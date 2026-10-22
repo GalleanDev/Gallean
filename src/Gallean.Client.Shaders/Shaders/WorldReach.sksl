@@ -1,0 +1,74 @@
+uniform shader tiles;
+
+uniform float2 halfTile;
+uniform float pixelWidth;
+uniform float4 fillColor;
+uniform float4 featherColor;
+uniform float4 edgeColor;
+uniform float4 outlineColor;
+
+const float FeatherSteps = 6.0;
+const float FeatherStep = 1.5;
+const float EdgeWidth = 1.25;
+const float OutlineWidth = 1.0;
+const float FarDistance = 1000.0;
+const float CornerRadius = 0.45;
+const float Inset = 0.16;
+
+bool isReachable(float2 tile) {
+    return tiles.eval(tile + 0.5).a > 0.5;
+}
+
+float quadrantDistance(float2 tile, float2 side, float2 offset) {
+    bool horizontal = isReachable(tile + float2(side.x, 0.0));
+    bool vertical = isReachable(tile + float2(0.0, side.y));
+
+    if (!horizontal && !vertical) {
+        float2 corner = offset - (0.5 - CornerRadius);
+
+        return CornerRadius - length(max(corner, 0.0)) - min(max(corner.x, corner.y), 0.0);
+    }
+
+    if (!horizontal) {
+        return 0.5 - offset.x;
+    }
+
+    if (!vertical) {
+        return 0.5 - offset.y;
+    }
+
+    if (!isReachable(tile + side)) {
+        return length(0.5 - offset);
+    }
+
+    return FarDistance;
+}
+
+float4 blend(float4 color, float alpha, float4 under) {
+    return float4(color.rgb, 1.0) * alpha + under * (1.0 - alpha);
+}
+
+half4 main(float2 coord) {
+    float2 cell = float2(
+        (coord.y / halfTile.y + coord.x / halfTile.x) * 0.5,
+        (coord.y / halfTile.y - coord.x / halfTile.x) * 0.5);
+
+    float2 tile = floor(cell + 0.5);
+    float2 side = step(tile, cell) * 2.0 - 1.0;
+    float pixelsPerCell = 2.0 * halfTile.x * halfTile.y / length(halfTile);
+    float distance = (quadrantDistance(tile, side, (cell - tile) * side) - Inset) * pixelsPerCell;
+
+    float coverage = clamp((distance + OutlineWidth) / pixelWidth, 0.0, 1.0);
+    float featherLayers = clamp(FeatherSteps - distance / FeatherStep, 0.0, FeatherSteps);
+    float featherAlpha = 1.0 - pow(1.0 - featherColor.a, featherLayers);
+    float edgeAlpha = edgeColor.a * clamp((EdgeWidth - distance) / pixelWidth + 0.5, 0.0, 1.0);
+    float outlineAlpha = outlineColor.a * clamp(0.5 - distance / pixelWidth, 0.0, 1.0);
+
+    float4 color = float4(fillColor.rgb * fillColor.a, fillColor.a);
+
+    color = blend(featherColor, featherAlpha, color);
+    color = blend(edgeColor, edgeAlpha, color);
+    color = blend(outlineColor, outlineAlpha, color);
+
+    return half4(color * coverage);
+}

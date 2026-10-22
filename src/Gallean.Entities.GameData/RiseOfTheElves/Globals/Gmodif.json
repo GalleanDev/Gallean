@@ -1,0 +1,895 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "MODIF_ID": "g000um0001",
+      "SOURCE": 0,
+      "COMMENTS": "Air ward (H1)"
+    },
+    {
+      "MODIF_ID": "g000um0002",
+      "SOURCE": 3,
+      "COMMENTS": "Speed (H2)"
+    },
+    {
+      "MODIF_ID": "g000um0003",
+      "SOURCE": 3,
+      "COMMENTS": "Justice (H3)"
+    },
+    {
+      "MODIF_ID": "g000um0005",
+      "SOURCE": 0,
+      "COMMENTS": "Water ward (H5)"
+    },
+    {
+      "MODIF_ID": "g000um0011",
+      "SOURCE": 0,
+      "COMMENTS": "Mind ward (H11)"
+    },
+    {
+      "MODIF_ID": "g000um0012",
+      "SOURCE": 0,
+      "COMMENTS": "Holy armor (H12)"
+    },
+    {
+      "MODIF_ID": "g000um0013",
+      "SOURCE": 3,
+      "COMMENTS": "Holy strength (H13)"
+    },
+    {
+      "MODIF_ID": "g000um0016",
+      "SOURCE": 0,
+      "COMMENTS": "Fire ward (H16)"
+    },
+    {
+      "MODIF_ID": "g000um0017",
+      "SOURCE": 3,
+      "COMMENTS": "Call to arms (H17)"
+    },
+    {
+      "MODIF_ID": "g000um0010",
+      "SOURCE": 0,
+      "COMMENTS": "Earth ward (H10)"
+    },
+    {
+      "MODIF_ID": "g000um0018",
+      "SOURCE": 0,
+      "COMMENTS": "Death ward (H18)"
+    },
+    {
+      "MODIF_ID": "g000um0021",
+      "SOURCE": 0,
+      "COMMENTS": "Ice shield (M21)"
+    },
+    {
+      "MODIF_ID": "g000um0034",
+      "SOURCE": 3,
+      "COMMENTS": "Call to arms (M34)"
+    },
+    {
+      "MODIF_ID": "g000um0023",
+      "SOURCE": 3,
+      "COMMENTS": "Might (M23)"
+    },
+    {
+      "MODIF_ID": "g000um0026",
+      "SOURCE": 3,
+      "COMMENTS": "Hymn of the clans (M26)"
+    },
+    {
+      "MODIF_ID": "g000um0027",
+      "SOURCE": 1,
+      "COMMENTS": "Wotans wind (M27)"
+    },
+    {
+      "MODIF_ID": "g000um0022",
+      "SOURCE": 1,
+      "COMMENTS": "Forestwalk (M22)"
+    },
+    {
+      "MODIF_ID": "g000um0035",
+      "SOURCE": 0,
+      "COMMENTS": "Iron skin (M35)"
+    },
+    {
+      "MODIF_ID": "g000um0036",
+      "SOURCE": 3,
+      "COMMENTS": "Wotan\u0027s blessing (M36)"
+    },
+    {
+      "MODIF_ID": "g000um0039",
+      "SOURCE": 1,
+      "COMMENTS": "Uncorruptible (M39)"
+    },
+    {
+      "MODIF_ID": "g000um0040",
+      "SOURCE": 3,
+      "COMMENTS": "Wotan\u0027s chant (M40)"
+    },
+    {
+      "MODIF_ID": "g000um0045",
+      "SOURCE": 0,
+      "COMMENTS": "Pain (D45)"
+    },
+    {
+      "MODIF_ID": "g000um0053",
+      "SOURCE": 1,
+      "COMMENTS": "Paralyze (D53)"
+    },
+    {
+      "MODIF_ID": "g000um0049",
+      "SOURCE": 3,
+      "COMMENTS": "Weakness  (D49)"
+    },
+    {
+      "MODIF_ID": "g000um0055",
+      "SOURCE": 3,
+      "COMMENTS": "Hypnosis (D55)"
+    },
+    {
+      "MODIF_ID": "g000um0050",
+      "SOURCE": 3,
+      "COMMENTS": "Slow (D50)"
+    },
+    {
+      "MODIF_ID": "g000um0064",
+      "SOURCE": 3,
+      "COMMENTS": "Weakness (U64)"
+    },
+    {
+      "MODIF_ID": "g000um0065",
+      "SOURCE": 0,
+      "COMMENTS": "Rust (U65)"
+    },
+    {
+      "MODIF_ID": "g000um0069",
+      "SOURCE": 3,
+      "COMMENTS": "Curse (U69)"
+    },
+    {
+      "MODIF_ID": "g000um0073",
+      "SOURCE": 3,
+      "COMMENTS": "Chaos (U73)"
+    },
+    {
+      "MODIF_ID": "g000um0076",
+      "SOURCE": 3,
+      "COMMENTS": "Rot (U76)"
+    },
+    {
+      "MODIF_ID": "g000um0075",
+      "SOURCE": 3,
+      "COMMENTS": "Terror (U75)"
+    },
+    {
+      "MODIF_ID": "g000um0079",
+      "SOURCE": 0,
+      "COMMENTS": "Damage ward (U79)"
+    },
+    {
+      "MODIF_ID": "g000um2002",
+      "SOURCE": 0,
+      "COMMENTS": "Potion boost armor 1"
+    },
+    {
+      "MODIF_ID": "g000um2003",
+      "SOURCE": 0,
+      "COMMENTS": "Potion boost armor 2"
+    },
+    {
+      "MODIF_ID": "g000um2004",
+      "SOURCE": 0,
+      "COMMENTS": "Potion boost armor permanent"
+    },
+    {
+      "MODIF_ID": "g000um2007",
+      "SOURCE": 0,
+      "COMMENTS": "Potion boost Hit points permanent"
+    },
+    {
+      "MODIF_ID": "g000um2008",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost power 1"
+    },
+    {
+      "MODIF_ID": "g000um2009",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost power 2"
+    },
+    {
+      "MODIF_ID": "g000um2010",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost power permanent"
+    },
+    {
+      "MODIF_ID": "g000um2011",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost initiative 1"
+    },
+    {
+      "MODIF_ID": "g000um2012",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost initiative 2"
+    },
+    {
+      "MODIF_ID": "g000um2013",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost initiative permanent"
+    },
+    {
+      "MODIF_ID": "g000um2014",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost damage 1"
+    },
+    {
+      "MODIF_ID": "g000um2015",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost damage 2"
+    },
+    {
+      "MODIF_ID": "g000um2016",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost damage permanent"
+    },
+    {
+      "MODIF_ID": "g000um2101",
+      "SOURCE": 0,
+      "COMMENTS": "Banner boost armor 1"
+    },
+    {
+      "MODIF_ID": "g000um2102",
+      "SOURCE": 0,
+      "COMMENTS": "Banner boost armor 2"
+    },
+    {
+      "MODIF_ID": "g000um2103",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost power 1"
+    },
+    {
+      "MODIF_ID": "g000um2104",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost power 2"
+    },
+    {
+      "MODIF_ID": "g000um2105",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost initiative 1"
+    },
+    {
+      "MODIF_ID": "g000um2106",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost initiative 2"
+    },
+    {
+      "MODIF_ID": "g000um2107",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost damage 1"
+    },
+    {
+      "MODIF_ID": "g000um2108",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost damage 2"
+    },
+    {
+      "MODIF_ID": "g000um2109",
+      "SOURCE": 1,
+      "COMMENTS": "Banner add plainswalk"
+    },
+    {
+      "MODIF_ID": "g000um2110",
+      "SOURCE": 1,
+      "COMMENTS": "Boots add forestwalk"
+    },
+    {
+      "MODIF_ID": "g000um2111",
+      "SOURCE": 1,
+      "COMMENTS": "Boots add sailing"
+    },
+    {
+      "MODIF_ID": "g000um2201",
+      "SOURCE": 0,
+      "COMMENTS": "Armor 1 (Runestone)"
+    },
+    {
+      "MODIF_ID": "g000um2202",
+      "SOURCE": 0,
+      "COMMENTS": "Armor 2 (Holy Chalice)"
+    },
+    {
+      "MODIF_ID": "g000um2203",
+      "SOURCE": 0,
+      "COMMENTS": "Armor 3 (Skull Bracers)"
+    },
+    {
+      "MODIF_ID": "g000um2204",
+      "SOURCE": 0,
+      "COMMENTS": "Armor 4 (Horn of Courage)"
+    },
+    {
+      "MODIF_ID": "g000um2205",
+      "SOURCE": 0,
+      "COMMENTS": "Armor 5 (Dragon Shield)"
+    },
+    {
+      "MODIF_ID": "g000um2301",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 1 (Rune Blade)"
+    },
+    {
+      "MODIF_ID": "g000um2302",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 2 (Unholy Chalice)"
+    },
+    {
+      "MODIF_ID": "g000um2303",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 3 (Sanguine sword)"
+    },
+    {
+      "MODIF_ID": "g000um2304",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 4 (Talon of Mortis)"
+    },
+    {
+      "MODIF_ID": "g000um2305",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 5 (Mjolnir Hammer)"
+    },
+    {
+      "MODIF_ID": "g000um2306",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 6 (Sword of Ages)"
+    },
+    {
+      "MODIF_ID": "g000um2307",
+      "SOURCE": 3,
+      "COMMENTS": "Weapon 7 (Bethrezen\u0027s Claw)"
+    },
+    {
+      "MODIF_ID": "g000um2401",
+      "SOURCE": 0,
+      "COMMENTS": "Tome of Air  (Immunes  air)"
+    },
+    {
+      "MODIF_ID": "g000um2402",
+      "SOURCE": 0,
+      "COMMENTS": "Tome of Water (Immune water)"
+    },
+    {
+      "MODIF_ID": "g000um2403",
+      "SOURCE": 0,
+      "COMMENTS": "Tome of Earth (Immune earth)"
+    },
+    {
+      "MODIF_ID": "g000um3001",
+      "SOURCE": 0,
+      "COMMENTS": "City level 1 (Armor 10%)"
+    },
+    {
+      "MODIF_ID": "g000um3002",
+      "SOURCE": 0,
+      "COMMENTS": "City level 2 (Armor 15%)"
+    },
+    {
+      "MODIF_ID": "g000um3003",
+      "SOURCE": 0,
+      "COMMENTS": "City level 3 (Armor 20%)"
+    },
+    {
+      "MODIF_ID": "g000um3004",
+      "SOURCE": 0,
+      "COMMENTS": "City level 4 (Armor 25%)"
+    },
+    {
+      "MODIF_ID": "g000um3005",
+      "SOURCE": 0,
+      "COMMENTS": "City level 5 (Armor30%)"
+    },
+    {
+      "MODIF_ID": "g000um4001",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Artifacts Lore"
+    },
+    {
+      "MODIF_ID": "g000um4002",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Arcane Knowledge (Tomes)"
+    },
+    {
+      "MODIF_ID": "g000um4003",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Banner Bearer"
+    },
+    {
+      "MODIF_ID": "g000um4004",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Pathfinding"
+    },
+    {
+      "MODIF_ID": "g000um4005",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Arcane Lore"
+    },
+    {
+      "MODIF_ID": "g000um4006",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Leadership"
+    },
+    {
+      "MODIF_ID": "g000um4007",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Boots Lore"
+    },
+    {
+      "MODIF_ID": "g000um4008",
+      "SOURCE": 3,
+      "COMMENTS": "Leader Upgrade: Might"
+    },
+    {
+      "MODIF_ID": "g000um4009",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Natural Armor"
+    },
+    {
+      "MODIF_ID": "g000um4010",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Arcane Power"
+    },
+    {
+      "MODIF_ID": "g000um4011",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Tracking"
+    },
+    {
+      "MODIF_ID": "g000um4012",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Weapon Master"
+    },
+    {
+      "MODIF_ID": "g000um4013",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Leadership"
+    },
+    {
+      "MODIF_ID": "g000um4014",
+      "SOURCE": 3,
+      "COMMENTS": "Leader Upgrade: Accuracy"
+    },
+    {
+      "MODIF_ID": "g000um4015",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Keen-Sight"
+    },
+    {
+      "MODIF_ID": "g000um2308",
+      "SOURCE": 1,
+      "COMMENTS": "Weapon (Incorruptible)"
+    },
+    {
+      "MODIF_ID": "g000um6001",
+      "SOURCE": 0,
+      "COMMENTS": "Capital protection"
+    },
+    {
+      "MODIF_ID": "g000um2206",
+      "SOURCE": 1,
+      "COMMENTS": "Armor 6 (Incorruptibility)"
+    },
+    {
+      "MODIF_ID": "g000um2404",
+      "SOURCE": 0,
+      "COMMENTS": "Tome of Fire (Immune fire)"
+    },
+    {
+      "MODIF_ID": "g000um4016",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Natural Healing"
+    },
+    {
+      "MODIF_ID": "g000um4017",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Toughness"
+    },
+    {
+      "MODIF_ID": "g000um4018",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Incorruptible"
+    },
+    {
+      "MODIF_ID": "g000um0085",
+      "SOURCE": 3,
+      "COMMENTS": "Ymir\u0027s blessing (M85)"
+    },
+    {
+      "MODIF_ID": "g000um0088",
+      "SOURCE": 0,
+      "COMMENTS": "Ancestor\u0027s call"
+    },
+    {
+      "MODIF_ID": "g000um0089",
+      "SOURCE": 3,
+      "COMMENTS": "Maledicere (D 89)"
+    },
+    {
+      "MODIF_ID": "g000um0091",
+      "SOURCE": 3,
+      "COMMENTS": "Chronos Major (D 91)"
+    },
+    {
+      "MODIF_ID": "g000um0094",
+      "SOURCE": 1,
+      "COMMENTS": "Psalm of death (U 94)"
+    },
+    {
+      "MODIF_ID": "g000um2017",
+      "SOURCE": 0,
+      "COMMENTS": "Potion boost armor 3"
+    },
+    {
+      "MODIF_ID": "g000um2019",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost initiative 3"
+    },
+    {
+      "MODIF_ID": "g000um2020",
+      "SOURCE": 3,
+      "COMMENTS": "Potion boost damage 3"
+    },
+    {
+      "MODIF_ID": "g000um2021",
+      "SOURCE": 0,
+      "COMMENTS": "Potion Ward Air"
+    },
+    {
+      "MODIF_ID": "g000um2022",
+      "SOURCE": 0,
+      "COMMENTS": "Potion Ward Water"
+    },
+    {
+      "MODIF_ID": "g000um2023",
+      "SOURCE": 0,
+      "COMMENTS": "Potion Ward Earth"
+    },
+    {
+      "MODIF_ID": "g000um2024",
+      "SOURCE": 0,
+      "COMMENTS": "Potion Ward Fire"
+    },
+    {
+      "MODIF_ID": "g000um2115",
+      "SOURCE": 0,
+      "COMMENTS": "Banner boost armor 3"
+    },
+    {
+      "MODIF_ID": "g000um2116",
+      "SOURCE": 3,
+      "COMMENTS": "Banner boost damage 3"
+    },
+    {
+      "MODIF_ID": "g000um2503",
+      "SOURCE": 1,
+      "COMMENTS": "Boots 3 (\u002B25% Move)"
+    },
+    {
+      "MODIF_ID": "g000um2504",
+      "SOURCE": 1,
+      "COMMENTS": "Boots 4 (\u002B50% Move)"
+    },
+    {
+      "MODIF_ID": "g000um2505",
+      "SOURCE": 1,
+      "COMMENTS": "Boots 5 (\u002B100% Move)"
+    },
+    {
+      "MODIF_ID": "g000um4019",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Water Ward"
+    },
+    {
+      "MODIF_ID": "g000um4020",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Forestwalk"
+    },
+    {
+      "MODIF_ID": "g000um4021",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Earth Ward"
+    },
+    {
+      "MODIF_ID": "g000um4022",
+      "SOURCE": 3,
+      "COMMENTS": "Leader Upgrade: First Strike"
+    },
+    {
+      "MODIF_ID": "g000um4023",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Fire Ward"
+    },
+    {
+      "MODIF_ID": "g000um4024",
+      "SOURCE": 0,
+      "COMMENTS": "Leader Upgrade: Air Ward"
+    },
+    {
+      "MODIF_ID": "g000um2405",
+      "SOURCE": 1,
+      "COMMENTS": "Tome of War (Weapon Master)"
+    },
+    {
+      "MODIF_ID": "g000um2406",
+      "SOURCE": 1,
+      "COMMENTS": "Tome of Arcanum (Use Orb)"
+    },
+    {
+      "MODIF_ID": "g000um2407",
+      "SOURCE": 1,
+      "COMMENTS": "Tome of Sorcery (Use Talisman)"
+    },
+    {
+      "MODIF_ID": "g000um7001",
+      "SOURCE": 1,
+      "COMMENTS": "Leadership -1"
+    },
+    {
+      "MODIF_ID": "g000um9001",
+      "SOURCE": 0,
+      "COMMENTS": "\u002B20% Hit Points"
+    },
+    {
+      "MODIF_ID": "g000um9002",
+      "SOURCE": 0,
+      "COMMENTS": "-20% Hit Points"
+    },
+    {
+      "MODIF_ID": "g000um9003",
+      "SOURCE": 0,
+      "COMMENTS": "\u002B10 Armor"
+    },
+    {
+      "MODIF_ID": "g000um9004",
+      "SOURCE": 0,
+      "COMMENTS": "-10 Armor"
+    },
+    {
+      "MODIF_ID": "g000um9005",
+      "SOURCE": 3,
+      "COMMENTS": "\u002B10% Power"
+    },
+    {
+      "MODIF_ID": "g000um9006",
+      "SOURCE": 3,
+      "COMMENTS": "-10% Power"
+    },
+    {
+      "MODIF_ID": "g000um9007",
+      "SOURCE": 3,
+      "COMMENTS": "\u002B10% Initiative"
+    },
+    {
+      "MODIF_ID": "g000um9008",
+      "SOURCE": 3,
+      "COMMENTS": "-10% Initiative"
+    },
+    {
+      "MODIF_ID": "g000um9009",
+      "SOURCE": 3,
+      "COMMENTS": "\u002B10% Damage"
+    },
+    {
+      "MODIF_ID": "g000um9010",
+      "SOURCE": 3,
+      "COMMENTS": "-10% Damage"
+    },
+    {
+      "MODIF_ID": "g000um9011",
+      "SOURCE": 0,
+      "COMMENTS": "Fire Ward"
+    },
+    {
+      "MODIF_ID": "g000um9012",
+      "SOURCE": 0,
+      "COMMENTS": "Air Ward"
+    },
+    {
+      "MODIF_ID": "g000um9013",
+      "SOURCE": 0,
+      "COMMENTS": "Water Ward"
+    },
+    {
+      "MODIF_ID": "g000um9014",
+      "SOURCE": 0,
+      "COMMENTS": "Earth Ward"
+    },
+    {
+      "MODIF_ID": "g000um9015",
+      "SOURCE": 0,
+      "COMMENTS": "Death Ward"
+    },
+    {
+      "MODIF_ID": "g000um9016",
+      "SOURCE": 0,
+      "COMMENTS": "Mind Ward"
+    },
+    {
+      "MODIF_ID": "g000um9017",
+      "SOURCE": 0,
+      "COMMENTS": "Fire Immunity"
+    },
+    {
+      "MODIF_ID": "g000um9018",
+      "SOURCE": 0,
+      "COMMENTS": "Air Immunity"
+    },
+    {
+      "MODIF_ID": "g000um9019",
+      "SOURCE": 0,
+      "COMMENTS": "Water  Immunity"
+    },
+    {
+      "MODIF_ID": "g000um9020",
+      "SOURCE": 0,
+      "COMMENTS": "Earth Immunity"
+    },
+    {
+      "MODIF_ID": "g000um9021",
+      "SOURCE": 0,
+      "COMMENTS": "Death Immunity"
+    },
+    {
+      "MODIF_ID": "g000um9022",
+      "SOURCE": 0,
+      "COMMENTS": "Mind Immunity"
+    },
+    {
+      "MODIF_ID": "g000um9023",
+      "SOURCE": 1,
+      "COMMENTS": "Equip Artifacts"
+    },
+    {
+      "MODIF_ID": "g000um9024",
+      "SOURCE": 1,
+      "COMMENTS": "Equip Tomes"
+    },
+    {
+      "MODIF_ID": "g000um9025",
+      "SOURCE": 1,
+      "COMMENTS": "Equip Banners"
+    },
+    {
+      "MODIF_ID": "g000um9026",
+      "SOURCE": 1,
+      "COMMENTS": "Equip Boots"
+    },
+    {
+      "MODIF_ID": "g000um9027",
+      "SOURCE": 1,
+      "COMMENTS": "Equip Orbs"
+    },
+    {
+      "MODIF_ID": "g000um9028",
+      "SOURCE": 1,
+      "COMMENTS": "Equip Talismans"
+    },
+    {
+      "MODIF_ID": "g000um9029",
+      "SOURCE": 1,
+      "COMMENTS": "Use Parchment"
+    },
+    {
+      "MODIF_ID": "g000um9030",
+      "SOURCE": 1,
+      "COMMENTS": "Incorruptible"
+    },
+    {
+      "MODIF_ID": "g000um9031",
+      "SOURCE": 1,
+      "COMMENTS": "\u002B1 Leadership"
+    },
+    {
+      "MODIF_ID": "g000um9032",
+      "SOURCE": 1,
+      "COMMENTS": "-1 Leadership"
+    },
+    {
+      "MODIF_ID": "g000um9033",
+      "SOURCE": 1,
+      "COMMENTS": "\u002B10% Move Points"
+    },
+    {
+      "MODIF_ID": "g000um9034",
+      "SOURCE": 1,
+      "COMMENTS": "-10% Move Points"
+    },
+    {
+      "MODIF_ID": "g000um9035",
+      "SOURCE": 0,
+      "COMMENTS": "\u002B10% Regeneration"
+    },
+    {
+      "MODIF_ID": "g000um9036",
+      "SOURCE": 1,
+      "COMMENTS": "Add Forestwalk"
+    },
+    {
+      "MODIF_ID": "g000um9037",
+      "SOURCE": 1,
+      "COMMENTS": "Add Sailing"
+    },
+    {
+      "MODIF_ID": "g000um2317",
+      "SOURCE": 3,
+      "COMMENTS": "Unholy Dagger"
+    },
+    {
+      "MODIF_ID": "g000um4101",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Leadership 8"
+    },
+    {
+      "MODIF_ID": "g000um4102",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Leadership 10"
+    },
+    {
+      "MODIF_ID": "g000um7538",
+      "SOURCE": 1,
+      "COMMENTS": "Tangle (-30% move)"
+    },
+    {
+      "MODIF_ID": "g000um7539",
+      "SOURCE": 1,
+      "COMMENTS": "Swift (\u002B30% move)"
+    },
+    {
+      "MODIF_ID": "g000um7540",
+      "SOURCE": 3,
+      "COMMENTS": "Swarm (-10% damage)"
+    },
+    {
+      "MODIF_ID": "g000um7541",
+      "SOURCE": 3,
+      "COMMENTS": "Confusion (-15% initiative)"
+    },
+    {
+      "MODIF_ID": "g000um7542",
+      "SOURCE": 3,
+      "COMMENTS": "Distraction (-20% power)"
+    },
+    {
+      "MODIF_ID": "g000um7543",
+      "SOURCE": 0,
+      "COMMENTS": "Mold (-80% armor)"
+    },
+    {
+      "MODIF_ID": "g000um7544",
+      "SOURCE": 3,
+      "COMMENTS": "Gallean\u0027s Curse (-33% damage)"
+    },
+    {
+      "MODIF_ID": "g000um7545",
+      "SOURCE": 0,
+      "COMMENTS": "Gallean\u0027s Boon (\u002B50 hp max)"
+    },
+    {
+      "MODIF_ID": "g000um4103",
+      "SOURCE": 1,
+      "COMMENTS": "Leader Upgrade: Critical Hit"
+    },
+    {
+      "MODIF_ID": "g000um7546",
+      "SOURCE": 1,
+      "COMMENTS": "Escape"
+    },
+    {
+      "MODIF_ID": "g000um7547",
+      "SOURCE": 0,
+      "COMMENTS": "Tome of Thought (Mind Ward Leader)"
+    },
+    {
+      "MODIF_ID": "g000um7548",
+      "SOURCE": 1,
+      "COMMENTS": "Lute of Charming (Cheaper Merchants)"
+    }
+  ]
+}

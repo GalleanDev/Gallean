@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Umbra.Prompts.Generators\Umbra.Prompts.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="data\**\*.txt">
+      <PromptDirectory>$([System.String]::Copy('%(RecursiveDir)').Replace('\','/'))</PromptDirectory>
+    </AdditionalFiles>
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="PromptDirectory" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="*.py" />
+  </ItemGroup>
+
+</Project>

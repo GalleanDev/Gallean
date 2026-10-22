@@ -1,0 +1,789 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug Guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dark Elf Last",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM000f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0010",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0011",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0012",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0013",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0014",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0015",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223MM0016",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Kulin\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Everything I possess is for sale.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Grukk\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Grukk will make men out of your peasants!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Known in his times as the mightiest of all adepts of the black art, this lord was slain by the inquisitor Vorgel who ended his reign of terror. He is now resurrected as an undead with the intention to subjugate every mortal to his will.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "A veteran in the struggle to reclaim Elven glory, nobody enters the forest without his knowledge.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pradesh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug Guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug Guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Thug Guard \n\u0022You expect to stroll right through our domain unchallenged?!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Objective Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Objective Elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Begin Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ruthllak \n\u0022Milord! We have information about the whereabouts of Mortis\u0027 cult. They have found a way to enslave the Greenskins.\u0022\r \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle \n\u0022Treacherous Dark Elves! What are they doing? What business do they have with the Greenskins?\u0022\r \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ruthllak \n\u0022We can\u0027t allow this...I will send out the scouts at once! We must not allow this filth to reach our forests.\u0022\r \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Begin Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Zombie \n\u0022Euuuuuuuuuuughhhhhhhhh\u2026\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shr\u0027ullen \n\u0022Who let that stupid zombie in here?!? We have no time to deal with this! Destroy it\u2026\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Vampire \n\u0022Yes, Shr\u0027ullen.\u0022\r \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shr\u0027ullen \n\u0022Those treacherous Dark Elves! How could they turn their backs on Mortis? What are they trying to achieve?\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shr\u0027ullen \n\u0022Send out the troops! Their purpose is of no interest to us. Mortis would like us to clean up her...indiscretions.\u0022\r \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "T 11 Dark Elf Message",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dark Elf \n\u0022You have not seen the Beast\u0027s power...If you attempt to stop us, you will be destroyed. Gallean\u0027s Beast will live again!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Near Ruin Spell",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dark Elf \n\u0022You have made a grave mistake coming here. Our god\u0027s revival will not be prevented by you!\u0022\r \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Beware!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "T 11 Elf Reply",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ruthllak \n\u0022Those disgusting Dark Elves! They are trying to bring the abomination back - they are trying to revive Gallean\u0027s Beast!\u0022 \r \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle \n\u0022They must be stopped, Ruthllak! Gallean would not want this!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ruthllak \n\u0022It will be done! We must destroy all  the Dark Elves in the region! The Greenskins will fall soon after...\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "T 11 Undead reply",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shr\u0027ullen \n\u0022Gallean\u0027s Beast?!? How dare they worship such a thing? Betraying Mortis for Gallean\u0027s crumbs\u2026\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Vampire \n\u0022What must be done, Shr\u0027ullen?\u0022\r \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shr\u0027ullen \n\u0022Mortis wants them destroyed. What are you waiting for? Begone!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Vampire \n\u0022Yes, Shr\u0027ullen...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0033",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0035",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0047",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0055",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Assassin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN005b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0060",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN006a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN006e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0071",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0073",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0074",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN007d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN007f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0082",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0084",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thrensha",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ullinamil",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Utten\u0027s Keep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zanthar Keep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hunner",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN008e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sunderin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0091",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0092",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elder One",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN0099",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN009a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN009c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN009f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN00a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN00a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN00a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN00b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223UN00ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cyclops",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Drugun\u0027s Ruins",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ruined Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Abandoned Chapel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Abandoned Holy Site",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S223SC0000",
+      "ID_OBJECT": "S223RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Umkresh",
+      "SEQ_NUM": 0
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\EngineAliases.cs" Link="EngineAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reactive" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Engine.Contracts\Gallean.Engine.Contracts.csproj" />
+    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\Gallean.Engine.Generators\Gallean.Engine.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Engine.Contracts" />
+    <Using Include="Gallean.Entities" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gallean.Engine.Tests" />
+    <InternalsVisibleTo Include="Gallean.Client.Tests" />
+  </ItemGroup>
+
+</Project>

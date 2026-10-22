@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.LootScreenView"
+             x:DataType="local:LootScreenViewModel">
+
+  <UserControl.DataTemplates>
+    <DataTemplate x:DataType="local:IconViewModel+Item">
+      <Panel Classes="inventory-slot">
+        <local:PlateChrome Classes="socket" />
+        <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+      </Panel>
+    </DataTemplate>
+
+    <DataTemplate x:DataType="local:IconViewModel+Spell">
+      <Border Classes="frame spell-icon" Width="64" Height="64" BorderThickness="2" Classes.dark-background="{Binding Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
+        <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+      </Border>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel MinWidth="440" MaxWidth="620" MaxHeight="620" Padding="28,24" Title="{Binding Title}" InitialFocus="{Binding #ContinueButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="ContinueButton" Grid.Column="1" Content="{local:Text 'Continue'}" Classes="pill" Command="{Binding CloseCommand}" MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <StackPanel Spacing="10">
+        <TextBlock Text="{Binding Text}"
+                   Classes="body"
+                   Foreground="{StaticResource PrimaryTextBrush}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center" />
+
+        <ContentControl Content="{Binding Resources}"
+                        Classes="body"
+                        HorizontalAlignment="Center"
+                        Foreground="{StaticResource PrimaryTextBrush}" />
+
+        <ScrollViewer Classes="list" IsVisible="{Binding Items.Length, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+          <ItemsControl ItemsSource="{Binding Items}" Padding="6">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="local:LootItem">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" Margin="0,4">
+                  <ContentControl Grid.Column="0" Content="{Binding Icon}" />
+                  <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                    <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding Description}"
+                               Classes="caption"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               TextWrapping="Wrap" />
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </StackPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

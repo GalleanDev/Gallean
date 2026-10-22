@@ -1,0 +1,64 @@
+uniform shader body;
+
+uniform float4 color;
+uniform float glowRadius;
+
+const float GoldenAngle = 2.39996323;
+const float SigmaRange = 3.0;
+const int GlowSampleCount = 32;
+const float GlowGain = 1.2;
+const int CoreSampleCount = 12;
+const float CoreSigma = 1.2;
+const float DilationRadius = 1.5;
+const float LogisticScale = 1.702;
+
+float2 sampleTap(float2 coord, float radius, int index, int count) {
+    float sigma = radius / SigmaRange;
+    float distance = radius * sqrt((float(index) + 0.5) / float(count));
+    float angle = float(index) * GoldenAngle;
+    float weight = exp(-0.5 * distance * distance / (sigma * sigma));
+    float coverage = float(body.eval(coord + distance * float2(cos(angle), sin(angle))).a);
+
+    return float2(coverage, 1.0) * weight;
+}
+
+float dilate(float coverage, float sigma) {
+    float gain = exp(LogisticScale * DilationRadius / sigma);
+
+    return coverage * gain / (1.0 + coverage * (gain - 1.0));
+}
+
+float blurGlow(float2 coord) {
+    float2 sum = float2(0.0);
+
+    for (int index = 0; index < GlowSampleCount; index++) {
+        sum += sampleTap(coord, glowRadius, index, GlowSampleCount);
+    }
+
+    return dilate(sum.x / sum.y, glowRadius / SigmaRange);
+}
+
+float blurCore(float2 coord) {
+    float2 sum = float2(0.0);
+
+    for (int index = 0; index < CoreSampleCount; index++) {
+        sum += sampleTap(coord, CoreSigma * SigmaRange, index, CoreSampleCount);
+    }
+
+    return dilate(sum.x / sum.y, CoreSigma);
+}
+
+half4 main(float2 coord) {
+    float coverage = float(body.eval(coord).a);
+
+    if (coverage >= 1.0) {
+        return half4(0.0);
+    }
+
+    float glow = min(blurGlow(coord) * GlowGain, 1.0);
+    float core = blurCore(coord);
+    float halo = core + glow * (1.0 - core);
+    float alpha = halo * (1.0 - coverage) * color.a;
+
+    return half4(half3(color.rgb * alpha), half(alpha));
+}

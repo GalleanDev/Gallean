@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.OfferStatusView"
+             x:DataType="local:OfferStatusViewModel"
+             IsVisible="{Binding IsVisible}">
+
+  <Panel>
+    <ContentControl Content="{Binding Price}" HorizontalAlignment="Left" IsVisible="{Binding IsPriceVisible}" />
+
+    <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding IsReasonVisible}">
+      <local:IconVisual Grid.Column="0"
+                        Moniker="Locked"
+                        Width="14"
+                        Height="14"
+                        Margin="0,1,6,0"
+                        VerticalAlignment="Top"
+                        Foreground="{StaticResource OfferStatusReasonBrush}" />
+      <TextBlock Grid.Column="1"
+                 Text="{Binding UnavailableReason}"
+                 TextWrapping="Wrap"
+                 Foreground="{StaticResource OfferStatusReasonBrush}" />
+    </Grid>
+  </Panel>
+
+</UserControl>

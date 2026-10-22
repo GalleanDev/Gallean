@@ -1,0 +1,2504 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN026b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0270",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0273",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions Win",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022We have taken the city Calebren!  Now we can raise an army that should impress Bethrezen himself!  The Calebrenians are now our minions!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans Win",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "King\u0027s Guard \n\u0022Let us finally enter the gateway! \nMay Wotan be there to meet us on the other side!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Win",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022We have finally reached Talder\u0027sss Altar.  May the blood that hasss already been ssspilled here empower our ritualsss! \nNow, Hand me the Sssoul Dagger ssso I can begin the final ritual...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lady speaks to Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022I have been using all of my powers to prevent the Clans from reaching their goal. \nThe way to their goal is blocked right now, but if you kill me, you will unravel my spells and open their way for them.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Massster!  The Lady will not be of much ussse to usss dead.  We ssshould protect her (for now).\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022You would do well to protect me from the Clans\u0027 onslaught. I cannot stand against their might...\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Let usss protect the Lady and her troops! \nWe cannot reach the ceremonial groundsss on time if the Clansss do not have their way blocked! \n(We can still assassinate her after the ceremony!)\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lady speaks to Legions",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022Demons, heed my warning! If you destroy me, you will help your enemies!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demonologist \n\u0022We do as we please, Witch! You will serve the Legions, or Die!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022You are fools if you kill me! I have been maintaining the barrier that prevents the Clans from reaching their goal.  If I die, the barrier will lift, and you will all be doomed.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demonologist \n\u0022My lord, we must protect the Lady of the Lake, at least until we can take Calebren city. (We can then subvert the Lady to our own purposes, and add her power to our own!)\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lady Speaks to the Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dwarf \n\u0022Sir, the song has turned to screeching! \nMy ears cannot withstand much more of this!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022Stop, Dwarfs! Turn your ships around and never come back!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "King\u0027s Guard \n\u0022We do not take our orders from Lake Witches! Release the barrier, or die.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022You do not understand the evils you will be unleashing upon the world if you break the seal. I cannot let you open the gateway. I would sooner die.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "King\u0027s Guard: \n\u0022Then you will.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Siren song",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dwarf \n\u0022I hear a wonderful song, My Lord! \nFull sails due west!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN027c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Deathdragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonic Wrath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon\u0027s warning Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ta\u0027Klammath \n\u0022Do not come any closer, Unclean, or you will feel my wrath!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidess \n\u0022I believe we should heed the warning, my lord.  My skills would not suffice to protect us against such a powerful demon\u0027s wrath!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "King\u0027s Guard \n\u0022We should leave a sentry here, so we\u0027ll know when this demon decides to leave.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonic assault",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ta\u0027Klammath \n\u0022You have been warned. Now prepare to die!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonic Help",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ta\u0027Klammath \n\u0022I have been awaiting your arrival for some time.  I am at your command. \nFor the Legions of the Damned, I would level mountains!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022Nothing can stop us now! Onwards to Calebren!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eerie Chant, Legions",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demon \n\u0022There is a strange music wafting in with the north winds... \nPerhaps this is not our place, let us be careful...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eerie Chant, Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Crossbowman \n\u0022My Lord, do you hear this eerie chant that seems to be one with the north winds? \nIt is chilling me right down to my bones! \nWe should not be here, this is an Omen!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0283",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Occultist defenses, Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Horth\u0027Ankh, Master Occultist \n\u0022You should not have come.Now meet your end.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Occultist defenses Legion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Horth\u0027Ankh, Master Occultist \n\u0022You should not have come here. Return to the pits from whence you came.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0286",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead at Occultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Horth\u0027Ankh, Master Occultist \n\u0022I have the Dagger, I decide when the mountains will part.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Sssurrender the dagger and we won\u0027t force you to join our horde.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Horth\u0027Ankh, Master Occultist \n\u0022I will not surrender!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Ssso be it.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Open Undead Goal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022This mussst be the place. \nGive me the Dagger!  I will ssstart the ritual!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022The path isss open! Nothing can stop us now!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0288",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Who let the Clans out?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archmage Tennius \n\u0022With the last of my powers I bring the mountains down on you!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "King\u0027s Guard \n\u0022It is a pity his aim is so bad...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Open Legions goal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ta\u0027Klammath \n\u0022You want me to level these mountains? \nI will do as you command!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ta\u0027Klammath \n\u0022This exertion has drained my power.  I must return to the deepest pits of Hell to rest.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022Restl, Ta\u0027Klammath!  You have served us well!  Now we can finally take the city Calebren!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN028b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "The Lady  is dead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lady of the Lake \n\u0022No!  Please reconsider, do not open the gate...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archdruidess: \n\u0022She has died, sir.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Who let the Undead out?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archmage Deuxios \n\u0022I may not have been able to contain your hordes, but I know you will fail in the end. \nI die in peace; you cannot raise me!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Who let the Legions out?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archmage Sixtus \n\u0022I cannot damn you more than you already are, but I have divined that your doom is at hand.  I will not let myself be possessed by you demons, I prefer to die here, in peace.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Quake 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Vithar \n\u0022I feel a rumble coming from the bowels of the earth...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Vithar \n\u0022A new way has opened!  Let us fortify that new border and then enter the breach!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Quake 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashgan \n\u0022The Earth is calling Usss!  Yesss!  But we do not want to go!  No...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashgan \n\u0022The Earth did not claim usss!  But the opening must be guarded if we are to protect our landsss...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Quake 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashkael \n\u0022With all these mountains around us, we will never be able to reach our goal...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashkael \n\u0022How...convenient. Hahahaaaah!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titannia is dead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Titannia \n\u0022With my last dying breath I open a breach into another part of the land.  May all of you die there...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonius dies",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV001f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demonius \n\u0022You will join me in the underworld before long.  Perhaps there I will be victorious.  As I fade, I use the last of my strength to destroy more lands.  It feels so good...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Drakk dies",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The dragon, in its death throes, thrashes around, and hits some nearby mountains, bringing them down and opening a passage into new lands...",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Yggar\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I\u0027m all out of mountain gear, but maybe I still have some of the things you need...",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Tralar\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I sell potions.  I do not blink.  I do what I am told to do.  I worship Bethrezen.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Kilgen\u0027hr\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I\u0027m not dead yet!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Kulder\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "The greatest fighters of the realm have trained here too!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0004",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Luther\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0004",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "The greatest fighters of the realm have trained here.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0005",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Reggen\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0005",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Hey Lads! Are you in need of some training?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0006",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Allar\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SI0006",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I\u0027ve just finished rebuilding my store from the last war.  Please don\u0027t break anything.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Special Goblin dies 0",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0028",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Special Goblin \n\u0022You can\u0027t kill Gogg!  You can\u0027t catch me!  You can watch me!  Come meet my buddies!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0028",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Special Goblin \n\u0022See?  Come meet my new friend! Ha ha ha haaa! Gogg always survive!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Special Goblin spawn A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Special Goblin spawn B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN029e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gerbert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions Evil Humans warn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022It seems as though the remnants of the Empire that were trapped here with us after the cataclysm have all become thugs and assassins.  Pity we don\u0027t have time to subvert them... \n \nOnwards to Calebren!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead evil Empire Warn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archlich \n\u0022Massster!  Sssome humans were trapped in this valley with usss when the mountains sssprung up!  What would the Emperor think if he sssaw his once proud troopsss as the thievesss and thugsss they are now?\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans evil Empire Warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "King\u0027s Guard \n\u0022Some of the Empire\u0027s men have been blocked from returning to their lands, my lord.  The mountains seem to have become impassable.  We would offer them asylum and shelter, but they seem to prefer mugging and murdering our people.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans popup turn 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archdruidess \n\u0022My Lord, our seers have determined that the way to Caelith Morreth is being kept closed from us by a powerful force emanating from the far west. \nWe should investigate in that direction first!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions lose Ta\u0027Klammath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Devil \n\u0022Our only way to Calebren is lost.  There is only one way for us to survive here now...  We must take the Clans\u0027 and the Undead capitals for our own before they accomplish their tasks...it will not be easy...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV002f",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Legions must take the Clans\u0027 and the Undead\u0027s capitals. \nThe Clans must loot Caerlith Morreth. \nThe Undead must visit Talder\u0027s Altar.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Virgile",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions win (capitals)",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0031",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Devil \n\u0022We have stopped the Clans and the Undead!  With the power we now have and the forces we now control, nothing, not even the mountains, can stand in our way!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "About Tennius",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0032",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archdruidess \n\u0022My lord, I believe the Wizard Tennius has the power to help us.  He lives north of here in the mountains.  Be careful though, he is very powerful!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0034",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "About Sixthar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0034",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Devil \n\u0022My lord, there is a wizard who lives north of here, in the mountains.  His name is Sixthar, and he is very powerful.  We should try to enlist or subvert him to our cause...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0035",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "About Deuxios",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0035",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archlich \n\u0022Massster!  I feel a powerful sssource of magic to the sssouth-eassst!  The Wizard Deuxioss has become very powerful of late...  We ssshould get to him before the enemy doesss...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Enable special goblin B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02aa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0037",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Enable special goblin A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Perchon taken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV0038",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Abyssal Devil \n\u0022We were destined to conquer the backward Dwarves north of here...  You have tipped the balance in their favor, you fools! Maybe we should not have rebelled against the Legions so soon...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Truy\u0027a taken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Primitive Dwarf \n\u0022You bad people.  You make demons win.  We go, but will come back.  We want kill all demons.  Demons have fire in eyes, but we not afraid.  We go to sleep now... cold...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon\u0027s warning Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ta\u0027Klammath \n\u0022Do not come any closer, Unclean, or you will feel my wrath!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Initiate \n\u0022This demon is not worth our attention, master, let us leave it alone on its island.  Perhaps, when it finally dies, it can become useful to us.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Wraith \n\u0022Yesss.  We have more pressssing mattersss to attend to.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans have the Dagger",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans have dagger 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022It ssseemsss that the Clans have found the Soul Dagger before we could.  We ssshall need to hunt them down and find it if we are to accomplish our aimsss...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions have dagger",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions have dagger 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245EV003f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022It ssseemsss that the Legionsss have found the Soul Dagger before we could.  We ssshall need to hunt them down and find it if we are to accomplish our aimsss...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kahath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02c4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02c8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02ca",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02d3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02d5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02d7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02d9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02de",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN02e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "The Altar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 5",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 6",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 7",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 8",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 9",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 10",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 11",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains 12",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lady of the Lake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Siren\u0027s song",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Meet the Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonic Wrath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonic Warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Occultist defend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eerie chant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Occultist defenses",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spider spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Special Goblin spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Caerlith Morreth",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245LO0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Special Goblin Popup 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Orc slave camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Hermit\u0027s Farm",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Akkuk\u0027s Old Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Haunted Halls",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kenoshann",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Calebren",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vinusi",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Western Fort",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "March Fort",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Khumpala",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kurn Fort",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ottykrra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Allantyr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Morning Dew",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Isha Castle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Truy\u0027a",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Perchon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Otzwall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gilgam City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245FT0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Turania",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SR000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Stone-Age Dwarves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245SR000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Renegade Demons",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gogg the Special Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245TM0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gogg the Special Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Calderic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Begrezen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Justin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Witeric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Highest lord of the dwarf lords, he is known for his intensity in battle and his courage in the face of overwhelming odds. He once fought seven days and nights against the mighty red dragon ARFURUZON to finally defeat him.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zagamon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Every child trembles at the hearing of this most infamous name. This lord of hell is known for his blood thirsts. It is said that he once ate 1000 slaves at a banquet given by Bethrezen for a victory against the kingdom of light.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ophaal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Known in her times as the mightiest of all adepts of the black art, this lord was slain by the inquisitor Vorgel who ended her reign of terror. She is now resurrected as an undead with the intention to subjugate every mortal to her will.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Tennius",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sixthar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Deuxios",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ailiia, Lady of the Lake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ta\u0027Klammath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hort\u0027ankh, Master Occultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0039",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Special Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0049",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mad Engineer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN004e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0068",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0071",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0074",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0079",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN007c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0081",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0084",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0085",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0088",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN008e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0090",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0092",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0096",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN009a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN009f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonius",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00cb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00d3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00da",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titannia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN00f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Green Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0101",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0105",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN010a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0111",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0115",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0118",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN011d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0123",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0127",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN012c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0131",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0135",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0139",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN013d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0142",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN014a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0150",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0157",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clovis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0163",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0167",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sea Serpent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN016a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN016d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN017e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blue Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN017f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0185",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN018a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN018e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0191",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0194",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0197",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN019b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN019e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hill Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01bf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01c2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01d6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01d8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01da",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01de",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Drakk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sea Serpent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01f9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN01fb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sea Serpent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0201",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magneric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0207",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elder One",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0208",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0209",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN020c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN020f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eraric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0216",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thotgel\u0027yr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN021c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Onyx Gargoyle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN021f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Tiamath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0222",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0226",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zehura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN022a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ythren",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN022f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0231",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0232",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0236",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN023e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0242",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0247",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN024d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0253",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0258",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN025e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S245SC0000",
+      "ID_OBJECT": "S245UN0268",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    }
+  ]
+}

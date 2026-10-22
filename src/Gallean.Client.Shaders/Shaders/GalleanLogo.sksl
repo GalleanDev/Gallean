@@ -1,0 +1,89 @@
+uniform shader color;
+uniform shader normals;
+
+uniform float4 lightPositions[8];
+uniform float4 lightRadiances[8];
+uniform float3 ambient;
+uniform float4 grazing;
+
+const int LightCount = 8;
+const float Pi = 3.14159265;
+const float3 View = float3(0.0, 0.0, 1.0);
+const float CoverageThreshold = 0.06;
+const float EdgeInsetAlpha = 0.5;
+const float EdgeDamping = 0.55;
+const float Roughness = 0.6;
+const float MinimumSteeperDot = 0.0709;
+const float Shininess = 40.0;
+const float GrazingExponent = 2.5;
+
+float3 srgbToLinear(float3 color) {
+    return pow(max(color, 0.0), float3(2.2));
+}
+
+float3 linearToSrgb(float3 color) {
+    return pow(max(color, 0.0), float3(1.0 / 2.2));
+}
+
+float orenNayar(float3 normal, float3 toLight) {
+    float lightDot = clamp(dot(normal, toLight), 0.0, 1.0);
+    float viewFacing = dot(normal, View);
+    float viewDot = clamp(viewFacing, 0.0, 1.0);
+    float sigmaSquared = Roughness * Roughness;
+    float a = 1.0 - 0.5 * sigmaSquared / (sigmaSquared + 0.33);
+    float b = 0.45 * sigmaSquared / (sigmaSquared + 0.09);
+
+    float tangentDot = max(dot(View, toLight) - lightDot * viewFacing, 0.0);
+    float steeperDot = max(max(lightDot, viewDot), MinimumSteeperDot);
+
+    return lightDot / Pi * (a + b * tangentDot / steeperDot);
+}
+
+half4 main(float2 coord) {
+    half4 colorSample = color.eval(coord);
+    float alpha = float(colorSample.a);
+
+    if (alpha < CoverageThreshold) {
+        return colorSample;
+    }
+
+    float3 surface = float3(colorSample.rgb) / alpha;
+    half4 normalSample = normals.eval(coord);
+    float3 encoded = float3(normalSample.rgb) / alpha;
+    float3 normal = normalize(float3(encoded.r * 2.0 - 1.0, -(encoded.g * 2.0 - 1.0), encoded.b * 2.0 - 1.0));
+
+    float inset = clamp((alpha - EdgeInsetAlpha) / (1.0 - EdgeInsetAlpha), 0.0, 1.0);
+
+    normal = normalize(mix(View, normal, EdgeDamping + (1.0 - EdgeDamping) * inset));
+
+    float3 position = float3(coord, 0.0);
+    float3 light = ambient;
+    float3 specular = float3(0.0);
+
+    for (int index = 0; index < LightCount; index++) {
+        float4 lightPosition = lightPositions[index];
+
+        if (lightPosition.w > 0.0) {
+            float4 radiance = lightRadiances[index];
+            float3 delta = lightPosition.xyz - position;
+            float lightDistance = max(length(delta), 1e-4);
+            float3 direction = delta / lightDistance;
+            float relative = lightDistance / lightPosition.w;
+            float attenuation = 1.0 / (1.0 + relative * relative);
+            float3 halfway = normalize(direction + View);
+            float highlight = pow(clamp(dot(normal, halfway), 0.0, 1.0), Shininess) * step(0.0, dot(normal, direction));
+
+            light += orenNayar(normal, direction) * radiance.rgb * attenuation;
+            specular += radiance.rgb * radiance.a * highlight * attenuation;
+        }
+        else {
+            break;
+        }
+    }
+
+    float grazingFactor = pow(1.0 - clamp(dot(normal, View), 0.0, 1.0), GrazingExponent);
+    float3 lit = linearToSrgb(clamp(srgbToLinear(surface) * light + specular + grazing.rgb * grazing.a * grazingFactor, 0.0, 1.0));
+    float3 mixed = mix(surface, lit, alpha);
+
+    return half4(half3(mixed * alpha), half(alpha));
+}

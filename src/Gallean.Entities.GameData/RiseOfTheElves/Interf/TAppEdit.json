@@ -1,0 +1,6809 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "TXT_ID": "X001TA0000",
+      "TEXT": "Invalid or missing scenario info",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0001",
+      "TEXT": "Scenario %SCENARIONAME% has been created",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0002",
+      "TEXT": "Error creating new scenario",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0003",
+      "TEXT": "Error starting scenario editor",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0001",
+      "TEXT": "Erase Trees and Mountains",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0003",
+      "TEXT": "Infernal Mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0004",
+      "TEXT": "Runestone Mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0005",
+      "TEXT": "Life Mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0006",
+      "TEXT": "Death Mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0007",
+      "TEXT": "Gold",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0013",
+      "TEXT": "1x1 zone",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0014",
+      "TEXT": "3x3 zone",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0015",
+      "TEXT": "5x5 zone",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0016",
+      "TEXT": "Erase (Any object)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0017",
+      "TEXT": "Move object",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0018",
+      "TEXT": "Add city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0020",
+      "TEXT": "Add merchant",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0021",
+      "TEXT": "Add ruin",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0022",
+      "TEXT": "Add road",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0023",
+      "TEXT": "Add party",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0024",
+      "TEXT": "Add bag",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0004",
+      "TEXT": "Scenario %SCENARIONAME% has been saved successfully.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0005",
+      "TEXT": "There was an error saving scenario %SCENARIONAME%:\\n\\n\\hC;%ERROR%",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0006",
+      "TEXT": "Scenario %SCENARIONAME% has been deleted successfully.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0007",
+      "TEXT": "There has been an error deleting the scenario %SCENARIONAME%.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0008",
+      "TEXT": "Do you really want to delete %SCENARIONAME%?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0002",
+      "TEXT": "Scenario %SCENARIONAME% has not been saved! Do you want to save it now?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0003",
+      "TEXT": "Do you really want to delete the %ITEMTYPE%%NAMED% you have selected?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0004",
+      "TEXT": "Village",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0005",
+      "TEXT": "Landmark",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0006",
+      "TEXT": "Party",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0007",
+      "TEXT": "Bag",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0008",
+      "TEXT": "Object",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0009",
+      "TEXT": "Road",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0011",
+      "TEXT": "The maximum number of players in the scenario %SCENARIONAME% has been reached!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0033",
+      "TEXT": "Dismiss %UNITNAME%?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0014",
+      "TEXT": "Add mage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0015",
+      "TEXT": "Edit object properties",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0016",
+      "TEXT": "Site",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0017",
+      "TEXT": "Level",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0019",
+      "TEXT": "Delete units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0020",
+      "TEXT": "Set looted state",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0021",
+      "TEXT": "Small map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0022",
+      "TEXT": "Medium map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0023",
+      "TEXT": "Large map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0024",
+      "TEXT": "Humongous map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0009",
+      "TEXT": "Exporting scenario %SCENARIONAME% to %EXPORTFILENAME%.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0010",
+      "TEXT": "File %FILE% already exists. Overwrite?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0011",
+      "TEXT": "Export successful",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0012",
+      "TEXT": "Export failed",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0013",
+      "TEXT": "Importing file %FILE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0014",
+      "TEXT": "Error loading file %FILE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0015",
+      "TEXT": "Import successful",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0016",
+      "TEXT": "Import failed",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0034",
+      "TEXT": "Ground:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0035",
+      "TEXT": "Feature:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0051",
+      "TEXT": "Income:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0001",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;MISS",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0002",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;IMMUNE",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0055",
+      "TEXT": "%QTY% Gold",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0056",
+      "TEXT": "%QTY% Runestone mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0057",
+      "TEXT": "%QTY% Death mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0058",
+      "TEXT": "%QTY% Life mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0059",
+      "TEXT": "%QTY% Infernal mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0065",
+      "TEXT": "Warrior Lord",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0066",
+      "TEXT": "Mage Lord",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0067",
+      "TEXT": "Guildmaster",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0097",
+      "TEXT": "Here lies:\\n\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Tomb encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0098",
+      "TEXT": "%NAME%%DEFEATED%",
+      "VERIFIED": false,
+      "CONTEXT": "Tomb encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0096",
+      "TEXT": "Add mercenary",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0136",
+      "TEXT": "\\hL;\\c000;000;000;\\s60;Source:\\t%SOURCE%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0137",
+      "TEXT": "\\hL;\\c000;000;000;\\s60;Duration:\\t%DURATION%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0145",
+      "TEXT": "Weapon",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0146",
+      "TEXT": "Mind",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0147",
+      "TEXT": "Life",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0148",
+      "TEXT": "Death",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0149",
+      "TEXT": "Fire",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0150",
+      "TEXT": "Water",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0151",
+      "TEXT": "Air",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0152",
+      "TEXT": "Earth",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0159",
+      "TEXT": "\\hC;\\vT;\\fNormal;Click here to hire a leader and create a party",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0171",
+      "TEXT": "Unknown treasure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0181",
+      "TEXT": "Use Staffs \u0026 Scrolls",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0182",
+      "TEXT": "Artifact Lore",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0183",
+      "TEXT": "Banner Bearer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0184",
+      "TEXT": "Arcane Knowledge",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0185",
+      "TEXT": "Leader abilities:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0186",
+      "TEXT": "\\hC;\\vC;%RUINNAME% has been looted.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0187",
+      "TEXT": "\\hC;\\vC;%RUINNAME% is unexplored.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0200",
+      "TEXT": "Any unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0201",
+      "TEXT": "Adjacent units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0256",
+      "TEXT": "Flying",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0277",
+      "TEXT": "Mountain Clans",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0278",
+      "TEXT": "Legions of the Damned",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0279",
+      "TEXT": "The Empire",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0280",
+      "TEXT": "Undead Hordes",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0281",
+      "TEXT": "Neutral",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0095",
+      "TEXT": "Capital",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0323",
+      "TEXT": "\\c255;255;255;\\hR;\\vB;\\fSmall;%NUM%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0003",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;BOOST",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0340",
+      "TEXT": "Belongs to: %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0341",
+      "TEXT": "This resource belongs to your race; your terrain type is under it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0342",
+      "TEXT": "This resource does not belong to anyone.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0343",
+      "TEXT": "This resource can belong to you by changing the terrain beneath it. To control a resource, plant a rod beside it or let your cities\u0027 terrain expand to this location.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0350",
+      "TEXT": "%PLAYER% is a %TYPE% and is the Lord you are currently playing!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0351",
+      "TEXT": "%PLAYER% is a %TYPE% and is one of the Lords you are battling against!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0352",
+      "TEXT": "You are currently at war with the race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0353",
+      "TEXT": "You are currently in peace with the race.\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0354",
+      "TEXT": "You are not in alliance with the race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0355",
+      "TEXT": "You are in alliance with the race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0359",
+      "TEXT": "Plant rod",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0361",
+      "TEXT": "Scenario File (*.sg)|*.sg|All files (*.*)|*.*||",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0362",
+      "TEXT": "Import Scenario",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0366",
+      "TEXT": "This unit cannot be enrolled! The leader either needs a greater leadership value or the position next to the one where you are trying to hire this unit needs to be freed.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0367",
+      "TEXT": "The leaders cannot be exchanged. Either the leadership value is too low to handle the units already in the party or you are trying to replace a small leader by a large one while another unit occupies the second space in the stack.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0368",
+      "TEXT": "Do you want to surrender to the enemy and destroy your party?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0393",
+      "TEXT": "Merchant",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0394",
+      "TEXT": "Temple",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0409",
+      "TEXT": "A thief must spy on this race to gain information about it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0096",
+      "TEXT": "Death mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0097",
+      "TEXT": "Runestone mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0098",
+      "TEXT": "Life mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0099",
+      "TEXT": "Infernal mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0004",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fLarge;%DAMAGE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0005",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fMedium;XP:\\n\u002B%GAIN%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0006",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;%NOW%/%MAX%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0422",
+      "TEXT": "\\fNormal;%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0423",
+      "TEXT": "\\s100;\\fmedbold;Level:\\t\\fnormal;%LEVEL%\\n\\fmedbold;XP:\\t\\fnormal;%XP%\\n\\fmedbold;HP:\\t\\fnormal;%HP1% / %HP2%\\n\\fmedbold;Armor:\\t\\fnormal;%ARMOR%\\n\\fmedbold;Immunities:\\t\\fnormal;\\p100;%IMMU%\\mL0;\\fmedbold;Wards:\\t\\fnormal;\\p100;%WARD%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0424",
+      "TEXT": "%PART1%%PART2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0429",
+      "TEXT": "\\hC;%NAME% (%LEVEL%)\\nRace: %RACE%\\nHit point regeneration per day: %HP%%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0431",
+      "TEXT": "%LEADER%\u0027s party",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0432",
+      "TEXT": "City defenses",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0433",
+      "TEXT": "\\hC;%NAME%\\nRace: %RACE%\\n\\nA thief must spy on this city to gain information about it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0434",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;Level up!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0435",
+      "TEXT": "\\fMedBold;\\hL;%NAME%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0436",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;HP: \\t%HPVALUE1%/%HPVALUE2%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0437",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;XP: \\t%XP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0438",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;Level: \\t%LEVEL%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X008TA0007",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;FEAR",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0459",
+      "TEXT": "\\fNormal;\\c000;000;000; or \\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0469",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Immunities in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0472",
+      "TEXT": "\\hL;\\c000;000;000;\\s60;Effect:\\t%DESC%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Spell effect"
+    },
+    {
+      "TXT_ID": "X005TA0473",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Spells that have no source"
+    },
+    {
+      "TXT_ID": "X005TA0486",
+      "TEXT": "\\c025;090;000; \u002B %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia (stat modifiers)"
+    },
+    {
+      "TXT_ID": "X005TA0487",
+      "TEXT": "\\c100;000;000; - %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia (stat modifiers)"
+    },
+    {
+      "TXT_ID": "X005TA0488",
+      "TEXT": "\\c000;000;000;",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia (stat modifiers) used to return to previous color"
+    },
+    {
+      "TXT_ID": "X005TA0496",
+      "TEXT": "Your lord cannot cast this spell.",
+      "VERIFIED": false,
+      "CONTEXT": "Spell encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0497",
+      "TEXT": "\\fMedBold;Casting cost:",
+      "VERIFIED": false,
+      "CONTEXT": "Spell encyclopedia"
+    },
+    {
+      "TXT_ID": "X008TA0008",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;PARALYZE",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0009",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;PETRIFY",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0010",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;PASS",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0503",
+      "TEXT": "Damage",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0504",
+      "TEXT": "Heal",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0513",
+      "TEXT": "You must build the %BUILDING% in your capital to upgrade this unit.",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0529",
+      "TEXT": "Item price: %PRICE%",
+      "VERIFIED": false,
+      "CONTEXT": "Item encyclopedia when opened from a site"
+    },
+    {
+      "TXT_ID": "X005TA0530",
+      "TEXT": "Buying cost: %COST%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0534",
+      "TEXT": "Boost",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0535",
+      "TEXT": "\u002B%BOOST%%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0541",
+      "TEXT": "%RACE%\\n\\nTerrain transformed: %NOW% / %TOTAL% (%PERCENT%%)",
+      "VERIFIED": false,
+      "CONTEXT": "Encyclopedia on \u0022terrain transformed\u0022 icons in iso"
+    },
+    {
+      "TXT_ID": "X005TA0575",
+      "TEXT": "%USED% / %AVAIL%",
+      "VERIFIED": false,
+      "CONTEXT": "Leadership strings in all interfaces"
+    },
+    {
+      "TXT_ID": "X005TA0583",
+      "TEXT": "\\s110;\\fMedBold;Leadership:\\t\\fNormal;%MAX%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0613",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;Cost: \\t%COST_HIRING% gold\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Txt for mercenary list (in Mercenary Interf)"
+    },
+    {
+      "TXT_ID": "X005TA0616",
+      "TEXT": "\\fLarge;\\hC;\\vC;\\c000;000;000;City Level\\fNormal;\\nYou cannot lower the city level because its reinforcement contains too many units! Dismiss units if you want to lower the city level!",
+      "VERIFIED": false,
+      "CONTEXT": "ScenEdit CityInterf"
+    },
+    {
+      "TXT_ID": "X005TA0619",
+      "TEXT": "No moving stack",
+      "VERIFIED": false,
+      "CONTEXT": "City encyclopedia when there\u0027s no moving stack in city"
+    },
+    {
+      "TXT_ID": "X005TA0637",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;You cannot change the owner of a city containing a party. You must delete the party before changing the city owner.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0639",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;The leader cannot be dismissed from the capital.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0640",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;The Guardian cannot be dismissed from the capital.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0641",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;This group must contain at least one unit!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0642",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;The leader of a party cannot be dismissed when his party contains units.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0646",
+      "TEXT": "Crystal",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0018",
+      "TEXT": "This name already exists",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0019",
+      "TEXT": "At least one race is required to build a quest",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0020",
+      "TEXT": "The quest has not been named",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0648",
+      "TEXT": "\\c128;000;000;Max\\c000;000;000;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0649",
+      "TEXT": "%XP1% / %XP2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0650",
+      "TEXT": "Move points:\\t%AP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0034",
+      "TEXT": "Legions terrain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0035",
+      "TEXT": "Clans terrain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0036",
+      "TEXT": "Empire terrain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0037",
+      "TEXT": "Undead terrain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0038",
+      "TEXT": "Neutral terrain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0039",
+      "TEXT": "Mountains",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0040",
+      "TEXT": "Trees",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0041",
+      "TEXT": "Water",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X001TA0021",
+      "TEXT": "You have reached the maximum number of stacks (%MAX% stacks) a scenario can contain.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0652",
+      "TEXT": "More...",
+      "VERIFIED": false,
+      "CONTEXT": "Bag encyclopedia in ScenEdit"
+    },
+    {
+      "TXT_ID": "X005TA0653",
+      "TEXT": "\\fMedBold;%NAME%\\fNormal;\\n%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": "Spell Encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0657",
+      "TEXT": "\\fLarge;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Building encyclopedia"
+    },
+    {
+      "TXT_ID": "X010TA0006",
+      "TEXT": "Third Party",
+      "VERIFIED": false,
+      "CONTEXT": "Description in scenedit menu"
+    },
+    {
+      "TXT_ID": "X010TA0001",
+      "TEXT": "Strategy First Inc.",
+      "VERIFIED": false,
+      "CONTEXT": "Description in scenedit menu"
+    },
+    {
+      "TXT_ID": "X005TA0658",
+      "TEXT": "Owner: %NAME%\\n\\nRods transform a small amount of land every day. Each race\u0027s resources increase when the terrain under a resource is of their type. To destroy a rod, you must enroll the leader who possesses the plant rod ability.",
+      "VERIFIED": false,
+      "CONTEXT": "Rod encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0660",
+      "TEXT": "\\fMedBold;%NAME%\\n\\fNormal;%DESC%%CASTCOST%%ITEMCAT%",
+      "VERIFIED": false,
+      "CONTEXT": "Item encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0661",
+      "TEXT": "\\n\\nCasting cost: %CASTCOST%",
+      "VERIFIED": false,
+      "CONTEXT": "Item encyclopedia for wands"
+    },
+    {
+      "TXT_ID": "X008TA0011",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;\\fSmall;WARD",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0663",
+      "TEXT": "Level %LEVEL%",
+      "VERIFIED": false,
+      "CONTEXT": "City encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0668",
+      "TEXT": "\\mL3;\\s40;Level: \\t%LEVEL%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Carry over interface"
+    },
+    {
+      "TXT_ID": "X005TA0669",
+      "TEXT": "\\mL3;\\s40;XP: \\t%XP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Carry over interface"
+    },
+    {
+      "TXT_ID": "X110TA0013",
+      "TEXT": "Add/Remove alignment grid on the map",
+      "VERIFIED": false,
+      "CONTEXT": "Grid ToolTip"
+    },
+    {
+      "TXT_ID": "X110TA0014",
+      "TEXT": "Delete this hint?",
+      "VERIFIED": false,
+      "CONTEXT": "Confirmation for hint in scenedit"
+    },
+    {
+      "TXT_ID": "X002TA0042",
+      "TEXT": "Add training camp",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0674",
+      "TEXT": "6",
+      "VERIFIED": false,
+      "CONTEXT": "Targets in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0675",
+      "TEXT": "1",
+      "VERIFIED": false,
+      "CONTEXT": "Targets in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0676",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Leader abilities in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0679",
+      "TEXT": "\\vC;Level %LEVEL% - %NAME% (%EFFECT%)",
+      "VERIFIED": false,
+      "CONTEXT": "Spell menu for capitals in ScenEdit"
+    },
+    {
+      "TXT_ID": "X005TA0681",
+      "TEXT": "\\vC;\\fMedBold;%NAME%\\fNormal;%LEVEL%%LEADERSHIP%\\nExperience (XP): %XP%\\nHit Points: %HP%",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll unit in ScenEdit"
+    },
+    {
+      "TXT_ID": "X005TA0682",
+      "TEXT": "\\nLevel: %LEVEL%",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll unit in ScenEdit"
+    },
+    {
+      "TXT_ID": "X005TA0683",
+      "TEXT": "\\nLeadership: %LEADERSHIP%",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll unit in ScenEdit"
+    },
+    {
+      "TXT_ID": "X100TA0608",
+      "TEXT": "Select location",
+      "VERIFIED": false,
+      "CONTEXT": "When creating a new location"
+    },
+    {
+      "TXT_ID": "X100TA0609",
+      "TEXT": "Enter location name",
+      "VERIFIED": false,
+      "CONTEXT": "When creating a new location"
+    },
+    {
+      "TXT_ID": "X100TA0610",
+      "TEXT": "Name must be at least %MIN% character long and at most %MAX% characters long.",
+      "VERIFIED": false,
+      "CONTEXT": "When creating a new location"
+    },
+    {
+      "TXT_ID": "X100TA0611",
+      "TEXT": "%LOCNAME%\\hR;(%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Location list"
+    },
+    {
+      "TXT_ID": "X100TA0614",
+      "TEXT": "A location has already been defined at this position",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0615",
+      "TEXT": "Delete location \u0022%NAME%\u0022?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0616",
+      "TEXT": "A location with that name already exists",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0617",
+      "TEXT": "Frequency (every n days)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0619",
+      "TEXT": "Entering a predefined zone",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0620",
+      "TEXT": "Entering a city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0621",
+      "TEXT": "Owning a city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0622",
+      "TEXT": "Destroying a stack",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0623",
+      "TEXT": "Owning an item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0624",
+      "TEXT": "Specific leader owning an item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0625",
+      "TEXT": "Diplomacy relations",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0626",
+      "TEXT": "Being in alliance",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0627",
+      "TEXT": "Looting a ruin",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0628",
+      "TEXT": "Transforming x% of the land",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0629",
+      "TEXT": "Visiting a site",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0630",
+      "TEXT": "You must choose different players",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0631",
+      "TEXT": "Could not create new condition",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0632",
+      "TEXT": "Valid frequency range is %MIN% to %MAX%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0633",
+      "TEXT": "Enter frequency:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0634",
+      "TEXT": "Select players",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0635",
+      "TEXT": "Select location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0636",
+      "TEXT": "Select city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0637",
+      "TEXT": "Select ruin",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0638",
+      "TEXT": "Select site",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0639",
+      "TEXT": "Enter percentage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0640",
+      "TEXT": "Valid range for terrain transformation is %MIN% to %MAX%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0641",
+      "TEXT": "Select stack",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0642",
+      "TEXT": "Select item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0643",
+      "TEXT": "Select item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0644",
+      "TEXT": "Select stack and location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0645",
+      "TEXT": "Select stack and city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0646",
+      "TEXT": "Stack to location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0647",
+      "TEXT": "Stack to city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0648",
+      "TEXT": "Select players and diplomacy relationship",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0649",
+      "TEXT": "Do you really want to delete the selected condition?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0650",
+      "TEXT": "Frequency: %QTY% days",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0651",
+      "TEXT": "Go to location %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0652",
+      "TEXT": "Enter city %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0653",
+      "TEXT": "Own city %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0654",
+      "TEXT": "Own item %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "own item condition"
+    },
+    {
+      "TXT_ID": "X100TA0655",
+      "TEXT": "Leader %LEADER% (%X%, %Y%) must own item %ITEM%",
+      "VERIFIED": false,
+      "CONTEXT": "leader own item condition"
+    },
+    {
+      "TXT_ID": "X100TA0656",
+      "TEXT": "%PLAYER1% must be %RELATION% with %PLAYER2%",
+      "VERIFIED": false,
+      "CONTEXT": "diplomacy condition"
+    },
+    {
+      "TXT_ID": "X100TA0657",
+      "TEXT": "at war",
+      "VERIFIED": false,
+      "CONTEXT": "diplomacy condition"
+    },
+    {
+      "TXT_ID": "X100TA0658",
+      "TEXT": "at peace",
+      "VERIFIED": false,
+      "CONTEXT": "diplomacy condition"
+    },
+    {
+      "TXT_ID": "X100TA0659",
+      "TEXT": "neutral",
+      "VERIFIED": false,
+      "CONTEXT": "diplomacy condition"
+    },
+    {
+      "TXT_ID": "X100TA0660",
+      "TEXT": "%PLAYER1% must be in alliance with %PLAYER2%",
+      "VERIFIED": false,
+      "CONTEXT": "alliance condition"
+    },
+    {
+      "TXT_ID": "X100TA0661",
+      "TEXT": "Loot ruin %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "loot ruin condition"
+    },
+    {
+      "TXT_ID": "X100TA0662",
+      "TEXT": "Transform %PERCENT%% of the land",
+      "VERIFIED": false,
+      "CONTEXT": "transform land condition"
+    },
+    {
+      "TXT_ID": "X100TA0663",
+      "TEXT": "Visit site %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "visit site condition"
+    },
+    {
+      "TXT_ID": "X100TA0664",
+      "TEXT": "Stack %NAME% (%X1%, %Y1%) must go to location %LOCATION% (%X2%, %Y2%)",
+      "VERIFIED": false,
+      "CONTEXT": "leader to zone condition"
+    },
+    {
+      "TXT_ID": "X100TA0665",
+      "TEXT": "Stack %NAME% (%X1%, %Y1%) must go to city %CITY% (%X2%, %Y2%)",
+      "VERIFIED": false,
+      "CONTEXT": "leader to city condition"
+    },
+    {
+      "TXT_ID": "X100TA0666",
+      "TEXT": "Destroy %NAME%\u0027s stack (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "kill stack condition"
+    },
+    {
+      "TXT_ID": "X100TA0667",
+      "TEXT": "New Event",
+      "VERIFIED": false,
+      "CONTEXT": "Default name for new event"
+    },
+    {
+      "TXT_ID": "X100TA0668",
+      "TEXT": "Invalid or incomplete event.  Please correct and try again.",
+      "VERIFIED": false,
+      "CONTEXT": "New event dialog"
+    },
+    {
+      "TXT_ID": "X100TA0669",
+      "TEXT": "Delete event \u0022%NAME%\u0022?",
+      "VERIFIED": false,
+      "CONTEXT": "Delete an event"
+    },
+    {
+      "TXT_ID": "X100TA0670",
+      "TEXT": "Win or lose scenario",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0671",
+      "TEXT": "Create new stack",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0672",
+      "TEXT": "Cast spell on trigerrer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0673",
+      "TEXT": "Cast spell at specific location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0674",
+      "TEXT": "Change stack owner",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0675",
+      "TEXT": "Move stack next to trigerrer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0676",
+      "TEXT": "Go into battle",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0677",
+      "TEXT": "Enable/disable another event",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0678",
+      "TEXT": "Give spell",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0679",
+      "TEXT": "Give item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0680",
+      "TEXT": "Move stack to specific location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0681",
+      "TEXT": "Ally two AI players",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0682",
+      "TEXT": "Change player diplomacy meter",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0683",
+      "TEXT": "Unfog an area of the map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0684",
+      "TEXT": "Remove mountains around a location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0685",
+      "TEXT": "Remove landmark",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0686",
+      "TEXT": "Change scenario objective text",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0687",
+      "TEXT": "Display popup message",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0688",
+      "TEXT": "Select stack and location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0689",
+      "TEXT": "Select spell and location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0690",
+      "TEXT": "Could not create new effect",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0692",
+      "TEXT": "Select spell to cast on triggerer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0693",
+      "TEXT": "Select stack and new owner",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0694",
+      "TEXT": "Enter text and choose an optional image, sound and/or music track",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0695",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0696",
+      "TEXT": "Do you really want to delete the selected effect?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0697",
+      "TEXT": "Choose stack that will move beside triggerer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0698",
+      "TEXT": "Choose stack that will attack triggerer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0699",
+      "TEXT": "Choose event",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0701",
+      "TEXT": "Choose spell",
+      "VERIFIED": false,
+      "CONTEXT": "give spell effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0702",
+      "TEXT": "Choose item",
+      "VERIFIED": false,
+      "CONTEXT": "give item effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0703",
+      "TEXT": "Choose stack and location",
+      "VERIFIED": false,
+      "CONTEXT": "move to pos effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0704",
+      "TEXT": "Select players",
+      "VERIFIED": false,
+      "CONTEXT": "Ally effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0705",
+      "TEXT": "You must choose different players",
+      "VERIFIED": false,
+      "CONTEXT": "Ally effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0706",
+      "TEXT": "Select players and diplomacy relation",
+      "VERIFIED": false,
+      "CONTEXT": "Diplomacy effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0707",
+      "TEXT": "Select races and location",
+      "VERIFIED": false,
+      "CONTEXT": "Unfog effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0708",
+      "TEXT": "You must choose at least one valid player",
+      "VERIFIED": false,
+      "CONTEXT": "Unfog effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0709",
+      "TEXT": "Choose location around which to remove mountains",
+      "VERIFIED": false,
+      "CONTEXT": "Remove mountains effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0710",
+      "TEXT": "Choose landmark",
+      "VERIFIED": false,
+      "CONTEXT": "Remove landmark effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0711",
+      "TEXT": "Enter new objective text",
+      "VERIFIED": false,
+      "CONTEXT": "Change objective text effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0712",
+      "TEXT": "The \u0027%RACE%\u0027 race wins the scenario",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0713",
+      "TEXT": "Create %STACK% at location %LOC%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0714",
+      "TEXT": "Cast spell %SPELL% on triggerer",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0715",
+      "TEXT": "Cast spell %SPELL% at location %LOC%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0716",
+      "TEXT": "Give ownership of %STACK%\u0027s party to %PLAYER%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0717",
+      "TEXT": "Move %NAME%\u0027s party next to triggerer",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0718",
+      "TEXT": "Go into battle with %NAME%\u0027s party",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0719",
+      "TEXT": "%ENABLE% event %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0720",
+      "TEXT": "Enable",
+      "VERIFIED": false,
+      "CONTEXT": "X100TA0719 subset"
+    },
+    {
+      "TXT_ID": "X100TA0721",
+      "TEXT": "Disable",
+      "VERIFIED": false,
+      "CONTEXT": "X100TA0719 subset"
+    },
+    {
+      "TXT_ID": "X100TA0722",
+      "TEXT": "Give spell %SPELL% to triggerer race",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0723",
+      "TEXT": "Give item %ITEM% to %GIVETO%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0724",
+      "TEXT": "Move %NAME%\u0027s party to location %LOC%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0725",
+      "TEXT": "Ally %PLAYER1% with %PLAYER2%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0726",
+      "TEXT": "Make %PLAYER1% be %RELATION% with %PLAYER2%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0727",
+      "TEXT": "at war",
+      "VERIFIED": false,
+      "CONTEXT": "X100TA0726 subset"
+    },
+    {
+      "TXT_ID": "X100TA0728",
+      "TEXT": "at peace",
+      "VERIFIED": false,
+      "CONTEXT": "X100TA0726 subset"
+    },
+    {
+      "TXT_ID": "X100TA0729",
+      "TEXT": "neutral",
+      "VERIFIED": false,
+      "CONTEXT": "X100TA0726 subset"
+    },
+    {
+      "TXT_ID": "X100TA0730",
+      "TEXT": "Unfog map around location %LOC% for %QTY% players",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0731",
+      "TEXT": "Remove mountains around location %LOC%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0732",
+      "TEXT": "Remove landmark %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X100TA0733",
+      "TEXT": "Change objective text",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0734",
+      "TEXT": "Display popup message",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0735",
+      "TEXT": "Invalid event name",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0736",
+      "TEXT": "Event needs to have at least one affected race. Select one or more races in order to save your event.",
+      "VERIFIED": false,
+      "CONTEXT": "EventPropInterf"
+    },
+    {
+      "TXT_ID": "X100TA0737",
+      "TEXT": "Event needs to have at least one condition. Select one or more conditions in order to save your event.",
+      "VERIFIED": false,
+      "CONTEXT": "EventPropInterf"
+    },
+    {
+      "TXT_ID": "X100TA0738",
+      "TEXT": "Event needs to have at least one effect. Select one or more effects in order to save your event.",
+      "VERIFIED": false,
+      "CONTEXT": "EventPropInterf"
+    },
+    {
+      "TXT_ID": "X100TA0739",
+      "TEXT": "Only one condition of type \u0022Frequency\u0022 is allowed per event.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0740",
+      "TEXT": "Only one condition of type \u0022Enter Location\u0022 is allowed per event.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0741",
+      "TEXT": "Conditions of type \u0022Frequency\u0022 and \u0022Enter Location\u0022 are mutually exclusive.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0742",
+      "TEXT": "Occurance \u0022Always\u0022 requires a condition of type \u0022Frequency\u0022 or \u0022Enter Location\u0022",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0743",
+      "TEXT": "Can\u0027t set occurance to \u0022Always\u0022 for events that have an effect of type \u0022Win Scenario\u0022",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0744",
+      "TEXT": "Do you really want to delete this event?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0746",
+      "TEXT": "Only one \u0022Win scenario\u0022 effect is allowed per event and it must be the last effect in the list.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0747",
+      "TEXT": "Invalid location position",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0748",
+      "TEXT": "%X% x %Y%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0749",
+      "TEXT": "Could not set order",
+      "VERIFIED": false,
+      "CONTEXT": "Stack order interface error"
+    },
+    {
+      "TXT_ID": "X100TA0750",
+      "TEXT": "Normal",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0751",
+      "TEXT": "Stand",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0752",
+      "TEXT": "Guard",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0753",
+      "TEXT": "Attack stack %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0754",
+      "TEXT": "Defend stack %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0755",
+      "TEXT": "Secure city %NAME% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0756",
+      "TEXT": "Roam",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0757",
+      "TEXT": "Move to location %LOC% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0758",
+      "TEXT": "Defend location %LOC% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0759",
+      "TEXT": "Berserk",
+      "VERIFIED": false,
+      "CONTEXT": "Detailed description of a stack order"
+    },
+    {
+      "TXT_ID": "X100TA0760",
+      "TEXT": "Normal",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0761",
+      "TEXT": "Stand",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0762",
+      "TEXT": "Guard",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0763",
+      "TEXT": "Attack stack",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0764",
+      "TEXT": "Defend stack",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0765",
+      "TEXT": "Secure city",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0766",
+      "TEXT": "Roam",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0767",
+      "TEXT": "Move to location",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0768",
+      "TEXT": "Defend location",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0769",
+      "TEXT": "Berserk",
+      "VERIFIED": false,
+      "CONTEXT": "Short description of stack order (Set/change stack order)"
+    },
+    {
+      "TXT_ID": "X100TA0770",
+      "TEXT": "Select city",
+      "VERIFIED": false,
+      "CONTEXT": "City picker"
+    },
+    {
+      "TXT_ID": "X100TA0771",
+      "TEXT": "Select stack",
+      "VERIFIED": false,
+      "CONTEXT": "Stack picker"
+    },
+    {
+      "TXT_ID": "X100TA0772",
+      "TEXT": "Select location",
+      "VERIFIED": false,
+      "CONTEXT": "Location picker"
+    },
+    {
+      "TXT_ID": "X100TA0773",
+      "TEXT": "Select stack and new order",
+      "VERIFIED": false,
+      "CONTEXT": "Change order effect"
+    },
+    {
+      "TXT_ID": "X100TA0774",
+      "TEXT": "\\c000;255;000;%X%:%Y%\\n%GROUND%\\n%TERRAIN%",
+      "VERIFIED": false,
+      "CONTEXT": "IsoPosDisplay.cpp (WritePos)"
+    },
+    {
+      "TXT_ID": "X100TA0775",
+      "TEXT": "Change stack order",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description"
+    },
+    {
+      "TXT_ID": "X100TA0776",
+      "TEXT": "Change order of %STACK%\u0027s party to %ORDERDESC%",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detailed)"
+    },
+    {
+      "TXT_ID": "X100TA0777",
+      "TEXT": "Select order",
+      "VERIFIED": false,
+      "CONTEXT": "Order category picker"
+    },
+    {
+      "TXT_ID": "X005TA0685",
+      "TEXT": "%NAME%\\hR;\u003C%OWNER%\u003E",
+      "VERIFIED": false,
+      "CONTEXT": "Stack template interf"
+    },
+    {
+      "TXT_ID": "X100TA0778",
+      "TEXT": "Please set an order.",
+      "VERIFIED": false,
+      "CONTEXT": "Change order effect interf"
+    },
+    {
+      "TXT_ID": "X005TA0690",
+      "TEXT": "There is a riot in this city.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0779",
+      "TEXT": "%NAME%, %NUM% times",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0547",
+      "TEXT": "Lower",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0550",
+      "TEXT": "-%LOWER%%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0551",
+      "TEXT": "Lower initiative",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X110TA0018",
+      "TEXT": "\\c000;000;000;\\mL0;Description:\\n\\mL30;%DESCRIPTION%\\n\\mL0;Size of map:\\n\\mL30;%SIZEA% by %SIZEB%.\\n\\mL0;Designed by:\\n\\mL30;%DESIGNER%\\n\\mL0;From:\\n\\mL30;%SOURCE%",
+      "VERIFIED": false,
+      "CONTEXT": "Description in scenedit menu"
+    },
+    {
+      "TXT_ID": "X110TA0012",
+      "TEXT": "Not Named",
+      "VERIFIED": false,
+      "CONTEXT": "Description in scenedit menu"
+    },
+    {
+      "TXT_ID": "X005TA0691",
+      "TEXT": "Please specify a level ranging from %MINLEVEL% to %MAXLEVEL%.",
+      "VERIFIED": false,
+      "CONTEXT": "UnitPickerInterf"
+    },
+    {
+      "TXT_ID": "X110TA0019",
+      "TEXT": "%ITEM%%COUNT%\\s200;\\tLocation %X%, %Y%\\s100;\\tIn %HOLDER%",
+      "VERIFIED": false,
+      "CONTEXT": "ItemListInterf"
+    },
+    {
+      "TXT_ID": "X110TA0020",
+      "TEXT": "the stack named %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "X110TA0019 subset"
+    },
+    {
+      "TXT_ID": "X110TA0021",
+      "TEXT": "a bag",
+      "VERIFIED": false,
+      "CONTEXT": "X110TA0019 subset"
+    },
+    {
+      "TXT_ID": "X110TA0022",
+      "TEXT": "the city named %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "X110TA0019 subset"
+    },
+    {
+      "TXT_ID": "X110TA0023",
+      "TEXT": "the capital named %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "X110TA0019 subset"
+    },
+    {
+      "TXT_ID": "X110TA0024",
+      "TEXT": "\\c000;000;000;Are you sure you want to delete this item?",
+      "VERIFIED": false,
+      "CONTEXT": "ItemListInterf"
+    },
+    {
+      "TXT_ID": "X005TA0692",
+      "TEXT": "The leader you selected can only be used in deep water.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0710",
+      "TEXT": "\\hL;\\c000;000;000;Effect area : %AREA%",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0711",
+      "TEXT": "Single target",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0712",
+      "TEXT": "%W%x%H%",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0713",
+      "TEXT": "World",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0693",
+      "TEXT": "Invalid location for chosen party. This party must be created in water.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0694",
+      "TEXT": "Invalid position in group.",
+      "VERIFIED": false,
+      "CONTEXT": "StackGroup"
+    },
+    {
+      "TXT_ID": "X005TA0363",
+      "TEXT": "Add Scenario",
+      "VERIFIED": false,
+      "CONTEXT": "Campaign editor"
+    },
+    {
+      "TXT_ID": "X005TA0714",
+      "TEXT": "%NUM%.  %NAME% (%SIZE% x %SIZE%)",
+      "VERIFIED": false,
+      "CONTEXT": "Campaign editor"
+    },
+    {
+      "TXT_ID": "X005TA0715",
+      "TEXT": "Could not save saga! Make sure that disk is not full or that file is not read-only.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0716",
+      "TEXT": "You must give a name to your saga before saving it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0717",
+      "TEXT": "Invalid scenario(s) found:\\n\\n\\hC;%NUMBERS%\\n\\n\\hL;These scenarios are unplayable with the selected race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0718",
+      "TEXT": "Invalid saga: at least two scenarios have the same filename.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0719",
+      "TEXT": "New saga",
+      "VERIFIED": false,
+      "CONTEXT": "Campaign editor"
+    },
+    {
+      "TXT_ID": "X005TA0720",
+      "TEXT": "Unknown",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0721",
+      "TEXT": "%NAME% / %QTY% quests",
+      "VERIFIED": false,
+      "CONTEXT": "Campaign editor"
+    },
+    {
+      "TXT_ID": "X005TA0722",
+      "TEXT": "Delete custom saga \u0027%NAME%\u0027?",
+      "VERIFIED": false,
+      "CONTEXT": "Campaign editor"
+    },
+    {
+      "TXT_ID": "X005TA0723",
+      "TEXT": "Unable to delete saga.  Make sure the file is not read-only.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0724",
+      "TEXT": "A saga must contain at least two scenarios.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0725",
+      "TEXT": "Suggested level is invalid",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0726",
+      "TEXT": "A saga with the same name already exists. Do you want to overwrite it?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0727",
+      "TEXT": "Delete selected scenario from saga?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0728",
+      "TEXT": "You must save your saga before you can edit the quests it contains.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0729",
+      "TEXT": "Error starting quest edition",
+      "VERIFIED": false,
+      "CONTEXT": "Campaign editor"
+    },
+    {
+      "TXT_ID": "X005TA0730",
+      "TEXT": "Unable to reload the saga that contains the scenario being edited",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0731",
+      "TEXT": "The quest has become invalid and can not replace the version currently in the saga",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0732",
+      "TEXT": "An error occurred while rebuilding the saga",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0737",
+      "TEXT": "\\s110;\\fMedBold;Battles won:\\t\\fNormal;%VALUE%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0175",
+      "TEXT": "Incorruptible",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0176",
+      "TEXT": "Use orbs",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0177",
+      "TEXT": "Use talismans",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0178",
+      "TEXT": "Use travel items",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0180",
+      "TEXT": "Weapon master",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0757",
+      "TEXT": "\\fMedBold;\\vT;\\hC;\\c255;255;255;%HP%/%HPMAX%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit group"
+    },
+    {
+      "TXT_ID": "X005TA0567",
+      "TEXT": "\\fmedbold;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0780",
+      "TEXT": "Select item and location",
+      "VERIFIED": false,
+      "CONTEXT": "CCondItemToLocationInterf"
+    },
+    {
+      "TXT_ID": "X100TA0781",
+      "TEXT": "Item to location",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0782",
+      "TEXT": "A stack with the Item %ITEM% must go to location %LOCATION% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": "Item to location condition"
+    },
+    {
+      "TXT_ID": "X100TA0783",
+      "TEXT": "Destroy item",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (short)"
+    },
+    {
+      "TXT_ID": "X100TA0784",
+      "TEXT": "Destroy item %ITEM%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0785",
+      "TEXT": "Destroy only triggerer\u0027s item",
+      "VERIFIED": false,
+      "CONTEXT": "CEffectDestroyItemInterf"
+    },
+    {
+      "TXT_ID": "X100TA0788",
+      "TEXT": "All races lose the scenario",
+      "VERIFIED": false,
+      "CONTEXT": "CEffectDescription (Details)"
+    },
+    {
+      "TXT_ID": "X005TA0758",
+      "TEXT": "\\n\\nIf you proceed, the following events will be affected:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0759",
+      "TEXT": "%EVNT% (%WHAT%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0760",
+      "TEXT": "Deleted",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0761",
+      "TEXT": "Modified",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0762",
+      "TEXT": "Delete selected stack template?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0763",
+      "TEXT": "Delete prize?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0764",
+      "TEXT": "Only one prize is allowed per ruin. Please delete current prize first.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0765",
+      "TEXT": "You are about to delete an item.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0766",
+      "TEXT": "\\hC;Can\u0027t save scenario!\\n\\nOne or more event is invalid. Make sure that you have respected all event rules and that all map objects involved in events still exist. Correct the error and save again.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0767",
+      "TEXT": "\\hC;Can\u0027t save scenario!\\n\\nOne or more water-only stack is on the ground. Correct the error and save again.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0789",
+      "TEXT": "\\o000;000;000;\\c255;255;255;\\hC;%LM% (%CX%x%CY%)",
+      "VERIFIED": false,
+      "CONTEXT": "CTaskAddLandmark"
+    },
+    {
+      "TXT_ID": "X005TA0768",
+      "TEXT": "%DESC% (%X%, %Y%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0769",
+      "TEXT": "%DESC% (%INFO%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0770",
+      "TEXT": "%NAME% (%LDR%Position %N%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0771",
+      "TEXT": "You can not delete the leader from a stack template.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X009TA0001",
+      "TEXT": "Current turn must be a factor of the specified value.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0002",
+      "TEXT": "A stack from the affected races is inside the specified location.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0003",
+      "TEXT": "There is a stack from the affected races inside the specified city.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0004",
+      "TEXT": "One of the affected races owns the specified city.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0005",
+      "TEXT": "Specified stack must be killed by any of the affected races. If a stack template is selected, a single stack generated from that template must be killed for condition to be true.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0006",
+      "TEXT": "Any of the affected races owns an item of the specified type.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0007",
+      "TEXT": "Specified stack must own specified item. Only special items are listed. Condition is true if stack has the item in its inventory. If a stack template is selected, a single stack generated from that template must own the item for condition to be true.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0008",
+      "TEXT": "The diplomacy relation between the two specified players must be at the specified level.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0009",
+      "TEXT": "The two specified players must be in alliance.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0010",
+      "TEXT": "The specified ruin must be looted by any of the affected races.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0011",
+      "TEXT": "One of the affected races must have transformed the specified percentage of the land.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0012",
+      "TEXT": "A stack from the affected races must be inside the specified site.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0013",
+      "TEXT": "Specified stack must be on area covered by specified location. If a stack template is selected, a stack that was generated from that template must be inside the location area for condition to be true.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0014",
+      "TEXT": "Specified stack must be in specified city. If a stack template is selected, a stack that was generated from that template must be in city for condition to be true.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA0015",
+      "TEXT": "A stack from the affected races holding an item of the specified type must be inside the specified location.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X009TA1001",
+      "TEXT": "Win or lose the scenario.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1002",
+      "TEXT": "Create a stack from the specified template at the specified location.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1003",
+      "TEXT": "Cast the specified spell on the triggerer. In some cases (for summoning spells) you can specify the casting player. Note that you can\u0027t choose a world spell.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1004",
+      "TEXT": "Cast the specified spell on the specified location. In some cases (for summoning and world spells) you can specified the casting player.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1005",
+      "TEXT": "Change the owner of the specified stack. If the stack is inside a city, it will exit. If it can\u0027t exit the event will fail.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1006",
+      "TEXT": "Change the order of the specified stack.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1007",
+      "TEXT": "Move the specified stack beside the triggerer. The movement will not use any movement points, and will not trigger any events.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1008",
+      "TEXT": "Make the specified stack go into battle with the triggerer. The movement will not use any movement points, and will not trigger any events.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1009",
+      "TEXT": "Enable or disable the specified event.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1010",
+      "TEXT": "Give the specified spell to the triggerer.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1011",
+      "TEXT": "Give the specified item to the triggerer (either in its capital or in the stack\u0027s inventory).",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1012",
+      "TEXT": "Move the specified stack over the specified location. The movement will not use any movement points, and will not trigger any events.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1013",
+      "TEXT": "Ally the two specified players.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1014",
+      "TEXT": "Change the diplomacy relation between the two specified players.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1015",
+      "TEXT": "Unfog an area of the map over the specified location for the specified players.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1016",
+      "TEXT": "Remove the mountains over the specified location.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1017",
+      "TEXT": "Remove the specified landmark.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1018",
+      "TEXT": "Change the objective of the scenario.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1019",
+      "TEXT": "Popup a message.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA1020",
+      "TEXT": "Destroy one or more item of the specified type.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X009TA2001",
+      "TEXT": "All actions are possible for stacks that have the \u0022normal\u0022 order. The stack is free to move wherever it wants and will attack enemy stacks/cities, pick up bags, visit sites, etc.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2002",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2003",
+      "TEXT": "Other than defending itself when it is attacked, a stack that has the \u0022stand\u0022 order will not move or do anything on the map. It just stays there until it is attacked.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2004",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2005",
+      "TEXT": "The only valid action for a stack with the order \u0022guard\u0022 is to attack enemy stacks that are within a %QTY%x%QTY% area around itself. Stacks in the guarded area that have the order \u0022stand\u0022 will be ignored.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2006",
+      "TEXT": "A stack that has the \u0022guard\u0022 order will ignore all other objects on the map (bags, cities, sites, resources, etc...)",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2007",
+      "TEXT": "A stack that has the \u0022Attack stack\u0022 order will try to destroy its target as soon as it possibly can. It will only attack other stacks if they are blocking the way to its target. If a bag is in the way, it will be picked up.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2008",
+      "TEXT": "Once the target stack has been destroyed, the order of the stack will change to \u0022Berserk\u0022.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2009",
+      "TEXT": "This order instructs a stack to attack any enemy stack that moves within a %QTY%x%QTY% area around the defended stack. When possible, the defender will try to remain close to the stack it is defending. If an enemy is preventing the stack from reaching",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2010",
+      "TEXT": "the stack to defend, it will be attacked. If a bag is blocking the way, it will be picked up. When the stack to defend gets killed, this order changes to \u0022Roam\u0022 for neutral stacks and to \u0022Normal\u0022 for stacks owned by a playable race.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X005TA0772",
+      "TEXT": "Can\u0027t save scenario!\\n\\nOne or more stack template has two or more leaders in it. Correct the error and save again.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0773",
+      "TEXT": "City with no name",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new city"
+    },
+    {
+      "TXT_ID": "X005TA0774",
+      "TEXT": "Empty city description",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new city"
+    },
+    {
+      "TXT_ID": "X005TA0775",
+      "TEXT": "Untitled",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new scenario"
+    },
+    {
+      "TXT_ID": "X005TA0776",
+      "TEXT": "Scenario description",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new scenario"
+    },
+    {
+      "TXT_ID": "X005TA0777",
+      "TEXT": "No scenario objective defined",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new scenario"
+    },
+    {
+      "TXT_ID": "X005TA0778",
+      "TEXT": "Congratulations! You have successfully completed the quest.",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new scenario"
+    },
+    {
+      "TXT_ID": "X005TA0779",
+      "TEXT": "You have been defeated, the objective was completed by the enemy.",
+      "VERIFIED": false,
+      "CONTEXT": "Default value for new scenario"
+    },
+    {
+      "TXT_ID": "X009TA2011",
+      "TEXT": "In order to secure the city it is assigned to, a stack with this order will try to reach and enter the city as soon as it can. If enemy stacks or bags are blocking its way, the stack will deal with them accordingly.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2012",
+      "TEXT": "Once inside the city, the stack will stay there to defend it. Stacks with the \u0022Secure city\u0022 order will not take other map objects (sites, resources, etc...) into consideration.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2013",
+      "TEXT": "A stack that is assigned this order will roam the lands seeking for a safe city to inhabit, with the possibility of attacking enemy stacks and cities as well as picking up close-by bags. It will not interact with other",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2014",
+      "TEXT": "map objects such as sites and resources. Once the stack enters a city, it will stay there.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2015",
+      "TEXT": "The stack will move to the center of the specified location, picking up bags and attacking other stacks that are in its way. No other interactions with map objects are allowed.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2016",
+      "TEXT": "Once the stack has reached its target position, its order will change to \u0022Stand\u0022.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2017",
+      "TEXT": "A stack that is assigned this order will attack enemy stacks within the specified location. The size of the location is used to determine which stacks to attack. If there are",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2018",
+      "TEXT": "no stacks to attack, the defending stack will try to move to the center of the location, picking up bags or attacking enemies that are blocking the way. No other interation with map objects is possible.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X009TA2019",
+      "TEXT": "A berserk stack will attack any enemy stack or city in sight. It will not interact with sites and ruins, and it will not pick up bags unless one is in its way.",
+      "VERIFIED": false,
+      "CONTEXT": "Part 1"
+    },
+    {
+      "TXT_ID": "X009TA2020",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": "Part 2"
+    },
+    {
+      "TXT_ID": "X110TA0025",
+      "TEXT": "the ruin named %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "X110TA0019 subset"
+    },
+    {
+      "TXT_ID": "X110TA0026",
+      "TEXT": "the merchant named %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "X110TA0019 subset"
+    },
+    {
+      "TXT_ID": "X110TA0027",
+      "TEXT": "(x%NUM%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0780",
+      "TEXT": "Order : %ORDER%",
+      "VERIFIED": false,
+      "CONTEXT": "Stack and city encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0781",
+      "TEXT": "named %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0790",
+      "TEXT": "Remove stack",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (short)"
+    },
+    {
+      "TXT_ID": "X100TA0791",
+      "TEXT": "Remove %STACK%\u0027s party from map",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X009TA1021",
+      "TEXT": "Remove the specified stack from map.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X100TA0792",
+      "TEXT": "Select stack to remove from map",
+      "VERIFIED": false,
+      "CONTEXT": "Remove stack effect interf"
+    },
+    {
+      "TXT_ID": "X100TA0793",
+      "TEXT": "Stack existance",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X009TA0016",
+      "TEXT": "Specified stack must exist or not. If a stack template is selected, at least one instance of a stack must exist or none at all, depending on the chosen setting.",
+      "VERIFIED": false,
+      "CONTEXT": "Condition explanation"
+    },
+    {
+      "TXT_ID": "X100TA0794",
+      "TEXT": "Stack %NAME% (%X%, %Y%) must %EXISTANCE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0795",
+      "TEXT": "exist",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0796",
+      "TEXT": "not exist",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0782",
+      "TEXT": "There is no space left in the group for this unit.",
+      "VERIFIED": false,
+      "CONTEXT": "StackGroup.cpp (DD)"
+    },
+    {
+      "TXT_ID": "X005TA0783",
+      "TEXT": "\\fNormal;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Stack encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0784",
+      "TEXT": "\\fMedBold;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Stack encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0785",
+      "TEXT": "/ %ATTACK%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0786",
+      "TEXT": "(2x) %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0787",
+      "TEXT": "\\s110;Attack:\\t\\p110;%TWICE%%ALTATTACK%%ATTACK%%SECOND%\\p0;\\nChances to hit:\\t%HIT%%HIT2%\\n%EFFECT%:\\t%DAMAGE%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Unit ency"
+    },
+    {
+      "TXT_ID": "X005TA0788",
+      "TEXT": "Source:\\t%SOURCE%%SOURCE2%\\nInitiative:\\t%INIT%\\nReach:\\t%REACH%\\nTargets:\\t%TARGETS%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit ency"
+    },
+    {
+      "TXT_ID": "X005TA0789",
+      "TEXT": "Paralyze",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0790",
+      "TEXT": "Petrify",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0791",
+      "TEXT": "Damage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0792",
+      "TEXT": "Drain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0793",
+      "TEXT": "Heal",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0794",
+      "TEXT": "Fear",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0795",
+      "TEXT": "Boost damage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0796",
+      "TEXT": "Lower damage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0797",
+      "TEXT": "Lower initiative",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0798",
+      "TEXT": "Poison",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0799",
+      "TEXT": "Frostbite",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0800",
+      "TEXT": "Revive",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0801",
+      "TEXT": "Drain overflow",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0802",
+      "TEXT": "Cure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0803",
+      "TEXT": "Summon",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0804",
+      "TEXT": "Drain level",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0805",
+      "TEXT": "Give attack",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0806",
+      "TEXT": "Doppelganger",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0807",
+      "TEXT": "Transform self",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0808",
+      "TEXT": "Transform other",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0809",
+      "TEXT": "\\c000;000;000;%LDRSHP%%AP%%NBBAT%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit ency"
+    },
+    {
+      "TXT_ID": "X005TA0811",
+      "TEXT": "%DMG% \\c000;000;000;(\\c128;000;000;Max\\c000;000;000;)",
+      "VERIFIED": false,
+      "CONTEXT": "Max damage reached in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0099",
+      "TEXT": ", defeated by %KILLER%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0816",
+      "TEXT": "/ %SOURCE%",
+      "VERIFIED": false,
+      "CONTEXT": "Second attack in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X100TA0798",
+      "TEXT": "triggerer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0799",
+      "TEXT": "triggerer\u0027s capital",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0817",
+      "TEXT": "File is read-only!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0818",
+      "TEXT": "Unknown error",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0819",
+      "TEXT": "Scenario inconsistency detected. Could not save scenario.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0820",
+      "TEXT": "Database is read-only!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0822",
+      "TEXT": "This unit is ready to upgrade but can not because it needs a building that is only accessible to the %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0823",
+      "TEXT": "The moving party in a capital can not be edited due to the fact that the leader is replaced at the beginning of a new game based on the lord that the player has chosen.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0824",
+      "TEXT": "Triggerer\u0027s race",
+      "VERIFIED": false,
+      "CONTEXT": "Effect change owner interf"
+    },
+    {
+      "TXT_ID": "X100TA0800",
+      "TEXT": "Destroy \u0027%NAME%\u0027 (stack template)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0801",
+      "TEXT": "Stack \u0027%NAME%\u0027 (stack template) must own item %ITEM%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0802",
+      "TEXT": "Instance of \u0027%NAME%\u0027 (stack template) must %EXISTANCE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0803",
+      "TEXT": "Stack \u0027%NAME%\u0027 (stack template) must go to city %CITY% (%X2%, %Y2%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0804",
+      "TEXT": "Stack \u0027%NAME%\u0027 (stack template) must go to location %LOCATION% (%X2%, %Y2%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0805",
+      "TEXT": "Change order of first \u0027%STACK%\u0027 (stack template) to %ORDERDESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0806",
+      "TEXT": "Change order of all \u0027%STACK%\u0027 (stack template) to %ORDERDESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0807",
+      "TEXT": "Give ownership of first \u0027%STACK%\u0027 (stack template) to %PLAYER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0808",
+      "TEXT": "Give ownership of all \u0027%STACK%\u0027 (stack template) to %PLAYER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0809",
+      "TEXT": "Go into battle with first \u0027%NAME%\u0027 (stack template)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0810",
+      "TEXT": "Go into battle with all \u0027%NAME%\u0027 (stack template)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0811",
+      "TEXT": "Move \u0027%NAME%\u0027 (stack template) next to triggerer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0812",
+      "TEXT": "Move \u0027%NAME%\u0027 (stack template) to location %LOC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0813",
+      "TEXT": "Remove first \u0027%STACK%\u0027 (stack template) from map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0814",
+      "TEXT": "Remove all \u0027%STACK%\u0027 (stack template) from map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0825",
+      "TEXT": "The leadership value of your leader is too low for the quantity of units currently in this party.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0826",
+      "TEXT": "Only one \u0022Go into battle\u0022 effect is allowed per event and it must be the last effect in the list.",
+      "VERIFIED": false,
+      "CONTEXT": "Event prop interf"
+    },
+    {
+      "TXT_ID": "X100TA0815",
+      "TEXT": "Event needs to have at least one verified race. Select one or more races in order to save your event.",
+      "VERIFIED": false,
+      "CONTEXT": "EventPropInterf"
+    },
+    {
+      "TXT_ID": "X002TA0043",
+      "TEXT": "Name",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0044",
+      "TEXT": "Description",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0829",
+      "TEXT": "%ATTACK% or %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": "EncyUnit"
+    },
+    {
+      "TXT_ID": "X005TA0830",
+      "TEXT": "Neutrals races converted successfully!",
+      "VERIFIED": false,
+      "CONTEXT": "InfoInterf"
+    },
+    {
+      "TXT_ID": "X005TA0831",
+      "TEXT": "There was a problem converting the neutrals races. Please reload your scenario (without saving) and try again.",
+      "VERIFIED": false,
+      "CONTEXT": "InfoInterf"
+    },
+    {
+      "TXT_ID": "X100TA0816",
+      "TEXT": "triggerer",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X005TA0832",
+      "TEXT": "Are you sure you want to delete the race \u0022%NAME%\u0022?",
+      "VERIFIED": false,
+      "CONTEXT": "Delete race"
+    },
+    {
+      "TXT_ID": "X005TA0833",
+      "TEXT": "Please specify a name for your custom race.",
+      "VERIFIED": false,
+      "CONTEXT": "AddSubRaceInterf"
+    },
+    {
+      "TXT_ID": "X005TA0834",
+      "TEXT": "Custom race modification successful",
+      "VERIFIED": false,
+      "CONTEXT": "AddSubRaceInterf"
+    },
+    {
+      "TXT_ID": "X005TA0835",
+      "TEXT": "There was a problem modifying the custom race.",
+      "VERIFIED": false,
+      "CONTEXT": "AddSubRaceInterf"
+    },
+    {
+      "TXT_ID": "X005TA0836",
+      "TEXT": "(Custom)",
+      "VERIFIED": false,
+      "CONTEXT": "DelPlayerInterf"
+    },
+    {
+      "TXT_ID": "X005TA0837",
+      "TEXT": "(Playable)",
+      "VERIFIED": false,
+      "CONTEXT": "DelPlayerInterf"
+    },
+    {
+      "TXT_ID": "X100TA0787",
+      "TEXT": "Invalid effect",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0838",
+      "TEXT": "Please choose a banner for your custom race.",
+      "VERIFIED": false,
+      "CONTEXT": "AddSubRaceInterf"
+    },
+    {
+      "TXT_ID": "X005TA0839",
+      "TEXT": "Scenario briefing",
+      "VERIFIED": false,
+      "CONTEXT": "MenuNew"
+    },
+    {
+      "TXT_ID": "X005TA0868",
+      "TEXT": "\\hC;\\vC;\\fLarge;%NAME%\\fNormal;\\n%TYPE%\\n\\n%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0869",
+      "TEXT": "\\hC;\\vC;\\fLarge;%TYPE%\\fNormal;\\n\\nIncome: %INCOME%\\n\\n%TXT%\\n\\n%TXT2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0870",
+      "TEXT": "Neutral resource",
+      "VERIFIED": false,
+      "CONTEXT": "Resource encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0871",
+      "TEXT": "Controlled resource",
+      "VERIFIED": false,
+      "CONTEXT": "Resource encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0872",
+      "TEXT": "Enemy resource",
+      "VERIFIED": false,
+      "CONTEXT": "Resource encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0873",
+      "TEXT": "(Merchant)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0874",
+      "TEXT": "(Magic shop)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0875",
+      "TEXT": "(Mercenary)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0876",
+      "TEXT": "(Trainer)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0877",
+      "TEXT": "%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Landmark encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0881",
+      "TEXT": "/ %POWER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0882",
+      "TEXT": "Leader -%S%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0883",
+      "TEXT": "Custom saga has been saved properly",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0887",
+      "TEXT": "Battles won: %QTY%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0001",
+      "TEXT": "Tab",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0002",
+      "TEXT": "Enter",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0003",
+      "TEXT": "Esc",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0004",
+      "TEXT": "Space",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0005",
+      "TEXT": "Left",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0006",
+      "TEXT": "Up",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0007",
+      "TEXT": "Right",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0008",
+      "TEXT": "Down",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0009",
+      "TEXT": "Pg. Up",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0010",
+      "TEXT": "Pg. Down",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0011",
+      "TEXT": "F1",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0012",
+      "TEXT": "F2",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0013",
+      "TEXT": "F3",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0014",
+      "TEXT": "F4",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0015",
+      "TEXT": "F5",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0016",
+      "TEXT": "F6",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0017",
+      "TEXT": "F7",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0018",
+      "TEXT": "F8",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0019",
+      "TEXT": "F9",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0020",
+      "TEXT": "F10",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0021",
+      "TEXT": "F11",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0022",
+      "TEXT": "F12",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0001",
+      "TEXT": "Cancel",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0002",
+      "TEXT": "ADD LOCATION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0003",
+      "TEXT": "Ok",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0004",
+      "TEXT": "ADD PLAYER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0005",
+      "TEXT": "OK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0006",
+      "TEXT": "Race banner",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0007",
+      "TEXT": "Race name",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0008",
+      "TEXT": "ADD CUSTOM RACE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0009",
+      "TEXT": "Add",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0010",
+      "TEXT": "Delete",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0011",
+      "TEXT": "AI PRIORITY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0012",
+      "TEXT": "IMAGE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0013",
+      "TEXT": "ITEMS AVAILABLE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0014",
+      "TEXT": "VAULTS \u0026 BAGS MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0015",
+      "TEXT": "Close",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0016",
+      "TEXT": "Edit",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0017",
+      "TEXT": "New",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0018",
+      "TEXT": "LOAD SAGA",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0019",
+      "TEXT": "Edit Quest",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0020",
+      "TEXT": "Save",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0021",
+      "TEXT": "AUTHOR",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0022",
+      "TEXT": "LEVEL",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0023",
+      "TEXT": "Move down",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0024",
+      "TEXT": "Move up",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0025",
+      "TEXT": "NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0026",
+      "TEXT": "RACE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0027",
+      "TEXT": "SAGA EDITOR",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0028",
+      "TEXT": "Spells",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0029",
+      "TEXT": "Party \u0026 Reserve",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0030",
+      "TEXT": "AI Priority",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0031",
+      "TEXT": "AI TYPE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0032",
+      "TEXT": "LORD NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0033",
+      "TEXT": "LORD TYPE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0034",
+      "TEXT": "CAPITAL NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0035",
+      "TEXT": "OWNER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0036",
+      "TEXT": "RESOURCES",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0037",
+      "TEXT": "CAPITAL MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0038",
+      "TEXT": "CITY LEVEL",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0039",
+      "TEXT": "CITY MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0040",
+      "TEXT": "CITY NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0041",
+      "TEXT": "ALLIANCE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0042",
+      "TEXT": "Neutral",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0043",
+      "TEXT": "Peace",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0044",
+      "TEXT": "War",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0045",
+      "TEXT": "Select the races and their new diplomacy state",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0046",
+      "TEXT": "DIPLOMACY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0047",
+      "TEXT": "Select the city to enter",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0048",
+      "TEXT": "ENTER CITY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0049",
+      "TEXT": "Enter the frequency of the event.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0050",
+      "TEXT": "FREQUENCY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0051",
+      "TEXT": "Select the item and the location",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0052",
+      "TEXT": "ITEM TO LOCATION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0053",
+      "TEXT": "Select stack",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0054",
+      "TEXT": "Select the party that must be destroyed",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0055",
+      "TEXT": "DESTROY STACK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0056",
+      "TEXT": "Select the leader and the city it must enter",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0057",
+      "TEXT": "LEADER TO CITY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0058",
+      "TEXT": "Select the leader and the location he must reach",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0059",
+      "TEXT": "LEADER TO ZONE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0060",
+      "TEXT": "Select the leader and the item he must own",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0061",
+      "TEXT": "LEADER OWN ITEM",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0062",
+      "TEXT": "Select the location",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0063",
+      "TEXT": "LOCATION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0064",
+      "TEXT": "Select the ruin that must be looted",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0065",
+      "TEXT": "LOOT RUIN",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0066",
+      "TEXT": "Select the city that must be owned",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0067",
+      "TEXT": "OWN CITY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0068",
+      "TEXT": "Select the item that must be owned",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0069",
+      "TEXT": "OWN ITEM",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0070",
+      "TEXT": "Mountain Clans",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0071",
+      "TEXT": "Must not exist",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0072",
+      "TEXT": "Must exist",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0073",
+      "TEXT": "Legions of the Damned",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0074",
+      "TEXT": "The Empire",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0075",
+      "TEXT": "Neutrals",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0076",
+      "TEXT": "Undead Hordes",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0077",
+      "TEXT": "Select whether the party must exist or not",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0078",
+      "TEXT": "PARTY EXISTS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0079",
+      "TEXT": "Select the percentage of land that must be transformed",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0080",
+      "TEXT": "TRANSFORM LAND",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0081",
+      "TEXT": "CHOOSE CONDITION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0082",
+      "TEXT": "DESCRIPTION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0083",
+      "TEXT": "ADD CONDITION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0084",
+      "TEXT": "Select the site that must be visited",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0085",
+      "TEXT": "VISIT SITE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0086",
+      "TEXT": "RESOURCE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0087",
+      "TEXT": "DELETE MAP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0088",
+      "TEXT": "No",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0089",
+      "TEXT": "Yes",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0090",
+      "TEXT": "DELETE ITEM",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0091",
+      "TEXT": "Edit custom",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0092",
+      "TEXT": "Note :\\nTo be able to delete a race, it must not own any rod, city or stack.\\n\\nYou cannot delete predefined neutral races and there must be at least 1 playable race left.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0093",
+      "TEXT": "RACES",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0094",
+      "TEXT": "X",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0095",
+      "TEXT": "RELATION WITH",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0096",
+      "TEXT": "PEACE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0097",
+      "TEXT": "DIPLOMACY MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0098",
+      "TEXT": "WAR",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0099",
+      "TEXT": "LOAD MAP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0100",
+      "TEXT": "Select the preset party that will be added and the location where it will be created",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0101",
+      "TEXT": "ADD PARTY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0102",
+      "TEXT": "Select the races that will ally",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0103",
+      "TEXT": "ALLY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0104",
+      "TEXT": "Select which party will go into battle with the triggerer",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0105",
+      "TEXT": "Note: If a stack template is selected, effect applies to first existing instance only.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0106",
+      "TEXT": "GO INTO BATTLE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0107",
+      "TEXT": "Clans",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0108",
+      "TEXT": "Legions",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0109",
+      "TEXT": "Empire",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0110",
+      "TEXT": "Undead",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0111",
+      "TEXT": "Caster:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0112",
+      "TEXT": "Select the spell that will be cast and the location on which to cast",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0113",
+      "TEXT": "CAST SPELL ON LOCATION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0114",
+      "TEXT": "Triggerer",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0115",
+      "TEXT": "Select the spell to cast",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0116",
+      "TEXT": "CAST SPELL ON STACK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0117",
+      "TEXT": "Select order",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0118",
+      "TEXT": "All",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0119",
+      "TEXT": "First",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0120",
+      "TEXT": "Select the party and its new order",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0121",
+      "TEXT": "If stack template, apply to:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0122",
+      "TEXT": "CHANGE PARTY ORDER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0123",
+      "TEXT": "No animation",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0124",
+      "TEXT": "Play animation",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0125",
+      "TEXT": "*****",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0126",
+      "TEXT": "Select the party and its new owner",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0127",
+      "TEXT": "CHANGE OWNER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0128",
+      "TEXT": "Select the item to destroy",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0129",
+      "TEXT": "DESTROY ITEM",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0130",
+      "TEXT": "Disable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0131",
+      "TEXT": "Enable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0132",
+      "TEXT": "Select the event to disable or enable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0133",
+      "TEXT": "ENABLE / DISABLE EVENT",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0134",
+      "TEXT": "Capital",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0135",
+      "TEXT": "Give item to:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0136",
+      "TEXT": "Select the item to give",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0137",
+      "TEXT": "GIVE ITEM",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0138",
+      "TEXT": "Select the spell to give",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0139",
+      "TEXT": "GIVE SPELL",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0140",
+      "TEXT": "Select the party that will move and the location it will move to",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0141",
+      "TEXT": "MOVE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0142",
+      "TEXT": "Select which party will move beside the triggerer",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0143",
+      "TEXT": "MOVE BESIDE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0144",
+      "TEXT": "Enter the new objective text",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0145",
+      "TEXT": "OBJECTIVE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0146",
+      "TEXT": "Send to affected",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0147",
+      "TEXT": "Send to all",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0148",
+      "TEXT": "Image on right side",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0149",
+      "TEXT": "Image on left side",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0150",
+      "TEXT": "***",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0151",
+      "TEXT": "Send to triggerer",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0152",
+      "TEXT": "Image preview",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0153",
+      "TEXT": "Image",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0154",
+      "TEXT": "Music (put your custom MP3 music in MusicP folder, 8 characters max)",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0155",
+      "TEXT": "Sound (put your custom MP3 sounds in SoundsP folder, 8 characters max)",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0156",
+      "TEXT": "Text",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0157",
+      "TEXT": "DISPLAY POP-UP MESSAGE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0158",
+      "TEXT": "Select the party you want to remove",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0159",
+      "TEXT": "REMOVE STACK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0160",
+      "TEXT": "Select the landmark you want to remove",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0161",
+      "TEXT": "REMOVE LANDMARK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0162",
+      "TEXT": "Select the location where the mountains will be removed",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0163",
+      "TEXT": "REMOVE MOUNTAIN",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0164",
+      "TEXT": "CHOOSE EFFECT",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0165",
+      "TEXT": "ADD EFFECT",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0166",
+      "TEXT": "Select the location where the fog will be removed and which races it will affect",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0167",
+      "TEXT": "UNFOG",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0168",
+      "TEXT": "Lose",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0169",
+      "TEXT": "Select the race that will win the quest or select \u0027Lose\u0027 if you want all races to lose the quest.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0170",
+      "TEXT": "WIN OR LOSE SCENARIO",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0171",
+      "TEXT": "Barbarians",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0172",
+      "TEXT": "Dragons",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0173",
+      "TEXT": "Elves",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0174",
+      "TEXT": "Green Skins",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0175",
+      "TEXT": "Marshes",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0176",
+      "TEXT": "Neutral Humans",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0177",
+      "TEXT": "Sort by Name",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0178",
+      "TEXT": "Sort by Experience",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0179",
+      "TEXT": "Water Inhabitants",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0180",
+      "TEXT": "Wolves",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0181",
+      "TEXT": "ENROLL UNITS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0182",
+      "TEXT": "EVENT EVALUATION ORDER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0183",
+      "TEXT": "Add Condition",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0184",
+      "TEXT": "Add Effect",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0185",
+      "TEXT": "Properties",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0186",
+      "TEXT": "Disabled",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0187",
+      "TEXT": "Enabled",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0188",
+      "TEXT": "Infinite",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0189",
+      "TEXT": "Once",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0190",
+      "TEXT": "Condition and effects apply to the following races:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0191",
+      "TEXT": "Chances of happening",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0192",
+      "TEXT": "Conditions",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0193",
+      "TEXT": "Effects",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0194",
+      "TEXT": "Event name",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0195",
+      "TEXT": "Event will happen",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0196",
+      "TEXT": "%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0197",
+      "TEXT": "Event is initially",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0198",
+      "TEXT": "EVENT",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0199",
+      "TEXT": "Event can trigger when the following races are playing:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0200",
+      "TEXT": "Edit",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0201",
+      "TEXT": "Order",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0202",
+      "TEXT": "Preset parties",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0203",
+      "TEXT": "Grid",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0204",
+      "TEXT": "On top",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0205",
+      "TEXT": "EVENTS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0206",
+      "TEXT": "LOCATIONS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0207",
+      "TEXT": "EXPORT MAP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0208",
+      "TEXT": "Browse",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0209",
+      "TEXT": "IMPORT MAP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0210",
+      "TEXT": "Add Custom Race",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0211",
+      "TEXT": "Diplomacy",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0212",
+      "TEXT": "Convert Neutrals",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0213",
+      "TEXT": "Edit Race",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0214",
+      "TEXT": "Reset Hit Points",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0215",
+      "TEXT": "Quest Info",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0216",
+      "TEXT": "Winning chances",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0217",
+      "TEXT": "INFORMATIONS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0218",
+      "TEXT": "INVENTORY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0219",
+      "TEXT": "MAP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0220",
+      "TEXT": "OBJECTS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0221",
+      "TEXT": "QUEST RULES",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0222",
+      "TEXT": "SPELL VIEWER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0223",
+      "TEXT": "OPTIONS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0224",
+      "TEXT": "Delete item",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0225",
+      "TEXT": "Bags",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0226",
+      "TEXT": "Cities",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0227",
+      "TEXT": "Merchants",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0228",
+      "TEXT": "Ruins",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0229",
+      "TEXT": "Sort by holder",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0230",
+      "TEXT": "Sort by location",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0231",
+      "TEXT": "Sort by name",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0232",
+      "TEXT": "Parties",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0233",
+      "TEXT": "LIST OF ITEM HOLDERS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0234",
+      "TEXT": "ITEMS LIST",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0235",
+      "TEXT": "ITEMS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0236",
+      "TEXT": "Quantity",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0237",
+      "TEXT": "KNOWN SPELLS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0238",
+      "TEXT": "SPELLS MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0239",
+      "TEXT": "Buildings",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0240",
+      "TEXT": "Misc.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0241",
+      "TEXT": "Structures",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0242",
+      "TEXT": "Terrain",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0243",
+      "TEXT": "LANDMARKS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0244",
+      "TEXT": "Select the name and size of the location",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0245",
+      "TEXT": "Name",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0246",
+      "TEXT": "Size",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0247",
+      "TEXT": "LOCATION NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0248",
+      "TEXT": "Position X",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0249",
+      "TEXT": "Position Y",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0250",
+      "TEXT": "APPEARANCE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0251",
+      "TEXT": "MAGE TOWER MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0252",
+      "TEXT": "SPELLS AVAILABLE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0253",
+      "TEXT": "Custom Sagas",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0254",
+      "TEXT": "Create Quest",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0255",
+      "TEXT": "Delete Quest",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0256",
+      "TEXT": "Export Quest",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0257",
+      "TEXT": "Import Quest",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0258",
+      "TEXT": "Load Quest",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0259",
+      "TEXT": "Quit",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0260",
+      "TEXT": "Disciples II : Dark Prophecy",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0261",
+      "TEXT": "QUEST EDITOR",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0262",
+      "TEXT": "Randomize mountains",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0263",
+      "TEXT": "Randomize terrain",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0264",
+      "TEXT": "Erase",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0265",
+      "TEXT": "5x5",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0266",
+      "TEXT": "3x3",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0267",
+      "TEXT": "1x1",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0268",
+      "TEXT": "BRUSH SIZE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0269",
+      "TEXT": "MAP TOOLS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0270",
+      "TEXT": "MERCENARY CAMP MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0271",
+      "TEXT": "UNITS AVAILABLE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0272",
+      "TEXT": "The Temple will be used by AI for healing",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0273",
+      "TEXT": "MERCHANT",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0274",
+      "TEXT": "ITEMS SELECTION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0275",
+      "TEXT": "TEMPLE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0276",
+      "TEXT": "MERCHANT MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0277",
+      "TEXT": "MESSAGE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0278",
+      "TEXT": "Available",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0279",
+      "TEXT": "Selected",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0280",
+      "TEXT": "Units",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0281",
+      "TEXT": "Map Size",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0282",
+      "TEXT": "NEW MAP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0283",
+      "TEXT": "Add Race",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0284",
+      "TEXT": "Resources",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0285",
+      "TEXT": "Item List",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0286",
+      "TEXT": "Landmark",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0287",
+      "TEXT": "Bag",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0288",
+      "TEXT": "City",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0289",
+      "TEXT": "Copy Party",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0290",
+      "TEXT": "Mage",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0291",
+      "TEXT": "Mercenary",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0292",
+      "TEXT": "Merchant",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0293",
+      "TEXT": "Move",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0294",
+      "TEXT": "Roads",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0295",
+      "TEXT": "Add Party",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0296",
+      "TEXT": "Trainer",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0297",
+      "TEXT": "Back",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0298",
+      "TEXT": "ORDER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0299",
+      "TEXT": "ORDER CATEGORY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0300",
+      "TEXT": "CHOOSE CITY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0301",
+      "TEXT": "Banner",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0302",
+      "TEXT": "Orb",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0303",
+      "TEXT": "Potion",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0304",
+      "TEXT": "Scroll",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0305",
+      "TEXT": "Special",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0306",
+      "TEXT": "Talisman",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0307",
+      "TEXT": "Tome",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0308",
+      "TEXT": "Boots",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0309",
+      "TEXT": "Valuable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0310",
+      "TEXT": "Wand",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0311",
+      "TEXT": "Artifact",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0312",
+      "TEXT": "CHOOSE ITEM(S)",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0313",
+      "TEXT": "CHOOSE LOCATION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0314",
+      "TEXT": "SELECT SPELL",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0315",
+      "TEXT": "SELECT PARTY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0316",
+      "TEXT": "Briefing",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0317",
+      "TEXT": "Debunk Lose",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0318",
+      "TEXT": "Debunk Win",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0319",
+      "TEXT": "Description",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0320",
+      "TEXT": "Objective",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0321",
+      "TEXT": "DESIGNER NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0322",
+      "TEXT": "Maximum leader level",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0323",
+      "TEXT": "MAXIMUMS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0324",
+      "TEXT": "QUEST NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0325",
+      "TEXT": "SOURCE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0326",
+      "TEXT": "Maximum spell level",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0327",
+      "TEXT": "Suggested leader level",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0328",
+      "TEXT": "QUEST INFORMATION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0329",
+      "TEXT": "Maximum unit level",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0330",
+      "TEXT": "PRESET PARTIES",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0331",
+      "TEXT": "Change Leader",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0332",
+      "TEXT": "Edit Units",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0333",
+      "TEXT": "Set Order",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0334",
+      "TEXT": "AI Ignore",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0335",
+      "TEXT": "Dismiss",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0336",
+      "TEXT": "Note: Editing units will not change the statistics in the scenario editor\u0027s unit encyclopedia but will do so properly in the game itself.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0337",
+      "TEXT": "FACING",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0338",
+      "TEXT": "Use facing",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0339",
+      "TEXT": "LEADERSHIP",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0340",
+      "TEXT": "LEADER\u0027S NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0341",
+      "TEXT": "PARTY UNITS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0342",
+      "TEXT": "STACK TEMPLATE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0343",
+      "TEXT": "Inventory",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0344",
+      "TEXT": "Party Inventory",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0345",
+      "TEXT": "PARTY\u0027S INVENTORY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0346",
+      "TEXT": "LEADER NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0347",
+      "TEXT": "RESERVE UNITS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0348",
+      "TEXT": "PARTY AND RESERVE MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0349",
+      "TEXT": "VAULT INVENTORY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0350",
+      "TEXT": "Select",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0351",
+      "TEXT": "Looted",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0352",
+      "TEXT": "BONUS GOLD",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0353",
+      "TEXT": "GUARDIANS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0354",
+      "TEXT": "RUIN NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0355",
+      "TEXT": "REWARD SELECTION",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0356",
+      "TEXT": "RUIN MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0357",
+      "TEXT": "Select Spell",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0358",
+      "TEXT": "High quality\\nblending",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0359",
+      "TEXT": "SPELLS VIEW",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0360",
+      "TEXT": "Ai Ignore",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0361",
+      "TEXT": "PARTY INVENTORY",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0362",
+      "TEXT": "LEADER NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0363",
+      "TEXT": "PARTY MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0364",
+      "TEXT": "CAMP\u0027S NAME",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0365",
+      "TEXT": "TRAINING CAMP MENU",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0366",
+      "TEXT": "Go",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0367",
+      "TEXT": "Stack 1",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0368",
+      "TEXT": "Stack 2",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0500",
+      "TEXT": "Cancel",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0501",
+      "TEXT": "Ok",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0502",
+      "TEXT": "Add",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0503",
+      "TEXT": "Delete",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0504",
+      "TEXT": "Close",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0505",
+      "TEXT": "Edit",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0506",
+      "TEXT": "New",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0507",
+      "TEXT": "Spells",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0508",
+      "TEXT": "Party \u0026 Reserve",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0509",
+      "TEXT": "ADD",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0510",
+      "TEXT": "DELETE",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0511",
+      "TEXT": "Choose spell with spell picker",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0512",
+      "TEXT": "Randomize map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0817",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Random map generator"
+    },
+    {
+      "TXT_ID": "X100TA0818",
+      "TEXT": "Small",
+      "VERIFIED": false,
+      "CONTEXT": "Random map generator"
+    },
+    {
+      "TXT_ID": "X100TA0819",
+      "TEXT": "Medium",
+      "VERIFIED": false,
+      "CONTEXT": "Random map generator"
+    },
+    {
+      "TXT_ID": "X100TA0820",
+      "TEXT": "Large",
+      "VERIFIED": false,
+      "CONTEXT": "Random map generator"
+    },
+    {
+      "TXT_ID": "X150TA0513",
+      "TEXT": "Random map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0514",
+      "TEXT": "Clear existing objects of generated types from map",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0515",
+      "TEXT": "Generate terrain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0516",
+      "TEXT": "Water",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0517",
+      "TEXT": "Mountains",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0518",
+      "TEXT": "Trees",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0519",
+      "TEXT": "Reposition capitals",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0520",
+      "TEXT": "Generate cities",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0521",
+      "TEXT": "Quantity",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0522",
+      "TEXT": "Generate resources",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0523",
+      "TEXT": "Generate parties",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0524",
+      "TEXT": "Randomize",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0525",
+      "TEXT": "Close",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0526",
+      "TEXT": "Default",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0527",
+      "TEXT": "Generate bags",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0528",
+      "TEXT": "Generate sites",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0529",
+      "TEXT": "Merchants",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0530",
+      "TEXT": "Mercenaries",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0531",
+      "TEXT": "Trainers",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0532",
+      "TEXT": "Mage Towers",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0533",
+      "TEXT": "Generate ruins",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0534",
+      "TEXT": "Ally %PLAYER1% with %PLAYER2% permanently",
+      "VERIFIED": false,
+      "CONTEXT": "Effect description (detail)"
+    },
+    {
+      "TXT_ID": "X150TA0535",
+      "TEXT": "Make alliance permanent",
+      "VERIFIED": null,
+      "CONTEXT": "Alliance effect interf"
+    },
+    {
+      "TXT_ID": "X150TA0536",
+      "TEXT": "AI should never break alliance\\nPERMANENT",
+      "VERIFIED": null,
+      "CONTEXT": "Diplomacy interf"
+    },
+    {
+      "TXT_ID": "X150TA0537",
+      "TEXT": "Select the target landmark and the new landmark type. Both landmarks must have the same size for the effect to work.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0538",
+      "TEXT": "Change landmark",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0539",
+      "TEXT": "Change landmark %NAME% (%X%, %Y%) to %NEWTYPE%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0540",
+      "TEXT": "Change the specified landmark to another type",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0541",
+      "TEXT": "CHANGE LANDMARK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0542",
+      "TEXT": "%DESC% (%X%x%Y%)",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0543",
+      "TEXT": "You can not change a landmark to one that is not the same size!",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0544",
+      "TEXT": "CHANGE TERRAIN",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0545",
+      "TEXT": "Select the location and the new terrain type to change to",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0546",
+      "TEXT": "Location :",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0547",
+      "TEXT": "Ground type :",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0548",
+      "TEXT": "Size of the area to change :",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0549",
+      "TEXT": "The Mountain Clans",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0550",
+      "TEXT": "The Empire",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0551",
+      "TEXT": "The Legions of the Damned",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0552",
+      "TEXT": "The Undead Hordes",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0553",
+      "TEXT": "Neutral",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0554",
+      "TEXT": "Change terrain",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0555",
+      "TEXT": "Change a block of terrain of size %SIZE% to %TERRAIN% at location %LOCATION%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0556",
+      "TEXT": "Change a block of terrain around a location",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0557",
+      "TEXT": "Add fog",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0558",
+      "TEXT": "Remove fog",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0559",
+      "TEXT": "Effect will",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0560",
+      "TEXT": "Select the location where the fog will be removed or added and which races it will affect",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0561",
+      "TEXT": "Always AI",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0562",
+      "TEXT": "This is the last playable race. You can\u0027t force it to be AI.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0563",
+      "TEXT": "LANDMARK",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0564",
+      "TEXT": "Description",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0565",
+      "TEXT": "Default",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0566",
+      "TEXT": "ALWAYS AT WAR",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0567",
+      "TEXT": "Always at war",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0568",
+      "TEXT": "Radius",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0569",
+      "TEXT": "Event: %EVENT%\\nCondition: %COND%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0570",
+      "TEXT": "Event: %EVENT%\\nEffect: %EFFECT%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0571",
+      "TEXT": "\\n\\nNote: Your scenario uses expansion-specific features. It will not be playable with the original release of Disciples II.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0572",
+      "TEXT": "Unfog or fog an area of the map over the specified location for the specified players.",
+      "VERIFIED": false,
+      "CONTEXT": "Effect explanation"
+    },
+    {
+      "TXT_ID": "X150TA0573",
+      "TEXT": "Unfog or fog an area of the map",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0574",
+      "TEXT": "%ACTION% map around location %LOC% for %QTY% players",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0575",
+      "TEXT": "FOG / UNFOG",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0576",
+      "TEXT": "Fog",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0577",
+      "TEXT": "Unfog",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0578",
+      "TEXT": "\\hC;\\vC;Please wait...\\nGenerating map",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0579",
+      "TEXT": "The random map generator automatically creates a basic map layout.  No event is created and the maps are not perfectly balanced. These issues must be addressed manually by the map designer.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0001",
+      "TEXT": "%QTY% Grove mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0002",
+      "TEXT": "Elven Alliance",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0003",
+      "TEXT": "The Elven Alliance",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0004",
+      "TEXT": "Neutral Elves",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0005",
+      "TEXT": "Grove mana",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0006",
+      "TEXT": "Too many races selected.  A maximum of 4 races can be present on a map.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0007",
+      "TEXT": "Use triggerer\u0027s image",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0017",
+      "TEXT": "Critical hit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0018",
+      "TEXT": "Adds 20% more damage regardless of armor.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0019",
+      "TEXT": "\\hC;\\vC;Shatter",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0020",
+      "TEXT": "Shatter",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0011",
+      "TEXT": "\\hC;\\vC;Blister",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0012",
+      "TEXT": "Blister",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0013",
+      "TEXT": "\\hC;\\vC;Bestow wards",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0014",
+      "TEXT": "Bestow wards",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0021",
+      "TEXT": "Move triggerer stack instead of specific stack",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0022",
+      "TEXT": "Variables",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0023",
+      "TEXT": "Add variable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0024",
+      "TEXT": "Change value",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0025",
+      "TEXT": "Name",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0026",
+      "TEXT": "Value",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0027",
+      "TEXT": "Move triggerer to location %LOC%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0028",
+      "TEXT": "A variable of that name already exists.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0029",
+      "TEXT": "Valid range is %MIN% to %MAX%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0030",
+      "TEXT": "Variable is in range",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0031",
+      "TEXT": "The specified variable must be equal or between the minimum and maximum value specified.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0032",
+      "TEXT": "Variable %VAR% in [%MIN%, %MAX%]%SECOND%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0033",
+      "TEXT": "Variable in range",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0034",
+      "TEXT": "Minimum",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0035",
+      "TEXT": "Maximum",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0036",
+      "TEXT": "And",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0037",
+      "TEXT": "Or",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0038",
+      "TEXT": "Ignore second",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0039",
+      "TEXT": "%OP% variable %VAR2% in [%MIN2%, %MAX2%]",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0040",
+      "TEXT": "and",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0041",
+      "TEXT": "or",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0042",
+      "TEXT": "Modify variable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0043",
+      "TEXT": "Add",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0044",
+      "TEXT": "Subtract",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0045",
+      "TEXT": "Multiply",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0046",
+      "TEXT": "Divide",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0047",
+      "TEXT": "Replace",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0048",
+      "TEXT": "Value",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0049",
+      "TEXT": "Modify variable",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0050",
+      "TEXT": "Modifies the value of a variable.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0051",
+      "TEXT": "Add %VALUE% to %VAR%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0052",
+      "TEXT": "Subtract %VALUE% from %VAR%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0053",
+      "TEXT": "Multiply %VAR% by %VALUE%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0054",
+      "TEXT": "Divide %VAR% by %VALUE%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0055",
+      "TEXT": "Set %VAR% to %VALUE%",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0056",
+      "TEXT": "Elven terrain",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0057",
+      "TEXT": "Play animation",
+      "VERIFIED": null,
+      "CONTEXT": null
+    }
+  ]
+}

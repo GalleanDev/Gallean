@@ -1,0 +1,1459 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Style Selector=":is(TopLevel)">
+    <Setter Property="FontFeatures" Value="{x:Static local:ThemeFont.Features}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+  </Style>
+
+  <Style Selector=":is(Window)">
+    <Setter Property="Icon" Value="avares://Gallean.Client/Theme/Assets/Gallean.ico" />
+  </Style>
+
+  <Style Selector=":is(Visual).cached">
+    <Setter Property="CacheMode">
+      <BitmapCache SnapsToDevicePixels="True" />
+    </Setter>
+    <Setter Property="local:BitmapCacheBounds.Outset" Value="48" />
+  </Style>
+
+  <Style Selector=":is(InputElement).focus-group">
+    <Setter Property="XYFocus.NavigationModes" Value="Enabled" />
+    <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
+  </Style>
+
+  <Style Selector="AdornerLayer">
+    <Setter Property="DefaultFocusAdorner">
+      <FocusAdornerTemplate>
+        <Border Margin="-3"
+                AdornerLayer.IsClipEnabled="False"
+                BorderBrush="{StaticResource FocusRingBrush}"
+                BorderThickness="1.5"
+                CornerRadius="{StaticResource RadiusMd}" />
+      </FocusAdornerTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="Button.plate">
+    <Setter Property="Height" Value="40" />
+    <Setter Property="Padding" Value="24,0" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PlateTextBrush}" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <local:PlateChrome x:Name="PlateChrome"
+                             Stroke="{StaticResource PlateBorderGradientBrush}"
+                             StrokeThickness="2.5"
+                             OuterShadow="{StaticResource PlateOuterShadowBrush}"
+                             InnerShadow="{StaticResource PlateInnerShadowBrush}"
+                             Gloss="{StaticResource PlateGlossGradientBrush}"
+                             Fill="{StaticResource PlateFaceGradientBrush}"
+                             Texture="{StaticResource PlateTextureBrush}"
+                             TextureSeed="{TemplateBinding (local:PlateChrome.TextureSeed)}" />
+          <ContentPresenter x:Name="PlateContent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.plate TextBlock">
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="1" Color="{x:Static local:Theme+Plate.TextShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Button.plate:focus-visible /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateFocusGlowBrush}" />
+  </Style>
+  <Style Selector="Button.plate:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource PlateHoverTextBrush}" />
+  </Style>
+  <Style Selector="Button.plate:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlateHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.plate.primary /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlatePrimaryFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.plate.primary:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlatePrimaryHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.plate.highlighted /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateGlowBrush}" />
+  </Style>
+  <Style Selector="Button.plate:disabled /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Button.plate:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="Button.plate:disabled">
+    <Setter Property="Foreground" Value="{StaticResource PlateDisabledTextBrush}" />
+  </Style>
+  <Style Selector="Button.plate.primary:disabled">
+    <Setter Property="Foreground" Value="{StaticResource PlatePrimaryDisabledTextBrush}" />
+  </Style>
+
+  <Style Selector="CheckBox">
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="Padding" Value="10,0,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*" Background="Transparent">
+          <Border x:Name="Box"
+                  Grid.Column="0"
+                  Width="22"
+                  Height="22"
+                  VerticalAlignment="Center"
+                  Background="{StaticResource FieldFaceGradientBrush}"
+                  BorderBrush="{StaticResource FieldBorderGradientBrush}"
+                  BorderThickness="1.5"
+                  CornerRadius="{StaticResource RadiusSm}">
+            <Panel>
+              <local:IconVisual x:Name="CheckMark"
+                                Moniker="Check"
+                                Foreground="{StaticResource AccentBrush}"
+                                Width="16"
+                                Height="16"
+                                IsVisible="False" />
+              <Rectangle x:Name="IndeterminateMark"
+                         Width="10"
+                         Height="2"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Fill="{StaticResource AccentBrush}"
+                         IsVisible="False" />
+            </Panel>
+          </Border>
+          <ContentPresenter x:Name="PART_ContentPresenter"
+                            Grid.Column="1"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="CheckBox /template/ local|IconVisual#CheckMark">
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="2" Opacity="1" Color="{x:Static local:Theme+Plate.TextShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="CheckBox:checked /template/ local|IconVisual#CheckMark">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="CheckBox:indeterminate /template/ Rectangle#IndeterminateMark">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="CheckBox:focus-visible /template/ Border#Box">
+    <Setter Property="BorderBrush" Value="{StaticResource FocusRingBrush}" />
+  </Style>
+  <Style Selector="CheckBox:pointerover /template/ Border#Box">
+    <Setter Property="Background" Value="{StaticResource FieldHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="CheckBox:pointerover /template/ local|IconVisual#CheckMark">
+    <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+  </Style>
+  <Style Selector="CheckBox:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="CheckBox:disabled">
+    <Setter Property="Foreground" Value="{StaticResource PlateDisabledTextBrush}" />
+  </Style>
+  <Style Selector="CheckBox:disabled /template/ Border#Box">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
+  <Style Selector="CheckBox:disabled /template/ local|IconVisual#CheckMark">
+    <Setter Property="Foreground" Value="{StaticResource PlateDisabledTextBrush}" />
+  </Style>
+  <Style Selector="CheckBox:disabled /template/ Rectangle#IndeterminateMark">
+    <Setter Property="Fill" Value="{StaticResource PlateDisabledTextBrush}" />
+  </Style>
+
+  <Style Selector="local|PlateChrome.slider-thumb">
+    <Setter Property="Shape" Value="Round" />
+    <Setter Property="Fill" Value="{StaticResource PlateFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource PlateRoundBorderGradientBrush}" />
+    <Setter Property="StrokeThickness" Value="2" />
+    <Setter Property="OuterShadow" Value="{StaticResource PlateOuterShadowBrush}" />
+    <Setter Property="InnerShadow" Value="{StaticResource PlateInnerShadowBrush}" />
+    <Setter Property="Gloss" Value="{StaticResource PlateRoundGlossGradientBrush}" />
+    <Setter Property="Texture" Value="{StaticResource PlateTextureBrush}" />
+  </Style>
+
+  <Style Selector="Slider">
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Slider:horizontal">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent" MinHeight="24">
+          <Border x:Name="TrackBackdrop"
+                  Height="8"
+                  Margin="10,0"
+                  VerticalAlignment="Center"
+                  Background="{StaticResource SliderTrackGradientBrush}"
+                  BorderBrush="{StaticResource SliderTrackBorderBrush}"
+                  BorderThickness="1"
+                  CornerRadius="4" />
+          <Track x:Name="PART_Track"
+                 Minimum="{TemplateBinding Minimum}"
+                 Maximum="{TemplateBinding Maximum}"
+                 Value="{TemplateBinding Value, Mode=TwoWay}"
+                 IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                 Orientation="Horizontal">
+            <Track.DecreaseButton>
+              <RepeatButton x:Name="PART_DecreaseButton" Classes="slider-fill" />
+            </Track.DecreaseButton>
+            <Track.IncreaseButton>
+              <RepeatButton x:Name="PART_IncreaseButton" Classes="slider-track" />
+            </Track.IncreaseButton>
+            <Thumb x:Name="thumb" Classes="slider-thumb" Width="20" Height="20" />
+          </Track>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Slider /template/ RepeatButton.slider-fill">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <Border x:Name="Fill"
+                  Height="6"
+                  Margin="1,0,0,0"
+                  VerticalAlignment="Center"
+                  Background="{StaticResource SliderFillGradientBrush}"
+                  CornerRadius="3,0,0,3" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Slider /template/ RepeatButton.slider-track">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent" />
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Slider /template/ Thumb.slider-thumb">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <local:PlateChrome x:Name="PlateChrome" Classes="slider-thumb" />
+          <Ellipse x:Name="Stud" Width="6" Height="6" Fill="{StaticResource SliderStudBrush}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Slider:pointerover /template/ RepeatButton.slider-fill /template/ Border#Fill">
+    <Setter Property="Background" Value="{StaticResource SliderHoverFillGradientBrush}" />
+  </Style>
+  <Style Selector="Slider /template/ Thumb.slider-thumb:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlateHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Slider /template/ Thumb.slider-thumb:pointerover /template/ Ellipse#Stud">
+    <Setter Property="Fill" Value="{StaticResource SliderStudHoverBrush}" />
+  </Style>
+  <Style Selector="Slider /template/ Thumb.slider-thumb:pressed /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlateHoverFaceGradientBrush}" />
+    <Setter Property="Glow" Value="{StaticResource PlateGlowBrush}" />
+  </Style>
+  <Style Selector="Slider:focus-visible /template/ Thumb.slider-thumb /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateFocusGlowBrush}" />
+  </Style>
+  <Style Selector="Slider:disabled /template/ RepeatButton.slider-fill /template/ Border#Fill">
+    <Setter Property="Background" Value="{StaticResource SliderDisabledFillBrush}" />
+  </Style>
+  <Style Selector="Slider:disabled /template/ Thumb.slider-thumb">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
+  <Style Selector="Slider:disabled /template/ Thumb.slider-thumb /template/ Ellipse#Stud">
+    <Setter Property="Fill" Value="{StaticResource SliderDisabledFillBrush}" />
+  </Style>
+
+  <Style Selector="ComboBox">
+    <Setter Property="Height" Value="34" />
+    <Setter Property="Padding" Value="16,0,5.5,0" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource FieldTextBrush}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border x:Name="Field"
+                  Background="{StaticResource FieldFaceGradientBrush}"
+                  BorderBrush="{StaticResource FieldBorderGradientBrush}"
+                  BorderThickness="1.5"
+                  CornerRadius="17">
+            <Grid ColumnDefinitions="*,Auto" Margin="{TemplateBinding Padding}">
+              <ContentControl x:Name="ContentPresenter"
+                              Grid.Column="0"
+                              Content="{TemplateBinding SelectionBoxItem}"
+                              ContentTemplate="{TemplateBinding ItemTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+              <Border x:Name="DropDownRing"
+                      Grid.Column="1"
+                      Width="20"
+                      Height="20"
+                      Margin="8,0,0,0"
+                      VerticalAlignment="Center"
+                      BorderBrush="{StaticResource FieldBorderGradientBrush}"
+                      BorderThickness="1.5"
+                      CornerRadius="10">
+                <local:IconVisual x:Name="DropDownGlyph"
+                                  Moniker="Expand"
+                                  Width="11"
+                                  Height="11"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Foreground="{StaticResource AccentBrush}" />
+              </Border>
+            </Grid>
+          </Border>
+          <Popup x:Name="PART_Popup"
+                 IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+                 PlacementTarget="{Binding $parent[ComboBox]}"
+                 Placement="BottomEdgeAlignedLeft"
+                 MinWidth="{Binding $parent[ComboBox].Bounds.Width}"
+                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                 IsLightDismissEnabled="True"
+                 InheritsTransform="True">
+            <Border x:Name="PopupBorder"
+                    Margin="0,4,0,0"
+                    Padding="4"
+                    Background="{StaticResource PopupBackgroundBrush}"
+                    BorderBrush="{StaticResource PanelBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{StaticResource RadiusLg}"
+                    BoxShadow="{x:Static local:Theme+Tooltip.Shadow}">
+              <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsPresenter x:Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </ScrollViewer>
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ComboBox TextBlock">
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="1" Color="{x:Static local:Theme+Field.TextShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="ComboBox:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource FieldHoverTextBrush}" />
+  </Style>
+  <Style Selector="ComboBox:pointerover /template/ Border#Field">
+    <Setter Property="Background" Value="{StaticResource FieldHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="ComboBox:pointerover /template/ local|IconVisual#DropDownGlyph">
+    <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+  </Style>
+  <Style Selector="ComboBox:focus-visible /template/ Border#Field">
+    <Setter Property="BorderBrush" Value="{StaticResource FocusRingBrush}" />
+  </Style>
+  <Style Selector="ComboBox:dropdownopen /template/ Border#Field">
+    <Setter Property="Background" Value="{StaticResource FieldHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="ComboBox:dropdownopen /template/ Border#DropDownRing">
+    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+  </Style>
+  <Style Selector="ComboBox:dropdownopen /template/ local|IconVisual#DropDownGlyph">
+    <Setter Property="Moniker" Value="Collapse" />
+  </Style>
+  <Style Selector="ComboBox:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="ComboBox:disabled">
+    <Setter Property="Foreground" Value="{StaticResource FieldDisabledTextBrush}" />
+  </Style>
+  <Style Selector="ComboBox:disabled /template/ Border#DropDownRing">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
+  <Style Selector="ComboBox:disabled /template/ local|IconVisual#DropDownGlyph">
+    <Setter Property="Foreground" Value="{StaticResource FieldDisabledTextBrush}" />
+  </Style>
+
+  <Style Selector="ComboBoxItem">
+    <Setter Property="Margin" Value="0,1" />
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="Row"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                BorderThickness="2,0,0,0"
+                CornerRadius="{StaticResource RadiusSm}"
+                Padding="{TemplateBinding Padding}">
+          <ContentPresenter x:Name="ItemContent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ComboBoxItem /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:pointerover /template/ Border#Row">
+    <Setter Property="Background" Value="{StaticResource CardHoverBackgroundGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ScenarioSelectDividerBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected /template/ Border#Row">
+    <Setter Property="Background" Value="{StaticResource CardSelectedFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ScenarioSelectAccentBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:pressed /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected:pointerover /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected:pressed /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:disabled /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource PlateDisabledTextBrush}" />
+  </Style>
+  <Style Selector="ComboBoxItem:selected:disabled /template/ ContentPresenter#ItemContent">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource PlateDisabledTextBrush}" />
+  </Style>
+
+  <Style Selector="ScrollViewer">
+    <Setter Property="AllowAutoHide" Value="False" />
+  </Style>
+  <Style Selector="ScrollViewer.list">
+    <Setter Property="Padding" Value="8" />
+    <Setter Property="Background" Value="{StaticResource ListBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ListBorderBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusLg}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" />
+          <Rectangle Stroke="{TemplateBinding BorderBrush}"
+                     StrokeThickness="1"
+                     StrokeDashArray="4,3"
+                     RadiusX="6"
+                     RadiusY="6"
+                     Margin="0.5"
+                     IsHitTestVisible="False" />
+          <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto" Margin="{TemplateBinding Padding}">
+            <ScrollContentPresenter x:Name="PART_ContentPresenter"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Background="Transparent"
+                                    HorizontalSnapPointsType="{TemplateBinding HorizontalSnapPointsType}"
+                                    VerticalSnapPointsType="{TemplateBinding VerticalSnapPointsType}"
+                                    HorizontalSnapPointsAlignment="{TemplateBinding HorizontalSnapPointsAlignment}"
+                                    VerticalSnapPointsAlignment="{TemplateBinding VerticalSnapPointsAlignment}"
+                                    ScrollViewer.IsScrollInertiaEnabled="{TemplateBinding IsScrollInertiaEnabled}">
+              <ScrollContentPresenter.GestureRecognizers>
+                <ScrollGestureRecognizer CanHorizontallyScroll="{Binding CanHorizontallyScroll, ElementName=PART_ContentPresenter}"
+                                         CanVerticallyScroll="{Binding CanVerticallyScroll, ElementName=PART_ContentPresenter}"
+                                         IsScrollInertiaEnabled="{Binding (ScrollViewer.IsScrollInertiaEnabled), ElementName=PART_ContentPresenter}"
+                                         Offset="{Binding Offset, ElementName=PART_ContentPresenter}"
+                                         Viewport="{Binding Viewport, ElementName=PART_ContentPresenter}"
+                                         Extent="{Binding Extent, ElementName=PART_ContentPresenter}" />
+              </ScrollContentPresenter.GestureRecognizers>
+            </ScrollContentPresenter>
+            <ScrollBar x:Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" />
+            <ScrollBar x:Name="PART_VerticalScrollBar" Orientation="Vertical" Grid.Column="1" />
+          </Grid>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ScrollBar">
+    <Setter Property="Margin" Value="4,0,0,0" />
+  </Style>
+  <Style Selector="ScrollBar:vertical">
+    <Setter Property="Width" Value="10" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="TrackBackdrop"
+                Background="{StaticResource ScrollBarTrackBrush}"
+                BorderBrush="{StaticResource ScrollBarTrackBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="5">
+          <Track x:Name="PART_Track"
+                 Margin="1"
+                 Minimum="{TemplateBinding Minimum}"
+                 Maximum="{TemplateBinding Maximum}"
+                 Value="{TemplateBinding Value, Mode=TwoWay}"
+                 ViewportSize="{TemplateBinding ViewportSize}"
+                 Orientation="Vertical"
+                 IsDirectionReversed="True">
+            <Track.DecreaseButton>
+              <RepeatButton x:Name="PART_PageUpButton" Classes="scroll-page" />
+            </Track.DecreaseButton>
+            <Track.IncreaseButton>
+              <RepeatButton x:Name="PART_PageDownButton" Classes="scroll-page" />
+            </Track.IncreaseButton>
+            <Thumb x:Name="thumb" Classes="scroll-thumb" MinHeight="24" />
+          </Track>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ScrollBar:horizontal">
+    <Setter Property="Height" Value="10" />
+    <Setter Property="Margin" Value="0,4,0,0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="TrackBackdrop"
+                Background="{StaticResource ScrollBarTrackBrush}"
+                BorderBrush="{StaticResource ScrollBarTrackBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="5">
+          <Track x:Name="PART_Track"
+                 Margin="1"
+                 Minimum="{TemplateBinding Minimum}"
+                 Maximum="{TemplateBinding Maximum}"
+                 Value="{TemplateBinding Value, Mode=TwoWay}"
+                 ViewportSize="{TemplateBinding ViewportSize}"
+                 Orientation="Horizontal">
+            <Track.DecreaseButton>
+              <RepeatButton x:Name="PART_PageUpButton" Classes="scroll-page" />
+            </Track.DecreaseButton>
+            <Track.IncreaseButton>
+              <RepeatButton x:Name="PART_PageDownButton" Classes="scroll-page" />
+            </Track.IncreaseButton>
+            <Thumb x:Name="thumb" Classes="scroll-thumb" MinWidth="24" />
+          </Track>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ScrollBar /template/ RepeatButton.scroll-page">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent" />
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ScrollBar /template/ Thumb.scroll-thumb">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="ThumbFace"
+                Background="{StaticResource ScrollBarThumbBrush}"
+                BorderBrush="{StaticResource ScrollBarThumbBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="4">
+          <Border x:Name="ThumbGloss" Margin="1" CornerRadius="3" Background="{StaticResource ScrollBarThumbGlossGradientBrush}" Opacity="0.35" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ScrollBar /template/ Thumb.scroll-thumb:pointerover /template/ Border#ThumbFace">
+    <Setter Property="Background" Value="{StaticResource ScrollBarThumbHoverBrush}" />
+  </Style>
+  <Style Selector="ScrollBar /template/ Thumb.scroll-thumb:pressed /template/ Border#ThumbFace">
+    <Setter Property="Background" Value="{StaticResource ScrollBarThumbPressedBrush}" />
+  </Style>
+  <Style Selector="ScrollBar:disabled">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
+
+  <Style Selector="Border.hud-prompt">
+    <Setter Property="MaxWidth" Value="560" />
+    <Setter Property="Padding" Value="20,8,8,8" />
+    <Setter Property="Background" Value="{StaticResource HudPanelBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+    <Setter Property="BorderThickness" Value="2" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
+    <Setter Property="BoxShadow" Value="{x:Static local:Theme+Hud.PlateShadow}" />
+  </Style>
+
+  <Style Selector="Button.dismiss">
+    <Setter Property="Width" Value="32" />
+    <Setter Property="Height" Value="32" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.dismiss local|IconVisual">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Foreground" Value="{StaticResource HudInkBrush}" />
+  </Style>
+  <Style Selector="Button.dismiss:pointerover local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource HudHoverInkBrush}" />
+  </Style>
+  <Style Selector="Button.dismiss:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+
+  <Style Selector="local|PlateChrome.icon-button">
+    <Setter Property="Shape" Value="Octagon" />
+    <Setter Property="Fill" Value="{StaticResource PlateFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource PlateRoundBorderGradientBrush}" />
+    <Setter Property="StrokeThickness" Value="2.5" />
+    <Setter Property="OuterShadow" Value="{StaticResource PlateOuterShadowBrush}" />
+    <Setter Property="InnerShadow" Value="{StaticResource PlateInnerShadowBrush}" />
+    <Setter Property="Gloss" Value="{StaticResource PlateRoundGlossGradientBrush}" />
+    <Setter Property="Texture" Value="{StaticResource PlateTextureBrush}" />
+  </Style>
+
+  <Style Selector="Button.icon-button">
+    <Setter Property="Width" Value="32" />
+    <Setter Property="Height" Value="32" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PlateTextBrush}" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <local:PlateChrome x:Name="PlateChrome" Classes="icon-button" TextureSeed="{TemplateBinding (local:PlateChrome.TextureSeed)}" />
+          <ContentPresenter x:Name="StudContent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.icon-button local|IconVisual">
+    <Setter Property="Width" Value="13" />
+    <Setter Property="Height" Value="13" />
+    <Setter Property="Foreground" Value="{StaticResource PlateTextBrush}" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="2" Opacity="1" Color="{x:Static local:Theme+Plate.TextShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Button.icon-button:pointerover local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource PlateHoverTextBrush}" />
+  </Style>
+  <Style Selector="Button.icon-button:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlateHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.icon-button:focus-visible /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateFocusGlowBrush}" />
+  </Style>
+  <Style Selector="Button.icon-button:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="Button.icon-button:disabled">
+    <Setter Property="Opacity" Value="0.4" />
+  </Style>
+
+  <Style Selector="Border.pager">
+    <Setter Property="Height" Value="26" />
+    <Setter Property="Margin" Value="12,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Background" Value="{StaticResource PagerBandBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource PagerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,1" />
+  </Style>
+
+  <Style Selector="local|PlateChrome.socket">
+    <Setter Property="Shape" Value="Round" />
+    <Setter Property="Fill" Value="{StaticResource PlateFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource PlateRoundBorderGradientBrush}" />
+    <Setter Property="StrokeThickness" Value="2.5" />
+    <Setter Property="OuterShadow" Value="{StaticResource PlateOuterShadowBrush}" />
+    <Setter Property="InnerShadow" Value="{StaticResource PlateInnerShadowBrush}" />
+    <Setter Property="Gloss" Value="{StaticResource PlateRoundGlossGradientBrush}" />
+    <Setter Property="Texture" Value="{StaticResource PlateTextureBrush}" />
+  </Style>
+
+  <Style Selector="Button.socket">
+    <Setter Property="Width" Value="72" />
+    <Setter Property="Height" Value="72" />
+    <Setter Property="Padding" Value="12" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <local:PlateChrome x:Name="PlateChrome" Classes="socket" TextureSeed="{TemplateBinding (local:PlateChrome.TextureSeed)}" />
+          <ContentPresenter x:Name="SocketContent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.socket:focus-visible /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateFocusGlowBrush}" />
+  </Style>
+  <Style Selector="Button.socket:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PlateHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.socket.selected /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryFaceGradientBrush}" />
+    <Setter Property="Glow" Value="{StaticResource PlateGlowBrush}" />
+  </Style>
+  <Style Selector="Button.socket.selected:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.socket.highlighted /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateGlowBrush}" />
+    <Setter Property="GlowHalo" Value="{StaticResource PlateGlowHaloBrush}" />
+  </Style>
+  <Style Selector="Button.socket:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="Button.socket:disabled /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Opacity" Value="0.45" />
+    <Setter Property="Glow" Value="{x:Null}" />
+    <Setter Property="GlowHalo" Value="{x:Null}" />
+  </Style>
+
+  <Style Selector="local|PlateChrome.pill">
+    <Setter Property="Shape" Value="Pill" />
+    <Setter Property="Fill" Value="{StaticResource PillFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource PillBorderGradientBrush}" />
+    <Setter Property="StrokeThickness" Value="1.5" />
+    <Setter Property="OuterShadow" Value="{StaticResource PlateOuterShadowBrush}" />
+    <Setter Property="InnerShadow" Value="{StaticResource PillInnerShadowBrush}" />
+    <Setter Property="InnerShadowDepth" Value="4" />
+    <Setter Property="Bevel" Value="{StaticResource PillBevelBrush}" />
+    <Setter Property="Outline" Value="{StaticResource PillOutlineBrush}" />
+  </Style>
+
+  <Style Selector="Button.pill">
+    <Setter Property="Height" Value="36" />
+    <Setter Property="Padding" Value="24,0" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PillTextBrush}" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <local:PlateChrome x:Name="PlateChrome" Classes="pill" TextureSeed="{TemplateBinding (local:PlateChrome.TextureSeed)}" />
+          <ContentPresenter x:Name="PillContent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.pill TextBlock">
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="1" Color="{x:Static local:Theme+Pill.TextShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Button.pill local|IconVisual">
+    <Setter Property="Width" Value="18" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Button.pill:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource PillHoverTextBrush}" />
+  </Style>
+  <Style Selector="Button.pill:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.primary /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.primary:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.danger /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillDangerFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.danger:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillDangerHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.success /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillSuccessFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.success:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillSuccessHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill:focus-visible /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateFocusGlowBrush}" />
+  </Style>
+  <Style Selector="Button.pill:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="Button.pill:disabled">
+    <Setter Property="Foreground" Value="{StaticResource PillDisabledTextBrush}" />
+  </Style>
+  <Style Selector="Button.pill:disabled /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillDisabledFaceGradientBrush}" />
+    <Setter Property="Glow" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Button.pill.primary:disabled /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryDisabledFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.danger:disabled /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillDangerDisabledFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.pill.success:disabled /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillSuccessDisabledFaceGradientBrush}" />
+  </Style>
+
+  <Style Selector="Button.row">
+    <Setter Property="Margin" Value="0,1" />
+    <Setter Property="Padding" Value="10,8" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Background" Value="{StaticResource CardBackgroundGradientBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
+  </Style>
+  <Style Selector="Button.row:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource CardHoverBackgroundGradientBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="Button.row:disabled, Button.row.unavailable">
+    <Setter Property="Opacity" Value="0.6" />
+  </Style>
+  <Style Selector="Button.row:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource CardBackgroundGradientBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="Button.row.selected">
+    <Setter Property="BorderBrush" Value="{StaticResource CardSelectedBorderGradientBrush}" />
+  </Style>
+  <Style Selector="Button.row.selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource CardSelectedFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CardSelectedBorderGradientBrush}" />
+  </Style>
+
+  <Style Selector="local|PagedItemsControl">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <local:PagedStackPanel Overflow="16" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*,Auto">
+          <Button x:Name="PART_PreviousButton" Grid.Column="0" Classes="icon-button page-arrow">
+            <local:IconVisual Moniker="Previous" />
+          </Button>
+          <ItemsPresenter x:Name="PART_ItemsPresenter"
+                          Grid.Column="1"
+                          HorizontalAlignment="Center"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+          <Button x:Name="PART_NextButton" Grid.Column="2" Classes="icon-button page-arrow">
+            <local:IconVisual Moniker="Next" />
+          </Button>
+          <ContentPresenter x:Name="PART_Blankslate"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Classes="blankslate"
+                            Content="{TemplateBinding (local:Blankslate.Content)}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|PagedItemsControl:empty /template/ Button.page-arrow">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="ContentPresenter.blankslate">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector=":is(ItemsControl):empty /template/ ContentPresenter.blankslate">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="ItemsControl:blankslate">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <Panel>
+            <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+            <ContentPresenter Name="PART_Blankslate"
+                              Classes="blankslate"
+                              Content="{TemplateBinding (local:Blankslate.Content)}" />
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox:blankslate">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border"
+                ClipToBounds="{TemplateBinding ClipToBounds}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+          <Panel>
+            <ScrollViewer Name="PART_ScrollViewer"
+                          VerticalSnapPointsType="{TemplateBinding (ScrollViewer.VerticalSnapPointsType)}"
+                          HorizontalSnapPointsType="{TemplateBinding (ScrollViewer.HorizontalSnapPointsType)}"
+                          HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                          VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                          IsScrollChainingEnabled="{TemplateBinding (ScrollViewer.IsScrollChainingEnabled)}"
+                          IsScrollInertiaEnabled="{TemplateBinding (ScrollViewer.IsScrollInertiaEnabled)}"
+                          IsDeferredScrollingEnabled="{TemplateBinding (ScrollViewer.IsDeferredScrollingEnabled)}"
+                          AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
+                          BringIntoViewOnFocusChange="{TemplateBinding (ScrollViewer.BringIntoViewOnFocusChange)}">
+              <ItemsPresenter Name="PART_ItemsPresenter"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"
+                              Margin="{TemplateBinding Padding}" />
+            </ScrollViewer>
+            <ContentPresenter Name="PART_Blankslate"
+                              Classes="blankslate"
+                              Content="{TemplateBinding (local:Blankslate.Content)}" />
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|PagedItemsControl /template/ Button.page-arrow">
+    <Setter Property="Width" Value="26" />
+    <Setter Property="Height" Value="26" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <Style Selector="Border.section-header">
+    <Setter Property="Padding" Value="14,8" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Background" Value="{StaticResource HeadingGradientBrush}" />
+  </Style>
+
+  <Style Selector="Border.card">
+    <Setter Property="Padding" Value="16" />
+    <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+  </Style>
+
+  <Style Selector="local|PlateChrome.panel">
+    <Setter Property="Shape" Value="Panel" />
+    <Setter Property="PanelRadius" Value="{StaticResource RadiusPanel}" />
+    <Setter Property="Stroke" Value="{StaticResource PanelOrnamentBorderGradientBrush}" />
+    <Setter Property="StrokeThickness" Value="1.5" />
+    <Setter Property="Trim" Value="{StaticResource PillBorderGradientBrush}" />
+    <Setter Property="OuterShadow" Value="{StaticResource PlateOuterShadowBrush}" />
+    <Setter Property="Outline" Value="{StaticResource PillOutlineBrush}" />
+  </Style>
+
+  <Style Selector="ContentControl.ornament-panel">
+    <Setter Property="Padding" Value="16,10" />
+    <Setter Property="Background" Value="{StaticResource PanelBodyGradientBrush}" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Classes="cached">
+          <local:PlateChrome Classes="panel" Fill="{TemplateBinding Background}" />
+          <ContentPresenter x:Name="PART_ContentPresenter"
+                            Margin="3"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ContentControl.ornament-panel.highlighted /template/ local|PlateChrome">
+    <Setter Property="Glow" Value="{StaticResource PlateGlowBrush}" />
+    <Setter Property="GlowHalo" Value="{StaticResource PlateGlowHaloBrush}" />
+  </Style>
+  <Style Selector=":is(TextBlock).panel-title">
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+  </Style>
+  <Style Selector="StackPanel.leadership">
+    <Setter Property="Margin" Value="12,0,0,0" />
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Spacing" Value="6" />
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="StackPanel.leadership > local|IconVisual">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+  </Style>
+  <Style Selector="local|OrnamentDivider.section">
+    <Setter Property="Margin" Value="0,2" />
+    <Setter Property="Stroke" Value="{StaticResource AccentSecondaryBrush}" />
+  </Style>
+
+  <Style Selector="Border.frame">
+    <Setter Property="Background" Value="{StaticResource FrameBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource FrameBorderBrush}" />
+    <Setter Property="ClipToBounds" Value="True" />
+  </Style>
+
+  <Style Selector="Border.spell-icon">
+    <Setter Property="Background" Value="{StaticResource SpellIconLightBackgroundBrush}" />
+  </Style>
+  <Style Selector="Border.spell-icon.dark-background">
+    <Setter Property="Background" Value="{StaticResource SpellIconDarkBackgroundBrush}" />
+  </Style>
+
+  <Style Selector="local|PointerTiltDecorator.event-portrait">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Depth" Value="600" />
+    <Setter Property="Tilt" Value="5" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="18" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
+    </Setter>
+    <Setter Property="CacheMode">
+      <BitmapCache />
+    </Setter>
+  </Style>
+
+  <Style Selector="local|CoverBoxDecorator.menu-background">
+    <Setter Property="CropMargin" Value="200,0,0,40" />
+  </Style>
+
+  <Style Selector="local|CoverBoxDecorator.menu-background > local|MenuBackgroundView, local|CoverBoxDecorator.menu-background > local|MainMenuBackgroundView">
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="OpacityMask">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="20%,0%">
+        <GradientStop Offset="0" Color="{x:Static local:Theme+Artwork.FeatherFadeColor}" />
+        <GradientStop Offset="1" Color="{x:Static local:Theme+Artwork.FeatherColor}" />
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.game-menu-vignette">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background">
+      <RadialGradientBrush GradientOrigin="50%,40%" Center="50%,40%" RadiusX="75%" RadiusY="75%">
+        <GradientStop Offset="0" Color="{x:Static local:Theme+GameMenu.VignetteFadeColor}" />
+        <GradientStop Offset="0.35" Color="{x:Static local:Theme+GameMenu.VignetteFadeColor}" />
+        <GradientStop Offset="1" Color="{x:Static local:Theme+GameMenu.VignetteColor}" />
+      </RadialGradientBrush>
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.menu-overlay">
+    <Setter Property="Width" Value="820" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+        <GradientStop Offset="0" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+        <GradientStop Offset="0.52" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+        <GradientStop Offset="1" Color="{x:Static local:Theme+Artwork.OverlayFadeColor}" />
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.heading">
+    <Setter Property="Padding" Value="14,8" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Background" Value="{StaticResource HeadingGradientBrush}" />
+  </Style>
+
+  <Style Selector="TextBox">
+    <Setter Property="MinHeight" Value="34" />
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="Background" Value="{StaticResource FieldFaceGradientBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource FieldTextBrush}" />
+    <Setter Property="CaretBrush" Value="{StaticResource AccentBrush}" />
+    <Setter Property="SelectionBrush" Value="{StaticResource TextBoxSelectionBrush}" />
+    <Setter Property="PlaceholderForeground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource FieldBorderGradientBrush}" />
+    <Setter Property="BorderThickness" Value="1.5" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusLg}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+  </Style>
+  <Style Selector="TextBox:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource FieldHoverTextBrush}" />
+  </Style>
+  <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{StaticResource FieldHoverFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource FieldBorderGradientBrush}" />
+  </Style>
+  <Style Selector="TextBox:focus">
+    <Setter Property="Foreground" Value="{StaticResource FieldHoverTextBrush}" />
+  </Style>
+  <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{StaticResource FieldHoverFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource FocusRingBrush}" />
+    <Setter Property="BorderThickness" Value="1.5" />
+  </Style>
+  <Style Selector="TextBox:disabled">
+    <Setter Property="Foreground" Value="{StaticResource FieldDisabledTextBrush}" />
+  </Style>
+  <Style Selector="TextBox:disabled /template/ Border#PART_BorderElement">
+    <Setter Property="Opacity" Value="0.45" />
+    <Setter Property="Background" Value="{StaticResource FieldFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource FieldBorderGradientBrush}" />
+  </Style>
+
+  <Style Selector="local|ModalFrameDecorator">
+    <Setter Property="Background" Value="{StaticResource ModalBodyGradientBrush}" />
+    <Setter Property="OutlineBrush" Value="{StaticResource ModalBorderOutlineBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ModalBorderGradientBrush}" />
+  </Style>
+
+  <Style Selector="StackPanel.details-header > :is(TextBlock).object-name">
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector=":is(TextBlock).details-category">
+    <Setter Property="Margin" Value="0,4,0,0" />
+  </Style>
+  <Style Selector="TextBlock.details-flavor">
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="FontStyle" Value="Italic" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="local|IconVisual.details-ornament">
+    <Setter Property="Width" Value="18" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="Margin" Value="-4,2,5,0" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+  </Style>
+  <Style Selector="Rectangle.details-rule">
+    <Setter Property="Height" Value="1" />
+    <Setter Property="Fill" Value="{StaticResource ModalRuleGradientBrush}" />
+  </Style>
+  <Style Selector="Grid.details-effect">
+    <Setter Property="Margin" Value="0,0,0,4" />
+  </Style>
+  <Style Selector="Grid.details-effect TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource ModalEffectBrush}" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="Rectangle.details-bullet">
+    <Setter Property="Width" Value="5" />
+    <Setter Property="Height" Value="5" />
+    <Setter Property="Margin" Value="2,8,12,0" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Fill" Value="{StaticResource ModalEffectBrush}" />
+    <Setter Property="RenderTransform" Value="rotate(45deg)" />
+  </Style>
+  <Style Selector="ContentControl.details-value">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+  </Style>
+  <Style Selector="local|GlowVisual.details-icon-glow">
+    <Setter Property="Margin" Value="-24" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0.22" />
+    <Setter Property="Color" Value="{DynamicResource AccentColor}" />
+  </Style>
+  <Style Selector="local|SpriteVisual.details-icon">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="6" BlurRadius="16" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Decorator.details-portrait">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="8" BlurRadius="20" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
+    </Setter>
+    <Setter Property="CacheMode">
+      <BitmapCache />
+    </Setter>
+  </Style>
+
+  <Style Selector="local|ModalPanel">
+    <Setter Property="Padding" Value="20,16" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Classes="cached">
+          <local:ModalFrameDecorator>
+            <Grid RowDefinitions="Auto,*,Auto">
+
+              <local:OutlinedTextBlock Grid.Row="0"
+                                       Text="{TemplateBinding Title}"
+                                       Classes="h3"
+                                       Foreground="{StaticResource ModalTitleBrush}"
+                                       HorizontalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="20,20,20,0"
+                                       IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+              <ContentPresenter Grid.Row="1"
+                                x:Name="PART_ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Padding="{TemplateBinding Padding}" />
+
+              <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
+                <Border Grid.Column="0" Width="{Binding Padding.Left, RelativeSource={RelativeSource TemplatedParent}}" />
+                <ContentPresenter Grid.Column="1"
+                                  Classes="focus-group"
+                                  Content="{TemplateBinding Footer}"
+                                  Padding="0,0,0,20"
+                                  IsVisible="{Binding Footer, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                <Border Grid.Column="2" Width="{Binding Padding.Right, RelativeSource={RelativeSource TemplatedParent}}" />
+              </Grid>
+
+            </Grid>
+          </local:ModalFrameDecorator>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="local|ModalPanel.accent /template/ local|ModalFrameDecorator">
+    <Setter Property="Background" Value="{StaticResource ModalAccentBodyGradientBrush}" />
+  </Style>
+
+  <Style Selector="local|ModalIcon">
+    <Setter Property="Width" Value="44" />
+    <Setter Property="Height" Value="44" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Foreground" Value="{StaticResource ModalIconInfoInkBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ModalIconInfoRingGradientBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Ellipse Fill="{StaticResource ModalBorderOutlineBrush}" />
+          <Ellipse Fill="{StaticResource ModalIconGradientBrush}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="2" Margin="1" />
+          <Ellipse Stroke="{StaticResource ModalBorderOutlineBrush}" StrokeThickness="1" Margin="3" />
+          <local:IconVisual Moniker="{TemplateBinding Icon}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Width="22"
+                            Height="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+            <local:IconVisual.Effect>
+              <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="4" Opacity="1" Color="{x:Static local:Theme+ModalIcon.InkShadowColor}" />
+            </local:IconVisual.Effect>
+          </local:IconVisual>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|ModalIcon.error">
+    <Setter Property="Foreground" Value="{StaticResource ModalIconErrorInkBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ModalIconErrorRingGradientBrush}" />
+  </Style>
+
+  <Style Selector="ToolTip">
+    <Setter Property="MaxWidth" Value="280" />
+    <Setter Property="Padding" Value="14,10" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Margin="6"
+                Padding="1"
+                CornerRadius="5"
+                Background="{StaticResource ModalBorderOutlineBrush}"
+                BoxShadow="{x:Static local:Theme+Tooltip.Shadow}">
+          <Border Padding="2" CornerRadius="4" Background="{StaticResource ModalBorderGradientBrush}">
+            <Border Padding="1" CornerRadius="2" Background="{StaticResource ModalBorderOutlineBrush}">
+              <Border CornerRadius="1" ClipToBounds="True" Background="{StaticResource ModalBodyGradientBrush}">
+                <ContentPresenter x:Name="PART_ContentPresenter"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  Padding="{TemplateBinding Padding}" />
+              </Border>
+            </Border>
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ToolTip :is(TextBlock)">
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="ToolTip :is(TextBlock).h4">
+    <Setter Property="Foreground" Value="{StaticResource ModalTitleBrush}" />
+  </Style>
+
+  <Style Selector="ListBox.select-list">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem">
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+
+  <Style Selector="ListBox.select-list ListBoxItem Border.row">
+    <Setter Property="Padding" Value="14,6" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="2,0,0,0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem:pointerover Border.row">
+    <Setter Property="Background" Value="{StaticResource ScenarioSelectRowHoverGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ScenarioSelectDividerBrush}" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem:selected Border.row">
+    <Setter Property="Background" Value="{StaticResource ScenarioSelectRowSelectedGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ScenarioSelectAccentBrush}" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem TextBlock.row-title">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+  </Style>
+  <Style Selector="ListBox.select-list ListBoxItem:selected TextBlock.row-title">
+    <Setter Property="Foreground" Value="{StaticResource ScenarioSelectAccentBrush}" />
+  </Style>
+
+  <Style Selector="Border.upgrade-badge">
+    <Setter Property="Width" Value="22" />
+    <Setter Property="Height" Value="22" />
+    <Setter Property="Margin" Value="4" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Background" Value="{StaticResource BadgeBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource BadgeBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="11" />
+    <Setter Property="ToolTip.Tip" Value="{local:Text 'Upgrades after its next battle'}" />
+  </Style>
+  <Style Selector="Border.upgrade-badge > local|IconVisual">
+    <Setter Property="Width" Value="12" />
+    <Setter Property="Height" Value="12" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource BadgeTextBrush}" />
+  </Style>
+
+  <Style Selector="local|BarVisual">
+    <Setter Property="Height" Value="22" />
+    <Setter Property="Foreground" Value="{StaticResource BarTextBrush}" />
+    <Setter Property="Edge" Value="{StaticResource BarEdgeBrush}" />
+    <Setter Property="Bevel" Value="{StaticResource BarBevelBrush}" />
+    <Setter Property="Relight" Value="{StaticResource BarRelightGradientBrush}" />
+    <Setter Property="Overlay" Value="{StaticResource BarOverlayGradientBrush}" />
+    <Setter Property="FillOverlay" Value="{StaticResource BarFillOverlayGradientBrush}" />
+    <Setter Property="Texture" Value="{StaticResource PlateTextureBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+    <Setter Property="Outline" Value="{StaticResource BarTextOutlineBrush}" />
+    <Setter Property="OutlineThickness" Value="1.5" />
+  </Style>
+  <Style Selector="local|BarVisual.hitpoints">
+    <Setter Property="Fill" Value="{StaticResource BarHitpointsFillBrush}" />
+    <Setter Property="Track" Value="{StaticResource BarHitpointsTrackBrush}" />
+  </Style>
+  <Style Selector="local|BarVisual.experience">
+    <Setter Property="Fill" Value="{StaticResource BarExperienceFillBrush}" />
+    <Setter Property="GainFill" Value="{StaticResource BarExperienceGainFillBrush}" />
+    <Setter Property="Track" Value="{StaticResource BarExperienceTrackBrush}" />
+  </Style>
+  <Style Selector="local|BarVisual.gain">
+    <Style.Animations>
+      <Animation Duration="0:0:0.8" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+        <KeyFrame Cue="0%">
+          <Setter Property="GainOpacity" Value="0.35" />
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="GainOpacity" Value="1.0" />
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="local|BarVisual.experience.maximum">
+    <Setter Property="Fill" Value="{StaticResource BarMaximumExperienceFillBrush}" />
+    <Setter Property="Track" Value="{StaticResource BarMaximumExperienceTrackBrush}" />
+  </Style>
+  <Style Selector="local|BarVisual.experience.pending">
+    <Setter Property="Fill" Value="{StaticResource BarPendingExperienceFillBrush}" />
+    <Setter Property="Track" Value="{StaticResource BarPendingExperienceTrackBrush}" />
+  </Style>
+</Styles>

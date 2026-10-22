@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.AlertView"
+             x:DataType="local:AlertViewModel"
+             IsHitTestVisible="False"
+             ClipToBounds="False"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Top">
+
+  <Panel x:Name="Plate" x:DataType="local:Alert" Opacity="0" ClipToBounds="False" Margin="0,22,0,0" RenderOptions.RequiresFullOpacityHandling="True">
+    <Panel.RenderTransform>
+      <TranslateTransform />
+    </Panel.RenderTransform>
+
+    <local:ModalPanel MinWidth="360" Padding="0">
+      <StackPanel Spacing="2" Margin="48,32,48,20" MaxWidth="560">
+        <local:OutlinedTextBlock Text="{Binding Caption}"
+                                 Classes="h3"
+                                 Foreground="{StaticResource ModalTitleBrush}"
+                                 TextAlignment="Center"
+                                 TextWrapping="Wrap" />
+        <TextBlock Text="{Binding Details}"
+                   Classes="body"
+                   Foreground="{StaticResource AlertDetailsBrush}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   IsVisible="{Binding Details, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+      </StackPanel>
+    </local:ModalPanel>
+
+    <local:ModalIcon x:Name="AlertIcon" Icon="{Binding Icon}" Margin="0,-21,0,0" />
+  </Panel>
+
+</UserControl>

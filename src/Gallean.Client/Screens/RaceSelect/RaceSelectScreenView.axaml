@@ -1,0 +1,99 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.RaceSelectScreenView"
+             x:DataType="local:RaceSelectScreenViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="ComboBox.player-type">
+      <Setter Property="Width" Value="156" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="Padding" Value="12,0,6,0" />
+    </Style>
+    <Style Selector="ListBox.select-list ListBoxItem">
+      <Setter Property="ClipToBounds" Value="False" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="{StaticResource ScenarioSelectBackdropBrush}" ClipToBounds="True">
+
+    <TransitioningContentControl Content="{Binding Background}">
+      <TransitioningContentControl.PageTransition>
+        <CrossFade Duration="0:0:0.3" />
+      </TransitioningContentControl.PageTransition>
+      <TransitioningContentControl.ContentTemplate>
+        <DataTemplate x:DataType="local:MenuBackgroundViewModel">
+          <local:CoverBoxDecorator Classes="menu-background">
+            <local:MenuBackgroundView />
+          </local:CoverBoxDecorator>
+        </DataTemplate>
+      </TransitioningContentControl.ContentTemplate>
+    </TransitioningContentControl>
+
+    <Border Classes="menu-overlay" />
+
+    <Grid Width="380"
+          MaxHeight="820"
+          Margin="56,32,0,32"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          RowDefinitions="Auto,Auto,*,Auto">
+
+      <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Choose race'}" Classes="h1" Foreground="{StaticResource ScenarioSelectAccentBrush}" />
+
+      <Border Grid.Row="1"
+              Width="72"
+              Height="1"
+              HorizontalAlignment="Left"
+              Background="{StaticResource ScenarioSelectDividerBrush}"
+              Margin="0,10,0,20" />
+
+      <ListBox Grid.Row="2" Classes="select-list" Padding="0,6" ItemsSource="{Binding Races}" SelectedItem="{Binding SelectedRace}">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="local:RaceSelectItemViewModel">
+            <Border Classes="row">
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Grid.Column="0"
+                           Text="{Binding Name}"
+                           Classes="body row-title"
+                           TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Center" />
+                <ComboBox Grid.Column="1"
+                          Classes="player-type"
+                          ItemsSource="{Binding PlayerTypes}"
+                          SelectedItem="{Binding PlayerType}"
+                          VerticalAlignment="Center"
+                          ToolTip.Tip="{local:Text 'Choose whether a human or the computer plays this race'}">
+                  <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="local:PlayerType">
+                      <StackPanel Orientation="Horizontal" Spacing="8">
+                        <local:IconVisual Moniker="{Binding Converter={x:Static local:PlayerTypeIconConverter.Instance}}"
+                                          Width="16"
+                                          Height="16"
+                                          VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Converter={x:Static local:PlayerTypeConverter.Instance}}"
+                                   Classes="caption"
+                                   VerticalAlignment="Center" />
+                      </StackPanel>
+                    </DataTemplate>
+                  </ComboBox.ItemTemplate>
+                </ComboBox>
+              </Grid>
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <Grid Grid.Row="3" Classes="focus-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
+        <Button Grid.Column="0"
+                Classes="pill"
+                local:PlateChrome.TextureSeed="1"
+                Content="{local:Text 'Back'}"
+                Command="{Binding CloseCommand}"
+                Margin="0,0,6,0" />
+        <Button Grid.Column="1" Classes="pill primary" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Next'}" Command="{Binding NextCommand}" Margin="6,0,0,0" />
+      </Grid>
+    </Grid>
+  </Grid>
+
+</UserControl>

@@ -1,0 +1,22 @@
+uniform shader noise;
+
+uniform float4 color;
+uniform float2 seed;
+uniform float time;
+uniform float frequency;
+uniform float threshold;
+uniform float softness;
+
+const float2 WarpFlow = float2(7.0, 19.0);
+const float2 DensityFlow = float2(-5.0, 27.0);
+const float WarpStrength = 64.0;
+const float2 Stretch = float2(1.0, 0.55);
+
+half4 main(float2 coord) {
+    float2 point = coord * frequency * Stretch + seed;
+    float2 warp = float2(noise.eval(point + WarpFlow * time).rg) - 0.5;
+    float density = float(noise.eval(point + DensityFlow * time + warp * WarpStrength).b);
+    float alpha = color.a * smoothstep(threshold - softness, threshold + softness, density);
+
+    return half4(color.rgb * alpha, alpha);
+}

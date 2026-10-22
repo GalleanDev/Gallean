@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <ItemGroup>
+    <Compile Include="..\EngineAliases.cs" Link="EngineAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gallean.Client.Tests" />
+    <InternalsVisibleTo Include="Gallean.Configuration.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Engine\Gallean.Engine.csproj" />
+    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Engine.Contracts" />
+    <Using Include="Gallean.Entities" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestData\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

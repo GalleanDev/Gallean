@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ResourceSetView"
+             x:Name="Root"
+             x:DataType="local:ResourceSetViewModel">
+
+  <ItemsControl ItemsSource="{Binding Items}" VerticalAlignment="Center">
+    <ItemsControl.ItemsPanel>
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal" Spacing="12" />
+      </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+    <ItemsControl.ItemTemplate>
+      <DataTemplate x:DataType="local:ResourceSetItemViewModel">
+        <StackPanel Orientation="Horizontal" Spacing="4" Background="Transparent" ToolTip.Tip="{Binding Name}">
+          <local:AnimatedNumberTextBlock Value="{Binding Value}"
+                                         Animation="{Binding ValueAnimation}"
+                                         VerticalAlignment="Center" />
+          <local:IconVisual Moniker="{Binding Icon}"
+                            Width="{Binding #Root.IconSize}"
+                            Height="{Binding #Root.IconSize}"
+                            VerticalAlignment="Center" />
+        </StackPanel>
+      </DataTemplate>
+    </ItemsControl.ItemTemplate>
+  </ItemsControl>
+
+</UserControl>

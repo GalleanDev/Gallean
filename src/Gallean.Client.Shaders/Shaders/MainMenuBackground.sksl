@@ -1,0 +1,55 @@
+uniform shader source;
+uniform shader normals;
+uniform shader heightField;
+uniform shader albedo;
+
+uniform float4 lightPositions[16];
+uniform float4 lightRadiances[16];
+uniform float depthScale;
+
+const int LightCount = 16;
+const float CoreStrength = 0.6;
+
+float3 srgbToLinear(float3 color) {
+    return pow(max(color, 0.0), float3(2.2));
+}
+
+float3 linearToSrgb(float3 color) {
+    return pow(max(color, 0.0), float3(1.0 / 2.2));
+}
+
+half4 main(float2 coord) {
+    half4 sourceSample = source.eval(coord);
+    float3 color = srgbToLinear(float3(sourceSample.rgb));
+    float3 surface = max(srgbToLinear(float3(albedo.eval(coord).rgb)), float3(1e-3));
+    float3 normal = normalize(float3(normals.eval(coord).rgb) * 2.0 - 1.0);
+    float depth = float(heightField.eval(coord).r);
+    float3 position = float3(coord, -depth * depthScale);
+    float3 glow = float3(0.0);
+    float3 core = float3(0.0);
+
+    for (int index = 0; index < LightCount; index++) {
+        float4 light = lightPositions[index];
+
+        if (light.w > 0.0) {
+            float3 radiance = lightRadiances[index].rgb;
+            float lightDepth = float(heightField.eval(light.xy).r);
+            float3 delta = float3(light.xy, -lightDepth * depthScale + light.z) - position;
+            float lightDistance = max(length(delta), 1e-4);
+            float relative = lightDistance / light.w;
+            float attenuation = 1.0 / (1.0 + relative * relative);
+            float facing = max(dot(normal, delta / lightDistance), 0.0);
+            float2 fromCore = (coord - light.xy) / max(lightRadiances[index].a, 1e-4);
+
+            glow += radiance * facing * attenuation;
+            core += radiance * CoreStrength * exp(-dot(fromCore, fromCore));
+        }
+        else {
+            break;
+        }
+    }
+
+    float3 lit = 1.0 - (1.0 - color) * exp(-(surface * glow + core));
+
+    return half4(half3(linearToSrgb(lit)), sourceSample.a);
+}

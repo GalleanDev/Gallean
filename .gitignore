@@ -1,0 +1,9 @@
+.idea
+*.user
+/build
+/dist
+/src/**/bin/
+/src/**/obj/
+/tools/**/bin/
+/tools/**/obj/
+__pycache__/

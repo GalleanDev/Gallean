@@ -1,0 +1,590 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "RACE_ID": "g000rr0000",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0000",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0000",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0000",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0000",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0001",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0001",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0001",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0001",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0001",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0002",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0002",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0002",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0002",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0002",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0003",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0003",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0003",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0003",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0003",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0005",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0005",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0005",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0005",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0005",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0004",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": null
+    },
+    {
+      "RACE_ID": "g000rr0004",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0004",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0004",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0004",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0006",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0006",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0006",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0006",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0006",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0007",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0007",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0007",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0007",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0007",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0008",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0008",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0008",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0008",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0008",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0009",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0009",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0009",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0009",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0009",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0010",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0010",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0010",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0010",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0010",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0011",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0011",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0011",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0011",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0011",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    },
+    {
+      "RACE_ID": "g000rr0012",
+      "SIZE": 1,
+      "SCOUT": 5,
+      "REGEN_F": 10,
+      "PROTECTION": "g000um3001",
+      "GROWTH": "g0150:r0000:y0000:e0000:w0000",
+      "RES_M": 0
+    },
+    {
+      "RACE_ID": "g000rr0012",
+      "SIZE": 2,
+      "SCOUT": 5,
+      "REGEN_F": 15,
+      "PROTECTION": "g000um3002",
+      "GROWTH": "g0250:r0000:y0000:e0000:w0000",
+      "RES_M": 25
+    },
+    {
+      "RACE_ID": "g000rr0012",
+      "SIZE": 3,
+      "SCOUT": 5,
+      "REGEN_F": 20,
+      "PROTECTION": "g000um3003",
+      "GROWTH": "g0500:r0000:y0000:e0000:w0000",
+      "RES_M": 50
+    },
+    {
+      "RACE_ID": "g000rr0012",
+      "SIZE": 4,
+      "SCOUT": 6,
+      "REGEN_F": 25,
+      "PROTECTION": "g000um3004",
+      "GROWTH": "g0750:r0000:y0000:e0000:w0000",
+      "RES_M": 75
+    },
+    {
+      "RACE_ID": "g000rr0012",
+      "SIZE": 5,
+      "SCOUT": 6,
+      "REGEN_F": 30,
+      "PROTECTION": "g000um3005",
+      "GROWTH": "g0000:r0000:y0000:e0000:w0000",
+      "RES_M": 100
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <DataTemplate x:Key="DropZoneTemplate" x:DataType="local:DropZoneViewModel">
+      <Panel Classes="drop-zone">
+        <Border Classes="drop-zone-face" />
+        <Rectangle Classes="drop-zone-outline" />
+        <ContentControl Classes="drop-zone-content" Content="{Binding Content}">
+          <ContentControl.DataTemplates>
+            <DataTemplate x:DataType="x:String">
+              <local:OutlinedTextBlock Classes="drop-zone-label" Text="{Binding}" />
+            </DataTemplate>
+          </ContentControl.DataTemplates>
+        </ContentControl>
+      </Panel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DragImageTemplate" x:DataType="local:DragPreview">
+      <Panel>
+        <local:UnitPortrait Classes="drag-image-unit"
+                            FaceKey="{Binding SpriteKey}"
+                            IsHitpointsVisible="False"
+                            IsVisible="{Binding Type, Converter={x:Static local:EnumNotEqualsConverter.Instance}, ConverterParameter={x:Static local:DragPreviewType.Item}}" />
+        <Border Classes="drag-image-item"
+                IsVisible="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DragPreviewType.Item}}">
+          <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="UniformToFill" />
+        </Border>
+      </Panel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DropTargetTemplate" x:DataType="local:DropZoneViewModel">
+      <Border Classes="drop-zone drop-target" IsVisible="{Binding IsVisible}">
+        <Panel Classes="drop-target-plate">
+          <Border Classes="drop-zone-face" />
+          <Rectangle Classes="drop-zone-outline" />
+          <ContentControl Classes="drop-target-content" Content="{Binding Content}">
+            <ContentControl.DataTemplates>
+              <DataTemplate x:DataType="x:String">
+                <TextBlock Classes="drop-zone-label" Text="{Binding}" />
+              </DataTemplate>
+            </ContentControl.DataTemplates>
+          </ContentControl>
+        </Panel>
+      </Border>
+    </DataTemplate>
+
+    <ControlTheme x:Key="DropZoneContainerTheme" TargetType="ContentPresenter" x:DataType="local:DropZoneViewModel">
+      <Setter Property="IsVisible" Value="{Binding IsVisible}" />
+    </ControlTheme>
+  </Styles.Resources>
+
+  <Style Selector="ItemsControl.drop-zones">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <UniformGrid Rows="1" ColumnSpacing="16" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="ItemTemplate" Value="{StaticResource DropZoneTemplate}" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource DropZoneContainerTheme}" />
+  </Style>
+
+  <Style Selector="ContentControl.drop-zone-content">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Panel.drop-zone">
+    <Setter Property="Height" Value="64" />
+    <Setter Property="MinWidth" Value="220" />
+  </Style>
+  <Style Selector="Border.drop-zone-face">
+    <Setter Property="Background" Value="{StaticResource DropZoneBackgroundBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Background" Duration="0:0:0.12" />
+      </Transitions>
+    </Setter>
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="4" BlurRadius="18" Color="{x:Static local:Theme+DropZone.ShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Rectangle.drop-zone-outline">
+    <Setter Property="Margin" Value="1" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="RadiusX" Value="10" />
+    <Setter Property="RadiusY" Value="10" />
+    <Setter Property="Stroke" Value="{StaticResource DropZoneBorderBrush}" />
+    <Setter Property="StrokeThickness" Value="2" />
+    <Setter Property="StrokeDashArray" Value="5,3" />
+  </Style>
+  <Style Selector=":is(TextBlock).drop-zone-label">
+    <Setter Property="Margin" Value="28,0" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Foreground" Value="{StaticResource DropZoneTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+  </Style>
+  <Style Selector="Panel.drop-zone.drag-over Border.drop-zone-face">
+    <Setter Property="Background" Value="{StaticResource DropZoneHoverBackgroundBrush}" />
+  </Style>
+  <Style Selector="Panel.drop-zone.drag-over Rectangle.drop-zone-outline">
+    <Setter Property="Stroke" Value="{StaticResource DropZoneHoverBorderBrush}" />
+    <Setter Property="StrokeDashArray" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Panel.drop-zone.drag-over :is(TextBlock).drop-zone-label">
+    <Setter Property="Foreground" Value="{StaticResource DropZoneHoverTextBrush}" />
+  </Style>
+
+  <Style Selector="ContentControl.drag-image">
+    <Setter Property="ContentTemplate" Value="{StaticResource DragImageTemplate}" />
+  </Style>
+  <Style Selector="local|UnitPortrait.drag-image-unit">
+    <Setter Property="Margin" Value="0" />
+  </Style>
+  <Style Selector="Border.drag-image-item">
+    <Setter Property="Background" Value="{StaticResource SlotBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource SlotSelectedBorderBrush}" />
+    <Setter Property="BorderThickness" Value="3" />
+    <Setter Property="CornerRadius" Value="38" />
+    <Setter Property="ClipToBounds" Value="True" />
+  </Style>
+
+  <Style Selector="Border.drop-target">
+    <Setter Property="Margin" Value="1.5" />
+    <Setter Property="Background" Value="{StaticResource DropZoneBackdropBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusPanel}" />
+  </Style>
+  <Style Selector="Panel.drop-target-plate">
+    <Setter Property="MinWidth" Value="220" />
+    <Setter Property="MinHeight" Value="64" />
+    <Setter Property="Margin" Value="24" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+  </Style>
+  <Style Selector="Panel.drop-target-plate Border.drop-zone-face">
+    <Setter Property="Effect" Value="{x:Null}" />
+  </Style>
+  <Style Selector="ContentControl.drop-target-content">
+    <Setter Property="Margin" Value="28,12" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Panel.drop-target-plate :is(TextBlock).drop-zone-label">
+    <Setter Property="MaxWidth" Value="280" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="Border.drop-target.drag-over Border.drop-zone-face">
+    <Setter Property="Background" Value="{StaticResource DropZoneHoverBackgroundBrush}" />
+  </Style>
+  <Style Selector="Border.drop-target.drag-over Rectangle.drop-zone-outline">
+    <Setter Property="StrokeDashArray" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Border.drop-target.drag-over :is(TextBlock).drop-zone-label">
+    <Setter Property="Foreground" Value="{StaticResource DropZoneHoverTextBrush}" />
+  </Style>
+
+</Styles>

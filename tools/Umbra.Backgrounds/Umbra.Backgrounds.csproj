@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Umbra.Backgrounds.Generators\Umbra.Backgrounds.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="data\**\*.webp">
+      <Background>$([System.String]::Copy('%(RecursiveDir)').Replace('\','/').TrimEnd('/'))</Background>
+    </AdditionalFiles>
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="Background" />
+    <EmbeddedResource Include="data\**\*.webp">
+      <LogicalName>$([System.String]::Copy('%(RecursiveDir)').Replace('\','/'))%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

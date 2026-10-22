@@ -1,0 +1,80 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.CapitalSceneView"
+             x:DataType="local:CapitalSceneViewModel"
+             IsHitTestVisible="False">
+
+  <UserControl.Resources>
+    <ControlTheme x:Key="CapitalSceneLayerContainerTheme" TargetType="ContentPresenter" x:DataType="local:CapitalSceneLayerViewModel">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+    </ControlTheme>
+
+    <DataTemplate x:Key="CapitalSceneLayerTemplate" x:DataType="local:CapitalSceneLayerViewModel">
+      <Grid Classes.constructed="{Binding IsConstructed}">
+        <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform" />
+        <local:AnimationVisual AnimationKey="{Binding AnimationKey}" Stretch="Uniform" />
+      </Grid>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <Style Selector="Grid.constructed">
+      <Style.Animations>
+        <Animation Duration="0:0:2.4" Delay="0:0:0.05" FillMode="Backward">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0" />
+          </KeyFrame>
+          <KeyFrame Cue="12%">
+            <Setter Property="Opacity" Value="1" />
+          </KeyFrame>
+          <KeyFrame Cue="24%">
+            <Setter Property="Opacity" Value="0" />
+          </KeyFrame>
+          <KeyFrame Cue="36%">
+            <Setter Property="Opacity" Value="1" />
+          </KeyFrame>
+          <KeyFrame Cue="48%">
+            <Setter Property="Opacity" Value="0" />
+          </KeyFrame>
+          <KeyFrame Cue="60%">
+            <Setter Property="Opacity" Value="1" />
+          </KeyFrame>
+          <KeyFrame Cue="72%">
+            <Setter Property="Opacity" Value="0.25" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector=":is(Control).capital-scene-frame">
+      <Setter Property="Margin" Value="0,-60" />
+    </Style>
+  </UserControl.Styles>
+
+  <Panel>
+    <Panel ClipToBounds="True">
+      <ItemsControl Classes="capital-scene-frame cached"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    ItemsSource="{Binding Layers}"
+                    ItemTemplate="{StaticResource CapitalSceneLayerTemplate}"
+                    ItemContainerTheme="{StaticResource CapitalSceneLayerContainerTheme}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Grid />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+      </ItemsControl>
+    </Panel>
+
+    <Panel Classes="cached" ClipToBounds="True">
+      <local:CapitalBackdropVisual Classes="capital-scene-frame" SpriteKey="{Binding BackdropKey}" />
+    </Panel>
+  </Panel>
+
+</UserControl>

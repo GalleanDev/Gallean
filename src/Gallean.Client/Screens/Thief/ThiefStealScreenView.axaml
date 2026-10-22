@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ThiefStealScreenView"
+             x:DataType="local:ThiefStealScreenViewModel">
+
+  <UserControl.DataTemplates>
+    <DataTemplate x:DataType="local:IconViewModel+Item">
+      <Border Classes="frame" Width="64" Height="64" BorderThickness="2">
+        <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+      </Border>
+    </DataTemplate>
+
+    <DataTemplate x:DataType="local:IconViewModel+Spell">
+      <Border Classes="frame spell-icon" Width="64" Height="64" BorderThickness="2" Classes.dark-background="{Binding Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
+        <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+      </Border>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="ThiefStealTemplate" x:DataType="local:ThiefStealItemViewModel">
+      <Button Classes="row" Command="{Binding SelectCommand}" IsEnabled="{Binding Status.IsAvailable}">
+        <Grid ColumnDefinitions="64,*">
+          <ContentControl Grid.Column="0" Content="{Binding Icon}" />
+          <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Spacing="2">
+            <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Description}"
+                       Classes="caption"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       TextWrapping="Wrap" />
+            <ContentControl Content="{Binding Status}" Classes="caption" />
+          </StackPanel>
+        </Grid>
+      </Button>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Width="520" MaxHeight="620" Title="{local:Text 'Select what to steal'}" InitialFocus="{Binding #CancelButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="CancelButton" Grid.Column="1" Content="{local:Text 'Cancel'}" Classes="pill" MinWidth="150" Command="{Binding CloseCommand}" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <ScrollViewer Classes="list" VerticalScrollBarVisibility="Auto">
+        <ItemsControl Classes="focus-group" ItemsSource="{Binding Targets}" ItemTemplate="{StaticResource ThiefStealTemplate}">
+          <local:Blankslate.Content>
+            <TextBlock Text="{local:Text 'There is nothing to steal.'}"
+                       Classes="body"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,10" />
+          </local:Blankslate.Content>
+        </ItemsControl>
+      </ScrollViewer>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

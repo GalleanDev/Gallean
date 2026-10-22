@@ -1,0 +1,93 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0000",
+      "IMAGE": 1,
+      "POS_X": 52,
+      "POS_Y": 1,
+      "CASH": "G0200:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG7003",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0001",
+      "IMAGE": 0,
+      "POS_X": 1,
+      "POS_Y": 17,
+      "CASH": "G0250:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000000000",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0002",
+      "IMAGE": 4,
+      "POS_X": 19,
+      "POS_Y": 19,
+      "CASH": "G0500:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG9014",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0003",
+      "IMAGE": 1,
+      "POS_X": 58,
+      "POS_Y": 21,
+      "CASH": "G0100:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG7002",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0005",
+      "IMAGE": 2,
+      "POS_X": 68,
+      "POS_Y": 15,
+      "CASH": "G0200:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000000000",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0006",
+      "IMAGE": 3,
+      "POS_X": 1,
+      "POS_Y": 47,
+      "CASH": "G0100:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG1010",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0007",
+      "IMAGE": 2,
+      "POS_X": 28,
+      "POS_Y": 49,
+      "CASH": "G0150:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG0002",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S108SC0000",
+      "RUIN_ID": "S108RU0008",
+      "IMAGE": 4,
+      "POS_X": 1,
+      "POS_Y": 2,
+      "CASH": "G0100:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000000000",
+      "LOOTER": "S108PL0000",
+      "AIPRIORITY": 3
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Win32" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Client.Shaders\Gallean.Client.Shaders.csproj" />
+  </ItemGroup>
+
+</Project>

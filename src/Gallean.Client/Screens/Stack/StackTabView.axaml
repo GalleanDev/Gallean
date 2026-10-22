@@ -1,0 +1,393 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.StackTabView"
+             x:DataType="local:StackTabViewModel">
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="EquipmentSlotTemplate" x:DataType="local:LeaderEquipmentSlotViewModel">
+      <StackPanel Classes="equipment-cell">
+        <Button Classes="socket equipment-slot" Classes.highlighted="{Binding IsHighlighted}">
+          <Panel>
+            <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform" IsVisible="{Binding ItemId, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            <local:IconVisual Moniker="{Binding Icon}" IsVisible="{Binding ItemId, Converter={x:Static ObjectConverters.IsNull}}" />
+          </Panel>
+        </Button>
+        <TextBlock Text="{Binding Label}" Classes="caption" />
+      </StackPanel>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <Style Selector="StackPanel.equipment-cell">
+      <Setter Property="Width" Value="92" />
+      <Setter Property="Margin" Value="4,6" />
+      <Setter Property="Spacing" Value="4" />
+    </Style>
+    <Style Selector="StackPanel.equipment-cell > TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <Style Selector="Button.equipment-slot">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.equipment-slot /template/ local|PlateChrome#PlateChrome">
+      <Setter Property="Shape" Value="Square" />
+    </Style>
+    <Style Selector="Button.equipment-slot local|SpriteVisual">
+      <Setter Property="Margin" Value="-15" />
+    </Style>
+    <Style Selector="Button.equipment-slot local|IconVisual">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="Opacity" Value="0.4" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+
+    <Style Selector="local|PagedItemsControl.inventory">
+      <Setter Property="MinWidth" Value="0" />
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" MinSlotSize="84,84" />
+        </ItemsPanelTemplate>
+      </Setter>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid RowDefinitions="*,Auto">
+            <WrapPanel Grid.Row="0" Classes="inventory-sockets" Height="{Binding #PART_ItemsPresenter.Bounds.Height}">
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+              <Panel Classes="inventory-slot empty">
+                <local:PlateChrome Classes="socket" />
+              </Panel>
+            </WrapPanel>
+            <ItemsPresenter x:Name="PART_ItemsPresenter"
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            ItemsPanel="{TemplateBinding ItemsPanel}" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="16" Margin="0,8,0,4">
+              <Button x:Name="PART_PreviousButton" Classes="icon-button page-arrow">
+                <local:IconVisual Moniker="Previous" />
+              </Button>
+              <Button x:Name="PART_NextButton" Classes="icon-button page-arrow">
+                <local:IconVisual Moniker="Next" />
+              </Button>
+            </StackPanel>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="local|PagedItemsControl.inventory:empty /template/ Button.page-arrow">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="local|PagedItemsControl.inventory /template/ Button.page-arrow local|IconVisual">
+      <Setter Property="RenderTransform" Value="rotate(90deg)" />
+    </Style>
+    <Style Selector="WrapPanel.inventory-sockets">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Panel.inventory-slot.empty">
+      <Setter Property="Opacity" Value="0.55" />
+    </Style>
+
+    <Style Selector="Line.party-divider">
+      <Setter Property="Margin" Value="40,24,40,0" />
+      <Setter Property="Stretch" Value="Fill" />
+      <Setter Property="StartPoint" Value="0,0" />
+      <Setter Property="EndPoint" Value="0,1" />
+      <Setter Property="Stroke" Value="{StaticResource AccentSecondaryBrush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="StrokeDashArray" Value="4,3" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="Transparent">
+    <ContentControl Classes="ornament-panel"
+                    Background="{StaticResource CapitalScenePanelBodyGradientBrush}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsVisible="{Binding !HasStack}">
+      <Viewbox Classes="unit-grid-container" MaxHeight="350" Margin="48,40">
+        <ContentControl Classes="unit-grid" Content="{Binding LeaderBlankslate}" />
+      </Viewbox>
+    </ContentControl>
+
+    <Grid Grid.IsSharedSizeScope="True" Margin="16,12" IsVisible="{Binding HasStack}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="PartyFlank" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="PartyFlank" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0"
+              Grid.RowSpan="4"
+              RowDefinitions="*,Auto"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Margin="0,0,40,0">
+          <Viewbox Grid.Row="0" StretchDirection="DownOnly" ClipToBounds="False">
+            <Panel Width="300" Height="430" Background="Transparent" DataContext="{Binding Leader}">
+              <Ellipse Width="420"
+                       Height="420"
+                       Margin="-60,-30"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Fill="{StaticResource StackPortraitGlowGradientBrush}" />
+              <local:PointerTiltDecorator Classes="event-portrait" Margin="-20,0,-20,0" x:DataType="local:StackLeaderViewModel">
+                <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Stretch="Uniform" />
+              </local:PointerTiltDecorator>
+            </Panel>
+          </Viewbox>
+
+          <StackPanel Grid.Row="1" Spacing="4" Margin="0,-16,0,0" HorizontalAlignment="Center">
+            <local:OutlinedTextBlock Text="{Binding Leader.Title}"
+                                     Classes="object-name title"
+                                     HorizontalAlignment="Center"
+                                     TextTrimming="CharacterEllipsis" />
+            <ItemsControl Width="300" Margin="0,6,0,0" Classes="stat-table" ItemsSource="{Binding Leader.Stats}" />
+            <ItemsControl Width="300"
+                          Margin="0,4,0,0"
+                          Classes="leader-abilities"
+                          ItemsSource="{Binding Leader.Abilities}"
+                          IsVisible="{Binding !!Leader.Abilities.Count}" />
+          </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="2"
+              Classes="cached"
+              ColumnDefinitions="Auto,Auto"
+              RowDefinitions="Auto,Auto,Auto,Auto"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0,-3,-11,0">
+          <ContentControl Grid.Column="0"
+                          Grid.Row="0"
+                          Content="{Binding Equipment.Slots[0]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False" />
+          <ContentControl Grid.Column="1"
+                          Grid.Row="0"
+                          Content="{Binding Equipment.Slots[1]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False" />
+          <ContentControl Grid.Column="0"
+                          Grid.Row="1"
+                          Content="{Binding Equipment.Slots[2]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False" />
+          <ContentControl Grid.Column="1"
+                          Grid.Row="1"
+                          Content="{Binding Equipment.Slots[3]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False" />
+          <ContentControl Grid.Column="0"
+                          Grid.Row="2"
+                          Content="{Binding Equipment.Slots[4]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False" />
+          <ContentControl Grid.Column="1"
+                          Grid.Row="2"
+                          Content="{Binding Equipment.Slots[5]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False" />
+          <ContentControl Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Grid.Row="3"
+                          Content="{Binding Equipment.Slots[6]}"
+                          ContentTemplate="{StaticResource EquipmentSlotTemplate}"
+                          ClipToBounds="False"
+                          HorizontalAlignment="Center" />
+        </Grid>
+
+        <Line Grid.Column="2" Grid.RowSpan="4" Classes="party-divider" />
+
+        <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center" Margin="0,0,0,12">
+          <local:OutlinedTextBlock Text="{Binding StackGridTitle}" Classes="object-name row" />
+          <local:OutlinedTextBlock Text="{Binding StackUnitCount}" Classes="object-name row" Foreground="{StaticResource SecondaryTextBrush}" />
+        </StackPanel>
+
+        <Viewbox Grid.Column="3"
+                 Grid.Row="2"
+                 Classes="unit-grid-container cached"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top">
+          <ItemsControl Classes="unit-grid focus-group"
+                        ItemsSource="{Binding UnitGrid.Slots}"
+                        ItemTemplate="{StaticResource UnitGridSlotTemplate}"
+                        ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
+        </Viewbox>
+
+        <ContentControl Grid.Column="4" Grid.RowSpan="4" Classes="ornament-panel" Background="Transparent" HorizontalAlignment="Center" Margin="40,0,0,0" DataContext="{Binding Inventory}" Classes.highlighted="{Binding IsHighlighted}">
+          <Grid RowDefinitions="Auto,*" Margin="6,2" x:DataType="local:InventoryViewModel">
+            <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party inventory'}" Classes="panel-title" Height="40" />
+            <local:PagedItemsControl Grid.Row="1"
+                                     Margin="0,8,0,0"
+                                     ItemsSource="{Binding Items}"
+                                     Classes="inventory"
+                                     ItemTemplate="{StaticResource InventoryItemTemplate}" />
+          </Grid>
+        </ContentControl>
+      </Grid>
+    </Grid>
+
+    <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
+
+    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
+      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
+    </Canvas>
+  </Grid>
+
+</UserControl>

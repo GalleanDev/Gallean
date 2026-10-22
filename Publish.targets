@@ -1,0 +1,66 @@
+<Project>
+
+  <PropertyGroup>
+    <CreatePackage Condition="'$(CreatePackage)' == ''">$(IsPublishable)</CreatePackage>
+    <PackageProductName Condition="'$(PackageProductName)' == ''">Gallean</PackageProductName>
+    <PackageAfterTargets>Publish</PackageAfterTargets>
+    <PackageAfterTargets Condition="'$(PublishAot)' == 'true'">_CopyAotSymbols</PackageAfterTargets>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_IsPublishing)' == 'true' And '$(RuntimeIdentifier)' == ''">
+    <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <Target Name="CheckWorkingTree" BeforeTargets="Build" Condition="'$(_IsPublishing)' == 'true' And '$(CreatePackage)' == 'true'">
+    <Exec Command="git status --porcelain" WorkingDirectory="$(MSBuildThisFileDirectory)" ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="WorkingTreeChanges" />
+    </Exec>
+    <Error Condition="'$(WorkingTreeChanges)' != ''" Text="The working tree has uncommitted changes." />
+  </Target>
+
+  <Target Name="ResolveBuildVersion" DependsOnTargets="CheckWorkingTree">
+    <Exec Command="git describe --tags --exact-match --match v*" WorkingDirectory="$(MSBuildThisFileDirectory)" ConsoleToMSBuild="true" IgnoreExitCode="true" IgnoreStandardErrorWarningFormat="true" StandardOutputImportance="low" StandardErrorImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitTag" />
+      <Output TaskParameter="ExitCode" PropertyName="GitTagExitCode" />
+    </Exec>
+    <Exec Command="git rev-list --count HEAD" WorkingDirectory="$(MSBuildThisFileDirectory)" ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitCommitCount" />
+    </Exec>
+    <Exec Command="git rev-parse --short=9 HEAD" WorkingDirectory="$(MSBuildThisFileDirectory)" ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitRevision" />
+    </Exec>
+    <Exec Command="git rev-parse --path-format=absolute --git-common-dir" WorkingDirectory="$(MSBuildThisFileDirectory)" ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitCommonDir" />
+    </Exec>
+    <Error Condition="'$(GitTagExitCode)' == '0' And '$(GitTag)' != 'v$(VersionPrefix)'" Text="The tag $(GitTag) does not match version $(VersionPrefix) in Version.props." />
+    <PropertyGroup>
+      <BuildVersion Condition="'$(GitTagExitCode)' == '0'">$(VersionPrefix)</BuildVersion>
+      <BuildVersion Condition="'$(GitTagExitCode)' != '0'">$(VersionPrefix)-dev.$(GitCommitCount).$(GitRevision)</BuildVersion>
+      <DistDir Condition="'$(DistDir)' == ''">$([System.IO.Path]::Combine($([System.IO.Path]::GetDirectoryName($(GitCommonDir))), 'dist'))</DistDir>
+      <PackageBaseName>$(PackageProductName)-$(BuildVersion)-$(RuntimeIdentifier)</PackageBaseName>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="CreatePackage" AfterTargets="$(PackageAfterTargets)" DependsOnTargets="ResolveBuildVersion" Condition="'$(CreatePackage)' == 'true'">
+    <PropertyGroup>
+      <PackageStageDir>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)dist\</PackageStageDir>
+      <SymbolsPackageBaseName>$(PackageBaseName)-symbols</SymbolsPackageBaseName>
+      <PackageZipPath>$(DistDir)\$(PackageBaseName).zip</PackageZipPath>
+      <SymbolsPackageZipPath>$(DistDir)\$(SymbolsPackageBaseName).zip</SymbolsPackageZipPath>
+    </PropertyGroup>
+    <ItemGroup>
+      <Symbol Include="$(PublishDir)**\*.pdb;$(PublishDir)**\*.dbg" />
+      <PackageFile Include="$(PublishDir)**\*" Exclude="@(Symbol)" />
+    </ItemGroup>
+    <RemoveDir Directories="$(PackageStageDir)" />
+    <Copy SourceFiles="@(PackageFile)" DestinationFiles="@(PackageFile->'$(PackageStageDir)build\$(PackageBaseName)\%(RecursiveDir)%(Filename)%(Extension)')" UseHardlinksIfPossible="true" />
+    <Copy SourceFiles="@(Symbol)" DestinationFiles="@(Symbol->'$(PackageStageDir)symbols\$(SymbolsPackageBaseName)\%(RecursiveDir)%(Filename)%(Extension)')" UseHardlinksIfPossible="true" />
+    <MakeDir Directories="$(DistDir)" />
+    <ZipDirectory SourceDirectory="$(PackageStageDir)build" DestinationFile="$(PackageZipPath)" Overwrite="true" />
+    <ZipDirectory SourceDirectory="$(PackageStageDir)symbols" DestinationFile="$(SymbolsPackageZipPath)" Overwrite="true" />
+    <RemoveDir Directories="$(PackageStageDir)" />
+    <Message Importance="high" Text="$(MSBuildProjectName) -&gt; $(PackageZipPath)" />
+    <Message Importance="high" Text="$(MSBuildProjectName) -&gt; $(SymbolsPackageZipPath)" />
+  </Target>
+
+</Project>

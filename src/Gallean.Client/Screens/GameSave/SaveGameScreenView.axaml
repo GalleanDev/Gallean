@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.SaveGameScreenView"
+             x:DataType="local:SaveGameScreenViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
+    <local:ModalPanel Classes="accent" Width="620" Padding="28,24" Title="{local:Text 'Save game'}" InitialFocus="{Binding #SaveButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,Auto,*">
+          <Button x:Name="SaveButton"
+                  Grid.Column="1"
+                  Content="{Binding SaveLabel}"
+                  Classes="pill primary"
+                  local:PlateChrome.TextureSeed="1"
+                  Command="{Binding SaveCommand}"
+                  MinWidth="150"
+                  Margin="0,0,16,0" />
+          <Button Grid.Column="2"
+                  Content="{local:Text 'Close'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="2"
+                  Command="{Binding CloseCommand}"
+                  MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <DockPanel>
+        <Border DockPanel.Dock="Top" Classes="heading" Margin="-28,0,-28,8" Padding="28,8">
+          <local:OutlinedTextBlock Text="{local:Text 'Save name'}" Classes="label" />
+        </Border>
+
+        <TextBox DockPanel.Dock="Top" Text="{Binding Name}" MaxLength="{Binding MaxNameLength}" Margin="0,0,0,16" />
+
+        <Border DockPanel.Dock="Top" Classes="heading" Margin="-28,0,-28,8" Padding="28,8">
+          <local:OutlinedTextBlock Text="{local:Text 'Existing saves'}" Classes="label" />
+        </Border>
+
+        <ScrollViewer Classes="list" Height="260" HorizontalScrollBarVisibility="Disabled">
+          <ListBox Classes="save-list"
+                   ItemsSource="{Binding SaveList.Saves}"
+                   SelectedItem="{Binding SaveList.SelectedSave}"
+                   DoubleTapped="OnSaveDoubleTapped">
+            <local:Blankslate.Content>
+              <TextBlock Text="{local:Text 'There are no saved games yet.'}"
+                         Classes="body"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+            </local:Blankslate.Content>
+          </ListBox>
+        </ScrollViewer>
+      </DockPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

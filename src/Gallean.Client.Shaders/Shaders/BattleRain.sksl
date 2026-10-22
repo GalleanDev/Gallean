@@ -1,0 +1,201 @@
+uniform shader normals;
+uniform shader heightField;
+
+uniform float4 rigLightPositions[8];
+uniform float4 rigLightRadiances[8];
+uniform float3 skyRadiance;
+uniform float3 groundNormal;
+uniform float4 sceneToGround;
+uniform float2 groundOffset;
+uniform float depthScale;
+uniform float2 battlefieldCenter;
+uniform float perspectiveScalePerPixel;
+uniform float time;
+uniform float nearDepth;
+uniform float farDepth;
+
+uniform float3 streakRadiance;
+uniform float3 splashRadiance;
+uniform float3 hazeRadiance;
+
+uniform float2 streakSpacing;
+uniform float streakFall;
+uniform float streakSlant;
+uniform float streakLength;
+uniform float streakWidth;
+uniform float streakChance;
+uniform float streakOpacity;
+uniform float depthSpread;
+uniform float depthFade;
+
+uniform float splashSpacing;
+uniform float splashRate;
+uniform float splashRadius;
+uniform float splashWidth;
+uniform float splashChance;
+uniform float splashOpacity;
+uniform float groundFacing;
+
+uniform float haze;
+
+const float MinimumHalfWidth = 0.5;
+const float ColumnPeriod = 71.0;
+const float RowPeriod = 89.0;
+const float CyclePeriod = 64.0;
+const float ImpactWidth = 1.1;
+const float RingWeight = 0.35;
+
+float3 linearToSrgb(float3 color) {
+    return pow(max(color, 0.0), float3(1.0 / 2.2));
+}
+
+float4 hash(float2 point) {
+    float4 seed = fract(point.xyxy * float4(0.1031, 0.1030, 0.0973, 0.1099));
+
+    seed += dot(seed, seed.wzxy + 33.33);
+
+    return fract((seed.xxyz + seed.yzzw) * seed.zywx);
+}
+
+float3 sceneLight(float3 position) {
+    float3 light = skyRadiance;
+
+    for (int index = 0; index < 8; index++) {
+        if (rigLightPositions[index].w > 0.0) {
+            float3 delta = rigLightPositions[index].xyz - position;
+            float distance = length(delta);
+            float relative = distance / rigLightPositions[index].w;
+
+            light += rigLightRadiances[index].rgb / (1.0 + relative * relative);
+        }
+        else {
+            break;
+        }
+    }
+
+    return light;
+}
+
+float streak(float2 coord, float depth) {
+    float perspective = 1.0 / (1.0 + depth * depthSpread);
+    float2 cell = streakSpacing * perspective;
+    float2 grid = float2(coord.x + coord.y * streakSlant, coord.y) / cell;
+    float column = floor(grid.x);
+    float4 columnHash = hash(float2(column, depth * 128.0));
+    float speed = streakFall * perspective * mix(0.8, 1.2, columnHash.x) / cell.y;
+    float run = grid.y - time * speed + columnHash.y * ColumnPeriod;
+    float row = floor(run);
+    float4 dropHash = hash(float2(columnHash.z * 512.0, mod(row, RowPeriod)));
+
+    if (dropHash.z > streakChance) {
+        return 0.0;
+    }
+
+    float span = streakLength * perspective * mix(0.75, 1.25, dropHash.y);
+    float wanted = streakWidth * perspective;
+    float halfWidth = max(wanted, MinimumHalfWidth);
+    float2 offset = float2(
+        (grid.x - column - mix(0.25, 0.75, dropHash.x)) * cell.x,
+        (1.0 - (run - row)) * cell.y);
+    float2 axis = float2(offset.x, offset.y - clamp(offset.y, 0.0, span));
+    float body = 1.0 - smoothstep(halfWidth * 0.3, halfWidth, length(axis));
+    float taper = 1.0 - clamp(offset.y / span, 0.0, 1.0);
+    float fade = mix(1.0, depthFade, depth) * (wanted / halfWidth);
+
+    return body * (0.25 + 0.75 * taper * taper) * fade * mix(0.55, 1.0, dropHash.w);
+}
+
+float streaks(float2 coord) {
+    float total = 0.0;
+
+    for (int index = 0; index < 6; index++) {
+        float depth = (float(index) + 0.5) / 6.0;
+
+        if (depth >= nearDepth && depth < farDepth) {
+            total += streak(coord, depth);
+        }
+    }
+
+    return total;
+}
+
+float ripple(float2 offset, float2 cellIndex, float size) {
+    float4 cellHash = hash(cellIndex);
+    float cycle = time * splashRate + cellHash.x * 13.0;
+    float4 dropHash = hash(float2(cellHash.w * 512.0, mod(floor(cycle), CyclePeriod)));
+
+    if (dropHash.z > splashChance) {
+        return 0.0;
+    }
+
+    float phase = fract(cycle);
+    float distance = length(offset - dropHash.xy);
+    float width = splashWidth * size;
+    float radius = (0.2 + 0.8 * phase) * splashRadius * size * mix(0.55, 1.0, dropHash.w);
+    float edge = (distance - radius) / width;
+    float crown = distance / (width * ImpactWidth);
+    float rest = 1.0 - phase;
+    float strength = mix(0.45, 1.0, dropHash.z / splashChance);
+    float ring = exp(-edge * edge) * rest * RingWeight;
+    float burst = exp(-crown * crown) * rest * rest * rest;
+
+    return (ring + burst) * strength;
+}
+
+float splashes(float2 coord) {
+    float2 plane = float2(
+        dot(sceneToGround.xy, coord) + groundOffset.x,
+        dot(sceneToGround.zw, coord) + groundOffset.y) / splashSpacing;
+    float2 base = floor(plane - 0.5);
+    float size = 1.0 + (coord.y - battlefieldCenter.y) * perspectiveScalePerPixel;
+    float total = 0.0;
+
+    for (int x = 0; x <= 1; x++) {
+        for (int y = 0; y <= 1; y++) {
+            float2 cellIndex = base + float2(float(x), float(y));
+
+            total += ripple(plane - cellIndex, cellIndex, size);
+        }
+    }
+
+    return total;
+}
+
+float groundCoverage(float2 coord) {
+    float3 encoded = float3(normals.eval(coord).rgb);
+    float3 normal = normalize(encoded * 2.0 - 1.0);
+
+    return smoothstep(groundFacing, 1.0, dot(normal, groundNormal));
+}
+
+half4 main(float2 coord) {
+    float height = float(heightField.eval(coord).r);
+    float3 light = sceneLight(float3(coord, -height * depthScale));
+
+    float streakAlpha = clamp(streaks(coord) * streakOpacity, 0.0, 1.0);
+    float splashAlpha = 0.0;
+
+    if (splashOpacity > 0.0) {
+        float ground = groundCoverage(coord);
+
+        if (ground > 0.0) {
+            splashAlpha = clamp(splashes(coord) * splashOpacity * ground, 0.0, 1.0);
+        }
+    }
+
+    float hazeAlpha = clamp(haze * (farDepth - nearDepth) * height, 0.0, 1.0);
+    float coverage = streakAlpha + splashAlpha + hazeAlpha;
+
+    if (coverage <= 0.0) {
+        return half4(0.0);
+    }
+
+    float3 scattered =
+        streakRadiance * streakAlpha +
+        splashRadiance * splashAlpha +
+        hazeRadiance * hazeAlpha;
+
+    float3 lit = linearToSrgb(scattered * light / coverage);
+
+    return half4(half3(lit * min(coverage, 1.0)), half(hazeAlpha));
+}

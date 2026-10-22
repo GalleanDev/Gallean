@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.BuildingDetailsView"
+             x:DataType="local:BuildingDetailsViewModel"
+             ClipToBounds="False">
+
+  <local:ModalFrameDecorator Width="400" Margin="0,60,52,0">
+    <Grid RowDefinitions="Auto,Auto">
+
+      <StackPanel Grid.Row="0" Classes="details-header" Margin="22,20,124,0">
+        <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
+        <local:OutlinedTextBlock Text="{local:Text 'Building'}" Classes="label details-category" />
+      </StackPanel>
+
+      <Panel Grid.Row="0"
+             Grid.RowSpan="2"
+             Width="156"
+             Height="156"
+             Margin="0,-52,-44,0"
+             HorizontalAlignment="Right"
+             VerticalAlignment="Top">
+        <local:GlowVisual Classes="details-icon-glow" />
+        <local:SpriteVisual Classes="details-icon" SpriteKey="{Binding IconKey}" />
+      </Panel>
+
+      <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="22,14,124,16">
+        <local:IconVisual Grid.Column="0" Classes="details-ornament" Moniker="OrnamentFinialSmall" />
+        <TextBlock Grid.Column="1" Text="{Binding Description}" Classes="body details-flavor" />
+      </Grid>
+
+    </Grid>
+  </local:ModalFrameDecorator>
+
+</UserControl>

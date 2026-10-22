@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.UnitPurchaseView"
+             x:DataType="local:UnitPurchaseViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
+    <local:ModalPanel Width="480" MaxHeight="640" Title="{local:Text 'Hire unit'}" InitialFocus="{Binding #CloseButton}">
+
+      <local:ModalPanel.Footer>
+        <Button x:Name="CloseButton"
+                Content="{local:Text 'Cancel'}"
+                Classes="pill"
+                MinWidth="110"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding CloseCommand}" />
+      </local:ModalPanel.Footer>
+
+      <ScrollViewer Classes="list">
+        <ItemsControl Classes="focus-group" ItemsSource="{Binding Options}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="local:UnitPurchaseItemViewModel">
+              <Button Classes="row" Command="{Binding PurchaseCommand}">
+                <Grid ColumnDefinitions="64,*">
+                  <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="64" Height="64" />
+                  <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Spacing="2">
+                    <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
+                    <TextBlock Text="{Binding Description}"
+                               Classes="caption"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               TextWrapping="Wrap" />
+                    <ContentControl Content="{Binding Status}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+                  </StackPanel>
+                </Grid>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

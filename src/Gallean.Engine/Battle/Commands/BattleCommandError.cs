@@ -1,0 +1,35 @@
+namespace Gallean.Engine;
+
+public enum BattleCommandError
+{
+    ActionNotAvailable,
+    AttackerDead,
+    AttackRequiresUnitTarget,
+    CannotGiveAttackToSelf,
+    CannotGiveAttackToTarget,
+    CanOnlyTransformSelf,
+    DoppelgangerTargetInvalid,
+    ItemNotEquipped,
+    ItemNotUsable,
+    ItemTargetInvalid,
+    ItemUserNotLeader,
+    MissingLeaderAbility,
+    NoActiveBattle,
+    NotUnitTurn,
+    SummonTargetInvalid,
+    SummonTargetOccupied,
+    TargetAlreadyRevived,
+    TargetAtMinimumLevel,
+    TargetDead,
+    TargetIncorrect,
+    TargetNotCurable,
+    TargetNotDead,
+    TargetNotHealable,
+    TargetNotInBattle,
+    TargetNotReachable,
+    UnitAlreadyRetreating,
+    UnitAlreadyTransformed,
+    UnitAlreadyWaited,
+    UnitModifierAlreadyApplied,
+    UnitRetreatNotAllowed
+}

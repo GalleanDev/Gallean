@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Client.Shaders.Generators\Gallean.Client.Shaders.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Shaders\*.sksl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gallean.Client.Shaders.Tests" />
+  </ItemGroup>
+
+  <Target Name="EmbedShaderSources" BeforeTargets="PrepareForBuild">
+    <ItemGroup>
+      <EmbeddedResource Include="@(AdditionalFiles)" Condition="'%(Extension)' == '.sksl'" LogicalName="%(Filename)%(Extension)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

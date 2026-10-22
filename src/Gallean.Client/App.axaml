@@ -1,0 +1,39 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.App"
+             RequestedThemeVariant="Dark">
+
+  <Application.DataTemplates>
+    <local:ViewDataTemplate />
+  </Application.DataTemplates>
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://Gallean.Client/Theme/Colors.axaml" />
+        <ResourceInclude Source="avares://Gallean.Client/Theme/Dimensions.axaml" />
+        <ResourceInclude Source="avares://Gallean.Client/Theme/Typography.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+    <StyleInclude Source="avares://Gallean.Client/Theme/Controls.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Theme/TextStyles.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/Drag/DragDrop.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/Inventory/InventorySlot.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/PriceButton/PriceButton.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/StatRow/StatRow.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/StackLeader/StackLeader.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/UnitGrid/UnitGrid.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/UnitIcon/UnitIcon.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/UnitPortrait/UnitPortrait.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Common/UnitStatus/UnitStatus.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/GameSave/SaveList.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Site/SiteOffer.axaml" />
+    <StyleInclude Source="avares://Gallean.Client/Screens/Site/SiteStack.axaml" />
+  </Application.Styles>
+
+</Application>

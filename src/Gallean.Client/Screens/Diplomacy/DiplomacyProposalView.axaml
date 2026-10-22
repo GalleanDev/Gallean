@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.DiplomacyProposalView"
+             x:DataType="local:DiplomacyProposalViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel MinWidth="440" MaxWidth="620" Padding="28,24" Title="{local:Text 'Diplomatic offer'}" InitialFocus="{Binding #AcceptButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,Auto,*">
+          <Button x:Name="AcceptButton"
+                  Grid.Column="1"
+                  Content="{local:Text 'Accept'}"
+                  Classes="pill success"
+                  local:PlateChrome.TextureSeed="1"
+                  Command="{Binding AcceptCommand}"
+                  MinWidth="150"
+                  Margin="0,0,16,0" />
+          <Button Grid.Column="2"
+                  Content="{local:Text 'Decline'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="2"
+                  Command="{Binding DeclineCommand}"
+                  MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <StackPanel Spacing="10">
+        <TextBlock Text="{Binding Message}"
+                   Classes="body"
+                   Foreground="{StaticResource PrimaryTextBrush}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center" />
+        <TextBlock Text="{local:Text 'Do you accept the offer?'}"
+                   Classes="body"
+                   Foreground="{StaticResource PrimaryTextBrush}"
+                   TextAlignment="Center" />
+      </StackPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

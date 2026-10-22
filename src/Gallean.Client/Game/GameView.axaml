@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client"
+        x:Class="Gallean.Client.GameView"
+        x:DataType="local:GameViewModel"
+        Title="{local:Text 'Gallean'}"
+        IsWindowed="{Binding IsWindowed}"
+        TopScreen="{Binding TopScreen}"
+        local:SettingsScope.Settings="{Binding Settings}"
+        local:CursorLock.IsEnabled="{Binding Settings.LockCursor}"
+        WindowStartupLocation="CenterScreen"
+        Width="1366"
+        Height="768"
+        MinWidth="1280"
+        MinHeight="720"
+        Background="{StaticResource WindowBackgroundBrush}">
+
+  <Window.Template>
+    <ControlTemplate TargetType="local:GameView">
+      <Panel>
+        <local:AnimatedTextSegmentShaderPrecompileVisual />
+        <local:AnimatedTextSmokeShaderPrecompileVisual />
+        <local:BattleWorldTransitionShaderPrecompileVisual />
+        <local:WorldBattleTransitionShaderPrecompileVisual />
+        <local:WorldHighlightShaderPrecompileVisual />
+        <local:WorldReachShaderPrecompileVisual />
+
+        <Panel Background="{TemplateBinding Background}" IsVisible="{Binding !PaintsOwnBackground}" />
+        <VisualLayerManager x:Name="PART_VisualLayerManager">
+          <local:UiScaleDecorator MinContentWidth="{TemplateBinding MinWidth}" MinContentHeight="{TemplateBinding MinHeight}">
+            <Panel>
+              <local:CursorVisual CursorType="{Binding TopScreen.CursorType}" />
+              <ContentPresenter x:Name="PART_ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Panel>
+          </local:UiScaleDecorator>
+        </VisualLayerManager>
+      </Panel>
+    </ControlTemplate>
+  </Window.Template>
+
+  <Window.KeyBindings>
+    <KeyBinding Gesture="Escape" Command="{Binding EscapeCommand}" />
+    <KeyBinding Gesture="F11" Command="{Binding ToggleWindowedCommand}" />
+    <KeyBinding Gesture="F12" Command="{Binding DevTools.ToggleCommand}" />
+  </Window.KeyBindings>
+
+  <Panel>
+    <ItemsControl x:Name="ScreenHost" ItemsSource="{Binding Screens}">
+      <ItemsControl.Styles>
+        <Style Selector="ItemsControl#ScreenHost > ContentPresenter > :is(UserControl)">
+          <Setter Property="Focusable" Value="True" />
+          <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+        </Style>
+        <Style Selector="ItemsControl#ScreenHost > ContentPresenter.backdrop">
+          <Setter Property="Effect">
+            <BlurEffect Radius="30" />
+          </Setter>
+          <Setter Property="CacheMode">
+            <BitmapCache />
+          </Setter>
+        </Style>
+      </ItemsControl.Styles>
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <local:ScreenPanel />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+    </ItemsControl>
+
+    <ContentControl Content="{Binding DevTools}" />
+
+    <Grid RowDefinitions="*,Auto,3*" IsHitTestVisible="False">
+      <ContentControl Grid.Row="1" Content="{Binding Alert}" ClipToBounds="False" />
+    </Grid>
+  </Panel>
+
+</Window>

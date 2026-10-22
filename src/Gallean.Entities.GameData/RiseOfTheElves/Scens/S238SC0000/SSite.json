@@ -1,0 +1,51 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S238SC0000",
+      "SITE_ID": "S238SI0000",
+      "IMG_ISO": 2,
+      "IMG_INTF": null,
+      "VISITER": null,
+      "POS_X": 14,
+      "POS_Y": 33,
+      "QTY_VISIT": null,
+      "QTY_SPELL": null,
+      "QTY_UNIT": null,
+      "QTY_ITEM": 4,
+      "BUY_ARMOR": true,
+      "BUY_JEWEL": true,
+      "BUY_WEAPON": true,
+      "BUY_BANNER": true,
+      "BUY_POTION": true,
+      "BUY_SCROLL": true,
+      "BUY_WAND": true,
+      "BUY_VALUE": true,
+      "MISSION": false,
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S238SC0000",
+      "SITE_ID": "S238SI0001",
+      "IMG_ISO": 0,
+      "IMG_INTF": null,
+      "VISITER": null,
+      "POS_X": 25,
+      "POS_Y": 9,
+      "QTY_VISIT": null,
+      "QTY_SPELL": 3,
+      "QTY_UNIT": null,
+      "QTY_ITEM": null,
+      "BUY_ARMOR": null,
+      "BUY_JEWEL": null,
+      "BUY_WEAPON": null,
+      "BUY_BANNER": null,
+      "BUY_POTION": null,
+      "BUY_SCROLL": null,
+      "BUY_WAND": null,
+      "BUY_VALUE": null,
+      "MISSION": null,
+      "AIPRIORITY": 3
+    }
+  ]
+}

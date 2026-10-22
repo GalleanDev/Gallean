@@ -1,0 +1,81 @@
+uniform shader thickness;
+uniform shader heightField;
+
+uniform float4 rigLightPositions[8];
+uniform float4 rigLightRadiances[8];
+uniform float4 spriteLightPositions[16];
+uniform float4 spriteLightRadiances[16];
+uniform float3 sunRadiance;
+uniform float depthScale;
+uniform float gain;
+uniform float extinction;
+uniform float powder;
+uniform float powderFloor;
+uniform float bodyRamp;
+uniform float peakRamp;
+uniform float peakOffset;
+uniform float4 deepColor;
+uniform float4 bodyColor;
+uniform float4 peakColor;
+uniform float4 scatterColor;
+
+const float Pi = 3.14159265;
+const float Phase = 1.0 / (4.0 * Pi);
+
+float3 srgbToLinear(float3 color) {
+    return pow(max(color, 0.0), float3(2.2));
+}
+
+float3 linearToSrgb(float3 color) {
+    return pow(max(color, 0.0), float3(1.0 / 2.2));
+}
+
+float3 scatteredLight(float3 position, float4 light, float3 radiance) {
+    float3 delta = light.xyz - position;
+    float distance = length(delta);
+    float relative = distance / light.w;
+    float attenuation = 1.0 / (1.0 + relative * relative);
+
+    return radiance * attenuation * Phase;
+}
+
+half4 main(float2 coord) {
+    float depth = float(thickness.eval(coord).r) * gain;
+
+    if (depth <= 0.0) {
+        return half4(0.0);
+    }
+
+    float transmittance = exp(-depth * extinction);
+    float powdered = 1.0 - exp(-depth * powder);
+    float scattered = (1.0 - transmittance) * (powderFloor + (1.0 - powderFloor) * powdered);
+
+    float3 body = mix(deepColor.rgb, bodyColor.rgb, clamp(depth * bodyRamp, 0.0, 1.0));
+
+    body = mix(body, peakColor.rgb, clamp(depth * peakRamp - peakOffset, 0.0, 1.0));
+
+    float3 scenePosition = float3(coord, -float(heightField.eval(coord).r) * depthScale);
+    float3 light = sunRadiance * Phase;
+
+    for (int index = 0; index < 8; index++) {
+        if (rigLightPositions[index].w > 0.0) {
+            light += scatteredLight(scenePosition, rigLightPositions[index], rigLightRadiances[index].rgb);
+        }
+        else {
+            break;
+        }
+    }
+
+    for (int index = 0; index < 16; index++) {
+        if (spriteLightPositions[index].w > 0.0) {
+            light += scatteredLight(scenePosition, spriteLightPositions[index], spriteLightRadiances[index].rgb);
+        }
+        else {
+            break;
+        }
+    }
+
+    float3 lit = linearToSrgb(srgbToLinear(body) + srgbToLinear(scatterColor.rgb) * light);
+
+    return half4(half3(lit * scattered), half(1.0 - transmittance));
+}

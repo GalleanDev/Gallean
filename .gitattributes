@@ -1,0 +1,12 @@
+* text=auto eol=crlf
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.xaml text eol=crlf
+*.props text eol=crlf
+*.sg binary
+*.csg binary
+*.gz binary
+*.png binary
+*.safetensors binary
+*.ttf binary
+*.webp binary

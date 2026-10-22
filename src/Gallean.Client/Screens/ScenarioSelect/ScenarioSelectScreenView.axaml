@@ -1,0 +1,148 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ScenarioSelectScreenView"
+             x:DataType="local:ScenarioSelectScreenViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Border.menu-overlay.wide">
+      <Setter Property="Width" Value="1120" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Offset="0" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+          <GradientStop Offset="0.7" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+          <GradientStop Offset="1" Color="{x:Static local:Theme+Artwork.OverlayFadeColor}" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="TextBlock.prose">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+      <Setter Property="LineHeight" Value="24" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector=":is(TextBlock).section-label">
+      <Setter Property="Margin" Value="0,18,0,6" />
+    </Style>
+    <Style Selector=":is(TextBlock).details-label">
+      <Setter Property="Margin" Value="0,0,20,8" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.details-value">
+      <Setter Property="Margin" Value="0,0,0,8" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="{StaticResource ScenarioSelectBackdropBrush}" ClipToBounds="True">
+
+    <local:CoverBoxDecorator Classes="menu-background" DataContext="{Binding Background}">
+      <local:MainMenuBackgroundView />
+    </local:CoverBoxDecorator>
+
+    <Border Classes="menu-overlay wide" />
+
+    <Grid MaxHeight="820"
+          Margin="56,32,0,32"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          ColumnDefinitions="380,56,440"
+          RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+      <local:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Text="{local:Text 'New quest'}" Classes="h1" Foreground="{StaticResource ScenarioSelectAccentBrush}" />
+
+      <Border Grid.Row="1"
+              Grid.Column="0"
+              Width="72"
+              Height="1"
+              HorizontalAlignment="Left"
+              Background="{StaticResource ScenarioSelectDividerBrush}"
+              Margin="0,10,0,20" />
+
+      <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Text="{local:Text 'Quest'}" Classes="label" Margin="14,0,0,8" />
+
+      <ListBox Grid.Row="3"
+               Grid.Column="0"
+               Classes="select-list"
+               Padding="0,0,0,72"
+               ItemsSource="{Binding Scenarios}"
+               SelectedItem="{Binding SelectedScenario}"
+               DoubleTapped="OnScenarioDoubleTapped">
+        <ListBox.OpacityMask>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+            <GradientStop Offset="0.9" Color="{x:Static local:Theme+Artwork.FeatherColor}" />
+            <GradientStop Offset="1" Color="{x:Static local:Theme+Artwork.FeatherFadeColor}" />
+          </LinearGradientBrush>
+        </ListBox.OpacityMask>
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="local:GameScenario">
+            <Border Classes="row">
+              <TextBlock Text="{Binding Name}" Classes="row-title" TextTrimming="CharacterEllipsis" />
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <Grid Grid.Row="4" Grid.Column="0" Classes="focus-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
+        <Button Grid.Column="0"
+                Classes="pill"
+                local:PlateChrome.TextureSeed="1"
+                Content="{local:Text 'Back'}"
+                Command="{Binding Game.ShowMainMenuCommand}"
+                Margin="0,0,6,0" />
+        <Button Grid.Column="1" Classes="pill primary" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Start game'}" Command="{Binding StartCommand}" Margin="6,0,0,0" />
+      </Grid>
+
+      <StackPanel Grid.Row="2"
+                  Grid.RowSpan="3"
+                  Grid.Column="2"
+                  VerticalAlignment="Top"
+                  IsVisible="{Binding SelectedScenario, Converter={x:Static ObjectConverters.IsNotNull}}">
+
+        <local:OutlinedTextBlock Text="{Binding SelectedScenarioName}"
+                                 Classes="h2"
+                                 Foreground="{StaticResource ScenarioSelectAccentBrush}"
+                                 TextWrapping="Wrap" />
+
+        <Border Width="72"
+                Height="1"
+                HorizontalAlignment="Left"
+                Background="{StaticResource ScenarioSelectDividerBrush}"
+                Margin="0,10,0,18" />
+
+        <TextBlock Text="{Binding SelectedScenarioDescription}"
+                   Classes="prose"
+                   IsVisible="{Binding SelectedScenarioDescription, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+        <local:OutlinedTextBlock Text="{local:Text 'Objective'}" Classes="label section-label" />
+
+        <TextBlock Text="{Binding SelectedScenarioObjective}" Classes="prose" />
+
+        <Border Height="1" Background="{StaticResource ScenarioSelectDividerBrush}" Margin="0,24,0,16" />
+
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+          <local:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Text="{local:Text 'Level'}" Classes="label details-label" />
+          <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedScenarioLevel}" Classes="details-value" />
+
+          <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Text="{local:Text 'Map'}" Classes="label details-label" />
+          <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedScenarioMapSize}" Classes="details-value" />
+
+          <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Text="{local:Text 'Cities'}" Classes="label details-label" />
+          <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedScenarioCityCount}" Classes="details-value" />
+
+          <local:OutlinedTextBlock Grid.Row="3" Grid.Column="0" Text="{local:Text 'Races'}" Classes="label details-label" />
+          <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SelectedScenarioRaces}" Classes="details-value" />
+
+          <local:OutlinedTextBlock Grid.Row="4" Grid.Column="0" Text="{local:Text 'Author'}" Classes="label details-label" />
+          <TextBlock Grid.Row="4"
+                     Grid.Column="1"
+                     Text="{Binding SelectedScenarioCreator, TargetNullValue=—}"
+                     Classes="details-value" />
+        </Grid>
+      </StackPanel>
+    </Grid>
+  </Grid>
+
+</UserControl>

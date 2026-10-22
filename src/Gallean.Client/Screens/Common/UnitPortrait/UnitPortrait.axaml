@@ -1,0 +1,232 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type local:UnitPortrait}" TargetType="local:UnitPortrait">
+      <Setter Property="Margin" Value="2" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="VerticalContentAlignment" Value="Stretch" />
+      <Setter Property="ClipToBounds" Value="False" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel>
+            <Border x:Name="PART_Glow" Background="{StaticResource UnitPortraitFrameEdgeBrush}" BoxShadow="{x:Static local:Theme+UnitPortrait.Glow}" />
+            <Border x:Name="PART_Frame" BoxShadow="{x:Static local:Theme+UnitPortrait.Shadow}">
+              <Panel>
+                <Border x:Name="PART_SelectedFrame" Background="{StaticResource UnitPortraitSelectedFrameGradientBrush}" />
+                <Border x:Name="PART_MarkerFrame" Background="{TemplateBinding Marker}" IsVisible="{TemplateBinding Marker, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                <Border x:Name="PART_FrameTexture" Background="{StaticResource PlateTextureBrush}" />
+                <Border x:Name="PART_FrameGloss" Background="{StaticResource UnitPortraitFrameGlossGradientBrush}" />
+                <Border x:Name="PART_FrameBevel" BorderBrush="{StaticResource UnitPortraitFrameBevelGradientBrush}" BorderThickness="1" />
+              </Panel>
+            </Border>
+            <Border x:Name="PART_Background" Classes="unit-portrait-inner">
+              <Panel>
+                <Panel x:Name="PART_Portrait">
+                  <local:SpriteVisual SpriteKey="{TemplateBinding FaceKey}" Stretch="UniformToFill" />
+                  <Image x:Name="PART_GrayOverlay" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                  <local:AnimatedFill x:Name="PART_LostHitpoints"
+                                      Value="{TemplateBinding Hitpoints}"
+                                      Maximum="{TemplateBinding MaxHitpoints}"
+                                      Animation="{TemplateBinding HitpointsAnimation}" />
+                  <Panel x:Name="PART_Overlay" IsVisible="{TemplateBinding Overlay, Converter={x:Static ObjectConverters.IsNotNull}}">
+                    <Rectangle Fill="{TemplateBinding Overlay}" OpacityMask="{StaticResource UnitPortraitOverlayMaskGradientBrush}" />
+                    <Rectangle Fill="{StaticResource UnitPortraitOverlayGlossGradientBrush}" />
+                  </Panel>
+                  <Rectangle x:Name="PART_FootOverlay" Fill="{StaticResource UnitPortraitFootOverlayGradientBrush}" />
+                  <Rectangle x:Name="PART_DeadOverlay" Fill="{StaticResource UnitPortraitDeadOverlayGradientBrush}" />
+                  <Panel IsVisible="{TemplateBinding IsHitpointsVisible}">
+                    <local:OutlinedTextBlock x:Name="PART_Hitpoints">
+                      <local:OutlinedTextBlock.Foreground>
+                        <MultiBinding Converter="{x:Static local:HitpointsBrushConverter.Instance}">
+                          <Binding ElementName="PART_LostHitpoints" Path="Value" />
+                          <Binding ElementName="PART_LostHitpoints" Path="Maximum" />
+                        </MultiBinding>
+                      </local:OutlinedTextBlock.Foreground>
+                      <local:OutlinedTextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:F0}/{1:F0}">
+                          <Binding ElementName="PART_LostHitpoints" Path="Value" />
+                          <Binding ElementName="PART_LostHitpoints" Path="Maximum" />
+                        </MultiBinding>
+                      </local:OutlinedTextBlock.Text>
+                    </local:OutlinedTextBlock>
+                  </Panel>
+                </Panel>
+                <ContentPresenter x:Name="PART_ContentPresenter"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+              </Panel>
+            </Border>
+            <Border x:Name="PART_InnerShadow" Classes="unit-portrait-inner" BoxShadow="{x:Static local:Theme+UnitPortrait.InnerShadow}" />
+            <Border x:Name="PART_Highlight"
+                    Background="{StaticResource UnitPortraitHighlightOverlayBrush}"
+                    BorderBrush="{StaticResource UnitPortraitHighlightRingBrush}"
+                    BorderThickness="2" />
+            <ItemsControl x:Name="PART_Statuses"
+                          Classes="status-badges"
+                          ItemsSource="{TemplateBinding Statuses}"
+                          ItemTemplate="{TemplateBinding StatusTemplate}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <local:FittingStackPanel Spacing="2" Overflow="8" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Border Classes="upgrade-badge" IsVisible="{TemplateBinding IsPendingUpgrade}">
+              <local:IconVisual Moniker="Experience" />
+            </Border>
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+
+      <Style Selector="^ /template/ Border#PART_Glow, ^ /template/ Border#PART_Highlight">
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <DoubleTransition Property="Opacity" Duration="0:0:0.08" />
+          </Transitions>
+        </Setter>
+      </Style>
+      <Style Selector="^:highlighted /template/ Border#PART_Glow, ^:highlighted /template/ Border#PART_Highlight">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+
+      <Style Selector="^ /template/ Border#PART_SelectedFrame, ^ /template/ Border#PART_FrameGloss">
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+          </Transitions>
+        </Setter>
+      </Style>
+      <Style Selector="^:selected /template/ Border#PART_SelectedFrame">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#PART_FrameGloss, ^:highlighted /template/ Border#PART_FrameGloss">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+
+      <Style Selector="^:marked:not(:free) /template/ Border#PART_FrameTexture, ^:marked:not(:free) /template/ Border#PART_FrameGloss, ^:marked:not(:free) /template/ Border#PART_FrameBevel">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+
+      <Style Selector="^ /template/ Border#PART_Frame">
+        <Setter Property="Background" Value="{StaticResource UnitPortraitFrameGradientBrush}" />
+      </Style>
+      <Style Selector="^ /template/ Border#PART_FrameTexture">
+        <Setter Property="Opacity" Value="0.8" />
+      </Style>
+
+      <Style Selector="^ /template/ Border.unit-portrait-inner">
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+      </Style>
+      <Style Selector="^ /template/ Border#PART_Background">
+        <Setter Property="Background" Value="{StaticResource UnitPortraitBackgroundBrush}" />
+        <Setter Property="ClipToBounds" Value="True" />
+      </Style>
+      <Style Selector="^ /template/ Border#PART_InnerShadow">
+        <Setter Property="IsHitTestVisible" Value="False" />
+      </Style>
+
+      <Style Selector="^ /template/ Panel#PART_Portrait">
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <DoubleTransition Property="Opacity" Duration="0:0:0.2" Easing="SineEaseOut" />
+          </Transitions>
+        </Setter>
+      </Style>
+
+      <Style Selector="^ /template/ Image#PART_GrayOverlay">
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <DoubleTransition Property="Opacity" Duration="0:0:0.4" Easing="SineEaseOut" />
+          </Transitions>
+        </Setter>
+      </Style>
+      <Style Selector="^:dead /template/ Image#PART_GrayOverlay">
+        <Setter Property="Opacity" Value="0.7" />
+      </Style>
+
+      <Style Selector="^ /template/ local|AnimatedFill#PART_LostHitpoints">
+        <Setter Property="Fill" Value="{StaticResource UnitPortraitLostHitpointsGradientBrush}" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <DoubleTransition Property="Opacity" Duration="0:0:0.4" Easing="SineEaseOut" />
+          </Transitions>
+        </Setter>
+      </Style>
+      <Style Selector="^:dead /template/ local|AnimatedFill#PART_LostHitpoints">
+        <Setter Property="Opacity" Value="0" />
+      </Style>
+
+      <Style Selector="^ /template/ Rectangle#PART_DeadOverlay">
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <DoubleTransition Property="Opacity" Duration="0:0:0.4" Easing="SineEaseOut" />
+          </Transitions>
+        </Setter>
+      </Style>
+      <Style Selector="^:dead /template/ Rectangle#PART_DeadOverlay">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+
+      <Style Selector="^ /template/ local|OutlinedTextBlock#PART_Hitpoints">
+        <Setter Property="Margin" Value="0,0,0,2" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+        <Setter Property="Outline" Value="{StaticResource UnitPortraitHitpointsOutlineBrush}" />
+        <Setter Property="OutlineThickness" Value="1" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <BrushTransition Property="Foreground" Duration="0:0:0.25" />
+          </Transitions>
+        </Setter>
+        <Setter Property="Effect">
+          <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="2" Opacity="1" Color="{x:Static local:Theme+UnitPortrait.HitpointsShadowColor}" />
+        </Setter>
+      </Style>
+
+      <Style Selector="^ /template/ ItemsControl#PART_Statuses">
+        <Setter Property="Margin" Value="4,4,4,20" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+      </Style>
+
+      <Style Selector="^:free /template/ Border#PART_Frame, ^:dead /template/ Border#PART_Frame">
+        <Setter Property="Background" Value="{StaticResource UnitPortraitEmptyFrameGradientBrush}" />
+      </Style>
+      <Style Selector="^:free /template/ Border#PART_FrameTexture, ^:dead /template/ Border#PART_FrameTexture">
+        <Setter Property="Opacity" Value="0.25" />
+      </Style>
+      <Style Selector="^:free /template/ Border#PART_FrameBevel, ^:dead /template/ Border#PART_FrameBevel">
+        <Setter Property="Opacity" Value="0.3" />
+      </Style>
+      <Style Selector="^:free /template/ Border#PART_Background">
+        <Setter Property="Background" Value="{StaticResource UnitPortraitEmptyBackgroundBrush}" />
+      </Style>
+      <Style Selector="^:free:highlighted /template/ Border#PART_Frame, ^:dead:highlighted /template/ Border#PART_Frame">
+        <Setter Property="Background" Value="{StaticResource UnitPortraitFrameGradientBrush}" />
+      </Style>
+      <Style Selector="^:free:highlighted /template/ Border#PART_FrameTexture, ^:dead:highlighted /template/ Border#PART_FrameTexture">
+        <Setter Property="Opacity" Value="0.8" />
+      </Style>
+      <Style Selector="^:free:highlighted /template/ Border#PART_FrameBevel, ^:dead:highlighted /template/ Border#PART_FrameBevel">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+      <Style Selector="^:free /template/ Panel#PART_Portrait">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+    </ControlTheme>
+  </Styles.Resources>
+</Styles>

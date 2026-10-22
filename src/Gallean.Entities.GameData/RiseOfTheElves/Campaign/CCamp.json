@@ -1,0 +1,95 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "CAMP_ID": "C000CC0001",
+      "PLAY_RACE": 4,
+      "CONCLUSION": null,
+      "NAME_ID": "X000TAE000",
+      "DESC_ID": "X000TAE100",
+      "SKIRMISH": true,
+      "CANIMPORT": true
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "PLAY_RACE": 0,
+      "CONCLUSION": "ConcHu",
+      "NAME_ID": "X000TAE001",
+      "DESC_ID": "X000TAE101",
+      "SKIRMISH": false,
+      "CANIMPORT": false
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "PLAY_RACE": 3,
+      "CONCLUSION": "ConcDw",
+      "NAME_ID": "X000TAE002",
+      "DESC_ID": "X000TAE102",
+      "SKIRMISH": false,
+      "CANIMPORT": false
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "PLAY_RACE": 2,
+      "CONCLUSION": "ConcHe",
+      "NAME_ID": "X000TAE003",
+      "DESC_ID": "X000TAE103",
+      "SKIRMISH": false,
+      "CANIMPORT": false
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "PLAY_RACE": 1,
+      "CONCLUSION": "ConcUn",
+      "NAME_ID": "X000TAE004",
+      "DESC_ID": "X000TAE104",
+      "SKIRMISH": false,
+      "CANIMPORT": false
+    },
+    {
+      "CAMP_ID": "C000CC0012",
+      "PLAY_RACE": 0,
+      "CONCLUSION": "ConcHu2",
+      "NAME_ID": "X000TAE011",
+      "DESC_ID": "X000TAE111",
+      "SKIRMISH": false,
+      "CANIMPORT": true
+    },
+    {
+      "CAMP_ID": "C000CC0013",
+      "PLAY_RACE": 3,
+      "CONCLUSION": "ConcDw2",
+      "NAME_ID": "X000TAE012",
+      "DESC_ID": "X000TAE112",
+      "SKIRMISH": false,
+      "CANIMPORT": true
+    },
+    {
+      "CAMP_ID": "C000CC0014",
+      "PLAY_RACE": 2,
+      "CONCLUSION": "ConcHe2",
+      "NAME_ID": "X000TAE013",
+      "DESC_ID": "X000TAE113",
+      "SKIRMISH": false,
+      "CANIMPORT": true
+    },
+    {
+      "CAMP_ID": "C000CC0015",
+      "PLAY_RACE": 1,
+      "CONCLUSION": "ConcUn2",
+      "NAME_ID": "X000TAE014",
+      "DESC_ID": "X000TAE114",
+      "SKIRMISH": false,
+      "CANIMPORT": true
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "PLAY_RACE": 5,
+      "CONCLUSION": "ConcEl",
+      "NAME_ID": "X160TAE005",
+      "DESC_ID": "X160TAE105",
+      "SKIRMISH": false,
+      "CANIMPORT": false
+    }
+  ]
+}

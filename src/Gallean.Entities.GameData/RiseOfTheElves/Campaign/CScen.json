@@ -1,0 +1,986 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": null,
+      "SCEN_ID": "S021SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S107SC0000",
+      "SMK_BRIEF": "BRIEFH01",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH01"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S116SC0000",
+      "SMK_BRIEF": "BRIEFM01",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM01"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S100SC0000",
+      "SMK_BRIEF": "BRIEFL01",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL01"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S109SC0000",
+      "SMK_BRIEF": "BRIEFU01",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU01"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S110SC0000",
+      "SMK_BRIEF": "BRIEFU02",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU02"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S108SC0000",
+      "SMK_BRIEF": "BRIEFH02",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH02"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S095SC0000",
+      "SMK_BRIEF": "BRIEFH03",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH03"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 4,
+      "SCEN_ID": "S096SC0000",
+      "SMK_BRIEF": "BRIEFH04",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH04"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S117SC0000",
+      "SMK_BRIEF": "BRIEFM02",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM02"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S118SC0000",
+      "SMK_BRIEF": "BRIEFM03",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM03"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 4,
+      "SCEN_ID": "S119SC0000",
+      "SMK_BRIEF": "BRIEFM04",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM04"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 4,
+      "SCEN_ID": "S103SC0000",
+      "SMK_BRIEF": "BRIEFL04",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL04"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S102SC0000",
+      "SMK_BRIEF": "BRIEFL03",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL03"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S101SC0000",
+      "SMK_BRIEF": "BRIEFL02",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL02"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S111SC0000",
+      "SMK_BRIEF": "BRIEFU03",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU03"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 4,
+      "SCEN_ID": "S112SC0000",
+      "SMK_BRIEF": "BRIEFU04",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU04"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 5,
+      "SCEN_ID": "S097SC0000",
+      "SMK_BRIEF": "BRIEFH05",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH05"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 6,
+      "SCEN_ID": "S098SC0000",
+      "SMK_BRIEF": "BRIEFH06",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH06"
+    },
+    {
+      "CAMP_ID": "C000CC0002",
+      "SCEN_NO": 7,
+      "SCEN_ID": "S099SC0000",
+      "SMK_BRIEF": "BRIEFH07",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINH07"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 5,
+      "SCEN_ID": "S120SC0000",
+      "SMK_BRIEF": "BRIEFM05",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM05"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 6,
+      "SCEN_ID": "S121SC0000",
+      "SMK_BRIEF": "BRIEFM06",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM06"
+    },
+    {
+      "CAMP_ID": "C000CC0003",
+      "SCEN_NO": 7,
+      "SCEN_ID": "S122SC0000",
+      "SMK_BRIEF": "BRIEFM07",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINM07"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 5,
+      "SCEN_ID": "S104SC0000",
+      "SMK_BRIEF": "BRIEFL05",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL05"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 6,
+      "SCEN_ID": "S105SC0000",
+      "SMK_BRIEF": "BRIEFL06",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL06"
+    },
+    {
+      "CAMP_ID": "C000CC0004",
+      "SCEN_NO": 7,
+      "SCEN_ID": "S106SC0000",
+      "SMK_BRIEF": "BRIEFL07",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINL07"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 5,
+      "SCEN_ID": "S113SC0000",
+      "SMK_BRIEF": "BRIEFU05",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU05"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 6,
+      "SCEN_ID": "S114SC0000",
+      "SMK_BRIEF": "BRIEFU06",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU06"
+    },
+    {
+      "CAMP_ID": "C000CC0005",
+      "SCEN_NO": 7,
+      "SCEN_ID": "S115SC0000",
+      "SMK_BRIEF": "BRIEFU07",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINU07"
+    },
+    {
+      "CAMP_ID": "C000CC0012",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S123SC0000",
+      "SMK_BRIEF": "BRIEF2H",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0013",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S129SC0000",
+      "SMK_BRIEF": "BRIEF2D",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0014",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S126SC0000",
+      "SMK_BRIEF": "BRIEF2L",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0015",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S132SC0000",
+      "SMK_BRIEF": "BRIEF2U",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0012",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S124SC0000",
+      "SMK_BRIEF": "BRIEF2H",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0012",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S125SC0000",
+      "SMK_BRIEF": "BRIEF2H",
+      "SMK_WIN": "CMP2HU",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0014",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S127SC0000",
+      "SMK_BRIEF": "BRIEF2L",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0014",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S128SC0000",
+      "SMK_BRIEF": "BRIEF2L",
+      "SMK_WIN": "CMP2HE",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0015",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S133SC0000",
+      "SMK_BRIEF": "BRIEF2U",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0015",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S134SC0000",
+      "SMK_BRIEF": "BRIEF2U",
+      "SMK_WIN": "CMP2UN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0013",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S130SC0000",
+      "SMK_BRIEF": "BRIEF2D",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0013",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S131SC0000",
+      "SMK_BRIEF": "BRIEF2D",
+      "SMK_WIN": "CMP2DW",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S135SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S136SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S137SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 4,
+      "SCEN_ID": "S138SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 5,
+      "SCEN_ID": "S139SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 6,
+      "SCEN_ID": "S140SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 7,
+      "SCEN_ID": "S141SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "ELFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINFGEN"
+    },
+    {
+      "CAMP_ID": "C000CC0006",
+      "SCEN_NO": 8,
+      "SCEN_ID": "S142SC0000",
+      "SMK_BRIEF": "BRIEF3EL",
+      "SMK_WIN": "CMP3EL",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "WINF08"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 1,
+      "SCEN_ID": "S200SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 2,
+      "SCEN_ID": "S201SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 3,
+      "SCEN_ID": "S202SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 4,
+      "SCEN_ID": "S203SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 5,
+      "SCEN_ID": "S204SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 6,
+      "SCEN_ID": "S205SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 7,
+      "SCEN_ID": "S206SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 8,
+      "SCEN_ID": "S207SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 9,
+      "SCEN_ID": "S208SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 10,
+      "SCEN_ID": "S209SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 11,
+      "SCEN_ID": "S210SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 12,
+      "SCEN_ID": "S211SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 13,
+      "SCEN_ID": "S212SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 14,
+      "SCEN_ID": "S213SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 15,
+      "SCEN_ID": "S214SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 16,
+      "SCEN_ID": "S215SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 17,
+      "SCEN_ID": "S216SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 18,
+      "SCEN_ID": "S217SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 19,
+      "SCEN_ID": "S218SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 20,
+      "SCEN_ID": "S219SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 21,
+      "SCEN_ID": "S220SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 22,
+      "SCEN_ID": "S221SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 23,
+      "SCEN_ID": "S222SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 24,
+      "SCEN_ID": "S223SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 25,
+      "SCEN_ID": "S224SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 26,
+      "SCEN_ID": "S225SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 27,
+      "SCEN_ID": "S226SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 28,
+      "SCEN_ID": "S227SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 29,
+      "SCEN_ID": "S228SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 30,
+      "SCEN_ID": "S229SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 31,
+      "SCEN_ID": "S230SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 32,
+      "SCEN_ID": "S231SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 33,
+      "SCEN_ID": "S232SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 34,
+      "SCEN_ID": "S233SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 35,
+      "SCEN_ID": "S234SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 36,
+      "SCEN_ID": "S235SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 37,
+      "SCEN_ID": "S236SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 38,
+      "SCEN_ID": "S237SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 39,
+      "SCEN_ID": "S238SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 40,
+      "SCEN_ID": "S239SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 41,
+      "SCEN_ID": "S240SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 42,
+      "SCEN_ID": "S241SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 43,
+      "SCEN_ID": "S242SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 44,
+      "SCEN_ID": "S243SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 45,
+      "SCEN_ID": "S244SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 46,
+      "SCEN_ID": "S245SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 47,
+      "SCEN_ID": "S246SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 48,
+      "SCEN_ID": "S247SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 49,
+      "SCEN_ID": "S248SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 50,
+      "SCEN_ID": "S249SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 51,
+      "SCEN_ID": "S250SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 52,
+      "SCEN_ID": "S251SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 53,
+      "SCEN_ID": "S252SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 54,
+      "SCEN_ID": "S253SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 55,
+      "SCEN_ID": "S254SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 56,
+      "SCEN_ID": "S255SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 57,
+      "SCEN_ID": "S256SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 58,
+      "SCEN_ID": "S257SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 59,
+      "SCEN_ID": "S258SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    },
+    {
+      "CAMP_ID": "C000CC0001",
+      "SCEN_NO": 60,
+      "SCEN_ID": "S259SC0000",
+      "SMK_BRIEF": "DEFAULT",
+      "SMK_WIN": "DEFWIN",
+      "SMK_LOSE": "DEFLOSE",
+      "WAV_WIN": "GENBRIEF"
+    }
+  ]
+}

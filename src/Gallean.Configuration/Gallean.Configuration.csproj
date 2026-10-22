@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Engine.Contracts\Gallean.Engine.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

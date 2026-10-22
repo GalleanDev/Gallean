@@ -1,0 +1,65 @@
+<Solution>
+  <Project Path="src/Gallean.Assets/Gallean.Assets.csproj" />
+  <Project Path="src/Gallean.Assets.Tests/Gallean.Assets.Tests.csproj" />
+  <Project Path="src/Gallean.Client/Gallean.Client.csproj" />
+  <Project Path="src/Gallean.Client.Tests/Gallean.Client.Tests.csproj" />
+  <Project Path="src/Gallean.Client.Linux/Gallean.Client.Linux.csproj" />
+  <Project Path="src/Gallean.Client.Shaders/Gallean.Client.Shaders.csproj" />
+  <Project Path="src/Gallean.Client.Shaders.Generators/Gallean.Client.Shaders.Generators.csproj" />
+  <Project Path="src/Gallean.Client.Shaders.Tests/Gallean.Client.Shaders.Tests.csproj" />
+  <Project Path="src/Gallean.Client.Texts/Gallean.Client.Texts.csproj" />
+  <Project Path="src/Gallean.Client.Texts.Generators/Gallean.Client.Texts.Generators.csproj" />
+  <Project Path="src/Gallean.Client.Texts.Tests/Gallean.Client.Texts.Tests.csproj" />
+  <Project Path="src/Gallean.Client.Windows/Gallean.Client.Windows.csproj" />
+  <Project Path="src/Gallean.Common/Gallean.Common.csproj" />
+  <Project Path="src/Gallean.Common.Tests/Gallean.Common.Tests.csproj" />
+  <Project Path="src/Gallean.Configuration/Gallean.Configuration.csproj" />
+  <Project Path="src/Gallean.Configuration.Tests/Gallean.Configuration.Tests.csproj" />
+  <Project Path="src/Gallean.Engine/Gallean.Engine.csproj" />
+  <Project Path="src/Gallean.Engine.Contracts/Gallean.Engine.Contracts.csproj" />
+  <Project Path="src/Gallean.Engine.Generators/Gallean.Engine.Generators.csproj" />
+  <Project Path="src/Gallean.Engine.Tests/Gallean.Engine.Tests.csproj" />
+  <Project Path="src/Gallean.Entities/Gallean.Entities.csproj" />
+  <Project Path="src/Gallean.Entities.GameData/Gallean.Entities.GameData.csproj" />
+  <Project Path="src/Gallean.Entities.Generators/Gallean.Entities.Generators.csproj" />
+  <Project Path="src/Gallean.Entities.Tests/Gallean.Entities.Tests.csproj" />
+  <Project Path="src/Gallean.Tests.Common/Gallean.Tests.Common.csproj" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="Generators.props" />
+    <File Path="LICENSE" />
+    <File Path="NOTICE" />
+    <File Path="Publish.targets" />
+    <File Path="README.md" />
+    <File Path="global.json" />
+    <File Path="Tests.props" />
+    <File Path="Version.props" />
+  </Folder>
+  <Folder Name="/Solution Items/src/">
+    <File Path="src/CodeWriter.cs" />
+    <File Path="src/AssetAliases.cs" />
+    <File Path="src/EngineAliases.cs" />
+    <File Path="src/IsExternalInit.cs" />
+  </Folder>
+  <Folder Name="/Tools/">
+    <Project Path="tools/Extractor/Extractor.csproj" />
+    <Project Path="tools/Extractor.Tests/Extractor.Tests.csproj" />
+    <Project Path="tools/GameContent/GameContent.csproj" />
+    <Project Path="tools/GameContent.Tests/GameContent.Tests.csproj" />
+    <Project Path="tools/Packer/Packer.csproj" />
+    <Project Path="tools/Packer.Tests/Packer.Tests.csproj" />
+    <Project Path="tools/Umbra/Umbra.csproj" />
+    <Project Path="tools/Umbra.Backgrounds/Umbra.Backgrounds.csproj" />
+    <Project Path="tools/Umbra.Backgrounds.Generators/Umbra.Backgrounds.Generators.csproj" />
+    <Project Path="tools/Umbra.CorridorKey/Umbra.CorridorKey.csproj" />
+    <Project Path="tools/Umbra.Ltx/Umbra.Ltx.csproj" />
+    <Project Path="tools/Umbra.Prompts/Umbra.Prompts.csproj" />
+    <Project Path="tools/Umbra.Prompts.Generators/Umbra.Prompts.Generators.csproj" />
+    <Project Path="tools/Umbra.Tests/Umbra.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,288 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.CityTabView"
+             x:DataType="local:CityTabViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="local|PagedItemsControl.inventory">
+      <Setter Property="MinWidth" Value="292" />
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" />
+        </ItemsPanelTemplate>
+      </Setter>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*,Auto">
+            <Button x:Name="PART_PreviousButton" Grid.Column="0" Classes="icon-button page-arrow">
+              <local:IconVisual Moniker="Previous" />
+            </Button>
+            <WrapPanel Grid.Column="1" Classes="inventory-sockets">
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+            </WrapPanel>
+            <ItemsPresenter x:Name="PART_ItemsPresenter"
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            ItemsPanel="{TemplateBinding ItemsPanel}" />
+            <Button x:Name="PART_NextButton" Grid.Column="2" Classes="icon-button page-arrow">
+              <local:IconVisual Moniker="Next" />
+            </Button>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="local|PagedItemsControl.inventory:empty /template/ Button.page-arrow">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="WrapPanel.inventory-sockets">
+      <Setter Property="Height" Value="84" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+
+    <Style Selector="Viewbox.unit-grid-container">
+      <Setter Property="MaxHeight" Value="350" />
+    </Style>
+
+    <Style Selector="ContentControl.ornament-panel">
+      <Setter Property="Background" Value="{StaticResource CapitalScenePanelBodyGradientBrush}" />
+    </Style>
+
+    <Style Selector="Panel.inventory-slot.empty">
+      <Setter Property="Opacity" Value="0.55" />
+    </Style>
+
+    <Style Selector="Button.pill.action">
+      <Setter Property="Padding" Value="16,0,24,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="Button.pill.action TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.backdrop">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{StaticResource ModalBackdropBrush}" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector=":is(Control).inactive">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0.3" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="Transparent">
+    <ContentControl Content="{Binding CapitalScene}" />
+
+    <Border Background="{StaticResource CapitalSceneFootOverlayGradientBrush}" IsHitTestVisible="False" />
+
+    <Button Classes="backdrop" Command="{Binding CancelTargetingCommand}" IsVisible="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+    <Panel>
+      <Grid ColumnDefinitions="270,*,270" Margin="16,12">
+
+        <ContentControl Grid.Column="0" Classes="ornament-panel" Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" VerticalAlignment="Top" IsVisible="{Binding HasStack}">
+          <ContentControl Margin="6,2" Content="{Binding Leader}" ClipToBounds="False" />
+        </ContentControl>
+
+        <Grid Grid.Column="1" RowDefinitions="*,Auto,Auto" Margin="12,0" MaxWidth="1136">
+          <Grid Grid.Row="1" ColumnDefinitions="*,*">
+            <ContentControl Grid.Column="0" Classes="ornament-panel" Margin="0,0,8,0">
+              <Grid RowDefinitions="Auto,*" Margin="6,2">
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Height="40" IsVisible="{Binding HasStack}">
+                  <local:OutlinedTextBlock Grid.Column="0" Text="{Binding StackGridTitle}" Classes="panel-title" />
+                  <StackPanel Grid.Column="1" Classes="leadership" ToolTip.Tip="{local:Text 'Leadership'}">
+                    <local:OutlinedTextBlock Text="{Binding StackUnitCount}" Classes="panel-title" />
+                    <local:IconVisual Moniker="Leadership" />
+                  </StackPanel>
+                </Grid>
+                <Panel Grid.Row="1" Margin="0,8,0,4">
+                  <Viewbox Classes="unit-grid-container" IsVisible="{Binding HasStack}">
+                    <ItemsControl Classes="unit-grid focus-group"
+                                  ItemsSource="{Binding StackGrid.Slots}"
+                                  ItemTemplate="{StaticResource UnitGridSlotTemplate}"
+                                  ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
+                  </Viewbox>
+                  <Viewbox Classes="unit-grid-container" IsVisible="{Binding !HasStack}">
+                    <ContentControl Classes="unit-grid" Content="{Binding LeaderBlankslate}" />
+                  </Viewbox>
+                </Panel>
+              </Grid>
+            </ContentControl>
+
+            <ContentControl Grid.Column="1" Classes="ornament-panel" Margin="8,0,0,0">
+              <Grid RowDefinitions="Auto,*" Margin="6,2">
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Height="40">
+                  <local:OutlinedTextBlock Grid.Column="0" Text="{local:Text 'Garrison'}" Classes="panel-title" />
+                  <local:OutlinedTextBlock Grid.Column="1" Text="{Binding GarrisonCapacity}" Classes="panel-title" Margin="12,0,0,0" />
+                </Grid>
+                <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,4">
+                  <ItemsControl Classes="unit-grid focus-group"
+                                ItemsSource="{Binding GarrisonGrid.Slots}"
+                                ItemTemplate="{StaticResource UnitGridSlotTemplate}"
+                                ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
+                </Viewbox>
+              </Grid>
+            </ContentControl>
+          </Grid>
+
+          <Grid Grid.Row="2" Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" ColumnDefinitions="*,*" Margin="0,20,0,0">
+            <ContentControl Grid.Column="0" Classes="ornament-panel" Margin="0,0,8,0" DataContext="{Binding InventoryTransfer.Inventory}" Classes.highlighted="{Binding IsHighlighted}">
+              <Grid RowDefinitions="Auto,*" Margin="6,2" x:DataType="local:InventoryViewModel">
+                <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party inventory'}" Classes="panel-title" Height="34" />
+                <local:PagedItemsControl Grid.Row="1"
+                                         ItemsSource="{Binding Items}"
+                                         Classes="inventory"
+                                         ItemTemplate="{StaticResource InventoryItemTemplate}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center" />
+              </Grid>
+            </ContentControl>
+
+            <ContentControl Grid.Column="1" Classes="ornament-panel" Margin="8,0,0,0" DataContext="{Binding InventoryTransfer.OtherInventory}" Classes.highlighted="{Binding IsHighlighted}">
+              <Grid RowDefinitions="Auto,*" Margin="6,2" x:DataType="local:InventoryViewModel">
+                <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'City inventory'}" Classes="panel-title" Height="34" />
+                <local:PagedItemsControl Grid.Row="1"
+                                         ItemsSource="{Binding Items}"
+                                         Classes="inventory"
+                                         ItemTemplate="{StaticResource InventoryDisplayItemTemplate}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center" />
+              </Grid>
+            </ContentControl>
+          </Grid>
+        </Grid>
+
+        <Grid Grid.Column="2" Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" RowDefinitions="Auto,*,Auto">
+          <ContentControl Grid.Row="0" Classes="ornament-panel">
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Margin="6,6">
+              <local:OutlinedTextBlock Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Grid.Row="0"
+                                       Margin="0,0,0,8"
+                                       Text="{Binding CityTitle}"
+                                       Classes="object-name title"
+                                       TextWrapping="Wrap" />
+              <Panel Grid.Column="0" Grid.Row="1" Width="96" Height="96" VerticalAlignment="Top">
+                <local:SpriteVisual SpriteKey="{Binding CityImageKey}" Stretch="UniformToFill">
+                  <local:SpriteVisual.Clip>
+                    <EllipseGeometry Rect="0,0,96,96" />
+                  </local:SpriteVisual.Clip>
+                </local:SpriteVisual>
+                <Ellipse Stroke="{StaticResource AccentSecondaryBrush}" StrokeThickness="1" />
+              </Panel>
+              <StackPanel Grid.Column="1" Grid.Row="1" Margin="14,0,0,0" Spacing="4" VerticalAlignment="Center">
+                <TextBlock local:TextRuns.Spans="{Binding CitySummary}"
+                           Classes="prose"
+                           Foreground="{StaticResource SecondaryTextBrush}" />
+                <TextBlock local:TextRuns.Spans="{Binding GarrisonSummary}"
+                           Classes="prose"
+                           Foreground="{StaticResource SecondaryTextBrush}"
+                           TextWrapping="Wrap" />
+              </StackPanel>
+            </Grid>
+          </ContentControl>
+
+          <StackPanel Grid.Row="2" Classes="focus-group cached" Spacing="12">
+            <local:PriceButton Classes="pill action"
+                               local:PlateChrome.TextureSeed="2"
+                               Command="{Binding UpgradeCommand}"
+                               Price="{Binding UpgradeCost}"
+                               IsVisible="{Binding UpgradeLabel, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+              <Grid ColumnDefinitions="Auto,*">
+                <local:IconVisual Grid.Column="0" Moniker="Fortification" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{Binding UpgradeLabel}" />
+              </Grid>
+            </local:PriceButton>
+            <Button Classes="pill action" local:PlateChrome.TextureSeed="3" Command="{Binding HealCommand}">
+              <Grid ColumnDefinitions="Auto,*">
+                <local:IconVisual Grid.Column="0" Moniker="Heal" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Heal'}" />
+              </Grid>
+            </Button>
+            <Button Classes="pill action" local:PlateChrome.TextureSeed="4" Command="{Binding ResurrectCommand}">
+              <Grid ColumnDefinitions="Auto,*">
+                <local:IconVisual Grid.Column="0" Moniker="Resurrect" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Resurrect'}" />
+              </Grid>
+            </Button>
+            <Button Classes="pill action" local:PlateChrome.TextureSeed="5" Command="{Binding LockTypeCommand}">
+              <Grid ColumnDefinitions="Auto,*">
+                <local:IconVisual Grid.Column="0" Moniker="Locked" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Lock unit type'}" />
+              </Grid>
+            </Button>
+
+            <local:OrnamentDivider Classes="section" />
+
+            <Button Classes="pill action" local:PlateChrome.TextureSeed="6" Command="{Binding AutoFitCommand}">
+              <Grid ColumnDefinitions="Auto,*">
+                <local:IconVisual Grid.Column="0" Moniker="Transform" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Auto-fit party'}" />
+              </Grid>
+            </Button>
+            <Button Classes="pill action" local:PlateChrome.TextureSeed="7" Command="{Binding ExitStackCommand}">
+              <Grid ColumnDefinitions="Auto,*">
+                <local:IconVisual Grid.Column="0" Moniker="Exit" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Exit city'}" />
+              </Grid>
+            </Button>
+          </StackPanel>
+        </Grid>
+      </Grid>
+
+      <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
+    </Panel>
+
+    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
+      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
+    </Canvas>
+  </Grid>
+
+</UserControl>

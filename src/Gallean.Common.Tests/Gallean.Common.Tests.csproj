@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+  </ItemGroup>
+
+</Project>

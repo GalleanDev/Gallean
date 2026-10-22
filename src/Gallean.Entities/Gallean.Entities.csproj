@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Entities.Generators\Gallean.Entities.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gallean.Entities.Tests" />
+  </ItemGroup>
+
+</Project>

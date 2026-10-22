@@ -1,0 +1,479 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.BuildingTabView"
+             x:Name="Screen"
+             x:DataType="local:BuildingTabViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Image.desaturate">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0" />
+    </Style>
+    <Style Selector=".blocked Image.desaturate">
+      <Setter Property="Opacity" Value="0.85" />
+    </Style>
+
+    <Style Selector="Button.node">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="ClipToBounds" Value="False" />
+      <Setter Property="FocusAdorner" Value="{x:Null}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ClipToBounds="False" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="Panel.node-body">
+      <Setter Property="Width" Value="64" />
+      <Setter Property="Height" Value="64" />
+      <Setter Property="ClipToBounds" Value="False" />
+    </Style>
+    <Style Selector="Panel.node-body.common">
+      <Setter Property="Width" Value="84" />
+      <Setter Property="Height" Value="84" />
+    </Style>
+    <Style Selector="Button.node.blocked Panel.node-body">
+      <Setter Property="Opacity" Value="0.8" />
+    </Style>
+    <Style Selector="Button.node.branch-locked Panel.node-body">
+      <Setter Property="Opacity" Value="0.7" />
+    </Style>
+    <Style Selector="Button.node.scenario-locked Panel.node-body">
+      <Setter Property="Opacity" Value="0.55" />
+    </Style>
+
+    <Style Selector="Border.node-glow">
+      <Setter Property="Margin" Value="3" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0" />
+      <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
+      <Setter Property="CornerRadius" Value="29" />
+      <Setter Property="BoxShadow" Value="{x:Static local:Theme+BuildingGraph.HighlightGlow}" />
+    </Style>
+    <Style Selector="Panel.node-body.common Border.node-glow">
+      <Setter Property="CornerRadius" Value="42" />
+    </Style>
+    <Style Selector="Button.node:pointerover Border.node-glow">
+      <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style Selector="Button.node.selected Border.node-glow">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="Border.node-background">
+      <Setter Property="Margin" Value="3" />
+      <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
+      <Setter Property="CornerRadius" Value="29" />
+      <Setter Property="BoxShadow" Value="{x:Static local:Theme+BuildingGraph.NodeShadow}" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Panel.node-body.common Border.node-background">
+      <Setter Property="Margin" Value="1" />
+      <Setter Property="CornerRadius" Value="41" />
+    </Style>
+    <Style Selector="local|SpriteVisual.node-portrait">
+      <Setter Property="Stretch" Value="UniformToFill" />
+    </Style>
+    <Style Selector="Panel.node-body.common local|SpriteVisual.node-portrait">
+      <Setter Property="Margin" Value="-4" />
+    </Style>
+    <Style Selector="Button.node.unavailable Image.desaturate">
+      <Setter Property="Opacity" Value="0.45" />
+    </Style>
+
+    <Style Selector="Border.node-lock-overlay">
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Background" Value="{StaticResource BuildingGraphBlockedOverlayBrush}" />
+    </Style>
+    <Style Selector="Button.node.locked Border.node-lock-overlay, Button.node.selection-locked Border.node-lock-overlay">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="Ellipse.node-ring" x:DataType="local:BuildingNodeViewModel">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="StrokeThickness" Value="2.5" />
+      <Setter Property="Stroke" Value="{Binding BranchColor, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Panel.node-body.common Ellipse.node-ring">
+      <Setter Property="Stroke" Value="{StaticResource BuildingGraphCommonRingBrush}" />
+      <Setter Property="StrokeThickness" Value="3" />
+    </Style>
+    <Style Selector="Button.node.built Ellipse.node-ring">
+      <Setter Property="Stroke" Value="{StaticResource AccentBrush}" />
+    </Style>
+    <Style Selector="Button.node.unavailable Ellipse.node-ring">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+    <Style Selector="Button.node.blocked Ellipse.node-ring">
+      <Setter Property="Opacity" Value="0.45" />
+      <Setter Property="StrokeThickness" Value="1.5" />
+    </Style>
+    <Style Selector="Button.node.branch-locked Ellipse.node-ring, Button.node.selection-locked Ellipse.node-ring">
+      <Setter Property="Opacity" Value="0.9" />
+      <Setter Property="Stroke" Value="{StaticResource BuildingGraphBlockedInkBrush}" />
+      <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+    <Style Selector="Button.node:pointerover Ellipse.node-ring, Button.node.selected Ellipse.node-ring">
+      <Setter Property="Opacity" Value="1" />
+      <Setter Property="Stroke" Value="{StaticResource BuildingGraphHighlightRingBrush}" />
+      <Setter Property="StrokeThickness" Value="2.5" />
+    </Style>
+    <Style Selector="Button.node.selected Ellipse.node-ring">
+      <Setter Property="StrokeThickness" Value="3" />
+    </Style>
+
+    <Style Selector="Ellipse.node-outline">
+      <Setter Property="Margin" Value="-5" />
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0.85" />
+      <Setter Property="Stroke" Value="{StaticResource AccentBrush}" />
+      <Setter Property="StrokeThickness" Value="1.5" />
+    </Style>
+    <Style Selector="Button.node.constructible Ellipse.node-outline">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Button.node.selection-locked Ellipse.node-outline">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="Border.node-badge">
+      <Setter Property="Width" Value="20" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="Margin" Value="0,0,-2,-2" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Border.node-badge local|IconVisual">
+      <Setter Property="Width" Value="12" />
+      <Setter Property="Height" Value="12" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource WindowBackgroundBrush}" />
+    </Style>
+    <Style Selector="Border.node-badge.lock">
+      <Setter Property="Width" Value="26" />
+      <Setter Property="Height" Value="26" />
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="Background" Value="{StaticResource BuildingGraphBlockedInkBrush}" />
+      <Setter Property="CornerRadius" Value="13" />
+    </Style>
+    <Style Selector="Border.node-badge.lock local|IconVisual">
+      <Setter Property="Width" Value="15" />
+      <Setter Property="Height" Value="15" />
+    </Style>
+    <Style Selector="Button.node.scenario-locked Border.node-badge.lock">
+      <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
+    </Style>
+    <Style Selector="Button.node.scenario-locked Border.node-badge.lock local|IconVisual">
+      <Setter Property="Foreground" Value="{StaticResource BuildingGraphBlockedInkBrush}" />
+    </Style>
+    <Style Selector="Button.node.locked Border.node-badge.lock, Button.node.selection-locked Border.node-badge.lock">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="Border.icon-frame">
+      <Setter Property="Background" Value="{StaticResource FrameBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource FrameBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Border.face-frame">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource FrameBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+
+    <Style Selector="Panel.building-panels">
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.3" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Panel.building-panels.hidden">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0" />
+    </Style>
+  </UserControl.Styles>
+
+  <UserControl.Resources>
+    <x:Double x:Key="BuildingGraphUnitSize">64</x:Double>
+
+    <ControlTheme x:Key="BackgroundButtonTheme" TargetType="Button">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="FocusAdorner" Value="{x:Null}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="BuildingNodeContainerTheme" TargetType="ContentPresenter" x:DataType="local:BuildingNodeViewModel">
+      <Setter Property="local:BuildingGraphPanel.X" Value="{Binding X}" />
+      <Setter Property="local:BuildingGraphPanel.Y" Value="{Binding Y}" />
+      <Setter Property="ClipToBounds" Value="False" />
+    </ControlTheme>
+
+    <DataTemplate x:Key="BuildingUnitTemplate" x:DataType="local:BuildingUnitViewModel">
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <Border Classes="face-frame">
+          <Panel>
+            <local:SpriteVisual SpriteKey="{Binding FaceKey}" Stretch="UniformToFill" />
+            <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+          </Panel>
+        </Border>
+        <TextBlock Text="{Binding Name}"
+                   Classes="body"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource PrimaryTextBrush}" />
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BuildingNodeTemplate" x:DataType="local:BuildingNodeViewModel">
+      <Panel>
+        <Button Classes="node"
+                Classes.constructible="{Binding IsConstructible}"
+                Classes.unavailable="{Binding IsUnavailable}"
+                Classes.built="{Binding IsBuilt}"
+                Classes.branch-locked="{Binding IsBranchLocked}"
+                Classes.blocked="{Binding IsBlocked}"
+                Classes.scenario-locked="{Binding IsScenarioLocked}"
+                Classes.locked="{Binding IsLocked}"
+                Classes.selection-locked="{Binding IsSelectionLocked}"
+                Classes.selected="{Binding IsSelected}"
+                Command="{Binding #Screen.((local:BuildingTabViewModel)DataContext).SelectBuildingCommand}"
+                CommandParameter="{Binding}">
+          <Panel Classes="node-body" Classes.common="{Binding IsCommon}">
+            <Border Classes="node-glow" />
+            <Ellipse Classes="node-outline" />
+            <Border Classes="node-background">
+              <Panel>
+                <local:SpriteVisual Classes="node-portrait" SpriteKey="{Binding PortraitKey}" />
+                <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                <Border Classes="node-lock-overlay" />
+              </Panel>
+            </Border>
+            <Ellipse Classes="node-ring" />
+            <Border Classes="node-badge" IsVisible="{Binding IsBuilt}">
+              <local:IconVisual Moniker="Check" />
+            </Border>
+            <Border Classes="node-badge lock">
+              <local:IconVisual Moniker="Locked" />
+            </Border>
+          </Panel>
+        </Button>
+        <Popup Placement="Custom" CustomPopupPlacementCallback="PlaceDetails">
+          <Popup.IsOpen>
+            <MultiBinding Converter="{x:Static BoolConverters.And}">
+              <Binding Path="IsSelected" />
+              <Binding ElementName="Screen" Path="((local:BuildingTabViewModel)DataContext).PanelsVisible" />
+              <Binding ElementName="Screen" Path="((local:BuildingTabViewModel)DataContext).IsInForeground" />
+            </MultiBinding>
+          </Popup.IsOpen>
+          <ContentControl Content="{Binding PaneContent}">
+            <ContentControl.ContentTemplate>
+              <DataTemplate x:DataType="local:BuildingNodeViewModel">
+                <Panel Classes="cached">
+            <local:ModalFrameDecorator Width="400" Background="{StaticResource ModalAccentBodyGradientBrush}">
+              <DockPanel Margin="18,16,18,18" Classes.blocked="{Binding IsBlocked}">
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,16,0,0" Spacing="8">
+                  <Grid ColumnDefinitions="Auto,*"
+                        Classes="caption"
+                        IsVisible="{Binding LockedText, Converter={x:Static ObjectConverters.IsNotNull}}">
+                    <local:IconVisual Grid.Column="0"
+                                      Moniker="Warning"
+                                      Width="14"
+                                      Height="14"
+                                      Margin="0,1,6,0"
+                                      VerticalAlignment="Top"
+                                      Foreground="{StaticResource OfferStatusReasonBrush}" />
+                    <TextBlock Grid.Column="1"
+                               local:TextRuns.Spans="{Binding LockedText}"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource OfferStatusReasonBrush}" />
+                  </Grid>
+                  <local:PriceButton Classes="pill"
+                                     local:PlateChrome.TextureSeed="1"
+                                     Content="{Binding #Screen.((local:BuildingTabViewModel)DataContext).ConstructText}"
+                                     Status="{Binding Offer}"
+                                     Command="{Binding #Screen.((local:BuildingTabViewModel)DataContext).ConstructCommand}"
+                                     IsVisible="{Binding !IsBuilt}" />
+                  <ContentControl Content="{Binding Offer}"
+                                  Classes="caption"
+                                  HorizontalAlignment="Center"
+                                  IsVisible="{Binding Offer.IsReasonVisible}" />
+                  <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center" IsVisible="{Binding IsBuilt}">
+                    <local:IconVisual Moniker="Check"
+                                      Width="14"
+                                      Height="14"
+                                      VerticalAlignment="Center"
+                                      Foreground="{StaticResource AccentBrush}" />
+                    <TextBlock Text="{local:Text 'Already built'}"
+                               Classes="caption"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource SecondaryTextBrush}" />
+                  </StackPanel>
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                  <Grid ColumnDefinitions="Auto,*">
+                    <Border Grid.Column="0" Classes="icon-frame" Width="84" Height="84" BorderThickness="2" VerticalAlignment="Top">
+                      <Panel>
+                        <local:SpriteVisual SpriteKey="{Binding IconKey}" Stretch="UniformToFill" />
+                        <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                      </Panel>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="16,0,0,0" Spacing="4" VerticalAlignment="Center">
+                      <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name" TextWrapping="Wrap" />
+                      <TextBlock Text="{Binding LevelText}" Classes="body" Foreground="{StaticResource SecondaryTextBrush}" />
+                    </StackPanel>
+                  </Grid>
+
+                  <local:OrnamentDivider Classes="section" />
+
+                  <TextBlock Text="{Binding Description}"
+                             Classes="body"
+                             TextWrapping="Wrap"
+                             Foreground="{StaticResource PrimaryTextBrush}" />
+
+                  <StackPanel Spacing="8" IsVisible="{Binding Units.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
+                    <local:OrnamentDivider Classes="section" />
+                    <local:OutlinedTextBlock Text="{local:Text 'Unlocks'}" Classes="label" />
+                    <ItemsControl ItemsSource="{Binding Units}" ItemTemplate="{StaticResource BuildingUnitTemplate}">
+                      <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <StackPanel Spacing="6" />
+                        </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                  </StackPanel>
+                </StackPanel>
+              </DockPanel>
+            </local:ModalFrameDecorator>
+                </Panel>
+              </DataTemplate>
+            </ContentControl.ContentTemplate>
+          </ContentControl>
+        </Popup>
+      </Panel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BuildingBranchTemplate" x:DataType="local:BuildingBranchViewModel">
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <local:IconVisual Moniker="{Binding Icon}"
+                          Width="18"
+                          Height="18"
+                          VerticalAlignment="Center"
+                          Foreground="{Binding Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+        <TextBlock Text="{Binding Title}"
+                   Classes="body"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource PrimaryTextBrush}" />
+      </StackPanel>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid Background="Transparent">
+    <ContentControl Content="{Binding CapitalScene}" />
+
+    <Panel Classes="building-panels" Classes.hidden="{Binding !PanelsVisible}">
+      <Border Background="{StaticResource BuildingGraphSceneOverlayBrush}" IsHitTestVisible="False" />
+      <Border Background="{StaticResource CapitalSceneFootOverlayGradientBrush}" IsHitTestVisible="False" />
+
+      <Button Theme="{StaticResource BackgroundButtonTheme}"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Command="{Binding ClearSelectionCommand}" />
+
+      <Viewbox Classes="cached" Stretch="Uniform" Margin="24,4,24,4" ClipToBounds="False">
+        <Grid ClipToBounds="False">
+          <local:BuildingHubVisual Classes="cached"
+                                   Graph="{Binding Graph}"
+                                   UnitSize="{StaticResource BuildingGraphUnitSize}"
+                                   Fill="{StaticResource BuildingGraphHubGradientBrush}"
+                                   Texture="{StaticResource PlateTextureBrush}"
+                                   Shadow="{StaticResource BuildingGraphHubShadowBrush}"
+                                   Bevel="{StaticResource BuildingGraphHubBevelBrush}" />
+
+          <local:BuildingGraphVisual Classes="body"
+                                     Foreground="{StaticResource SecondaryTextBrush}"
+                                     Graph="{Binding Graph}"
+                                     SelectedNode="{Binding SelectedBuilding}"
+                                     UnitSize="{StaticResource BuildingGraphUnitSize}"
+                                     RingBrush="{StaticResource BuildingGraphLevelRingBrush}"
+                                     ForkOutlineBrush="{StaticResource BuildingGraphNodeBackgroundBrush}"
+                                     Outline="{StaticResource TextOutlineBrush}"
+                                     OutlineThickness="1" />
+
+          <ItemsControl Classes="focus-group"
+                        ItemsSource="{Binding Graph.Nodes}"
+                        ItemTemplate="{StaticResource BuildingNodeTemplate}"
+                        ItemContainerTheme="{StaticResource BuildingNodeContainerTheme}"
+                        ClipToBounds="False">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <local:BuildingGraphPanel UnitSize="{StaticResource BuildingGraphUnitSize}"
+                                          ExtentX="{Binding #Screen.((local:BuildingTabViewModel)DataContext).Graph.ExtentX}"
+                                          ExtentY="{Binding #Screen.((local:BuildingTabViewModel)DataContext).Graph.ExtentY}" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
+        </Grid>
+      </Viewbox>
+
+      <ContentControl HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="24,0,0,0"
+                      Classes="ornament-panel"
+                      Background="{StaticResource CapitalScenePanelBodyGradientBrush}"
+                      IsVisible="{Binding Graph.Branches.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
+        <ItemsControl Margin="14,12,22,12" ItemsSource="{Binding Graph.Branches}" ItemTemplate="{StaticResource BuildingBranchTemplate}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Spacing="8" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </ContentControl>
+
+      <TextBlock Text="{local:Text 'No buildings are available in your capital.'}"
+                 IsVisible="{Binding Graph.IsEmpty}"
+                 Classes="body"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Foreground="{StaticResource SecondaryTextBrush}" />
+    </Panel>
+
+    <Button Theme="{StaticResource BackgroundButtonTheme}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Command="{Binding ShowPanelsCommand}"
+            IsVisible="{Binding !PanelsVisible}" />
+  </Grid>
+
+</UserControl>

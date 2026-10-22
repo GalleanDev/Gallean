@@ -1,0 +1,49 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S119SC0000",
+      "RUIN_ID": "S119RU0000",
+      "IMAGE": 0,
+      "POS_X": 5,
+      "POS_Y": 37,
+      "CASH": "G0012:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG5041",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S119SC0000",
+      "RUIN_ID": "S119RU0001",
+      "IMAGE": 1,
+      "POS_X": 44,
+      "POS_Y": 13,
+      "CASH": "G0108:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG2003",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 0
+    },
+    {
+      "NO_SCEN": "S119SC0000",
+      "RUIN_ID": "S119RU0004",
+      "IMAGE": 0,
+      "POS_X": 17,
+      "POS_Y": 1,
+      "CASH": "G0223:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000IG7007",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 3
+    },
+    {
+      "NO_SCEN": "S119SC0000",
+      "RUIN_ID": "S119RU0005",
+      "IMAGE": 8,
+      "POS_X": 27,
+      "POS_Y": 21,
+      "CASH": "G0379:R0000:Y0000:E0000:W0000",
+      "ITEM": "G000000000",
+      "LOOTER": "G000000000",
+      "AIPRIORITY": 0
+    }
+  ]
+}

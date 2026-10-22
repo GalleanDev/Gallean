@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
+    <PackageReference Include="NVorbis" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Assets" />
+    <Using Include="Umbra" />
+    <Using Include="Umbra.CorridorKey" />
+    <Using Include="Umbra.Ltx" />
+    <Using Include="Umbra.Prompts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\AssetAliases.cs" Link="AssetAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Packer\Packer.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+  </ItemGroup>
+
+</Project>

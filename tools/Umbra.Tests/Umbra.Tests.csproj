@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\Tests.props" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Parity\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Umbra\Umbra.csproj" />
+    <ProjectReference Include="..\Umbra.CorridorKey\Umbra.CorridorKey.csproj" />
+    <ProjectReference Include="..\Umbra.Ltx\Umbra.Ltx.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Configuration\Gallean.Configuration.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Umbra.CorridorKey" />
+    <Using Include="Umbra.Ltx" />
+  </ItemGroup>
+</Project>

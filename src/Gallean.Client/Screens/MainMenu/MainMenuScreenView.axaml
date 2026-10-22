@@ -1,0 +1,118 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.MainMenuScreenView"
+             x:DataType="local:MainMenuScreenViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="local|CoverBoxDecorator.menu-background.main-menu > local|MainMenuBackgroundView">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="12%,0%">
+          <GradientStop Offset="0" Color="{x:Static local:Theme+Artwork.FeatherFadeColor}" />
+          <GradientStop Offset="1" Color="{x:Static local:Theme+Artwork.FeatherColor}" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Border.menu-overlay.main-menu">
+      <Setter Property="Width" Value="620" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Offset="0" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+          <GradientStop Offset="0.35" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+          <GradientStop Offset="1" Color="{x:Static local:Theme+Artwork.OverlayFadeColor}" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="{StaticResource MainMenuBackdropBrush}" ClipToBounds="True">
+    <local:CoverBoxDecorator Classes="menu-background main-menu" DataContext="{Binding Background}">
+      <local:MainMenuBackgroundView />
+    </local:CoverBoxDecorator>
+
+    <Border Classes="menu-overlay main-menu" />
+
+    <local:PlateLightingDecorator>
+      <StackPanel Width="330" Margin="80,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <local:GalleanLogoVisual Width="330" Margin="0,0,0,16" />
+        <StackPanel Classes="focus-group" Width="300" HorizontalAlignment="Center" Spacing="12">
+          <Button x:Name="Continue"
+                  Classes="plate primary"
+                  local:PlateChrome.TextureSeed="1"
+                  Content="{local:Text 'Continue'}"
+                  Command="{Binding Game.LoadGameCommand}"
+                  CommandParameter="{Binding LatestSave.Entry}"
+                  IsVisible="{Binding LatestSave.Entry, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}"
+                  ToolTip.Placement="Right"
+                  ToolTip.HorizontalOffset="16"
+                  ToolTip.ShowDelay="0">
+            <ToolTip.Tip>
+              <ToolTip MinWidth="300" MaxWidth="360">
+                <StackPanel Spacing="2" DataContext="{Binding LatestSave}" x:DataType="local:GameSaveViewModel">
+                  <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" TextTrimming="CharacterEllipsis" />
+                  <TextBlock Text="{Binding ScenarioName}" Classes="body" TextAlignment="Left" Foreground="{StaticResource SecondaryTextBrush}" />
+                  <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+                    <TextBlock Grid.Column="0" Text="{Binding Turn}" Classes="caption" />
+                    <TextBlock Grid.Column="2" Text="{Binding SavedAt}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
+                  </Grid>
+                </StackPanel>
+              </ToolTip>
+            </ToolTip.Tip>
+          </Button>
+          <Button x:Name="NewCampaign"
+                  Classes="plate"
+                  Classes.primary="{Binding LatestSave.Entry, Converter={x:Static ObjectConverters.IsNull}, FallbackValue=True}"
+                  local:PlateChrome.TextureSeed="2"
+                  Content="{local:Text 'New saga'}"
+                  Command="{Binding Game.ShowCampaignSelectCommand}" />
+          <Button x:Name="NewScenario"
+                  Classes="plate"
+                  local:PlateChrome.TextureSeed="3"
+                  Content="{local:Text 'New quest'}"
+                  Command="{Binding Game.ShowScenarioSelectCommand}" />
+          <Button x:Name="LoadGame"
+                  Classes="plate"
+                  local:PlateChrome.TextureSeed="4"
+                  Content="{local:Text 'Load game'}"
+                  Command="{Binding Game.ShowLoadGameCommand}" />
+          <Button x:Name="Tutorial"
+                  Classes="plate"
+                  local:PlateChrome.TextureSeed="5"
+                  Content="{local:Text 'Tutorial'}"
+                  Command="{Binding Game.StartGameCommand}"
+                  CommandParameter="{Binding TutorialConfiguration}" />
+          <Button x:Name="Settings"
+                  Classes="plate"
+                  local:PlateChrome.TextureSeed="6"
+                  Content="{local:Text 'Settings'}"
+                  Command="{Binding Game.OpenSettingsCommand}" />
+          <Button x:Name="Exit"
+                  Classes="plate"
+                  local:PlateChrome.TextureSeed="7"
+                  Content="{local:Text 'Exit'}"
+                  Command="{Binding Game.ExitCommand}"
+                  Margin="0,24,0,0" />
+        </StackPanel>
+      </StackPanel>
+    </local:PlateLightingDecorator>
+
+    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12,8" Spacing="12">
+      <local:LinkButton x:Name="SupportDeveloper"
+                        Classes="pill success"
+                        HorizontalAlignment="Right"
+                        Height="26"
+                        Padding="16,0"
+                        FontSize="{StaticResource FontSizeSm}"
+                        Content="{local:Text 'Support developer'}"
+                        NavigateUri="{Binding SupportDeveloperUri}" />
+      <local:OutlinedTextBlock Text="{Binding Version}"
+                               HorizontalAlignment="Right"
+                               Foreground="{StaticResource MainMenuVersionTextBrush}"
+                               Outline="{StaticResource MainMenuVersionOutlineBrush}"
+                               OutlineThickness="1.5"
+                               Classes="caption"
+                               IsHitTestVisible="False" />
+    </StackPanel>
+  </Grid>
+
+</UserControl>

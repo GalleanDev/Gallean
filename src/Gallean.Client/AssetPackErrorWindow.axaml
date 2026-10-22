@@ -1,0 +1,177 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client"
+        x:Class="Gallean.Client.AssetPackErrorWindow"
+        x:DataType="local:AssetPackErrorViewModel"
+        Title="{local:Text 'Gallean'}"
+        Width="680"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource WindowBackgroundBrush}">
+
+  <Window.Styles>
+    <Style Selector="Button.open-folder">
+      <Setter Property="Padding" Value="14,8" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource ModalBorderDarkBrush}" />
+      <Setter Property="FocusAdorner" Value="{x:Null}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="1"
+                  CornerRadius="4"
+                  Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="Button.open-folder:pointerover, Button.open-folder:focus-visible">
+      <Setter Property="Foreground" Value="{StaticResource HighlightTextBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource ModalOrnamentBrush}" />
+    </Style>
+    <Style Selector="Border.step-number">
+      <Setter Property="Width" Value="30" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Background" Value="{StaticResource ModalIconGradientBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource ModalOrnamentBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="15" />
+    </Style>
+    <Style Selector="Border.step-number TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+      <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+      <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+      <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+  </Window.Styles>
+
+  <local:ModalFrameDecorator Background="{StaticResource ModalAccentBodyGradientBrush}">
+    <Panel ClipToBounds="True">
+      <local:GlowVisual Width="720"
+                        Height="300"
+                        Margin="0,0,0,-150"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        IsHitTestVisible="False"
+                        Color="{x:Static local:Theme+AssetPackError.GlowColor}" />
+
+      <StackPanel Margin="56,28,56,36">
+        <local:GalleanLogoVisual Width="240" HorizontalAlignment="Center" />
+
+        <local:OutlinedTextBlock Text="{Binding Title}"
+                                 Classes="h2"
+                                 Foreground="{StaticResource ModalTitleBrush}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,10,0,0" />
+
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" MaxWidth="520" HorizontalAlignment="Center" Margin="0,14,0,0">
+          <local:IconVisual Grid.Column="0"
+                            Moniker="OrnamentFinial"
+                            Foreground="{StaticResource ModalOrnamentBrush}"
+                            Width="18"
+                            Height="18"
+                            Margin="0,2,0,0" />
+          <TextBlock Grid.Column="1"
+                     Text="{Binding Message}"
+                     Classes="body"
+                     Foreground="{StaticResource SecondaryTextBrush}"
+                     TextWrapping="Wrap" />
+        </Grid>
+
+        <ContentControl Classes="ornament-panel" Padding="20" Margin="0,24,0,0">
+          <StackPanel Spacing="18">
+            <Grid ColumnDefinitions="30,*,Auto" ColumnSpacing="14">
+              <Border Grid.Column="0" Classes="step-number">
+                <TextBlock Text="1" Classes="body" />
+              </Border>
+              <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                <TextBlock Text="{local:Text 'Get the asset pack'}"
+                           Classes="h4"
+                           Foreground="{StaticResource AssetPackErrorStepTitleBrush}" />
+                <TextBlock Text="{local:Text 'Find and download a community-provided asset pack.'}"
+                           Classes="caption"
+                           Foreground="{StaticResource SecondaryTextBrush}" />
+              </StackPanel>
+              <local:LinkButton x:Name="DownloadButton"
+                                Grid.Column="2"
+                                Content="{local:Text 'Find pack'}"
+                                Classes="pill success"
+                                local:PlateChrome.TextureSeed="1"
+                                NavigateUri="{Binding GetPackUri}"
+                                MinWidth="150" />
+            </Grid>
+
+            <Border Height="1" Background="{StaticResource ModalBorderDarkBrush}" Margin="44,0,0,0" />
+
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="14">
+              <Border Grid.Column="0" Classes="step-number">
+                <TextBlock Text="2" Classes="body" />
+              </Border>
+              <StackPanel Grid.Column="1" Spacing="4">
+                <TextBlock Text="{local:Text 'Put the pack into the game folder'}"
+                           Classes="h4"
+                           Foreground="{StaticResource AssetPackErrorStepTitleBrush}" />
+                <TextBlock Text="{local:Text 'Gallean searches for the asset pack in the game folder below:'}"
+                           Classes="caption"
+                           Foreground="{StaticResource SecondaryTextBrush}" />
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" Margin="0,6,0,0">
+                  <Border Grid.Column="0"
+                          Background="{StaticResource AssetPackErrorLocationBrush}"
+                          BorderBrush="{StaticResource ModalBorderDarkBrush}"
+                          BorderThickness="1"
+                          CornerRadius="4"
+                          Padding="14,9">
+                    <TextBlock Text="{Binding Location}"
+                               Classes="caption"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" />
+                  </Border>
+                  <Button Grid.Column="1"
+                          Content="{local:Text 'Open'}"
+                          Classes="open-folder caption"
+                          Click="OnOpenFolderClick"
+                          ToolTip.Tip="{local:Text 'Open game folder'}" />
+                </Grid>
+              </StackPanel>
+            </Grid>
+
+            <Border Height="1" Background="{StaticResource ModalBorderDarkBrush}" Margin="44,0,0,0" />
+
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="14">
+              <Border Grid.Column="0" Classes="step-number">
+                <TextBlock Text="3" Classes="body" />
+              </Border>
+              <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                <TextBlock Text="{local:Text 'Restart Gallean'}"
+                           Classes="h4"
+                           Foreground="{StaticResource AssetPackErrorStepTitleBrush}" />
+                <TextBlock Text="{local:Text 'The game will detect the pack automatically when it starts.'}"
+                           Classes="caption"
+                           Foreground="{StaticResource SecondaryTextBrush}" />
+              </StackPanel>
+            </Grid>
+          </StackPanel>
+        </ContentControl>
+
+        <Button Content="{local:Text 'Close'}"
+                Classes="pill"
+                local:PlateChrome.TextureSeed="2"
+                Command="{Binding ExitCommand}"
+                MinWidth="170"
+                HorizontalAlignment="Center"
+                Margin="0,24,0,0" />
+      </StackPanel>
+    </Panel>
+  </local:ModalFrameDecorator>
+
+</Window>

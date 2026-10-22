@@ -1,0 +1,143 @@
+uniform float2 size;
+uniform float thickness;
+uniform float tipLength;
+uniform float cornerRadius;
+uniform float shape;
+uniform float ambient;
+uniform float opacity;
+uniform float4 lightPositions[4];
+uniform float3 lightRadiances[4];
+
+const int LightCount = 4;
+const float3 View = float3(0.0, 0.0, 1.0);
+const float GradientStep = 0.5;
+const float RimHeight = 1.2;
+const float RimSlopeClamp = 0.92;
+const float BevelHeight = 3.0;
+const float BevelWidth = 7.0;
+const float RimShininess = 24.0;
+const float FaceShininess = 8.0;
+const float RimSpecular = 0.9;
+const float FaceSpecular = 0.12;
+
+float segmentDistance(float2 p, float2 a, float2 b) {
+    float2 edge = b - a;
+    float along = clamp(dot(p - a, edge) / dot(edge, edge), 0.0, 1.0);
+
+    return length(p - a - edge * along);
+}
+
+float hexagonDistance(float2 p, float2 halfSize) {
+    p = abs(p);
+
+    float radius = min(cornerRadius, halfSize.y * 0.5);
+    float2 edgeNormal = normalize(float2(halfSize.y, tipLength));
+    float edgeOffset = dot(edgeNormal, float2(halfSize.x, 0.0)) - radius;
+    float top = halfSize.y - radius;
+    float2 corner = float2((edgeOffset - edgeNormal.y * top) / edgeNormal.x, top);
+    float2 tip = float2(edgeOffset / edgeNormal.x, 0.0);
+    float nearest = min(segmentDistance(p, float2(0.0, top), corner), segmentDistance(p, corner, tip));
+    bool inside = p.y < top && dot(edgeNormal, p) < edgeOffset;
+
+    return (inside ? -nearest : nearest) - radius;
+}
+
+float ellipseDistance(float2 p, float2 halfSize) {
+    float k0 = length(p / halfSize);
+    float k1 = max(length(p / (halfSize * halfSize)), 0.0001);
+
+    return k0 * (k0 - 1.0) / k1;
+}
+
+float capsuleDistance(float2 p, float2 halfSize) {
+    p = abs(p);
+
+    float2 nearest = float2(max(p.x - (halfSize.x - halfSize.y), 0.0), p.y);
+
+    return length(nearest) - halfSize.y;
+}
+
+float roundedBoxDistance(float2 p, float2 halfSize) {
+    float radius = min(cornerRadius, tipLength);
+    float2 q = abs(p) - halfSize + radius;
+
+    return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
+}
+
+float signedDistance(float2 coord) {
+    float2 halfSize = size * 0.5 - thickness * 0.5;
+    float2 p = coord - size * 0.5;
+
+    if (shape > 2.5) {
+        return roundedBoxDistance(p, halfSize);
+    }
+    else if (shape > 1.5) {
+        return capsuleDistance(p, halfSize);
+    }
+    else if (shape > 0.5) {
+        return ellipseDistance(p, halfSize);
+    }
+    else {
+        return hexagonDistance(p, halfSize);
+    }
+}
+
+float2 heightAndSlope(float edgeDistance) {
+    float halfThickness = thickness * 0.5;
+
+    if (edgeDistance > -halfThickness) {
+        float x = clamp(edgeDistance / halfThickness, -RimSlopeClamp, RimSlopeClamp);
+        float y = sqrt(1.0 - x * x);
+
+        return float2(BevelHeight + RimHeight * y, -RimHeight * x / (halfThickness * y));
+    }
+    else {
+        float t = clamp((-edgeDistance - halfThickness) / BevelWidth, 0.0, 1.0);
+        float height = BevelHeight * t * t * (3.0 - 2.0 * t);
+        float slope = -BevelHeight * 6.0 * t * (1.0 - t) / BevelWidth;
+
+        return float2(height, slope);
+    }
+}
+
+half4 main(float2 coord) {
+    float edgeDistance = signedDistance(coord);
+    float coverage = clamp(thickness * 0.5 - edgeDistance + 0.5, 0.0, 1.0) * opacity;
+
+    if (coverage <= 0.0) {
+        return half4(0.0);
+    }
+
+    float2 gradient = float2(
+        signedDistance(coord + float2(GradientStep, 0.0)) - signedDistance(coord - float2(GradientStep, 0.0)),
+        signedDistance(coord + float2(0.0, GradientStep)) - signedDistance(coord - float2(0.0, GradientStep)));
+    float2 outward = gradient / max(length(gradient), 0.0001);
+    float2 heightSlope = heightAndSlope(edgeDistance);
+    float3 normal = normalize(float3(-heightSlope.y * outward, 1.0));
+    float3 position = float3(coord, heightSlope.x);
+    float rimMask = smoothstep(-thickness * 0.5 - 1.0, -thickness * 0.5, edgeDistance);
+    float shininess = mix(FaceShininess, RimShininess, rimMask);
+    float specularStrength = mix(FaceSpecular, RimSpecular, rimMask);
+    float3 irradiance = float3(ambient);
+
+    for (int index = 0; index < LightCount; index++) {
+        float4 light = lightPositions[index];
+
+        if (light.w > 0.0) {
+            float3 delta = light.xyz - position;
+            float lightDistance = length(delta);
+            float3 toLight = delta / lightDistance;
+            float relative = lightDistance / light.w;
+            float attenuation = 1.0 / (1.0 + relative * relative);
+            float lightDot = max(dot(normal, toLight), 0.0);
+            float3 halfVector = normalize(toLight + View);
+            float specular = pow(max(dot(normal, halfVector), 0.0), shininess) * specularStrength;
+
+            irradiance += lightRadiances[index] * attenuation * (lightDot + specular);
+        }
+    }
+
+    float3 shade = clamp(irradiance * 0.5, 0.0, 1.0);
+
+    return half4(half3(shade * coverage), half(coverage));
+}

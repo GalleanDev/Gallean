@@ -1,0 +1,37 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S132SC0000",
+      "STACK_ID": "S132KC0000",
+      "SRCTMPL_ID": "G000000000",
+      "POS_X": 1,
+      "POS_Y": 1,
+      "LEADER_ID": "S132UN0001",
+      "LEADR_ALIV": true,
+      "MORALE": 0,
+      "MOVE": 20,
+      "FACING": 0,
+      "BANNER": "G000000000",
+      "TOME": "G000000000",
+      "BATTLE1": "G000000000",
+      "BATTLE2": "G000000000",
+      "ARTIFACT1": "G000000000",
+      "ARTIFACT2": "G000000000",
+      "BOOTS": "G000000000",
+      "OWNER": "S132PL0001",
+      "SUBRACE": "S132SR0001",
+      "INSIDE": "S132FT0000",
+      "INVISIBLE": false,
+      "UPGCOUNT": 0,
+      "AI_IGNORE": false,
+      "AIPRIORITY": 3,
+      "ORDER": 1,
+      "ORDER_TARG": "G000000000",
+      "CREAT_LVL": 1,
+      "NBBATTLE": 0,
+      "AIORDER": 1,
+      "AIORDERTAR": "G000000000"
+    }
+  ]
+}

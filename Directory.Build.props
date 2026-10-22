@@ -1,0 +1,17 @@
+<Project>
+
+  <Import Project="$(MSBuildThisFileDirectory)Version.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_IsPublishing)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.OfferPriceView"
+             x:Name="Root"
+             x:DataType="local:OfferPriceViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="TextBlock.short">
+      <Setter Property="Foreground" Value="{StaticResource OfferStatusShortResourceBrush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <ItemsControl ItemsSource="{Binding Items}" VerticalAlignment="Center">
+    <ItemsControl.ItemsPanel>
+      <ItemsPanelTemplate>
+        <WrapPanel ItemSpacing="12" LineSpacing="2" />
+      </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+    <ItemsControl.ItemTemplate>
+      <DataTemplate x:DataType="local:OfferPriceItemViewModel">
+        <StackPanel Orientation="Horizontal" Spacing="4" Background="Transparent" ToolTip.Tip="{Binding Resource.Name}">
+          <TextBlock Text="{Binding Resource.Value}" Classes.short="{Binding IsShort}" VerticalAlignment="Center" />
+          <local:IconVisual Moniker="{Binding Resource.Icon}"
+                            Width="{Binding #Root.IconSize}"
+                            Height="{Binding #Root.IconSize}"
+                            VerticalAlignment="Center" />
+        </StackPanel>
+      </DataTemplate>
+    </ItemsControl.ItemTemplate>
+  </ItemsControl>
+
+</UserControl>

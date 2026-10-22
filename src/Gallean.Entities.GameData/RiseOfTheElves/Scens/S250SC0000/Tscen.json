@@ -1,0 +1,1755 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "In his youth, this mighty lord once stood fast against an army from hell and single-handedly defeated them by sealing the gateway that spew them. He then became sovereign of his realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Moldar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Highest lord of the dwarf lords, he is known for his intensity in battle and his courage in the face of overwhelming odds. He once fought seven days and nights against the mighty red dragon ARFURUZON to finally defeat him.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dorian",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Every child trembles at the hearing of this most infamous name. This lord of hell is known for her blood thirsts. It is said that she once ate 1000 slaves at a banquet given by Bethrezen for a victory against the kingdom of light.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hill Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thief",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0033",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thief",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lutha ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0041",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Asura\u0027s Chief",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0044",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thief",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Darphis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0060",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0069",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN006d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0076",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0078",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0083",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0087",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dakoniac",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN008b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Memyline",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN008c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Myolina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Leeford",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Necromancer ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Necromancer ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00c4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00c7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00d4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00d6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00d9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00dc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonologist ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00e0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Berzerker",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Berzerker",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Boirro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00fb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN00ff",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0102",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thief00",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0103",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0109",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN010c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0110",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0112",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0117",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Werewolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN011b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN011e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0124",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Berzerker",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN012e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN013b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN013e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0140",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Werewolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0142",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN014d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0151",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0159",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doomdrake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN015b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0164",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN016a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN016e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bulner",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0171",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0176",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0181",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0186",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0188",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN018a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN018d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0193",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Brodulf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0195",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN019a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN019e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01cf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01d2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gundulf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01d5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01d6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01e9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01f4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN01fc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E M entrance ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demon \n\u0022Do you really think you can survive in here? Please, be my guest...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountain goal ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire\u0027s goal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion goal01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L removemountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L removemountain02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion change goal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sordan \n\u0022Hah! I\u0027ve opened the Labyrinth doors! Your cause is lost, beasts!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000b",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Empire and Mountain clan: Take the Legions Capital \n \nLegions: Defeat Sordan the Wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion goal 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L dragon to legion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Advisor \n\u0022This is more than a simple relic - with this eye we can be the masters of the beast Dakoniac! With such power at our command, we will surely prevail!\u0022 ",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Dragon to Empire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Advisor \n\u0022Highfather be blessed! With this tiny trinket we can control the fearsome Dakoniac!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "M dragon to MC",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Advisor \n\u0022With this miraculous little bauble, we can control the tremendous Dakoniac, Sire!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E M peasant to werewolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Peasant \n\u0022I...I... will die soon...I\u0027m too weak! P... Please help us!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E humainorder",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Spearman \n\u0022I have orders to prevent anyone from passing through here. You have two options. First, you may turn around and head back the way you came. The other lies at the end of my spear.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "M orderdwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hill Giant \n\u0022You cannot pass. Stay away or get hurt -  bad.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "A dwarfzombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Boirro \n\u0022Pleeeease....leeeave. I don\u0027t know what they\u0027ve done to me. I don\u0027t want to hurt you!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": " spell of the old Wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ancient Hisderon \n\u0022I\u0027m very old and I am dying. I would rather go out in flames than to wither away. Hurry,  I will use my last breath to help you!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L spell old wizard vs L",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ancient Wizard \n\u0022You\u0027ll feel one final sting from this old man before he dies!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E M hint for wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV001f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Thief \n\u0022If you require assistance, seek the Wizard. You can find him between the two falls, a little west of Forgotten Hills. You did not hear this from me.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "A orcchamp multi",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Orc \n\u0022Ha ha ha ! You want to play? Me warn you, Orc play very rough! Me play the most roughest!\u0022 ",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Othon\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I think my magical library can be of some help to you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Ebbon\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "The Barbarians are the better mercenary.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Ebhon\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Take a look at my wares, I may have something of interest to you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "A orcmulti01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Werric\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "My items are the best in the realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0004",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Lergem\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0004",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Take a look at my wares, I may have something of interest to you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "A orcmulti02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0005",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Lergem\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0005",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Everything I possess is for sale.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L Troll attack",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0027",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Orc King \n\u0022You take ours mountain! You treat us like dogs! No more! Now you be food for my Troll!\u0022  ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0006",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Sallat\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SI0006",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Take a look at my wares, I may have something of interest to you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L Gargoyle appear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0028",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Onyx Gargoyle \n\u0022You need some help!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L remove mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV0029",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Baroness \n\u0022The gates are opens it\u0027s time to expand our power.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L dragon entrance",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV002d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demon \n\u0022No more tricks. Defeat them!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250EV002e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Death \n\u0022I will raise my dead army to destroy you all.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "entrance",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "orderhumain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "orderdwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "dryland01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "dryland02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "removemountain01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "remove mountain02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "peasant to werewolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarftowerewolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "old wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "spellOW01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "spellOW02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Old wizard vs legion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xtwo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xtwo02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xtrois01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xtrois02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xtrois03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xquatre01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xquatre02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Barbarian\u0027s lair",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Xquatre03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Tower of Yssard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "guardtresure",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Old Millhouse",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "spawnwizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Millhouse",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "trollattack",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Lost Church",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "demon guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L necromancer guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": " Old tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L occultist guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ruined Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L necromancer02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L remove mountain01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L remove mountain02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "L remove mountain03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "legion goal 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 04",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 05",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 06",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn 07",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250LO0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Valdes",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skyhigh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Soul Screamer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forgebane",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kahjall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Asurabourg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Burtania",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kogdrean Fort",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Huryenna",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gartuel City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fort of the North",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250FT000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fort of the South",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SR000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forsaken ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SR000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "The Arusawood\u0027s Guild",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SR000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forgotten hill\u0027s Peoples",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SR000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forsaken guard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250SR0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Revolting Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doors Guardian",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Leeford",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Boirro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Magic Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sordan ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Onyx Gargoyle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250TM000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clovis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trudulf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baalhu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S250SC0000",
+      "ID_OBJECT": "S250UN000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ancient Hisderon",
+      "SEQ_NUM": 0
+    }
+  ]
+}

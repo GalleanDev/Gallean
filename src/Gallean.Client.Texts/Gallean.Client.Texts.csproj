@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gallean.Client.Texts.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
+  </ItemGroup>
+
+</Project>

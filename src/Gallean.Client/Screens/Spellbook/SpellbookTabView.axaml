@@ -1,0 +1,353 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.SpellbookTabView"
+             x:Name="Screen"
+             x:DataType="local:SpellbookTabViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Image.desaturate">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0" />
+    </Style>
+    <Style Selector=".locked Image.desaturate">
+      <Setter Property="Opacity" Value="0.9" />
+    </Style>
+
+    <Style Selector="Button.spell-tile">
+      <Setter Property="Width" Value="104" />
+      <Setter Property="Padding" Value="4,8,4,6" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.12" />
+        </Transitions>
+      </Setter>
+      <Setter Property="FocusAdorner" Value="{x:Null}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}"
+                  CornerRadius="{TemplateBinding CornerRadius}"
+                  Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="Button.spell-tile:pointerover">
+      <Setter Property="Background" Value="{StaticResource SpellTileHoverBrush}" />
+    </Style>
+    <Style Selector="Button.spell-tile.selected">
+      <Setter Property="Background" Value="{StaticResource SpellTileSelectedBrush}" />
+    </Style>
+
+    <Style Selector="Panel.spell-thumbnail">
+      <Setter Property="Width" Value="76" />
+      <Setter Property="Height" Value="76" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Panel.spell-thumbnail > Border.spell-icon">
+      <Setter Property="Margin" Value="3" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Border.spell-locked-overlay">
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Background" Value="{StaticResource SpellLockedOverlayBrush}" />
+    </Style>
+    <Style Selector=".locked Border.spell-locked-overlay">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Border.spell-border">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="BorderBrush" Value="{StaticResource FrameBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1.5" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+    </Style>
+    <Style Selector="Button.spell-tile.known Border.spell-border">
+      <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+      <Setter Property="BorderThickness" Value="2.5" />
+    </Style>
+    <Style Selector="Button.spell-tile.locked Border.spell-border">
+      <Setter Property="BorderBrush" Value="{StaticResource SpellLockedInkBrush}" />
+    </Style>
+    <Style Selector="Button.spell-tile.selected Border.spell-border">
+      <Setter Property="BorderBrush" Value="{StaticResource SpellSelectedBorderBrush}" />
+      <Setter Property="BorderThickness" Value="3" />
+    </Style>
+    <Style Selector="Button.spell-tile.locked TextBlock.spell-name">
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+
+    <Style Selector="local|IconVisual.spell-lock">
+      <Setter Property="Width" Value="24" />
+      <Setter Property="Height" Value="24" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Foreground" Value="{StaticResource SpellLockedInkBrush}" />
+    </Style>
+    <Style Selector=".locked local|IconVisual.spell-lock">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="Border.spell-research-overlay">
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Background" Value="{StaticResource SpellResearchOverlayBrush}" />
+    </Style>
+    <Style Selector=".researchable Border.spell-research-overlay">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="local|IconVisual.spell-research">
+      <Setter Property="Width" Value="26" />
+      <Setter Property="Height" Value="26" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector=".researchable local|IconVisual.spell-research">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector=".researchable local|IconVisual.spell-research.ready">
+      <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+      <Style.Animations>
+        <Animation Duration="0:0:0.9" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%">
+            <Setter Property="ScaleTransform.ScaleX" Value="0.92" />
+            <Setter Property="ScaleTransform.ScaleY" Value="0.92" />
+            <Setter Property="Effect">
+              <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="4" Opacity="0.2" Color="{x:Static local:Theme+Spell.ResearchGlowColor}" />
+            </Setter>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="ScaleTransform.ScaleX" Value="1.15" />
+            <Setter Property="ScaleTransform.ScaleY" Value="1.15" />
+            <Setter Property="Effect">
+              <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="12" Opacity="0.9" Color="{x:Static local:Theme+Spell.ResearchGlowColor}" />
+            </Setter>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector="Border.level-divider">
+      <Setter Property="Height" Value="1" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Background" Value="{StaticResource DividerBrush}" />
+    </Style>
+
+    <Style Selector="Border.spell-popup-icon">
+      <Setter Property="Width" Value="64" />
+      <Setter Property="Height" Value="64" />
+      <Setter Property="BorderBrush" Value="{StaticResource FrameBorderBrush}" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector=".known Border.spell-popup-icon">
+      <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+    </Style>
+
+    <Style Selector="ContentControl.spell-price">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector=".known ContentControl.spell-price">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="ContentControl.spell-price WrapPanel">
+      <Setter Property="ItemsAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Line.spell-divider">
+      <Setter Property="Margin" Value="0,6" />
+      <Setter Property="Stretch" Value="Fill" />
+      <Setter Property="StartPoint" Value="0,0" />
+      <Setter Property="EndPoint" Value="1,0" />
+      <Setter Property="Stroke" Value="{StaticResource DividerBrush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="StrokeDashArray" Value="4,3" />
+    </Style>
+  </UserControl.Styles>
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="SpellTileTemplate" x:DataType="local:SpellbookItemViewModel">
+      <Panel>
+        <Button Classes="spell-tile"
+                Classes.known="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:SpellbookItemType.Known}}"
+                Classes.researchable="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:SpellbookItemType.Researchable}}"
+                Classes.locked="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:SpellbookItemType.Locked}}"
+                Classes.selected="{Binding IsSelected}"
+                Command="{Binding #Screen.((local:SpellbookTabViewModel)DataContext).SelectSpellCommand}"
+                CommandParameter="{Binding}"
+                DoubleTapped="OnSpellDoubleTapped">
+          <StackPanel Spacing="6">
+            <Panel Classes="spell-thumbnail">
+              <Border Classes="spell-icon" Classes.dark-background="{Binding Details.Icon.Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
+                <Panel>
+                  <local:SpriteVisual SpriteKey="{Binding Details.Icon.Key}" Stretch="UniformToFill" />
+                  <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                  <Border Classes="spell-locked-overlay" />
+                  <Border Classes="spell-research-overlay" />
+                </Panel>
+              </Border>
+              <Border Classes="spell-border" />
+              <local:IconVisual Classes="spell-lock" Moniker="Locked" />
+              <local:IconVisual Classes="spell-research" Classes.ready="{Binding Status.IsAvailable}" Moniker="Research" />
+            </Panel>
+            <TextBlock Classes="caption spell-name"
+                       Text="{Binding Details.Name}"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       MaxLines="2"
+                       TextTrimming="CharacterEllipsis" />
+            <ContentControl Content="{Binding Status.Price}"
+                            Classes="caption spell-price"
+                            HorizontalAlignment="Center"
+                            Foreground="{StaticResource SecondaryTextBrush}" />
+          </StackPanel>
+        </Button>
+        <Popup Placement="RightEdgeAlignedTop"
+               PlacementConstraintAdjustment="FlipX,SlideY"
+               HorizontalOffset="6"
+               VerticalOffset="-6">
+          <Popup.IsOpen>
+            <MultiBinding Converter="{x:Static BoolConverters.And}">
+              <Binding Path="IsSelected" />
+              <Binding ElementName="Screen" Path="((local:SpellbookTabViewModel)DataContext).IsInForeground" />
+            </MultiBinding>
+          </Popup.IsOpen>
+          <local:ModalFrameDecorator Width="340"
+                                     Background="{StaticResource ModalAccentBodyGradientBrush}"
+                                     Classes.known="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:SpellbookItemType.Known}}"
+                                     Classes.locked="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:SpellbookItemType.Locked}}">
+            <StackPanel Margin="18,16,18,18" Spacing="10">
+              <local:PriceButton Classes="pill"
+                                 local:PlateChrome.TextureSeed="1"
+                                 Content="{Binding ActionText}"
+                                 Status="{Binding Status}"
+                                 Command="{Binding #Screen.((local:SpellbookTabViewModel)DataContext).ActivateCommand}"
+                                 IsVisible="{Binding ActionText, Converter={x:Static ObjectConverters.IsNotNull}}" />
+              <ContentControl Content="{Binding Status}"
+                              Classes="caption"
+                              HorizontalAlignment="Center"
+                              IsVisible="{Binding Status.IsReasonVisible}" />
+
+              <Line Classes="spell-divider" />
+
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Border Grid.Column="0" Classes="spell-icon spell-popup-icon" Classes.dark-background="{Binding Details.Icon.Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
+                  <Panel>
+                    <local:SpriteVisual SpriteKey="{Binding Details.Icon.Key}" Stretch="UniformToFill" />
+                    <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                  </Panel>
+                </Border>
+                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                  <local:OutlinedTextBlock Text="{Binding Details.Name}" Classes="object-name row" TextWrapping="Wrap" />
+                  <TextBlock Text="{Binding Details.LevelText}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
+                </StackPanel>
+              </Grid>
+
+              <TextBlock Text="{Binding Details.Description}"
+                         Classes="body"
+                         Foreground="{StaticResource PrimaryTextBrush}"
+                         TextWrapping="Wrap" />
+              <TextBlock Text="{Binding Details.EffectText}"
+                         Classes="body"
+                         Foreground="{StaticResource AccentBrush}"
+                         TextWrapping="Wrap"
+                         IsVisible="{Binding Details.EffectText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            </StackPanel>
+          </local:ModalFrameDecorator>
+        </Popup>
+      </Panel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SpellLevelTemplate" x:DataType="local:SpellbookLevelViewModel">
+      <StackPanel Spacing="6" Margin="0,0,0,14">
+        <Grid ColumnDefinitions="Auto,*">
+          <local:OutlinedTextBlock Grid.Column="0" Text="{Binding Title}" Classes="label" VerticalAlignment="Center" />
+          <Border Grid.Column="1" Classes="level-divider" Margin="12,0,0,0" />
+        </Grid>
+        <ItemsControl Classes="focus-group" ItemsSource="{Binding Spells}" ItemTemplate="{StaticResource SpellTileTemplate}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel ItemSpacing="4" LineSpacing="4" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RequiredBuildingTemplate" x:DataType="local:SpellbookBuildingViewModel">
+      <Border Classes="card" Margin="0,0,0,14" Padding="16,12">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+          <local:IconVisual Grid.Column="0"
+                            Moniker="Spellbook"
+                            Width="28"
+                            Height="28"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource AccentBrush}" />
+          <StackPanel Grid.Column="1" Margin="14,0" Spacing="4" VerticalAlignment="Center">
+            <TextBlock Text="{Binding MessageText}"
+                       Classes="body"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextWrapping="Wrap" />
+            <ContentControl Content="{Binding Status}" Classes="caption" IsVisible="{Binding Status.IsReasonVisible}" />
+          </StackPanel>
+          <local:PriceButton Grid.Column="2"
+                             Content="{Binding ConstructText}"
+                             Status="{Binding Status}"
+                             Classes="pill"
+                             local:PlateChrome.TextureSeed="3"
+                             Command="{Binding ConstructCommand}"
+                             VerticalAlignment="Center"
+                             MinWidth="160" />
+        </Grid>
+      </Border>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
+    <ContentControl Classes="ornament-panel" MaxWidth="900" MaxHeight="660" Margin="18" Padding="22,18,10,10" PointerPressed="OnContentPointerPressed">
+      <Grid RowDefinitions="Auto,Auto,*">
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,12,12">
+          <TextBlock Grid.Column="0"
+                     Text="{Binding ResearchedCountText}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <TextBlock Grid.Column="1"
+                     Text="{local:Text 'Tip: double-click a spell to cast it immediately'}"
+                     Classes="body"
+                     Foreground="{StaticResource SecondaryTextBrush}"
+                     FontStyle="Italic"
+                     VerticalAlignment="Center" />
+        </Grid>
+
+        <ContentControl Grid.Row="1"
+                        Margin="0,0,12,0"
+                        Content="{Binding RequiredBuilding}"
+                        ContentTemplate="{StaticResource RequiredBuildingTemplate}" />
+
+        <ScrollViewer Grid.Row="2" Background="Transparent" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+          <ItemsControl Margin="0,0,12,0" ItemsSource="{Binding Levels}" ItemTemplate="{StaticResource SpellLevelTemplate}">
+            <local:Blankslate.Content>
+              <TextBlock Text="{local:Text 'Your race has no spells.'}"
+                         Classes="caption"
+                         Foreground="{StaticResource SecondaryTextBrush}" />
+            </local:Blankslate.Content>
+          </ItemsControl>
+        </ScrollViewer>
+      </Grid>
+    </ContentControl>
+  </Grid>
+
+</UserControl>

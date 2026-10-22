@@ -1,0 +1,104 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <PublishTrimmed>$(IsPublishable)</PublishTrimmed>
+    <PublishAot>$(IsPublishable)</PublishAot>
+    <PackageProductName>Packer</PackageProductName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Umbra" />
+    <TrimmerRootAssembly Include="Umbra.CorridorKey" />
+    <TrimmerRootAssembly Include="Umbra.Ltx" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <NativePackageVersionsFile>$(BaseIntermediateOutputPath)NativePackageVersions.g.cs</NativePackageVersionsFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(NativePackageVersionsFile)" Visible="false" />
+    <EmbeddedResource Include="Models\vrgbx-inverse-context.safetensors.gz" LogicalName="vrgbx-inverse-context.safetensors.gz" />
+    <EmbeddedResource Include="Models\basicvsrpp-reds4.safetensors.gz" LogicalName="basicvsrpp-reds4.safetensors.gz" />
+    <EmbeddedResource Include="Models\mosr-aomr-2x.safetensors.gz" LogicalName="mosr-aomr-2x.safetensors.gz" />
+  </ItemGroup>
+
+  <Target Name="GenerateNativePackageVersions" BeforeTargets="BeforeCompile">
+    <ItemGroup>
+      <NativePackageVersionsLine Include="namespace Packer%3B" />
+      <NativePackageVersionsLine Include="internal static class NativePackageVersions" />
+      <NativePackageVersionsLine Include="{" />
+      <NativePackageVersionsLine Include="    public const string LibTorch = &quot;$(LibTorchVersion)&quot;%3B" />
+      <NativePackageVersionsLine Include="    public const string LibTorchCuda = &quot;$(LibTorchCudaVersion)&quot;%3B" />
+      <NativePackageVersionsLine Include="    public const string TorchSharp = &quot;$(TorchSharpVersion)&quot;%3B" />
+      <NativePackageVersionsLine Include="    public const string ImageMagick = &quot;$(MagickVersion)&quot;%3B" />
+      <NativePackageVersionsLine Include="}" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(NativePackageVersionsFile)" Lines="@(NativePackageVersionsLine)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+  </Target>
+
+  <ItemGroup>
+    <IlcArg Include="--nowarn:IL3000" Visible="false" />
+    <IlcArg Include="--nowarn:IL2104" Visible="false" />
+    <IlcArg Include="--nowarn:IL3053" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
+    <PackageReference Include="NAudio.Core" />
+    <PackageReference Include="NLayer.NAudioSupport" />
+    <PackageReference Include="OggVorbisEncoder" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\AssetAliases.cs" Link="AssetAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Gallean.Assets\Gallean.Assets.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Configuration\Gallean.Configuration.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Engine.Contracts\Gallean.Engine.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
+    <ProjectReference Include="..\GameContent\GameContent.csproj" />
+    <ProjectReference Include="..\Umbra\Umbra.csproj" />
+    <ProjectReference Include="..\Umbra.CorridorKey\Umbra.CorridorKey.csproj" />
+    <ProjectReference Include="..\Umbra.Ltx\Umbra.Ltx.csproj" />
+    <ProjectReference Include="..\Umbra.Prompts\Umbra.Prompts.csproj" />
+    <ProjectReference Include="..\Umbra.Backgrounds\Umbra.Backgrounds.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Assets" />
+    <Using Include="Umbra" />
+    <Using Include="Umbra.CorridorKey" />
+    <Using Include="Umbra.Ltx" />
+    <Using Include="Umbra.Prompts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Packer.Tests" />
+  </ItemGroup>
+
+  <Target Name="RemoveBuiltNativeLibraries" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <BuiltNativeLibrary Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.AssetType)' == 'native'" />
+      <ReferenceCopyLocalPaths Remove="@(BuiltNativeLibrary)" />
+    </ItemGroup>
+    <Delete Files="@(BuiltNativeLibrary->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+    <Message Condition="@(BuiltNativeLibrary->Count()) != 0" Importance="normal" Text="The build excludes @(BuiltNativeLibrary->Count()) native libraries." />
+  </Target>
+
+  <Target Name="RemovePublishedNativeLibraries" AfterTargets="ComputeResolvedFilesToPublishList">
+    <ItemGroup>
+      <PublishedNativeLibrary Include="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.AssetType)' == 'native'" />
+      <ResolvedFileToPublish Remove="@(PublishedNativeLibrary)" />
+    </ItemGroup>
+    <Message Condition="@(PublishedNativeLibrary->Count()) != 0" Importance="high" Text="The published build excludes @(PublishedNativeLibrary->Count()) native libraries." />
+  </Target>
+
+  <Import Project="..\..\Publish.targets" />
+
+</Project>

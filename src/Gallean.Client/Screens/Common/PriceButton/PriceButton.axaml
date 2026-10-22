@@ -1,0 +1,57 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Style Selector="Button.pill:has-price">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="local:PriceButton">
+        <Panel Background="Transparent">
+          <local:PlateChrome x:Name="PlateChrome"
+                             Classes="pill"
+                             TrailingSectionWidth="{Binding #PriceSection.Bounds.Width}"
+                             TrailingSectionOverlay="{StaticResource PlatePriceOverlayBrush}"
+                             TrailingSectionDivider="{StaticResource PlatePriceDividerBrush}"
+                             TextureSeed="{TemplateBinding (local:PlateChrome.TextureSeed)}" />
+          <Grid ColumnDefinitions="*,Auto">
+            <ContentPresenter x:Name="PlateContent"
+                              Grid.Column="0"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            <ContentPresenter x:Name="PriceSection"
+                              Grid.Column="1"
+                              Content="{TemplateBinding PriceContent}"
+                              Margin="-14,0,0,0"
+                              Padding="10,0,22,0"
+                              VerticalContentAlignment="Center" />
+          </Grid>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.pill:has-price:long-price">
+    <Setter Property="Height" Value="NaN" />
+    <Setter Property="Template">
+      <ControlTemplate TargetType="local:PriceButton">
+        <StackPanel Background="Transparent" Spacing="6">
+          <Panel Height="36">
+            <local:PlateChrome x:Name="PlateChrome"
+                               Classes="pill"
+                               TextureSeed="{TemplateBinding (local:PlateChrome.TextureSeed)}" />
+            <ContentPresenter x:Name="PlateContent"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Padding="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Panel>
+          <ContentPresenter x:Name="PriceSection"
+                            Content="{TemplateBinding PriceContent}"
+                            FontSize="{StaticResource FontSizeMd}"
+                            HorizontalAlignment="Center" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

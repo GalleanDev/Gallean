@@ -1,0 +1,70 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <DataTemplate x:Key="GameSaveRowTemplate" x:DataType="local:GameSaveViewModel">
+      <Border Classes="row" Classes.unreadable="{Binding IsUnreadable}">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+            <local:OutlinedTextBlock Text="{Binding Name}"
+                                     Classes="h4"
+                                     Foreground="{StaticResource PrimaryTextBrush}"
+                                     TextTrimming="CharacterEllipsis" />
+            <TextBlock Text="{Binding ScenarioName}"
+                       Classes="caption"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="2" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding Turn}"
+                       Classes="caption"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextAlignment="Right" />
+            <TextBlock Text="{Binding SavedAt}"
+                       Classes="caption"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       TextAlignment="Right" />
+          </StackPanel>
+        </Grid>
+      </Border>
+    </DataTemplate>
+  </Styles.Resources>
+
+  <Style Selector="ListBox.save-list">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="ItemTemplate" Value="{StaticResource GameSaveRowTemplate}" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem">
+    <Setter Property="Margin" Value="0,1" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+
+  <Style Selector="ListBox.save-list ListBoxItem Border.row">
+    <Setter Property="Padding" Value="12,8" />
+    <Setter Property="Background" Value="{StaticResource CardBackgroundGradientBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem Border.row.unreadable">
+    <Setter Property="Opacity" Value="0.55" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem:pointerover Border.row">
+    <Setter Property="Background" Value="{StaticResource CardHoverBackgroundGradientBrush}" />
+  </Style>
+  <Style Selector="ListBox.save-list ListBoxItem:selected Border.row">
+    <Setter Property="Background" Value="{StaticResource CardSelectedFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CardSelectedBorderGradientBrush}" />
+  </Style>
+</Styles>

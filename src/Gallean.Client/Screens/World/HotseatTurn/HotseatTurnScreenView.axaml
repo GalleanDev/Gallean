@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.HotseatTurnScreenView"
+             x:DataType="local:HotseatTurnScreenViewModel">
+
+  <Border Background="{StaticResource HotseatTurnBackdropBrush}">
+    <local:ModalPanel Width="440" Padding="28,24" Title="{Binding LordName}" InitialFocus="{Binding #ContinueButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="ContinueButton" Grid.Column="1" Content="{local:Text 'Continue'}" Classes="pill" Command="{Binding CloseCommand}" MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <StackPanel Spacing="16">
+        <Border Classes="frame" Width="150" Height="198" BorderThickness="2" HorizontalAlignment="Center">
+          <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Stretch="UniformToFill" />
+        </Border>
+
+        <StackPanel Spacing="10">
+          <TextBlock Text="{Binding RaceTitle}"
+                     Classes="h3"
+                     Foreground="{StaticResource HighlightTextBrush}"
+                     TextWrapping="Wrap"
+                     TextAlignment="Center" />
+
+          <local:OrnamentDivider Width="150" Stroke="{StaticResource ModalOrnamentBrush}" HorizontalAlignment="Center" />
+
+          <TextBlock Text="{local:Text 'It is your turn!'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextWrapping="Wrap"
+                     TextAlignment="Center" />
+        </StackPanel>
+      </StackPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

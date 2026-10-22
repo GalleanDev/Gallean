@@ -1,0 +1,252 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Style Selector="Panel.hud">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.35" Easing="SineEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Panel.hud.shown">
+    <Setter Property="IsHitTestVisible" Value="True" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+  <Style Selector=":is(TextBlock).feedback-label">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="Margin" Value="4,0" />
+  </Style>
+  <Style Selector="Border.feedback.damage">
+    <Setter Property="Background" Value="{StaticResource BattleFeedbackDamageOverlayBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.damage :is(TextBlock).feedback-label">
+    <Setter Property="Foreground" Value="{StaticResource BattleFeedbackDamageTextBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.miss">
+    <Setter Property="Background" Value="{StaticResource BattleFeedbackMissOverlayBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.miss :is(TextBlock).feedback-label">
+    <Setter Property="Foreground" Value="{StaticResource BattleFeedbackMissTextBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.ward">
+    <Setter Property="Background" Value="{StaticResource BattleFeedbackWardOverlayBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.ward :is(TextBlock).feedback-label">
+    <Setter Property="Foreground" Value="{StaticResource BattleFeedbackWardTextBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.heal">
+    <Setter Property="Background" Value="{StaticResource BattleFeedbackHealOverlayBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.heal :is(TextBlock).feedback-label">
+    <Setter Property="Foreground" Value="{StaticResource BattleFeedbackHealTextBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.effect">
+    <Setter Property="Background" Value="{StaticResource BattleFeedbackEffectOverlayBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.effect :is(TextBlock).feedback-label">
+    <Setter Property="Foreground" Value="{StaticResource BattleFeedbackEffectTextBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.action">
+    <Setter Property="Background" Value="{StaticResource BattleFeedbackActionOverlayBrush}" />
+  </Style>
+  <Style Selector="Border.feedback.action :is(TextBlock).feedback-label">
+    <Setter Property="Foreground" Value="{StaticResource BattleFeedbackActionTextBrush}" />
+  </Style>
+
+  <Style Selector="Border.hud-plate">
+    <Setter Property="Background" Value="{StaticResource HudPlateBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource HudPlateBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
+    <Setter Property="BoxShadow" Value="{x:Static local:Theme+Hud.PlateShadow}" />
+  </Style>
+
+  <Style Selector="Border.portrait-panel">
+    <Setter Property="Width" Value="168" />
+    <Setter Property="Height" Value="285" />
+    <Setter Property="Margin" Value="0,14" />
+  </Style>
+
+  <Style Selector="Button.socket.ability">
+    <Setter Property="Width" Value="70" />
+    <Setter Property="Height" Value="70" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+  <Style Selector="Button.socket.item">
+    <Setter Property="ToolTip.Placement" Value="Top" />
+    <Setter Property="ToolTip.VerticalOffset" Value="-8" />
+    <Setter Property="ToolTip.ShowDelay" Value="0" />
+    <Setter Property="ToolTip.ShowOnDisabled" Value="True" />
+  </Style>
+  <Style Selector="Button.socket.item local|SpriteVisual">
+    <Setter Property="Margin" Value="-7" />
+  </Style>
+
+  <Style Selector="Border.hotkey-pill">
+    <Setter Property="Padding" Value="9,1" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="Background" Value="{StaticResource HudHotkeyPillBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource HudHotkeyPillBorderBrush}" />
+    <Setter Property="BorderThickness" Value="2" />
+    <Setter Property="CornerRadius" Value="12" />
+  </Style>
+  <Style Selector="Border.hotkey-pill TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource HudHotkeyTextBrush}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+  </Style>
+
+  <Style Selector="StackPanel.action-row">
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Spacing" Value="12" />
+  </Style>
+  <Style Selector="local|ModalFrameDecorator.action-bar">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="local|ModalFrameDecorator.action-bar > StackPanel">
+    <Setter Property="Margin" Value="3,0" />
+    <Setter Property="Orientation" Value="Horizontal" />
+  </Style>
+  <Style Selector="Border.action-divider">
+    <Setter Property="Width" Value="1" />
+    <Setter Property="Margin" Value="3,8" />
+    <Setter Property="Background" Value="{StaticResource BattleActionBarDividerBrush}" />
+  </Style>
+
+  <Style Selector="Button.bar-action">
+    <Setter Property="Width" Value="48" />
+    <Setter Property="Height" Value="54" />
+    <Setter Property="ToolTip.Placement" Value="Top" />
+    <Setter Property="ToolTip.VerticalOffset" Value="-8" />
+    <Setter Property="ToolTip.ShowDelay" Value="0" />
+    <Setter Property="ToolTip.ShowOnDisabled" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <Panel x:Name="Backdrop" IsVisible="False">
+            <Border x:Name="Ember" />
+            <Border x:Name="Heat" Height="2" VerticalAlignment="Bottom" />
+          </Panel>
+          <Border x:Name="Face" Margin="4,7" CornerRadius="{StaticResource RadiusSm}" />
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.bar-action local|IconVisual">
+    <Setter Property="Width" Value="26" />
+    <Setter Property="Height" Value="26" />
+    <Setter Property="Foreground" Value="{StaticResource HudInkBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action.highlighted /template/ Border#Ember">
+    <Setter Property="Background" Value="{StaticResource BattleActionBarSuggestedEmberGradientBrush}" />
+    <Setter Property="OpacityMask" Value="{StaticResource BattleActionBarSuggestedEmberMaskGradientBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action.highlighted /template/ Border#Heat">
+    <Setter Property="Background" Value="{StaticResource BattleActionBarSuggestedHeatGradientBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action.highlighted /template/ Panel#Backdrop">
+    <Setter Property="IsVisible" Value="True" />
+    <Style.Animations>
+      <Animation Duration="0:0:0.7" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+        <KeyFrame Cue="0%">
+          <Setter Property="Opacity" Value="0.7" />
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="Opacity" Value="1.0" />
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="Button.bar-action:pointerover local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource HudHoverInkBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action.highlighted local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource BattleActionBarSuggestedInkBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action:pointerover /template/ Border#Face">
+    <Setter Property="Background" Value="{StaticResource BattleActionBarHoverFaceBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action:focus-visible /template/ Border#Face">
+    <Setter Property="BorderBrush" Value="{StaticResource FocusRingBrush}" />
+    <Setter Property="BorderThickness" Value="1.5" />
+  </Style>
+  <Style Selector="Button.bar-action:pressed">
+    <Setter Property="Opacity" Value="0.85" />
+  </Style>
+  <Style Selector="Button.bar-action:disabled local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource HudDisabledInkBrush}" />
+  </Style>
+  <Style Selector="Button.bar-action:disabled /template/ Border#Face">
+    <Setter Property="Background" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Button.bar-action:disabled /template/ Panel#Backdrop">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+
+  <Style Selector="ToolTip.action-caption">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Content="{TemplateBinding Content}" />
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ToolTip.action-caption Border.hotkey-pill">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.action-caption">
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="Outline" Value="{StaticResource UnitPortraitHitpointsOutlineBrush}" />
+    <Setter Property="OutlineThickness" Value="1" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="2" Opacity="1" Color="{x:Static local:Theme+UnitPortrait.HitpointsShadowColor}" />
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.target-plate">
+    <Setter Property="Padding" Value="8,8,16,8" />
+  </Style>
+  <Style Selector="Run.target-level">
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+  </Style>
+  <Style Selector="local|UnitIcon.target-face">
+    <Setter Property="Width" Value="64" />
+    <Setter Property="Height" Value="64" />
+  </Style>
+
+  <Style Selector="local|BarVisual.target-hitpoints">
+    <Setter Property="Width" Value="284" />
+    <Setter Property="Height" Value="26" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+  </Style>
+
+  <Style Selector="local|PointerTiltDecorator.event-portrait">
+    <Setter Property="Height" Value="340" />
+    <Setter Property="AngleX" Value="8" />
+    <Setter Property="AngleY" Value="14" />
+    <Setter Property="Tilt" Value="2" />
+  </Style>
+
+  <Style Selector="local|PointerTiltDecorator.event-portrait.target">
+    <Setter Property="AngleY" Value="-14" />
+  </Style>
+
+  <Style Selector="local|OutlinedTextBlock.event-portrait-name">
+    <Setter Property="Margin" Value="0,0,0,64" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
+  </Style>
+
+</Styles>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
+    <PackageReference Include="NAudio.Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\AssetAliases.cs" Link="AssetAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Gallean.Assets\Gallean.Assets.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Common\Gallean.Common.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Configuration\Gallean.Configuration.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Engine.Contracts\Gallean.Engine.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Assets" />
+    <Using Include="Gallean.Entities" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="GameContent.Tests" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.LoadGameScreenView"
+             x:DataType="local:LoadGameScreenViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
+    <local:ModalPanel Classes="accent" Width="620" Padding="28,24" Title="{local:Text 'Load game'}" InitialFocus="{Binding #LoadButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+          <Button Grid.Column="0"
+                  Classes="pill danger"
+                  local:PlateChrome.TextureSeed="1"
+                  Command="{Binding DeleteCommand}"
+                  MinWidth="130">
+            <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+              <local:IconVisual Moniker="Delete"
+                                Width="18"
+                                Height="18"
+                                VerticalAlignment="Center"
+                                Foreground="{Binding $parent[Button].Foreground}" />
+              <TextBlock Text="{local:Text 'Delete'}" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+          <Button x:Name="LoadButton"
+                  Grid.Column="2"
+                  Content="{local:Text 'Load'}"
+                  Classes="pill primary"
+                  local:PlateChrome.TextureSeed="2"
+                  Command="{Binding Game.LoadGameCommand}"
+                  CommandParameter="{Binding SaveList.SelectedSave.Entry}"
+                  MinWidth="130"
+                  Margin="0,0,16,0" />
+          <Button Grid.Column="3"
+                  Content="{local:Text 'Close'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="3"
+                  Command="{Binding CloseCommand}"
+                  MinWidth="130" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <ScrollViewer Classes="list" Height="340" HorizontalScrollBarVisibility="Disabled">
+        <ListBox Classes="save-list"
+                 ItemsSource="{Binding SaveList.Saves}"
+                 SelectedItem="{Binding SaveList.SelectedSave}"
+                 DoubleTapped="OnSaveDoubleTapped">
+          <local:Blankslate.Content>
+            <TextBlock Text="{local:Text 'There are no saved games.'}"
+                       Classes="body"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+          </local:Blankslate.Content>
+        </ListBox>
+      </ScrollViewer>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

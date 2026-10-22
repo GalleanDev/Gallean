@@ -1,0 +1,139 @@
+uniform shader source;
+uniform shader normals;
+uniform shader ambient;
+uniform shader reflection;
+
+uniform float4 rigLightPositions[8];
+uniform float4 rigLightRadiances[8];
+uniform float4 spriteLightPositions[16];
+uniform float4 spriteLightRadiances[16];
+uniform float3 sunDirection;
+uniform float3 sunRadiance;
+uniform float3 sunGrade;
+uniform float3 skyRadiance;
+uniform float2 ambientSize;
+uniform float2 reflectionSize;
+uniform float2 sceneOffset;
+uniform float4 highlightColor;
+uniform float highlightTime;
+
+const float Pi = 3.14159265;
+const float3 View = float3(0.0, 0.0, 1.0);
+const float CoverageThreshold = 0.06;
+const float EdgeInsetAlpha = 0.5;
+const float EdgeDamping = 0.55;
+const float Roughness = 0.6;
+const float MinimumSteeperDot = 0.0709;
+const float EnvironmentGain = 1.2;
+const float FacingReflectance = 0.04;
+const float GrazingReflectanceGain = 3.9;
+const float GrazingReflectanceExponent = 3.3;
+const float HighlightOrbitSpeed = 1.7;
+const float HighlightOrbitTilt = 0.6;
+const float HighlightOrbitElevation = 0.45;
+const float HighlightKeyExponent = 4.0;
+const float HighlightGrazingExponent = 2.5;
+const float HighlightGrazingGain = 0.9;
+const float HighlightKeyGain = 0.7;
+
+float3 srgbToLinear(float3 color) {
+    return pow(max(color, 0.0), float3(2.2));
+}
+
+float3 linearToSrgb(float3 color) {
+    return pow(max(color, 0.0), float3(1.0 / 2.2));
+}
+
+float orenNayar(float3 normal, float3 toLight) {
+    float lightDot = clamp(dot(normal, toLight), 0.0, 1.0);
+    float viewFacing = dot(normal, View);
+    float viewDot = clamp(viewFacing, 0.0, 1.0);
+    float sigmaSquared = Roughness * Roughness;
+    float a = 1.0 - 0.5 * sigmaSquared / (sigmaSquared + 0.33);
+    float b = 0.45 * sigmaSquared / (sigmaSquared + 0.09);
+
+    float tangentDot = max(dot(View, toLight) - lightDot * viewFacing, 0.0);
+    float steeperDot = max(max(lightDot, viewDot), MinimumSteeperDot);
+
+    return lightDot / Pi * (a + b * tangentDot / steeperDot);
+}
+
+float3 sampleEnvironment(float3 direction, float2 size, bool reflected) {
+    float2 coord = (0.5 + 0.5 * direction.xy) * size;
+    float3 color = reflected ? float3(reflection.eval(coord).rgb) : float3(ambient.eval(coord).rgb);
+
+    return srgbToLinear(color) * sunGrade * EnvironmentGain;
+}
+
+float3 directionalLight(float3 normal, float3 direction, float3 radiance) {
+    return orenNayar(normal, direction) * radiance;
+}
+
+float3 pointLight(float3 normal, float3 position, float4 light, float3 radiance) {
+    float3 delta = light.xyz - position;
+    float distance = length(delta);
+    float relative = distance / light.w;
+    float attenuation = 1.0 / (1.0 + relative * relative);
+
+    return orenNayar(normal, delta / max(distance, 1e-4)) * radiance * attenuation;
+}
+
+float3 highlight(float3 normal) {
+    float angle = highlightTime * HighlightOrbitSpeed;
+    float3 orbit = normalize(float3(cos(angle), sin(angle) * HighlightOrbitTilt, HighlightOrbitElevation));
+    float key = pow(clamp(dot(normal, orbit), 0.0, 1.0), HighlightKeyExponent);
+    float grazing = pow(1.0 - clamp(dot(normal, View), 0.0, 1.0), HighlightGrazingExponent);
+
+    return highlightColor.rgb * (grazing * HighlightGrazingGain + key * HighlightKeyGain) * highlightColor.a;
+}
+
+half4 main(float2 coord) {
+    half4 sourceSample = source.eval(coord);
+    float sourceAlpha = float(sourceSample.a);
+
+    if (sourceAlpha < CoverageThreshold) {
+        return sourceSample;
+    }
+
+    float3 color = float3(sourceSample.rgb) / sourceAlpha;
+    float3 encoded = float3(normals.eval(coord).rgb);
+    float3 normal = normalize(float3(encoded.r * 2.0 - 1.0, -(encoded.g * 2.0 - 1.0), encoded.b * 2.0 - 1.0));
+
+    float inset = clamp((sourceAlpha - EdgeInsetAlpha) / (1.0 - EdgeInsetAlpha), 0.0, 1.0);
+
+    float3 surfaceNormal = normal;
+    normal = normalize(mix(View, normal, EdgeDamping + (1.0 - EdgeDamping) * inset));
+
+    float3 scenePosition = float3(coord + sceneOffset, 0.0);
+    float3 light = directionalLight(normal, sunDirection, sunRadiance);
+
+    for (int index = 0; index < 8; index++) {
+        if (rigLightPositions[index].w > 0.0) {
+            light += pointLight(normal, scenePosition, rigLightPositions[index], rigLightRadiances[index].rgb);
+        }
+        else {
+            break;
+        }
+    }
+
+    for (int index = 0; index < 16; index++) {
+        if (spriteLightPositions[index].w > 0.0) {
+            light += pointLight(normal, scenePosition, spriteLightPositions[index], spriteLightRadiances[index].rgb);
+        }
+        else {
+            break;
+        }
+    }
+
+    float facing = clamp(dot(normal, View), 0.0, 1.0);
+    float reflectance = FacingReflectance * (1.0 + GrazingReflectanceGain * pow(1.0 - facing, GrazingReflectanceExponent));
+    float smoothness = 1.0 - Roughness;
+
+    float skyWeight = 0.5 - 0.5 * normal.y;
+    float3 ambientLight = mix(sampleEnvironment(normal, ambientSize, false), skyRadiance, skyWeight);
+    float3 reflectedLight = sampleEnvironment(reflect(-View, normal), reflectionSize, true) * reflectance * smoothness * smoothness;
+
+    float3 lit = linearToSrgb(clamp(srgbToLinear(color) * (light + ambientLight) + reflectedLight, 0.0, 1.0));
+    float3 mixed = mix(color, lit, sourceAlpha) + highlight(surfaceNormal) * sourceAlpha;
+    return half4(half3(mixed * sourceAlpha), half(sourceAlpha));
+}

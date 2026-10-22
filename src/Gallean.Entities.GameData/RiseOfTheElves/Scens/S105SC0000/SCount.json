@@ -1,0 +1,1661 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105OB0000",
+      "TYPE": "MAP_OBJECT",
+      "COUNT": 555
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105MP0000",
+      "TYPE": "MAP",
+      "COUNT": 48
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105SC0000",
+      "TYPE": "TEXT",
+      "COUNT": 275
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KS0000",
+      "TYPE": "KNOWN_SPELLS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KS0009",
+      "TYPE": "KNOWN_SPELLS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KS000a",
+      "TYPE": "KNOWN_SPELLS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105PB0000",
+      "TYPE": "PLAYER_BUILDING",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105PB0009",
+      "TYPE": "PLAYER_BUILDING",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105PB000a",
+      "TYPE": "PLAYER_BUILDING",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FG0000",
+      "TYPE": "FOG",
+      "COUNT": 48
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FG0009",
+      "TYPE": "FOG",
+      "COUNT": 48
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FG000a",
+      "TYPE": "FOG",
+      "COUNT": 48
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105PN0000",
+      "TYPE": "MAPEL_COUNT",
+      "COUNT": 573
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105PN0000",
+      "TYPE": "MAPEL_SIZE",
+      "COUNT": 48
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0000",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0001",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0002",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0003",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0004",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0009",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN000b",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN000d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN000f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0011",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0013",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0016",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0018",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN001e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 4
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0020",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0022",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0024",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0027",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN002a",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN002c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN002e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0032",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0034",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0036",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0039",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN003c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN003d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN003e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN003f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0040",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0041",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0042",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0046",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0047",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0048",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0049",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN004a",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN004c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN004d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN004e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN004f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0050",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0051",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0052",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0054",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0056",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0057",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0058",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0059",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN005a",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN005b",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN005c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN005d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN005e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN005f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0060",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0061",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0062",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0063",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0064",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0066",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0068",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN006c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0071",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0072",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0073",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0074",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0075",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0076",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0077",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0078",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN007c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN007d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN007e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN007f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0080",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0081",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0084",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0085",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0087",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0088",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0089",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN008b",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN008c",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN008d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN008e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN008f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0090",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0091",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0092",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0093",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0094",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0095",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0096",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0097",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0098",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN0099",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN009d",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN009e",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN009f",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a0",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a1",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a3",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a4",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a5",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a6",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a8",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00a9",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ac",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ad",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ae",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00af",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b0",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b1",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b2",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b3",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b4",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b5",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b6",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b7",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b8",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00b9",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ba",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00bb",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00bc",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00be",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00bf",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c0",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c1",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c3",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c4",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c5",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c6",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c7",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00c8",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ca",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 8
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00cb",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00cc",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00cf",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d0",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d1",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d2",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d3",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d4",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d5",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d6",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d7",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d8",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00d9",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00da",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00db",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00dc",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00dd",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00de",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00df",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e1",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e3",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 5
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e4",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e5",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e6",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e7",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e8",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00e9",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ea",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00eb",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ec",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ee",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00ef",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00f0",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00f1",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105UN00f2",
+      "TYPE": "UNIT_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105SI0000",
+      "TYPE": "SITE_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105SI0001",
+      "TYPE": "SITE_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105SI0002",
+      "TYPE": "SITE_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105RU0000",
+      "TYPE": "RUIN_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105RU0001",
+      "TYPE": "RUIN_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105RU0002",
+      "TYPE": "RUIN_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105RU0003",
+      "TYPE": "RUIN_VISIT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FT0000",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 5
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FT0001",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FT0002",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105FT0005",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0000",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0001",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0002",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0003",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0004",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0005",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0006",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0007",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0008",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0009",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC000a",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC000b",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC000d",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC000e",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC000f",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0010",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0011",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0013",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0014",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0015",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0016",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0017",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0018",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0019",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC001a",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC001b",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC001c",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC001d",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC001e",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC001f",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0020",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0021",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0023",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0026",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0027",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0028",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0029",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC002a",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC002b",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC002c",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC002d",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC002e",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 2
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC002f",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0030",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105KC0031",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0000",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0001",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0002",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0003",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0004",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0005",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0006",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0007",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0008",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0009",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG000a",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG000b",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG000c",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG000d",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG000e",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG000f",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0010",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0011",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0012",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0013",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0014",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105BG0015",
+      "TYPE": "INVENTORY_CONTENT",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105ET0000",
+      "TYPE": "SPELLEFFECTS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105ST0000",
+      "TYPE": "CASTSPELL",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105ST0000",
+      "TYPE": "CASTWAND",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105DP0000",
+      "TYPE": "DIPLO",
+      "COUNT": 3
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105SD0000",
+      "TYPE": "STACK_DESTROYED",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105EV0002",
+      "TYPE": "EFFECT_UNFOG",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105SC0000",
+      "TYPE": "COUNTSTREAM",
+      "COUNT": 276
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105TC0000",
+      "TYPE": "TALISMAN_CHARGES",
+      "COUNT": 1
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105ML0000",
+      "TYPE": "MOUNTAINS",
+      "COUNT": 133
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105TM0000",
+      "TYPE": "STK_TEMPL_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105TM0001",
+      "TYPE": "STK_TEMPL_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105TM0002",
+      "TYPE": "STK_TEMPL_MODIFS",
+      "COUNT": 0
+    },
+    {
+      "NO_SCEN": "S105SC0000",
+      "ID": "S105TM0003",
+      "TYPE": "STK_TEMPL_MODIFS",
+      "COUNT": 0
+    }
+  ]
+}

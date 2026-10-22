@@ -1,0 +1,186 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:configuration="clr-namespace:Gallean.Configuration;assembly=Gallean.Configuration"
+             x:Class="Gallean.Client.SettingsScreenView"
+             x:DataType="local:SettingsScreenViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
+    <local:ModalPanel Classes="accent" Width="520" Padding="28,24" Title="{local:Text 'Settings'}" InitialFocus="{Binding #CloseButton}">
+
+      <local:ModalPanel.Footer>
+        <Button x:Name="CloseButton" Margin="0,24,0,0" HorizontalAlignment="Right" Content="{local:Text 'Close'}" Classes="pill" Command="{Binding CloseCommand}" MinWidth="150" />
+      </local:ModalPanel.Footer>
+
+      <StackPanel Spacing="20">
+        <Border Classes="heading" Margin="-28,0" Padding="28,8">
+          <local:OutlinedTextBlock Text="{local:Text 'Sound and music'}" Classes="label" />
+        </Border>
+
+        <Grid ColumnDefinitions="120,*,48" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+          <TextBlock Grid.Row="0"
+                     Grid.Column="0"
+                     Text="{local:Text 'Sound effects'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <Slider Grid.Row="0"
+                  Grid.Column="1"
+                  Minimum="{Binding MinVolume}"
+                  Maximum="{Binding MaxVolume}"
+                  TickFrequency="5"
+                  IsSnapToTickEnabled="True"
+                  Value="{Binding SoundVolume}"
+                  VerticalAlignment="Center" />
+          <TextBlock Grid.Row="0"
+                     Grid.Column="2"
+                     Text="{Binding SoundVolume}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextAlignment="Right"
+                     VerticalAlignment="Center" />
+
+          <TextBlock Grid.Row="1"
+                     Grid.Column="0"
+                     Text="{local:Text 'Music'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <Slider Grid.Row="1"
+                  Grid.Column="1"
+                  Minimum="{Binding MinVolume}"
+                  Maximum="{Binding MaxVolume}"
+                  TickFrequency="5"
+                  IsSnapToTickEnabled="True"
+                  Value="{Binding MusicVolume}"
+                  VerticalAlignment="Center" />
+          <TextBlock Grid.Row="1"
+                     Grid.Column="2"
+                     Text="{Binding MusicVolume}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextAlignment="Right"
+                     VerticalAlignment="Center" />
+        </Grid>
+
+        <Border Classes="heading" Margin="-28,0" Padding="28,8">
+          <local:OutlinedTextBlock Text="{local:Text 'Display'}" Classes="label" />
+        </Border>
+
+        <CheckBox IsChecked="{Binding Windowed}">
+          <TextBlock Text="{local:Text 'Windowed mode (F11)'}" Classes="body" Foreground="{StaticResource PrimaryTextBrush}" />
+        </CheckBox>
+
+        <CheckBox IsChecked="{Binding LockCursor}">
+          <TextBlock Text="{local:Text 'Lock cursor to window'}" Classes="body" Foreground="{StaticResource PrimaryTextBrush}" />
+        </CheckBox>
+
+        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+          <TextBlock Grid.Row="0"
+                     Grid.Column="0"
+                     Text="{local:Text 'Interface scale'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="0"
+                    Grid.Column="1"
+                    ItemsSource="{Binding UiScales}"
+                    SelectedItem="{Binding UiScale}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="local:UiScaleOption">
+                <TextBlock Text="{Binding Scale, StringFormat={}{0}%, TargetNullValue={local:Text 'Automatic (from DPI)'}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="1"
+                     Grid.Column="0"
+                     Text="{local:Text 'Render resolution'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="1"
+                    Grid.Column="1"
+                    ItemsSource="{Binding RenderResolutions}"
+                    SelectedItem="{Binding RenderResolution}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="sys:Int32">
+                <TextBlock Text="{Binding StringFormat={}{0}%}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+
+        <Border Classes="heading" Margin="-28,0" Padding="28,8">
+          <local:OutlinedTextBlock Text="{local:Text 'Game'}" Classes="label" />
+        </Border>
+
+        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+          <TextBlock Grid.Row="0"
+                     Grid.Column="0"
+                     Text="{local:Text 'Autosave interval'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="0"
+                    Grid.Column="1"
+                    ItemsSource="{Binding AutoSaveIntervals}"
+                    SelectedItem="{Binding AutoSaveInterval}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="sys:Int32">
+                <TextBlock Text="{Binding Converter={x:Static local:AutoSaveIntervalConverter.Instance}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="1"
+                     Grid.Column="0"
+                     Text="{local:Text 'Autosave limit'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="1"
+                    Grid.Column="1"
+                    ItemsSource="{Binding AutoSaveLimits}"
+                    SelectedItem="{Binding AutoSaveLimit}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="sys:Int32">
+                <TextBlock Text="{Binding}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="2"
+                     Grid.Column="0"
+                     Text="{local:Text 'Battle speed'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="2"
+                    Grid.Column="1"
+                    ItemsSource="{Binding BattleSpeeds}"
+                    SelectedItem="{Binding BattleSpeed}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="configuration:BattleSpeed">
+                <TextBlock Text="{Binding Converter={x:Static local:BattleSpeedConverter.Instance}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+      </StackPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AvaloniaAccessUnstablePrivateApis>true</AvaloniaAccessUnstablePrivateApis>
+    <NoWarn>$(NoWarn);AVA3001</NoWarn>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\EngineAliases.cs" Link="EngineAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Theme\Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="**\*.axaml" Exclude="bin\**;obj\**" />
+    <CompilerVisibleProperty Include="ProjectDir" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Assets" />
+    <Using Include="Gallean.Engine.Contracts" />
+    <Using Include="Gallean.Client.Shaders" />
+    <Using Include="Gallean.Client.Texts" />
+    <Using Include="Gallean.Client.Texts.TextCatalog" Static="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Assets\Gallean.Assets.csproj" />
+    <ProjectReference Include="..\Gallean.Client.Shaders\Gallean.Client.Shaders.csproj" />
+    <ProjectReference Include="..\Gallean.Client.Texts\Gallean.Client.Texts.csproj" />
+    <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Configuration\Gallean.Configuration.csproj" />
+    <ProjectReference Include="..\Gallean.Engine\Gallean.Engine.csproj" />
+    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
+    <ProjectReference Include="..\Gallean.Client.Texts.Generators\Gallean.Client.Texts.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Skia" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="NAudio.Alsa" />
+    <PackageReference Include="NAudio.Core" />
+    <PackageReference Include="NAudio.Wasapi" />
+    <PackageReference Include="NVorbis" />
+    <PackageReference Include="SkiaSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gallean.Client.Tests" />
+  </ItemGroup>
+
+  <Target Name="EnsureAvaloniaXamlCompilation"
+          BeforeTargets="CoreCompile"
+          Condition="'$(DesignTimeBuild)' != 'true' AND '$(EnableAvaloniaXamlCompilation)' != 'false' AND Exists('@(IntermediateAssembly)')"
+          Inputs="@(IntermediateAssembly)"
+          Outputs="$(IntermediateOutputPath)avalonia-xaml-compilation.stamp">
+    <Delete Files="@(IntermediateAssembly)" />
+  </Target>
+
+  <Target Name="TrackAvaloniaXamlCompilation" AfterTargets="CompileAvaloniaXaml">
+    <Touch Files="$(IntermediateOutputPath)avalonia-xaml-compilation.stamp" AlwaysCreate="true" />
+    <ItemGroup>
+      <FileWrites Include="$(IntermediateOutputPath)avalonia-xaml-compilation.stamp" />
+    </ItemGroup>
+  </Target>
+
+</Project>

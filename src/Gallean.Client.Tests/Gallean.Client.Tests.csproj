@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Headless.NUnit" />
+    <PackageReference Include="OggVorbisEncoder" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\EngineAliases.cs" Link="EngineAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Client\Gallean.Client.csproj" />
+    <ProjectReference Include="..\Gallean.Engine.Tests\Gallean.Engine.Tests.csproj" />
+    <ProjectReference Include="..\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Assets" />
+    <Using Include="Gallean.Engine.Contracts" />
+    <Using Include="Gallean.Client.Texts" />
+    <Using Include="Gallean.Client.Texts.TextCatalog" Static="true" />
+  </ItemGroup>
+
+</Project>

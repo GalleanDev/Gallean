@@ -1,0 +1,796 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Whirlpool",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200MM000f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Tralar\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "My items are the best in the realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Herbert\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Come in, I will make worthy fighters out of your frail soldiers.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Known in his times as the mightiest of all adepts of the black art, this lord was slain by the inquisitor Vorgel who ended his reign of terror. He is now resurrected as an undead with the intention to subjugate every mortal to his will.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "A veteran in the struggle to reclaim Elven glory, nobody enters the forest without his knowledge.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pradesh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kaprielle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Oak",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Efrahel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fog-Elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fog-Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Healing 1 ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Healing 2 ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves-GFC Threat",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Centaur Charger \n\u0022Halt! The Elven Alliance is not welcomed here. I am on a mission of peace. Despite our differences I am willing to give you a chance to leave once and for all. Now go before I am forced to strike you down!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead-GFC threat ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Centaur Charger \n\u0022Evil creature of the night! We know what you have done to the Dark Elves. Great Gallean shall punish you!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Rotturdam",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Our city will not remain in the hands of the Elven Alliance for very long!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves-Unit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Our city will not remain in the hands of the Undead Hordes for too long!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Loot GFC Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Loot Sea Forest Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcs Appear ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Win_Elves ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Win-Undead ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Isnill",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Oak",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0046",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN004b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Erwylle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN004f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ildest",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doraven",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0062",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0072",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cillen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0076",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN007a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0080",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0084",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cendyll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0088",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ellysium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gromdam",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rotturdam",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Silveria",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN008f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0090",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0091",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0092",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0093",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0094",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0095",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN0096",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN009a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN009b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN009c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN009d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN009e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200UN009f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sividd",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dryad Of The Forests",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aurangzeb Of The Dead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Warden Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Green Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "The 5th Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Medeus Cult ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Goblin Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Sea Forest Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Hideout",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": "GFC Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "Eternity Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0007",
+      "ID_STRING": "TITLE",
+      "TEXT": "Pandemoneus Lair",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0008",
+      "ID_STRING": "TITLE",
+      "TEXT": "Abandoned Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU0009",
+      "ID_STRING": "TITLE",
+      "TEXT": "Imperial Ruin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU000a",
+      "ID_STRING": "TITLE",
+      "TEXT": "Lair",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200RU000b",
+      "ID_STRING": "TITLE",
+      "TEXT": "Haunted Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200SR000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Galleans Fifth Column ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Darkness",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Healing 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Healing 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eternity Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sea Forest Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC Threaten Elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC-Threaten undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S200SC0000",
+      "ID_OBJECT": "S200LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcs",
+      "SEQ_NUM": 0
+    }
+  ]
+}

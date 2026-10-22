@@ -1,0 +1,2840 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gardharus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Merlot",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Heiric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Erwylle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Assam",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clovis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "In his youth, this mighty lord once stood fast against an army from hell and single-handedly defeated them by sealing the gateway that spew them. He then became sovereign of his realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lideric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Highest lord of the dwarf lords, she is known for her intensity in battle and her courage in the face of overwhelming odds. She once fought seven days and nights against the mighty red dragon ARFURUZON to finally defeat him.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ellamend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nehru",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251PL0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Known in his times as the mightiest of all adepts of the black art, this lord was slain by the inquisitor Vorgel who ended his reign of terror. He is now resurrected as an undead with the intention to subjugate every mortal to his will.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Squire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0056",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN005a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Squire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0062",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN006c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN006d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN006e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0070",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Shamaness",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0073",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trapper",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0076",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Shamaness",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0079",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN007d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lich",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN007f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Necromancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0082",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skeleton Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0086",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0087",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0088",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doomdrake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0089",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN008e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Necromancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0091",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0094",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0095",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN0097",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN009b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demonologist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN009e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Occultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Occultist",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cyclops",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00b2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00bf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00c8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00cc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00cd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00d2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00d6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00d8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00da",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Deathdragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Air Elemental",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Air Elemental",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Air Elemental",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00e9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spirit Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00ee",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00f2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00f4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Assassin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251UN00fa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Elf Fire Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sun Dancer \n\u0022Priests of Fire, we seek your knowledge!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022And what would you do with it, child?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sun Dancer \n\u0022We know you grow weaker each day and we know why. We can destroy the relic, but you must help us reach it. We seek your part of the incantation.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022Very well. The chant begins with \u0027Emmos Na,\u0022 though I doubt the other priests will give you the rest of the spell. I have accepted my own death, but the thought that someone works to stop it intrigues me...\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Elf Bone Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Why do the living drift into my temple?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022You are one of us, at least for now. And you are dying. If you help us reach the relic, we can destroy it.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Death means rebirth for one such as myself. You will not be able to...STOP! WHAT ARE YOU DOING?\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022I\u0027m setting fire to your temple. If you won\u0027t help us, why should we let this accursed place remain?\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022No, wait! I will tell you! The middle of the incantation is \u0027Dellom Vrallak,\u0022 but it won\u0027t do you any good! The others will not help you!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Elf Water Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest of Water \n\u0022Elves? What business do you have here?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sylph \n\u0022We seek to destroy the relic that is corrupting these lands. We cannot do so without your help. We require your portion of the incantation that seals the gate.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest of Water \n\u0022The incantation ends with \u0027Nes Serem.\u0022 Now go! Quickly! My kind will not tolerate the presence of Elves in their waters, though you attempt a noble task.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "\u002BElf Counter=3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Channeler \n\u0022That\u0027s it! We\u0027ve learned the complete incantation, assuming none of the mages deceived us. We must hurry to the seal!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves Approach Seal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Channeler \n\u0022EMMOS NA DELLOM VRALLAK NES SEREM!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Channeler \n\u0022It worked! Now, we mus..WHAT?!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Many thanks, Elves. You\u0027ve been most helpful. Feel free to go back to your forest...we can handle this. We\u0027ll see to it that whatever relic lies ahead is...err...destroyed.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022He\u0027s lying!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Ah, I was hoping to avoid getting my hands dirty. Archibald, I trust you came armed this time?\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archibald \n\u0022Right.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0004",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Destroy Gardharus\u0027 Group.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves Kill Gardharus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Channeler \n\u0022He\u0027s dead. Let\u0027s see what it is that drove him to his own destruction...so horrible! I can\u0027t even keep my eyes focused on it! This must never fall into tainted hands. We must destroy it!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Grovemaiden \n\u0022Such a thing cannot be destroyed, but the forest can bury it for us. We will see to it that roots pull it so deep into the soil that it will never affect the surface with its corruption again.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Empire Bone Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Holy men? Why do holy men visit a place like this? You are not welcome here.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hierophant \n\u0022In the name of the Highfather, I cleanse this foul place of...\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022No! Wait! Surely we can come to some arrangement! Please...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hierophant \n\u0022Tell us how to open the seal.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022I only know a segment of it! You should know that! It\u0027s the middle of the incantation -  \u0022Dellom Vrallak.\u0022 Please...leave this place!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hierophant \n\u0022Thank you. Now, where were we? Cleanse this foul place of unholy spirits...\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Noooooo!\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Empire Fire Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sorcerer \n\u0022Knights? Gah! Let me die in peace.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Paladin \n\u0022We shall, if you do us a small favor. We merely require your portion of the incantation. Deliver it, and we will leave. You have my word.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sorcerer \n\u0022I suppose these lands are already dead. There\u0027s no escaping the corruption...do you understand? Seeking it will only kill you faster. The incantation begins with \u0022Emmos Na.\u0022 ",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Empire Water Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest of Water \n\u0022Why do the Humans seek us?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ranger \n\u0022We seek to destroy the relic that is corrupting these lands. I can smell the death upon your sea, even this far north. Tell us the water chant of the incantation and we will try to stop it.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest of Water \n\u0022I sense you speak the truth. The incantation ends with \u0022nes Serem,\u0022 but I doubt the other temples will cooperate with you.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire Approach Seal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Wizard \n\u0022EMMOS NA DELLOM VRALLAK NES SEREM!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Wizard \n\u0022The incantation was correct. We must...\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Thank you, brave knights. Your task is done. My crew will see to it that the...thing...is disposed of properly. Send my thanks to King Emry. You have done a great thing.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Grand Inquisitor \n\u0022He\u0027s lying.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Ah, I was hoping to avoid getting my hands dirty. Archibald, I trust you came armed this time?\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archibald \n\u0022Right.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0009",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Destroy Gardharus\u0027 Group.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "\u002BEmpire Counter = 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Imperial Priest \n\u0022That should be the entire incantation! We should hurry to the seal!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire Kills Gardharus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Prophetess \n\u0022What is it? The power...it\u0027s blinding! We won\u0027t be able to destroy this! It wants to be freed...it wants us to bring it with us...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Grand Inquisitor \n\u0022It\u0027s using you. It is so corrupt it seeks to lash out at the world. We will try performing an exorcism...it is certainly conscious. An object cannot gain life! It must be a malicious spirit!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Clans Fire Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022I would have thought these lands too hot for the likes of you, half-men.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Flamecaster \n\u0022We\u0027ll manage. We\u0027re here for your part of the incantation.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022And what would you diggers do with the relic should you find it? Place it on some statue of Wotan to show your wealth?\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Flame Caster \n\u0022That\u0027s none of your concern. We know the relic is killing you priests. We\u0027ll take it off your hands. It\u0027s that simple.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022Hahaha! It\u0027s far from simple, but you amuse me. My part of the incantation is \u0022Emmos Na.\u0022 It begins the chant.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Clans Bone Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Mortis calls to me! She does...calls, calls! Draining me. The relic. Draining...calls! Soon I transform into something perfect. The chant...the chant...here for the chant, like the rest, are you?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dwarf \n\u0022He\u0027s about to die...his mind has already left him. The chant, old man! What is it? Tell us quickly!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Yes, yes. No harm now. Not the same. No. Changing. Dellom Vrallak. That\u0027s it. That is the center. Use it, before you change too. Oh, sweet Mortis.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Clans Water Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Preist of Water \n\u0022Why do you taint our waters, children of Wotan?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hermit \n\u0022You know as well as we do there is something much more powerful harming this sea. We are here with an offer to remove it. Give us your part of the incantation and we will take it far from here.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest of Water \n\u0022There is no reason for me to keep it from you. If you are lying, we will perish. If I do not give you the chant, we will perish. You offer a chance at recovery...I will give you the incantation. \u0022Nes Serem\u0022 concludes the chant.\u0022 ",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans Approach Seal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Rune Master \n\u0022Ah yes, here is the seal. Bring me the scroll! I will read the chant, but you must all stand back. EMMOS NA DELLOM VRALLAK NES SEREM!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Rune Master \n\u0022That did it! Quickly let\u0027s mov...what is this?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Thank you, my little friends. I couldn\u0027t have done this without you. Now if you\u0027ll excuse me, I have a relic to unearth.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Rune Master \n\u0022Slay that dog!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022I have done all the research! I have done all of the exploring! You will not take what is rightfully mine!\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV000f",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Destroy Gardharus\u0027 Group.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans Kill Gardharus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Rune Master \n\u0022These thieves have been delt with. Now, for the relic. I want engineers on it right away. I don\u0027t want any Dwarf touching that thing with his bare hands. We will lift it with ropes and drag it back to Gumtik.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "\u002BClan Counter =3 ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0011",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidess \n\u0022We have the full incantation. We should hurry to the seal!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Undead Bone Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Can it be? Is it my time? I am ready, Mortis! I am ready for my transformation!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Mortisss ssstill hasss need of you. Ssshe requiresss the relic. Ssshare with usss your portion of the chant.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Necromancer \n\u0022Of course! I conducted the middle portion of the incantation. It is \u0022Dellom Vrallak.\u0022 Please, when you retrieve the relic, return for me. I am dying. I will join you soon!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Undead Fire Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022Corpses? Why do the dead visit the Temple of Fire?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich \n\u0022We ssseek the power of the relic. Give usss your part of the incantation and we will ssspar...\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire priest \n\u0022IGNITAE DELEMN!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich \n\u0022Gaaaaaaah!\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022What?! More?\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Don\u0027t you underssstand? We will keep coming until you give usss what we need. You will never sssleep.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fire Priest \n\u0022Bah! Very well. I fear I\u0027ll be part of your army soon anyway, this relic is slowly poisoning me. The chant begins with \u0022Emmos Na.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "-Undead Water Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priestess of Water \n\u0022Children of Mortis approach! Quickly, bring the guards!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elder Vampire \n\u0022There is no reason to bring the guards. You would much rather tell us how to open the seal, priestess. Do you understand?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priestess of Water \n\u0022I would much rather. I understand. The seal.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elder Vampire \n\u0022...and my portion of the chant is...\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priestess of Water \n\u0022And my portion of the chant is \u0022nes Serem,\u0022 to open the seal.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elder Vampire \n\u0022She has an exceptionally weak will.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Approach Seal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shade \n\u0022Yesss. Here it isss. EMMOS NA DELLOM VRALLAK NES SEREM...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Shade \n\u0022Mortisss will be pleasssed. Wait, who isss thisss?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022I thank you, good corpses. It is most fortunate that you\u0027ve done all of my work for me. Now if you would kindly depart, I will collect my relic.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Death Knight \n\u0022Ssslay him!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0015",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Destroy Gardharus\u0027 Group.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "\u002BUndead Counter=3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0016",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022We have the entire incantation. We mussst hurry to the ssseal!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Kills Gardharus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022It isss done. We have the relic! Lisssten to its whissspersss. It wants to be free. Mortisss mussst know of thisss.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans Day 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mountaineer \n\u0022A human approaches!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Do not be alarmed. I know of your struggle against the Elves. I can help you. Please, I must speak with Gumtik Bledwater.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gumtik Bledwater \n\u0022I\u0027m listening.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022I know all about your war machine. You hope it will be enough to halt the Elven assault. It won\u0027t be. I have seen the armies headed towards Temperance and they are massive. I offer you a chance at a...modification...of your machine.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022All I ask is a small amount of funding for my...ah...research when this war is won. Wait...I haven\u0027t finished. There is a relic locked away here; something that predates the concept of war. It has grown powerful as time has passed.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022It drains all life it touches. Imagine how much destruction could be caused by breaking it into pieces and feeding it into your machine. I know you already work with deadly substances, think of this as one...more deadly.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gumtik Bledwater \n\u0022I can\u0027t say you don\u0027t catch my ear, Human. But something like you\u0027re describing don\u0027t come easy and you wouldn\u0027t be coming to us for help if it did.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Quite right. The relic is sealed behind a sort of verbal lock, an incantation of safe keeping. There are three parts, each known only to the priests of its corresponding temple. You must persuade the priests of Fire, Water, and Bone.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gumtik Bledwater \n\u0022I\u0027ve seen these temples. We\u0027ll visit the first one and see if we can get them to cough up anything. If this is all some sort of game, I\u0027ll be testing my interrogation machines on you.\u0022",
+      "SEQ_NUM": 8
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire Day 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archer \n\u0022Sire, an assassin approaches!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Lower your bow, I am no assassin. I am a...researcher. I bring news of a great evil in this land. I felt it my civic duty to report it. Please, fetch someone in command.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sir Allemon \n\u0022I heard you. What is so urgent that you disturb the work of the Imperial army? We are about to move to war. Surely this can wait?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022There is a relic locked away here; something that predates the concept of war. It has grown powerful as time has passed. It destroys life around it. You can feel it even here...the death touching everything.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sir Allemon \n\u0022Yes, my soldiers are sick. Many are not recovering. Where is this relic?\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022It is sealed behind a magic incantation, unreachable without the proper words. The priests of the three temples here each share a part of the key chant. You must convince them to tell you, or I fear we will all perish.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sir Allemon \n\u0022I understand. Thank you for your information. This is something we must deal with at once, Emry will understand if we arrive late. And if our enemies should discover this thing...unthinkable. We ride at dawn.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves Day 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022A good shot! You came close, Elf! But I am not here to fight you. I wish to speak to your leaders.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Warden \n\u0022There is no Elf here who would waste time speaking with you.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fyrwenn \n\u0022Nonsense. Let him speak. He wouldn\u0027t approach us like this if he intended us harm.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Thank you, milady. Now then, I bring news of a great evil in this region. I see your trees wilting. No doubt you have felt it. There is a relic sealed away, one that predates the very concept of w...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fyrwenn \n\u0022I have heard these tales. I thought them myths, but we have not been able to explain the death within the forest. Why do you come to us with this information instead of the Humans?\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022I went to my own kind first. They laughed at my claims...accused me of believing children\u0027s tales! Meanwhile, everything decays before our eyes. Please, you must help!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Fyrwenn \n\u0022Very well, we will look into this. Where must we go?\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022This...relic...is sealed by a verbal incantation. Each part of the chant is known only to the priests of a specific temple. You must persuade the priests of the Fire, Water, and Bone temples to give you the words to their part of the key.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Day 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Phantom Warrior \n\u0022We caught thisss...poking around the ssseal.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022Most unfortunate. But wait...I have information you could use! I know you are drawn to the relic. It\u0027s like you in some ways. I can tell you how to open the seal, in exchange for my freedom!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Ssspeak, Human.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022There are three temples in these lands. I\u0027m sure you know of the bone temple. There is also one for water and for fire. The priests of each knows a portion of an incantation that will open the seal.\u0022 ",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gardharus \n\u0022It shouldn\u0027t be too difficult for your kind to...extract...the information from them.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Ssslay him.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Phantom Warrior \n\u0022...he isss gone! Imposssible!\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022No matter. You mussst visssit thessse templesss. Mortisss desiresss the relic.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Gorbillus\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Buy what you need and flee these dying lands.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Boorminn\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "We have a few spells that might give you the upper hand.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Willsill\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I don\u0027t haggle. Don\u0027t even try.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Ssamess\u0027 Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Fine ssslavesss. You like?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0004",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Od\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0004",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "We will teach them techniques from the North.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0005",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Gunner\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0005",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "It\u0027s all about the time it takes for the mind to speak to the body.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0006",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Femmic\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251SI0006",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I see you have a fine eye for rare merchandise. Please, come in.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0013",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0014",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0015",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0017",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0018",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0019",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM001a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM001b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM001c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM001d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM001e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM001f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0020",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0022",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0023",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0024",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0025",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0026",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0027",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0028",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain Clans House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0029",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain Clans House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM002a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain Clans House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM002b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain Clans House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM002c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM002d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM002e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM002f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Well",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0030",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ice",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0031",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ice",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0032",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0033",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0034",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0037",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0038",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM003c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM003d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM003e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0041",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0047",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0048",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM004d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0050",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0051",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0052",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0053",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0056",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0057",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0058",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0059",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM005b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM005c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM005d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM005f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0062",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0065",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0066",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0067",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM006a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM006b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM006c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM006d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elven House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM006f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0073",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0074",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0077",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0078",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM007d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM007e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM007f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0080",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0081",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0086",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seal of Words",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0087",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0088",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0089",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM008a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM008b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM008c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM008d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM008e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM008f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0090",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0092",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0096",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0097",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Earth Rift",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0098",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM0099",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM009a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Volcano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM009b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM009c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM009d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM009e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Temple of Fire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Temple of Water",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00a9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00aa",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00ac",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00ad",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00ae",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00af",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Temple of Bone",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Impaled Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Impaled Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Centaur Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Relic Site",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00b9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00ba",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00bb",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00bc",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00bd",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00be",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00bf",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00c0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251MM00c1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Well",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fire Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bone Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Water Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Relic Gate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Raiders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Relic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Belladoss",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Kengorr Keep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ewelley",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Lost Ullessil",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Kruthus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ormethory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "Skujjugg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0007",
+      "ID_STRING": "TITLE",
+      "TEXT": "Tidos",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251RU0008",
+      "ID_STRING": "TITLE",
+      "TEXT": "Dragon\u0027s Den",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "North Keep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Runnemel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hanwesk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kellemina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ocnides",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Churmill",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Radania",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hodrass",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Saughes",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S251SC0000",
+      "ID_OBJECT": "S251FT0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pealos",
+      "SEQ_NUM": 0
+    }
+  ]
+}

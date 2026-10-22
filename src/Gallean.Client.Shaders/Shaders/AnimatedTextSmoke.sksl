@@ -1,0 +1,27 @@
+uniform shader opacity;
+uniform shader noise;
+
+uniform float4 color;
+uniform float time;
+uniform float frequency;
+
+const float2 WarpFlow = float2(5.0, 21.0);
+const float2 DetailFlow = float2(-3.0, 33.0);
+const float WarpStrength = 48.0;
+const float2 Stretch = float2(1.0, 0.6);
+const float WispThreshold = 0.62;
+const float WispSoftness = 0.3;
+const float TextureDepth = 0.5;
+
+half4 main(float2 coord) {
+    float smoke = float(opacity.eval(coord).a);
+    float2 point = coord * frequency * Stretch;
+    float2 warp = float2(noise.eval(point + WarpFlow * time).rg) - 0.5;
+    float detail = float(noise.eval(point + DetailFlow * time + warp * WarpStrength).b);
+    float threshold = WispThreshold - smoke;
+    float wisps = smoothstep(threshold, threshold + WispSoftness, detail);
+    float texture = mix(1.0 - TextureDepth, 1.0, detail);
+    float alpha = color.a * smoke * wisps * texture;
+
+    return half4(color.rgb * alpha, alpha);
+}

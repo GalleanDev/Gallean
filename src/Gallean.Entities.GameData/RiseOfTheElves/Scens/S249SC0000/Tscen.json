@@ -1,0 +1,2028 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clovis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trudulf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baalhu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Huun\u0027reh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Theodemis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "SealUndBlocked",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "This gate keeps the way to the Undead Hordes\u0027 territory and shall remain closed until the proper seal is broken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "SealClansBlocked",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "This gate leads to the Clans sacred lands and shall remain shut until the proper seal has been broken.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "SealDamnBlocked",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Until the proper seal has been broken, this gate that leads to the Damned will remain shut to you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "SealEmpBlocked",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "This gate leads to the Empire\u0027s land and it is only by breaking the proper seal that it can be entered.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "OpenClansGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The gate to the lands of the Clans has been opened!",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "OpenEmpGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The gate to the Empire is now opened!",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "OpenDamGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The way to the lands of the Legions is now clear!",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "OpenUndGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The gate to the land of the dead is now opened.",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vengeance of Ymir",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "By Wotan, you won\u0027t pass here. You are not worthy to be allowed to go beyond this pass.",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fedrah",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wrath of God",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV000b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "As your first test, you shall have to pass me. Only then will the way to salvation be opened to you.",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rot",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "This way is closed to you until you have proven yourself in battle against me.",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sinestra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "This is what awaits you if you dare go any further",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Imps",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Titans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Amoth",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Imps Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Titans Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call PolarBears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call PolarBears Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Spiders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN003e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aurangzeb",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Spiders Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Red Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Red Spider Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Big Imp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Big Imps Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Lone Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Lone Titans Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Lone Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Lone Bears Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Skeleton Champions",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0025",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Now let us see how you will fare against my minions!",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Skel Champ Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0027",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "What will you do against my precious giants now?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Prim Giant Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Angel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0029",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The High Father now sends his Angels to further test your abilities",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Angels Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Rock Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "By Wotan, you will fight now!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Rock Giant Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal Message Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The artifact you need to break the seal can be found in a tower not far from here. You must seek it and destroy its\u0027 guardians first.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal Message Emp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV002f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "There is an object that you will need to break the seal. To obtain it, you must destroy it\u0027s guardians in ancient Odense.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal Message Damn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0030",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "There is an abandonned temple further on your road. It is within it\u0027s walls that you will find the sacred object that is required to break the seal.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal Message Und",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0031",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "It is in the Gardens of Mortis that you will find the object that will allow you to break the seal. The guardians there must first be defeated for you to obtain it.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Weres 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0033",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Weres 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0034",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Weres Disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "ClanGate Enable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "EmpGate Enable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0039",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "DamGate Enable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "UndGate Enable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Art to Gate Emp message",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Now that you have the artifact, bring it to the gate, beyond the guardians. The seal will then be broken and you will be allowed to continue on your quest.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Art to Gate Clans message",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Now go beyond the giant guardian  with the eye. This will break the seal and open the gate that leads to the land beyond.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Art to Gate Und message",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "This is well done! Now take this dagger to the gate, beyond the guardian. This will break the seal and reveal a passage.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Art to Gate Damn message",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV003e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Now that you passed this stage, bring the vial to the gate. You will have to pass the guardian first and once you succeed, the seal will be finally broken.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0062",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0040",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "FinalTask Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0040",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "To win this contest, you must take Gorgon Castle. Doing so will allow you to gain access to our enemies.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "FinalTask Emp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0042",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "There is a castle beyond. You must take it to gain access to our enemies.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "FinalTasl Und",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0043",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "To the east lies Gorgon Castle. You must seize control of it to be allowed to enter ou enemies lands.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0044",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "FinalTask Damn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0044",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "In this part of the land, there is a castle that you must take. Doing so will open the way to our enemies.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0045",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Items to Emp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0045",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "You are really the champion of the Empire! The High Father blesses you and your enemies are shamed in front of their gods!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0046",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lose Emp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0046",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The High Father is ashamed with this loss! It was a grave mistake to give to this task.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0047",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lose Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0047",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "How dare you lose this contest! You made the clans lose face in front of our enemies! Wotan will never forgive you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0048",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lose Und",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0048",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mortis has prepared an eternal grave for you! There shall be no escape from his wrath. The shame you brought to the Hordes cannot be forgiven.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lose Damn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "You will suffer from eternal flames for this! How dare you allow these puny creatures insult the Legions in such a way!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Open all",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Blocked Messages",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Change Orders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Message to all",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The gates are now all opened. It is time to prove your worth and claim all of the four precious artifacts in the name of your god! Some may be carried by your enemies and others may still be found in lairs.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV004f",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "You must now wrest the four items from the hands of your enemies or from their original locations if they are still there. These Items are: Doragon\u0027s Eye, the Soul Dagger, Uther\u0027s blood and the Holy Artifact.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0050",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Items to Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0050",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arrrgh! What a great job! Wotan has prepared a banquet for you and all of the Clans will rejoice and feast for a year!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0051",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Items to the Hordes",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0051",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mortis is pleased with you! you will play a role of great importance in the horde\u0027s future plans. The other gods will now be forced to recognize our superiority.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Items to the Legions",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0052",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "You have done well! You are the true champion the Legions needed to represent them! We shall now laugh at our enemies\u0027 loss of face! Ha ha ha ha haaaa!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Vampires 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0054",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Vampires 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0055",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Vampires disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0056",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Bone Emp 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Bone Emp 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0058",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Bone Emp disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Bones Und 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV005a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Bones Und 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN007d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV005b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Call Bones Und disable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Sinestra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV005d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Ymir",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0081",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Wrath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Rot",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0061",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "AddRedDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0062",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "AddWhiteDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "AddBlackDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "AddBlueDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1stWhiteDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1stBlackDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0067",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1stRedDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0068",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1stBlueDragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kenoshann",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0069",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "EnableDragons",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN008c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zolik City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "DragonsRetakeCastle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN008d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1stMessageEmp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "I will be your guide in this quest that the High Father has entrusted you. It is imperative that you fully realize the importance of this contest. The honor of the Empire will be in your hands.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Your first task will be to overtake the pass guardian to the east. She will summon forces to assault you until you face and defeat her. Do not waste too much time, our enemies are already moving.",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1st message Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "I will guide you through this quest. Wotan is indeed putting a lot of trust in you, so, do not fail him! The honor of the clans will depend on the outcome of this contest.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "First, you must defeat the guardian of the Eastern pass. Untill this is done, he will summon forces to assault you. Once you succeed in doing this, you will be told what lies ahead.",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1st Message Hordes",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "I have been sent to guide you through this quest. Let it be known that Mortis will not suffer you failing him on this important journey.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "First, You will have to find and destroy the guardian blocking the western pass. Until then, she will send forces against you.",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gorgon Castle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "1st Message Legions",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "I will guide you in this important quest. The supremacy of the Legions is now in your hands.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "First, take care of the pass guardian to the West. She will send her minions to test your abilities until this is done. Do not fail us!",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV006f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wrath of God2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0070",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sinestra2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0071",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vengeance of Ymir2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249EV0072",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rot2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN009a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN009c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN009d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur Lancer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN00a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fat Imp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN00b2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN00b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN00b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN00c5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN00c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN012c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Onyx Gargoyle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0132",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rock Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0138",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Air Elemental",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0139",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN013c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0143",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0145",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0152",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Castle Keeper",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0154",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0155",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fat Imp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Big Imp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lone Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Red Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lone Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skeleton Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rock Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bone Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249UN0165",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Abyssal Devil",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bone Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vampire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Werewolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Red Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Black Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "White Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249TM0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blue Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Stone Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Odense",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Gardens of Mortis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Abandonned Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249SR000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Seal Guardians",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249SR000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "High Father Keepers",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249SR000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Devil\u0027s Spawns",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249SR0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wotan\u0027s Prouds",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guards01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guards02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guards03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guards04",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal01A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal01B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal02A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal02B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal03A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal03B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal04A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal04B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal03C",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal01C",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal04C",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Seal02C",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vengence of Ymir",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wrath of God",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rot",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sinestra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "ClansDefenders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "EmpDefenders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dam Defenders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "UndDefenders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City Defenders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spiders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imps",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "ClanGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "EmpGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "DamGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249LO0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "UndGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0013",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM001e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain Clans House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0021",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0023",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain Clans House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0025",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0026",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0027",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0028",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0029",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM002a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM002b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM002c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM002d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM002e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM002f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0037",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM004a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM004b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ice",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM004d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ice",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM004e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ice",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM004f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM005d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Impaled Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM005e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Impaled Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM005f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Impaled Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0060",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Impaled Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0065",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0066",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0067",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0068",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249MM0069",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "In his youth, this mighty lord once stood fast against an army from hell and single-handedly defeated them by sealing the gateway that spew them. He then became sovereign of his realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bertin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Highest lord of the dwarf lords, he is known for his intensity in battle and his courage in the face of overwhelming odds. He once fought seven days and nights against the mighty red dragon ARFURUZON to finally defeat him.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Huuxera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Every child trembles at the hearing of this most infamous name. This lord of hell is known for her blood thirsts. It is said that she once ate 1000 slaves at a banquet given by Bethrezen for a victory against the kingdom of light.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gangren",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S249SC0000",
+      "ID_OBJECT": "S249PL0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Known in his times as the mightiest of all adepts of the black art, this lord was slain by the inquisitor Vorgel who ended his reign of terror. He is now resurrected as an undead with the intention to subjugate every mortal to his will.",
+      "SEQ_NUM": 0
+    }
+  ]
+}

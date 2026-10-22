@@ -1,0 +1,970 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Gallean.Client">
+  <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{x:Static local:Theme+Common.WindowBackgroundColor}" />
+  <SolidColorBrush x:Key="WindowTranslucentBackgroundBrush" Color="{x:Static local:Theme+Common.WindowTranslucentBackgroundColor}" />
+  <SolidColorBrush x:Key="PrimaryTextBrush" Color="{x:Static local:Theme+Common.PrimaryTextColor}" />
+  <SolidColorBrush x:Key="HighlightTextBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="SecondaryTextBrush" Color="{x:Static local:Theme+Common.SecondaryTextColor}" />
+  <SolidColorBrush x:Key="LabelTextBrush" Color="{DynamicResource AccentDarkColor}" />
+  <SolidColorBrush x:Key="TextOutlineBrush" Color="{x:Static local:Theme+Common.TextOutlineColor}" />
+  <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="AccentLightBrush" Color="{DynamicResource AccentLightColor}" />
+  <SolidColorBrush x:Key="AccentSecondaryBrush" Color="{DynamicResource AccentSecondaryColor}" />
+  <SolidColorBrush x:Key="ModalBackdropBrush" Color="{x:Static local:Theme+Common.ModalBackdropColor}" />
+  <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{x:Static local:Theme+Common.PopupBackgroundColor}" />
+  <SolidColorBrush x:Key="DividerBrush" Color="{x:Static local:Theme+Common.DividerColor}" />
+  <SolidColorBrush x:Key="FocusRingBrush" Color="{DynamicResource AccentColor}" Opacity="0.86" />
+
+  <SolidColorBrush x:Key="ModalBodyTopBrush" Color="{x:Static local:Theme+Modal.BodyTopColor}" />
+  <SolidColorBrush x:Key="ModalBodyBottomBrush" Color="{x:Static local:Theme+Modal.BodyBottomColor}" />
+  <SolidColorBrush x:Key="ModalAccentBodyBottomBrush" Color="{x:Static local:Theme+Modal.AccentBodyBottomColor}" />
+  <SolidColorBrush x:Key="ModalBorderLightBrush" Color="{DynamicResource AccentSecondaryColor}" />
+  <SolidColorBrush x:Key="ModalBorderDarkBrush" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  <SolidColorBrush x:Key="ModalBorderOutlineBrush" Color="{x:Static local:Theme+Modal.BorderOutlineColor}" />
+  <SolidColorBrush x:Key="ModalPortraitFrameBrush" Color="{x:Static local:Theme+Modal.PortraitFrameColor}" />
+  <SolidColorBrush x:Key="ModalOrnamentBrush" Color="{DynamicResource AccentColor}" Opacity="0.59" />
+  <SolidColorBrush x:Key="ModalTitleBrush" Color="{x:Static local:Theme+Modal.TitleColor}" />
+  <SolidColorBrush x:Key="ModalEffectBrush" Color="{x:Static local:Theme+Modal.EffectColor}" />
+  <SolidColorBrush x:Key="ModalIconGlowBrush" Color="{DynamicResource AccentColor}" Opacity="0.22" />
+  <SolidColorBrush x:Key="ModalRuleBrush" Color="{DynamicResource AccentSecondaryColor}" Opacity="0.67" />
+  <SolidColorBrush x:Key="ModalRuleFadeBrush" Color="{DynamicResource AccentSecondaryFadeColor}" />
+  <LinearGradientBrush x:Key="ModalRuleGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.67">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryFadeColor}" />
+    <GradientStop Offset="0.2" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="0.8" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ModalBorderGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="HeadingLitBrush" Color="{DynamicResource AccentDarkColor}" Opacity="0.18" />
+  <SolidColorBrush x:Key="HeadingMiddleBrush" Color="{DynamicResource AccentDarkColor}" Opacity="0.09" />
+  <SolidColorBrush x:Key="HeadingFadeBrush" Color="{DynamicResource AccentDarkFadeColor}" />
+  <LinearGradientBrush x:Key="HeadingGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.18">
+    <GradientStop Offset="0" Color="{DynamicResource AccentDarkColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentDarkFadeColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="TextBoxSelectionBrush" Color="{DynamicResource AccentColor}" Opacity="0.43" />
+  <SolidColorBrush x:Key="PagerBandBrush" Color="{x:Static local:Theme+Pager.BandColor}" />
+  <SolidColorBrush x:Key="PagerBorderBrush" Color="{DynamicResource AccentSecondaryColor}" Opacity="0.67" />
+  <LinearGradientBrush x:Key="ModalBodyGradientBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Modal.BodyTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Modal.BodyBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ModalAccentBodyGradientBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Modal.BodyTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Modal.AccentBodyBottomColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="ScenarioDialogBandBrush" Color="{x:Static local:Theme+ScenarioDialog.BandColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogBandFadeBrush" Color="{x:Static local:Theme+ScenarioDialog.BandFadeColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogRuleBrush" Color="{DynamicResource AccentDarkColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogRuleFadeBrush" Color="{DynamicResource AccentDarkFadeColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogOrnamentBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogOrnamentGlowBrush" Color="{x:Static local:Theme+ScenarioDialog.OrnamentGlowColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogDividerBrush" Color="{DynamicResource AccentDarkColor}" Opacity="0.67" />
+  <SolidColorBrush x:Key="ScenarioDialogDividerFadeBrush" Color="{DynamicResource AccentDarkFadeColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogSpeakerBrush" Color="{x:Static local:Theme+ScenarioDialog.SpeakerColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogTextBrush" Color="{x:Static local:Theme+ScenarioDialog.TextColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogHistorySpeakerBrush" Color="{x:Static local:Theme+ScenarioDialog.HistorySpeakerColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogHistoryTextBrush" Color="{x:Static local:Theme+ScenarioDialog.HistoryTextColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogHistoryCharacterBrush" Color="{x:Static local:Theme+ScenarioDialog.HistoryCharacterColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogHistoryObjectBrush" Color="{x:Static local:Theme+ScenarioDialog.HistoryObjectColor}" />
+  <SolidColorBrush x:Key="ScenarioDialogSmokeBrush" Color="{x:Static local:Theme+ScenarioDialog.SmokeColor}" />
+  <SolidColorBrush x:Key="ScenarioTextCharacterBrush" Color="{x:Static local:Theme+ScenarioText.CharacterColor}" />
+  <SolidColorBrush x:Key="ScenarioTextObjectBrush" Color="{x:Static local:Theme+ScenarioText.ObjectColor}" />
+  <LinearGradientBrush x:Key="ScenarioDialogBandGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+ScenarioDialog.BandFadeColor}" />
+    <GradientStop Offset="0.14" Color="{x:Static local:Theme+ScenarioDialog.BandColor}" />
+    <GradientStop Offset="0.86" Color="{x:Static local:Theme+ScenarioDialog.BandColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+ScenarioDialog.BandFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ScenarioDialogRuleGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentDarkFadeColor}" />
+    <GradientStop Offset="0.2" Color="{DynamicResource AccentDarkColor}" />
+    <GradientStop Offset="0.8" Color="{DynamicResource AccentDarkColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentDarkFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ScenarioDialogDividerGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.67">
+    <GradientStop Offset="0" Color="{DynamicResource AccentDarkFadeColor}" />
+    <GradientStop Offset="0.25" Color="{DynamicResource AccentDarkColor}" />
+    <GradientStop Offset="0.75" Color="{DynamicResource AccentDarkColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentDarkFadeColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="LoadingBackdropBrush" Color="{x:Static local:Theme+Loading.BackdropColor}" />
+
+  <SolidColorBrush x:Key="HudPlateBrush" Color="{x:Static local:Theme+Hud.PlateColor}" />
+  <SolidColorBrush x:Key="HudPlateBorderBrush" Color="{x:Static local:Theme+Hud.PlateBorderColor}" />
+  <SolidColorBrush x:Key="HudPanelBrush" Color="{x:Static local:Theme+Hud.PanelColor}" />
+  <SolidColorBrush x:Key="HudInkBrush" Color="{x:Static local:Theme+Hud.InkColor}" />
+  <SolidColorBrush x:Key="HudHoverInkBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="HudDisabledInkBrush" Color="{x:Static local:Theme+Hud.DisabledInkColor}" />
+  <SolidColorBrush x:Key="HudHotkeyTextBrush" Color="{x:Static local:Theme+Hud.HotkeyTextColor}" />
+  <SolidColorBrush x:Key="HudHotkeyPillBrush" Color="{x:Static local:Theme+Hud.HotkeyPillColor}" />
+  <SolidColorBrush x:Key="HudHotkeyPillBorderBrush" Color="{x:Static local:Theme+Hud.HotkeyPillBorderColor}" />
+  <SolidColorBrush x:Key="HudPlateShadowBrush" Color="{x:Static local:Theme+Hud.PlateShadowColor}" />
+  <SolidColorBrush x:Key="DevToolsLabelBrush" Color="{x:Static local:Theme+DevTools.LabelColor}" />
+
+  <SolidColorBrush x:Key="AlertDetailsBrush" Color="{x:Static local:Theme+Alert.DetailsColor}" />
+
+  <SolidColorBrush x:Key="AssetPackErrorGlowBrush" Color="{x:Static local:Theme+AssetPackError.GlowColor}" />
+  <SolidColorBrush x:Key="AssetPackErrorLocationBrush" Color="{x:Static local:Theme+AssetPackError.LocationColor}" />
+  <SolidColorBrush x:Key="AssetPackErrorStepTitleBrush" Color="{x:Static local:Theme+AssetPackError.StepTitleColor}" />
+
+  <SolidColorBrush x:Key="ModalIconInfoInkBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="ModalIconErrorInkBrush" Color="{x:Static local:Theme+ModalIcon.ErrorInkColor}" />
+  <SolidColorBrush x:Key="ModalIconErrorRingLightBrush" Color="{x:Static local:Theme+ModalIcon.ErrorRingLightColor}" />
+  <SolidColorBrush x:Key="ModalIconErrorRingDarkBrush" Color="{x:Static local:Theme+ModalIcon.ErrorRingDarkColor}" />
+  <SolidColorBrush x:Key="ModalIconInkShadowBrush" Color="{x:Static local:Theme+ModalIcon.InkShadowColor}" />
+  <LinearGradientBrush x:Key="ModalIconInfoRingGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ModalIconErrorRingGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+ModalIcon.ErrorRingLightColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+ModalIcon.ErrorRingDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ModalIconGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Modal.BodyBottomColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Modal.BodyTopColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="ArtworkOverlayBrush" Color="{x:Static local:Theme+Artwork.OverlayColor}" />
+  <SolidColorBrush x:Key="ArtworkOverlayFadeBrush" Color="{x:Static local:Theme+Artwork.OverlayFadeColor}" />
+  <SolidColorBrush x:Key="ArtworkFrameBrush" Color="{DynamicResource AccentColor}" Opacity="0.27" />
+  <SolidColorBrush x:Key="ArtworkFeatherBrush" Color="{x:Static local:Theme+Artwork.FeatherColor}" />
+  <SolidColorBrush x:Key="ArtworkFeatherFadeBrush" Color="{x:Static local:Theme+Artwork.FeatherFadeColor}" />
+  <SolidColorBrush x:Key="ArtworkPortraitShadowBrush" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
+
+  <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="{x:Static local:Theme+Badge.BackgroundColor}" />
+  <SolidColorBrush x:Key="BadgeBorderBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="BadgeTextBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="StatRowStripeBrush" Color="{x:Static local:Theme+StatRow.StripeColor}" />
+  <SolidColorBrush x:Key="StatRowIncreaseBrush" Color="{x:Static local:Theme+StatRow.IncreaseColor}" />
+  <SolidColorBrush x:Key="StatRowDecreaseBrush" Color="{x:Static local:Theme+StatRow.DecreaseColor}" />
+  <SolidColorBrush x:Key="LeaderAbilityFaceTopBrush" Color="{x:Static local:Theme+LeaderAbility.FaceTopColor}" />
+  <SolidColorBrush x:Key="LeaderAbilityFaceBottomBrush" Color="{x:Static local:Theme+LeaderAbility.FaceBottomColor}" />
+  <SolidColorBrush x:Key="LeaderAbilityIconBrush" Color="{DynamicResource AccentColor}" />
+  <LinearGradientBrush x:Key="LeaderAbilityFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+LeaderAbility.FaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+LeaderAbility.FaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="LeaderAbilityBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%" Opacity="0.75">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="UnitDetailsPrimaryStatBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="UnitDetailsWarningBrush" Color="{x:Static local:Theme+OfferStatus.ReasonColor}" />
+
+  <SolidColorBrush x:Key="MainMenuBackdropBrush" Color="{x:Static local:Theme+MainMenu.BackdropColor}" />
+  <SolidColorBrush x:Key="MainMenuDividerBrush" Color="{DynamicResource AccentColor}" Opacity="0.37" />
+  <SolidColorBrush x:Key="MainMenuItemHoverBrush" Color="{DynamicResource AccentColor}" Opacity="0.16" />
+  <SolidColorBrush x:Key="MainMenuItemHoverFadeBrush" Color="{DynamicResource AccentFadeColor}" />
+  <SolidColorBrush x:Key="MainMenuVersionTextBrush" Color="{x:Static local:Theme+MainMenu.VersionTextColor}" />
+  <SolidColorBrush x:Key="MainMenuVersionOutlineBrush" Color="{x:Static local:Theme+MainMenu.VersionOutlineColor}" />
+  <SolidColorBrush x:Key="MainMenuLightWispBrush" Color="{x:Static local:Theme+MainMenu+Light.WispColor}" />
+  <SolidColorBrush x:Key="MainMenuLightWispGoldBrush" Color="{x:Static local:Theme+MainMenu+Light.WispGoldColor}" />
+  <SolidColorBrush x:Key="MainMenuLightWispGreenBrush" Color="{x:Static local:Theme+MainMenu+Light.WispGreenColor}" />
+  <SolidColorBrush x:Key="MainMenuLightWispPaleBrush" Color="{x:Static local:Theme+MainMenu+Light.WispPaleColor}" />
+  <SolidColorBrush x:Key="MainMenuLightEmberBrush" Color="{x:Static local:Theme+MainMenu+Light.EmberColor}" />
+
+  <SolidColorBrush x:Key="GameMenuOverlayBrush" Color="{x:Static local:Theme+GameMenu.OverlayColor}" />
+  <SolidColorBrush x:Key="GameMenuVignetteBrush" Color="{x:Static local:Theme+GameMenu.VignetteColor}" />
+  <SolidColorBrush x:Key="GameMenuVignetteFadeBrush" Color="{x:Static local:Theme+GameMenu.VignetteFadeColor}" />
+  <SolidColorBrush x:Key="LogoAmbientBrush" Color="{x:Static local:Theme+Logo.AmbientColor}" />
+  <SolidColorBrush x:Key="LogoGrazingBrush" Color="{x:Static local:Theme+Logo.GrazingColor}" />
+  <SolidColorBrush x:Key="LogoMoonBrush" Color="{x:Static local:Theme+Logo.MoonColor}" />
+  <SolidColorBrush x:Key="LogoShineBrush" Color="{x:Static local:Theme+Logo.ShineColor}" />
+  <SolidColorBrush x:Key="LogoShadowBrush" Color="{x:Static local:Theme+Logo.ShadowColor}" />
+
+  <SolidColorBrush x:Key="ScenarioSelectBackdropBrush" Color="{x:Static local:Theme+ScenarioSelect.BackdropColor}" />
+  <SolidColorBrush x:Key="ScenarioSelectDividerBrush" Color="{DynamicResource AccentColor}" Opacity="0.37" />
+  <SolidColorBrush x:Key="ScenarioSelectRowHoverBrush" Color="{DynamicResource AccentColor}" Opacity="0.11" />
+  <SolidColorBrush x:Key="ScenarioSelectRowSelectedBrush" Color="{DynamicResource AccentColor}" Opacity="0.22" />
+  <SolidColorBrush x:Key="ScenarioSelectRowFadeBrush" Color="{DynamicResource AccentFadeColor}" />
+  <LinearGradientBrush x:Key="ScenarioSelectRowHoverGradientBrush" StartPoint="0%,0%" EndPoint="100%,0%" Opacity="0.11">
+    <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ScenarioSelectRowSelectedGradientBrush" StartPoint="0%,0%" EndPoint="100%,0%" Opacity="0.22">
+    <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentFadeColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="ScenarioSelectAccentBrush" Color="{DynamicResource AccentColor}" />
+
+  <SolidColorBrush x:Key="HotseatTurnBackdropBrush" Color="{x:Static local:Theme+HotseatTurn.BackdropColor}" />
+  <SolidColorBrush x:Key="LeaderUpgradeGlowBrush" Color="{x:Static local:Theme+LeaderUpgrade.GlowColor}" />
+  <SolidColorBrush x:Key="LeaderUpgradeSmokeBrush" Color="{x:Static local:Theme+LeaderUpgrade.SmokeColor}" />
+
+  <SolidColorBrush x:Key="BriefingEmberBrush" Color="{x:Static local:Theme+Briefing.EmberColor}" />
+  <SolidColorBrush x:Key="BriefingSmokeBrush" Color="{x:Static local:Theme+Briefing.SmokeColor}" />
+  <SolidColorBrush x:Key="BriefingRuleBrush" Color="{DynamicResource AccentColor}" Opacity="0.55" />
+  <SolidColorBrush x:Key="BriefingRuleFadeBrush" Color="{DynamicResource AccentFadeColor}" />
+  <SolidColorBrush x:Key="BriefingBackdropBrush" Color="{x:Static local:Theme+Briefing.BackdropColor}" />
+  <SolidColorBrush x:Key="BriefingBackdropFadeBrush" Color="{x:Static local:Theme+Briefing.BackdropFadeColor}" />
+  <SolidColorBrush x:Key="BriefingObjectiveShadowBrush" Color="{x:Static local:Theme+Briefing.ObjectiveShadowColor}" />
+  <LinearGradientBrush x:Key="BriefingRuleLeadingGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.55">
+    <GradientStop Offset="0" Color="{DynamicResource AccentFadeColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BriefingRuleTrailingGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.55">
+    <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentFadeColor}" />
+  </LinearGradientBrush>
+  <RadialGradientBrush x:Key="BriefingBackdropGradientBrush" Center="50%,50%" GradientOrigin="50%,50%" RadiusX="50%" RadiusY="50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Briefing.BackdropColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Briefing.BackdropFadeColor}" />
+  </RadialGradientBrush>
+
+  <SolidColorBrush x:Key="TabBarBackgroundBrush" Color="{x:Static local:Theme+TabBar.BackgroundColor}" />
+  <SolidColorBrush x:Key="TabBarBackgroundDarkBrush" Color="{x:Static local:Theme+TabBar.BackgroundDarkColor}" />
+  <SolidColorBrush x:Key="TabBarTextBrush" Color="{x:Static local:Theme+TabBar.TextColor}" />
+  <SolidColorBrush x:Key="TabBarHoverTextBrush" Color="{x:Static local:Theme+TabBar.HoverTextColor}" />
+  <SolidColorBrush x:Key="TabBarSelectedTextBrush" Color="{x:Static local:Theme+TabBar.SelectedTextColor}" />
+  <SolidColorBrush x:Key="TabBarSelectedCellTopBrush" Color="{x:Static local:Theme+TabBar.SelectedCellTopColor}" />
+  <SolidColorBrush x:Key="TabBarSelectedCellBottomBrush" Color="{x:Static local:Theme+TabBar.SelectedCellBottomColor}" />
+  <SolidColorBrush x:Key="TabBarSelectedCellBorderBrush" Color="{x:Static local:Theme+TabBar.SelectedCellBorderColor}" />
+  <SolidColorBrush x:Key="TabBarSelectedCellBorderShadowBrush" Color="{x:Static local:Theme+TabBar.SelectedCellBorderShadowColor}" />
+  <SolidColorBrush x:Key="TabBarUnderlineBrush" Color="{x:Static local:Theme+TabBar.UnderlineColor}" />
+  <SolidColorBrush x:Key="TabBarUnderlineGlowBrush" Color="{x:Static local:Theme+TabBar.UnderlineGlowColor}" />
+  <SolidColorBrush x:Key="TabBarRuleBrush" Color="{x:Static local:Theme+TabBar.RuleColor}" />
+  <SolidColorBrush x:Key="TabBarRuleDarkBrush" Color="{x:Static local:Theme+TabBar.RuleDarkColor}" />
+  <SolidColorBrush x:Key="TabBarOrnamentBrush" Color="{x:Static local:Theme+TabBar.OrnamentColor}" />
+  <SolidColorBrush x:Key="TabBarPatternBrush" Color="{x:Static local:Theme+TabBar.PatternColor}" />
+  <SolidColorBrush x:Key="TabBarPatternDarkBrush" Color="{x:Static local:Theme+TabBar.PatternDarkColor}" />
+  <SolidColorBrush x:Key="TabBarHotkeyFaceBrush" Color="{x:Static local:Theme+TabBar.HotkeyFaceColor}" />
+  <SolidColorBrush x:Key="TabBarHotkeyHoverFaceBrush" Color="{x:Static local:Theme+TabBar.HotkeyHoverFaceColor}" />
+  <SolidColorBrush x:Key="TabBarHotkeyTextBrush" Color="{x:Static local:Theme+TabBar.HotkeyTextColor}" />
+  <SolidColorBrush x:Key="TabBarOrnamentShadowBrush" Color="{x:Static local:Theme+TabBar.OrnamentShadowColor}" />
+  <LinearGradientBrush x:Key="TabBarBackgroundGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+TabBar.BackgroundColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+TabBar.BackgroundDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="TabBarSelectedCellGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+TabBar.SelectedCellTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+TabBar.SelectedCellBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="TabBarSelectedCellBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+TabBar.SelectedCellTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+TabBar.SelectedCellBorderColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="TabBarSelectedCellBorderShadowGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+TabBar.SelectedCellTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+TabBar.SelectedCellBorderShadowColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="TabBarPatternGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+TabBar.PatternColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+TabBar.PatternDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="TabBarRuleGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+TabBar.RuleDarkColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+TabBar.RuleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+TabBar.RuleDarkColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="PanelTranslucentBackgroundBrush" Color="{x:Static local:Theme+Panel.TranslucentBackgroundColor}" />
+  <SolidColorBrush x:Key="PanelBorderBrush" Color="{x:Static local:Theme+Panel.BorderColor}" />
+  <SolidColorBrush x:Key="PanelBodyTopBrush" Color="{x:Static local:Theme+Panel.BodyTopColor}" />
+  <SolidColorBrush x:Key="PanelBodyBottomBrush" Color="{x:Static local:Theme+Panel.BodyBottomColor}" />
+  <LinearGradientBrush x:Key="PanelOrnamentBorderGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryLightColor}" />
+    <GradientStop Offset="0.45" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PanelBodyGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Panel.BodyTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Panel.BodyBottomColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="CardBackgroundBrush" Color="{x:Static local:Theme+Card.BackgroundColor}" />
+  <SolidColorBrush x:Key="CardBackgroundDarkBrush" Color="{x:Static local:Theme+Card.BackgroundDarkColor}" />
+  <SolidColorBrush x:Key="CardHoverBackgroundBrush" Color="{x:Static local:Theme+Card.HoverBackgroundColor}" />
+  <SolidColorBrush x:Key="CardHoverBackgroundDarkBrush" Color="{x:Static local:Theme+Card.HoverBackgroundDarkColor}" />
+  <SolidColorBrush x:Key="CardSelectedFaceTopBrush" Color="{x:Static local:Theme+Card.SelectedFaceTopColor}" />
+  <SolidColorBrush x:Key="CardSelectedFaceBottomBrush" Color="{x:Static local:Theme+Card.SelectedFaceBottomColor}" />
+  <SolidColorBrush x:Key="CardSelectedBorderLightBrush" Color="{x:Static local:Theme+Card.SelectedBorderLightColor}" />
+  <SolidColorBrush x:Key="CardSelectedBorderDarkBrush" Color="{x:Static local:Theme+Card.SelectedBorderDarkColor}" />
+  <SolidColorBrush x:Key="CardBorderBrush" Color="{DynamicResource AccentColor}" Opacity="0.16" />
+  <LinearGradientBrush x:Key="CardBackgroundGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Card.BackgroundColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Card.BackgroundDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="CardHoverBackgroundGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Card.HoverBackgroundColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Card.HoverBackgroundDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="CardSelectedFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Card.SelectedFaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Card.SelectedFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="CardSelectedBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Card.SelectedBorderLightColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Card.SelectedBorderDarkColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="ListBackgroundBrush" Color="{x:Static local:Theme+List.BackgroundColor}" />
+  <SolidColorBrush x:Key="ListBorderBrush" Color="{DynamicResource AccentSecondaryColor}" Opacity="0.43" />
+
+  <SolidColorBrush x:Key="DropZoneBackgroundBrush" Color="{x:Static local:Theme+DropZone.BackgroundColor}" />
+  <SolidColorBrush x:Key="DropZoneHoverBackgroundBrush" Color="{x:Static local:Theme+DropZone.HoverBackgroundColor}" />
+  <SolidColorBrush x:Key="DropZoneBackdropBrush" Color="{x:Static local:Theme+DropZone.BackdropColor}" />
+  <SolidColorBrush x:Key="DropZoneShadowBrush" Color="{x:Static local:Theme+DropZone.ShadowColor}" />
+  <SolidColorBrush x:Key="DropZoneBorderBrush" Color="{DynamicResource AccentColor}" Opacity="0.67" />
+  <SolidColorBrush x:Key="DropZoneHoverBorderBrush" Color="{DynamicResource AccentLightColor}" />
+  <SolidColorBrush x:Key="DropZoneTextBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="DropZoneHoverTextBrush" Color="{DynamicResource AccentLightColor}" />
+
+  <SolidColorBrush x:Key="FrameBackgroundBrush" Color="{x:Static local:Theme+Frame.BackgroundColor}" />
+  <SolidColorBrush x:Key="FrameBorderBrush" Color="{x:Static local:Theme+Frame.BorderColor}" />
+
+  <SolidColorBrush x:Key="SlotBackgroundBrush" Color="{x:Static local:Theme+Slot.BackgroundColor}" />
+  <SolidColorBrush x:Key="SlotSelectedBorderBrush" Color="{DynamicResource AccentColor}" />
+
+  <SolidColorBrush x:Key="UnitIconRingBrush" Color="{DynamicResource AccentSecondaryColor}" Opacity="0.5" />
+  <SolidColorBrush x:Key="UnitPortraitFrameEdgeBrush" Color="{x:Static local:Theme+UnitPortrait.FrameEdgeColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHighlightRingBrush" Color="{DynamicResource AccentLightColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHighlightOverlayBrush" Color="{x:Static local:Theme+UnitPortrait.HighlightOverlayColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameLightBrush" Color="{x:Static local:Theme+UnitPortrait.FrameLightColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameBrush" Color="{x:Static local:Theme+UnitPortrait.FrameColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameDarkBrush" Color="{x:Static local:Theme+UnitPortrait.FrameDarkColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameBevelLightBrush" Color="{x:Static local:Theme+UnitPortrait.FrameBevelLightColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameBevelDarkBrush" Color="{x:Static local:Theme+UnitPortrait.FrameBevelDarkColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameGlossBrush" Color="{x:Static local:Theme+UnitPortrait.FrameGlossColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFrameGlossFadeBrush" Color="{x:Static local:Theme+UnitPortrait.FrameGlossFadeColor}" />
+  <SolidColorBrush x:Key="UnitPortraitSelectedFrameLightBrush" Color="{x:Static local:Theme+UnitPortrait.SelectedFrameLightColor}" />
+  <SolidColorBrush x:Key="UnitPortraitSelectedFrameBrush" Color="{x:Static local:Theme+UnitPortrait.SelectedFrameColor}" />
+  <SolidColorBrush x:Key="UnitPortraitSelectedFrameDarkBrush" Color="{x:Static local:Theme+UnitPortrait.SelectedFrameDarkColor}" />
+  <SolidColorBrush x:Key="UnitPortraitEmptyFrameLightBrush" Color="{x:Static local:Theme+UnitPortrait.EmptyFrameLightColor}" />
+  <SolidColorBrush x:Key="UnitPortraitEmptyFrameBrush" Color="{x:Static local:Theme+UnitPortrait.EmptyFrameColor}" />
+  <SolidColorBrush x:Key="UnitPortraitEmptyFrameDarkBrush" Color="{x:Static local:Theme+UnitPortrait.EmptyFrameDarkColor}" />
+  <SolidColorBrush x:Key="UnitPortraitBackgroundBrush" Color="{x:Static local:Theme+UnitPortrait.BackgroundColor}" />
+  <SolidColorBrush x:Key="UnitPortraitEmptyBackgroundBrush" Color="{x:Static local:Theme+UnitPortrait.EmptyBackgroundColor}" />
+  <SolidColorBrush x:Key="UnitPortraitShadowBrush" Color="{x:Static local:Theme+UnitPortrait.ShadowColor}" />
+  <SolidColorBrush x:Key="UnitPortraitInnerShadowBrush" Color="{x:Static local:Theme+UnitPortrait.InnerShadowColor}" />
+  <SolidColorBrush x:Key="UnitPortraitGlowBrush" Color="{x:Static local:Theme+UnitPortrait.GlowColor}" />
+  <SolidColorBrush x:Key="UnitPortraitGlowHaloBrush" Color="{x:Static local:Theme+UnitPortrait.GlowHaloColor}" />
+  <SolidColorBrush x:Key="UnitPortraitLostHitpointsEdgeBrush" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsEdgeColor}" />
+  <SolidColorBrush x:Key="UnitPortraitLostHitpointsTopBrush" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsTopColor}" />
+  <SolidColorBrush x:Key="UnitPortraitLostHitpointsBottomBrush" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsBottomColor}" />
+  <SolidColorBrush x:Key="UnitPortraitDeadOverlayTopBrush" Color="{x:Static local:Theme+UnitPortrait.DeadOverlayTopColor}" />
+  <SolidColorBrush x:Key="UnitPortraitDeadOverlayBottomBrush" Color="{x:Static local:Theme+UnitPortrait.DeadOverlayBottomColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFootOverlayFadeBrush" Color="{x:Static local:Theme+UnitPortrait.FootOverlayFadeColor}" />
+  <SolidColorBrush x:Key="UnitPortraitFootOverlayBrush" Color="{x:Static local:Theme+UnitPortrait.FootOverlayColor}" />
+  <SolidColorBrush x:Key="UnitPortraitOverlayMaskTopBrush" Color="{x:Static local:Theme+UnitPortrait.OverlayMaskTopColor}" />
+  <SolidColorBrush x:Key="UnitPortraitOverlayMaskBottomBrush" Color="{x:Static local:Theme+UnitPortrait.OverlayMaskBottomColor}" />
+  <SolidColorBrush x:Key="UnitPortraitOverlayGlossEdgeBrush" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossEdgeColor}" />
+  <SolidColorBrush x:Key="UnitPortraitOverlayGlossTopBrush" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossTopColor}" />
+  <SolidColorBrush x:Key="UnitPortraitOverlayGlossMiddleBrush" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossMiddleColor}" />
+  <SolidColorBrush x:Key="UnitPortraitOverlayGlossBottomBrush" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossBottomColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHitpointsHealthyBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsHealthyColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHitpointsWoundedBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsWoundedColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHitpointsCriticalBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsCriticalColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHitpointsOutlineBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsOutlineColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHitpointsShadowBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsShadowColor}" />
+  <SolidColorBrush x:Key="UnitNameShadowBrush" Color="{x:Static local:Theme+UnitName.ShadowColor}" />
+  <LinearGradientBrush x:Key="UnitPortraitLostHitpointsGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsEdgeColor}" />
+    <GradientStop Offset="0.06" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitDeadOverlayGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.DeadOverlayTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.DeadOverlayBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitFootOverlayGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0.55" Color="{x:Static local:Theme+UnitPortrait.FootOverlayFadeColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.FootOverlayColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitOverlayGlossGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossEdgeColor}" />
+    <GradientStop Offset="0.04" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossTopColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.OverlayGlossBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitOverlayMaskGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.OverlayMaskTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.OverlayMaskBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitFrameGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.FrameLightColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+UnitPortrait.FrameColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.FrameDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitSelectedFrameGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.SelectedFrameLightColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+UnitPortrait.SelectedFrameColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.SelectedFrameDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitEmptyFrameGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.EmptyFrameLightColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+UnitPortrait.EmptyFrameColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.EmptyFrameDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitFrameBevelGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.FrameBevelLightColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.FrameBevelDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="UnitPortraitFrameGlossGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.FrameGlossColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+UnitPortrait.FrameGlossFadeColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="BarEdgeBrush" Color="{x:Static local:Theme+Bar.EdgeColor}" />
+  <SolidColorBrush x:Key="BarBevelBrush" Color="{x:Static local:Theme+Bar.BevelColor}" />
+  <SolidColorBrush x:Key="BarRelightTopBrush" Color="{x:Static local:Theme+Bar.RelightTopColor}" />
+  <SolidColorBrush x:Key="BarRelightUpperBrush" Color="{x:Static local:Theme+Bar.RelightUpperColor}" />
+  <SolidColorBrush x:Key="BarRelightLowerBrush" Color="{x:Static local:Theme+Bar.RelightLowerColor}" />
+  <SolidColorBrush x:Key="BarRelightBottomBrush" Color="{x:Static local:Theme+Bar.RelightBottomColor}" />
+  <SolidColorBrush x:Key="BarOverlayBrush" Color="{x:Static local:Theme+Bar.OverlayColor}" />
+  <SolidColorBrush x:Key="BarOverlayFadeBrush" Color="{x:Static local:Theme+Bar.OverlayFadeColor}" />
+  <SolidColorBrush x:Key="BarFillOverlayBrush" Color="{x:Static local:Theme+Bar.FillOverlayColor}" />
+  <SolidColorBrush x:Key="BarFillOverlayFadeBrush" Color="{x:Static local:Theme+Bar.FillOverlayFadeColor}" />
+  <SolidColorBrush x:Key="BarTextBrush" Color="{x:Static local:Theme+Bar.TextColor}" />
+  <SolidColorBrush x:Key="BarTextOutlineBrush" Color="{x:Static local:Theme+Bar.TextOutlineColor}" />
+  <SolidColorBrush x:Key="BarHitpointsFillBrush" Color="{x:Static local:Theme+Bar.HitpointsFillColor}" />
+  <SolidColorBrush x:Key="BarHitpointsTrackBrush" Color="{x:Static local:Theme+Bar.HitpointsTrackColor}" />
+  <SolidColorBrush x:Key="BarExperienceFillBrush" Color="{x:Static local:Theme+Bar.ExperienceFillColor}" />
+  <SolidColorBrush x:Key="BarExperienceTrackBrush" Color="{x:Static local:Theme+Bar.ExperienceTrackColor}" />
+  <SolidColorBrush x:Key="BarExperienceGainFillBrush" Color="{x:Static local:Theme+Bar.ExperienceGainFillColor}" />
+  <SolidColorBrush x:Key="BarMaximumExperienceFillBrush" Color="{x:Static local:Theme+Bar.MaximumExperienceFillColor}" />
+  <SolidColorBrush x:Key="BarMaximumExperienceTrackBrush" Color="{x:Static local:Theme+Bar.MaximumExperienceTrackColor}" />
+  <SolidColorBrush x:Key="BarPendingExperienceFillBrush" Color="{x:Static local:Theme+Bar.PendingExperienceFillColor}" />
+  <SolidColorBrush x:Key="BarPendingExperienceTrackBrush" Color="{x:Static local:Theme+Bar.PendingExperienceTrackColor}" />
+  <LinearGradientBrush x:Key="BarRelightGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Bar.RelightTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Bar.RelightUpperColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Bar.RelightLowerColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Bar.RelightBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BarOverlayGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Bar.OverlayColor}" />
+    <GradientStop Offset="0.05" Color="{x:Static local:Theme+Bar.OverlayFadeColor}" />
+    <GradientStop Offset="0.7" Color="{x:Static local:Theme+Bar.OverlayFadeColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Bar.OverlayColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BarFillOverlayGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Bar.FillOverlayColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Bar.FillOverlayFadeColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="OfferStatusShortResourceBrush" Color="{x:Static local:Theme+OfferStatus.ShortResourceColor}" />
+  <SolidColorBrush x:Key="OfferStatusReasonBrush" Color="{x:Static local:Theme+OfferStatus.ReasonColor}" />
+
+  <SolidColorBrush x:Key="SpellIconLightBackgroundBrush" Color="{x:Static local:Theme+Spell.IconLightBackgroundColor}" />
+  <SolidColorBrush x:Key="SpellIconDarkBackgroundBrush" Color="{x:Static local:Theme+Spell.IconDarkBackgroundColor}" />
+  <SolidColorBrush x:Key="SpellSelectedBorderBrush" Color="{x:Static local:Theme+Spell.SelectedBorderColor}" />
+  <SolidColorBrush x:Key="SpellTileHoverBrush" Color="{x:Static local:Theme+Spell.TileHoverColor}" />
+  <SolidColorBrush x:Key="SpellTileSelectedBrush" Color="{x:Static local:Theme+Spell.TileSelectedColor}" />
+  <SolidColorBrush x:Key="SpellLockedOverlayBrush" Color="{x:Static local:Theme+Spell.LockedOverlayColor}" />
+  <SolidColorBrush x:Key="SpellResearchOverlayBrush" Color="{x:Static local:Theme+Spell.ResearchOverlayColor}" />
+  <SolidColorBrush x:Key="SpellResearchGlowBrush" Color="{x:Static local:Theme+Spell.ResearchGlowColor}" />
+  <SolidColorBrush x:Key="SpellLockedInkBrush" Color="{x:Static local:Theme+Spell.LockedInkColor}" />
+
+  <SolidColorBrush x:Key="StackPortraitGlowBrush" Color="{DynamicResource AccentColor}" Opacity="0.27" />
+  <SolidColorBrush x:Key="StackPortraitGlowFadeBrush" Color="{DynamicResource AccentFadeColor}" />
+  <RadialGradientBrush x:Key="StackPortraitGlowGradientBrush" GradientOrigin="50%,50%" Center="50%,50%" RadiusX="50%" RadiusY="50%" Opacity="0.27">
+    <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentFadeColor}" />
+  </RadialGradientBrush>
+
+  <SolidColorBrush x:Key="FieldFaceTopBrush" Color="{x:Static local:Theme+Field.FaceTopColor}" />
+  <SolidColorBrush x:Key="FieldFaceMiddleBrush" Color="{x:Static local:Theme+Field.FaceMiddleColor}" />
+  <SolidColorBrush x:Key="FieldFaceBottomBrush" Color="{x:Static local:Theme+Field.FaceBottomColor}" />
+  <SolidColorBrush x:Key="FieldHoverFaceTopBrush" Color="{x:Static local:Theme+Field.HoverFaceTopColor}" />
+  <SolidColorBrush x:Key="FieldHoverFaceMiddleBrush" Color="{x:Static local:Theme+Field.HoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="FieldHoverFaceBottomBrush" Color="{x:Static local:Theme+Field.HoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="FieldTextBrush" Color="{x:Static local:Theme+Field.TextColor}" />
+  <SolidColorBrush x:Key="FieldDisabledTextBrush" Color="{x:Static local:Theme+Field.DisabledTextColor}" />
+  <SolidColorBrush x:Key="FieldTextShadowBrush" Color="{x:Static local:Theme+Field.TextShadowColor}" />
+  <SolidColorBrush x:Key="FieldHoverTextBrush" Color="{DynamicResource AccentLightColor}" />
+  <LinearGradientBrush x:Key="FieldBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryLightColor}" />
+    <GradientStop Offset="0.5" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="FieldFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Field.FaceTopColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+Field.FaceMiddleColor}" />
+    <GradientStop Offset="0.85" Color="{x:Static local:Theme+Field.FaceBottomColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Field.FaceMiddleColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="FieldHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Field.HoverFaceTopColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+Field.HoverFaceMiddleColor}" />
+    <GradientStop Offset="0.85" Color="{x:Static local:Theme+Field.HoverFaceBottomColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Field.HoverFaceMiddleColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="PillBevelBrush" Color="{DynamicResource AccentSecondaryLightColor}" />
+  <SolidColorBrush x:Key="PillOutlineBrush" Color="{x:Static local:Theme+Pill.OutlineColor}" />
+  <SolidColorBrush x:Key="PillInnerShadowBrush" Color="{x:Static local:Theme+Pill.InnerShadowColor}" />
+  <SolidColorBrush x:Key="PillFaceTopBrush" Color="{x:Static local:Theme+Pill.FaceTopColor}" />
+  <SolidColorBrush x:Key="PillFaceMiddleBrush" Color="{x:Static local:Theme+Pill.FaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillFaceBottomBrush" Color="{x:Static local:Theme+Pill.FaceBottomColor}" />
+  <SolidColorBrush x:Key="PillHoverFaceTopBrush" Color="{x:Static local:Theme+Pill.HoverFaceTopColor}" />
+  <SolidColorBrush x:Key="PillHoverFaceMiddleBrush" Color="{x:Static local:Theme+Pill.HoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillHoverFaceBottomBrush" Color="{x:Static local:Theme+Pill.HoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillTextBrush" Color="{x:Static local:Theme+Pill.TextColor}" />
+  <SolidColorBrush x:Key="PillTextShadowBrush" Color="{x:Static local:Theme+Pill.TextShadowColor}" />
+  <SolidColorBrush x:Key="PillHoverTextBrush" Color="{DynamicResource AccentLightColor}" />
+  <SolidColorBrush x:Key="PillPrimaryFaceTopBrush" Color="{x:Static local:Theme+Pill.PrimaryFaceTopColor}" />
+  <SolidColorBrush x:Key="PillPrimaryFaceMiddleBrush" Color="{x:Static local:Theme+Pill.PrimaryFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillPrimaryFaceBottomBrush" Color="{x:Static local:Theme+Pill.PrimaryFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillPrimaryHoverFaceTopBrush" Color="{x:Static local:Theme+Pill.PrimaryHoverFaceTopColor}" />
+  <SolidColorBrush x:Key="PillPrimaryHoverFaceMiddleBrush" Color="{x:Static local:Theme+Pill.PrimaryHoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillPrimaryHoverFaceBottomBrush" Color="{x:Static local:Theme+Pill.PrimaryHoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillPrimaryDisabledFaceTopBrush" Color="{x:Static local:Theme+Pill.PrimaryDisabledFaceTopColor}" />
+  <SolidColorBrush x:Key="PillPrimaryDisabledFaceMiddleBrush" Color="{x:Static local:Theme+Pill.PrimaryDisabledFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillPrimaryDisabledFaceBottomBrush" Color="{x:Static local:Theme+Pill.PrimaryDisabledFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillDangerFaceTopBrush" Color="{x:Static local:Theme+Pill.DangerFaceTopColor}" />
+  <SolidColorBrush x:Key="PillDangerFaceMiddleBrush" Color="{x:Static local:Theme+Pill.DangerFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillDangerFaceBottomBrush" Color="{x:Static local:Theme+Pill.DangerFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillDangerHoverFaceTopBrush" Color="{x:Static local:Theme+Pill.DangerHoverFaceTopColor}" />
+  <SolidColorBrush x:Key="PillDangerHoverFaceMiddleBrush" Color="{x:Static local:Theme+Pill.DangerHoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillDangerHoverFaceBottomBrush" Color="{x:Static local:Theme+Pill.DangerHoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillDangerDisabledFaceTopBrush" Color="{x:Static local:Theme+Pill.DangerDisabledFaceTopColor}" />
+  <SolidColorBrush x:Key="PillDangerDisabledFaceMiddleBrush" Color="{x:Static local:Theme+Pill.DangerDisabledFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillDangerDisabledFaceBottomBrush" Color="{x:Static local:Theme+Pill.DangerDisabledFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillSuccessFaceTopBrush" Color="{x:Static local:Theme+Pill.SuccessFaceTopColor}" />
+  <SolidColorBrush x:Key="PillSuccessFaceMiddleBrush" Color="{x:Static local:Theme+Pill.SuccessFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillSuccessFaceBottomBrush" Color="{x:Static local:Theme+Pill.SuccessFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillSuccessHoverFaceTopBrush" Color="{x:Static local:Theme+Pill.SuccessHoverFaceTopColor}" />
+  <SolidColorBrush x:Key="PillSuccessHoverFaceMiddleBrush" Color="{x:Static local:Theme+Pill.SuccessHoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillSuccessHoverFaceBottomBrush" Color="{x:Static local:Theme+Pill.SuccessHoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="PillSuccessDisabledFaceTopBrush" Color="{x:Static local:Theme+Pill.SuccessDisabledFaceTopColor}" />
+  <SolidColorBrush x:Key="PillSuccessDisabledFaceMiddleBrush" Color="{x:Static local:Theme+Pill.SuccessDisabledFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillSuccessDisabledFaceBottomBrush" Color="{x:Static local:Theme+Pill.SuccessDisabledFaceBottomColor}" />
+  <LinearGradientBrush x:Key="PillBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryLightColor}" />
+    <GradientStop Offset="0.5" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.FaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.FaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.FaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.HoverFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.HoverFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.HoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="PillDisabledTextBrush" Color="{x:Static local:Theme+Pill.DisabledTextColor}" />
+  <SolidColorBrush x:Key="PillDisabledFaceTopBrush" Color="{x:Static local:Theme+Pill.DisabledFaceTopColor}" />
+  <SolidColorBrush x:Key="PillDisabledFaceMiddleBrush" Color="{x:Static local:Theme+Pill.DisabledFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PillDisabledFaceBottomBrush" Color="{x:Static local:Theme+Pill.DisabledFaceBottomColor}" />
+  <LinearGradientBrush x:Key="PillDisabledFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.DisabledFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.DisabledFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.DisabledFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillPrimaryFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.PrimaryFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.PrimaryFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.PrimaryFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillPrimaryHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.PrimaryHoverFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.PrimaryHoverFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.PrimaryHoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillPrimaryDisabledFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.PrimaryDisabledFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.PrimaryDisabledFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.PrimaryDisabledFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillDangerFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.DangerFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.DangerFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.DangerFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillDangerHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.DangerHoverFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.DangerHoverFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.DangerHoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillDangerDisabledFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.DangerDisabledFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.DangerDisabledFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.DangerDisabledFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillSuccessFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.SuccessFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.SuccessFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.SuccessFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillSuccessHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.SuccessHoverFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.SuccessHoverFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.SuccessHoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PillSuccessDisabledFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Pill.SuccessDisabledFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Pill.SuccessDisabledFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Pill.SuccessDisabledFaceBottomColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="PlateOuterShadowBrush" Color="{x:Static local:Theme+Plate.OuterShadowColor}" />
+  <SolidColorBrush x:Key="PlateInnerShadowBrush" Color="{x:Static local:Theme+Plate.InnerShadowColor}" />
+  <SolidColorBrush x:Key="PlateTextShadowBrush" Color="{x:Static local:Theme+Plate.TextShadowColor}" />
+  <SolidColorBrush x:Key="PlateGlowBrush" Color="{DynamicResource AccentColor}" Opacity="0.55" />
+  <SolidColorBrush x:Key="PlateGlowHaloBrush" Color="{DynamicResource AccentColor}" Opacity="0.4" />
+  <SolidColorBrush x:Key="PlateFocusGlowBrush" Color="{DynamicResource AccentLightColor}" Opacity="0.47" />
+  <SolidColorBrush x:Key="PlateGlossBrush" Color="{x:Static local:Theme+Plate.GlossColor}" />
+  <SolidColorBrush x:Key="PlateGlossFadeBrush" Color="{x:Static local:Theme+Plate.GlossFadeColor}" />
+  <SolidColorBrush x:Key="PlateRoundGlossBrush" Color="{x:Static local:Theme+Plate.RoundGlossColor}" />
+  <SolidColorBrush x:Key="PlateFaceTopBrush" Color="{x:Static local:Theme+Plate.FaceTopColor}" />
+  <SolidColorBrush x:Key="PlateFaceMiddleBrush" Color="{x:Static local:Theme+Plate.FaceMiddleColor}" />
+  <SolidColorBrush x:Key="PlateFaceBottomBrush" Color="{x:Static local:Theme+Plate.FaceBottomColor}" />
+  <SolidColorBrush x:Key="PlateHoverFaceTopBrush" Color="{x:Static local:Theme+Plate.HoverFaceTopColor}" />
+  <SolidColorBrush x:Key="PlateHoverFaceMiddleBrush" Color="{x:Static local:Theme+Plate.HoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PlateHoverFaceBottomBrush" Color="{x:Static local:Theme+Plate.HoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="PlateTextBrush" Color="{x:Static local:Theme+Plate.TextColor}" />
+  <SolidColorBrush x:Key="PlateHoverTextBrush" Color="{DynamicResource AccentLightColor}" />
+  <SolidColorBrush x:Key="PlateDisabledTextBrush" Color="{x:Static local:Theme+Plate.DisabledTextColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryFaceTopBrush" Color="{x:Static local:Theme+Plate.PrimaryFaceTopColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryFaceMiddleBrush" Color="{x:Static local:Theme+Plate.PrimaryFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryFaceBottomBrush" Color="{x:Static local:Theme+Plate.PrimaryFaceBottomColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryHoverFaceTopBrush" Color="{x:Static local:Theme+Plate.PrimaryHoverFaceTopColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryHoverFaceMiddleBrush" Color="{x:Static local:Theme+Plate.PrimaryHoverFaceMiddleColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryHoverFaceBottomBrush" Color="{x:Static local:Theme+Plate.PrimaryHoverFaceBottomColor}" />
+  <SolidColorBrush x:Key="PlatePrimaryDisabledTextBrush" Color="{x:Static local:Theme+Plate.PrimaryDisabledTextColor}" />
+  <SolidColorBrush x:Key="PlatePriceOverlayBrush" Color="{x:Static local:Theme+Plate.PriceOverlayColor}" />
+  <SolidColorBrush x:Key="PlatePriceDividerBrush" Color="{x:Static local:Theme+Plate.PriceDividerColor}" />
+  <SolidColorBrush x:Key="PlateKeyLightBrush" Color="{x:Static local:Theme+Plate.KeyLightColor}" />
+  <SolidColorBrush x:Key="PlateFillLightBrush" Color="{x:Static local:Theme+Plate.FillLightColor}" />
+  <SolidColorBrush x:Key="PlatePointerLightBrush" Color="{x:Static local:Theme+Plate.PointerLightColor}" />
+  <LinearGradientBrush x:Key="PlateBorderGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryDarkColor}" />
+    <GradientStop Offset="0.2" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="0.5" Color="{DynamicResource AccentSecondaryLightColor}" />
+    <GradientStop Offset="0.8" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlateRoundBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryLightColor}" />
+    <GradientStop Offset="0.5" Color="{DynamicResource AccentSecondaryColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlateGlossGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.GlossFadeColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.GlossColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlateRoundGlossGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.GlossFadeColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.RoundGlossColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlateFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.FaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Plate.FaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.FaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlateHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.HoverFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Plate.HoverFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.HoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlatePrimaryFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.PrimaryFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Plate.PrimaryFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.PrimaryFaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="PlatePrimaryHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.PrimaryHoverFaceTopColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Plate.PrimaryHoverFaceMiddleColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.PrimaryHoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="SliderTrackTopBrush" Color="{x:Static local:Theme+Slider.TrackTopColor}" />
+  <SolidColorBrush x:Key="SliderTrackBottomBrush" Color="{x:Static local:Theme+Slider.TrackBottomColor}" />
+  <SolidColorBrush x:Key="SliderTrackBorderBrush" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  <SolidColorBrush x:Key="SliderFillTopBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="SliderFillBottomBrush" Color="{DynamicResource AccentSecondaryColor}" />
+  <SolidColorBrush x:Key="SliderHoverFillTopBrush" Color="{DynamicResource AccentLightColor}" />
+  <SolidColorBrush x:Key="SliderHoverFillBottomBrush" Color="{DynamicResource AccentSecondaryLightColor}" />
+  <SolidColorBrush x:Key="SliderDisabledFillBrush" Color="{x:Static local:Theme+Slider.DisabledFillColor}" />
+  <SolidColorBrush x:Key="SliderStudBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="SliderStudHoverBrush" Color="{DynamicResource AccentLightColor}" />
+  <LinearGradientBrush x:Key="SliderTrackGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Slider.TrackTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Slider.TrackBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="SliderFillGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="SliderHoverFillGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{DynamicResource AccentLightColor}" />
+    <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryLightColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="ScrollBarTrackBrush" Color="{x:Static local:Theme+ScrollBar.TrackColor}" />
+  <SolidColorBrush x:Key="ScrollBarTrackBorderBrush" Color="{x:Static local:Theme+ScrollBar.TrackBorderColor}" />
+  <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="{DynamicResource AccentSecondaryColor}" />
+  <SolidColorBrush x:Key="ScrollBarThumbBorderBrush" Color="{DynamicResource AccentSecondaryDarkColor}" />
+  <SolidColorBrush x:Key="ScrollBarThumbGlossBrush" Color="{x:Static local:Theme+ScrollBar.ThumbGlossColor}" />
+  <SolidColorBrush x:Key="ScrollBarThumbHoverBrush" Color="{DynamicResource AccentColor}" />
+  <SolidColorBrush x:Key="ScrollBarThumbPressedBrush" Color="{DynamicResource AccentLightColor}" />
+  <LinearGradientBrush x:Key="ScrollBarThumbGlossGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+ScrollBar.ThumbGlossColor}" />
+    <GradientStop Offset="0.5" Color="{DynamicResource AccentColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+ScrollBar.ThumbGlossColor}" />
+  </LinearGradientBrush>
+  <ImageBrush x:Key="PlateTextureBrush" Source="{x:Static local:PlateTexture.Bitmap}" TileMode="Tile" DestinationRect="0,0,512,128" />
+
+  <SolidColorBrush x:Key="BuildingGraphFighterBrush" Color="{x:Static local:Theme+BuildingGraph.FighterColor}" />
+  <SolidColorBrush x:Key="BuildingGraphRangerBrush" Color="{x:Static local:Theme+BuildingGraph.RangerColor}" />
+  <SolidColorBrush x:Key="BuildingGraphMageBrush" Color="{x:Static local:Theme+BuildingGraph.MageColor}" />
+  <SolidColorBrush x:Key="BuildingGraphSpecialBrush" Color="{x:Static local:Theme+BuildingGraph.SpecialColor}" />
+  <SolidColorBrush x:Key="BuildingGraphCommonBrush" Color="{x:Static local:Theme+BuildingGraph.CommonColor}" />
+  <SolidColorBrush x:Key="BuildingGraphLevelRingBrush" Color="{x:Static local:Theme+BuildingGraph.LevelRingColor}" />
+  <SolidColorBrush x:Key="BuildingGraphCommonLightBrush" Color="{x:Static local:Theme+BuildingGraph.CommonLightColor}" />
+  <SolidColorBrush x:Key="BuildingGraphCommonDarkBrush" Color="{x:Static local:Theme+BuildingGraph.CommonDarkColor}" />
+  <SolidColorBrush x:Key="BuildingGraphHubLightBrush" Color="{x:Static local:Theme+BuildingGraph.HubLightColor}" />
+  <SolidColorBrush x:Key="BuildingGraphHubBrush" Color="{x:Static local:Theme+BuildingGraph.HubColor}" />
+  <SolidColorBrush x:Key="BuildingGraphHubDarkBrush" Color="{x:Static local:Theme+BuildingGraph.HubDarkColor}" />
+  <SolidColorBrush x:Key="BuildingGraphHubShadowBrush" Color="{x:Static local:Theme+BuildingGraph.HubShadowColor}" />
+  <SolidColorBrush x:Key="BuildingGraphHubBevelBrush" Color="{x:Static local:Theme+BuildingGraph.HubBevelColor}" />
+  <LinearGradientBrush x:Key="BuildingGraphHubGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+BuildingGraph.HubLightColor}" />
+    <GradientStop Offset="0.45" Color="{x:Static local:Theme+BuildingGraph.HubColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+BuildingGraph.HubDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BuildingGraphCommonRingBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+BuildingGraph.CommonLightColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+BuildingGraph.CommonColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+BuildingGraph.CommonDarkColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="BuildingGraphHighlightRingBrush" Color="{x:Static local:Theme+BuildingGraph.HighlightRingColor}" />
+  <SolidColorBrush x:Key="BuildingGraphHighlightGlowBrush" Color="{x:Static local:Theme+BuildingGraph.HighlightGlowColor}" />
+  <SolidColorBrush x:Key="BuildingGraphSceneOverlayBrush" Color="{x:Static local:Theme+BuildingGraph.SceneOverlayColor}" />
+  <SolidColorBrush x:Key="BuildingGraphNodeBackgroundBrush" Color="{x:Static local:Theme+BuildingGraph.NodeBackgroundColor}" />
+  <SolidColorBrush x:Key="BuildingGraphBlockedOverlayBrush" Color="{x:Static local:Theme+BuildingGraph.BlockedOverlayColor}" />
+  <SolidColorBrush x:Key="BuildingGraphBlockedInkBrush" Color="{x:Static local:Theme+BuildingGraph.BlockedInkColor}" />
+
+  <SolidColorBrush x:Key="CapitalSceneEdgeMaskBrush" Color="{x:Static local:Theme+CapitalScene.EdgeMaskColor}" />
+  <SolidColorBrush x:Key="CapitalSceneEdgeMaskFadeBrush" Color="{x:Static local:Theme+CapitalScene.EdgeMaskFadeColor}" />
+  <SolidColorBrush x:Key="CapitalScenePanelBodyTopBrush" Color="{x:Static local:Theme+CapitalScene.PanelBodyTopColor}" />
+  <SolidColorBrush x:Key="CapitalScenePanelBodyBottomBrush" Color="{x:Static local:Theme+CapitalScene.PanelBodyBottomColor}" />
+  <LinearGradientBrush x:Key="CapitalScenePanelBodyGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+CapitalScene.PanelBodyTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+CapitalScene.PanelBodyBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="CapitalSceneFootOverlayBrush" Color="{x:Static local:Theme+CapitalScene.FootOverlayColor}" />
+  <SolidColorBrush x:Key="CapitalSceneFootOverlayFadeBrush" Color="{x:Static local:Theme+CapitalScene.FootOverlayFadeColor}" />
+  <LinearGradientBrush x:Key="CapitalSceneFootOverlayGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0.35" Color="{x:Static local:Theme+CapitalScene.FootOverlayFadeColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+CapitalScene.FootOverlayColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="EventLogDamageBrush" Color="{x:Static local:Theme+EventLog.DamageColor}" />
+  <SolidColorBrush x:Key="EventLogHealingBrush" Color="{x:Static local:Theme+EventLog.HealingColor}" />
+  <SolidColorBrush x:Key="EventLogFadeTopBrush" Color="{x:Static local:Theme+EventLog.FadeTopColor}" />
+  <SolidColorBrush x:Key="EventLogFadeBottomBrush" Color="{x:Static local:Theme+EventLog.FadeBottomColor}" />
+  <LinearGradientBrush x:Key="EventLogFadeGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+EventLog.FadeTopColor}" />
+    <GradientStop Offset="0.6" Color="{x:Static local:Theme+EventLog.FadeBottomColor}" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="BattleActionBarHoverFaceBrush" Color="{DynamicResource AccentColor}" Opacity="0.13" />
+  <LinearGradientBrush x:Key="BattleActionBarSuggestedEmberGradientBrush" StartPoint="50%,100%" EndPoint="50%,0%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberCoreColor}" />
+    <GradientStop Offset="0.25" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberColor}" />
+    <GradientStop Offset="0.7" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BattleActionBarSuggestedEmberMaskGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberMaskFadeColor}" />
+    <GradientStop Offset="0.18" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberMaskColor}" />
+    <GradientStop Offset="0.82" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberMaskColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberMaskFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BattleActionBarSuggestedHeatGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedHeatFadeColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedHeatColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedHeatFadeColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="BattleActionBarSuggestedEmberCoreBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberCoreColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedEmberBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedEmberFadeBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberFadeColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedEmberMaskBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberMaskColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedEmberMaskFadeBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedEmberMaskFadeColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedHeatBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedHeatColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedHeatFadeBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedHeatFadeColor}" />
+  <SolidColorBrush x:Key="BattleActionBarSuggestedInkBrush" Color="{x:Static local:Theme+Battle+ActionBar.SuggestedInkColor}" />
+  <SolidColorBrush x:Key="BattleActionBarDividerBrush" Color="{DynamicResource AccentSecondaryDarkColor}" Opacity="0.59" />
+  <SolidColorBrush x:Key="BattleGroundMarkerOverlayBrush" Color="{x:Static local:Theme+Battle+GroundMarker.OverlayColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerCurrentBrush" Color="{x:Static local:Theme+Battle+GroundMarker.CurrentColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerEnemyTargetBrush" Color="{x:Static local:Theme+Battle+GroundMarker.EnemyTargetColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerAllyTargetBrush" Color="{x:Static local:Theme+Battle+GroundMarker.AllyTargetColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerAllyReachableBrush" Color="{x:Static local:Theme+Battle+GroundMarker.AllyReachableColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerSummonTargetBrush" Color="{x:Static local:Theme+Battle+GroundMarker.SummonTargetColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerSummonReachableBrush" Color="{x:Static local:Theme+Battle+GroundMarker.SummonReachableColor}" />
+  <SolidColorBrush x:Key="BattleGridMarkerEnemyTargetBrush" Color="{x:Static local:Theme+Battle+GridMarker.EnemyTargetColor}" />
+  <SolidColorBrush x:Key="BattleGridMarkerEnemyReachableBrush" Color="{x:Static local:Theme+Battle+GridMarker.EnemyReachableColor}" />
+  <SolidColorBrush x:Key="BattleGridMarkerAllyTargetBrush" Color="{x:Static local:Theme+Battle+GridMarker.AllyTargetColor}" />
+  <SolidColorBrush x:Key="BattleGridMarkerAllyReachableBrush" Color="{x:Static local:Theme+Battle+GridMarker.AllyReachableColor}" />
+  <SolidColorBrush x:Key="BattleGridMarkerSummonTargetBrush" Color="{x:Static local:Theme+Battle+GridMarker.SummonTargetColor}" />
+  <SolidColorBrush x:Key="BattleGridMarkerSummonReachableBrush" Color="{x:Static local:Theme+Battle+GridMarker.SummonReachableColor}" />
+  <SolidColorBrush x:Key="BattleHighlightCurrentBrush" Color="{x:Static local:Theme+Battle+Highlight.CurrentColor}" />
+  <SolidColorBrush x:Key="BattleHighlightEnemyTargetBrush" Color="{x:Static local:Theme+Battle+Highlight.EnemyTargetColor}" />
+  <SolidColorBrush x:Key="BattleHighlightAllyTargetBrush" Color="{x:Static local:Theme+Battle+Highlight.AllyTargetColor}" />
+  <SolidColorBrush x:Key="BattleHighlightAllyReachableBrush" Color="{x:Static local:Theme+Battle+Highlight.AllyReachableColor}" />
+  <SolidColorBrush x:Key="BattleHighlightSummonTargetBrush" Color="{x:Static local:Theme+Battle+Highlight.SummonTargetColor}" />
+  <SolidColorBrush x:Key="BattleHighlightSummonReachableBrush" Color="{x:Static local:Theme+Battle+Highlight.SummonReachableColor}" />
+
+  <SolidColorBrush x:Key="BattleStatusEffectFaceBrush" Color="{x:Static local:Theme+Battle+StatusEffect.FaceColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectCounterTextBrush" Color="{x:Static local:Theme+Battle+StatusEffect.CounterTextColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectParalyzeOverlayBrush" Color="{x:Static local:Theme+Battle+StatusEffect.ParalyzeOverlayColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectPetrifyOverlayBrush" Color="{x:Static local:Theme+Battle+StatusEffect.PetrifyOverlayColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectPoisonOverlayBrush" Color="{x:Static local:Theme+Battle+StatusEffect.PoisonOverlayColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectFrostbiteOverlayBrush" Color="{x:Static local:Theme+Battle+StatusEffect.FrostbiteOverlayColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectBlisterOverlayBrush" Color="{x:Static local:Theme+Battle+StatusEffect.BlisterOverlayColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectDefendBrush" Color="{x:Static local:Theme+Battle+StatusEffect.DefendColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectParalyzeBrush" Color="{x:Static local:Theme+Battle+StatusEffect.ParalyzeColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectPetrifyBrush" Color="{x:Static local:Theme+Battle+StatusEffect.PetrifyColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectPoisonBrush" Color="{x:Static local:Theme+Battle+StatusEffect.PoisonColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectFrostbiteBrush" Color="{x:Static local:Theme+Battle+StatusEffect.FrostbiteColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectBlisterBrush" Color="{x:Static local:Theme+Battle+StatusEffect.BlisterColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectRetreatBrush" Color="{x:Static local:Theme+Battle+StatusEffect.RetreatColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectFortificationBrush" Color="{x:Static local:Theme+Battle+StatusEffect.FortificationColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectIncreaseDamageBrush" Color="{x:Static local:Theme+Battle+StatusEffect.IncreaseDamageColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectReduceDamageBrush" Color="{x:Static local:Theme+Battle+StatusEffect.ReduceDamageColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectReduceInitiativeBrush" Color="{x:Static local:Theme+Battle+StatusEffect.ReduceInitiativeColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectReduceLevelBrush" Color="{x:Static local:Theme+Battle+StatusEffect.ReduceLevelColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectShatterArmorBrush" Color="{x:Static local:Theme+Battle+StatusEffect.ShatterArmorColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectCureBrush" Color="{x:Static local:Theme+Battle+StatusEffect.CureColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectTransformBrush" Color="{x:Static local:Theme+Battle+StatusEffect.TransformColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectBoostModifierBrush" Color="{x:Static local:Theme+Battle+StatusEffect.BoostModifierColor}" />
+  <SolidColorBrush x:Key="BattleStatusEffectWeakenModifierBrush" Color="{x:Static local:Theme+Battle+StatusEffect.WeakenModifierColor}" />
+
+  <SolidColorBrush x:Key="BattleFeedbackDamageOverlayBrush" Color="{x:Static local:Theme+Battle+Feedback.DamageOverlayColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackDamageTextBrush" Color="{x:Static local:Theme+Battle+Feedback.DamageTextColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackMissOverlayBrush" Color="{x:Static local:Theme+Battle+Feedback.MissOverlayColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackMissTextBrush" Color="{x:Static local:Theme+Battle+Feedback.MissTextColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackWardOverlayBrush" Color="{x:Static local:Theme+Battle+Feedback.WardOverlayColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackWardTextBrush" Color="{x:Static local:Theme+Battle+Feedback.WardTextColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackHealOverlayBrush" Color="{x:Static local:Theme+Battle+Feedback.HealOverlayColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackHealTextBrush" Color="{x:Static local:Theme+Battle+Feedback.HealTextColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackEffectOverlayBrush" Color="{x:Static local:Theme+Battle+Feedback.EffectOverlayColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackEffectTextBrush" Color="{x:Static local:Theme+Battle+Feedback.EffectTextColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackActionOverlayBrush" Color="{x:Static local:Theme+Battle+Feedback.ActionOverlayColor}" />
+  <SolidColorBrush x:Key="BattleFeedbackActionTextBrush" Color="{x:Static local:Theme+Battle+Feedback.ActionTextColor}" />
+
+  <SolidColorBrush x:Key="BattleFluidFogDeepBrush" Color="{x:Static local:Theme+Battle+Fluid.FogDeepColor}" />
+  <SolidColorBrush x:Key="BattleFluidFogBodyBrush" Color="{x:Static local:Theme+Battle+Fluid.FogBodyColor}" />
+  <SolidColorBrush x:Key="BattleFluidFogPeakBrush" Color="{x:Static local:Theme+Battle+Fluid.FogPeakColor}" />
+  <SolidColorBrush x:Key="BattleFluidFogScatterBrush" Color="{x:Static local:Theme+Battle+Fluid.FogScatterColor}" />
+  <SolidColorBrush x:Key="BattleFluidMiasmaDeepBrush" Color="{x:Static local:Theme+Battle+Fluid.MiasmaDeepColor}" />
+  <SolidColorBrush x:Key="BattleFluidMiasmaBodyBrush" Color="{x:Static local:Theme+Battle+Fluid.MiasmaBodyColor}" />
+  <SolidColorBrush x:Key="BattleFluidMiasmaPeakBrush" Color="{x:Static local:Theme+Battle+Fluid.MiasmaPeakColor}" />
+  <SolidColorBrush x:Key="BattleFluidMiasmaScatterBrush" Color="{x:Static local:Theme+Battle+Fluid.MiasmaScatterColor}" />
+  <SolidColorBrush x:Key="BattleFluidDustDeepBrush" Color="{x:Static local:Theme+Battle+Fluid.DustDeepColor}" />
+  <SolidColorBrush x:Key="BattleFluidDustBodyBrush" Color="{x:Static local:Theme+Battle+Fluid.DustBodyColor}" />
+  <SolidColorBrush x:Key="BattleFluidDustPeakBrush" Color="{x:Static local:Theme+Battle+Fluid.DustPeakColor}" />
+  <SolidColorBrush x:Key="BattleFluidDustScatterBrush" Color="{x:Static local:Theme+Battle+Fluid.DustScatterColor}" />
+  <SolidColorBrush x:Key="BattleFluidLavaDeepBrush" Color="{x:Static local:Theme+Battle+Fluid.LavaDeepColor}" />
+  <SolidColorBrush x:Key="BattleFluidLavaBodyBrush" Color="{x:Static local:Theme+Battle+Fluid.LavaBodyColor}" />
+  <SolidColorBrush x:Key="BattleFluidLavaPeakBrush" Color="{x:Static local:Theme+Battle+Fluid.LavaPeakColor}" />
+  <SolidColorBrush x:Key="BattleFluidLavaScatterBrush" Color="{x:Static local:Theme+Battle+Fluid.LavaScatterColor}" />
+  <SolidColorBrush x:Key="BattleFluidVaporDeepBrush" Color="{x:Static local:Theme+Battle+Fluid.VaporDeepColor}" />
+  <SolidColorBrush x:Key="BattleFluidVaporBodyBrush" Color="{x:Static local:Theme+Battle+Fluid.VaporBodyColor}" />
+  <SolidColorBrush x:Key="BattleFluidVaporPeakBrush" Color="{x:Static local:Theme+Battle+Fluid.VaporPeakColor}" />
+  <SolidColorBrush x:Key="BattleFluidVaporScatterBrush" Color="{x:Static local:Theme+Battle+Fluid.VaporScatterColor}" />
+  <SolidColorBrush x:Key="BattleFluidWaterDeepBrush" Color="{x:Static local:Theme+Battle+Fluid.WaterDeepColor}" />
+  <SolidColorBrush x:Key="BattleFluidWaterBodyBrush" Color="{x:Static local:Theme+Battle+Fluid.WaterBodyColor}" />
+  <SolidColorBrush x:Key="BattleFluidWaterPeakBrush" Color="{x:Static local:Theme+Battle+Fluid.WaterPeakColor}" />
+  <SolidColorBrush x:Key="BattleFluidWaterScatterBrush" Color="{x:Static local:Theme+Battle+Fluid.WaterScatterColor}" />
+  <SolidColorBrush x:Key="BattleRainStreakBrush" Color="{x:Static local:Theme+Battle+Rain.StreakColor}" />
+  <SolidColorBrush x:Key="BattleRainSplashBrush" Color="{x:Static local:Theme+Battle+Rain.SplashColor}" />
+  <SolidColorBrush x:Key="BattleRainHazeBrush" Color="{x:Static local:Theme+Battle+Rain.HazeColor}" />
+  <SolidColorBrush x:Key="BattleLightSunDawnBrush" Color="{x:Static local:Theme+Battle+Light.SunDawnColor}" />
+  <SolidColorBrush x:Key="BattleLightSunMiddayBrush" Color="{x:Static local:Theme+Battle+Light.SunMiddayColor}" />
+  <SolidColorBrush x:Key="BattleLightSunEveningBrush" Color="{x:Static local:Theme+Battle+Light.SunEveningColor}" />
+  <SolidColorBrush x:Key="BattleLightMoonBrush" Color="{x:Static local:Theme+Battle+Light.MoonColor}" />
+  <SolidColorBrush x:Key="BattleLightSkyBrush" Color="{x:Static local:Theme+Battle+Light.SkyColor}" />
+  <SolidColorBrush x:Key="BattleLightSkyDuskBrush" Color="{x:Static local:Theme+Battle+Light.SkyDuskColor}" />
+  <SolidColorBrush x:Key="BattleLightLanternBrush" Color="{x:Static local:Theme+Battle+Light.LanternColor}" />
+  <SolidColorBrush x:Key="BattleLightWindowBrush" Color="{x:Static local:Theme+Battle+Light.WindowColor}" />
+  <SolidColorBrush x:Key="BattleLightLavaBrush" Color="{x:Static local:Theme+Battle+Light.LavaColor}" />
+  <SolidColorBrush x:Key="BattleLightGlowingWaterBrush" Color="{x:Static local:Theme+Battle+Light.GlowingWaterColor}" />
+  <SolidColorBrush x:Key="BattleLightGhostCrystalBrush" Color="{x:Static local:Theme+Battle+Light.GhostCrystalColor}" />
+  <SolidColorBrush x:Key="BattleLightStormBrush" Color="{x:Static local:Theme+Battle+Light.StormColor}" />
+
+  <SolidColorBrush x:Key="WorldBackdropBrush" Color="{x:Static local:Theme+World.BackdropColor}" />
+  <SolidColorBrush x:Key="WorldHoverCursorInnerBrush" Color="{x:Static local:Theme+World.HoverCursorInnerColor}" />
+  <SolidColorBrush x:Key="WorldHoverCursorOuterBrush" Color="{x:Static local:Theme+World.HoverCursorOuterColor}" />
+  <SolidColorBrush x:Key="WorldSpellCursorInnerBrush" Color="{x:Static local:Theme+World.SpellCursorInnerColor}" />
+  <SolidColorBrush x:Key="WorldSpellCursorOuterBrush" Color="{x:Static local:Theme+World.SpellCursorOuterColor}" />
+  <SolidColorBrush x:Key="WorldCursorHaloBrush" Color="{x:Static local:Theme+World.CursorHaloColor}" />
+
+  <SolidColorBrush x:Key="WorldHighlightSelectedBrush" Color="{x:Static local:Theme+World+Highlight.SelectedColor}" />
+  <SolidColorBrush x:Key="WorldHighlightExhaustedBrush" Color="{x:Static local:Theme+World+Highlight.ExhaustedColor}" />
+  <SolidColorBrush x:Key="WorldHighlightHostileBrush" Color="{x:Static local:Theme+World+Highlight.HostileColor}" />
+
+  <SolidColorBrush x:Key="WorldReachFillBrush" Color="{x:Static local:Theme+World+Reach.FillColor}" />
+  <SolidColorBrush x:Key="WorldReachFeatherBrush" Color="{x:Static local:Theme+World+Reach.FeatherColor}" />
+  <SolidColorBrush x:Key="WorldReachEdgeBrush" Color="{x:Static local:Theme+World+Reach.EdgeColor}" />
+  <SolidColorBrush x:Key="WorldReachOutlineBrush" Color="{x:Static local:Theme+World+Reach.OutlineColor}" />
+
+  <SolidColorBrush x:Key="WorldPathValidInnerBrush" Color="{x:Static local:Theme+World+Path.ValidInnerColor}" />
+  <SolidColorBrush x:Key="WorldPathValidOuterBrush" Color="{x:Static local:Theme+World+Path.ValidOuterColor}" />
+  <SolidColorBrush x:Key="WorldPathUnreachedInnerBrush" Color="{x:Static local:Theme+World+Path.UnreachedInnerColor}" />
+  <SolidColorBrush x:Key="WorldPathUnreachedOuterBrush" Color="{x:Static local:Theme+World+Path.UnreachedOuterColor}" />
+  <SolidColorBrush x:Key="WorldPathAttackInnerBrush" Color="{x:Static local:Theme+World+Path.AttackInnerColor}" />
+  <SolidColorBrush x:Key="WorldPathAttackOuterBrush" Color="{x:Static local:Theme+World+Path.AttackOuterColor}" />
+  <SolidColorBrush x:Key="WorldPathOutlineBrush" Color="{x:Static local:Theme+World+Path.OutlineColor}" />
+  <SolidColorBrush x:Key="WorldPathMarkerFillBrush" Color="{x:Static local:Theme+World+Path.MarkerFillColor}" />
+
+  <SolidColorBrush x:Key="WorldObjectiveRingBrush" Color="{x:Static local:Theme+World+Objective.RingColor}" />
+  <SolidColorBrush x:Key="WorldObjectiveRuneBrush" Color="{x:Static local:Theme+World+Objective.RuneColor}" />
+  <SolidColorBrush x:Key="WorldObjectiveShadowBrush" Color="{x:Static local:Theme+World+Objective.ShadowColor}" />
+
+  <SolidColorBrush x:Key="WorldTileHiddenBrush" Color="{x:Static local:Theme+World+Tile.HiddenColor}" />
+
+  <SolidColorBrush x:Key="WorldWaterDeepBrush" Color="{x:Static local:Theme+World+Water.DeepColor}" />
+  <SolidColorBrush x:Key="WorldWaterShallowBrush" Color="{x:Static local:Theme+World+Water.ShallowColor}" />
+  <SolidColorBrush x:Key="WorldWaterSkyBrush" Color="{x:Static local:Theme+World+Water.SkyColor}" />
+  <SolidColorBrush x:Key="WorldWaterFoamBrush" Color="{x:Static local:Theme+World+Water.FoamColor}" />
+  <SolidColorBrush x:Key="WorldWaterSunBrush" Color="{x:Static local:Theme+World+Water.SunColor}" />
+
+  <SolidColorBrush x:Key="WorldRaceHumanBrush" Color="{x:Static local:Theme+World+Race.HumanColor}" />
+  <SolidColorBrush x:Key="WorldRaceUndeadBrush" Color="{x:Static local:Theme+World+Race.UndeadColor}" />
+  <SolidColorBrush x:Key="WorldRaceHereticBrush" Color="{x:Static local:Theme+World+Race.HereticColor}" />
+  <SolidColorBrush x:Key="WorldRaceDwarfBrush" Color="{x:Static local:Theme+World+Race.DwarfColor}" />
+  <SolidColorBrush x:Key="WorldRaceNeutralBrush" Color="{x:Static local:Theme+World+Race.NeutralColor}" />
+  <SolidColorBrush x:Key="WorldRaceElfBrush" Color="{x:Static local:Theme+World+Race.ElfColor}" />
+
+  <SolidColorBrush x:Key="WorldStackBarSelectedGlowBrush" Color="{x:Static local:Theme+World+StackBar.SelectedGlowColor}" />
+  <SolidColorBrush x:Key="WorldStackBarTextOutlineBrush" Color="{x:Static local:Theme+World+StackBar.TextOutlineColor}" />
+  <SolidColorBrush x:Key="WorldStackBarMovesBrush" Color="{x:Static local:Theme+World+StackBar.MovesColor}" />
+  <SolidColorBrush x:Key="WorldStackBarNoMovesBrush" Color="{x:Static local:Theme+World+StackBar.NoMovesColor}" />
+
+  <SolidColorBrush x:Key="MedallionGoldBrush" Color="{x:Static local:Theme+Medallion.GoldColor}" />
+  <SolidColorBrush x:Key="MedallionGoldLightBrush" Color="{x:Static local:Theme+Medallion.GoldLightColor}" />
+  <SolidColorBrush x:Key="MedallionGoldDarkBrush" Color="{x:Static local:Theme+Medallion.GoldDarkColor}" />
+  <SolidColorBrush x:Key="MedallionStoneBrush" Color="{x:Static local:Theme+Medallion.StoneColor}" />
+  <SolidColorBrush x:Key="MedallionChannelBrush" Color="{x:Static local:Theme+Medallion.ChannelColor}" />
+  <SolidColorBrush x:Key="MedallionShineBrush" Color="{x:Static local:Theme+Medallion.ShineColor}" />
+  <SolidColorBrush x:Key="MedallionSlotBrush" Color="{x:Static local:Theme+Medallion.SlotColor}" />
+  <SolidColorBrush x:Key="MedallionBorderBackdropBrush" Color="{x:Static local:Theme+Medallion.BorderBackdropColor}" />
+  <SolidColorBrush x:Key="MedallionInsetBrush" Color="{x:Static local:Theme+Medallion.InsetColor}" />
+  <SolidColorBrush x:Key="MedallionHaloBrush" Color="{x:Static local:Theme+Medallion.HaloColor}" />
+  <SolidColorBrush x:Key="MedallionFaceBrush" Color="{x:Static local:Theme+Medallion.FaceColor}" />
+  <SolidColorBrush x:Key="MedallionFaceEdgeBrush" Color="{x:Static local:Theme+Medallion.FaceEdgeColor}" />
+  <SolidColorBrush x:Key="MedallionFaceGlowBrush" Color="{x:Static local:Theme+Medallion.FaceGlowColor}" />
+  <SolidColorBrush x:Key="MedallionFaceHoverEdgeBrush" Color="{x:Static local:Theme+Medallion.FaceHoverEdgeColor}" />
+  <SolidColorBrush x:Key="MedallionFaceHoverGlowBrush" Color="{x:Static local:Theme+Medallion.FaceHoverGlowColor}" />
+  <SolidColorBrush x:Key="MedallionFaceLitBrush" Color="{x:Static local:Theme+Medallion.FaceLitColor}" />
+  <SolidColorBrush x:Key="MedallionFaceLitEdgeBrush" Color="{x:Static local:Theme+Medallion.FaceLitEdgeColor}" />
+  <SolidColorBrush x:Key="MedallionFaceLitGlowBrush" Color="{x:Static local:Theme+Medallion.FaceLitGlowColor}" />
+  <SolidColorBrush x:Key="MedallionFaceLitHoverBrush" Color="{x:Static local:Theme+Medallion.FaceLitHoverColor}" />
+  <SolidColorBrush x:Key="MedallionFaceLitHoverEdgeBrush" Color="{x:Static local:Theme+Medallion.FaceLitHoverEdgeColor}" />
+  <SolidColorBrush x:Key="MedallionFaceLitHoverGlowBrush" Color="{x:Static local:Theme+Medallion.FaceLitHoverGlowColor}" />
+  <SolidColorBrush x:Key="MedallionInkBrush" Color="{x:Static local:Theme+Medallion.InkColor}" />
+
+  <SolidColorBrush x:Key="MinimapViewportBrush" Color="{x:Static local:Theme+Minimap.ViewportColor}" />
+  <SolidColorBrush x:Key="MinimapMarkerOutlineBrush" Color="{x:Static local:Theme+Minimap.MarkerOutlineColor}" />
+  <SolidColorBrush x:Key="MinimapCapitalInsetBrush" Color="{x:Static local:Theme+Minimap.CapitalInsetColor}" />
+  <SolidColorBrush x:Key="MinimapPortraitHoverOverlayBrush" Color="{x:Static local:Theme+Minimap.PortraitHoverOverlayColor}" />
+  <SolidColorBrush x:Key="MinimapDirectionTextBrush" Color="{x:Static local:Theme+Minimap.DirectionTextColor}" />
+</ResourceDictionary>

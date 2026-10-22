@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Gallean</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\Gallean.Client\Theme\Assets\Gallean.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsPublishable>$([MSBuild]::IsOSPlatform('Windows'))</IsPublishable>
+    <PublishTrimmed>$(IsPublishable)</PublishTrimmed>
+    <PublishAot>$(IsPublishable)</PublishAot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Client\Gallean.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" />
+  </ItemGroup>
+
+  <Import Project="..\..\Publish.targets" />
+
+</Project>

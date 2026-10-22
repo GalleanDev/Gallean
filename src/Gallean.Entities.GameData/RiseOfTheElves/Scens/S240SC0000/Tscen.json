@@ -1,0 +1,3568 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Annoyance",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "BlackThorne Down 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Annoyance 1a",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Witch Gate down",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Giant protector",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Primitive Giant \n\u0022Must... pro-tect... the lady. Old bones... crush!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rocky Cairn Down",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Trainer \n\u0022So, someone finally dealt with the damned giant! He sure managed to ruin my business down here! Anyway, my training grounds are now open for business again. If ya want to get in shape quickly, please pass by, your money is always welcome!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance level 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Spearman \n\u0022I knew we should never have accepted this rotten job...we\u0027ll charge the demons with you, but any treasure along the way is ours!",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Intro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashkael \n\u0022At last! It took us several months to decimate the Empire frontlines, but we are finally within reach of the cursed Life Orb!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Peasant \n\u0022The city is in flames! The demonic presence has disturbed the dead dragon! How can we escape with the beast on one side and the demons on the other?\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Man at Arms \n\u0022There is no way I\u0027m standing against a dragon! We\u0027ve got better chances with the demons!\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashkael \n\u0022Ah, perfect! You don\u0027t even have to chase your victims in this country; fresh meat delivers itself to your door! I we\u0027ll grow to love this place!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance Level 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance Level 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance Level 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Goblin Annoyance",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance level 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Intro 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ranger \n\u0022Sorry Milord, I haven\u0027t been able to reach the king or our men defending the Great Line. I stumbled upon a large group of orcs and goblins around the ruins of Blackthorne, many of them are marching toward Katras.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pegasus Knight \n\u0022It appears we underestimated the orcish threat while confronting our dark enemies. \nWe must defend Katras at all cost! The Life Orb Must be protected; who knows what horrors could be unleashed if it falls into enemy hands.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elf Lord \n\u0022Our mages think moving the Life Orb away from its original location could render the artifact useless. We will need more time in order to discover anything useful from the Orb. You must fend off any disturbances coming this way!\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Acolyte \n\u0022We didn\u0027t anticipate conflict to come this way so early, we still haven\u0027t completed our defenses. We\u0027ll need all the help available in order to defend neighboring cities.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pegasus Knight \n\u0022We will do all in our power to protect your work.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ranger \n\u0022I wish you luck my friends! I\u0027ll will continue with my message for the king. \nThere must be a safe passage somewhere.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_victory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pegasus Knight \n\u0022We did it gentlemen! We reclaimed our province from our enemies and now that the Orcish threat is gone, we\u0027ll have no problem dealing with the remnants of the Undead and Demon forces!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Luther\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "No pain, no gain.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Drake Warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0023",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Skeleton Champion \n\u0022In life, I was the dragon\u0027s master. In death, our roles reverse...I guess this way, our score is settled. Oh, sorry for rattling my bone box like this... I rarely have the chance to talk to those I\u0027m about to kill.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0023",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashkael \n\u0022We will blaze our way through your crippled tower and your insignificant dragon! Maybe your sense of humor will be better appreciated in Hell.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Tralar\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Great healing suplies!",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest 1st annoy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest 2nd Annoy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest 3rd Annoy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest Level 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0027",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": " Squire \n\u0022We received many accounts of missing farm animals and even farmers in the Fergal City neighborhood...maybe we should investigate?\u0022\r \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest Level 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0028",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Squire \n\u0022Neighboring farmers have informed us that Goblins have settled in an abandoned farm south of Fergal City! That must be why people are disappearing!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance Level 5",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Annoyance 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Annoyance 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Annoyance 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rocky Cairn_ Warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Rock Giant \n\u0022This place is now my house! Go find another, little one!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Ann level 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022There is ssssomething intriguing about the Witch\u0027s activities. We discovered she\u0027s controlling the wolves which were ssstealing bones from our graveyards. We now know for sure she has been collecting those ssstolen bones... but to what end?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Ann level 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV002f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Lord, we have discovered sssomething absolutely atrocious! The witch is creating undead sssservants. Those mindless creatures are an insult to our goddess and must be put back to rest as ssssoon as possible.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Ann level 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Intro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0031",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashgan \n\u0022This sssacrilegious artifact, the Life Orb, evaded us for too long now! The human king is gone waging war against the demons, leaving the elven ssscholars behind with the life Orb and little defenders. Our days of hiding are over!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0031",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Wraith \n\u0022Yes! We mussst dessstroy this artifact before the elvess dissscover its full potential... But I fear we\u0027ll have other matters to sssolve first.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0031",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Wolves have been ssstealing bones from our graveyards in increasssing numbers lately. The animals act ssstrangely and they attack our followers. Some kind of sssorcery is bound to be involved in all this!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0031",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Red Thirst \n\u0022The wolves patrol the route to Katras, but beyond them, Katras is still blocked! A powerful witch established herself west of here and managed to seal the only passage we had into that territory.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Old Rock Warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0032",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Angel \n\u0022Don\u0027t worry, good people of Old Rock, we\u0027ve come to help you in your battle against the Orcish horde.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0032",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Kaleros \n\u0022Who said you were welcome here, imperial lackeys? When we told you about the orcs a few years ago, your king laughed at us. We can handle ourselves.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0032",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pegasus Knight \n\u0022We apologize, The upcoming war forced us to neglect our neighbors to monitor the Demons\u0027 progress. We need your help; your city would make the perfect launching point for our attacking forces.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0032",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Kaleros \n\u0022That\u0027s too bad. The next time you need a favor from someone, try not to look the other way while orcs kill his brothers and eat his children!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0033",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Old Rock",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0033",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Angel \n\u0022Perhaps we should seek aid from Old Rock; the city is located next to Blackthorne\u0027s ruins. Some people say the village was been founded by the great warriors who once defended this formidable fortress centuries ago.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0033",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": " Pegasus Knight \n\u0022Indeed. It shows in their descendants. The city\u0027s location would be ideal to launch our attack against the Orcish stronghold. \nWe won\u0027t know peace as long as those ruins are still standing.\u0022\r \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0034",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_DrakeGuardian Down",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0034",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Skeleton Champion \n\u0022Sorry to let you down. I would certainly enjoy joining your little party but my soul belongs to someone else...yet I was immensely entertained, we must do this again sometime!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0035",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pesky Skeleton 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0035",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Skeleton Champion \n\u0022Hehehe! Miss me? Who wants to have some more fun?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance 03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0037",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance 04",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Annoyance Level 6",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0039",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest Down",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Victory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashkael \n\u0022The Orb! It is so painfully pure, yet with its power in our hands, we\u0027ll be able to accomplish so much! We shall reverse its powers to scorch the land and harvest the souls of the mortals!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM000f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Victory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Ashgan \n\u0022Sacrilegiousss relic, be gone and trouble the dead no more!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0010",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elven lord stay there",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elf Lord \n\u0022We still have much left to decipher with the Life Orb! We will notify you when our work has produced something useful.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0011",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0012",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Drake Tower Down 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0013",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0014",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0041",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutral_Kills Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0041",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nosferat \n\u0022Apparently, the Elven party studying the Life Orb was killed by another of the Empire\u0027s enemies.The Life Orb was damaged during the confrontation and is now completely wasted. The dead will be troubled by this abomination no more.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0015",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf Ambush 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0016",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man_Embush",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0017",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0044",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rebel Mine_Warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0044",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Titan \n\u0022Go away Demons if you seek to remain attached to your unholy heads!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0018",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0045",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man Ambush 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0019",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0046",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug_Escaping",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0046",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Thug \n\u0022I already told you - the Dwarves didn\u0027t dig a passage through the mountains yet.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0046",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Thug \n\u0022And where do you suggest we go then? Through the Demons\u0027 den?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0046",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Master Thug \n\u0022Silence, both of you! The Demons aren\u0027t that far yet.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM001a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM001b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0048",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug_Embush",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0049",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Baen Goblinbane",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0049",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Baen Goblinbane \n\u0022Goblins! Those foul creatures can drive a province into chaos if left unopposed. We\u0027d better crush their nest before they drive all of us mad.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM001d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Brute Down",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Peasant \n\u0022Thank you Milord! Those thugs had been robbing all they could from us for a couple months now. Please accept this humble gift to express our gratitude. It isn\u0027t much, but this is the only thing the thugs overlooked.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM001e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Water travel cleared",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Peasant \n\u0022The rivers have been ridden of the merfolk at last! We just discovered these near the waterfalls; the merfolk probably took them from other seafarers. Since you bested them, I guess these belong to you.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM001f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Discovery 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elf Lord \n\u0022We\u0027ve discovered the incantations for a powerful healing spell within the Life Orb! As promised, we will share this knowledge with you.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0020",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Discovery 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elf Lord \n\u0022The Life Orb has granted us a very powerful healing spell. It should bring health to a large number of soldiers with each use.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0021",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Annoyance 2a",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0022",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc_Clueless",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV004f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Orc Champion \n\u0022Urh...pretty thing in that chest...What could it be for?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0023",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0050",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Annoyance 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0024",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0051",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Lost souls 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0051",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022These gravesss have been disturbed! How horrible! This isn\u0027t the goddess\u0027 will, the damn witch is bound to be involved in thisss! We\u0027ll teach her to ressspect our Queen!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0025",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Lost souls 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0052",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Here\u0027s one of the graveyards the witch profaned! The souls seem lost and disturbed. We shall deliver the corpses to Mortis.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0026",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Ann level 3a",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0027",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0054",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "BlackThorne Down 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0028",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Well",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0055",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0029",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0056",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Annoyance level 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM002a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Intro 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0057",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Orc Champion \n\u0022Humans think they\u0027re tough urh? Blackthorne\u0027s boys don\u0027t think so. \nSquish the Humans!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0057",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pegasus Knight \n\u0022They\u0027re already at our doors! Quick! Reinforce our cities and prepare for the attack!\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM002b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0058",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Reinforcement",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0058",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Tifhaen Gravespark \n\u0022Why? Why is this witch still breathing? Mortis can\u0027t suffer this insolent being\u0027s presence anymore. She awakened me from the grave to put an end to thisss humiliating situation.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM002c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Reinforcement",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV0059",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Voramel Dragonbane \n\u0022So, a dead dragon is still holds our progress? The fiery lords are disappointed by your lack of action. I have been dispatched to dispose of this creature.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM002d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Witchgate Down 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM002e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Life Orb 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022The tower\u0027s fall granted us passage through the mountains at last! The Empire strongholds should be located to the north. \nIf the Life Orb isn\u0027t around, we\u0027ll surely find a feeble mind willing to tell us where they\u0027ve taken it.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM002f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Drake Tower Donw 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0030",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Life Orb 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022You will talk to us, human. We will char your flesh slowly until your skin is gone.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest \n\u0022AAAAAAAAAAAAAAAAAARH! \nI told you, you\u0027re wasting your time demon! I\u0027ll never tell you anything! \nKill me, torture me...the High Father will shield my soul against your worst torments.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Succubus \n\u0022Enough!  Leave this poor man alone, demon! There, pour soul, lay down and take this!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest \n\u0022My wounds... they\u0027ve healed! You\u0027re a healer?\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Succubus \n\u0022I hate to see suffering as much as you do, priest. Let me help you, I could make you feel so much better! If only...\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest \n\u0022If only what?\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Succubus \n\u0022If only we could reach these...vile creatures. If we could give them what they want, they would leave this place and leave your people alone... leave us alone.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Priest \n\u0022Yes...yes, I see. Your eyes...they\u0027re so...the Life Orb is north of here, milady, north of Katras, on an island protected by high mountains. Tell them this...we can be alone.\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Succubus \n\u0022That\u0027s a good boy! I\u0027ll take care of you, you\u0027ll never even understand your treason...and in the end, your soul shall be mine! But you don\u0027t understand anymore do you? You have the information you looked for, Duke, you can leave us now.\u0022",
+      "SEQ_NUM": 8
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022And miss the show? No, missing such an artist\u0027s performance, even a part of it, would be torture. I\u0027ll stay and watch you work...milady...ha ha ha!\u0022",
+      "SEQ_NUM": 9
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Life Orb 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022The witch\u0027s sssorcery vanished! We are now free to invade the land of the living. The Humans\u0027 main cities are located north of here, the Life Orb mussst be inside one of them.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0032",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Life Orb 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Can you feel it? The vilenesss around here causesss even my putrid bones to quake.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240EV005f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Death Knight \nThe Life Orb is near, guarded by Humans...and Elves. I can\u0027t wait to deliver more of those \u0022immortals\u0022 into Mortis\u0027 eternal embrace.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0033",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0034",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0035",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0036",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0037",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0038",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0039",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM003a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM003b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM003c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM003d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM003e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM003f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0040",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0041",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0042",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0044",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0045",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0046",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0047",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM004a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM004f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0050",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0051",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0052",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cross",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0053",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0055",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0056",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0059",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM005a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM005b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM005c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM005d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM005e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM005f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0060",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0062",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0063",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0064",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0066",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0067",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0068",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0069",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cemetery",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0076",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0078",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0079",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Statue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM007a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM007b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM007c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM007d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM007e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0081",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0082",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0083",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0085",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0086",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0087",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0088",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM0089",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM008b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM008c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00a3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "City in Flames",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ab",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00b8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ba",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00bf",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00c9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ca",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00cb",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00cc",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00cd",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ce",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00cf",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00d0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00d1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00d2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00d3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00d5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Seaweed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00d9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00da",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00db",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00dc",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00dd",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00de",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legions Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00df",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Skeleton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00e9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ea",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00eb",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ec",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Lava Pit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ed",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ee",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240MM00ef",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Life Orb",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blackthorne\u0027s doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blackthorne perimeter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "WhichGate\u0027s doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant protector\u0027s vision",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant\u0027s house",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rocky Kairn doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Drake Tower exit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Drake Tower Doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nephiris\u0027 doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mess\u0027 final Dest",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin Nest doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Old Rock Perimeter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elvenborder 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fergal City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead capital",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf_Ambush 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man_Ambush",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rebel mine perimeter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Drake Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard man Ambush 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Witch Gate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug_Escaping",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Lost Halls",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Old Rock_Doorstep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Blackthorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug_Ambush",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baen_Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": "North Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baen_Dest",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "West tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clueless Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0007",
+      "ID_STRING": "TITLE",
+      "TEXT": "Abandoned farm",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Lost souls",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0008",
+      "ID_STRING": "TITLE",
+      "TEXT": "Goblin nest",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disturbed Grave",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU0009",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ruined Temple",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Skeleton guardian",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240RU000a",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ancient chapel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Protector",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_EOrc 01",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_EOrc 02",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_EOrc 03",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_EOrc 04",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legion_Reinforcement",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Reinforcement",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240LO0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Life Orb cue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Katras",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kenoshann",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nepheris",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fergal City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rocky Cairn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Old Rock",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Satoria",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekorath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240SR000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcs of Blackthorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240SR000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "WitchGate",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "\u0022Small mouth\u0022 Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin raider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcish Raider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcish berserkers",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcish crusher",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "High Air elemental",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Freed Paesant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fleeing Peasants",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fleeing mercenary",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fleeing Mercenary",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin weakling",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trained Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nasty Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dire Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Minion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mindless servant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skeleton Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baen Goblinbane",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Possessed Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Air Elemental",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fleeing Squire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Tifhaen Gravespark",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240TM001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Voramel Dragonbane",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zardomas",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Begrezen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rock Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "In his youth, this mighty lord once stood fast against an army from hell and single-handedly defeated them by sealing the gateway that spew them. He then became sovereign of his realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zagamon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Every child trembles at the hearing of this most infamous name. This lord of hell is known for his blood thirsts. It is said that he once ate 1000 slaves at a banquet given by Bethrezen for a victory against the kingdom of light.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ophaal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Known in her times as the mightiest of all adepts of the black art, this lord was slain by the inquisitor Vorgel who ended her reign of terror. She is now resurrected as an undead with the intention to subjugate every mortal to her will.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0040",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc raider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0049",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0054",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN006a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0072",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0074",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Messenger",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0075",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN007b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Lord",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN008f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skeleton Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN009e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00ab",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kaleros",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00c2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00c5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00d2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00d6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Red thirst",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00d9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Charmed Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00e7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lost Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00f6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00f9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00fc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN00fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0102",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Squire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0107",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0109",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Calderic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN010e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baldaric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0113",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Brodulf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0118",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0120",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0124",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0129",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN012c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN012f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0132",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0135",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0138",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN013b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN014e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Squire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0152",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0156",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN015d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cagneric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0161",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0163",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0165",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0168",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN016b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN016e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0174",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0176",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN017a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN017c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN017f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Brute",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0183",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0188",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN018c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN018e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0191",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0193",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0195",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN0197",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN019b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spearman",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN019f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Master Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01aa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dwarf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01d4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S240SC0000",
+      "ID_OBJECT": "S240UN01f2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    }
+  ]
+}

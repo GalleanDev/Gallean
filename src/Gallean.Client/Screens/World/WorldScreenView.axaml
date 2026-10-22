@@ -1,0 +1,495 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:texts="clr-namespace:Gallean.Client.Texts;assembly=Gallean.Client.Texts"
+             x:Class="Gallean.Client.WorldScreenView"
+             x:Name="Screen"
+             x:DataType="local:WorldScreenViewModel">
+
+  <UserControl.Resources>
+    <ControlTheme x:Key="UnitGroupInfoUnitContainerTheme" TargetType="ContentPresenter" x:DataType="local:WorldUnitGroupInfoUnitViewModel">
+      <Setter Property="Grid.Row" Value="{Binding Row}" />
+      <Setter Property="Grid.Column" Value="{Binding Column}" />
+      <Setter Property="Grid.ColumnSpan" Value="{Binding ColumnSpan}" />
+    </ControlTheme>
+
+    <DataTemplate x:Key="UnitGroupInfoUnitTemplate" x:DataType="local:WorldUnitGroupInfoUnitViewModel">
+      <local:UnitPortrait FaceKey="{Binding FaceKey}"
+                          Hitpoints="{Binding Hitpoints}"
+                          MaxHitpoints="{Binding MaxHitpoints}"
+                          IsDead="{Binding !IsAlive}"
+                          Statuses="{Binding Statuses}"
+                          StatusTemplate="{StaticResource UnitStatusBadgeTemplate}">
+        <local:OutlinedTextBlock Classes="object-name compact unit-group-info-name" Text="{Binding Name}" />
+      </local:UnitPortrait>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UnitGroupInfoGridTemplate" x:DataType="local:WorldUnitGroupInfoGridViewModel">
+      <Grid Width="230" Height="414">
+        <UniformGrid Rows="3" Columns="2">
+          <local:UnitPortrait />
+          <local:UnitPortrait />
+          <local:UnitPortrait />
+          <local:UnitPortrait />
+          <local:UnitPortrait />
+          <local:UnitPortrait />
+        </UniformGrid>
+        <ItemsControl ItemsSource="{Binding Units}"
+                      ClipToBounds="False"
+                      ItemContainerTheme="{StaticResource UnitGroupInfoUnitContainerTheme}"
+                      ItemTemplate="{StaticResource UnitGroupInfoUnitTemplate}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UnitGroupInfoLineTemplate" x:DataType="texts:TextSpans">
+      <local:OutlinedTextBlock local:TextRuns.Spans="{Binding}"
+                               Classes="body"
+                               Foreground="{StaticResource SecondaryTextBrush}"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap" />
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <StyleInclude Source="avares://Gallean.Client/Screens/World/WorldChrome.axaml" />
+
+    <Style Selector="local|OutlinedTextBlock.unit-group-info-name">
+      <Setter Property="Margin" Value="4,0,4,20" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+
+    <Style Selector="Panel.hud.inactive StackPanel#Nav, Panel.hud.inactive StackPanel#TopCenter, Panel.hud.inactive Panel#MinimapFrame, Panel.hud.inactive Panel#ObjectivePanel">
+      <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+
+    <Style Selector=":is(TextBlock).unit-group-info-header">
+      <Setter Property="MinHeight" Value="24" />
+    </Style>
+
+  </UserControl.Styles>
+
+  <Grid>
+    <local:WorldVisual x:Name="World" IsHitboxOverlayVisible="{Binding Game.DevTools.IsHitboxOverlayEnabled}" />
+
+    <Panel Classes="hud" Classes.battle="{Binding IsInBattle}" Classes.inactive="{Binding !IsActive}">
+      <local:AnchorPanel x:Name="ActionWheelAnchor" UseLayoutRounding="False">
+        <local:HoverItemsControl Classes="world-wheel cached"
+                                 Classes.open="{Binding IsActionWheelVisible}"
+                                 ItemsSource="{Binding ActionWheel.Items}">
+          <local:HoverItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="local:WorldActionWheelItemViewModel">
+              <Button Classes="socket world wheel"
+                      Classes.highlighted="{Binding IsHighlighted}"
+                      Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).ActivateStackActionCommand}"
+                      CommandParameter="{Binding Action}">
+                <Panel>
+                  <ContentControl Content="{Binding Icon}">
+                    <ContentControl.ContentTemplate>
+                      <DataTemplate x:DataType="local:IconMoniker">
+                        <local:IconVisual Moniker="{Binding}" />
+                      </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                  </ContentControl>
+                  <local:SpriteVisual SpriteKey="{Binding ItemIconKey}" />
+                </Panel>
+              </Button>
+            </DataTemplate>
+          </local:HoverItemsControl.ItemTemplate>
+        </local:HoverItemsControl>
+      </local:AnchorPanel>
+
+      <StackPanel x:Name="Nav"
+                  Classes="cached"
+                  Orientation="Horizontal"
+                  Spacing="5"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="14,10,0,0">
+        <Button Classes="pill primary" Command="{Binding OpenCapitalCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <local:IconVisual Moniker="Capital" />
+            <TextBlock Text="{local:Text 'Capital'}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="pill" local:PlateChrome.TextureSeed="2" Command="{Binding OpenSpellbookCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <local:IconVisual Moniker="Spellbook" />
+            <TextBlock Text="{local:Text 'Spellbook'}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="pill" local:PlateChrome.TextureSeed="3" Command="{Binding OpenStackCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <local:IconVisual Moniker="Stack" />
+            <TextBlock Text="{local:Text 'Party'}" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+
+      <StackPanel x:Name="TopCenter" Classes="cached" Spacing="6" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+        <Border Classes="world-plate" HorizontalAlignment="Center">
+          <ContentControl Content="{Binding Status.Resources}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+        </Border>
+
+        <Border Classes="hud-prompt"
+                HorizontalAlignment="Center"
+                IsVisible="{Binding ActionPromptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+          <DockPanel>
+            <Button DockPanel.Dock="Right"
+                    Classes="dismiss"
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding CancelSelectedActionCommand}"
+                    ToolTip.Tip="{local:Text 'Cancel'}">
+              <local:IconVisual Moniker="Close" />
+            </Button>
+            <local:OutlinedTextBlock Text="{Binding ActionPromptText}"
+                                     Classes="body"
+                                     Foreground="{StaticResource AccentBrush}"
+                                     TextWrapping="Wrap"
+                                     TextAlignment="Center"
+                                     VerticalAlignment="Center" />
+          </DockPanel>
+        </Border>
+      </StackPanel>
+
+      <StackPanel x:Name="SystemCluster" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,6,0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <Panel Classes="cached">
+            <local:OutlinedTextBlock Classes="world-turn" Text="{Binding Status.TurnText}" />
+          </Panel>
+          <Panel x:Name="MinimapFrame" Classes="world-minimap cached">
+            <Panel Classes="minimap-compass">
+              <Panel.RenderTransform>
+                <Rotate3DTransform AngleX="36" Depth="560" />
+              </Panel.RenderTransform>
+              <Ellipse Classes="minimap-backdrop" />
+              <local:PlateChrome Classes="socket minimap-border" local:PlateChrome.TextureSeed="6" />
+              <Ellipse Classes="plate-texture" />
+              <local:MinimapVisual x:Name="Minimap" />
+              <Panel Classes="minimap-direction" RenderTransform="rotate(0deg)">
+                <Panel Classes="minimap-direction-badge">
+                  <Path Data="M 0,6 Q 15,0 30,6 L 24,17 L 15,26 L 6,17 Z" />
+                  <local:OutlinedTextBlock Text="{local:Text 'N'}" />
+                </Panel>
+              </Panel>
+              <Panel Classes="minimap-direction" RenderTransform="rotate(90deg)">
+                <Panel Classes="minimap-direction-badge">
+                  <Path Data="M 0,6 Q 15,0 30,6 L 24,17 L 15,26 L 6,17 Z" />
+                  <local:OutlinedTextBlock Text="{local:Text 'E'}" />
+                </Panel>
+              </Panel>
+              <Panel Classes="minimap-direction" RenderTransform="rotate(180deg)">
+                <Panel Classes="minimap-direction-badge">
+                  <Path Data="M 0,6 Q 15,0 30,6 L 24,17 L 15,26 L 6,17 Z" />
+                  <local:OutlinedTextBlock Text="{local:Text 'S'}" />
+                </Panel>
+              </Panel>
+              <Panel Classes="minimap-direction" RenderTransform="rotate(270deg)">
+                <Panel Classes="minimap-direction-badge">
+                  <Path Data="M 0,6 Q 15,0 30,6 L 24,17 L 15,26 L 6,17 Z" />
+                  <local:OutlinedTextBlock Text="{local:Text 'W'}" />
+                </Panel>
+              </Panel>
+            </Panel>
+            <Button Classes="socket world minimap-lord" local:PlateChrome.TextureSeed="5" Command="{Binding OpenDiplomacyCommand}">
+              <Border Classes="minimap-portrait">
+                <Panel>
+                  <local:SpriteVisual SpriteKey="{Binding Status.PortraitKey}" />
+                  <Border Classes="minimap-portrait-overlay" />
+                </Panel>
+              </Border>
+            </Button>
+            <Button Classes="socket world minimap-menu" local:PlateChrome.TextureSeed="4" Command="{Binding OpenGameMenuCommand}">
+              <local:IconVisual Moniker="Menu" />
+            </Button>
+          </Panel>
+        </StackPanel>
+
+        <Panel x:Name="ObjectivePanel"
+               Classes="cached"
+               HorizontalAlignment="Right"
+               IsVisible="{Binding ObjectiveText, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <StackPanel Classes="world-objective" Spacing="2">
+            <Button Classes="world-objective-toggle" Command="{Binding ToggleObjectiveCommand}">
+              <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Right">
+                <local:OutlinedTextBlock Classes="world-objective-heading" Text="{local:Text 'Objective'}" Foreground="{StaticResource AccentBrush}" />
+                <Panel>
+                  <local:IconVisual Classes="chevron" Moniker="Collapse" IsVisible="{Binding IsObjectiveExpanded}" />
+                  <local:IconVisual Classes="chevron" Moniker="Expand" IsVisible="{Binding !IsObjectiveExpanded}" />
+                </Panel>
+              </StackPanel>
+            </Button>
+            <Panel IsVisible="{Binding IsObjectiveExpanded}">
+              <local:OutlinedTextBlock Classes="world-objective-text"
+                                       Text="{Binding ObjectiveText}"
+                                       Foreground="{StaticResource PrimaryTextBrush}" />
+              <local:OutlinedTextBlock x:Name="ObjectiveHighlight"
+                                       Classes="world-objective-text highlight"
+                                       Text="{Binding ObjectiveText}" />
+            </Panel>
+          </StackPanel>
+        </Panel>
+      </StackPanel>
+
+      <Grid x:Name="StackBar" ColumnDefinitions="*,Auto,*" VerticalAlignment="Bottom">
+        <ItemsControl Grid.Column="1" Classes="world-stack-bar" ItemsSource="{Binding StackItems}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" Spacing="-40" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="local:WorldStackItemViewModel">
+              <Panel>
+                <Button Classes="world-stack-card cached"
+                        Classes.selected="{Binding IsSelected}"
+                        Classes.exhausted="{Binding MovementPoints, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=1}"
+                        Classes.finished="{Binding IsFinished}"
+                        Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).SelectStackItemCommand}"
+                        CommandParameter="{Binding StackId}"
+                        PointerPressed="OnStackCardPointerPressed"
+                        DoubleTapped="OnStackCardDoubleTapped"
+                        PointerReleased="OnStackCardPointerReleased"
+                        PointerCaptureLost="OnStackCardPointerCaptureLost">
+                  <Panel>
+                    <local:SpriteVisual SpriteKey="{Binding PortraitKey}" />
+                    <Image Classes="overlay" Source="{x:Static local:SolidTexture.Black}" Stretch="Fill" RenderOptions.BitmapBlendingMode="SourceAtop" />
+                    <local:OutlinedTextBlock Classes="moves">
+                      <local:OutlinedTextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}/{1}">
+                          <Binding Path="MovementPoints" />
+                          <Binding Path="MaxMovementPoints" />
+                        </MultiBinding>
+                      </local:OutlinedTextBlock.Text>
+                    </local:OutlinedTextBlock>
+                    <local:OutlinedTextBlock Classes="object-name compact name" Text="{Binding LeaderName}" />
+                  </Panel>
+                </Button>
+                <StackPanel Classes="world-stack-card-actions" IsVisible="{Binding IsSelected}">
+                  <Panel>
+                    <Button x:Name="InspectButton"
+                            Classes="socket world card"
+                            Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).InspectStackCommand}">
+                      <local:IconVisual Moniker="Stack" />
+                    </Button>
+                    <local:AnchorPanel Classes="world-caption-anchor" IsVisible="{Binding #InspectButton.IsPointerOver}">
+                      <StackPanel Classes="world-caption">
+                        <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'Inspect'}" />
+                        <Border Classes="hotkey-pill">
+                          <TextBlock Text="{local:Text 'T'}" />
+                        </Border>
+                      </StackPanel>
+                    </local:AnchorPanel>
+                  </Panel>
+                  <Panel>
+                    <Button x:Name="FinishButton"
+                            Classes="socket world card"
+                            Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).FinishStackCommand}">
+                      <local:IconVisual Moniker="Check" />
+                    </Button>
+                    <local:AnchorPanel Classes="world-caption-anchor" IsVisible="{Binding #FinishButton.IsPointerOver}">
+                      <StackPanel Classes="world-caption">
+                        <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'Done'}" />
+                        <Border Classes="hotkey-pill">
+                          <TextBlock Text="{local:Text 'Enter'}" />
+                        </Border>
+                      </StackPanel>
+                    </local:AnchorPanel>
+                  </Panel>
+                </StackPanel>
+              </Panel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Grid>
+
+      <Panel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <local:MedallionCornerDecorator Classes="world-medallion-corner">
+          <Panel>
+            <Panel.RenderTransform>
+              <Rotate3DTransform AngleX="16" Depth="560" />
+            </Panel.RenderTransform>
+            <Button x:Name="EndTurnButton"
+                    Classes="world-medallion cached"
+                    Classes.highlighted="{Binding IsEndTurnHighlighted}"
+                    Command="{Binding EndTurnCommand}">
+              <StackPanel Spacing="4">
+                <local:EndTurnIconDecorator IsSpinning="{Binding !IsViewPlayerTurn}" />
+                <local:OutlinedTextBlock Text="{local:Text 'End turn'}" />
+              </StackPanel>
+            </Button>
+          </Panel>
+        </local:MedallionCornerDecorator>
+        <local:AnchorPanel Classes="world-caption-anchor medallion" IsVisible="{Binding #EndTurnButton.IsPointerOver}">
+          <StackPanel Classes="world-caption">
+            <Border Classes="hotkey-pill">
+              <TextBlock Text="{local:Text 'E'}" />
+            </Border>
+            <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'or'}" />
+            <Border Classes="hotkey-pill">
+              <TextBlock Text="{local:Text 'Ctrl+Enter'}" />
+            </Border>
+          </StackPanel>
+        </local:AnchorPanel>
+      </Panel>
+    </Panel>
+
+    <Popup x:Name="PositionInfoPopup"
+           IsOpen="{Binding PositionInfo, Converter={x:Static ObjectConverters.IsNotNull}}"
+           PlacementTarget="{Binding #World}"
+           Placement="AnchorAndGravity"
+           PlacementAnchor="Right"
+           PlacementGravity="Right"
+           PlacementConstraintAdjustment="FlipX,SlideX,SlideY"
+           IsHitTestVisible="False">
+      <ContentControl Classes="cached" Content="{Binding PositionInfo}">
+        <ContentControl.DataTemplates>
+          <DataTemplate x:DataType="local:WorldStackInfoViewModel">
+            <local:ModalFrameDecorator Padding="16" Margin="0,40,0,0">
+              <Grid ColumnDefinitions="260,Auto" ColumnSpacing="16">
+                <DockPanel Grid.Column="0">
+                  <StackPanel DockPanel.Dock="Bottom" Spacing="4" Margin="0,12,0,0">
+                    <local:OutlinedTextBlock Text="{Binding LeaderName}"
+                                             Classes="object-name row"
+                                             HorizontalAlignment="Center"
+                                             TextTrimming="CharacterEllipsis" />
+                    <local:OutlinedTextBlock Text="{Binding RaceName}"
+                                             Classes="body"
+                                             Foreground="{StaticResource SecondaryTextBrush}"
+                                             HorizontalAlignment="Center" />
+                    <ItemsControl ItemsSource="{Binding Lines}" ItemTemplate="{StaticResource UnitGroupInfoLineTemplate}" />
+                  </StackPanel>
+                  <local:PointerTiltDecorator Classes="event-portrait" Margin="-24,-56,-24,-20">
+                    <local:SpriteVisual SpriteKey="{Binding LeaderPortraitKey}" Stretch="Uniform" />
+                  </local:PointerTiltDecorator>
+                </DockPanel>
+                <Panel Grid.Column="1">
+                  <ContentControl Content="{Binding Grid}"
+                                  ContentTemplate="{StaticResource UnitGroupInfoGridTemplate}"
+                                  ClipToBounds="False"
+                                  IsVisible="{Binding Note, Converter={x:Static ObjectConverters.IsNull}}" />
+                  <local:OutlinedTextBlock Text="{Binding Note}"
+                                           IsVisible="{Binding Note, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                           Classes="body"
+                                           Width="230"
+                                           Foreground="{StaticResource PrimaryTextBrush}"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center" />
+                </Panel>
+              </Grid>
+            </local:ModalFrameDecorator>
+          </DataTemplate>
+          <DataTemplate x:DataType="local:WorldFortificationInfoViewModel">
+            <local:ModalFrameDecorator Padding="16,12,16,16">
+              <StackPanel Spacing="8">
+                <local:OutlinedTextBlock Text="{Binding Title}"
+                                         Classes="h4"
+                                         Foreground="{StaticResource PrimaryTextBrush}"
+                                         HorizontalAlignment="Center" />
+                <ItemsControl ItemsSource="{Binding Lines}" ItemTemplate="{StaticResource UnitGroupInfoLineTemplate}" />
+                <Rectangle Classes="details-rule" />
+                <local:OutlinedTextBlock Text="{Binding Note}"
+                                         IsVisible="{Binding Note, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                         Classes="body"
+                                         MaxWidth="476"
+                                         Foreground="{StaticResource PrimaryTextBrush}"
+                                         TextWrapping="Wrap"
+                                         TextAlignment="Center" />
+                <Grid ColumnDefinitions="Auto,Auto"
+                      RowDefinitions="Auto,Auto"
+                      ColumnSpacing="16"
+                      RowSpacing="4"
+                      IsVisible="{Binding Note, Converter={x:Static ObjectConverters.IsNull}}">
+                  <local:OutlinedTextBlock Grid.Column="0"
+                                           Grid.Row="0"
+                                           Text="{Binding VisitingStackTitle}"
+                                           Classes="body unit-group-info-header"
+                                           Foreground="{StaticResource PrimaryTextBrush}"
+                                           HorizontalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis" />
+                  <local:OutlinedTextBlock Grid.Column="1"
+                                           Grid.Row="0"
+                                           Text="{local:Text 'City defenses'}"
+                                           Classes="body unit-group-info-header"
+                                           Foreground="{StaticResource PrimaryTextBrush}"
+                                           HorizontalAlignment="Center" />
+                  <ContentControl Grid.Column="0"
+                                  Grid.Row="1"
+                                  Content="{Binding VisitingStack}"
+                                  ContentTemplate="{StaticResource UnitGroupInfoGridTemplate}"
+                                  ClipToBounds="False" />
+                  <ContentControl Grid.Column="1"
+                                  Grid.Row="1"
+                                  Content="{Binding Defenses}"
+                                  ContentTemplate="{StaticResource UnitGroupInfoGridTemplate}"
+                                  ClipToBounds="False" />
+                </Grid>
+              </StackPanel>
+            </local:ModalFrameDecorator>
+          </DataTemplate>
+          <DataTemplate x:DataType="local:WorldTileInfoViewModel">
+            <local:ModalFrameDecorator Width="300" Padding="20,16">
+              <StackPanel Spacing="8">
+                <local:OutlinedTextBlock Text="{Binding Title}"
+                                         Classes="h4"
+                                         Foreground="{StaticResource PrimaryTextBrush}"
+                                         HorizontalAlignment="Center"
+                                         TextTrimming="CharacterEllipsis" />
+                <Rectangle Classes="details-rule" IsVisible="{Binding HasDetails}" />
+                <ItemsControl ItemsSource="{Binding Lines}"
+                              ItemTemplate="{StaticResource UnitGroupInfoLineTemplate}"
+                              IsVisible="{Binding Lines.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
+                <ItemsControl ItemsSource="{Binding Tombs}"
+                              IsVisible="{Binding Tombs.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="texts:TextSpans">
+                      <local:OutlinedTextBlock Classes="body"
+                                               Foreground="{StaticResource SecondaryTextBrush}"
+                                               HorizontalAlignment="Center"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"
+                                               local:TextRuns.Spans="{Binding}" />
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ContentControl Content="{Binding Garrison}"
+                                ContentTemplate="{StaticResource UnitGroupInfoGridTemplate}"
+                                IsVisible="{Binding Garrison, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                HorizontalAlignment="Center"
+                                ClipToBounds="False" />
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="12"
+                      IsVisible="{Binding Item, Converter={x:Static ObjectConverters.IsNotNull}}">
+                  <Panel Grid.Column="0" Classes="inventory-slot">
+                    <local:PlateChrome Classes="socket" />
+                    <local:SpriteVisual SpriteKey="{Binding Item.SpriteKey, FallbackValue={x:Null}}" Stretch="Uniform" />
+                  </Panel>
+                  <local:OutlinedTextBlock Grid.Column="1"
+                                           Text="{Binding Item.Name, FallbackValue=''}"
+                                           Classes="object-name row"
+                                           VerticalAlignment="Center"
+                                           TextWrapping="Wrap" />
+                </Grid>
+                <ContentControl Content="{Binding Reward}"
+                                Classes="body"
+                                IsVisible="{Binding Reward, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource PrimaryTextBrush}" />
+              </StackPanel>
+            </local:ModalFrameDecorator>
+          </DataTemplate>
+        </ContentControl.DataTemplates>
+      </ContentControl>
+    </Popup>
+  </Grid>
+
+</UserControl>

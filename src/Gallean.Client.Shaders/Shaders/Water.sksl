@@ -1,0 +1,141 @@
+uniform shader shore;
+uniform shader grain;
+uniform shader albedo;
+
+uniform float2 halfTile;
+uniform float fieldScale;
+uniform float shoreRange;
+uniform float grainScale;
+uniform float time;
+uniform float fineDetail;
+uniform float4 octaveScales;
+uniform float4 octaveHeightWeights;
+uniform float4 octaveSlopeWeights;
+uniform float4 deepColor;
+uniform float4 shallowColor;
+uniform float4 skyColor;
+uniform float4 foamColor;
+uniform float4 sunColor;
+
+const float TintStrength = 0.94;
+const float AlbedoReference = 0.42;
+const float AlbedoStrength = 1.8;
+const float AlbedoClamp = 0.6;
+const float2 WindDirection = float2(0.8607, 0.5091);
+const float2 WindNormal = float2(-0.5091, 0.8607);
+const float AcrossWindStretch = 0.52;
+const float SlopeScale = 0.13;
+const float RippleSpeed = 0.7;
+
+const float3 SunDirection = float3(-0.3714, 0.2600, 0.8910);
+const float3 ViewDirection = float3(0.6139, 0.6139, 0.4961);
+
+float3 noise(float2 point) {
+    float2 cell = floor(point);
+    float2 offset = fract(point);
+    float2 weight = offset * offset * (3.0 - 2.0 * offset);
+    float2 weightSlope = 6.0 * offset * (1.0 - offset);
+
+    float4 encoded = float4(grain.eval(cell + 0.5));
+    float4 patch = (float4(encoded.rgb / encoded.a, encoded.a) - 0.5) * grainScale;
+
+    float alongX = patch.x;
+    float alongY = patch.y;
+    float diagonal = patch.z;
+    float origin = patch.w;
+
+    float value = origin + alongX * weight.x + alongY * weight.y + diagonal * weight.x * weight.y;
+
+    float2 slope = float2(
+        alongX + diagonal * weight.y,
+        alongY + diagonal * weight.x) * weightSlope;
+
+    return float3(value, slope);
+}
+
+float fbm(float2 point) {
+    return noise(point).x * 0.62 + noise(point * 2.03 + 11.0).x * 0.38;
+}
+
+float3 octave(float2 aligned, float scale, float2 drift, float heightWeight, float slopeWeight) {
+    float3 sampled = noise(aligned * scale + drift);
+    float2 slope = scale * (sampled.y * WindDirection + sampled.z * AcrossWindStretch * WindNormal);
+
+    return float3(sampled.x * heightWeight, slope * slopeWeight);
+}
+
+float3 ripples(float2 point) {
+    float2 aligned = float2(dot(point, WindDirection), dot(point, WindNormal) * AcrossWindStretch);
+    float flow = time * RippleSpeed;
+    float3 height = float3(0.0);
+
+    height += octave(aligned, octaveScales.x, float2(flow * 0.8, 0.0), octaveHeightWeights.x, octaveSlopeWeights.x);
+    height += octave(aligned, octaveScales.y, float2(flow * -1.4, flow * 0.2), octaveHeightWeights.y, octaveSlopeWeights.y);
+    height += octave(aligned, octaveScales.z, float2(flow * 2.1, flow * -0.35), octaveHeightWeights.z, octaveSlopeWeights.z);
+
+    if (octaveHeightWeights.w > 0.0) {
+        height += octave(aligned, octaveScales.w, float2(flow * -3.0, flow * 0.6), octaveHeightWeights.w, octaveSlopeWeights.w);
+    }
+
+    return height;
+}
+
+float3 surface(float2 point) {
+    float3 field = ripples(point);
+
+    return float3(field.x, -field.yz * SlopeScale);
+}
+
+half4 main(float2 coord) {
+    float2 cell = float2(
+        (coord.y / halfTile.y + coord.x / halfTile.x) * 0.5,
+        (coord.y / halfTile.y - coord.x / halfTile.x) * 0.5);
+
+    float2 tile = cell + 0.5;
+
+    half4 field = shore.eval(tile * fieldScale);
+    float shoreDistance = field.r * shoreRange;
+    float openness = field.g * shoreRange;
+    float open = smoothstep(0.3, 0.95, openness);
+    float shallow = 1.0 - smoothstep(0.6, 3.0, shoreDistance);
+
+    float3 shape = float3(0.0);
+
+    if (octaveHeightWeights.x > 0.0) {
+        shape = surface(cell) * (0.78 + 0.22 * open);
+    }
+
+    float slope = length(shape.yz);
+    float3 normal = normalize(float3(-shape.yz, 1.0));
+
+    float3 halfway = normalize(SunDirection + ViewDirection);
+    float specular = pow(max(dot(normal, halfway), 0.0), 260.0);
+    float fresnel = 0.02 + 0.98 * pow(1.0 - max(dot(normal, ViewDirection), 0.0), 5.0);
+    float diffuse = max(dot(normal, SunDirection), 0.0);
+
+    float whitecap = smoothstep(1.25, 2.1, slope) * smoothstep(0.62, 0.92, shape.x);
+    float foam = clamp(whitecap * open * 0.45, 0.0, 1.0);
+
+    float shoreShade = 1.0 - smoothstep(0.1, 0.55, shoreDistance);
+
+    float mottle = fbm(cell * 0.5 + float2(time * 0.02, 31.0));
+    float seabed = 0.78 + 0.44 * mottle;
+
+    float3 color = mix(deepColor.rgb, shallowColor.rgb * mix(1.0, seabed, shallow), shallow);
+    color *= (0.78 + 0.42 * diffuse) * (1.0 - 0.38 * shoreShade);
+    color = mix(color, skyColor.rgb, clamp(fresnel, 0.0, 0.38));
+
+    float gust = smoothstep(0.3, 0.72, mottle);
+
+    color += sunColor.rgb * specular * 3.4 * (0.15 + 0.85 * gust) * fineDetail;
+    color = mix(color, foamColor.rgb, clamp(foam * 1.15, 0.0, 1.0));
+
+    float luminance = dot(float3(albedo.eval(coord).rgb), float3(0.2126, 0.7152, 0.0722));
+
+    color *= 1.0 + clamp((luminance - AlbedoReference) * AlbedoStrength, -AlbedoClamp, AlbedoClamp);
+
+    float depthAlpha = TintStrength - 0.08 * shallow;
+    float alpha = depthAlpha + (1.0 - depthAlpha) * clamp(foam * 1.4 + specular * fineDetail, 0.0, 1.0);
+
+    return half4(half3(color * alpha), half(alpha));
+}

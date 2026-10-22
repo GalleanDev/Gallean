@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.MageTabView"
+             x:DataType="local:MageTabViewModel">
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="MageSpellItemTemplate" x:DataType="local:MageSpellItemViewModel">
+      <Button Classes="row"
+              Classes.selected="{Binding IsSelected}"
+              Classes.unavailable="{Binding !Status.IsAvailable}"
+              Command="{Binding SelectCommand}">
+        <Grid ColumnDefinitions="64,*">
+          <Border Grid.Column="0"
+                  Classes="frame spell-icon"
+                  Classes.dark-background="{Binding Details.Icon.Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}"
+                  Width="64"
+                  Height="64"
+                  BorderThickness="2">
+            <local:SpriteVisual SpriteKey="{Binding Details.Icon.Key}" Stretch="Uniform" />
+          </Border>
+          <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Spacing="2">
+            <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Description}"
+                       Classes="caption"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="{Binding LevelText}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
+            <ContentControl Content="{Binding Status}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+          </StackPanel>
+        </Grid>
+      </Button>
+    </DataTemplate>
+
+  </UserControl.Resources>
+
+  <Grid Background="Transparent">
+    <Grid ColumnDefinitions="*,24,*" MaxWidth="960" MaxHeight="720" Margin="18">
+
+      <ContentControl Grid.Column="0" Classes="ornament-panel">
+        <Grid RowDefinitions="40,*" Margin="6,2">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party'}" Classes="panel-title" />
+          <ContentControl Grid.Row="1" Content="{Binding Stack}" ContentTemplate="{StaticResource SiteStackTemplate}" />
+        </Grid>
+      </ContentControl>
+
+      <ContentControl Grid.Column="2" Classes="ornament-panel">
+        <Grid RowDefinitions="40,*" Margin="6,2">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{Binding SiteTitle}" Classes="panel-title" />
+          <Grid Grid.Row="1" RowDefinitions="Auto,*,Auto">
+            <TextBlock Grid.Row="0" Classes="body site-greeting" Text="{Binding SiteGreeting}" />
+
+            <ScrollViewer Classes="list" Grid.Row="1">
+              <ItemsControl Classes="focus-group"
+                            ItemsSource="{Binding Spells}"
+                            ItemTemplate="{StaticResource MageSpellItemTemplate}">
+                <local:Blankslate.Content>
+                  <TextBlock Text="{local:Text 'There are no spells left to learn.'}"
+                             Classes="body"
+                             Foreground="{StaticResource SecondaryTextBrush}"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center"
+                             Margin="12,24" />
+                </local:Blankslate.Content>
+              </ItemsControl>
+            </ScrollViewer>
+
+            <Border Grid.Row="2" Classes="site-offer">
+              <Panel>
+                <ContentControl Content="{Binding Offer}" ContentTemplate="{StaticResource SiteOfferTemplate}" />
+                <TextBlock Classes="body site-offer-hint"
+                           Text="{Binding OfferHint}"
+                           IsVisible="{Binding Offer, Converter={x:Static ObjectConverters.IsNull}}" />
+              </Panel>
+            </Border>
+          </Grid>
+        </Grid>
+      </ContentControl>
+
+    </Grid>
+
+    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
+      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
+    </Canvas>
+  </Grid>
+
+</UserControl>

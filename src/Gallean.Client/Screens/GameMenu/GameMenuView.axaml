@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.GameMenuView"
+             x:DataType="local:GameMenuViewModel">
+
+  <Grid Background="{StaticResource GameMenuOverlayBrush}">
+    <Border Classes="game-menu-vignette" />
+
+    <local:PlateLightingDecorator HorizontalAlignment="Center" VerticalAlignment="Center" KeyLightOrigin="-5%,10%">
+      <StackPanel Classes="focus-group" Width="300" Spacing="12">
+        <local:GalleanLogoVisual Width="340" HorizontalAlignment="Center" Margin="0,0,0,20" />
+
+        <Button Content="{local:Text 'Resume'}"
+                Classes="plate primary"
+                local:PlateChrome.TextureSeed="1"
+                Command="{Binding CloseCommand}" />
+
+        <Button Content="{local:Text 'Save game'}"
+                Classes="plate"
+                local:PlateChrome.TextureSeed="2"
+                Command="{Binding SaveGameCommand}"
+                ToolTip.Tip="{Binding SaveTip}"
+                ToolTip.ShowOnDisabled="True"
+                Margin="0,12,0,0" />
+        <Button Content="{local:Text 'Load game'}"
+                Classes="plate"
+                local:PlateChrome.TextureSeed="3"
+                Command="{Binding Game.ShowLoadGameCommand}" />
+
+        <Button Content="{local:Text 'Settings'}"
+                Classes="plate"
+                local:PlateChrome.TextureSeed="4"
+                Command="{Binding Game.OpenSettingsCommand}"
+                Margin="0,12,0,0" />
+
+        <Button Content="{local:Text 'Exit to main menu'}"
+                Classes="plate"
+                local:PlateChrome.TextureSeed="5"
+                Command="{Binding Game.ExitGameCommand}"
+                Margin="0,12,0,0" />
+      </StackPanel>
+    </local:PlateLightingDecorator>
+  </Grid>
+
+</UserControl>

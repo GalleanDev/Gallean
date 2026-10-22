@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ThiefActionScreenView"
+             x:DataType="local:ThiefActionScreenViewModel">
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="ThiefActionTemplate" x:DataType="local:ThiefActionItemViewModel">
+      <Button Classes="row" Command="{Binding SelectCommand}" IsEnabled="{Binding Status.IsAvailable}">
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+          <local:IconVisual Grid.Column="0"
+                            Moniker="{Binding Icon}"
+                            Width="28"
+                            Height="28"
+                            Foreground="{StaticResource AccentBrush}"
+                            VerticalAlignment="Top"
+                            Margin="0,2,0,0" />
+          <StackPanel Grid.Column="1" Spacing="2">
+            <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" Foreground="{StaticResource PrimaryTextBrush}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Description}"
+                       Classes="caption"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       TextWrapping="Wrap" />
+            <TextBlock local:TextRuns.Spans="{Binding ChanceText}"
+                       Classes="body"
+                       Foreground="{StaticResource PrimaryTextBrush}" />
+            <ContentControl Content="{Binding Status}" Classes="caption" />
+          </StackPanel>
+        </Grid>
+      </Button>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Width="520" MaxHeight="620" Title="{local:Text 'Thief actions'}" InitialFocus="{Binding #CancelButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto">
+          <Button x:Name="CancelButton" Grid.Column="1" Content="{local:Text 'Cancel'}" Classes="pill" MinWidth="150" Command="{Binding CloseCommand}" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <ScrollViewer Classes="list" VerticalScrollBarVisibility="Auto">
+        <ItemsControl Classes="focus-group" ItemsSource="{Binding Actions}" ItemTemplate="{StaticResource ThiefActionTemplate}">
+          <local:Blankslate.Content>
+            <TextBlock Text="{local:Text 'Nothing can be done to this target.'}"
+                       Classes="body"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,10" />
+          </local:Blankslate.Content>
+        </ItemsControl>
+      </ScrollViewer>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

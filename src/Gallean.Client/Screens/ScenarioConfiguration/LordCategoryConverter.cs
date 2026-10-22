@@ -1,0 +1,25 @@
+using System.Globalization;
+using Avalonia.Data.Converters;
+using Gallean.Engine;
+
+namespace Gallean.Client;
+
+internal sealed class LordCategoryConverter : IValueConverter
+{
+    public static LordCategoryConverter Instance { get; } = new();
+
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is not LordCategory category)
+        {
+            throw new ArgumentException("Unexpected value type.", nameof(value));
+        }
+
+        return LordCategoryFormatter.FormatTitle(category);
+    }
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotSupportedException();
+    }
+}

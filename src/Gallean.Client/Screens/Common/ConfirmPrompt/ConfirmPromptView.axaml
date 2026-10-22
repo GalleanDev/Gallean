@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ConfirmPromptView"
+             x:DataType="local:ConfirmPromptViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Classes="accent" MinWidth="440" MaxWidth="620" Padding="28,24" Title="{Binding Title}" InitialFocus="{Binding #ConfirmButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,Auto,*">
+          <local:PriceButton x:Name="ConfirmButton"
+                             Grid.Column="1"
+                             Content="{Binding ConfirmLabel}"
+                             Price="{Binding ConfirmPrice}"
+                             Classes="pill"
+                             Classes.primary="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Primary}}"
+                             Classes.danger="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Danger}}"
+                             local:PlateChrome.TextureSeed="1"
+                             Command="{Binding ConfirmCommand}"
+                             MinWidth="150"
+                             Margin="0,0,16,0" />
+          <Button Grid.Column="2"
+                  Content="{local:Text 'Cancel'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="2"
+                  Command="{Binding CloseCommand}"
+                  MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <TextBlock local:TextRuns.Spans="{Binding Message}"
+                 Classes="body"
+                 Foreground="{StaticResource PrimaryTextBrush}"
+                 TextWrapping="Wrap"
+                 TextAlignment="Center" />
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

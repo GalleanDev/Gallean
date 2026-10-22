@@ -1,0 +1,46 @@
+uniform shader image;
+
+uniform float2 center;
+uniform float2 extent;
+uniform float blur;
+uniform float vignette;
+uniform float desaturation;
+uniform float4 shade;
+
+const int SampleCount = 16;
+const float SampleFalloff = 0.5;
+const float VignetteStart = 0.25;
+const float VignetteEnd = 1.35;
+const float3 LuminanceWeights = float3(0.2126, 0.7152, 0.0722);
+
+float hash(float2 point) {
+    float3 seed = fract(point.xyx * 0.1031);
+
+    seed += dot(seed, seed.yzx + 33.33);
+
+    return fract((seed.x + seed.y) * seed.z);
+}
+
+half4 main(float2 coord) {
+    float2 delta = coord - center;
+    float jitter = hash(coord);
+    float3 sum = float3(0.0);
+    float total = 0.0;
+
+    for (int index = 0; index < SampleCount; index++) {
+        float fraction = (float(index) + jitter) / float(SampleCount);
+        float weight = 1.0 - SampleFalloff * fraction;
+
+        sum += float3(image.eval(center + delta * (1.0 - blur * fraction)).rgb) * weight;
+        total += weight;
+    }
+
+    float3 color = sum / total;
+    float luminance = dot(color, LuminanceWeights);
+    float edge = smoothstep(VignetteStart, VignetteEnd, length(delta / extent));
+
+    color = mix(color, float3(luminance), desaturation);
+    color = mix(color, shade.rgb, edge * vignette);
+
+    return half4(half3(color), 1.0);
+}

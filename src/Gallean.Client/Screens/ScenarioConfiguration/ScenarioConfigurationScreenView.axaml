@@ -1,0 +1,168 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:contracts="clr-namespace:Gallean.Engine.Contracts;assembly=Gallean.Engine.Contracts"
+             xmlns:engine="clr-namespace:Gallean.Engine;assembly=Gallean.Engine"
+             x:Class="Gallean.Client.ScenarioConfigurationScreenView"
+             x:DataType="local:ScenarioConfigurationScreenViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Button.portrait">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Content="{TemplateBinding Content}" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="{StaticResource ScenarioSelectBackdropBrush}" ClipToBounds="True">
+
+    <ContentControl Content="{Binding Background}">
+      <ContentControl.ContentTemplate>
+        <DataTemplate x:DataType="local:MenuBackgroundViewModel">
+          <local:CoverBoxDecorator Classes="menu-background">
+            <local:MenuBackgroundView />
+          </local:CoverBoxDecorator>
+        </DataTemplate>
+      </ContentControl.ContentTemplate>
+    </ContentControl>
+
+    <Border Background="{StaticResource ModalBackdropBrush}" IsHitTestVisible="False" />
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto" Margin="48,32" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+      <StackPanel Grid.Row="0" Spacing="6" HorizontalAlignment="Center">
+        <local:OutlinedTextBlock Text="{local:Text 'Choose lord'}"
+                                 Classes="h1"
+                                 Foreground="{StaticResource ScenarioSelectAccentBrush}"
+                                 HorizontalAlignment="Center" />
+        <local:OutlinedTextBlock Text="{Binding PlayerCaption}" Classes="label" HorizontalAlignment="Center" />
+      </StackPanel>
+
+      <Border Grid.Row="1"
+              Width="72"
+              Height="1"
+              HorizontalAlignment="Center"
+              Background="{StaticResource ScenarioSelectDividerBrush}"
+              Margin="0,16,0,24" />
+
+      <Grid Grid.Row="2" ColumnDefinitions="Auto,400" ColumnSpacing="40" HorizontalAlignment="Center">
+
+        <StackPanel Grid.Column="0" Classes="focus-group" Spacing="14" VerticalAlignment="Center">
+          <Button Classes="portrait" Command="{Binding NextLordFaceCommand}">
+            <Border Classes="frame" Width="220" Height="290" BorderThickness="2">
+              <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Stretch="UniformToFill" />
+            </Border>
+          </Button>
+          <Panel Width="220">
+            <Border Classes="pager" />
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Button Grid.Column="0"
+                      Classes="icon-button"
+                      local:PlateChrome.TextureSeed="1"
+                      Command="{Binding PreviousLordFaceCommand}"
+                      ToolTip.Tip="{local:Text 'Previous portrait'}">
+                <local:IconVisual Moniker="Previous" />
+              </Button>
+              <TextBlock Grid.Column="1"
+                         Text="{local:Text 'Select portrait'}"
+                         Classes="caption"
+                         Foreground="{StaticResource PrimaryTextBrush}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+              <Button Grid.Column="2"
+                      Classes="icon-button"
+                      local:PlateChrome.TextureSeed="2"
+                      Command="{Binding NextLordFaceCommand}"
+                      ToolTip.Tip="{local:Text 'Next portrait'}">
+                <local:IconVisual Moniker="Next" />
+              </Button>
+            </Grid>
+          </Panel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+          <local:OutlinedTextBlock Text="{local:Text 'Lord'}" Classes="label" Margin="16,0,0,6" />
+          <ComboBox ItemsSource="{Binding LordCategories}" SelectedItem="{Binding SelectedLordCategory}" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="engine:LordCategory">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:IconVisual Moniker="{Binding Converter={x:Static local:LordCategoryIconConverter.Instance}}"
+                                    Width="16"
+                                    Height="16"
+                                    VerticalAlignment="Center" />
+                  <TextBlock Text="{Binding Converter={x:Static local:LordCategoryConverter.Instance}}" Classes="body" VerticalAlignment="Center" />
+                </StackPanel>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <TextBlock Text="{Binding SelectedLordDescription}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextWrapping="Wrap"
+                     local:TextLines.MinLines="3"
+                     Margin="16,10,8,0" />
+
+          <StackPanel IsVisible="{Binding Leaders.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" Margin="0,24,0,0">
+            <local:OutlinedTextBlock Text="{local:Text 'Starting hero'}" Classes="label" Margin="16,0,0,6" />
+            <ComboBox ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}" HorizontalAlignment="Stretch">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="local:StartingLeaderViewModel">
+                  <StackPanel Orientation="Horizontal" Spacing="8">
+                    <local:IconVisual Moniker="{Binding Category, Converter={x:Static local:UnitLeaderCategoryIconConverter.Instance}}"
+                                      Width="16"
+                                      Height="16"
+                                      VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Name}" Classes="body" VerticalAlignment="Center" />
+                  </StackPanel>
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="{Binding SelectedLeader.Description}"
+                       Classes="body"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextWrapping="Wrap"
+                       local:TextLines.MinLines="3"
+                       Margin="16,10,8,0" />
+          </StackPanel>
+
+          <local:OutlinedTextBlock Text="{local:Text 'Difficulty'}" Classes="label" Margin="16,24,0,6" />
+          <ComboBox ItemsSource="{Binding Difficulties}" SelectedItem="{Binding SelectedDifficulty}" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="contracts:WorldDifficulty">
+                <TextBlock Text="{Binding Converter={x:Static local:WorldDifficultyConverter.Instance}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+      </Grid>
+
+      <Grid Grid.Row="3" Classes="focus-group" ColumnDefinitions="*,*" Width="440" Margin="0,40,0,0" HorizontalAlignment="Center">
+        <Button Grid.Column="0"
+                Classes="pill"
+                local:PlateChrome.TextureSeed="3"
+                Content="{local:Text 'Back'}"
+                Command="{Binding CloseCommand}"
+                Margin="0,0,6,0" />
+        <Button Grid.Column="1"
+                Classes="pill primary"
+                local:PlateChrome.TextureSeed="4"
+                Content="{local:Text 'Next'}"
+                Command="{Binding NextCommand}"
+                IsVisible="{Binding !IsLastPlayer}"
+                Margin="6,0,0,0" />
+        <Button Grid.Column="1"
+                Classes="pill success"
+                local:PlateChrome.TextureSeed="4"
+                Content="{local:Text 'Start game'}"
+                Command="{Binding Game.StartGameCommand}"
+                CommandParameter="{Binding GameConfiguration}"
+                IsVisible="{Binding IsLastPlayer}"
+                Margin="6,0,0,0" />
+      </Grid>
+    </Grid>
+  </Grid>
+
+</UserControl>

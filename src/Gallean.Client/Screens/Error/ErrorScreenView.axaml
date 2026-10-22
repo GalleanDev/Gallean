@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ErrorScreenView"
+             x:DataType="local:ErrorScreenViewModel">
+
+  <Border Background="{StaticResource WindowBackgroundBrush}">
+    <local:ModalPanel MinWidth="420" MaxWidth="760" Padding="28,24" Title="{local:Text 'Error'}" InitialFocus="{Binding #ActionButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="ActionButton"
+                  Grid.Column="1"
+                  Content="{Binding ActionLabel}"
+                  Classes="pill"
+                  Command="{Binding ExecuteActionCommand}"
+                  MinWidth="220" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <StackPanel Spacing="14">
+        <TextBlock Text="{Binding Message}"
+                   Classes="body"
+                   Foreground="{StaticResource PrimaryTextBrush}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="{Binding Details}"
+                   Classes="caption"
+                   Foreground="{StaticResource SecondaryTextBrush}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   IsVisible="{Binding Details, Converter={x:Static ObjectConverters.IsNotNull}}" />
+      </StackPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

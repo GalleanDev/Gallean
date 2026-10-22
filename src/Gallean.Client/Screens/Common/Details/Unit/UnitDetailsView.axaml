@@ -1,0 +1,157 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.UnitDetailsView"
+             x:DataType="local:UnitDetailsViewModel"
+             ClipToBounds="False">
+
+  <UserControl.Styles>
+    <Style Selector=":is(TextBlock).primary-stat">
+      <Setter Property="Foreground" Value="{StaticResource UnitDetailsPrimaryStatBrush}" />
+    </Style>
+    <Style Selector=":is(TextBlock).primary-stat-change">
+      <Setter Property="Foreground" Value="{StaticResource StatRowIncreaseBrush}" />
+    </Style>
+    <Style Selector=":is(TextBlock).primary-stat-change.decrease">
+      <Setter Property="Foreground" Value="{StaticResource StatRowDecreaseBrush}" />
+    </Style>
+
+    <Style Selector=":is(TextBlock).bar-label">
+      <Setter Property="Margin" Value="2,0,0,4" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector="local|BarVisual.details-bar">
+      <Setter Property="Height" Value="20" />
+    </Style>
+    <Style Selector="local|BarVisual.details-bar.maximum">
+      <Setter Property="Text" Value="Max" />
+    </Style>
+
+    <Style Selector="Line.status-divider">
+      <Setter Property="Margin" Value="0,-8,0,0" />
+      <Setter Property="Stretch" Value="Fill" />
+      <Setter Property="StartPoint" Value="0,0" />
+      <Setter Property="EndPoint" Value="1,0" />
+      <Setter Property="Stroke" Value="{StaticResource DividerBrush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="StrokeDashArray" Value="4,3" />
+    </Style>
+  </UserControl.Styles>
+
+  <local:ModalFrameDecorator Width="680" Margin="60,76,0,0">
+    <Grid ColumnDefinitions="Auto,*">
+
+      <StackPanel Grid.Column="0" Width="236" Margin="0,0,0,22">
+        <Decorator Classes="details-portrait" Margin="-98,-168,-5,-81" HorizontalAlignment="Left">
+          <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Height="565" Stretch="Uniform" />
+        </Decorator>
+
+        <StackPanel Margin="18,0,0,0" Spacing="12">
+          <StackPanel>
+            <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Hit points'}" />
+            <local:BarVisual Classes="details-bar hitpoints" Value="{Binding Hitpoints}" Maximum="{Binding MaxHitpoints}" />
+          </StackPanel>
+          <StackPanel>
+            <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Experience'}" />
+            <local:BarVisual Classes="details-bar experience"
+                             Classes.maximum="{Binding IsMaximumLevel}"
+                             Classes.pending="{Binding IsPendingUpgrade}"
+                             Value="{Binding Experience}"
+                             Maximum="{Binding NextLevelExperience}" />
+          </StackPanel>
+          <TextBlock Text="{local:Text 'Upgrades after its next battle'}"
+                     Classes="caption"
+                     TextWrapping="Wrap"
+                     Foreground="{StaticResource AccentBrush}"
+                     IsVisible="{Binding IsPendingUpgrade}" />
+          <TextBlock Text="{local:Text 'Unit type locked'}"
+                     Classes="caption"
+                     TextWrapping="Wrap"
+                     Foreground="{StaticResource SecondaryTextBrush}"
+                     IsVisible="{Binding IsTypeLocked}" />
+          <Grid ColumnDefinitions="Auto,*" Classes="caption" IsVisible="{Binding IsUpgradeBlocked}">
+            <local:IconVisual Grid.Column="0"
+                              Moniker="Warning"
+                              Width="14"
+                              Height="14"
+                              Margin="0,1,6,0"
+                              VerticalAlignment="Top"
+                              Foreground="{StaticResource UnitDetailsWarningBrush}" />
+            <TextBlock Grid.Column="1"
+                       Text="{local:Text 'Needs a building in the capital to upgrade'}"
+                       TextWrapping="Wrap"
+                       Foreground="{StaticResource UnitDetailsWarningBrush}" />
+          </Grid>
+        </StackPanel>
+      </StackPanel>
+
+      <StackPanel Grid.Column="1" Margin="22,20,24,22" Spacing="14">
+        <StackPanel Classes="details-header">
+          <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
+          <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category" />
+        </StackPanel>
+
+        <Grid ColumnDefinitions="Auto,*">
+          <local:IconVisual Grid.Column="0" Classes="details-ornament" Moniker="OrnamentFinialSmall" />
+          <TextBlock Grid.Column="1" Text="{Binding Description}" Classes="body details-flavor" />
+        </Grid>
+
+        <Rectangle Classes="details-rule" />
+
+        <Grid ColumnDefinitions="Auto,Auto,*">
+          <local:OutlinedTextBlock Grid.Column="0"
+                                   Classes="h1 primary-stat"
+                                   Text="{Binding Damage.BaseText}"
+                                   VerticalAlignment="Center" />
+          <local:OutlinedTextBlock Grid.Column="1"
+                                   Classes="h4 primary-stat-change"
+                                   Classes.decrease="{Binding Damage.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}"
+                                   Text="{Binding Damage.ChangeText}"
+                                   VerticalAlignment="Center" />
+          <StackPanel Grid.Column="2" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
+            <TextBlock Text="{Binding AttackText}"
+                       Classes="body"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="{Binding SecondaryAttackText}"
+                       Classes="caption"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       TextWrapping="Wrap"
+                       IsVisible="{Binding SecondaryAttackText, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          </StackPanel>
+        </Grid>
+
+        <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
+
+        <Rectangle Classes="details-rule">
+          <Rectangle.IsVisible>
+            <MultiBinding Converter="{x:Static BoolConverters.Or}">
+              <Binding Path="Statuses.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+              <Binding Path="PermanentModifiers.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+            </MultiBinding>
+          </Rectangle.IsVisible>
+        </Rectangle>
+
+        <ItemsControl Classes="status-badges"
+                      ItemsSource="{Binding Statuses}"
+                      ItemTemplate="{StaticResource UnitStatusRowTemplate}"
+                      IsVisible="{Binding Statuses.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
+
+        <Line Classes="status-divider">
+          <Line.IsVisible>
+            <MultiBinding Converter="{x:Static BoolConverters.And}">
+              <Binding Path="Statuses.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+              <Binding Path="PermanentModifiers.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+            </MultiBinding>
+          </Line.IsVisible>
+        </Line>
+
+        <ItemsControl Classes="permanent-modifiers"
+                      ItemsSource="{Binding PermanentModifiers}"
+                      IsVisible="{Binding PermanentModifiers.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
+      </StackPanel>
+
+    </Grid>
+  </local:ModalFrameDecorator>
+
+</UserControl>

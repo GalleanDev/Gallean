@@ -1,0 +1,79 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <DataTemplate x:Key="SiteOfferTemplate" x:DataType="local:SiteOfferViewModel">
+      <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" Background="Transparent">
+        <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding Icon}" VerticalAlignment="Top">
+          <ContentControl.DataTemplates>
+            <DataTemplate x:DataType="local:IconViewModel+Item">
+              <Border Classes="frame site-offer-icon">
+                <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+              </Border>
+            </DataTemplate>
+            <DataTemplate x:DataType="local:IconViewModel+Spell">
+              <Border Classes="frame spell-icon site-offer-icon" Classes.dark-background="{Binding Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
+                <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+              </Border>
+            </DataTemplate>
+            <DataTemplate x:DataType="local:IconViewModel+Unit">
+              <local:UnitIcon SpriteKey="{Binding Key}" Width="56" Height="56" />
+            </DataTemplate>
+          </ContentControl.DataTemplates>
+        </ContentControl>
+
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="12,0,0,0" VerticalAlignment="Center" Spacing="2">
+          <local:OutlinedTextBlock Text="{Binding Title}" Classes="object-name row" TextWrapping="Wrap" />
+          <TextBlock local:TextRuns.Spans="{Binding Subtitle}"
+                     Classes="caption"
+                     Foreground="{StaticResource SecondaryTextBrush}" />
+          <TextBlock Text="{Binding Description}"
+                     Classes="caption"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextWrapping="Wrap"
+                     local:TextLines.MinLines="2" />
+        </StackPanel>
+
+        <ContentControl Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        Content="{Binding Status}"
+                        Classes="caption"
+                        IsVisible="{Binding Status.IsReasonVisible}"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center" />
+
+        <local:PriceButton Grid.Column="2"
+                           Grid.Row="1"
+                           Classes="pill"
+                           Content="{Binding ActionText}"
+                           Status="{Binding Status}"
+                           Command="{Binding ActCommand}"
+                           MinWidth="140"
+                           Margin="0"
+                           VerticalAlignment="Center" />
+      </Grid>
+    </DataTemplate>
+  </Styles.Resources>
+
+  <Style Selector="Border.site-offer-icon">
+    <Setter Property="Width" Value="56" />
+    <Setter Property="Height" Value="56" />
+    <Setter Property="BorderThickness" Value="2" />
+  </Style>
+  <Style Selector="Border.site-offer">
+    <Setter Property="MinHeight" Value="116" />
+    <Setter Property="Margin" Value="0,10,0,0" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+  <Style Selector="Border.site-offer ContentControl">
+    <Setter Property="ClipToBounds" Value="False" />
+  </Style>
+  <Style Selector="Border.site-offer TextBlock.site-offer-hint">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+</Styles>

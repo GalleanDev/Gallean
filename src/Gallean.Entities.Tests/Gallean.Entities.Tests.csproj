@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+    <ProjectReference Include="..\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
+  </ItemGroup>
+
+</Project>

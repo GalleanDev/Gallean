@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.DetailsView"
+             x:DataType="local:DetailsViewModel"
+             IsHitTestVisible="False">
+
+  <ContentControl Classes="cached" Content="{Binding Content}" ClipToBounds="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+</UserControl>

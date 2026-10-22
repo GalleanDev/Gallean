@@ -1,0 +1,84 @@
+uniform shader image;
+
+uniform float2 center;
+uniform float2 extent;
+uniform float radius;
+uniform float blur;
+uniform float time;
+
+const int SampleCount = 16;
+const int Octaves = 5;
+const float SampleFalloff = 0.5;
+const float Aspect = 1.8;
+const float Feather = 0.12;
+const float NoiseScale = 2.5;
+const float NoiseAmount = 0.3;
+const float LuminanceKey = 0.15;
+const float2 NoiseDrift = float2(0.35, -0.25);
+const float3 LuminanceWeights = float3(0.2126, 0.7152, 0.0722);
+
+float hash(float2 point) {
+    float3 seed = fract(point.xyx * 0.1031);
+
+    seed += dot(seed, seed.yzx + 33.33);
+
+    return fract((seed.x + seed.y) * seed.z);
+}
+
+float noise(float2 point) {
+    float2 cell = floor(point);
+    float2 offset = fract(point);
+    float2 blend = offset * offset * (3.0 - 2.0 * offset);
+
+    float topLeft = hash(cell);
+    float topRight = hash(cell + float2(1.0, 0.0));
+    float bottomLeft = hash(cell + float2(0.0, 1.0));
+    float bottomRight = hash(cell + float2(1.0, 1.0));
+
+    return mix(mix(topLeft, topRight, blend.x), mix(bottomLeft, bottomRight, blend.x), blend.y);
+}
+
+float fractalNoise(float2 point) {
+    float sum = 0.0;
+    float amplitude = 0.5;
+    float total = 0.0;
+
+    for (int octave = 0; octave < Octaves; octave++) {
+        sum += noise(point) * amplitude;
+        total += amplitude;
+        point = point * 2.03 + float2(17.0, 31.0);
+        amplitude *= 0.5;
+    }
+
+    return sum / total;
+}
+
+half4 main(float2 coord) {
+    float2 delta = coord - center;
+    float2 span = float2(Aspect, 1.0) * 2.0 * extent.y;
+    float grain = fractalNoise(delta / span.y * NoiseScale + NoiseDrift * time);
+    float shape = radius - length(delta / span) + NoiseAmount * (grain - 0.5);
+
+    if (shape + LuminanceKey * 0.5 <= -Feather) {
+        return half4(0.0);
+    }
+
+    float jitter = hash(coord);
+    float4 sum = float4(0.0);
+    float total = 0.0;
+
+    for (int index = 0; index < SampleCount; index++) {
+        float fraction = (float(index) + jitter) / float(SampleCount);
+        float weight = 1.0 - SampleFalloff * fraction;
+
+        sum += float4(image.eval(center + delta * (1.0 - blur * fraction))) * weight;
+        total += weight;
+    }
+
+    float4 color = sum / total;
+    float luminance = dot(color.rgb, LuminanceWeights);
+    float field = shape + LuminanceKey * (luminance - 0.5);
+    float coverage = smoothstep(-Feather, Feather, field);
+
+    return half4(color * coverage);
+}

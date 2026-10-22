@@ -1,0 +1,240 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:assets="clr-namespace:Gallean.Assets;assembly=Gallean.Assets"
+             x:Class="Gallean.Client.ScenarioEventPopupView"
+             x:DataType="local:ScenarioEventPopupViewModel">
+
+  <UserControl.DataTemplates>
+    <DataTemplate x:DataType="assets:AssetSpriteKey+UnitEventPortrait">
+      <local:SpriteVisual SpriteKey="{Binding}" Stretch="Uniform" />
+    </DataTemplate>
+
+    <DataTemplate x:DataType="assets:AssetSpriteKey+LordFace">
+      <Viewbox Stretch="Uniform">
+        <Panel Width="241" Height="310">
+          <Border HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  BorderBrush="{StaticResource ModalPortraitFrameBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{StaticResource RadiusMd}"
+                  ClipToBounds="True">
+            <local:SpriteVisual SpriteKey="{Binding}" Height="166" Stretch="Uniform" />
+          </Border>
+        </Panel>
+      </Viewbox>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+
+  <UserControl.Styles>
+    <Style Selector="local|PointerTiltDecorator.event-portrait">
+      <Setter Property="Grid.Row" Value="0" />
+      <Setter Property="Grid.RowSpan" Value="2" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style Selector="local|PointerTiltDecorator.event-portrait > ContentControl">
+      <Setter Property="Height" Value="310" />
+      <Setter Property="RenderTransform" Value="translateY(0px)" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Height" Duration="0:0:0.28" Easing="CubicEaseOut" />
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.28" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="local|PointerTiltDecorator.event-portrait[IsVisible=True]">
+      <Style.Animations>
+        <Animation Duration="0:0:0.3" Easing="CubicEaseOut">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector="local|PointerTiltDecorator.event-portrait.inactive > ContentControl">
+      <Setter Property="Height" Value="260" />
+      <Setter Property="RenderTransform" Value="translateY(50px)" />
+    </Style>
+
+    <Style Selector="Panel.portrait-slot">
+      <Setter Property="Grid.Row" Value="1" />
+      <Setter Property="Width" Value="110" />
+    </Style>
+
+    <Style Selector="Panel.portrait-slot.occupied">
+      <Setter Property="Width" Value="250" />
+    </Style>
+
+    <Style Selector="local|OrnamentRule.dialog-divider">
+      <Setter Property="Margin" Value="0,10,0,14" />
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="Type" Value="Node" />
+      <Setter Property="Size" Value="4" />
+      <Setter Property="Stroke" Value="{StaticResource ScenarioDialogOrnamentBrush}" />
+      <Setter Property="Line" Value="{StaticResource ScenarioDialogDividerGradientBrush}" />
+    </Style>
+
+    <Style Selector="ItemsControl.dialog-lines ContentPresenter:nth-last-child(1):not(:nth-child(1)) local|OrnamentRule.dialog-divider">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="TextBlock.dialog-speaker">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogHistorySpeakerBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.dialog-text">
+      <Setter Property="Margin" Value="20,0,0,0" />
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogHistoryTextBrush}" />
+      <Setter Property="local:AnimatedTextBlock.Reveal" Value="{x:Static local:AnimatedTextReveal.FadeWords}" />
+    </Style>
+
+    <Style Selector="TextBlock.dialog-text Run.character, TextBlock.dialog-text Run.faction">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogHistoryCharacterBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.dialog-text Run.place, TextBlock.dialog-text Run.item">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogHistoryObjectBrush}" />
+    </Style>
+
+    <Style Selector="ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) TextBlock.dialog-speaker">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogSpeakerBrush}" />
+      <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+    </Style>
+
+    <Style Selector="ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) TextBlock.dialog-text">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogTextBrush}" />
+      <Setter Property="FontSize" Value="{StaticResource FontSizeXl}" />
+    </Style>
+
+    <Style Selector="ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) TextBlock.dialog-text Run.character, ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) TextBlock.dialog-text Run.faction">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioTextCharacterBrush}" />
+    </Style>
+
+    <Style Selector="ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) TextBlock.dialog-text Run.place, ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) TextBlock.dialog-text Run.item">
+      <Setter Property="Foreground" Value="{StaticResource ScenarioTextObjectBrush}" />
+    </Style>
+
+    <Style Selector="StackPanel.dialog-line">
+      <Setter Property="Margin" Value="0,4" />
+      <Setter Property="Opacity" Value="0.35" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.4" Easing="SineEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="ItemsControl.dialog-lines.history StackPanel.dialog-line, ItemsControl.dialog-lines ContentPresenter:nth-last-child(1) StackPanel.dialog-line">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="StackPanel.dialog-line.narration">
+      <Setter Property="Margin" Value="0,4,0,28" />
+    </Style>
+
+    <Style Selector="StackPanel.narration > TextBlock">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="StackPanel.short-narration > TextBlock.dialog-text">
+      <Setter Property="local:AnimatedTextBlock.Reveal" Value="{x:Static local:AnimatedTextReveal.SmokeGlyphs}" />
+    </Style>
+  </UserControl.Styles>
+
+  <Panel>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" RowDefinitions="90,Auto" ColumnDefinitions="Auto,Auto,Auto">
+
+      <Border Grid.Row="1" Grid.ColumnSpan="3" Background="{StaticResource ScenarioDialogBandGradientBrush}" />
+
+      <local:OrnamentRule Grid.Row="1"
+                          Grid.ColumnSpan="3"
+                          Type="Center"
+                          Size="4"
+                          Margin="40,-12,40,0"
+                          VerticalAlignment="Top"
+                          IsHitTestVisible="False"
+                          Stroke="{StaticResource ScenarioDialogOrnamentBrush}"
+                          Line="{StaticResource ScenarioDialogRuleGradientBrush}">
+        <local:OrnamentRule.Effect>
+          <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="10" Opacity="0.43" Color="{DynamicResource AccentColor}" />
+        </local:OrnamentRule.Effect>
+      </local:OrnamentRule>
+
+      <Panel Grid.Column="0" Classes="portrait-slot" Classes.occupied="{Binding LeftPortrait.PortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+      <Grid Grid.Row="1" Grid.Column="1" Width="600" Height="270" Margin="0,32,0,24" RowDefinitions="*,Auto">
+
+        <ScrollViewer x:Name="MessagesScroll"
+                      Grid.Row="0"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      ScrollChanged="OnMessagesScrollChanged">
+          <ScrollViewer.OpacityMask>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,28">
+              <GradientStop Offset="0" Color="Transparent" />
+              <GradientStop Offset="1" Color="Black" />
+            </LinearGradientBrush>
+          </ScrollViewer.OpacityMask>
+          <ItemsControl x:Name="MessageLines" Classes="dialog-lines" ItemsSource="{Binding Messages}" VerticalAlignment="Bottom" Margin="0,0,12,0" ClipToBounds="False">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="local:ScenarioEventPopupMessageViewModel">
+                <StackPanel Classes="dialog-line"
+                            Spacing="2"
+                            Classes.narration="{Binding IsNarration}"
+                            Classes.short-narration="{Binding IsShortNarration}">
+                  <local:OrnamentRule Classes="dialog-divider" />
+                  <local:AnimatedTextBlock Classes="caption dialog-speaker"
+                                           Text="{Binding Message.PortraitName}"
+                                           IsVisible="{Binding Message.PortraitName, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                           Reveal="{x:Static local:AnimatedTextReveal.FadeWords}"
+                                           GlowColor="{x:Static local:Theme+ScenarioDialog.OrnamentGlowColor}"
+                                           SmokeColor="{x:Static local:Theme+ScenarioDialog.HistorySpeakerColor}" />
+                  <local:AnimatedTextBlock Classes="prose dialog-text"
+                                           local:ScenarioText.Spans="{Binding Message.Spans}"
+                                           RevealDelay="0:0:0.1"
+                                           GlowColor="{x:Static local:Theme+ScenarioDialog.OrnamentGlowColor}"
+                                           SmokeColor="{x:Static local:Theme+ScenarioDialog.SmokeColor}" />
+                </StackPanel>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+
+        <Button Grid.Row="1"
+                Content="{local:Text 'Continue'}"
+                Classes="pill"
+                Command="{Binding CloseCommand}"
+                HorizontalAlignment="Right"
+                Margin="0,12,0,0"
+                MinWidth="180" />
+
+      </Grid>
+
+      <Panel Grid.Column="2" Classes="portrait-slot" Classes.occupied="{Binding RightPortrait.PortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+      <local:PointerTiltDecorator Grid.Column="0"
+                                  Classes="event-portrait"
+                                  Classes.inactive="{Binding !LeftPortrait.IsActive}"
+                                  IsVisible="{Binding LeftPortrait.PortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <ContentControl Content="{Binding LeftPortrait.PortraitKey}" />
+      </local:PointerTiltDecorator>
+
+      <local:PointerTiltDecorator Grid.Column="2"
+                                  Classes="event-portrait"
+                                  Classes.inactive="{Binding !RightPortrait.IsActive}"
+                                  IsVisible="{Binding RightPortrait.PortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <ContentControl Content="{Binding RightPortrait.PortraitKey}" />
+      </local:PointerTiltDecorator>
+
+    </Grid>
+  </Panel>
+
+</UserControl>

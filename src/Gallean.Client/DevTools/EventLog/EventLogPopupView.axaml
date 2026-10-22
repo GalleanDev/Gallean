@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.EventLogPopupView"
+             x:DataType="local:EventLogPopupViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="ScrollViewer.event-log /template/ ScrollContentPresenter">
+      <Setter Property="OpacityMask" Value="{StaticResource EventLogFadeGradientBrush}" />
+    </Style>
+
+    <Style Selector="Run.actor">
+      <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector="Run.object">
+      <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+      <Setter Property="FontStyle" Value="Italic" />
+    </Style>
+
+    <Style Selector="Run.value">
+      <Setter Property="Foreground" Value="{StaticResource HighlightTextBrush}" />
+    </Style>
+
+    <Style Selector="Run.reference">
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+
+    <Style Selector="Run.damage">
+      <Setter Property="Foreground" Value="{StaticResource EventLogDamageBrush}" />
+    </Style>
+
+    <Style Selector="Run.healing">
+      <Setter Property="Foreground" Value="{StaticResource EventLogHealingBrush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
+    <local:ModalPanel Width="520" MaxHeight="620" Title="{local:Text 'Event log'}" InitialFocus="{Binding #CloseButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="CloseButton" Grid.Column="1" Content="{local:Text 'Close'}" Classes="pill" MinWidth="150" Command="{Binding CloseCommand}" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <ScrollViewer x:Name="EntriesScrollViewer" Classes="event-log" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+          <ItemsControl ItemsSource="{Binding Entries}">
+            <local:Blankslate.Content>
+              <TextBlock Text="{local:Text 'Nothing has been recorded yet.'}"
+                         Classes="body"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         HorizontalAlignment="Center"
+                         Margin="0,10" />
+            </local:Blankslate.Content>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="local:EventLogEntry">
+                <TextBlock local:EventLogText.Spans="{Binding Spans}"
+                           Classes="body"
+                           Foreground="{StaticResource PrimaryTextBrush}"
+                           TextWrapping="Wrap"
+                           Margin="0,3" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </ScrollViewer>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

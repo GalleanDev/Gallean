@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.GameEndedScreenView"
+             x:DataType="local:GameEndedScreenViewModel">
+
+  <Grid Background="{StaticResource ScenarioSelectBackdropBrush}" ClipToBounds="True">
+
+    <ContentControl Content="{Binding Background}">
+      <ContentControl.ContentTemplate>
+        <DataTemplate x:DataType="local:MenuBackgroundViewModel">
+          <local:CoverBoxDecorator Classes="menu-background">
+            <local:MenuBackgroundView />
+          </local:CoverBoxDecorator>
+        </DataTemplate>
+      </ContentControl.ContentTemplate>
+    </ContentControl>
+
+    <Border Background="{StaticResource ModalBackdropBrush}" IsHitTestVisible="False" />
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto"
+          MaxWidth="760"
+          Margin="48,36"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center">
+
+      <local:AnimatedTextBlock Grid.Row="0"
+                               Text="{Binding ScenarioName}"
+                               Classes="label"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Reveal="{x:Static local:AnimatedTextReveal.SmokeWords}"
+                               SmokeColor="{x:Static local:Theme+Briefing.SmokeColor}"
+                               RevealDelay="0:0:0.5" />
+
+      <local:AnimatedTextBlock Grid.Row="1"
+                               x:Name="TitleText"
+                               Text="{Binding Title}"
+                               Classes="display"
+                               Foreground="{StaticResource HighlightTextBrush}"
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0"
+                               Reveal="{x:Static local:AnimatedTextReveal.SmokeGlyphs}"
+                               SmokeColor="{x:Static local:Theme+Briefing.SmokeColor}"
+                               GlowColor="{x:Static local:Theme+Briefing.EmberColor}" />
+
+      <local:OrnamentDivider Grid.Row="2"
+                             Width="300"
+                             Stroke="{StaticResource ModalOrnamentBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,18,0,0" />
+
+      <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="0,20,0,0">
+        <ScrollViewer.OpacityMask>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+            <GradientStop Offset="0" Color="Transparent" />
+            <GradientStop Offset="0.05" Color="Black" />
+            <GradientStop Offset="0.95" Color="Black" />
+            <GradientStop Offset="1" Color="Transparent" />
+          </LinearGradientBrush>
+        </ScrollViewer.OpacityMask>
+        <local:AnimatedTextBlock x:Name="DebriefingText"
+                                 local:ScenarioText.Spans="{Binding Debriefing}"
+                                 Classes="prose"
+                                 Foreground="{StaticResource PrimaryTextBrush}"
+                                 Margin="16,16,24,16"
+                                 Reveal="{x:Static local:AnimatedTextReveal.SmokeWords}"
+                                 SmokeColor="{x:Static local:Theme+Briefing.SmokeColor}"
+                                 RevealDelay="{Binding #TitleText.RevealEnd}"
+                                 GlowColor="{x:Static local:Theme+Briefing.EmberColor}" />
+      </ScrollViewer>
+
+      <StackPanel Grid.Row="4" Classes="focus-group" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="16" Margin="0,32,0,0">
+        <Button Content="{local:Text 'Return to main menu'}"
+                Classes="pill"
+                local:PlateChrome.TextureSeed="1"
+                Command="{Binding Game.ShowMainMenuCommand}"
+                Width="280" />
+        <Button Content="{local:Text 'Continue saga'}"
+                Classes="pill success"
+                local:PlateChrome.TextureSeed="2"
+                Command="{Binding Game.ContinueCampaignCommand}"
+                Width="280"
+                IsVisible="{Binding CanContinueCampaign}" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+
+</UserControl>

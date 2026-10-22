@@ -1,0 +1,543 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Style Selector="Panel.hud">
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.3" Easing="SineEaseInOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Panel.hud.battle">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+  </Style>
+
+  <Style Selector="Border.world-plate">
+    <Setter Property="Padding" Value="14,6" />
+    <Setter Property="Background" Value="{StaticResource HudPlateBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource HudPlateBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
+    <Setter Property="BoxShadow" Value="{x:Static local:Theme+Hud.PlateShadow}" />
+  </Style>
+  <Style Selector="Border.world-plate.panel">
+    <Setter Property="Background" Value="{StaticResource HudPanelBrush}" />
+  </Style>
+  <Style Selector="StackPanel.world-objective">
+    <Setter Property="Width" Value="300" />
+    <Setter Property="Margin" Value="0,-10,6,0" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.world-objective-heading">
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+    <Setter Property="OutlineThickness" Value="1.5" />
+  </Style>
+  <Style Selector=":is(TextBlock).world-objective-text">
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+    <Setter Property="TextAlignment" Value="Right" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.world-objective-text">
+    <Setter Property="OutlineThickness" Value="1.5" />
+  </Style>
+  <Style Selector=":is(TextBlock).world-objective-text.highlight">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+  </Style>
+
+  <Style Selector="Button.world-objective-toggle">
+    <Setter Property="Height" Value="28" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-objective-toggle local|IconVisual.chevron">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Foreground" Value="{StaticResource HudInkBrush}" />
+  </Style>
+  <Style Selector="Button.world-objective-toggle:pointerover local|IconVisual.chevron">
+    <Setter Property="Foreground" Value="{StaticResource HudHoverInkBrush}" />
+  </Style>
+  <Style Selector="Button.world-objective-toggle:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="Button.socket.world">
+    <Setter Property="Width" Value="54" />
+    <Setter Property="Height" Value="54" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+  <Style Selector="Button.socket.world local|IconVisual">
+    <Setter Property="Width" Value="26" />
+    <Setter Property="Height" Value="26" />
+    <Setter Property="Foreground" Value="{StaticResource HudInkBrush}" />
+  </Style>
+  <Style Selector="Button.socket.world:pointerover local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource HudHoverInkBrush}" />
+  </Style>
+  <Style Selector="Button.socket.world:disabled local|IconVisual">
+    <Setter Property="Foreground" Value="{StaticResource HudDisabledInkBrush}" />
+  </Style>
+
+  <Style Selector="Button.world-stack-card">
+    <Setter Property="Width" Value="130" />
+    <Setter Property="Height" Value="170" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="RenderTransformOrigin" Value="50%,100%" />
+    <Setter Property="RenderTransform" Value="none" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Width" Duration="0:0:0.18" Easing="CubicEaseOut" />
+        <DoubleTransition Property="Height" Duration="0:0:0.18" Easing="CubicEaseOut" />
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <local:PointerTiltDecorator x:Name="Tilt">
+            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+          </local:PointerTiltDecorator>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-stack-card /template/ local|PointerTiltDecorator#Tilt">
+    <Setter Property="Depth" Value="300" />
+    <Setter Property="AngleX" Value="6" />
+    <Setter Property="AngleY" Value="10" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="2" BlurRadius="8" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-stack-card.selected /template/ local|PointerTiltDecorator#Tilt">
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="14" Color="{x:Static local:Theme+World+StackBar.SelectedGlowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-stack-card:pointerover:not(.selected)">
+    <Setter Property="RenderTransform" Value="translateY(-16px) scale(1.04)" />
+  </Style>
+  <Style Selector="Button.world-stack-card.selected">
+    <Setter Property="Width" Value="156" />
+    <Setter Property="Height" Value="204" />
+    <Setter Property="RenderTransform" Value="translateY(-16px)" />
+  </Style>
+  <Style Selector="Button.world-stack-card:pressed">
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+
+  <Style Selector="Button.world-stack-card local|SpriteVisual">
+    <Setter Property="Stretch" Value="Uniform" />
+  </Style>
+  <Style Selector="Button.world-stack-card Image.overlay">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.6" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-stack-card.exhausted Image.overlay, Button.world-stack-card.finished Image.overlay">
+    <Setter Property="Opacity" Value="0.6" />
+  </Style>
+  <Style Selector="Button.world-stack-card local|OutlinedTextBlock.moves">
+    <Setter Property="Margin" Value="0,36,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Foreground" Value="{StaticResource WorldStackBarMovesBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="Outline" Value="{StaticResource WorldStackBarTextOutlineBrush}" />
+    <Setter Property="OutlineThickness" Value="1" />
+  </Style>
+  <Style Selector="Button.world-stack-card.selected local|OutlinedTextBlock.moves">
+    <Setter Property="Margin" Value="0,43,0,0" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeXl}" />
+  </Style>
+  <Style Selector="Button.world-stack-card.exhausted local|OutlinedTextBlock.moves">
+    <Setter Property="Foreground" Value="{StaticResource WorldStackBarNoMovesBrush}" />
+  </Style>
+  <Style Selector="Button.world-stack-card local|OutlinedTextBlock.name">
+    <Setter Property="Margin" Value="4,0,4,72" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.18" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-stack-card.selected local|OutlinedTextBlock.name">
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+  <Style Selector="ItemsControl.world-stack-bar">
+    <Setter Property="Margin" Value="0,0,0,-64" />
+    <Setter Property="ClipToBounds" Value="False" />
+  </Style>
+  <Style Selector="ItemsControl.world-stack-bar > ContentPresenter" x:DataType="local:WorldStackItemViewModel">
+    <Setter Property="ZIndex" Value="{Binding IsSelected}" />
+  </Style>
+  <Style Selector="ItemsControl.world-stack-bar[ItemCount=1], ItemsControl.world-stack-bar[ItemCount=2], ItemsControl.world-stack-bar[ItemCount=3], ItemsControl.world-stack-bar[ItemCount=4]">
+    <Setter Property="Margin" Value="0,0,0,-90" />
+    <Style Selector="^ StackPanel">
+      <Setter Property="Spacing" Value="-48" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card">
+      <Setter Property="Width" Value="162" />
+      <Setter Property="Height" Value="212" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card.selected">
+      <Setter Property="Width" Value="195" />
+      <Setter Property="Height" Value="255" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card local|OutlinedTextBlock.moves">
+      <Setter Property="Margin" Value="0,45,0,0" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card.selected local|OutlinedTextBlock.moves">
+      <Setter Property="Margin" Value="0,54,0,0" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card local|OutlinedTextBlock.name">
+      <Setter Property="Margin" Value="4,0,4,96" />
+    </Style>
+    <Style Selector="^ StackPanel.world-stack-card-actions">
+      <Setter Property="Margin" Value="0,-15,0,0" />
+    </Style>
+  </Style>
+
+  <Style Selector="Ellipse.plate-texture">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Stroke" Value="{StaticResource PlateTextureBrush}" />
+  </Style>
+
+  <Style Selector="local|MedallionCornerDecorator.world-medallion-corner">
+    <Setter Property="Padding" Value="0,0,8,6" />
+  </Style>
+  <Style Selector="local|AnchorPanel.world-caption-anchor.medallion">
+    <Setter Property="Margin" Value="0,8,8,6" />
+  </Style>
+  <Style Selector="Button.world-medallion">
+    <Setter Property="Width" Value="{x:Static local:MedallionTexture.Size}" />
+    <Setter Property="Height" Value="{x:Static local:MedallionTexture.Size}" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <Image x:Name="MedallionRing" Stretch="Fill" Source="{x:Static local:MedallionTexture.Ring}" />
+          <Ellipse x:Name="MedallionPlateTexture" Classes="plate-texture" Margin="{x:Static local:MedallionTexture.MetalMargin}" StrokeThickness="{x:Static local:MedallionTexture.MetalThickness}" />
+          <Image x:Name="MedallionFaceDarkHover" Stretch="Fill" IsVisible="False" Source="{x:Static local:MedallionTexture.FaceDarkHover}" />
+          <Image x:Name="MedallionFaceLit" Stretch="Fill" IsVisible="False" Source="{x:Static local:MedallionTexture.FaceLit}" />
+          <Image x:Name="MedallionFaceLitHover" Stretch="Fill" IsVisible="False" Source="{x:Static local:MedallionTexture.FaceLitHover}" />
+          <ContentPresenter x:Name="MedallionContent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-medallion TextBlock">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource MedallionInkBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeXl}" />
+  </Style>
+  <Style Selector="Button.world-medallion local|IconVisual">
+    <Setter Property="Width" Value="28" />
+    <Setter Property="Height" Value="28" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource MedallionInkBrush}" />
+  </Style>
+  <Style Selector="Button.world-medallion:pointerover:not(.highlighted) /template/ Image#MedallionFaceDarkHover">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="Button.world-medallion.highlighted /template/ Image#MedallionFaceLit">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="Button.world-medallion.highlighted:pointerover /template/ Image#MedallionFaceLitHover">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="Button.world-medallion:pressed">
+    <Setter Property="RenderTransform" Value="scale(0.98)" />
+  </Style>
+
+  <Style Selector="StackPanel.world-stack-card-actions">
+    <Setter Property="Margin" Value="0,-24,0,0" />
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Spacing" Value="6" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+  </Style>
+  <Style Selector="Button.socket.world.card">
+    <Setter Property="Width" Value="38" />
+    <Setter Property="Height" Value="38" />
+  </Style>
+  <Style Selector="Button.socket.world.card local|IconVisual">
+    <Setter Property="Width" Value="18" />
+    <Setter Property="Height" Value="18" />
+  </Style>
+  <Style Selector="local|AnchorPanel.world-caption-anchor">
+    <Setter Property="Anchor" Value="50%,0%" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.world-caption">
+    <Setter Property="Margin" Value="0,0,0,6" />
+    <Setter Property="Foreground" Value="{StaticResource WorldStackBarMovesBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+    <Setter Property="Outline" Value="{StaticResource WorldStackBarTextOutlineBrush}" />
+    <Setter Property="OutlineThickness" Value="1" />
+  </Style>
+
+  <Style Selector="StackPanel.world-caption">
+    <Setter Property="Margin" Value="0,0,0,6" />
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Spacing" Value="8" />
+  </Style>
+  <Style Selector="StackPanel.world-caption local|OutlinedTextBlock.world-caption">
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.hotkey-pill">
+    <Setter Property="Padding" Value="9,1" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Background" Value="{StaticResource HudHotkeyPillBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource HudHotkeyPillBorderBrush}" />
+    <Setter Property="BorderThickness" Value="2" />
+    <Setter Property="CornerRadius" Value="12" />
+  </Style>
+  <Style Selector="Border.hotkey-pill TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource HudHotkeyTextBrush}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+  </Style>
+
+  <Style Selector="local|HoverItemsControl.world-wheel">
+    <Setter Property="Margin" Value="0,0,0,96" />
+    <Setter Property="IsVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.2" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <local:ArcPanel />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel UseLayoutRounding="True">
+          <local:ArcTrack ItemCount="{TemplateBinding ItemCount}"
+                          Fill="{StaticResource HudPlateBrush}"
+                          Stroke="{StaticResource HudPlateBorderBrush}"
+                          Shadow="{StaticResource HudPlateShadowBrush}" />
+          <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+          <local:AnchorPanel Classes="world-caption-anchor">
+            <ContentControl Content="{TemplateBinding HoveredItem}">
+              <ContentControl.ContentTemplate>
+                <DataTemplate x:DataType="local:WorldActionWheelItemViewModel">
+                  <local:OutlinedTextBlock Classes="world-caption" Text="{Binding Label}" />
+                </DataTemplate>
+              </ContentControl.ContentTemplate>
+            </ContentControl>
+          </local:AnchorPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|HoverItemsControl.world-wheel.open">
+    <Setter Property="IsVisible" Value="True" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+  <Style Selector="local|HoverItemsControl.world-wheel[ItemCount=0]">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="local|HoverItemsControl.world-wheel /template/ local|ArcPanel">
+    <Setter Property="Radius" Value="96" />
+    <Setter Property="ItemAngle" Value="30" />
+    <Setter Property="Spread" Value="0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Spread" Duration="0:0:0.28" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="local|HoverItemsControl.world-wheel.open /template/ local|ArcPanel">
+    <Setter Property="Spread" Value="1" />
+  </Style>
+  <Style Selector="local|HoverItemsControl.world-wheel /template/ local|ArcTrack">
+    <Setter Property="Padding" Value="5" />
+    <Setter Property="Radius" Value="96" />
+    <Setter Property="ItemAngle" Value="30" />
+    <Setter Property="Spread" Value="0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Spread" Duration="0:0:0.28" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="local|HoverItemsControl.world-wheel.open /template/ local|ArcTrack">
+    <Setter Property="Spread" Value="1" />
+  </Style>
+
+  <Style Selector="Button.socket.world.wheel">
+    <Setter Property="Width" Value="46" />
+    <Setter Property="Height" Value="46" />
+    <Setter Property="RenderTransform" Value="none" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.socket.world.wheel:pointerover">
+    <Setter Property="RenderTransform" Value="scale(1.12)" />
+  </Style>
+  <Style Selector="Button.socket.world.wheel local|IconVisual">
+    <Setter Property="Width" Value="22" />
+    <Setter Property="Height" Value="22" />
+  </Style>
+  <Style Selector="Button.socket.world.wheel local|SpriteVisual">
+    <Setter Property="Width" Value="30" />
+    <Setter Property="Height" Value="30" />
+    <Setter Property="Stretch" Value="Uniform" />
+  </Style>
+  <Style Selector="Button.socket.world.wheel:disabled local|SpriteVisual">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
+
+  <Style Selector="Panel.world-minimap">
+    <Setter Property="Width" Value="224" />
+    <Setter Property="Height" Value="186" />
+  </Style>
+  <Style Selector="Panel.world-minimap Panel.minimap-compass">
+    <Setter Property="Width" Value="224" />
+    <Setter Property="Height" Value="224" />
+    <Setter Property="Margin" Value="0,-19" />
+  </Style>
+  <Style Selector="Panel.world-minimap Ellipse.minimap-backdrop">
+    <Setter Property="Margin" Value="16" />
+    <Setter Property="Fill" Value="Transparent" />
+  </Style>
+  <Style Selector="Panel.world-minimap local|PlateChrome.minimap-border">
+    <Setter Property="Margin" Value="16" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="StrokeThickness" Value="14" />
+  </Style>
+  <Style Selector="Panel.world-minimap Ellipse.plate-texture">
+    <Setter Property="Margin" Value="16" />
+    <Setter Property="StrokeThickness" Value="14" />
+  </Style>
+  <Style Selector="Panel.world-minimap local|MinimapVisual">
+    <Setter Property="Width" Value="164" />
+    <Setter Property="Height" Value="164" />
+    <Setter Property="MapScale" Value="1.25" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Panel.world-minimap Panel.minimap-direction">
+    <Setter Property="IsHitTestVisible" Value="False" />
+  </Style>
+  <Style Selector="Panel.world-minimap Panel.minimap-direction-badge">
+    <Setter Property="Width" Value="30" />
+    <Setter Property="Height" Value="26" />
+    <Setter Property="Margin" Value="0,12,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+  </Style>
+  <Style Selector="Panel.world-minimap Panel.minimap-direction-badge Path">
+    <Setter Property="Fill" Value="{StaticResource PlateRoundBorderGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource PlateOuterShadowBrush}" />
+    <Setter Property="StrokeThickness" Value="1" />
+    <Setter Property="StrokeJoin" Value="Round" />
+  </Style>
+  <Style Selector="Panel.world-minimap Panel.minimap-direction-badge local|OutlinedTextBlock">
+    <Setter Property="Margin" Value="0,2,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Foreground" Value="{StaticResource MinimapDirectionTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+    <Setter Property="Outline" Value="{StaticResource MinimapDirectionTextBrush}" />
+    <Setter Property="OutlineThickness" Value="0.5" />
+  </Style>
+  <Style Selector="Panel.world-minimap Button.minimap-lord">
+    <Setter Property="Width" Value="48" />
+    <Setter Property="Height" Value="48" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+  </Style>
+  <Style Selector="Panel.world-minimap Border.minimap-portrait">
+    <Setter Property="Margin" Value="2.5" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="CornerRadius" Value="21.5" />
+    <Setter Property="ClipToBounds" Value="True" />
+  </Style>
+  <Style Selector="Panel.world-minimap Border.minimap-portrait local|SpriteVisual">
+    <Setter Property="Stretch" Value="UniformToFill" />
+  </Style>
+  <Style Selector="Panel.world-minimap Border.minimap-portrait-overlay">
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="Background" Value="{StaticResource MinimapPortraitHoverOverlayBrush}" />
+  </Style>
+  <Style Selector="Panel.world-minimap Button.minimap-lord:pointerover Border.minimap-portrait-overlay">
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+  <Style Selector="Panel.world-minimap Button.minimap-menu">
+    <Setter Property="Width" Value="48" />
+    <Setter Property="Height" Value="48" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+  </Style>
+  <Style Selector="Panel.world-minimap Button.minimap-menu local|IconVisual">
+    <Setter Property="Width" Value="22" />
+    <Setter Property="Height" Value="22" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.world-turn">
+    <Setter Property="Margin" Value="0,14,8,0" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+    <Setter Property="OutlineThickness" Value="1.5" />
+  </Style>
+</Styles>

@@ -1,0 +1,123 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.TrainerTabView"
+             x:DataType="local:TrainerTabViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Border.site-offer.trainer-offer">
+      <Setter Property="MinHeight" Value="56" />
+    </Style>
+    <Style Selector="local|BarVisual.trainer-experience">
+      <Setter Property="Height" Value="26" />
+      <Setter Property="Margin" Value="0,4,0,0" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="Transparent">
+    <Grid ColumnDefinitions="*,24,*" MaxWidth="960" MaxHeight="720" Margin="18">
+
+      <ContentControl Grid.Column="0" Classes="ornament-panel">
+        <Grid RowDefinitions="40,*" Margin="6,2">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party'}" Classes="panel-title" />
+          <Grid Grid.Row="1" RowDefinitions="*,Auto">
+            <ContentControl Grid.Row="0" Content="{Binding Stack}" ContentTemplate="{StaticResource SiteStackTemplate}" />
+
+            <StackPanel Grid.Row="1" Spacing="10" Margin="0,10,0,0">
+              <Rectangle Height="1" Fill="{StaticResource DividerBrush}" />
+              <TextBlock Text="{local:Text 'Trainable units are highlighted.'}"
+                         Classes="caption"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         TextWrapping="Wrap"
+                         TextAlignment="Center"
+                         HorizontalAlignment="Center" />
+            </StackPanel>
+          </Grid>
+        </Grid>
+      </ContentControl>
+
+      <ContentControl Grid.Column="2" Classes="ornament-panel">
+        <Grid RowDefinitions="40,*" Margin="6,2">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{Binding SiteTitle}" Classes="panel-title" />
+          <Grid Grid.Row="1" RowDefinitions="Auto,*,Auto,Auto">
+            <TextBlock Grid.Row="0" Classes="body site-greeting" Text="{Binding SiteGreeting}" />
+
+            <Viewbox Grid.Row="1" StretchDirection="DownOnly" ClipToBounds="False" IsVisible="{Binding InspectedUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <Panel Width="230" Height="330" Background="Transparent">
+                <Ellipse Width="340"
+                         Height="340"
+                         Margin="-55,-5"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Fill="{StaticResource StackPortraitGlowGradientBrush}" />
+                <local:PointerTiltDecorator Classes="event-portrait" Margin="-40,-24,-40,-8">
+                  <local:SpriteVisual SpriteKey="{Binding InspectedUnit.PortraitKey, FallbackValue={x:Null}}" Stretch="Uniform" />
+                </local:PointerTiltDecorator>
+              </Panel>
+            </Viewbox>
+
+            <ContentControl Grid.Row="2" Margin="24,8,24,0" Content="{Binding InspectedUnit}">
+              <ContentControl.ContentTemplate>
+                <DataTemplate x:DataType="local:TrainerInspectedUnitViewModel">
+                  <StackPanel Spacing="6">
+                    <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding GainText}"
+                               Classes="caption"
+                               Foreground="{StaticResource SecondaryTextBrush}"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               IsVisible="{Binding GainText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                    <local:BarVisual Classes="trainer-experience experience"
+                                     Classes.maximum="{Binding IsMaximumLevel}"
+                                     Classes.pending="{Binding IsPendingUpgrade}"
+                                     Classes.gain="{Binding HasTrainableExperience}"
+                                     Value="{Binding Experience}"
+                                     Maximum="{Binding NextLevelExperience}"
+                                     Gain="{Binding TrainableExperience}"
+                                     Text="{Binding ExperienceText}" />
+                  </StackPanel>
+                </DataTemplate>
+              </ContentControl.ContentTemplate>
+            </ContentControl>
+
+            <Border Grid.Row="3" Classes="site-offer trainer-offer">
+              <Panel>
+                <ContentControl Content="{Binding Offer}">
+                  <ContentControl.ContentTemplate>
+                    <DataTemplate x:DataType="local:SiteOfferViewModel">
+                      <Grid ColumnDefinitions="*,Auto">
+                        <ContentControl Grid.Column="0"
+                                        Content="{Binding Status}"
+                                        Classes="caption"
+                                        IsVisible="{Binding Status.IsReasonVisible}"
+                                        Margin="0,0,16,0"
+                                        VerticalAlignment="Center" />
+                        <local:PriceButton Grid.Column="1"
+                                           Classes="pill"
+                                           Content="{Binding ActionText}"
+                                           Status="{Binding Status}"
+                                           Command="{Binding ActCommand}"
+                                           MinWidth="140"
+                                           VerticalAlignment="Center" />
+                      </Grid>
+                    </DataTemplate>
+                  </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Classes="body site-offer-hint"
+                           Text="{Binding OfferHint}"
+                           IsVisible="{Binding Offer, Converter={x:Static ObjectConverters.IsNull}}" />
+              </Panel>
+            </Border>
+          </Grid>
+        </Grid>
+      </ContentControl>
+
+    </Grid>
+
+    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
+      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
+    </Canvas>
+  </Grid>
+
+</UserControl>

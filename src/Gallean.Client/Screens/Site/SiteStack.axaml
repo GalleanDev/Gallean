@@ -1,0 +1,31 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <DataTemplate x:Key="SiteStackTemplate" x:DataType="local:SiteStackViewModel">
+      <Grid RowDefinitions="Auto,*">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Margin="0,0,0,14">
+          <local:UnitIcon Grid.Column="0" SpriteKey="{Binding LeaderPortraitKey}" Width="88" Height="88" VerticalAlignment="Center" />
+          <StackPanel Grid.Column="1" Margin="14,0,0,0" Spacing="4" VerticalAlignment="Center">
+            <local:OutlinedTextBlock Text="{Binding LeaderName}" Classes="object-name" />
+            <TextBlock local:TextRuns.Spans="{Binding Summary}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
+          </StackPanel>
+        </Grid>
+
+        <Viewbox Grid.Row="1" Classes="unit-grid-container">
+          <ItemsControl Classes="unit-grid focus-group"
+                        ItemsSource="{Binding UnitGrid.Slots}"
+                        ItemTemplate="{StaticResource UnitGridSlotTemplate}"
+                        ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
+        </Viewbox>
+      </Grid>
+    </DataTemplate>
+  </Styles.Resources>
+
+  <Style Selector="TextBlock.site-greeting">
+    <Setter Property="Margin" Value="4,0,4,10" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="FontStyle" Value="Italic" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+</Styles>

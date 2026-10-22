@@ -1,0 +1,126 @@
+uniform shader source;
+uniform shader normals;
+uniform shader heightField;
+uniform shader albedo;
+
+uniform float4 rigLightPositions[8];
+uniform float4 rigLightRadiances[8];
+uniform float4 spriteLightPositions[16];
+uniform float4 spriteLightRadiances[16];
+uniform float3 sunDirection;
+uniform float3 sunRadiance;
+uniform float3 sunGrade;
+uniform float3 groundNormal;
+uniform float ambient;
+uniform float depthScale;
+uniform float shadingCap;
+uniform float rollOffThreshold;
+uniform float spriteLightBoost;
+uniform float spriteLightReach;
+
+const float Pi = 3.14159265;
+const float3 View = float3(0.0, 0.0, 1.0);
+const float3 LuminanceWeights = float3(0.2126, 0.7152, 0.0722);
+const float Roughness = 0.8;
+const float MinimumSteeperDot = 0.0709;
+const float RigLightBoost = 1.5;
+const float SpriteLightDepthLimit = 0.4;
+const float SpriteLightDepthFade = 0.1;
+const float SunContrast = 1.5;
+
+float3 srgbToLinear(float3 color) {
+    return pow(max(color, 0.0), float3(2.2));
+}
+
+float3 linearToSrgb(float3 color) {
+    return pow(max(color, 0.0), float3(1.0 / 2.2));
+}
+
+float orenNayar(float3 normal, float3 toLight) {
+    float lightDot = clamp(dot(normal, toLight), 0.0, 1.0);
+    float viewFacing = dot(normal, View);
+    float viewDot = clamp(viewFacing, 0.0, 1.0);
+    float sigmaSquared = Roughness * Roughness;
+    float a = 1.0 - 0.5 * sigmaSquared / (sigmaSquared + 0.33);
+    float b = 0.45 * sigmaSquared / (sigmaSquared + 0.09);
+
+    float tangentDot = max(dot(View, toLight) - lightDot * viewFacing, 0.0);
+    float steeperDot = max(max(lightDot, viewDot), MinimumSteeperDot);
+
+    return lightDot / Pi * (a + b * tangentDot / steeperDot);
+}
+
+float3 directionalLight(float3 normal, float3 direction, float3 radiance) {
+    return orenNayar(normal, direction) * radiance;
+}
+
+float3 pointLight(float3 normal, float3 position, float4 light, float3 radiance) {
+    float3 delta = light.xyz - position;
+    float distance = length(delta);
+    float relative = distance / light.w;
+    float attenuation = 1.0 / (1.0 + relative * relative);
+
+    return orenNayar(normal, delta / max(distance, 1e-4)) * radiance * attenuation;
+}
+
+float3 rollOff(float3 color) {
+    float peak = max(max(color.r, color.g), color.b);
+
+    if (peak <= rollOffThreshold) {
+        return color;
+    }
+
+    float headroom = 1.0 - rollOffThreshold;
+    float eased = rollOffThreshold + headroom * (1.0 - exp(-(peak - rollOffThreshold) / headroom));
+
+    return color * (eased / peak);
+}
+
+half4 main(float2 coord) {
+    half4 sourceSample = source.eval(coord);
+    float3 color = srgbToLinear(float3(sourceSample.rgb));
+
+    float3 surface = max(srgbToLinear(float3(albedo.eval(coord).rgb)), float3(1e-3));
+    float shading = min(dot(color, LuminanceWeights) / dot(surface, LuminanceWeights), shadingCap);
+    float3 reflected = surface * shading;
+    float3 emission = color - reflected;
+
+    float3 encoded = float3(normals.eval(coord).rgb);
+    float3 normal = normalize(encoded * 2.0 - 1.0);
+
+    float depth = float(heightField.eval(coord).r);
+    float3 scenePosition = float3(coord, -depth * depthScale);
+    float3 sun = directionalLight(normal, sunDirection, sunRadiance);
+    float3 reference = directionalLight(groundNormal, sunDirection, sunRadiance);
+    float3 light = (float3(ambient) + sun) / max(float3(ambient) + reference, float3(1e-3));
+    float contrast = pow(max(dot(light, LuminanceWeights), 1e-3), SunContrast - 1.0);
+    float3 grade = contrast * sunGrade;
+    float3 spriteLight = float3(0.0);
+
+    for (int index = 0; index < 8; index++) {
+        if (rigLightPositions[index].w > 0.0) {
+            light += pointLight(normal, scenePosition, rigLightPositions[index], rigLightRadiances[index].rgb) * RigLightBoost;
+        }
+        else {
+            break;
+        }
+    }
+
+    for (int index = 0; index < 16; index++) {
+        if (spriteLightPositions[index].w > 0.0) {
+            float4 reachedLight = float4(spriteLightPositions[index].xyz, spriteLightPositions[index].w * spriteLightReach);
+
+            spriteLight += pointLight(normal, scenePosition, reachedLight, spriteLightRadiances[index].rgb);
+        }
+        else {
+            break;
+        }
+    }
+
+    float spriteLightMask = 1.0 - smoothstep(SpriteLightDepthLimit - SpriteLightDepthFade, SpriteLightDepthLimit + SpriteLightDepthFade, depth);
+    float3 base = rollOff(max((reflected * light + emission) * grade, 0.0));
+    float3 glow = surface * spriteLight * spriteLightBoost * spriteLightMask;
+    float3 lit = linearToSrgb(1.0 - (1.0 - base) * exp(-glow));
+
+    return half4(half3(lit), sourceSample.a);
+}

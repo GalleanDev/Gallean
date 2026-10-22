@@ -1,0 +1,57 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <DataTemplate x:Key="StatRowTemplate" x:DataType="local:StatRowViewModel">
+      <Border Classes="stat-row">
+        <Grid ColumnDefinitions="Auto,Auto,*">
+          <ContentControl Grid.Column="0" Classes="stat-icon" Content="{Binding Icon}">
+            <ContentControl.ContentTemplate>
+              <DataTemplate x:DataType="local:IconMoniker">
+                <local:IconVisual Moniker="{Binding}" />
+              </DataTemplate>
+            </ContentControl.ContentTemplate>
+          </ContentControl>
+          <TextBlock Grid.Column="1" Classes="body stat-label" Text="{Binding Label}" />
+          <TextBlock Grid.Column="2" Classes="body stat-value"><Run Text="{Binding Value.BaseText}" /><Run Classes="change" Classes.decrease="{Binding Value.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding Value.ChangeText}" /></TextBlock>
+        </Grid>
+      </Border>
+    </DataTemplate>
+  </Styles.Resources>
+
+  <Style Selector="ItemsControl.stat-table">
+    <Setter Property="ItemTemplate" Value="{StaticResource StatRowTemplate}" />
+  </Style>
+  <Style Selector="ItemsControl.stat-table ContentPresenter:nth-child(odd) Border.stat-row">
+    <Setter Property="Background" Value="{StaticResource StatRowStripeBrush}" />
+  </Style>
+  <Style Selector="Border.stat-row">
+    <Setter Property="Margin" Value="0,1" />
+    <Setter Property="Padding" Value="10,4" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+  </Style>
+  <Style Selector="Border.stat-row ContentControl.stat-icon">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Margin" Value="0,0,8,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+  </Style>
+  <Style Selector="Border.stat-row TextBlock.stat-label">
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+  </Style>
+  <Style Selector="Border.stat-row TextBlock.stat-value">
+    <Setter Property="Margin" Value="12,0,0,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="TextAlignment" Value="Right" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="Border.stat-row Run.change">
+    <Setter Property="Foreground" Value="{StaticResource StatRowIncreaseBrush}" />
+  </Style>
+  <Style Selector="Border.stat-row Run.change.decrease">
+    <Setter Property="Foreground" Value="{StaticResource StatRowDecreaseBrush}" />
+  </Style>
+</Styles>

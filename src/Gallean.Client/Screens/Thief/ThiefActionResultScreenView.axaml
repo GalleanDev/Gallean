@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ThiefActionResultScreenView"
+             x:DataType="local:ThiefActionResultScreenViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Width="440" Padding="28,24" Title="{Binding Title}" InitialFocus="{Binding #ContinueButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="ContinueButton" Grid.Column="1" Content="{local:Text 'Continue'}" Classes="pill success" Command="{Binding CloseCommand}" MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <StackPanel Spacing="16">
+        <Border Classes="frame" Width="254" Height="254" BorderThickness="2" HorizontalAlignment="Center">
+          <local:SpriteVisual SpriteKey="{Binding ImageKey}" Stretch="Uniform" />
+        </Border>
+
+        <TextBlock Text="{Binding Text}"
+                   Classes="body"
+                   Foreground="{StaticResource PrimaryTextBrush}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center" />
+      </StackPanel>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

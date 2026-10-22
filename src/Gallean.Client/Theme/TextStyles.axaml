@@ -1,0 +1,113 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Style Selector="local|OutlinedTextBlock">
+    <Setter Property="Outline" Value="{StaticResource TextOutlineBrush}" />
+    <Setter Property="OutlineThickness" Value="1" />
+  </Style>
+
+  <Style Selector="TextBlock.display, TextBlock.h1, TextBlock.h2, TextBlock.h3, TextBlock.h4, TextBlock.label">
+    <Setter Property="local:OutlinedTextBlock.Outline" Value="{StaticResource TextOutlineBrush}" />
+    <Setter Property="local:OutlinedTextBlock.OutlineThickness" Value="1" />
+  </Style>
+
+  <Style Selector=":is(Control).display">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSize4Xl}" />
+    <Setter Property="TextElement.FontWeight" Value="Bold" />
+  </Style>
+
+  <Style Selector=":is(Control).h1">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSize3Xl}" />
+    <Setter Property="TextElement.FontWeight" Value="Bold" />
+  </Style>
+
+  <Style Selector=":is(Control).h2">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSize2Xl}" />
+    <Setter Property="TextElement.FontWeight" Value="Bold" />
+  </Style>
+
+  <Style Selector=":is(Control).h3">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeXl}" />
+    <Setter Property="TextElement.FontWeight" Value="Bold" />
+  </Style>
+
+  <Style Selector=":is(Control).h4">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="TextElement.FontWeight" Value="Normal" />
+  </Style>
+
+  <Style Selector=":is(Control).label">
+    <Setter Property="TextElement.Foreground" Value="{StaticResource LabelTextBrush}" />
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="TextElement.FontWeight" Value="Normal" />
+  </Style>
+
+  <Style Selector=":is(Control).prose">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeLg}" />
+    <Setter Property="TextElement.FontWeight" Value="Normal" />
+  </Style>
+  <Style Selector="TextBlock.prose">
+    <Setter Property="LineHeight" Value="26" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+
+  <Style Selector=":is(Control).body">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeMd}" />
+  </Style>
+
+  <Style Selector=":is(Control).caption">
+    <Setter Property="TextElement.FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeSm}" />
+  </Style>
+
+  <Style Selector="local|OutlinedTextBlock.object-name">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySerif}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeXl}" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="2" Opacity="1" Color="{x:Static local:Theme+UnitName.ShadowColor}" />
+    </Setter>
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.object-name.title">
+    <Setter Property="FontSize" Value="{StaticResource FontSize2Xl}" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.object-name.row">
+    <Setter Property="FontSize" Value="{StaticResource FontSizeLg}" />
+  </Style>
+  <Style Selector="local|OutlinedTextBlock.object-name.compact">
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+  </Style>
+
+  <Style Selector="Run.highlight">
+    <Setter Property="Foreground" Value="{StaticResource HighlightTextBrush}" />
+  </Style>
+
+  <Style Selector="Run.bold">
+    <Setter Property="FontWeight" Value="Bold" />
+  </Style>
+
+  <Style Selector="Run.italic">
+    <Setter Property="FontStyle" Value="Italic" />
+  </Style>
+
+  <Style Selector="Run.character, Run.faction">
+    <Setter Property="Foreground" Value="{StaticResource ScenarioTextCharacterBrush}" />
+  </Style>
+
+  <Style Selector="Run.character, Run.faction, Run.place, Run.item">
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+  </Style>
+
+  <Style Selector="Run.place, Run.item">
+    <Setter Property="Foreground" Value="{StaticResource ScenarioTextObjectBrush}" />
+  </Style>
+</Styles>

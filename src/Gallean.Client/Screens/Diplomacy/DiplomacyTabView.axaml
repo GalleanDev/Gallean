@@ -1,0 +1,194 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.DiplomacyTabView"
+             x:DataType="local:DiplomacyTabViewModel">
+
+  <UserControl.DataTemplates>
+    <DataTemplate x:DataType="local:IconViewModel+Item">
+      <Border Classes="frame" Width="56" Height="56" BorderThickness="2">
+        <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+      </Border>
+    </DataTemplate>
+
+    <DataTemplate x:DataType="local:IconViewModel+Spell">
+      <Border Classes="frame spell-icon" Width="56" Height="56" BorderThickness="2" Classes.dark-background="{Binding Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
+        <local:SpriteVisual SpriteKey="{Binding Key}" Stretch="Uniform" />
+      </Border>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="DiplomacyPlayerTemplate" x:DataType="local:DiplomacyPlayerViewModel">
+      <Button Classes="row" Classes.selected="{Binding IsSelected}" Command="{Binding SelectCommand}" Margin="0,2">
+        <Grid ColumnDefinitions="Auto,*">
+          <Border Grid.Column="0"
+                  Classes="frame"
+                  Width="54"
+                  Height="54"
+                  CornerRadius="27"
+                  BorderThickness="2"
+                  Margin="0,0,12,0"
+                  VerticalAlignment="Center">
+            <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Stretch="Uniform" />
+          </Border>
+          <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+            <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" TextWrapping="Wrap" Foreground="{StaticResource PrimaryTextBrush}" />
+            <TextBlock Text="{Binding RaceName}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
+            <TextBlock Text="{Binding RelationText}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+            <TextBlock Text="{Binding StatusText}"
+                       Classes="caption"
+                       FontStyle="Italic"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       IsVisible="{Binding StatusText, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          </StackPanel>
+        </Grid>
+      </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DiplomacyActionTemplate" x:DataType="local:DiplomacyActionViewModel">
+      <Button Classes="row" Command="{Binding SelectCommand}" Margin="0,2" Padding="16,10">
+        <StackPanel Spacing="2">
+          <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" Foreground="{StaticResource PrimaryTextBrush}" />
+          <TextBlock Text="{Binding Description}"
+                     Classes="caption"
+                     Foreground="{StaticResource SecondaryTextBrush}"
+                     TextWrapping="Wrap" />
+          <ContentControl Content="{Binding Status}" Classes="caption" />
+        </StackPanel>
+      </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DiplomacyOfferTemplate" x:DataType="local:DiplomacyOfferViewModel">
+      <Button Classes="row" Command="{Binding SelectCommand}" Margin="0,2" Padding="12,10,16,10">
+        <Grid ColumnDefinitions="Auto,*">
+          <ContentControl Grid.Column="0" Content="{Binding Icon}" VerticalAlignment="Center" />
+          <StackPanel Grid.Column="1" Spacing="2" Margin="14,0,0,0" VerticalAlignment="Center">
+            <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" Foreground="{StaticResource PrimaryTextBrush}" />
+            <TextBlock Text="{Binding Description}"
+                       Classes="caption"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextWrapping="Wrap" />
+            <ContentControl Content="{Binding Cost}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" HorizontalAlignment="Left" />
+            <ContentControl Content="{Binding Status}" Classes="caption" />
+          </StackPanel>
+        </Grid>
+      </Button>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid Background="Transparent">
+    <ContentControl Classes="ornament-panel" MaxWidth="1160" MaxHeight="640" Margin="18" Padding="24">
+      <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="10"
+                    IsVisible="{Binding Players.Count, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=1}">
+          <local:IconVisual Moniker="Locked"
+                            Width="28"
+                            Height="28"
+                            HorizontalAlignment="Center"
+                            Foreground="{StaticResource SecondaryTextBrush}" />
+          <TextBlock Text="{local:Text 'There are no other lords to negotiate with.'}"
+                     Classes="prose"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextWrapping="Wrap"
+                     TextAlignment="Center" />
+        </StackPanel>
+
+        <Grid ColumnDefinitions="260,24,Auto,20,*" IsVisible="{Binding Players.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
+          <Grid Grid.Column="0" RowDefinitions="Auto,*">
+            <Border Grid.Row="0" Classes="section-header" Margin="0,0,0,10" HorizontalAlignment="Stretch">
+              <local:OutlinedTextBlock Text="{local:Text 'Lords'}" Classes="h4" Foreground="{StaticResource PrimaryTextBrush}" HorizontalAlignment="Center" />
+            </Border>
+            <ScrollViewer Classes="list" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+              <ItemsControl Classes="focus-group" ItemsSource="{Binding Players}" ItemTemplate="{StaticResource DiplomacyPlayerTemplate}" />
+            </ScrollViewer>
+          </Grid>
+
+          <Border Grid.Column="2"
+                  Classes="frame"
+                  Width="180"
+                  Height="235"
+                  BorderThickness="2"
+                  CornerRadius="{StaticResource RadiusMd}"
+                  VerticalAlignment="Top"
+                  IsVisible="{Binding SelectedPlayer, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <local:SpriteVisual SpriteKey="{Binding SelectedPlayer.LargePortraitKey, FallbackValue={x:Null}}" Stretch="UniformToFill" />
+          </Border>
+
+          <Grid Grid.Column="4" RowDefinitions="Auto,*,Auto">
+            <Border Grid.Row="0" Classes="section-header" Margin="0,0,0,10" HorizontalAlignment="Stretch">
+              <local:OutlinedTextBlock Text="{Binding SelectedPlayer.Name, FallbackValue=''}"
+                                       Classes="h4"
+                                       TextTrimming="CharacterEllipsis"
+                                       Foreground="{StaticResource PrimaryTextBrush}"
+                                       HorizontalAlignment="Center" />
+            </Border>
+
+            <ScrollViewer Classes="list" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+              <StackPanel Classes="focus-group" Spacing="6">
+                <ItemsControl ItemsSource="{Binding Actions}"
+                              ItemTemplate="{StaticResource DiplomacyActionTemplate}"
+                              IsVisible="{Binding Step, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DiplomacyStep.Actions}}" />
+
+                <StackPanel Spacing="6"
+                            IsVisible="{Binding Step, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DiplomacyStep.Offer}}">
+                  <TextBlock Text="{local:Text 'Choose what to offer.'}"
+                             Classes="body"
+                             Foreground="{StaticResource PrimaryTextBrush}"
+                             Margin="10,6,10,4" />
+                  <ItemsControl ItemsSource="{Binding Offers}" ItemTemplate="{StaticResource DiplomacyOfferTemplate}">
+                    <local:Blankslate.Content>
+                      <TextBlock Text="{local:Text 'Nothing can be offered.'}"
+                                 Classes="caption"
+                                 Foreground="{StaticResource SecondaryTextBrush}"
+                                 Margin="10,0" />
+                    </local:Blankslate.Content>
+                  </ItemsControl>
+                </StackPanel>
+
+                <StackPanel Spacing="14"
+                            Margin="10,6"
+                            IsVisible="{Binding Step, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DiplomacyStep.Amount}}">
+                  <TextBlock Text="{Binding PromptText}"
+                             Classes="body"
+                             Foreground="{StaticResource PrimaryTextBrush}"
+                             TextWrapping="Wrap" />
+                  <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Classes="icon-button" local:PlateChrome.TextureSeed="2" Command="{Binding DecreaseAmountCommand}" VerticalAlignment="Center">
+                      <local:IconVisual Moniker="Minus" />
+                    </Button>
+                    <TextBox Text="{Binding AmountText}" Width="90" HorizontalContentAlignment="Center" VerticalAlignment="Center" />
+                    <Button Classes="icon-button" local:PlateChrome.TextureSeed="3" Command="{Binding IncreaseAmountCommand}" VerticalAlignment="Center">
+                      <local:IconVisual Moniker="Plus" />
+                    </Button>
+                  </StackPanel>
+                </StackPanel>
+              </StackPanel>
+            </ScrollViewer>
+
+            <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" Margin="0,12,0,0" IsVisible="{Binding Step, Converter={x:Static local:EnumNotEqualsConverter.Instance}, ConverterParameter={x:Static local:DiplomacyStep.Actions}}">
+              <Button Grid.Column="0"
+                      Content="{local:Text 'Back'}"
+                      Classes="pill"
+                      local:PlateChrome.TextureSeed="1"
+                      Command="{Binding BackCommand}"
+                      MinWidth="120" />
+              <Button Grid.Column="2"
+                      Content="{local:Text 'Offer'}"
+                      Classes="pill success"
+                      local:PlateChrome.TextureSeed="4"
+                      Command="{Binding ConfirmAmountCommand}"
+                      MinWidth="120"
+                      IsVisible="{Binding Step, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DiplomacyStep.Amount}}" />
+            </Grid>
+
+          </Grid>
+        </Grid>
+
+      </Grid>
+    </ContentControl>
+  </Grid>
+
+</UserControl>

@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type local:UnitIcon}" TargetType="local:UnitIcon">
+      <Setter Property="BorderBrush" Value="{StaticResource UnitIconRingBrush}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel>
+            <local:EllipseClipDecorator>
+              <local:SpriteVisual SpriteKey="{TemplateBinding SpriteKey}" Stretch="UniformToFill" Margin="-3" />
+            </local:EllipseClipDecorator>
+            <Ellipse Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+  </Styles.Resources>
+</Styles>

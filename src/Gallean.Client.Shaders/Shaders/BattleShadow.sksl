@@ -1,0 +1,65 @@
+uniform shader source;
+
+uniform float2 foot;
+uniform float3 light;
+uniform float lightPower;
+uniform float groundLight;
+uniform float contrast;
+uniform float3 lightTint;
+uniform float lightRange;
+uniform float lightRadius;
+uniform float2 span;
+uniform float opacity;
+uniform float riseLimit;
+uniform float penumbraLimit;
+uniform float2 groundScale;
+
+const float Pi = 3.14159265;
+const float GoldenAngle = 2.39996323;
+const int SampleCount = 24;
+const float PenumbraBase = 3.0;
+const float MaximumDarkness = 0.675;
+const float TintAmount = 0.25;
+
+float sampleCoverage(float2 coord, float spread) {
+    float coverage = 0.0;
+
+    for (int index = 0; index < SampleCount; index++) {
+        float fraction = (float(index) + 0.5) / float(SampleCount);
+        float angle = float(index) * GoldenAngle;
+        float2 offset = sqrt(fraction) * spread * float2(cos(angle), sin(angle));
+
+        coverage += float(source.eval(coord + offset).a);
+    }
+
+    return coverage / float(SampleCount);
+}
+
+half4 main(float2 coord) {
+    float rise = clamp((foot.y - coord.y) / light.z, 0.0, riseLimit);
+    float spread = min(PenumbraBase + lightRadius * rise, penumbraLimit);
+    float coverage = sampleCoverage(coord, spread);
+
+    if (coverage < 0.004) {
+        return half4(1.0);
+    }
+
+    float2 base = foot + (coord.x - foot.x) * span;
+    float2 landing = light.xy + (base - light.xy) / (1.0 - rise);
+    float3 toLight = float3((light.xy - landing) * float2(1.0, groundScale.x), light.z * groundScale.y);
+    float distance = length(toLight);
+    float relative = distance / lightRange;
+    float attenuation = 1.0 / (1.0 + relative * relative);
+    float lightDot = toLight.z / max(distance, 1e-4);
+
+    float blocked = lightPower * attenuation * lightDot / Pi;
+    float darkness = MaximumDarkness * (1.0 - exp(-contrast * blocked / groundLight));
+
+    float fade = 1.0 - smoothstep(0.5, 1.0, rise / riseLimit);
+    float occlusion = coverage * opacity * fade;
+
+    float3 removed = darkness * mix(float3(1.0), lightTint, TintAmount);
+    float3 transmitted = pow(max(1.0 - occlusion * removed, 0.0), float3(1.0 / 2.2));
+
+    return half4(half3(transmitted), 1.0);
+}

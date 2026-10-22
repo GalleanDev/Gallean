@@ -1,0 +1,436 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.BattleScreenView"
+             x:Name="Screen"
+             x:DataType="local:BattleScreenViewModel">
+
+  <UserControl.KeyBindings>
+    <KeyBinding Gesture="D" Command="{Binding DefendCommand}" />
+    <KeyBinding Gesture="W" Command="{Binding WaitCommand}" />
+    <KeyBinding Gesture="S" Command="{Binding SkipCommand}" />
+    <KeyBinding Gesture="R" Command="{Binding RetreatCommand}" />
+    <KeyBinding Gesture="D1" Command="{Binding SelectFirstItemCommand}" />
+    <KeyBinding Gesture="D2" Command="{Binding SelectSecondItemCommand}" />
+  </UserControl.KeyBindings>
+
+  <UserControl.Resources>
+    <ControlTheme x:Key="GridUnitContainerTheme" TargetType="ContentPresenter" x:DataType="local:BattleGridUnitViewModel">
+      <Setter Property="Grid.Row" Value="{Binding Row}" />
+      <Setter Property="Grid.Column" Value="{Binding Column}" />
+      <Setter Property="Grid.ColumnSpan" Value="{Binding ColumnSpan}" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="GridTileContainerTheme" TargetType="ContentPresenter" x:DataType="local:BattleGridTileViewModel">
+      <Setter Property="Grid.Row" Value="{Binding Row}" />
+      <Setter Property="Grid.Column" Value="{Binding Column}" />
+    </ControlTheme>
+
+    <DataTemplate x:Key="GridTileTemplate" x:DataType="local:BattleGridTileViewModel">
+      <local:UnitPortrait PointerPressed="OnGridTilePointerPressed"
+                          PointerMoved="OnGridTilePointerMoved"
+                          PointerExited="OnGridPointerExited"
+                          Marker="{Binding Marker, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ActionButtonsTemplate" x:DataType="local:BattleScreenViewModel">
+      <local:ModalFrameDecorator Classes="action-bar">
+        <StackPanel>
+          <Button Classes="bar-action" Classes.highlighted="{Binding !HasTargets}" Command="{Binding DefendCommand}">
+            <ToolTip.Tip>
+              <ToolTip Classes="action-caption">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Defend'}" />
+                  <Border Classes="hotkey-pill">
+                    <TextBlock Text="{local:Text 'D'}" />
+                  </Border>
+                </StackPanel>
+              </ToolTip>
+            </ToolTip.Tip>
+            <local:IconVisual Moniker="Defend" />
+          </Button>
+          <Border Classes="action-divider" />
+          <Button Classes="bar-action" Classes.highlighted="{Binding !HasTargets}" Command="{Binding WaitCommand}">
+            <ToolTip.Tip>
+              <ToolTip Classes="action-caption">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Wait'}" />
+                  <Border Classes="hotkey-pill">
+                    <TextBlock Text="{local:Text 'W'}" />
+                  </Border>
+                </StackPanel>
+              </ToolTip>
+            </ToolTip.Tip>
+            <local:IconVisual Moniker="Wait" />
+          </Button>
+          <Border Classes="action-divider" />
+          <Button Classes="bar-action" Command="{Binding SkipCommand}">
+            <ToolTip.Tip>
+              <ToolTip Classes="action-caption">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Skip'}" />
+                  <Border Classes="hotkey-pill">
+                    <TextBlock Text="{local:Text 'S'}" />
+                  </Border>
+                </StackPanel>
+              </ToolTip>
+            </ToolTip.Tip>
+            <local:IconVisual Moniker="Skip" />
+          </Button>
+          <Border Classes="action-divider" />
+          <Button Classes="bar-action" Command="{Binding RetreatCommand}">
+            <ToolTip.Tip>
+              <ToolTip Classes="action-caption">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Retreat'}" />
+                  <Border Classes="hotkey-pill">
+                    <TextBlock Text="{local:Text 'R'}" />
+                  </Border>
+                </StackPanel>
+              </ToolTip>
+            </ToolTip.Tip>
+            <local:IconVisual Moniker="Retreat" />
+          </Button>
+        </StackPanel>
+      </local:ModalFrameDecorator>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ItemButtonsTemplate" x:DataType="local:BattleScreenViewModel">
+      <ItemsControl ItemsSource="{Binding Items}" VerticalAlignment="Top" ClipToBounds="False">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" Spacing="12" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="local:BattleItemViewModel">
+            <Panel Background="Transparent"
+                   PointerPressed="OnItemPointerPressed"
+                   PointerReleased="OnItemPointerReleased"
+                   PointerCaptureLost="OnItemPointerCaptureLost">
+              <Button Classes="socket ability item" Classes.selected="{Binding IsActive}" Command="{Binding SelectCommand}">
+                <ToolTip.Tip>
+                  <ToolTip Classes="action-caption">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <local:OutlinedTextBlock Classes="action-caption" Text="{Binding Name}" />
+                      <Border Classes="hotkey-pill">
+                        <TextBlock Text="{Binding Hotkey}" />
+                      </Border>
+                    </StackPanel>
+                  </ToolTip>
+                </ToolTip.Tip>
+                <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform" />
+              </Button>
+              <Popup Placement="Custom" CustomPopupPlacementCallback="PlaceItemDetails" IsLightDismissEnabled="False">
+                <ContentControl Classes="cached"
+                                Content="{Binding #Screen.((local:BattleScreenViewModel)DataContext).InspectedItem}"
+                                ClipToBounds="False"
+                                IsHitTestVisible="False" />
+              </Popup>
+            </Panel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GridUnitTemplate" x:DataType="local:BattleGridUnitViewModel">
+      <Panel Background="Transparent"
+             PointerPressed="OnGridUnitPointerPressed"
+             PointerMoved="OnGridUnitPointerMoved"
+             PointerExited="OnGridPointerExited"
+             PointerReleased="OnGridUnitPointerReleased"
+             PointerCaptureLost="OnGridUnitPointerCaptureLost">
+        <local:UnitPortrait FaceKey="{Binding FaceKey}"
+                            Hitpoints="{Binding Hitpoints}"
+                            MaxHitpoints="{Binding MaxHitpoints}"
+                            HitpointsAnimation="{Binding HitpointsAnimation}"
+                            IsHitpointsVisible="{Binding Presence, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+Presence.Alive}}"
+                            IsDead="{Binding Presence, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+Presence.Dead}}"
+                            IsSelected="{Binding IsCurrent}"
+                            IsPendingUpgrade="{Binding IsPendingUpgrade}"
+                            Marker="{Binding Marker, Converter={x:Static local:ColorToBrushConverter.Instance}}"
+                            Overlay="{Binding Overlay, Converter={x:Static local:ColorToBrushConverter.Instance}}"
+                            Statuses="{Binding Statuses}"
+                            StatusTemplate="{StaticResource UnitStatusBadgeTemplate}">
+          <ItemsControl ItemsSource="{Binding Feedback}" IsHitTestVisible="False">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <Panel />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="local:BattleFeedbackViewModel">
+                <local:AnimatedOpacity Animation="{Binding Animation}">
+                  <Border Classes="feedback"
+                          Classes.damage="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Damage}}"
+                          Classes.miss="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Miss}}"
+                          Classes.ward="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Ward}}"
+                          Classes.heal="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Heal}}"
+                          Classes.effect="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Effect}}"
+                          Classes.action="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Action}}">
+                    <local:OutlinedTextBlock Classes="feedback-label" Text="{Binding Text}" />
+                  </Border>
+                </local:AnimatedOpacity>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </local:UnitPortrait>
+        <Popup Placement="Custom" CustomPopupPlacementCallback="PlaceUnitDetails" IsLightDismissEnabled="False">
+          <ContentControl Classes="cached"
+                          Content="{Binding #Screen.((local:BattleScreenViewModel)DataContext).InspectedUnit}"
+                          ClipToBounds="False"
+                          IsHitTestVisible="False" />
+        </Popup>
+      </Panel>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <StyleInclude Source="avares://Gallean.Client/Screens/Battle/BattleChrome.axaml" />
+  </UserControl.Styles>
+
+  <Panel>
+    <local:BattleVisual x:Name="Battlefield"
+                        IsLightOverlayVisible="{Binding Game.DevTools.IsLightOverlayEnabled}"
+                        IsHitboxOverlayVisible="{Binding Game.DevTools.IsHitboxOverlayEnabled}" />
+    <Popup x:Name="BattlefieldUnitDetails"
+           PlacementTarget="{Binding #Battlefield}"
+           Placement="Center"
+           IsLightDismissEnabled="False">
+      <ContentControl Classes="cached" Content="{Binding InspectedUnit}" ClipToBounds="False" IsHitTestVisible="False" />
+    </Popup>
+
+    <Panel Classes="hud" Classes.shown="{Binding TransitionState, Converter={x:Static ObjectConverters.IsNull}}">
+      <Panel HorizontalAlignment="Left"
+             VerticalAlignment="Bottom"
+             IsVisible="{Binding AttackerUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <local:PointerTiltDecorator Classes="event-portrait"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Margin="12,0,0,-50">
+          <local:BattlePortraitRevealDecorator UnitId="{Binding AttackerUnit.UnitId}">
+            <Panel>
+              <local:SpriteVisual SpriteKey="{Binding AttackerUnit.PortraitKey}" Stretch="Uniform" />
+              <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding AttackerUnit.Name}" />
+            </Panel>
+          </local:BattlePortraitRevealDecorator>
+        </local:PointerTiltDecorator>
+        <StackPanel Classes="cached" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="244,0,0,12">
+          <ItemsControl Classes="status-badges status-large"
+                        ItemsSource="{Binding AttackerUnit.Statuses}"
+                        ItemTemplate="{StaticResource UnitStatusBadgeTemplate}"
+                        HorizontalAlignment="Left"
+                        Margin="14,0">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="12" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
+          <StackPanel Classes="action-row focus-group" HorizontalAlignment="Left" IsVisible="{Binding IsPlayerTurn}">
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ActionButtonsTemplate}" ClipToBounds="False" />
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ItemButtonsTemplate}" ClipToBounds="False" />
+          </StackPanel>
+        </StackPanel>
+      </Panel>
+
+      <Panel HorizontalAlignment="Right"
+             VerticalAlignment="Bottom"
+             IsVisible="{Binding DefenderUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <local:PointerTiltDecorator Classes="event-portrait target"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,12,-50">
+          <local:BattlePortraitRevealDecorator UnitId="{Binding DefenderUnit.UnitId}">
+            <Panel>
+              <local:SpriteVisual SpriteKey="{Binding DefenderUnit.PortraitKey}" Stretch="Uniform" />
+              <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding DefenderUnit.Name}" />
+            </Panel>
+          </local:BattlePortraitRevealDecorator>
+        </local:PointerTiltDecorator>
+        <StackPanel Classes="cached" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,244,12">
+          <ItemsControl Classes="status-badges status-large"
+                        ItemsSource="{Binding DefenderUnit.Statuses}"
+                        ItemTemplate="{StaticResource UnitStatusBadgeTemplate}"
+                        HorizontalAlignment="Right"
+                        Margin="14,0">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="12" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
+          <StackPanel Classes="action-row focus-group" HorizontalAlignment="Right" IsVisible="{Binding IsPlayerTurn}">
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ItemButtonsTemplate}" ClipToBounds="False" />
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ActionButtonsTemplate}" ClipToBounds="False" />
+          </StackPanel>
+        </StackPanel>
+      </Panel>
+
+      <Grid RowDefinitions="7*,10*,8*" Margin="12,0,0,0">
+        <Viewbox Grid.Row="1" Classes="cached" Stretch="Uniform" HorizontalAlignment="Left" ClipToBounds="False">
+          <Border Classes="portrait-panel">
+            <Grid>
+              <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+                <local:UnitPortrait Grid.Row="0" Grid.Column="0" />
+                <local:UnitPortrait Grid.Row="0" Grid.Column="1" />
+                <local:UnitPortrait Grid.Row="1" Grid.Column="0" />
+                <local:UnitPortrait Grid.Row="1" Grid.Column="1" />
+                <local:UnitPortrait Grid.Row="2" Grid.Column="0" />
+                <local:UnitPortrait Grid.Row="2" Grid.Column="1" />
+              </Grid>
+              <ItemsControl ItemsSource="{Binding AttackerGrid.Tiles}"
+                            ClipToBounds="False"
+                            ItemTemplate="{StaticResource GridTileTemplate}"
+                            ItemContainerTheme="{StaticResource GridTileContainerTheme}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+              <ItemsControl ItemsSource="{Binding AttackerGrid.Units}"
+                            ClipToBounds="False"
+                            ItemTemplate="{StaticResource GridUnitTemplate}"
+                            ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </Grid>
+          </Border>
+        </Viewbox>
+      </Grid>
+
+      <Grid RowDefinitions="7*,10*,8*" Margin="0,0,12,0">
+        <Viewbox Grid.Row="1" Classes="cached" Stretch="Uniform" HorizontalAlignment="Right" ClipToBounds="False">
+          <Border Classes="portrait-panel">
+            <Grid>
+              <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+                <local:UnitPortrait Grid.Row="0" Grid.Column="0" />
+                <local:UnitPortrait Grid.Row="0" Grid.Column="1" />
+                <local:UnitPortrait Grid.Row="1" Grid.Column="0" />
+                <local:UnitPortrait Grid.Row="1" Grid.Column="1" />
+                <local:UnitPortrait Grid.Row="2" Grid.Column="0" />
+                <local:UnitPortrait Grid.Row="2" Grid.Column="1" />
+              </Grid>
+              <ItemsControl ItemsSource="{Binding DefenderGrid.Tiles}"
+                            ClipToBounds="False"
+                            ItemTemplate="{StaticResource GridTileTemplate}"
+                            ItemContainerTheme="{StaticResource GridTileContainerTheme}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+              <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
+                            ClipToBounds="False"
+                            ItemTemplate="{StaticResource GridUnitTemplate}"
+                            ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </Grid>
+          </Border>
+        </Viewbox>
+      </Grid>
+
+      <Border Classes="hud-plate cached" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,14,14,0" Padding="16,8,10,8" IsVisible="{Binding !IsBattleOver}">
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <local:OutlinedTextBlock Text="{Binding StatusText}"
+                                   Classes="body"
+                                   Foreground="{StaticResource PrimaryTextBrush}"
+                                   VerticalAlignment="Center" />
+          <Button Classes="pill" Command="{Binding AutoResolveCommand}" ToolTip.Tip="{Binding AutoResolveTip}" ToolTip.ShowOnDisabled="True">
+            <TextBlock Text="{local:Text 'Auto-resolve'}" />
+          </Button>
+        </StackPanel>
+      </Border>
+
+      <StackPanel Classes="cached" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" Spacing="8">
+        <Border Classes="hud-prompt"
+                HorizontalAlignment="Center"
+                IsVisible="{Binding ItemPromptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+          <DockPanel>
+            <Button DockPanel.Dock="Right"
+                    Classes="dismiss"
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding CancelItemCommand}"
+                    ToolTip.Tip="{local:Text 'Cancel'}">
+              <local:IconVisual Moniker="Close" />
+            </Button>
+            <local:OutlinedTextBlock Text="{Binding ItemPromptText}"
+                                     Classes="body"
+                                     Foreground="{StaticResource AccentBrush}"
+                                     TextWrapping="Wrap"
+                                     TextAlignment="Center"
+                                     VerticalAlignment="Center" />
+          </DockPanel>
+        </Border>
+        <Border Classes="hud-plate target-plate"
+                IsVisible="{Binding TargetUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <local:UnitIcon Classes="target-face" SpriteKey="{Binding TargetUnit.IconKey}" />
+            <StackPanel Spacing="4" VerticalAlignment="Center">
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="14,0,0,0">
+                <local:OutlinedTextBlock Classes="object-name row" VerticalAlignment="Center"><Run Text="{Binding TargetUnit.Name}" /><Run Text="  " /><Run Classes="target-level" Text="{Binding TargetUnit.Level, StringFormat='Lv. {0}'}" /></local:OutlinedTextBlock>
+                <ItemsControl Classes="status-badges"
+                              ItemsSource="{Binding TargetUnit.Statuses}"
+                              ItemTemplate="{StaticResource UnitStatusBadgeTemplate}"
+                              VerticalAlignment="Center">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" Spacing="8" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                </ItemsControl>
+              </StackPanel>
+              <local:BarVisual Classes="hitpoints target-hitpoints"
+                               Value="{Binding TargetUnit.Hitpoints}"
+                               Maximum="{Binding TargetUnit.MaxHitpoints}"
+                               Animation="{Binding TargetUnit.HitpointsAnimation}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <Panel Classes="cached"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Bottom"
+             Margin="0,0,0,40"
+             ClipToBounds="False"
+             IsVisible="{Binding IsBattleOver}">
+        <local:ModalPanel MinWidth="400" Padding="0">
+          <StackPanel Classes="focus-group" Spacing="20" Margin="48,32,48,24">
+            <StackPanel Spacing="8">
+              <local:OutlinedTextBlock Text="{Binding OutcomeTitle}"
+                                       Classes="h1"
+                                       Foreground="{StaticResource ModalTitleBrush}"
+                                       TextAlignment="Center" />
+              <local:OutlinedTextBlock local:TextRuns.Spans="{Binding OutcomeText}"
+                                       Classes="body"
+                                       Foreground="{StaticResource PrimaryTextBrush}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       IsVisible="{Binding OutcomeText.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            </StackPanel>
+            <Button Classes="pill success"
+                    Content="{local:Text 'Continue'}"
+                    Width="260"
+                    HorizontalAlignment="Center"
+                    Command="{Binding ExitBattleCommand}" />
+          </StackPanel>
+        </local:ModalPanel>
+        <local:ModalIcon Icon="{Binding OutcomeIcon}" Margin="0,-21,0,0" />
+      </Panel>
+    </Panel>
+  </Panel>
+
+</UserControl>

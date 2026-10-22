@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <FontFamily x:Key="FontFamilySans">avares://Gallean.Client/Theme/Assets#Alegreya Sans</FontFamily>
+  <FontFamily x:Key="FontFamilySerif">avares://Gallean.Client/Theme/Assets#Alegreya</FontFamily>
+  <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="FontFamilySans" />
+
+  <x:Double x:Key="FontSizeSm">14</x:Double>
+  <x:Double x:Key="FontSizeMd">16</x:Double>
+  <x:Double x:Key="FontSizeLg">18</x:Double>
+  <x:Double x:Key="FontSizeXl">22</x:Double>
+  <x:Double x:Key="FontSize2Xl">28</x:Double>
+  <x:Double x:Key="FontSize3Xl">36</x:Double>
+  <x:Double x:Key="FontSize4Xl">56</x:Double>
+</ResourceDictionary>

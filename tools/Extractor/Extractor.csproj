@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DbfDataReader" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\GameContent\GameContent.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Entities" />
+    <Using Include="GameContent" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Extractor.Tests" />
+  </ItemGroup>
+
+</Project>

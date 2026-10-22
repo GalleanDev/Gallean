@@ -1,0 +1,97 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.DevToolsView"
+             x:DataType="local:DevToolsViewModel"
+             IsVisible="{Binding IsActive}">
+
+  <UserControl.Styles>
+    <Style Selector="ComboBox">
+      <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="Focusable" Value="False" />
+    </Style>
+  </UserControl.Styles>
+
+  <Border x:Name="Frame"
+          Background="{StaticResource HudPanelBrush}"
+          BorderBrush="{StaticResource HudPlateBorderBrush}"
+          BorderThickness="{StaticResource BorderThicknessSm}"
+          CornerRadius="{StaticResource RadiusMd}"
+          Padding="14,10"
+          Margin="12,72,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top">
+    <StackPanel Spacing="12">
+      <local:DiagnosticsVisual />
+
+      <Border Height="1" Background="{StaticResource DividerBrush}">
+        <Border.OpacityMask>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="7,0" SpreadMethod="Repeat">
+            <GradientStop Offset="0.0" Color="Black" />
+            <GradientStop Offset="0.5714" Color="Black" />
+            <GradientStop Offset="0.5714" Color="Transparent" />
+            <GradientStop Offset="1.0" Color="Transparent" />
+          </LinearGradientBrush>
+        </Border.OpacityMask>
+      </Border>
+
+      <Grid x:Name="Switches" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+        <TextBlock Grid.Row="0" Text="{local:Text 'Hitbox overlay'}" Classes="body" Foreground="{StaticResource DevToolsLabelBrush}" VerticalAlignment="Center" />
+        <ComboBox Grid.Row="0"
+                  Grid.Column="1"
+                  ItemsSource="{x:Static local:DevToolsViewModel.Switches}"
+                  SelectedItem="{Binding IsHitboxOverlayEnabled}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center">
+          <ComboBox.ItemTemplate>
+            <DataTemplate x:DataType="x:Boolean">
+              <TextBlock Text="{Binding Converter={x:Static local:DevToolsSwitchConverter.Instance}}" Classes="body" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Grid.Row="1" Text="{local:Text 'Light overlay'}" Classes="body" Foreground="{StaticResource DevToolsLabelBrush}" VerticalAlignment="Center" />
+        <ComboBox Grid.Row="1"
+                  Grid.Column="1"
+                  ItemsSource="{x:Static local:DevToolsViewModel.Switches}"
+                  SelectedItem="{Binding IsLightOverlayEnabled}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center">
+          <ComboBox.ItemTemplate>
+            <DataTemplate x:DataType="x:Boolean">
+              <TextBlock Text="{Binding Converter={x:Static local:DevToolsSwitchConverter.Instance}}" Classes="body" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Grid.Row="2" Text="{local:Text 'Map fog'}" Classes="body" Foreground="{StaticResource DevToolsLabelBrush}" VerticalAlignment="Center" />
+        <ComboBox Grid.Row="2"
+                  Grid.Column="1"
+                  ItemsSource="{x:Static local:DevToolsViewModel.Switches}"
+                  SelectedItem="{Binding IsFogEnabled}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center">
+          <ComboBox.ItemTemplate>
+            <DataTemplate x:DataType="x:Boolean">
+              <TextBlock Text="{Binding Converter={x:Static local:DevToolsSwitchConverter.Instance}}" Classes="body" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Grid.Row="3" Text="{local:Text 'Events'}" Classes="body" Foreground="{StaticResource DevToolsLabelBrush}" VerticalAlignment="Center" />
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Content="{local:Text 'Event log'}"
+                Classes="pill"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                local:PlateChrome.TextureSeed="1"
+                Command="{Binding OpenEventLogCommand}" />
+      </Grid>
+    </StackPanel>
+  </Border>
+
+</UserControl>

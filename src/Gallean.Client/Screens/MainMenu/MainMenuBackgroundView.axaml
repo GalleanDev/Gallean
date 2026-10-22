@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.MainMenuBackgroundView"
+             x:DataType="local:MainMenuBackgroundViewModel"
+             Width="800"
+             Height="600">
+
+  <Panel>
+    <local:MainMenuBackgroundVisual SpriteKey="{Binding SpriteKey}" />
+    <local:AnimationVisual AnimationKey="{Binding RiverOverlayKey}" Stretch="Fill" />
+  </Panel>
+
+</UserControl>

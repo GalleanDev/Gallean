@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.LeaderBlankslateView"
+             x:DataType="local:LeaderBlankslateViewModel">
+
+  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+    <local:IconVisual Moniker="Stack"
+                      Width="36"
+                      Height="36"
+                      HorizontalAlignment="Center"
+                      Foreground="{StaticResource SecondaryTextBrush}" />
+    <TextBlock Text="{local:Text 'No leader in this city.'}"
+               Classes="prose"
+               FontSize="{StaticResource FontSizeSm}"
+               LineHeight="20"
+               Foreground="{StaticResource PrimaryTextBrush}"
+               TextWrapping="Wrap"
+               TextAlignment="Center" />
+    <Button Content="{local:Text 'Hire leader'}"
+            Classes="pill"
+            local:PlateChrome.TextureSeed="3"
+            Command="{Binding HireCommand}"
+            HorizontalAlignment="Center"
+            Height="28"
+            Padding="14,0"
+            FontSize="{StaticResource FontSizeSm}" />
+  </StackPanel>
+
+</UserControl>

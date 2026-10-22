@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:assets="clr-namespace:Gallean.Assets;assembly=Gallean.Assets"
+             x:Class="Gallean.Client.MenuBackgroundView"
+             x:DataType="local:MenuBackgroundViewModel"
+             Width="800"
+             Height="600">
+
+  <Panel>
+    <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Fill" />
+
+    <ItemsControl ItemsSource="{Binding OverlayKeys}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <Panel />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="assets:AssetAnimationKey">
+          <local:AnimationVisual AnimationKey="{Binding}" Stretch="Fill" />
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Panel>
+
+</UserControl>

@@ -1,0 +1,96 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallean.Client">
+  <Styles.Resources>
+    <ControlTheme x:Key="UnitGridSlotContainerTheme" TargetType="ContentPresenter" x:DataType="local:UnitGridSlotViewModel">
+      <Setter Property="Grid.Row" Value="{Binding Row}" />
+      <Setter Property="Grid.Column" Value="{Binding Column}" />
+      <Setter Property="Grid.ColumnSpan" Value="{Binding ColumnSpan}" />
+      <Setter Property="IsVisible" Value="{Binding IsVisible}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+    </ControlTheme>
+
+    <DataTemplate x:Key="UnitGridSlotTemplate" x:DataType="local:UnitGridSlotViewModel">
+      <Button Classes="slot" Command="{Binding SelectCommand}">
+        <local:UnitPortrait FaceKey="{Binding FaceKey}"
+                            Hitpoints="{Binding Hitpoints}"
+                            MaxHitpoints="{Binding MaxHitpoints}"
+                            IsDead="{Binding !IsAlive}"
+                            IsPendingUpgrade="{Binding IsPendingUpgrade}"
+                            IsSelected="{Binding IsSelected}"
+                            IsHighlighted="{Binding IsHighlighted}"
+                            Statuses="{Binding Details.Statuses}"
+                            StatusTemplate="{DynamicResource UnitStatusBadgeTemplate}">
+          <Border Classes="rune" Classes.purchase="{Binding ShowsPurchaseHint}" IsVisible="{Binding FaceKey, Converter={x:Static ObjectConverters.IsNull}}">
+            <TextBlock Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+        </local:UnitPortrait>
+      </Button>
+    </DataTemplate>
+  </Styles.Resources>
+
+  <Style Selector="ItemsControl.unit-grid, ContentControl.unit-grid">
+    <Setter Property="Width" Value="160" />
+    <Setter Property="Height" Value="285" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <Style Selector="ItemsControl.unit-grid local|UnitPortrait /template/ local|AnimatedFill#PART_LostHitpoints">
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Value" Duration="0:0:0.8" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <Style Selector="ItemsControl.unit-grid">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <Grid RowDefinitions="95,95,95" ColumnDefinitions="80,80" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="Viewbox.unit-grid-container">
+    <Setter Property="MaxWidth" Value="240" />
+    <Setter Property="MaxHeight" Value="427.5" />
+    <Setter Property="ClipToBounds" Value="False" />
+  </Style>
+
+  <Style Selector="Button.slot">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Content="{TemplateBinding Content}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Padding="{TemplateBinding Padding}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.rune > TextBlock">
+    <Setter Property="Opacity" Value="0.6" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="FontSize" Value="28" />
+  </Style>
+  <Style Selector="Border.rune.purchase">
+    <Setter Property="ToolTip.Tip" Value="Hire a new unit" />
+  </Style>
+  <Style Selector="Border.rune.purchase > TextBlock">
+    <Setter Property="Opacity" Value="0.9" />
+    <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+    <Setter Property="FontSize" Value="42" />
+    <Setter Property="FontWeight" Value="Bold" />
+  </Style>
+</Styles>

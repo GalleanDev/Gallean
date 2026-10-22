@@ -1,0 +1,5957 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "TXT_ID": "X010TA0002",
+      "TEXT": "Easy",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X010TA0003",
+      "TEXT": "Average",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X010TA0004",
+      "TEXT": "Hard",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X010TA0005",
+      "TEXT": "Very hard",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0000",
+      "TEXT": "Do you want to end your turn now?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X020TA0000",
+      "TEXT": "S (save)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X020TA0001",
+      "TEXT": "Q (quit)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X003TA0001",
+      "TEXT": "Cannot connect to game session",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X003TA0002",
+      "TEXT": "Invalid filename",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X003TA0003",
+      "TEXT": "Saving game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0027",
+      "TEXT": "Cannot use staffs and scrolls because a leader is not selected or does not possess the Leader ability",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0029",
+      "TEXT": "Thief action successful!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0031",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fLarge;Failure!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0032",
+      "TEXT": "\\c000;000;000;\\hC;\\vT;\\fLarge;Success!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0033",
+      "TEXT": "%ATTACKER% is attacking a village. Do you want to see the battle?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0036",
+      "TEXT": "How many gold coins do you want?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X003TA0004",
+      "TEXT": "Please Wait",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0037",
+      "TEXT": "\\n____________\\n\\nThe offer has been declined!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0038",
+      "TEXT": "\\n____________\\n\\nThe offer has been accepted!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0039",
+      "TEXT": "%BUYER% is offering you %QTY% in gold. Do you accept the counter-offer?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0042",
+      "TEXT": "You are victorious!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0043",
+      "TEXT": "\\hC;You found the item %ITEM%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0044",
+      "TEXT": "\\hC;You found %CURRENCY%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X040TA0001",
+      "TEXT": "This building is already built",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X040TA0002",
+      "TEXT": "More gold is needed to build this structure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X040TA0003",
+      "TEXT": "This building is in construction",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X040TA0004",
+      "TEXT": "The %s must be built first.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X040TA0005",
+      "TEXT": "This building is exclusive to another building already built",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0047",
+      "TEXT": "\\fLarge;Beginning day %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "Begin of turn"
+    },
+    {
+      "TXT_ID": "X005TA0051",
+      "TEXT": "Income:",
+      "VERIFIED": false,
+      "CONTEXT": "Begin of turn and capture resources"
+    },
+    {
+      "TXT_ID": "X005TA0053",
+      "TEXT": "More gold needed to enroll this unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0054",
+      "TEXT": "More gold needed to enroll this leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0001",
+      "TEXT": "\\hC;\\vC;Miss",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0002",
+      "TEXT": "\\hC;\\vC;Immune",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0055",
+      "TEXT": "%QTY% Gold",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0056",
+      "TEXT": "%QTY% Runestone mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0057",
+      "TEXT": "%QTY% Death mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0058",
+      "TEXT": "%QTY% Life mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0059",
+      "TEXT": "%QTY% Infernal mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0065",
+      "TEXT": "Warrior Lord",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0066",
+      "TEXT": "Mage Lord",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0067",
+      "TEXT": "Guildmaster",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0001",
+      "TEXT": "Close",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0004",
+      "TEXT": "Build Structure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0006",
+      "TEXT": "Grow City",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0007",
+      "TEXT": "Army Screen",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0012",
+      "TEXT": "Select Lord Proficiency",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0013",
+      "TEXT": "Select Difficulty Level",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0014",
+      "TEXT": "Select Portrait",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0015",
+      "TEXT": "Sell item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0016",
+      "TEXT": "Sell spell",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0017",
+      "TEXT": "Give gold",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0019",
+      "TEXT": "Build Structure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0020",
+      "TEXT": "Close",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0021",
+      "TEXT": "Cast spell",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0022",
+      "TEXT": "Level 1 spells",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0023",
+      "TEXT": "Level 2 spells",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0024",
+      "TEXT": "Level 3 spells",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0025",
+      "TEXT": "Level 4 spells",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0026",
+      "TEXT": "Level 5 spells",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0027",
+      "TEXT": "Previous page",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0028",
+      "TEXT": "Next page",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0029",
+      "TEXT": "Heal unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0030",
+      "TEXT": "Revive unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0031",
+      "TEXT": "Dismiss unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0034",
+      "TEXT": "Accept offer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0035",
+      "TEXT": "Refuse offer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0040",
+      "TEXT": "Back",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0041",
+      "TEXT": "Confirm",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0042",
+      "TEXT": "Cancel",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0043",
+      "TEXT": "Diplomacy Screen",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0044",
+      "TEXT": "Briefing",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0047",
+      "TEXT": "Map / Resources",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0048",
+      "TEXT": "Options",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0049",
+      "TEXT": "Research spell",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0050",
+      "TEXT": "Spell book",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0052",
+      "TEXT": "Dismiss unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0055",
+      "TEXT": "Yes",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0056",
+      "TEXT": "Confirm action",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0057",
+      "TEXT": "Save game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0058",
+      "TEXT": "Quit game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0060",
+      "TEXT": "Guard",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0061",
+      "TEXT": "Select Next Leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0062",
+      "TEXT": "Drop item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0063",
+      "TEXT": "Exchange Between Parties",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0064",
+      "TEXT": "Use Staff or Scroll",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0066",
+      "TEXT": "End Turn",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0067",
+      "TEXT": "Cancel action",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0068",
+      "TEXT": "Send offer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0074",
+      "TEXT": "The Magic Tower must be built to research spells.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0077",
+      "TEXT": "A large unit cannot be placed here because there is a unit in the front rank or the back rank.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0079",
+      "TEXT": "Restarting the quest at day %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0080",
+      "TEXT": "\\fMedBold;Moving party\\fnormal;\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0081",
+      "TEXT": "\\fMedBold;City defenses\\fnormal;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0086",
+      "TEXT": "Name of the new leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0088",
+      "TEXT": "Do you want to terminate the current game?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0089",
+      "TEXT": "Do you want to terminate the current game?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0097",
+      "TEXT": "\\hC;\\vC;\\fLarge;Here lies:\\fNormal;\\n\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Tomb encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0098",
+      "TEXT": "\\fnormal;%NAME%%DEFEATED%",
+      "VERIFIED": false,
+      "CONTEXT": "Tomb encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0100",
+      "TEXT": "I can sell you this item for %PRICE% gold coins.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0101",
+      "TEXT": "I will buy that item for %PRICE% gold coins.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0102",
+      "TEXT": "Do you want to buy the %NAME% for %GOLD% gold coins?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0103",
+      "TEXT": "Do you want to sell the %NAME% for %GOLD% gold coins?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0105",
+      "TEXT": "New spells for %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0106",
+      "TEXT": "Items of party %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0107",
+      "TEXT": "I have many spells that can improve your magical library!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0108",
+      "TEXT": "Do you wish to acquire the spell %NAME%?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0094",
+      "TEXT": "City Development",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0109",
+      "TEXT": "%PRICE% gold coins are necessary to purchase this item!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0110",
+      "TEXT": "Off",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0111",
+      "TEXT": "Low",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0112",
+      "TEXT": "Medium",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0113",
+      "TEXT": "Loud",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0114",
+      "TEXT": "Normal",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0115",
+      "TEXT": "Fast",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0116",
+      "TEXT": "Very fast",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0117",
+      "TEXT": "Slow",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0118",
+      "TEXT": "Normal",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0119",
+      "TEXT": "Fast",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0120",
+      "TEXT": "You do not possess enough gold to construct this building.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0127",
+      "TEXT": "Enroll mercenaries for party %NAME%\\n\\nLeadership: %LEADERSHIP%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0129",
+      "TEXT": "Are your sure you want to hire the %NAME% mercenary?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0136",
+      "TEXT": "\\hL;\\c000;000;000;\\s60;Source:\\t%SOURCE%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0137",
+      "TEXT": "\\hL;\\c000;000;000;\\s60;Duration:\\t%DURATION%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0145",
+      "TEXT": "Weapon",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0146",
+      "TEXT": "Mind",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0147",
+      "TEXT": "Life",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0148",
+      "TEXT": "Death",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0149",
+      "TEXT": "Fire",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0150",
+      "TEXT": "Water",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0151",
+      "TEXT": "Air",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0152",
+      "TEXT": "Earth",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0072",
+      "TEXT": "Exit Leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0073",
+      "TEXT": "Return to Previous",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0074",
+      "TEXT": "Banner",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0079",
+      "TEXT": "Capital screen",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0156",
+      "TEXT": "Choose a position around the party to drop the item(s)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0157",
+      "TEXT": "Click on the party you want to exchange with",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0158",
+      "TEXT": "No party in this city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0159",
+      "TEXT": "\\hC;\\vT;\\fNormal;\\c200;200;200;\\nClick here to hire a leader and create a party",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0160",
+      "TEXT": "\\hC;\\c000;000;000;\\flarge;Hire a party leader",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Leader"
+    },
+    {
+      "TXT_ID": "X005TA0161",
+      "TEXT": "\\hC;\\c000;000;000;\\flarge;Hire a unit",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit"
+    },
+    {
+      "TXT_ID": "X005TA0166",
+      "TEXT": "Leadership: %QTY%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0169",
+      "TEXT": "Move: %NOW% / %MAX%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0171",
+      "TEXT": "\\hC;\\vC;Unknown treasure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0181",
+      "TEXT": "Use Staffs \u0026 Scrolls",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0182",
+      "TEXT": "Artifact Lore",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0183",
+      "TEXT": "Banner Bearer",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0184",
+      "TEXT": "Arcane Knowledge",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0185",
+      "TEXT": "\\fmedbold;Leader abilities:\\fnormal;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0186",
+      "TEXT": "\\hC;\\vC;%RUINNAME% has been looted.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0187",
+      "TEXT": "\\hC;\\vC;%RUINNAME% is unexplored.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0200",
+      "TEXT": "Any unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0201",
+      "TEXT": "Adjacent units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0206",
+      "TEXT": "\\fMedBold;Available mana:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0207",
+      "TEXT": "\\hL;\\c000;000;000;\\nCasting Cost:\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0208",
+      "TEXT": "City level:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0211",
+      "TEXT": "The leader is dead. The leader must be revived before exchanging or dismissing units.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0212",
+      "TEXT": "Both leaders must be alive before exchanging units.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0213",
+      "TEXT": "You are not powerful enough to cast this spell.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0214",
+      "TEXT": "More mana needed to use this item.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0215",
+      "TEXT": "More mana needed to cast this spell.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0216",
+      "TEXT": "Upgrading this city to level %LEVEL% will cost you %COST% gold coins.\\n\\nCity growth advantages:\\nCity contains more units\\nHit point regeneration increases\\nDefense bonus increases",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0217",
+      "TEXT": "More gold needed to upgrade this city to level %LEVEL%.  The upgrade costs %COST% gold coins.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0226",
+      "TEXT": "It will cost %PRICE% gold coins to revive this unit. Do you wish to proceed?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0227",
+      "TEXT": "\\hC;\\vC;\\fLarge;Complete Heal\\n\\n\\fNormal;It will cost %PRICE% gold to heal this unit. Do you want to heal it?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0229",
+      "TEXT": "The temple must be built in your capital to heal units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0231",
+      "TEXT": "The temple must be built in your capital to revive units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0081",
+      "TEXT": "Terrain transformed",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0082",
+      "TEXT": "Gold",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0239",
+      "TEXT": "Only one structure can be built per day!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0240",
+      "TEXT": "Do you really want to build the %NAME% for %PRICE% gold coins?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0241",
+      "TEXT": "Thief actions",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0247",
+      "TEXT": "There is not enough space in the party to hire a mercenary. A unit must be dismissed before hiring another.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0249",
+      "TEXT": "Cost: %PRICE% gold coins",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0251",
+      "TEXT": "More mana needed to research this spell.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0252",
+      "TEXT": "Only one spell can be researched per day.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0256",
+      "TEXT": "Flying",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0265",
+      "TEXT": "Drop a rod for %COST% gold coins?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0268",
+      "TEXT": "The negotiation failed.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0269",
+      "TEXT": "Research the %NAME% spell for %PRICE%?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0271",
+      "TEXT": "%DEFENDANT% has been ambushed by %ATTACKER%.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0272",
+      "TEXT": "Do you want to destroy this rod?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0274",
+      "TEXT": "A city can only grow once each day!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0275",
+      "TEXT": "This city has reached its maximum size.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0282",
+      "TEXT": "Quantity in your army: %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0283",
+      "TEXT": "\\flarge;You found an Item:",
+      "VERIFIED": false,
+      "CONTEXT": "Take bag"
+    },
+    {
+      "TXT_ID": "X005TA0284",
+      "TEXT": "Select a location to plant the rod.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0285",
+      "TEXT": "Do you wish to hire this unit?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0286",
+      "TEXT": "\\hL;\\c000;000;000;Research Cost:\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0287",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;These spells are not available in this quest!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0288",
+      "TEXT": "The city level needs to be higher than %CITY_LEVEL% to hire a large unit.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0095",
+      "TEXT": "(Capital)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0085",
+      "TEXT": "Skip unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0086",
+      "TEXT": "Retreat",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0087",
+      "TEXT": "Fighter units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0088",
+      "TEXT": "Mage units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0089",
+      "TEXT": "Range attack units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0090",
+      "TEXT": "Support units",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0091",
+      "TEXT": "Other buildings",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0092",
+      "TEXT": "Plant rod",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0289",
+      "TEXT": "\\fMedBold;%PLAYER%\\fNormal;, Lord of the \\fMedBold;%RACE%\\fNormal;, offers to ally with you.\\nDo you accept the treaty?",
+      "VERIFIED": true,
+      "CONTEXT": "ProposeAlliance"
+    },
+    {
+      "TXT_ID": "X005TA0290",
+      "TEXT": "\\fMedBold;%PLAYER%\\fNormal;, Lord of the \\fMedBold;%RACE%\\fNormal;, has accepted your treaty. You are now allies!",
+      "VERIFIED": true,
+      "CONTEXT": "ProposeAlliance"
+    },
+    {
+      "TXT_ID": "X005TA0291",
+      "TEXT": "\\fMedBold;%PLAYER%\\fNormal;, Lord of the \\fMedBold;%RACE%\\fNormal;, has betrayed the alliance and broken the treaty.",
+      "VERIFIED": true,
+      "CONTEXT": "ProposeAlliance"
+    },
+    {
+      "TXT_ID": "X005TA0292",
+      "TEXT": "Select a leader and five items to complete the next quest.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0293",
+      "TEXT": "Selected leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0294",
+      "TEXT": "Selected items",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0295",
+      "TEXT": "The items and leader you selected will accompany you to the next quest! Continue?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0296",
+      "TEXT": "A leader was not selected!  Continue anyway?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0297",
+      "TEXT": "Only %NUMBER% items have been selected! Continue anyway?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0298",
+      "TEXT": "Only %NUMBER% item has been selected! Continue anyway?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0299",
+      "TEXT": "A leader has not been selected. More items can be selected. Continue anyway?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0300",
+      "TEXT": "\\fMedBold;%PLAYER%,\\fNormal; Lord of the \\fMedBold;%RACE%,\\fNormal; declines your treaty and refuses to ally with you!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0301",
+      "TEXT": "\\fMedBold;%PLAYER%,\\fNormal; Lord of the \\fMedBold;%RACE%,\\fNormal; offers a tribute of %GOLD% gold coins to the \\fMedBold;%TARGETRACE%.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0302",
+      "TEXT": "Waiting for an answer from \\fMedBold;%PLAYER%.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0303",
+      "TEXT": "The alliance treaty must be broken before attacking an ally.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0306",
+      "TEXT": "The party this unit was in has been destroyed.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0307",
+      "TEXT": "This structure can be built.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0308",
+      "TEXT": "This structure is already built.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0310",
+      "TEXT": "\\c128;000;000;You must build the prerequisite before building this structure.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0312",
+      "TEXT": "\\c128;000;000;This structure can no longer be built because another branch has been selected.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0314",
+      "TEXT": "\\hC;\\fMedbold;%LORD%, Lord of the %RACE% (%TYPE%)\\n\\hL;\\fNormal;%STATE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0317",
+      "TEXT": "\\fNormal;\\hC;\\c000;000;000;You do not possess enough gold!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0093",
+      "TEXT": "Offer alliance",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0094",
+      "TEXT": "Break alliance",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0319",
+      "TEXT": "\\fNormal;\\hC;\\c000;000;000;Breaking your treaty will greatly offend \\fMedbold;%PLAYER%.\\fNormal;  Do you wish to break the alliance and engage in war?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0320",
+      "TEXT": "\\fMedbold;%NAME%\\fNormal;\\n\\nThe spell you chose is worth %PRICE% gold coins. Select a price between 50 to %HIGHER% gold coins.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0321",
+      "TEXT": "\\fMedbold;%NAME%\\fNormal;\\n\\nThe Item you chose is worth %PRICE% gold coins. Select a price between 50 to %HIGHER% gold coins.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0322",
+      "TEXT": "How many gold coins do you want to offer?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0323",
+      "TEXT": "\\c255;255;255;\\hR;\\vB;\\fSmall;%NUM%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0324",
+      "TEXT": "\\hC;Offer to\\n\\fMedbold;%LORDNAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0325",
+      "TEXT": "\\hC;You are currently selected",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0329",
+      "TEXT": "\\flarge;Offer a tribute to \\fMedbold;%PLAYER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0330",
+      "TEXT": "\\flarge;Sell to %PLAYER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0003",
+      "TEXT": "\\hC;\\vC;Boost",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0340",
+      "TEXT": "Belongs to: %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0341",
+      "TEXT": "This resource belongs to your race; your terrain type is under it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0342",
+      "TEXT": "This resource does not belong to anyone.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0343",
+      "TEXT": "This resource can belong to you by changing the terrain beneath it. To control a resource, plant a rod beside it or let your cities\u0027 terrain expand to this location.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0344",
+      "TEXT": "The lord must have a name.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0345",
+      "TEXT": "The leader must have a name.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0346",
+      "TEXT": "I am not interested in buying such an item.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0347",
+      "TEXT": "Item name:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0348",
+      "TEXT": "Description:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0350",
+      "TEXT": "%PLAYER% is a %TYPE% and is the Lord you are currently playing!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0351",
+      "TEXT": "%PLAYER% is a %TYPE% and is one of the Lords you are battling against!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0352",
+      "TEXT": "You are currently at war with the race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0353",
+      "TEXT": "You are currently in peace with the race.\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0354",
+      "TEXT": "You are not in alliance with the race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0355",
+      "TEXT": "You are in alliance with the race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0356",
+      "TEXT": "Another rod already exists in the area.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0359",
+      "TEXT": "Plant rod",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0360",
+      "TEXT": "Error saving game.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0368",
+      "TEXT": "Do you want to surrender to the enemy and destroy your party?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0370",
+      "TEXT": "\\hC;%NAME%\u0027s party is in training!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0371",
+      "TEXT": "Click on a highlighted unit in order to raise its experience!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0373",
+      "TEXT": "\\s20;\\t-- Is at peace with %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0374",
+      "TEXT": "\\s20;\\t-- Is at war  with %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0375",
+      "TEXT": "\\s20;\\t-- Is neutral with %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0376",
+      "TEXT": "\\s20;\\t-- Is in alliance with %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0377",
+      "TEXT": "It will cost %PRICE% gold coins to train this unit. Do you want to train it?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0381",
+      "TEXT": "Waiting to upgrade: %URGENT%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0382",
+      "TEXT": "Right-click on unit\u0027s face for statistics.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0383",
+      "TEXT": "\\fMedBold;Upgrading unit:\\fNormal; %NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0384",
+      "TEXT": "\\fMedBold;Next upgrade:\\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0392",
+      "TEXT": "Only partial training is available for this unit. It will cost %PRICE% gold coins to train it for %XP% XP. Do you want to proceed with the training?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0395",
+      "TEXT": "Cheat: %CHEAT%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0396",
+      "TEXT": "Move:\\n%COLOR%%MOVE1% / %MOVE2%",
+      "VERIFIED": false,
+      "CONTEXT": "Strategic palette"
+    },
+    {
+      "TXT_ID": "X005TA0399",
+      "TEXT": "\\hL;\\c000;000;000;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0400",
+      "TEXT": "Move: %MOVE1% / %MOVE2%\\nLeadership: %LEADERSHIP%\\n\\nScouting range: %SCOUTRNG%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0401",
+      "TEXT": "Nothing was found",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0402",
+      "TEXT": "\\hC;\\fLarge;Warning!\\fNormal;\\n\\nThe current game will be lost. Do you wish to continue?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0403",
+      "TEXT": "You have been disconnected from the server.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0405",
+      "TEXT": "The Magic Tower must be built before spells can be researched",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0406",
+      "TEXT": "There are no spells to cast. Spells can be researched in the capital.",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0408",
+      "TEXT": "%KILLER% destroyed %ILLUSION%.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0409",
+      "TEXT": "\\hC;\\fLarge;%NAME%\\fNormal;\\n%RACE%\\n\\nA thief must spy on this race to gain information about it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0410",
+      "TEXT": "Sound FX volume",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0411",
+      "TEXT": "Music volume",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0412",
+      "TEXT": "Unit movement",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0413",
+      "TEXT": "Opponent unit movement",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0414",
+      "TEXT": "Scroll speed",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0415",
+      "TEXT": "Confirm end of turn",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0416",
+      "TEXT": "Autosave",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0095",
+      "TEXT": "Surrender",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0096",
+      "TEXT": "Death mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0097",
+      "TEXT": "Runestone mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0098",
+      "TEXT": "Life mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0099",
+      "TEXT": "Infernal mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0100",
+      "TEXT": "Send message",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0101",
+      "TEXT": "Hire",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0102",
+      "TEXT": "Load game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0103",
+      "TEXT": "Delete saved game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0104",
+      "TEXT": "Train unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0105",
+      "TEXT": "City defense bonus",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0419",
+      "TEXT": "Options",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0420",
+      "TEXT": "\\fvlarge;Save Game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0421",
+      "TEXT": "\\fvlarge;Load Game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0004",
+      "TEXT": "\\hC;\\vC;\\fLarge;%DAMAGE%",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0005",
+      "TEXT": "\\hC;\\vC;\\fMedium;XP:\\n\u002B%GAIN%",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0006",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fmedbold;%NOW%/%MAX%",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0422",
+      "TEXT": "\\fnormal;\\hL;\\vT;%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0423",
+      "TEXT": "\\s110;\\fmedbold;Level:\\t\\fnormal;%LEVEL%\\n\\fMedbold;XP:\\t\\fNormal;%XP%\\n\\fMedbold;HP:\\t\\fnormal;%HP1% / %HP2%\\n\\fMedbold;Armor:\\t\\fNormal;%ARMOR%\\n\\fMedbold;Immunities:\\t\\fNormal;\\p110;%IMMU%\\mL0;\\fMedbold;Wards:\\t\\fNormal;\\p110;%WARD%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0424",
+      "TEXT": "%PART1%%PART2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0425",
+      "TEXT": "\\s60;\\t%WHITEAMOUNT% \\s90;\\tRunestone Mana\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0426",
+      "TEXT": "\\s60;\\t%REDAMOUNT% \\s90;\\tInfernal Mana\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0427",
+      "TEXT": "\\s60;\\t%ORANGEAMOUNT% \\s90;\\tDeath Mana\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0428",
+      "TEXT": "\\s60;\\t%YELLOWAMOUNT% \\s90;\\tLife Mana\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0429",
+      "TEXT": "\\hC;\\fLarge;%NAME%%RIOT%\\fMedium;%LEVEL%\\n\\fNormal;Owned by the %RACE%\\nHit point regeneration per day: %HP%%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0430",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;You do not possess any spell of this level.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0431",
+      "TEXT": "%LEADER%\u0027s party",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0432",
+      "TEXT": "City defenses",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0433",
+      "TEXT": "\\hC;\\fLarge;%NAME%\\fNormal;\\nOwned by the %RACE%\\n\\nA thief must spy on this city to gain information about it.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0434",
+      "TEXT": "\\c255;255;255;\\hC;\\vC;Level up!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0435",
+      "TEXT": "\\fMedBold;\\hL;%NAME%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0436",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;HP: \\t%HPVALUE1%/%HPVALUE2%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0437",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;XP: \\t%XP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0438",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s30;Level: \\t%LEVEL%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader ( unit info ) May not be used"
+    },
+    {
+      "TXT_ID": "X005TA0615",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s80;Leadership: \\t%LEADERSHIP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader (unit info)"
+    },
+    {
+      "TXT_ID": "X005TA0444",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;Your lord cannot research these spells!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0445",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;Each spell can be cast once a day!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0446",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;Each spell can be cast twice each day!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0447",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;The chosen scroll contains the following spell:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0448",
+      "TEXT": "\\hC;\\c000;000;000;\\fMedium;The chosen staff contains the following spell:",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0449",
+      "TEXT": "\\fMedBold;%NAME% \\fNormal;(%COST%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0450",
+      "TEXT": "\\hC;\\c000;000;000;The guardian cannot be dismissed!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0451",
+      "TEXT": "\\hC;\\c000;000;000;The Guild structure in necessary to hire this leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0452",
+      "TEXT": "\\hC;\\c000;000;000;The %BUILDINGNAME% structure is necessary to hire this unit",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0453",
+      "TEXT": "\\fLarge;\\hC;\\c000;000;000;Training Completed",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0454",
+      "TEXT": "%NAME%\\nXP: %XPVALUE1% / %XPVALUE2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0455",
+      "TEXT": "\\fNormal;\\hC;\\c000;000;000;This unit will upgrade after its next battle",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0456",
+      "TEXT": "\\fNormal;\\hC;\\c000;000;000;If the %BUILDINGNAME% is built, the %NAME% will upgrade after its next battle.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0007",
+      "TEXT": "\\hC;\\vC;Fear",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0458",
+      "TEXT": "Summoned creatures and thieves cannot capture a city.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0459",
+      "TEXT": "\\fNormal;\\c000;000;000; or \\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0462",
+      "TEXT": "Do you want to ask \\fMedbold;%NAME%,\\fNormal; Lord of the \\fMedbold;%RACE%,\\fNormal; for an alliance?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0463",
+      "TEXT": "\\fMedBold;Warrior Lord\\n\\fNormal;The Warrior Lord\u0027s units will regenerate 15% of their damage each day, but magic research is limited to the fourth level.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0464",
+      "TEXT": "\\fMedBold;Guildmaster\\n\\fNormal;The Guildmaster\u0027s spell research is limited to the fourth level, but the Thief performs more actions and cities cost 50% less gold to grow.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0465",
+      "TEXT": "\\fMedBold;Mage Lord\\n\\fNormal;The Mage Lord can research all the spells at half the cost and spells can be cast twice per day.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0469",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Immunities in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0470",
+      "TEXT": "(Custom)",
+      "VERIFIED": false,
+      "CONTEXT": "list of skirmish quests"
+    },
+    {
+      "TXT_ID": "X005TA0472",
+      "TEXT": "\\hL;\\c000;000;000;\\s60;Effect:\\t%DESC%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Spell effect"
+    },
+    {
+      "TXT_ID": "X005TA0473",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Spells that have no source"
+    },
+    {
+      "TXT_ID": "X005TA0476",
+      "TEXT": "%NAME% has gained a level! \\nSelect a new ability for that leader.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0110",
+      "TEXT": "Replay",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0477",
+      "TEXT": "\\hC;\\vC;\\fMedBold;%SCEN%\\fSmall;\\n%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0478",
+      "TEXT": "Map size: %X% x %Y%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0479",
+      "TEXT": "Not available",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0480",
+      "TEXT": "The Empire",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0481",
+      "TEXT": "The Undead Hordes",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0482",
+      "TEXT": "The Mountain Clans",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0483",
+      "TEXT": "The Legions of the Damned",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0484",
+      "TEXT": "\\fMedium;%RACE%",
+      "VERIFIED": false,
+      "CONTEXT": "Race name/description in menus"
+    },
+    {
+      "TXT_ID": "X005TA0485",
+      "TEXT": "No description given",
+      "VERIFIED": false,
+      "CONTEXT": "Displayed when choosing a skirmish that has no description"
+    },
+    {
+      "TXT_ID": "X005TA0486",
+      "TEXT": "\\c025;090;000; \u002B %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia (stat modifiers)"
+    },
+    {
+      "TXT_ID": "X005TA0487",
+      "TEXT": "\\c100;000;000; - %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia (stat modifiers)"
+    },
+    {
+      "TXT_ID": "X005TA0488",
+      "TEXT": "\\c000;000;000;",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia (stat modifiers) used to return to previous color"
+    },
+    {
+      "TXT_ID": "X005TA0489",
+      "TEXT": "\\fMedium;%NAME%\\n\\fNormal;\\hL;%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": "Mercenary interface"
+    },
+    {
+      "TXT_ID": "X005TA0490",
+      "TEXT": "You can hire this unit for %PRICE% gold coins.",
+      "VERIFIED": false,
+      "CONTEXT": "Mercenary interface"
+    },
+    {
+      "TXT_ID": "X005TA0491",
+      "TEXT": "\\fMedium;%NAME%\\n\\fNormal;%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": "Merchant interface"
+    },
+    {
+      "TXT_ID": "X005TA0492",
+      "TEXT": "\\vC;My fine mercenaries will gladly fight for you... for a price.",
+      "VERIFIED": false,
+      "CONTEXT": "Mercenary interface"
+    },
+    {
+      "TXT_ID": "X005TA0493",
+      "TEXT": "\\hC;\\vC;Good day. Take a look around my store and let me know if anything catches your eye.",
+      "VERIFIED": false,
+      "CONTEXT": "Merchant interface"
+    },
+    {
+      "TXT_ID": "X005TA0494",
+      "TEXT": "\\hC;\\vC;Good day. Take a look around my temple and let me know if anything grabs your attention.",
+      "VERIFIED": false,
+      "CONTEXT": "Temple interface"
+    },
+    {
+      "TXT_ID": "X005TA0495",
+      "TEXT": "Right-click on icon for details.",
+      "VERIFIED": false,
+      "CONTEXT": "Spells in mage site"
+    },
+    {
+      "TXT_ID": "X005TA0496",
+      "TEXT": "Your lord cannot cast this spell.",
+      "VERIFIED": false,
+      "CONTEXT": "Spell encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0497",
+      "TEXT": "\\fMedBold;Casting cost:",
+      "VERIFIED": false,
+      "CONTEXT": "Spell encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0498",
+      "TEXT": "Who shall be trained?",
+      "VERIFIED": false,
+      "CONTEXT": "Training camp interface"
+    },
+    {
+      "TXT_ID": "X005TA0499",
+      "TEXT": "This unit is partially trained and will have to come again to complete its training.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0500",
+      "TEXT": "\\hL;\\vC;\\fNormal;%NAME%\\nValue: %VALUE% gold coins\\nQuantity: %NUM%",
+      "VERIFIED": false,
+      "CONTEXT": "String utilise ds Carray Over \u0026 TradeItem"
+    },
+    {
+      "TXT_ID": "X005TA0501",
+      "TEXT": "The leader\u0027s leadership value allows a small unit to be hired. A large unit cannot be hired.",
+      "VERIFIED": false,
+      "CONTEXT": "Stack enters Mercenary site with one position left in stack and small units are available."
+    },
+    {
+      "TXT_ID": "X005TA0502",
+      "TEXT": "Your leader\u0027s leadership value allows a small unit to be hired. Unfortunately, I only have large units to offer you.",
+      "VERIFIED": false,
+      "CONTEXT": "Stack enters Mercenary site with one position left in stack and small units are NOT available."
+    },
+    {
+      "TXT_ID": "X008TA0008",
+      "TEXT": "\\hC;\\vC;Paralyze",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0009",
+      "TEXT": "\\hC;\\vC;Petrify",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0010",
+      "TEXT": "\\hC;\\vC;Pass",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0503",
+      "TEXT": "Damage",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0504",
+      "TEXT": "Heal",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0505",
+      "TEXT": "You do not possess any spell or the ones you possess can not be exchanged.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0506",
+      "TEXT": "The %LEADER% must be hired to plant rods and transform the lands.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0507",
+      "TEXT": "%COST% gold coins are needed to plant a rod.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0509",
+      "TEXT": "\\hC;\\vC;\\fLarge;Partial Heal\\n\\n\\fNormal;It costs %PRICE% gold coins to heal this unit, and you posses %AMOUNT%. Do you want to heal the unit for the amount of gold that you possess?",
+      "VERIFIED": false,
+      "CONTEXT": "Heal/Revive in city/capital interf"
+    },
+    {
+      "TXT_ID": "X005TA0510",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Gold\\n\\n\\fNormal;You do not possess any gold. Gold is needed to heal or revive units!",
+      "VERIFIED": false,
+      "CONTEXT": "Heal/Revive in city/capital interf"
+    },
+    {
+      "TXT_ID": "X005TA0511",
+      "TEXT": "\\hC;\\vC;\\fLarge;Closed\\n\\n\\fNormal;You already know all the spells that I have to offer!",
+      "VERIFIED": false,
+      "CONTEXT": "When you know all the spells of a mage tower"
+    },
+    {
+      "TXT_ID": "X005TA0513",
+      "TEXT": "You must build the %BUILDING% in your capital to upgrade this unit.",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0514",
+      "TEXT": "\\hC;\\vC;\\fLarge;Closed\\n\\n\\fNormal;All my units have been hired. I have nothing left to offer!",
+      "VERIFIED": false,
+      "CONTEXT": "When mercenaries list is empty (mercenary interf )"
+    },
+    {
+      "TXT_ID": "X005TA0515",
+      "TEXT": "\\hC;\\vC;\\fNormal;I have no more items for sale, but I will buy some!",
+      "VERIFIED": false,
+      "CONTEXT": "Merchant interf ( when inventory is empty )"
+    },
+    {
+      "TXT_ID": "X100TA0111",
+      "TEXT": "Begin Game",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0516",
+      "TEXT": "%QTY% %ITEM%",
+      "VERIFIED": false,
+      "CONTEXT": "pickup item"
+    },
+    {
+      "TXT_ID": "X005TA0517",
+      "TEXT": "\\fLarge;%NAME%\\fNormal;\\n%DESC%\\n\\n\\fLarge;Objective:\\fNormal;\\n%OBJECTIVE%",
+      "VERIFIED": false,
+      "CONTEXT": "Objective description in briefing interface"
+    },
+    {
+      "TXT_ID": "X100TA0116",
+      "TEXT": "Refresh quest list",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0117",
+      "TEXT": "Continue",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0118",
+      "TEXT": "Tendency towards war",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0119",
+      "TEXT": "Tendency towards peace",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0525",
+      "TEXT": "The leader is incorruptible and has captured your thief!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0526",
+      "TEXT": "There is no available action to perform against that city.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0527",
+      "TEXT": "You have already spied on that ruin!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0528",
+      "TEXT": "No action can be performed against this site!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0529",
+      "TEXT": "Item price: %PRICE%",
+      "VERIFIED": false,
+      "CONTEXT": "Item encyclopedia when opened from a site"
+    },
+    {
+      "TXT_ID": "X005TA0530",
+      "TEXT": "Buying cost: %COST%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0531",
+      "TEXT": "\\c000;000;000;\\hC;\\vT;\\fLarge;%NAME%\\n\\n\\hL;\\fNormal;%DESCRIPTION%\\n\\nChances of success: %CHANCE%%",
+      "VERIFIED": false,
+      "CONTEXT": "Thief Actions interf"
+    },
+    {
+      "TXT_ID": "X005TA0532",
+      "TEXT": "%PLAYER% has joined the game as a %LORD%.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0533",
+      "TEXT": "Waiting for reply...",
+      "VERIFIED": false,
+      "CONTEXT": "Multiplayer popup"
+    },
+    {
+      "TXT_ID": "X005TA0534",
+      "TEXT": "Boost",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0535",
+      "TEXT": "\u002B%BOOST%%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0536",
+      "TEXT": "%PLAYER%, Lord of the %RACE%, had infiltrated a spy in your army. The spy has been captured and executed!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0537",
+      "TEXT": "\\hC;\\vC;\\fNormal;It will cost you %PRICE% gold coins to buy the allegiance of the city!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0538",
+      "TEXT": "\\hC;\\vC;\\fNormal;The other thief actions are available to the Guildmaster lord only!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0539",
+      "TEXT": "\\hC;\\vC;\\flarge;Choose item to steal",
+      "VERIFIED": false,
+      "CONTEXT": "steal item"
+    },
+    {
+      "TXT_ID": "X005TA0540",
+      "TEXT": "\\hC;\\vC;\\flarge;Choose spell to steal",
+      "VERIFIED": false,
+      "CONTEXT": "steal spell"
+    },
+    {
+      "TXT_ID": "X005TA0541",
+      "TEXT": "%RACE%\\n\\nTerrain transformed: %NOW% / %TOTAL% (%PERCENT%%)",
+      "VERIFIED": false,
+      "CONTEXT": "Encyclopedia on \u0022terrain transformed\u0022 icons in iso"
+    },
+    {
+      "TXT_ID": "X005TA0542",
+      "TEXT": "More move points needed to perform this action",
+      "VERIFIED": false,
+      "CONTEXT": "Plant rod with no AP"
+    },
+    {
+      "TXT_ID": "X005TA0543",
+      "TEXT": "The party leader must be alive to plant a rod.",
+      "VERIFIED": false,
+      "CONTEXT": "Plant rod with leader dead"
+    },
+    {
+      "TXT_ID": "X005TA0544",
+      "TEXT": "Exit the fortification before planting a rod.",
+      "VERIFIED": false,
+      "CONTEXT": "Plant rod when stack inside city/capital"
+    },
+    {
+      "TXT_ID": "X005TA0545",
+      "TEXT": "\\c000;000;000;\\hC;\\vT;\\fNormal;%NAME%\\n\\n\\hL;%DESCRIPTION%\\n\\n\\c128;000;000;Action is not available",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0546",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%CITYNAME% has been poisoned",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0548",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;A spy has been placed in the enemy city. Right-click on enemy parties and cities to reveal information about them!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0549",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;An item has been stolen from the enemy party!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0552",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;The enemy leader has been provoked into a duel!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0554",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;A spy has infiltrated the enemy. Right-click on the enemy parties and cities to reveal information about them!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0555",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;A spell has been stolen from the enemy!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0556",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;The city has proclaimed its allegiance to you!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0557",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;Unit assassinated: %UNITNAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0558",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;The false message has worked and unorganized the enemy troops!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0559",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%AMOUNT% gold coins have been stolen from the enemy!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0561",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;A spell has been stolen from the magic tower!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0562",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal; The ruin has been spied upon. Right-click on it to reveal information about it!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0563",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PARTYNAME%\u0027s party has been poisoned!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0564",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;An item has been stolen from the merchant!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0565",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;Your thief has been captured and executed!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0575",
+      "TEXT": "%USED% / %AVAIL%",
+      "VERIFIED": false,
+      "CONTEXT": "Leadership strings in all interfaces"
+    },
+    {
+      "TXT_ID": "X005TA0576",
+      "TEXT": "Units in city: %IN% / %TOTAL%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0577",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;More resources are required to buy the spell!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0578",
+      "TEXT": "\\hC;\\vC;\\fLarge;Not Enough Resources\\n\\n\\fNormal;%PRICE% gold coins are needed to revive this unit!",
+      "VERIFIED": false,
+      "CONTEXT": "Not enough gold to revive"
+    },
+    {
+      "TXT_ID": "X005TA0579",
+      "TEXT": "The staff can only be used once a day.",
+      "VERIFIED": false,
+      "CONTEXT": "When player attempts to use staff more often than allowed by lord type"
+    },
+    {
+      "TXT_ID": "X005TA0580",
+      "TEXT": "The staff can only be used twice per day.",
+      "VERIFIED": false,
+      "CONTEXT": "When player attempts to use staff more often than allowed by lord type"
+    },
+    {
+      "TXT_ID": "X005TA0581",
+      "TEXT": "Saving %SAVEGAME%.sg...",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0582",
+      "TEXT": "Game saved under %SAVEGAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0583",
+      "TEXT": "\\s110;\\fmedbold;Leadership:\\t\\fnormal;%MAX%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0584",
+      "TEXT": "\\flarge;Select the city that contains the Item",
+      "VERIFIED": false,
+      "CONTEXT": "Trade item interface"
+    },
+    {
+      "TXT_ID": "X005TA0586",
+      "TEXT": "\\fMedbold;%PLAYER%,\\fNormal; Lord of the \\fMedbold;%RACE%,\\fNormal; offers you the item \\fMedbold;%OFFER%\\fNormal; for %PRICE% gold coins.  The item is worth %VALUE% gold coins. Do you accept?",
+      "VERIFIED": false,
+      "CONTEXT": "AI offers item to player"
+    },
+    {
+      "TXT_ID": "X005TA0587",
+      "TEXT": "\\fMedbold;%PLAYER%,\\fNormal; Lord of the \\fMedbold;%RACE%,\\fNormal; offers you the spell \\fMedbold;%OFFER%\\fNormal; for %PRICE% gold coins.  The spell is worth %VALUE% gold coins.  Do you accept?",
+      "VERIFIED": false,
+      "CONTEXT": "AI offers spell to player"
+    },
+    {
+      "TXT_ID": "X005TA0589",
+      "TEXT": "I can buy this item for %PRICE% gold coins.",
+      "VERIFIED": false,
+      "CONTEXT": "Merchant interf Buy Valuable"
+    },
+    {
+      "TXT_ID": "X005TA0590",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Resources\\n\\n\\fNormal;More gold is needed to enroll this unit.",
+      "VERIFIED": false,
+      "CONTEXT": "Mercernary interf"
+    },
+    {
+      "TXT_ID": "X005TA0591",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not possess the ability to use Staffs.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for Item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0592",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not possess the ability to use Scrolls.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for Item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0593",
+      "TEXT": "\\hC;\\vC;\\fLarge;Already Used\\n\\n\\fNormal;This unit has already used this potion.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for Item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0594",
+      "TEXT": "\\hC;\\vC;\\fLarge;Not Injured\\n\\n\\fNormal;This unit is not injured. Only injured units can be healed.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for Item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0595",
+      "TEXT": "\\hC;\\vC;\\fLarge;Still Alive\\n\\n\\fNormal;This unit is still alive. Only dead units can be revived.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for Item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0596",
+      "TEXT": "\\hC;\\vC;\\fLarge;Not Alive\\n\\n\\fNormal;This unit is dead. Only living units can be healed.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0597",
+      "TEXT": "You must be at peace with the race to %WHAT%!\\n\\nGiving gold to an opponent or attacking his enemies will bring you closer to peace.",
+      "VERIFIED": false,
+      "CONTEXT": "Diplomacy interface"
+    },
+    {
+      "TXT_ID": "X005TA0598",
+      "TEXT": "sell items",
+      "VERIFIED": false,
+      "CONTEXT": "Diplomacy interface"
+    },
+    {
+      "TXT_ID": "X005TA0599",
+      "TEXT": "sell spells",
+      "VERIFIED": false,
+      "CONTEXT": "Diplomacy interface"
+    },
+    {
+      "TXT_ID": "X005TA0600",
+      "TEXT": "ask for a treaty",
+      "VERIFIED": false,
+      "CONTEXT": "Diplomacy interface"
+    },
+    {
+      "TXT_ID": "X005TA0601",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not have the ability to use Artifacts. The \u0022Artifact Lore\u0022 ability can be selected when the leader upgrades.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0602",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not have the ability to use Tomes. The \u0022Arcane Knowledge\u0022 ability can be selected when the leader upgrades.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0603",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not have the ability to use Banners. The \u0022Banner Bearer\u0022 ability can be selected when the leader upgrades.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0605",
+      "TEXT": "%PLAYER%, Lord of the %RACE%, has discovered the spy you infiltrated in his army. The spy has been captured and executed!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0606",
+      "TEXT": "\\fMedbold;%NAME%, Lord of the %RACE%:\\n\\n\\fNormal;\u0022%MSG%\u0022",
+      "VERIFIED": false,
+      "CONTEXT": "AI message box"
+    },
+    {
+      "TXT_ID": "X005TA0607",
+      "TEXT": "\\s60;Value:\\t%VALUE%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0608",
+      "TEXT": "\\hC;\\vC;\\fLarge;Cannot Equip\\n\\n\\fNormal;This item cannot be equiped.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0609",
+      "TEXT": "More gold is needed to accept the offer.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0611",
+      "TEXT": "\\fLarge;Mission completed!\\fNormal;\\n\\nThe mission has been successfully completed.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0612",
+      "TEXT": "\\fLarge;Failure!\\fNormal;\\n\\n%PLAYER%\u0027s race wins.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0613",
+      "TEXT": "\\fNormal;\\hL;\\c000;000;000;\\s60;Cost: \\t%COST_HIRING% gold\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Txt for mercenary list (in Mercenary Interf)"
+    },
+    {
+      "TXT_ID": "X005TA0614",
+      "TEXT": "\\fNormal;\\hL;\\s80;Cost: \\t%COST%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Enroll Unit/Leader (unit info)"
+    },
+    {
+      "TXT_ID": "X005TA0617",
+      "TEXT": "\\vC;\\hC;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Iso palette when casting a spell/scroll"
+    },
+    {
+      "TXT_ID": "X005TA0618",
+      "TEXT": "\\fLarge;\\hC;\\vC;\\c000;000;000;Maximum Level\\n\\n\\fNormal;Unit has reached its maximum experience level and can no longer benefit from training.",
+      "VERIFIED": false,
+      "CONTEXT": "Training Interface."
+    },
+    {
+      "TXT_ID": "X005TA0619",
+      "TEXT": "No moving party",
+      "VERIFIED": false,
+      "CONTEXT": "City encyclopedia when there\u0027s no moving stack in city"
+    },
+    {
+      "TXT_ID": "X005TA0620",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has placed a spy in your city.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0621",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has placed a spy in your army.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0622",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has stolen an item from you.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0623",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has stolen a spell from you.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0624",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has unorganized your troops.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0625",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has provoked your leader into a duel.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0626",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has poisoned your party.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0627",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has poisoned your city.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0628",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has assassinated one of your soldiers.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0629",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER% has stolen gold from you.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0630",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;%PLAYER%\u0027s thief has been captured and executed!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0631",
+      "TEXT": "%NAME%\\n\\n%INFO%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0632",
+      "TEXT": "Quest",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0633",
+      "TEXT": "Saga",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0634",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;Drop Items",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0635",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;Drag the items to drop from the party inventory on the left to the slots on the right.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0638",
+      "TEXT": "Summon spells cannot be traded.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0643",
+      "TEXT": "\\hC;\\vC;\\fLarge;Dead unit\\n\\n\\fNormal;This unit is dead. Only the revive potion can be used on this unit.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0644",
+      "TEXT": "\\hC;\\vC;\\fLarge;Dead Leader\\n\\n\\fNormal;The leader is dead, the leader must be alive to use staffs.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0645",
+      "TEXT": "\\hC;\\vC;\\fLarge;Dead Leader\\n\\n\\fNormal;The leader is dead, the leader must be alive to use scrolls.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0647",
+      "TEXT": "A rod cannot be planted on an allied lord\u0027s land.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0648",
+      "TEXT": "\\c128;000;000;Max\\c000;000;000;",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0649",
+      "TEXT": "%XP1% / %XP2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0650",
+      "TEXT": "\\fmedbold;Move points:\\t\\fnormal;%AP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0651",
+      "TEXT": "Dead leaders cannot wear equipment.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0652",
+      "TEXT": "More...",
+      "VERIFIED": false,
+      "CONTEXT": "Bag encyclopedia in ScenEdit"
+    },
+    {
+      "TXT_ID": "X005TA0604",
+      "TEXT": "This feature is not available in this version.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0653",
+      "TEXT": "\\fMedBold;%NAME%\\fNormal;\\n%DESC%\\n\\n%AREA%\\n\\n%INFO%",
+      "VERIFIED": false,
+      "CONTEXT": "Spell Encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0654",
+      "TEXT": "\\fMedBold;%NAME%\\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": "Spell list box in spell book"
+    },
+    {
+      "TXT_ID": "X005TA0655",
+      "TEXT": "There is no available action to perform against that party.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0656",
+      "TEXT": "Do you really want to replace \u0022%SAVEGAME%\u0022?",
+      "VERIFIED": false,
+      "CONTEXT": "Save game interface when replacing existing file"
+    },
+    {
+      "TXT_ID": "X005TA0657",
+      "TEXT": "\\fLarge;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Building encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0658",
+      "TEXT": "\\vC;\\hC;\\fLarge;%NAME%\\fNormal;\\n\\nRods transform a small amount of land every day. Each race\u0027s resources increase when the terrain under a resource is of their type. To destroy a rod, you must enroll the leader who possesses the plant rod ability.",
+      "VERIFIED": false,
+      "CONTEXT": "Rod encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0659",
+      "TEXT": "Do you really want to delete \u0022%SAVEGAME%\u0022?",
+      "VERIFIED": false,
+      "CONTEXT": "Save game interface when deleting file"
+    },
+    {
+      "TXT_ID": "X005TA0660",
+      "TEXT": "\\fMedBold;%NAME%\\n\\fNormal;%DESC%%CASTCOST%%ITEMCAT%",
+      "VERIFIED": false,
+      "CONTEXT": "Item encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0661",
+      "TEXT": "\\n\\nCasting cost: %CASTCOST%",
+      "VERIFIED": false,
+      "CONTEXT": "Item encyclopedia for wands"
+    },
+    {
+      "TXT_ID": "X008TA0011",
+      "TEXT": "\\hC;\\vC;Ward",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0662",
+      "TEXT": "\\fLarge;\\hC;\\c000;000;000;Partial Training Completed",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0663",
+      "TEXT": "(Level %LEVEL%)",
+      "VERIFIED": false,
+      "CONTEXT": "City encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0664",
+      "TEXT": "\\hC;\\vC;\\fMedBold;%NAME% (%TYPE%)\\n\\fSmall;%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": "Title and description in Load menu"
+    },
+    {
+      "TXT_ID": "X005TA0665",
+      "TEXT": "Type : %TYPE%\\n%TYPEDESC%\\nTurn: %TURN%\\nDifficulty level: %DIFF%",
+      "VERIFIED": false,
+      "CONTEXT": "Info in Load menu"
+    },
+    {
+      "TXT_ID": "X005TA0668",
+      "TEXT": "\\mL3;\\s40;Level: \\t%LEVEL%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Carry over interface"
+    },
+    {
+      "TXT_ID": "X005TA0669",
+      "TEXT": "\\mL3;\\s40;XP: \\t%XP%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Carry over interface"
+    },
+    {
+      "TXT_ID": "X005TA0670",
+      "TEXT": "You cannot cast on that party because it is immune to your spell.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0671",
+      "TEXT": "Casting on that party will not produce any effect.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0672",
+      "TEXT": "You cannot attack an allied party.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0673",
+      "TEXT": "You cannot cast on an invisible party.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0674",
+      "TEXT": "6",
+      "VERIFIED": false,
+      "CONTEXT": "Targets in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0675",
+      "TEXT": "1",
+      "VERIFIED": false,
+      "CONTEXT": "Targets in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0676",
+      "TEXT": "None",
+      "VERIFIED": false,
+      "CONTEXT": "Leader abilities in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0677",
+      "TEXT": "\\fMedBold;Special unit:\\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": "Sideshow units in structure building screen"
+    },
+    {
+      "TXT_ID": "X005TA0678",
+      "TEXT": "More gold is required to train this unit.",
+      "VERIFIED": false,
+      "CONTEXT": "Trainer site when trying to train a unit without sufficient gold"
+    },
+    {
+      "TXT_ID": "X100TA0120",
+      "TEXT": "Send to Empire",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0121",
+      "TEXT": "Send to Mountain Clans",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0122",
+      "TEXT": "Send to Legions of the Damned",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0123",
+      "TEXT": "Send to Undead Hordes",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0124",
+      "TEXT": "Send to All",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X006TA0001",
+      "TEXT": "A new player is waiting in the lobby.",
+      "VERIFIED": false,
+      "CONTEXT": "when a new player wants to join a game"
+    },
+    {
+      "TXT_ID": "X006TA0002",
+      "TEXT": "%PLAYER% left the game.",
+      "VERIFIED": false,
+      "CONTEXT": "when a player leave the game"
+    },
+    {
+      "TXT_ID": "X006TA0003",
+      "TEXT": "You cannot end your turn now. At least one player is currently waiting in the lobby.",
+      "VERIFIED": false,
+      "CONTEXT": "when a player try to end its turn"
+    },
+    {
+      "TXT_ID": "X006TA0005",
+      "TEXT": "(Computer)",
+      "VERIFIED": false,
+      "CONTEXT": "X006TA0004"
+    },
+    {
+      "TXT_ID": "X006TA0007",
+      "TEXT": "Waiting in lobby",
+      "VERIFIED": false,
+      "CONTEXT": "X006TA0004"
+    },
+    {
+      "TXT_ID": "X006TA0008",
+      "TEXT": "You are trying to join a game with a newer or an older version of the game.",
+      "VERIFIED": false,
+      "CONTEXT": "version mismatch (join game)"
+    },
+    {
+      "TXT_ID": "X006TA0009",
+      "TEXT": "Continuing the quest at day %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "drop into the game"
+    },
+    {
+      "TXT_ID": "X006TA0010",
+      "TEXT": "You cannot kickout yourself.",
+      "VERIFIED": false,
+      "CONTEXT": "kickout player"
+    },
+    {
+      "TXT_ID": "X006TA0011",
+      "TEXT": "Only the host player can kickout the undesired.",
+      "VERIFIED": false,
+      "CONTEXT": "kickout player"
+    },
+    {
+      "TXT_ID": "X006TA0012",
+      "TEXT": "You can only kickout a human player.",
+      "VERIFIED": false,
+      "CONTEXT": "kickout player"
+    },
+    {
+      "TXT_ID": "X006TA0013",
+      "TEXT": "Do you want to kickout  \\fMedbold;%NAME%?",
+      "VERIFIED": false,
+      "CONTEXT": "kickout player"
+    },
+    {
+      "TXT_ID": "X006TA0014",
+      "TEXT": "Curent Turn",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby screen"
+    },
+    {
+      "TXT_ID": "X006TA0015",
+      "TEXT": "Max Players",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby screen"
+    },
+    {
+      "TXT_ID": "X006TA0016",
+      "TEXT": "Chat",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby screen"
+    },
+    {
+      "TXT_ID": "X006TA0017",
+      "TEXT": "Player Info",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby screen"
+    },
+    {
+      "TXT_ID": "X006TA0018",
+      "TEXT": "Bonus Gold",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby screen"
+    },
+    {
+      "TXT_ID": "X006TA0019",
+      "TEXT": "Mana",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby screen"
+    },
+    {
+      "TXT_ID": "X006TA0020",
+      "TEXT": "Game List",
+      "VERIFIED": false,
+      "CONTEXT": "Multi-player menus"
+    },
+    {
+      "TXT_ID": "X006TA0021",
+      "TEXT": "Player List",
+      "VERIFIED": false,
+      "CONTEXT": "Multi-player menus"
+    },
+    {
+      "TXT_ID": "X006TA0022",
+      "TEXT": "Player Name",
+      "VERIFIED": false,
+      "CONTEXT": "Multi-player menus"
+    },
+    {
+      "TXT_ID": "X006TA0023",
+      "TEXT": "Password",
+      "VERIFIED": false,
+      "CONTEXT": "Multi-player menus"
+    },
+    {
+      "TXT_ID": "X006TA0024",
+      "TEXT": "Game Name",
+      "VERIFIED": false,
+      "CONTEXT": "Multi-player menus"
+    },
+    {
+      "TXT_ID": "X006TA0025",
+      "TEXT": "Password protected",
+      "VERIFIED": false,
+      "CONTEXT": "Password protected (multi-player menus)"
+    },
+    {
+      "TXT_ID": "X006TA0026",
+      "TEXT": "Please insert the original game CD in your CD-ROM drive.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0600",
+      "TEXT": "Kick out player",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0601",
+      "TEXT": "Human race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0602",
+      "TEXT": "Undead race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0603",
+      "TEXT": "Dwarf race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0604",
+      "TEXT": "Heretic race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0605",
+      "TEXT": "Lord type",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0606",
+      "TEXT": "Lord face",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0607",
+      "TEXT": "Difficulty level",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X110TA0017",
+      "TEXT": "\\hC;\\vC;\\fLarge;Already Trained\\n\\n\\fNormal;This unit is already trained and will upgrade at the end of his next battle!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0686",
+      "TEXT": "Effect Result: No trigerrer for \u0022Cast Spell On Triggerer\u0022!",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0687",
+      "TEXT": "Effect Result: No trigerrer for \u0022Enter In Battle\u0022!",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0566",
+      "TEXT": "\\c000;000;000;\\hC;\\vC;\\fNormal;A riot has been provoked inside the city!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0689",
+      "TEXT": "No action can be done on this city while a riot is taking place.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0125",
+      "TEXT": "Continue move",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0397",
+      "TEXT": "\\c000;000;000;",
+      "VERIFIED": false,
+      "CONTEXT": "X005TA0396, color normal"
+    },
+    {
+      "TXT_ID": "X005TA0398",
+      "TEXT": "\\c150;000;000;",
+      "VERIFIED": false,
+      "CONTEXT": "X005TA0396, color no move remaining"
+    },
+    {
+      "TXT_ID": "X005TA0695",
+      "TEXT": "%NAME%\\n%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": "Wand and scroll screen"
+    },
+    {
+      "TXT_ID": "X005TA0696",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not have the ability to use Orbs. The \u0022Use Orb\u0022 ability can be selected when the leader upgrades.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0697",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not have the ability to use Talismans. The \u0022Use Talismans\u0022 ability can be selected when the leader upgrades.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0698",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Ability\\n\\n\\fNormal;The leader does not have the ability to use Travel Items. The \u0022Use Travel Items\u0022 ability can be selected when the leader upgrades.",
+      "VERIFIED": false,
+      "CONTEXT": "Msg for item Usage"
+    },
+    {
+      "TXT_ID": "X005TA0699",
+      "TEXT": "Please enter a name for your first leader.",
+      "VERIFIED": false,
+      "CONTEXT": "CChangeFirstLeaderNameInterf"
+    },
+    {
+      "TXT_ID": "X100TA0608",
+      "TEXT": "\\vC;\\fMedBold;%NAME%\\n\\fSmall;HP : %HP%/%HPMAX%",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer"
+    },
+    {
+      "TXT_ID": "X100TA0609",
+      "TEXT": "No attack",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer"
+    },
+    {
+      "TXT_ID": "X100TA0610",
+      "TEXT": "Dead",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer unit status"
+    },
+    {
+      "TXT_ID": "X100TA0611",
+      "TEXT": "Paralysed",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer unit status"
+    },
+    {
+      "TXT_ID": "X100TA0612",
+      "TEXT": "Petrified",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer unit status"
+    },
+    {
+      "TXT_ID": "X100TA0613",
+      "TEXT": "Boosted",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer unit status"
+    },
+    {
+      "TXT_ID": "X005TA0547",
+      "TEXT": "Lower",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0550",
+      "TEXT": "-%LOWER%%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0551",
+      "TEXT": "Lower initiative",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X008TA0012",
+      "TEXT": "\\hC;\\vC;Lower",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0013",
+      "TEXT": "\\hC;\\vC;Lower Init",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0014",
+      "TEXT": "\\hC;\\vC;Poison (%DAMAGE%)",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0015",
+      "TEXT": "\\hC;\\vC;Frostbite (%DAMAGE%)",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0016",
+      "TEXT": "\\hC;\\vC;Revive",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0017",
+      "TEXT": "\\hC;\\vC;Cure",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0018",
+      "TEXT": "\\hC;\\vC;Drain Level",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0019",
+      "TEXT": "\\hC;\\vC;Give Attack",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0020",
+      "TEXT": "\\hC;\\vC;Wait",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0021",
+      "TEXT": "\\hC;\\vC;Defend",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0022",
+      "TEXT": "\\hC;\\vC;Transform",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0700",
+      "TEXT": "Battle speed",
+      "VERIFIED": false,
+      "CONTEXT": "Options interf"
+    },
+    {
+      "TXT_ID": "X005TA0701",
+      "TEXT": "Extra battle animations",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0702",
+      "TEXT": "Are you sure you want to cast the spell %SPELLNAME%?",
+      "VERIFIED": false,
+      "CONTEXT": "CTaskWorldSpell"
+    },
+    {
+      "TXT_ID": "X005TA0703",
+      "TEXT": "\\o000;000;000;\\c255;255;255;%TEXT%",
+      "VERIFIED": false,
+      "CONTEXT": "IsoChatDisplay"
+    },
+    {
+      "TXT_ID": "X005TA0705",
+      "TEXT": "%LORD%, lord of the %RACE%, cast the spell %SPELL%.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0710",
+      "TEXT": "\\hL;\\c000;000;000;Effect area : %AREA%",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0711",
+      "TEXT": "Single target",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0712",
+      "TEXT": "%W%x%H%",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0713",
+      "TEXT": "World",
+      "VERIFIED": false,
+      "CONTEXT": "Spell ency"
+    },
+    {
+      "TXT_ID": "X005TA0706",
+      "TEXT": "Isometric animations",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0707",
+      "TEXT": "\\c000;000;000;%QTY%%",
+      "VERIFIED": false,
+      "CONTEXT": "Transformed land palette (Strategic.cpp)"
+    },
+    {
+      "TXT_ID": "X005TA0757",
+      "TEXT": "\\fMedBold;\\vT;\\hC;\\c000;000;000;%HP%/%HPMAX%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit group"
+    },
+    {
+      "TXT_ID": "X005TA0715",
+      "TEXT": "Hotseat",
+      "VERIFIED": false,
+      "CONTEXT": "Multiplayer protocol selection"
+    },
+    {
+      "TXT_ID": "X100TA0614",
+      "TEXT": ", %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer unit status"
+    },
+    {
+      "TXT_ID": "X005TA0787",
+      "TEXT": "\\s110;\\fMedBold;Attack:\\t\\p110;\\fNormal;%TWICE%%ALTATTACK%%ATTACK%%SECOND%\\p0;\\n\\fMedBold;Chances to hit:\\t\\fNormal;%HIT%%HIT2%\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0788",
+      "TEXT": "\\fMedBold;%EFFECT%:\\t\\fNormal;%DAMAGE%\\n\\fMedBold;Source:\\t\\fNormal;%SOURCE%%SOURCE2%\\n\\fMedBold;Initiative:\\t\\fNormal;%INIT%\\n\\fMedBold;Reach:\\t\\fNormal;%REACH%\\n\\fMedBold;Targets:\\t\\fNormal;%TARGETS%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X006TA0029",
+      "TEXT": "No limit",
+      "VERIFIED": false,
+      "CONTEXT": "Hotseat lobby time limit"
+    },
+    {
+      "TXT_ID": "X006TA0030",
+      "TEXT": "\\c255;255;255;",
+      "VERIFIED": false,
+      "CONTEXT": "Hotseat lobby time limit format"
+    },
+    {
+      "TXT_ID": "X006TA0031",
+      "TEXT": "%NB% minutes",
+      "VERIFIED": false,
+      "CONTEXT": "Hotseat lobby time limit text"
+    },
+    {
+      "TXT_ID": "X006TA0032",
+      "TEXT": "You must select at least two races to play in hotseat.",
+      "VERIFIED": false,
+      "CONTEXT": "Hotseat lobby error"
+    },
+    {
+      "TXT_ID": "X005TA0718",
+      "TEXT": "\\hC;\\fLarge;%NAME%\\fMedbold;\\nLord of the %RACE%\\n\\nYour turn has arrived!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0719",
+      "TEXT": "Race: %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": "Load menu, type description, normal game"
+    },
+    {
+      "TXT_ID": "X005TA0720",
+      "TEXT": "Number of players: %NBPLAYERS%\\nRaces: %RACES%",
+      "VERIFIED": false,
+      "CONTEXT": "Load menu, type description, hotseat game"
+    },
+    {
+      "TXT_ID": "X005TA0721",
+      "TEXT": "Normal",
+      "VERIFIED": false,
+      "CONTEXT": "Load menu, normal game type"
+    },
+    {
+      "TXT_ID": "X005TA0722",
+      "TEXT": "Hotseat",
+      "VERIFIED": false,
+      "CONTEXT": "Load menu, hotseat game type"
+    },
+    {
+      "TXT_ID": "X005TA0723",
+      "TEXT": ", %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": "Load menu, hotseat races separator"
+    },
+    {
+      "TXT_ID": "X006TA0033",
+      "TEXT": "There must be at least two players in the saved quest to play in hotseat.",
+      "VERIFIED": false,
+      "CONTEXT": "MenuLoad error"
+    },
+    {
+      "TXT_ID": "X005TA0724",
+      "TEXT": "An emissary from \\fMedBold;%NAME%\\fNormal;, lord of the  \\fMedBold;%RACE%\\fNormal;, has a message for  \\fMedBold;%TARGETNAME%\\fNormal;.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0725",
+      "TEXT": "\\vC;\\fMedBold;%NAME%\\fNormal;\\nLevel : %LEVEL%\\nBattles won : %NBBATTLE%",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderPickerInterf"
+    },
+    {
+      "TXT_ID": "X005TA0726",
+      "TEXT": "\\fLarge;Can\u0027t export\\fNormal;\\n\\nYou cannot export this leader because it was not hired. Only leaders created at level 1 can be exported.",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderPicker"
+    },
+    {
+      "TXT_ID": "X005TA0727",
+      "TEXT": "\\fMedBold;%NAME%\\fNormal; has been saved with his equipped items.",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0728",
+      "TEXT": "There was an error exporting the leader.",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0729",
+      "TEXT": "You cannot export this leader, it is not from a playable race. Only leaders from the 4 playable races can be exported.",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderPicker"
+    },
+    {
+      "TXT_ID": "X005TA0730",
+      "TEXT": "Import leader",
+      "VERIFIED": false,
+      "CONTEXT": "ImportLeader interf"
+    },
+    {
+      "TXT_ID": "X005TA0733",
+      "TEXT": "Suggested leader level : %LEVEL%",
+      "VERIFIED": false,
+      "CONTEXT": "ImportLeader interf"
+    },
+    {
+      "TXT_ID": "X005TA0734",
+      "TEXT": "\\vC;None",
+      "VERIFIED": false,
+      "CONTEXT": "ImportLeader listbox empty string"
+    },
+    {
+      "TXT_ID": "X005TA0735",
+      "TEXT": "\\vC;%NAME%\\nLevel %LEVEL%",
+      "VERIFIED": false,
+      "CONTEXT": "ImportLeader listbox string"
+    },
+    {
+      "TXT_ID": "X005TA0736",
+      "TEXT": "Will you bring \\fMedBold;%NAME%\\fNormal; to the next quest?",
+      "VERIFIED": false,
+      "CONTEXT": "ImportLeader confirmation"
+    },
+    {
+      "TXT_ID": "X005TA0737",
+      "TEXT": "\\s110;\\fMedBold;Battles won:\\t\\fNormal;%VALUE%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0738",
+      "TEXT": "If you change your race, the leader you wanted to import will not be imported. Are you sure?",
+      "VERIFIED": false,
+      "CONTEXT": "Multiplayer lobby"
+    },
+    {
+      "TXT_ID": "X005TA0739",
+      "TEXT": "%NAME%\\hR;%RACE%",
+      "VERIFIED": false,
+      "CONTEXT": "New custom campaign menu"
+    },
+    {
+      "TXT_ID": "X005TA0175",
+      "TEXT": "Incorruptible",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0176",
+      "TEXT": "Use orbs",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0177",
+      "TEXT": "Use talismans",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0178",
+      "TEXT": "Use travel items",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0180",
+      "TEXT": "Weapon master",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbility"
+    },
+    {
+      "TXT_ID": "X005TA0740",
+      "TEXT": "Error loading saga",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0741",
+      "TEXT": "Low memory video card",
+      "VERIFIED": false,
+      "CONTEXT": "Option Interf"
+    },
+    {
+      "TXT_ID": "X006TA0034",
+      "TEXT": "Error loading selected saved game",
+      "VERIFIED": false,
+      "CONTEXT": "MenuLoad"
+    },
+    {
+      "TXT_ID": "X005TA0742",
+      "TEXT": "Custom saga",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0750",
+      "TEXT": "Auto battle",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0751",
+      "TEXT": "Retreat",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0752",
+      "TEXT": "Wait",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0753",
+      "TEXT": "Defend",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0754",
+      "TEXT": "Toggle displayed party",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0755",
+      "TEXT": "Close",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0756",
+      "TEXT": "Paperdoll",
+      "VERIFIED": false,
+      "CONTEXT": "Battle tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0759",
+      "TEXT": "Isometric audio environment",
+      "VERIFIED": false,
+      "CONTEXT": "OptionInterf"
+    },
+    {
+      "TXT_ID": "X005TA0760",
+      "TEXT": "Unit acknowledgements",
+      "VERIFIED": false,
+      "CONTEXT": "OptionInterf"
+    },
+    {
+      "TXT_ID": "X005TA0567",
+      "TEXT": "\\fLarge;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0615",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Resources\\n\\n\\fNormal;More gold is needed to revive this unit.",
+      "VERIFIED": false,
+      "CONTEXT": "Revive action"
+    },
+    {
+      "TXT_ID": "X005TA0761",
+      "TEXT": "\\hC;\\fLarge;Failure!\\fNormal;\\n\\nYou have lost the mission.",
+      "VERIFIED": false,
+      "CONTEXT": "Lose scenario message"
+    },
+    {
+      "TXT_ID": "X008TA0023",
+      "TEXT": "\\hC;\\vC;Restore Form!",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0024",
+      "TEXT": "\\hC;\\vC;Break Paralyze!",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0025",
+      "TEXT": "\\hC;\\vC;Break Petrify!",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0026",
+      "TEXT": "\\hC;\\vC;Poison",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X008TA0027",
+      "TEXT": "\\hC;\\vC;Frostbite",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0762",
+      "TEXT": "Map destination highlight",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0765",
+      "TEXT": "Allow battles in path when moving a party",
+      "VERIFIED": false,
+      "CONTEXT": "Options screen"
+    },
+    {
+      "TXT_ID": "X006TA0035",
+      "TEXT": "\\c000;000;000;%NAME% %TYPE%",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby player list"
+    },
+    {
+      "TXT_ID": "X006TA0036",
+      "TEXT": "Quest information",
+      "VERIFIED": false,
+      "CONTEXT": "Lobby label"
+    },
+    {
+      "TXT_ID": "X005TA0766",
+      "TEXT": "Cancelling the action will spend move points anyway. Continue?",
+      "VERIFIED": false,
+      "CONTEXT": "Thief action"
+    },
+    {
+      "TXT_ID": "X005TA0767",
+      "TEXT": "Instant",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0768",
+      "TEXT": "\\fLarge;Warning!\\n\\n\\fNormal;You are about to overwrite or use the name of an automatic savegame. Continue?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0769",
+      "TEXT": "AutoSave",
+      "VERIFIED": false,
+      "CONTEXT": "Name of autosave file"
+    },
+    {
+      "TXT_ID": "X005TA0770",
+      "TEXT": "Campaign Start",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0771",
+      "TEXT": "Scrolling between actions",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0772",
+      "TEXT": "\\hC;\\fLarge;%NAME%\\fNormal;\\nThe now crumbled capital of the %RACE%.",
+      "VERIFIED": false,
+      "CONTEXT": "City ency"
+    },
+    {
+      "TXT_ID": "X005TA0773",
+      "TEXT": "\\fLarge;You found a Spell:",
+      "VERIFIED": false,
+      "CONTEXT": "ItemInterf"
+    },
+    {
+      "TXT_ID": "X005TA0774",
+      "TEXT": "\\fLarge;Their spell book contained:",
+      "VERIFIED": false,
+      "CONTEXT": "ItemInterf"
+    },
+    {
+      "TXT_ID": "X005TA0775",
+      "TEXT": "\\fLarge;Congratulations!\\fMedium;\\nYou have conquered the %RACE%.",
+      "VERIFIED": false,
+      "CONTEXT": "CaptureCapital"
+    },
+    {
+      "TXT_ID": "X005TA0776",
+      "TEXT": "\\fLarge;You have captured resources",
+      "VERIFIED": false,
+      "CONTEXT": "Capture resources"
+    },
+    {
+      "TXT_ID": "X005TA0783",
+      "TEXT": "\\fNormal;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Stack encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0784",
+      "TEXT": "\\fMedBold;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Stack encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0785",
+      "TEXT": "/ %ATTACK%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0786",
+      "TEXT": "(2x) %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0789",
+      "TEXT": "Paralyze",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0790",
+      "TEXT": "Petrify",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0791",
+      "TEXT": "Damage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0792",
+      "TEXT": "Drain",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0793",
+      "TEXT": "Heal",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0794",
+      "TEXT": "Fear",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0795",
+      "TEXT": "Boost damage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0796",
+      "TEXT": "Lower damage",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0797",
+      "TEXT": "Lower initiative",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0798",
+      "TEXT": "Poison",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0799",
+      "TEXT": "Frostbite",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0800",
+      "TEXT": "Revive",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0801",
+      "TEXT": "Drain overflow",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0802",
+      "TEXT": "Cure",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0803",
+      "TEXT": "Summon",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0804",
+      "TEXT": "Drain level",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0805",
+      "TEXT": "Give attack",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0806",
+      "TEXT": "Doppelganger",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0807",
+      "TEXT": "Transform self",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0808",
+      "TEXT": "Transform other",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0616",
+      "TEXT": "/ %ATTACK%",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer"
+    },
+    {
+      "TXT_ID": "X100TA0617",
+      "TEXT": "(2x) %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer"
+    },
+    {
+      "TXT_ID": "X005TA0809",
+      "TEXT": "\\c000;000;000;%LDRSHP%%AP%%NBBAT%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit ency"
+    },
+    {
+      "TXT_ID": "X005TA0810",
+      "TEXT": "\\hC;\\vC;\\fLarge;No Effect\\n\\n\\fNormal;Equipping this item would have no effect on this party\u0027s statistics or abilities.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0811",
+      "TEXT": "%DMG% \\c000;000;000;(\\c128;000;000;Max\\c000;000;000;)",
+      "VERIFIED": false,
+      "CONTEXT": "Max damage reached in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0099",
+      "TEXT": ", defeated by %KILLER%\\n",
+      "VERIFIED": false,
+      "CONTEXT": "Tomb encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0812",
+      "TEXT": "Off",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0813",
+      "TEXT": "Low",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0814",
+      "TEXT": "Normal",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0815",
+      "TEXT": "High",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0816",
+      "TEXT": "/ %SOURCE%",
+      "VERIFIED": false,
+      "CONTEXT": "Second attack in unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0817",
+      "TEXT": "Environment animations",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0818",
+      "TEXT": "There is no action to perform on this site.",
+      "VERIFIED": false,
+      "CONTEXT": "Iso noble message"
+    },
+    {
+      "TXT_ID": "X005TA0819",
+      "TEXT": "\\c000;000;000;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Thief Actions interf"
+    },
+    {
+      "TXT_ID": "X005TA0820",
+      "TEXT": "\\c128;000;000;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Thief Actions interf"
+    },
+    {
+      "TXT_ID": "X005TA0821",
+      "TEXT": "File is read-only!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0822",
+      "TEXT": "This unit is ready to upgrade but can not because it needs a building that is only accessible to the %RACE%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0121",
+      "TEXT": "Disabled",
+      "VERIFIED": false,
+      "CONTEXT": "Options screen with sound disabled in .INI"
+    },
+    {
+      "TXT_ID": "X005TA0823",
+      "TEXT": "\\o000;000;000;\\c255;255;255;Computer is thinking",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0825",
+      "TEXT": "\\hC;\\vC;\\fLarge;Closed\\n\\n\\fNormal;Unfortunately, I have no spell to sell to you.",
+      "VERIFIED": false,
+      "CONTEXT": "Mage tower with no spell"
+    },
+    {
+      "TXT_ID": "X008TA0028",
+      "TEXT": "\\o000;000;000;\\c255;255;255;",
+      "VERIFIED": false,
+      "CONTEXT": "Battle (face text)"
+    },
+    {
+      "TXT_ID": "X006TA0037",
+      "TEXT": "This is a hotseat saved game. If you want to load it, please do so in the multiplayer hotseat menu.",
+      "VERIFIED": false,
+      "CONTEXT": "MenuLoad"
+    },
+    {
+      "TXT_ID": "X005TA0826",
+      "TEXT": "Smooth scrolling during party movement",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0827",
+      "TEXT": "\\hC;\\fLarge;Warning!\\fNormal;\\n\\nIf you continue the current game will be lost and the new game will be loaded in single player. If you want to load this game in multiplayer, please do so in the multiplayer menu. Do you wish to continue?",
+      "VERIFIED": false,
+      "CONTEXT": "Load interf"
+    },
+    {
+      "TXT_ID": "X002TA0043",
+      "TEXT": "Name",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X002TA0044",
+      "TEXT": "Description",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0828",
+      "TEXT": "Joining the quest at day %NUMBER%",
+      "VERIFIED": false,
+      "CONTEXT": "BeginOfTurn popup (in multiplayer)"
+    },
+    {
+      "TXT_ID": "X005TA0829",
+      "TEXT": "%ATTACK% or %BLANK%",
+      "VERIFIED": false,
+      "CONTEXT": "EncyUnit"
+    },
+    {
+      "TXT_ID": "X005TA0830",
+      "TEXT": "Choose lord",
+      "VERIFIED": false,
+      "CONTEXT": "MenuLord"
+    },
+    {
+      "TXT_ID": "X005TA0831",
+      "TEXT": "\\hC;\\fLarge;You have a new objective.\\fNormal;\\n\\n%OBJECTIVE%",
+      "VERIFIED": false,
+      "CONTEXT": "MainView2"
+    },
+    {
+      "TXT_ID": "X005TA0832",
+      "TEXT": "\\c255;255;255;\\hC;\\n\\fLarge;%NAME%\\n\\n\\n\\n\\n\\n\\fNormal;%BRIEFING%\\n\\n\\n\\n\\n\\fMedBold;Objective: \\fNormal;%OBJECTIVE%",
+      "VERIFIED": false,
+      "CONTEXT": "Scrolling text in briefing interface"
+    },
+    {
+      "TXT_ID": "X005TA0840",
+      "TEXT": "Adjusts volume for sounds.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0841",
+      "TEXT": "Adjusts volume for music.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0842",
+      "TEXT": "Controls the movement speed of the parties under your control.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0843",
+      "TEXT": "Controls the movement speed of enemy parties.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0844",
+      "TEXT": "Adjusts the speed at which you scroll across the map.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0845",
+      "TEXT": "Adjusts how long the text remains on unit portraits in the battle screen.  \u0022Instant\u0022 also disables most battle animations.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0846",
+      "TEXT": "Controls the volume of the unit acknowledgement sounds.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0847",
+      "TEXT": "Controls the quantity of environment sounds that can be played simultaneously.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0848",
+      "TEXT": "Enables or disables the end of turn confirmation window.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0849",
+      "TEXT": "Enables or disables the automatic savegame feature.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0850",
+      "TEXT": "Enables or disables idle animations for units in the battle screen.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0851",
+      "TEXT": "Enables or disables various map animations.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0852",
+      "TEXT": "Enable this option if you sometimes have slow mouse movement",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0853",
+      "TEXT": "Enables or disables scrolling between the computer\u0027s actions. If disabled, the screen will jump instantaneously to the computer\u0027s next action.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0854",
+      "TEXT": "Gives better scroll movement when parties are moving. Only enable this option if your computer is fast.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0855",
+      "TEXT": "Enables or disables the tile marker when choosing a destination on the map.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0856",
+      "TEXT": "When this option is off, you will not be allowed to make a path that leads to a battle. This can prevent you from reaching certain locations. Press CTRL while making path to dynamically toggle this option.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0857",
+      "TEXT": "Enables or disables environment map animations.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0833",
+      "TEXT": "%HELP%",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0834",
+      "TEXT": "Game settings",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0835",
+      "TEXT": "Graphics",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0836",
+      "TEXT": "Audio",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0837",
+      "TEXT": "Performance",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0858",
+      "TEXT": "\\hC;\\vC;\\fLarge;Dead Leader\\n\\n\\fNormal;The leader is dead, the leader must be alive to use staffs or scrolls.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0859",
+      "TEXT": "\\fLarge;\\hC;\\vC;\\c000;000;000;Dead Unit\\n\\n\\fNormal;Unit is dead",
+      "VERIFIED": false,
+      "CONTEXT": "Training Interface."
+    },
+    {
+      "TXT_ID": "X005TA0860",
+      "TEXT": "\\hC;The guardian has been released. You can now put your capital\u0027s guardian into one of your parties.",
+      "VERIFIED": false,
+      "CONTEXT": "MainView2"
+    },
+    {
+      "TXT_ID": "X005TA0861",
+      "TEXT": "Quick default settings for low-end systems",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0862",
+      "TEXT": "Quick default settings for high-end systems",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0863",
+      "TEXT": "\\fVLarge;Low-end system\\fNormal;\\n\\nThis will modify performance-related settings to maximize the game\u0027s performance on your system.\\n\\nDo you want to proceed?",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0864",
+      "TEXT": "\\fVLarge;High-end system\\fNormal;\\n\\nThis will modify performance-related settings to maximize the game\u0027s audio-visual quality on your system.\\n\\nDo you want to proceed?",
+      "VERIFIED": false,
+      "CONTEXT": "Option interf"
+    },
+    {
+      "TXT_ID": "X005TA0865",
+      "TEXT": "High quality translucency effects",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X005TA0866",
+      "TEXT": "Lets you choose between two qualities of transluscency effects.",
+      "VERIFIED": false,
+      "CONTEXT": "Option screen"
+    },
+    {
+      "TXT_ID": "X105TA0000",
+      "TEXT": "9",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0029",
+      "TEXT": "\\hC;\\vC;Recover Level",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0867",
+      "TEXT": "Please enter valid game name and player name",
+      "VERIFIED": false,
+      "CONTEXT": "Multiplayer interface"
+    },
+    {
+      "TXT_ID": "X005TA0868",
+      "TEXT": "\\hC;\\vC;\\fLarge;%NAME%\\fNormal;\\n%TYPE%\\n\\n%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0869",
+      "TEXT": "\\hC;\\vC;\\fLarge;%TYPE%\\fNormal;\\n\\nIncome: %INCOME%\\n\\n%TXT%\\n\\n%TXT2%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0870",
+      "TEXT": "Neutral resource",
+      "VERIFIED": false,
+      "CONTEXT": "Resource encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0871",
+      "TEXT": "Controlled resource",
+      "VERIFIED": false,
+      "CONTEXT": "Resource encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0872",
+      "TEXT": "Enemy resource",
+      "VERIFIED": false,
+      "CONTEXT": "Resource encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0873",
+      "TEXT": "(Merchant)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0874",
+      "TEXT": "(Magic shop)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0875",
+      "TEXT": "(Mercenary)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0876",
+      "TEXT": "(Trainer)",
+      "VERIFIED": false,
+      "CONTEXT": "Site encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0877",
+      "TEXT": "%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": "Landmark encyclopedia"
+    },
+    {
+      "TXT_ID": "X005TA0878",
+      "TEXT": "\\fLarge;Cannot launch game.\\fNormal;\\n\\nCould not initialize TCP/IP protocol or protocol not found.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0879",
+      "TEXT": "Attempting to connect to server.\\nPlease wait. . .",
+      "VERIFIED": false,
+      "CONTEXT": "Gamespy join"
+    },
+    {
+      "TXT_ID": "X005TA0880",
+      "TEXT": "Host computer is not responding. It might not be ready to accept client connections yet. Would you like to try connecting again?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0054",
+      "TEXT": "No",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X008TA0030",
+      "TEXT": "\\hC;\\vC;Unsummon",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X005TA0881",
+      "TEXT": "/ %POWER%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0364",
+      "TEXT": "Game saved successfully.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0882",
+      "TEXT": "Gamespy",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0883",
+      "TEXT": "\\fLarge;Halt!\\fNormal;\\n\\nYou can not dismiss this leader because it is required to complete this quest.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0126",
+      "TEXT": "Export leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0884",
+      "TEXT": "Do you really want to delete \u0027%LDR%\u0027?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0127",
+      "TEXT": "Import leader",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0075",
+      "TEXT": "Tome",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0076",
+      "TEXT": "Battle item",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0077",
+      "TEXT": "Artifact",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0078",
+      "TEXT": "Boots",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0128",
+      "TEXT": "Previous race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0129",
+      "TEXT": "Next race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0130",
+      "TEXT": "Race",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0131",
+      "TEXT": "Player type",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0886",
+      "TEXT": "Could not join game.  Host did not report any available race.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0887",
+      "TEXT": "Battles won: %QTY%",
+      "VERIFIED": false,
+      "CONTEXT": "Stack encyclopedia"
+    },
+    {
+      "TXT_ID": "X008TA0031",
+      "TEXT": "Each unit can be revived once per battle.",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer popup"
+    },
+    {
+      "TXT_ID": "X008TA0032",
+      "TEXT": "The Doppelganger cannot transform into a guardian.",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewer popup"
+    },
+    {
+      "TXT_ID": "X005TA0888",
+      "TEXT": "Leaving this menu will drop you out of Gamespy mode.  Do you really wish to continue?",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X200TA0001",
+      "TEXT": "\\hC;\\c255;255;255;\\fLarge;The Great Wars\\fNormal;\\n\\n\\n\\n\\n\\nMore than a decade has passed since the First Great Wars ended.\\n\\n\\n\\n\\nWhen infernal beasts and demons poured forth from the ground, the human Empire did their best to resist the unholy",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X200TA0002",
+      "TEXT": "onslaught. Alas, the beloved queen was killed and Uther, the sole heir, disappeared from the realm.\\n\\n\\n\\n\\n\\nThe combined forces of the Empire and Mountain Clans, with the retrieved runic wisdom, sealed the infernal rift before the accursed one could",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X200TA0003",
+      "TEXT": "arise.\\n\\n\\n\\n\\n\\nThe menace posed by the Undead Hordes came to an end with the beheading of the Dwarven high king Sturmir; Mortis\u0027 vengeance accomplished, her minions fell lifelessly to the ground, their languid voices echoed with no answer.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X200TA0004",
+      "TEXT": "\\n\\n\\n\\n\\n\\n\\nBards feared to weave tales of the suffering brought by the First Great Wars. Stories of these terrible events traveled only on witch\u0027s winds.",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0132",
+      "TEXT": "Previous city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0133",
+      "TEXT": "Next city",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0618",
+      "TEXT": "Show or hide banners",
+      "VERIFIED": false,
+      "CONTEXT": "DLG_ISO_"
+    },
+    {
+      "TXT_ID": "X005TA0690",
+      "TEXT": "(RIOT)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0889",
+      "TEXT": "Inverse mini map mouse behavior",
+      "VERIFIED": false,
+      "CONTEXT": "OptionScreen"
+    },
+    {
+      "TXT_ID": "X005TA0890",
+      "TEXT": "Inverses the way clicking on the mini map scrolls the map",
+      "VERIFIED": false,
+      "CONTEXT": "OptionScreen"
+    },
+    {
+      "TXT_ID": "X120TA0001",
+      "TEXT": "\\hC;\\fVLarge;Disciples II - %SUBTITLE%\\n\\n\\fLarge;Production\\fMedBold;\\n\\nProducer\\fNormal;\\nAriel Gauthier\\n\\n\\fMedBold;Lead Designer\\nDisciples II - Dark Prophecy\\fNormal;\\nDanny B\u0412langer\\n\\n\\fMedBold;Lead Designer\\nDisciples II - Rise of the Elves",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0002",
+      "TEXT": "\\hC;\\fNormal;\\nEthan Petty\\n\\n\\fMedBold;Director of Production\\fNormal;\\nDanny B\u0412langer\\n\\n\\fMedBold;Lead Artist\\fNormal;\\nAlexandre Rodrigue\\n\\n\\fMedBold;2D Character Art\\fNormal;\\nEric Belisle\\nPatrick Lambert\\nRandy Humphries\\n\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0003",
+      "TEXT": "\\hC;\\fMedBold;Lead Programmer\\fNormal;\\nFr\u0412d\u0412ric Ferland\\n\\n\\fMedBold;Programming\\fNormal;\\nJean-Fran\u0417ois Marquis\\n\\n\\fMedBold;Environment Art\\fNormal;\\nAlexandre Rodrigue\\nPatrick Lambert\\n\\n\\fMedBold;Art\\fNormal;\\nPatrick Lambert\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0004",
+      "TEXT": "\\hC;Ludovic Pinard\\nRandy Humphries\\nNormand Olsen\\nVincent Joyal\\nEthan Petty\\nBenoit R\u0412gimbal\\n\\n\\fMedBold;Game Designers\\fNormal;\\nEthan Petty\\nJulien Fullum\\n\\n\\fMedBold;Skirmish maps\\fNormal;\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0005",
+      "TEXT": "\\hC;Danny B\u0412langer\\nEthan Petty\\nJulien Fullum\\n\\n\\fMedBold;Cinematics\\fNormal;\\nNathalie Guimond\\nMichel Therrien\\nRapha\u0419l Beaupr\u0412\\nElie Rocray\\nAlex Gingras\\n\\n\\fMedBold;Writing / Manual\\fNormal;\\nEthan Petty\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0008",
+      "TEXT": "\\hC;Simon Lamoureux\\n\\n\\fMedBold;Music Designer/Composer\\fNormal;\\nPhilippe Charron\\n\\n\\fMedBold;\\n\\n\\fLarge;Quality Assurance\\fMedBold;\\n\\nCustomer Support\\fNormal;\\nBrock Beaubien\\nEmanuel Protopapas\\n\\n\\fMedBold;Quality Assurance Team\\fNormal;\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0009",
+      "TEXT": "\\hC;\u0420ric Tougas\\nSylvain Schmidt\\nYan Favreau Lipp\u0412\\nGuillaume Bourbonni\u041Are\\nMichel Chouinard\\nAllison Skerl\\nDavid Mallet\\nBrock Beaubien\\nNathan Pinard\\nEmanuel Protopapas\\n\\n\\fMedBold;\\n\\n\\fLarge;Marketing\\fMedBold;\\n\\nProduct Manager\\fNormal;\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0010",
+      "TEXT": "\\hC;Prokopios \u0022Pro\u0022 Sotos\\n\\n\\fMedBold;Director of Marketing\\fNormal;\\nSteve Milburn\\n\\n\\fMedBold;Graphic Design Manager\\fNormal;\\nLes Parsons\\n\\n\\fMedBold;Graphic Design\\fNormal;\\nMartine B\u0412langer\\n\\n\\fMedBold;Web Design\\fNormal;\\nHugo Tr\u0412panier\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0013",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0014",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0015",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0016",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0017",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0018",
+      "TEXT": null,
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0011",
+      "TEXT": "\\hC;Serge Mongeau\\n\\n\\fMedBold;Senior PR Associate\\fNormal;\\nKelly Ekins\\n\\n\\fMedBold;Logistics Coordinator\\fNormal;\\nAnne-Lise Albrand\\n\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0012",
+      "TEXT": "\\hC;\\fMedBold;President\\fNormal;\\nDon McFatridge\\n\\n\\fMedBold;Senior V.P.\\fNormal;\\nBrian Clarke\\n\\n\\fMedBold;V.P. Creative Development\\fNormal;\\nRichard Therrien\\n\\n\\fMedBold;V.P. Systems\\fNormal;\\nDave Hill\\n\\n\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0006",
+      "TEXT": "\\hC;Calvin Campbell\\n\\n\\fMedBold;\\n\\n\\fLarge;Sound\\fMedBold;\\n\\nVoice Actors\\fNormal;\\nDoug Campbell\\nKarl Gerhardt Graap\\nOrla Johannes\\nPaul Thibault\\nKersti Kass\\nDavid Lawson\\nWill Licari\\nRobert Saigec Taylor\\nIan Doyle\\nMaria Loreto\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X120TA0007",
+      "TEXT": "\\hC;Kelly Ekins\\nIsabelle Lestage\\nMartine B\u0412langer\\nPatrick Lambert\\nJames Devito\\nAriel Gauthier\\nNormand Olsen\\nJeff Giasson\\nSteve Milburn\\nYannick Blenkhorn\\nEthan Petty\\n\\n\\fMedBold;Sound Engineer\\fNormal;\\nPhilippe Charron\\nAriel Gauthier\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0891",
+      "TEXT": "\\hC;\\vC;%ABIL%",
+      "VERIFIED": false,
+      "CONTEXT": "Unit ency"
+    },
+    {
+      "TXT_ID": "X005TA0892",
+      "TEXT": "\\vC;\\fSmall;%TEXT%",
+      "VERIFIED": false,
+      "CONTEXT": "Chat"
+    },
+    {
+      "TXT_ID": "X005TA0893",
+      "TEXT": "\\hC;\\fLarge;%TARGETNAME% is under attack!\\n\\n\\fLarge;%NAME%\\fMedbold;\\nLord of the %RACE%\\n\\nYou need to defend yourself!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0894",
+      "TEXT": "%WIN%\\n\\nYou can export any of your leaders and equipped items to import them later in quests or custom sagas.\\nExport leaders now?",
+      "VERIFIED": false,
+      "CONTEXT": "TaskAskExportLeader"
+    },
+    {
+      "TXT_ID": "X005TA0777",
+      "TEXT": "(%RACE%)",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0900",
+      "TEXT": "Allows the leader to use Wands and Scrolls",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0901",
+      "TEXT": "Allows the leader to equip Artifacts",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0902",
+      "TEXT": "Allows the leader to equip Banners",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0903",
+      "TEXT": "Allows the leader to read magical Tomes",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0904",
+      "TEXT": "Allows the leader to transform the lands by planting Rods",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0905",
+      "TEXT": "All the units in the leader\u0027s party are unaffected by enemy Thieves",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0906",
+      "TEXT": "All the units in the leader\u0027s party will gain 25% more experience in battle",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0907",
+      "TEXT": "Allows the leader to equip and use Orbs in battle",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0908",
+      "TEXT": "Allows the leader to equip and use Talismans in battle",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0909",
+      "TEXT": "Allows the leader to wear magical Boots",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0910",
+      "TEXT": "Allows the leader to Fly",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil desc"
+    },
+    {
+      "TXT_ID": "X005TA0911",
+      "TEXT": "\\hC;\\vC;\\fMedBold;%NAME%\\fNormal;\\n\\n%DESC%",
+      "VERIFIED": false,
+      "CONTEXT": "LeaderAbil Ency"
+    },
+    {
+      "TXT_ID": "X005TA0912",
+      "TEXT": "%TYPE% at turn %TURN%",
+      "VERIFIED": false,
+      "CONTEXT": "QuestLogInterf"
+    },
+    {
+      "TXT_ID": "X005TA0913",
+      "TEXT": "Message",
+      "VERIFIED": false,
+      "CONTEXT": "QuestLogInterf"
+    },
+    {
+      "TXT_ID": "X005TA0914",
+      "TEXT": "Your capital has been captured. Would you like to allow other players to continue playing?\\n\\nIf you choose no the game will stop completely.",
+      "VERIFIED": false,
+      "CONTEXT": "MainView2 - Captured capital"
+    },
+    {
+      "TXT_ID": "X100TA0619",
+      "TEXT": "Quest log",
+      "VERIFIED": false,
+      "CONTEXT": "Iso palette tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0915",
+      "TEXT": "Your capital has been captured. Would you like to continue watching the game?",
+      "VERIFIED": false,
+      "CONTEXT": "MainView2 - Captured capital"
+    },
+    {
+      "TXT_ID": "X005TA0916",
+      "TEXT": "Empty quest log",
+      "VERIFIED": false,
+      "CONTEXT": "QuestLogInterf"
+    },
+    {
+      "TXT_ID": "X005TA0588",
+      "TEXT": "Saving %SAVEGAME%.csg...",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X006TA0038",
+      "TEXT": "\\vC;%NAME%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0917",
+      "TEXT": "Summary of the previous turn",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X005TA0918",
+      "TEXT": "\\s15;  -\\p15;\\t\\fMedBold;%DEFEND%\\fNormal; was attacked at location %X%, %Y% by \\fMedBold;%ASSAIL%\\fNormal;, a party from the \\fMedBold;%ASSAILRACE%\\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0919",
+      "TEXT": "\\s15;  -\\p15;\\tThe spell \\fMedBold;%SPELL%\\fNormal; was cast by the \\fMedBold;%CASTERRACE%\\fNormal; over \\fMedBold;%TARGET%\\fNormal; at location %X%, %Y%",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0920",
+      "TEXT": "\\s15;  -\\p15;\\tThe spell \\fMedBold;%SPELL%\\fNormal; was cast by the \\fMedBold;%CASTERRACE%\\fNormal; at location %X%, %Y%",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0921",
+      "TEXT": "\\s15;  -\\p15;\\tThe spell \\fMedBold;%SPELL%\\fNormal; was cast by the \\fMedBold;%CASTERRACE%",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X005TA0922",
+      "TEXT": "Do you really want to instantly resolve this battle?",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewerInterf"
+    },
+    {
+      "TXT_ID": "X005TA0923",
+      "TEXT": "\\fNormal;\\fMedBold;%STACK%\\fNormal; was destroyed",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X005TA0924",
+      "TEXT": "\\fNormal;The city of \\fMedBold;%CITY%\\fNormal; was lost",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X005TA0925",
+      "TEXT": "\\fNormal;The rod at %X%, %Y% was destroyed",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0926",
+      "TEXT": "You can not instantly resolve this battle because you are battling against another human player.\\n\\nPlease use the auto battle feature instead.",
+      "VERIFIED": false,
+      "CONTEXT": "BattleViewerInterf"
+    },
+    {
+      "TXT_ID": "X005TA0927",
+      "TEXT": "\\fNormal;The party \\fMedBold;%STACK%\\fNormal; was created at location %X%, %Y%",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0928",
+      "TEXT": "\\fNormal;The party \\fMedBold;%STACK%\\fNormal; has joined your army at location %X%, %Y%",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0929",
+      "TEXT": "\\fNormal;The party \\fMedBold;%STACK%\\fNormal; has left your army at location %X%, %Y%",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf (unused)"
+    },
+    {
+      "TXT_ID": "X005TA0930",
+      "TEXT": "The player could not be kicked out because the server is waiting for an answer",
+      "VERIFIED": false,
+      "CONTEXT": "ServerLogic"
+    },
+    {
+      "TXT_ID": "X005TA0931",
+      "TEXT": "You are currently in the lobby. Are you sure you want to go back to the main menu?",
+      "VERIFIED": false,
+      "CONTEXT": "Multiplayer lobby"
+    },
+    {
+      "TXT_ID": "X005TA0932",
+      "TEXT": "\\hC;\\vC;\\c255;255;255;%TEXT%",
+      "VERIFIED": false,
+      "CONTEXT": "EndScenario"
+    },
+    {
+      "TXT_ID": "X002TA0033",
+      "TEXT": "Dismiss %UNITNAME%?",
+      "VERIFIED": false,
+      "CONTEXT": "Dismiss"
+    },
+    {
+      "TXT_ID": "X005TA0933",
+      "TEXT": "Play computer movement animation",
+      "VERIFIED": false,
+      "CONTEXT": "Option"
+    },
+    {
+      "TXT_ID": "X005TA0934",
+      "TEXT": "Enables or disables the playback of movement animation during the computer\u0027s turn.",
+      "VERIFIED": false,
+      "CONTEXT": "Option"
+    },
+    {
+      "TXT_ID": "X100TA0620",
+      "TEXT": "Party management",
+      "VERIFIED": false,
+      "CONTEXT": "tooltip"
+    },
+    {
+      "TXT_ID": "X100TA0621",
+      "TEXT": "Show / hide resources bar",
+      "VERIFIED": false,
+      "CONTEXT": "tooltip"
+    },
+    {
+      "TXT_ID": "X005TA0935",
+      "TEXT": "\\fLarge;\\hC;\\vT;\\c255;255;255;\\o000;000;000;%TURN%",
+      "VERIFIED": false,
+      "CONTEXT": "StackPath"
+    },
+    {
+      "TXT_ID": "X005TA0936",
+      "TEXT": "You cannot force a leader to upgrade without changing type.",
+      "VERIFIED": false,
+      "CONTEXT": "DynLevel DD"
+    },
+    {
+      "TXT_ID": "X005TA0937",
+      "TEXT": "You cannot force a guardian to upgrade without changing type.",
+      "VERIFIED": false,
+      "CONTEXT": "DynLevel DD"
+    },
+    {
+      "TXT_ID": "X005TA0938",
+      "TEXT": "Are you sure you want to stop %UNITNAME% from changing type? This cannot be undone! Note that unit will still continue to move up levels once its type has been locked.",
+      "VERIFIED": false,
+      "CONTEXT": "DynLevel DD"
+    },
+    {
+      "TXT_ID": "X005TA0939",
+      "TEXT": "This unit is already locked.",
+      "VERIFIED": false,
+      "CONTEXT": "DynLevel DD"
+    },
+    {
+      "TXT_ID": "X100TA0622",
+      "TEXT": "Lock unit type",
+      "VERIFIED": false,
+      "CONTEXT": "DD DynLevel Tooltip"
+    },
+    {
+      "TXT_ID": "X130TA0001",
+      "TEXT": "Tab",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0002",
+      "TEXT": "Enter",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0003",
+      "TEXT": "Esc",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0004",
+      "TEXT": "Space",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0005",
+      "TEXT": "Left",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0006",
+      "TEXT": "Up",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0007",
+      "TEXT": "Right",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0008",
+      "TEXT": "Down",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0009",
+      "TEXT": "Pg. Up",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0010",
+      "TEXT": "Pg. Down",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0011",
+      "TEXT": "F1",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0012",
+      "TEXT": "F2",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0013",
+      "TEXT": "F3",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0014",
+      "TEXT": "F4",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0015",
+      "TEXT": "F5",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0016",
+      "TEXT": "F6",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0017",
+      "TEXT": "F7",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0018",
+      "TEXT": "F8",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0019",
+      "TEXT": "F9",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0020",
+      "TEXT": "F10",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0021",
+      "TEXT": "F11",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X130TA0022",
+      "TEXT": "F12",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0940",
+      "TEXT": "\\vC;%ABIL%",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0001",
+      "TEXT": "Choose Race",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0002",
+      "TEXT": "Credits",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0003",
+      "TEXT": "LOAD SKIRMISH",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0004",
+      "TEXT": "NEW SKIRMISH",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0005",
+      "TEXT": "Average",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0006",
+      "TEXT": "Easy",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0007",
+      "TEXT": "Gold",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0008",
+      "TEXT": "Hard",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0009",
+      "TEXT": "Mana",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0010",
+      "TEXT": "Very hard",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0011",
+      "TEXT": "Delete leader",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0012",
+      "TEXT": "Import leader",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0013",
+      "TEXT": "View leader",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0014",
+      "TEXT": "Transformed Lands",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0015",
+      "TEXT": "HOST",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0016",
+      "TEXT": "JOIN QUEST",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0017",
+      "TEXT": "LOAD QUEST",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0018",
+      "TEXT": "Max. player",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0019",
+      "TEXT": "Turn",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0020",
+      "TEXT": "CREDITS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0021",
+      "TEXT": "INTRO",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0022",
+      "TEXT": "MULTIPLAYER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0023",
+      "TEXT": "OPTIONS",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0024",
+      "TEXT": "QUIT",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0025",
+      "TEXT": "SINGLE PLAYER",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0026",
+      "TEXT": "v.3.01",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0027",
+      "TEXT": "Quests:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0028",
+      "TEXT": "Leader Level:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0029",
+      "TEXT": "Author:",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0030",
+      "TEXT": "High End",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0031",
+      "TEXT": "Low End",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0032",
+      "TEXT": "NEW CUSTOM SAGA",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0033",
+      "TEXT": "LOAD CUSTOM SAGA",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0034",
+      "TEXT": "LOAD SAGA",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0035",
+      "TEXT": "NEW QUEST",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0036",
+      "TEXT": "NEW SAGA",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X100TA0623",
+      "TEXT": "Instant resolve",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X005TA0941",
+      "TEXT": "This unit\u0027s type has been locked. It does not need a new building to upgrade.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0500",
+      "TEXT": "This high-level campaign requires that you import a leader (level %LEVEL% or above suggested) to begin your quest. However, no valid leader was found.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0501",
+      "TEXT": "You need to import a leader to play this campaign.  A level %LEVEL% or above leader is suggested.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0502",
+      "TEXT": "\\fLarge;Predicted income at the beginning of the next turn",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0503",
+      "TEXT": "Show next turn income",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0504",
+      "TEXT": "Choose campaign",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0505",
+      "TEXT": "TUTORIAL",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0506",
+      "TEXT": "The \u0022%NAME%\u0022 expansion pack is required to play this scenario or campaign.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0507",
+      "TEXT": "Disciples II - Guardians of the Light",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0508",
+      "TEXT": "Disciples II - Servants of the Dark",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0509",
+      "TEXT": "\\fLarge;Failure!\\fNormal;\\n\\n%PLAYER%, Lord of the %RACE%, wins!",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0510",
+      "TEXT": "Guardians of the Light",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0511",
+      "TEXT": "Servants of the Dark",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0512",
+      "TEXT": "Gallean\u0027s Return",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X150TA0513",
+      "TEXT": "No other race is available.  All playable races are already assigned to other players.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0001",
+      "TEXT": "%QTY% Grove mana",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0002",
+      "TEXT": "\\s60;\\t%BLUEAMOUNT% \\s90;\\tGrove Mana\\n",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0003",
+      "TEXT": "The Elven Alliance",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0004",
+      "TEXT": "Send to the Elves",
+      "VERIFIED": false,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0005",
+      "TEXT": "exchange fog vision",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0006",
+      "TEXT": "Are you sure you want to exchange fog vision?",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0007",
+      "TEXT": "Exchange fog vision",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0008",
+      "TEXT": "\\fMedBold;%PLAYER%\\fNormal;, Lord of the \\fMedBold;%RACE%\\fNormal;, offers to exchange its view of the map with you.\\nDo you accept the offer?",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0009",
+      "TEXT": "\\fMedBold;%PLAYER%\\fNormal;, Lord of the \\fMedBold;%RACE%\\fNormal;, has accepted your offer. You have now exchanged your view of the map!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0010",
+      "TEXT": "\\fMedBold;%PLAYER%,\\fNormal; Lord of the \\fMedBold;%RACE%,\\fNormal; declines your offer and refuses to exchange its view of the map with you!",
+      "VERIFIED": true,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0011",
+      "TEXT": "\\hC;\\vC;Blister",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0012",
+      "TEXT": "Blister",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0013",
+      "TEXT": "\\hC;\\vC;Bestow wards",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0014",
+      "TEXT": "Bestow wards",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0015",
+      "TEXT": "Flip battle sides",
+      "VERIFIED": false,
+      "CONTEXT": "Option"
+    },
+    {
+      "TXT_ID": "X160TA0016",
+      "TEXT": "Flip the side from which you see the battles.",
+      "VERIFIED": false,
+      "CONTEXT": "Option"
+    },
+    {
+      "TXT_ID": "X160TA0017",
+      "TEXT": "Critical hit",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0018",
+      "TEXT": "Inflicts 5% more damage regardless of armor.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0019",
+      "TEXT": "\\hC;\\vC;Shatter",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0020",
+      "TEXT": "Shatter",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0021",
+      "TEXT": "\\hC;\\vC;\\fLarge;Critical hit\\n%DAMAGE% \u002B %CRITICAL%",
+      "VERIFIED": false,
+      "CONTEXT": "Battle"
+    },
+    {
+      "TXT_ID": "X160TA0022",
+      "TEXT": "\\hC;\\vC;Blister (%DAMAGE%)",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0023",
+      "TEXT": "You have already proposed to exchange fog vision with this player this turn. You must wait for your next turn to try again.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0024",
+      "TEXT": "Always show turn summary",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0025",
+      "TEXT": "Show the turn summary all the time, not only in hotseat.",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0026",
+      "TEXT": "\\s15;  -\\p15;\\t\\fMedBold;%DEFEND%\\fNormal; was attacked around the %MAPPART% part of the map by \\fMedBold;%ASSAIL%\\fNormal;, a party from the \\fMedBold;%ASSAILRACE%\\fNormal;",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0027",
+      "TEXT": "\\s15;  -\\p15;\\tThe spell \\fMedBold;%SPELL%\\fNormal; was cast by the \\fMedBold;%CASTERRACE%\\fNormal; over \\fMedBold;%TARGET%\\fNormal; around the %MAPPART% part of the map",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0028",
+      "TEXT": "\\s15;  -\\p15;\\tThe spell \\fMedBold;%SPELL%\\fNormal; was cast by the \\fMedBold;%CASTERRACE%\\fNormal; around the %MAPPART% part of the map",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0029",
+      "TEXT": "\\fNormal;A rod around the %MAPPART% part of the map was destroyed",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0030",
+      "TEXT": "\\fNormal;The party \\fMedBold;%STACK%\\fNormal; was created around the %MAPPART% part of the map",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0031",
+      "TEXT": "\\fNormal;The party \\fMedBold;%STACK%\\fNormal; has joined your army around the %MAPPART% part of the map",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0032",
+      "TEXT": "\\fNormal;The party \\fMedBold;%STACK%\\fNormal; has left your army around the %MAPPART% part of the map",
+      "VERIFIED": false,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0033",
+      "TEXT": "upper",
+      "VERIFIED": null,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0034",
+      "TEXT": "lower",
+      "VERIFIED": null,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0035",
+      "TEXT": "left",
+      "VERIFIED": null,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0036",
+      "TEXT": "right",
+      "VERIFIED": null,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0037",
+      "TEXT": "center",
+      "VERIFIED": null,
+      "CONTEXT": "TurnSummaryInterf"
+    },
+    {
+      "TXT_ID": "X160TA0038",
+      "TEXT": "Grove mana",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0039",
+      "TEXT": "Send to Elven Alliance",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0040",
+      "TEXT": "Map / Land",
+      "VERIFIED": null,
+      "CONTEXT": null
+    },
+    {
+      "TXT_ID": "X160TA0514",
+      "TEXT": "Rise of the Elves",
+      "VERIFIED": null,
+      "CONTEXT": null
+    }
+  ]
+}

@@ -1,0 +1,1781 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0000",
+      "POS_X": 6,
+      "POS_Y": 21,
+      "INDEX": 13,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0001",
+      "POS_X": 6,
+      "POS_Y": 22,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0002",
+      "POS_X": 6,
+      "POS_Y": 23,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA000b",
+      "POS_X": 8,
+      "POS_Y": 29,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA000c",
+      "POS_X": 9,
+      "POS_Y": 29,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA000d",
+      "POS_X": 9,
+      "POS_Y": 30,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA000e",
+      "POS_X": 9,
+      "POS_Y": 31,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA000f",
+      "POS_X": 10,
+      "POS_Y": 31,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0010",
+      "POS_X": 10,
+      "POS_Y": 32,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0011",
+      "POS_X": 10,
+      "POS_Y": 33,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0012",
+      "POS_X": 11,
+      "POS_Y": 33,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0013",
+      "POS_X": 11,
+      "POS_Y": 34,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0014",
+      "POS_X": 12,
+      "POS_Y": 34,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0015",
+      "POS_X": 12,
+      "POS_Y": 35,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0016",
+      "POS_X": 13,
+      "POS_Y": 35,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0017",
+      "POS_X": 13,
+      "POS_Y": 36,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0018",
+      "POS_X": 14,
+      "POS_Y": 36,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0019",
+      "POS_X": 15,
+      "POS_Y": 36,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA001a",
+      "POS_X": 16,
+      "POS_Y": 36,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA001b",
+      "POS_X": 17,
+      "POS_Y": 36,
+      "INDEX": 15,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA001c",
+      "POS_X": 5,
+      "POS_Y": 24,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA001d",
+      "POS_X": 5,
+      "POS_Y": 25,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA001e",
+      "POS_X": 5,
+      "POS_Y": 26,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0020",
+      "POS_X": 6,
+      "POS_Y": 27,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0021",
+      "POS_X": 5,
+      "POS_Y": 23,
+      "INDEX": 9,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0022",
+      "POS_X": 5,
+      "POS_Y": 27,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0023",
+      "POS_X": 6,
+      "POS_Y": 28,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0024",
+      "POS_X": 6,
+      "POS_Y": 29,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0025",
+      "POS_X": 7,
+      "POS_Y": 29,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0026",
+      "POS_X": 27,
+      "POS_Y": 22,
+      "INDEX": 9,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0027",
+      "POS_X": 27,
+      "POS_Y": 23,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0029",
+      "POS_X": 28,
+      "POS_Y": 24,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA002a",
+      "POS_X": 29,
+      "POS_Y": 24,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA002b",
+      "POS_X": 29,
+      "POS_Y": 25,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA002c",
+      "POS_X": 29,
+      "POS_Y": 26,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA002d",
+      "POS_X": 29,
+      "POS_Y": 27,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA002e",
+      "POS_X": 29,
+      "POS_Y": 28,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA002f",
+      "POS_X": 29,
+      "POS_Y": 29,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0030",
+      "POS_X": 28,
+      "POS_Y": 29,
+      "INDEX": 9,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0031",
+      "POS_X": 28,
+      "POS_Y": 30,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0032",
+      "POS_X": 27,
+      "POS_Y": 30,
+      "INDEX": 9,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0033",
+      "POS_X": 27,
+      "POS_Y": 31,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0034",
+      "POS_X": 26,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0035",
+      "POS_X": 25,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0036",
+      "POS_X": 24,
+      "POS_Y": 31,
+      "INDEX": 9,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0037",
+      "POS_X": 24,
+      "POS_Y": 32,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0038",
+      "POS_X": 23,
+      "POS_Y": 32,
+      "INDEX": 12,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0039",
+      "POS_X": 53,
+      "POS_Y": 15,
+      "INDEX": 15,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA003a",
+      "POS_X": 52,
+      "POS_Y": 15,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA003b",
+      "POS_X": 51,
+      "POS_Y": 15,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA003c",
+      "POS_X": 50,
+      "POS_Y": 15,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA003d",
+      "POS_X": 49,
+      "POS_Y": 15,
+      "INDEX": 12,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA003e",
+      "POS_X": 48,
+      "POS_Y": 16,
+      "INDEX": 15,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA003f",
+      "POS_X": 47,
+      "POS_Y": 16,
+      "INDEX": 7,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0040",
+      "POS_X": 47,
+      "POS_Y": 17,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0041",
+      "POS_X": 47,
+      "POS_Y": 18,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0042",
+      "POS_X": 47,
+      "POS_Y": 19,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0043",
+      "POS_X": 48,
+      "POS_Y": 19,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0044",
+      "POS_X": 48,
+      "POS_Y": 20,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0045",
+      "POS_X": 48,
+      "POS_Y": 21,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0046",
+      "POS_X": 49,
+      "POS_Y": 21,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0047",
+      "POS_X": 49,
+      "POS_Y": 22,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0051",
+      "POS_X": 53,
+      "POS_Y": 26,
+      "INDEX": 13,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0052",
+      "POS_X": 53,
+      "POS_Y": 27,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0053",
+      "POS_X": 54,
+      "POS_Y": 27,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0054",
+      "POS_X": 54,
+      "POS_Y": 28,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0055",
+      "POS_X": 55,
+      "POS_Y": 29,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0056",
+      "POS_X": 56,
+      "POS_Y": 30,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0057",
+      "POS_X": 57,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0058",
+      "POS_X": 58,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0059",
+      "POS_X": 59,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA005a",
+      "POS_X": 60,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA005b",
+      "POS_X": 56,
+      "POS_Y": 31,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA005c",
+      "POS_X": 55,
+      "POS_Y": 30,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA005d",
+      "POS_X": 54,
+      "POS_Y": 29,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA005f",
+      "POS_X": 44,
+      "POS_Y": 4,
+      "INDEX": 12,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0060",
+      "POS_X": 45,
+      "POS_Y": 4,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0061",
+      "POS_X": 46,
+      "POS_Y": 4,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0062",
+      "POS_X": 46,
+      "POS_Y": 5,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0063",
+      "POS_X": 47,
+      "POS_Y": 5,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0064",
+      "POS_X": 48,
+      "POS_Y": 6,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0065",
+      "POS_X": 48,
+      "POS_Y": 7,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0066",
+      "POS_X": 49,
+      "POS_Y": 7,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0067",
+      "POS_X": 54,
+      "POS_Y": 14,
+      "INDEX": 14,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0068",
+      "POS_X": 54,
+      "POS_Y": 13,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0069",
+      "POS_X": 54,
+      "POS_Y": 12,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA006a",
+      "POS_X": 54,
+      "POS_Y": 11,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA006b",
+      "POS_X": 53,
+      "POS_Y": 10,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA006c",
+      "POS_X": 53,
+      "POS_Y": 9,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA006d",
+      "POS_X": 52,
+      "POS_Y": 9,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA006e",
+      "POS_X": 51,
+      "POS_Y": 9,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA006f",
+      "POS_X": 51,
+      "POS_Y": 8,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0070",
+      "POS_X": 50,
+      "POS_Y": 8,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0071",
+      "POS_X": 50,
+      "POS_Y": 7,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0072",
+      "POS_X": 54,
+      "POS_Y": 10,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0073",
+      "POS_X": 48,
+      "POS_Y": 5,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0074",
+      "POS_X": 41,
+      "POS_Y": 39,
+      "INDEX": 14,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0075",
+      "POS_X": 41,
+      "POS_Y": 38,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0076",
+      "POS_X": 41,
+      "POS_Y": 37,
+      "INDEX": 6,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0077",
+      "POS_X": 42,
+      "POS_Y": 37,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0078",
+      "POS_X": 42,
+      "POS_Y": 36,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0079",
+      "POS_X": 42,
+      "POS_Y": 35,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA007a",
+      "POS_X": 42,
+      "POS_Y": 34,
+      "INDEX": 9,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA007b",
+      "POS_X": 43,
+      "POS_Y": 34,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA007c",
+      "POS_X": 43,
+      "POS_Y": 33,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA007d",
+      "POS_X": 43,
+      "POS_Y": 32,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA007e",
+      "POS_X": 43,
+      "POS_Y": 31,
+      "INDEX": 4,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA007f",
+      "POS_X": 42,
+      "POS_Y": 31,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0080",
+      "POS_X": 41,
+      "POS_Y": 31,
+      "INDEX": 12,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0081",
+      "POS_X": 40,
+      "POS_Y": 30,
+      "INDEX": 0,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0082",
+      "POS_X": 40,
+      "POS_Y": 37,
+      "INDEX": 12,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0083",
+      "POS_X": 43,
+      "POS_Y": 30,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0084",
+      "POS_X": 43,
+      "POS_Y": 29,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0085",
+      "POS_X": 43,
+      "POS_Y": 28,
+      "INDEX": 9,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0086",
+      "POS_X": 44,
+      "POS_Y": 28,
+      "INDEX": 15,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0087",
+      "POS_X": 49,
+      "POS_Y": 23,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0088",
+      "POS_X": 50,
+      "POS_Y": 23,
+      "INDEX": 15,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA008d",
+      "POS_X": 61,
+      "POS_Y": 64,
+      "INDEX": 13,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA008e",
+      "POS_X": 61,
+      "POS_Y": 65,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA008f",
+      "POS_X": 60,
+      "POS_Y": 65,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0090",
+      "POS_X": 59,
+      "POS_Y": 65,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0091",
+      "POS_X": 59,
+      "POS_Y": 64,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0092",
+      "POS_X": 58,
+      "POS_Y": 64,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0093",
+      "POS_X": 57,
+      "POS_Y": 63,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0094",
+      "POS_X": 57,
+      "POS_Y": 62,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0095",
+      "POS_X": 57,
+      "POS_Y": 61,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0096",
+      "POS_X": 57,
+      "POS_Y": 60,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0097",
+      "POS_X": 57,
+      "POS_Y": 59,
+      "INDEX": 6,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0098",
+      "POS_X": 57,
+      "POS_Y": 64,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA0099",
+      "POS_X": 52,
+      "POS_Y": 56,
+      "INDEX": 12,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA009a",
+      "POS_X": 53,
+      "POS_Y": 56,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA009b",
+      "POS_X": 53,
+      "POS_Y": 57,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA009c",
+      "POS_X": 53,
+      "POS_Y": 58,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA009d",
+      "POS_X": 54,
+      "POS_Y": 58,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA009e",
+      "POS_X": 54,
+      "POS_Y": 59,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA009f",
+      "POS_X": 55,
+      "POS_Y": 59,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a0",
+      "POS_X": 56,
+      "POS_Y": 59,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a1",
+      "POS_X": 58,
+      "POS_Y": 59,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a2",
+      "POS_X": 58,
+      "POS_Y": 58,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a3",
+      "POS_X": 58,
+      "POS_Y": 57,
+      "INDEX": 13,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a4",
+      "POS_X": 64,
+      "POS_Y": 44,
+      "INDEX": 12,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a5",
+      "POS_X": 65,
+      "POS_Y": 44,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a6",
+      "POS_X": 65,
+      "POS_Y": 43,
+      "INDEX": 9,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a7",
+      "POS_X": 66,
+      "POS_Y": 43,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00a8",
+      "POS_X": 67,
+      "POS_Y": 43,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00aa",
+      "POS_X": 68,
+      "POS_Y": 42,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ab",
+      "POS_X": 68,
+      "POS_Y": 41,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ac",
+      "POS_X": 67,
+      "POS_Y": 41,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ad",
+      "POS_X": 67,
+      "POS_Y": 40,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ae",
+      "POS_X": 67,
+      "POS_Y": 39,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00af",
+      "POS_X": 66,
+      "POS_Y": 39,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b0",
+      "POS_X": 66,
+      "POS_Y": 38,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b1",
+      "POS_X": 66,
+      "POS_Y": 37,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b2",
+      "POS_X": 65,
+      "POS_Y": 37,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b3",
+      "POS_X": 65,
+      "POS_Y": 36,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b4",
+      "POS_X": 64,
+      "POS_Y": 36,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b5",
+      "POS_X": 64,
+      "POS_Y": 35,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b6",
+      "POS_X": 63,
+      "POS_Y": 35,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b7",
+      "POS_X": 63,
+      "POS_Y": 34,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b8",
+      "POS_X": 62,
+      "POS_Y": 34,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00b9",
+      "POS_X": 62,
+      "POS_Y": 33,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ba",
+      "POS_X": 61,
+      "POS_Y": 33,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00bb",
+      "POS_X": 61,
+      "POS_Y": 32,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00bc",
+      "POS_X": 61,
+      "POS_Y": 31,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00bd",
+      "POS_X": 68,
+      "POS_Y": 43,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00be",
+      "POS_X": 27,
+      "POS_Y": 4,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00bf",
+      "POS_X": 27,
+      "POS_Y": 5,
+      "INDEX": 5,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c0",
+      "POS_X": 26,
+      "POS_Y": 5,
+      "INDEX": 12,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c1",
+      "POS_X": 27,
+      "POS_Y": 3,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c2",
+      "POS_X": 27,
+      "POS_Y": 2,
+      "INDEX": 13,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c3",
+      "POS_X": 28,
+      "POS_Y": 5,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c4",
+      "POS_X": 28,
+      "POS_Y": 6,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c7",
+      "POS_X": 28,
+      "POS_Y": 8,
+      "INDEX": 14,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c8",
+      "POS_X": 28,
+      "POS_Y": 7,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00c9",
+      "POS_X": 44,
+      "POS_Y": 15,
+      "INDEX": 14,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ca",
+      "POS_X": 44,
+      "POS_Y": 14,
+      "INDEX": 7,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00cb",
+      "POS_X": 44,
+      "POS_Y": 13,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00cc",
+      "POS_X": 44,
+      "POS_Y": 12,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00cd",
+      "POS_X": 44,
+      "POS_Y": 11,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ce",
+      "POS_X": 43,
+      "POS_Y": 10,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00cf",
+      "POS_X": 42,
+      "POS_Y": 10,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d0",
+      "POS_X": 41,
+      "POS_Y": 10,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d1",
+      "POS_X": 40,
+      "POS_Y": 9,
+      "INDEX": 5,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d2",
+      "POS_X": 40,
+      "POS_Y": 8,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d3",
+      "POS_X": 41,
+      "POS_Y": 9,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d4",
+      "POS_X": 44,
+      "POS_Y": 10,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d5",
+      "POS_X": 39,
+      "POS_Y": 9,
+      "INDEX": 12,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d6",
+      "POS_X": 45,
+      "POS_Y": 14,
+      "INDEX": 2,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d7",
+      "POS_X": 46,
+      "POS_Y": 14,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d8",
+      "POS_X": 46,
+      "POS_Y": 15,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00d9",
+      "POS_X": 47,
+      "POS_Y": 15,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00da",
+      "POS_X": 28,
+      "POS_Y": 22,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00db",
+      "POS_X": 28,
+      "POS_Y": 21,
+      "INDEX": 9,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00dc",
+      "POS_X": 29,
+      "POS_Y": 21,
+      "INDEX": 11,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00dd",
+      "POS_X": 29,
+      "POS_Y": 20,
+      "INDEX": 9,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00de",
+      "POS_X": 30,
+      "POS_Y": 20,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00df",
+      "POS_X": 31,
+      "POS_Y": 19,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e0",
+      "POS_X": 31,
+      "POS_Y": 18,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e1",
+      "POS_X": 31,
+      "POS_Y": 17,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e2",
+      "POS_X": 30,
+      "POS_Y": 16,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e3",
+      "POS_X": 30,
+      "POS_Y": 15,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e4",
+      "POS_X": 29,
+      "POS_Y": 15,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e5",
+      "POS_X": 28,
+      "POS_Y": 14,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e6",
+      "POS_X": 27,
+      "POS_Y": 13,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e7",
+      "POS_X": 28,
+      "POS_Y": 13,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e8",
+      "POS_X": 29,
+      "POS_Y": 14,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00e9",
+      "POS_X": 31,
+      "POS_Y": 16,
+      "INDEX": 10,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ea",
+      "POS_X": 31,
+      "POS_Y": 20,
+      "INDEX": 11,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00eb",
+      "POS_X": 27,
+      "POS_Y": 24,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ec",
+      "POS_X": 27,
+      "POS_Y": 12,
+      "INDEX": 13,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ed",
+      "POS_X": 37,
+      "POS_Y": 4,
+      "INDEX": 3,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ee",
+      "POS_X": 37,
+      "POS_Y": 5,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00ef",
+      "POS_X": 38,
+      "POS_Y": 5,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f0",
+      "POS_X": 38,
+      "POS_Y": 6,
+      "INDEX": 3,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f1",
+      "POS_X": 39,
+      "POS_Y": 7,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f3",
+      "POS_X": 40,
+      "POS_Y": 7,
+      "INDEX": 10,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f4",
+      "POS_X": 38,
+      "POS_Y": 7,
+      "INDEX": 8,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f5",
+      "POS_X": 37,
+      "POS_Y": 3,
+      "INDEX": 13,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f6",
+      "POS_X": 35,
+      "POS_Y": 41,
+      "INDEX": 13,
+      "VAR": 0
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f7",
+      "POS_X": 35,
+      "POS_Y": 42,
+      "INDEX": 8,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f8",
+      "POS_X": 36,
+      "POS_Y": 42,
+      "INDEX": 2,
+      "VAR": 1
+    },
+    {
+      "NO_SCEN": "S252SC0000",
+      "ROAD_ID": "S252RA00f9",
+      "POS_X": 37,
+      "POS_Y": 42,
+      "INDEX": 15,
+      "VAR": 0
+    }
+  ]
+}

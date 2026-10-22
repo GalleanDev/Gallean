@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Tests.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Assets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\AssetAliases.cs" Link="AssetAliases.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameContent\GameContent.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
+  </ItemGroup>
+
+</Project>

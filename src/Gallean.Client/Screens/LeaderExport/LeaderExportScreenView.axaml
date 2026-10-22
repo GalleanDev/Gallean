@@ -1,0 +1,118 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.LeaderExportScreenView"
+             x:DataType="local:LeaderExportScreenViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Width="820" MaxHeight="680" Padding="20,16,20,24" Title="{local:Text 'Export leader'}" InitialFocus="{Binding #ExportButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,Auto">
+          <TextBlock Grid.Column="0"
+                     local:TextRuns.Spans="{Binding SelectedItemsText}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <Button Grid.Column="1"
+                  Content="{local:Text 'Back'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="1"
+                  MinWidth="110"
+                  VerticalAlignment="Center"
+                  Command="{Binding CloseCommand}"
+                  Margin="0,0,12,0" />
+          <Button x:Name="ExportButton"
+                  Grid.Column="2"
+                  Content="{local:Text 'Export leader'}"
+                  Classes="pill success"
+                  local:PlateChrome.TextureSeed="2"
+                  MinWidth="160"
+                  VerticalAlignment="Center"
+                  Command="{Binding ExportCommand}" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <Grid ColumnDefinitions="*,24,*" RowDefinitions="Auto,*">
+
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   Text="{Binding Instruction}"
+                   Classes="body"
+                   Foreground="{StaticResource SecondaryTextBrush}"
+                   TextWrapping="Wrap"
+                   Margin="0,0,0,12" />
+
+        <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="Auto,*">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Leader'}" Classes="label" Margin="0,0,0,8" />
+          <ListBox Grid.Row="1" Classes="select-list" ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="local:LeaderExportCandidateViewModel">
+                <Border Classes="row">
+                  <Grid ColumnDefinitions="56,*">
+                    <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="56" Height="56" />
+                    <StackPanel Grid.Column="1" Spacing="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                      <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Text="{Binding Summary}"
+                                 Classes="caption"
+                                 Foreground="{StaticResource SecondaryTextBrush}"
+                                 TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="2" RowDefinitions="Auto,*">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Items'}" Classes="label" Margin="0,0,0,8" />
+          <ScrollViewer Classes="list" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl Classes="focus-group" Padding="0,6,12,6" ItemsSource="{Binding Items}">
+              <local:Blankslate.Content>
+                <TextBlock Text="{local:Text 'No items can be brought to the next quest.'}"
+                           Classes="body"
+                           Foreground="{StaticResource SecondaryTextBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,10" />
+              </local:Blankslate.Content>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="local:LeaderExportItemViewModel">
+                  <Border Padding="0,6" BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerBrush}" Background="Transparent">
+                    <Grid ColumnDefinitions="56,*,Auto,Auto" VerticalAlignment="Center">
+                      <Border Grid.Column="0" Classes="frame" Width="56" Height="56" BorderThickness="2">
+                        <local:SpriteVisual SpriteKey="{Binding IconKey}" Stretch="Uniform" />
+                      </Border>
+                      <StackPanel Grid.Column="1" Spacing="1" Margin="12,0,12,0" VerticalAlignment="Center">
+                        <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                          <TextBlock Text="{Binding AvailableText}"
+                                     Classes="caption"
+                                     Foreground="{StaticResource SecondaryTextBrush}" />
+                          <TextBlock Text="{Binding SelectedText}"
+                                     Classes="caption"
+                                     Foreground="{StaticResource PrimaryTextBrush}"
+                                     IsVisible="{Binding IsSelected}" />
+                        </StackPanel>
+                      </StackPanel>
+                      <Button Grid.Column="2" Classes="icon-button" Command="{Binding RemoveCommand}" Margin="0,0,8,0">
+                        <local:IconVisual Moniker="Minus" />
+                      </Button>
+                      <Button Grid.Column="3" Classes="icon-button" Command="{Binding AddCommand}">
+                        <local:IconVisual Moniker="Plus" />
+                      </Button>
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </Grid>
+
+      </Grid>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>
