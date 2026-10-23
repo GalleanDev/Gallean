@@ -16,7 +16,7 @@ internal sealed class RestoreMovementSpellResolver : WorldAbstractUnitSpellResol
 
     protected override WorldCommandResult OnHit(
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldStack stack,
         int powerPercent,
         WorldRestoreMovementSpellEffect effect)

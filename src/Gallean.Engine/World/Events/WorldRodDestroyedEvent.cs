@@ -2,7 +2,7 @@ namespace Gallean.Engine;
 
 public sealed record WorldRodDestroyedEvent(
     WorldRodId RodId,
-    WorldPlayerId PlayerId,
+    WorldPlayerId? PlayerId,
     WorldPlayerId TargetPlayerId,
     WorldPosition Position) : WorldEvent
 {

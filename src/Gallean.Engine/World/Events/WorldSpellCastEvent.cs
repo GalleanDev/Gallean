@@ -1,7 +1,7 @@
 namespace Gallean.Engine;
 
 public sealed record WorldSpellCastEvent(
-    WorldPlayerId CasterId,
+    WorldPlayerId? CasterId,
     WorldSpellDefinitionId SpellId,
     WorldSpellTarget? Target,
     WorldResourceSet Cost,

@@ -247,7 +247,7 @@ internal sealed partial class WorldEventQueue
 
         public sealed record SpellCast(
             WorldState State,
-            WorldPlayerId CasterId,
+            WorldPlayerId? CasterId,
             WorldSpellDefinitionId SpellId,
             WorldPosition Position,
             WorldStackId? SummonedStackId) : Animated(State)

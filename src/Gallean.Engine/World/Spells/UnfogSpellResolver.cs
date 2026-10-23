@@ -8,12 +8,17 @@ internal sealed class UnfogSpellResolver : IWorldSpellResolver<WorldUnfogSpellEf
     public WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         WorldUnfogSpellEffect effect)
     {
-        WorldPlayer player = state.Players[casterId];
+        if (casterId is null)
+        {
+            return WorldCommandResult.Fail(WorldCommandError.SpellTargetInvalid);
+        }
+
+        WorldPlayer player = state.Players[casterId.Value];
         ImmutableArray<WorldPosition>.Builder revealed = ImmutableArray.CreateBuilder<WorldPosition>();
 
         foreach (WorldPosition tile in SpellTargetCalculator.GetArea(state, target?.Center, spell.AreaRadius))
@@ -28,7 +33,7 @@ internal sealed class UnfogSpellResolver : IWorldSpellResolver<WorldUnfogSpellEf
         {
             return WorldCommandResult.Success(
                 Empty.Value,
-                [new WorldFogRevealedEvent(casterId, revealed.ToImmutable())]);
+                [new WorldFogRevealedEvent(casterId.Value, revealed.ToImmutable())]);
         }
         else
         {

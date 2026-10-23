@@ -7,7 +7,7 @@ internal sealed class SummonSpellResolver : IWorldSpellResolver<WorldSummonStack
     public WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         WorldSummonStackSpellEffect effect)
@@ -54,6 +54,22 @@ internal sealed class SummonSpellResolver : IWorldSpellResolver<WorldSummonStack
             return WorldCommandResult.Fail(error.Value);
         }
 
+        WorldPlayerId? racePlayerId = FindPlayerId(state, unitDefinition.Race);
+        WorldPlayerId ownerId;
+
+        if (casterId is not null)
+        {
+            ownerId = casterId.Value;
+        }
+        else if (racePlayerId is not null)
+        {
+            ownerId = racePlayerId.Value;
+        }
+        else
+        {
+            ownerId = WorldCommandHelpers.GetNeutralPlayerId(state);
+        }
+
         int? expirationTurn;
 
         if (unitDefinition.Lifetime is not null)
@@ -67,14 +83,14 @@ internal sealed class SummonSpellResolver : IWorldSpellResolver<WorldSummonStack
 
         WorldStack stack = new(
             WorldCommandHelpers.GenerateStackId(state),
-            casterId,
+            ownerId,
             tile.Value,
             WorldStackDirection.South,
             units,
             unitDefinition.MovementPoints ?? 0,
             Inventory: WorldInventory.Empty,
             LeaderEquipment.Empty,
-            WorldCommandHelpers.GetPlayerSubraceId(state, casterId),
+            WorldCommandHelpers.GetPlayerSubraceId(state, ownerId),
             context.Globals.AiDefaultPriority,
             AiIgnore: false,
             Concealed: false,
@@ -90,5 +106,18 @@ internal sealed class SummonSpellResolver : IWorldSpellResolver<WorldSummonStack
                 new WorldStackCreatedEvent(stack, WorldResourceSet.Empty),
                 new WorldScenarioCheckEvent(new ScenarioEventStackCreatedTrigger(stack.Id), [])
             ]);
+    }
+
+    private static WorldPlayerId? FindPlayerId(WorldState state, WorldRace race)
+    {
+        foreach (WorldPlayer player in state.Players.Values)
+        {
+            if (player.Race == race)
+            {
+                return player.Id;
+            }
+        }
+
+        return null;
     }
 }

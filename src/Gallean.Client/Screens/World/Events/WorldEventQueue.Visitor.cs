@@ -543,10 +543,10 @@ internal sealed partial class WorldEventQueue
         {
             queue.Add(new Entry.SpellCast(step.NewState, ev.CasterId, ev.SpellId, ev.Target.Center, SummonedStackId: null));
         }
-        else
+        else if (ev.CasterId is not null)
         {
             WorldPlan plan = WorldPlan.For(step.NewState);
-            WorldCapital? capital = plan.GetCapital(ev.CasterId);
+            WorldCapital? capital = plan.GetCapital(ev.CasterId.Value);
 
             if (capital is not null)
             {

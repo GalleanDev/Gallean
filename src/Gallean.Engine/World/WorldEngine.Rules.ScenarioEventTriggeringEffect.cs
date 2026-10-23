@@ -207,7 +207,19 @@ internal partial class WorldEngine
                 return Empty(context.State);
             }
 
-            return Cast(effect.SpellId, effect.CasterId, new WorldSpellTarget(triggerer.Position, Radius: 0), context);
+            WorldSpellDefinition spell = Context.Definitions.GetSpell(effect.SpellId);
+            WorldPlayerId? casterId;
+
+            if (spell.Effect is WorldSummonStackSpellEffect)
+            {
+                casterId = effect.CasterId ?? context.TriggeredEvent.TriggererId;
+            }
+            else
+            {
+                casterId = effect.CasterId;
+            }
+
+            return Cast(effect.SpellId, casterId, new WorldSpellTarget(triggerer.Position, Radius: 0), context);
         }
 
         public ScenarioEventEffectResult Visit(ScenarioEventCastSpellMapEffect effect, ScenarioEventEffectContext context)
@@ -544,16 +556,14 @@ internal partial class WorldEngine
             WorldSpellTarget target,
             ScenarioEventEffectContext context)
         {
-            WorldPlayerId resolvedCasterId = casterId ?? context.TriggeredEvent.TriggererId;
-
-            if (!context.State.Players.ContainsKey(resolvedCasterId))
+            if (casterId is not null && !context.State.Players.ContainsKey(casterId.Value))
             {
                 return Empty(context.State);
             }
 
             return new ScenarioEventEffectResult(
                 context.State,
-                [new WorldSpellCastEvent(resolvedCasterId, spellId, target, WorldResourceSet.Empty, WorldSpellCastSource.Scenario)]);
+                [new WorldSpellCastEvent(casterId, spellId, target, WorldResourceSet.Empty, WorldSpellCastSource.Scenario)]);
         }
 
         private static ScenarioEventEffectResult Relocate(

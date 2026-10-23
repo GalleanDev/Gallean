@@ -7,7 +7,7 @@ internal sealed class RemoveRodSpellResolver : IWorldSpellResolver<WorldRemoveRo
     public WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         WorldRemoveRodSpellEffect effect)

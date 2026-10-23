@@ -8,7 +8,7 @@ internal sealed class ChangeTerrainSpellResolver : IWorldSpellResolver<WorldChan
     public WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         WorldChangeTerrainSpellEffect effect)

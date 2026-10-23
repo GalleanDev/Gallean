@@ -30,7 +30,7 @@ internal sealed class InvisibilitySpellResolver : WorldAbstractUnitSpellResolver
 
     protected override WorldCommandResult OnHit(
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldStack stack,
         int powerPercent,
         WorldInvisibilitySpellEffect effect)

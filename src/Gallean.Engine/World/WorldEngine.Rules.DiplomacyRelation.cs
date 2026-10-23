@@ -58,7 +58,14 @@ internal partial class WorldEngine
 
         public override EventRuleResult<WorldEvent> Visit(WorldRodDestroyedEvent ev, WorldState state)
         {
-            return UpdateRelation(state, ev.PlayerId, ev.TargetPlayerId, Context.Globals.DiplomacyDestroyRodRelationChange);
+            if (ev.PlayerId is not null)
+            {
+                return UpdateRelation(state, ev.PlayerId.Value, ev.TargetPlayerId, Context.Globals.DiplomacyDestroyRodRelationChange);
+            }
+            else
+            {
+                return EventRuleResult<WorldEvent>.Empty;
+            }
         }
 
         public override EventRuleResult<WorldEvent> Visit(WorldAllianceEndedEvent ev, WorldState state)

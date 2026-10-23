@@ -182,6 +182,19 @@ internal static class WorldCommandHelpers
         throw new InvalidOperationException($"Player '{playerId.Value}' has no subrace.");
     }
 
+    public static WorldPlayerId GetNeutralPlayerId(WorldState state)
+    {
+        foreach (WorldPlayer player in state.Players.Values)
+        {
+            if (player.Race == WorldRace.Neutral)
+            {
+                return player.Id;
+            }
+        }
+
+        throw new InvalidOperationException("World has no neutral player.");
+    }
+
     public static WorldState RemoveStack(
         WorldState state,
         WorldStackId stackId,

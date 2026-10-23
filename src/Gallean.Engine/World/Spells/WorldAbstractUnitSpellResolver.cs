@@ -8,7 +8,7 @@ internal abstract class WorldAbstractUnitSpellResolver<TEffect> : IWorldSpellRes
     public WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         TEffect effect)
@@ -43,7 +43,7 @@ internal abstract class WorldAbstractUnitSpellResolver<TEffect> : IWorldSpellRes
 
                 footprint.Add((stack, powerPercent));
 
-                if (IsTarget(state, context.Definitions, casterId, stack, spell))
+                if (casterId is null || IsTarget(state, context.Definitions, casterId.Value, stack, spell))
                 {
                     targets.Add((stack, powerPercent));
                 }
@@ -74,14 +74,14 @@ internal abstract class WorldAbstractUnitSpellResolver<TEffect> : IWorldSpellRes
 
     protected abstract WorldCommandResult OnHit(
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldStack stack,
         int powerPercent,
         TEffect effect);
 
     private WorldCommandResult HitStacks(
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         List<(WorldStack Stack, int PowerPercent)> stacks,
         TEffect effect)
     {

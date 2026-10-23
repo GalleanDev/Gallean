@@ -16,7 +16,7 @@ internal sealed class HealSpellResolver : WorldAbstractUnitSpellResolver<WorldHe
 
     protected override WorldCommandResult OnHit(
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldStack stack,
         int powerPercent,
         WorldHealSpellEffect effect)

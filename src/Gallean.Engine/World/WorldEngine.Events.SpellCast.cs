@@ -6,15 +6,22 @@ internal partial class WorldEngine
 {
     WorldState IWorldEventVisitor<WorldState, WorldState>.Visit(WorldSpellCastEvent ev, WorldState state)
     {
-        WorldPlayer player = state.Players[ev.CasterId];
-
-        WorldPlayer updatedPlayer = player with
+        if (ev.CasterId is not null)
         {
-            Resources = ResourceSetCalculator.Subtract(player.Resources, ev.Cost),
-            TurnActions = RecordCast(player.TurnActions, ev)
-        };
+            WorldPlayer player = state.Players[ev.CasterId.Value];
 
-        return state with { Players = state.Players.SetItem(ev.CasterId, updatedPlayer) };
+            WorldPlayer updatedPlayer = player with
+            {
+                Resources = ResourceSetCalculator.Subtract(player.Resources, ev.Cost),
+                TurnActions = RecordCast(player.TurnActions, ev)
+            };
+
+            return state with { Players = state.Players.SetItem(player.Id, updatedPlayer) };
+        }
+        else
+        {
+            return state;
+        }
     }
 
     private static WorldPlayerTurnActions RecordCast(WorldPlayerTurnActions actions, WorldSpellCastEvent ev)

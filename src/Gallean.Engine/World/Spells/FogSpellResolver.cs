@@ -8,7 +8,7 @@ internal sealed class FogSpellResolver : IWorldSpellResolver<WorldFogSpellEffect
     public WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         WorldFogSpellEffect effect)
@@ -17,7 +17,7 @@ internal sealed class FogSpellResolver : IWorldSpellResolver<WorldFogSpellEffect
 
         foreach (WorldPlayer player in state.Players.Values)
         {
-            if (DiplomacyCalculator.IsHostile(state, casterId, player.Id))
+            if (casterId is null || DiplomacyCalculator.IsHostile(state, casterId.Value, player.Id))
             {
                 ImmutableArray<WorldPosition>.Builder positions = ImmutableArray.CreateBuilder<WorldPosition>();
 

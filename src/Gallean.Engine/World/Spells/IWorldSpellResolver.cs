@@ -5,7 +5,7 @@ internal interface IWorldSpellResolver<in TEffect> where TEffect : WorldAbstract
     WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell,
         TEffect effect);

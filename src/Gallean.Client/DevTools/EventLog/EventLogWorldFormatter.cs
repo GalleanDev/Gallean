@@ -381,7 +381,14 @@ internal sealed class EventLogWorldFormatter(IGameDefinitionProvider definitions
 
     IReadOnlyList<EventLogEntry> IWorldEventVisitor<WorldState, IReadOnlyList<EventLogEntry>>.Visit(WorldSpellCastEvent ev, WorldState state)
     {
-        return AddEvent($"{Player(ev.CasterId)} cast {Spell(ev.SpellId)}.");
+        if (ev.CasterId is not null)
+        {
+            return AddEvent($"{Player(ev.CasterId.Value)} cast {Spell(ev.SpellId)}.");
+        }
+        else
+        {
+            return AddEvent($"{Spell(ev.SpellId)} was cast.");
+        }
     }
 
     IReadOnlyList<EventLogEntry> IWorldEventVisitor<WorldState, IReadOnlyList<EventLogEntry>>.Visit(WorldSpellResearchedEvent ev, WorldState state)
@@ -557,7 +564,14 @@ internal sealed class EventLogWorldFormatter(IGameDefinitionProvider definitions
 
     IReadOnlyList<EventLogEntry> IWorldEventVisitor<WorldState, IReadOnlyList<EventLogEntry>>.Visit(WorldRodDestroyedEvent ev, WorldState state)
     {
-        return AddEvent($"{Player(ev.PlayerId)} destroyed a rod of {Player(ev.TargetPlayerId)}.");
+        if (ev.PlayerId is not null)
+        {
+            return AddEvent($"{Player(ev.PlayerId.Value)} destroyed a rod of {Player(ev.TargetPlayerId)}.");
+        }
+        else
+        {
+            return AddEvent($"A rod of {Player(ev.TargetPlayerId)} was destroyed.");
+        }
     }
 
     IReadOnlyList<EventLogEntry> IWorldEventVisitor<WorldState, IReadOnlyList<EventLogEntry>>.Visit(WorldRoundStartedEvent ev, WorldState state)

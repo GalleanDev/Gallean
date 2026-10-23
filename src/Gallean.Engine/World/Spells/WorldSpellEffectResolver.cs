@@ -7,7 +7,7 @@ internal static class WorldSpellEffectResolver
     private readonly record struct Context(
         WorldState State,
         IEngineContext EngineContext,
-        WorldPlayerId CasterId,
+        WorldPlayerId? CasterId,
         WorldSpellTarget? Target,
         WorldSpellDefinition Spell);
 
@@ -31,7 +31,7 @@ internal static class WorldSpellEffectResolver
     public static WorldCommandResult Resolve(
         WorldState state,
         IEngineContext context,
-        WorldPlayerId casterId,
+        WorldPlayerId? casterId,
         WorldSpellTarget? target,
         WorldSpellDefinition spell)
     {

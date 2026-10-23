@@ -4741,7 +4741,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 new WorldStackMovedEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
                 new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
                 new WorldSpellCastEvent(
-                    player.Id,
+                    CasterId: null,
                     spell.Id,
                     new WorldSpellTarget(new WorldPosition(0, 1), Radius: 0),
                     WorldResourceSet.Empty,
@@ -4904,12 +4904,24 @@ public sealed class WorldEngineScenarioEventEffectTests
     }
 
     [Test]
-    public void CastSpellMapEffectTriggeringPlayerTest()
+    public void CastSpellMapEffectRacePlayerTest()
     {
         WorldMap map = TestHelpers.SimpleMap(5, 3);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
-        UnitDefinition summon = SummonedUnitDefinition("summon");
+        WorldPlayer undead = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map);
+
+        WorldSubrace undeadSubrace = new(
+            new WorldSubraceId("undead"),
+            undead.Id,
+            WorldSubraceType.Undead,
+            BannerVariant: new WorldObjectVariant(1));
+
+        UnitDefinition summon = SummonedUnitDefinition("summon") with
+        {
+            Race = WorldRace.Undead
+        };
+
         WorldSpellDefinition spell = SummonSpell(new WorldSpellDefinitionId("summon"), summon, WorldResourceSet.Empty);
 
         ScenarioLocationDefinition location = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Grave"), new WorldPosition(2, 1), 1);
@@ -4932,6 +4944,9 @@ public sealed class WorldEngineScenarioEventEffectTests
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithDefinition(TestHelpers.SimpleLord(undead.LordId, undead.Race, LordCategory.Warrior))
+            .WithPlayer(undead)
+            .WithSubrace(undeadSubrace)
             .WithScenarioLocation(location)
             .WithScenarioEvent(scenarioEvent)
             .Build();
@@ -4939,8 +4954,8 @@ public sealed class WorldEngineScenarioEventEffectTests
         WorldStack summoned = SummonedStack(
             new WorldUnitId("Unit0001"),
             new WorldStackId("Stack0001"),
-            player.Id,
-            TestHelpers.NeutralSubrace.Id,
+            undead.Id,
+            undeadSubrace.Id,
             summon,
             new WorldPosition(2, 1));
 
@@ -4950,7 +4965,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
             new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
             new WorldSpellCastEvent(
-                player.Id,
+                CasterId: null,
                 spell.Id,
                 new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1),
                 WorldResourceSet.Empty,
@@ -5017,7 +5032,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
             new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
             new WorldSpellCastEvent(
-                player.Id,
+                CasterId: null,
                 spell.Id,
                 new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1),
                 WorldResourceSet.Empty,
@@ -5108,11 +5123,11 @@ public sealed class WorldEngineScenarioEventEffectTests
             new WorldTurnStartedEvent(player.Id),
             new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
             new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
-            new WorldSpellCastEvent(player.Id, spell.Id, new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
+            new WorldSpellCastEvent(CasterId: null, spell.Id, new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
             new WorldStackCreatedEvent(first, WorldResourceSet.Empty),
-            new WorldSpellCastEvent(player.Id, spell.Id, new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
+            new WorldSpellCastEvent(CasterId: null, spell.Id, new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
             new WorldStackCreatedEvent(second, WorldResourceSet.Empty),
-            new WorldSpellCastEvent(player.Id, spell.Id, new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
+            new WorldSpellCastEvent(CasterId: null, spell.Id, new WorldSpellTarget(new WorldPosition(2, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
             new WorldStackCreatedEvent(third, WorldResourceSet.Empty),
             new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
         ]);
@@ -5183,7 +5198,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 new WorldStackMovedEvent(stack.Id, new WorldPosition(3, 1), new WorldPosition(2, 1), WorldStackDirection.NorthWest, 4, [], null),
                 new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
                 new WorldSpellCastEvent(
-                    player.Id,
+                    CasterId: null,
                     spell.Id,
                     new WorldSpellTarget(new WorldPosition(1, 1), Radius: 1),
                     WorldResourceSet.Empty,
@@ -6284,7 +6299,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             new WorldTurnStartedEvent(player.Id),
             new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
             new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
-            new WorldSpellCastEvent(player.Id, spell.Id, new WorldSpellTarget(new WorldPosition(1, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
+            new WorldSpellCastEvent(CasterId: null, spell.Id, new WorldSpellTarget(new WorldPosition(1, 1), Radius: 1), WorldResourceSet.Empty, WorldSpellCastSource.Scenario),
             new WorldStackCreatedEvent(summoned, WorldResourceSet.Empty),
             new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
         ]);
@@ -6606,5 +6621,67 @@ public sealed class WorldEngineScenarioEventEffectTests
                         .Add(arrivalEvent.Id, false)
                 }
             }));
+    }
+
+    [Test]
+    public void CastSpellEffectAttackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 2);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldSpellDefinition spell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("attack"), new WorldAttackSpellEffect(UnitAttackSource.Fire, Damage: 10));
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Zone"), new WorldPosition(0, 1), 0);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventEnteringZoneCondition(zone.Id)],
+            [new ScenarioEventCastSpellEffect(spell.Id, CasterId: null)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithScenarioLocation(zone)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(stack.Id, new WorldPosition(0, 1)),
+            [
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
+                new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
+                new WorldSpellCastEvent(
+                    CasterId: null,
+                    spell.Id,
+                    new WorldSpellTarget(new WorldPosition(0, 1), Radius: 0),
+                    WorldResourceSet.Empty,
+                    WorldSpellCastSource.Scenario),
+                new WorldUnitDamagedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), 90, SourcePlayerId: null),
+                new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
+            ]);
     }
 }
