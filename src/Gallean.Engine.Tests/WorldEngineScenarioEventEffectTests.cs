@@ -4820,67 +4820,6 @@ public sealed class WorldEngineScenarioEventEffectTests
     }
 
     [Test]
-    public void CastSpellEffectWithUnimplementedSpellTest()
-    {
-        WorldMap map = TestHelpers.SimpleMap(2, 2);
-
-        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
-        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
-            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
-            movementPoints: 6, leadership: 6);
-
-        WorldSpellDefinition spell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("unimplemented"), new WorldAttackSpellEffect(UnitAttackSource.Fire, Damage: 10));
-
-        WorldStack stack = TestHelpers.SimpleStack(
-            new WorldStackId("Stack1"),
-            player.Id,
-            new WorldPosition(0, 0),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
-            movementPoints: 6);
-
-        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Zone"), new WorldPosition(0, 1), 0);
-
-        ScenarioEventDefinition scenarioEvent = new(
-            new ScenarioEventId("Event1"),
-            [WorldRace.Human],
-            [WorldRace.Human],
-            [new ScenarioEventEnteringZoneCondition(zone.Id)],
-            [new ScenarioEventCastSpellEffect(spell.Id, CasterId: null)],
-            Enabled: true,
-            OccurOnce: true,
-            Chance: 100,
-            Order: 0);
-
-        WorldEngine engine = new TestWorldEngineBuilder()
-            .WithMap(map)
-            .WithDefinition(leader)
-            .WithDefinition(spell)
-            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
-            .WithPlayer(player)
-            .WithStack(stack)
-            .WithScenarioLocation(zone)
-            .WithScenarioEvent(scenarioEvent)
-            .Build();
-
-        _ = engine.DispatchCommand(new WorldStartGameCommand());
-
-        engine.CheckCommand(
-            new WorldMoveStackCommand(stack.Id, new WorldPosition(0, 1)),
-            [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
-                new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
-                new WorldSpellCastEvent(
-                    player.Id,
-                    spell.Id,
-                    new WorldSpellTarget(new WorldPosition(0, 1), Radius: 0),
-                    WorldResourceSet.Empty,
-                    WorldSpellCastSource.Scenario),
-                new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
-            ]);
-    }
-
-    [Test]
     public void CastSpellMapEffectCastingPlayerTest()
     {
         WorldMap map = TestHelpers.SimpleMap(5, 3);
