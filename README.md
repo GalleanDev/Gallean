@@ -13,7 +13,7 @@
 Gallean is a full remake of Disciples II: Rise of the Elves: every campaign and scenario, the original rules, hotseat multiplayer, and visuals rebuilt for 4K with dynamic lighting.
 
 <p align="center">
-  <img src="https://gallean.org/media/battle/poster-1280.webp" width="32%" />
+  <img src="https://gallean.org/media/battle/poster-3840.avif" width="32%" />
   <img src="https://gallean.org/media/features/battle.webp" width="32%" />
   <img src="https://gallean.org/media/features/buildings.webp" width="32%" />
 </p>
