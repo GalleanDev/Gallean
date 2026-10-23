@@ -3818,10 +3818,10 @@ public sealed class WorldEngineAiTests
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P2 847] Move Main -> (1, 0) (Attacker wins)"]));
     }
 
-    [TestCase(WorldDifficulty.Easy, "[P2 240] Move Summon -> (1, 0) (Defender wins)")]
-    [TestCase(WorldDifficulty.Average, "[P2 240] Move Summon -> (1, 0) (Defender wins)")]
-    [TestCase(WorldDifficulty.Hard, "[P2 240] Move Summon -> (1, 0) (Defender wins)")]
-    [TestCase(WorldDifficulty.VeryHard, "[P2 240] Move Summon -> (1, 0) (Defender wins)")]
+    [TestCase(WorldDifficulty.Easy, "[P2 192] Move Summon -> (1, 0) (Defender wins)")]
+    [TestCase(WorldDifficulty.Average, "[P2 192] Move Summon -> (1, 0) (Defender wins)")]
+    [TestCase(WorldDifficulty.Hard, "[P2 192] Move Summon -> (1, 0) (Defender wins)")]
+    [TestCase(WorldDifficulty.VeryHard, "[P2 192] Move Summon -> (1, 0) (Defender wins)")]
     public void SummonAttackUnwinnableTest(WorldDifficulty difficulty, string expectedTrace)
     {
         WorldMap map = TestHelpers.SimpleMap(5, 1);
@@ -3903,7 +3903,7 @@ public sealed class WorldEngineAiTests
 
         TestWorldAiRunner runner = new(session, engine);
 
-        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P2 231] Move Summon -> (3, 3) (Defender wins)"]));
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P2 185] Move Summon -> (3, 3) (Defender wins)"]));
     }
 
     [Test]
@@ -3989,5 +3989,85 @@ public sealed class WorldEngineAiTests
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
             "[P0 431] Purchase ranged -> capital (0, 0)"
         ]));
+    }
+
+    [Test]
+    public void SummonAttackNearTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(10, 3);
+
+        UnitDefinition summon = Leader("summon", damage: 50, movementPoints: 40) with
+        {
+            Category = UnitCategory.Summon,
+            Lifetime = 2
+        };
+        UnitDefinition near = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("near", maxHitpoints: 100, initiative: 50, damage: 20),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition far = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("far", maxHitpoints: 100, initiative: 50, damage: 20),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Heretic, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack summonStack = MyStack(new WorldUnitId("summonLeader"), "Summon", player1.Id, new WorldPosition(0, 1), summon, 100, 40, WorldStackOrder.Normal.Instance);
+        WorldStack nearStack = EnemyStack(new WorldUnitId("nearUnit"), "Near", player2.Id, new WorldPosition(2, 1), near, 60);
+        WorldStack farStack = EnemyStack(new WorldUnitId("farUnit"), "Far", player2.Id, new WorldPosition(7, 1), far, 10);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(summon)
+            .WithDefinition(near)
+            .WithDefinition(far)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(summonStack)
+            .WithStack(nearStack)
+            .WithStack(farStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P2 428] Move Summon -> (2, 1) (Attacker wins)"]));
+    }
+
+    [Test]
+    public void SummonApproachDistantTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(10, 3);
+
+        UnitDefinition summon = Leader("summon", damage: 50, movementPoints: 40) with
+        {
+            Category = UnitCategory.Summon,
+            Lifetime = 2
+        };
+        UnitDefinition far = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("far", maxHitpoints: 100, initiative: 50, damage: 20),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Heretic, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack summonStack = MyStack(new WorldUnitId("summonLeader"), "Summon", player1.Id, new WorldPosition(0, 1), summon, 100, 40, WorldStackOrder.Normal.Instance);
+        WorldStack farStack = EnemyStack(new WorldUnitId("farUnit"), "Far", player2.Id, new WorldPosition(7, 1), far, 10);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(summon)
+            .WithDefinition(far)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(summonStack)
+            .WithStack(farStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P1 250] Move Summon -> (5, 1)", "[P2 534] Move Summon -> (7, 1) (Attacker wins)"]));
     }
 }

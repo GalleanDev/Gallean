@@ -22,6 +22,8 @@ internal sealed partial class WorldAiPlanner
             private const int ProximityCloseDistance = 7;
             private const int ProximityCloseMultiplier = 2;
             private const int ProximityLimit = 250;
+            private const int SummonAttackRange = 5;
+            private const int SummonDistancePenaltyPercent = 16;
 
             private static readonly UtilityScore.ResponseCurve ExperienceCurve =
                 new UtilityScore.ResponseCurve.Polynomial(
@@ -61,6 +63,18 @@ internal sealed partial class WorldAiPlanner
                 else
                 {
                     return UtilityScore.Ratio(score, ProximityLimit);
+                }
+            }
+
+            public static UtilityScore.Consideration SummonRange(int distance)
+            {
+                if (distance > SummonAttackRange)
+                {
+                    return UtilityScore.None;
+                }
+                else
+                {
+                    return UtilityScore.Ratio((SummonAttackRange + 1 - distance) * SummonDistancePenaltyPercent, 100);
                 }
             }
 

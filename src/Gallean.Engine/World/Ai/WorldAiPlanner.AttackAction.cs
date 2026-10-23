@@ -11,7 +11,8 @@ internal sealed partial class WorldAiPlanner
             Ordered,
             Roaming,
             Prefiltered,
-            Simulated
+            Simulated,
+            Summon
         }
 
         private const int BlockingRadius = 1;
@@ -157,7 +158,7 @@ internal sealed partial class WorldAiPlanner
 
             if (IsSummon(context.Stack))
             {
-                scoring = ScoringType.Ordered;
+                scoring = ScoringType.Summon;
             }
             else if (!WorldHelpers.IsRacePlayable(owner.Race))
             {
@@ -220,8 +221,22 @@ internal sealed partial class WorldAiPlanner
                 ]),
                 ScoringType.Roaming => ScoreRoamingBattle(context, battle),
                 ScoringType.Prefiltered => ScorePrefilteredBattle(context, battle),
-                ScoringType.Simulated => ScoreSimulatedBattle(context, battle)
+                ScoringType.Simulated => ScoreSimulatedBattle(context, battle),
+                ScoringType.Summon => ScoreSummonBattle(context, battle)
             };
+        }
+
+        private int ScoreSummonBattle(ActionContext context, BattleInfo battle)
+        {
+            int distance = context.Stack.Position.GetDistance(battle.TargetPosition);
+
+            return UtilityScore.Combine(
+            [
+                Considerations.SummonRange(distance),
+                Considerations.PowerRatio(battle.Power),
+                Considerations.ScenarioObjective(context, battle.Target),
+                Considerations.Survival(Context.Estimator, context, battle)
+            ]);
         }
 
         private int ScoreRoamingBattle(ActionContext context, BattleInfo battle)
