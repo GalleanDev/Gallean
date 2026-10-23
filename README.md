@@ -59,9 +59,6 @@ The release will be in `dist/` at the root, for example `dist/Gallean-0.8.0-linu
 
 The game needs a `.galleanpack` with its assets. [Packer](tools/Packer) can build one from your own copy of the original game and can enhance it with the 4K asset pipeline.
 
-> [!NOTE]
-> To run it, you would need at least 12 GB VRAM GPU and 24 GB RAM. 16 GB of VRAM and 32 GB of RAM are recommended.
-
 ---
 
 Gallean is an independent fan project, unaffiliated with Strategy First. Disciples is a trademark of its respective owners.
