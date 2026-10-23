@@ -18,6 +18,7 @@ internal class OutlinedTextBlock : TextBlock
 
     static OutlinedTextBlock()
     {
+        ClipToBoundsProperty.OverrideDefaultValue<OutlinedTextBlock>(false);
         AffectsRender<OutlinedTextBlock>(OutlineProperty, OutlineThicknessProperty);
     }
 
