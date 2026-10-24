@@ -76,7 +76,7 @@ public sealed class ExchangeTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
@@ -164,7 +164,7 @@ public sealed class ExchangeTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
@@ -253,7 +253,7 @@ public sealed class ExchangeTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
         InventoryItemViewModel source = screen.InventoryTransfer.Inventory.Items[0];
@@ -336,7 +336,7 @@ public sealed class ExchangeTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
         InventoryItemViewModel source = screen.InventoryTransfer.OtherInventory.Items[0];
@@ -406,7 +406,7 @@ public sealed class ExchangeTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.TabHeader, Is.EqualTo("Exchange"));
@@ -546,7 +546,7 @@ public sealed class ExchangeTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
         screen.DragDrop.TryBeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontBottom).Reference);

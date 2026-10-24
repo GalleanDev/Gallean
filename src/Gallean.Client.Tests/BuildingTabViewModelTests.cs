@@ -234,7 +234,7 @@ public sealed class BuildingTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new BuildingTabViewModel(gameModel, gameViewModel, owner)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new BuildingTabViewModel(gameModel, gameViewModel, owner)]);
         BuildingTabViewModel screen = Assert.IsOfType<BuildingTabViewModel>(management.Tabs[0]);
 
         Assert.That(
@@ -377,7 +377,7 @@ public sealed class BuildingTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new BuildingTabViewModel(gameModel, gameViewModel, owner)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new BuildingTabViewModel(gameModel, gameViewModel, owner)]);
         BuildingTabViewModel screen = Assert.IsOfType<BuildingTabViewModel>(management.Tabs[0]);
 
         Assert.That(
@@ -439,7 +439,7 @@ public sealed class BuildingTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new BuildingTabViewModel(gameModel, gameViewModel, owner)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new BuildingTabViewModel(gameModel, gameViewModel, owner)]);
         BuildingTabViewModel screen = Assert.IsOfType<BuildingTabViewModel>(management.Tabs[0]);
 
         Assert.That(
@@ -526,7 +526,6 @@ public sealed class BuildingTabViewModelTests
             gameViewModel,
             ScreenMusic.Keep,
             null,
-            ResourceSetProjection.Gold,
             owner =>
             [
                 new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id),

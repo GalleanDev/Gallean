@@ -7,6 +7,7 @@ internal abstract partial class ManagementTabViewModel(GameModel gameModel, Game
 {
     public abstract string TabHeader { get; }
     public virtual AssetSpriteKey.SiteImage? SiteImageKey => null;
+    public virtual ResourceSetProjection ResourceProjection => ResourceSetProjection.Gold;
 
     [ObservableProperty]
     public partial bool IsSelected { get; set; }

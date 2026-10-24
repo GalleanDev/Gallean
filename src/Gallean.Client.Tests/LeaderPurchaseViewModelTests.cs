@@ -110,7 +110,7 @@ public sealed class LeaderPurchaseViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
         CityTabViewModel city = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(city.CityImageKey, Is.EqualTo(new AssetSpriteKey.CapitalImage(WorldRace.Human)));
@@ -301,7 +301,7 @@ public sealed class LeaderPurchaseViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel cityTab = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(cityTab.CityImageKey, Is.EqualTo(new AssetSpriteKey.CityImage(3)));

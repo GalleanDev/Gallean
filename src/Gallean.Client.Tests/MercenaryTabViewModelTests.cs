@@ -155,7 +155,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
@@ -226,7 +226,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
@@ -281,7 +281,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
@@ -330,7 +330,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
@@ -426,7 +426,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
@@ -474,7 +474,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.Offer, Is.Null);
@@ -551,7 +551,7 @@ public sealed class MercenaryTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MercenaryTabViewModel(gameModel, gameViewModel, owner, site.Id, stack.Id)]);
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.Mercenaries[0].Details, Is.EqualTo(new UnitDetailsViewModel(

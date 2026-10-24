@@ -133,6 +133,7 @@ public sealed class ManagementScreenViewModelTests
             "City | selected",
             "Party | not selected",
             "Buildings | not selected",
+            "Spellbook | not selected",
             "Diplomacy | not selected"
         ]));
         Assert.That(screen.SelectedTab, Is.SameAs(screen.Tabs[0]));
@@ -666,5 +667,125 @@ public sealed class ManagementScreenViewModelTests
         gameViewModel.OpenScreen(screen);
 
         Assert.That(audioPlayer.Actions, Is.Empty);
+    }
+
+    [Test]
+    public void CapitalSpellbookResourcesTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            Resources = new WorldResourceSet(250, 0, 0, 30, 0, 5)
+        };
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+
+        WorldRaceDefinition raceDefinition = new(
+            Race: WorldRace.Human,
+            NameTextId: new GlobalTextId("Human"),
+            Income: WorldResourceSet.Empty,
+            NativeTerrain: WorldMapTerrain.Human,
+            IsPlayable: true,
+            CapitalRegeneration: 35,
+            Cities: [],
+            Leaders: [leaderDefinition.Id],
+            Units: [],
+            MaleLeaderNames: [],
+            FemaleLeaderNames: []);
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("cap"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithRace(raceDefinition)
+            .WithCapital(capital)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, capital.Id);
+
+        screen.SelectTabCommand.Execute(screen.Tabs[3]);
+
+        Assert.That(FormatResources(screen.PlayerResources), Is.EqualTo([
+            "LifeMana | 30",
+            "GroveMana | 5"
+        ]));
+
+        screen.SelectTabCommand.Execute(screen.Tabs[4]);
+
+        Assert.That(FormatResources(screen.PlayerResources), Is.EqualTo(["Gold | 250"]));
+    }
+
+    [Test]
+    public void CapitalSpellbookSoundTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+
+        WorldRaceDefinition raceDefinition = new(
+            Race: WorldRace.Human,
+            NameTextId: new GlobalTextId("Human"),
+            Income: WorldResourceSet.Empty,
+            NativeTerrain: WorldMapTerrain.Human,
+            IsPlayable: true,
+            CapitalRegeneration: 35,
+            Cities: [],
+            Leaders: [leaderDefinition.Id],
+            Units: [],
+            MaleLeaderNames: [],
+            FemaleLeaderNames: []);
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("cap"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithRace(raceDefinition)
+            .WithCapital(capital)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        TestAudioPlayer audioPlayer = new();
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAudioPlayer(audioPlayer).Build();
+        ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, capital.Id);
+
+        gameViewModel.OpenScreen(screen);
+        screen.SelectTabCommand.Execute(screen.Tabs[3]);
+        screen.SelectTabCommand.Execute(screen.Tabs[4]);
+
+        Assert.That(audioPlayer.Actions, Is.EqualTo([
+            "Sound:interface-open",
+            "Music:capital-music/human/0,capital-music/human/1,capital-music/human/2",
+            "Sound:book-open",
+            "Sound:book-close"
+        ]));
     }
 }

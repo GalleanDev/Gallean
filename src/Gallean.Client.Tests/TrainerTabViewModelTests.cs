@@ -134,7 +134,7 @@ public sealed class TrainerTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         TrainerTabViewModel screen = Assert.IsOfType<TrainerTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.Offer, Is.Null);
@@ -219,7 +219,7 @@ public sealed class TrainerTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         TrainerTabViewModel screen = Assert.IsOfType<TrainerTabViewModel>(management.Tabs[0]);
 
         await FindSlot(screen.Stack.UnitGrid, GridPosition.FrontBottom).SelectCommand.ExecuteAsync(null);
@@ -303,7 +303,7 @@ public sealed class TrainerTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         TrainerTabViewModel screen = Assert.IsOfType<TrainerTabViewModel>(management.Tabs[0]);
 
         await FindSlot(screen.Stack.UnitGrid, GridPosition.FrontCenter).SelectCommand.ExecuteAsync(null);
@@ -373,7 +373,7 @@ public sealed class TrainerTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new TrainerTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         TrainerTabViewModel screen = Assert.IsOfType<TrainerTabViewModel>(management.Tabs[0]);
 
         await FindSlot(screen.Stack.UnitGrid, GridPosition.FrontBottom).SelectCommand.ExecuteAsync(null);

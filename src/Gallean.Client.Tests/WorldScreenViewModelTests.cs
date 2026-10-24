@@ -3124,7 +3124,7 @@ public sealed class WorldScreenViewModelTests
 
         ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(screen.Tabs.Select(tab => tab.TabHeader), Is.EqualTo(["City", "Party", "Buildings", "Diplomacy"]));
+        Assert.That(screen.Tabs.Select(tab => tab.TabHeader), Is.EqualTo(["City", "Party", "Buildings", "Spellbook", "Diplomacy"]));
         Assert.IsOfType<CityTabViewModel>(screen.SelectedTab);
 
         gameViewModel.CloseScreen(screen);

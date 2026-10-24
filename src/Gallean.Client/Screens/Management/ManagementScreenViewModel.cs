@@ -11,16 +11,15 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
         GameViewModel gameViewModel,
         ScreenMusic music,
         AssetSoundKey? openSound,
-        ResourceSetProjection resourceProjection,
         Func<ManagementScreenViewModel, IReadOnlyList<ManagementTabViewModel>> createTabs)
         : base(gameModel, gameViewModel)
     {
         Music = music;
         OpenSound = openSound;
-        PlayerResources = new ResourceSetViewModel(WorldState.Players[ViewPlayerId].Resources, resourceProjection);
         Tabs = createTabs(this);
         SelectedTab = Tabs[0];
         SelectedTab.IsSelected = true;
+        PlayerResources = new ResourceSetViewModel(WorldState.Players[ViewPlayerId].Resources, SelectedTab.ResourceProjection);
     }
 
     public IReadOnlyList<ManagementTabViewModel> Tabs { get; }
@@ -42,7 +41,7 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
         ScreenMusic music = ResolveFortificationMusic(gameModel, fortificationId);
         AssetSoundKey? openSound = ResolveFortificationOpenSound(gameModel, fortificationId);
 
-        return new ManagementScreenViewModel(gameModel, gameViewModel, music, openSound, ResourceSetProjection.Gold, screen =>
+        return new ManagementScreenViewModel(gameModel, gameViewModel, music, openSound, screen =>
         {
             WorldState world = gameModel.Snapshot.WorldState;
 
@@ -57,6 +56,7 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
             if (fortification is WorldCapital)
             {
                 tabs.Add(new BuildingTabViewModel(gameModel, gameViewModel, screen));
+                tabs.Add(new SpellbookTabViewModel(gameModel, gameViewModel, screen));
                 tabs.Add(new DiplomacyTabViewModel(gameModel, gameViewModel));
             }
 
@@ -105,7 +105,7 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
 
     private static ManagementScreenViewModel CreateAtStack(GameModel gameModel, GameViewModel gameViewModel, WorldStackId stackId)
     {
-        return new ManagementScreenViewModel(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, screen =>
+        return new ManagementScreenViewModel(gameModel, gameViewModel, ScreenMusic.Keep, null, screen =>
         {
             List<ManagementTabViewModel> tabs = [];
 
@@ -140,7 +140,6 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
             gameViewModel,
             ScreenMusic.Keep,
             new AssetSoundKey.BookOpen(),
-            ResourceSetProjection.Mana,
             screen => [new SpellbookTabViewModel(gameModel, gameViewModel, screen)]);
     }
 
@@ -231,6 +230,7 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
         SelectedTab.IsSelected = false;
         SelectedTab = tab;
         tab.IsSelected = true;
+        PlayerResources = new ResourceSetViewModel(WorldState.Players[ViewPlayerId].Resources, tab.ResourceProjection);
     }
 
     [RelayCommand(CanExecute = nameof(CanSelectPreviousTab))]

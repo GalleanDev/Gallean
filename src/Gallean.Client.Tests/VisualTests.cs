@@ -2612,6 +2612,24 @@ public sealed class VisualTests
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
         ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, new WorldFortificationId("S107FT0000"));
+        screen.SelectTabCommand.Execute(screen.Tabs[4]);
+        gameViewModel.OpenScreen(screen);
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
+    public async Task CapitalSpellbookTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, new WorldFortificationId("S107FT0000"));
         screen.SelectTabCommand.Execute(screen.Tabs[3]);
         gameViewModel.OpenScreen(screen);
 
@@ -2643,7 +2661,7 @@ public sealed class VisualTests
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
         ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, new WorldFortificationId("S107FT0000"));
-        screen.SelectTabCommand.Execute(screen.Tabs[3]);
+        screen.SelectTabCommand.Execute(screen.Tabs[4]);
         gameViewModel.OpenScreen(screen);
 
         await CaptureAsync(window);
@@ -2661,10 +2679,10 @@ public sealed class VisualTests
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
         ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, new WorldFortificationId("S107FT0000"));
-        screen.SelectTabCommand.Execute(screen.Tabs[3]);
+        screen.SelectTabCommand.Execute(screen.Tabs[4]);
         gameViewModel.OpenScreen(screen);
 
-        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(screen.Tabs[3]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(screen.Tabs[4]);
         diplomacy.SelectAction(diplomacy.Actions[0]);
 
         await CaptureAsync(window);
@@ -2686,10 +2704,10 @@ public sealed class VisualTests
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
         ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, new WorldFortificationId("S107FT0000"));
-        screen.SelectTabCommand.Execute(screen.Tabs[3]);
+        screen.SelectTabCommand.Execute(screen.Tabs[4]);
         gameViewModel.OpenScreen(screen);
 
-        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(screen.Tabs[3]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(screen.Tabs[4]);
         diplomacy.SelectAction(diplomacy.Actions[1]);
 
         await CaptureAsync(window);
@@ -4131,7 +4149,6 @@ public sealed class VisualTests
             gameViewModel,
             ScreenMusic.Keep,
             null,
-            ResourceSetProjection.Gold,
             screen => [new CityTabViewModel(gameModel, gameViewModel, screen, new WorldFortificationId("S107FT0000"))]);
 
         CityTabViewModel city = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
@@ -4172,7 +4189,6 @@ public sealed class VisualTests
             gameViewModel,
             ScreenMusic.Keep,
             null,
-            ResourceSetProjection.Gold,
             screen => [new CityTabViewModel(gameModel, gameViewModel, screen, capital.Id)]);
 
         CityTabViewModel city = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
@@ -4360,7 +4376,6 @@ public sealed class VisualTests
             gameViewModel,
             ScreenMusic.Keep,
             null,
-            ResourceSetProjection.Gold,
             screen => [new BuildingTabViewModel(gameModel, gameViewModel, screen)]));
 
         await CaptureAsync(window);
@@ -4429,7 +4444,7 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        gameViewModel.OpenScreen(new ManagementScreenViewModel(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, screen => [new BuildingTabViewModel(gameModel, gameViewModel, screen)]));
+        gameViewModel.OpenScreen(new ManagementScreenViewModel(gameModel, gameViewModel, ScreenMusic.Keep, null, screen => [new BuildingTabViewModel(gameModel, gameViewModel, screen)]));
 
         await CaptureAsync(window);
     }
@@ -4497,7 +4512,7 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, screen => [new BuildingTabViewModel(gameModel, gameViewModel, screen)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, screen => [new BuildingTabViewModel(gameModel, gameViewModel, screen)]);
         gameViewModel.OpenScreen(management);
 
         await SkipFramesAsync(5);

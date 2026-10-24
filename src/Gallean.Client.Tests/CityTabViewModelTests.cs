@@ -142,7 +142,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
@@ -232,7 +232,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
@@ -316,7 +316,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontBottom);
@@ -406,7 +406,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.StackGrid.Slots.Select(slot => (slot.Position, slot.Row, slot.Column, slot.ColumnSpan, slot.HasUnit, slot.IsVisible)), Is.EqualTo([
@@ -489,7 +489,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).ShowsPurchaseHint, Is.True);
@@ -606,7 +606,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         UnitGridSlotViewModel slot = FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter);
@@ -676,7 +676,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -755,7 +755,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).ShowsPurchaseHint, Is.True);
@@ -850,7 +850,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -993,7 +993,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.ExitStackCommand.CanExecute(null), Is.True);
@@ -1086,7 +1086,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.CapitalScene, Is.Not.Null);
@@ -1232,7 +1232,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         InventoryItemViewModel source = screen.InventoryTransfer.Inventory.Items[0];
@@ -1321,7 +1321,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         InventoryItemViewModel source = screen.InventoryTransfer.OtherInventory.Items[0];
@@ -1422,7 +1422,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         screen.HealCommand.Execute(null);
@@ -1564,7 +1564,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -1668,7 +1668,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         screen.DragDrop.TryBeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontBottom).Reference);
@@ -1752,7 +1752,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -1837,7 +1837,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -1947,7 +1947,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
@@ -2036,7 +2036,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
@@ -2071,7 +2071,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -2125,7 +2125,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.False);
@@ -2208,7 +2208,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())
@@ -2274,7 +2274,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         screen.LockTypeCommand.Execute(null);
@@ -2382,7 +2382,7 @@ public sealed class CityTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
         using (Assert.EnterMultipleScope())

@@ -190,7 +190,7 @@ public sealed class MerchantTabViewModelTests
     {
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MerchantTabViewModel(gameModel, gameViewModel, owner, siteId, stackId)]);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MerchantTabViewModel(gameModel, gameViewModel, owner, siteId, stackId)]);
 
         return Assert.IsOfType<MerchantTabViewModel>(management.Tabs[0]);
     }

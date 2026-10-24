@@ -25,7 +25,9 @@ internal sealed partial class SpellbookTabViewModel : ManagementTabViewModel
     public ManagementScreenViewModel Screen { get; }
 
     public override string TabHeader => Tr("Spellbook");
+    public override AssetSoundKey OpenSound => new AssetSoundKey.BookOpen();
     public override AssetSoundKey CloseSound => new AssetSoundKey.BookClose();
+    public override ResourceSetProjection ResourceProjection => ResourceSetProjection.Mana;
     public bool IsInForeground => ReferenceEquals(Game.TopScreen, Screen) && Game.Alert.Current is null;
 
     [ObservableProperty]
