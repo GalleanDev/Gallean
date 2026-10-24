@@ -608,7 +608,6 @@ public sealed class WorldEngineGameEndedTests
             new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, attacker.Id, new ScenarioEventStackDestroyedTrigger(null)),
             new WorldScenarioEndedEvent(defender.Id),
             new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, attacker.Id, new ScenarioEventStackDestroyedTrigger(null)),
-            new WorldScenarioEndedEvent(attacker.Id),
             new WorldFortificationCapturedEvent(capital.Id, defender.Id, attacker.Id, attackerStack.Id),
             new WorldStackMovedEvent(attackerStack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null)
         ]);
@@ -631,6 +630,84 @@ public sealed class WorldEngineGameEndedTests
                 IsEnded = true,
                 Winner = defender.Id
             }
+        }));
+    }
+
+    [Test]
+    public void WinEventTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^.."
+        ]);
+
+        WorldPlayer attacker = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer defender = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 2, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            attacker.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 2);
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            defender.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Undead],
+            [WorldRace.Undead],
+            [new ScenarioEventLootingRuinCondition(new WorldFortificationId("ruin"))],
+            [new ScenarioEventWinEffect(attacker.Id)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(attacker.LordId, attacker.Race, LordCategory.Warrior))
+            .WithPlayer(attacker)
+            .WithDefinition(TestHelpers.SimpleLord(defender.LordId, defender.Race, LordCategory.Warrior))
+            .WithPlayer(defender)
+            .WithStack(stack)
+            .WithCapital(capital)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommand(new WorldMoveStackCommand(stack.Id, capital.Entrance), [
+            new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null),
+            new WorldFortificationEnteredEvent(new WorldStackId("stack"), new WorldFortificationId("capital")),
+            new WorldFortificationCapturingEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldPlayerDefeatedEvent(defender.Id),
+            new WorldFortificationCapturedEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(engine.State with
+        {
+            Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+            {
+                Position = capital.Entrance,
+                Direction = WorldStackDirection.NorthWest,
+                MovementPoints = 2
+            }),
+            Fortifications = engine.State.Fortifications.SetItem(capital.Id, capital with
+            {
+                CapturedById = attacker.Id
+            }),
+            ScenarioState = WorldScenarioState.Empty
         }));
     }
 }

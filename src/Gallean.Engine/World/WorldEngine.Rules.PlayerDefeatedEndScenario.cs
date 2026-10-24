@@ -41,7 +41,12 @@ internal partial class WorldEngine
 
             if (remainingPlayers.Count == 1)
             {
-                return EventRuleResult<WorldEvent>.Append(new WorldScenarioEndedEvent(remainingPlayers[0].Id));
+                WorldPlayer player = remainingPlayers[0];
+
+                if (!HasWinEvent(player.Race))
+                {
+                    return EventRuleResult<WorldEvent>.Append(new WorldScenarioEndedEvent(player.Id));
+                }
             }
 
             if (anyHumanExists && !anyHumanRemains)
@@ -50,6 +55,19 @@ internal partial class WorldEngine
             }
 
             return EventRuleResult<WorldEvent>.Empty;
+        }
+
+        private bool HasWinEvent(WorldRace race)
+        {
+            foreach (ScenarioEventDefinition definition in Context.Scenario.Events)
+            {
+                if (definition.AffectedRaces.Contains(race) && definition.Effects is [.., ScenarioEventWinEffect])
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
