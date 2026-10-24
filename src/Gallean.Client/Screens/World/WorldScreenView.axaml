@@ -63,7 +63,8 @@
       <Setter Property="Margin" Value="4,0,4,20" />
       <Setter Property="HorizontalAlignment" Value="Center" />
       <Setter Property="VerticalAlignment" Value="Bottom" />
-      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="TextAlignment" Value="Center" />
+      <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style Selector="Panel.hud.inactive StackPanel#Nav, Panel.hud.inactive StackPanel#TopCenter, Panel.hud.inactive Panel#MinimapFrame, Panel.hud.inactive Panel#ObjectivePanel">
