@@ -5,6 +5,8 @@ internal sealed partial class WorldAiPlanner
     private sealed record EnterCityAction(WorldAiContext Context, int Priority) : AbstractStackAction(Context, Priority)
     {
         private const int MaxDistance = 250;
+        private const int ExitStackDistance = 1;
+        private const int ExitStackHitpointsPercent = 90;
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {
@@ -33,7 +35,7 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.SecureCity order, ActionContext context)
         {
-            return null;
+            return PlanExitStack(context, order.TargetId);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Roam order, ActionContext context)
@@ -147,6 +149,55 @@ internal sealed partial class WorldAiPlanner
             }
 
             return null;
+        }
+
+        private WorldAiActionPlan? PlanExitStack(ActionContext context, WorldFortificationId fortificationId)
+        {
+            WorldState state = context.State;
+
+            if (context.Stack.MovementPoints <= 0)
+            {
+                return null;
+            }
+
+            if (!state.Fortifications.TryGetValue(fortificationId, out WorldFortification? fortification))
+            {
+                return null;
+            }
+
+            if (context.Stack.Position.GetDistance(fortification.Entrance) != ExitStackDistance)
+            {
+                return null;
+            }
+
+            WorldPlan plan = WorldPlan.For(state);
+
+            WorldStack? target = plan.GetStackAt(fortification.Entrance);
+
+            if (target is null)
+            {
+                return null;
+            }
+
+            foreach ((WorldUnit unit, _) in target.Units.GetUnits())
+            {
+                UnitStats unitStats = Context.Engine.UnitStats.GetWorldUnitStats(unit);
+
+                if (unit.Hitpoints * 100 <= unitStats.MaxHitpoints * ExitStackHitpointsPercent)
+                {
+                    return null;
+                }
+            }
+
+            WorldExitStackCommand command = new(target.Id);
+            WorldCommandResult commandResult = command.Execute(state, Context.Engine);
+
+            if (commandResult.Failed)
+            {
+                return null;
+            }
+
+            return MakePlan(MaxScore, command, context.Memory);
         }
 
         private WorldAiActionPlan? PlanMoveToward(ActionContext context, WorldPathMap pathMap, WorldPosition targetPosition)

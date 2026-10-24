@@ -104,7 +104,9 @@ internal sealed partial class WorldAiPlanner
         {
             if (context.Stack.Position.GetDistance(order.TargetPosition) > order.Radius)
             {
-                return PlanMove(context, EnumerateLocationTargets(context, order.TargetPosition, order.Radius), ScoringType.Ordered);
+                TargetArea area = new(order.TargetPosition, order.Radius);
+
+                return PlanMove(context, EnumerateFreeTiles(context.State, context.Stack, area, Context.Engine.Definitions), ScoringType.Ordered);
             }
             else
             {
@@ -116,7 +118,9 @@ internal sealed partial class WorldAiPlanner
         {
             if (context.Stack.Position.GetDistance(order.TargetPosition) > order.Radius)
             {
-                return PlanMove(context, EnumerateLocationTargets(context, order.TargetPosition, order.Radius), ScoringType.Ordered);
+                TargetArea area = new(order.TargetPosition, order.Radius);
+
+                return PlanMove(context, EnumerateFreeTiles(context.State, context.Stack, area, Context.Engine.Definitions), ScoringType.Ordered);
             }
             else
             {
@@ -193,20 +197,6 @@ internal sealed partial class WorldAiPlanner
             else
             {
                 return PlanExploreMove(context, pathMap);
-            }
-        }
-
-        private IEnumerable<WorldAiTarget> EnumerateLocationTargets(ActionContext context, WorldPosition center, int radius)
-        {
-            WorldPlan plan = WorldPlan.For(context.State);
-            WorldMovementCalculator.MovementProfile profile = WorldMovementCalculator.GetMovementProfile(context.Stack, Context.Engine.Definitions);
-
-            foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(center, radius, context.State.Map))
-            {
-                if (plan.CanPlaceStackAt(position, profile))
-                {
-                    yield return new WorldAiTarget.Location(position);
-                }
             }
         }
 

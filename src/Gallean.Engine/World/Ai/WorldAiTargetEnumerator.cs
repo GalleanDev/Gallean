@@ -52,6 +52,20 @@ internal static class WorldAiTargetEnumerator
         }
     }
 
+    public static IEnumerable<WorldAiTarget> EnumerateFreeTiles(WorldState state, WorldStack stack, TargetArea area, IGameDefinitionProvider definitions)
+    {
+        WorldPlan plan = WorldPlan.For(state);
+        WorldMovementCalculator.MovementProfile profile = WorldMovementCalculator.GetMovementProfile(stack, definitions);
+
+        foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(area.Center, area.Radius, state.Map))
+        {
+            if (plan.CanPlaceStackAt(position, profile))
+            {
+                yield return new WorldAiTarget.Location(position);
+            }
+        }
+    }
+
     private static IEnumerable<WorldAiTarget> EnumerateEnemyStacks(WorldState state, WorldPlayer player, TargetArea? area)
     {
         foreach (WorldStack stack in state.Stacks.Values)

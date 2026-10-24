@@ -66,15 +66,15 @@ internal sealed partial class WorldAiPlanner
 
             TargetArea area = new(protectedStack.Position, Context.Engine.Globals.AiStackDefendRange / 2);
             IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, area);
+            TargetArea adjacentArea = new(protectedStack.Position, 1);
+            IEnumerable<WorldAiTarget> adjacentTiles = EnumerateFreeTiles(context.State, context.Stack, adjacentArea, Context.Engine.Definitions);
 
-            return PlanAttack(context, targets, ScoringType.Ordered);
+            return PlanAttack(context, targets.Concat(adjacentTiles), ScoringType.Ordered);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.SecureCity order, ActionContext context)
         {
-            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy, BlockingArea(context));
-
-            return PlanAttack(context, targets, ScoringType.Ordered);
+            return PlanAttack(context, [new WorldAiTarget.Fortification(order.TargetId)], ScoringType.Ordered);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Roam order, ActionContext context)
@@ -101,15 +101,27 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.MoveToLocation order, ActionContext context)
         {
-            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, BlockingArea(context));
+            if (context.Stack.Position.GetDistance(order.TargetPosition) > order.Radius)
+            {
+                TargetArea area = new(order.TargetPosition, order.Radius);
 
-            return PlanAttack(context, targets, ScoringType.Ordered);
+                return PlanAttack(context, EnumerateFreeTiles(context.State, context.Stack, area, Context.Engine.Definitions), ScoringType.Ordered);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendLocation order, ActionContext context)
         {
             TargetArea area = new(order.TargetPosition, order.Radius);
             IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.EnemyStack, area);
+
+            if (context.Stack.Position.GetDistance(order.TargetPosition) > order.Radius)
+            {
+                targets = targets.Concat(EnumerateFreeTiles(context.State, context.Stack, area, Context.Engine.Definitions));
+            }
 
             return PlanAttack(context, targets, ScoringType.Ordered);
         }
