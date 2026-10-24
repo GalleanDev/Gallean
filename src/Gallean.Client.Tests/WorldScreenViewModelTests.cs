@@ -6867,7 +6867,6 @@ public sealed class WorldScreenViewModelTests
             .WithStack(stack)
             .WithResourceNode(new WorldResourceNode(
                 Id: new WorldResourceNodeId("crystal"),
-                OwnerId: player.Id,
                 Position: new WorldPosition(1, 1),
                 ResourceType: WorldResourceType.LifeMana,
                 AiPriority: 1))

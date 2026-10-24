@@ -1854,18 +1854,18 @@ public sealed class ScenarioLoaderTests
         Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
 
         Assert.That(scenario.State.ResourceNodes.Values, Is.EqualTo([
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0000"), new WorldPlayerId(1), new WorldPosition(7, 36), WorldResourceType.Gold, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0001"), new WorldPlayerId(1), new WorldPosition(32, 13), WorldResourceType.Gold, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0002"), new WorldPlayerId(1), new WorldPosition(42, 5), WorldResourceType.Gold, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0003"), new WorldPlayerId(1), new WorldPosition(28, 25), WorldResourceType.Gold, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0004"), new WorldPlayerId(1), new WorldPosition(19, 45), WorldResourceType.LifeMana, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0005"), new WorldPlayerId(1), new WorldPosition(42, 24), WorldResourceType.LifeMana, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0006"), new WorldPlayerId(1), new WorldPosition(37, 2), WorldResourceType.InfernalMana, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0007"), new WorldPlayerId(1), new WorldPosition(19, 24), WorldResourceType.InfernalMana, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0008"), new WorldPlayerId(1), new WorldPosition(41, 44), WorldResourceType.RuneMana, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR0009"), new WorldPlayerId(1), new WorldPosition(25, 10), WorldResourceType.DeathMana, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR000a"), new WorldPlayerId(1), new WorldPosition(30, 43), WorldResourceType.Gold, AiPriority: 3),
-            new WorldResourceNode(new WorldResourceNodeId("S095CR000b"), new WorldPlayerId(1), new WorldPosition(26, 34), WorldResourceType.LifeMana, AiPriority: 3)
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0000"), new WorldPosition(7, 36), WorldResourceType.Gold, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0001"), new WorldPosition(32, 13), WorldResourceType.Gold, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0002"), new WorldPosition(42, 5), WorldResourceType.Gold, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0003"), new WorldPosition(28, 25), WorldResourceType.Gold, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0004"), new WorldPosition(19, 45), WorldResourceType.LifeMana, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0005"), new WorldPosition(42, 24), WorldResourceType.LifeMana, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0006"), new WorldPosition(37, 2), WorldResourceType.InfernalMana, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0007"), new WorldPosition(19, 24), WorldResourceType.InfernalMana, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0008"), new WorldPosition(41, 44), WorldResourceType.RuneMana, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR0009"), new WorldPosition(25, 10), WorldResourceType.DeathMana, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR000a"), new WorldPosition(30, 43), WorldResourceType.Gold, AiPriority: 3),
+            new WorldResourceNode(new WorldResourceNodeId("S095CR000b"), new WorldPosition(26, 34), WorldResourceType.LifeMana, AiPriority: 3)
         ]));
     }
 

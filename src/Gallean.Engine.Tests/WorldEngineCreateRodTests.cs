@@ -132,7 +132,7 @@ public sealed class WorldEngineCreateRodTests
                 .Build(),
             movementPoints: 20);
 
-        WorldResourceNode node = new(new WorldResourceNodeId("node"), player2.Id, new WorldPosition(3, 2), WorldResourceType.Gold, AiPriority: 3);
+        WorldResourceNode node = new(new WorldResourceNodeId("node"), new WorldPosition(3, 2), WorldResourceType.Gold, AiPriority: 3);
 
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)

@@ -33,7 +33,6 @@ internal sealed partial class WorldEngine(IEngineContext context, WorldState ini
             new ScenarioEventTriggeringEffectRule(context),
             new TurnEndedEndRoundRule(context),
             new RoundEndedStartRoundRule(context),
-            new TurnStartingCaptureNodeRule(context),
             new TurnStartingDiscoverSpiesRule(context),
             new TurnStartingRestoreMovementRule(context),
             new TurnStartingUnitModifierDurationRule(context),

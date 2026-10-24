@@ -79,11 +79,11 @@ public sealed record WorldCreateRodCommand(
             return WorldCommandResult.Fail(WorldCommandError.TargetOccupied);
         }
 
-        WorldPlayer? landOwner = FindLandOwner(state, cell.Terrain);
+        WorldPlayerId? landOwnerId = plan.GetLandOwner(TargetPosition);
 
-        if (landOwner is not null && landOwner.Id != currentPlayer)
+        if (landOwnerId is not null && landOwnerId != currentPlayer)
         {
-            WorldRelation relation = DiplomacyCalculator.GetRelation(state, currentPlayer, landOwner.Id);
+            WorldRelation relation = DiplomacyCalculator.GetRelation(state, currentPlayer, landOwnerId.Value);
 
             if (relation.Alliance)
             {
@@ -96,19 +96,6 @@ public sealed record WorldCreateRodCommand(
         return WorldCommandResult.Success(
             Empty.Value,
             [new WorldRodCreatedEvent(rodId, currentPlayer, TargetPosition), new WorldStackMovementConsumedEvent(StackId, 0)]);
-    }
-
-    private static WorldPlayer? FindLandOwner(WorldState state, WorldMapTerrain terrain)
-    {
-        foreach (WorldPlayer player in state.Players.Values)
-        {
-            if (WorldHelpers.IsRacePlayable(player.Race) && WorldHelpers.GetNativeTerrain(player.Race) == terrain)
-            {
-                return player;
-            }
-        }
-
-        return null;
     }
 
     private static WorldRodId GenerateRodId(WorldState state)

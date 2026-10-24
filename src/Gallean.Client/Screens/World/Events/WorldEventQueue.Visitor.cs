@@ -206,16 +206,6 @@ internal sealed partial class WorldEventQueue
         return Empty.Value;
     }
 
-    Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldResourceNodeCapturedEvent ev, EngineStep<WorldState, WorldEvent> step)
-    {
-        if (step.NewState.ResourceNodes.TryGetValue(ev.NodeId, out WorldResourceNode? node))
-        {
-            queue.Add(new Entry.Pause(step.NewState, node.Position, ev.NewOwnerId, PauseDurationDefault));
-        }
-
-        return Empty.Value;
-    }
-
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldStackBattleEndedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
         return Empty.Value;

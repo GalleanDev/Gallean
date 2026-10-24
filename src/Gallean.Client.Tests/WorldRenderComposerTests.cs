@@ -296,14 +296,12 @@ public sealed class WorldRenderComposerTests
 
         WorldResourceNode foggedNode = new(
             Id: new WorldResourceNodeId("r1"),
-            OwnerId: human.Id,
             Position: new WorldPosition(7, 4),
             ResourceType: WorldResourceType.GroveMana,
             AiPriority: 3);
 
         WorldResourceNode visibleNode = new(
             Id: new WorldResourceNodeId("r2"),
-            OwnerId: undead.Id,
             Position: new WorldPosition(6, 6),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3);
@@ -3967,14 +3965,12 @@ public sealed class WorldRenderComposerTests
 
         WorldResourceNode goldMine = new(
             Id: new WorldResourceNodeId("r1"),
-            OwnerId: undead.Id,
             Position: new WorldPosition(8, 8),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3);
 
         WorldResourceNode manaNode = new(
             Id: new WorldResourceNodeId("r2"),
-            OwnerId: undead.Id,
             Position: new WorldPosition(10, 8),
             ResourceType: WorldResourceType.DeathMana,
             AiPriority: 3);

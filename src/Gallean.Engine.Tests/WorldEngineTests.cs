@@ -172,7 +172,6 @@ public sealed class WorldEngineTests
 
         WorldResourceNode node1 = new(
             Id: new WorldResourceNodeId("node1"),
-            OwnerId: player3.Id,
             Position: new WorldPosition(5, 3),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3
@@ -222,7 +221,6 @@ public sealed class WorldEngineTests
             new WorldRoundEndedEvent(),
             new WorldRoundStartedEvent(),
             new WorldTurnStartingEvent(player1.Id),
-            new WorldResourceNodeCapturedEvent(node1.Id, player1.Id),
             new WorldStackMovementRestoredEvent(stack1.Id, 10),
             new WorldTurnStartedEvent(player1.Id),
             new WorldTurnResourcesGeneratedEvent(player1.Id, new WorldResourceSet(150, 25, 0, 0, 0, 0))
@@ -277,16 +275,11 @@ public sealed class WorldEngineTests
         {
             Resources = new WorldResourceSet(400, 75, 0, 0, 0, 0)
         };
-        WorldResourceNode expectedNode = node1 with
-        {
-            OwnerId = player1.Id
-        };
 
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
-                Players = engine.State.Players.SetItem(expectedPlayer1.Id, expectedPlayer1),
-                ResourceNodes = engine.State.ResourceNodes.SetItem(expectedNode.Id, expectedNode)
+                Players = engine.State.Players.SetItem(expectedPlayer1.Id, expectedPlayer1)
             }));
     }
 
@@ -435,7 +428,6 @@ public sealed class WorldEngineTests
 
         WorldResourceNode goldNode = new(
             Id: new WorldResourceNodeId("gold"),
-            OwnerId: neutralPlayer.Id,
             Position: new WorldPosition(0, 0),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3
@@ -443,7 +435,6 @@ public sealed class WorldEngineTests
 
         WorldResourceNode manaNode = new(
             Id: new WorldResourceNodeId("mana"),
-            OwnerId: neutralPlayer.Id,
             Position: new WorldPosition(1, 0),
             ResourceType: WorldResourceType.DeathMana,
             AiPriority: 3
@@ -461,23 +452,13 @@ public sealed class WorldEngineTests
 
         engine.CheckCommand(new WorldStartGameCommand(), [
             new WorldTurnStartingEvent(player.Id),
-            new WorldResourceNodeCapturedEvent(goldNode.Id, player.Id),
-            new WorldResourceNodeCapturedEvent(manaNode.Id, player.Id),
             new WorldTurnStartedEvent(player.Id),
             new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(150, 75, 0, 0, 0, 0))
         ]);
-
-        Assert.That(engine.State, Is.EqualTo(
-            engine.State with
-            {
-                ResourceNodes = engine.State.ResourceNodes
-                    .SetItem(goldNode.Id, goldNode with { OwnerId = player.Id })
-                    .SetItem(manaNode.Id, manaNode with { OwnerId = player.Id })
-            }));
     }
 
     [Test]
-    public void NeutralTerrainDoesNotCaptureNodesTest()
+    public void NeutralTerrainNodeTest()
     {
         WorldMap map = TestHelpers.SimpleMap(1, 1);
 
@@ -486,7 +467,6 @@ public sealed class WorldEngineTests
 
         WorldResourceNode node = new(
             Id: new WorldResourceNodeId("node"),
-            OwnerId: player.Id,
             Position: new WorldPosition(0, 0),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3
@@ -504,14 +484,8 @@ public sealed class WorldEngineTests
         engine.CheckCommand(new WorldStartGameCommand(), [
             new WorldTurnStartingEvent(player.Id),
             new WorldTurnStartedEvent(player.Id),
-            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(150, 25, 0, 0, 0, 0))
+            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 25, 0, 0, 0, 0))
         ]);
-
-        Assert.That(engine.State, Is.EqualTo(
-            engine.State with
-            {
-                ResourceNodes = engine.State.ResourceNodes.SetItem(node.Id, node)
-            }));
     }
 
     [Test]

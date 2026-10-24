@@ -42,7 +42,6 @@ public sealed class WorldPlanTests
 
         WorldResourceNode resourceNode = new(
             Id: new WorldResourceNodeId("node"),
-            OwnerId: player.Id,
             Position: new WorldPosition(5, 6),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3);

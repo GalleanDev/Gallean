@@ -139,7 +139,7 @@ public static class ScenarioLoader
         ImmutableSortedDictionary<WorldStackId, WorldStack> stacks =
             LoadStacks(scenarioDb, scenarioId, playerIds, definitions, globals, fortifications, locations);
         ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode> resourceNodes =
-            LoadResourceNodes(scenarioDb, scenarioId, GetNeutralPlayerId(players));
+            LoadResourceNodes(scenarioDb, scenarioId);
         ImmutableSortedDictionary<WorldRodId, WorldRod> rods =
             LoadRods(scenarioDb, scenarioId, playerIds);
         ImmutableSortedDictionary<WorldBagId, WorldBag> bags =
@@ -334,8 +334,7 @@ public static class ScenarioLoader
 
     private static ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode> LoadResourceNodes(
         ScenarioDatabase scenarioDb,
-        Db.ScenarioId scenarioId,
-        WorldPlayerId neutralPlayerId)
+        Db.ScenarioId scenarioId)
     {
         ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode>.Builder result =
             ImmutableSortedDictionary.CreateBuilder<WorldResourceNodeId, WorldResourceNode>();
@@ -344,7 +343,6 @@ public static class ScenarioLoader
         {
             WorldResourceNode node = new(
                 new WorldResourceNodeId(crystal.CrystalId),
-                neutralPlayerId,
                 new WorldPosition(crystal.PositionX, crystal.PositionY),
                 MapCrystalType(crystal.Resource),
                 crystal.AiPriority
@@ -1213,19 +1211,6 @@ public static class ScenarioLoader
         }
 
         return result.ToImmutable();
-    }
-
-    private static WorldPlayerId GetNeutralPlayerId(ImmutableSortedDictionary<WorldPlayerId, WorldPlayer> players)
-    {
-        foreach (WorldPlayer player in players.Values)
-        {
-            if (player.Race == WorldRace.Neutral)
-            {
-                return player.Id;
-            }
-        }
-
-        throw new InvalidDataException("Scenario has no neutral player.");
     }
 
     private static WorldResourceType MapCrystalType(int resource)

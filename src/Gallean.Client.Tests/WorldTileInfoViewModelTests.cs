@@ -237,7 +237,10 @@ public sealed class WorldTileInfoViewModelTests
     [Test]
     public void ResourceNodesTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(3, 2);
+        WorldMap map = TestHelpers.BuildMap([
+            "..E",
+            ".U."
+        ]);
 
         WorldPlayer undeadPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
         WorldPlayer elfPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Elf, map);
@@ -250,20 +253,24 @@ public sealed class WorldTileInfoViewModelTests
             .WithPlayer(elfPlayer)
             .WithResourceNode(new WorldResourceNode(
                 Id: new WorldResourceNodeId("mine"),
-                OwnerId: undeadPlayer.Id,
                 Position: new WorldPosition(1, 1),
                 ResourceType: WorldResourceType.Gold,
                 AiPriority: 1))
             .WithResourceNode(new WorldResourceNode(
                 Id: new WorldResourceNodeId("crystal"),
-                OwnerId: elfPlayer.Id,
                 Position: new WorldPosition(2, 0),
                 ResourceType: WorldResourceType.LifeMana,
+                AiPriority: 1))
+            .WithResourceNode(new WorldResourceNode(
+                Id: new WorldResourceNodeId("unowned"),
+                Position: new WorldPosition(0, 0),
+                ResourceType: WorldResourceType.DeathMana,
                 AiPriority: 1))
             .BuildSession();
 
         Assert.That(FormatTileInfo(CreateInfo(session, engine, new WorldPosition(1, 1))), Is.EqualTo(["Gold mine", "Owner: Undead Hordes"]));
         Assert.That(FormatTileInfo(CreateInfo(session, engine, new WorldPosition(2, 0))), Is.EqualTo(["Life mana crystal", "Owner: Elven Alliance"]));
+        Assert.That(FormatTileInfo(CreateInfo(session, engine, new WorldPosition(0, 0))), Is.EqualTo(["Death mana crystal"]));
     }
 
     [Test]
@@ -382,7 +389,6 @@ public sealed class WorldTileInfoViewModelTests
             .WithPlayer(player)
             .WithResourceNode(new WorldResourceNode(
                 Id: new WorldResourceNodeId("mine"),
-                OwnerId: player.Id,
                 Position: new WorldPosition(1, 1),
                 ResourceType: WorldResourceType.Gold,
                 AiPriority: 1))

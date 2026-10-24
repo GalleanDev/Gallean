@@ -43,7 +43,6 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldMerchantItemStolenEvent ev, TContext context);
     TResult Visit(WorldMountainsRemovedEvent ev, TContext context);
     TResult Visit(WorldPlayerDefeatedEvent ev, TContext context);
-    TResult Visit(WorldResourceNodeCapturedEvent ev, TContext context);
     TResult Visit(WorldRodCreatedEvent ev, TContext context);
     TResult Visit(WorldRodDestroyedEvent ev, TContext context);
     TResult Visit(WorldRoundStartedEvent ev, TContext context);

@@ -10,10 +10,11 @@ internal static class PlayerIncomeCalculator
         }
 
         WorldResourceSet income = context.Definitions.GetRace(player.Race).Income;
+        WorldPlan plan = WorldPlan.For(state);
 
         foreach (WorldResourceNode node in state.ResourceNodes.Values)
         {
-            if (node.OwnerId == player.Id)
+            if (plan.GetLandOwner(node.Position) == player.Id)
             {
                 income = ResourceSetCalculator.Add(income, ResourceNodeCalculator.GetIncome(node, context.Globals));
             }

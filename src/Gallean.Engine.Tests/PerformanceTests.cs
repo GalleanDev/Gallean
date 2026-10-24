@@ -161,8 +161,7 @@ public sealed class PerformanceTests
             }
 
             WorldResourceNodeId nodeId = new($"Node{i}");
-            WorldPlayerId ownerId = new(i % Math.Max(1, playerCount - 1) + 1);
-            WorldResourceNode node = new(nodeId, ownerId, position, WorldResourceType.Gold, AiPriority: 3);
+            WorldResourceNode node = new(nodeId, position, WorldResourceType.Gold, AiPriority: 3);
             resourceNodes.Add(nodeId, node);
         }
 

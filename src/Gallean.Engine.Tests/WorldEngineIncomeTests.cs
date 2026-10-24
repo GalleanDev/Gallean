@@ -121,7 +121,6 @@ public sealed class WorldEngineIncomeTests
 
         WorldResourceNode node = new(
             Id: new WorldResourceNodeId("gold_mine"),
-            OwnerId: player1.Id,
             Position: new WorldPosition(1, 0),
             ResourceType: WorldResourceType.Gold,
             AiPriority: 3
@@ -419,7 +418,11 @@ public sealed class WorldEngineIncomeTests
     [Test]
     public void EasyResourceNodeTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(3, 3);
+        WorldMap map = TestHelpers.BuildMap([
+            ".U.",
+            "...",
+            ".R."
+        ]);
 
         WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
         WorldPlayer ai = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with
@@ -447,14 +450,12 @@ public sealed class WorldEngineIncomeTests
 
         WorldResourceNode humanNode = new(
             new WorldResourceNodeId("node1"),
-            new WorldPlayerId(1),
             new WorldPosition(1, 0),
             WorldResourceType.Gold,
             AiPriority: 3);
 
         WorldResourceNode aiNode = new(
             new WorldResourceNodeId("node2"),
-            new WorldPlayerId(2),
             new WorldPosition(1, 2),
             WorldResourceType.InfernalMana,
             AiPriority: 3);

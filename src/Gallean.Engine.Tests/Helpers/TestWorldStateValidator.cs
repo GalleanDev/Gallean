@@ -28,11 +28,6 @@ internal static class TestWorldStateValidator
                 RequireOwner(state, capital.OwnerId, $"Capital '{capital.Id.Value}'");
             }
         }
-
-        foreach (WorldResourceNode resourceNode in state.ResourceNodes.Values)
-        {
-            RequireOwner(state, resourceNode.OwnerId, $"Resource node '{resourceNode.Id.Value}'");
-        }
     }
 
     private static void ValidatePositions(WorldState state)

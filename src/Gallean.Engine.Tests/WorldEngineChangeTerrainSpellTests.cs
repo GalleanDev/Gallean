@@ -158,7 +158,6 @@ public sealed class WorldEngineChangeTerrainSpellTests
 
         WorldResourceNode node = new(
             new WorldResourceNodeId("node"),
-            player.Id,
             new WorldPosition(1, 1),
             WorldResourceType.Gold,
             AiPriority: 0);

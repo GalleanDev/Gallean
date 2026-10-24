@@ -639,7 +639,7 @@ public sealed class ExpansionCalculatorTests
             CreateFortifications(CreateCity(new WorldFortificationId("city"), undeadPlayerId, new WorldPosition(3, 3), 1)),
             ImmutableSortedDictionary<WorldRodId, WorldRod>.Empty,
             CreateResourceNodes(
-                new WorldResourceNode(new WorldResourceNodeId("node"), humanPlayerId, new WorldPosition(4, 2), WorldResourceType.Gold, AiPriority: 3)),
+                new WorldResourceNode(new WorldResourceNodeId("node"), new WorldPosition(4, 2), WorldResourceType.Gold, AiPriority: 3)),
             ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark>.Empty);
         IEngineContext context = CreateContext(new GlobalVariables { CityTerrainTilesPerTurnLevel1 = 34 });
 
@@ -672,7 +672,7 @@ public sealed class ExpansionCalculatorTests
             CreateFortifications(CreateCity(new WorldFortificationId("city"), undeadPlayerId, new WorldPosition(3, 3), 1)),
             CreateRods(new WorldRod(new WorldRodId("rod"), humanPlayerId, new WorldPosition(5, 2))),
             CreateResourceNodes(
-                new WorldResourceNode(new WorldResourceNodeId("node"), humanPlayerId, new WorldPosition(4, 2), WorldResourceType.Gold, AiPriority: 3)),
+                new WorldResourceNode(new WorldResourceNodeId("node"), new WorldPosition(4, 2), WorldResourceType.Gold, AiPriority: 3)),
             ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark>.Empty);
         IEngineContext context = CreateContext(new GlobalVariables { CityTerrainTilesPerTurnLevel1 = 34 });
 
@@ -705,7 +705,7 @@ public sealed class ExpansionCalculatorTests
             ImmutableSortedDictionary<WorldFortificationId, WorldFortification>.Empty,
             CreateRods(new WorldRod(new WorldRodId("rod"), undeadPlayerId, new WorldPosition(2, 2))),
             CreateResourceNodes(
-                new WorldResourceNode(new WorldResourceNodeId("node"), humanPlayerId, new WorldPosition(3, 2), WorldResourceType.Gold, AiPriority: 3)),
+                new WorldResourceNode(new WorldResourceNodeId("node"), new WorldPosition(3, 2), WorldResourceType.Gold, AiPriority: 3)),
             ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark>.Empty);
         IEngineContext context = CreateContext(new GlobalVariables { RodTerrainTilesPerTurn = 2 });
 
@@ -738,7 +738,7 @@ public sealed class ExpansionCalculatorTests
             ImmutableSortedDictionary<WorldFortificationId, WorldFortification>.Empty,
             CreateRods(new WorldRod(new WorldRodId("rod"), undeadPlayerId, new WorldPosition(2, 2))),
             CreateResourceNodes(
-                new WorldResourceNode(new WorldResourceNodeId("node"), humanPlayerId, new WorldPosition(2, 3), WorldResourceType.Gold, AiPriority: 3)),
+                new WorldResourceNode(new WorldResourceNodeId("node"), new WorldPosition(2, 3), WorldResourceType.Gold, AiPriority: 3)),
             ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark>.Empty);
         IEngineContext context = CreateContext(new GlobalVariables { RodTerrainTilesPerTurn = 1 });
 

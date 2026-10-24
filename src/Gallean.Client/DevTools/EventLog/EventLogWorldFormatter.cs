@@ -90,11 +90,6 @@ internal sealed class EventLogWorldFormatter(IGameDefinitionProvider definitions
         }
     }
 
-    IReadOnlyList<EventLogEntry> IWorldEventVisitor<WorldState, IReadOnlyList<EventLogEntry>>.Visit(WorldResourceNodeCapturedEvent ev, WorldState state)
-    {
-        return AddEvent($"Resource node {Reference(ev.NodeId.Value)} captured by {Player(ev.NewOwnerId)}.");
-    }
-
     IReadOnlyList<EventLogEntry> IWorldEventVisitor<WorldState, IReadOnlyList<EventLogEntry>>.Visit(WorldStackBattleStartedEvent ev, WorldState state)
     {
         return AddEvent($"Stack {Reference(ev.AttackerStackId.Value)} attacked stack {Reference(ev.DefenderStackId.Value)}.");

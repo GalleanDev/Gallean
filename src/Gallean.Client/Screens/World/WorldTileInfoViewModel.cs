@@ -78,9 +78,7 @@ internal sealed record WorldTileInfoViewModel(
 
         if (resourceNode is not null)
         {
-            return new WorldTileInfoViewModel(
-                FormatResourceNodeTitle(resourceNode.ResourceType),
-                [FormatOwnerLine(resourceNode.OwnerId, world, definitions, texts)]);
+            return CreateResourceNodeInfo(resourceNode, plan, world, definitions, texts);
         }
 
         WorldRod? rod = plan.GetRodAt(position);
@@ -107,6 +105,26 @@ internal sealed record WorldTileInfoViewModel(
         }
 
         return null;
+    }
+
+    private static WorldTileInfoViewModel CreateResourceNodeInfo(
+        WorldResourceNode resourceNode,
+        WorldPlan plan,
+        WorldState world,
+        IGameDefinitionProvider definitions,
+        IGameTextProvider texts)
+    {
+        string title = FormatResourceNodeTitle(resourceNode.ResourceType);
+        WorldPlayerId? ownerId = plan.GetLandOwner(resourceNode.Position);
+
+        if (ownerId is not null)
+        {
+            return new WorldTileInfoViewModel(title, [FormatOwnerLine(ownerId.Value, world, definitions, texts)]);
+        }
+        else
+        {
+            return new WorldTileInfoViewModel(title, []);
+        }
     }
 
     private static WorldTileInfoViewModel CreateRuinInfo(

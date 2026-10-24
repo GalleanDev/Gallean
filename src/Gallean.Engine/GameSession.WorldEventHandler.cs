@@ -78,7 +78,6 @@ public sealed partial class GameSession
         public Empty Visit(WorldFortificationCapturedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldFortificationPoisonedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldTurnResourcesGeneratedEvent ev, Empty context) => Empty.Value;
-        public Empty Visit(WorldResourceNodeCapturedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldStackBattleEndedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldStackCreatedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldStackDestroyedEvent ev, Empty context) => Empty.Value;

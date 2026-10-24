@@ -111,6 +111,21 @@ public sealed class WorldPlan
         return resourceNode;
     }
 
+    public WorldPlayerId? GetLandOwner(WorldPosition position)
+    {
+        WorldMapCell cell = state.Map.GetCellAt(position);
+
+        foreach (WorldPlayer player in state.Players.Values)
+        {
+            if (WorldHelpers.IsRacePlayable(player.Race) && WorldHelpers.GetNativeTerrain(player.Race) == cell.Terrain)
+            {
+                return player.Id;
+            }
+        }
+
+        return null;
+    }
+
     public WorldRod? GetRodAt(WorldPosition position)
     {
         rods.Value.TryGetValue(position, out WorldRod? rod);

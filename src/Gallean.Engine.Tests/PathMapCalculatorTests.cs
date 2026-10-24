@@ -346,8 +346,8 @@ public sealed class PathMapCalculatorTests
     {
         WorldMap map = TestHelpers.SimpleMap(3, 3);
 
-        WorldResourceNode node1 = new(new WorldResourceNodeId("0"), new WorldPlayerId(0), new WorldPosition(1, 0), default, AiPriority: 3);
-        WorldResourceNode node2 = new(new WorldResourceNodeId("1"), new WorldPlayerId(0), new WorldPosition(1, 1), default, AiPriority: 3);
+        WorldResourceNode node1 = new(new WorldResourceNodeId("0"), new WorldPosition(1, 0), default, AiPriority: 3);
+        WorldResourceNode node2 = new(new WorldResourceNodeId("1"), new WorldPosition(1, 1), default, AiPriority: 3);
         WorldState state = CreateEmptyState(map) with
         {
             ResourceNodes = ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode>.Empty
