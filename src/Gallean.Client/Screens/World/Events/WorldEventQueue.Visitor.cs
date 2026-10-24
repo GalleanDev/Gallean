@@ -489,35 +489,14 @@ internal sealed partial class WorldEventQueue
 
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldScenarioPopupEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
-        WorldPosition? focusPosition = ResolveScenarioPopupFocusPosition(ev, step.NewState);
-
-        if (focusPosition is not null)
+        if (ev.TriggererPosition is not null)
         {
-            queue.Add(new Entry.Pause(step.NewState, focusPosition.Value, null, PauseDurationScenarioPopup));
+            queue.Add(new Entry.Pause(step.NewState, ev.TriggererPosition.Value, null, PauseDurationScenarioPopup));
         }
 
         queue.Add(new Entry.ScenarioPopup(step.NewState, [ev]));
 
         return Empty.Value;
-    }
-
-    private static WorldPosition? ResolveScenarioPopupFocusPosition(WorldScenarioPopupEvent ev, WorldState state)
-    {
-        if (ev.TriggererPosition is not null)
-        {
-            return ev.TriggererPosition;
-        }
-        else if (ev.Audience.Contains(state.TurnInfo.CurrentPlayerId))
-        {
-            WorldPlan plan = WorldPlan.For(state);
-            WorldCapital? capital = plan.GetCapital(state.TurnInfo.CurrentPlayerId);
-
-            return capital?.Entrance;
-        }
-        else
-        {
-            return null;
-        }
     }
 
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldScenarioEndedEvent ev, EngineStep<WorldState, WorldEvent> step)

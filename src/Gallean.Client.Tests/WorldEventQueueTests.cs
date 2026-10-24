@@ -1406,43 +1406,6 @@ public sealed class WorldEventQueueTests
     }
 
     [Test]
-    public void ScenarioPopupAtCapitalTest()
-    {
-        WorldMap map = TestHelpers.SimpleMap(8, 8);
-        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
-
-        (GameSession session, _) = new TestWorldEngineBuilder()
-            .WithMap(map)
-            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
-            .WithPlayer(player)
-            .WithCapital(new WorldCapital(
-                Id: new WorldFortificationId("capital"),
-                NameTextId: new ScenarioTextId("Name"),
-                OwnerId: player.Id,
-                Footprint: new WorldFootprint(new WorldPosition(0, 0), 5, 5),
-                Garrison: UnitGrid<WorldUnit>.Empty,
-                Inventory: WorldInventory.Empty,
-                AiPriority: 1,
-                CapturedById: null))
-            .BuildSession();
-
-        WorldState state = session.World.State;
-        WorldScenarioPopupEvent popup = Popup(player.Id, triggererPosition: null);
-        Subject<EngineStep<WorldState, WorldEvent>> events = new();
-        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
-
-        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, state, popup));
-
-        Entry pause = Assert.NotNull(queue.PlayNext());
-        Assert.That(pause, Is.EqualTo(new Entry.Pause(state, new WorldPosition(4, 4), null, TimeSpan.FromSeconds(0.25))));
-
-        queue.Stop();
-
-        Entry entry = Assert.NotNull(queue.PlayNext());
-        Assert.That(entry, Is.EqualTo(new Entry.ScenarioPopup(state, [popup])));
-    }
-
-    [Test]
     public void ScenarioPopupWithoutPositionTest()
     {
         WorldPlayerId triggerer = new(1);
