@@ -4279,4 +4279,68 @@ public sealed class WorldEngineAiTests
             "[P1 1000] Move Main -> (3, 0)"
         ]));
     }
+
+    [Test]
+    public void LeaderQuotaOrderedStackTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^^^",
+            "^^^^^^^^",
+            "^^^^^^^^",
+            "^^^^^^^^",
+            "^^^^...."
+        ]);
+
+        UnitDefinition fighterDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("fighter", maxHitpoints: 100, initiative: 50, damage: 50),
+                movementPoints: 6, leadership: 6) with
+            {
+                Race = WorldRace.Undead,
+                PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+            };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldRaceDefinition race = new(
+            WorldRace.Undead,
+            new GlobalTextId("Undead"),
+            WorldResourceSet.Empty,
+            WorldMapTerrain.Undead,
+            true,
+            35,
+            [],
+            [fighterDefinition.Id],
+            [],
+            ["Nigosh"],
+            ["Orissia"]);
+
+        WorldStack guardStack = MyStack(new WorldUnitId("guard"), "Guard", player.Id, new WorldPosition(7, 4), fighterDefinition, 100, 0, WorldStackOrder.Stand.Instance);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(fighterDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCapital(capital)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithRace(race)
+            .WithStack(guardStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 0] Leader fighter -> capital",
+            "[P3 1000] AutoFit Stack0001"
+        ]));
+    }
 }

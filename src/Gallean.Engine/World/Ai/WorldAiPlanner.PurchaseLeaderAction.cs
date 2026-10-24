@@ -122,7 +122,7 @@ internal sealed partial class WorldAiPlanner
 
             foreach (WorldStack stack in state.Stacks.Values)
             {
-                if (stack.OwnerId == playerId)
+                if (stack.OwnerId == playerId && stack is { Order: WorldStackOrder.Normal, AiIgnore: false })
                 {
                     (WorldUnit _, GridPosition _, UnitDefinition leaderDefinition) = stack.GetLeader(Context.Engine.Definitions);
                     LeaderRole? role = GetLeaderRole(leaderDefinition.LeaderCategory);
