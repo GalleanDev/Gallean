@@ -3122,9 +3122,12 @@ public sealed class WorldScreenViewModelTests
 
         world.OpenCapitalCommand.Execute(null);
 
-        Assert.That(gameViewModel.TopScreen, Is.InstanceOf<ManagementScreenViewModel>());
+        ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
 
-        gameViewModel.CloseScreen(Assert.NotNull(gameViewModel.TopScreen));
+        Assert.That(screen.Tabs.Select(tab => tab.TabHeader), Is.EqualTo(["City", "Party", "Buildings", "Diplomacy"]));
+        Assert.IsOfType<CityTabViewModel>(screen.SelectedTab);
+
+        gameViewModel.CloseScreen(screen);
 
         await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
 
@@ -7722,44 +7725,6 @@ public sealed class WorldScreenViewModelTests
             "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
         ]));
         Assert.That(world.FinishStackCommand.CanExecute(null), Is.False);
-    }
-
-    [Test]
-    public void OpenDiplomacyTest()
-    {
-        WorldMap map = TestHelpers.SimpleMap(8, 8);
-
-        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
-
-        WorldCapital capital = TestHelpers.SimpleCapital(
-            new WorldFortificationId("cap"),
-            player.Id,
-            new WorldPosition(4, 4),
-            UnitGrid<WorldUnit>.Empty);
-
-        (GameSession session, _) = new TestWorldEngineBuilder()
-            .WithMap(map)
-            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
-            .WithPlayer(player)
-            .WithCapital(capital)
-            .BuildSession();
-
-        session.World.DispatchCommand(new WorldStartGameCommand());
-
-        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
-        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
-        gameViewModel.ShowScreen(world);
-        world.CompleteGameStart();
-
-        Assert.That(world.OpenDiplomacyCommand.CanExecute(null), Is.True);
-
-        world.OpenDiplomacyCommand.Execute(null);
-
-        ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
-
-        Assert.That(screen.Tabs.Select(tab => tab.TabHeader), Is.EqualTo(["City", "Party", "Buildings", "Diplomacy"]));
-        Assert.IsOfType<DiplomacyTabViewModel>(screen.SelectedTab);
     }
 
     [Test]

@@ -64,7 +64,6 @@ internal sealed partial class WorldScreenViewModel :
             SelectPreviousStackCommand,
             SelectNextStackCommand,
             OpenCapitalCommand,
-            OpenDiplomacyCommand,
             OpenSpellbookCommand,
             OpenStackCommand);
     }
@@ -716,17 +715,6 @@ internal sealed partial class WorldScreenViewModel :
         WorldPlan plan = WorldPlan.For(WorldState);
 
         return plan.GetCapital(ViewPlayerId) is not null;
-    }
-
-    [RelayCommand(CanExecute = nameof(CanOpenCapital))]
-    private void OpenDiplomacy()
-    {
-        WorldPlan plan = WorldPlan.For(WorldState);
-
-        if (plan.GetCapital(ViewPlayerId) is { } capital)
-        {
-            Game.OpenScreen(ManagementScreenViewModel.CreateForDiplomacy(GameModel, Game, capital.Id));
-        }
     }
 
     private void OpenFortification(WorldFortification fortification)

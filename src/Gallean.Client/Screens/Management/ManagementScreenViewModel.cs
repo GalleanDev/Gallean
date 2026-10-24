@@ -64,16 +64,6 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
         });
     }
 
-    public static ManagementScreenViewModel CreateForDiplomacy(GameModel gameModel, GameViewModel gameViewModel, WorldFortificationId capitalId)
-    {
-        ManagementScreenViewModel screen = CreateForFortification(gameModel, gameViewModel, capitalId);
-        DiplomacyTabViewModel diplomacy = screen.Tabs.OfType<DiplomacyTabViewModel>().First();
-
-        screen.ChangeSelectedTab(diplomacy);
-
-        return screen;
-    }
-
     public static ManagementScreenViewModel CreateForStack(GameModel gameModel, GameViewModel gameViewModel, WorldStackId stackId)
     {
         WorldState world = gameModel.Snapshot.WorldState;
