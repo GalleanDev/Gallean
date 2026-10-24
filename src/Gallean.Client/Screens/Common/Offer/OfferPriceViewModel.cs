@@ -1,6 +1,8 @@
+using Gallean.Common;
+
 namespace Gallean.Client;
 
-internal sealed class OfferPriceViewModel
+internal sealed record OfferPriceViewModel
 {
     public OfferPriceViewModel(WorldResourceSet value)
     {
@@ -31,6 +33,30 @@ internal sealed class OfferPriceViewModel
     public IReadOnlyList<OfferPriceItemViewModel> Items { get; }
 
     public bool IsShort => Items.Any(item => item.IsShort);
+
+    public bool Equals(OfferPriceViewModel? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Items.SequenceEqual(other.Items);
+    }
+
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+
+        hash.AddSequence(Items);
+
+        return hash.ToHashCode();
+    }
 
     private static int GetValue(WorldResourceSet resources, WorldResourceType type)
     {
