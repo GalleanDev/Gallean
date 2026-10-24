@@ -11,6 +11,7 @@ internal sealed class BattleModel(GameModel gameModel, BattleSession session, IL
     public bool IsDefenderAi => session.IsDefenderAi;
     public bool CanAutoResolve => session.CanAutoResolve;
     public WorldPosition Position => session.Position;
+    public BattleHistory History { get; } = new(session.Events);
 
     public BattleViewerSide ViewerSide
     {

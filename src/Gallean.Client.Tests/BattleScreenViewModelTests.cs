@@ -4603,4 +4603,106 @@ public sealed class BattleScreenViewModelTests
             ],
             [])));
     }
+
+    [Test]
+    public async Task LogTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 30, initiative: 30, damage: 5);
+
+        GlobalVariables globals = new() { BattleInitiativeVariance = 0, BattleDamageVariance = 0 };
+        WorldMap map = TestHelpers.SimpleMap(1, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithGlobals(globals)
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit enemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 30);
+
+        BattleState battleState = new BattleStateBuilder(engine.Definitions)
+            .Add(attacker)
+            .Add(enemy)
+            .Build(BattleModifiers.None);
+
+        EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                battleEngine,
+                battleState,
+                NullBattleUnitUpgradeResolver.Instance,
+                _ =>
+                {
+                },
+                isAttackerAi: false,
+                isDefenderAi: true,
+                canAutoResolve: true,
+                new WorldPosition(0, 0)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        TestAssetProviderBuilder assetBuilder = new();
+        Sprite sprite = assetBuilder.CreateSprite(SKColors.Transparent, 80, 120);
+        Animation animation = assetBuilder.CreateAnimation(new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null), [sprite]);
+        using TestAssetProvider assets = assetBuilder
+            .ResolveSprite(_ => sprite)
+            .ResolveAnimation(_ => animation)
+            .ResolveSound(_ => null)
+            .Build();
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAssets(assets).Build();
+        IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("enemy"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithSprite(new AssetSpriteKey.BattleCorpse(IsLarge: false, Variant: 0), new AssetSpriteMetadata(Width: 44, Height: 28, PixelWidth: 44, PixelHeight: 28, OffsetX: -22, OffsetY: -20, Additive: false))
+            .Build();
+        BattleScreenViewModel viewModel = new(gameModel, battle, gameViewModel, assetMetadata, NullAssetPreloader.Instance, new RandomProvider(0));
+        gameViewModel.OpenScreen(viewModel);
+        await viewModel.CompleteTransitionAsync();
+
+        await battle.DispatchCommandAsync(new BattleAutoResolveCommand());
+
+        viewModel.OpenLogCommand.Execute(null);
+
+        BattleLogPopupViewModel popup = Assert.IsOfType<BattleLogPopupViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(popup.Entries, Is.EqualTo<BattleLogEntry[]>(
+        [
+            new BattleLogRoundEntry("Round 1"),
+            new BattleLogEventEntry(new TextSpans(
+            [
+                new TextSpan("name", TextStyle.Highlight),
+                new TextSpan(" hit ", TextStyle.None),
+                new TextSpan("name", TextStyle.Highlight),
+                new TextSpan(" for 50 damage.", TextStyle.None)
+            ])),
+            new BattleLogEventEntry(new TextSpans(
+            [
+                new TextSpan("name", TextStyle.Highlight),
+                new TextSpan(" died.", TextStyle.None)
+            ])),
+            new BattleLogEventEntry(new TextSpans(
+            [
+                new TextSpan("The attacker won.", TextStyle.None)
+            ])),
+            new BattleLogEventEntry(new TextSpans(
+            [
+                new TextSpan("name", TextStyle.Highlight),
+                new TextSpan(" gained 1 experience.", TextStyle.None)
+            ]))
+        ]));
+
+        popup.CloseCommand.Execute(null);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(viewModel));
+    }
 }

@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.BattleLogPopupView"
+             x:DataType="local:BattleLogPopupViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="ScrollViewer.battle-log /template/ ScrollContentPresenter">
+      <Setter Property="OpacityMask" Value="{StaticResource BattleLogFadeGradientBrush}" />
+    </Style>
+
+    <Style Selector="Line.round-divider">
+      <Setter Property="Stretch" Value="Fill" />
+      <Setter Property="StartPoint" Value="0,0" />
+      <Setter Property="EndPoint" Value="1,0" />
+      <Setter Property="Stroke" Value="{StaticResource DividerBrush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="StrokeDashArray" Value="4,3" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+  </UserControl.Styles>
+
+  <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
+    <local:ModalPanel Width="520" MaxHeight="620" Title="{local:Text 'Battle log'}" InitialFocus="{Binding #CloseButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,*">
+          <Button x:Name="CloseButton" Grid.Column="1" Content="{local:Text 'Close'}" Classes="pill" MinWidth="150" Command="{Binding CloseCommand}" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <ScrollViewer x:Name="EntriesScrollViewer" Classes="battle-log" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+          <ItemsControl ItemsSource="{Binding Entries}">
+            <local:Blankslate.Content>
+              <TextBlock Text="{local:Text 'Nothing has happened yet.'}"
+                         Classes="body"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         HorizontalAlignment="Center"
+                         Margin="0,10" />
+            </local:Blankslate.Content>
+            <ItemsControl.DataTemplates>
+              <DataTemplate x:DataType="local:BattleLogEventEntry">
+                <TextBlock local:TextRuns.Spans="{Binding Text}"
+                           Classes="body"
+                           Foreground="{StaticResource PrimaryTextBrush}"
+                           TextWrapping="Wrap"
+                           Margin="0,3" />
+              </DataTemplate>
+              <DataTemplate x:DataType="local:BattleLogRoundEntry">
+                <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="12" Margin="0,10,0,6">
+                  <Line Grid.Column="0" Classes="round-divider" />
+                  <TextBlock Grid.Column="1"
+                             Text="{Binding Title}"
+                             Classes="body"
+                             Foreground="{StaticResource SecondaryTextBrush}" />
+                  <Line Grid.Column="2" Classes="round-divider" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.DataTemplates>
+          </ItemsControl>
+        </StackPanel>
+      </ScrollViewer>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

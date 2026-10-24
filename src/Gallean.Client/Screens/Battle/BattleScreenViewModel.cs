@@ -21,6 +21,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     private readonly CleanupList assetLeases;
     private readonly AssetPreloadPlan assetPlan;
     private readonly string? fortificationName;
+    private readonly BattleLogFormatter logFormatter;
     private LeaderEquipmentSlot? activeItemSlot;
     private TaskCompletionSource<TimeSpan>? animationCompletionSource;
     private BattleUnitId? inspectedUnitId;
@@ -51,6 +52,8 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         this.assets = assets;
         this.assetPreloader = assetPreloader;
         this.random = random;
+
+        logFormatter = new BattleLogFormatter(gameModel.Definitions, gameModel.Texts);
 
         AssetSpriteKey.BattleLocation location = ResolveBattleLocation(gameModel, battle.State, battle.Position);
         fortificationName = ResolveFortificationName(gameModel, battle.Position);
@@ -435,6 +438,12 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         }
 
         await battle.DispatchCommandAsync(new BattleAutoResolveCommand());
+    }
+
+    [RelayCommand]
+    private void OpenLog()
+    {
+        Game.OpenScreen(new BattleLogPopupViewModel(logFormatter.Format(battle.History.Steps)));
     }
 
     [RelayCommand(CanExecute = nameof(CanExitBattle))]

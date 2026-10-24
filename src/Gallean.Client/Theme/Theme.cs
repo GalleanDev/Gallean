@@ -561,10 +561,8 @@ internal static class Theme
         public static Color FootOverlayFadeColor { get; } = Color.FromArgb(0, 6, 5, 8);
     }
 
-    public static class EventLog
+    public static class BattleLog
     {
-        public static Color DamageColor { get; } = Color.FromRgb(244, 122, 112);
-        public static Color HealingColor { get; } = Color.FromRgb(140, 224, 150);
         public static Color FadeTopColor { get; } = Color.FromArgb(110, 0, 0, 0);
         public static Color FadeBottomColor { get; } = Color.FromArgb(255, 0, 0, 0);
     }

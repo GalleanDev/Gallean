@@ -3,9 +3,9 @@ using Avalonia.Interactivity;
 
 namespace Gallean.Client;
 
-internal sealed partial class EventLogPopupView : UserControl
+internal sealed partial class BattleLogPopupView : UserControl
 {
-    public EventLogPopupView()
+    public BattleLogPopupView()
     {
         InitializeComponent();
     }

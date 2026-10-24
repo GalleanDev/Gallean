@@ -757,13 +757,11 @@
     <GradientStop Offset="1" Color="{x:Static local:Theme+CapitalScene.FootOverlayColor}" />
   </LinearGradientBrush>
 
-  <SolidColorBrush x:Key="EventLogDamageBrush" Color="{x:Static local:Theme+EventLog.DamageColor}" />
-  <SolidColorBrush x:Key="EventLogHealingBrush" Color="{x:Static local:Theme+EventLog.HealingColor}" />
-  <SolidColorBrush x:Key="EventLogFadeTopBrush" Color="{x:Static local:Theme+EventLog.FadeTopColor}" />
-  <SolidColorBrush x:Key="EventLogFadeBottomBrush" Color="{x:Static local:Theme+EventLog.FadeBottomColor}" />
-  <LinearGradientBrush x:Key="EventLogFadeGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
-    <GradientStop Offset="0" Color="{x:Static local:Theme+EventLog.FadeTopColor}" />
-    <GradientStop Offset="0.6" Color="{x:Static local:Theme+EventLog.FadeBottomColor}" />
+  <SolidColorBrush x:Key="BattleLogFadeTopBrush" Color="{x:Static local:Theme+BattleLog.FadeTopColor}" />
+  <SolidColorBrush x:Key="BattleLogFadeBottomBrush" Color="{x:Static local:Theme+BattleLog.FadeBottomColor}" />
+  <LinearGradientBrush x:Key="BattleLogFadeGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+BattleLog.FadeTopColor}" />
+    <GradientStop Offset="0.6" Color="{x:Static local:Theme+BattleLog.FadeBottomColor}" />
   </LinearGradientBrush>
 
   <SolidColorBrush x:Key="BattleActionBarHoverFaceBrush" Color="{DynamicResource AccentColor}" Opacity="0.13" />

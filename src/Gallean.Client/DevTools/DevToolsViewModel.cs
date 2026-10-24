@@ -8,8 +8,6 @@ internal sealed partial class DevToolsViewModel(GameViewModel game) : Observable
     private ConfirmPromptViewModel? activationPrompt;
     private bool activationConfirmed;
 
-    public static IReadOnlyList<bool> Switches { get; } = [false, true];
-
     public DiagnosticsRecorder Diagnostics { get; } = new();
 
     [ObservableProperty]
@@ -24,31 +22,9 @@ internal sealed partial class DevToolsViewModel(GameViewModel game) : Observable
     [ObservableProperty]
     public partial bool IsFogEnabled { get; set; } = true;
 
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(OpenEventLogCommand))]
-    public partial EventLogViewModel? EventLog { get; private set; }
-
     partial void OnIsActiveChanged(bool value)
     {
         Diagnostics.IsEnabled = value;
-    }
-
-    public void StartEventLog(GameModel gameModel)
-    {
-        StopEventLog();
-
-        EventLog = new EventLogViewModel(gameModel);
-    }
-
-    public void LogBattle(BattleModel battle)
-    {
-        EventLog?.LogBattle(battle);
-    }
-
-    public void StopEventLog()
-    {
-        EventLog?.Dispose();
-        EventLog = null;
     }
 
     [RelayCommand]
@@ -84,22 +60,6 @@ internal sealed partial class DevToolsViewModel(GameViewModel game) : Observable
                 });
             game.OpenScreen(activationPrompt);
         }
-    }
-
-    [RelayCommand(CanExecute = nameof(CanOpenEventLog))]
-    private void OpenEventLog()
-    {
-        if (EventLog is null)
-        {
-            return;
-        }
-
-        game.OpenScreen(new EventLogPopupViewModel(EventLog.Entries));
-    }
-
-    private bool CanOpenEventLog()
-    {
-        return EventLog is not null;
     }
 
     private void Activate()

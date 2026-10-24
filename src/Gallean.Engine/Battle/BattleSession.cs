@@ -24,7 +24,6 @@ public sealed class BattleSession
         Position = position;
 
         engine = new BattleEngine(context, initialState, upgradeResolver);
-        engine.DispatchCommand(new BattleStartCommand());
     }
 
     public BattleState State => engine.State;
@@ -35,6 +34,11 @@ public sealed class BattleSession
     public WorldPosition Position { get; }
 
     public bool IsAiTurn => State.Outcome is null && IsAiControlled(State.CurrentUnit.Side);
+
+    internal void Start()
+    {
+        engine.DispatchCommand(new BattleStartCommand());
+    }
 
     public ICommandResult<BattleCommandError, BattleEvent, TResult> DispatchCommand<TResult>(
         IBattleCommand<TResult> command,

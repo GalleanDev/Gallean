@@ -11,6 +11,7 @@ internal sealed class ViewDataTemplate : IDataTemplate
         {
             AlertViewModel => new AlertView(),
             AttackPromptViewModel => new AttackPromptView(),
+            BattleLogPopupViewModel => new BattleLogPopupView(),
             BattleScreenViewModel => new BattleScreenView(),
             BriefingScreenViewModel => new BriefingScreenView(),
             BuildingTabViewModel => new BuildingTabView(),
@@ -24,7 +25,6 @@ internal sealed class ViewDataTemplate : IDataTemplate
             DiplomacyProposalViewModel => new DiplomacyProposalView(),
             DiplomacyTabViewModel => new DiplomacyTabView(),
             ErrorScreenViewModel => new ErrorScreenView(),
-            EventLogPopupViewModel => new EventLogPopupView(),
             ExchangeTabViewModel => new ExchangeTabView(),
             GameEndedScreenViewModel => new GameEndedScreenView(),
             GameMenuViewModel => new GameMenuView(),

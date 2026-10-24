@@ -152,8 +152,6 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         Debug.Assert(gameModel.ActiveBattle is not null);
 
-        DevTools.LogBattle(gameModel.ActiveBattle);
-
         BattleScreenViewModel? screen = null;
         try
         {
@@ -718,7 +716,6 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     {
         StopGame();
         activeGame = gameModel;
-        DevTools.StartEventLog(gameModel);
 
         return new WorldScreenViewModel(gameModel, this, random);
     }
@@ -734,7 +731,6 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         activeGame = null;
         savedState = null;
-        DevTools.StopEventLog();
         gameModel.Dispose();
     }
 

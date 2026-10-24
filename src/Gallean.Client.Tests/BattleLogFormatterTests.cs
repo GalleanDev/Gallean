@@ -4,7 +4,7 @@ using Gallean.Engine.Tests;
 
 namespace Gallean.Client.Tests;
 
-public sealed class EventLogBattleFormatterTests
+public sealed class BattleLogFormatterTests
 {
     [Test]
     public void FormatBattleEventsTest()
@@ -33,25 +33,18 @@ public sealed class EventLogBattleFormatterTests
             .Add(scout)
             .Build(BattleModifiers.None);
 
-        EventLogBattleFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
         Assert.That(formatter.Format(
                 new BattleUnitAttackHitEvent(new BattleUnitId(1), new BattleUnitId(2), new UnitAttackDefinitionId("warrior"), 7),
                 state),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Warrior", EventLogSpanType.Actor),
-                        new EventLogSpan(" hit ", EventLogSpanType.Text),
-                        new EventLogSpan("Scout", EventLogSpanType.Actor),
-                        new EventLogSpan(" for ", EventLogSpanType.Text),
-                        new EventLogSpan("7", EventLogSpanType.Damage),
-                        new EventLogSpan(" damage.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Warrior", TextStyle.Highlight),
+                new TextSpan(" hit ", TextStyle.None),
+                new TextSpan("Scout", TextStyle.Highlight),
+                new TextSpan(" for 7 damage.", TextStyle.None)
+            ]))));
     }
 
     [Test]
@@ -83,7 +76,7 @@ public sealed class EventLogBattleFormatterTests
             .Add(scout)
             .Build(BattleModifiers.None);
 
-        EventLogBattleFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
         Assert.That(formatter.Format(
                 new BattleUnitAttackBlockedEvent(
@@ -92,38 +85,28 @@ public sealed class EventLogBattleFormatterTests
                     AttackId: new UnitAttackDefinitionId("warrior"),
                     Ward: ward),
                 state),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Warrior", EventLogSpanType.Actor),
-                        new EventLogSpan(" was blocked by ", EventLogSpanType.Text),
-                        new EventLogSpan("Scout", EventLogSpanType.Actor),
-                        new EventLogSpan("'s ", EventLogSpanType.Text),
-                        new EventLogSpan("Fire", EventLogSpanType.Object),
-                        new EventLogSpan(" ward.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Warrior", TextStyle.Highlight),
+                new TextSpan(" was blocked by the ", TextStyle.None),
+                new TextSpan("Fire", TextStyle.Italic),
+                new TextSpan(" ward of ", TextStyle.None),
+                new TextSpan("Scout", TextStyle.Highlight),
+                new TextSpan(".", TextStyle.None)
+            ]))));
 
         Assert.That(formatter.Format(
                 new BattleUnitWardConsumedEvent(
                     UnitId: new BattleUnitId(2),
                     Ward: ward),
                 state),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Scout", EventLogSpanType.Actor),
-                        new EventLogSpan(" consumed ", EventLogSpanType.Text),
-                        new EventLogSpan("Fire", EventLogSpanType.Object),
-                        new EventLogSpan(" ward.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Scout", TextStyle.Highlight),
+                new TextSpan(" used the ", TextStyle.None),
+                new TextSpan("Fire", TextStyle.Italic),
+                new TextSpan(" ward.", TextStyle.None)
+            ]))));
     }
 
     [Test]
@@ -171,7 +154,7 @@ public sealed class EventLogBattleFormatterTests
             .Add(imp)
             .Build(BattleModifiers.None);
 
-        EventLogBattleFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
         Assert.That(formatter.Format(
                 new BattleUnitSummonedEvent(
@@ -183,50 +166,33 @@ public sealed class EventLogBattleFormatterTests
                     Level: 1,
                     SummonerId: new BattleUnitId(1)),
                 stateBeforeSummon),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Warrior", EventLogSpanType.Actor),
-                        new EventLogSpan(" summoned ", EventLogSpanType.Text),
-                        new EventLogSpan("Imp", EventLogSpanType.Actor),
-                        new EventLogSpan(".", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Warrior", TextStyle.Highlight),
+                new TextSpan(" summoned ", TextStyle.None),
+                new TextSpan("Imp", TextStyle.Highlight),
+                new TextSpan(".", TextStyle.None)
+            ]))));
 
         Assert.That(formatter.Format(
                 new BattleUnitAttackHitEvent(new BattleUnitId(2), new BattleUnitId(1), new UnitAttackDefinitionId("imp"), 4),
                 stateAfterSummon),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Imp", EventLogSpanType.Actor),
-                        new EventLogSpan(" hit ", EventLogSpanType.Text),
-                        new EventLogSpan("Warrior", EventLogSpanType.Actor),
-                        new EventLogSpan(" for ", EventLogSpanType.Text),
-                        new EventLogSpan("4", EventLogSpanType.Damage),
-                        new EventLogSpan(" damage.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Imp", TextStyle.Highlight),
+                new TextSpan(" hit ", TextStyle.None),
+                new TextSpan("Warrior", TextStyle.Highlight),
+                new TextSpan(" for 4 damage.", TextStyle.None)
+            ]))));
 
         Assert.That(formatter.Format(
                 new BattleUnitDiedEvent(new BattleUnitId(2)),
                 stateAfterSummon),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Imp", EventLogSpanType.Actor),
-                        new EventLogSpan(" died.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Imp", TextStyle.Highlight),
+                new TextSpan(" died.", TextStyle.None)
+            ]))));
     }
 
     [Test]
@@ -256,36 +222,43 @@ public sealed class EventLogBattleFormatterTests
             .Add(scout)
             .Build(BattleModifiers.None);
 
-        EventLogBattleFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
         Assert.That(formatter.Format(new BattleEndedEvent(BattleSide.Attacker), state),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Battle ended. ", EventLogSpanType.Text),
-                        new EventLogSpan("Attacker", EventLogSpanType.Actor),
-                        new EventLogSpan(" won.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("The attacker won.", TextStyle.None)
+            ]))));
 
         Assert.That(formatter.Format(new BattleUnitExperienceGainedEvent(new BattleUnitId(1), 40), state),
-            Is.EqualTo(
+            Is.EqualTo(new BattleLogEventEntry(new TextSpans(
             [
-                new EventLogEntry(
-                    EventLogEntryType.Battle,
-                    [
-                        new EventLogSpan("Warrior", EventLogSpanType.Actor),
-                        new EventLogSpan(" has gained ", EventLogSpanType.Text),
-                        new EventLogSpan("40", EventLogSpanType.Value),
-                        new EventLogSpan(" XP this battle.", EventLogSpanType.Text)
-                    ],
-                    null)
-            ]));
+                new TextSpan("Warrior", TextStyle.Highlight),
+                new TextSpan(" gained 40 experience.", TextStyle.None)
+            ]))));
 
         Assert.That(formatter.Format(new BattleUnitExperienceGainedEvent(new BattleUnitId(2), 0), state),
-            Is.Empty);
+            Is.Null);
+    }
+
+    [Test]
+    public void FormatRoundTest()
+    {
+        UnitDefinition warriorDefinition = TestHelpers.SimpleUnitDefinition("warrior", maxHitpoints: 20, initiative: 50, damage: 5);
+
+        BattleUnit warrior = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, warriorDefinition.Id, BattleSide.Attacker, hitpoints: warriorDefinition.MaxHitpoints);
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(warriorDefinition)
+            .Build();
+
+        BattleState state = new BattleStateBuilder(definitions)
+            .Add(warrior)
+            .Build(BattleModifiers.None);
+
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+
+        Assert.That(formatter.Format(new BattleRoundStartedEvent(BattleRound.Normal(2), []), state),
+            Is.EqualTo(new BattleLogRoundEntry("Round 2")));
     }
 }

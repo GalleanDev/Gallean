@@ -347,9 +347,14 @@
                                    Classes="body"
                                    Foreground="{StaticResource PrimaryTextBrush}"
                                    VerticalAlignment="Center" />
-          <Button Classes="pill" Command="{Binding AutoResolveCommand}" ToolTip.Tip="{Binding AutoResolveTip}" ToolTip.ShowOnDisabled="True">
-            <TextBlock Text="{local:Text 'Auto-resolve'}" />
-          </Button>
+          <StackPanel Orientation="Horizontal" Spacing="5">
+            <Button Classes="pill" local:PlateChrome.TextureSeed="2" Command="{Binding AutoResolveCommand}" ToolTip.Tip="{Binding AutoResolveTip}" ToolTip.ShowOnDisabled="True">
+              <TextBlock Text="{local:Text 'Auto-resolve'}" />
+            </Button>
+            <Button Classes="pill" local:PlateChrome.TextureSeed="3" Command="{Binding OpenLogCommand}" ToolTip.Tip="{local:Text 'Show the battle log'}">
+              <TextBlock Text="{local:Text 'Show log'}" />
+            </Button>
+          </StackPanel>
         </StackPanel>
       </Border>
 

@@ -52,6 +52,7 @@ public sealed partial class GameSession
     {
         Battle = battle;
         battleStarted.OnNext(battle);
+        battle.Start();
     }
 
     private void OnWorldEvent(EngineStep<WorldState, WorldEvent> step)

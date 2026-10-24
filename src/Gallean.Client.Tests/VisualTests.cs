@@ -1028,31 +1028,6 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
-    public async Task WorldEventLogTest()
-    {
-        using Sandbox sb = Sandbox.Create();
-
-        GameModel gameModel = LoadScenario(null);
-
-        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
-
-        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
-
-        gameViewModel.DevTools.StartEventLog(gameModel);
-
-        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
-        gameViewModel.ShowScreen(world);
-
-        await WaitForWorldAsync(window);
-
-        gameViewModel.DevTools.OpenEventLogCommand.Execute(null);
-
-        Assert.That(gameViewModel.TopScreen, Is.InstanceOf<EventLogPopupViewModel>());
-
-        await CaptureAsync(window);
-    }
-
-    [AvaloniaTest]
     public async Task WorldObjectiveCollapsedTest()
     {
         using Sandbox sb = Sandbox.Create();
@@ -1560,7 +1535,6 @@ public sealed class VisualTests
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
-        gameViewModel.DevTools.StartEventLog(gameModel);
         WorldScreenViewModel viewModel = new(gameModel, gameViewModel, new RandomProvider(0));
         gameViewModel.ShowScreen(viewModel);
 
@@ -5367,7 +5341,7 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
-    public async Task BattleEventLogTest()
+    public async Task BattleLogTest()
     {
         using Sandbox sb = Sandbox.Create();
 
@@ -5403,9 +5377,6 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.DevTools.StartEventLog(gameModel);
-        gameViewModel.DevTools.LogBattle(battle);
-
         BattleScreenViewModel viewModel = new(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0));
         gameViewModel.ShowScreen(viewModel);
 
@@ -5413,9 +5384,9 @@ public sealed class VisualTests
 
         await battle.DispatchCommandAsync(new BattleAutoResolveCommand());
 
-        gameViewModel.DevTools.OpenEventLogCommand.Execute(null);
+        viewModel.OpenLogCommand.Execute(null);
 
-        Assert.That(gameViewModel.TopScreen, Is.InstanceOf<EventLogPopupViewModel>());
+        Assert.That(gameViewModel.TopScreen, Is.InstanceOf<BattleLogPopupViewModel>());
 
         await CaptureAsync(window);
     }
