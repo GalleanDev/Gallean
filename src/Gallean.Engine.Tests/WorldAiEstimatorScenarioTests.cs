@@ -91,7 +91,7 @@ public sealed class WorldAiEstimatorScenarioTests
             Is.EqualTo("S095KC0000 (77) vs S095KC0011 (92): Attacker wins, leader alive"));
         Assert.That(
             FormatStackBattle("S095SC0000", "S095KC0011", "S095KC0000"),
-            Is.EqualTo("S095KC0011 (92) vs S095KC0000 (77): Attacker wins, leader dead"));
+            Is.EqualTo("S095KC0011 (92) vs S095KC0000 (77): Defender wins, leader dead"));
         Assert.That(
             FormatStackBattle("S095SC0000", "S095KC001e", "S095KC0007"),
             Is.EqualTo("S095KC001e (316) vs S095KC0007 (290): Attacker wins, leader dead"));
