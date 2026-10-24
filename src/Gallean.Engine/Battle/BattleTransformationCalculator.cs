@@ -85,6 +85,21 @@ internal static class BattleTransformationCalculator
         }
     }
 
+    public static bool IsTransformableCategory(UnitCategory category)
+    {
+        return category switch
+        {
+            UnitCategory.Soldier => true,
+            UnitCategory.Thief => true,
+            UnitCategory.Leader => true,
+            UnitCategory.Summon => true,
+            UnitCategory.Illusion => false,
+            UnitCategory.NeutralLeader => true,
+            UnitCategory.NeutralSoldier => true,
+            UnitCategory.Guardian => false
+        };
+    }
+
     private static BattleState Apply(
         BattleState state,
         IEngineContext context,

@@ -87,23 +87,8 @@ internal sealed class DoppelgangerAttackResolver : IBattleAttackResolver, IStati
         UnitWard? blockingWard = BattleUnitWardCalculator.FindBlockingWard(target, attack);
 
         return !targetDefinition.IsLarge &&
-               IsTransformableCategory(targetDefinition.Category) &&
+               BattleTransformationCalculator.IsTransformableCategory(targetDefinition.Category) &&
                targetDefinition.Attack.Type != UnitAttackType.Doppelganger &&
                blockingWard is null;
-    }
-
-    private static bool IsTransformableCategory(UnitCategory category)
-    {
-        return category switch
-        {
-            UnitCategory.Soldier => true,
-            UnitCategory.Thief => true,
-            UnitCategory.Leader => true,
-            UnitCategory.Summon => true,
-            UnitCategory.Illusion => false,
-            UnitCategory.NeutralLeader => true,
-            UnitCategory.NeutralSoldier => true,
-            UnitCategory.Guardian => false
-        };
     }
 }

@@ -4,6 +4,23 @@ namespace Gallean.Engine;
 
 internal sealed class TransformOtherAttackResolver : BattleAbstractAttackResolver, IStaticInstance<TransformOtherAttackResolver>
 {
+    protected override BattleCommandError? ValidateTarget(
+        BattleState state,
+        IEngineContext context,
+        BattleUnitId attackerId,
+        BattleUnit target,
+        UnitAttackDefinition attack)
+    {
+        UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
+
+        if (!BattleTransformationCalculator.IsTransformableCategory(targetDefinition.Category))
+        {
+            return BattleCommandError.TargetIncorrect;
+        }
+
+        return null;
+    }
+
     protected override IReadOnlyList<BattleEvent> OnHit(
         BattleState state,
         IEngineContext context,

@@ -713,4 +713,30 @@ public sealed class BattleEngineTransformOtherAttackTests
                 Outcome = new BattleOutcome(BattleSide.Defender)
             }));
     }
+
+    [Test]
+    public void GuardianTest()
+    {
+        UnitDefinition transformedDefinition = TestHelpers.SimpleUnitDefinition("transformed", maxHitpoints: 50, initiative: 40, damage: 2);
+        UnitDefinition attackerDefinition = TransformAttackerDefinition(false, transformedDefinition.Id, transformedDefinition.Id);
+        UnitDefinition guardianDefinition = TestHelpers.SimpleUnitDefinition("guardian", maxHitpoints: 900, initiative: 40, damage: 100) with
+        {
+            Category = UnitCategory.Guardian
+        };
+
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 10);
+        BattleUnit guardian = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, guardianDefinition.Id, BattleSide.Defender, hitpoints: 900);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(guardianDefinition)
+            .WithDefinition(transformedDefinition)
+            .WithAttacker(attacker, GridPosition.FrontBottom)
+            .WithDefender(guardian, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommandError(
+            new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(guardian.Id)),
+            BattleCommandError.TargetIncorrect);
+    }
 }
