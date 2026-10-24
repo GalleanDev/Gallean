@@ -44,6 +44,7 @@ internal sealed class ViewDataTemplate : IDataTemplate
             MerchantTabViewModel => new MerchantTabView(),
             OfferPriceViewModel => new OfferPriceView(),
             OfferStatusViewModel => new OfferStatusView(),
+            QuestTabViewModel => new QuestTabView(),
             RaceSelectScreenViewModel => new RaceSelectScreenView(),
             ResourceSetViewModel => new ResourceSetView(),
             SaveGameScreenViewModel => new SaveGameScreenView(),

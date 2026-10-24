@@ -494,7 +494,7 @@ internal sealed partial class WorldEventQueue
             queue.Add(new Entry.Pause(step.NewState, ev.TriggererPosition.Value, null, PauseDurationScenarioPopup));
         }
 
-        queue.Add(new Entry.ScenarioPopup(step.NewState, [ev]));
+        queue.Add(new Entry.ScenarioPopup(step.NewState, [step.NewState.ScenarioState.Messages[^1]]));
 
         return Empty.Value;
     }

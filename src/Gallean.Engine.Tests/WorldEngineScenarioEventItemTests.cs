@@ -69,7 +69,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is home."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -740,7 +752,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is ours."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -788,7 +812,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is ours."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -852,7 +888,28 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic has been found."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic has been found."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            rival.Id,
+                            [rival.Id])
+                    ]
                 }
             }));
     }
@@ -1021,7 +1078,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The bearer is ready."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1145,7 +1214,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The bearer is ready."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1212,7 +1293,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is ours."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1281,7 +1374,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is ours."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1351,7 +1456,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The bearer is ready."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1431,7 +1548,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is home."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1505,7 +1634,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The enemy has the relic."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1568,7 +1709,19 @@ public sealed class WorldEngineScenarioEventItemTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The bearer is ready."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1754,7 +1907,19 @@ public sealed class WorldEngineScenarioEventItemTests
                 }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is ours."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            attacker.Id,
+                            [attacker.Id])
+                    ]
                 }
             }));
     }
@@ -1858,6 +2023,18 @@ public sealed class WorldEngineScenarioEventItemTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The relic is ours."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(enemyStack.Id, player.Id, SourceTemplateId: null)]
                 }
             }));

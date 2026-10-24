@@ -71,7 +71,19 @@ public sealed class WorldEngineScenarioEventSiteTests
                 Sites = ImmutableSortedDictionary<WorldSiteId, WorldSite>.Empty.Add(site.Id, site with { VisitorIds = [player.Id] }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Welcome, traveler!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -286,7 +298,19 @@ public sealed class WorldEngineScenarioEventSiteTests
                 Sites = ImmutableSortedDictionary<WorldSiteId, WorldSite>.Empty.Add(site.Id, site with { VisitorIds = [player.Id] }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 2,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Welcome, traveler!"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -441,7 +465,19 @@ public sealed class WorldEngineScenarioEventSiteTests
                 Sites = ImmutableSortedDictionary<WorldSiteId, WorldSite>.Empty.Add(site.Id, site with { VisitorIds = [ally.Id] }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 2,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Welcome, traveler!"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }

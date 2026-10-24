@@ -53,7 +53,19 @@ public sealed class WorldEngineScenarioEventLandTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The empire spreads."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -158,7 +170,19 @@ public sealed class WorldEngineScenarioEventLandTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The empire spreads."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -223,7 +247,28 @@ public sealed class WorldEngineScenarioEventLandTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The blight spreads."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The blight spreads."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            rival.Id,
+                            [rival.Id])
+                    ]
                 }
             }));
     }

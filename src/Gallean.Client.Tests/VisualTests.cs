@@ -4642,6 +4642,53 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task QuestTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel scenario = LoadScenario(null);
+
+        WorldState state = scenario.World.State;
+        WorldPlayerId playerId = state.TurnInfo.CurrentPlayerId;
+        GameModel gameModel = LoadScenario(state with
+        {
+            TurnInfo = state.TurnInfo with { TurnNumber = 18 },
+            ScenarioState = state.ScenarioState with
+            {
+                Messages =
+                [
+                    new WorldScenarioMessage(1, new ScenarioEventId("S107EV0000"), new ScenarioTextId("S107EV0000:POPUP_TXT:0"), new ScenarioEventPortraitId("G000UU5001"), PortraitName: null, IsPortraitLeft: true, playerId, [playerId]),
+                    new WorldScenarioMessage(4, new ScenarioEventId("S107EV0006"), new ScenarioTextId("S107EV0006:POPUP_TXT:0"), new ScenarioEventPortraitId("G000UU0020"), PortraitName: null, IsPortraitLeft: true, playerId, [playerId]),
+                    new WorldScenarioMessage(9, new ScenarioEventId("S107EV001a"), new ScenarioTextId("S107EV001a:POPUP_TXT:0"), new ScenarioEventPortraitId("G000UU0070"), PortraitName: null, IsPortraitLeft: true, playerId, [playerId]),
+                    new WorldScenarioMessage(9, new ScenarioEventId("S107EV001a"), new ScenarioTextId("S107EV001a:POPUP_TXT:1"), new ScenarioEventPortraitId("G000UU0021"), PortraitName: null, IsPortraitLeft: false, playerId, [playerId]),
+                    new WorldScenarioMessage(9, new ScenarioEventId("S107EV001a"), new ScenarioTextId("S107EV001a:POPUP_TXT:2"), new ScenarioEventPortraitId("G000UU0070"), PortraitName: null, IsPortraitLeft: true, playerId, [playerId]),
+                    new WorldScenarioMessage(12, new ScenarioEventId("S107EV0014"), new ScenarioTextId("S107EV0014:POPUP_TXT:0"), PortraitId: null, PortraitName: null, IsPortraitLeft: true, playerId, [playerId]),
+                    new WorldScenarioMessage(17, new ScenarioEventId("S107EV0019"), new ScenarioTextId("S107EV0019:POPUP_TXT:0"), new ScenarioEventPortraitId("G000UU0020"), PortraitName: null, IsPortraitLeft: true, playerId, [playerId])
+                ]
+            }
+        });
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        await WaitForWorldAsync(window);
+
+        gameViewModel.OpenScreen(ManagementScreenViewModel.CreateForQuest(gameModel, gameViewModel));
+
+        await CaptureAsync(window);
+
+        QuestTabView view = window.GetVisualDescendants().OfType<QuestTabView>().First();
+        ScrollViewer scrollViewer = view.GetVisualDescendants().OfType<ScrollViewer>().First();
+        scrollViewer.ScrollToHome();
+
+        await CaptureAsync(window, "top");
+    }
+
+    [AvaloniaTest]
     public async Task DetailsCardsTest()
     {
         GameModel gameModel = LoadScenario(null);

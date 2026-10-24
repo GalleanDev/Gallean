@@ -299,12 +299,12 @@ internal sealed partial class WorldEventQueue
 
         public sealed record ScenarioPopup(
             WorldState State,
-            ImmutableArray<WorldScenarioPopupEvent> Events) : Entry(State)
+            ImmutableArray<WorldScenarioMessage> Messages) : Entry(State)
         {
             public bool Equals(ScenarioPopup? other)
             {
                 return base.Equals(other) &&
-                       Events.SequenceEqual(other.Events);
+                       Messages.SequenceEqual(other.Messages);
             }
 
             public override int GetHashCode()
@@ -312,29 +312,35 @@ internal sealed partial class WorldEventQueue
                 HashCode hash = new();
 
                 hash.Add(base.GetHashCode());
-                hash.AddSequence(Events);
+                hash.AddSequence(Messages);
 
                 return hash.ToHashCode();
             }
 
             public override Entry? TryExtend(EngineStep<WorldState, WorldEvent> step)
             {
-                return step.Event switch
+                if (step.Event is WorldScenarioPopupEvent)
                 {
-                    WorldScenarioPopupEvent data when IsSameDialog(data) => this with
-                    {
-                        State = step.NewState,
-                        Events = Events.Add(data)
-                    },
-                    _ => null
-                };
+                    WorldScenarioMessage message = step.NewState.ScenarioState.Messages[^1];
 
-                bool IsSameDialog(WorldScenarioPopupEvent data)
-                {
-                    return Events[^1].EventId == data.EventId &&
-                           Events[^1].TriggererId == data.TriggererId &&
-                           Events[^1].Audience.SequenceEqual(data.Audience);
+                    if (IsSameDialog(message))
+                    {
+                        return this with
+                        {
+                            State = step.NewState,
+                            Messages = Messages.Add(message)
+                        };
+                    }
                 }
+
+                return null;
+            }
+
+            private bool IsSameDialog(WorldScenarioMessage message)
+            {
+                return Messages[^1].EventId == message.EventId &&
+                       Messages[^1].TriggererId == message.TriggererId &&
+                       Messages[^1].Audience.SequenceEqual(message.Audience);
             }
 
             public override WorldEventFocus? GetFocus()

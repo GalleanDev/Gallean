@@ -126,10 +126,10 @@
             <TextBlock Text="{local:Text 'Spellbook'}" />
           </StackPanel>
         </Button>
-        <Button Classes="pill" local:PlateChrome.TextureSeed="3" Command="{Binding OpenStackCommand}">
+        <Button Classes="pill" local:PlateChrome.TextureSeed="3" Command="{Binding OpenQuestCommand}">
           <StackPanel Orientation="Horizontal" Spacing="8">
-            <local:IconVisual Moniker="Stack" />
-            <TextBlock Text="{local:Text 'Party'}" />
+            <local:IconVisual Moniker="Quest" />
+            <TextBlock Text="{local:Text 'Quest'}" />
           </StackPanel>
         </Button>
       </StackPanel>

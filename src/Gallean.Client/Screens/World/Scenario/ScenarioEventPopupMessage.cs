@@ -14,21 +14,21 @@ internal sealed record ScenarioEventPopupMessage(
         IGameTextProvider texts,
         IGameDefinitionProvider definitions,
         ScenarioTextFormatter formatter,
-        WorldScenarioPopupEvent popup)
+        WorldScenarioMessage message)
     {
-        string scenarioText = texts.GetScenarioText(popup.TextId);
+        string scenarioText = texts.GetScenarioText(message.TextId);
         ScenarioPopupText popupText = ScenarioPopupText.Parse(scenarioText);
         ImmutableArray<ScenarioTextSpan> spans = formatter.Format(popupText.Speech);
 
-        if (popup.PortraitId is { } portraitId)
+        if (message.PortraitId is not null)
         {
-            string portraitName = popupText.Speaker ?? popup.PortraitName ?? ResolveUnitName(portraitId, definitions, texts);
+            string speakerName = popupText.Speaker ?? message.PortraitName ?? ResolveUnitName(message.PortraitId.Value, definitions, texts);
 
-            return new ScenarioEventPopupMessage(spans, portraitName, new AssetSpriteKey.UnitEventPortrait(portraitId), popup.IsPortraitLeft);
+            return new ScenarioEventPopupMessage(spans, speakerName, new AssetSpriteKey.UnitEventPortrait(message.PortraitId.Value), message.IsPortraitLeft);
         }
         else
         {
-            return new ScenarioEventPopupMessage(spans, popupText.Speaker ?? string.Empty, PortraitKey: null, popup.IsPortraitLeft);
+            return new ScenarioEventPopupMessage(spans, popupText.Speaker ?? string.Empty, PortraitKey: null, message.IsPortraitLeft);
         }
     }
 

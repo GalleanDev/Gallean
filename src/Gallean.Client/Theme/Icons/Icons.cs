@@ -77,6 +77,7 @@ internal static partial class Icons
             IconMoniker.Plus => PlusIcon,
             IconMoniker.Poison => PoisonIcon,
             IconMoniker.Previous => PreviousIcon,
+            IconMoniker.Quest => QuestIcon,
             IconMoniker.ReduceDamage => ReduceDamageIcon,
             IconMoniker.ReduceInitiative => ReduceInitiativeIcon,
             IconMoniker.ReduceLevel => ReduceLevelIcon,

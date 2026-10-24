@@ -274,7 +274,27 @@ public sealed class WorldStateJsonSerializerTests
                     .Add(new ScenarioVariableId(2), -1),
                 new ScenarioTextId("Hold the pass."),
                 IsEnded: true,
-                player.Id)
+                player.Id,
+                [
+                    new WorldScenarioMessage(
+                        TurnNumber: 3,
+                        new ScenarioEventId("event-0"),
+                        new ScenarioTextId("Hold the pass."),
+                        new ScenarioEventPortraitId("unit-0"),
+                        "Captain",
+                        IsPortraitLeft: true,
+                        player.Id,
+                        [player.Id]),
+                    new WorldScenarioMessage(
+                        TurnNumber: 5,
+                        new ScenarioEventId("event-1"),
+                        new ScenarioTextId("The pass has fallen."),
+                        PortraitId: null,
+                        PortraitName: null,
+                        IsPortraitLeft: false,
+                        player.Id,
+                        [])
+                ])
         };
         using MemoryStream stream = new();
 
@@ -285,6 +305,28 @@ public sealed class WorldStateJsonSerializerTests
 
         Assert.That(actual, Is.EqualTo(state));
         Assert.That(json, Does.Contain("\"objectiveTextId\":\"Hold the pass.\""));
+    }
+
+    [Test]
+    public async Task ScenarioStateWithoutMessagesTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 2);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Elf, map);
+        (GameSession session, _) = new TestWorldEngineBuilder().WithMap(map).WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior)).WithPlayer(player).BuildSession();
+        WorldState state = session.World.State;
+        using MemoryStream stream = new();
+
+        await WorldStateJsonSerializer.SerializeAsync(stream, state);
+        string json = Encoding.UTF8.GetString(stream.ToArray());
+
+        Assert.That(json, Does.Contain(",\"messages\":[]"));
+
+        string legacyJson = json.Replace(",\"messages\":[]", "", StringComparison.Ordinal);
+        using MemoryStream legacyStream = new(Encoding.UTF8.GetBytes(legacyJson));
+        WorldState actual = await WorldStateJsonSerializer.DeserializeAsync(legacyStream);
+
+        Assert.That(actual, Is.EqualTo(state));
+        Assert.That(actual.ScenarioState.Messages, Is.Empty);
     }
 
     [Test]

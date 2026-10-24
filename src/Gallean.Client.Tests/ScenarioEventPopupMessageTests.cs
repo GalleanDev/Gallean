@@ -22,19 +22,19 @@ public sealed class ScenarioEventPopupMessageTests
             .WithPlayer(player)
             .BuildSession();
 
-        WorldScenarioPopupEvent popup = new(
+        WorldScenarioMessage message = new(
+            TurnNumber: 1,
             new ScenarioEventId("Event1"),
             new ScenarioTextId(text),
             portraitId,
             portraitName,
             IsPortraitLeft: true,
             player.Id,
-            TriggererPosition: null,
             [player.Id]);
 
         ScenarioTextFormatter formatter = new(names);
 
-        return ScenarioEventPopupMessage.Create(TestGameTextProvider.Instance, session.EngineContext.Definitions, formatter, popup);
+        return ScenarioEventPopupMessage.Create(TestGameTextProvider.Instance, session.EngineContext.Definitions, formatter, message);
     }
 
     [Test]

@@ -43,7 +43,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Greetings Milord!"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -224,7 +236,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Greetings Milord!"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -286,7 +310,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Ambush!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -381,7 +417,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
                 }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The city is ours!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            attacker.Id,
+                            [attacker.Id])
+                    ]
                 }
             }));
     }
@@ -426,7 +474,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Greetings Milord!"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -521,7 +581,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(certain.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(certain.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            certain.Id,
+                            new ScenarioTextId("Certain"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -566,7 +638,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Greetings Milord!"),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -613,7 +697,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            enemy.Id,
+                            [enemy.Id])
+                    ]
                 }
             }));
     }
@@ -742,7 +838,28 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            enemy.Id,
+                            [enemy.Id])
+                    ]
                 }
             }));
     }
@@ -796,7 +913,19 @@ public sealed class WorldEngineScenarioEventTriggerTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The dead stir."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            neutral.Id,
+                            [neutral.Id])
+                    ]
                 }
             }));
     }

@@ -187,6 +187,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
             (Key.E, KeyModifiers.None) => [ViewModel.EndTurnCommand],
             (Key.C, KeyModifiers.None) => [ViewModel.OpenCapitalCommand],
             (Key.B, KeyModifiers.None) => [ViewModel.OpenSpellbookCommand],
+            (Key.J, KeyModifiers.None) => [ViewModel.OpenQuestCommand],
             (Key.P, KeyModifiers.None) => [ViewModel.OpenStackCommand],
             _ => []
         };

@@ -143,6 +143,16 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
             screen => [new SpellbookTabViewModel(gameModel, gameViewModel, screen)]);
     }
 
+    public static ManagementScreenViewModel CreateForQuest(GameModel gameModel, GameViewModel gameViewModel)
+    {
+        return new ManagementScreenViewModel(
+            gameModel,
+            gameViewModel,
+            ScreenMusic.Keep,
+            new AssetSoundKey.BookOpen(),
+            screen => [new QuestTabViewModel(gameModel, gameViewModel, screen)]);
+    }
+
     private static ScreenMusic ResolveFortificationMusic(GameModel gameModel, WorldFortificationId fortificationId)
     {
         WorldState world = gameModel.Snapshot.WorldState;

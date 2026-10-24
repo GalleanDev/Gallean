@@ -144,6 +144,19 @@ public sealed class WorldEventQueueTests
             new WorldSpellCastEvent(casterId, spellId, new WorldSpellTarget(position, Radius: 0), WorldResourceSet.Empty, WorldSpellCastSource.Player));
     }
 
+    private static WorldScenarioMessage Message(WorldPlayerId triggererId)
+    {
+        return new WorldScenarioMessage(
+            TurnNumber: 1,
+            new ScenarioEventId("Event1"),
+            new ScenarioTextId("Greetings Milord!"),
+            PortraitId: null,
+            PortraitName: null,
+            IsPortraitLeft: true,
+            triggererId,
+            [triggererId]);
+    }
+
     private static WorldScenarioPopupEvent Popup(WorldPlayerId triggererId, WorldPosition? triggererPosition)
     {
         return new WorldScenarioPopupEvent(
@@ -1387,21 +1400,23 @@ public sealed class WorldEventQueueTests
     {
         WorldPlayerId triggerer = new(1);
         WorldState state = BuildState();
+        WorldScenarioMessage message = Message(triggerer);
+        WorldState newState = state with { ScenarioState = state.ScenarioState with { Messages = [message] } };
         WorldScenarioPopupEvent popup = Popup(triggerer, new WorldPosition(2, 0));
         Subject<EngineStep<WorldState, WorldEvent>> events = new();
         WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
 
-        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, state, popup));
+        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, newState, popup));
 
         Entry pause = Assert.NotNull(queue.PlayNext());
-        Assert.That(pause, Is.EqualTo(new Entry.Pause(state, new WorldPosition(2, 0), null, TimeSpan.FromSeconds(0.25))));
+        Assert.That(pause, Is.EqualTo(new Entry.Pause(newState, new WorldPosition(2, 0), null, TimeSpan.FromSeconds(0.25))));
         Assert.That(pause.GetFocusPosition(triggerer), Is.EqualTo(new WorldPosition(2, 0)));
         Assert.That(pause.GetFocusPosition(new WorldPlayerId(2)), Is.EqualTo(new WorldPosition(2, 0)));
 
         queue.Stop();
 
         Entry entry = Assert.NotNull(queue.PlayNext());
-        Assert.That(entry, Is.EqualTo(new Entry.ScenarioPopup(state, [popup])));
+        Assert.That(entry, Is.EqualTo(new Entry.ScenarioPopup(newState, [message])));
         Assert.That(entry.GetFocusPosition(triggerer), Is.Null);
     }
 
@@ -1410,14 +1425,16 @@ public sealed class WorldEventQueueTests
     {
         WorldPlayerId triggerer = new(1);
         WorldState state = BuildState();
+        WorldScenarioMessage message = Message(triggerer);
+        WorldState newState = state with { ScenarioState = state.ScenarioState with { Messages = [message] } };
         WorldScenarioPopupEvent popup = Popup(triggerer, triggererPosition: null);
         Subject<EngineStep<WorldState, WorldEvent>> events = new();
         WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
 
-        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, state, popup));
+        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, newState, popup));
 
         Entry entry = Assert.NotNull(queue.PlayNext());
-        Assert.That(entry, Is.EqualTo(new Entry.ScenarioPopup(state, [popup])));
+        Assert.That(entry, Is.EqualTo(new Entry.ScenarioPopup(newState, [message])));
         Assert.That(entry.GetFocusPosition(triggerer), Is.Null);
 
         queue.Stop();

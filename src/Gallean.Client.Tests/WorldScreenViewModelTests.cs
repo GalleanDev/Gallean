@@ -3194,6 +3194,36 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
+    public void OpenQuestTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        Assert.That(world.OpenQuestCommand.CanExecute(null), Is.True);
+
+        world.OpenQuestCommand.Execute(null);
+
+        ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(screen.Tabs.Select(tab => tab.TabHeader), Is.EqualTo(["Quest"]));
+        Assert.That(screen.SelectedTab, Is.InstanceOf<QuestTabViewModel>());
+    }
+
+    [Test]
     public async Task MusicOnViewPlayerChangeTest()
     {
         WorldMap map = TestHelpers.SimpleMap(10, 10);

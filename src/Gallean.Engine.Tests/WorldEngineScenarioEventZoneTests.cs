@@ -61,7 +61,19 @@ public sealed class WorldEngineScenarioEventZoneTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Ambush!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -123,7 +135,19 @@ public sealed class WorldEngineScenarioEventZoneTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Ambush!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -249,7 +273,19 @@ public sealed class WorldEngineScenarioEventZoneTests
                 }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Ambush!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -653,7 +689,19 @@ public sealed class WorldEngineScenarioEventZoneTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Ambush!"),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }

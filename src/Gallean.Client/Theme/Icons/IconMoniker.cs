@@ -68,6 +68,7 @@ internal enum IconMoniker
     Plus,
     Poison,
     Previous,
+    Quest,
     ReduceDamage,
     ReduceInitiative,
     ReduceLevel,

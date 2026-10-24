@@ -126,7 +126,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The chosen one arrives."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -191,7 +203,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The chosen one arrives."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -260,7 +284,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The chosen one arrives."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -378,7 +414,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The guide still lives."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -449,7 +497,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -601,6 +661,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(boneLord.Id, stack.OwnerId, SourceTemplateId: null)]
                 }
             }));
@@ -696,6 +768,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(boneLord.Id, stack.OwnerId, SourceTemplateId: null)]
                 }
             }));
@@ -785,6 +869,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The raider was cut down."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            enemy.Id,
+                            [enemy.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(raider.Id, sentinel.OwnerId, SourceTemplateId: null)]
                 }
             }));
@@ -1010,6 +1106,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Both guards were destroyed."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks =
                     [
                         new ScenarioDestroyedStack(firstGuard.Id, stack.OwnerId, SourceTemplateId: null),
@@ -1052,7 +1160,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The raiders are gone."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1140,7 +1260,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The raiders are here."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -1231,6 +1363,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The raiders are gone."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(raider.Id, stack.OwnerId, templateId)]
                 }
             }));
@@ -1369,6 +1513,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(removeEvent.Id, false).Add(chainedEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            chainedEvent.Id,
+                            new ScenarioTextId("The stack is gone."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(stack.Id, DestroyerPlayerId: null, SourceTemplateId: null)]
                 }
             }));
@@ -1443,6 +1599,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(removeEvent.Id, false).Add(destroyedEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            destroyedEvent.Id,
+                            new ScenarioTextId("The stack was destroyed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(stack.Id, DestroyerPlayerId: null, SourceTemplateId: null)]
                 }
             }));
@@ -1607,6 +1775,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The raiders were slain."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(raider.Id, stack.OwnerId, templateId)]
                 }
             }));
@@ -1838,6 +2018,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(replaceEvent.Id, false).Add(absenceEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            absenceEvent.Id,
+                            new ScenarioTextId("The scouts are gone."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(scout.Id, DestroyerPlayerId: null, scoutsId)]
                 }
             }));
@@ -1944,6 +2136,18 @@ public sealed class WorldEngineScenarioEventStackTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The Bone Lord was destroyed."),
+                            ScenarioEventPortraitId.Unit(leader.Id),
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     DestroyedStacks = [new ScenarioDestroyedStack(boneLord.Id, stack.OwnerId, SourceTemplateId: null)]
                 }
             }));
@@ -2097,7 +2301,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The chosen one arrives."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -2174,7 +2390,19 @@ public sealed class WorldEngineScenarioEventStackTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The chosen one arrives."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }

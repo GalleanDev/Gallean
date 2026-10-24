@@ -351,7 +351,19 @@ public sealed class WorldEngineScenarioEventEffectTests
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty
                         .Add(moveEvent.Id, false)
-                        .Add(arrivalEvent.Id, false)
+                        .Add(arrivalEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            arrivalEvent.Id,
+                            new ScenarioTextId("The escort has arrived."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -6618,7 +6630,19 @@ public sealed class WorldEngineScenarioEventEffectTests
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty
                         .Add(summonEvent.Id, false)
-                        .Add(arrivalEvent.Id, false)
+                        .Add(arrivalEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            arrivalEvent.Id,
+                            new ScenarioTextId("The dragon breaks loose."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            neutral.Id,
+                            [player.Id, neutral.Id])
+                    ]
                 }
             }));
     }

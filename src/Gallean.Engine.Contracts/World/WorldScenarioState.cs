@@ -9,7 +9,8 @@ public sealed record WorldScenarioState(
     ImmutableSortedDictionary<ScenarioVariableId, int> Variables,
     ScenarioTextId? ObjectiveTextId,
     bool IsEnded,
-    WorldPlayerId? Winner)
+    WorldPlayerId? Winner,
+    ImmutableArray<WorldScenarioMessage> Messages = default)
 {
     public static WorldScenarioState Empty { get; } = new(
         ImmutableSortedDictionary<ScenarioEventId, bool>.Empty,
@@ -17,7 +18,10 @@ public sealed record WorldScenarioState(
         ImmutableSortedDictionary<ScenarioVariableId, int>.Empty,
         null,
         false,
-        null);
+        null,
+        []);
+
+    public ImmutableArray<WorldScenarioMessage> Messages { get; init; } = Messages.IsDefault ? [] : Messages;
 
     public bool Equals(WorldScenarioState? other)
     {
@@ -32,6 +36,7 @@ public sealed record WorldScenarioState(
         }
 
         return EventStates.SequenceEqual(other.EventStates) &&
+               Messages.SequenceEqual(other.Messages) &&
                DestroyedStacks.SequenceEqual(other.DestroyedStacks) &&
                Variables.SequenceEqual(other.Variables) &&
                ObjectiveTextId == other.ObjectiveTextId &&
@@ -44,6 +49,7 @@ public sealed record WorldScenarioState(
         HashCode hash = new();
 
         hash.AddSequence(EventStates);
+        hash.AddSequence(Messages);
         hash.AddSequence(DestroyedStacks);
         hash.AddSequence(Variables);
         hash.Add(ObjectiveTextId);

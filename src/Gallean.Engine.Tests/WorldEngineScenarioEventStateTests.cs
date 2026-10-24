@@ -98,7 +98,28 @@ public sealed class WorldEngineScenarioEventStateTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(armingEvent.Id, false).Add(armedEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(armingEvent.Id, false).Add(armedEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            armingEvent.Id,
+                            new ScenarioTextId("A key turns in the lock."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            armedEvent.Id,
+                            new ScenarioTextId("The gates swing open."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -164,7 +185,19 @@ public sealed class WorldEngineScenarioEventStateTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(armedEvent.Id, false).Add(armingEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(armedEvent.Id, false).Add(armingEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            armedEvent.Id,
+                            new ScenarioTextId("The gates swing open."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -293,7 +326,19 @@ public sealed class WorldEngineScenarioEventStateTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(disarmingEvent.Id, false).Add(disarmedEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(disarmingEvent.Id, false).Add(disarmedEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            disarmedEvent.Id,
+                            new ScenarioTextId("The gates swing open."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -351,7 +396,28 @@ public sealed class WorldEngineScenarioEventStateTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(lastEvent.Id, false).Add(firstEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(lastEvent.Id, false).Add(firstEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            firstEvent.Id,
+                            new ScenarioTextId("Spoken first."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            lastEvent.Id,
+                            new ScenarioTextId("Spoken second."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -422,7 +488,28 @@ public sealed class WorldEngineScenarioEventStateTests
             {
                 ScenarioState = WorldScenarioState.Empty with
                 {
-                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(armedEvent.Id, false)
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(armedEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            armedEvent.Id,
+                            new ScenarioTextId("The fountain heals you."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 2,
+                            armedEvent.Id,
+                            new ScenarioTextId("The fountain heals you."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
                 }
             }));
     }
@@ -476,7 +563,30 @@ public sealed class WorldEngineScenarioEventStateTests
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
-                ScenarioState = WorldScenarioState.Empty
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The bells toll."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id]),
+                        new WorldScenarioMessage(
+                            TurnNumber: 2,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The bells toll."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
+                }
             }));
     }
 }

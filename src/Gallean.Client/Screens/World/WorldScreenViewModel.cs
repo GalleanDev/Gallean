@@ -65,6 +65,7 @@ internal sealed partial class WorldScreenViewModel :
             SelectNextStackCommand,
             OpenCapitalCommand,
             OpenSpellbookCommand,
+            OpenQuestCommand,
             OpenStackCommand);
     }
 
@@ -727,6 +728,13 @@ internal sealed partial class WorldScreenViewModel :
     {
         ClearSelectedAction();
         Game.OpenScreen(ManagementScreenViewModel.CreateForSpellbook(GameModel, Game));
+    }
+
+    [RelayCommand(CanExecute = nameof(CanDispatchCommand))]
+    private void OpenQuest()
+    {
+        ClearSelectedAction();
+        Game.OpenScreen(ManagementScreenViewModel.CreateForQuest(GameModel, Game));
     }
 
     [RelayCommand(CanExecute = nameof(CanOpenStack))]

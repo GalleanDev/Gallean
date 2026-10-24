@@ -242,12 +242,12 @@ internal sealed class WorldEventActionBuilder(
 
     private WorldEventAction BuildScenarioPopup(Entry.ScenarioPopup scenarioPopup)
     {
-        if (scenarioPopup.Events[0].Audience.Contains(ViewPlayerId))
+        if (scenarioPopup.Messages[0].Audience.Contains(ViewPlayerId))
         {
             ScenarioTextFormatter formatter = new(scenario.Names);
             ImmutableArray<ScenarioEventPopupMessage> messages =
             [
-                .. scenarioPopup.Events.Select(popupEvent => ScenarioEventPopupMessage.Create(texts, definitions, formatter, popupEvent))
+                .. scenarioPopup.Messages.Select(message => ScenarioEventPopupMessage.Create(texts, definitions, formatter, message))
             ];
 
             return new WorldEventAction.ScenarioPopup([], FocusPosition: null, messages);

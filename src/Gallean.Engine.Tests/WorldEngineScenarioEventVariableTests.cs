@@ -46,7 +46,22 @@ public sealed class WorldEngineScenarioEventVariableTests
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
-                ScenarioState = WorldScenarioState.Empty with { EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false) }
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("The seal is broken."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
+                }
             }));
     }
 
@@ -138,7 +153,22 @@ public sealed class WorldEngineScenarioEventVariableTests
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
-                ScenarioState = WorldScenarioState.Empty with { EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false) }
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("Both walls are sealed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
+                }
             }));
     }
 
@@ -233,7 +263,22 @@ public sealed class WorldEngineScenarioEventVariableTests
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
-                ScenarioState = WorldScenarioState.Empty with { EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false) }
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            scenarioEvent.Id,
+                            new ScenarioTextId("A wall is sealed."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ]
+                }
             }));
     }
 
@@ -566,6 +611,18 @@ public sealed class WorldEngineScenarioEventVariableTests
                 ScenarioState = WorldScenarioState.Empty with
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(gatedEvent.Id, false),
+                    Messages =
+                    [
+                        new WorldScenarioMessage(
+                            TurnNumber: 1,
+                            gatedEvent.Id,
+                            new ScenarioTextId("The tale begins."),
+                            PortraitId: null,
+                            PortraitName: null,
+                            IsPortraitLeft: true,
+                            player.Id,
+                            [player.Id])
+                    ],
                     Variables = ImmutableSortedDictionary<ScenarioVariableId, int>.Empty
                         .Add(new ScenarioVariableId(1), 2)
                 }

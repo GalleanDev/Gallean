@@ -1,0 +1,256 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.QuestTabView"
+             x:DataType="local:QuestTabViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Grid.history-header">
+      <Setter Property="Margin" Value="0,0,0,2" />
+    </Style>
+    <Style Selector="Grid.history-header > Rectangle">
+      <Setter Property="Height" Value="1" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Fill" Value="{StaticResource ModalRuleGradientBrush}" />
+    </Style>
+    <Style Selector="Grid.history-header > TextBlock">
+      <Setter Property="Margin" Value="16,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Line.quest-divider">
+      <Setter Property="Margin" Value="12,16,12,14" />
+      <Setter Property="Stretch" Value="Fill" />
+      <Setter Property="StartPoint" Value="0,0" />
+      <Setter Property="EndPoint" Value="1,0" />
+      <Setter Property="Stroke" Value="{StaticResource DividerBrush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="StrokeDashArray" Value="4,3" />
+    </Style>
+
+    <Style Selector="Button.quest-backdrop">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="Transparent" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="local|SpriteVisual.event-portrait">
+      <Setter Property="Width" Value="186" />
+      <Setter Property="Height" Value="240" />
+      <Setter Property="Stretch" Value="Uniform" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style Selector="Panel.dialog-bubble">
+      <Setter Property="MaxWidth" Value="640" />
+      <Setter Property="Margin" Value="0,26,0,0" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+    <Style Selector="Grid.dialog-line.right Panel.dialog-bubble">
+      <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+    <Style Selector="Grid.dialog-line.narration Panel.dialog-bubble">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style Selector="Border.dialog-card">
+      <Setter Property="Padding" Value="16,10" />
+      <Setter Property="Margin" Value="12,0,0,0" />
+      <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
+    </Style>
+    <Style Selector="Grid.dialog-line.right Border.dialog-card">
+      <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+    <Style Selector="Border.dialog-card.briefing">
+      <Setter Property="Margin" Value="0,4,0,8" />
+      <Setter Property="Padding" Value="24,16" />
+      <Setter Property="MaxWidth" Value="640" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Grid.dialog-line.narration Border.dialog-card">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="24,6" />
+    </Style>
+
+    <Style Selector="Path.dialog-tail">
+      <Setter Property="Data" Value="M 13,0 L 0,11 L 13,22" />
+      <Setter Property="Fill" Value="{StaticResource CardBackgroundBrush}" />
+      <Setter Property="Stroke" Value="{StaticResource CardBorderBrush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="StrokeJoin" Value="Round" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Margin" Value="0,18,0,0" />
+    </Style>
+    <Style Selector="Grid.dialog-line.right Path.dialog-tail">
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="RenderTransform" Value="scaleX(-1)" />
+    </Style>
+    <Style Selector="Grid.dialog-line.narration Path.dialog-tail">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="TextBlock.dialog-speaker">
+      <Setter Property="Margin" Value="0,0,0,4" />
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogSpeakerBrush}" />
+    </Style>
+    <Style Selector="Grid.dialog-line.right TextBlock.dialog-speaker">
+      <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+
+    <Style Selector="TextBlock.dialog-text">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+    <Style Selector="Grid.dialog-line.narration TextBlock.dialog-text">
+      <Setter Property="TextAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource ScenarioDialogHistoryTextBrush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <Panel>
+    <Button Classes="quest-backdrop" Command="{Binding Screen.CloseCommand}" />
+
+    <Grid ColumnDefinitions="300,18,*" MaxWidth="1320" Margin="18">
+
+      <ContentControl Grid.Column="0" Classes="ornament-panel" VerticalAlignment="Center">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Margin="6,10,6,8">
+          <Border Grid.Row="0"
+                  Classes="frame"
+                  Width="128"
+                  Height="128"
+                  CornerRadius="64"
+                  BorderThickness="2"
+                  HorizontalAlignment="Center"
+                  Margin="0,4,0,18">
+            <local:SpriteVisual SpriteKey="{Binding LordPortraitKey}" Stretch="UniformToFill" />
+          </Border>
+
+          <local:OutlinedTextBlock Grid.Row="1"
+                                   Text="{Binding Title}"
+                                   Classes="h3"
+                                   Foreground="{StaticResource HighlightTextBrush}"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Center" />
+
+          <Line Grid.Row="2" Classes="quest-divider" />
+
+          <TextBlock Grid.Row="3" Text="{local:Text 'Objective'}" Classes="label" HorizontalAlignment="Center" />
+
+          <TextBlock Grid.Row="4"
+                     Text="{Binding Objective}"
+                     Classes="prose"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     TextAlignment="Center"
+                     Margin="4,8,4,0"
+                     IsVisible="{Binding Objective, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+          <TextBlock Grid.Row="4"
+                     Text="{local:Text 'No scenario objective'}"
+                     Classes="prose"
+                     Foreground="{StaticResource SecondaryTextBrush}"
+                     TextAlignment="Center"
+                     Margin="4,8,4,0"
+                     IsVisible="{Binding Objective, Converter={x:Static ObjectConverters.IsNull}}" />
+
+          <TextBlock Grid.Row="5"
+                     Text="{Binding TurnText}"
+                     Classes="caption"
+                     Foreground="{StaticResource SecondaryTextBrush}"
+                     HorizontalAlignment="Center"
+                     Margin="0,18,0,0" />
+        </Grid>
+      </ContentControl>
+
+        <Grid Grid.Column="2">
+          <ScrollViewer x:Name="HistoryScroll"
+                        Classes="list"
+                        VerticalScrollBarVisibility="Auto"
+                        ScrollChanged="OnHistoryScrollChanged">
+            <StackPanel Spacing="12" Margin="10,2">
+
+              <StackPanel Spacing="4" IsVisible="{Binding HasBriefing}">
+                <Grid Classes="history-header" ColumnDefinitions="*,Auto,*">
+                  <Rectangle Grid.Column="0" />
+                  <TextBlock Grid.Column="1" Text="{local:Text 'Briefing'}" Classes="label" />
+                  <Rectangle Grid.Column="2" />
+                </Grid>
+                <Border Classes="dialog-card briefing">
+                  <TextBlock local:ScenarioText.Spans="{Binding Briefing}" Classes="prose dialog-text" />
+                </Border>
+              </StackPanel>
+
+              <ItemsControl ItemsSource="{Binding Dialogs}">
+                <local:Blankslate.Content>
+                  <TextBlock Text="{local:Text 'Nothing has been said yet.'}"
+                             Classes="caption"
+                             Foreground="{StaticResource SecondaryTextBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,12"
+                             IsVisible="{Binding !HasBriefing}" />
+                </local:Blankslate.Content>
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Spacing="12" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="local:QuestDialogViewModel">
+                    <StackPanel Spacing="4">
+                      <Grid Classes="history-header" ColumnDefinitions="*,Auto,*">
+                        <Rectangle Grid.Column="0" />
+                        <TextBlock Grid.Column="1" Text="{Binding TurnText}" Classes="label" />
+                        <Rectangle Grid.Column="2" />
+                      </Grid>
+                      <ItemsControl ItemsSource="{Binding Messages}">
+                        <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                            <StackPanel Spacing="2" />
+                          </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate x:DataType="local:QuestMessageViewModel">
+                            <Grid Classes="dialog-line"
+                                  Classes.right="{Binding HasRightPortrait}"
+                                  Classes.narration="{Binding IsNarration}"
+                                  ColumnDefinitions="Auto,*,Auto">
+                              <local:SpriteVisual Grid.Column="0" Classes="event-portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="0,0,12,0" IsVisible="{Binding HasLeftPortrait}" />
+                              <Panel Grid.Column="1" Classes="dialog-bubble">
+                                <Border Classes="dialog-card">
+                                  <StackPanel>
+                                    <TextBlock Classes="caption dialog-speaker" Text="{Binding Message.PortraitName}" IsVisible="{Binding HasSpeaker}" />
+                                    <TextBlock Classes="prose dialog-text" local:ScenarioText.Spans="{Binding Message.Spans}" />
+                                  </StackPanel>
+                                </Border>
+                                <Path Classes="dialog-tail" />
+                              </Panel>
+                              <local:SpriteVisual Grid.Column="2" Classes="event-portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="12,0,0,0" IsVisible="{Binding HasRightPortrait}" />
+                            </Grid>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    </StackPanel>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+
+            </StackPanel>
+          </ScrollViewer>
+        </Grid>
+
+    </Grid>
+  </Panel>
+
+</UserControl>

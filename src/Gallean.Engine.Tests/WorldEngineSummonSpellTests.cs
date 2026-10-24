@@ -662,7 +662,19 @@ public sealed class WorldEngineSummonSpellTests
         Assert.That(engine.State.ScenarioState, Is.EqualTo(
             WorldScenarioState.Empty with
             {
-                EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                Messages =
+                [
+                    new WorldScenarioMessage(
+                        TurnNumber: 1,
+                        scenarioEvent.Id,
+                        new ScenarioTextId("Something stirs in the circle."),
+                        PortraitId: null,
+                        PortraitName: null,
+                        IsPortraitLeft: true,
+                        player.Id,
+                        [player.Id])
+                ]
             }));
     }
 
