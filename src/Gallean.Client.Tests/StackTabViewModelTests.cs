@@ -2584,6 +2584,7 @@ public sealed class StackTabViewModelTests
                 "Weapon",
                 "desc",
                 ["+20 damage"],
+                CastingCost: null,
                 new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 150 }, ResourceSetProjection.All))));
             Assert.That(talismanDetails, Is.EqualTo(new ItemDetailsViewModel(
                 new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(talisman.Id)),
@@ -2591,10 +2592,82 @@ public sealed class StackTabViewModelTests
                 "Talisman",
                 "desc",
                 [],
+                CastingCost: null,
                 new ResourceSetViewModel(WorldResourceSet.Empty, ResourceSetProjection.All))));
             Assert.That(details.Content, Is.EqualTo(weaponDetails));
             Assert.That(gameViewModel.TopScreen, Is.Null);
         }
+    }
+
+    [Test]
+    public void InspectStaffTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                LeaderAbilities = LeaderAbility.WandScrollUse
+            };
+
+        WorldSpellDefinition spell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("Lightning"), new WorldRestoreMovementSpellEffect(50));
+
+        ItemDefinition staff = new(
+            new ItemDefinitionId("staff1"),
+            new GlobalTextId("Staff of Thunder"),
+            new GlobalTextId("desc"),
+            ItemCategory.Wand,
+            WorldResourceSet.Empty with { Gold = 600 },
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: new SpellItemEffect(spell.Id, WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }),
+            AnimationUnitId: null);
+
+        WorldItem staffItem = new(new WorldItemId("Staff"), staff.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 20) with
+            {
+                Equipment = LeaderEquipment.Empty.With(LeaderEquipmentSlot.Battle1, staffItem)
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(spell)
+            .WithDefinition(staff)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        Assert.That(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Details, Is.EqualTo(new ItemDetailsViewModel(
+            new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(staff.Id)),
+            "Staff of Thunder",
+            "Staff",
+            "desc",
+            [],
+            new ResourceSetViewModel(WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }, ResourceSetProjection.All),
+            new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 600 }, ResourceSetProjection.All))));
     }
 
     [Test]

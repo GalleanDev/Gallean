@@ -4664,16 +4664,16 @@ public sealed class VisualTests
 
         UnitDetailsViewModel unitDetails = UnitDetailsViewModel.CreateFromWorld(leader, null, gameModel.Definitions, gameModel.Texts, gameModel.Stats);
         ItemDetailsViewModel bannerDetails = ItemDetailsViewModel.Create(new ItemDefinitionId("G000IG1002"), charges: null, gameModel.Definitions, gameModel.Texts);
-        ItemDetailsViewModel potionDetails = ItemDetailsViewModel.Create(new ItemDefinitionId("G000IG0001"), charges: null, gameModel.Definitions, gameModel.Texts);
+        ItemDetailsViewModel staffDetails = ItemDetailsViewModel.Create(new ItemDefinitionId("G000IG6001"), charges: null, gameModel.Definitions, gameModel.Texts);
 
         StackPanel items = new()
         {
-            Spacing = 72,
+            Spacing = 40,
             VerticalAlignment = VerticalAlignment.Center,
             Children =
             {
                 new ContentControl { Content = bannerDetails, ClipToBounds = false },
-                new ContentControl { Content = potionDetails, ClipToBounds = false },
+                new ContentControl { Content = staffDetails, ClipToBounds = false },
                 new ToolTip { Content = "Ability lvl 3 required to unlock this glyph", Opacity = 1.0, HorizontalAlignment = HorizontalAlignment.Left }
             }
         };

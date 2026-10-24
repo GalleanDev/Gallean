@@ -659,6 +659,7 @@ public sealed class MerchantTabViewModelTests
             "Healing potion",
             "desc",
             [],
+            CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
         Assert.That(screen.SellItems[0].Details, Is.EqualTo(new ItemDetailsViewModel(
             new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(ownedDefinition.Id)),
@@ -666,6 +667,7 @@ public sealed class MerchantTabViewModelTests
             "Healing potion",
             "desc",
             [],
+            CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(80, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
     }
 }

@@ -9,6 +9,7 @@ internal sealed record ItemDetailsViewModel(
     string CategoryText,
     string Description,
     IReadOnlyList<string> Effects,
+    ResourceSetViewModel? CastingCost,
     ResourceSetViewModel Value)
 {
     public bool Equals(ItemDetailsViewModel? other)
@@ -28,6 +29,7 @@ internal sealed record ItemDetailsViewModel(
                CategoryText == other.CategoryText &&
                Description == other.Description &&
                Effects.SequenceEqual(other.Effects) &&
+               CastingCost == other.CastingCost &&
                Value == other.Value;
     }
 
@@ -46,12 +48,25 @@ internal sealed record ItemDetailsViewModel(
             effects = [.. UnitModifierFormatter.FormatEffects(modifier)];
         }
 
+        WorldResourceSet? castingCost = GetCastingCost(definition);
+        ResourceSetViewModel? castingCostViewModel;
+
+        if (castingCost is not null)
+        {
+            castingCostViewModel = new ResourceSetViewModel(castingCost.Value, ResourceSetProjection.All);
+        }
+        else
+        {
+            castingCostViewModel = null;
+        }
+
         return new ItemDetailsViewModel(
             ItemIconResolver.Resolve(definitions, definitionId),
             ItemFormatter.FormatName(definitions, texts, definitionId, charges),
             ItemFormatter.FormatCategory(definition.Category),
             ItemFormatter.FormatDescription(definitions, texts, definitionId),
             effects,
+            castingCostViewModel,
             new ResourceSetViewModel(definition.Value, ResourceSetProjection.All));
     }
 
@@ -64,8 +79,21 @@ internal sealed record ItemDetailsViewModel(
         hash.Add(CategoryText);
         hash.Add(Description);
         hash.AddSequence(Effects);
+        hash.Add(CastingCost);
         hash.Add(Value);
 
         return hash.ToHashCode();
+    }
+
+    private static WorldResourceSet? GetCastingCost(ItemDefinition definition)
+    {
+        if (definition.Effect is SpellItemEffect effect && effect.CastingCost != WorldResourceSet.Empty)
+        {
+            return effect.CastingCost;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
