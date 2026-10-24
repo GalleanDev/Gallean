@@ -133,9 +133,9 @@ public sealed class MerchantTabViewModelTests
 
         foreach (OfferPriceItemViewModel item in price.Items)
         {
-            if (item.IsShort)
+            if (item.IsUnaffordable)
             {
-                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (unaffordable)");
             }
             else
             {
@@ -333,12 +333,12 @@ public sealed class MerchantTabViewModelTests
         MerchantTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
 
         Assert.That(FormatPurchaseItems(screen.PurchaseItems), Is.EqualTo([
-            "potion | name | desc | In stock: 2 | Cost: 50 gold (short) | unavailable | not selected"
+            "potion | name | desc | In stock: 2 | Cost: 50 gold (unaffordable) | unavailable | not selected"
         ]));
 
         screen.PurchaseItems[0].SelectCommand.Execute(null);
 
-        Assert.That(FormatOffer(Assert.NotNull(screen.Offer)), Is.EqualTo("name | In stock: 2 | desc | 50 gold (short) | Buy | unavailable: Not enough resources | disabled"));
+        Assert.That(FormatOffer(Assert.NotNull(screen.Offer)), Is.EqualTo("name | In stock: 2 | desc | 50 gold (unaffordable) | Buy | unavailable: Not enough resources | disabled"));
     }
 
     [Test]

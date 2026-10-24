@@ -83,9 +83,9 @@ public sealed class MageTabViewModelTests
 
         foreach (OfferPriceItemViewModel item in price.Items)
         {
-            if (item.IsShort)
+            if (item.IsUnaffordable)
             {
-                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (unaffordable)");
             }
             else
             {
@@ -224,12 +224,12 @@ public sealed class MageTabViewModelTests
         MageTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
 
         Assert.That(FormatSpells(screen.Spells), Is.EqualTo([
-            "spell | name | desc | Level 2 | Cost: 200 gold (short) | unavailable | not selected"
+            "spell | name | desc | Level 2 | Cost: 200 gold (unaffordable) | unavailable | not selected"
         ]));
 
         screen.Spells[0].SelectCommand.Execute(null);
 
-        Assert.That(FormatOffer(Assert.NotNull(screen.Offer)), Is.EqualTo("name | Level 2 | desc | 200 gold (short) | Learn | unavailable: Not enough resources | disabled"));
+        Assert.That(FormatOffer(Assert.NotNull(screen.Offer)), Is.EqualTo("name | Level 2 | desc | 200 gold (unaffordable) | Learn | unavailable: Not enough resources | disabled"));
     }
 
     [Test]

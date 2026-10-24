@@ -40,9 +40,9 @@ public sealed class SpellbookTabViewModelTests
 
         foreach (OfferPriceItemViewModel item in price.Items)
         {
-            if (item.IsShort)
+            if (item.IsUnaffordable)
             {
-                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (unaffordable)");
             }
             else
             {
@@ -860,7 +860,7 @@ public sealed class SpellbookTabViewModelTests
 
         Assert.That(
             FormatSpellbook(spellbook.Levels),
-            Is.EqualTo(["Level 1 | restore | Restoration | Restores movement points | Known — 40 life mana (short) | unavailable: Not enough resources"]));
+            Is.EqualTo(["Level 1 | restore | Restoration | Restores movement points | Known — 40 life mana (unaffordable) | unavailable: Not enough resources"]));
     }
 
     [Test]

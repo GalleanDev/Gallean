@@ -25,9 +25,9 @@ public sealed class LeaderPurchaseViewModelTests
 
         foreach (OfferPriceItemViewModel item in price.Items)
         {
-            if (item.IsShort)
+            if (item.IsUnaffordable)
             {
-                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (unaffordable)");
             }
             else
             {
@@ -233,7 +233,7 @@ public sealed class LeaderPurchaseViewModelTests
         Assert.That(
             FormatOptions(purchase.Options),
             Is.EqualTo([
-                "expensive | name | description | Cost: 500 gold (short) | disabled",
+                "expensive | name | description | Cost: 500 gold (unaffordable) | disabled",
                 "gated | name | description | Cost: 50 gold | disabled: Requires guild",
                 "blocked | name | description | Cost: 50 gold | disabled: City entrance is occupied"
             ]));

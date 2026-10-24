@@ -40,9 +40,9 @@ public sealed class StackTabViewModelTests
 
         foreach (OfferPriceItemViewModel item in price.Items)
         {
-            if (item.IsShort)
+            if (item.IsUnaffordable)
             {
-                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (unaffordable)");
             }
             else
             {
@@ -2694,7 +2694,7 @@ public sealed class StackTabViewModelTests
                 [],
                 new OfferPriceViewModel(WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }, WorldResourceSet.Empty with { LifeMana = 150, RuneMana = 20 }),
                 new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 600 }, ResourceSetProjection.All))));
-            Assert.That(FormatPrice(Assert.NotNull(details.CastingCost)), Is.EqualTo("100 life mana, 50 rune mana (short)"));
+            Assert.That(FormatPrice(Assert.NotNull(details.CastingCost)), Is.EqualTo("100 life mana, 50 rune mana (unaffordable)"));
         }
     }
 

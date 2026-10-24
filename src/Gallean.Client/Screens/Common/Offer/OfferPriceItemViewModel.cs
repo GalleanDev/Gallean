@@ -1,3 +1,3 @@
 namespace Gallean.Client;
 
-internal sealed record OfferPriceItemViewModel(ResourceSetItemViewModel Resource, bool IsShort);
+internal sealed record OfferPriceItemViewModel(ResourceSetItemViewModel Resource, bool IsUnaffordable);

@@ -115,7 +115,7 @@ public sealed class BuildingTabViewModelTests
         {
             return $"reason: {offer.UnavailableReason}";
         }
-        else if (Assert.NotNull(offer.Price).IsShort)
+        else if (Assert.NotNull(offer.Price).IsUnaffordable)
         {
             return "short";
         }

@@ -11,7 +11,7 @@ internal sealed record OfferPriceViewModel
 
         foreach (ResourceSetItemViewModel item in valueView.Items)
         {
-            items.Add(new OfferPriceItemViewModel(item, IsShort: false));
+            items.Add(new OfferPriceItemViewModel(item, IsUnaffordable: false));
         }
 
         Items = items;
@@ -32,7 +32,7 @@ internal sealed record OfferPriceViewModel
 
     public IReadOnlyList<OfferPriceItemViewModel> Items { get; }
 
-    public bool IsShort => Items.Any(item => item.IsShort);
+    public bool IsUnaffordable => Items.Any(item => item.IsUnaffordable);
 
     public bool Equals(OfferPriceViewModel? other)
     {

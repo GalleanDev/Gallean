@@ -6,8 +6,8 @@
              x:DataType="local:OfferPriceViewModel">
 
   <UserControl.Styles>
-    <Style Selector="TextBlock.short">
-      <Setter Property="Foreground" Value="{StaticResource OfferStatusShortResourceBrush}" />
+    <Style Selector="TextBlock.unaffordable">
+      <Setter Property="Foreground" Value="{StaticResource OfferStatusUnaffordableResourceBrush}" />
     </Style>
   </UserControl.Styles>
 
@@ -20,7 +20,7 @@
     <ItemsControl.ItemTemplate>
       <DataTemplate x:DataType="local:OfferPriceItemViewModel">
         <StackPanel Orientation="Horizontal" Spacing="4" Background="Transparent" ToolTip.Tip="{Binding Resource.Name}">
-          <TextBlock Text="{Binding Resource.Value}" Classes.short="{Binding IsShort}" VerticalAlignment="Center" />
+          <TextBlock Text="{Binding Resource.Value}" Classes.unaffordable="{Binding IsUnaffordable}" VerticalAlignment="Center" />
           <local:IconVisual Moniker="{Binding Resource.Icon}"
                             Width="{Binding #Root.IconSize}"
                             Height="{Binding #Root.IconSize}"

@@ -390,7 +390,7 @@ internal static class Theme
 
     public static class OfferStatus
     {
-        public static Color ShortResourceColor { get; } = Color.FromRgb(232, 112, 92);
+        public static Color UnaffordableResourceColor { get; } = Color.FromRgb(232, 112, 92);
         public static Color ReasonColor { get; } = Color.FromRgb(226, 164, 118);
     }
 

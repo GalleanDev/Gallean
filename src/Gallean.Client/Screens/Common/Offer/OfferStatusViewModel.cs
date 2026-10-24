@@ -17,7 +17,7 @@ internal sealed class OfferStatusViewModel
     public OfferPriceViewModel? Price { get; }
     public string? UnavailableReason { get; }
 
-    public bool IsAvailable => UnavailableReason is null && (Price is null || !Price.IsShort);
+    public bool IsAvailable => UnavailableReason is null && (Price is null || !Price.IsUnaffordable);
     public bool IsReasonVisible => UnavailableReason is not null;
     public bool IsPriceVisible => Price is not null && UnavailableReason is null;
     public bool IsVisible => IsPriceVisible || IsReasonVisible;

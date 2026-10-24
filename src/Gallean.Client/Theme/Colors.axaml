@@ -449,7 +449,7 @@
     <GradientStop Offset="1" Color="{x:Static local:Theme+Bar.FillOverlayFadeColor}" />
   </LinearGradientBrush>
 
-  <SolidColorBrush x:Key="OfferStatusShortResourceBrush" Color="{x:Static local:Theme+OfferStatus.ShortResourceColor}" />
+  <SolidColorBrush x:Key="OfferStatusUnaffordableResourceBrush" Color="{x:Static local:Theme+OfferStatus.UnaffordableResourceColor}" />
   <SolidColorBrush x:Key="OfferStatusReasonBrush" Color="{x:Static local:Theme+OfferStatus.ReasonColor}" />
 
   <SolidColorBrush x:Key="SpellIconLightBackgroundBrush" Color="{x:Static local:Theme+Spell.IconLightBackgroundColor}" />

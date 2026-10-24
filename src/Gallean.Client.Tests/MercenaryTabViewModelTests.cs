@@ -92,9 +92,9 @@ public sealed class MercenaryTabViewModelTests
 
         foreach (OfferPriceItemViewModel item in price.Items)
         {
-            if (item.IsShort)
+            if (item.IsUnaffordable)
             {
-                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (unaffordable)");
             }
             else
             {
@@ -285,7 +285,7 @@ public sealed class MercenaryTabViewModelTests
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
-            "merc | name | description | Level 1 | Cost: 50 gold (short) | unavailable | not selected"
+            "merc | name | description | Level 1 | Cost: 50 gold (unaffordable) | unavailable | not selected"
         ]));
 
         screen.DragDrop.TryBeginDrag(screen.Mercenaries[0].Reference);
@@ -431,7 +431,7 @@ public sealed class MercenaryTabViewModelTests
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
             "scout | name | description | Level 1 | Cost: 45 gold | available | not selected",
-            "knight | name | description | Level 1 | Cost: 450 gold (short) | unavailable | not selected"
+            "knight | name | description | Level 1 | Cost: 450 gold (unaffordable) | unavailable | not selected"
         ]));
     }
 
