@@ -7377,4 +7377,119 @@ public sealed class BattleAnimationStateBuilderTests
             "@26 unit 2 feedback +15 Effect Paralyzed"
         ]));
     }
+
+    [Test]
+    public void AllReachDrainHealTest()
+    {
+        BattleRenderState.Unit attacker = new(
+            Id: new BattleUnitId(1),
+            DefinitionId: new UnitDefinitionId("ATK"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 1,
+            Hitpoints: 40,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState.Unit defender = new(
+            Id: new BattleUnitId(2),
+            DefinitionId: new UnitDefinitionId("DEF"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+            Facing: BattleSide.Defender,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 0,
+            Hitpoints: 40,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState.Unit neighbor = new(
+            Id: new BattleUnitId(3),
+            DefinitionId: new UnitDefinitionId("DEF"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontTop, IsLarge: false),
+            Facing: BattleSide.Defender,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 0,
+            Hitpoints: 40,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState baseState = new(
+            new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            [attacker, defender, neighbor],
+            Placeholders: [],
+            HitTargets: [],
+            BattleLightConfiguration.MakeMidday([]),
+            FluidConfigurations: [],
+            RainConfiguration: null,
+            AnimationRate.Sprites);
+
+        IAssetMetadataProvider assets = new TestMetadataProviderBuilder()
+            .WithAnimation(
+                new AssetAnimationKey.BattleUnit(new UnitDefinitionId("ATK"), AssetAnimationKey.BattleUnitPose.Attack, BattleSide.Attacker),
+                new AssetAnimationMetadata(FrameCount: 16, Width: 4, Height: 4, OffsetX: 0, OffsetY: 0, TriggerFrame: 7, SecondTriggerFrame: 0))
+            .WithAnimation(
+                new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Hit, BattleSide.Defender),
+                new AssetAnimationMetadata(FrameCount: 9, Width: 4, Height: 4, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(
+                new AssetAnimationKey.BattleEffect.Heal(),
+                new AssetAnimationMetadata(FrameCount: 14, Width: 4, Height: 4, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null))
+            .Build();
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddAttack(Attack("DRAIN", UnitAttackType.DrainLife, UnitAttackReach.All))
+            .Build();
+
+        BattleAnimationStateBuilder builder = new(assets, definitions, new RandomProvider(0), BattleViewerSide.Defender, 1);
+        BattleAnimationState? animation = builder.Build(
+            baseState,
+            [
+                new BattleUnitAttackEvent(
+                    new BattleUnitId(1),
+                    new BattleAttackUnitTarget(new BattleUnitId(2)),
+                    [new UnitAttackDefinitionId("DRAIN")]),
+                new BattleUnitAttackedEvent(new BattleUnitId(1), new BattleUnitId(2), new UnitAttackDefinitionId("DRAIN")),
+                new BattleUnitAttackHitEvent(new BattleUnitId(1), new BattleUnitId(2), new UnitAttackDefinitionId("DRAIN"), 20),
+                new BattleUnitHealedEvent(new BattleUnitId(1), HitpointsAfter: 50),
+                new BattleUnitAttackedEvent(new BattleUnitId(1), new BattleUnitId(3), new UnitAttackDefinitionId("DRAIN")),
+                new BattleUnitAttackHitEvent(new BattleUnitId(1), new BattleUnitId(3), new UnitAttackDefinitionId("DRAIN"), 20),
+                new BattleUnitHealedEvent(new BattleUnitId(1), HitpointsAfter: 60),
+                new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(2), BattleUnitTurnType.Normal))
+            ]);
+        Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
+            "sequence 26 frames",
+            "@0 unit 1 body Attack Alive for 16 frames",
+            "@0 sound battle-unit-attack/atk/4",
+            "@7 unit 2 body Hit Alive for 9 frames",
+            "@7 unit 3 body Hit Alive for 9 frames",
+            "@7 unit 1 feedback +15 Heal Healed",
+            "@7 unit 1 feedback +15 Heal Healed",
+            "@7 unit 2 feedback +15 Damage -20",
+            "@7 unit 3 feedback +15 Damage -20",
+            "@7 unit 1 hitpoints 40 -> 60 over 12 frames Decelerate",
+            "@7 unit 2 hitpoints 40 -> 20 over 12 frames Decelerate",
+            "@7 unit 3 hitpoints 40 -> 20 over 12 frames Decelerate",
+            "@7 clip battle-effect-heal for 14 frames at attacker front-center small",
+            "@7 clip battle-effect-heal for 14 frames at attacker front-center small",
+            "@7 sound battle-unit-touch/atk/4",
+            "@16 unit 1 body Idle Alive",
+            "@16 unit 2 body Idle Alive",
+            "@16 unit 3 body Idle Alive"
+        ]));
+    }
 }

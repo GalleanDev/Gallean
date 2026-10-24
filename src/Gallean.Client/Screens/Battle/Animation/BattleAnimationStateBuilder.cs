@@ -1277,13 +1277,22 @@ internal sealed partial class BattleAnimationStateBuilder(
     {
         TimeSpan duration = rate.GetDuration(HitpointsChangeFrames);
 
-        timeline.Hitpoints.Add(new AnimationProperty(
-            new BattleAnimationTarget.UnitHitpoints(timeline.Unit.Id),
-            at,
-            duration,
-            timeline.CurrentHitpoints,
-            value,
-            AnimationEasing.Decelerate));
+        if (at < timeline.HitpointsEnd)
+        {
+            AnimationProperty last = timeline.Hitpoints[^1];
+
+            timeline.Hitpoints[^1] = last with { To = value };
+        }
+        else
+        {
+            timeline.Hitpoints.Add(new AnimationProperty(
+                new BattleAnimationTarget.UnitHitpoints(timeline.Unit.Id),
+                at,
+                duration,
+                timeline.CurrentHitpoints,
+                value,
+                AnimationEasing.Decelerate));
+        }
 
         RequireStep().ExtendTo(at + duration);
     }

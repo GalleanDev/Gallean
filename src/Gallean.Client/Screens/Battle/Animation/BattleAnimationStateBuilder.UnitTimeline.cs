@@ -91,6 +91,23 @@ internal sealed partial class BattleAnimationStateBuilder
             }
         }
 
+        public TimeSpan HitpointsEnd
+        {
+            get
+            {
+                if (Hitpoints.Count > 0)
+                {
+                    AnimationProperty hitpoints = Hitpoints[^1];
+
+                    return hitpoints.Start + hitpoints.Duration;
+                }
+                else
+                {
+                    return TimeSpan.Zero;
+                }
+            }
+        }
+
         public TimeSpan BodyEnd
         {
             get
