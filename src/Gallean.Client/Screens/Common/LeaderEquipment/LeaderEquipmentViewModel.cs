@@ -23,13 +23,13 @@ internal sealed class LeaderEquipmentViewModel(GameModel gameModel)
         Slots.Clear();
     }
 
-    public void Update(WorldStack stack, IReadOnlySet<LeaderEquipmentSlot> highlight)
+    public void Update(WorldStack stack, WorldResourceSet resources, IReadOnlySet<LeaderEquipmentSlot> highlight)
     {
         List<LeaderEquipmentSlotViewModel> newItems = [];
 
         foreach (LeaderEquipmentSlot slot in SlotLayout)
         {
-            newItems.Add(BuildSlot(stack, slot, LeaderEquipmentSlotFormatter.FormatName(slot), highlight));
+            newItems.Add(BuildSlot(stack, slot, LeaderEquipmentSlotFormatter.FormatName(slot), resources, highlight));
         }
 
         int index = 0;
@@ -61,6 +61,7 @@ internal sealed class LeaderEquipmentViewModel(GameModel gameModel)
         WorldStack stack,
         LeaderEquipmentSlot slot,
         string label,
+        WorldResourceSet resources,
         IReadOnlySet<LeaderEquipmentSlot> highlight)
     {
         WorldItem? equippedItem = stack.Equipment[slot];
@@ -73,7 +74,12 @@ internal sealed class LeaderEquipmentViewModel(GameModel gameModel)
         {
             itemId = equippedItem.DefinitionId;
             spriteKey = ItemIconResolver.Resolve(gameModel.Definitions, equippedItem.DefinitionId);
-            details = ItemDetailsViewModel.Create(equippedItem.DefinitionId, equippedItem.Charges, gameModel.Definitions, gameModel.Texts);
+            details = ItemDetailsViewModel.Create(
+                equippedItem.DefinitionId,
+                equippedItem.Charges,
+                resources,
+                gameModel.Definitions,
+                gameModel.Texts);
         }
 
         return new LeaderEquipmentSlotViewModel(slot, label, itemId, spriteKey, details, highlight.Contains(slot), this);

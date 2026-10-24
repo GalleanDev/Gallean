@@ -9,7 +9,7 @@ internal sealed record ItemDetailsViewModel(
     string CategoryText,
     string Description,
     IReadOnlyList<string> Effects,
-    ResourceSetViewModel? CastingCost,
+    OfferPriceViewModel? CastingCost,
     ResourceSetViewModel Value)
 {
     public bool Equals(ItemDetailsViewModel? other)
@@ -36,6 +36,7 @@ internal sealed record ItemDetailsViewModel(
     public static ItemDetailsViewModel Create(
         ItemDefinitionId definitionId,
         int? charges,
+        WorldResourceSet resources,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts)
     {
@@ -49,11 +50,11 @@ internal sealed record ItemDetailsViewModel(
         }
 
         WorldResourceSet? castingCost = GetCastingCost(definition);
-        ResourceSetViewModel? castingCostViewModel;
+        OfferPriceViewModel? castingCostViewModel;
 
         if (castingCost is not null)
         {
-            castingCostViewModel = new ResourceSetViewModel(castingCost.Value, ResourceSetProjection.All);
+            castingCostViewModel = new OfferPriceViewModel(castingCost.Value, resources);
         }
         else
         {

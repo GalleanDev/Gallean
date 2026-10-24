@@ -4678,8 +4678,18 @@ public sealed class VisualTests
         WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints - 40, 35, leaderDefinition.Level, [new UnitModifier(boostDefinition.Id, RemainingTurns: 3)], null, false);
 
         UnitDetailsViewModel unitDetails = UnitDetailsViewModel.CreateFromWorld(leader, null, gameModel.Definitions, gameModel.Texts, gameModel.Stats);
-        ItemDetailsViewModel bannerDetails = ItemDetailsViewModel.Create(new ItemDefinitionId("G000IG1002"), charges: null, gameModel.Definitions, gameModel.Texts);
-        ItemDetailsViewModel staffDetails = ItemDetailsViewModel.Create(new ItemDefinitionId("G000IG6001"), charges: null, gameModel.Definitions, gameModel.Texts);
+        ItemDetailsViewModel bannerDetails = ItemDetailsViewModel.Create(
+            new ItemDefinitionId("G000IG1002"),
+            charges: null,
+            WorldResourceSet.Empty,
+            gameModel.Definitions,
+            gameModel.Texts);
+        ItemDetailsViewModel staffDetails = ItemDetailsViewModel.Create(
+            new ItemDefinitionId("G000IG6001"),
+            charges: null,
+            WorldResourceSet.Empty,
+            gameModel.Definitions,
+            gameModel.Texts);
 
         StackPanel items = new()
         {

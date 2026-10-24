@@ -195,6 +195,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
     private IReadOnlyList<LeaderExportItemViewModel> BuildItems()
     {
         ImmutableArray<WorldItem> exportableItems = ScenarioExporter.GetExportableItems(WorldState, ViewPlayerId);
+        WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<(ItemDefinitionId DefinitionId, int? Charges)> keys = [];
         Dictionary<(ItemDefinitionId DefinitionId, int? Charges), List<WorldItem>> groups = [];
 
@@ -229,7 +230,11 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
             }
 
             ItemDetailsViewModel details = ItemDetailsViewModel.Create(
-                key.DefinitionId, key.Charges, GameModel.Definitions, GameModel.Texts);
+                key.DefinitionId,
+                key.Charges,
+                resources,
+                GameModel.Definitions,
+                GameModel.Texts);
 
             result.Add(new LeaderExportItemViewModel(
                 this,

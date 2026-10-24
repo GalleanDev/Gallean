@@ -34,6 +34,25 @@ public sealed class StackTabViewModelTests
         throw new InvalidOperationException($"Equipment slot {slot} was not found.");
     }
 
+    private static string FormatPrice(OfferPriceViewModel price)
+    {
+        List<string> items = [];
+
+        foreach (OfferPriceItemViewModel item in price.Items)
+        {
+            if (item.IsShort)
+            {
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()} (short)");
+            }
+            else
+            {
+                items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()}");
+            }
+        }
+
+        return string.Join(", ", items);
+    }
+
     private static UnitModifierDefinition WeaponModifier()
     {
         return TestHelpers.SimpleModifier("weapon-mod") with { Damage = new UnitStatModifier(20, 0) };
@@ -2604,7 +2623,10 @@ public sealed class StackTabViewModelTests
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
 
-        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            Resources = WorldResourceSet.Empty with { LifeMana = 150, RuneMana = 20 }
+        };
 
         UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
                 TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
@@ -2660,14 +2682,20 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        Assert.That(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Details, Is.EqualTo(new ItemDetailsViewModel(
-            new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(staff.Id)),
-            "Staff of Thunder",
-            "Staff",
-            "desc",
-            [],
-            new ResourceSetViewModel(WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }, ResourceSetProjection.All),
-            new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 600 }, ResourceSetProjection.All))));
+        ItemDetailsViewModel details = Assert.NotNull(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Details);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(details, Is.EqualTo(new ItemDetailsViewModel(
+                new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(staff.Id)),
+                "Staff of Thunder",
+                "Staff",
+                "desc",
+                [],
+                new OfferPriceViewModel(WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }, WorldResourceSet.Empty with { LifeMana = 150, RuneMana = 20 }),
+                new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 600 }, ResourceSetProjection.All))));
+            Assert.That(FormatPrice(Assert.NotNull(details.CastingCost)), Is.EqualTo("100 life mana, 50 rune mana (short)"));
+        }
     }
 
     [Test]

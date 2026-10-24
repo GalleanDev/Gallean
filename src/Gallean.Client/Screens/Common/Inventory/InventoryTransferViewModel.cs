@@ -33,10 +33,14 @@ internal sealed class InventoryTransferViewModel(GameModel gameModel, IInventory
         }
     }
 
-    public void Update(WorldInventory inventory, WorldInventory otherInventory, InventoryTransferDirection? highlight)
+    public void Update(
+        WorldInventory inventory,
+        WorldInventory otherInventory,
+        WorldResourceSet resources,
+        InventoryTransferDirection? highlight)
     {
-        Inventory.Update(inventory, highlight == InventoryTransferDirection.FromOther);
-        OtherInventory.Update(otherInventory, highlight == InventoryTransferDirection.ToOther);
+        Inventory.Update(inventory, resources, highlight == InventoryTransferDirection.FromOther);
+        OtherInventory.Update(otherInventory, resources, highlight == InventoryTransferDirection.ToOther);
     }
 
     public void Reset()

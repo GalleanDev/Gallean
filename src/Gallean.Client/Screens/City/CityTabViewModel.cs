@@ -808,7 +808,7 @@ internal sealed partial class CityTabViewModel
             Leader = leader;
             StackGridTitle = Tr("{0}'s party", leader.Title);
             HasStack = true;
-            InventoryTransfer.Update(visitingStack.Inventory, fortification.Inventory, BuildTransferHighlight(dragged));
+            InventoryTransfer.Update(visitingStack.Inventory, fortification.Inventory, WorldState.Players[ViewPlayerId].Resources, BuildTransferHighlight(dragged));
         }
         else
         {

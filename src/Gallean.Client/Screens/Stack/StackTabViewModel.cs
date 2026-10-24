@@ -241,7 +241,7 @@ internal abstract partial class StackTabViewModel
         IDragSourceReference? dragged = DragDrop.Dragged;
 
         UnitGrid.Update(stack.Units, showsPurchaseHints: false, highlight: BuildUnitHighlight(stack, dragged));
-        Inventory.Update(stack.Inventory, IsInventoryDropTarget(stack, dragged));
+        Inventory.Update(stack.Inventory, WorldState.Players[ViewPlayerId].Resources, IsInventoryDropTarget(stack, dragged));
 
         StackLeaderViewModel leader = StackLeaderViewModel.Create(
             stack, WorldState.Players[stack.OwnerId], GameModel.Definitions, GameModel.Texts, GameModel.Stats);
@@ -250,7 +250,7 @@ internal abstract partial class StackTabViewModel
         StackGridTitle = Tr("{0}'s party", leader.Title);
         StackUnitCount = $"{stack.Units.GetUnits().Count()} / {GridPosition.Count}";
 
-        Equipment.Update(stack, BuildEquipmentHighlight(stack, dragged));
+        Equipment.Update(stack, WorldState.Players[ViewPlayerId].Resources, BuildEquipmentHighlight(stack, dragged));
 
         UpdateDropZones(stack, dragged);
         UpdateDismissDropZone(stack, dragged);

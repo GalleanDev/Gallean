@@ -27,7 +27,7 @@ internal sealed partial class InventoryViewModel(GameModel gameModel) : Observab
         }
     }
 
-    public void Update(WorldInventory newInventory, bool isHighlighted)
+    public void Update(WorldInventory newInventory, WorldResourceSet resources, bool isHighlighted)
     {
         inventory = newInventory;
         IsHighlighted = isHighlighted;
@@ -38,13 +38,20 @@ internal sealed partial class InventoryViewModel(GameModel gameModel) : Observab
         {
             WorldItem item = newInventory.Items[itemIndex];
 
+            ItemDetailsViewModel details = ItemDetailsViewModel.Create(
+                item.DefinitionId,
+                item.Charges,
+                resources,
+                gameModel.Definitions,
+                gameModel.Texts);
+
             newItems.Add(new InventoryItemViewModel(
                 itemIndex,
                 item.Id,
                 ItemIconResolver.Resolve(gameModel.Definitions, item.DefinitionId),
                 ItemFormatter.FormatName(gameModel.Definitions, gameModel.Texts, item.DefinitionId, item.Charges),
                 ItemFormatter.FormatDescription(gameModel.Definitions, gameModel.Texts, item.DefinitionId),
-                ItemDetailsViewModel.Create(item.DefinitionId, item.Charges, gameModel.Definitions, gameModel.Texts),
+                details,
                 this));
         }
 

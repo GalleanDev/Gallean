@@ -296,6 +296,13 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
                 unavailableReason = null;
             }
 
+            ItemDetailsViewModel details = ItemDetailsViewModel.Create(
+                purchaseItem.ItemId,
+                charges: null,
+                resources,
+                GameModel.Definitions,
+                GameModel.Texts);
+
             MerchantPurchaseItemViewModel item = new(
                 this,
                 purchaseItem.ItemId,
@@ -304,7 +311,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
                 description,
                 countText,
                 new OfferStatusViewModel(new OfferPriceViewModel(purchaseItem.Cost, resources), unavailableReason),
-                ItemDetailsViewModel.Create(purchaseItem.ItemId, charges: null, GameModel.Definitions, GameModel.Texts))
+                details)
             {
                 IsSelected = selectedPurchaseItemId == purchaseItem.ItemId
             };
@@ -317,6 +324,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
 
     private IReadOnlyList<MerchantSellItemViewModel> BuildSellItems(WorldGetMerchantInfoCommand.Result info)
     {
+        WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<MerchantSellItemViewModel> result = [];
 
         foreach (WorldGetMerchantInfoCommand.SellItem sellItem in info.SellItems)
@@ -329,6 +337,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
             ItemDetailsViewModel details = ItemDetailsViewModel.Create(
                 worldItem.DefinitionId,
                 worldItem.Charges,
+                resources,
                 GameModel.Definitions,
                 GameModel.Texts);
 
@@ -353,25 +362,41 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
 
     private SiteOfferViewModel? BuildOffer(WorldGetMerchantInfoCommand.Result info)
     {
+        WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
+
         if (selectedPurchaseItemId is { } purchaseItemId && FindPurchaseItem(info, purchaseItemId) is { } purchaseItem)
         {
+            ItemDetailsViewModel details = ItemDetailsViewModel.Create(
+                purchaseItemId,
+                charges: null,
+                resources,
+                GameModel.Definitions,
+                GameModel.Texts);
+
             return new SiteOfferViewModel(
                 new IconViewModel.Item(ItemIconResolver.Resolve(GameModel.Definitions, purchaseItemId)),
-                ItemDetailsViewModel.Create(purchaseItemId, charges: null, GameModel.Definitions, GameModel.Texts),
+                details,
                 ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, purchaseItemId, charges: null),
                 TrSpans("In stock: {0:*}", purchaseItem.Count),
                 ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, purchaseItemId),
                 Tr("Buy"),
-                new OfferStatusViewModel(new OfferPriceViewModel(purchaseItem.Cost, WorldState.Players[ViewPlayerId].Resources), FormatPurchaseUnavailability(purchaseItem)),
+                new OfferStatusViewModel(new OfferPriceViewModel(purchaseItem.Cost, resources), FormatPurchaseUnavailability(purchaseItem)),
                 TradeCommand);
         }
         else if (selectedSellItemId is { } sellItemId && FindSellItem(info, sellItemId) is { } sellItem)
         {
             WorldItem worldItem = sellItem.Item;
 
+            ItemDetailsViewModel details = ItemDetailsViewModel.Create(
+                worldItem.DefinitionId,
+                worldItem.Charges,
+                resources,
+                GameModel.Definitions,
+                GameModel.Texts);
+
             return new SiteOfferViewModel(
                 new IconViewModel.Item(ItemIconResolver.Resolve(GameModel.Definitions, worldItem.DefinitionId)),
-                ItemDetailsViewModel.Create(worldItem.DefinitionId, worldItem.Charges, GameModel.Definitions, GameModel.Texts),
+                details,
                 ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId, worldItem.Charges),
                 TrSpans("From your inventory"),
                 ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId),

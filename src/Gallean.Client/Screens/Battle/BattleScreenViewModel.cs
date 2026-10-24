@@ -1086,7 +1086,12 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
         if (item is not null)
         {
-            InspectedItem = ItemDetailsViewModel.Create(item.ItemId, item.Charges, GameModel.Definitions, GameModel.Texts);
+            InspectedItem = ItemDetailsViewModel.Create(
+                item.ItemId,
+                item.Charges,
+                WorldState.Players[ViewPlayerId].Resources,
+                GameModel.Definitions,
+                GameModel.Texts);
         }
         else
         {

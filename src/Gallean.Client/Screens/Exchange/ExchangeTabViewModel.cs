@@ -298,7 +298,7 @@ internal sealed partial class ExchangeTabViewModel
 
         StackGrid.Update(stack.Units, showsPurchaseHints: false, BuildUnitHighlight(StackGrid, dragged));
         OtherStackGrid.Update(otherStack.Units, showsPurchaseHints: false, BuildUnitHighlight(OtherStackGrid, dragged));
-        InventoryTransfer.Update(stack.Inventory, otherStack.Inventory, BuildTransferHighlight(dragged));
+        InventoryTransfer.Update(stack.Inventory, otherStack.Inventory, WorldState.Players[ViewPlayerId].Resources, BuildTransferHighlight(dragged));
 
         StackLeaderViewModel leader = StackLeaderViewModel.Create(
             stack, WorldState.Players[stack.OwnerId], GameModel.Definitions, GameModel.Texts, GameModel.Stats);
