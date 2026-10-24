@@ -17,6 +17,7 @@ uniform float shadingCap;
 uniform float rollOffThreshold;
 uniform float spriteLightBoost;
 uniform float spriteLightReach;
+uniform float spriteLightLimit;
 
 const float Pi = 3.14159265;
 const float3 View = float3(0.0, 0.0, 1.0);
@@ -119,7 +120,9 @@ half4 main(float2 coord) {
 
     float spriteLightMask = 1.0 - smoothstep(SpriteLightDepthLimit - SpriteLightDepthFade, SpriteLightDepthLimit + SpriteLightDepthFade, depth);
     float3 base = rollOff(max((reflected * light + emission) * grade, 0.0));
-    float3 glow = surface * spriteLight * spriteLightBoost * spriteLightMask;
+    float3 irradiance = spriteLight * spriteLightBoost * spriteLightMask;
+    float level = dot(irradiance, LuminanceWeights);
+    float3 glow = surface * irradiance / (1.0 + level / spriteLightLimit);
     float3 lit = linearToSrgb(1.0 - (1.0 - base) * exp(-glow));
 
     return half4(half3(lit), sourceSample.a);

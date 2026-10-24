@@ -23,6 +23,7 @@ internal sealed record BattleLightConfiguration(
     double BackgroundRollOffThreshold,
     double BackgroundSpriteLightBoost,
     double BackgroundSpriteLightReach,
+    double BackgroundSpriteLightLimit,
     BattleStormConfiguration? Storm)
 {
     public bool Equals(BattleLightConfiguration? other)
@@ -55,6 +56,7 @@ internal sealed record BattleLightConfiguration(
                BackgroundRollOffThreshold.Equals(other.BackgroundRollOffThreshold) &&
                BackgroundSpriteLightBoost.Equals(other.BackgroundSpriteLightBoost) &&
                BackgroundSpriteLightReach.Equals(other.BackgroundSpriteLightReach) &&
+               BackgroundSpriteLightLimit.Equals(other.BackgroundSpriteLightLimit) &&
                Storm == other.Storm;
     }
 
@@ -80,6 +82,7 @@ internal sealed record BattleLightConfiguration(
         hash.Add(BackgroundRollOffThreshold);
         hash.Add(BackgroundSpriteLightBoost);
         hash.Add(BackgroundSpriteLightReach);
+        hash.Add(BackgroundSpriteLightLimit);
         hash.Add(Storm);
 
         return hash.ToHashCode();
@@ -133,6 +136,7 @@ internal sealed record BattleLightConfiguration(
             BackgroundRollOffThreshold: 0.85,
             BackgroundSpriteLightBoost: 2.25,
             BackgroundSpriteLightReach: 0.75,
+            BackgroundSpriteLightLimit: 1.0,
             Storm: null);
     }
 

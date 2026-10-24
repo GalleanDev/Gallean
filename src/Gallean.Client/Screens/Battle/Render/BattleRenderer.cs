@@ -729,6 +729,7 @@ internal sealed partial class BattleRenderer
         backgroundEditor.SetRollOffThreshold((float)lightConfiguration.BackgroundRollOffThreshold);
         backgroundEditor.SetSpriteLightBoost((float)lightConfiguration.BackgroundSpriteLightBoost);
         backgroundEditor.SetSpriteLightReach((float)lightConfiguration.BackgroundSpriteLightReach);
+        backgroundEditor.SetSpriteLightLimit((float)lightConfiguration.BackgroundSpriteLightLimit);
         backgroundEditor.SetDepthScale((float)content.Ground.DepthScale);
 
         foreach (BattleFluidShaderProgram fluidShaderProgram in content.FluidShaderPrograms)
