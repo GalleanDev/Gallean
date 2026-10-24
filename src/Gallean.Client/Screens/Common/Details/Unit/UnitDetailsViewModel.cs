@@ -105,7 +105,6 @@ internal sealed record UnitDetailsViewModel(
             unitStats,
             baseStats,
             attackStats.Damage,
-            attackStats.Accuracy,
             unit.Hitpoints,
             unit.Level,
             experience,
@@ -143,7 +142,6 @@ internal sealed record UnitDetailsViewModel(
             unitStats,
             baseStats,
             unitStats.Damage,
-            unitStats.Accuracy,
             unit.Hitpoints,
             unit.Level,
             experience,
@@ -180,7 +178,6 @@ internal sealed record UnitDetailsViewModel(
         UnitStats unitStats,
         UnitStats baseStats,
         int attackDamage,
-        int attackAccuracy,
         int hitpoints,
         int level,
         UnitExperience experience,
@@ -230,7 +227,7 @@ internal sealed record UnitDetailsViewModel(
         [
             new(IconMoniker.Target, Tr("Targets"), new StatValueViewModel(FormatTargets(definition.Attack.Reach), 0)),
             new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(baseStats.Armor.ToString(), unitStats.Armor - baseStats.Armor)),
-            new(IconMoniker.Accuracy, Tr("Accuracy"), new StatValueViewModel($"{baseStats.Accuracy}%", attackAccuracy - baseStats.Accuracy)),
+            new(IconMoniker.Accuracy, Tr("Accuracy"), new StatValueViewModel($"{baseStats.Accuracy}%", unitStats.Accuracy - baseStats.Accuracy)),
             new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(baseStats.Initiative.ToString(), unitStats.Initiative - baseStats.Initiative)),
             new(IconMoniker.Immunity, Tr("Immunities"), new StatValueViewModel(UnitWardFormatter.FormatList(wards, UnitWardCategory.Always), 0)),
             new(IconMoniker.Ward, Tr("Wards"), new StatValueViewModel(UnitWardFormatter.FormatList(wards, UnitWardCategory.Once), 0))

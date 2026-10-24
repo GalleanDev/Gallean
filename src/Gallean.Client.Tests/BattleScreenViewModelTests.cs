@@ -4502,4 +4502,105 @@ public sealed class BattleScreenViewModelTests
         Assert.That(viewModel.IsBattleOver, Is.True);
         Assert.That(viewModel.ExitBattleCommand.CanExecute(null), Is.True);
     }
+
+    [Test]
+    public async Task InspectAiUnitTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50);
+        UnitDefinition baseEnemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 30, initiative: 30, damage: 5);
+        UnitDefinition enemyDefinition = baseEnemyDefinition with { Attack = baseEnemyDefinition.Attack with { Accuracy = 80 } };
+        UnitModifierDefinition curse = TestHelpers.SimpleModifier("curse") with { Accuracy = new UnitStatModifier(0, -10) };
+
+        GlobalVariables globals = new() { BattleInitiativeVariance = 0, BattleDamageVariance = 0 };
+        WorldMap map = TestHelpers.SimpleMap(1, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithGlobals(globals)
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithDefinition(curse)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+
+        BattleUnitId attackerId = new(1);
+        BattleUnitId enemyId = new(2);
+
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(attackerId, null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit enemy = new(enemyId, null, enemyDefinition.Id, BattleSide.Defender, 30, 0, 0, 1, [new UnitModifier(curse.Id, RemainingTurns: 2)], [], null, [], null, false);
+
+        BattleState battleState = new BattleStateBuilder(engine.Definitions)
+            .Add(attacker)
+            .Add(enemy)
+            .Build(new BattleModifiers(BattleSideModifiers.None, new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 5, RandomDamageBonus: 0)));
+
+        EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                battleEngine,
+                battleState,
+                NullBattleUnitUpgradeResolver.Instance,
+                _ =>
+                {
+                },
+                isAttackerAi: false,
+                isDefenderAi: true,
+                canAutoResolve: true,
+                new WorldPosition(0,
+                    0)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        TestAssetProviderBuilder assetBuilder = new();
+        Sprite sprite = assetBuilder.CreateSprite(SKColors.Transparent, 80, 120);
+        Animation animation = assetBuilder.CreateAnimation(new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null), [sprite]);
+        using TestAssetProvider assets = assetBuilder
+            .ResolveSprite(_ => sprite)
+            .ResolveAnimation(_ => animation)
+            .ResolveSound(_ => null)
+            .Build();
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAssets(assets).Build();
+        IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("enemy"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .Build();
+        BattleScreenViewModel viewModel = new(gameModel, battle, gameViewModel, assetMetadata, NullAssetPreloader.Instance, new RandomProvider(0));
+
+        viewModel.ShowUnitDetails(enemyId);
+
+        Assert.That(viewModel.InspectedUnit, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(enemyDefinition.Id)),
+            "name",
+            "description",
+            1,
+            30,
+            30,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            "Damage (Weapon)",
+            new StatValueViewModel("5", 0),
+            null,
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("80%", -8)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0)),
+                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
+                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+            ],
+            [
+                new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-10% accuracy", null, UnitModifierType.Weaken)])
+            ],
+            [])));
+    }
 }
