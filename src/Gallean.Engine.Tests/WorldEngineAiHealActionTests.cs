@@ -160,7 +160,7 @@ public sealed class WorldEngineAiHealActionTests
         WorldPlayer aiPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
             IsAi = true,
-            Resources = new WorldResourceSet(10, 0, 0, 0, 0, 0),
+            Resources = WorldResourceSet.Empty,
             Buildings = new WorldPlayerBuildings([temple.Id], [temple.Id])
         };
         WorldPlayer humanPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);

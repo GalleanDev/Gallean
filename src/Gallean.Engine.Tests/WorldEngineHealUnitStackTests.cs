@@ -468,7 +468,7 @@ public sealed class WorldEngineHealUnitStackTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
-            Resources = new WorldResourceSet(10, 0, 0, 0, 0, 0),
+            Resources = WorldResourceSet.Empty,
             Buildings = new WorldPlayerBuildings([temple.Id], [temple.Id]),
             Spellbook = new WorldPlayerSpellbook([], [])
         };
@@ -503,5 +503,90 @@ public sealed class WorldEngineHealUnitStackTests
         engine.CheckCommandError(
             new WorldHealUnitCommand(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier")),
             WorldCommandError.InsufficientResources);
+    }
+
+    [Test]
+    public void PartialHealTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^..",
+            "^^^^.."
+        ]);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10) with
+        {
+            HealCost = new WorldResourceSet(1, 0, 0, 0, 0, 0)
+        };
+
+        WorldPlayerBuildingDefinition temple = new(
+            Id: new WorldPlayerBuildingDefinitionId("temple"),
+            NameTextId: new GlobalTextId("name"),
+            DescriptionTextId: new GlobalTextId("description"),
+            RequiredId: null,
+            Category: WorldPlayerBuildingCategory.Heal,
+            UnitBranch: null,
+            Level: 1,
+            Cost: WorldResourceSet.Empty,
+            UnitIds: []);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(10, 0, 0, 0, 0, 0),
+            Buildings = new WorldPlayerBuildings([temple.Id], [temple.Id]),
+            Spellbook = new WorldPlayerSpellbook([], [])
+        };
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("cap"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(4, 4),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 30 }, GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(temple)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCapital(capital)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldHealUnitCommand(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier")),
+            [
+                new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 40, new WorldResourceSet(10, 0, 0, 0, 0, 0))
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Players = engine.State.Players.SetItem(player.Id, player with { Resources = WorldResourceSet.Empty }),
+                Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+                {
+                    Units = new UnitGrid<WorldUnit>.Builder()
+                        .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
+                        .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 40 }, GridPosition.FrontBottom, false)
+                        .Build()
+                })
+            }));
     }
 }

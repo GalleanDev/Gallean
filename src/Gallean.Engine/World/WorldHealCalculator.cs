@@ -36,14 +36,21 @@ internal static partial class WorldHealCalculator
         }
 
         int missingHitpoints = stats.MaxHitpoints - unit.Hitpoints;
-        WorldResourceSet cost = ResourceSetCalculator.Multiply(costs.HealCost, missingHitpoints);
+        int affordableHitpoints = GetAffordableHitpoints(state.CurrentPlayer.Resources, costs.HealCost);
+        int healedHitpoints = Math.Min(missingHitpoints, affordableHitpoints);
 
-        if (!ResourceSetCalculator.CanAfford(state.CurrentPlayer.Resources, cost))
+        if (healedHitpoints > 0)
         {
+            WorldResourceSet cost = ResourceSetCalculator.Multiply(costs.HealCost, healedHitpoints);
+
+            return new HealInfo(unit.Hitpoints + healedHitpoints, cost, Error: null);
+        }
+        else
+        {
+            WorldResourceSet cost = ResourceSetCalculator.Multiply(costs.HealCost, missingHitpoints);
+
             return new HealInfo(stats.MaxHitpoints, cost, WorldCommandError.InsufficientResources);
         }
-
-        return new HealInfo(stats.MaxHitpoints, cost, Error: null);
     }
 
     public static ResurrectInfo GetResurrectInfo(WorldState state, WorldUnitGroup group, WorldUnitId unitId, IEngineContext context)
@@ -148,6 +155,39 @@ internal static partial class WorldHealCalculator
                 LordCategory.Mage => 0,
                 LordCategory.Guildmaster => 0
             };
+        }
+    }
+
+    private static int GetAffordableHitpoints(WorldResourceSet available, WorldResourceSet costPerHitpoint)
+    {
+        int affordable = int.MaxValue;
+
+        affordable = Limit(affordable, available.Gold, costPerHitpoint.Gold);
+        affordable = Limit(affordable, available.DeathMana, costPerHitpoint.DeathMana);
+        affordable = Limit(affordable, available.RuneMana, costPerHitpoint.RuneMana);
+        affordable = Limit(affordable, available.LifeMana, costPerHitpoint.LifeMana);
+        affordable = Limit(affordable, available.InfernalMana, costPerHitpoint.InfernalMana);
+        affordable = Limit(affordable, available.GroveMana, costPerHitpoint.GroveMana);
+
+        if (affordable != int.MaxValue)
+        {
+            return affordable;
+        }
+        else
+        {
+            return 0;
+        }
+
+        static int Limit(int affordable, int available, int costPerHitpoint)
+        {
+            if (costPerHitpoint > 0)
+            {
+                return Math.Min(affordable, available / costPerHitpoint);
+            }
+            else
+            {
+                return affordable;
+            }
         }
     }
 

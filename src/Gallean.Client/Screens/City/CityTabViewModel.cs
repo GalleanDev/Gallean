@@ -338,8 +338,8 @@ internal sealed partial class CityTabViewModel
 
             string caption = type switch
             {
-                UnitActionType.Heal => Tr("No units need healing"),
-                UnitActionType.Resurrect => Tr("No units need resurrecting"),
+                UnitActionType.Heal => Tr("No units can be healed"),
+                UnitActionType.Resurrect => Tr("No units can be resurrected"),
                 UnitActionType.LockType => Tr("No units can have their type locked")
             };
 

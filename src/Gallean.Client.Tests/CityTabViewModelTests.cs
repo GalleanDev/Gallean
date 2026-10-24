@@ -2324,4 +2324,85 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Locked, "No units can have their type locked", Details: null)));
         }
     }
+
+    [Test]
+    public async Task NoGoldHealTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayerBuildingDefinition temple = new(
+            Id: new WorldPlayerBuildingDefinitionId("temple"),
+            NameTextId: new GlobalTextId("Temple"),
+            DescriptionTextId: new GlobalTextId("Temple description"),
+            RequiredId: null,
+            Category: WorldPlayerBuildingCategory.Heal,
+            UnitBranch: null,
+            Level: 1,
+            Cost: WorldResourceSet.Empty,
+            UnitIds: []);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            Resources = WorldResourceSet.Empty,
+            Buildings = new WorldPlayerBuildings([temple.Id], [temple.Id])
+        };
+
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 50, damage: 10) with
+        {
+            HealCost = new WorldResourceSet(1000, 0, 0, 0, 0, 0),
+            ReviveCost = new WorldResourceSet(50, 0, 0, 0, 0, 0)
+        };
+
+        WorldUnit woundedSoldier = new(new WorldUnitId("woundedSoldier"), soldierDefinition.Id, 30, 0, soldierDefinition.Level, [], null, false);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
+
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player.Id,
+            new WorldPosition(4, 4),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(woundedSoldier, GridPosition.FrontCenter, false)
+                .Build());
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(temple)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(cityDefinition)
+            .WithCity(city)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+        WorldState initialState = session.World.State;
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, ResourceSetProjection.Gold, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.HealCommand.CanExecute(null), Is.True);
+            Assert.That(screen.ResurrectCommand.CanExecute(null), Is.True);
+        }
+
+        screen.HealCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.Null);
+            Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Heal, "No units can be healed", Details: null)));
+        }
+
+        UnitGridSlotViewModel slot = FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter);
+        await slot.SelectCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State, Is.EqualTo(initialState));
+    }
 }
