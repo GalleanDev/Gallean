@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://gallean.org/logo.webp" alt="Gallean" width="220" />
+  <a href="https://gallean.org"><img src="https://gallean.org/logo.webp" alt="Gallean" width="220" /></a>
 </p>
 
 <p align="center">
