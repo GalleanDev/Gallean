@@ -440,6 +440,83 @@ public sealed class WorldEngineIllusionTests
     }
 
     [Test]
+    public void ThiefPastTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 2);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition illusion = TestHelpers.SimpleUnitDefinition("illusion", maxHitpoints: 100, initiative: 50, damage: 10) with
+        {
+            Category = UnitCategory.Illusion,
+            Leadership = 1,
+            MovementPoints = 20,
+            Lifetime = 3
+        };
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(0, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 20);
+
+        WorldStack illusionStack = TestHelpers.SimpleStack(
+                new WorldStackId("illusion"),
+                player2.Id,
+                new WorldPosition(2, 0),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("illusion"), illusion),
+                movementPoints: 20) with
+            {
+                ExpirationTurn = 3
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(illusion)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(illusionStack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldState before = engine.State;
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(thiefStack.Id, new WorldPosition(3, 1)),
+            [
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [], new WorldPosition(2, 0)),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [], new WorldPosition(2, 0)),
+                new WorldStackDestroyedEvent(illusionStack.Id, new WorldUnitGroup.Stack(thiefStack.Id), player1.Id),
+                new WorldStackMovementConsumedEvent(thiefStack.Id, 8)
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            before with
+            {
+                Stacks = before.Stacks
+                    .Remove(illusionStack.Id)
+                    .SetItem(thiefStack.Id, thiefStack with
+                    {
+                        Position = new WorldPosition(1, 1),
+                        Direction = WorldStackDirection.SouthEast,
+                        MovementPoints = 8
+                    }),
+                ScenarioState = before.ScenarioState with
+                {
+                    DestroyedStacks = [new ScenarioDestroyedStack(illusionStack.Id, player1.Id, SourceTemplateId: null)]
+                }
+            }));
+    }
+
+    [Test]
     public void ThiefActionsTest()
     {
         WorldMap map = TestHelpers.SimpleMap(4, 2);

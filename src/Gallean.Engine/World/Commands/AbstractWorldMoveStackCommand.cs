@@ -88,8 +88,7 @@ public abstract partial record AbstractWorldMoveStackCommand(WorldStackId StackI
 
         WorldPosition? encounterPosition;
 
-        if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanBegin: false } ||
-            traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanAvoid: true })
+        if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanBegin: false })
         {
             encounterPosition = null;
         }

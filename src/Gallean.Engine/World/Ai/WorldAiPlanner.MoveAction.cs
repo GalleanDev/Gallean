@@ -320,7 +320,7 @@ internal sealed partial class WorldAiPlanner
 
                 PathTraversalCalculator.TraversalInfo traversal = Context.Pathfinding.GetTraversalInfo(state, stack, path);
 
-                if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanAvoid: false })
+                if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle)
                 {
                     return null;
                 }

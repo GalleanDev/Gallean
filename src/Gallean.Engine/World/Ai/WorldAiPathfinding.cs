@@ -34,7 +34,7 @@ internal sealed partial class WorldAiPathfinding(IEngineContext context)
             {
                 PathTraversalCalculator.TraversalInfo traversal = GetTraversalInfo(state, stack, path.Truncate(count));
 
-                if (traversal.Encounter is not PathTraversalCalculator.Encounter.Battle { CanAvoid: false })
+                if (traversal.Encounter is not PathTraversalCalculator.Encounter.Battle)
                 {
                     return candidate;
                 }

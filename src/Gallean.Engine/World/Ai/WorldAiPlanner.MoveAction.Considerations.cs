@@ -113,7 +113,7 @@ internal sealed partial class WorldAiPlanner
                     if (DiplomacyCalculator.IsHostile(state, stack.OwnerId, other.OwnerId) &&
                         other.Position.GetDistance(stack.Position) <= VitalThreatRadius)
                     {
-                        PathTraversalCalculator.Encounter.StackBattle encounter = new(stack, true, false);
+                        PathTraversalCalculator.Encounter.StackBattle encounter = new(stack, true);
                         WorldAiTarget.Stack target = new(stack.Id);
                         BattleInfo? battleInfo = GetBattleInfo(aiContext, state, other, target, stack.Position, encounter);
 

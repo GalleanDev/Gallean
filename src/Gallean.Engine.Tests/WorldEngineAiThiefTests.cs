@@ -188,7 +188,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 600] Move thief -> (6, 0)",
+            "[P2 500] Move thief -> (5, 0)",
             "[P2 1000] Spy thief -> (6, 0)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));

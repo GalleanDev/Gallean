@@ -28,7 +28,7 @@ internal static partial class PathTraversalCalculator
             WorldStack? traverseStack = plan.GetStackAt(position);
             if (traverseStack is not null && DiplomacyCalculator.IsHostile(state, stack.OwnerId, traverseStack.OwnerId))
             {
-                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.StackBattle(traverseStack, canBeginBattle, CanAvoid: false));
+                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.StackBattle(traverseStack, canBeginBattle));
             }
 
             WorldFortification? traverseFortification = plan.GetFortificationAt(position);
@@ -42,29 +42,26 @@ internal static partial class PathTraversalCalculator
                 }
             }
 
-            WorldStack? adjacentEnemyStack = FindAdjacentEnemyStack(state, plan, stack, position);
-            if (adjacentEnemyStack is not null)
+            WorldStack? interceptingStack = FindInterceptingStack(state, plan, stack, profile, position, definitions);
+            if (interceptingStack is not null)
             {
-                (_, _, UnitDefinition leaderDefinition) = adjacentEnemyStack.GetLeader(definitions);
-
-                bool canAvoid = profile.IsThief;
-
-                if (leaderDefinition.Category is UnitCategory.Illusion)
-                {
-                    canAvoid = false;
-                }
-
                 return new TraversalInfo(
                     path.Truncate(i + 1),
                     path.Skip(i + 1),
-                    new Encounter.StackBattle(adjacentEnemyStack, canBeginBattle, canAvoid));
+                    new Encounter.StackBattle(interceptingStack, canBeginBattle));
             }
         }
 
         return new TraversalInfo(path, new WorldPath([]), null);
     }
 
-    private static WorldStack? FindAdjacentEnemyStack(WorldState state, WorldPlan plan, WorldStack stack, WorldPosition position)
+    private static WorldStack? FindInterceptingStack(
+        WorldState state,
+        WorldPlan plan,
+        WorldStack stack,
+        WorldMovementCalculator.MovementProfile profile,
+        WorldPosition position,
+        IGameDefinitionProvider definitions)
     {
         foreach (WorldPosition adjacentPosition in position.GetAdjacentPositions())
         {
@@ -72,7 +69,12 @@ internal static partial class PathTraversalCalculator
 
             if (adjacentStack is not null && DiplomacyCalculator.IsHostile(state, stack.OwnerId, adjacentStack.OwnerId))
             {
-                return adjacentStack;
+                (_, _, UnitDefinition leaderDefinition) = adjacentStack.GetLeader(definitions);
+
+                if (!profile.IsThief || leaderDefinition.Category is UnitCategory.Illusion)
+                {
+                    return adjacentStack;
+                }
             }
         }
 

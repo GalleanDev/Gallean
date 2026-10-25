@@ -2716,15 +2716,77 @@ public sealed class WorldEngineMovementTests
 
         _ = engine.DispatchCommand(new WorldStartGameCommand());
 
-        WorldState before = engine.State;
+        BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(thief).AddUnit(leader).Build())
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("thief"), thief.Id, BattleSide.Attacker, hitpoints: 100), GridPosition.FrontBottom)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("leader"), leader.Id, BattleSide.Defender, hitpoints: 100), GridPosition.FrontBottom)
+            .Build(BattleModifiers.None);
 
         engine.CheckCommand(
             new WorldMoveStackCommand(thiefStack.Id, enemyStack.Position),
             [
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], null),
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], null)
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], new WorldPosition(3, 0)),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], new WorldPosition(3, 0)),
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], new WorldPosition(3, 0)),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], new WorldPosition(3, 0)),
+                new WorldStackMovementConsumedEvent(thiefStack.Id, 6),
+                new WorldStackBattleStartedEvent(thiefStack.Id, enemyStack.Id, enemyStack.Position, expectedBattleState, IsDuel: false)
+            ]);
+    }
+
+    [Test]
+    public void ThiefPastEnemyStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(7, 3);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(0, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 20);
+
+        WorldStack enemyStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(enemyStack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldState before = engine.State;
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(thiefStack.Id, new WorldPosition(4, 1)),
+            [
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 1), new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 1), new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 16, [new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 16, [new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 14, [new WorldPosition(4, 1)], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 14, [new WorldPosition(4, 1)], null),
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(3, 1), new WorldPosition(4, 1), WorldStackDirection.SouthEast, 12, [], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(3, 1), new WorldPosition(4, 1), WorldStackDirection.SouthEast, 12, [], null)
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -2732,7 +2794,71 @@ public sealed class WorldEngineMovementTests
             {
                 Stacks = before.Stacks.SetItem(thiefStack.Id, thiefStack with
                 {
-                    Position = new WorldPosition(2, 0),
+                    Position = new WorldPosition(4, 1),
+                    Direction = WorldStackDirection.SouthEast,
+                    MovementPoints = 12
+                })
+            }));
+    }
+
+    [Test]
+    public void ThiefLeaveEnemyStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 2);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(1, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 20);
+
+        WorldStack enemyStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(enemyStack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldState before = engine.State;
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(thiefStack.Id, new WorldPosition(3, 1)),
+            [
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(3, 1)], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(3, 1)], null),
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 16, [], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 16, [], null)
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            before with
+            {
+                Stacks = before.Stacks.SetItem(thiefStack.Id, thiefStack with
+                {
+                    Position = new WorldPosition(3, 1),
                     Direction = WorldStackDirection.SouthEast,
                     MovementPoints = 16
                 })
@@ -2913,15 +3039,13 @@ public sealed class WorldEngineMovementTests
         Assert.That(result, Is.EqualTo(new WorldGetPathCommand.Result(
             new WorldPath(
             [
-                new WorldPathSegment(new WorldPosition(0, 1), new WorldPosition(1, 1), 2, Turn: 0)
-            ]),
-            new WorldPath(
-            [
+                new WorldPathSegment(new WorldPosition(0, 1), new WorldPosition(1, 1), 2, Turn: 0),
                 new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), 2, Turn: 0),
                 new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), 2, Turn: 0),
                 new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(4, 1), 2, Turn: 0)
             ]),
-            new WorldPathEncounter.Thief(new WorldPosition(2, 0)))));
+            new WorldPath([]),
+            null)));
     }
 
     [Test]

@@ -17,7 +17,7 @@ public abstract partial record AbstractWorldMoveStackCommand
 
         public WorldCommandResult Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
         {
-            if (!encounter.CanBegin || encounter.CanAvoid)
+            if (!encounter.CanBegin)
             {
                 return WorldCommandResult.Fail(WorldCommandError.InsufficientMovement);
             }

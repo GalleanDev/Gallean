@@ -354,7 +354,7 @@ internal sealed partial class WorldAiPlanner
                 {
                     PathTraversalCalculator.TraversalInfo traversal = Context.Pathfinding.GetTraversalInfo(context.State, stack, targetPath.Path);
 
-                    if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanBegin: true, CanAvoid: false })
+                    if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanBegin: true })
                     {
                         BattleInfo? battleInfo = GetBattleInfo(
                             Context, context.State, stack, targetPath.Target, targetPath.Position, traversal.Encounter);

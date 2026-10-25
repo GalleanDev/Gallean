@@ -12,9 +12,9 @@ internal static partial class PathTraversalCalculator
             }
         }
 
-        public abstract record Battle(WorldPosition Position, bool CanBegin, bool CanAvoid) : Encounter(Position);
+        public abstract record Battle(WorldPosition Position, bool CanBegin) : Encounter(Position);
 
-        public sealed record StackBattle(WorldStack Stack, bool CanBegin, bool CanAvoid) : Battle(Stack.Position, CanBegin, CanAvoid)
+        public sealed record StackBattle(WorldStack Stack, bool CanBegin) : Battle(Stack.Position, CanBegin)
         {
             public override TResult Accept<TContext, TResult>(IEncounterVisitor<TContext, TResult> visitor, TContext context)
             {
@@ -22,7 +22,7 @@ internal static partial class PathTraversalCalculator
             }
         }
 
-        public sealed record FortificationBattle(WorldFortification Fortification, bool CanBegin) : Battle(Fortification.Entrance, CanBegin, CanAvoid: false)
+        public sealed record FortificationBattle(WorldFortification Fortification, bool CanBegin) : Battle(Fortification.Entrance, CanBegin)
         {
             public override TResult Accept<TContext, TResult>(IEncounterVisitor<TContext, TResult> visitor, TContext context)
             {
