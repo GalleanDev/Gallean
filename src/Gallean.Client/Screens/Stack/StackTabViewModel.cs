@@ -248,7 +248,7 @@ internal abstract partial class StackTabViewModel
 
         Leader = leader;
         StackGridTitle = Tr("{0}'s party", leader.Title);
-        StackUnitCount = $"{stack.Units.GetUnits().Count()} / {GridPosition.Count}";
+        StackUnitCount = FormatStackLeadership(stackInfo);
 
         Equipment.Update(stack, WorldState.Players[ViewPlayerId].Resources, BuildEquipmentHighlight(stack, dragged));
 
@@ -269,6 +269,11 @@ internal abstract partial class StackTabViewModel
         {
             return result.Data;
         }
+    }
+
+    private static string FormatStackLeadership(WorldGetStackInfoCommand.Result info)
+    {
+        return $"{info.OccupiedLeadership} / {info.TotalLeadership}";
     }
 
     private static WorldUnitActionInfo? FindStackUnit(WorldGetStackInfoCommand.Result info, WorldUnitId unitId)

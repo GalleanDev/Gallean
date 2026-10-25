@@ -794,7 +794,7 @@ public sealed class StackTabViewModelTests
                     [],
                     []))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
-            Assert.That(screen.StackUnitCount, Is.EqualTo("2 / 6"));
+            Assert.That(screen.StackUnitCount, Is.EqualTo("2 / 3"));
         }
     }
 
