@@ -203,13 +203,13 @@ internal sealed partial class WorldAiPlanner
         private WorldAiActionPlan? PlanMoveToward(ActionContext context, WorldPathMap pathMap, WorldPosition targetPosition)
         {
             WorldStack stack = context.Stack;
-            WorldPosition? towardCell = Context.Pathfinding.FindMoveTowardCell(context.State, stack, pathMap, targetPosition);
+            WorldPosition? movePosition = Context.Pathfinding.FindMoveTowardCell(context.State, stack, pathMap, targetPosition);
 
-            if (towardCell is not null)
+            if (movePosition is not null)
             {
                 int score = UtilityScore.InverseRatio(stack.Position.GetDistance(targetPosition), MaxDistance).Score;
 
-                return MakePlan(score, new WorldAiMoveStackCommand(stack.Id, towardCell.Value), context.Memory);
+                return MakePlan(score, new WorldAiMoveStackCommand(stack.Id, movePosition.Value), context.Memory);
             }
             else
             {
