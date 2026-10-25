@@ -6,9 +6,9 @@ internal static class SoundRecordMap
 {
     private static readonly IReadOnlyDictionary<UnitDefinitionId, UnitDefinitionId> RecordUnits = new Dictionary<UnitDefinitionId, UnitDefinitionId>
     {
-        [new UnitDefinitionId("g000uu8006")] = new UnitDefinitionId("g000uu5008"),
-        [new UnitDefinitionId("g000uu8007")] = new UnitDefinitionId("g000uu6107"),
-        [new UnitDefinitionId("g000uu8008")] = new UnitDefinitionId("g000uu0157")
+        [new UnitDefinitionId("g000uu8006")] = new("g000uu5008"),
+        [new UnitDefinitionId("g000uu8007")] = new("g000uu6107"),
+        [new UnitDefinitionId("g000uu8008")] = new("g000uu0157")
     };
 
     public static AssetKey? GetRecordKey(AssetKey key)
