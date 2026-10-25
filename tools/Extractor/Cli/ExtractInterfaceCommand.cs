@@ -25,10 +25,15 @@ internal class ExtractInterfaceCommand : Command
         string outputPath = Path.Combine(output, "Interface");
         Directory.CreateDirectory(outputPath);
 
+        EnumerationOptions enumerationOptions = new()
+        {
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
         List<string> dlgFiles = [];
         if (Directory.Exists(gameFiles.InterfaceRoot))
         {
-            dlgFiles.AddRange(Directory.EnumerateFiles(gameFiles.InterfaceRoot, "*.dlg"));
+            dlgFiles.AddRange(Directory.EnumerateFiles(gameFiles.InterfaceRoot, "*.dlg", enumerationOptions));
         }
 
         Console.WriteLine($"Found {dlgFiles.Count} interface resource files.");

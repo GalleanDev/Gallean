@@ -40,7 +40,13 @@ internal class ExtractDatabaseCommand : Command
             SkipDeletedRecords = true
         };
 
-        foreach (string file in Directory.EnumerateFiles(gamePath, "*.dbf", SearchOption.AllDirectories))
+        EnumerationOptions enumerationOptions = new()
+        {
+            RecurseSubdirectories = true,
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
+        foreach (string file in Directory.EnumerateFiles(gamePath, "*.dbf", enumerationOptions))
         {
             cancellationToken.ThrowIfCancellationRequested();
 

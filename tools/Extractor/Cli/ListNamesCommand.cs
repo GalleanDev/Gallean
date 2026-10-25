@@ -25,11 +25,16 @@ internal class ListNamesCommand : Command
         GameFiles gameFiles = new(gamePath);
         List<string> ffFiles = [];
 
+        EnumerationOptions enumerationOptions = new()
+        {
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
         foreach (string path in (string[])[gameFiles.ImagesRoot, gameFiles.InterfaceRoot, gameFiles.ScenarioDataRoot])
         {
             if (Directory.Exists(path))
             {
-                ffFiles.AddRange(Directory.EnumerateFiles(path, "*.ff"));
+                ffFiles.AddRange(Directory.EnumerateFiles(path, "*.ff", enumerationOptions));
             }
         }
 

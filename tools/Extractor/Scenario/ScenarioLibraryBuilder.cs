@@ -63,8 +63,14 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
 
     private static IEnumerable<string> EnumerateInputFiles(string inputDirectory, string extension)
     {
-        return Directory.EnumerateFiles(inputDirectory, "*" + extension, SearchOption.AllDirectories)
-            .Order(StringComparer.OrdinalIgnoreCase);
+        EnumerationOptions enumerationOptions = new()
+        {
+            RecurseSubdirectories = true,
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
+        return Directory.EnumerateFiles(inputDirectory, "*" + extension, enumerationOptions)
+                        .Order(StringComparer.OrdinalIgnoreCase);
     }
 
     private static ScenarioFile SetHumanPlayers(ScenarioFile file, Db.Id playRaceId)

@@ -25,10 +25,15 @@ internal class ExtractImagesCommand : Command
         string outputPath = Path.Combine(output, "Images");
         Directory.CreateDirectory(outputPath);
 
+        EnumerationOptions enumerationOptions = new()
+        {
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
         List<string> ffFiles = [];
         if (Directory.Exists(gameFiles.ImagesRoot))
         {
-            ffFiles.AddRange(Directory.EnumerateFiles(gameFiles.ImagesRoot, "*.ff"));
+            ffFiles.AddRange(Directory.EnumerateFiles(gameFiles.ImagesRoot, "*.ff", enumerationOptions));
         }
 
         Console.WriteLine($"Found {ffFiles.Count} image resource files.");

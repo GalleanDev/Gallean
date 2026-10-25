@@ -25,7 +25,12 @@ internal class ExtractSoundsCommand : Command
         string outputPath = Path.Combine(output, "Sounds");
         Directory.CreateDirectory(outputPath);
 
-        foreach (string wdbFile in Directory.EnumerateFiles(gameFiles.SoundsRoot, "*.wdb"))
+        EnumerationOptions enumerationOptions = new()
+        {
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
+        foreach (string wdbFile in Directory.EnumerateFiles(gameFiles.SoundsRoot, "*.wdb", enumerationOptions))
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -58,7 +63,7 @@ internal class ExtractSoundsCommand : Command
             Console.WriteLine($"  {fileName}: {saved} extracted successfully.");
         }
 
-        foreach (string wdtFile in Directory.EnumerateFiles(gameFiles.SoundsRoot, "*.wdt"))
+        foreach (string wdtFile in Directory.EnumerateFiles(gameFiles.SoundsRoot, "*.wdt", enumerationOptions))
         {
             cancellationToken.ThrowIfCancellationRequested();
 
