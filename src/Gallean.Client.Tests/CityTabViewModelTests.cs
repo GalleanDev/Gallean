@@ -804,14 +804,15 @@ public sealed class CityTabViewModelTests
             movementPoints: 20, leadership: 3);
         UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
-        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(20, 0) };
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)
             .AddUnit(soldierDefinition)
+            .AddUnitModifier(protection)
             .Build();
 
-        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(20, 0) };
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
                 new WorldCityDefinitionId(WorldRace.Human, 3),
                 WorldResourceSet.Empty) with

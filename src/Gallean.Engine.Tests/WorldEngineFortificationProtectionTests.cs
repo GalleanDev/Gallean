@@ -31,7 +31,9 @@ public sealed class WorldEngineFortificationProtectionTests
             cityDefinition,
             player.Id,
             new WorldPosition(3, 3),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), soldier));
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("guard"), soldier) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, GridPosition.FrontBottom, false)
+                .Build());
 
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("stack"),
@@ -51,10 +53,6 @@ public sealed class WorldEngineFortificationProtectionTests
             .WithStack(stack)
             .WithCity(city)
             .Build();
-
-        Assert.That(engine.State.Fortifications[city.Id].Garrison, Is.EqualTo(new UnitGrid<WorldUnit>.Builder()
-            .Place(TestHelpers.SimpleUnit(new WorldUnitId("guard"), soldier) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, GridPosition.FrontBottom, false)
-            .Build()));
 
         _ = engine.DispatchCommand(new WorldStartGameCommand());
         _ = engine.DispatchCommand(new WorldMoveStackCommand(stack.Id, new WorldPosition(3, 3)));
@@ -101,13 +99,17 @@ public sealed class WorldEngineFortificationProtectionTests
             level1,
             player.Id,
             new WorldPosition(4, 4),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), soldier));
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("guard"), soldier) with { Modifiers = [UnitModifier.FromFortification(protection1.Id)] }, GridPosition.FrontBottom, false)
+                .Build());
 
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("stack"),
             player.Id,
             new WorldPosition(4, 4),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Modifiers = [UnitModifier.FromFortification(protection1.Id)] }, GridPosition.FrontBottom, false)
+                .Build(),
             movementPoints: 20);
 
         WorldEngine engine = new TestWorldEngineBuilder()
@@ -228,8 +230,8 @@ public sealed class WorldEngineFortificationProtectionTests
             player.Id,
             new WorldPosition(3, 3),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader1"), leader), GridPosition.FrontBottom, false)
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldier), GridPosition.FrontCenter, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader1"), leader) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldier) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, GridPosition.FrontCenter, false)
                 .Build(),
             movementPoints: 10);
 

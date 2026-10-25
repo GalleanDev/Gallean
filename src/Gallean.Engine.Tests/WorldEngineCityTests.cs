@@ -44,7 +44,7 @@ public sealed class WorldEngineCityTests
             new WorldPlayerId(2),
             new WorldPosition(3, 3),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("unit2"), unitDefinition), new GridPosition(0, 0), unitDefinition.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("unit2"), unitDefinition) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, new GridPosition(0, 0), unitDefinition.IsLarge)
                 .Build());
 
         WorldEngine engine = new TestWorldEngineBuilder()
@@ -1078,6 +1078,7 @@ public sealed class WorldEngineCityTests
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
             TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
             movementPoints: 10, leadership: 6);
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(15, 0) };
 
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
@@ -1093,10 +1094,11 @@ public sealed class WorldEngineCityTests
             new WorldStackId("visitor"),
             player2.Id,
             new WorldPosition(3, 3),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("visitor-leader"), leader),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("visitor-leader"), leader) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, GridPosition.FrontBottom, false)
+                .Build(),
             movementPoints: 10);
 
-        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(15, 0) };
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 2), WorldResourceSet.Empty) with
         {
             ProtectionModifierId = protection.Id
@@ -1106,7 +1108,9 @@ public sealed class WorldEngineCityTests
             cityDefinition,
             player2.Id,
             new WorldPosition(3, 3),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("garrison-leader"), leader));
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("garrison-leader"), leader) with { Modifiers = [UnitModifier.FromFortification(protection.Id)] }, GridPosition.FrontBottom, false)
+                .Build());
 
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)

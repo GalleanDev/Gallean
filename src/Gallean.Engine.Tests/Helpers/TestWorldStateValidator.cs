@@ -8,6 +8,7 @@ internal static class TestWorldStateValidator
         ValidatePositions(state);
         ValidateLeaders(state, definitions);
         ValidateUnitIds(state);
+        ValidateProtection(state, definitions);
     }
 
     private static void ValidateOwners(WorldState state)
@@ -89,6 +90,31 @@ internal static class TestWorldStateValidator
             foreach ((WorldUnit unit, GridPosition _) in fortification.Garrison.GetUnits())
             {
                 AddUniqueUnitId(unitIds, unit.Id, $"Fortification '{fortification.Id.Value}'");
+            }
+        }
+    }
+
+    private static void ValidateProtection(WorldState state, IGameDefinitionProvider definitions)
+    {
+        WorldState expected = FortificationCalculator.UpdateUnitModifiers(state, definitions);
+
+        foreach (WorldStack stack in state.Stacks.Values)
+        {
+            WorldStack expectedStack = expected.Stacks[stack.Id];
+
+            if (!stack.Units.Equals(expectedStack.Units))
+            {
+                Assert.Fail($"Stack '{stack.Id}' has invalid protection modifiers.");
+            }
+        }
+
+        foreach (WorldFortification fortification in state.Fortifications.Values)
+        {
+            WorldFortification expectedFortification = expected.Fortifications[fortification.Id];
+
+            if (!fortification.Garrison.Equals(expectedFortification.Garrison))
+            {
+                Assert.Fail($"Garrison of '{fortification.Id.Value}' has invalid protection modifiers.");
             }
         }
     }
