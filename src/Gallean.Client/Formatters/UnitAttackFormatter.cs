@@ -28,7 +28,7 @@ internal static class UnitAttackFormatter
             UnitAttackType.TransformEnemy => Tr("Transform enemy"),
             UnitAttackType.Blister => Tr("Blister"),
             UnitAttackType.GiveProtection => Tr("Grant protection"),
-            UnitAttackType.ReduceArmor => Tr("Reduce armor")
+            UnitAttackType.ReduceArmor => Tr("Shatter")
         };
     }
 

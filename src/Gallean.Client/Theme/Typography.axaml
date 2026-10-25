@@ -4,6 +4,7 @@
   <FontFamily x:Key="FontFamilySerif">avares://Gallean.Client/Theme/Assets#Alegreya</FontFamily>
   <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="FontFamilySans" />
 
+  <x:Double x:Key="FontSizeXs">12</x:Double>
   <x:Double x:Key="FontSizeSm">14</x:Double>
   <x:Double x:Key="FontSizeMd">16</x:Double>
   <x:Double x:Key="FontSizeLg">18</x:Double>

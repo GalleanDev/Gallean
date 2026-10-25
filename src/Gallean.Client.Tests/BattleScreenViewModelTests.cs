@@ -658,10 +658,11 @@ public sealed class BattleScreenViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0))
             ],
+            null,
+            null,
+            null,
             [
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Poison))
             ],
@@ -760,10 +761,11 @@ public sealed class BattleScreenViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
             ],
+            null,
+            null,
+            null,
             [
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.IncreaseDamage))
             ],
@@ -874,10 +876,11 @@ public sealed class BattleScreenViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
             ],
+            null,
+            null,
+            null,
             [],
             [])));
     }
@@ -3976,10 +3979,11 @@ public sealed class BattleScreenViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 10)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", -10)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", -10))
             ],
+            null,
+            null,
+            null,
             [
                 new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-20% initiative", null, UnitModifierType.Weaken)]),
                 new UnitModifierStatusViewModel(UnitModifierType.Boost,
@@ -4594,10 +4598,11 @@ public sealed class BattleScreenViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("80%", -8)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0))
             ],
+            null,
+            null,
+            null,
             [
                 new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-10% accuracy", null, UnitModifierType.Weaken)])
             ],

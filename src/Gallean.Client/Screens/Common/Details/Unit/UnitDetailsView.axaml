@@ -5,6 +5,20 @@
              x:DataType="local:UnitDetailsViewModel"
              ClipToBounds="False">
 
+  <UserControl.Resources>
+    <DataTemplate x:Key="UnitWardItemTemplate" x:DataType="local:UnitWardItemViewModel">
+      <Grid Classes="ward-item" Classes.active="{Binding IsActive}" ColumnDefinitions="Auto,*">
+        <Panel Grid.Column="0" Classes="ward-item-icon">
+          <local:GlowVisual Classes="ward-glow" Color="{Binding Color}" IsVisible="{Binding IsActive}" />
+          <local:IconVisual Moniker="{Binding Icon}" Foreground="{Binding Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" IsVisible="{Binding IsActive}" />
+          <local:IconVisual Classes="inactive" Moniker="{Binding Icon}" IsVisible="{Binding !IsActive}" />
+        </Panel>
+        <TextBlock Grid.Column="1" Classes="caption" Text="{Binding Text}" Foreground="{Binding Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" IsVisible="{Binding IsActive}" />
+        <TextBlock Grid.Column="1" Classes="caption inactive" Text="{Binding Text}" IsVisible="{Binding !IsActive}" />
+      </Grid>
+    </DataTemplate>
+  </UserControl.Resources>
+
   <UserControl.Styles>
     <Style Selector=":is(TextBlock).primary-stat">
       <Setter Property="Foreground" Value="{StaticResource UnitDetailsPrimaryStatBrush}" />
@@ -14,6 +28,69 @@
     </Style>
     <Style Selector=":is(TextBlock).primary-stat-change.decrease">
       <Setter Property="Foreground" Value="{StaticResource StatRowDecreaseBrush}" />
+    </Style>
+
+    <Style Selector="Border.ward-block">
+      <Setter Property="Padding" Value="10,5,10,8" />
+    </Style>
+    <Style Selector="Border.ward-block.striped, Border.ward-none.striped">
+      <Setter Property="Background" Value="{StaticResource StatRowStripeBrush}" />
+    </Style>
+    <Style Selector="Border.ward-none local|IconVisual.stat-icon">
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
+      <Setter Property="Margin" Value="0,0,8,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector="StackPanel.block-header">
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="8" />
+      <Setter Property="Margin" Value="0,0,0,2" />
+    </Style>
+    <Style Selector="StackPanel.block-header > local|IconVisual">
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector="StackPanel.block-header > TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector="Border.ward-block ItemsControl.ward-grid">
+      <Setter Property="Margin" Value="16,4,0,0" />
+      <Setter Property="ClipToBounds" Value="False" />
+    </Style>
+    <Style Selector="Grid.ward-item">
+      <Setter Property="Margin" Value="0,2,2,2" />
+    </Style>
+    <Style Selector="Grid.ward-item > Panel.ward-item-icon">
+      <Setter Property="Width" Value="14" />
+      <Setter Property="Height" Value="14" />
+      <Setter Property="Margin" Value="0,0,3,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Grid.ward-item > Panel.ward-item-icon > local|GlowVisual.ward-glow">
+      <Setter Property="Margin" Value="-7" />
+      <Setter Property="Opacity" Value="0.5" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+    <Style Selector="Grid.ward-item > TextBlock">
+      <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Grid.ward-item local|IconVisual.inactive">
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+      <Setter Property="Opacity" Value="0.35" />
+    </Style>
+    <Style Selector="Grid.ward-item TextBlock.inactive">
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+      <Setter Property="Opacity" Value="0.35" />
+    </Style>
+    <Style Selector="ContentControl.leadership-row Border.stat-row">
+      <Setter Property="Background" Value="{StaticResource StatRowStripeBrush}" />
     </Style>
 
     <Style Selector=":is(TextBlock).bar-label">
@@ -121,7 +198,62 @@
           </StackPanel>
         </Grid>
 
-        <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
+        <StackPanel>
+          <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
+
+          <Border Classes="stat-row ward-none striped" IsVisible="{Binding Immunities, Converter={x:Static ObjectConverters.IsNull}}">
+            <Grid ColumnDefinitions="Auto,Auto,*">
+              <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Immunity" />
+              <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Immunities'}" />
+              <TextBlock Grid.Column="2" Classes="body stat-value" Text="{local:Text 'None'}" />
+            </Grid>
+          </Border>
+
+          <Border Classes="stat-row ward-block striped" IsVisible="{Binding Immunities, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <StackPanel>
+              <StackPanel Classes="block-header">
+                <local:IconVisual Moniker="Immunity" />
+                <TextBlock Classes="body" Text="{local:Text 'Immunities'}" />
+              </StackPanel>
+              <ItemsControl Classes="ward-grid" ItemsSource="{Binding Immunities.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <UniformGrid Columns="5" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </StackPanel>
+          </Border>
+
+          <Border Classes="stat-row ward-none" IsVisible="{Binding Wards, Converter={x:Static ObjectConverters.IsNull}}">
+            <Grid ColumnDefinitions="Auto,Auto,*">
+              <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Ward" />
+              <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Wards'}" />
+              <TextBlock Grid.Column="2" Classes="body stat-value" Text="{local:Text 'None'}" />
+            </Grid>
+          </Border>
+
+          <Border Classes="stat-row ward-block" IsVisible="{Binding Wards, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <StackPanel>
+              <StackPanel Classes="block-header">
+                <local:IconVisual Moniker="Ward" />
+                <TextBlock Classes="body" Text="{local:Text 'Wards'}" />
+              </StackPanel>
+              <ItemsControl Classes="ward-grid" ItemsSource="{Binding Wards.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <UniformGrid Columns="5" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </StackPanel>
+          </Border>
+
+          <ContentControl Classes="leadership-row"
+                          Content="{Binding Leadership}"
+                          ContentTemplate="{StaticResource StatRowTemplate}"
+                          IsVisible="{Binding Leadership, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </StackPanel>
 
         <Rectangle Classes="details-rule">
           <Rectangle.IsVisible>

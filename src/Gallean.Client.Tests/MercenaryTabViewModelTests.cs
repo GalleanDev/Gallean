@@ -574,10 +574,11 @@ public sealed class MercenaryTabViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("40", 0)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("40", 0))
             ],
+            null,
+            null,
+            null,
             [],
             [])));
     }

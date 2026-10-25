@@ -21,9 +21,26 @@ internal sealed record UnitDetailsViewModel(
     StatValueViewModel Damage,
     string? SecondaryAttackText,
     IReadOnlyList<StatRowViewModel> Stats,
+    UnitWardGridViewModel? Immunities,
+    UnitWardGridViewModel? Wards,
+    StatRowViewModel? Leadership,
     IReadOnlyList<UnitStatusViewModel> Statuses,
     IReadOnlyList<UnitPermanentModifierViewModel> PermanentModifiers)
 {
+    private static readonly ImmutableArray<Func<UnitWardCategory, UnitWard>> WardTypes =
+    [
+        category => new UnitAttackSourceWard(UnitAttackSource.Weapon, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Mind, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Life, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Death, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Fire, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Water, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Earth, category),
+        category => new UnitAttackSourceWard(UnitAttackSource.Air, category),
+        category => new UnitAttackClassWard(UnitAttackType.Poison, category),
+        category => new UnitAttackClassWard(UnitAttackType.ReduceArmor, category)
+    ];
+
     public static WorldUnitId PreviewUnitId { get; } = new("preview");
 
     public string LevelText => Tr("Level {0}", Level);
@@ -56,6 +73,9 @@ internal sealed record UnitDetailsViewModel(
                Damage == other.Damage &&
                SecondaryAttackText == other.SecondaryAttackText &&
                Stats.SequenceEqual(other.Stats) &&
+               Immunities == other.Immunities &&
+               Wards == other.Wards &&
+               Leadership == other.Leadership &&
                Statuses.SequenceEqual(other.Statuses) &&
                PermanentModifiers.SequenceEqual(other.PermanentModifiers);
     }
@@ -228,14 +248,17 @@ internal sealed record UnitDetailsViewModel(
             new(IconMoniker.Target, Tr("Targets"), new StatValueViewModel(FormatTargets(definition.Attack.Reach), 0)),
             new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(baseStats.Armor.ToString(), unitStats.Armor - baseStats.Armor)),
             new(IconMoniker.Accuracy, Tr("Accuracy"), new StatValueViewModel($"{baseStats.Accuracy}%", unitStats.Accuracy - baseStats.Accuracy)),
-            new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(baseStats.Initiative.ToString(), unitStats.Initiative - baseStats.Initiative)),
-            new(IconMoniker.Immunity, Tr("Immunities"), new StatValueViewModel(UnitWardFormatter.FormatList(wards, UnitWardCategory.Always), 0)),
-            new(IconMoniker.Ward, Tr("Wards"), new StatValueViewModel(UnitWardFormatter.FormatList(wards, UnitWardCategory.Once), 0))
+            new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(baseStats.Initiative.ToString(), unitStats.Initiative - baseStats.Initiative))
         ];
 
+        StatRowViewModel? leadershipRow;
         if (definition.LeaderCategory is not null)
         {
-            rows.Add(new StatRowViewModel(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(leadership.ToString(), 0)));
+            leadershipRow = new StatRowViewModel(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(leadership.ToString(), 0));
+        }
+        else
+        {
+            leadershipRow = null;
         }
 
         GlobalText description = texts.GetGlobalText(definition.DescriptionTextId);
@@ -257,8 +280,39 @@ internal sealed record UnitDetailsViewModel(
             damage,
             secondaryAttackText,
             rows,
+            CreateWardGrid(wards, UnitWardCategory.Always),
+            CreateWardGrid(wards, UnitWardCategory.Once),
+            leadershipRow,
             statuses,
             permanentModifiers);
+    }
+
+    private static UnitWardGridViewModel? CreateWardGrid(ImmutableArray<UnitWard> wards, UnitWardCategory category)
+    {
+        List<UnitWardItemViewModel> items = [];
+        bool hasActive = false;
+
+        foreach (Func<UnitWardCategory, UnitWard> type in WardTypes)
+        {
+            UnitWard ward = type(category);
+            bool isActive = wards.Contains(ward);
+
+            items.Add(UnitWardItemBuilder.Build(ward, isActive));
+
+            if (isActive)
+            {
+                hasActive = true;
+            }
+        }
+
+        if (hasActive)
+        {
+            return new UnitWardGridViewModel(items);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private static bool CheckUpgradeBlocked(
@@ -331,6 +385,9 @@ internal sealed record UnitDetailsViewModel(
         hash.Add(Damage);
         hash.Add(SecondaryAttackText);
         hash.AddSequence(Stats);
+        hash.Add(Immunities);
+        hash.Add(Wards);
+        hash.Add(Leadership);
         hash.AddSequence(Statuses);
         hash.AddSequence(PermanentModifiers);
 

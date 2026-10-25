@@ -145,6 +145,14 @@
   <SolidColorBrush x:Key="StatRowStripeBrush" Color="{x:Static local:Theme+StatRow.StripeColor}" />
   <SolidColorBrush x:Key="StatRowIncreaseBrush" Color="{x:Static local:Theme+StatRow.IncreaseColor}" />
   <SolidColorBrush x:Key="StatRowDecreaseBrush" Color="{x:Static local:Theme+StatRow.DecreaseColor}" />
+  <SolidColorBrush x:Key="AttackSourceWeaponBrush" Color="{x:Static local:Theme+AttackSource.WeaponColor}" />
+  <SolidColorBrush x:Key="AttackSourceMindBrush" Color="{x:Static local:Theme+AttackSource.MindColor}" />
+  <SolidColorBrush x:Key="AttackSourceLifeBrush" Color="{x:Static local:Theme+AttackSource.LifeColor}" />
+  <SolidColorBrush x:Key="AttackSourceDeathBrush" Color="{x:Static local:Theme+AttackSource.DeathColor}" />
+  <SolidColorBrush x:Key="AttackSourceFireBrush" Color="{x:Static local:Theme+AttackSource.FireColor}" />
+  <SolidColorBrush x:Key="AttackSourceWaterBrush" Color="{x:Static local:Theme+AttackSource.WaterColor}" />
+  <SolidColorBrush x:Key="AttackSourceEarthBrush" Color="{x:Static local:Theme+AttackSource.EarthColor}" />
+  <SolidColorBrush x:Key="AttackSourceAirBrush" Color="{x:Static local:Theme+AttackSource.AirColor}" />
   <SolidColorBrush x:Key="LeaderAbilityFaceTopBrush" Color="{x:Static local:Theme+LeaderAbility.FaceTopColor}" />
   <SolidColorBrush x:Key="LeaderAbilityFaceBottomBrush" Color="{x:Static local:Theme+LeaderAbility.FaceBottomColor}" />
   <SolidColorBrush x:Key="LeaderAbilityIconBrush" Color="{DynamicResource AccentColor}" />

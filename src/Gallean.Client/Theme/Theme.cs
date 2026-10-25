@@ -145,6 +145,18 @@ internal static class Theme
         public static Color DecreaseColor { get; } = Color.FromRgb(244, 122, 112);
     }
 
+    public static class AttackSource
+    {
+        public static Color WeaponColor { get; } = Color.FromRgb(206, 208, 216);
+        public static Color MindColor { get; } = Color.FromRgb(196, 144, 236);
+        public static Color LifeColor { get; } = Color.FromRgb(250, 226, 140);
+        public static Color DeathColor { get; } = Color.FromRgb(160, 206, 140);
+        public static Color FireColor { get; } = Color.FromRgb(244, 128, 64);
+        public static Color WaterColor { get; } = Color.FromRgb(100, 160, 244);
+        public static Color EarthColor { get; } = Color.FromRgb(200, 156, 104);
+        public static Color AirColor { get; } = Color.FromRgb(140, 226, 236);
+    }
+
     public static class LeaderAbility
     {
         public static Color FaceTopColor { get; } = Color.FromArgb(220, 52, 44, 40);

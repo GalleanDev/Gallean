@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Gallean.Common;
 
 namespace Gallean.Client;
@@ -21,27 +20,5 @@ internal static class UnitWardFormatter
     public static string FormatName(UnitWard ward)
     {
         return ward.Accept(NameVisitor.Instance, Empty.Value);
-    }
-
-    public static string FormatList(ImmutableArray<UnitWard> wards, UnitWardCategory category)
-    {
-        JoinStringBuilder names = new(", ");
-
-        foreach (UnitWard ward in wards)
-        {
-            if (ward.Category == category)
-            {
-                names.Add(FormatName(ward));
-            }
-        }
-
-        if (names.Count > 0)
-        {
-            return names.ToString();
-        }
-        else
-        {
-            return Tr("None");
-        }
     }
 }
