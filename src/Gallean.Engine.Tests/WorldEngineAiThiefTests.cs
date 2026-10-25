@@ -80,7 +80,7 @@ public sealed class WorldEngineAiThiefTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P2 0] Leader thief -> capital",
+            "[P2 1000] Leader thief -> capital",
             "[P3 1000] AutoFit Stack0001"
         ]));
 

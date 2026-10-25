@@ -2,7 +2,7 @@ namespace Gallean.Engine;
 
 internal sealed partial class WorldAiPlanner
 {
-    private sealed record PurchaseLeaderAction(WorldAiContext Context, int Priority) : AbstractEconomyAction(Context, Priority)
+    private sealed partial record PurchaseLeaderAction(WorldAiContext Context, int Priority) : AbstractEconomyAction(Context, Priority)
     {
         private enum LeaderRole
         {
@@ -25,30 +25,29 @@ internal sealed partial class WorldAiPlanner
             }
 
             WorldPlayer player = state.Players[playerId];
-            IReadOnlyList<UnitDefinition> wanted = [.. EnumerateWantedLeaders(state, playerId)];
+            IReadOnlyList<(UnitDefinition Leader, int OwnedStacks)> wanted = [.. EnumerateWantedLeaders(state, playerId)];
 
-            foreach (UnitDefinition leader in wanted)
+            foreach ((UnitDefinition leader, int ownedStacks) in wanted)
             {
                 WorldPurchaseLeaderCommand command = new(capital.Id, leader.Id);
+                int score = ScorePurchase(leader, player, ownedStacks);
 
-                if (!command.Execute(state, Context.Engine).Failed)
+                if (score > 0 && !command.Execute(state, Context.Engine).Failed)
                 {
-                    int score = UtilityScore.InverseRatio(leader.PurchaseCost.Gold, player.Resources.Gold).Score;
-
                     return MakePlan(score, command, memory);
                 }
             }
 
-            foreach (UnitDefinition leader in wanted)
+            foreach ((UnitDefinition leader, int ownedStacks) in wanted)
             {
                 WorldPurchaseLeaderCommand command = new(capital.Id, leader.Id);
                 WorldCommandResult commandResult = command.Execute(state, Context.Engine);
+                int score = ScorePurchase(leader, player, ownedStacks);
 
-                if (commandResult.Error is WorldCommandError.InsufficientResources &&
+                if (score > 0 &&
+                    commandResult.Error is WorldCommandError.InsufficientResources &&
                     CanOvercommit(player, leader.PurchaseCost))
                 {
-                    int score = UtilityScore.InverseRatio(leader.PurchaseCost.Gold, player.Resources.Gold).Score;
-
                     return MakePlan(score, command, memory);
                 }
             }
@@ -56,7 +55,18 @@ internal sealed partial class WorldAiPlanner
             return null;
         }
 
-        private IEnumerable<UnitDefinition> EnumerateWantedLeaders(WorldState state, WorldPlayerId playerId)
+        private static int ScorePurchase(UnitDefinition leader, WorldPlayer player, int ownedStacks)
+        {
+            List<UtilityScore.Consideration> considerations =
+            [
+                Considerations.Affordability(leader, player),
+                Considerations.Repetition(leader, player, ownedStacks)
+            ];
+
+            return UtilityScore.Combine(considerations);
+        }
+
+        private IEnumerable<(UnitDefinition Leader, int OwnedStacks)> EnumerateWantedLeaders(WorldState state, WorldPlayerId playerId)
         {
             WorldRaceDefinition race = Context.Engine.Definitions.GetRace(state.Players[playerId].Race);
             Dictionary<LeaderRole, int> stacksByRole = CountStacksByRole(state, playerId);
@@ -66,9 +76,14 @@ internal sealed partial class WorldAiPlanner
                 UnitDefinition leader = GetLeaderDefinition(leaderId);
                 LeaderRole? role = GetLeaderRole(leader.LeaderCategory);
 
-                if (role is not null && stacksByRole.GetValueOrDefault(role.Value) < GetLeaderQuota(role.Value))
+                if (role is not null)
                 {
-                    yield return leader;
+                    int count = stacksByRole.GetValueOrDefault(role.Value);
+
+                    if (count < GetLeaderQuota(state, playerId, role.Value))
+                    {
+                        yield return (leader, count);
+                    }
                 }
             }
         }
@@ -105,15 +120,30 @@ internal sealed partial class WorldAiPlanner
             };
         }
 
-        private static int GetLeaderQuota(LeaderRole role)
+        private static int GetLeaderQuota(WorldState state, WorldPlayerId playerId, LeaderRole role)
         {
             return role switch
             {
-                LeaderRole.Fighter => 1,
+                LeaderRole.Fighter => CountFortifications(state, playerId),
                 LeaderRole.Explorer => 1,
                 LeaderRole.Rod => 1,
                 LeaderRole.Thief => 1
             };
+        }
+
+        private static int CountFortifications(WorldState state, WorldPlayerId playerId)
+        {
+            int count = 0;
+
+            foreach (WorldFortification fortification in state.Fortifications.Values)
+            {
+                if (fortification.Owner == playerId)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         private Dictionary<LeaderRole, int> CountStacksByRole(WorldState state, WorldPlayerId playerId)
