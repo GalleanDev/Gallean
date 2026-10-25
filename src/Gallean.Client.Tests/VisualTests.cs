@@ -1027,8 +1027,8 @@ public sealed class VisualTests
         gameViewModel.ShowScreen(world);
         await WaitForWorldAsync(window);
 
-        await world.HandleMapClickAsync(new WorldPosition(10, 14), [], 1);
-        world.UpdateHover(new WorldPosition(8, 4), []);
+        await world.HandleMapClickAsync(new WorldPosition(10, 14), null, 1);
+        world.UpdateHover(new WorldPosition(8, 4), null);
 
         await CaptureAsync(window);
     }
@@ -1454,8 +1454,8 @@ public sealed class VisualTests
         gameViewModel.ShowScreen(world);
         await WaitForWorldAsync(window);
 
-        await world.HandleMapClickAsync(stack.Position, [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(3, 3), [], 1);
+        await world.HandleMapClickAsync(stack.Position, null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.InstanceOf<AttackPromptViewModel>());
 
@@ -1523,8 +1523,8 @@ public sealed class VisualTests
         gameViewModel.ShowScreen(world);
         await WaitForWorldAsync(window);
 
-        await world.HandleMapClickAsync(stack.Position, [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(3, 3), [], 1);
+        await world.HandleMapClickAsync(stack.Position, null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.InstanceOf<AttackPromptViewModel>());
 
@@ -1746,8 +1746,8 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), [], 1);
-        viewModel.UpdateHover(new WorldPosition(13, 18), []);
+        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), null, 1);
+        viewModel.UpdateHover(new WorldPosition(13, 18), null);
 
         await CaptureAsync(window);
     }
@@ -1780,7 +1780,7 @@ public sealed class VisualTests
 
         WorldScreenView view = await WaitForWorldAsync(window);
 
-        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), [], 1);
+        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), null, 1);
         view.Camera.LookAt(WorldTransform.ToWorldPoint(new WorldPosition(4, 6)));
 
         await CaptureAsync(window);
@@ -1840,7 +1840,7 @@ public sealed class VisualTests
 
         WorldScreenView view = await WaitForWorldAsync(window);
 
-        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), [], 1);
+        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), null, 1);
         view.Camera.LookAt(WorldTransform.ToWorldPoint(new WorldPosition(4, 6)));
 
         await SkipFramesAsync(1);
@@ -1888,7 +1888,7 @@ public sealed class VisualTests
 
         WorldScreenView view = await WaitForWorldAsync(window);
 
-        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), [], 1);
+        await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), null, 1);
         view.Camera.LookAt(WorldTransform.ToWorldPoint(new WorldPosition(4, 6)));
 
         await SkipFramesAsync(1);

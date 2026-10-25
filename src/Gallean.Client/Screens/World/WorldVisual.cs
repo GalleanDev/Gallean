@@ -272,17 +272,17 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
         PointerPoint point = e.GetCurrentPoint(this);
         Point worldPoint = GetWorldPoint(e);
         IReadOnlyList<WorldRenderContent.HitTarget> hitTargets = snapshotWorker.Current?.WorldContent.HitTargets ?? [];
-        IReadOnlyList<WorldPosition> hitPositions = WorldHitTester.HitTest(hitTargets, worldPoint);
+        WorldPosition? hitPosition = WorldHitTester.HitTest(hitTargets, worldPoint);
 
         if (point.Properties.IsRightButtonPressed)
         {
-            ViewModel.ShowPositionInfo(WorldTransform.FromWorldPoint(worldPoint), hitPositions);
+            ViewModel.ShowPositionInfo(WorldTransform.FromWorldPoint(worldPoint), hitPosition);
 
             e.Handled = true;
         }
         else if (point.Properties.IsLeftButtonPressed)
         {
-            ViewModel.HandleMapClickAsync(WorldTransform.FromWorldPoint(worldPoint), hitPositions, e.ClickCount).FileAndForget();
+            ViewModel.HandleMapClickAsync(WorldTransform.FromWorldPoint(worldPoint), hitPosition, e.ClickCount).FileAndForget();
         }
         else if (point.Properties.IsMiddleButtonPressed)
         {
@@ -336,8 +336,8 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 
         Point worldPoint = GetWorldPoint(e);
         IReadOnlyList<WorldRenderContent.HitTarget> hitTargets = snapshotWorker.Current?.WorldContent.HitTargets ?? [];
-        IReadOnlyList<WorldPosition> hitPositions = WorldHitTester.HitTest(hitTargets, worldPoint);
-        ViewModel.UpdateHover(WorldTransform.FromWorldPoint(worldPoint), hitPositions);
+        WorldPosition? hitPosition = WorldHitTester.HitTest(hitTargets, worldPoint);
+        ViewModel.UpdateHover(WorldTransform.FromWorldPoint(worldPoint), hitPosition);
 
         if (measure)
         {

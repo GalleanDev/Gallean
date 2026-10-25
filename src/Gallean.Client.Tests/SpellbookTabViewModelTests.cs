@@ -368,7 +368,7 @@ public sealed class SpellbookTabViewModelTests
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(world.ActionPromptText, Is.EqualTo("Select a target for the spell on the map."));
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(session.World.State.Stacks[stack.Id].MovementPoints, Is.EqualTo(9));
         Assert.That(world.Game.Alert.Current, Is.Null);
@@ -443,7 +443,7 @@ public sealed class SpellbookTabViewModelTests
 
         Assert.That(gameViewModel.Alert.Current, Is.Null);
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(session.World.State.Stacks[stack.Id].MovementPoints, Is.EqualTo(8));
     }
@@ -518,7 +518,7 @@ public sealed class SpellbookTabViewModelTests
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(world.ActionPromptText, Is.Null);
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(session.World.State.Stacks[stack.Id].MovementPoints, Is.EqualTo(8));
     }
@@ -736,7 +736,7 @@ public sealed class SpellbookTabViewModelTests
 
         spellbook.SelectSpellCommand.Execute(spellbook.Levels[0].Spells[0]);
         await spellbook.ActivateCommand.ExecuteAsync(null);
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Alert alert = Assert.NotNull(world.Game.Alert.Current);
         Assert.That(alert, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "This spell cannot be cast on that target", Details: null)));

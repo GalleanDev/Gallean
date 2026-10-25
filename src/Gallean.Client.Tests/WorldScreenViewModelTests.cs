@@ -195,8 +195,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -234,7 +234,7 @@ public sealed class WorldScreenViewModelTests
         }));
         Assert.That(gameModel.Snapshot.BattleState, Is.Null);
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         renderState = BuildWorldState(world);
 
@@ -436,9 +436,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         world.CompleteAnimation();
 
@@ -570,9 +570,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         world.CompleteAnimation();
 
@@ -708,9 +708,9 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         world.CompleteAnimation();
 
@@ -1886,8 +1886,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -1902,7 +1902,7 @@ public sealed class WorldScreenViewModelTests
         }));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         renderState = BuildWorldState(world);
 
@@ -2019,8 +2019,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(3, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(3, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -2036,7 +2036,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(3, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 0), null, 1);
 
         renderState = BuildWorldState(world);
 
@@ -2442,26 +2442,26 @@ public sealed class WorldScreenViewModelTests
         Assert.That(world.SelectStackItemCommand.CanExecute(otherHumanStack.Id), Is.True);
         Assert.That(world.FastForwardCommand.CanExecute(null), Is.False);
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
         await gameModel.World.DispatchCommandAsync(new WorldEndTurnCommand());
 
         Assert.That(world.EndTurnCommand.CanExecute(null), Is.False);
         Assert.That(world.SelectStackItemCommand.CanExecute(otherHumanStack.Id), Is.False);
         Assert.That(world.OpenSpellbookCommand.CanExecute(null), Is.False);
 
-        world.UpdateHover(new WorldPosition(4, 0), [new WorldPosition(4, 0)]);
+        world.UpdateHover(new WorldPosition(4, 0), new WorldPosition(4, 0));
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Wait));
 
         Assert.That(world.FastForwardCommand.CanExecute(null), Is.True);
 
         world.FastForwardCommand.Execute(null);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         Assert.That(world.FastForwardCommand.CanExecute(null), Is.False);
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
-        world.UpdateHover(new WorldPosition(1, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
+        world.UpdateHover(new WorldPosition(1, 0), null);
 
         WorldRenderState state = BuildWorldState(world);
 
@@ -2524,7 +2524,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -2534,7 +2534,7 @@ public sealed class WorldScreenViewModelTests
             SelectedPath = null
         }));
 
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         renderState = BuildWorldState(world);
 
@@ -2549,7 +2549,7 @@ public sealed class WorldScreenViewModelTests
         }));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
 
-        world.UpdateHover(new WorldPosition(3, 0), []);
+        world.UpdateHover(new WorldPosition(3, 0), null);
 
         renderState = BuildWorldState(world);
 
@@ -2565,7 +2565,7 @@ public sealed class WorldScreenViewModelTests
         }));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
 
-        await world.HandleMapClickAsync(new WorldPosition(3, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 0), null, 1);
         world.CompleteAnimation();
         world.CompleteAnimation();
         world.CompleteAnimation();
@@ -2635,7 +2635,7 @@ public sealed class WorldScreenViewModelTests
 
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
 
         await world.EndTurnCommand.ExecuteAsync(null);
 
@@ -2654,7 +2654,7 @@ public sealed class WorldScreenViewModelTests
             SelectedPath = null
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(3, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 0), null, 1);
         world.CompleteAnimation();
         world.CompleteAnimation();
         world.CompleteAnimation();
@@ -2727,11 +2727,11 @@ public sealed class WorldScreenViewModelTests
 
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
 
         await world.EndTurnCommand.ExecuteAsync(null);
 
-        world.UpdateHover(new WorldPosition(3, 0), []);
+        world.UpdateHover(new WorldPosition(3, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -2799,8 +2799,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(3, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(3, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -2908,8 +2908,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(3, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(3, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -2924,8 +2924,8 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 1), [], 1);
-        world.UpdateHover(new WorldPosition(2, 1), []);
+        await world.HandleMapClickAsync(new WorldPosition(5, 1), null, 1);
+        world.UpdateHover(new WorldPosition(2, 1), null);
 
         renderState = BuildWorldState(world);
 
@@ -2978,7 +2978,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(1, 0), []);
+        world.UpdateHover(new WorldPosition(1, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -2987,8 +2987,8 @@ public sealed class WorldScreenViewModelTests
             Cursors = []
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         renderState = BuildWorldState(world);
 
@@ -3005,7 +3005,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        world.UpdateHover(new WorldPosition(0, 0), []);
+        world.UpdateHover(new WorldPosition(0, 0), null);
 
         renderState = BuildWorldState(world);
 
@@ -3014,7 +3014,7 @@ public sealed class WorldScreenViewModelTests
             Cursors = []
         }));
 
-        world.UpdateHover(new WorldPosition(1, 0), []);
+        world.UpdateHover(new WorldPosition(1, 0), null);
         world.ClearHover();
 
         renderState = BuildWorldState(world);
@@ -3062,7 +3062,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(0, 0), [new WorldPosition(1, 0), new WorldPosition(0, 0)]);
+        world.UpdateHover(new WorldPosition(0, 0), new WorldPosition(1, 0));
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -3070,13 +3070,12 @@ public sealed class WorldScreenViewModelTests
         {
             Cursors =
             [
-                new WorldRenderState.Cursor(new WorldPosition(0, 0), 30, Theme.World.HoverCursorInnerColor, Theme.World.HoverCursorOuterColor, 1.0),
                 new WorldRenderState.Cursor(new WorldPosition(1, 0), 542, Theme.World.HoverCursorInnerColor, Theme.World.HoverCursorOuterColor, 1.0)
             ]
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
-        world.UpdateHover(new WorldPosition(2, 0), [new WorldPosition(1, 0)]);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
+        world.UpdateHover(new WorldPosition(2, 0), new WorldPosition(1, 0));
 
         renderState = BuildWorldState(world);
 
@@ -3129,13 +3128,13 @@ public sealed class WorldScreenViewModelTests
 
         gameViewModel.CloseScreen(screen);
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.InstanceOf<ManagementScreenViewModel>());
 
         gameViewModel.CloseScreen(Assert.NotNull(gameViewModel.TopScreen));
 
-        await world.HandleMapClickAsync(new WorldPosition(7, 7), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(7, 7), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
     }
@@ -3808,7 +3807,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -3888,7 +3887,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(0, 0), []);
+        world.UpdateHover(new WorldPosition(0, 0), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.SelectUnit));
 
@@ -3896,7 +3895,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.CastSpell));
 
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.CastSpellInvalid));
 
@@ -3904,7 +3903,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Default));
 
-        world.UpdateHover(new WorldPosition(0, 0), []);
+        world.UpdateHover(new WorldPosition(0, 0), null);
         world.CancelSelectedActionCommand.Execute(null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.SelectUnit));
@@ -3962,8 +3961,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 7), [], 1);
-        world.UpdateHover(new WorldPosition(5, 5), []);
+        await world.HandleMapClickAsync(new WorldPosition(5, 7), null, 1);
+        world.UpdateHover(new WorldPosition(5, 5), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -3977,7 +3976,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 5), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(5, 5), null, 1);
 
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(5, 5)));
     }
@@ -4034,8 +4033,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 7), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(3, 3), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(5, 7), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -4103,8 +4102,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 7), [], 1);
-        world.UpdateHover(new WorldPosition(3, 3), []);
+        await world.HandleMapClickAsync(new WorldPosition(5, 7), null, 1);
+        world.UpdateHover(new WorldPosition(3, 3), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -4119,7 +4118,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(3, 3), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(5, 5)));
     }
@@ -4173,8 +4172,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 6), [], 1);
-        world.UpdateHover(new WorldPosition(4, 4), []);
+        await world.HandleMapClickAsync(new WorldPosition(4, 6), null, 1);
+        world.UpdateHover(new WorldPosition(4, 4), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -4188,7 +4187,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(4, 4)));
     }
@@ -4242,8 +4241,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 6), [], 1);
-        world.UpdateHover(new WorldPosition(2, 2), []);
+        await world.HandleMapClickAsync(new WorldPosition(4, 6), null, 1);
+        world.UpdateHover(new WorldPosition(2, 2), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -4257,7 +4256,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 2), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 2), null, 1);
 
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(4, 4)));
     }
@@ -4358,7 +4357,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(audioPlayer.Actions, Is.Empty);
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 1), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 1), null, 1);
         world.SelectStackItemCommand.Execute(stack.Id);
 
         Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:stack-unit-response/leader/3"]));
@@ -4515,11 +4514,11 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
         audioPlayer.Actions.Clear();
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(gameModel.Snapshot.BattleState, Is.Not.Null);
         Assert.That(audioPlayer.Actions, Is.EqualTo([
@@ -4765,8 +4764,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -4780,7 +4779,7 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(1, 0)));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Inventory, Is.EqualTo(items));
@@ -4852,16 +4851,16 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Default));
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(2, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(2, 0), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.TakeBag));
 
-        world.UpdateHover(new WorldPosition(1, 0), []);
+        world.UpdateHover(new WorldPosition(1, 0), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Move));
     }
@@ -4925,9 +4924,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].MovementPoints, Is.EqualTo(6));
@@ -5039,9 +5038,9 @@ public sealed class WorldScreenViewModelTests
 
         hotseatTurn.Close();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         world.CompleteAnimation();
 
@@ -5210,7 +5209,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
         audioPlayer.Actions.Clear();
 
         world.InspectStackCommand.Execute(null);
@@ -5345,7 +5344,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.ShowPositionInfo(new WorldPosition(0, 0), []);
+        world.ShowPositionInfo(new WorldPosition(0, 0), null);
 
         WorldFortificationInfoViewModel info = Assert.IsOfType<WorldFortificationInfoViewModel>(world.PositionInfo);
 
@@ -5395,7 +5394,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.ShowPositionInfo(new WorldPosition(0, 0), []);
+        world.ShowPositionInfo(new WorldPosition(0, 0), null);
 
         Assert.That(world.PositionInfo, Is.Null);
     }
@@ -5432,7 +5431,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.ShowPositionInfo(new WorldPosition(0, 1), []);
+        world.ShowPositionInfo(new WorldPosition(0, 1), null);
 
         WorldTileInfoViewModel info = Assert.IsOfType<WorldTileInfoViewModel>(world.PositionInfo);
 
@@ -5487,7 +5486,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.ShowPositionInfo(new WorldPosition(3, 3), []);
+        world.ShowPositionInfo(new WorldPosition(3, 3), null);
 
         WorldFortificationInfoViewModel info = Assert.IsOfType<WorldFortificationInfoViewModel>(world.PositionInfo);
 
@@ -5560,13 +5559,13 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(thiefStack.Position, [], 1);
-        world.UpdateHover(enemyStack.Position, []);
+        await world.HandleMapClickAsync(thiefStack.Position, null, 1);
+        world.UpdateHover(enemyStack.Position, null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Negotiate));
 
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 
@@ -5595,8 +5594,8 @@ public sealed class WorldScreenViewModelTests
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(world.EndTurnCommand.CanExecute(null), Is.True);
 
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
 
         thiefScreen = Assert.IsOfType<ThiefActionScreenViewModel>(gameViewModel.TopScreen);
 
@@ -5667,11 +5666,11 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(stack.Position, [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(stack.Position, null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
         audioPlayer.Actions.Clear();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
 
@@ -5736,10 +5735,10 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(stack.Position, [], 1);
+        await world.HandleMapClickAsync(stack.Position, null, 1);
         audioPlayer.Actions.Clear();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(audioPlayer.Actions, Is.Empty);
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
@@ -5801,13 +5800,13 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(thiefStack.Position, [], 1);
-        world.UpdateHover(new WorldPosition(3, 3), []);
+        await world.HandleMapClickAsync(thiefStack.Position, null, 1);
+        world.UpdateHover(new WorldPosition(3, 3), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Negotiate));
 
-        await world.HandleMapClickAsync(new WorldPosition(3, 3), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(3, 3), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 
@@ -5880,12 +5879,12 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(thiefStack.Position, [], 1);
-        world.UpdateHover(new WorldPosition(2, 2), []);
+        await world.HandleMapClickAsync(thiefStack.Position, null, 1);
+        world.UpdateHover(new WorldPosition(2, 2), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Negotiate));
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 2), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 2), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 
@@ -5994,9 +5993,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 2), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 2), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 2), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 2), null, 1);
 
         world.CompleteAnimation();
 
@@ -6063,7 +6062,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.ShowPositionInfo(new WorldPosition(1, 1), [new WorldPosition(3, 1)]);
+        world.ShowPositionInfo(new WorldPosition(1, 1), new WorldPosition(3, 1));
 
         WorldStackInfoViewModel info = Assert.IsOfType<WorldStackInfoViewModel>(world.PositionInfo);
 
@@ -6104,7 +6103,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.ShowPositionInfo(new WorldPosition(2, 1), [new WorldPosition(3, 1), new WorldPosition(1, 1)]);
+        world.ShowPositionInfo(new WorldPosition(2, 1), new WorldPosition(3, 1));
 
         WorldStackInfoViewModel info = Assert.IsOfType<WorldStackInfoViewModel>(world.PositionInfo);
 
@@ -6285,9 +6284,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(thiefStack.Position, [], 1);
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
+        await world.HandleMapClickAsync(thiefStack.Position, null, 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
 
         ThiefActionScreenViewModel thiefScreen = Assert.IsOfType<ThiefActionScreenViewModel>(gameViewModel.TopScreen);
 
@@ -6358,9 +6357,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(thiefStack.Position, [], 1);
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
-        await world.HandleMapClickAsync(enemyStack.Position, [], 1);
+        await world.HandleMapClickAsync(thiefStack.Position, null, 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
+        await world.HandleMapClickAsync(enemyStack.Position, null, 1);
 
         ThiefActionScreenViewModel thiefScreen = Assert.IsOfType<ThiefActionScreenViewModel>(gameViewModel.TopScreen);
 
@@ -6500,7 +6499,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.ActionWheel, Is.Null);
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 5), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(5, 5), null, 1);
 
         Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
             new WorldPosition(5, 5),
@@ -6603,7 +6602,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(thiefStack.Position, [], 1);
+        await world.HandleMapClickAsync(thiefStack.Position, null, 1);
 
         Assert.That(world.ActionWheel, Is.Null);
         Assert.That(world.IsActionWheelVisible, Is.False);
@@ -6671,8 +6670,8 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.ActionWheel, Is.Null);
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
             "Exhausted | unit-event-portrait/leader | name | level 1 | 0 / 2 | - | -",
@@ -6734,8 +6733,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 1), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 1), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 1), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 1), null, 1);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -6789,9 +6788,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 1), [], 1);
-        world.UpdateHover(new WorldPosition(1, 1), []);
-        await world.HandleMapClickAsync(new WorldPosition(1, 1), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 1), null, 1);
+        world.UpdateHover(new WorldPosition(1, 1), null);
+        await world.HandleMapClickAsync(new WorldPosition(1, 1), null, 1);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -6854,9 +6853,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 1), [], 1);
-        world.UpdateHover(new WorldPosition(1, 1), []);
-        await world.HandleMapClickAsync(new WorldPosition(1, 1), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 1), null, 1);
+        world.UpdateHover(new WorldPosition(1, 1), null);
+        await world.HandleMapClickAsync(new WorldPosition(1, 1), null, 1);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -6912,9 +6911,9 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 1), [], 1);
-        world.UpdateHover(new WorldPosition(1, 1), []);
-        await world.HandleMapClickAsync(new WorldPosition(1, 1), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 1), null, 1);
+        world.UpdateHover(new WorldPosition(1, 1), null);
+        await world.HandleMapClickAsync(new WorldPosition(1, 1), null, 1);
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -7016,19 +7015,19 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(1, 0), []);
+        world.UpdateHover(new WorldPosition(1, 0), null);
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.SelectUnit));
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
-        world.UpdateHover(new WorldPosition(1, 0), []);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
+        world.UpdateHover(new WorldPosition(1, 0), null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
             "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
         ]));
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Default));
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
@@ -7085,13 +7084,13 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 5), [], 1);
-        world.UpdateHover(new WorldPosition(5, 5), []);
+        await world.HandleMapClickAsync(new WorldPosition(5, 5), null, 1);
+        world.UpdateHover(new WorldPosition(5, 5), null);
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.ViewCity));
 
-        await world.HandleMapClickAsync(new WorldPosition(5, 5), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(5, 5), null, 1);
 
         ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
 
@@ -7137,30 +7136,26 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        world.UpdateHover(new WorldPosition(1, 0), [new WorldPosition(2, 0)]);
+        world.UpdateHover(new WorldPosition(1, 0), new WorldPosition(2, 0));
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.SelectUnit));
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [new WorldPosition(2, 0)], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), new WorldPosition(2, 0), 1);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
             "First | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
             "Second | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
         ]));
 
-        world.UpdateHover(new WorldPosition(1, 0), [new WorldPosition(0, 0)]);
+        world.UpdateHover(new WorldPosition(1, 0), new WorldPosition(0, 0));
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.SelectUnit));
 
-        world.UpdateHover(new WorldPosition(1, 0), [new WorldPosition(2, 0)]);
+        world.UpdateHover(new WorldPosition(1, 0), new WorldPosition(2, 0));
 
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Move));
 
-        world.UpdateHover(new WorldPosition(1, 0), [new WorldPosition(0, 0), new WorldPosition(2, 0)]);
-
-        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Move));
-
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [new WorldPosition(0, 0)], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), new WorldPosition(0, 0), 1);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
             "First | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -",
@@ -7207,8 +7202,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        world.UpdateHover(new WorldPosition(3, 0), [new WorldPosition(4, 0)]);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(3, 0), new WorldPosition(4, 0));
 
         WorldRenderState renderState = BuildWorldState(world);
 
@@ -7263,8 +7258,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         AttackPromptViewModel prompt = Assert.IsOfType<AttackPromptViewModel>(gameViewModel.TopScreen);
 
@@ -7280,7 +7275,7 @@ public sealed class WorldScreenViewModelTests
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
 
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         AttackPromptViewModel reopenedPrompt = Assert.IsOfType<AttackPromptViewModel>(gameViewModel.TopScreen);
 
@@ -7335,8 +7330,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         AttackPromptViewModel prompt = Assert.IsOfType<AttackPromptViewModel>(gameViewModel.TopScreen);
 
@@ -7392,8 +7387,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(2, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(2, 0), null, 1);
 
         AttackPromptViewModel prompt = Assert.IsOfType<AttackPromptViewModel>(gameViewModel.TopScreen);
 
@@ -7446,8 +7441,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(3, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 0), null, 1);
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
@@ -7485,7 +7480,7 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         gameViewModel.EscapeCommand.Execute(null);
 
@@ -7499,7 +7494,7 @@ public sealed class WorldScreenViewModelTests
         GameMenuViewModel menu = Assert.IsOfType<GameMenuViewModel>(gameViewModel.TopScreen);
         gameViewModel.CloseScreen(menu);
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
         world.SelectAction(new WorldCursorAction.CastSpell(new WorldSpellDefinitionId("restore")));
 
         gameViewModel.EscapeCommand.Execute(null);
@@ -7648,7 +7643,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.FinishStackCommand.CanExecute(null), Is.False);
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
 
         Assert.That(world.FinishStackCommand.CanExecute(null), Is.True);
 
@@ -7677,7 +7672,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.FinishStackCommand.CanExecute(null), Is.False);
 
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
         world.CompleteAnimation();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
@@ -7737,8 +7732,8 @@ public sealed class WorldScreenViewModelTests
         List<WorldPosition> cameraFocusRequests = [];
         world.CameraFocusRequested += (position, _) => cameraFocusRequests.Add(position);
 
-        await world.HandleMapClickAsync(new WorldPosition(0, 0), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(1, 0), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
         world.CompleteAnimation();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
@@ -7904,7 +7899,7 @@ public sealed class WorldScreenViewModelTests
         Assert.That(audioPlayer.Actions, Is.Empty);
 
         world.SelectStackItemCommand.Execute(second.Id);
-        await world.HandleMapClickAsync(new WorldPosition(1, 1), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(1, 1), null, 1);
 
         Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:stack-unit-response/leader/3", "Sound:stack-unit-response/leader/0"]));
     }
@@ -7948,11 +7943,11 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 2);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 2);
 
         Assert.That(gameViewModel.TopScreen, Is.InstanceOf<ManagementScreenViewModel>());
     }
@@ -8003,11 +7998,11 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 2);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 2);
 
         ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
         Assert.IsOfType<CityTabViewModel>(screen.SelectedTab);
@@ -8188,8 +8183,8 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.ShowScreen(world);
         world.CompleteGameStart();
 
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
-        await world.HandleMapClickAsync(new WorldPosition(4, 4), [], 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
 

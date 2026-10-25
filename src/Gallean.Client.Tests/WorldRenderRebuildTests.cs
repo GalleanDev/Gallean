@@ -129,7 +129,7 @@ public sealed class WorldRenderRebuildTests
         Fixture fixture = CreateWorld();
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(AlphaStart, [], 1));
+        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(AlphaStart, null, 1));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: true,
@@ -163,10 +163,10 @@ public sealed class WorldRenderRebuildTests
     public async Task HoverPathTest()
     {
         Fixture fixture = CreateWorld();
-        await fixture.World.HandleMapClickAsync(AlphaStart, [], 1);
+        await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, []));
+        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, null));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: true,
@@ -182,10 +182,10 @@ public sealed class WorldRenderRebuildTests
     public async Task MoveStackTest()
     {
         Fixture fixture = CreateWorld();
-        await fixture.World.HandleMapClickAsync(AlphaStart, [], 1);
+        await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(NearTile, [], 1));
+        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(NearTile, null, 1));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: true,
@@ -201,9 +201,9 @@ public sealed class WorldRenderRebuildTests
     public async Task CompleteAnimationTest()
     {
         Fixture fixture = CreateWorld();
-        await fixture.World.HandleMapClickAsync(AlphaStart, [], 1);
-        await fixture.World.HandleMapClickAsync(NearTile, [], 1);
-        await fixture.World.HandleMapClickAsync(NearTile, [], 1);
+        await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
+        await fixture.World.HandleMapClickAsync(NearTile, null, 1);
+        await fixture.World.HandleMapClickAsync(NearTile, null, 1);
         RebuildProbe probe = new(fixture.World);
 
         RebuildState rebuildState = probe.Measure(fixture.World.CompleteAnimation);
@@ -222,10 +222,10 @@ public sealed class WorldRenderRebuildTests
     public async Task HoverTest()
     {
         Fixture fixture = CreateWorld();
-        await fixture.World.HandleMapClickAsync(AlphaStart, [], 1);
+        await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, []));
+        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, null));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: true,
@@ -241,11 +241,11 @@ public sealed class WorldRenderRebuildTests
     public async Task HoverUnchangedTest()
     {
         Fixture fixture = CreateWorld();
-        await fixture.World.HandleMapClickAsync(AlphaStart, [], 1);
-        fixture.World.UpdateHover(NearTile, []);
+        await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
+        fixture.World.UpdateHover(NearTile, null);
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, []));
+        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, null));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: false,
@@ -263,7 +263,7 @@ public sealed class WorldRenderRebuildTests
         Fixture fixture = CreateWorld();
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, []));
+        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, null));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: true,
@@ -279,8 +279,8 @@ public sealed class WorldRenderRebuildTests
     public async Task ClearHoverTest()
     {
         Fixture fixture = CreateWorld();
-        await fixture.World.HandleMapClickAsync(AlphaStart, [], 1);
-        fixture.World.UpdateHover(NearTile, []);
+        await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
+        fixture.World.UpdateHover(NearTile, null);
         RebuildProbe probe = new(fixture.World);
 
         RebuildState rebuildState = probe.Measure(fixture.World.ClearHover);
@@ -319,7 +319,7 @@ public sealed class WorldRenderRebuildTests
         Fixture fixture = CreateWorld();
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = probe.Measure(() => fixture.World.ShowPositionInfo(AlphaStart, []));
+        RebuildState rebuildState = probe.Measure(() => fixture.World.ShowPositionInfo(AlphaStart, null));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: false,
@@ -335,7 +335,7 @@ public sealed class WorldRenderRebuildTests
     public void HidePositionInfoTest()
     {
         Fixture fixture = CreateWorld();
-        fixture.World.ShowPositionInfo(AlphaStart, []);
+        fixture.World.ShowPositionInfo(AlphaStart, null);
         RebuildProbe probe = new(fixture.World);
 
         RebuildState rebuildState = probe.Measure(fixture.World.HidePositionInfo);
@@ -356,7 +356,7 @@ public sealed class WorldRenderRebuildTests
         Fixture fixture = CreateWorld();
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(InvalidTile, [], 1));
+        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(InvalidTile, null, 1));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: false,
@@ -374,7 +374,7 @@ public sealed class WorldRenderRebuildTests
         Fixture fixture = CreateWorld();
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(EmptyTile, [], 1));
+        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(EmptyTile, null, 1));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: false,
@@ -431,17 +431,17 @@ public sealed class WorldRenderRebuildTests
 
         List<(string Action, RebuildState Outcome)> log =
         [
-            ("Click empty ground (no selection)", await probe.MeasureAsync(() => world.HandleMapClickAsync(EmptyTile, [], 1))),
-            ("Click invalid position", await probe.MeasureAsync(() => world.HandleMapClickAsync(InvalidTile, [], 1))),
-            ("Hover tile (no selection)", probe.Measure(() => world.UpdateHover(EmptyTile, []))),
-            ("Select own stack", await probe.MeasureAsync(() => world.HandleMapClickAsync(AlphaStart, [], 1))),
-            ("Hover reachable tile (selected)", probe.Measure(() => world.UpdateHover(NearTile, []))),
-            ("Hover same tile again", probe.Measure(() => world.UpdateHover(NearTile, []))),
+            ("Click empty ground (no selection)", await probe.MeasureAsync(() => world.HandleMapClickAsync(EmptyTile, null, 1))),
+            ("Click invalid position", await probe.MeasureAsync(() => world.HandleMapClickAsync(InvalidTile, null, 1))),
+            ("Hover tile (no selection)", probe.Measure(() => world.UpdateHover(EmptyTile, null))),
+            ("Select own stack", await probe.MeasureAsync(() => world.HandleMapClickAsync(AlphaStart, null, 1))),
+            ("Hover reachable tile (selected)", probe.Measure(() => world.UpdateHover(NearTile, null))),
+            ("Hover same tile again", probe.Measure(() => world.UpdateHover(NearTile, null))),
             ("Clear hover", probe.Measure(world.ClearHover)),
-            ("Click reachable tile (move stack)", await probe.MeasureAsync(() => world.HandleMapClickAsync(FarTile, [], 1))),
+            ("Click reachable tile (move stack)", await probe.MeasureAsync(() => world.HandleMapClickAsync(FarTile, null, 1))),
             ("Complete movement animation", probe.Measure(world.CompleteAnimation)),
             ("Select stack item", probe.Measure(() => world.SelectStackItemCommand.Execute(new WorldStackId("Bravo")))),
-            ("Show info", probe.Measure(() => world.ShowPositionInfo(BravoStart, []))),
+            ("Show info", probe.Measure(() => world.ShowPositionInfo(BravoStart, null))),
             ("Hide info", probe.Measure(world.HidePositionInfo)),
             ("Toggle fog off", probe.Measure(() => world.Game.DevTools.IsFogEnabled = false)),
             ("Toggle fog on", probe.Measure(() => world.Game.DevTools.IsFogEnabled = true)),

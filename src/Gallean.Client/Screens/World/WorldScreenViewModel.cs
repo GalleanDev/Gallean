@@ -28,7 +28,7 @@ internal sealed partial class WorldScreenViewModel :
     private readonly IRandomProvider random;
     private WorldCursor cursor = WorldCursor.Empty;
     private WorldPosition? infoTile;
-    private IReadOnlyList<WorldPosition> infoObjects = [];
+    private WorldPosition? infoObject;
     private WorldStackId? infoStackId;
     private TimeSpan stackIdleRemaining;
     private WorldRenderRequest? renderRequest;
@@ -179,7 +179,7 @@ internal sealed partial class WorldScreenViewModel :
 
     public async Task HandleMapClickAsync(
         WorldPosition tile,
-        IReadOnlyList<WorldPosition> objectPositions,
+        WorldPosition? objectPosition,
         int clickCount)
     {
         if (!WorldState.Map.IsValidPosition(tile))
@@ -198,12 +198,12 @@ internal sealed partial class WorldScreenViewModel :
             return;
         }
 
-        if (TryHandleInspectAction(tile, objectPositions, clickCount))
+        if (TryHandleInspectAction(tile, objectPosition, clickCount))
         {
             return;
         }
 
-        WorldPosition position = ResolveClickTarget(ResolvePointerTile(tile, objectPositions));
+        WorldPosition position = ResolveClickTarget(ResolvePointerTile(tile, objectPosition));
 
         if (TryHandleStackAction(position))
         {
@@ -228,7 +228,7 @@ internal sealed partial class WorldScreenViewModel :
         SelectStackAt(position);
     }
 
-    private bool TryHandleInspectAction(WorldPosition tile, IReadOnlyList<WorldPosition> objectPositions, int clickCount)
+    private bool TryHandleInspectAction(WorldPosition tile, WorldPosition? objectPosition, int clickCount)
     {
         WorldStack? selected = ResolveSelectedStack();
 
@@ -243,7 +243,7 @@ internal sealed partial class WorldScreenViewModel :
                 return false;
             }
 
-            if (selected.Position == tile || objectPositions.Contains(selected.Position))
+            if (selected.Position == tile || selected.Position == objectPosition)
             {
                 InspectStack();
 
@@ -357,10 +357,10 @@ internal sealed partial class WorldScreenViewModel :
         }
     }
 
-    public void ShowPositionInfo(WorldPosition tile, IReadOnlyList<WorldPosition> objectPositions)
+    public void ShowPositionInfo(WorldPosition tile, WorldPosition? objectPosition)
     {
         infoTile = tile;
-        infoObjects = objectPositions;
+        infoObject = objectPosition;
         infoStackId = null;
         UpdatePositionInfo();
     }
@@ -368,7 +368,7 @@ internal sealed partial class WorldScreenViewModel :
     public void ShowStackInfo(WorldStackId stackId)
     {
         infoTile = null;
-        infoObjects = [];
+        infoObject = null;
         infoStackId = stackId;
         UpdatePositionInfo();
     }
@@ -376,7 +376,7 @@ internal sealed partial class WorldScreenViewModel :
     public void HidePositionInfo()
     {
         infoTile = null;
-        infoObjects = [];
+        infoObject = null;
         infoStackId = null;
         UpdatePositionInfo();
     }
@@ -393,9 +393,9 @@ internal sealed partial class WorldScreenViewModel :
             WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
             WorldPositionInfoViewModel? info = CreatePositionInfo(infoTile.Value, plan, visibility);
 
-            if (info is null && infoObjects.Count > 0)
+            if (info is null && infoObject is not null)
             {
-                info = CreatePositionInfo(infoObjects[0], plan, visibility);
+                info = CreatePositionInfo(infoObject.Value, plan, visibility);
             }
 
             PositionInfo = info;
@@ -479,26 +479,26 @@ internal sealed partial class WorldScreenViewModel :
             GameModel.Stats);
     }
 
-    public void UpdateHover(WorldPosition hoverTile, IReadOnlyList<WorldPosition> objectPositions)
+    public void UpdateHover(WorldPosition hoverTile, WorldPosition? objectPosition)
     {
-        WorldPosition tile = ResolvePointerTile(hoverTile, objectPositions);
+        WorldPosition tile = ResolvePointerTile(hoverTile, objectPosition);
 
         if (WorldState.Map.IsValidPosition(tile))
         {
             WorldPosition? hoverTarget = IsBusy ? null : ResolveHoverTarget(tile);
             WorldPathSelection? hoverPath = ResolveHoverPath(cursor, hoverTarget);
 
-            SetCursor(cursor with { HoverTile = tile, HoverTarget = hoverTarget, HoverPath = hoverPath, HoverObjects = objectPositions });
+            SetCursor(cursor with { HoverTile = tile, HoverTarget = hoverTarget, HoverPath = hoverPath, HoverObject = objectPosition });
         }
         else
         {
-            SetCursor(cursor with { HoverTile = null, HoverTarget = null, HoverPath = null, HoverObjects = objectPositions });
+            SetCursor(cursor with { HoverTile = null, HoverTarget = null, HoverPath = null, HoverObject = objectPosition });
         }
     }
 
     public void ClearHover()
     {
-        SetCursor(cursor with { HoverTile = null, HoverTarget = null, HoverPath = null, HoverObjects = [] });
+        SetCursor(cursor with { HoverTile = null, HoverTarget = null, HoverPath = null, HoverObject = null });
     }
 
     private WorldPathSelection? ResolveHoverPath(WorldCursor current, WorldPosition? hoverTarget)
@@ -1517,12 +1517,12 @@ internal sealed partial class WorldScreenViewModel :
         }
     }
 
-    private WorldPosition ResolvePointerTile(WorldPosition tile, IReadOnlyList<WorldPosition> objectPositions)
+    private WorldPosition ResolvePointerTile(WorldPosition tile, WorldPosition? objectPosition)
     {
-        if (cursor.Action is null && objectPositions.Count == 1)
+        if (cursor.Action is null && objectPosition is not null)
         {
             WorldPlan plan = WorldPlan.For(WorldState);
-            WorldStack? stack = plan.GetStackAt(objectPositions[0]);
+            WorldStack? stack = plan.GetStackAt(objectPosition.Value);
 
             if (stack is not null && stack.OwnerId == ViewPlayerId && stack.Id != cursor.StackId)
             {

@@ -284,32 +284,22 @@ internal sealed partial class WorldRenderComposer(
         }
 
         PathStep? destination = path?.Steps[^1];
-        List<WorldPosition> stackTiles = [];
-
-        foreach (WorldPosition stackTile in request.Cursor.HoverObjects)
-        {
-            if (request.State.Map.IsValidPosition(stackTile) &&
-                visibility.IsRevealed(stackTile) &&
-                stackTile != selected?.Position &&
-                stackTile != destination?.Position &&
-                !stackTiles.Contains(stackTile))
-            {
-                stackTiles.Add(stackTile);
-            }
-        }
-
         List<Cursor> cursors = [];
 
-        foreach (WorldPosition stackTile in stackTiles)
+        if (request.Cursor.HoverObject is { } hoverObject &&
+            request.State.Map.IsValidPosition(hoverObject) &&
+            visibility.IsRevealed(hoverObject) &&
+            hoverObject != selected?.Position &&
+            hoverObject != destination?.Position)
         {
-            WorldStack? hovered = plan.GetStackAt(stackTile);
+            WorldStack? hoverStack = plan.GetStackAt(hoverObject);
 
             cursors.Add(new Cursor(
-                stackTile,
-                GetDepth(stackTile, Layer.SymbolStackHighlight),
+                hoverObject,
+                GetDepth(hoverObject, Layer.SymbolStackHighlight),
                 Theme.World.HoverCursorInnerColor,
                 Theme.World.HoverCursorOuterColor,
-                GetCursorScale(hovered, definitions)));
+                GetCursorScale(hoverStack, definitions)));
         }
 
         if (destination is not null && visibility.IsRevealed(destination.Position))

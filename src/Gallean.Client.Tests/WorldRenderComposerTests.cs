@@ -3395,7 +3395,7 @@ public sealed class WorldRenderComposerTests
         WorldCursor cursor = WorldCursor.Empty.SelectStack(selected.Id) with
         {
             ReachablePositions = [new WorldPosition(1, 0), new WorldPosition(2, 0)],
-            HoverObjects = [new WorldPosition(2, 0)],
+            HoverObject = new WorldPosition(2, 0),
             HoverTile = new WorldPosition(1, 0),
             HoverTarget = new WorldPosition(1, 0),
             HoverPath = new WorldPathSelection(new WorldPosition(1, 0), path, new WorldPath([]), Encounter: null)
@@ -4305,7 +4305,7 @@ public sealed class WorldRenderComposerTests
         WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
         {
             ReachablePositions = [new WorldPosition(0, 1)],
-            HoverObjects = [new WorldPosition(1, 1)],
+            HoverObject = new WorldPosition(1, 1),
             HoverTile = new WorldPosition(2, 1),
             HoverTarget = new WorldPosition(2, 1)
         };

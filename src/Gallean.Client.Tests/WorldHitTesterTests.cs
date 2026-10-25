@@ -9,9 +9,9 @@ public sealed class WorldHitTesterTests
     {
         WorldRenderContent.HitTarget target = new(new WorldPosition(3, 4), new Rect(100, 100, 40, 60));
 
-        IReadOnlyList<WorldPosition> hits = WorldHitTester.HitTest([target], new Point(120, 130));
+        WorldPosition? hit = WorldHitTester.HitTest([target], new Point(120, 130));
 
-        Assert.That(hits, Is.EqualTo([new WorldPosition(3, 4)]));
+        Assert.That(hit, Is.EqualTo(new WorldPosition(3, 4)));
     }
 
     [Test]
@@ -20,16 +20,16 @@ public sealed class WorldHitTesterTests
         WorldRenderContent.HitTarget bottom = new(new WorldPosition(1, 1), new Rect(100, 100, 40, 60));
         WorldRenderContent.HitTarget top = new(new WorldPosition(2, 2), new Rect(110, 110, 40, 60));
 
-        IReadOnlyList<WorldPosition> hits = WorldHitTester.HitTest([bottom, top], new Point(120, 130));
+        WorldPosition? hit = WorldHitTester.HitTest([bottom, top], new Point(120, 130));
 
-        Assert.That(hits, Is.EqualTo([new WorldPosition(2, 2), new WorldPosition(1, 1)]));
+        Assert.That(hit, Is.EqualTo(new WorldPosition(2, 2)));
     }
 
     [Test]
     public void NoTargetTest()
     {
-        IReadOnlyList<WorldPosition> hits = WorldHitTester.HitTest([], WorldTransform.ToWorldPoint(3, 2));
+        WorldPosition? hit = WorldHitTester.HitTest([], WorldTransform.ToWorldPoint(3, 2));
 
-        Assert.That(hits, Is.Empty);
+        Assert.That(hit, Is.Null);
     }
 }
