@@ -7,10 +7,16 @@ internal sealed class BattleLogFormatter(IGameDefinitionProvider definitions, IG
     public IReadOnlyList<BattleLogEntry> Format(IReadOnlyList<EngineStep<BattleState, BattleEvent>> steps)
     {
         List<BattleLogEntry> entries = [];
+        bool hasEvents = false;
 
         foreach (EngineStep<BattleState, BattleEvent> step in steps)
         {
             BattleLogEntry? entry = Format(step.Event, step.OldState);
+
+            if (entry is BattleLogEventEntry)
+            {
+                hasEvents = true;
+            }
 
             if (entry is not null)
             {
@@ -18,7 +24,14 @@ internal sealed class BattleLogFormatter(IGameDefinitionProvider definitions, IG
             }
         }
 
-        return entries;
+        if (hasEvents)
+        {
+            return entries;
+        }
+        else
+        {
+            return [];
+        }
     }
 
     public BattleLogEntry? Format(BattleEvent ev, BattleState state)

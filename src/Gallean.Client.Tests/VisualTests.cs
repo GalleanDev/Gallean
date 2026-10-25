@@ -5439,6 +5439,55 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task BattleLogEmptyTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+        WorldRaceDefinition attackers = gameModel.Definitions.GetRace(WorldRace.Human);
+        WorldRaceDefinition defenders = gameModel.Definitions.GetRace(WorldRace.Undead);
+
+        BattleStateBuilder builder = new(gameModel.Definitions);
+
+        builder.Add(MakeBattleUnit(0, attackers.Leaders[0], BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(1, attackers.Units[0], BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(2, attackers.Units[1], BattleSide.Attacker, gameModel));
+
+        builder.Add(MakeBattleUnit(3, defenders.Leaders[0], BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(4, defenders.Units[0], BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(5, defenders.Units[1], BattleSide.Defender, gameModel));
+
+        EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
+
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                engine,
+                builder.Build(BattleModifiers.None),
+                NullBattleUnitUpgradeResolver.Instance,
+                _ => { },
+                isAttackerAi: false,
+                isDefenderAi: false,
+                canAutoResolve: true,
+                new WorldPosition(0, 0)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        BattleScreenViewModel viewModel = new(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0));
+        gameViewModel.ShowScreen(viewModel);
+
+        await WaitForBattleAsync(window);
+
+        viewModel.OpenLogCommand.Execute(null);
+
+        Assert.That(gameViewModel.TopScreen, Is.InstanceOf<BattleLogPopupViewModel>());
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task BattleUnitDetailsTest()
     {
         using Sandbox sb = Sandbox.Create();

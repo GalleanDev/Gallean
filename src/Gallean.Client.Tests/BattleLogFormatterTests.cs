@@ -261,4 +261,64 @@ public sealed class BattleLogFormatterTests
         Assert.That(formatter.Format(new BattleRoundStartedEvent(BattleRound.Normal(2), []), state),
             Is.EqualTo(new BattleLogRoundEntry("Round 2")));
     }
+
+    [Test]
+    public void FormatRoundsOnlyTest()
+    {
+        UnitDefinition warriorDefinition = TestHelpers.SimpleUnitDefinition("warrior", maxHitpoints: 20, initiative: 50, damage: 5);
+
+        BattleUnit warrior = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, warriorDefinition.Id, BattleSide.Attacker, hitpoints: warriorDefinition.MaxHitpoints);
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(warriorDefinition)
+            .Build();
+
+        BattleState state = new BattleStateBuilder(definitions)
+            .Add(warrior)
+            .Build(BattleModifiers.None);
+
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+
+        Assert.That(formatter.Format(
+            [
+                new EngineStep<BattleState, BattleEvent>(state, state, new BattleRoundStartedEvent(BattleRound.Normal(1), []))
+            ]),
+            Is.Empty);
+    }
+
+    [Test]
+    public void FormatRoundWithEventsTest()
+    {
+        UnitDefinition warriorDefinition = TestHelpers.SimpleUnitDefinition("warrior", maxHitpoints: 20, initiative: 50, damage: 5) with
+        {
+            NameTextId = new GlobalTextId("Warrior")
+        };
+
+        BattleUnit warrior = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, warriorDefinition.Id, BattleSide.Attacker, hitpoints: warriorDefinition.MaxHitpoints);
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(warriorDefinition)
+            .Build();
+
+        BattleState state = new BattleStateBuilder(definitions)
+            .Add(warrior)
+            .Build(BattleModifiers.None);
+
+        BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
+
+        Assert.That(formatter.Format(
+            [
+                new EngineStep<BattleState, BattleEvent>(state, state, new BattleRoundStartedEvent(BattleRound.Normal(1), [])),
+                new EngineStep<BattleState, BattleEvent>(state, state, new BattleUnitDefendedEvent(new BattleUnitId(1)))
+            ]),
+            Is.EqualTo<BattleLogEntry[]>(
+            [
+                new BattleLogRoundEntry("Round 1"),
+                new BattleLogEventEntry(new TextSpans(
+                [
+                    new TextSpan("Warrior", TextStyle.Highlight),
+                    new TextSpan(" defended.", TextStyle.None)
+                ]))
+            ]));
+    }
 }
