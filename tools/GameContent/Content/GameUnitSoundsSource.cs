@@ -25,16 +25,21 @@ internal sealed class GameUnitSoundsSource
             return null;
         }
 
+        EnumerationOptions enumerationOptions = new()
+        {
+            MatchCasing = MatchCasing.CaseInsensitive
+        };
+
         List<SoundsExtractor> banks = [];
 
-        foreach (string path in Directory.EnumerateFiles(soundsRoot, "*.wdb"))
+        foreach (string path in Directory.EnumerateFiles(soundsRoot, "*.wdb", enumerationOptions))
         {
             banks.Add(SoundsExtractor.Load(path));
         }
 
         Dictionary<string, UnitTypeSounds> unitSounds = new(StringComparer.OrdinalIgnoreCase);
 
-        foreach (string path in Directory.EnumerateFiles(soundsRoot, "*.wdt"))
+        foreach (string path in Directory.EnumerateFiles(soundsRoot, "*.wdt", enumerationOptions))
         {
             SoundsMappingExtractor mapping = SoundsMappingExtractor.Load(path);
 
