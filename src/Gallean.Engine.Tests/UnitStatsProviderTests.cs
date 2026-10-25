@@ -247,4 +247,20 @@ public sealed class UnitStatsProviderTests
 
         Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 65, Damage: 40, DrainPercent: 0)));
     }
+
+    [Test]
+    public void TransformedExperienceTest()
+    {
+        UnitDefinition originalDefinition = TestHelpers.SimpleUnitDefinition("original", maxHitpoints: 100, initiative: 50, damage: 25);
+        UnitDefinition transformedDefinition = TestHelpers.SimpleUnitDefinition("transformed", maxHitpoints: 30, initiative: 40, damage: 5) with { ExperienceNextLevel = 100 };
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(originalDefinition).AddUnit(transformedDefinition).Build();
+        GlobalVariables globals = new();
+
+        BattleUnit unit = new(new BattleUnitId(0), null, transformedDefinition.Id, BattleSide.Defender, 30, 500, 0, 1, [], [new BattleTransformStatusEffect(BattleTransformType.Transform, originalDefinition.Id, 1, [], null)], null, [], null, false);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+
+        UnitExperience experience = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitExperience(state, unit.Id);
+
+        Assert.That(experience, Is.EqualTo(new UnitExperience(Current: 0, NextLevel: 100, CanGainExperience: true, IsMaximumLevel: false, IsPendingUpgrade: false)));
+    }
 }

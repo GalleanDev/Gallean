@@ -200,8 +200,18 @@ public sealed class UnitStatsProvider(
     {
         BattleUnit unit = state.GetUnit(unitId);
         UnitStats stats = GetBattleUnitStats(state, unitId);
+        int experience;
 
-        return UnitExperienceCalculator.GetExperience(definitions.GetUnit(unit.DefinitionId), unit.Level, unit.Experience, stats, scenario);
+        if (unit.HasStatusEffect<BattleTransformStatusEffect>())
+        {
+            experience = 0;
+        }
+        else
+        {
+            experience = unit.Experience;
+        }
+
+        return UnitExperienceCalculator.GetExperience(definitions.GetUnit(unit.DefinitionId), unit.Level, experience, stats, scenario);
     }
 
     public UnitStats GetWorldUnitStats(WorldUnit unit)
