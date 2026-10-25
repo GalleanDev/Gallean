@@ -158,7 +158,19 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
             sprites.Add(sprite);
         }
 
-        return new Animation(metadata.Value, sprites, AnimationHitMaskBuilder.Build(metadata.Value, sprites));
+        return new Animation(metadata.Value, sprites, BuildHitMask(animationKey, metadata.Value, sprites));
+    }
+
+    private static ImmutableBitmap? BuildHitMask(AssetAnimationKey key, AssetAnimationMetadata metadata, IReadOnlyList<Sprite> frames)
+    {
+        if (key is AssetAnimationKey.StackUnit or AssetAnimationKey.StackBoat)
+        {
+            return AnimationHitMaskBuilder.Build(metadata, frames);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private Sound? LoadSound(AssetKey key)

@@ -754,9 +754,13 @@ internal sealed partial class WorldRenderContentProvider
             if (item is Stack stack)
             {
                 Animation animation = leases.Add(assets.GetRequiredAnimation(stack.AssetKey)).Value;
-                Point center = WorldTransform.ToWorldPoint(stack.Position);
 
-                targets.Add(new HitTarget(stack.Position, GetFrameBounds(center, animation.Metadata), animation.HitMask));
+                if (animation.HitMask is not null)
+                {
+                    Point center = WorldTransform.ToWorldPoint(stack.Position);
+
+                    targets.Add(new HitTarget(stack.Position, GetFrameBounds(center, animation.Metadata), animation.HitMask));
+                }
             }
         }
 

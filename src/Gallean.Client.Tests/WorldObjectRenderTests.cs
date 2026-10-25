@@ -1,5 +1,7 @@
 using Avalonia;
 using Avalonia.Skia;
+using Gallean.Common;
+using Gallean.Tests.Common;
 using SkiaSharp;
 using static Gallean.Client.WorldRenderContent;
 using static Gallean.Client.WorldRenderState;
@@ -413,8 +415,10 @@ public sealed class WorldObjectRenderTests
         Assert.That(content.DirectSprites, Is.Empty);
         Assert.That(content.Stacks, Is.EqualTo([new StackSprite(stack, bodyBounds)]));
 
+        ImmutableBitmap hitMask = Assert.NotNull(body.HitMask);
+
         Assert.That(content.HitTargets, Is.EqualTo([
-            new HitTarget(stackPosition, bodyBounds, body.HitMask)
+            new HitTarget(stackPosition, bodyBounds, hitMask)
         ]));
     }
 
