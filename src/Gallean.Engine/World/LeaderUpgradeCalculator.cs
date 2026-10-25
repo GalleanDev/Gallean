@@ -50,11 +50,11 @@ internal static class LeaderUpgradeCalculator
         return available;
     }
 
-    public static LeaderUpgradeDefinition? GetPreferredUpgrade(IReadOnlyList<LeaderUpgradeDefinition> available)
+    public static LeaderUpgradeDefinition? GetPreferredUpgrade(IReadOnlyList<LeaderUpgradeDefinition> upgrades)
     {
         LeaderUpgradeDefinition? preferred = null;
 
-        foreach (LeaderUpgradeDefinition upgrade in available)
+        foreach (LeaderUpgradeDefinition upgrade in upgrades)
         {
             if (preferred is null || upgrade.Priority > preferred.Priority)
             {
