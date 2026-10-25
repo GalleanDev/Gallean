@@ -254,6 +254,7 @@ public sealed class BattleEngineAttackReachTests
         engine.CheckCommand(
             new BattleSkipCommand(defenderBack.Id),
             [
+                new BattleUnitTurnSkippedEvent(defenderBack.Id),
                 new BattleUnitTurnEndingEvent(defenderBack.Id),
                 new BattleUnitTurnEndedEvent(defenderBack.Id),
                 new BattleRoundEndedEvent(),

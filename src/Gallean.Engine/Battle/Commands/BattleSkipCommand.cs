@@ -18,7 +18,7 @@ public sealed record BattleSkipCommand(BattleUnitId UnitId) : IBattleCommand<Emp
 
         return BattleCommandResult.Success(
             Empty.Value,
-            [new BattleUnitTurnEndingEvent(UnitId)]);
+            [new BattleUnitTurnSkippedEvent(UnitId), new BattleUnitTurnEndingEvent(UnitId)]);
     }
 
     private static bool IsAvailableInTurn(BattleUnitTurnType type)

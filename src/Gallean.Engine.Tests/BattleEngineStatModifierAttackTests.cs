@@ -761,6 +761,7 @@ public sealed class BattleEngineStatModifierAttackTests
         _ = engine.DispatchCommand(new BattleSkipCommand(scout.Id));
 
         engine.CheckCommand(new BattleSkipCommand(snail.Id), [
+            new BattleUnitTurnSkippedEvent(snail.Id),
             new BattleUnitTurnEndingEvent(snail.Id),
             new BattleUnitTurnEndedEvent(snail.Id),
             new BattleRoundEndedEvent(),
@@ -773,6 +774,7 @@ public sealed class BattleEngineStatModifierAttackTests
         _ = engine.DispatchCommand(new BattleSkipCommand(warrior.Id));
 
         engine.CheckCommand(new BattleSkipCommand(snail.Id), [
+            new BattleUnitTurnSkippedEvent(snail.Id),
             new BattleUnitTurnEndingEvent(snail.Id),
             new BattleUnitTurnEndedEvent(snail.Id),
             new BattleRoundEndedEvent(),
@@ -875,6 +877,7 @@ public sealed class BattleEngineStatModifierAttackTests
         _ = engine.DispatchCommand(new BattleSkipCommand(warrior.Id));
 
         engine.CheckCommand(new BattleSkipCommand(scout.Id), [
+            new BattleUnitTurnSkippedEvent(scout.Id),
             new BattleUnitTurnEndingEvent(scout.Id),
             new BattleUnitTurnEndedEvent(scout.Id),
             new BattleRoundEndedEvent(),

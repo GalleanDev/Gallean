@@ -273,6 +273,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
         _ = engine.DispatchCommand(new BattleSkipCommand(defender.Id));
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -296,6 +297,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
         _ = engine.DispatchCommand(new BattleSkipCommand(defender.Id));
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -320,6 +322,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
         _ = engine.DispatchCommand(new BattleSkipCommand(defender.Id));
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -370,6 +373,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
             .Build();
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -480,6 +484,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
             .Build();
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -529,6 +534,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -589,6 +595,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
             .Build();
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -624,6 +631,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
             }));
 
         engine.CheckCommand(new BattleSkipCommand(defender.Id), [
+            new BattleUnitTurnSkippedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(defender.Id),
             new BattleUnitTurnEndedEvent(defender.Id),
             new BattleRoundEndedEvent(),
@@ -632,6 +640,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),

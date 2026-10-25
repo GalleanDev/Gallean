@@ -202,6 +202,7 @@ public sealed class BattleEngineDisableAttackTests
             }));
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -226,6 +227,7 @@ public sealed class BattleEngineDisableAttackTests
             }));
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -251,6 +253,7 @@ public sealed class BattleEngineDisableAttackTests
             }));
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -288,6 +291,7 @@ public sealed class BattleEngineDisableAttackTests
             .Build();
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),

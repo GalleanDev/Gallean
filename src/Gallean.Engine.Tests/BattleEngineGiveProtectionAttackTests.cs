@@ -515,18 +515,21 @@ public sealed class BattleEngineGiveProtectionAttackTests
         Assert.That(engine.State, Is.EqualTo(expected));
 
         engine.CheckCommand(new BattleSkipCommand(protector.Id), [
+            new BattleUnitTurnSkippedEvent(protector.Id),
             new BattleUnitTurnEndingEvent(protector.Id),
             new BattleUnitTurnEndedEvent(protector.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal))
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
             new BattleUnitTurnEndingEvent(enemy.Id),
             new BattleUnitTurnEndedEvent(enemy.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(ally.Id), [
+            new BattleUnitTurnSkippedEvent(ally.Id),
             new BattleUnitTurnEndingEvent(ally.Id),
             new BattleUnitTurnEndedEvent(ally.Id),
             new BattleRoundEndedEvent(),

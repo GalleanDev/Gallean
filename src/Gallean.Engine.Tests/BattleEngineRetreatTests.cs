@@ -55,6 +55,7 @@ public sealed class BattleEngineRetreatTests
         _ = engine.DispatchCommand(new BattleRetreatCommand(retreating.Id));
 
         engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
             new BattleUnitTurnEndingEvent(enemy.Id),
             new BattleUnitTurnEndedEvent(enemy.Id),
             new BattleRoundEndedEvent(),
@@ -100,6 +101,7 @@ public sealed class BattleEngineRetreatTests
         _ = engine.DispatchCommand(new BattleRetreatCommand(retreating.Id));
 
         engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
             new BattleUnitTurnEndingEvent(enemy.Id),
             new BattleUnitTurnEndedEvent(enemy.Id),
             new BattleRoundEndedEvent(),
@@ -147,6 +149,7 @@ public sealed class BattleEngineRetreatTests
             .Build();
 
         engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
             new BattleUnitTurnEndingEvent(enemy.Id),
             new BattleUnitTurnEndedEvent(enemy.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(retreating.Id, BattleUnitTurnType.Normal)),
@@ -189,6 +192,7 @@ public sealed class BattleEngineRetreatTests
             .Build();
 
         engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
             new BattleUnitTurnEndingEvent(enemy.Id),
             new BattleUnitTurnEndedEvent(enemy.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(retreating.Id, BattleUnitTurnType.Normal)),

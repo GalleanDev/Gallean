@@ -142,6 +142,7 @@ public sealed class BattleEngineTransformSelfAttackTests
 
         engine.CheckCommand(new BattleSkipCommand(defender.Id),
         [
+            new BattleUnitTurnSkippedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(defender.Id),
             new BattleUnitTurnEndedEvent(defender.Id),
             new BattleRoundEndedEvent(),

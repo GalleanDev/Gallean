@@ -27,6 +27,7 @@ public sealed class BattleEngineTurnTests
         engine.CheckCommand(
             new BattleSkipCommand(fastScout.Id),
             [
+                new BattleUnitTurnSkippedEvent(fastScout.Id),
                 new BattleUnitTurnEndingEvent(fastScout.Id),
                 new BattleUnitTurnEndedEvent(fastScout.Id),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(mediumMage.Id, BattleUnitTurnType.Normal))
@@ -36,6 +37,7 @@ public sealed class BattleEngineTurnTests
         engine.CheckCommand(
             new BattleSkipCommand(mediumMage.Id),
             [
+                new BattleUnitTurnSkippedEvent(mediumMage.Id),
                 new BattleUnitTurnEndingEvent(mediumMage.Id),
                 new BattleUnitTurnEndedEvent(mediumMage.Id),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(slowWarrior.Id, BattleUnitTurnType.Normal))
@@ -113,6 +115,7 @@ public sealed class BattleEngineTurnTests
         engine.CheckCommand(
             new BattleSkipCommand(warrior.Id),
             [
+                new BattleUnitTurnSkippedEvent(warrior.Id),
                 new BattleUnitTurnEndingEvent(warrior.Id),
                 new BattleUnitTurnEndedEvent(warrior.Id),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(scout.Id, BattleUnitTurnType.Normal))

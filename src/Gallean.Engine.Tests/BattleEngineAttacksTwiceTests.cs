@@ -290,6 +290,7 @@ public sealed class BattleEngineAttacksTwiceTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id), [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -414,6 +415,7 @@ public sealed class BattleEngineAttacksTwiceTests
             }));
 
         engine.CheckCommand(new BattleSkipCommand(defender.Id), [
+            new BattleUnitTurnSkippedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(defender.Id),
             new BattleUnitTurnEndedEvent(defender.Id),
             new BattleRoundEndedEvent(),
@@ -471,6 +473,7 @@ public sealed class BattleEngineAttacksTwiceTests
             }));
 
         engine.CheckCommand(new BattleSkipCommand(defender.Id), [
+            new BattleUnitTurnSkippedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(defender.Id),
             new BattleUnitTurnEndedEvent(defender.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Resumed))

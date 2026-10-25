@@ -336,12 +336,14 @@ public sealed class BattleEngineGiveAdditionalAttackTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(ally.Id), [
+            new BattleUnitTurnSkippedEvent(ally.Id),
             new BattleUnitTurnEndingEvent(ally.Id),
             new BattleUnitTurnEndedEvent(ally.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal))
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
             new BattleUnitTurnEndingEvent(enemy.Id),
             new BattleUnitTurnEndedEvent(enemy.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)),

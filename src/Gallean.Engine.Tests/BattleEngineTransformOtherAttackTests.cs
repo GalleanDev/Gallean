@@ -55,6 +55,7 @@ public sealed class BattleEngineTransformOtherAttackTests
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id),
         [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -65,6 +66,7 @@ public sealed class BattleEngineTransformOtherAttackTests
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id),
         [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -121,6 +123,7 @@ public sealed class BattleEngineTransformOtherAttackTests
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id),
         [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -436,6 +439,7 @@ public sealed class BattleEngineTransformOtherAttackTests
 
         engine.CheckCommand(new BattleSkipCommand(attacker.Id),
         [
+            new BattleUnitTurnSkippedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(target.Id, BattleUnitTurnType.Normal)),

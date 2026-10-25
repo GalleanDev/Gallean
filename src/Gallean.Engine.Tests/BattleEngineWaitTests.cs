@@ -33,18 +33,21 @@ public sealed class BattleEngineWaitTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(slow.Id), [
+            new BattleUnitTurnSkippedEvent(slow.Id),
             new BattleUnitTurnEndingEvent(slow.Id),
             new BattleUnitTurnEndedEvent(slow.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(fast.Id, BattleUnitTurnType.Resumed))
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(fast.Id), [
+            new BattleUnitTurnSkippedEvent(fast.Id),
             new BattleUnitTurnEndingEvent(fast.Id),
             new BattleUnitTurnEndedEvent(fast.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(medium.Id, BattleUnitTurnType.Resumed))
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(medium.Id), [
+            new BattleUnitTurnSkippedEvent(medium.Id),
             new BattleUnitTurnEndingEvent(medium.Id),
             new BattleUnitTurnEndedEvent(medium.Id),
             new BattleRoundEndedEvent(),
@@ -90,6 +93,7 @@ public sealed class BattleEngineWaitTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(slow.Id), [
+            new BattleUnitTurnSkippedEvent(slow.Id),
             new BattleUnitTurnEndingEvent(slow.Id),
             new BattleUnitTurnEndedEvent(slow.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(fast.Id, BattleUnitTurnType.Resumed))

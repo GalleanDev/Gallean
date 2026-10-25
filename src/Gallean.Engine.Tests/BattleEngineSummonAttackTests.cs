@@ -1508,6 +1508,7 @@ public sealed class BattleEngineSummonAttackTests
         ]);
 
         engine.CheckCommand(new BattleSkipCommand(victim.Id), [
+            new BattleUnitTurnSkippedEvent(victim.Id),
             new BattleUnitTurnEndingEvent(victim.Id),
             new BattleUnitTurnEndedEvent(victim.Id),
             new BattleRoundEndedEvent(),
