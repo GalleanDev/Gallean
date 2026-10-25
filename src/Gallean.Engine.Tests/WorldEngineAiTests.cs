@@ -4434,4 +4434,68 @@ public sealed class WorldEngineAiTests
         ]));
         Assert.That(session.World.State.Rods.Values, Is.Empty);
     }
+
+    [Test]
+    public void HealExitStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(10, 10);
+
+        UnitDefinition main = Leader("main", damage: 50, movementPoints: 6);
+        UnitDefinition guard = Leader("guard", damage: 50, movementPoints: 6);
+        UnitDefinition soldier = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 30);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldRaceDefinition race = new(
+            WorldRace.Undead,
+            new GlobalTextId("Undead"),
+            WorldResourceSet.Empty,
+            WorldMapTerrain.Undead,
+            true,
+            35,
+            null,
+            [],
+            [],
+            [],
+            ["Nigosh"],
+            ["Orissia"]);
+
+        WorldStack guardStack = MyStack(new WorldUnitId("guardLeader"), "Guard", player.Id, new WorldPosition(4, 4), guard, 100, 6, WorldStackOrder.Stand.Instance);
+        WorldStack mainStack = TestHelpers.SimpleStack(
+            new WorldStackId("Main"),
+            player.Id,
+            new WorldPosition(5, 4),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("mainLeader"), main), GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("mainSoldier"), soldier) with { Hitpoints = 0 }, GridPosition.FrontCenter, false)
+                .Build(),
+            movementPoints: 6);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(main)
+            .WithDefinition(guard)
+            .WithDefinition(soldier)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCapital(capital)
+            .WithStack(guardStack)
+            .WithStack(mainStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P3 1000] AutoFit Guard",
+            "[P2 1000] Exit Guard",
+            "[P1 0] Move Main -> (4, 4)",
+            "[P3 1000] AutoFit Main"
+        ]));
+    }
 }

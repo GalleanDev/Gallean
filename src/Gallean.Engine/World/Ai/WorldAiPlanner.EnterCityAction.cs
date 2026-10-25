@@ -35,7 +35,14 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.SecureCity order, ActionContext context)
         {
-            return PlanExitStack(context, order.TargetId);
+            if (context.State.Fortifications.TryGetValue(order.TargetId, out WorldFortification? fortification))
+            {
+                return PlanExitStack(context, fortification);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Roam order, ActionContext context)
@@ -90,6 +97,19 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Heal order, ActionContext context)
         {
+            foreach (WorldFortification fortification in context.State.Fortifications.Values)
+            {
+                if (FortificationCalculator.GetOwner(fortification) == context.Stack.OwnerId)
+                {
+                    WorldAiActionPlan? plan = PlanExitStack(context, fortification);
+
+                    if (plan is not null)
+                    {
+                        return plan;
+                    }
+                }
+            }
+
             return null;
         }
 
@@ -151,16 +171,11 @@ internal sealed partial class WorldAiPlanner
             return null;
         }
 
-        private WorldAiActionPlan? PlanExitStack(ActionContext context, WorldFortificationId fortificationId)
+        private WorldAiActionPlan? PlanExitStack(ActionContext context, WorldFortification fortification)
         {
             WorldState state = context.State;
 
             if (context.Stack.MovementPoints <= 0)
-            {
-                return null;
-            }
-
-            if (!state.Fortifications.TryGetValue(fortificationId, out WorldFortification? fortification))
             {
                 return null;
             }
