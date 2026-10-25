@@ -17,5 +17,7 @@ public sealed record WorldStack(
     int? ExpirationTurn,
     int PendingLeaderUpgrades,
     int BattlesWon,
-    ScenarioStackTemplateId? SourceTemplateId,
-    bool LeaderUpgradePostponed = false);
+    ScenarioStackTemplateId? SourceTemplateId)
+{
+    public bool LeaderUpgradePostponed { get; init; }
+}
