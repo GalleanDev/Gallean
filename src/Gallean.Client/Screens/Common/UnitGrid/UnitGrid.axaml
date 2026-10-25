@@ -13,7 +13,7 @@
     </ControlTheme>
 
     <DataTemplate x:Key="UnitGridSlotTemplate" x:DataType="local:UnitGridSlotViewModel">
-      <Button Classes="slot" Command="{Binding SelectCommand}">
+      <Button Classes="slot" Classes.purchase="{Binding ShowsPurchaseHint}" Command="{Binding SelectCommand}">
         <local:UnitPortrait FaceKey="{Binding FaceKey}"
                             Hitpoints="{Binding Hitpoints}"
                             MaxHitpoints="{Binding MaxHitpoints}"
@@ -80,17 +80,47 @@
   </Style>
 
   <Style Selector="Border.rune > TextBlock">
-    <Setter Property="Opacity" Value="0.6" />
+    <Setter Property="Opacity" Value="0.3" />
     <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
-    <Setter Property="FontSize" Value="28" />
+    <Setter Property="FontSize" Value="24" />
   </Style>
   <Style Selector="Border.rune.purchase">
     <Setter Property="ToolTip.Tip" Value="Hire a new unit" />
   </Style>
   <Style Selector="Border.rune.purchase > TextBlock">
-    <Setter Property="Opacity" Value="0.9" />
+    <Setter Property="Opacity" Value="0.85" />
     <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
-    <Setter Property="FontSize" Value="42" />
+    <Setter Property="FontSize" Value="44" />
     <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="10" Opacity="1" Color="{x:Static local:Theme+UnitPortrait.GlowColor}" />
+    </Setter>
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.08" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.slot.purchase:pointerover Border.rune.purchase > TextBlock">
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+  <Style Selector="Button.slot.purchase local|UnitPortrait:free /template/ Border#PART_Frame">
+    <Setter Property="Background" Value="{StaticResource UnitPortraitFrameGradientBrush}" />
+    <Setter Property="Opacity" Value="0.7" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.08" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.slot.purchase local|UnitPortrait:free /template/ Border#PART_FrameTexture">
+    <Setter Property="Opacity" Value="0.8" />
+  </Style>
+  <Style Selector="Button.slot.purchase local|UnitPortrait:free /template/ Border#PART_FrameBevel">
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+  <Style Selector="Button.slot.purchase:pointerover local|UnitPortrait:free /template/ Border#PART_Frame">
+    <Setter Property="Opacity" Value="1" />
   </Style>
 </Styles>
