@@ -70,7 +70,7 @@ internal sealed class TestAssetProviderBuilder
 
     public Animation CreateAnimation(AssetAnimationMetadata metadata, IReadOnlyList<Sprite> frames)
     {
-        return new Animation(metadata, frames);
+        return new Animation(metadata, frames, AnimationHitMaskBuilder.Build(metadata, frames));
     }
 
     public TestAssetProvider Build()

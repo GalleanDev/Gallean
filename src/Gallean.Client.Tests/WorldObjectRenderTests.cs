@@ -414,7 +414,7 @@ public sealed class WorldObjectRenderTests
         Assert.That(content.Stacks, Is.EqualTo([new StackSprite(stack, bodyBounds)]));
 
         Assert.That(content.HitTargets, Is.EqualTo([
-            new HitTarget(stackPosition, bodyBounds)
+            new HitTarget(stackPosition, bodyBounds, body.HitMask)
         ]));
     }
 

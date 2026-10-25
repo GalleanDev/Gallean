@@ -158,7 +158,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
             sprites.Add(sprite);
         }
 
-        return new Animation(metadata.Value, sprites);
+        return new Animation(metadata.Value, sprites, AnimationHitMaskBuilder.Build(metadata.Value, sprites));
     }
 
     private Sound? LoadSound(AssetKey key)

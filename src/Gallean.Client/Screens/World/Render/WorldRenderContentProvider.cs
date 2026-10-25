@@ -743,18 +743,20 @@ internal sealed partial class WorldRenderContentProvider
         return new Rect(center.X + sprite.Metadata.OffsetX, center.Y + sprite.Metadata.OffsetY, sprite.Metadata.Width, height);
     }
 
-    private static IReadOnlyList<HitTarget> BuildHitTargets(IReadOnlyList<MapObject> objects, IAssetMetadataProvider assets)
+    private static IReadOnlyList<HitTarget> BuildHitTargets(IReadOnlyList<MapObject> objects, IAssetProvider assets)
     {
+        using CleanupList leases = new();
+
         List<HitTarget> targets = [];
 
         foreach (MapObject item in objects)
         {
             if (item is Stack stack)
             {
-                AssetAnimationMetadata metadata = assets.GetRequiredAnimationMetadata(stack.AssetKey);
-                Point anchor = Tile.GetAnchor(stack.Position, metadata);
-                Rect bounds = new(anchor.X - (metadata.Width / 2.0), anchor.Y - metadata.Height, metadata.Width, metadata.Height);
-                targets.Add(new HitTarget(stack.Position, bounds));
+                Animation animation = leases.Add(assets.GetRequiredAnimation(stack.AssetKey)).Value;
+                Point center = WorldTransform.ToWorldPoint(stack.Position);
+
+                targets.Add(new HitTarget(stack.Position, GetFrameBounds(center, animation.Metadata), animation.HitMask));
             }
         }
 

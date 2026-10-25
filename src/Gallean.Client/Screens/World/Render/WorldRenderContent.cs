@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Media;
+using Gallean.Common;
 using SkiaSharp;
 
 namespace Gallean.Client;
@@ -34,7 +35,7 @@ internal sealed record WorldRenderContent(
 
     public sealed record HighlightLayer(IReadOnlyList<DirectSprite> Sprites, Color Color, Rect Bounds);
 
-    public sealed record HitTarget(WorldPosition Position, Rect Bounds);
+    public sealed record HitTarget(WorldPosition Position, Rect Bounds, ImmutableBitmap Mask);
 
     public sealed record StackSprite(WorldRenderState.Stack Stack, Rect Bounds);
 
