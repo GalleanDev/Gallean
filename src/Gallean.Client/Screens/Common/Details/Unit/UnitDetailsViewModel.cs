@@ -343,14 +343,12 @@ internal sealed record UnitDetailsViewModel(
 
     private static string FormatTargets(UnitAttackReach reach)
     {
-        int targets = reach switch
+        return reach switch
         {
-            UnitAttackReach.All => GridPosition.Count,
-            UnitAttackReach.Any => 1,
-            UnitAttackReach.Adjacent => 1
+            UnitAttackReach.All => Tr("{0} (All)", GridPosition.Count),
+            UnitAttackReach.Any => Tr("1 (Ranged)"),
+            UnitAttackReach.Adjacent => Tr("1 (Melee)")
         };
-
-        return targets.ToString();
     }
 
     private static string FormatAttack(UnitAttackDefinition attack, bool attacksTwice)

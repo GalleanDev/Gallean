@@ -655,7 +655,7 @@ public sealed class BattleScreenViewModelTests
             new StatValueViewModel("5", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0))
@@ -758,7 +758,7 @@ public sealed class BattleScreenViewModelTests
             new StatValueViewModel("50", 25),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -873,7 +873,7 @@ public sealed class BattleScreenViewModelTests
             new StatValueViewModel("50", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -3976,7 +3976,7 @@ public sealed class BattleScreenViewModelTests
             new StatValueViewModel("50", 15),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 10)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", -10))
@@ -4595,7 +4595,7 @@ public sealed class BattleScreenViewModelTests
             new StatValueViewModel("5", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("80%", -8)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0))

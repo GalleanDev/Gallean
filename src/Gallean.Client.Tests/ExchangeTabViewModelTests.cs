@@ -437,7 +437,7 @@ public sealed class ExchangeTabViewModelTests
                 new StatValueViewModel("10", 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -474,7 +474,7 @@ public sealed class ExchangeTabViewModelTests
                 new StatValueViewModel("10", 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))

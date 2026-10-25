@@ -783,7 +783,7 @@ public sealed class StackTabViewModelTests
                     new StatValueViewModel("10", 0),
                     null,
                     [
-                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                         new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                         new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                         new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -879,7 +879,7 @@ public sealed class StackTabViewModelTests
                 new StatValueViewModel("10", 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -1152,7 +1152,7 @@ public sealed class StackTabViewModelTests
                 new StatValueViewModel("10", 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -1179,7 +1179,7 @@ public sealed class StackTabViewModelTests
                 new StatValueViewModel("10", 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -2150,7 +2150,7 @@ public sealed class StackTabViewModelTests
             new StatValueViewModel("10", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -2322,7 +2322,7 @@ public sealed class StackTabViewModelTests
             new StatValueViewModel("10", 5),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 15)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", -10)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 5))
@@ -2442,7 +2442,7 @@ public sealed class StackTabViewModelTests
             new StatValueViewModel("10", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 10)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 10))
@@ -2769,7 +2769,7 @@ public sealed class StackTabViewModelTests
             new StatValueViewModel("15", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("15", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("90%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("55", 0))
@@ -2856,7 +2856,7 @@ public sealed class StackTabViewModelTests
             new StatValueViewModel("—", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -2958,7 +2958,7 @@ public sealed class StackTabViewModelTests
                 new StatValueViewModel("10", 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
@@ -3118,7 +3118,7 @@ public sealed class StackTabViewModelTests
             new StatValueViewModel("10", 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Melee)", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
