@@ -53,13 +53,13 @@ internal sealed partial class ExchangeTabViewModel
     public partial string StackGridTitle { get; private set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string StackUnitCount { get; private set; } = string.Empty;
+    public partial string StackLeadership { get; private set; } = string.Empty;
 
     [ObservableProperty]
     public partial string OtherStackGridTitle { get; private set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string OtherStackUnitCount { get; private set; } = string.Empty;
+    public partial string OtherStackLeadership { get; private set; } = string.Empty;
 
     void IInventoryTransferProvider.OnItemTransferred()
     {
@@ -309,8 +309,8 @@ internal sealed partial class ExchangeTabViewModel
         OtherLeader = otherLeader;
         StackGridTitle = Tr("{0}'s party", leader.Title);
         OtherStackGridTitle = Tr("{0}'s party", otherLeader.Title);
-        StackUnitCount = FormatStackLeadership(stackInfo);
-        OtherStackUnitCount = FormatStackLeadership(otherStackInfo);
+        StackLeadership = FormatStackLeadership(stackInfo);
+        OtherStackLeadership = FormatStackLeadership(otherStackInfo);
 
         UpdateDismissDropZone(dragged);
     }

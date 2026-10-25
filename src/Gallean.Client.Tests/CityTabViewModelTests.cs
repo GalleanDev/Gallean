@@ -894,7 +894,7 @@ public sealed class CityTabViewModelTests
                     [],
                     []))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
-            Assert.That(screen.StackUnitCount, Is.EqualTo("2 / 3"));
+            Assert.That(screen.StackLeadership, Is.EqualTo("2 / 3"));
             Assert.That(screen.GarrisonCapacity, Is.EqualTo("0 / 3"));
             Assert.That(management.PlayerResources, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(100, 0, 0, 25, 0, 0), ResourceSetProjection.Gold)));
         }

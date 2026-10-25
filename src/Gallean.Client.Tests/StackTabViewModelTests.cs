@@ -794,7 +794,7 @@ public sealed class StackTabViewModelTests
                     [],
                     []))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
-            Assert.That(screen.StackUnitCount, Is.EqualTo("2 / 3"));
+            Assert.That(screen.StackLeadership, Is.EqualTo("2 / 3"));
         }
     }
 
@@ -1061,7 +1061,7 @@ public sealed class StackTabViewModelTests
             Assert.That(screen.HasStack, Is.False);
             Assert.That(screen.Leader, Is.Null);
             Assert.That(screen.StackGridTitle, Is.Empty);
-            Assert.That(screen.StackUnitCount, Is.Empty);
+            Assert.That(screen.StackLeadership, Is.Empty);
         }
 
         Assert.That(screen.Equipment.Slots, Is.Empty);

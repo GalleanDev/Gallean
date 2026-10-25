@@ -54,7 +54,7 @@ internal abstract partial class StackTabViewModel
     public partial string StackGridTitle { get; private set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string StackUnitCount { get; private set; } = string.Empty;
+    public partial string StackLeadership { get; private set; } = string.Empty;
 
     async Task IDragDropProvider.DropAsync(IDragSourceReference source, IDragTargetReference target)
     {
@@ -248,7 +248,7 @@ internal abstract partial class StackTabViewModel
 
         Leader = leader;
         StackGridTitle = Tr("{0}'s party", leader.Title);
-        StackUnitCount = FormatStackLeadership(stackInfo);
+        StackLeadership = FormatStackLeadership(stackInfo);
 
         Equipment.Update(stack, WorldState.Players[ViewPlayerId].Resources, BuildEquipmentHighlight(stack, dragged));
 
@@ -465,7 +465,7 @@ internal abstract partial class StackTabViewModel
 
         Leader = null;
         StackGridTitle = string.Empty;
-        StackUnitCount = string.Empty;
+        StackLeadership = string.Empty;
     }
 
     private void ConfirmDisband(WorldStack stack, GridPosition position)

@@ -138,7 +138,7 @@
                 <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Height="40" IsVisible="{Binding HasStack}">
                   <local:OutlinedTextBlock Grid.Column="0" Text="{Binding StackGridTitle}" Classes="panel-title" />
                   <StackPanel Grid.Column="1" Classes="leadership" ToolTip.Tip="{local:Text 'Leadership'}">
-                    <local:OutlinedTextBlock Text="{Binding StackUnitCount}" Classes="panel-title" />
+                    <local:OutlinedTextBlock Text="{Binding StackLeadership}" Classes="panel-title" />
                     <local:IconVisual Moniker="Leadership" />
                   </StackPanel>
                 </Grid>

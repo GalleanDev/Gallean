@@ -65,7 +65,7 @@ internal sealed partial class CityTabViewModel
     public partial string StackGridTitle { get; private set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string StackUnitCount { get; private set; } = string.Empty;
+    public partial string StackLeadership { get; private set; } = string.Empty;
 
     [ObservableProperty]
     public partial string GarrisonCapacity { get; private set; } = string.Empty;
@@ -818,7 +818,7 @@ internal sealed partial class CityTabViewModel
             InventoryTransfer.Reset();
         }
 
-        StackUnitCount = FormatStackLeadership(stackInfo);
+        StackLeadership = FormatStackLeadership(stackInfo);
         GarrisonCapacity = FormatGarrisonCapacity(garrisonInfo);
         StackGrid.Update(stackUnits, showsPurchaseHints: false, BuildUnitHighlight(StackGrid, stackUnits, dragged));
         GarrisonGrid.Update(garrison, showsPurchaseHints: true, BuildUnitHighlight(GarrisonGrid, garrison, dragged));
