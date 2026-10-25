@@ -90,11 +90,9 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
 
     private IReadOnlyList<Db.ScenarioId> ReadUsedScenarioIds()
     {
-        return
-        [
-            .. Directory.EnumerateDirectories(scenarioDirectory)
-                .Select(directory => new Db.ScenarioId(Path.GetFileName(directory)))
-        ];
+        IEnumerable<string> directories = Directory.EnumerateDirectories(scenarioDirectory);
+
+        return [.. directories.Select(directory => new Db.ScenarioId(Path.GetFileName(directory)))];
     }
 
     private int ReadNextScenarioNumber()
