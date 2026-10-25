@@ -31,6 +31,8 @@ internal static class TestWorldAiTraceFormatter
             WorldCastSpellCommand { Target: null } c => $"Cast {c.SpellId.Value}",
             WorldThiefActionCommand { Action: WorldThiefSpyAction action } c => $"Spy {c.StackId.Value} -> ({action.TargetPosition.X}, {action.TargetPosition.Y})",
             WorldThiefActionCommand { Action: WorldThiefRiotAction action } c => $"Riot {c.StackId.Value} -> ({action.TargetPosition.X}, {action.TargetPosition.Y})",
+            WorldCreateRodCommand c => $"Create rod {c.StackId.Value} -> ({c.TargetPosition.X}, {c.TargetPosition.Y})",
+            WorldRemoveRodCommand c => $"Remove rod {c.StackId.Value} -> ({c.TargetPosition.X}, {c.TargetPosition.Y})",
             _ => throw new InvalidOperationException($"Unexpected AI command '{trace.Plan.Command}'.")
         };
 

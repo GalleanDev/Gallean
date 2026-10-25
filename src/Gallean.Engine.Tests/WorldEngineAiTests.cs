@@ -4343,4 +4343,81 @@ public sealed class WorldEngineAiTests
             "[P3 1000] AutoFit Stack0001"
         ]));
     }
+
+    [Test]
+    public void CreateRodTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 3);
+
+        UnitDefinition planterDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("planter", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 6, leadership: 2) with
+            {
+                LeaderCategory = UnitLeaderCategory.Rod,
+                LeaderAbilities = LeaderAbility.Rod
+            };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(150, 0, 0, 0, 0, 0)
+        };
+
+        WorldStack planterStack = MyStack(new WorldUnitId("planter"), "Planter", player.Id, new WorldPosition(0, 1), planterDefinition, 100, 6, WorldStackOrder.Normal.Instance);
+        WorldResourceNode node = new(new WorldResourceNodeId("node"), new WorldPosition(4, 1), WorldResourceType.Gold, AiPriority: 3);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(planterDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(planterStack)
+            .WithResourceNode(node)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 666] Move Planter -> (2, 0)",
+            "[P2 1000] Create rod Planter -> (3, 0)"
+        ]));
+    }
+
+    [Test]
+    public void RemoveRodTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 3);
+
+        UnitDefinition planterDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("planter", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 10, leadership: 2) with
+            {
+                LeaderCategory = UnitLeaderCategory.Rod,
+                LeaderAbilities = LeaderAbility.Rod
+            };
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack planterStack = MyStack(new WorldUnitId("planter"), "Planter", player1.Id, new WorldPosition(0, 1), planterDefinition, 100, 10, WorldStackOrder.Normal.Instance);
+        WorldRod enemyRod = new(new WorldRodId("enemyRod"), player2.Id, new WorldPosition(5, 1));
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(planterDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithRod(enemyRod)
+            .WithStack(planterStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 600] Move Planter -> (3, 0)",
+            "[P2 1000] Remove rod Planter -> (5, 1)"
+        ]));
+        Assert.That(session.World.State.Rods.Values, Is.Empty);
+    }
 }
