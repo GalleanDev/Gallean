@@ -928,10 +928,11 @@ public sealed class CityTabViewModelTests
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0)),
-                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
-                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
             ],
+            null,
+            null,
+            null,
             [],
             [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+20 armor", "From city", null, 1)])));
 
