@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Gallean.Common;
 using Gallean.Engine;
 
@@ -220,7 +221,22 @@ internal sealed partial class WorldEventQueue
 
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldStackDestroyedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
-        AddStackDestroy(ev.StackId, step);
+        if (!step.OldState.Stacks.TryGetValue(ev.StackId, out WorldStack? stack))
+        {
+            return Empty.Value;
+        }
+
+        queue.Add(new Entry.StackDestroy(step.NewState, stack));
+
+        if (ev.Destroyer is not null && ev.DestroyerPlayerId is not null)
+        {
+            ImmutableArray<WorldItem> items = [.. stack.Inventory.Items, .. stack.Equipment.Items.Values];
+
+            if (!items.IsEmpty)
+            {
+                queue.Add(new Entry.ItemsReceive(step.NewState, ev.DestroyerPlayerId.Value, items));
+            }
+        }
 
         return Empty.Value;
     }
@@ -767,14 +783,6 @@ internal sealed partial class WorldEventQueue
             {
                 queue.Add(new Entry.StackCreate(step.NewState, stack));
             }
-        }
-    }
-
-    private void AddStackDestroy(WorldStackId stackId, EngineStep<WorldState, WorldEvent> step)
-    {
-        if (step.OldState.Stacks.TryGetValue(stackId, out WorldStack? stack))
-        {
-            queue.Add(new Entry.StackDestroy(step.NewState, stack));
         }
     }
 }

@@ -1875,4 +1875,40 @@ public sealed class WorldEventQueueTests
             [new WorldSpellDefinitionId("Spell1"), new WorldSpellDefinitionId("Spell2")])));
         Assert.That(entry.GetFocusPosition(new WorldPlayerId(1)), Is.Null);
     }
+
+    [Test]
+    public void DestroyedStackItemsReceiveTest()
+    {
+        WorldStackId stackId = new("Stack1");
+        WorldItem carried = new(new WorldItemId("Item0001"), new ItemDefinitionId("Item1"), Charges: null);
+        WorldItem banner = new(new WorldItemId("Item0002"), new ItemDefinitionId("Item2"), Charges: null);
+        WorldState state = BuildStateWithStack(new WorldUnitId("leader"), stackId, new WorldPlayerId(1), new WorldPlayerId(2));
+        WorldStack stack = state.Stacks[stackId] with
+        {
+            Inventory = new WorldInventory([carried]),
+            Equipment = LeaderEquipment.Empty.With(LeaderEquipmentSlot.Banner, banner)
+        };
+        WorldState oldState = state with { Stacks = state.Stacks.SetItem(stackId, stack) };
+        WorldState newState = state with { Stacks = state.Stacks.Remove(stackId) };
+
+        Subject<EngineStep<WorldState, WorldEvent>> events = new();
+        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
+
+        events.OnNext(new EngineStep<WorldState, WorldEvent>(
+            oldState,
+            newState,
+            new WorldStackDestroyedEvent(stackId, new WorldUnitGroup.Stack(new WorldStackId("Stack2")), new WorldPlayerId(2))));
+
+        Entry? destroyEntry = queue.PlayNext();
+        Assert.That(destroyEntry, Is.EqualTo(new Entry.StackDestroy(newState, stack)));
+
+        queue.Stop();
+
+        Entry? receiveEntry = queue.PlayNext();
+        Assert.That(receiveEntry, Is.EqualTo(new Entry.ItemsReceive(newState, new WorldPlayerId(2), [carried, banner])));
+
+        queue.Stop();
+
+        Assert.That(queue.IsIdle, Is.True);
+    }
 }
