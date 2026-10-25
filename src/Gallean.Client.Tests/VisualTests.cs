@@ -4430,6 +4430,71 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task CapitalBuildingsTreeStatesTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel scenario = LoadScenario(null);
+
+        WorldState state = scenario.World.State;
+        WorldPlayerId playerId = state.TurnInfo.CurrentPlayerId;
+        WorldPlayer player = state.Players[playerId];
+
+        WorldPlayer expanded = player with
+        {
+            Resources = player.Resources with { Gold = 150 },
+            Buildings = new WorldPlayerBuildings(
+                [
+                    new WorldPlayerBuildingDefinitionId("G000BB0001"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0002"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0003"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0004"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0005"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0006"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0007"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0008"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0009"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0010"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0011"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0012"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0013"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0014"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0015"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0016"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0017"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0018"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0019"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0020"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0021"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0022"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0023"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0024"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0025")
+                ],
+                [
+                    new WorldPlayerBuildingDefinitionId("G000BB0001"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0012"),
+                    new WorldPlayerBuildingDefinitionId("G000BB0024")
+                ])
+        };
+
+        GameModel gameModel = LoadScenario(state with { Players = state.Players.SetItem(playerId, expanded) });
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        await WaitForWorldAsync(window);
+
+        gameViewModel.OpenScreen(new ManagementScreenViewModel(gameModel, gameViewModel, ScreenMusic.Keep, null, screen => [new BuildingTabViewModel(gameModel, gameViewModel, screen)]));
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task CapitalBuildingsTreeSelectedTest()
     {
         using Sandbox sb = Sandbox.Create();

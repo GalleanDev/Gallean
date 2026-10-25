@@ -134,21 +134,6 @@
       <Setter Property="StrokeThickness" Value="3" />
     </Style>
 
-    <Style Selector="Ellipse.node-outline">
-      <Setter Property="Margin" Value="-5" />
-      <Setter Property="IsVisible" Value="False" />
-      <Setter Property="IsHitTestVisible" Value="False" />
-      <Setter Property="Opacity" Value="0.85" />
-      <Setter Property="Stroke" Value="{StaticResource AccentBrush}" />
-      <Setter Property="StrokeThickness" Value="1.5" />
-    </Style>
-    <Style Selector="Button.node.constructible Ellipse.node-outline">
-      <Setter Property="IsVisible" Value="True" />
-    </Style>
-    <Style Selector="Button.node.selection-locked Ellipse.node-outline">
-      <Setter Property="IsVisible" Value="False" />
-    </Style>
-
     <Style Selector="Border.node-badge">
       <Setter Property="Width" Value="20" />
       <Setter Property="Height" Value="20" />
@@ -165,6 +150,21 @@
       <Setter Property="HorizontalAlignment" Value="Center" />
       <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="Foreground" Value="{StaticResource WindowBackgroundBrush}" />
+    </Style>
+    <Style Selector="Border.node-badge.build">
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+      <Setter Property="BorderThickness" Value="1.5" />
+    </Style>
+    <Style Selector="Border.node-badge.build local|IconVisual">
+      <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+    </Style>
+    <Style Selector="Panel.node-body.constructible Border.node-badge.build">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Panel.node-body.selection-locked Border.node-badge.build">
+      <Setter Property="IsVisible" Value="False" />
     </Style>
     <Style Selector="Border.node-badge.lock">
       <Setter Property="Width" Value="26" />
@@ -270,7 +270,6 @@
                 CommandParameter="{Binding}">
           <Panel Classes="node-body" Classes.common="{Binding IsCommon}">
             <Border Classes="node-glow" />
-            <Ellipse Classes="node-outline" />
             <Border Classes="node-background">
               <Panel>
                 <local:SpriteVisual Classes="node-portrait" SpriteKey="{Binding PortraitKey}" />
@@ -383,6 +382,17 @@
       </Panel>
     </DataTemplate>
 
+    <DataTemplate x:Key="BuildingBadgeTemplate" x:DataType="local:BuildingNodeViewModel">
+      <Panel Classes="node-body"
+             Classes.common="{Binding IsCommon}"
+             Classes.constructible="{Binding IsConstructible}"
+             Classes.selection-locked="{Binding IsSelectionLocked}">
+        <Border Classes="node-badge build">
+          <local:IconVisual Moniker="Plus" />
+        </Border>
+      </Panel>
+    </DataTemplate>
+
     <DataTemplate x:Key="BuildingBranchTemplate" x:DataType="local:BuildingBranchViewModel">
       <StackPanel Orientation="Horizontal" Spacing="10">
         <local:IconVisual Moniker="{Binding Icon}"
@@ -433,6 +443,20 @@
           <ItemsControl Classes="focus-group"
                         ItemsSource="{Binding Graph.Nodes}"
                         ItemTemplate="{StaticResource BuildingNodeTemplate}"
+                        ItemContainerTheme="{StaticResource BuildingNodeContainerTheme}"
+                        ClipToBounds="False">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <local:BuildingGraphPanel UnitSize="{StaticResource BuildingGraphUnitSize}"
+                                          ExtentX="{Binding #Screen.((local:BuildingTabViewModel)DataContext).Graph.ExtentX}"
+                                          ExtentY="{Binding #Screen.((local:BuildingTabViewModel)DataContext).Graph.ExtentY}" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
+
+          <ItemsControl IsHitTestVisible="False"
+                        ItemsSource="{Binding Graph.Nodes}"
+                        ItemTemplate="{StaticResource BuildingBadgeTemplate}"
                         ItemContainerTheme="{StaticResource BuildingNodeContainerTheme}"
                         ClipToBounds="False">
             <ItemsControl.ItemsPanel>
