@@ -37,7 +37,8 @@ internal class ExtractDatabaseCommand : Command
         DbfDataReaderOptions dbfOptions = new()
         {
             Encoding = dbfEncoding,
-            SkipDeletedRecords = true
+            SkipDeletedRecords = true,
+            StringTrimming = StringTrimmingOption.TrimEnd
         };
 
         EnumerationOptions enumerationOptions = new()
@@ -104,7 +105,7 @@ internal class ExtractDatabaseCommand : Command
 
             if (value is string str)
             {
-                string trimmed = str.Trim();
+                string trimmed = str.TrimEnd();
 
                 if (trimmed.Length > 0)
                 {

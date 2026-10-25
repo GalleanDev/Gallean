@@ -639,25 +639,25 @@
     },
     {
       "TXT_ID": "X005TA0352",
-      "TEXT": "You are currently at war with the race.",
+      "TEXT": "  You are currently at war with the race.",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X005TA0353",
-      "TEXT": "You are currently in peace with the race.\\n",
+      "TEXT": "  You are currently in peace with the race.\\n",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X005TA0354",
-      "TEXT": "You are not in alliance with the race.",
+      "TEXT": "  You are not in alliance with the race.",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X005TA0355",
-      "TEXT": "You are in alliance with the race.",
+      "TEXT": "  You are in alliance with the race.",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -837,7 +837,7 @@
     },
     {
       "TXT_ID": "X005TA0459",
-      "TEXT": "\\fNormal;\\c000;000;000; or \\fNormal;",
+      "TEXT": " \\fNormal;\\c000;000;000; or \\fNormal;",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -2907,7 +2907,7 @@
     },
     {
       "TXT_ID": "X009TA2006",
-      "TEXT": "A stack that has the \u0022guard\u0022 order will ignore all other objects on the map (bags, cities, sites, resources, etc...)",
+      "TEXT": " A stack that has the \u0022guard\u0022 order will ignore all other objects on the map (bags, cities, sites, resources, etc...)",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -2919,7 +2919,7 @@
     },
     {
       "TXT_ID": "X009TA2008",
-      "TEXT": "Once the target stack has been destroyed, the order of the stack will change to \u0022Berserk\u0022.",
+      "TEXT": " Once the target stack has been destroyed, the order of the stack will change to \u0022Berserk\u0022.",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -2931,7 +2931,7 @@
     },
     {
       "TXT_ID": "X009TA2010",
-      "TEXT": "the stack to defend, it will be attacked. If a bag is blocking the way, it will be picked up. When the stack to defend gets killed, this order changes to \u0022Roam\u0022 for neutral stacks and to \u0022Normal\u0022 for stacks owned by a playable race.",
+      "TEXT": " the stack to defend, it will be attacked. If a bag is blocking the way, it will be picked up. When the stack to defend gets killed, this order changes to \u0022Roam\u0022 for neutral stacks and to \u0022Normal\u0022 for stacks owned by a playable race.",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -2991,7 +2991,7 @@
     },
     {
       "TXT_ID": "X009TA2012",
-      "TEXT": "Once inside the city, the stack will stay there to defend it. Stacks with the \u0022Secure city\u0022 order will not take other map objects (sites, resources, etc...) into consideration.",
+      "TEXT": " Once inside the city, the stack will stay there to defend it. Stacks with the \u0022Secure city\u0022 order will not take other map objects (sites, resources, etc...) into consideration.",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -3003,7 +3003,7 @@
     },
     {
       "TXT_ID": "X009TA2014",
-      "TEXT": "map objects such as sites and resources. Once the stack enters a city, it will stay there.",
+      "TEXT": " map objects such as sites and resources. Once the stack enters a city, it will stay there.",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -3015,7 +3015,7 @@
     },
     {
       "TXT_ID": "X009TA2016",
-      "TEXT": "Once the stack has reached its target position, its order will change to \u0022Stand\u0022.",
+      "TEXT": " Once the stack has reached its target position, its order will change to \u0022Stand\u0022.",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -3027,7 +3027,7 @@
     },
     {
       "TXT_ID": "X009TA2018",
-      "TEXT": "no stacks to attack, the defending stack will try to move to the center of the location, picking up bags or attacking enemies that are blocking the way. No other interation with map objects is possible.",
+      "TEXT": " no stacks to attack, the defending stack will try to move to the center of the location, picking up bags or attacking enemies that are blocking the way. No other interation with map objects is possible.",
       "VERIFIED": false,
       "CONTEXT": "Part 2"
     },
@@ -3057,7 +3057,7 @@
     },
     {
       "TXT_ID": "X110TA0027",
-      "TEXT": "(x%NUM%)",
+      "TEXT": " (x%NUM%)",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -3069,7 +3069,7 @@
     },
     {
       "TXT_ID": "X005TA0781",
-      "TEXT": "named %NAME%",
+      "TEXT": " named %NAME%",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -3147,7 +3147,7 @@
     },
     {
       "TXT_ID": "X005TA0785",
-      "TEXT": "/ %ATTACK%",
+      "TEXT": " / %ATTACK%",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -3309,7 +3309,7 @@
     },
     {
       "TXT_ID": "X005TA0816",
-      "TEXT": "/ %SOURCE%",
+      "TEXT": " / %SOURCE%",
       "VERIFIED": false,
       "CONTEXT": "Second attack in unit encyclopedia"
     },
@@ -3537,13 +3537,13 @@
     },
     {
       "TXT_ID": "X005TA0836",
-      "TEXT": "(Custom)",
+      "TEXT": " (Custom)",
       "VERIFIED": false,
       "CONTEXT": "DelPlayerInterf"
     },
     {
       "TXT_ID": "X005TA0837",
-      "TEXT": "(Playable)",
+      "TEXT": " (Playable)",
       "VERIFIED": false,
       "CONTEXT": "DelPlayerInterf"
     },
@@ -3627,7 +3627,7 @@
     },
     {
       "TXT_ID": "X005TA0881",
-      "TEXT": "/ %POWER%",
+      "TEXT": " / %POWER%",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -3939,7 +3939,7 @@
     },
     {
       "TXT_ID": "X150TA0027",
-      "TEXT": "SAGA EDITOR",
+      "TEXT": " SAGA EDITOR",
       "VERIFIED": null,
       "CONTEXT": null
     },
@@ -6693,7 +6693,7 @@
     },
     {
       "TXT_ID": "X160TA0039",
-      "TEXT": "%OP% variable %VAR2% in [%MIN2%, %MAX2%]",
+      "TEXT": " %OP% variable %VAR2% in [%MIN2%, %MAX2%]",
       "VERIFIED": false,
       "CONTEXT": null
     },

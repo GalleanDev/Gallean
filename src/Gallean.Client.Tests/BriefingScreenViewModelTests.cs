@@ -67,7 +67,7 @@ public sealed class BriefingScreenViewModelTests
                 new ScenarioTextSpan("Hubert de Lalye", ScenarioTextSpanType.Character),
                 new ScenarioTextSpan(" proposed to replenish the ", ScenarioTextSpanType.Text),
                 new ScenarioTextSpan("Empire", ScenarioTextSpanType.Faction),
-                new ScenarioTextSpan("'s chests with his… personal belongings, in exchange for the royal crown of course. Evidently, many nobles accepted the offer,fearing the loss of their aristocratic privileges.\n\nThe ", ScenarioTextSpanType.Text),
+                new ScenarioTextSpan("'s chests with his… personal belongings, in exchange for the royal crown of course. Evidently, many nobles accepted the offer, fearing the loss of their aristocratic privileges.\n\nThe ", ScenarioTextSpanType.Text),
                 new ScenarioTextSpan("Empire", ScenarioTextSpanType.Faction),
                 new ScenarioTextSpan(" was then divided. On one side of the schism were the virtuous nobles, who remained true to the Emperor Demosthene; opposing him, ", ScenarioTextSpanType.Text),
                 new ScenarioTextSpan("Hubert de Lalye", ScenarioTextSpanType.Character),

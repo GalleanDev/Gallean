@@ -1155,7 +1155,7 @@
     },
     {
       "TXT_ID": "X005TA0095",
-      "TEXT": "(Capital)",
+      "TEXT": " (Capital)",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -1335,7 +1335,7 @@
     },
     {
       "TXT_ID": "X005TA0317",
-      "TEXT": "\\fNormal;\\hC;\\c000;000;000;You do not possess enough gold!",
+      "TEXT": " \\fNormal;\\hC;\\c000;000;000;You do not possess enough gold!",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -1353,7 +1353,7 @@
     },
     {
       "TXT_ID": "X005TA0319",
-      "TEXT": "\\fNormal;\\hC;\\c000;000;000;Breaking your treaty will greatly offend \\fMedbold;%PLAYER%.\\fNormal;  Do you wish to break the alliance and engage in war?",
+      "TEXT": " \\fNormal;\\hC;\\c000;000;000;Breaking your treaty will greatly offend \\fMedbold;%PLAYER%.\\fNormal;  Do you wish to break the alliance and engage in war?",
       "VERIFIED": true,
       "CONTEXT": null
     },
@@ -1479,25 +1479,25 @@
     },
     {
       "TXT_ID": "X005TA0352",
-      "TEXT": "You are currently at war with the race.",
+      "TEXT": "  You are currently at war with the race.",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X005TA0353",
-      "TEXT": "You are currently in peace with the race.\\n",
+      "TEXT": "  You are currently in peace with the race.\\n",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X005TA0354",
-      "TEXT": "You are not in alliance with the race.",
+      "TEXT": "  You are not in alliance with the race.",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X005TA0355",
-      "TEXT": "You are in alliance with the race.",
+      "TEXT": "  You are in alliance with the race.",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -2007,7 +2007,7 @@
     },
     {
       "TXT_ID": "X005TA0459",
-      "TEXT": "\\fNormal;\\c000;000;000; or \\fNormal;",
+      "TEXT": " \\fNormal;\\c000;000;000; or \\fNormal;",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -2043,7 +2043,7 @@
     },
     {
       "TXT_ID": "X005TA0470",
-      "TEXT": "(Custom)",
+      "TEXT": " (Custom)",
       "VERIFIED": false,
       "CONTEXT": "list of skirmish quests"
     },
@@ -3033,7 +3033,7 @@
     },
     {
       "TXT_ID": "X005TA0663",
-      "TEXT": "(Level %LEVEL%)",
+      "TEXT": " (Level %LEVEL%)",
       "VERIFIED": false,
       "CONTEXT": "City encyclopedia"
     },
@@ -4041,7 +4041,7 @@
     },
     {
       "TXT_ID": "X005TA0785",
-      "TEXT": "/ %ATTACK%",
+      "TEXT": " / %ATTACK%",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -4173,7 +4173,7 @@
     },
     {
       "TXT_ID": "X100TA0616",
-      "TEXT": "/ %ATTACK%",
+      "TEXT": " / %ATTACK%",
       "VERIFIED": false,
       "CONTEXT": "BattleViewer"
     },
@@ -4233,7 +4233,7 @@
     },
     {
       "TXT_ID": "X005TA0816",
-      "TEXT": "/ %SOURCE%",
+      "TEXT": " / %SOURCE%",
       "VERIFIED": false,
       "CONTEXT": "Second attack in unit encyclopedia"
     },
@@ -4659,7 +4659,7 @@
     },
     {
       "TXT_ID": "X005TA0881",
-      "TEXT": "/ %POWER%",
+      "TEXT": " / %POWER%",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -4785,13 +4785,13 @@
     },
     {
       "TXT_ID": "X200TA0002",
-      "TEXT": "onslaught. Alas, the beloved queen was killed and Uther, the sole heir, disappeared from the realm.\\n\\n\\n\\n\\n\\nThe combined forces of the Empire and Mountain Clans, with the retrieved runic wisdom, sealed the infernal rift before the accursed one could",
+      "TEXT": " onslaught. Alas, the beloved queen was killed and Uther, the sole heir, disappeared from the realm.\\n\\n\\n\\n\\n\\nThe combined forces of the Empire and Mountain Clans, with the retrieved runic wisdom, sealed the infernal rift before the accursed one could",
       "VERIFIED": false,
       "CONTEXT": null
     },
     {
       "TXT_ID": "X200TA0003",
-      "TEXT": "arise.\\n\\n\\n\\n\\n\\nThe menace posed by the Undead Hordes came to an end with the beheading of the Dwarven high king Sturmir; Mortis\u0027 vengeance accomplished, her minions fell lifelessly to the ground, their languid voices echoed with no answer.",
+      "TEXT": " arise.\\n\\n\\n\\n\\n\\nThe menace posed by the Undead Hordes came to an end with the beheading of the Dwarven high king Sturmir; Mortis\u0027 vengeance accomplished, her minions fell lifelessly to the ground, their languid voices echoed with no answer.",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -4821,7 +4821,7 @@
     },
     {
       "TXT_ID": "X005TA0690",
-      "TEXT": "(RIOT)",
+      "TEXT": " (RIOT)",
       "VERIFIED": false,
       "CONTEXT": null
     },
@@ -4971,7 +4971,7 @@
     },
     {
       "TXT_ID": "X005TA0777",
-      "TEXT": "(%RACE%)",
+      "TEXT": " (%RACE%)",
       "VERIFIED": false,
       "CONTEXT": null
     },
