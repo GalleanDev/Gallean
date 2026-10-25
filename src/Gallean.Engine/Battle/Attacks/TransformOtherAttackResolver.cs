@@ -42,8 +42,14 @@ internal sealed class TransformOtherAttackResolver : BattleAbstractAttackResolve
             transformDefinitionId = attack.SmallTransformUnitId!.Value;
         }
 
-        BattleUnit transformed = target with { DefinitionId = transformDefinitionId };
-        int hitpointsAfter = BattleTransformationCalculator.GetScaledHitpoints(state, context, transformed);
+        UnitDefinition transformDefinition = context.Definitions.GetUnit(transformDefinitionId);
+        int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+            state,
+            context,
+            targetId,
+            BattleTransformType.Transform,
+            transformDefinitionId,
+            transformDefinition.Level);
 
         int? remainingTurns = null;
         if (attack.IsInfinite)
@@ -60,7 +66,7 @@ internal sealed class TransformOtherAttackResolver : BattleAbstractAttackResolve
                 targetId,
                 BattleTransformType.Transform,
                 transformDefinitionId,
-                target.Level,
+                transformDefinition.Level,
                 hitpointsAfter,
                 remainingTurns)
         ];

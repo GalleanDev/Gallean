@@ -44,7 +44,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 40, 3),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 80, 3),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -112,7 +112,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 40, 2),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 80, 2),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -183,7 +183,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, largeTransformDefinition.Id, 1, 60, null),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, largeTransformDefinition.Id, 1, 100, null),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -192,7 +192,7 @@ public sealed class BattleEngineTransformOtherAttackTests
         BattleUnit transformed = defender with
         {
             DefinitionId = largeTransformDefinition.Id,
-            Hitpoints = 60,
+            Hitpoints = 100,
             StatusEffects = [new BattleTransformStatusEffect(BattleTransformType.Transform, defenderDefinition.Id, 1, [originalWard], null)],
             Wards = [transformedWard]
         };
@@ -243,7 +243,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             null,
             transformedDefinition.Id,
             BattleSide.Attacker,
-            40,
+            80,
             0,
             0,
             1,
@@ -337,7 +337,7 @@ public sealed class BattleEngineTransformOtherAttackTests
         BattleUnit transformed = defender with
         {
             DefinitionId = transformedDefinition.Id,
-            Hitpoints = 40,
+            Hitpoints = 80,
             StatusEffects = [new BattleTransformStatusEffect(BattleTransformType.Transform, defenderDefinition.Id, 1, [], null)]
         };
 
@@ -382,7 +382,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             null,
             firstTransformDefinition.Id,
             BattleSide.Defender,
-            40,
+            80,
             0,
             0,
             1,
@@ -408,7 +408,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(target.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, target.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, target.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, target.Id, BattleTransformType.Transform, secondTransformDefinition.Id, 1, 24, 2),
+            new BattleUnitTransformAppliedEvent(attacker.Id, target.Id, BattleTransformType.Transform, secondTransformDefinition.Id, 1, 80, 2),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(target.Id, BattleUnitTurnType.Normal)),
@@ -418,7 +418,7 @@ public sealed class BattleEngineTransformOtherAttackTests
         BattleUnit overridden = target with
         {
             DefinitionId = secondTransformDefinition.Id,
-            Hitpoints = 24,
+            Hitpoints = 80,
             StatusEffects = [new BattleTransformStatusEffect(BattleTransformType.Transform, originalDefinition.Id, 1, [originalWard], 1)],
             Wards = [secondTransformWard]
         };
@@ -489,7 +489,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             null,
             transformedDefinition.Id,
             BattleSide.Attacker,
-            40,
+            80,
             0,
             0,
             1,
@@ -742,5 +742,123 @@ public sealed class BattleEngineTransformOtherAttackTests
         engine.CheckCommandError(
             new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(guardian.Id)),
             BattleCommandError.TargetIncorrect);
+    }
+
+    [Test]
+    public void TargetLevelTest()
+    {
+        UnitDefinition transformedDefinition = TestHelpers.SimpleUnitDefinition("transformed", maxHitpoints: 30, initiative: 40, damage: 2);
+        UnitDefinition attackerDefinition = TransformAttackerDefinition(false, transformedDefinition.Id, null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5);
+        UnitDynamicUpgradeDefinition transformedUpgrade = new(
+            transformedDefinition.Id,
+            UpgradeChangeLevel: 10,
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 10 },
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 5 });
+        UnitDynamicUpgradeDefinition defenderUpgrade = new(
+            defenderDefinition.Id,
+            UpgradeChangeLevel: 10,
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 10 },
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 5 });
+
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 10);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 90) with { Level = 3 };
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(transformedDefinition)
+            .WithDefinition(transformedUpgrade)
+            .WithDefinition(defenderUpgrade)
+            .WithAttacker(attacker, GridPosition.FrontBottom)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(defender.Id)),
+        [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 90, null),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        BattleUnit transformed = defender with
+        {
+            DefinitionId = transformedDefinition.Id,
+            Level = 1,
+            StatusEffects = [new BattleTransformStatusEffect(BattleTransformType.Transform, defenderDefinition.Id, 3, [], null)]
+        };
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(attacker, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(transformed, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)
+            }));
+    }
+
+    [Test]
+    public void HealTest()
+    {
+        UnitDefinition clericDefinition = TestHelpers.SimpleUnitDefinition("cleric", maxHitpoints: 100, initiative: 60, damage: 0) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("cleric"), initiative: 60, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Heal,
+                Heal = 30
+            }
+        };
+        UnitDefinition originalDefinition = TestHelpers.SimpleUnitDefinition("original", maxHitpoints: 100, initiative: 40, damage: 5);
+        UnitDefinition transformedDefinition = TestHelpers.SimpleUnitDefinition("transformed", maxHitpoints: 50, initiative: 40, damage: 2);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 10, initiative: 30, damage: 2);
+
+        BattleUnit cleric = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, clericDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit transformed = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, transformedDefinition.Id, BattleSide.Attacker, hitpoints: 60) with
+        {
+            StatusEffects = [new BattleTransformStatusEffect(BattleTransformType.Transform, originalDefinition.Id, 1, [], null)]
+        };
+        BattleUnit enemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 10);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(clericDefinition)
+            .WithDefinition(originalDefinition)
+            .WithDefinition(transformedDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithAttacker(cleric, GridPosition.FrontBottom)
+            .WithAttacker(transformed, GridPosition.FrontCenter)
+            .WithDefender(enemy, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(cleric.Id, new BattleAttackUnitTarget(transformed.Id)),
+        [
+            new BattleUnitAttackEvent(cleric.Id, new BattleAttackUnitTarget(transformed.Id), [clericDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(cleric.Id, transformed.Id, clericDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(cleric.Id, transformed.Id, clericDefinition.Attack.Id, 0),
+            new BattleUnitHealedEvent(transformed.Id, 90),
+            new BattleUnitTurnEndingEvent(cleric.Id),
+            new BattleUnitTurnEndedEvent(cleric.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(transformed.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(cleric, GridPosition.FrontBottom, false)
+                    .Place(transformed with { Hitpoints = 90 }, GridPosition.FrontCenter, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(enemy, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(transformed.Id, BattleUnitTurnType.Normal)
+            }));
     }
 }

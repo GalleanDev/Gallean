@@ -536,4 +536,61 @@ public sealed class BattleEngineTransformSelfAttackTests
                 CurrentUnitTurn = new BattleUnitTurn(transformed.Id, BattleUnitTurnType.Normal)
             }));
     }
+
+    [Test]
+    public void AttackerLevelTest()
+    {
+        UnitDefinition beastDefinition = TestHelpers.SimpleUnitDefinition("beast", maxHitpoints: 50, initiative: 50, damage: 9);
+        UnitDefinition attackerDefinition = TransformSelfDefinition("attacker", maxHitpoints: 100, beastDefinition.Id, null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5);
+        UnitDynamicUpgradeDefinition beastUpgrade = new(
+            beastDefinition.Id,
+            UpgradeChangeLevel: 10,
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 10 },
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 5 });
+        UnitDynamicUpgradeDefinition attackerUpgrade = new(
+            attackerDefinition.Id,
+            UpgradeChangeLevel: 10,
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 10 },
+            UnitDynamicUpgrade.Empty with { MaxHitpoints = 5 });
+
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 90) with { Level = 3 };
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(beastDefinition)
+            .WithDefinition(beastUpgrade)
+            .WithDefinition(attackerUpgrade)
+            .WithAttacker(attacker, GridPosition.FrontBottom)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(attacker.Id)),
+        [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(attacker.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 37, null)
+        ]);
+
+        BattleUnit transformed = attacker with
+        {
+            DefinitionId = beastDefinition.Id,
+            Level = 1,
+            Hitpoints = 37,
+            StatusEffects = [new BattleTransformStatusEffect(BattleTransformType.TransformSelf, attackerDefinition.Id, 3, [], null)]
+        };
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(transformed, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(defender, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal)
+            }));
+    }
 }

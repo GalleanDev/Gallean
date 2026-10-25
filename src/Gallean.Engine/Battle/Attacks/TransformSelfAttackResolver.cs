@@ -49,8 +49,14 @@ internal sealed class TransformSelfAttackResolver : IBattleAttackResolver, IStat
             transformDefinitionId = attack.SmallTransformUnitId ?? attack.LargeTransformUnitId!.Value;
         }
 
-        BattleUnit transformed = attacker with { DefinitionId = transformDefinitionId };
-        int hitpointsAfter = BattleTransformationCalculator.GetScaledHitpoints(state, context, transformed);
+        UnitDefinition transformDefinition = context.Definitions.GetUnit(transformDefinitionId);
+        int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+            state,
+            context,
+            attackerId,
+            BattleTransformType.TransformSelf,
+            transformDefinitionId,
+            transformDefinition.Level);
 
         return new BattleAttackResult(
             [
@@ -59,7 +65,7 @@ internal sealed class TransformSelfAttackResolver : IBattleAttackResolver, IStat
                     attackerId,
                     BattleTransformType.TransformSelf,
                     transformDefinitionId,
-                    attacker.Level,
+                    transformDefinition.Level,
                     hitpointsAfter,
                     RemainingTurns: null)
             ],

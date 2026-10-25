@@ -69,7 +69,29 @@ internal static class BattleTransformationCalculator
         return events.ToImmutable();
     }
 
-    public static int GetScaledHitpoints(BattleState state, IEngineContext context, BattleUnit changedUnit)
+    public static int GetTransformedHitpoints(
+        BattleState state,
+        IEngineContext context,
+        BattleUnitId targetId,
+        BattleTransformType type,
+        UnitDefinitionId definitionId,
+        int level)
+    {
+        BattleState restoredState = Restore(state, context, targetId);
+        BattleUnit target = restoredState.GetUnit(targetId);
+        BattleTransformStatusEffect effect = new(type, target.DefinitionId, target.Level, target.Wards, null);
+
+        BattleUnit transformed = target with
+        {
+            DefinitionId = definitionId,
+            Level = level,
+            StatusEffects = target.StatusEffects.Add(effect)
+        };
+
+        return GetScaledHitpoints(restoredState, context, transformed);
+    }
+
+    private static int GetScaledHitpoints(BattleState state, IEngineContext context, BattleUnit changedUnit)
     {
         BattleUnit unit = state.GetUnit(changedUnit.Id);
         UnitStats stats = context.UnitStats.GetBattleUnitStats(state, unit.Id);

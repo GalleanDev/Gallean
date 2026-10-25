@@ -80,9 +80,38 @@ public sealed class UnitStatsProvider(
 
         return stats with
         {
+            MaxHitpoints = GetBattleMaxHitpoints(unit, stats.MaxHitpoints),
             Armor = GetBattleArmor(stats.Armor, armorEffects),
             Initiative = GetBattleInitiative(unit, stats.Initiative)
         };
+    }
+
+    private int GetBattleMaxHitpoints(BattleUnit unit, int maxHitpoints)
+    {
+        BattleTransformStatusEffect? transform = BattleTransformationCalculator.GetTransformEffect(unit);
+
+        if (transform is not null)
+        {
+            return transform.Type switch
+            {
+                BattleTransformType.Transform => GetRestoredMaxHitpoints(unit, transform),
+                BattleTransformType.TransformSelf => maxHitpoints,
+                BattleTransformType.Doppelganger => maxHitpoints,
+                BattleTransformType.LevelDrain => maxHitpoints
+            };
+        }
+        else
+        {
+            return maxHitpoints;
+        }
+    }
+
+    private int GetRestoredMaxHitpoints(BattleUnit unit, BattleTransformStatusEffect transform)
+    {
+        UnitDefinition definition = definitions.GetUnit(transform.RestoreDefinitionId);
+        UnitStats stats = UnitStatsCalculator.GetStats(definition, transform.RestoreLevel, unit.Modifiers, definitions, globals);
+
+        return stats.MaxHitpoints;
     }
 
     public int GetBattleUnitInitiative(BattleState state, BattleUnitId unitId, int roll)

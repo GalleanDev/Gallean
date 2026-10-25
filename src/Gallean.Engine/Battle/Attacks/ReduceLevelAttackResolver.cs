@@ -39,8 +39,13 @@ internal sealed class ReduceLevelAttackResolver : BattleAbstractAttackResolver, 
         if (unit is not null)
         {
             (UnitDefinitionId definitionId, int level) = unit.Value;
-            BattleUnit reduced = target with { DefinitionId = definitionId, Level = level };
-            int hitpointsAfter = BattleTransformationCalculator.GetScaledHitpoints(state, context, reduced);
+            int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+                state,
+                context,
+                targetId,
+                BattleTransformType.LevelDrain,
+                definitionId,
+                level);
 
             int? remainingTurns = null;
             if (!attack.IsInfinite)

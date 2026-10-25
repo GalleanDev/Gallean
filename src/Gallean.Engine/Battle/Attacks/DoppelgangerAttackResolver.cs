@@ -32,8 +32,13 @@ internal sealed class DoppelgangerAttackResolver : IBattleAttackResolver, IStati
         }
 
         UnitDefinition transformDefinition = context.Definitions.GetUnit(targetUnit.DefinitionId);
-        BattleUnit transformUnit = attacker with { DefinitionId = transformDefinition.Id, Level = transformDefinition.Level };
-        int hitpointsAfter = BattleTransformationCalculator.GetScaledHitpoints(state, context, transformUnit);
+        int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+            state,
+            context,
+            attackerId,
+            BattleTransformType.Doppelganger,
+            transformDefinition.Id,
+            transformDefinition.Level);
 
         int? remainingTurns = null;
         if (!attack.IsInfinite)
