@@ -18,8 +18,10 @@ internal sealed record UnitDetailsViewModel(
     bool IsUpgradeBlocked,
     bool IsTypeLocked,
     string AttackText,
+    UnitAttackSourceViewModel AttackSource,
     StatValueViewModel Damage,
     string? SecondaryAttackText,
+    UnitAttackSourceViewModel? SecondaryAttackSource,
     IReadOnlyList<StatRowViewModel> Stats,
     UnitWardGridViewModel? Immunities,
     UnitWardGridViewModel? Wards,
@@ -70,8 +72,10 @@ internal sealed record UnitDetailsViewModel(
                IsUpgradeBlocked == other.IsUpgradeBlocked &&
                IsTypeLocked == other.IsTypeLocked &&
                AttackText == other.AttackText &&
+               AttackSource == other.AttackSource &&
                Damage == other.Damage &&
                SecondaryAttackText == other.SecondaryAttackText &&
+               SecondaryAttackSource == other.SecondaryAttackSource &&
                Stats.SequenceEqual(other.Stats) &&
                Immunities == other.Immunities &&
                Wards == other.Wards &&
@@ -224,13 +228,16 @@ internal sealed record UnitDetailsViewModel(
         }
 
         string? secondaryAttackText;
+        UnitAttackSourceViewModel? secondaryAttackSource;
         if (definition.SecondaryAttack is not null)
         {
             secondaryAttackText = FormatAttack(definition.SecondaryAttack, attacksTwice: false);
+            secondaryAttackSource = UnitAttackSourceViewModel.Create(definition.SecondaryAttack.Source);
         }
         else
         {
             secondaryAttackText = null;
+            secondaryAttackSource = null;
         }
 
         int currentExperience;
@@ -277,8 +284,10 @@ internal sealed record UnitDetailsViewModel(
             isUpgradeBlocked,
             isTypeLocked,
             FormatAttack(definition.Attack, definition.AttacksTwice),
+            UnitAttackSourceViewModel.Create(definition.Attack.Source),
             damage,
             secondaryAttackText,
+            secondaryAttackSource,
             rows,
             CreateWardGrid(wards, UnitWardCategory.Always),
             CreateWardGrid(wards, UnitWardCategory.Once),
@@ -353,7 +362,7 @@ internal sealed record UnitDetailsViewModel(
 
     private static string FormatAttack(UnitAttackDefinition attack, bool attacksTwice)
     {
-        string text = $"{UnitAttackFormatter.FormatType(attack.Type)} ({UnitAttackFormatter.FormatSource(attack.Source)})";
+        string text = UnitAttackFormatter.FormatType(attack.Type);
 
         if (attacksTwice)
         {
@@ -380,8 +389,10 @@ internal sealed record UnitDetailsViewModel(
         hash.Add(IsUpgradeBlocked);
         hash.Add(IsTypeLocked);
         hash.Add(AttackText);
+        hash.Add(AttackSource);
         hash.Add(Damage);
         hash.Add(SecondaryAttackText);
+        hash.Add(SecondaryAttackSource);
         hash.AddSequence(Stats);
         hash.Add(Immunities);
         hash.Add(Wards);

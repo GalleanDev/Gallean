@@ -42,19 +42,9 @@ internal static class UnitWardItemBuilder
 
         public UnitWardItemViewModel Visit(UnitAttackSourceWard ward, bool isActive)
         {
-            (IconMoniker icon, Color color) = ward.Source switch
-            {
-                UnitAttackSource.Weapon => (IconMoniker.AttackSourceWeapon, Theme.AttackSource.WeaponColor),
-                UnitAttackSource.Mind => (IconMoniker.AttackSourceMind, Theme.AttackSource.MindColor),
-                UnitAttackSource.Life => (IconMoniker.AttackSourceLife, Theme.AttackSource.LifeColor),
-                UnitAttackSource.Death => (IconMoniker.AttackSourceDeath, Theme.AttackSource.DeathColor),
-                UnitAttackSource.Fire => (IconMoniker.AttackSourceFire, Theme.AttackSource.FireColor),
-                UnitAttackSource.Water => (IconMoniker.AttackSourceWater, Theme.AttackSource.WaterColor),
-                UnitAttackSource.Earth => (IconMoniker.AttackSourceEarth, Theme.AttackSource.EarthColor),
-                UnitAttackSource.Air => (IconMoniker.AttackSourceAir, Theme.AttackSource.AirColor)
-            };
+            UnitAttackSourceViewModel source = UnitAttackSourceViewModel.Create(ward.Source);
 
-            return new UnitWardItemViewModel(icon, UnitAttackFormatter.FormatSource(ward.Source), color, isActive);
+            return new UnitWardItemViewModel(source.Icon, source.Text, source.Color, isActive);
         }
     }
 

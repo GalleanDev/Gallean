@@ -93,6 +93,42 @@
       <Setter Property="Background" Value="{StaticResource StatRowStripeBrush}" />
     </Style>
 
+    <Style Selector="StackPanel.attack-line">
+      <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source">
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source.open">
+      <Setter Property="Margin" Value="5,0,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > local|IconVisual.attack-source">
+      <Setter Property="Width" Value="13" />
+      <Setter Property="Height" Value="13" />
+      <Setter Property="Margin" Value="1,2,2,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source.close">
+      <Setter Property="Margin" Value="3,0,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-type">
+      <Setter Property="Margin" Value="0,3,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line.secondary > TextBlock.attack-type">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line.secondary > TextBlock.attack-source">
+      <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
+    </Style>
+    <Style Selector="StackPanel.attack-line.secondary > local|IconVisual.attack-source">
+      <Setter Property="Width" Value="11" />
+      <Setter Property="Height" Value="11" />
+      <Setter Property="Margin" Value="1,0,2,0" />
+    </Style>
+
     <Style Selector=":is(TextBlock).bar-label">
       <Setter Property="Margin" Value="2,0,0,4" />
       <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
@@ -186,15 +222,28 @@
                                    Text="{Binding Damage.ChangeText}"
                                    VerticalAlignment="Center" />
           <StackPanel Grid.Column="2" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
-            <TextBlock Text="{Binding AttackText}"
-                       Classes="body"
-                       Foreground="{StaticResource PrimaryTextBrush}"
-                       TextWrapping="Wrap" />
-            <TextBlock Text="{Binding SecondaryAttackText}"
-                       Classes="caption"
-                       Foreground="{StaticResource SecondaryTextBrush}"
-                       TextWrapping="Wrap"
-                       IsVisible="{Binding SecondaryAttackText, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            <StackPanel Classes="attack-line">
+              <TextBlock Text="{Binding AttackText}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
+              <TextBlock Text="(" Classes="caption attack-source open" />
+              <local:IconVisual Classes="attack-source"
+                                Moniker="{Binding AttackSource.Icon}"
+                                Foreground="{Binding AttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+              <TextBlock Text="{Binding AttackSource.Text}"
+                         Classes="caption attack-source"
+                         Foreground="{Binding AttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+              <TextBlock Text=")" Classes="caption attack-source close" />
+            </StackPanel>
+            <StackPanel Classes="attack-line secondary" IsVisible="{Binding SecondaryAttackText, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <TextBlock Text="{Binding SecondaryAttackText}" Classes="caption attack-type" Foreground="{StaticResource SecondaryTextBrush}" />
+              <TextBlock Text="(" Classes="caption attack-source open" />
+              <local:IconVisual Classes="attack-source"
+                                Moniker="{Binding SecondaryAttackSource.Icon}"
+                                Foreground="{Binding SecondaryAttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+              <TextBlock Text="{Binding SecondaryAttackSource.Text}"
+                         Classes="caption attack-source"
+                         Foreground="{Binding SecondaryAttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+              <TextBlock Text=")" Classes="caption attack-source close" />
+            </StackPanel>
           </StackPanel>
         </Grid>
 
