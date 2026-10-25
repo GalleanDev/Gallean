@@ -69,8 +69,9 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
             MatchCasing = MatchCasing.CaseInsensitive
         };
 
-        return Directory.EnumerateFiles(inputDirectory, "*" + extension, enumerationOptions)
-                        .Order(StringComparer.OrdinalIgnoreCase);
+        IEnumerable<string> files = Directory.EnumerateFiles(inputDirectory, "*" + extension, enumerationOptions);
+
+        return files.Order(StringComparer.OrdinalIgnoreCase);
     }
 
     private static ScenarioFile SetHumanPlayers(ScenarioFile file, Db.Id playRaceId)
