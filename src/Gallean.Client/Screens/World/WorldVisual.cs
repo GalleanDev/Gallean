@@ -171,6 +171,25 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 
                 e.Handled = true;
             }
+            else if (GetHotkeyStackIndex(e.Key, e.KeyModifiers) is { } stackIndex)
+            {
+                SelectStackItem(stackIndex);
+
+                e.Handled = true;
+            }
+        }
+    }
+
+    private void SelectStackItem(int index)
+    {
+        if (index < ViewModel.StackItems.Count)
+        {
+            WorldStackId stackId = ViewModel.StackItems[index].StackId;
+
+            if (ViewModel.SelectStackItemCommand.CanExecute(stackId))
+            {
+                ViewModel.SelectStackItemCommand.Execute(stackId);
+            }
         }
     }
 
@@ -190,6 +209,19 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
             (Key.J, KeyModifiers.None) => [ViewModel.OpenQuestCommand],
             (Key.P, KeyModifiers.None) => [ViewModel.OpenStackCommand],
             _ => []
+        };
+    }
+
+    private static int? GetHotkeyStackIndex(Key key, KeyModifiers modifiers)
+    {
+        return (key, modifiers) switch
+        {
+            (Key.D1 or Key.NumPad1, KeyModifiers.None) => 0,
+            (Key.D2 or Key.NumPad2, KeyModifiers.None) => 1,
+            (Key.D3 or Key.NumPad3, KeyModifiers.None) => 2,
+            (Key.D4 or Key.NumPad4, KeyModifiers.None) => 3,
+            (Key.D5 or Key.NumPad5, KeyModifiers.None) => 4,
+            _ => null
         };
     }
 
