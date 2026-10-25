@@ -4448,6 +4448,15 @@ public sealed class WorldEngineAiTests
                 PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
             };
 
+        UnitDefinition mageDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("mage", maxHitpoints: 60, initiative: 50, damage: 30),
+                movementPoints: 6, leadership: 4) with
+            {
+                Race = WorldRace.Undead,
+                LeaderCategory = UnitLeaderCategory.Mage,
+                PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+            };
+
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Undead, 1), WorldResourceSet.Empty);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
@@ -4477,7 +4486,7 @@ public sealed class WorldEngineAiTests
             35,
             null,
             [],
-            [fighterDefinition.Id],
+            [mageDefinition.Id, fighterDefinition.Id],
             [],
             ["Nigosh"],
             ["Orissia"]);
@@ -4487,6 +4496,7 @@ public sealed class WorldEngineAiTests
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
             .WithDefinition(fighterDefinition)
+            .WithDefinition(mageDefinition)
             .WithDefinition(cityDefinition)
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)

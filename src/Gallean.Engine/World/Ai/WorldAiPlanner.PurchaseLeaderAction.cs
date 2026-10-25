@@ -70,8 +70,11 @@ internal sealed partial class WorldAiPlanner
         {
             WorldRaceDefinition race = Context.Engine.Definitions.GetRace(state.Players[playerId].Race);
             Dictionary<LeaderRole, int> stacksByRole = CountStacksByRole(state, playerId);
+            UnitDefinitionId[] leaderIds = [.. race.Leaders];
 
-            foreach (UnitDefinitionId leaderId in race.Leaders.OrderBy(GetLeaderOrder))
+            Context.Engine.Random.Shuffle(leaderIds);
+
+            foreach (UnitDefinitionId leaderId in leaderIds.OrderBy(GetLeaderOrder))
             {
                 UnitDefinition leader = GetLeaderDefinition(leaderId);
                 LeaderRole? role = GetLeaderRole(leader.LeaderCategory);
@@ -100,11 +103,11 @@ internal sealed partial class WorldAiPlanner
             return leader.LeaderCategory switch
             {
                 UnitLeaderCategory.Fighter => 0,
+                UnitLeaderCategory.Mage => 0,
                 UnitLeaderCategory.Rod => 1,
                 UnitLeaderCategory.Explorer => 2,
-                UnitLeaderCategory.Mage => 3,
-                UnitLeaderCategory.Thief => 4,
-                null => 5
+                UnitLeaderCategory.Thief => 3,
+                null => 4
             };
         }
 
@@ -113,6 +116,7 @@ internal sealed partial class WorldAiPlanner
             return category switch
             {
                 UnitLeaderCategory.Fighter => LeaderRole.Fighter,
+                UnitLeaderCategory.Mage => LeaderRole.Fighter,
                 UnitLeaderCategory.Explorer => LeaderRole.Explorer,
                 UnitLeaderCategory.Rod => LeaderRole.Rod,
                 UnitLeaderCategory.Thief => LeaderRole.Thief,
