@@ -10,7 +10,7 @@ internal partial class WorldEngine
         {
             Stacks = state.Stacks.SetItem(
                 ev.StackId,
-                stack with { PendingLeaderUpgrades = stack.PendingLeaderUpgrades + 1 })
+                stack with { PendingLeaderUpgrades = stack.PendingLeaderUpgrades + 1, LeaderUpgradePostponed = false })
         };
     }
 }

@@ -38,6 +38,7 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldItemUsedEvent ev, TContext context);
     TResult Visit(WorldLeaderUpgradeGrantedEvent ev, TContext context);
     TResult Visit(WorldLeaderUpgradeSelectedEvent ev, TContext context);
+    TResult Visit(WorldLeaderUpgradePostponedEvent ev, TContext context);
     TResult Visit(WorldMapFeatureChangedEvent ev, TContext context);
     TResult Visit(WorldMercenaryPurchasedEvent ev, TContext context);
     TResult Visit(WorldMerchantItemStolenEvent ev, TContext context);

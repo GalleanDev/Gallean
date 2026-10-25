@@ -769,6 +769,68 @@ public sealed class WorldEventQueueTests
     }
 
     [Test]
+    public void LeaderUpgradeAfterAnotherTurnTest()
+    {
+        WorldStackId stackId = new("Stack1");
+        WorldPlayerId ownerId = new(1);
+        WorldPlayerId otherId = new(2);
+        WorldState ownTurnState = BuildStateWithStack(new WorldUnitId("leader"), stackId, ownerId, otherId);
+        WorldState grantedState = ownTurnState with
+        {
+            Stacks = ownTurnState.Stacks.SetItem(stackId, ownTurnState.Stacks[stackId] with { PendingLeaderUpgrades = 1 })
+        };
+        WorldState otherTurnState = grantedState with
+        {
+            TurnInfo = grantedState.TurnInfo with { CurrentPlayerId = otherId }
+        };
+
+        Subject<EngineStep<WorldState, WorldEvent>> events = new();
+        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
+
+        events.OnNext(UpgradeGranted(otherTurnState, stackId));
+        events.OnNext(new EngineStep<WorldState, WorldEvent>(otherTurnState, grantedState, new WorldTurnStartedEvent(ownerId)));
+
+        Entry? first = queue.PlayNext();
+        Assert.That(first, Is.EqualTo(new Entry.TurnStart(grantedState, ownerId)));
+
+        queue.Stop();
+
+        Entry? second = queue.PlayNext();
+        Assert.That(second, Is.EqualTo(new Entry.LeaderUpgrade(grantedState, stackId)));
+
+        queue.Stop();
+
+        Assert.That(queue.IsIdle, Is.True);
+    }
+
+    [Test]
+    public void LeaderUpgradePostponedTest()
+    {
+        WorldStackId stackId = new("Stack1");
+        WorldPlayerId ownerId = new(1);
+        WorldPlayerId otherId = new(2);
+        WorldState initialState = BuildStateWithStack(new WorldUnitId("leader"), stackId, ownerId, otherId);
+        WorldState state = initialState with
+        {
+            Stacks = initialState.Stacks.SetItem(
+                stackId,
+                initialState.Stacks[stackId] with { PendingLeaderUpgrades = 1, LeaderUpgradePostponed = true })
+        };
+
+        Subject<EngineStep<WorldState, WorldEvent>> events = new();
+        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
+
+        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, state, new WorldTurnStartedEvent(ownerId)));
+
+        Entry? first = queue.PlayNext();
+        Assert.That(first, Is.EqualTo(new Entry.TurnStart(state, ownerId)));
+
+        queue.Stop();
+
+        Assert.That(queue.IsIdle, Is.True);
+    }
+
+    [Test]
     public void LeaderUpgradeForAiTest()
     {
         WorldStackId stackId = new("Stack1");

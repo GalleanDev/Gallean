@@ -173,6 +173,177 @@ public sealed class WorldEngineLeaderUpgradeTests
     }
 
     [Test]
+    public void PostponeTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 4, leadership: 6);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                player.Id,
+                new WorldPosition(0, 0),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leaderDefinition),
+                movementPoints: 4) with
+            {
+                PendingLeaderUpgrades = 1
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(AbilityModifier("banner", LeaderAbility.BannerUse))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "banner", minLevel: 1, priority: 80))
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommand(new WorldPostponeLeaderUpgradeCommand(stack.Id), [
+            new WorldLeaderUpgradePostponedEvent(stack.Id)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(engine.State with
+        {
+            Stacks = engine.State.Stacks.SetItem(stack.Id, stack with { LeaderUpgradePostponed = true })
+        }));
+    }
+
+    [Test]
+    public void PostponeNoPendingUpgradeTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 4, leadership: 6);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leaderDefinition),
+            movementPoints: 4);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommandError(new WorldPostponeLeaderUpgradeCommand(stack.Id), WorldCommandError.LeaderUpgradeNotPending);
+    }
+
+    [Test]
+    public void PostponeUpgradeAfterTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 4, leadership: 6) with
+            {
+                ExperienceNextLevel = 10
+            };
+        UnitDefinition defenderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 4, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitGrid<WorldUnit> units = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Experience = 7 }, GridPosition.FrontBottom, false)
+            .Build();
+
+        WorldStack stack1 = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                player1.Id,
+                new WorldPosition(0, 0),
+                units,
+                movementPoints: 4) with
+            {
+                PendingLeaderUpgrades = 1,
+                LeaderUpgradePostponed = true
+            };
+        WorldStack stack2 = TestHelpers.SimpleStack(
+            new WorldStackId("Stack2"),
+            player2.Id,
+            new WorldPosition(2, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defenderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 4);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(stack1)
+            .WithStack(stack2)
+            .Build();
+
+        BattleUnit upgradedLeader = new(
+            Id: new BattleUnitId(0),
+            WorldUnitId: new WorldUnitId("leader"),
+            DefinitionId: leaderDefinition.Id,
+            Side: BattleSide.Attacker,
+            Hitpoints: 110,
+            Experience: 0,
+            ExperienceGained: 0,
+            Level: 2,
+            Modifiers: [],
+            StatusEffects: [],
+            SummonerId: null,
+            EquipmentAttackIds: [],
+            Name: null,
+            IsTypeLocked: false);
+
+        BattleUnit deadDefender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("defender"), defenderDefinition.Id, BattleSide.Defender, hitpoints: 0);
+
+        BattleState finalBattleState = new(
+            AttackerGrid: new UnitGrid<BattleUnit>.Builder().Place(upgradedLeader, GridPosition.FrontBottom, false).Build(),
+            DefenderGrid: new UnitGrid<BattleUnit>.Builder().Place(deadDefender, GridPosition.FrontBottom, false).Build(),
+            CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [],
+            CurrentRound: BattleRound.Normal(1),
+            Outcome: new BattleOutcome(BattleSide.Attacker),
+            Modifiers: BattleModifiers.None);
+
+        UnitGrid<WorldUnit> survivingDefenderGrid = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defenderDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
+            .Build();
+        UnitGrid<WorldUnit> survivingAttackerGrid = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Hitpoints = 110, Level = 2 }, GridPosition.FrontBottom, false)
+            .Build();
+
+        engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
+            new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, survivingAttackerGrid, survivingDefenderGrid),
+            new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId),
+            new WorldLeaderUpgradeGrantedEvent(stack1.Id)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(engine.State with
+        {
+            Stacks = engine.State.Stacks
+                .SetItem(stack1.Id, stack1 with { Units = survivingAttackerGrid, PendingLeaderUpgrades = 2, LeaderUpgradePostponed = false, BattlesWon = 1 })
+                .Remove(stack2.Id)
+        }));
+    }
+
+    [Test]
     public void NoPendingUpgradeTest()
     {
         WorldMap map = TestHelpers.SimpleMap(3, 1);

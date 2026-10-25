@@ -484,7 +484,7 @@ internal sealed class WorldEventActionBuilder(
             return WorldEventAction.None;
         }
 
-        if (stack.OwnerId != ViewPlayerId || stack.PendingLeaderUpgrades <= 0)
+        if (stack.OwnerId != ViewPlayerId || stack.PendingLeaderUpgrades <= 0 || stack.LeaderUpgradePostponed)
         {
             return WorldEventAction.None;
         }

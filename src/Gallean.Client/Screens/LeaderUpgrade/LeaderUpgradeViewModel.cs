@@ -31,7 +31,7 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
 
     protected override bool TryClose()
     {
-        CloseSelf();
+        PostponeCommand.Execute(null);
 
         return true;
     }
@@ -75,6 +75,20 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
         {
             RefreshView();
         }
+    }
+
+    [RelayCommand]
+    private async Task PostponeAsync()
+    {
+        if (WorldState.Stacks.TryGetValue(stackId, out WorldStack? stack) && stack.PendingLeaderUpgrades > 0)
+        {
+            if (!await TryDispatchWorldActionAsync(new WorldPostponeLeaderUpgradeCommand(stackId)))
+            {
+                return;
+            }
+        }
+
+        CloseSelf();
     }
 
     private bool CanLearn()

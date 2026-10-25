@@ -81,6 +81,7 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemUsedEvent ev, WorldState state) => Resume(ev.StackId);
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldLeaderUpgradeGrantedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldLeaderUpgradeSelectedEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldLeaderUpgradePostponedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldMapFeatureChangedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldMercenaryPurchasedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldMerchantItemStolenEvent ev, WorldState state) => Empty.Value;

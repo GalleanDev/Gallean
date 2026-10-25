@@ -106,6 +106,7 @@ public sealed partial class GameSession
         public Empty Visit(WorldUnitResurrectedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldLeaderUpgradeGrantedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldLeaderUpgradeSelectedEvent ev, Empty context) => Empty.Value;
+        public Empty Visit(WorldLeaderUpgradePostponedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldUnitModifierAppliedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldUnitModifierDurationDecreasedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldUnitModifierExpiredEvent ev, Empty context) => Empty.Value;

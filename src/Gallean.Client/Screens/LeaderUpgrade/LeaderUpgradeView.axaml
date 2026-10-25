@@ -24,7 +24,7 @@
                   local:PlateChrome.TextureSeed="2"
                   MinWidth="110"
                   VerticalAlignment="Center"
-                  Command="{Binding CloseCommand}" />
+                  Command="{Binding PostponeCommand}" />
         </Grid>
       </local:ModalPanel.Footer>
 

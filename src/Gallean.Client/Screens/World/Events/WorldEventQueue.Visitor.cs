@@ -375,6 +375,11 @@ internal sealed partial class WorldEventQueue
         return Empty.Value;
     }
 
+    Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldLeaderUpgradePostponedEvent ev, EngineStep<WorldState, WorldEvent> step)
+    {
+        return Empty.Value;
+    }
+
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldUnitModifierAppliedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
         return Empty.Value;
@@ -761,7 +766,7 @@ internal sealed partial class WorldEventQueue
     {
         foreach (WorldStack stack in state.Stacks.Values)
         {
-            if (stack.OwnerId == playerId && stack.PendingLeaderUpgrades > 0)
+            if (stack.OwnerId == playerId && stack.PendingLeaderUpgrades > 0 && !stack.LeaderUpgradePostponed)
             {
                 queue.Add(new Entry.LeaderUpgrade(state, stack.Id));
             }
