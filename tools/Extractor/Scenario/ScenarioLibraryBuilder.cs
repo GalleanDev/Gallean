@@ -147,6 +147,7 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
         ScenarioTableWriter.WriteScenario(Path.Combine(scenarioDirectory, file.ScenarioId.Value), file.Tables);
 
         infos.Add(info);
+
         campaignScenarios.Add(new Db.CampaignScenario(
             SkirmishCampaignId,
             nextScenarioNumber,
