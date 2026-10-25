@@ -45,10 +45,10 @@ internal sealed record StackLeaderViewModel(
 
         IReadOnlyList<StatRowViewModel> rows =
         [
-            new(IconMoniker.Hitpoint, Tr("Hit points"), new StatValueViewModel($"{leader.Leader.Hitpoints} / {leaderStats.MaxHitpoints}", 0)),
-            new(IconMoniker.Movement, Tr("Movement"), new StatValueViewModel($"{stack.MovementPoints} / {stackStats.MaxMovementPoints}", 0)),
-            new(IconMoniker.Stack, Tr("Units"), new StatValueViewModel($"{stack.Units.GetUnits().Count()} / {GridPosition.Count}", 0)),
-            new(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel($"{stackStats.Leadership}", 0))
+            new(IconMoniker.Hitpoint, Tr("Hit points"), new StatValueViewModel(TextSpans.FromText($"{leader.Leader.Hitpoints} / {leaderStats.MaxHitpoints}"), 0)),
+            new(IconMoniker.Movement, Tr("Movement"), new StatValueViewModel(TextSpans.FromText($"{stack.MovementPoints} / {stackStats.MaxMovementPoints}"), 0)),
+            new(IconMoniker.Stack, Tr("Units"), new StatValueViewModel(TextSpans.FromText($"{stack.Units.GetUnits().Count()} / {GridPosition.Count}"), 0)),
+            new(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(TextSpans.FromText($"{stackStats.Leadership}"), 0))
         ];
 
         return new StackLeaderViewModel(

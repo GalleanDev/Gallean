@@ -867,10 +867,10 @@ public sealed class CityTabViewModelTests
                 new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
                 "name",
                 [
-                    new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel("100 / 100", 0)),
-                    new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel("20 / 20", 0)),
-                    new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel("2 / 6", 0)),
-                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel("3", 0))
+                    new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100 / 100"), 0)),
+                    new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0)),
+                    new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0)),
+                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0))
                 ],
                 [],
                 new UnitDetailsViewModel(
@@ -887,17 +887,17 @@ public sealed class CityTabViewModelTests
                     false,
                     false,
                     "Damage (Weapon)",
-                    new StatValueViewModel("10", 0),
+                    new StatValueViewModel(TextSpans.FromText("10"), 0),
                     null,
                     [
-                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
-                        new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                        new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
+                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20)),
+                        new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                        new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0))
                     ],
                     null,
                     null,
-                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel("3", 0)),
+                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0)),
                     [],
                     [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+20 armor", "From city", null, 1)]))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
@@ -922,13 +922,13 @@ public sealed class CityTabViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("10", 0),
+            new StatValueViewModel(TextSpans.FromText("10"), 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0))
             ],
             null,
             null,
@@ -942,10 +942,10 @@ public sealed class CityTabViewModelTests
             new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
             "name",
             [
-                new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel("100 / 100", 0)),
-                new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel("20 / 20", 0)),
-                new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel("2 / 6", 0)),
-                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel("3", 0))
+                new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100 / 100"), 0)),
+                new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0)),
+                new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0)),
+                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0))
             ],
             [],
             new UnitDetailsViewModel(
@@ -962,17 +962,17 @@ public sealed class CityTabViewModelTests
                 false,
                 false,
                 "Damage (Weapon)",
-                new StatValueViewModel("10", 0),
+                new StatValueViewModel(TextSpans.FromText("10"), 0),
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
-                    new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                    new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20)),
+                    new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                    new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0))
                 ],
                 null,
                 null,
-                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel("3", 0)),
+                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0)),
                 [],
                 [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+20 armor", "From city", null, 1)]))));
     }

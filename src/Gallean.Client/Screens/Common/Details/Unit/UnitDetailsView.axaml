@@ -178,7 +178,7 @@
         <Grid ColumnDefinitions="Auto,Auto,*">
           <local:OutlinedTextBlock Grid.Column="0"
                                    Classes="h1 primary-stat"
-                                   Text="{Binding Damage.BaseText}"
+                                   Text="{Binding Damage.Text.Text}"
                                    VerticalAlignment="Center" />
           <local:OutlinedTextBlock Grid.Column="1"
                                    Classes="h4 primary-stat-change"
@@ -205,7 +205,9 @@
             <Grid ColumnDefinitions="Auto,Auto,*">
               <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Immunity" />
               <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Immunities'}" />
-              <TextBlock Grid.Column="2" Classes="body stat-value" Text="{local:Text 'None'}" />
+              <StackPanel Grid.Column="2" Classes="stat-value">
+                <TextBlock Classes="body" Text="{local:Text 'None'}" />
+              </StackPanel>
             </Grid>
           </Border>
 
@@ -229,7 +231,9 @@
             <Grid ColumnDefinitions="Auto,Auto,*">
               <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Ward" />
               <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Wards'}" />
-              <TextBlock Grid.Column="2" Classes="body stat-value" Text="{local:Text 'None'}" />
+              <StackPanel Grid.Column="2" Classes="stat-value">
+                <TextBlock Classes="body" Text="{local:Text 'None'}" />
+              </StackPanel>
             </Grid>
           </Border>
 

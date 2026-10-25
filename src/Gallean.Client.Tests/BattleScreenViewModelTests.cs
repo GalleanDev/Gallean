@@ -652,13 +652,13 @@ public sealed class BattleScreenViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("5", 0),
+            new StatValueViewModel(TextSpans.FromText("5"), 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("30"), 0))
             ],
             null,
             null,
@@ -755,13 +755,13 @@ public sealed class BattleScreenViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("50", 25),
+            new StatValueViewModel(TextSpans.FromText("50"), 25),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0))
             ],
             null,
             null,
@@ -870,13 +870,13 @@ public sealed class BattleScreenViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("50", 0),
+            new StatValueViewModel(TextSpans.FromText("50"), 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0))
             ],
             null,
             null,
@@ -3973,13 +3973,13 @@ public sealed class BattleScreenViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("50", 15),
+            new StatValueViewModel(TextSpans.FromText("50"), 15),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 10)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", -10))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 10)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), -10))
             ],
             null,
             null,
@@ -4592,13 +4592,13 @@ public sealed class BattleScreenViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("5", 0),
+            new StatValueViewModel(TextSpans.FromText("5"), 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("80%", -8)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("30", 0))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("80%"), -8)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("30"), 0))
             ],
             null,
             null,

@@ -568,13 +568,13 @@ public sealed class MercenaryTabViewModelTests
             false,
             false,
             "Damage (Weapon)",
-            new StatValueViewModel("21", 0),
+            new StatValueViewModel(TextSpans.FromText("21"), 0),
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1 (Ranged)", 0)),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("40", 0))
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("40"), 0))
             ],
             null,
             null,

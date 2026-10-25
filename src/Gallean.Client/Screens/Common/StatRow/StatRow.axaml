@@ -13,7 +13,10 @@
             </ContentControl.ContentTemplate>
           </ContentControl>
           <TextBlock Grid.Column="1" Classes="body stat-label" Text="{Binding Label}" />
-          <TextBlock Grid.Column="2" Classes="body stat-value"><Run Text="{Binding Value.BaseText}" /><Run Classes="change" Classes.decrease="{Binding Value.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding Value.ChangeText}" /></TextBlock>
+          <StackPanel Grid.Column="2" Classes="stat-value">
+            <TextBlock Classes="body" local:TextRuns.Spans="{Binding Value.Text}" />
+            <TextBlock Classes="body change" Classes.decrease="{Binding Value.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding Value.ChangeText}" />
+          </StackPanel>
         </Grid>
       </Border>
     </DataTemplate>
@@ -41,17 +44,20 @@
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
   </Style>
-  <Style Selector="Border.stat-row TextBlock.stat-value">
+  <Style Selector="Border.stat-row StackPanel.stat-value">
+    <Setter Property="Orientation" Value="Horizontal" />
     <Setter Property="Margin" Value="12,0,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
     <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.stat-row StackPanel.stat-value > TextBlock">
     <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
-    <Setter Property="TextAlignment" Value="Right" />
     <Setter Property="TextWrapping" Value="Wrap" />
   </Style>
-  <Style Selector="Border.stat-row Run.change">
+  <Style Selector="Border.stat-row StackPanel.stat-value > TextBlock.change">
     <Setter Property="Foreground" Value="{StaticResource StatRowIncreaseBrush}" />
   </Style>
-  <Style Selector="Border.stat-row Run.change.decrease">
+  <Style Selector="Border.stat-row StackPanel.stat-value > TextBlock.change.decrease">
     <Setter Property="Foreground" Value="{StaticResource StatRowDecreaseBrush}" />
   </Style>
 </Styles>

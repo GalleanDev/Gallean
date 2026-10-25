@@ -212,15 +212,15 @@ internal sealed record UnitDetailsViewModel(
         StatValueViewModel damage;
         if (definition.Attack.Heal > 0)
         {
-            damage = new StatValueViewModel(definition.Attack.Heal.ToString(), 0);
+            damage = new StatValueViewModel(TextSpans.FromText(definition.Attack.Heal.ToString()), 0);
         }
         else if (baseStats.Damage > 0 && attackDamage > 0)
         {
-            damage = new StatValueViewModel(baseStats.Damage.ToString(), attackDamage - baseStats.Damage);
+            damage = new StatValueViewModel(TextSpans.FromText(baseStats.Damage.ToString()), attackDamage - baseStats.Damage);
         }
         else
         {
-            damage = new StatValueViewModel("—", 0);
+            damage = new StatValueViewModel(TextSpans.FromText("—"), 0);
         }
 
         string? secondaryAttackText;
@@ -245,16 +245,16 @@ internal sealed record UnitDetailsViewModel(
 
         List<StatRowViewModel> rows =
         [
-            new(IconMoniker.Target, Tr("Targets"), new StatValueViewModel(FormatTargets(definition.Attack.Reach), 0)),
-            new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(baseStats.Armor.ToString(), unitStats.Armor - baseStats.Armor)),
-            new(IconMoniker.Accuracy, Tr("Accuracy"), new StatValueViewModel($"{baseStats.Accuracy}%", unitStats.Accuracy - baseStats.Accuracy)),
-            new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(baseStats.Initiative.ToString(), unitStats.Initiative - baseStats.Initiative))
+            new(IconMoniker.Target, Tr("Targets"), CreateTargets(definition.Attack.Reach)),
+            new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(TextSpans.FromText(baseStats.Armor.ToString()), unitStats.Armor - baseStats.Armor)),
+            new(IconMoniker.Accuracy, Tr("Accuracy"), new StatValueViewModel(TextSpans.FromText($"{baseStats.Accuracy}%"), unitStats.Accuracy - baseStats.Accuracy)),
+            new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(TextSpans.FromText(baseStats.Initiative.ToString()), unitStats.Initiative - baseStats.Initiative))
         ];
 
         StatRowViewModel? leadershipRow;
         if (definition.LeaderCategory is not null)
         {
-            leadershipRow = new StatRowViewModel(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(leadership.ToString(), 0));
+            leadershipRow = new StatRowViewModel(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(TextSpans.FromText(leadership.ToString()), 0));
         }
         else
         {
@@ -341,13 +341,13 @@ internal sealed record UnitDetailsViewModel(
         }
     }
 
-    private static string FormatTargets(UnitAttackReach reach)
+    private static StatValueViewModel CreateTargets(UnitAttackReach reach)
     {
         return reach switch
         {
-            UnitAttackReach.All => Tr("{0} (All)", GridPosition.Count),
-            UnitAttackReach.Any => Tr("1 (Ranged)"),
-            UnitAttackReach.Adjacent => Tr("1 (Melee)")
+            UnitAttackReach.All => new StatValueViewModel(TrSpans("{0:b} {1:i}", GridPosition.Count, Tr("(All)")), 0),
+            UnitAttackReach.Any => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Ranged)")), 0),
+            UnitAttackReach.Adjacent => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Melee)")), 0)
         };
     }
 
