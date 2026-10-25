@@ -7,9 +7,16 @@ namespace Gallean.Client;
 
 internal sealed partial class SaveGameScreenViewModel : AbstractGameScreenViewModel
 {
-    public SaveGameScreenViewModel(GameModel game, GameViewModel gameViewModel, IReadOnlyList<GameSaveEntry> saves)
+    private readonly Action onSaved;
+
+    public SaveGameScreenViewModel(
+        GameModel game,
+        GameViewModel gameViewModel,
+        IReadOnlyList<GameSaveEntry> saves,
+        Action onSaved)
         : base(game, gameViewModel)
     {
+        this.onSaved = onSaved;
         SaveList = new GameSaveListViewModel(saves);
         SaveList.PropertyChanged += OnSaveListPropertyChanged;
         Name = Tr("{0}, turn {1}", game.ScenarioName, WorldState.TurnInfo.TurnNumber);
@@ -87,16 +94,8 @@ internal sealed partial class SaveGameScreenViewModel : AbstractGameScreenViewMo
 
         if (saveEntry is not null)
         {
-            if (existingSave is not null)
-            {
-                SaveList.Remove(existingSave);
-            }
-
-            GameSaveViewModel save = new(saveEntry);
-            SaveList.Saves.Insert(0, save);
-            SaveList.SelectedSave = save;
-            Name = name;
             Game.ShowInfo(IconMoniker.SaveGame, Tr("Game saved"), name);
+            onSaved();
         }
     }
 }

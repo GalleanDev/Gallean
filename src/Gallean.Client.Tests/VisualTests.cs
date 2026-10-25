@@ -618,7 +618,10 @@ public sealed class VisualTests
 
         gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
 
-        await gameViewModel.ShowSaveGameAsync(gameModel);
+        GameMenuViewModel menu = new(gameModel, gameViewModel);
+        gameViewModel.OpenScreen(menu);
+
+        await menu.SaveGameCommand.ExecuteAsync(null);
 
         await CaptureAsync(window);
     }
@@ -634,7 +637,10 @@ public sealed class VisualTests
 
         gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
 
-        await gameViewModel.ShowSaveGameAsync(gameModel);
+        GameMenuViewModel menu = new(gameModel, gameViewModel);
+        gameViewModel.OpenScreen(menu);
+
+        await menu.SaveGameCommand.ExecuteAsync(null);
 
         await CaptureAsync(window);
     }

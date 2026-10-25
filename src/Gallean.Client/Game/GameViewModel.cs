@@ -548,13 +548,13 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         }
     }
 
-    public async Task ShowSaveGameAsync(GameModel gameModel)
+    public async Task ShowSaveGameAsync(GameModel gameModel, Action onSaved)
     {
         IReadOnlyList<GameSaveEntry>? saves = await TryEnumerateSavesAsync();
 
         if (saves is not null)
         {
-            OpenScreen(new SaveGameScreenViewModel(gameModel, this, saves));
+            OpenScreen(new SaveGameScreenViewModel(gameModel, this, saves, onSaved));
         }
     }
 

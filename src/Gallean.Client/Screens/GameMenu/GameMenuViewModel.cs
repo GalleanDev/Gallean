@@ -33,7 +33,7 @@ internal sealed partial class GameMenuViewModel : AbstractGameScreenViewModel
     [RelayCommand(CanExecute = nameof(CanSaveGame))]
     private async Task SaveGameAsync()
     {
-        await Game.ShowSaveGameAsync(GameModel);
+        await Game.ShowSaveGameAsync(GameModel, CloseSelf);
     }
 
     private bool CanSaveGame()

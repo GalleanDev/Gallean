@@ -188,7 +188,8 @@ public sealed class GameViewModelTests
             $"{saved.Metadata.Name} | {saved.Metadata.ScenarioId} | {saved.Metadata.ScenarioName} | {saved.Metadata.TurnNumber} | {saved.Metadata.SavedBy}",
             Is.EqualTo("My save | scenario-1 | scenario-1:NAME:0 | 1 | 0.1.0+2d403009d94320d045b06c4c97671638a00444b2"));
         Assert.That(saved.WorldState, Is.EqualTo(session.World.State));
-        Assert.That(saveScreen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.SaveGame, "Game saved", "My save")));
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.SaveGame, "Game saved", "My save")));
     }
 
     [Test]
@@ -237,8 +238,8 @@ public sealed class GameViewModelTests
 
         await prompt.ConfirmCommand.ExecuteAsync(null);
 
-        Assert.That(saveScreen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.SaveGame, "Game saved", "Old save")));
-        Assert.That(FormatSaves(saveScreen.SaveList.Saves), Is.EqualTo(["Old save | scenario-1:NAME:0 | Turn 1"]));
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.SaveGame, "Game saved", "Old save")));
         Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz"]));
     }
 
@@ -286,7 +287,10 @@ public sealed class GameViewModelTests
 
         await prompt.ConfirmCommand.ExecuteAsync(null);
 
-        Assert.That(FormatSaves(saveScreen.SaveList.Saves), Is.EqualTo(["scenario-1:NAME:0, turn 1 | scenario-1:NAME:0 | Turn 1"]));
+        GameSave saved = Assert.NotNull(await saveStore.TryLoadAsync(new GameSaveId(1)));
+
+        Assert.That(saved.Metadata.Name, Is.EqualTo("scenario-1:NAME:0, turn 1"));
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz"]));
     }
 
@@ -650,11 +654,13 @@ public sealed class GameViewModelTests
 
         await saveScreen.SaveCommand.ExecuteAsync(null);
 
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+
         gameViewModel.EscapeCommand.Execute(null);
 
-        Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { world, menu }));
+        GameMenuViewModel exitMenu = Assert.IsOfType<GameMenuViewModel>(gameViewModel.TopScreen);
 
-        await menu.Game.ExitGameCommand.ExecuteAsync(null);
+        await exitMenu.Game.ExitGameCommand.ExecuteAsync(null);
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([gameViewModel.RootScreen]));
         Assert.That(gameViewModel.RootScreen, Is.InstanceOf<MainMenuScreenViewModel>());
@@ -2095,10 +2101,19 @@ public sealed class GameViewModelTests
 
         await menu.SaveGameCommand.ExecuteAsync(null);
 
+        SaveGameScreenViewModel firstSaveScreen = Assert.IsOfType<SaveGameScreenViewModel>(gameViewModel.TopScreen);
+
+        await firstSaveScreen.SaveCommand.ExecuteAsync(null);
+
+        gameViewModel.EscapeCommand.Execute(null);
+
+        GameMenuViewModel secondMenu = Assert.IsOfType<GameMenuViewModel>(gameViewModel.TopScreen);
+
+        await secondMenu.SaveGameCommand.ExecuteAsync(null);
+
         SaveGameScreenViewModel saveScreen = Assert.IsOfType<SaveGameScreenViewModel>(gameViewModel.TopScreen);
 
-        await saveScreen.SaveCommand.ExecuteAsync(null);
-
+        Assert.That(FormatSaves(saveScreen.SaveList.Saves), Is.EqualTo(["scenario-1:NAME:0, turn 1 | scenario-1:NAME:0 | Turn 1"]));
         Assert.That(saveScreen.SaveList.SelectedSave, Is.EqualTo(saveScreen.SaveList.Saves[0]));
         Assert.That(saveScreen.SaveLabel, Is.EqualTo("Overwrite"));
 
@@ -2108,10 +2123,7 @@ public sealed class GameViewModelTests
 
         Assert.That(prompt.Message, Is.EqualTo(TextSpans.FromText("Replace \"scenario-1:NAME:0, turn 1\" with the current game?")));
 
-        await prompt.ConfirmCommand.ExecuteAsync(null);
-
-        Assert.That(FormatSaves(saveScreen.SaveList.Saves), Is.EqualTo(["scenario-1:NAME:0, turn 1 | scenario-1:NAME:0 | Turn 1"]));
-        Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz"]));
+        prompt.CloseCommand.Execute(null);
 
         saveScreen.Name = "Another save";
 
@@ -2122,6 +2134,14 @@ public sealed class GameViewModelTests
 
         Assert.That(saveScreen.SaveList.SelectedSave, Is.EqualTo(saveScreen.SaveList.Saves[0]));
         Assert.That(saveScreen.SaveLabel, Is.EqualTo("Overwrite"));
+
+        await saveScreen.SaveCommand.ExecuteAsync(null);
+
+        ConfirmPromptViewModel secondPrompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+        await secondPrompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz"]));
     }
 
     [Test]
