@@ -124,7 +124,7 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
             TrSpans("Upgrades to select: {0:*}", stack.PendingLeaderUpgrades),
             UnitDetailsViewModel.CreateFromWorld(leader, owner, GameModel.Definitions, GameModel.Texts, GameModel.Stats));
 
-        IReadOnlyList<LeaderUpgradeItemViewModel> options = BuildOptions(stack, leader);
+        IReadOnlyList<LeaderUpgradeItemViewModel> options = BuildOptions();
 
         if (!options.Any(option => option.Status.IsAvailable && option.ModifierId == selectedModifierId))
         {
@@ -140,49 +140,51 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
         HasSelectedUpgrade = selectedModifierId is not null;
     }
 
-    private IReadOnlyList<LeaderUpgradeItemViewModel> BuildOptions(WorldStack stack, WorldUnit leader)
+    private IReadOnlyList<LeaderUpgradeItemViewModel> BuildOptions()
     {
-        LordDefinitionId lordId = WorldState.Players[stack.OwnerId].LordId;
+        WorldGetLeaderUpgradeInfoCommand.Result info = ResolveLeaderUpgradeInfo();
+        IEnumerable<WorldGetLeaderUpgradeInfoCommand.Upgrade> upgrades = info.Upgrades.OrderByDescending(upgrade => upgrade.IsPreferred);
 
         List<LeaderUpgradeItemViewModel> result = [];
 
-        foreach (LeaderUpgradeDefinition upgrade in GameModel.Definitions.GetLeaderUpgrades(lordId))
+        foreach ((LeaderUpgradeDefinition definition, bool isPreferred, WorldCommandError? error) in upgrades)
         {
-            if (leader.Modifiers.Any(modifier => modifier.DefinitionId == upgrade.ModifierId))
-            {
-                continue;
-            }
+            string? unavailableReason;
 
-            WorldSelectLeaderUpgradeCommand command = new(stack.Id, upgrade.ModifierId);
-            WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
-
-            if (commandResult.Error == WorldCommandError.LeaderUpgradeNotAvailable)
+            if (error is not null)
             {
-                continue;
+                unavailableReason = WorldCommandErrorFormatter.Format(error.Value);
             }
             else
             {
-                string? unavailableReason;
-
-                if (commandResult.Failed)
-                {
-                    unavailableReason = WorldCommandErrorFormatter.Format(commandResult.Error.Value);
-                }
-                else
-                {
-                    unavailableReason = null;
-                }
-
-                result.Add(new LeaderUpgradeItemViewModel(
-                    this,
-                    upgrade.ModifierId,
-                    UnitModifierIconResolver.Resolve(GameModel.Definitions.GetUnitModifier(upgrade.ModifierId)),
-                    GameModel.Texts.GetGlobalText(upgrade.NameTextId).Text,
-                    GameModel.Texts.GetGlobalText(upgrade.DescriptionTextId).Text,
-                    unavailableReason));
+                unavailableReason = null;
             }
+
+            result.Add(new LeaderUpgradeItemViewModel(
+                this,
+                definition.ModifierId,
+                UnitModifierIconResolver.Resolve(GameModel.Definitions.GetUnitModifier(definition.ModifierId)),
+                GameModel.Texts.GetGlobalText(definition.NameTextId).Text,
+                GameModel.Texts.GetGlobalText(definition.DescriptionTextId).Text,
+                isPreferred,
+                unavailableReason));
         }
 
         return result;
+    }
+
+    private WorldGetLeaderUpgradeInfoCommand.Result ResolveLeaderUpgradeInfo()
+    {
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetLeaderUpgradeInfoCommand.Result> result =
+            GameModel.World.DryRunCommand(new WorldGetLeaderUpgradeInfoCommand(stackId));
+
+        if (result.Failed)
+        {
+            return new WorldGetLeaderUpgradeInfoCommand.Result([]);
+        }
+        else
+        {
+            return result.Data;
+        }
     }
 }

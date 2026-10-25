@@ -732,4 +732,56 @@ public sealed class WorldEngineLeaderUpgradeTests
                 .Remove(stack2.Id)
         }));
     }
+
+    [Test]
+    public void InfoTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 4, leadership: 6);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitGrid<WorldUnit> units = new UnitGrid<WorldUnit>.Builder()
+            .Place(
+                TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Level = 2, Modifiers = [UnitModifier.Permanent(new UnitModifierDefinitionId("wand"))] },
+                GridPosition.FrontBottom,
+                false)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                player.Id,
+                new WorldPosition(0, 0),
+                units,
+                movementPoints: 4) with
+            {
+                PendingLeaderUpgrades = 1
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(AbilityModifier("banner", LeaderAbility.BannerUse))
+            .WithDefinition(AbilityModifier("orb", LeaderAbility.OrbUse))
+            .WithDefinition(AbilityModifier("talisman", LeaderAbility.TalismanUse))
+            .WithDefinition(AbilityModifier("wand", LeaderAbility.WandScrollUse))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "banner", minLevel: 1, priority: 80))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "orb", minLevel: 2, priority: 99))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "talisman", minLevel: 9, priority: 95))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "wand", minLevel: 1, priority: 99))
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        WorldGetLeaderUpgradeInfoCommand.Result result = engine.CheckCommand(new WorldGetLeaderUpgradeInfoCommand(stack.Id), []);
+
+        Assert.That(result, Is.EqualTo(new WorldGetLeaderUpgradeInfoCommand.Result(
+        [
+            new WorldGetLeaderUpgradeInfoCommand.Upgrade(Upgrade(player.LordId, "banner", minLevel: 1, priority: 80), IsPreferred: false, Error: null),
+            new WorldGetLeaderUpgradeInfoCommand.Upgrade(Upgrade(player.LordId, "orb", minLevel: 2, priority: 99), IsPreferred: true, Error: null)
+        ])));
+    }
 }

@@ -79,10 +79,20 @@
                                       VerticalAlignment="Top"
                                       Foreground="{StaticResource AccentBrush}" />
                     <StackPanel Grid.Column="1" Spacing="2">
-                      <local:OutlinedTextBlock Text="{Binding Name}"
-                                               Classes="h4"
-                                               Foreground="{StaticResource PrimaryTextBrush}"
-                                               TextWrapping="Wrap" />
+                      <Grid ColumnDefinitions="*,Auto">
+                        <local:OutlinedTextBlock Grid.Column="0"
+                                                 Text="{Binding Name}"
+                                                 Classes="h4"
+                                                 Foreground="{StaticResource PrimaryTextBrush}"
+                                                 TextWrapping="Wrap" />
+                        <TextBlock Grid.Column="1"
+                                   Margin="12,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Classes="caption"
+                                   Foreground="{StaticResource HighlightTextBrush}"
+                                   IsVisible="{Binding IsPreferred}"
+                                   Text="{local:Text 'Recommended'}" />
+                      </Grid>
                       <TextBlock Text="{Binding Description}"
                                  Classes="body"
                                  Foreground="{StaticResource SecondaryTextBrush}"

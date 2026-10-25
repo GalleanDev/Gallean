@@ -4203,7 +4203,7 @@ public sealed class VisualTests
 
         WorldStack upgradable = stack with
         {
-            Units = stack.Units.Replace(leader, leader with { Level = 2 }),
+            Units = stack.Units.Replace(leader, leader with { Level = 3 }),
             PendingLeaderUpgrades = 1
         };
 
