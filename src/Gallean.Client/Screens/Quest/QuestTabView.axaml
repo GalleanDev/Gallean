@@ -42,8 +42,8 @@
     <Style Selector="local|SpriteVisual.event-portrait">
       <Setter Property="Width" Value="186" />
       <Setter Property="Height" Value="240" />
-      <Setter Property="Stretch" Value="Uniform" />
       <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Stretch" Value="Uniform" />
     </Style>
 
     <Style Selector="Panel.dialog-bubble">
@@ -56,13 +56,13 @@
       <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
     <Style Selector="Grid.dialog-line.narration Panel.dialog-bubble">
-      <Setter Property="HorizontalAlignment" Value="Center" />
       <Setter Property="Margin" Value="0" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
     <Style Selector="Border.dialog-card">
-      <Setter Property="Padding" Value="16,10" />
       <Setter Property="Margin" Value="12,0,0,0" />
+      <Setter Property="Padding" Value="16,10" />
       <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}" />
       <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}" />
       <Setter Property="BorderThickness" Value="1" />
@@ -72,27 +72,27 @@
       <Setter Property="Margin" Value="0,0,12,0" />
     </Style>
     <Style Selector="Border.dialog-card.briefing">
+      <Setter Property="MaxWidth" Value="640" />
       <Setter Property="Margin" Value="0,4,0,8" />
       <Setter Property="Padding" Value="24,16" />
-      <Setter Property="MaxWidth" Value="640" />
       <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
     <Style Selector="Grid.dialog-line.narration Border.dialog-card">
       <Setter Property="Margin" Value="0" />
+      <Setter Property="Padding" Value="24,6" />
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderThickness" Value="0" />
-      <Setter Property="Padding" Value="24,6" />
     </Style>
 
     <Style Selector="Path.dialog-tail">
+      <Setter Property="Margin" Value="0,18,0,0" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Top" />
       <Setter Property="Data" Value="M 13,0 L 0,11 L 13,22" />
       <Setter Property="Fill" Value="{StaticResource CardBackgroundBrush}" />
       <Setter Property="Stroke" Value="{StaticResource CardBorderBrush}" />
       <Setter Property="StrokeThickness" Value="1" />
       <Setter Property="StrokeJoin" Value="Round" />
-      <Setter Property="HorizontalAlignment" Value="Left" />
-      <Setter Property="VerticalAlignment" Value="Top" />
-      <Setter Property="Margin" Value="0,18,0,0" />
     </Style>
     <Style Selector="Grid.dialog-line.right Path.dialog-tail">
       <Setter Property="HorizontalAlignment" Value="Right" />
@@ -114,8 +114,8 @@
       <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
     </Style>
     <Style Selector="Grid.dialog-line.narration TextBlock.dialog-text">
-      <Setter Property="TextAlignment" Value="Center" />
       <Setter Property="Foreground" Value="{StaticResource ScenarioDialogHistoryTextBrush}" />
+      <Setter Property="TextAlignment" Value="Center" />
     </Style>
   </UserControl.Styles>
 
@@ -230,8 +230,11 @@
                               <Panel Grid.Column="1" Classes="dialog-bubble">
                                 <Border Classes="dialog-card">
                                   <StackPanel>
-                                    <TextBlock Classes="caption dialog-speaker" Text="{Binding Message.PortraitName}" IsVisible="{Binding HasSpeaker}" />
-                                    <TextBlock Classes="prose dialog-text" local:ScenarioText.Spans="{Binding Message.Spans}" />
+                                    <TextBlock Classes="caption dialog-speaker"
+                                               Text="{Binding Message.PortraitName}"
+                                               IsVisible="{Binding HasSpeaker}" />
+                                    <TextBlock Classes="prose dialog-text"
+                                               local:ScenarioText.Spans="{Binding Message.Spans}" />
                                   </StackPanel>
                                 </Border>
                                 <Path Classes="dialog-tail" />

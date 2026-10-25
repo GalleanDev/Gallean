@@ -92,13 +92,13 @@
     <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
     <Setter Property="FontSize" Value="44" />
     <Setter Property="FontWeight" Value="Bold" />
-    <Setter Property="Effect">
-      <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="10" Opacity="1" Color="{x:Static local:Theme+UnitPortrait.GlowColor}" />
-    </Setter>
     <Setter Property="Transitions">
       <Transitions>
         <DoubleTransition Property="Opacity" Duration="0:0:0.08" />
       </Transitions>
+    </Setter>
+    <Setter Property="Effect">
+      <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="10" Opacity="1" Color="{x:Static local:Theme+UnitPortrait.GlowColor}" />
     </Setter>
   </Style>
   <Style Selector="Button.slot.purchase:pointerover Border.rune.purchase > TextBlock">
@@ -106,8 +106,8 @@
   </Style>
 
   <Style Selector="Button.slot.purchase local|UnitPortrait:free /template/ Border#PART_Frame">
-    <Setter Property="Background" Value="{StaticResource UnitPortraitFrameGradientBrush}" />
     <Setter Property="Opacity" Value="0.7" />
+    <Setter Property="Background" Value="{StaticResource UnitPortraitFrameGradientBrush}" />
     <Setter Property="Transitions">
       <Transitions>
         <DoubleTransition Property="Opacity" Duration="0:0:0.08" />

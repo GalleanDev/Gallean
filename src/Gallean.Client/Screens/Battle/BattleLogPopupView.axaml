@@ -10,13 +10,13 @@
     </Style>
 
     <Style Selector="Line.round-divider">
+      <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="Stretch" Value="Fill" />
       <Setter Property="StartPoint" Value="0,0" />
       <Setter Property="EndPoint" Value="1,0" />
       <Setter Property="Stroke" Value="{StaticResource DividerBrush}" />
       <Setter Property="StrokeThickness" Value="1" />
       <Setter Property="StrokeDashArray" Value="4,3" />
-      <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
   </UserControl.Styles>
 
