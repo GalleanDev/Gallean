@@ -43,9 +43,11 @@ internal sealed partial class WorldAiPlanner
 
             public BattleState? Visit(PathTraversalCalculator.Encounter.FortificationBattle encounter, Context context)
             {
+                WorldPlayerId? owner = FortificationCalculator.GetOwner(encounter.Fortification);
                 BattleModifiers modifiers = WorldCommandHelpers.CreateModifiers(
-                    context.State, context.Stack.OwnerId, FortificationCalculator.GetOwner(encounter.Fortification), context.Engine);
-                int fortificationArmor = FortificationCalculator.GetArmorBonus(encounter.Fortification, context.Engine.Globals);
+                    context.State, context.Stack.OwnerId, owner, context.Engine);
+                int fortificationArmor = FortificationCalculator.GetArmorBonus(
+                    encounter.Fortification, context.Engine.Globals);
 
                 return WorldCommandHelpers.CreateGarrisonBattleState(
                     context.Stack, encounter.Fortification.Garrison, fortificationArmor, modifiers, context.Engine);
