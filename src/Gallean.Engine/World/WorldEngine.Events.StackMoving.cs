@@ -12,6 +12,8 @@ internal partial class WorldEngine
             MovementPoints = ev.NewMovementPoints
         };
 
-        return state with { Stacks = state.Stacks.SetItem(ev.StackId, updatedStack) };
+        WorldState updatedState = state with { Stacks = state.Stacks.SetItem(ev.StackId, updatedStack) };
+
+        return FortificationCalculator.UpdateUnitModifiers(updatedState, Context.Definitions);
     }
 }

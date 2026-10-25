@@ -363,4 +363,54 @@ public sealed class BattleEngineShatterAttackTests
                 CurrentRound = BattleRound.Normal(1)
             }));
     }
+
+    [Test]
+    public void FortifiedRemainingArmorCapTest()
+    {
+        UnitDefinition shattererDefinition = ShattererDefinition("shatterer", initiative: 60, damage: 80);
+        UnitDefinition golemDefinition = TestHelpers.SimpleUnitDefinition("golem", maxHitpoints: 100, initiative: 40, damage: 2) with
+        {
+            Armor = 20
+        };
+
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(10, 0) };
+
+        BattleUnit shatterer = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, shattererDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit golem = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, golemDefinition.Id, BattleSide.Defender, hitpoints: 100) with
+        {
+            Modifiers = [UnitModifier.FromFortification(protection.Id)],
+            StatusEffects = [new BattleFortificationStatusEffect(10)]
+        };
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(shattererDefinition)
+            .WithDefinition(golemDefinition)
+            .WithDefinition(protection)
+            .WithAttacker(shatterer, GridPosition.FrontBottom)
+            .WithDefender(golem, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(shatterer.Id, new BattleAttackUnitTarget(golem.Id)), [
+            new BattleUnitAttackEvent(shatterer.Id, new BattleAttackUnitTarget(golem.Id), [new UnitAttackDefinitionId("shatterer")]),
+            new BattleUnitAttackedEvent(shatterer.Id, golem.Id, new UnitAttackDefinitionId("shatterer")),
+            new BattleUnitAttackHitEvent(shatterer.Id, golem.Id, new UnitAttackDefinitionId("shatterer"), 0),
+            new BattleUnitEffectAppliedEvent(shatterer.Id, golem.Id, new BattleShatterArmorStatusEffect(30)),
+            new BattleUnitTurnEndingEvent(shatterer.Id),
+            new BattleUnitTurnEndedEvent(shatterer.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(shatterer, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(golem with { StatusEffects = [new BattleFortificationStatusEffect(10), new BattleShatterArmorStatusEffect(30)] }, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(1)
+            }));
+    }
 }

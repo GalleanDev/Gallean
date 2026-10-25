@@ -23,10 +23,12 @@ internal partial class WorldEngine
 
         WorldFortification updatedFortification = fortification with { Garrison = garrisonBuilder.Build() };
 
-        return state with
+        WorldState updatedState = state with
         {
             Players = state.Players.SetItem(updatedPlayer.Id, updatedPlayer),
             Fortifications = state.Fortifications.SetItem(updatedFortification.Id, updatedFortification)
         };
+
+        return FortificationCalculator.UpdateUnitModifiers(updatedState, Context.Definitions);
     }
 }

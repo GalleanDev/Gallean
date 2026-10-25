@@ -5,4 +5,5 @@ public sealed record WorldCityDefinition(
     int Level,
     int VisionRadius,
     int Regeneration,
-    WorldResourceSet UpgradeCost);
+    WorldResourceSet UpgradeCost,
+    UnitModifierDefinitionId? ProtectionModifierId);

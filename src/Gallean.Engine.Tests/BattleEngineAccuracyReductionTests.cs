@@ -11,6 +11,7 @@ public sealed class BattleEngineAccuracyReductionTests
             WorldMapTerrain.Human,
             true,
             35,
+            null,
             [],
             [.. leaders],
             [],

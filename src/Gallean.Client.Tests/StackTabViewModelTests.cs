@@ -2184,6 +2184,7 @@ public sealed class StackTabViewModelTests
             NativeTerrain: WorldMapTerrain.Human,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],

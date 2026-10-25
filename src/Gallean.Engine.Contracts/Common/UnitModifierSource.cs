@@ -4,5 +4,6 @@ public enum UnitModifierSource
 {
     Unit,
     Equipment,
-    Scenario
+    Scenario,
+    Fortification
 }

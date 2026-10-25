@@ -108,6 +108,54 @@ public sealed class UnitStatsProviderTests
     }
 
     [Test]
+    public void FortificationModifierTest()
+    {
+        UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 45 };
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(30, 0) };
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(definition).AddUnitModifier(protection).Build();
+        GlobalVariables globals = new();
+
+        BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [UnitModifier.FromFortification(protection.Id)], [new BattleFortificationStatusEffect(30)], null, [], null, false);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+
+        UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
+
+        Assert.That(stats, Is.EqualTo(new UnitStats(MaxHitpoints: 100, Armor: 75, Regeneration: 5, Initiative: 50, Damage: 25, Accuracy: 100, ExperienceKilled: 0, ExperienceNextLevel: 1000)));
+    }
+
+    [Test]
+    public void FortificationModifierCappedTest()
+    {
+        UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 80 };
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(30, 0) };
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(definition).AddUnitModifier(protection).Build();
+        GlobalVariables globals = new();
+
+        BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [UnitModifier.FromFortification(protection.Id)], [new BattleFortificationStatusEffect(30)], null, [], null, false);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+
+        UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
+
+        Assert.That(stats, Is.EqualTo(new UnitStats(MaxHitpoints: 100, Armor: 90, Regeneration: 5, Initiative: 50, Damage: 25, Accuracy: 100, ExperienceKilled: 0, ExperienceNextLevel: 1000)));
+    }
+
+    [Test]
+    public void FortificationModifierShatterTest()
+    {
+        UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 45 };
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(30, 0) };
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(definition).AddUnitModifier(protection).Build();
+        GlobalVariables globals = new();
+
+        BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [UnitModifier.FromFortification(protection.Id)], [new BattleFortificationStatusEffect(30), new BattleShatterArmorStatusEffect(60)], null, [], null, false);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+
+        UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
+
+        Assert.That(stats, Is.EqualTo(new UnitStats(MaxHitpoints: 100, Armor: 30, Regeneration: 5, Initiative: 50, Damage: 25, Accuracy: 100, ExperienceKilled: 0, ExperienceNextLevel: 1000)));
+    }
+
+    [Test]
     public void DefendTest()
     {
         UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 20 };

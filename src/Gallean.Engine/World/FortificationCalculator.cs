@@ -73,9 +73,20 @@ internal static partial class FortificationCalculator
         }
     }
 
-    public static int GetArmorBonus(WorldFortification fortification, GlobalVariables globals)
+    public static int GetArmorBonus(WorldFortification fortification, WorldState state, IGameDefinitionProvider definitions)
     {
-        return fortification.Accept(ArmorVisitor.Instance, globals);
+        UnitModifierDefinitionId? modifierId = GetProtectionModifierId(fortification, state, definitions);
+
+        if (modifierId is not null)
+        {
+            UnitModifierDefinition modifier = definitions.GetUnitModifier(modifierId.Value);
+
+            return modifier.Armor.Flat;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public static bool IsRioting(WorldFortification fortification)
@@ -103,6 +114,104 @@ internal static partial class FortificationCalculator
         return fortification.Accept(CaptureTerrainGrowthVisitor.Instance, globals);
     }
 
+    public static WorldState UpdateUnitModifiers(WorldState state, IGameDefinitionProvider definitions)
+    {
+        WorldPlan plan = WorldPlan.For(state);
+        WorldState result = state;
+
+        foreach (WorldStack stack in state.Stacks.Values)
+        {
+            WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
+
+            UnitModifierDefinitionId? modifierId;
+            if (fortification is not null)
+            {
+                modifierId = GetProtectionModifierId(fortification, state, definitions);
+            }
+            else
+            {
+                modifierId = null;
+            }
+
+            if (!HasProtection(stack.Units, modifierId))
+            {
+                UnitGrid<WorldUnit> units = SetProtection(stack.Units, modifierId);
+                result = result with { Stacks = result.Stacks.SetItem(stack.Id, stack with { Units = units }) };
+            }
+        }
+
+        foreach (WorldFortification fortification in state.Fortifications.Values)
+        {
+            UnitModifierDefinitionId? modifierId = GetProtectionModifierId(fortification, state, definitions);
+
+            if (!HasProtection(fortification.Garrison, modifierId))
+            {
+                UnitGrid<WorldUnit> garrison = SetProtection(fortification.Garrison, modifierId);
+                result = result with { Fortifications = result.Fortifications.SetItem(fortification.Id, fortification with { Garrison = garrison }) };
+            }
+        }
+
+        return result;
+    }
+
+    public static UnitGrid<WorldUnit> RemoveUnitModifiers(UnitGrid<WorldUnit> units)
+    {
+        return SetProtection(units, modifierId: null);
+    }
+
+    private static bool HasProtection(UnitGrid<WorldUnit> units, UnitModifierDefinitionId? modifierId)
+    {
+        foreach ((WorldUnit unit, _) in units.GetUnits())
+        {
+            if (GetProtection(unit) != modifierId)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static UnitModifierDefinitionId? GetProtection(WorldUnit unit)
+    {
+        foreach (UnitModifier modifier in unit.Modifiers)
+        {
+            if (modifier.Source is UnitModifierSource.Fortification)
+            {
+                return modifier.DefinitionId;
+            }
+        }
+
+        return null;
+    }
+
+    private static UnitGrid<WorldUnit> SetProtection(UnitGrid<WorldUnit> units, UnitModifierDefinitionId? modifierId)
+    {
+        UnitGrid<WorldUnit> result = units;
+
+        foreach ((WorldUnit unit, _) in units.GetUnits())
+        {
+            ImmutableArray<UnitModifier> modifiers = unit.Modifiers.RemoveAll(modifier => modifier.Source is UnitModifierSource.Fortification);
+
+            if (modifierId is not null)
+            {
+                modifiers = modifiers.Add(UnitModifier.FromFortification(modifierId.Value));
+            }
+
+            result = result.Replace(unit, unit with { Modifiers = modifiers });
+        }
+
+        return result;
+    }
+
+    private static UnitModifierDefinitionId? GetProtectionModifierId(
+        WorldFortification fortification,
+        WorldState state,
+        IGameDefinitionProvider definitions)
+    {
+        return fortification.Accept(ProtectionModifierVisitor.Instance, new ProtectionContext(state, definitions));
+    }
+
     private static int GetCityTerrainGrowth(int cityLevel, GlobalVariables globals)
     {
         return cityLevel switch
@@ -112,19 +221,6 @@ internal static partial class FortificationCalculator
             3 => globals.CityTerrainTilesPerTurnLevel3,
             4 => globals.CityTerrainTilesPerTurnLevel4,
             5 => globals.CityTerrainTilesPerTurnLevel5,
-            _ => 0
-        };
-    }
-
-    private static int GetCityArmorBonus(int cityLevel, GlobalVariables globals)
-    {
-        return cityLevel switch
-        {
-            1 => globals.ProtectionCityLevel1,
-            2 => globals.ProtectionCityLevel2,
-            3 => globals.ProtectionCityLevel3,
-            4 => globals.ProtectionCityLevel4,
-            5 => globals.ProtectionCityLevel5,
             _ => 0
         };
     }

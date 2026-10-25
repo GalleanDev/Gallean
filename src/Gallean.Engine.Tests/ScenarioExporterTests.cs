@@ -48,6 +48,7 @@ public sealed class ScenarioExporterTests
             WorldMapTerrain.Human,
             true,
             35,
+            null,
             [],
             [leaderDefinition.Id, thiefDefinition.Id],
             [],

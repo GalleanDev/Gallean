@@ -9,6 +9,7 @@ public sealed record WorldRaceDefinition(
     WorldMapTerrain NativeTerrain,
     bool IsPlayable,
     int CapitalRegeneration,
+    UnitModifierDefinitionId? CapitalProtectionModifierId,
     ImmutableArray<WorldCityDefinitionId> Cities,
     ImmutableArray<UnitDefinitionId> Leaders,
     ImmutableArray<UnitDefinitionId> Units,

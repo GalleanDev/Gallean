@@ -33,7 +33,11 @@ public sealed class WorldEngineCityTests
                 .Build(),
             movementPoints: 10);
 
-        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(10, 0) };
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty) with
+        {
+            ProtectionModifierId = protection.Id
+        };
         WorldCity city1 = TestHelpers.SimpleCity(
             new WorldFortificationId("city1"),
             cityDefinition,
@@ -46,6 +50,7 @@ public sealed class WorldEngineCityTests
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)
             .WithDefinition(unitDefinition)
+            .WithDefinition(protection)
             .WithDefinition(cityDefinition)
             .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
@@ -63,9 +68,9 @@ public sealed class WorldEngineCityTests
             new WorldTurnResourcesGeneratedEvent(new WorldPlayerId(1), new WorldResourceSet(100, 25, 0, 0, 0, 0))
         ]);
 
-        BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(unitDefinition).Build())
+        BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(unitDefinition).AddUnitModifier(protection).Build())
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 10), new GridPosition(0, 0))
-            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { StatusEffects = [new BattleFortificationStatusEffect(10)] }, new GridPosition(0, 0))
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { Modifiers = [UnitModifier.FromFortification(protection.Id)], StatusEffects = [new BattleFortificationStatusEffect(10)] }, new GridPosition(0, 0))
             .Build(BattleModifiers.None);
 
         engine.CheckCommand(
@@ -1056,5 +1061,81 @@ public sealed class WorldEngineCityTests
             OwnerId = attacker.Id,
             SubraceId = new WorldSubraceId("attacker-subrace")
         }));
+    }
+
+    [Test]
+    public void AttackVisitingStackTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^",
+            "^^^^^^",
+            "^^^^^^",
+            "^^^...",
+            "^^^...",
+            "^^^..U"
+        ]);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 10, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack attacker = TestHelpers.SimpleStack(
+            new WorldStackId("attacker"),
+            player1.Id,
+            new WorldPosition(5, 5),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("attacker-leader"), leader),
+            movementPoints: 10);
+
+        WorldStack visitor = TestHelpers.SimpleStack(
+            new WorldStackId("visitor"),
+            player2.Id,
+            new WorldPosition(3, 3),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("visitor-leader"), leader),
+            movementPoints: 10);
+
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(15, 0) };
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 2), WorldResourceSet.Empty) with
+        {
+            ProtectionModifierId = protection.Id
+        };
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player2.Id,
+            new WorldPosition(3, 3),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("garrison-leader"), leader));
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(protection)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(attacker)
+            .WithStack(visitor)
+            .WithCity(city)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).AddUnitModifier(protection).Build())
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("attacker-leader"), leader.Id, BattleSide.Attacker, hitpoints: 100), GridPosition.FrontBottom)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("visitor-leader"), leader.Id, BattleSide.Defender, hitpoints: 100) with { Modifiers = [UnitModifier.FromFortification(protection.Id)], StatusEffects = [new BattleFortificationStatusEffect(15)] }, GridPosition.FrontBottom)
+            .Build(BattleModifiers.None);
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(attacker.Id, new WorldPosition(3, 3)),
+            [
+                new WorldStackMovingEvent(attacker.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 8, [], new WorldPosition(3, 3)),
+                new WorldStackMovedEvent(attacker.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 8, [], new WorldPosition(3, 3)),
+                new WorldStackMovementConsumedEvent(attacker.Id, 3),
+                new WorldStackBattleStartedEvent(attacker.Id, visitor.Id, new WorldPosition(3, 3), expectedBattleState, IsDuel: false)
+            ]);
     }
 }

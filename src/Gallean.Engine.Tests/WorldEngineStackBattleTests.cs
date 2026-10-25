@@ -637,6 +637,7 @@ public sealed class WorldEngineStackBattleTests
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)
             .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Heretic, 1), WorldResourceSet.Empty))
             .WithDefinition(TestHelpers.SimpleLord(attacker.LordId, attacker.Race, LordCategory.Warrior))
             .WithPlayer(attacker)
             .WithDefinition(TestHelpers.SimpleLord(defender.LordId, defender.Race, LordCategory.Warrior))

@@ -739,10 +739,10 @@ public sealed class ScenarioLoaderTests
         UnitDefinitionId u3001 = new("G000UU3001");
 
         UnitGrid<WorldUnit> expectedGarrison = new UnitGrid<WorldUnit>.Builder()
-            .Place(new WorldUnit(new WorldUnitId("S095UN0004"), u0004, 125, 0, 2, [], null, false), GridPosition.FrontBottom, false)
-            .Place(new WorldUnit(new WorldUnitId("S095UN0000"), u3001, 900, 0, 1, [], null, false), GridPosition.FrontCenter, false)
-            .Place(new WorldUnit(new WorldUnitId("S095UN0006"), u0011, 50, 0, 1, [], null, false), GridPosition.FrontTop, false)
-            .Place(new WorldUnit(new WorldUnitId("S095UN0005"), u0006, 45, 0, 1, [], null, false), GridPosition.BackCenter, false)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0004"), u0004, 125, 0, 2, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.FrontBottom, false)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0000"), u3001, 900, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.FrontCenter, false)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0006"), u0011, 50, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.FrontTop, false)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0005"), u0006, 45, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.BackCenter, false)
             .Build();
 
         Assert.That(scenario.State.Fortifications[new WorldFortificationId("S095FT0000")], Is.EqualTo(new WorldCapital(
@@ -2168,7 +2168,7 @@ public sealed class ScenarioLoaderTests
 
         WorldStack stack = scenario.State.Stacks[new WorldStackId("S095KC0000")];
 
-        WorldUnit expectedUnit = new(new WorldUnitId("S095UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [], Name: "Ardobert", IsTypeLocked: false);
+        WorldUnit expectedUnit = new(new WorldUnitId("S095UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], Name: "Ardobert", IsTypeLocked: false);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(expectedUnit, new GridPosition(0, 1), false)
@@ -2207,9 +2207,9 @@ public sealed class ScenarioLoaderTests
         Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
-            .Place(new WorldUnit(new WorldUnitId("S107UN005b"), new UnitDefinitionId("G000UU5017"), 50, 0, 1, [], null, false), GridPosition.FrontBottom, false)
-            .Place(new WorldUnit(new WorldUnitId("S107UN005e"), new UnitDefinitionId("G000UU5018"), 40, 0, 1, [], null, false), GridPosition.FrontCenter, false)
-            .Place(new WorldUnit(new WorldUnitId("S107UN005c"), new UnitDefinitionId("G000UU5017"), 50, 0, 1, [], null, false), GridPosition.FrontTop, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN005b"), new UnitDefinitionId("G000UU5017"), 50, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM3002"))], null, false), GridPosition.FrontBottom, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN005e"), new UnitDefinitionId("G000UU5018"), 40, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM3002"))], null, false), GridPosition.FrontCenter, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN005c"), new UnitDefinitionId("G000UU5017"), 50, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM3002"))], null, false), GridPosition.FrontTop, false)
             .Build();
 
         Assert.That(scenario.State.Fortifications[new WorldFortificationId("S107FT0003")], Is.EqualTo(new WorldCity(
@@ -2233,11 +2233,11 @@ public sealed class ScenarioLoaderTests
         Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
-            .Place(new WorldUnit(new WorldUnitId("S107UN0053"), new UnitDefinitionId("G000UU0001"), 100, 0, 1, [], null, false), GridPosition.FrontBottom, false)
-            .Place(new WorldUnit(new WorldUnitId("S107UN0000"), new UnitDefinitionId("G000UU3001"), 900, 0, 1, [], null, false), GridPosition.FrontCenter, false)
-            .Place(new WorldUnit(new WorldUnitId("S107UN0054"), new UnitDefinitionId("G000UU0001"), 100, 0, 1, [], null, false), GridPosition.FrontTop, false)
-            .Place(new WorldUnit(new WorldUnitId("S107UN0055"), new UnitDefinitionId("G000UU0008"), 35, 0, 1, [], null, false), GridPosition.BackCenter, false)
-            .Place(new WorldUnit(new WorldUnitId("S107UN0056"), new UnitDefinitionId("G000UU0011"), 50, 0, 1, [], null, false), GridPosition.BackTop, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN0053"), new UnitDefinitionId("G000UU0001"), 100, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.FrontBottom, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN0000"), new UnitDefinitionId("G000UU3001"), 900, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.FrontCenter, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN0054"), new UnitDefinitionId("G000UU0001"), 100, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.FrontTop, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN0055"), new UnitDefinitionId("G000UU0008"), 35, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.BackCenter, false)
+            .Place(new WorldUnit(new WorldUnitId("S107UN0056"), new UnitDefinitionId("G000UU0011"), 50, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], null, false), GridPosition.BackTop, false)
             .Build();
 
         Assert.That(scenario.State.Fortifications[new WorldFortificationId("S107FT0000")], Is.EqualTo(new WorldCapital(
@@ -3187,7 +3187,8 @@ public sealed class ScenarioLoaderTests
                     Level: 3,
                     [
                         UnitModifier.Permanent(new UnitModifierDefinitionId("G000UM4008")),
-                        UnitModifier.FromEquipment(new UnitModifierDefinitionId("G000UM2101"))
+                        UnitModifier.FromEquipment(new UnitModifierDefinitionId("G000UM2101")),
+                        UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))
                     ],
                     Name: "Uther",
                     IsTypeLocked: false),

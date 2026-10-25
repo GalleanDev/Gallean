@@ -47,6 +47,7 @@ public sealed class WorldEngineAiThiefTests
             WorldMapTerrain.Undead,
             true,
             35,
+            null,
             [],
             [warDefinition.Id, thiefDefinition.Id],
             [],

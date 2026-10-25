@@ -26,7 +26,6 @@ public sealed record GlobalVariables
     internal int BribeCostMultiplier { get; init; } = 3;
     internal int CapitalCaptureSpellChance { get; init; } = 50;
     internal int CapitalCityLevel { get; init; } = 6;
-    internal int CapitalProtection { get; init; } = 50;
     internal int CapitalTerrainTilesPerTurn { get; init; } = 10;
     internal int CapitalVisionRadius { get; init; } = 6;
     internal int CityCaptureTerrainPercent { get; init; } = 100;
@@ -111,11 +110,6 @@ public sealed record GlobalVariables
     internal int PoisonCityDamagePercent { get; init; } = 25;
     internal int PoisonStackDamagePercent { get; init; } = 20;
     internal int PotionBoostDurationTurns { get; init; } = 1;
-    internal int ProtectionCityLevel1 { get; init; } = 10;
-    internal int ProtectionCityLevel2 { get; init; } = 15;
-    internal int ProtectionCityLevel3 { get; init; } = 20;
-    internal int ProtectionCityLevel4 { get; init; } = 25;
-    internal int ProtectionCityLevel5 { get; init; } = 30;
     internal int ReduceDamagePercentLevel1 { get; init; } = 50;
     internal int ReduceDamagePercentLevel2 { get; init; } = 33;
     internal int ReduceInitiativePercent { get; init; } = 50;

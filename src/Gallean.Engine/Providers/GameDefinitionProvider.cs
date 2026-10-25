@@ -954,7 +954,8 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
                     cityInfo.Size,
                     cityInfo.Scout,
                     cityInfo.Regeneration,
-                    ConvertResourceSet(cityInfo.Growth));
+                    ConvertResourceSet(cityInfo.Growth),
+                    new UnitModifierDefinitionId(cityInfo.ProtectionId));
             }
         }
     }
@@ -1001,6 +1002,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
                 nativeTerrain,
                 raceInfo.Playable,
                 raceInfo.Regeneration ?? 0,
+                ConvertOptionalId(raceInfo.ProtectionId, static id => new UnitModifierDefinitionId(id)),
                 [.. cityDefinitions],
                 [.. leaderDefinitions],
                 [.. unitDefinitions],

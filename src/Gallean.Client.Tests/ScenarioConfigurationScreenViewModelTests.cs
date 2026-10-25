@@ -138,7 +138,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(player.LordId, Is.EqualTo(new LordDefinitionId("G000LR0003")));
         Assert.That(player.FaceVariant, Is.EqualTo(new WorldObjectVariant(2)));
         Assert.That(player.Resources, Is.EqualTo(new WorldResourceSet(175, 0, 0, 25, 0, 0)));
-        Assert.That(leader, Is.EqualTo(new WorldUnit(new WorldUnitId("S107UN0001"), new UnitDefinitionId("G000UU0020"), Hitpoints: 90, Experience: 0, Level: 1, [], Name: "Winfrid", IsTypeLocked: false)));
+        Assert.That(leader, Is.EqualTo(new WorldUnit(new WorldUnitId("S107UN0001"), new UnitDefinitionId("G000UU0020"), Hitpoints: 90, Experience: 0, Level: 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("g000um6001"))], Name: "Winfrid", IsTypeLocked: false)));
         Assert.That(campaignSelect.IsOpen, Is.False);
         Assert.That(scenarioConfiguration.IsOpen, Is.False);
     }

@@ -367,6 +367,8 @@ internal sealed class TestWorldEngineBuilder
             scenarioState,
             aiMemories.ToImmutableSortedDictionary());
 
+        state = FortificationCalculator.UpdateUnitModifiers(state, definitions);
+
         TestWorldStateValidator.Validate(state, definitions);
 
         ScenarioDefinition scenarioDefinition = new(scenarioId, MakeTexts(scenarioId), suggestedLevel, maxLeaderLevel, maxCityLevel, NextScenarioId: null);
@@ -414,6 +416,8 @@ internal sealed class TestWorldEngineBuilder
             subraces.ToImmutableSortedDictionary(),
             scenarioState,
             aiMemories.ToImmutableSortedDictionary());
+
+        state = FortificationCalculator.UpdateUnitModifiers(state, definitions);
 
         TestWorldStateValidator.Validate(state, definitions);
 

@@ -228,12 +228,12 @@ internal sealed class TestGameDefinitionProvider : IGameDefinitionProvider
     {
         return
         [
-            new WorldRaceDefinition(WorldRace.Human, new GlobalTextId("Empire"), new WorldResourceSet(100, 0, 0, 25, 0, 0), WorldMapTerrain.Human, true, 35, [], [], [], ["Konrad"], ["Zolian"]),
-            new WorldRaceDefinition(WorldRace.Undead, new GlobalTextId("Undead Hordes"), new WorldResourceSet(100, 25, 0, 0, 0, 0), WorldMapTerrain.Undead, true, 35, [], [], [], ["Nigosh"], ["Orissia"]),
-            new WorldRaceDefinition(WorldRace.Heretic, new GlobalTextId("Legions of the Damned"), new WorldResourceSet(100, 0, 0, 0, 25, 0), WorldMapTerrain.Heretic, true, 35, [], [], [], ["Ekrezem"], ["Kisera"]),
-            new WorldRaceDefinition(WorldRace.Dwarf, new GlobalTextId("Mountain Clans"), new WorldResourceSet(100, 0, 25, 0, 0, 0), WorldMapTerrain.Dwarf, true, 35, [], [], [], ["Calderic"], ["Olga"]),
-            new WorldRaceDefinition(WorldRace.Neutral, new GlobalTextId("Neutral"), WorldResourceSet.Empty, WorldMapTerrain.Neutral, false, 0, [], [], [], ["Neutrals"], ["Neutrals"]),
-            new WorldRaceDefinition(WorldRace.Elf, new GlobalTextId("Elven Alliance"), new WorldResourceSet(100, 0, 0, 0, 0, 25), WorldMapTerrain.Elf, true, 35, [], [], [], ["Ime'el"], ["Cillen"])
+            new WorldRaceDefinition(WorldRace.Human, new GlobalTextId("Empire"), new WorldResourceSet(100, 0, 0, 25, 0, 0), WorldMapTerrain.Human, true, 35, null, [], [], [], ["Konrad"], ["Zolian"]),
+            new WorldRaceDefinition(WorldRace.Undead, new GlobalTextId("Undead Hordes"), new WorldResourceSet(100, 25, 0, 0, 0, 0), WorldMapTerrain.Undead, true, 35, null, [], [], [], ["Nigosh"], ["Orissia"]),
+            new WorldRaceDefinition(WorldRace.Heretic, new GlobalTextId("Legions of the Damned"), new WorldResourceSet(100, 0, 0, 0, 25, 0), WorldMapTerrain.Heretic, true, 35, null, [], [], [], ["Ekrezem"], ["Kisera"]),
+            new WorldRaceDefinition(WorldRace.Dwarf, new GlobalTextId("Mountain Clans"), new WorldResourceSet(100, 0, 25, 0, 0, 0), WorldMapTerrain.Dwarf, true, 35, null, [], [], [], ["Calderic"], ["Olga"]),
+            new WorldRaceDefinition(WorldRace.Neutral, new GlobalTextId("Neutral"), WorldResourceSet.Empty, WorldMapTerrain.Neutral, false, 0, null, [], [], [], ["Neutrals"], ["Neutrals"]),
+            new WorldRaceDefinition(WorldRace.Elf, new GlobalTextId("Elven Alliance"), new WorldResourceSet(100, 0, 0, 0, 0, 25), WorldMapTerrain.Elf, true, 35, null, [], [], [], ["Ime'el"], ["Cillen"])
         ];
     }
 }

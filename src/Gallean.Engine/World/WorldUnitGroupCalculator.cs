@@ -75,6 +75,8 @@ internal static class WorldUnitGroupCalculator
             newState, target,
             LeaderEquipmentCalculator.UpdateUnitModifiers(newTargetUnits, targetEquipment, definitions));
 
+        newState = FortificationCalculator.UpdateUnitModifiers(newState, definitions);
+
         error = null;
         return true;
     }

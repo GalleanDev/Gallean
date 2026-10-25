@@ -298,7 +298,7 @@ public sealed class WorldEngineDiplomacyAttackTests
 
         BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).Build())
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("leader"), leader.Id, BattleSide.Attacker, hitpoints: 100), GridPosition.FrontBottom)
-            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("leader2"), leader.Id, BattleSide.Defender, hitpoints: 100) with { StatusEffects = [new BattleFortificationStatusEffect(10)] }, GridPosition.FrontBottom)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("leader2"), leader.Id, BattleSide.Defender, hitpoints: 100), GridPosition.FrontBottom)
             .Build(BattleModifiers.None);
 
         WorldState before = engine.State;

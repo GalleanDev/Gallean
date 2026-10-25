@@ -2191,6 +2191,7 @@ public sealed class WorldScreenViewModelTests
             NativeTerrain: WorldMapTerrain.Undead,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [leader.Id],
             Units: [],

@@ -21,4 +21,9 @@ public sealed record UnitModifier(UnitModifierDefinitionId DefinitionId, int? Re
     {
         return new UnitModifier(definitionId, RemainingTurns: null) { Source = UnitModifierSource.Scenario };
     }
+
+    public static UnitModifier FromFortification(UnitModifierDefinitionId definitionId)
+    {
+        return new UnitModifier(definitionId, RemainingTurns: null) { Source = UnitModifierSource.Fortification };
+    }
 }

@@ -1223,7 +1223,8 @@ public sealed class GameDefinitionProviderTests
             Level: 1,
             Regeneration: 10,
             VisionRadius: 5,
-            UpgradeCost: new WorldResourceSet(150, 0, 0, 0, 0, 0)
+            UpgradeCost: new WorldResourceSet(150, 0, 0, 0, 0, 0),
+            ProtectionModifierId: new UnitModifierDefinitionId("g000um3001")
         )));
     }
 

@@ -97,7 +97,7 @@ public sealed class LeaderExportScreenViewModelTests
             new WorldPosition(11, 63),
             WorldStackDirection.SouthWest,
             new UnitGrid<WorldUnit>.Builder()
-                .Place(new WorldUnit(new WorldUnitId("S108UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [], Name: "Hatton", IsTypeLocked: false), GridPosition.FrontCenter, false)
+                .Place(new WorldUnit(new WorldUnitId("S108UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("g000um6001"))], Name: "Hatton", IsTypeLocked: false), GridPosition.FrontCenter, false)
                 .Build(),
             MovementPoints: 20,
             new WorldInventory([

@@ -4299,6 +4299,7 @@ public sealed class VisualTests
             NativeTerrain: WorldMapTerrain.Human,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [],
             Units: [],

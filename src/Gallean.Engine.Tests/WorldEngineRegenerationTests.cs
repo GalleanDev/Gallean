@@ -15,7 +15,7 @@ public sealed class WorldEngineRegenerationTests
         {
             Regeneration = 5
         };
-        WorldCityDefinition cityDefinition = new(new WorldCityDefinitionId(WorldRace.Human, cityLevel), cityLevel, 4, 5 * (cityLevel + 1), WorldResourceSet.Empty);
+        WorldCityDefinition cityDefinition = new(new WorldCityDefinitionId(WorldRace.Human, cityLevel), cityLevel, 4, 5 * (cityLevel + 1), WorldResourceSet.Empty, ProtectionModifierId: null);
 
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
 

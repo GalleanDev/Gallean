@@ -11,6 +11,8 @@ internal partial class WorldEngine
             Direction = ev.NewDirection
         };
 
-        return state with { Stacks = state.Stacks.SetItem(ev.StackId, updatedStack) };
+        WorldState updatedState = state with { Stacks = state.Stacks.SetItem(ev.StackId, updatedStack) };
+
+        return FortificationCalculator.UpdateUnitModifiers(updatedState, Context.Definitions);
     }
 }

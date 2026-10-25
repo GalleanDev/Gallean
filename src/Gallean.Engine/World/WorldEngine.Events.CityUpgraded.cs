@@ -27,9 +27,11 @@ internal partial class WorldEngine
         WorldPlayer updatedOwner = state.Players[city.OwnerId];
         ImmutableBitmap updatedFog = FogOfWarCalculator.Update(state, updatedOwner.Id, Context);
 
-        return state with
+        WorldState updatedState = state with
         {
             Players = state.Players.SetItem(updatedOwner.Id, updatedOwner with { FogOfWar = updatedFog })
         };
+
+        return FortificationCalculator.UpdateUnitModifiers(updatedState, Context.Definitions);
     }
 }

@@ -452,6 +452,7 @@ public sealed class CityTabViewModelTests
             NativeTerrain: WorldMapTerrain.Human,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],
@@ -567,6 +568,7 @@ public sealed class CityTabViewModelTests
             NativeTerrain: WorldMapTerrain.Human,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [expensiveDefinition.Id, gatedDefinition.Id],
@@ -712,6 +714,7 @@ public sealed class CityTabViewModelTests
             NativeTerrain: WorldMapTerrain.Human,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],
@@ -808,11 +811,13 @@ public sealed class CityTabViewModelTests
             .AddUnit(soldierDefinition)
             .Build();
 
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(20, 0) };
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
                 new WorldCityDefinitionId(WorldRace.Human, 3),
                 WorldResourceSet.Empty) with
             {
-                VisionRadius = 5
+                VisionRadius = 5,
+                ProtectionModifierId = protection.Id
             };
 
         WorldCity city = TestHelpers.SimpleCity(
@@ -840,6 +845,7 @@ public sealed class CityTabViewModelTests
             .WithPlayer(player)
             .WithDefinition(leaderDefinition)
             .WithDefinition(soldierDefinition)
+            .WithDefinition(protection)
             .WithDefinition(cityDefinition)
             .WithCity(city)
             .WithStack(stack)
@@ -884,7 +890,7 @@ public sealed class CityTabViewModelTests
                     null,
                     [
                         new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
-                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
+                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
                         new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                         new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0)),
                         new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
@@ -892,7 +898,7 @@ public sealed class CityTabViewModelTests
                         new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel("3", 0))
                     ],
                     [],
-                    []))));
+                    [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+20 armor", "From city", null, 1)]))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
             Assert.That(screen.StackLeadership, Is.EqualTo("2 / 3"));
             Assert.That(screen.GarrisonCapacity, Is.EqualTo("0 / 3"));
@@ -900,6 +906,34 @@ public sealed class CityTabViewModelTests
         }
 
         UnitGridSlotViewModel soldierSlot = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
+
+        Assert.That(soldierSlot.Details, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(soldierDefinition.Id)),
+            "name",
+            "description",
+            1,
+            35,
+            35,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            "Damage (Weapon)",
+            new StatValueViewModel("10", 0),
+            null,
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0)),
+                new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
+                new StatRowViewModel(IconMoniker.Ward, "Wards", new StatValueViewModel("None", 0))
+            ],
+            [],
+            [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+20 armor", "From city", null, 1)])));
+
         await soldierSlot.SelectCommand.ExecuteAsync(null);
 
         Assert.That(screen.Leader, Is.EqualTo(new StackLeaderViewModel(
@@ -930,7 +964,7 @@ public sealed class CityTabViewModelTests
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel("1", 0)),
-                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 0)),
+                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel("0", 20)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel("100%", 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel("50", 0)),
                     new StatRowViewModel(IconMoniker.Immunity, "Immunities", new StatValueViewModel("None", 0)),
@@ -938,7 +972,7 @@ public sealed class CityTabViewModelTests
                     new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel("3", 0))
                 ],
                 [],
-                []))));
+                [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+20 armor", "From city", null, 1)]))));
     }
 
     [Test]
@@ -1055,6 +1089,7 @@ public sealed class CityTabViewModelTests
             NativeTerrain: WorldMapTerrain.Human,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],

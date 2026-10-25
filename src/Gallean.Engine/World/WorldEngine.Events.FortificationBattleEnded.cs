@@ -91,7 +91,7 @@ internal partial class WorldEngine
         {
             WorldStack attackerStack = resolvedState.Stacks[ev.AttackerStackId];
 
-            return resolvedState with
+            resolvedState = resolvedState with
             {
                 Stacks = resolvedState.Stacks.SetItem(ev.AttackerStackId, attackerStack with
                 {
@@ -99,9 +99,7 @@ internal partial class WorldEngine
                 })
             };
         }
-        else
-        {
-            return resolvedState;
-        }
+
+        return FortificationCalculator.UpdateUnitModifiers(resolvedState, Context.Definitions);
     }
 }

@@ -319,7 +319,7 @@ internal static class WorldCommandHelpers
             if (enemyStack is not null)
             {
                 BattleModifiers modifiers = CreateModifiers(state, stack.OwnerId, enemyStack.OwnerId, context);
-                BattleState battleState = CreateStackBattleState(stack, enemyStack, modifiers, context);
+                BattleState battleState = CreateStackBattleState(state, stack, enemyStack, modifiers, context);
 
                 events.Add(new WorldStackBattleStartedEvent(stack.Id, enemyStack.Id, enemyStack.Position, battleState, IsDuel: false));
             }
@@ -328,7 +328,7 @@ internal static class WorldCommandHelpers
                 WorldPlayerId? fortificationOwnerId = FortificationCalculator.GetOwner(enemyFortification);
 
                 BattleModifiers modifiers = CreateModifiers(state, stack.OwnerId, fortificationOwnerId, context);
-                int fortificationArmor = FortificationCalculator.GetArmorBonus(enemyFortification, context.Globals);
+                int fortificationArmor = FortificationCalculator.GetArmorBonus(enemyFortification, state, context.Definitions);
                 BattleState battleState = CreateGarrisonBattleState(
                     stack, enemyFortification.Garrison, fortificationArmor, modifiers, context);
 
@@ -351,15 +351,30 @@ internal static class WorldCommandHelpers
     }
 
     public static BattleState CreateStackBattleState(
+        WorldState state,
         WorldStack attackerStack,
         WorldStack defenderStack,
         BattleModifiers modifiers,
         IEngineContext context)
     {
+        WorldPlan plan = WorldPlan.For(state);
+        WorldFortification? defenderFortification = plan.GetFortificationAt(defenderStack.Position);
+
+        int fortificationArmor;
+        if (defenderFortification is not null)
+        {
+            fortificationArmor = FortificationCalculator.GetArmorBonus(defenderFortification, state, context.Definitions);
+        }
+        else
+        {
+            fortificationArmor = 0;
+        }
+
         BattleStateBuilder builder = new(context.Definitions);
+        UnitGrid<WorldUnit> attackerUnits = FortificationCalculator.RemoveUnitModifiers(attackerStack.Units);
         int index = 0;
 
-        foreach ((WorldUnit unit, GridPosition position) in attackerStack.Units.GetUnits())
+        foreach ((WorldUnit unit, GridPosition position) in attackerUnits.GetUnits())
         {
             BattleUnit newUnit = new(
                 new BattleUnitId(index),
@@ -393,7 +408,7 @@ internal static class WorldCommandHelpers
                 0,
                 unit.Level,
                 unit.Modifiers,
-                [],
+                CreateFortificationStatusEffects(fortificationArmor),
                 null,
                 GetEquipmentAttackIds(unit, defenderStack, context),
                 unit.Name,
@@ -415,7 +430,11 @@ internal static class WorldCommandHelpers
         BattleModifiers modifiers,
         IEngineContext context)
     {
-        (WorldUnit attackerLeader, GridPosition _, UnitDefinition _) = attackerStack.GetLeader(context.Definitions);
+        WorldStack unfortifiedAttackerStack = attackerStack with
+        {
+            Units = FortificationCalculator.RemoveUnitModifiers(attackerStack.Units)
+        };
+        (WorldUnit attackerLeader, GridPosition _, UnitDefinition _) = unfortifiedAttackerStack.GetLeader(context.Definitions);
         (WorldUnit defenderLeader, GridPosition _, UnitDefinition _) = defenderStack.GetLeader(context.Definitions);
 
         BattleUnit attackerUnit = new(
@@ -471,7 +490,9 @@ internal static class WorldCommandHelpers
         BattleStateBuilder builder = new(context.Definitions);
         int index = 0;
 
-        foreach ((WorldUnit unit, GridPosition position) in attackerStack.Units.GetUnits())
+        UnitGrid<WorldUnit> attackerUnits = FortificationCalculator.RemoveUnitModifiers(attackerStack.Units);
+
+        foreach ((WorldUnit unit, GridPosition position) in attackerUnits.GetUnits())
         {
             BattleUnit newUnit = new(
                 new BattleUnitId(index),
@@ -495,13 +516,6 @@ internal static class WorldCommandHelpers
 
         foreach ((WorldUnit unit, GridPosition position) in defenderUnits.GetUnits())
         {
-            ImmutableArray<BattleAbstractStatusEffect>.Builder statusEffects = ImmutableArray.CreateBuilder<BattleAbstractStatusEffect>();
-
-            if (fortificationArmor > 0)
-            {
-                statusEffects.Add(new BattleFortificationStatusEffect(fortificationArmor));
-            }
-
             BattleUnit newUnit = new(
                 new BattleUnitId(index),
                 unit.Id,
@@ -512,7 +526,7 @@ internal static class WorldCommandHelpers
                 0,
                 unit.Level,
                 unit.Modifiers,
-                statusEffects.ToImmutable(),
+                CreateFortificationStatusEffects(fortificationArmor),
                 null,
                 [],
                 unit.Name,
@@ -525,6 +539,18 @@ internal static class WorldCommandHelpers
         AddBattleItems(builder, BattleSide.Attacker, attackerStack);
 
         return builder.Build(modifiers);
+    }
+
+    private static ImmutableArray<BattleAbstractStatusEffect> CreateFortificationStatusEffects(int fortificationArmor)
+    {
+        if (fortificationArmor > 0)
+        {
+            return [new BattleFortificationStatusEffect(fortificationArmor)];
+        }
+        else
+        {
+            return [];
+        }
     }
 
     private static ImmutableArray<UnitAttackDefinitionId> GetEquipmentAttackIds(WorldUnit unit, WorldStack stack, IEngineContext context)

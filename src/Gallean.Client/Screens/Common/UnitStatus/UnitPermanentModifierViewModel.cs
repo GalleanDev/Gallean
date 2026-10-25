@@ -53,7 +53,8 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
         {
             UnitModifierSource.Unit => Tr("Permanent"),
             UnitModifierSource.Equipment => Tr("From equipment"),
-            UnitModifierSource.Scenario => Tr("Permanent")
+            UnitModifierSource.Scenario => Tr("Permanent"),
+            UnitModifierSource.Fortification => Tr("From city")
         };
     }
 }

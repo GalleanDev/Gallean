@@ -212,6 +212,8 @@ public static class ScenarioLoader
 
         ValidateMapPositions(state);
 
+        state = FortificationCalculator.UpdateUnitModifiers(state, definitions);
+
         return new Scenario(state, scenarioProvider);
     }
 

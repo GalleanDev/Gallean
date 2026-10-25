@@ -153,7 +153,7 @@ public sealed class WorldEngineCapitalTests
 
         BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(unitDefinition).Build())
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 10), GridPosition.FrontBottom)
-            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { StatusEffects = [new BattleFortificationStatusEffect(50)] }, GridPosition.FrontBottom)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10), GridPosition.FrontBottom)
             .Build(BattleModifiers.None);
 
         engine.CheckCommand(
@@ -478,7 +478,7 @@ public sealed class WorldEngineCapitalTests
 
         BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(unitDefinition).Build())
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 10), GridPosition.FrontBottom)
-            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { StatusEffects = [new BattleFortificationStatusEffect(50)] }, GridPosition.FrontBottom)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10), GridPosition.FrontBottom)
             .Build(BattleModifiers.None);
 
         engine.CheckCommand(new WorldMoveStackCommand(stack.Id, capital.Entrance), [

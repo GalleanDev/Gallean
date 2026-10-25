@@ -230,6 +230,7 @@ internal static class TestHelpers
             NativeTerrain: nativeTerrain,
             IsPlayable: true,
             CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
             Cities: [],
             Leaders: [],
             Units: [],
@@ -244,7 +245,8 @@ internal static class TestHelpers
             Level: id.Level,
             VisionRadius: 4,
             Regeneration: 5 * (id.Level + 1),
-            UpgradeCost: upgradeCost);
+            UpgradeCost: upgradeCost,
+            ProtectionModifierId: null);
     }
 
     public static WorldPlayerBuildingDefinition SimpleBuildingDefinition(WorldPlayerBuildingDefinitionId id, WorldPlayerBuildingCategory category)

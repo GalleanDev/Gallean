@@ -44,9 +44,11 @@ internal partial class WorldEngine
             BattlesWon = winnerStack.BattlesWon + 1
         });
 
-        return state with
+        WorldState updatedState = state with
         {
             Stacks = updatedStacks
         };
+
+        return FortificationCalculator.UpdateUnitModifiers(updatedState, Context.Definitions);
     }
 }

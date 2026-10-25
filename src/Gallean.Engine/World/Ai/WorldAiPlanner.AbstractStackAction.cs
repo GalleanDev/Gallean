@@ -38,7 +38,7 @@ internal sealed partial class WorldAiPlanner
                 BattleModifiers modifiers = WorldCommandHelpers.CreateModifiers(
                     context.State, context.Stack.OwnerId, encounter.Stack.OwnerId, context.Engine);
 
-                return WorldCommandHelpers.CreateStackBattleState(context.Stack, encounter.Stack, modifiers, context.Engine);
+                return WorldCommandHelpers.CreateStackBattleState(context.State, context.Stack, encounter.Stack, modifiers, context.Engine);
             }
 
             public BattleState? Visit(PathTraversalCalculator.Encounter.FortificationBattle encounter, Context context)
@@ -47,7 +47,7 @@ internal sealed partial class WorldAiPlanner
                 BattleModifiers modifiers = WorldCommandHelpers.CreateModifiers(
                     context.State, context.Stack.OwnerId, owner, context.Engine);
                 int fortificationArmor = FortificationCalculator.GetArmorBonus(
-                    encounter.Fortification, context.Engine.Globals);
+                    encounter.Fortification, context.State, context.Engine.Definitions);
 
                 return WorldCommandHelpers.CreateGarrisonBattleState(
                     context.Stack, encounter.Fortification.Garrison, fortificationArmor, modifiers, context.Engine);
