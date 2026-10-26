@@ -391,7 +391,7 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitAttackEvent(reviver.Id, new BattleAttackUnitTarget(corpse.Id), [reviverDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(reviver.Id, corpse.Id, reviverDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(reviver.Id, corpse.Id, reviverDefinition.Attack.Id, 0),
-            new BattleUnitRevivedEvent(corpse.Id, 3),
+            new BattleUnitRevivedEvent(corpse.Id, 15),
             new BattleUnitTurnEndingEvent(reviver.Id),
             new BattleUnitTurnEndedEvent(reviver.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(living.Id, BattleUnitTurnType.Normal))

@@ -116,6 +116,7 @@ public sealed record GlobalVariables
     internal int ReduceLevelEffectDurationTurns { get; init; } = 1;
     internal int ResourceNodeIncome { get; init; } = 50;
     internal int ResurrectionHitpoints { get; init; } = 1;
+    internal int ReviveHitpointsPercent { get; init; } = 50;
     internal int RiotDamagePercent { get; init; } = 20;
     internal int RiotMaxTurns { get; init; } = 4;
     internal int RiotMinTurns { get; init; } = 1;

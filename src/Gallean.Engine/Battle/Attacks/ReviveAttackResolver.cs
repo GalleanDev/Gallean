@@ -16,7 +16,7 @@ internal sealed class ReviveAttackResolver : BattleAbstractAttackResolver, IStat
             return BattleCommandError.TargetAlreadyRevived;
         }
 
-        if (GetHitpointsAfter(state, context, target, attack) <= 0)
+        if (GetHitpointsAfter(state, context, target) <= 0)
         {
             return BattleCommandError.TargetIncorrect;
         }
@@ -34,13 +34,13 @@ internal sealed class ReviveAttackResolver : BattleAbstractAttackResolver, IStat
     {
         BattleUnit target = state.GetUnit(targetId);
 
-        return [new BattleUnitRevivedEvent(targetId, GetHitpointsAfter(state, context, target, attack))];
+        return [new BattleUnitRevivedEvent(targetId, GetHitpointsAfter(state, context, target))];
     }
 
-    private static int GetHitpointsAfter(BattleState state, IEngineContext context, BattleUnit target, UnitAttackDefinition attack)
+    private static int GetHitpointsAfter(BattleState state, IEngineContext context, BattleUnit target)
     {
         int maxHitpoints = context.UnitStats.GetBattleUnitStats(state, target.Id).MaxHitpoints;
 
-        return Math.Min(maxHitpoints * attack.Heal / 100, maxHitpoints);
+        return maxHitpoints * context.Globals.ReviveHitpointsPercent / 100;
     }
 }

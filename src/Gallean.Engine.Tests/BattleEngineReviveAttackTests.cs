@@ -33,7 +33,7 @@ public sealed class BattleEngineReviveAttackTests
             new BattleUnitAttackEvent(priest.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("priest")]),
             new BattleUnitAttackedEvent(priest.Id, ally.Id, new UnitAttackDefinitionId("priest")),
             new BattleUnitAttackHitEvent(priest.Id, ally.Id, new UnitAttackDefinitionId("priest"), 0),
-            new BattleUnitRevivedEvent(ally.Id, 40),
+            new BattleUnitRevivedEvent(ally.Id, 50),
             new BattleUnitTurnEndingEvent(priest.Id),
             new BattleUnitTurnEndedEvent(priest.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -44,59 +44,7 @@ public sealed class BattleEngineReviveAttackTests
             {
                 AttackerGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(priest, GridPosition.FrontBottom, false)
-                    .Place(ally with { Hitpoints = 40, IsRevived = true }, GridPosition.BackBottom, false)
-                    .Build(),
-                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
-                    .Place(defender, GridPosition.FrontBottom, false)
-                    .Build(),
-                CurrentUnitTurn = new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
-                CurrentRound = BattleRound.Normal(1)
-            }));
-    }
-
-    [Test]
-    public void RestoresUpToMaxHitpointsTest()
-    {
-        UnitDefinition priestDefinition = TestHelpers.SimpleUnitDefinition("priest", maxHitpoints: 100, initiative: 60, damage: 0) with
-        {
-            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("priest"), initiative: 60, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
-            {
-                Type = UnitAttackType.Revive,
-                Heal = 200
-            }
-        };
-        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 100, initiative: 20, damage: 5);
-        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5);
-
-        BattleUnit priest = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, priestDefinition.Id, BattleSide.Attacker, hitpoints: 100);
-        BattleUnit ally = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, allyDefinition.Id, BattleSide.Attacker, hitpoints: 0);
-        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 100);
-
-        BattleEngine engine = new TestBattleEngineBuilder()
-            .WithDefinition(priestDefinition)
-            .WithDefinition(allyDefinition)
-            .WithDefinition(defenderDefinition)
-            .WithAttacker(priest, GridPosition.FrontBottom)
-            .WithAttacker(ally, GridPosition.BackBottom)
-            .WithDefender(defender, GridPosition.FrontBottom)
-            .Build();
-
-        engine.CheckCommand(new BattleAttackCommand(priest.Id, new BattleAttackUnitTarget(ally.Id)), [
-            new BattleUnitAttackEvent(priest.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("priest")]),
-            new BattleUnitAttackedEvent(priest.Id, ally.Id, new UnitAttackDefinitionId("priest")),
-            new BattleUnitAttackHitEvent(priest.Id, ally.Id, new UnitAttackDefinitionId("priest"), 0),
-            new BattleUnitRevivedEvent(ally.Id, 100),
-            new BattleUnitTurnEndingEvent(priest.Id),
-            new BattleUnitTurnEndedEvent(priest.Id),
-            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
-        ]);
-
-        Assert.That(engine.State, Is.EqualTo(
-            engine.State with
-            {
-                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
-                    .Place(priest, GridPosition.FrontBottom, false)
-                    .Place(ally with { Hitpoints = 100, IsRevived = true }, GridPosition.BackBottom, false)
+                    .Place(ally with { Hitpoints = 50, IsRevived = true }, GridPosition.BackBottom, false)
                     .Build(),
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(defender, GridPosition.FrontBottom, false)
@@ -139,10 +87,10 @@ public sealed class BattleEngineReviveAttackTests
             new BattleUnitAttackEvent(priest.Id, new BattleAttackUnitTarget(allyA.Id), [new UnitAttackDefinitionId("priest")]),
             new BattleUnitAttackedEvent(priest.Id, allyA.Id, new UnitAttackDefinitionId("priest")),
             new BattleUnitAttackHitEvent(priest.Id, allyA.Id, new UnitAttackDefinitionId("priest"), 0),
-            new BattleUnitRevivedEvent(allyA.Id, 40),
+            new BattleUnitRevivedEvent(allyA.Id, 50),
             new BattleUnitAttackedEvent(priest.Id, allyB.Id, new UnitAttackDefinitionId("priest")),
             new BattleUnitAttackHitEvent(priest.Id, allyB.Id, new UnitAttackDefinitionId("priest"), 0),
-            new BattleUnitRevivedEvent(allyB.Id, 40),
+            new BattleUnitRevivedEvent(allyB.Id, 50),
             new BattleUnitTurnEndingEvent(priest.Id),
             new BattleUnitTurnEndedEvent(priest.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -153,8 +101,8 @@ public sealed class BattleEngineReviveAttackTests
             {
                 AttackerGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(priest, GridPosition.FrontBottom, false)
-                    .Place(allyA with { Hitpoints = 40, IsRevived = true }, GridPosition.FrontCenter, false)
-                    .Place(allyB with { Hitpoints = 40, IsRevived = true }, GridPosition.BackBottom, false)
+                    .Place(allyA with { Hitpoints = 50, IsRevived = true }, GridPosition.FrontCenter, false)
+                    .Place(allyB with { Hitpoints = 50, IsRevived = true }, GridPosition.BackBottom, false)
                     .Build(),
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(defender, GridPosition.FrontBottom, false)
@@ -300,7 +248,7 @@ public sealed class BattleEngineReviveAttackTests
             new BattleUnitAttackEvent(priest.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("priest")]),
             new BattleUnitAttackedEvent(priest.Id, ally.Id, new UnitAttackDefinitionId("priest")),
             new BattleUnitAttackHitEvent(priest.Id, ally.Id, new UnitAttackDefinitionId("priest"), 0),
-            new BattleUnitRevivedEvent(ally.Id, 40),
+            new BattleUnitRevivedEvent(ally.Id, 50),
             new BattleUnitTurnEndingEvent(priest.Id),
             new BattleUnitTurnEndedEvent(priest.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
@@ -311,7 +259,7 @@ public sealed class BattleEngineReviveAttackTests
             {
                 AttackerGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(priest, GridPosition.FrontBottom, false)
-                    .Place(ally with { Hitpoints = 40, IsRevived = true, StatusEffects = [new BattleShatterArmorStatusEffect(20)] }, GridPosition.FrontCenter, false)
+                    .Place(ally with { Hitpoints = 50, IsRevived = true, StatusEffects = [new BattleShatterArmorStatusEffect(20)] }, GridPosition.FrontCenter, false)
                     .Build(),
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(defender, GridPosition.FrontBottom, false)

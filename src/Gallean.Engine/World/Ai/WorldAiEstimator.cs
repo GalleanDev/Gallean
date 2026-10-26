@@ -122,7 +122,7 @@ internal sealed partial class WorldAiEstimator(IEngineContext context)
         return Math.Max(1, (int)Math.Round(Math.Sqrt(effectiveHitpoints * impact)));
     }
 
-    private static int EstimateImpact(UnitDefinition definition, UnitStats stats)
+    private int EstimateImpact(UnitDefinition definition, UnitStats stats)
     {
         int impact = definition.Attack.Type switch
         {
@@ -133,7 +133,7 @@ internal sealed partial class WorldAiEstimator(IEngineContext context)
             UnitAttackType.DrainLifeOverflow => stats.Damage * stats.Accuracy / 100,
             UnitAttackType.Blister => stats.Damage * stats.Accuracy / 100,
             UnitAttackType.Heal => definition.Attack.Heal,
-            UnitAttackType.Revive => definition.Attack.Heal,
+            UnitAttackType.Revive => context.Globals.ReviveHitpointsPercent,
             UnitAttackType.Paralyze => EstimateSpecialImpact(stats),
             UnitAttackType.Fear => EstimateSpecialImpact(stats),
             UnitAttackType.IncreaseDamage => EstimateSpecialImpact(stats),

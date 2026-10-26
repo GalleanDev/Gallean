@@ -377,7 +377,7 @@ public sealed class BattleEngineRecoveryRoundTests
             new BattleUnitAttackEvent(reviver.Id, new BattleAttackUnitTarget(fallen.Id), [new UnitAttackDefinitionId("reviver")]),
             new BattleUnitAttackedEvent(reviver.Id, fallen.Id, new UnitAttackDefinitionId("reviver")),
             new BattleUnitAttackHitEvent(reviver.Id, fallen.Id, new UnitAttackDefinitionId("reviver"), 0),
-            new BattleUnitRevivedEvent(fallen.Id, 40),
+            new BattleUnitRevivedEvent(fallen.Id, 50),
             new BattleUnitTurnEndingEvent(reviver.Id),
             new BattleRoundEndedEvent(),
             new BattleEndedEvent(BattleSide.Attacker),
@@ -389,7 +389,7 @@ public sealed class BattleEngineRecoveryRoundTests
         Assert.That(engine.State, Is.EqualTo(new BattleState(
             AttackerGrid: new UnitGrid<BattleUnit>.Builder()
                 .Place(warrior with { ExperienceGained = 1 }, GridPosition.FrontBottom, false)
-                .Place(fallen with { Hitpoints = 40, IsRevived = true, ExperienceGained = 1 }, GridPosition.FrontTop, false)
+                .Place(fallen with { Hitpoints = 50, IsRevived = true, ExperienceGained = 1 }, GridPosition.FrontTop, false)
                 .Place(reviver with { ExperienceGained = 1 }, GridPosition.BackBottom, false)
                 .Build(),
             DefenderGrid: new UnitGrid<BattleUnit>.Builder()
@@ -764,7 +764,7 @@ public sealed class BattleEngineRecoveryRoundTests
             new BattleUnitAttackEvent(resurrector.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("resurrector")]),
             new BattleUnitAttackedEvent(resurrector.Id, ally.Id, new UnitAttackDefinitionId("resurrector")),
             new BattleUnitAttackHitEvent(resurrector.Id, ally.Id, new UnitAttackDefinitionId("resurrector"), 0),
-            new BattleUnitRevivedEvent(ally.Id, 10),
+            new BattleUnitRevivedEvent(ally.Id, 5),
             new BattleUnitTurnEndingEvent(resurrector.Id),
             new BattleRoundEndedEvent(),
             new BattleEndedEvent(BattleSide.Attacker),
@@ -779,7 +779,7 @@ public sealed class BattleEngineRecoveryRoundTests
                 .Place(summoner with { ExperienceGained = 1 }, GridPosition.BackBottom, false)
                 .Place(warrior with { ExperienceGained = 1 }, GridPosition.FrontBottom, false)
                 .Place(resurrector with { ExperienceGained = 1 }, GridPosition.BackTop, false)
-                .Place(ally with { Hitpoints = 10, ExperienceGained = 1, IsRevived = true }, GridPosition.FrontCenter, false)
+                .Place(ally with { Hitpoints = 5, ExperienceGained = 1, IsRevived = true }, GridPosition.FrontCenter, false)
                 .Build(),
             DefenderGrid: new UnitGrid<BattleUnit>.Builder()
                 .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
