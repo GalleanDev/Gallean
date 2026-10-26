@@ -18,6 +18,13 @@ Gallean is a full remake of Disciples II: Rise of the Elves: every campaign and 
   <a href="https://gallean.org/media/brand/gallean-buildings.webp"><img src="https://gallean.org/media/brand/gallean-buildings-1920px.webp" width="32%" /></a>
 </p>
 
+## System requirements
+
+- **Operating system:** Windows 10 or newer (x64), Linux (x64)
+- **Processor:** Any 64-bit dual-core
+- **Memory:** 4 GB RAM
+- **Graphics:** 1 GB, DirectX 11 or OpenGL 3.0<br />Integrated graphics work
+
 ## Building
 
 You will need the .NET SDK 10. See [`global.json`](global.json).
