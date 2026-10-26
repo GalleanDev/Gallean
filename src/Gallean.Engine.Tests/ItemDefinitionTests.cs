@@ -31,6 +31,7 @@ public sealed class ItemDefinitionTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 50,
+            Heal: 0,
             Accuracy: 80,
             ExperienceKilled: 60,
             ExperienceNextLevel: 150);
@@ -83,6 +84,7 @@ public sealed class ItemDefinitionTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 50,
+            Heal: 0,
             Accuracy: 80,
             ExperienceKilled: 60,
             ExperienceNextLevel: 150);
@@ -108,8 +110,8 @@ public sealed class ItemDefinitionTests
         BattleUnit equippedBattleLeader = bareBattleLeader with { Id = new BattleUnitId(1), Modifiers = [UnitModifier.Permanent(itemModifier)] };
         BattleState battleState = new BattleStateBuilder(definitions).Add(bareBattleLeader).Add(equippedBattleLeader).Build(BattleModifiers.None);
 
-        Assert.That(statsProvider.GetBattleAttackStats(battleState, bareBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0)));
-        Assert.That(statsProvider.GetBattleAttackStats(battleState, equippedBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 25)));
+        Assert.That(statsProvider.GetBattleAttackStats(battleState, bareBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0, 0)));
+        Assert.That(statsProvider.GetBattleAttackStats(battleState, equippedBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0, 25)));
     }
 
     [Test]

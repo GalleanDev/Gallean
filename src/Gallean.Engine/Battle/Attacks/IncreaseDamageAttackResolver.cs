@@ -9,7 +9,8 @@ internal sealed class IncreaseDamageAttackResolver : BattleAbstractAttackResolve
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         if (CanIncreaseDamage(context, target, GetPercent(context, attack)))
         {

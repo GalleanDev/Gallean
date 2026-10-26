@@ -713,6 +713,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             upgrade.Regen ?? 0,
             upgrade.Initiative ?? 0,
             upgrade.Damage ?? 0,
+            upgrade.Heal ?? 0,
             upgrade.Power ?? 0,
             upgrade.ExperienceKilled,
             upgrade.ExperienceNext,

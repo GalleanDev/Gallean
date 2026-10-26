@@ -24,6 +24,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -58,6 +59,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -91,6 +93,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 60,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -123,6 +126,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 60,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -151,6 +155,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -179,6 +184,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -207,6 +213,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 300,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -235,6 +242,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 299,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -303,6 +311,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -331,6 +340,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -359,6 +369,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 150,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -387,6 +398,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 149,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -419,11 +431,12 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 40, 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 40, 0, 0)));
     }
 
     [Test]
@@ -453,11 +466,12 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 99,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(99, 40, 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(99, 40, 0, 0)));
     }
 
     [Test]
@@ -489,7 +503,7 @@ public sealed class UnitStatsCalculatorTests
             definitions,
             new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 40, 35)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 40, 0, 35)));
     }
 
     [Test]
@@ -515,6 +529,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 10,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -543,6 +558,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 10,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -582,6 +598,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 15,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -610,6 +627,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 20,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -659,6 +677,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 7,
             Initiative: 54,
             Damage: 46,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 10,
             ExperienceNextLevel: 1200)));
@@ -821,6 +840,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -860,6 +880,7 @@ public sealed class UnitStatsCalculatorTests
             Regeneration: 5,
             Initiative: 50,
             Damage: 40,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -883,5 +904,72 @@ public sealed class UnitStatsCalculatorTests
         int leadership = UnitStatsCalculator.GetLeadership(definition, [UnitModifier.Permanent(leadershipLoss.Id)], definitions);
 
         Assert.That(leadership, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void HealDynamicLevelTest()
+    {
+        UnitDefinition definition = BaseUnit() with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("unit"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Heal,
+                Heal = 30
+            }
+        };
+
+        UnitDynamicUpgradeDefinition dynamicUpgrade = new(
+            definition.Id,
+            UpgradeChangeLevel: 3,
+            LowLevelUpgrade: UnitDynamicUpgrade.Empty with { Heal = 5 },
+            HighLevelUpgrade: UnitDynamicUpgrade.Empty with { Heal = 2 });
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(definition)
+            .AddUnitDynamicUpgrade(dynamicUpgrade)
+            .Build();
+
+        UnitStats stats = UnitStatsCalculator.GetStats(definition, definition.Level + 3, [], definitions, new GlobalVariables());
+
+        Assert.That(stats, Is.EqualTo(new UnitStats(
+            MaxHitpoints: 100,
+            Armor: 10,
+            Regeneration: 5,
+            Initiative: 50,
+            Damage: 0,
+            Heal: 42,
+            Accuracy: 100,
+            ExperienceKilled: 0,
+            ExperienceNextLevel: 1000)));
+    }
+
+    [Test]
+    public void NoHealDynamicLevelTest()
+    {
+        UnitDefinition definition = BaseUnit();
+
+        UnitDynamicUpgradeDefinition dynamicUpgrade = new(
+            definition.Id,
+            UpgradeChangeLevel: 10,
+            LowLevelUpgrade: UnitDynamicUpgrade.Empty with { Heal = 5 },
+            HighLevelUpgrade: UnitDynamicUpgrade.Empty);
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(definition)
+            .AddUnitDynamicUpgrade(dynamicUpgrade)
+            .Build();
+
+        UnitStats stats = UnitStatsCalculator.GetStats(definition, definition.Level + 2, [], definitions, new GlobalVariables());
+
+        Assert.That(stats, Is.EqualTo(new UnitStats(
+            MaxHitpoints: 100,
+            Armor: 10,
+            Regeneration: 5,
+            Initiative: 50,
+            Damage: 40,
+            Heal: 0,
+            Accuracy: 100,
+            ExperienceKilled: 0,
+            ExperienceNextLevel: 1000)));
     }
 }

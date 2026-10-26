@@ -7,7 +7,8 @@ internal abstract class BattleAbstractDisableAttackResolver : BattleAbstractAtta
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         if (target.IsDisabled())
         {

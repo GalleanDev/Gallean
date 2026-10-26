@@ -321,4 +321,61 @@ public sealed class BattleEngineHealAttackTests
                 CurrentRound = BattleRound.Normal(1)
             }));
     }
+
+    [Test]
+    public void DynamicLevelTest()
+    {
+        UnitDefinition clericDefinition = TestHelpers.SimpleUnitDefinition("cleric", maxHitpoints: 100, initiative: 60, damage: 0) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("cleric"), initiative: 60, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Heal,
+                Heal = 30
+            }
+        };
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 100, initiative: 20, damage: 5);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5);
+
+        BattleUnit cleric = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, clericDefinition.Id, BattleSide.Attacker, hitpoints: 100) with { Level = 4 };
+        BattleUnit ally = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(clericDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(new UnitDynamicUpgradeDefinition(
+                clericDefinition.Id,
+                UpgradeChangeLevel: 3,
+                LowLevelUpgrade: UnitDynamicUpgrade.Empty with { Heal = 5 },
+                HighLevelUpgrade: UnitDynamicUpgrade.Empty with { Heal = 2 }))
+            .WithAttacker(cleric, GridPosition.FrontBottom)
+            .WithAttacker(ally, GridPosition.BackBottom)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(cleric.Id, new BattleAttackUnitTarget(ally.Id)), [
+            new BattleUnitAttackEvent(cleric.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("cleric")]),
+            new BattleUnitAttackedEvent(cleric.Id, ally.Id, new UnitAttackDefinitionId("cleric")),
+            new BattleUnitAttackHitEvent(cleric.Id, ally.Id, new UnitAttackDefinitionId("cleric"), 0),
+            new BattleUnitHealedEvent(ally.Id, 92),
+            new BattleUnitTurnEndingEvent(cleric.Id),
+            new BattleUnitTurnEndedEvent(cleric.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(cleric, GridPosition.FrontBottom, false)
+                    .Place(ally with { Hitpoints = 92 }, GridPosition.BackBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(defender, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(1)
+            }));
+    }
 }

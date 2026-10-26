@@ -93,6 +93,7 @@ public sealed class WorldEngineBannerTests
             Regeneration: 10,
             Initiative: 50,
             Damage: 10,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -103,6 +104,7 @@ public sealed class WorldEngineBannerTests
             Regeneration: 10,
             Initiative: 40,
             Damage: 5,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -447,6 +449,7 @@ public sealed class WorldEngineBannerTests
             Regeneration: 10,
             Initiative: 40,
             Damage: 5,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -693,6 +696,7 @@ public sealed class WorldEngineBannerTests
             Regeneration: 5,
             Initiative: 40,
             Damage: 6,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -703,12 +707,13 @@ public sealed class WorldEngineBannerTests
             Regeneration: 5,
             Initiative: 30,
             Damage: 5,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
 
         Assert.That(
             context.UnitStats.GetBattleAttackStats(expectedBattleState, battleSoldier.Id, soldierDefinition.Attack),
-            Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 6, DrainPercent: 0)));
+            Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 6, Heal: 0, DrainPercent: 0)));
     }
 }

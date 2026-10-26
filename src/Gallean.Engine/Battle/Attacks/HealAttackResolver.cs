@@ -9,9 +9,10 @@ internal sealed class HealAttackResolver : BattleAbstractAttackResolver, IStatic
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
-        if (GetNewHitpoints(state, context, target, attack) <= target.Hitpoints)
+        if (GetNewHitpoints(state, context, target, attackStats) <= target.Hitpoints)
         {
             return BattleCommandError.TargetNotHealable;
         }
@@ -29,13 +30,13 @@ internal sealed class HealAttackResolver : BattleAbstractAttackResolver, IStatic
     {
         BattleUnit target = state.GetUnit(targetId);
 
-        return [new BattleUnitHealedEvent(targetId, GetNewHitpoints(state, context, target, attack))];
+        return [new BattleUnitHealedEvent(targetId, GetNewHitpoints(state, context, target, attackStats))];
     }
 
-    private static int GetNewHitpoints(BattleState state, IEngineContext context, BattleUnit target, UnitAttackDefinition attack)
+    private static int GetNewHitpoints(BattleState state, IEngineContext context, BattleUnit target, UnitAttackStats attackStats)
     {
         int maxHitpoints = context.UnitStats.GetBattleUnitStats(state, target.Id).MaxHitpoints;
 
-        return Math.Min(target.Hitpoints + attack.Heal, maxHitpoints);
+        return Math.Min(target.Hitpoints + attackStats.Heal, maxHitpoints);
     }
 }

@@ -105,6 +105,7 @@ public sealed class WorldEngineBoostPotionTests
             Regeneration: 5,
             Initiative: 40,
             Damage: 13,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
@@ -244,6 +245,7 @@ public sealed class WorldEngineBoostPotionTests
             Regeneration: 5,
             Initiative: 40,
             Damage: 11,
+            Heal: 0,
             Accuracy: 100,
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));

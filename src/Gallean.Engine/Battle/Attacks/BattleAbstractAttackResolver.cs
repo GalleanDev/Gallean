@@ -33,7 +33,7 @@ internal abstract class BattleAbstractAttackResolver : IBattleAttackResolver
             return BattleAttackResult.Fail(BattleCommandError.TargetDead);
         }
 
-        BattleCommandError? error = ValidateTarget(state, context, attackerId, targetUnit, attack);
+        BattleCommandError? error = ValidateTarget(state, context, attackerId, targetUnit, attack, attackStats);
         if (error is not null)
         {
             return BattleAttackResult.Fail(error.Value);
@@ -99,7 +99,8 @@ internal abstract class BattleAbstractAttackResolver : IBattleAttackResolver
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         return null;
     }

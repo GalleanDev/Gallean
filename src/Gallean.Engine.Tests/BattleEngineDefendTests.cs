@@ -182,6 +182,6 @@ public sealed class BattleEngineDefendTests
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, defending.Id);
 
-        Assert.That(stats, Is.EqualTo(new UnitStats(MaxHitpoints: 10, Armor: 50, Regeneration: 5, Initiative: 50, Damage: 5, Accuracy: 100, ExperienceKilled: 0, ExperienceNextLevel: 1000)));
+        Assert.That(stats, Is.EqualTo(new UnitStats(MaxHitpoints: 10, Armor: 50, Regeneration: 5, Initiative: 50, Damage: 5, Heal: 0, Accuracy: 100, ExperienceKilled: 0, ExperienceNextLevel: 1000)));
     }
 }

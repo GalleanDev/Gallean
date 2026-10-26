@@ -132,7 +132,7 @@ internal sealed partial class WorldAiEstimator(IEngineContext context)
             UnitAttackType.Frostbite => stats.Damage * stats.Accuracy / 100,
             UnitAttackType.DrainLifeOverflow => stats.Damage * stats.Accuracy / 100,
             UnitAttackType.Blister => stats.Damage * stats.Accuracy / 100,
-            UnitAttackType.Heal => definition.Attack.Heal,
+            UnitAttackType.Heal => stats.Heal,
             UnitAttackType.Revive => context.Globals.ReviveHitpointsPercent,
             UnitAttackType.Paralyze => EstimateSpecialImpact(stats),
             UnitAttackType.Fear => EstimateSpecialImpact(stats),

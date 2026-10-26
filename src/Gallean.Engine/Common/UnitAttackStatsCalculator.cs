@@ -16,6 +16,7 @@ internal static class UnitAttackStatsCalculator
 
         int accuracy = attack.Accuracy + upgrade.Accuracy;
         int damage = attack.Damage + upgrade.Damage;
+        int heal = attack.Heal > 0 ? attack.Heal + upgrade.Heal : 0;
         int drainPercent = 0;
 
         foreach (UnitModifier modifier in modifiers)
@@ -27,16 +28,21 @@ internal static class UnitAttackStatsCalculator
             drainPercent += modifierDefinition.DrainPercent;
         }
 
-        return WithGlobalLimits(accuracy, damage, drainPercent, globals);
+        return WithGlobalLimits(accuracy, damage, heal, drainPercent, globals);
     }
 
     public static UnitAttackStats CalculateForItem(UnitAttackDefinition attack, GlobalVariables globals)
     {
-        return WithGlobalLimits(attack.Accuracy, attack.Damage, drainPercent: 0, globals);
+        return WithGlobalLimits(attack.Accuracy, attack.Damage, attack.Heal, drainPercent: 0, globals);
     }
 
-    private static UnitAttackStats WithGlobalLimits(int accuracy, int damage, int drainPercent, GlobalVariables globals)
+    private static UnitAttackStats WithGlobalLimits(
+        int accuracy,
+        int damage,
+        int heal,
+        int drainPercent,
+        GlobalVariables globals)
     {
-        return new UnitAttackStats(Math.Min(accuracy, globals.MaxAttackAccuracy), Math.Min(damage, globals.MaxAttackDamage), drainPercent);
+        return new UnitAttackStats(Math.Min(accuracy, globals.MaxAttackAccuracy), Math.Min(damage, globals.MaxAttackDamage), heal, drainPercent);
     }
 }

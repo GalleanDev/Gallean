@@ -12,6 +12,7 @@ internal static class UnitStatsCalculator
         GlobalVariables globals)
     {
         UnitDynamicUpgrade upgrade = UnitDynamicUpgradeCalculator.Calculate(definition, level, definitions);
+        UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, level, modifiers, definitions, globals);
 
         UnitStats stats = new(
             definition.MaxHitpoints + upgrade.MaxHitpoints,
@@ -19,6 +20,7 @@ internal static class UnitStatsCalculator
             definition.Regeneration + upgrade.Regeneration,
             definition.Attack.Initiative + upgrade.Initiative,
             definition.Attack.Damage + upgrade.Damage,
+            attackStats.Heal,
             definition.Attack.Accuracy + upgrade.Accuracy,
             definition.ExperienceKilled + upgrade.ExperienceKilled,
             definition.ExperienceNextLevel + upgrade.ExperienceNextLevel);

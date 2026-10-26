@@ -9,7 +9,8 @@ internal sealed class GiveAdditionalAttackResolver : BattleAbstractAttackResolve
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         if (target.Id == attackerId)
         {

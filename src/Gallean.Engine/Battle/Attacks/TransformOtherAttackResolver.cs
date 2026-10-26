@@ -9,7 +9,8 @@ internal sealed class TransformOtherAttackResolver : BattleAbstractAttackResolve
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
 

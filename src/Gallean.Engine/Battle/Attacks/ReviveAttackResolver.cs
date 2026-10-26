@@ -9,7 +9,8 @@ internal sealed class ReviveAttackResolver : BattleAbstractAttackResolver, IStat
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         if (target.IsRevived)
         {

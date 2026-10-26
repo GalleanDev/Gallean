@@ -9,7 +9,8 @@ internal sealed class ReduceLevelAttackResolver : BattleAbstractAttackResolver, 
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         if (target.IsRetreating())
         {

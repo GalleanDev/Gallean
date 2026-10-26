@@ -214,9 +214,9 @@ internal sealed record UnitDetailsViewModel(
         IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers)
     {
         StatValueViewModel damage;
-        if (definition.Attack.Heal > 0)
+        if (baseStats.Heal > 0)
         {
-            damage = new StatValueViewModel(TextSpans.FromText(definition.Attack.Heal.ToString()), 0);
+            damage = new StatValueViewModel(TextSpans.FromText(baseStats.Heal.ToString()), unitStats.Heal - baseStats.Heal);
         }
         else if (baseStats.Damage > 0 && attackDamage > 0)
         {

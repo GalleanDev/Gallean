@@ -9,7 +9,8 @@ internal sealed class CureAttackResolver : BattleAbstractAttackResolver, IStatic
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnit target,
-        UnitAttackDefinition attack)
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats)
     {
         if (!target.StatusEffects.Any(effect => effect.IsCurable()))
         {

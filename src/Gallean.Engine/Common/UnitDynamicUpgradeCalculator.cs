@@ -32,6 +32,7 @@ internal static class UnitDynamicUpgradeCalculator
             Regeneration: (lowLevelUpgrade.Regeneration * lowLevelCount) + (highLevelUpgrade.Regeneration * highLevelCount),
             Initiative: (lowLevelUpgrade.Initiative * lowLevelCount) + (highLevelUpgrade.Initiative * highLevelCount),
             Damage: (lowLevelUpgrade.Damage * lowLevelCount) + (highLevelUpgrade.Damage * highLevelCount),
+            Heal: (lowLevelUpgrade.Heal * lowLevelCount) + (highLevelUpgrade.Heal * highLevelCount),
             Accuracy: (lowLevelUpgrade.Accuracy * lowLevelCount) + (highLevelUpgrade.Accuracy * highLevelCount),
             ExperienceKilled: (lowLevelUpgrade.ExperienceKilled * lowLevelCount) + (highLevelUpgrade.ExperienceKilled * highLevelCount),
             ExperienceNextLevel: (lowLevelUpgrade.ExperienceNextLevel * lowLevelCount) + (highLevelUpgrade.ExperienceNextLevel * highLevelCount),
