@@ -6416,4 +6416,69 @@ public sealed class VisualTests
 
         window.MouseUp(point, MouseButton.Right);
     }
+
+    [AvaloniaTest]
+    public async Task BattleHotkeyAfterClickTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+        WorldRaceDefinition attackers = gameModel.Definitions.GetRace(WorldRace.Human);
+        WorldRaceDefinition defenders = gameModel.Definitions.GetRace(WorldRace.Undead);
+
+        BattleStateBuilder builder = new(gameModel.Definitions);
+
+        builder.Add(MakeBattleUnit(0, attackers.Leaders[0], BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(1, attackers.Units[0], BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(2, attackers.Units[1], BattleSide.Attacker, gameModel));
+
+        builder.Add(MakeBattleUnit(3, defenders.Leaders[0], BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(4, defenders.Units[0], BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(5, defenders.Units[1], BattleSide.Defender, gameModel));
+
+        EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
+
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                engine,
+                builder.Build(BattleModifiers.None),
+                NullBattleUnitUpgradeResolver.Instance,
+                _ => { },
+                isAttackerAi: false,
+                isDefenderAi: false,
+                canAutoResolve: true,
+                new WorldPosition(0, 0)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        BattleScreenViewModel viewModel = new(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0));
+        gameViewModel.ShowScreen(viewModel);
+
+        await WaitForBattleAsync(window);
+
+        Button defend = window.GetVisualDescendants()
+            .OfType<Button>()
+            .First(button => button.Command == viewModel.DefendCommand);
+
+        Point center = new(defend.Bounds.Width / 2.0, defend.Bounds.Height / 2.0);
+        Point point = Assert.NotNull(defend.TranslatePoint(center, window));
+
+        window.MouseDown(point, MouseButton.Left);
+        window.MouseUp(point, MouseButton.Left);
+        await WaitUntilAsync(() => viewModel.DefendCommand.CanExecute(null));
+
+        Assert.That(battle.State.CurrentUnitTurn, Is.EqualTo(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal)));
+
+        window.KeyPress(Key.D, RawInputModifiers.None, PhysicalKey.D, "d");
+        await SkipFramesAsync(5);
+
+        Assert.That(battle.State.CurrentUnitTurn, Is.EqualTo(new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal)));
+        Assert.That(battle.State.TurnQueue, Is.EqualTo([
+            new BattleUnitTurn(new BattleUnitId(3), BattleUnitTurnType.Normal),
+            new BattleUnitTurn(new BattleUnitId(4), BattleUnitTurnType.Normal),
+            new BattleUnitTurn(new BattleUnitId(5), BattleUnitTurnType.Normal)]));
+    }
 }

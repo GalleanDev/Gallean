@@ -104,6 +104,29 @@ internal sealed partial class GameView : Window
         }
     }
 
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+
+        if (!e.Handled && TopScreen is not null)
+        {
+            Control? container = ScreenHost.ContainerFromItem(TopScreen);
+
+            if (container is ContentPresenter { Child: not null } presenter)
+            {
+                foreach (KeyBinding binding in presenter.Child.KeyBindings)
+                {
+                    if (e.Handled)
+                    {
+                        break;
+                    }
+
+                    binding.TryHandle(e);
+                }
+            }
+        }
+    }
+
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
