@@ -46,6 +46,15 @@ public sealed class WorldObjectRenderTests
         return colors;
     }
 
+    // Skia's blended color channels can round differently across CPU architectures.
+    private static bool BlendedColorsEqual(SKColor actual, SKColor expected)
+    {
+        return Math.Abs(actual.Red - expected.Red) <= 1
+            && Math.Abs(actual.Green - expected.Green) <= 1
+            && Math.Abs(actual.Blue - expected.Blue) <= 1
+            && actual.Alpha == expected.Alpha;
+    }
+
     private static int CountColor(SKSurface surface, SKColor color)
     {
         using SKImage snapshot = surface.Snapshot();
@@ -680,8 +689,8 @@ public sealed class WorldObjectRenderTests
             Highlight: null);
 
         Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 3), Is.EqualTo(SKColors.Blue));
-        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 4), Is.EqualTo(new SKColor(126, 0, 128, 255)));
-        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 5), Is.EqualTo(new SKColor(126, 0, 128, 255)));
+        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 4), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
+        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 5), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
     }
 
     [Test]
@@ -720,7 +729,7 @@ public sealed class WorldObjectRenderTests
                     RoadKey: null)
             ], [WorldMapTerrain.Human], []);
 
-        Assert.That(RenderStackOverBag(assets, terrain, stackDepth: 3, bagDepth: 5), Is.EqualTo(new SKColor(126, 0, 128, 255)));
+        Assert.That(RenderStackOverBag(assets, terrain, stackDepth: 3, bagDepth: 5), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
         Assert.That(RenderStackOverBag(assets, terrain, stackDepth: 5, bagDepth: 3), Is.EqualTo(SKColors.Blue));
     }
 
@@ -1728,7 +1737,7 @@ public sealed class WorldObjectRenderTests
 
         renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
-        Assert.That(ReadColors(surface, [new SKPointI(65, 65)]), Is.EqualTo([new SKColor(126, 0, 128, 255)]));
+        Assert.That(ReadColors(surface, [new SKPointI(65, 65)]), Is.EqualTo([new SKColor(126, 0, 128, 255)]).Using<SKColor>(BlendedColorsEqual));
     }
 
     [Test]
@@ -1800,7 +1809,7 @@ public sealed class WorldObjectRenderTests
             IsObjective: false,
             Highlight: null);
 
-        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 3), Is.EqualTo(new SKColor(126, 0, 128, 255)));
+        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 3), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
     }
 
     [Test]
@@ -1853,7 +1862,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
-        Assert.That(ReadColors(surface, [new SKPointI(83, 64), new SKPointI(10, 10)]), Is.EqualTo([new SKColor(250, 68, 40, 255), SKColors.Red]));
+        Assert.That(ReadColors(surface, [new SKPointI(83, 64), new SKPointI(10, 10)]), Is.EqualTo([new SKColor(250, 68, 40, 255), SKColors.Red]).Using<SKColor>(BlendedColorsEqual));
     }
 
     [Test]

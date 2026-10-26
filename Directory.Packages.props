@@ -44,6 +44,7 @@
     <PackageVersion Include="System.Reactive" Version="7.0.0" />
     <PackageVersion Include="TorchSharp" Version="$(TorchSharpVersion)" />
     <PackageVersion Include="libtorch-cpu-linux-x64" Version="$(LibTorchVersion)" />
+    <PackageVersion Include="libtorch-cpu-osx-arm64" Version="$(LibTorchVersion)" />
     <PackageVersion Include="libtorch-cpu-win-x64" Version="$(LibTorchVersion)" />
   </ItemGroup>
 </Project>
