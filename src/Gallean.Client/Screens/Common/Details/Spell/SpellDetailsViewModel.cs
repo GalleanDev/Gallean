@@ -7,7 +7,8 @@ internal sealed record SpellDetailsViewModel(
     string Name,
     string LevelText,
     string Description,
-    string EffectText)
+    string EffectText,
+    OfferPriceViewModel CastingCost)
 {
     public static SpellDetailsViewModel Create(WorldSpellDefinitionId spellId, IGameDefinitionProvider definitions, IGameTextProvider texts)
     {
@@ -18,6 +19,7 @@ internal sealed record SpellDetailsViewModel(
             texts.GetGlobalText(definition.NameTextId).Text,
             Tr("Level {0}", definition.Level),
             texts.GetGlobalText(definition.DescriptionTextId).Text,
-            texts.GetGlobalText(definition.EffectDescriptionTextId).Text);
+            texts.GetGlobalText(definition.EffectDescriptionTextId).Text,
+            new OfferPriceViewModel(definition.CastingCost));
     }
 }

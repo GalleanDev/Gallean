@@ -6,7 +6,7 @@
              ClipToBounds="False">
 
   <local:ModalFrameDecorator Width="400" Margin="0,60,52,0">
-    <Grid RowDefinitions="Auto,Auto,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
 
       <StackPanel Grid.Row="0" Classes="details-header" Margin="22,20,124,0">
         <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
@@ -29,9 +29,15 @@
         <TextBlock Grid.Column="1" Text="{Binding Description}" Classes="body details-flavor" />
       </Grid>
 
-      <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Classes="details-effect" Margin="22,16,22,16">
+      <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Classes="details-effect" Margin="22,16,22,0">
         <Rectangle Grid.Column="0" Classes="details-bullet" />
         <TextBlock Grid.Column="1" Text="{Binding EffectText}" Classes="body" />
+      </Grid>
+
+      <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto,Auto" Classes="details-effect" Margin="22,16,22,16">
+        <Rectangle Grid.Column="0" Classes="details-bullet" />
+        <TextBlock Grid.Column="1" Text="{local:Text 'Casting cost:'}" Classes="body" Margin="0,0,8,0" />
+        <ContentControl Grid.Column="2" Content="{Binding CastingCost}" Classes="body details-value" />
       </Grid>
 
     </Grid>

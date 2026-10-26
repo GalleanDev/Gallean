@@ -26,6 +26,10 @@
                        Foreground="{StaticResource PrimaryTextBrush}"
                        TextWrapping="Wrap" />
             <TextBlock Text="{Binding LevelText}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <TextBlock Text="{local:Text 'Casting cost:'}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" VerticalAlignment="Center" />
+              <ContentControl Content="{Binding Details.CastingCost}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+            </StackPanel>
             <ContentControl Content="{Binding Status}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
           </StackPanel>
         </Grid>

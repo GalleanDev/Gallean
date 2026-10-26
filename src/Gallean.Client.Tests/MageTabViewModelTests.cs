@@ -28,7 +28,7 @@ public sealed class MageTabViewModelTests
             new GlobalTextId("effect"),
             WorldRace.Human,
             level,
-            new WorldResourceSet(10, 0, 0, 0, 0, 0),
+            new WorldResourceSet(0, 0, 0, 10, 0, 0),
             purchaseCost,
             AreaRadius: 0,
             Effect: new WorldFogSpellEffect(),
@@ -54,7 +54,7 @@ public sealed class MageTabViewModelTests
 
         foreach (MageSpellItemViewModel spell in spells)
         {
-            rows.Add($"{spell.SpellId.Value} | {spell.Name} | {spell.Description} | {spell.LevelText} | Cost: {FormatPrice(Assert.NotNull(spell.Status.Price))} | {FormatAvailability(spell.Status)} | {FormatSelection(spell.IsSelected)}");
+            rows.Add($"{spell.SpellId.Value} | {spell.Name} | {spell.Description} | {spell.LevelText} | Casting cost: {FormatPrice(spell.Details.CastingCost)} | Cost: {FormatPrice(Assert.NotNull(spell.Status.Price))} | {FormatAvailability(spell.Status)} | {FormatSelection(spell.IsSelected)}");
         }
 
         return rows;
@@ -168,7 +168,7 @@ public sealed class MageTabViewModelTests
         MageTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
 
         Assert.That(FormatSpells(screen.Spells), Is.EqualTo([
-            "spell | name | desc | Level 2 | Cost: 200 gold | available | not selected"
+            "spell | name | desc | Level 2 | Casting cost: 10 life mana | Cost: 200 gold | available | not selected"
         ]));
 
         Assert.That(screen.Offer, Is.Null);
@@ -177,7 +177,7 @@ public sealed class MageTabViewModelTests
 
         Assert.That(FormatOffer(Assert.NotNull(screen.Offer)), Is.EqualTo("name | Level 2 | desc | 200 gold | Learn | available | enabled"));
         Assert.That(FormatSpells(screen.Spells), Is.EqualTo([
-            "spell | name | desc | Level 2 | Cost: 200 gold | available | selected"
+            "spell | name | desc | Level 2 | Casting cost: 10 life mana | Cost: 200 gold | available | selected"
         ]));
 
         await Assert.NotNull(screen.Offer).ActCommand.ExecuteAsync(null);
@@ -224,7 +224,7 @@ public sealed class MageTabViewModelTests
         MageTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
 
         Assert.That(FormatSpells(screen.Spells), Is.EqualTo([
-            "spell | name | desc | Level 2 | Cost: 200 gold (unaffordable) | unavailable | not selected"
+            "spell | name | desc | Level 2 | Casting cost: 10 life mana | Cost: 200 gold (unaffordable) | unavailable | not selected"
         ]));
 
         screen.Spells[0].SelectCommand.Execute(null);
@@ -298,7 +298,7 @@ public sealed class MageTabViewModelTests
         MageTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
 
         Assert.That(FormatSpells(screen.Spells), Is.EqualTo([
-            "spell | name | desc | Level 2 | Cost: 180 gold | available | not selected"
+            "spell | name | desc | Level 2 | Casting cost: 10 life mana | Cost: 180 gold | available | not selected"
         ]));
 
         screen.Spells[0].SelectCommand.Execute(null);
@@ -342,6 +342,7 @@ public sealed class MageTabViewModelTests
             "name",
             "Level 2",
             "desc",
-            "effect")));
+            "effect",
+            new OfferPriceViewModel(new WorldResourceSet(0, 0, 0, 10, 0, 0)))));
     }
 }
