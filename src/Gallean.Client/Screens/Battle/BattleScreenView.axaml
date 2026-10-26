@@ -327,6 +327,7 @@
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
               <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
+                            Classes="facing-left"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridUnitTemplate}"
                             ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
