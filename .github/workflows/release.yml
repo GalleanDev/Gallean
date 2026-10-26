@@ -39,13 +39,7 @@ jobs:
           key: nuget-${{ runner.os }}-${{ hashFiles('Directory.Packages.props', '**/*.csproj') }}
           restore-keys: nuget-${{ runner.os }}-
 
-      - if: runner.os != 'macOS'
-        run: dotnet publish
-
-      - if: runner.os == 'macOS'
-        run: |
-          dotnet publish src/Gallean.Client.MacOS -r osx-arm64
-          dotnet publish src/Gallean.Client.MacOS -r osx-x64
+      - run: dotnet publish
 
       - uses: actions/attest-build-provenance@v4
         with:
