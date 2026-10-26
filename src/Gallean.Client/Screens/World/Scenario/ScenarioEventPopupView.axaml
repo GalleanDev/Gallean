@@ -7,7 +7,7 @@
 
   <UserControl.DataTemplates>
     <DataTemplate x:DataType="assets:AssetSpriteKey+UnitEventPortrait">
-      <local:SpriteVisual SpriteKey="{Binding}" Stretch="Uniform" />
+      <local:SpriteVisual Classes="portrait" SpriteKey="{Binding}" Stretch="Uniform" />
     </DataTemplate>
 
     <DataTemplate x:DataType="assets:AssetSpriteKey+LordFace">
@@ -19,7 +19,7 @@
                   BorderThickness="1"
                   CornerRadius="{StaticResource RadiusMd}"
                   ClipToBounds="True">
-            <local:SpriteVisual SpriteKey="{Binding}" Height="166" Stretch="Uniform" />
+            <local:SpriteVisual Classes="portrait" SpriteKey="{Binding}" Height="166" Stretch="Uniform" />
           </Border>
         </Panel>
       </Viewbox>
@@ -228,7 +228,7 @@
       </local:PointerTiltDecorator>
 
       <local:PointerTiltDecorator Grid.Column="2"
-                                  Classes="event-portrait"
+                                  Classes="event-portrait facing-left"
                                   Classes.inactive="{Binding !RightPortrait.IsActive}"
                                   IsVisible="{Binding RightPortrait.PortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}">
         <ContentControl Content="{Binding RightPortrait.PortraitKey}" />

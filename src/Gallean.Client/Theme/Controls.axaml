@@ -1076,6 +1076,10 @@
     <Setter Property="RenderTransform" Value="scaleX(-1)" />
   </Style>
 
+  <Style Selector=":is(Control).facing-left local|SpriteVisual.portrait">
+    <Setter Property="RenderTransform" Value="scaleX(-1)" />
+  </Style>
+
   <Style Selector="local|PointerTiltDecorator.event-portrait">
     <Setter Property="IsHitTestVisible" Value="False" />
     <Setter Property="Depth" Value="600" />

@@ -224,9 +224,10 @@
                           <DataTemplate x:DataType="local:QuestMessageViewModel">
                             <Grid Classes="dialog-line"
                                   Classes.right="{Binding HasRightPortrait}"
+                                  Classes.facing-left="{Binding HasRightPortrait}"
                                   Classes.narration="{Binding IsNarration}"
                                   ColumnDefinitions="Auto,*,Auto">
-                              <local:SpriteVisual Grid.Column="0" Classes="event-portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="0,0,12,0" IsVisible="{Binding HasLeftPortrait}" />
+                              <local:SpriteVisual Grid.Column="0" Classes="event-portrait portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="0,0,12,0" IsVisible="{Binding HasLeftPortrait}" />
                               <Panel Grid.Column="1" Classes="dialog-bubble">
                                 <Border Classes="dialog-card">
                                   <StackPanel>
@@ -239,7 +240,7 @@
                                 </Border>
                                 <Path Classes="dialog-tail" />
                               </Panel>
-                              <local:SpriteVisual Grid.Column="2" Classes="event-portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="12,0,0,0" IsVisible="{Binding HasRightPortrait}" />
+                              <local:SpriteVisual Grid.Column="2" Classes="event-portrait portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="12,0,0,0" IsVisible="{Binding HasRightPortrait}" />
                             </Grid>
                           </DataTemplate>
                         </ItemsControl.ItemTemplate>
