@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  An open source Disciples 2 remake for Windows and Linux.<br />
+  A cross-platformn open source Disciples 2 remake.<br />
   <a href="https://gallean.org">Website</a> ·
   <a href="https://gallean.org/blog/remaking-disciples-2-gallean">Remaking Disciples 2</a> ·
   <a href="https://gallean.org/roadmap">Roadmap</a> ·
@@ -31,7 +31,10 @@ Run the client for your platform:
 ```bash
 dotnet run --project src/Gallean.Client.Windows
 dotnet run --project src/Gallean.Client.Linux
+dotnet run --project src/Gallean.Client.MacOS
 ```
+
+macOS support is experimental. Sound output uses NAudio's preview Core Audio backend for music, sound effects, voices, and ambient audio.
 
 ## Tests
 
@@ -54,6 +57,8 @@ dotnet publish
 ```
 
 The release will be in `dist/` at the root, for example `dist/Gallean-0.8.0-linux-x64.zip`.
+
+On macOS, use the [Microsoft .NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and install Xcode or its Command Line Tools (`xcode-select --install`). The Homebrew `dotnet@10` formula works for running from source, but its Native AOT runtime packs can depend on Homebrew libraries.
 
 ## Assets
 

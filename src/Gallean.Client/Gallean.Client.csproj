@@ -48,6 +48,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="NAudio.Alsa" />
     <PackageReference Include="NAudio.Core" />
+    <PackageReference Include="NAudio.MacOS" />
     <PackageReference Include="NAudio.Wasapi" />
     <PackageReference Include="NVorbis" />
     <PackageReference Include="SkiaSharp" />

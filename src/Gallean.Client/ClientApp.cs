@@ -24,12 +24,14 @@ public static class ClientApp
             log.Error("Unobserved task exception.", ev.Exception);
         };
 
-        return AppBuilder
+        AppBuilder builder = AppBuilder
             .Configure(() => new App(log))
             .With(new SkiaOptions
             {
                 MaxGpuResourceSizeBytes = MaxGpuResourceSizeBytes
-            })
-            .WithDirectRendering();
+            });
+
+        // Metal window surfaces need Avalonia's intermediate surface for compositing effects.
+        return OperatingSystem.IsMacOS() ? builder : builder.WithDirectRendering();
     }
 }
