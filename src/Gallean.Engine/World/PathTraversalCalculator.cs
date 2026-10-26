@@ -67,7 +67,9 @@ internal static partial class PathTraversalCalculator
         {
             WorldStack? adjacentStack = plan.GetStackAt(adjacentPosition);
 
-            if (adjacentStack is not null && DiplomacyCalculator.IsHostile(state, stack.OwnerId, adjacentStack.OwnerId))
+            if (adjacentStack is not null &&
+                plan.GetFortificationAt(adjacentPosition) is null &&
+                DiplomacyCalculator.IsHostile(state, stack.OwnerId, adjacentStack.OwnerId))
             {
                 (_, _, UnitDefinition leaderDefinition) = adjacentStack.GetLeader(definitions);
 

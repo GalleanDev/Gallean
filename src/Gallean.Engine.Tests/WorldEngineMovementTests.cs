@@ -3515,4 +3515,82 @@ public sealed class WorldEngineMovementTests
                 Stacks = before.Stacks.SetItem(stack.Id, stack with { Direction = WorldStackDirection.SouthEast, MovementPoints = 3 })
             }));
     }
+
+    [Test]
+    public void MovePastEnemyInCityTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(7, 6);
+
+        UnitDefinition unitDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 10, initiative: 50, damage: 5),
+            movementPoints: 20, leadership: 6);
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            player1.Id,
+            new WorldPosition(4, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("unit"), unitDefinition),
+            movementPoints: 20);
+
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player2.Id,
+            new WorldPosition(3, 3),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("garrison"), unitDefinition));
+
+        WorldStack enemyStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            city.Entrance,
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), unitDefinition),
+            movementPoints: 20);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(unitDefinition)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithStack(enemyStack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldState before = engine.State;
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 5)),
+            [
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 0), new WorldPosition(4, 1), WorldStackDirection.SouthWest, 18, [new WorldPosition(4, 2), new WorldPosition(4, 3), new WorldPosition(4, 4), new WorldPosition(4, 5)], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 0), new WorldPosition(4, 1), WorldStackDirection.SouthWest, 18, [new WorldPosition(4, 2), new WorldPosition(4, 3), new WorldPosition(4, 4), new WorldPosition(4, 5)], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 1), new WorldPosition(4, 2), WorldStackDirection.SouthWest, 16, [new WorldPosition(4, 3), new WorldPosition(4, 4), new WorldPosition(4, 5)], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 1), new WorldPosition(4, 2), WorldStackDirection.SouthWest, 16, [new WorldPosition(4, 3), new WorldPosition(4, 4), new WorldPosition(4, 5)], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 2), new WorldPosition(4, 3), WorldStackDirection.SouthWest, 14, [new WorldPosition(4, 4), new WorldPosition(4, 5)], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 2), new WorldPosition(4, 3), WorldStackDirection.SouthWest, 14, [new WorldPosition(4, 4), new WorldPosition(4, 5)], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 3), new WorldPosition(4, 4), WorldStackDirection.SouthWest, 12, [new WorldPosition(4, 5)], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 3), new WorldPosition(4, 4), WorldStackDirection.SouthWest, 12, [new WorldPosition(4, 5)], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(4, 5), WorldStackDirection.SouthWest, 10, [], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(4, 5), WorldStackDirection.SouthWest, 10, [], null)
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            before with
+            {
+                Stacks = before.Stacks.SetItem(stack.Id, stack with
+                {
+                    Position = new WorldPosition(4, 5),
+                    Direction = WorldStackDirection.SouthWest,
+                    MovementPoints = 10
+                })
+            }));
+    }
 }
