@@ -12,6 +12,10 @@
     </DataTemplate>
   </Styles.Resources>
 
+  <Style Selector="ContentControl.facing-left local|SpriteVisual.leader-portrait">
+    <Setter Property="RenderTransform" Value="scaleX(-1)" />
+  </Style>
+
   <Style Selector="ItemsControl.leader-abilities">
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>

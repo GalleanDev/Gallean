@@ -25,7 +25,7 @@
             <Border x:Name="PART_Background" Classes="unit-portrait-inner">
               <Panel>
                 <Panel x:Name="PART_Portrait">
-                  <local:SpriteVisual SpriteKey="{TemplateBinding FaceKey}" Stretch="UniformToFill" />
+                  <local:SpriteVisual x:Name="PART_Face" SpriteKey="{TemplateBinding FaceKey}" Stretch="UniformToFill" />
                   <Image x:Name="PART_GrayOverlay" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
                   <local:AnimatedFill x:Name="PART_LostHitpoints"
                                       Value="{TemplateBinding Hitpoints}"

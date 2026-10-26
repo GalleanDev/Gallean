@@ -163,7 +163,7 @@
                   <local:OutlinedTextBlock Grid.Column="1" Text="{Binding GarrisonCapacity}" Classes="panel-title" Margin="12,0,0,0" />
                 </Grid>
                 <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,4">
-                  <ItemsControl Classes="unit-grid focus-group"
+                  <ItemsControl Classes="unit-grid focus-group facing-left"
                                 ItemsSource="{Binding GarrisonGrid.Slots}"
                                 ItemTemplate="{StaticResource UnitGridSlotTemplate}"
                                 ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
