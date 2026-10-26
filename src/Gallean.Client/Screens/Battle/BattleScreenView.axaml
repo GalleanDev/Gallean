@@ -210,7 +210,7 @@
                                     Margin="12,0,0,-50">
           <local:BattlePortraitRevealDecorator UnitId="{Binding AttackerUnit.UnitId}">
             <Panel>
-              <local:SpriteVisual SpriteKey="{Binding AttackerUnit.PortraitKey}" Stretch="Uniform" />
+              <local:SpriteVisual Classes="portrait" SpriteKey="{Binding AttackerUnit.PortraitKey}" Stretch="Uniform" />
               <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding AttackerUnit.Name}" />
             </Panel>
           </local:BattlePortraitRevealDecorator>
@@ -234,7 +234,8 @@
         </StackPanel>
       </Panel>
 
-      <Panel HorizontalAlignment="Right"
+      <Panel Classes="facing-left"
+             HorizontalAlignment="Right"
              VerticalAlignment="Bottom"
              IsVisible="{Binding DefenderUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
         <local:PointerTiltDecorator Classes="event-portrait target"
@@ -243,7 +244,7 @@
                                     Margin="0,0,12,-50">
           <local:BattlePortraitRevealDecorator UnitId="{Binding DefenderUnit.UnitId}">
             <Panel>
-              <local:SpriteVisual SpriteKey="{Binding DefenderUnit.PortraitKey}" Stretch="Uniform" />
+              <local:SpriteVisual Classes="portrait" SpriteKey="{Binding DefenderUnit.PortraitKey}" Stretch="Uniform" />
               <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding DefenderUnit.Name}" />
             </Panel>
           </local:BattlePortraitRevealDecorator>

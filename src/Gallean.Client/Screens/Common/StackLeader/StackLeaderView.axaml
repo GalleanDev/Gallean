@@ -15,7 +15,7 @@
                  VerticalAlignment="Center"
                  Fill="{StaticResource StackPortraitGlowGradientBrush}" />
         <local:PointerTiltDecorator Classes="event-portrait" Margin="-40,-24,-40,-8">
-          <local:SpriteVisual Classes="leader-portrait" SpriteKey="{Binding PortraitKey}" Stretch="Uniform" />
+          <local:SpriteVisual Classes="portrait" SpriteKey="{Binding PortraitKey}" Stretch="Uniform" />
         </local:PointerTiltDecorator>
       </Panel>
     </Viewbox>

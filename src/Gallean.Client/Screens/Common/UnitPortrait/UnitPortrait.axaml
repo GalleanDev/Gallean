@@ -230,7 +230,7 @@
     </ControlTheme>
   </Styles.Resources>
 
-  <Style Selector="ItemsControl.facing-left local|UnitPortrait /template/ local|SpriteVisual#PART_Face">
+  <Style Selector=":is(Control).facing-left local|UnitPortrait /template/ local|SpriteVisual#PART_Face">
     <Setter Property="RenderTransform" Value="scaleX(-1)" />
   </Style>
 </Styles>
