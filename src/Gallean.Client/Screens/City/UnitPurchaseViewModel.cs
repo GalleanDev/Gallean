@@ -94,9 +94,6 @@ internal sealed partial class UnitPurchaseViewModel : AbstractGameScreenViewMode
     {
         switch (error)
         {
-            case WorldCommandError.InvalidUnitPosition:
-                return Tr("Requires a front-line slot");
-
             case WorldCommandError.TargetOccupied:
                 return Tr("Requires two free slots");
 

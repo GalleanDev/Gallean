@@ -428,7 +428,7 @@ public sealed class WorldEnginePurchaseUnitTests
     }
 
     [Test]
-    public void InvalidPositionTest()
+    public void LargeUnitBackLineTest()
     {
         WorldMap map = TestHelpers.BuildMap([
             "^^^^^^^",
@@ -481,10 +481,25 @@ public sealed class WorldEnginePurchaseUnitTests
 
         _ = engine.DispatchCommand(new WorldStartGameCommand());
 
-        engine.CheckCommandError(
-            new WorldPurchaseUnitCommand(capital.Id, unitDefinition.Id, GridPosition.BackCenter),
-            WorldCommandError.InvalidUnitPosition
+        engine.CheckCommand(
+            new WorldPurchaseUnitCommand(capital.Id, unitDefinition.Id, GridPosition.BackBottom),
+            [
+                new WorldUnitPurchasedEvent(capital.Id, TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), unitDefinition), GridPosition.BackBottom, new WorldResourceSet(150, 0, 0, 0, 0, 0))
+            ]
         );
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Players = engine.State.Players.SetItem(player.Id, player with
+                {
+                    Resources = new WorldResourceSet(50, 0, 0, 0, 0, 0)
+                }),
+                Fortifications = engine.State.Fortifications.SetItem(capital.Id, capital with
+                {
+                    Garrison = TestHelpers.SingleUnitGrid(new WorldUnitId("Unit0001"), unitDefinition)
+                })
+            }));
     }
 
     [Test]

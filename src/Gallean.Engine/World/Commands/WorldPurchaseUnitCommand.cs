@@ -46,11 +46,6 @@ public sealed record WorldPurchaseUnitCommand(
             return WorldCommandResult.Fail(WorldCommandError.InvalidUnitPosition);
         }
 
-        if (unitDefinition.IsLarge && !Position.IsFrontLine)
-        {
-            return WorldCommandResult.Fail(WorldCommandError.InvalidUnitPosition);
-        }
-
         int capacity = GarrisonCalculator.GetTotalCapacity(fortification, context.Globals);
         WorldGarrisonBuilder builder = new(context.Definitions, fortification.Garrison, capacity);
 
