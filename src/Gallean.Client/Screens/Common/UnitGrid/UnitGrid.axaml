@@ -92,6 +92,7 @@
     <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
     <Setter Property="FontSize" Value="44" />
     <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Padding" Value="10" />
     <Setter Property="Transitions">
       <Transitions>
         <DoubleTransition Property="Opacity" Duration="0:0:0.08" />
