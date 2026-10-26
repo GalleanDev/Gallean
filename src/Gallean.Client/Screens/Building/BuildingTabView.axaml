@@ -197,15 +197,6 @@
       <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
       <Setter Property="ClipToBounds" Value="True" />
     </Style>
-    <Style Selector="Border.face-frame">
-      <Setter Property="Width" Value="36" />
-      <Setter Property="Height" Value="36" />
-      <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
-      <Setter Property="BorderBrush" Value="{StaticResource FrameBorderBrush}" />
-      <Setter Property="BorderThickness" Value="1" />
-      <Setter Property="CornerRadius" Value="18" />
-      <Setter Property="ClipToBounds" Value="True" />
-    </Style>
 
     <Style Selector="Panel.building-panels">
       <Setter Property="Transitions">
@@ -241,12 +232,12 @@
 
     <DataTemplate x:Key="BuildingUnitTemplate" x:DataType="local:BuildingUnitViewModel">
       <StackPanel Orientation="Horizontal" Spacing="10">
-        <Border Classes="face-frame">
-          <Panel>
-            <local:SpriteVisual SpriteKey="{Binding FaceKey}" Stretch="UniformToFill" />
+        <Panel Width="40" Height="40">
+          <local:UnitIcon SpriteKey="{Binding PortraitKey}" />
+          <local:EllipseClipDecorator>
             <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
-          </Panel>
-        </Border>
+          </local:EllipseClipDecorator>
+        </Panel>
         <TextBlock Text="{Binding Name}"
                    Classes="body"
                    VerticalAlignment="Center"

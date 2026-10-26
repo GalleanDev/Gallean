@@ -25,6 +25,7 @@ internal sealed record BuildingGraphViewModel(
             foreach (BuildingUnitViewModel unit in node.Units)
             {
                 yield return new AssetPreloadItem.Sprite(unit.FaceKey);
+                yield return new AssetPreloadItem.Sprite(unit.PortraitKey);
                 yield return new AssetPreloadItem.Sprite(unit.Details.PortraitKey);
             }
         }

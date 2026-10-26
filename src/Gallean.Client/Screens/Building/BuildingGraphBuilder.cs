@@ -496,6 +496,7 @@ internal sealed class BuildingGraphBuilder(
 
                 units.Add(new BuildingUnitViewModel(
                     new AssetSpriteKey.UnitFace(unitId),
+                    new AssetSpriteKey.UnitPortrait(unitId),
                     texts.GetGlobalText(unitDefinition.NameTextId).Text,
                     UnitDetailsViewModel.CreateFromWorld(unit, null, definitions, texts, stats)));
             }
