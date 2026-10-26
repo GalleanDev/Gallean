@@ -9,7 +9,7 @@ namespace Gallean.Client;
 
 internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<BuildingGraphVisual.LinkStyle>
 {
-    internal readonly record struct LinkStyle(int Order, double Thickness, double Opacity, bool IsDashed);
+    internal readonly record struct LinkStyle(int Order, double Thickness, double Opacity, DashStyle? Dash);
 
     private const double CurveTension = 0.3;
     private const double RingThickness = 1;
@@ -21,7 +21,8 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
     private const double LabelGap = 4;
 
     private static readonly DashStyle LinkDash = new([4, 3], 0);
-    private static readonly LinkStyle SelectionLockedStyle = new(0, 1.2, 0.35, IsDashed: true);
+    private static readonly DashStyle RequirementDash = new([0, 2.5], 0);
+    private static readonly LinkStyle SelectionLockedStyle = new(0, 1.2, 0.35, LinkDash);
 
     public static readonly StyledProperty<BuildingGraphViewModel?> GraphProperty =
         AvaloniaProperty.Register<BuildingGraphVisual, BuildingGraphViewModel?>(nameof(Graph));
@@ -160,32 +161,32 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
 
     LinkStyle BuildingStatus.IVisitor<LinkStyle>.Visit(BuildingStatus.Constructible status)
     {
-        return new LinkStyle(3, 2.2, 0.95, false);
+        return new LinkStyle(3, 2.2, 0.95, null);
     }
 
     LinkStyle BuildingStatus.IVisitor<LinkStyle>.Visit(BuildingStatus.Built status)
     {
-        return new LinkStyle(4, 3.0, 1.0, false);
+        return new LinkStyle(4, 3.0, 1.0, null);
     }
 
     LinkStyle BuildingStatus.IVisitor<LinkStyle>.Visit(BuildingStatus.BranchLocked status)
     {
-        return new LinkStyle(0, 1.2, 0.25, true);
+        return new LinkStyle(0, 1.2, 0.25, LinkDash);
     }
 
     LinkStyle BuildingStatus.IVisitor<LinkStyle>.Visit(BuildingStatus.MissingPrerequisite status)
     {
-        return new LinkStyle(1, 1.5, 0.55, true);
+        return new LinkStyle(1, 1.5, 0.55, LinkDash);
     }
 
     LinkStyle BuildingStatus.IVisitor<LinkStyle>.Visit(BuildingStatus.ScenarioLocked status)
     {
-        return new LinkStyle(0, 1.2, 0.3, true);
+        return new LinkStyle(0, 1.2, 0.3, LinkDash);
     }
 
     LinkStyle BuildingStatus.IVisitor<LinkStyle>.Visit(BuildingStatus.Unavailable status)
     {
-        return new LinkStyle(2, 2.0, 0.7, false);
+        return new LinkStyle(2, 2.0, 0.7, null);
     }
 
     private static Color WithOpacity(Color color, double opacity)
@@ -238,16 +239,7 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
         LinkStyle style)
     {
         ImmutableSolidColorBrush brush = new(WithOpacity(color, style.Opacity));
-        Pen pen;
-
-        if (style.IsDashed)
-        {
-            pen = new Pen(brush, style.Thickness, LinkDash, PenLineCap.Round);
-        }
-        else
-        {
-            pen = new Pen(brush, style.Thickness, lineCap: PenLineCap.Round);
-        }
+        Pen pen = new(brush, style.Thickness, style.Dash, PenLineCap.Round);
 
         context.DrawGeometry(null, pen, BuildCurve(origin, start, end));
     }
@@ -479,7 +471,7 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
 
                 foreach (BuildingNodeViewModel root in roots)
                 {
-                    DrawConnection(context, origin, fork, root);
+                    DrawConnection(context, origin, fork, root, ResolveStyle(root));
                 }
 
                 DrawFork(context, fork, branch.Color, style);
@@ -499,8 +491,19 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
     {
         foreach (BuildingLink link in graph.Links)
         {
-            DrawConnection(context, origin, ToPoint(origin, link.From.X, link.From.Y), link.To);
+            DrawConnection(context, origin, ToPoint(origin, link.From.X, link.From.Y), link.To, ResolveStyle(link));
         }
+    }
+
+    private LinkStyle ResolveStyle(BuildingLink link)
+    {
+        LinkStyle style = ResolveStyle(link.To);
+
+        return link.Type switch
+        {
+            BuildingLinkType.Upgrade => style,
+            BuildingLinkType.Requirement => style with { Dash = RequirementDash }
+        };
     }
 
     private LinkStyle ResolveStyle(BuildingNodeViewModel node)
@@ -515,9 +518,13 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
         }
     }
 
-    private void DrawConnection(DrawingContext context, Point origin, Point start, BuildingNodeViewModel target)
+    private void DrawConnection(
+        DrawingContext context,
+        Point origin,
+        Point start,
+        BuildingNodeViewModel target,
+        LinkStyle style)
     {
-        LinkStyle style = ResolveStyle(target);
         Point end = ToPoint(origin, target.X, target.Y);
 
         DrawCurve(context, origin, start, end, target.BranchColor, style);

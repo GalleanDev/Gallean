@@ -365,13 +365,28 @@ internal sealed class BuildingGraphBuilder(
             (List<BuildingNodeViewModel> childNodes, List<BuildingLink> childLinks) =
                 ProcessSubtree(child, branch, isBranchRoot: false, childFirstLeaf, members, levels, startDegrees, slotDegrees);
 
-            links.Add(new BuildingLink(node, childNodes[0]));
+            links.Add(new BuildingLink(node, childNodes[0], ResolveLinkType(child)));
             nodes.AddRange(childNodes);
             links.AddRange(childLinks);
             childFirstLeaf += CountLeaves(child, members);
         }
 
         return (nodes, links);
+    }
+
+    private BuildingLinkType ResolveLinkType(WorldPlayerBuildingDefinition building)
+    {
+        foreach (UnitDefinitionId unitId in building.UnitIds)
+        {
+            UnitDefinition? unitDefinition = definitions.TryGetUnit(unitId);
+
+            if (unitDefinition is not null && unitDefinition.RequiredBuildingId == building.Id)
+            {
+                return BuildingLinkType.Requirement;
+            }
+        }
+
+        return BuildingLinkType.Upgrade;
     }
 
     private BuildingNodeViewModel BuildNode(

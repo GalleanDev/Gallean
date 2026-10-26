@@ -51,7 +51,7 @@ public sealed class BuildingTabViewModelTests
 
         foreach (BuildingLink link in graph.Links)
         {
-            rows.Add($"{link.From.Name} -> {link.To.Name}");
+            rows.Add($"{link.From.Name} -> {link.To.Name} | {link.Type}");
         }
 
         return rows;
@@ -185,6 +185,12 @@ public sealed class BuildingTabViewModelTests
             NameTextId = new GlobalTextId("Holy Avenger")
         };
 
+        UnitDefinition titan = TestHelpers.SimpleUnitDefinition("Titan", maxHitpoints: 300, initiative: 40, damage: 75) with
+        {
+            NameTextId = new GlobalTextId("Titan"),
+            RequiredBuildingId = ruinedTempleId
+        };
+
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
         {
             Resources = new WorldResourceSet(5000, 0, 0, 0, 0, 0),
@@ -224,10 +230,11 @@ public sealed class BuildingTabViewModelTests
             .WithDefinition(BuildingDefinition(tortureChamberId, "Torture Chamber", dungeonId, UnitBranch.Fighter, 3, cost, []))
             .WithDefinition(BuildingDefinition(magistrateId, "Magistrate", tortureChamberId, UnitBranch.Fighter, 4, cost, []))
             .WithDefinition(BuildingDefinition(libraryId, "Library", null, UnitBranch.Mage, 2, cost, []))
-            .WithDefinition(BuildingDefinition(ruinedTempleId, "Ruined Temple", libraryId, UnitBranch.Sideshow, 3, cost, []))
+            .WithDefinition(BuildingDefinition(ruinedTempleId, "Ruined Temple", libraryId, UnitBranch.Sideshow, 3, cost, [titan.Id]))
             .WithDefinition(BuildingDefinition(templeId, "Temple", null, null, 2, cost, []))
             .WithDefinition(paladin)
             .WithDefinition(holyAvenger)
+            .WithDefinition(titan)
             .BuildSession();
 
         session.World.DispatchCommand(new WorldStartGameCommand());
@@ -260,16 +267,16 @@ public sealed class BuildingTabViewModelTests
                 "Fighter (-1.09, -3.62): Torture Chamber | branch-locked: Branch closed |  | 100 gold",
                 "Fighter (-1.38, -4.59): Magistrate | branch-locked: Branch closed |  | 100 gold",
                 "Mage root (-2.28, 2.02): Library | constructible |  | 100 gold",
-                "Mage (-3.11, 2.76): Ruined Temple | missing: Requires Library |  | 100 gold",
-                "Stable -> Imperial Stable",
-                "Imperial Stable -> Shrine",
-                "Shrine -> Holy Statue",
-                "Holy Statue -> Citadel",
-                "Shrine -> Chapel",
-                "Imperial Stable -> Fountain of Life",
-                "Dungeon -> Torture Chamber",
-                "Torture Chamber -> Magistrate",
-                "Library -> Ruined Temple"
+                "Mage (-3.11, 2.76): Ruined Temple | missing: Requires Library | Titan | 100 gold",
+                "Stable -> Imperial Stable | Upgrade",
+                "Imperial Stable -> Shrine | Upgrade",
+                "Shrine -> Holy Statue | Upgrade",
+                "Holy Statue -> Citadel | Upgrade",
+                "Shrine -> Chapel | Upgrade",
+                "Imperial Stable -> Fountain of Life | Upgrade",
+                "Dungeon -> Torture Chamber | Upgrade",
+                "Torture Chamber -> Magistrate | Upgrade",
+                "Library -> Ruined Temple | Requirement"
             ]));
 
         Assert.That(screen.SelectedBuilding, Is.Null);
@@ -314,8 +321,8 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Ruined Temple | missing: Requires Library |  | Level 3 | 100 gold | reason: Requires Library | building-icon/bb22",
-                "details: Ruined Temple | building-icon/bb22 | description",
+                "Ruined Temple | missing: Requires Library | Titan | Level 3 | 100 gold | reason: Requires Library | unit-face/titan",
+                "details: Titan",
                 "Build Ruined Temple"
             ]));
 
@@ -390,7 +397,7 @@ public sealed class BuildingTabViewModelTests
                 "Common (0.00, 0.00): Mage guild | constructible |  | 100 gold",
                 "Fighter root (-2.28, -2.02): Barracks | constructible |  | 100 gold",
                 "Fighter (-3.11, -2.76): Advanced barracks | missing: Requires Barracks |  | 100 gold",
-                "Barracks -> Advanced barracks"
+                "Barracks -> Advanced barracks | Upgrade"
             ]));
 
         screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[1]);
@@ -411,7 +418,7 @@ public sealed class BuildingTabViewModelTests
                 "Common (0.00, 0.00): Mage guild | unavailable: You have already constructed a building this turn |  | 100 gold",
                 "Fighter root (-2.28, -2.02): Barracks | built |  | 100 gold",
                 "Fighter (-3.11, -2.76): Advanced barracks | unavailable: You have already constructed a building this turn |  | 100 gold",
-                "Barracks -> Advanced barracks"
+                "Barracks -> Advanced barracks | Upgrade"
             ]));
 
         Assert.That(screen.ConstructCommand.CanExecute(null), Is.False);
