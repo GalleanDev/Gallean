@@ -120,7 +120,7 @@
           <local:OutlinedTextBlock Text="{local:Text 'Game'}" Classes="label" />
         </Border>
 
-        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="16">
           <TextBlock Grid.Row="0"
                      Grid.Column="0"
                      Text="{local:Text 'Autosave interval'}"
@@ -174,6 +174,25 @@
             <ComboBox.ItemTemplate>
               <DataTemplate x:DataType="configuration:BattleSpeed">
                 <TextBlock Text="{Binding Converter={x:Static local:BattleSpeedConverter.Instance}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="3"
+                     Grid.Column="0"
+                     Text="{local:Text 'Movement speed'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="3"
+                    Grid.Column="1"
+                    ItemsSource="{Binding MovementSpeeds}"
+                    SelectedItem="{Binding MovementSpeed}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="configuration:MovementSpeed">
+                <TextBlock Text="{Binding Converter={x:Static local:MovementSpeedConverter.Instance}}" Classes="body" />
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>

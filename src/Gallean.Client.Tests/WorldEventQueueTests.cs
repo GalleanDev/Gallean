@@ -1,4 +1,5 @@
 using System.Reactive.Subjects;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Engine.Tests;
 using Gallean.Tests.Common;
@@ -1654,7 +1655,7 @@ public sealed class WorldEventQueueTests
                 new Entry.StackMove.Step(new WorldPosition(2, 0), WorldStackDirection.SouthEast)
             ]);
 
-        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true));
+        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true), GameSettings.Default);
 
         Assert.That(animation, Is.EqualTo(new WorldAnimationState.StackMove(
             stack.Id,
@@ -1662,6 +1663,53 @@ public sealed class WorldEventQueueTests
                 new WorldAnimationState.StackMoveStep(new WorldPosition(0, 0), WorldStackDirection.SouthEast, TimeSpan.Zero),
                 new WorldAnimationState.StackMoveStep(new WorldPosition(1, 0), WorldStackDirection.SouthEast, TimeSpan.FromMilliseconds(200)),
                 new WorldAnimationState.StackMoveStep(new WorldPosition(2, 0), WorldStackDirection.SouthEast, TimeSpan.FromMilliseconds(400))
+            ])));
+    }
+
+    [Test]
+    public void FastMovementCreateAnimationTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(leader).Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.StackUnitGrid(definitions, [(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader), GridPosition.FrontBottom)]),
+            movementPoints: 6);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        WorldState state = session.World.State;
+        Entry.StackMove entry = new(
+            state,
+            stack.Id,
+            [
+                new Entry.StackMove.Step(new WorldPosition(0, 0), WorldStackDirection.SouthEast),
+                new Entry.StackMove.Step(new WorldPosition(1, 0), WorldStackDirection.SouthEast),
+                new Entry.StackMove.Step(new WorldPosition(2, 0), WorldStackDirection.SouthEast)
+            ]);
+
+        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true), GameSettings.Default with { MovementSpeed = MovementSpeed.Fast });
+
+        Assert.That(animation, Is.EqualTo(new WorldAnimationState.StackMove(
+            stack.Id,
+            [
+                new WorldAnimationState.StackMoveStep(new WorldPosition(0, 0), WorldStackDirection.SouthEast, TimeSpan.Zero),
+                new WorldAnimationState.StackMoveStep(new WorldPosition(1, 0), WorldStackDirection.SouthEast, TimeSpan.FromTicks(1538462)),
+                new WorldAnimationState.StackMoveStep(new WorldPosition(2, 0), WorldStackDirection.SouthEast, TimeSpan.FromTicks(3076924))
             ])));
     }
 
@@ -1703,7 +1751,7 @@ public sealed class WorldEventQueueTests
                 new Entry.StackMove.Step(new WorldPosition(1, 0), WorldStackDirection.SouthEast)
             ]);
 
-        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true));
+        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true), GameSettings.Default);
 
         Assert.That(animation, Is.EqualTo(new WorldAnimationState.StackMove(
             stack.Id,
@@ -1749,7 +1797,7 @@ public sealed class WorldEventQueueTests
                 new Entry.StackMove.Step(new WorldPosition(2, 0), WorldStackDirection.SouthEast)
             ]);
 
-        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true));
+        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true), GameSettings.Default);
 
         Assert.That(animation, Is.EqualTo(new WorldAnimationState.StackMove(
             stack.Id,
@@ -1800,7 +1848,7 @@ public sealed class WorldEventQueueTests
                 new Entry.StackMove.Step(new WorldPosition(3, 0), WorldStackDirection.SouthEast)
             ]);
 
-        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true));
+        WorldAnimationState animation = entry.CreateAnimation(definitions, WorldVisibility.Create(state, player.Id, fogEnabled: true), GameSettings.Default);
 
         Assert.That(animation, Is.EqualTo(new WorldAnimationState.StackMove(
             stack.Id,

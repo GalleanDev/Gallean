@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Runtime.CompilerServices;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client;
@@ -11,7 +12,7 @@ internal sealed partial class WorldEventQueue
     {
         public abstract record Animated(WorldState State) : Entry(State)
         {
-            public abstract WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility);
+            public abstract WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings);
         }
 
         public sealed record StackMove(
@@ -86,9 +87,9 @@ internal sealed partial class WorldEventQueue
                 }
             }
 
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
-                TimeSpan stepDuration = DefaultStepDuration;
+                TimeSpan stepDuration = DefaultStepDuration / settings.MovementSpeedFactor;
 
                 if (State.Stacks.TryGetValue(StackId, out WorldStack? stack))
                 {
@@ -96,7 +97,7 @@ internal sealed partial class WorldEventQueue
 
                     if (leaderDefinition.IsLarge)
                     {
-                        stepDuration = LargeLeaderStepDuration;
+                        stepDuration = LargeLeaderStepDuration / settings.MovementSpeedFactor;
                     }
                 }
 
@@ -159,7 +160,7 @@ internal sealed partial class WorldEventQueue
 
         public sealed record StackDestroy(WorldState State, WorldStack Stack) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 (WorldUnit leader, GridPosition _, UnitDefinition _) = Stack.GetLeader(definitions);
 
@@ -174,7 +175,7 @@ internal sealed partial class WorldEventQueue
 
         public sealed record StackRemove(WorldState State, WorldStack Stack) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 (WorldUnit leader, GridPosition _, UnitDefinition _) = Stack.GetLeader(definitions);
 
@@ -189,7 +190,7 @@ internal sealed partial class WorldEventQueue
 
         public sealed record StackCreate(WorldState State, WorldStack Stack) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.StackCreate(Stack.Position);
             }
@@ -202,7 +203,7 @@ internal sealed partial class WorldEventQueue
 
         public sealed record StackOwnerChange(WorldState State, WorldPosition Position) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.StackOwnerChange(Position);
             }
@@ -218,7 +219,7 @@ internal sealed partial class WorldEventQueue
             WorldPosition Center,
             int Radius) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.MountainRemove(Center, Radius);
             }
@@ -234,7 +235,7 @@ internal sealed partial class WorldEventQueue
             WorldPosition Position,
             WorldPlayerId PlayerId) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.Pause(PauseDurationDefault);
             }
@@ -270,7 +271,7 @@ internal sealed partial class WorldEventQueue
                 };
             }
 
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.SpellCast(SpellId, Position, SummonedStackId);
             }
@@ -286,7 +287,7 @@ internal sealed partial class WorldEventQueue
             WorldSpellDefinitionId SpellId,
             WorldPosition Position) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.SpellCast(SpellId, Position, SummonedStackId: null);
             }
@@ -363,7 +364,7 @@ internal sealed partial class WorldEventQueue
             WorldPlayerId? PlayerId,
             TimeSpan Duration) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.Pause(Duration);
             }
@@ -381,7 +382,7 @@ internal sealed partial class WorldEventQueue
             WorldThiefActionType Type,
             bool IsSuccess) : Animated(State)
         {
-            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility)
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 return new WorldAnimationState.Pause(PauseDurationDefault);
             }

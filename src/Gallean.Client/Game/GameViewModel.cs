@@ -89,7 +89,8 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                     Settings.AutoSaveLimit,
                     Settings.BattleSpeed,
                     Settings.UiScale,
-                    Settings.LockCursor));
+                    Settings.LockCursor,
+                    Settings.MovementSpeed));
             }
         }
     }

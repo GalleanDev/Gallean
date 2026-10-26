@@ -20,6 +20,7 @@ public sealed class ClientTextIndexTests
             "Game",
             "Interface scale",
             "Lock cursor to window",
+            "Movement speed",
             "Music",
             "Render resolution",
             "Settings",

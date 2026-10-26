@@ -593,7 +593,7 @@ internal sealed class WorldEventActionBuilder(
         return new WorldEventAction.Animation(
             [],
             entry.GetFocusPosition(ViewPlayerId),
-            entry.CreateAnimation(definitions, visibility));
+            entry.CreateAnimation(definitions, visibility, settings));
     }
 
     private static WorldEventAction Sound(AssetSoundKey sound)

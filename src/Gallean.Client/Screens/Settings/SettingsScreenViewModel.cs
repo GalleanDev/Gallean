@@ -12,6 +12,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private int autoSaveInterval;
     private int autoSaveLimit;
     private BattleSpeed battleSpeed;
+    private MovementSpeed movementSpeed;
     private int? uiScale;
     private bool lockCursor;
 
@@ -25,6 +26,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         autoSaveInterval = gameViewModel.Settings.AutoSaveInterval;
         autoSaveLimit = gameViewModel.Settings.AutoSaveLimit;
         battleSpeed = gameViewModel.Settings.BattleSpeed;
+        movementSpeed = gameViewModel.Settings.MovementSpeed;
         uiScale = gameViewModel.Settings.UiScale;
         lockCursor = gameViewModel.Settings.LockCursor;
 
@@ -39,6 +41,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     public IReadOnlyList<int> AutoSaveIntervals { get; } = [1, 3, 5, 10, 0];
     public IReadOnlyList<int> AutoSaveLimits { get; } = [1, 3, 5, 10, 20];
     public IReadOnlyList<BattleSpeed> BattleSpeeds { get; } = Enum.GetValues<BattleSpeed>();
+    public IReadOnlyList<MovementSpeed> MovementSpeeds { get; } = Enum.GetValues<MovementSpeed>();
 
     public int SoundVolume
     {
@@ -124,6 +127,18 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         }
     }
 
+    public MovementSpeed MovementSpeed
+    {
+        get => movementSpeed;
+        set
+        {
+            if (SetProperty(ref movementSpeed, value))
+            {
+                Apply();
+            }
+        }
+    }
+
     public bool LockCursor
     {
         get => lockCursor;
@@ -158,7 +173,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
 
     private void Apply()
     {
-        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiScale, lockCursor));
+        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiScale, lockCursor, movementSpeed));
     }
 
     private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)

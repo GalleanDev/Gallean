@@ -16,5 +16,11 @@ internal static class GameSettingsExtensions
             BattleSpeed.Normal => 1.2,
             BattleSpeed.Fast => 1.5
         };
+
+        public double MovementSpeedFactor => settings.MovementSpeed switch
+        {
+            MovementSpeed.Normal => 1.0,
+            MovementSpeed.Fast => 1.3
+        };
     }
 }

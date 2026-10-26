@@ -5267,7 +5267,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, null, true));
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, null, true, MovementSpeed.Normal));
         gameViewModel.ShowScreen(new BattleScreenViewModel(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0)));
 
         await WaitForBattleAsync(window);

@@ -12,7 +12,8 @@ public sealed record GameSettings(
     int AutoSaveLimit = GameSettings.DefaultAutoSaveLimit,
     BattleSpeed BattleSpeed = GameSettings.DefaultBattleSpeed,
     int? UiScale = null,
-    bool LockCursor = true)
+    bool LockCursor = true,
+    MovementSpeed MovementSpeed = GameSettings.DefaultMovementSpeed)
 {
     public const int CurrentFormatVersion = 6;
     public const int MinVolume = 0;
@@ -23,6 +24,7 @@ public sealed record GameSettings(
     public const int MinAutoSaveLimit = 1;
     public const int DefaultAutoSaveLimit = 10;
     public const BattleSpeed DefaultBattleSpeed = BattleSpeed.Normal;
+    public const MovementSpeed DefaultMovementSpeed = MovementSpeed.Normal;
     public const int MinUiScale = 100;
     public const int MaxUiScale = 300;
 
@@ -35,7 +37,8 @@ public sealed record GameSettings(
         DefaultAutoSaveLimit,
         DefaultBattleSpeed,
         null,
-        true);
+        true,
+        DefaultMovementSpeed);
 
     public int SoundVolume { get; } = Math.Clamp(SoundVolume, MinVolume, MaxVolume);
     public int MusicVolume { get; } = Math.Clamp(MusicVolume, MinVolume, MaxVolume);
@@ -53,7 +56,8 @@ public sealed record GameSettings(
         int autoSaveLimit,
         BattleSpeed battleSpeed,
         int? uiScale,
-        bool lockCursor)
+        bool lockCursor,
+        MovementSpeed movementSpeed)
     {
         return new GameSettings(
             CurrentFormatVersion,
@@ -65,6 +69,7 @@ public sealed record GameSettings(
             autoSaveLimit,
             battleSpeed,
             uiScale,
-            lockCursor);
+            lockCursor,
+            movementSpeed);
     }
 }
