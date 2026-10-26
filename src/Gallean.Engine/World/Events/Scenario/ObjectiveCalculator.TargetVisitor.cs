@@ -129,11 +129,17 @@ internal static partial class ObjectiveCalculator
             foreach (WorldStackId stackId in ScenarioStackReferenceCalculator.GetLiveInstances(reference, context.State))
             {
                 WorldStack stack = context.State.Stacks[stackId];
+                WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
 
-                if (!stack.Concealed || stack.OwnerId == context.PlayerId)
+                if (stack.OwnerId == context.PlayerId)
                 {
-                    WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
-
+                    if (fortification is null)
+                    {
+                        result.Add(new WorldObjective(new WorldFootprint(stack.Position, 1, 1), stackId));
+                    }
+                }
+                else if (!stack.Concealed)
+                {
                     if (fortification is not null)
                     {
                         result.Add(new WorldObjective(fortification.Footprint, stackId));

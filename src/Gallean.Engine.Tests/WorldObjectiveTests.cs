@@ -280,4 +280,27 @@ public sealed class WorldObjectiveTests
             "stack S101KC0013 at (13,43) 1x1"
         ]));
     }
+
+    [Test]
+    public void OwnStackInCityTest()
+    {
+        Scenario scenario = LoadScenario("S101SC0000");
+        WorldFortification city = scenario.State.Fortifications[new WorldFortificationId("S101FT0006")];
+        WorldPosition entrance = FortificationCalculator.GetEntrance(city.Footprint);
+        WorldStackId stackId = new("S101KC0013");
+        WorldStack stack = scenario.State.Stacks[stackId];
+        WorldState state = scenario.State with
+        {
+            Stacks = scenario.State.Stacks.SetItem(stackId, stack with { Position = entrance })
+        };
+
+        WorldPlan plan = WorldPlan.For(state);
+        ImmutableArray<WorldObjective> objectives = plan.GetObjectives(scenario.Provider, GetPlayer(state, WorldRace.Heretic));
+
+        Assert.That(plan.GetFortificationAt(entrance), Is.EqualTo(city));
+        Assert.That(FormatObjectives(state, objectives), Is.EqualTo(
+        [
+            "zone at (29,1) 1x1"
+        ]));
+    }
 }
