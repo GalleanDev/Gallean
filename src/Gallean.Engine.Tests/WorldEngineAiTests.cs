@@ -4578,4 +4578,58 @@ public sealed class WorldEngineAiTests
             "[P3 1000] AutoFit Main"
         ]));
     }
+
+    [Test]
+    public void RuinPriority0Test()
+    {
+        WorldMap map = TestHelpers.SimpleMap(5, 5);
+
+        UnitDefinition attackerDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition guardDefinition = TestHelpers.SimpleUnitDefinition("guard", maxHitpoints: 10, initiative: 40, damage: 5);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(2, 3),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attackerDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        WorldRuin ruin = new(
+            Id: new WorldFortificationId("Ruin1"),
+            NameTextId: new ScenarioTextId("Ruin"),
+            Footprint: FortificationCalculator.CreateFootprint(new WorldPosition(2, 2), FortificationCalculator.RuinFootprint),
+            Variant: new WorldObjectVariant(0),
+            Garrison: new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("guard"), guardDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            Resources: new WorldResourceSet(200, 0, 0, 0, 0, 0),
+            Item: null,
+            LooterId: null,
+            AiPriority: 0
+        );
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(guardDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithRuin(ruin)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.Empty);
+        Assert.That(session.World.State.Fortifications[new WorldFortificationId("Ruin1")], Is.EqualTo(ruin));
+        Assert.That(session.Battle, Is.Null);
+    }
 }

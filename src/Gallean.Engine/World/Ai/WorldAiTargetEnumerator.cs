@@ -70,7 +70,7 @@ internal static class WorldAiTargetEnumerator
     {
         foreach (WorldStack stack in state.Stacks.Values)
         {
-            if (!stack.Concealed &&
+            if (stack is { Concealed: false, AiPriority: > 0 } &&
                 DiplomacyCalculator.IsHostile(state, player.Id, stack.OwnerId) &&
                 IsExplored(player, stack.Position) &&
                 IsWithinArea(stack.Position, area))
@@ -87,6 +87,7 @@ internal static class WorldAiTargetEnumerator
             WorldPlayerId? fortificationOwner = FortificationCalculator.GetOwner(fortification);
 
             if (fortificationOwner is not null &&
+                fortification.AiPriority > 0 &&
                 DiplomacyCalculator.IsHostile(state, player.Id, fortificationOwner.Value) &&
                 IsExplored(player, fortification.Entrance) &&
                 IsWithinArea(fortification.Entrance, area))
@@ -101,6 +102,7 @@ internal static class WorldAiTargetEnumerator
         foreach (WorldFortification fortification in state.Fortifications.Values)
         {
             if (fortification is WorldRuin { LooterId: null } &&
+                fortification.AiPriority > 0 &&
                 IsExplored(player, fortification.Entrance) &&
                 IsWithinArea(fortification.Entrance, area))
             {
@@ -113,7 +115,7 @@ internal static class WorldAiTargetEnumerator
     {
         foreach (WorldBag bag in state.Bags.Values)
         {
-            if (IsExplored(player, bag.Position) && IsWithinArea(bag.Position, area))
+            if (bag.AiPriority > 0 && IsExplored(player, bag.Position) && IsWithinArea(bag.Position, area))
             {
                 yield return new WorldAiTarget.Bag(bag.Id);
             }
