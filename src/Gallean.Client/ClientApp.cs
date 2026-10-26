@@ -7,7 +7,7 @@ public static class ClientApp
 {
     private const long MaxGpuResourceSizeBytes = 2L * 1024 * 1024 * 1024;
 
-    public static AppBuilder Configure()
+    public static AppBuilder Configure(bool useDirectRendering)
     {
         FileLog log = new(AppDirectories.Logs, TimeProvider.System);
 
@@ -31,7 +31,6 @@ public static class ClientApp
                 MaxGpuResourceSizeBytes = MaxGpuResourceSizeBytes
             });
 
-        // Metal window surfaces need Avalonia's intermediate surface for compositing effects.
-        return OperatingSystem.IsMacOS() ? builder : builder.WithDirectRendering();
+        return useDirectRendering ? builder.WithDirectRendering() : builder;
     }
 }

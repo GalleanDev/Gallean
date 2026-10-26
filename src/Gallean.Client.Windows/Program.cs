@@ -8,7 +8,7 @@ internal static class Program
     public static void Main(string[] args)
     {
         ClientApp
-            .Configure()
+            .Configure(useDirectRendering: true)
             .UsePlatformDetect()
             .With(new Win32PlatformOptions
             {
