@@ -7,7 +7,7 @@ public static class ClientApp
 {
     private const long MaxGpuResourceSizeBytes = 2L * 1024 * 1024 * 1024;
 
-    public static AppBuilder Configure()
+    public static AppBuilder Configure(bool useDirectRendering)
     {
         FileLog log = new(AppDirectories.Logs, TimeProvider.System);
 
@@ -24,12 +24,13 @@ public static class ClientApp
             log.Error("Unobserved task exception.", ev.Exception);
         };
 
-        return AppBuilder
+        AppBuilder builder = AppBuilder
             .Configure(() => new App(log))
             .With(new SkiaOptions
             {
                 MaxGpuResourceSizeBytes = MaxGpuResourceSizeBytes
-            })
-            .WithDirectRendering();
+            });
+
+        return useDirectRendering ? builder.WithDirectRendering() : builder;
     }
 }

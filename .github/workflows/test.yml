@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-15-intel]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     steps:
@@ -36,5 +36,17 @@ jobs:
           path: ~/.nuget/packages
           key: nuget-${{ runner.os }}-${{ hashFiles('Directory.Packages.props', '**/*.csproj') }}
           restore-keys: nuget-${{ runner.os }}-
+
+      - if: runner.os == 'macOS' && runner.arch == 'ARM64'
+        uses: actions/cache@v6
+        id: libomp
+        with:
+          path: |
+            /opt/homebrew/Cellar/libomp
+            /opt/homebrew/opt/libomp
+          key: libomp-${{ runner.os }}-${{ runner.arch }}-v1
+
+      - if: runner.os == 'macOS' && runner.arch == 'ARM64' && steps.libomp.outputs.cache-hit != 'true'
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install libomp
 
       - run: dotnet test

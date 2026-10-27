@@ -49,7 +49,7 @@
       <SymbolsPackageZipPath>$(DistDir)\$(SymbolsPackageBaseName).zip</SymbolsPackageZipPath>
     </PropertyGroup>
     <ItemGroup>
-      <Symbol Include="$(PublishDir)**\*.pdb;$(PublishDir)**\*.dbg" />
+      <Symbol Include="$(PublishDir)**\*.pdb;$(PublishDir)**\*.dbg;$(PublishDir)**\*.dSYM\**\*" />
       <PackageFile Include="$(PublishDir)**\*" Exclude="@(Symbol)" />
     </ItemGroup>
     <RemoveDir Directories="$(PackageStageDir)" />

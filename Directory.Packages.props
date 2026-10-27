@@ -8,6 +8,7 @@
     <LibTorchVersion>2.10.0</LibTorchVersion>
     <MagickVersion>15.0.0</MagickVersion>
     <NAudioVersion>3.3.0</NAudioVersion>
+    <NAudioMacOSVersion>3.3.0-preview.34</NAudioMacOSVersion>
     <SkiaSharpVersion>4.153.1</SkiaSharpVersion>
     <TorchSharpVersion>0.107.0</TorchSharpVersion>
   </PropertyGroup>
@@ -28,6 +29,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
     <PackageVersion Include="NAudio.Alsa" Version="$(NAudioVersion)" />
     <PackageVersion Include="NAudio.Core" Version="$(NAudioVersion)" />
+    <PackageVersion Include="NAudio.MacOS" Version="$(NAudioMacOSVersion)" />
     <PackageVersion Include="NAudio.Wasapi" Version="$(NAudioVersion)" />
     <PackageVersion Include="NLayer.NAudioSupport" Version="3.0.0" />
     <PackageVersion Include="NUnit" Version="5.0.0" />
@@ -42,6 +44,7 @@
     <PackageVersion Include="System.Reactive" Version="7.0.0" />
     <PackageVersion Include="TorchSharp" Version="$(TorchSharpVersion)" />
     <PackageVersion Include="libtorch-cpu-linux-x64" Version="$(LibTorchVersion)" />
+    <PackageVersion Include="libtorch-cpu-osx-arm64" Version="$(LibTorchVersion)" />
     <PackageVersion Include="libtorch-cpu-win-x64" Version="$(LibTorchVersion)" />
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ internal sealed class NativeLibraryStore(
     private const string ShaExtension = ".sha";
     private const string FragmentExtension = ".fragment";
 
-    private static readonly string[] Runtimes = ["linux-x64", "win-x64"];
+    private static readonly string[] Runtimes = ["linux-x64", "win-x64", "osx-arm64", "osx-x64"];
 
     private static readonly string[] PayloadPrefixes =
     [

@@ -53,6 +53,10 @@ internal sealed class AudioOutput : IDisposable
         {
             return new AlsaOut();
         }
+        else if (OperatingSystem.IsMacOSVersionAtLeast(10, 5))
+        {
+            return new CoreAudioPlayer();
+        }
         else
         {
             throw new PlatformNotSupportedException("No sound output is available on this platform.");

@@ -1,0 +1,11 @@
+<Project>
+
+  <Target Name="Publish" Condition="'$(IsPublishable)' == 'true'">
+    <ItemGroup>
+      <_PublishRuntimeIdentifier Include="$(RuntimeIdentifiers)" />
+      <_PublishProject Include="$(MSBuildProjectFullPath)" AdditionalProperties="RuntimeIdentifier=%(_PublishRuntimeIdentifier.Identity)" />
+    </ItemGroup>
+    <MSBuild Projects="@(_PublishProject)" Targets="Publish" BuildInParallel="true" />
+  </Target>
+
+</Project>

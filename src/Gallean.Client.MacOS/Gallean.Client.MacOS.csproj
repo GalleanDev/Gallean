@@ -1,0 +1,33 @@
+<Project>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Gallean</AssemblyName>
+    <RuntimeIdentifiers>osx-arm64;osx-x64</RuntimeIdentifiers>
+    <IsPublishable>$([MSBuild]::IsOSPlatform('OSX'))</IsPublishable>
+    <PublishTrimmed>$(IsPublishable)</PublishTrimmed>
+    <PublishAot>$(IsPublishable)</PublishAot>
+    <_PublishAllRuntimeIdentifiers Condition="'$(IsPublishable)' == 'true' And '$(RuntimeIdentifier)' == '' And '$(PublishDir)' == ''">true</_PublishAllRuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Client\Gallean.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" />
+  </ItemGroup>
+
+  <Import Project="..\..\Publish.targets" />
+  <!-- Native AOT targets run only in the per-runtime builds. -->
+  <PropertyGroup Condition="'$(_PublishAllRuntimeIdentifiers)' == 'true'">
+    <ILCompilerTargetsPath />
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <Import Project="Publish.targets" Condition="'$(_PublishAllRuntimeIdentifiers)' == 'true'" />
+
+</Project>
