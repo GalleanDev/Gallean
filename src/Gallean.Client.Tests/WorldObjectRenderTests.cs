@@ -46,15 +46,6 @@ public sealed class WorldObjectRenderTests
         return colors;
     }
 
-    // Skia's blended color channels can round differently across CPU architectures.
-    private static bool BlendedColorsEqual(SKColor actual, SKColor expected)
-    {
-        return Math.Abs(actual.Red - expected.Red) <= 1
-            && Math.Abs(actual.Green - expected.Green) <= 1
-            && Math.Abs(actual.Blue - expected.Blue) <= 1
-            && actual.Alpha == expected.Alpha;
-    }
-
     private static int CountColor(SKSurface surface, SKColor color)
     {
         using SKImage snapshot = surface.Snapshot();
@@ -84,7 +75,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -105,7 +96,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -127,7 +118,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -146,7 +137,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -165,7 +156,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
         surface.Canvas.Clear(SKColors.Transparent);
@@ -223,7 +214,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         IReadOnlyList<SKPointI> samplePoints =
         [
@@ -289,7 +280,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -352,7 +343,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -531,7 +522,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -609,7 +600,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -689,8 +680,8 @@ public sealed class WorldObjectRenderTests
             Highlight: null);
 
         Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 3), Is.EqualTo(SKColors.Blue));
-        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 4), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
-        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 5), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
+        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 4), Is.EqualTo(new SKColor(128, 0, 128, 255)));
+        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 5), Is.EqualTo(new SKColor(128, 0, 128, 255)));
     }
 
     [Test]
@@ -729,7 +720,7 @@ public sealed class WorldObjectRenderTests
                     RoadKey: null)
             ], [WorldMapTerrain.Human], []);
 
-        Assert.That(RenderStackOverBag(assets, terrain, stackDepth: 3, bagDepth: 5), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
+        Assert.That(RenderStackOverBag(assets, terrain, stackDepth: 3, bagDepth: 5), Is.EqualTo(new SKColor(128, 0, 128, 255)));
         Assert.That(RenderStackOverBag(assets, terrain, stackDepth: 5, bagDepth: 3), Is.EqualTo(SKColors.Blue));
     }
 
@@ -793,7 +784,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -866,7 +857,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
@@ -942,7 +933,7 @@ public sealed class WorldObjectRenderTests
             Clouds: []);
 
         WorldRenderer renderer = new();
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
 
         using SKSurface foggedSurface = SKSurface.Create(info);
         foggedSurface.Canvas.Clear(SKColors.Transparent);
@@ -1016,7 +1007,7 @@ public sealed class WorldObjectRenderTests
             Clouds: []);
 
         WorldRenderer renderer = new();
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
 
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
@@ -1089,7 +1080,7 @@ public sealed class WorldObjectRenderTests
             Clouds: []);
 
         WorldRenderer renderer = new();
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
 
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
@@ -1144,7 +1135,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -1264,7 +1255,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -1331,7 +1322,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -1409,7 +1400,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -1658,7 +1649,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
 
@@ -1730,14 +1721,14 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
         renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
-        Assert.That(ReadColors(surface, [new SKPointI(65, 65)]), Is.EqualTo([new SKColor(126, 0, 128, 255)]).Using<SKColor>(BlendedColorsEqual));
+        Assert.That(ReadColors(surface, [new SKPointI(65, 65)]), Is.EqualTo([new SKColor(127, 0, 128, 255)]));
     }
 
     [Test]
@@ -1809,7 +1800,7 @@ public sealed class WorldObjectRenderTests
             IsObjective: false,
             Highlight: null);
 
-        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 3), Is.EqualTo(new SKColor(126, 0, 128, 255)).Using<SKColor>(BlendedColorsEqual));
+        Assert.That(RenderMoveOverBag(assets, terrain, stackMove, bagDepth: 3), Is.EqualTo(new SKColor(127, 0, 128, 255)));
     }
 
     [Test]
@@ -1856,13 +1847,13 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(128, 128, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(128, 128, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
         surface.Canvas.Clear(SKColors.Transparent);
         renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
-        Assert.That(ReadColors(surface, [new SKPointI(83, 64), new SKPointI(10, 10)]), Is.EqualTo([new SKColor(250, 68, 40, 255), SKColors.Red]).Using<SKColor>(BlendedColorsEqual));
+        Assert.That(ReadColors(surface, [new SKPointI(83, 64), new SKPointI(10, 10)]), Is.EqualTo([new SKColor(250, 68, 40, 255), SKColors.Red]));
     }
 
     [Test]
@@ -1911,7 +1902,7 @@ public sealed class WorldObjectRenderTests
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
 
-        SKImageInfo info = new(256, 256, SKColorType.Bgra8888, SKAlphaType.Premul);
+        SKImageInfo info = new(256, 256, SKColorType.RgbaF32, SKAlphaType.Premul);
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
