@@ -562,7 +562,11 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             renderState);
 
         BattleAnimationStateBuilder animationBuilder = new(
-            assets, GameModel.Definitions, random, battle.ViewerSide, Game.Settings.BattleSpeedFactor);
+            assets,
+            GameModel.Definitions,
+            random,
+            battle.ViewerSide,
+            Game.Settings.BattleSpeedFactor);
 
         BattleRenderState render = renderBuilder.BuildState();
         BattleAnimationState? animation = animationBuilder.Build(render, events);
@@ -589,16 +593,16 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             RenderState = render;
             AnimationState = animation;
 
-            ILookup<BattleUnitId, AnimationProperty> hitpoints = CollectHitpointAnimation(animation);
+            ILookup<AnimationTarget, AnimationProperty> properties = animation.Sequence.Properties.ToLookup(property => property.Target);
 
             IReadOnlyList<BattleGridUnitViewModel> attackerUnits = renderBuilder.BuildUnits(BattleSide.Attacker, true);
-            AttackerGrid.UpdateUnits(attackerUnits.Select(unit => SetupUnitAnimation(unit, animation, hitpoints)));
+            AttackerGrid.UpdateUnits(attackerUnits.Select(unit => SetupUnitAnimation(unit, animation, properties)));
 
             IReadOnlyList<BattleGridUnitViewModel> defenderUnits = renderBuilder.BuildUnits(BattleSide.Defender, false);
-            DefenderGrid.UpdateUnits(defenderUnits.Select(unit => SetupUnitAnimation(unit, animation, hitpoints)));
+            DefenderGrid.UpdateUnits(defenderUnits.Select(unit => SetupUnitAnimation(unit, animation, properties)));
 
-            CurrentUnit = SetupCardAnimation(CurrentUnit, hitpoints);
-            TargetUnit = SetupCardAnimation(TargetUnit, hitpoints);
+            CurrentUnit = SetupCardAnimation(CurrentUnit, properties);
+            TargetUnit = SetupCardAnimation(TargetUnit, properties);
 
             UpdateItems(BuildItems());
             NotifyCanExecuteChanged();
@@ -609,31 +613,16 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             RenderState = RenderState.WithFinishedAnimation(animation, loopTime);
             AnimationState = null;
         }
-
-        static ILookup<BattleUnitId, AnimationProperty> CollectHitpointAnimation(BattleAnimationState animationState)
-        {
-            List<(BattleUnitId UnitId, AnimationProperty Property)> entries = [];
-
-            foreach (AnimationProperty property in animationState.Sequence.Properties)
-            {
-                if (property.Target is BattleAnimationTarget.UnitHitpoints target)
-                {
-                    entries.Add((target.UnitId, property));
-                }
-            }
-
-            return entries.ToLookup(entry => entry.UnitId, entry => entry.Property);
-        }
     }
 
     private static BattleGridUnitViewModel SetupUnitAnimation(
         BattleGridUnitViewModel viewModel,
         BattleAnimationState animationState,
-        ILookup<BattleUnitId, AnimationProperty> hitpoints)
+        ILookup<AnimationTarget, AnimationProperty> properties)
     {
-        IReadOnlyList<AnimationProperty> unitHitpoints = [.. hitpoints[viewModel.UnitId]];
+        AnimationRange hitpoints = BuildHitpointsAnimation(viewModel.UnitId, properties);
         IReadOnlyList<BattleFeedbackViewModel> feedback = BuildFeedback(viewModel, animationState);
-        if (unitHitpoints.Count > 0 || feedback.Count > 0)
+        if (hitpoints != AnimationRange.None || feedback.Count > 0)
         {
             return new BattleGridUnitViewModel(
                 viewModel.UnitId,
@@ -650,7 +639,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
                 viewModel.Marker,
                 feedback,
                 viewModel.Statuses,
-                unitHitpoints);
+                hitpoints);
         }
         else
         {
@@ -658,16 +647,23 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         }
     }
 
-    private static BattleUnitCardViewModel? SetupCardAnimation(BattleUnitCardViewModel? card, ILookup<BattleUnitId, AnimationProperty> hitpoints)
+    private static BattleUnitCardViewModel? SetupCardAnimation(BattleUnitCardViewModel? card, ILookup<AnimationTarget, AnimationProperty> properties)
     {
         if (card is not null)
         {
-            return card with { HitpointsAnimation = [.. hitpoints[card.UnitId]] };
+            return card with { HitpointsAnimation = BuildHitpointsAnimation(card.UnitId, properties) };
         }
         else
         {
             return null;
         }
+    }
+
+    private static AnimationRange BuildHitpointsAnimation(BattleUnitId unitId, ILookup<AnimationTarget, AnimationProperty> properties)
+    {
+        return new AnimationRange(
+            [.. properties[new BattleAnimationTarget.UnitHitpoints(unitId)]],
+            [.. properties[new BattleAnimationTarget.UnitMaxHitpoints(unitId)]]);
     }
 
     private static IReadOnlyList<BattleFeedbackViewModel> BuildFeedback(BattleGridUnitViewModel viewModel, BattleAnimationState animationState)
@@ -1224,7 +1220,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             unit.Level,
             unit.Hitpoints,
             stats.MaxHitpoints,
-            HitpointsAnimation: [],
+            HitpointsAnimation: AnimationRange.None,
             UnitStatusViewModel.CreateAll(BattleUnitState.StatusEffect.CreateAll(unit.StatusEffects), modifiers));
     }
 

@@ -104,6 +104,7 @@ internal sealed partial class BattleAnimationStateBuilder(
             UnitTimeline timeline = timelines[unit.Id];
 
             properties.AddRange(timeline.Hitpoints);
+            properties.AddRange(timeline.MaxHitpoints);
 
             if (timeline.Body.Count > 0 ||
                 timeline.Form.Count > 0 ||
@@ -617,7 +618,13 @@ internal sealed partial class BattleAnimationStateBuilder(
         if (timelines.TryGetValue(ev.TargetId, out UnitTimeline? timeline) && currentAttack is { } attack)
         {
             AddStrike(timeline);
-            AddTransform(timeline, attack.Strike, resolver.ResolveTransform(ev.Type, timeline.Unit.Footprint.IsLarge), ev.DefinitionId);
+            AddTransform(
+                timeline,
+                attack.Strike,
+                resolver.ResolveTransform(ev.Type, timeline.Unit.Footprint.IsLarge),
+                ev.DefinitionId,
+                ev.HitpointsAfter,
+                ev.MaxHitpointsAfter);
         }
 
         return Empty.Value;
@@ -630,7 +637,13 @@ internal sealed partial class BattleAnimationStateBuilder(
             TimeSpan strike = ResolveStrikeTime();
 
             AddStrike(timeline);
-            AddTransform(timeline, strike, resolver.ResolveTransformRestore(ev.Type, timeline.Unit.Footprint.IsLarge), ev.DefinitionId);
+            AddTransform(
+                timeline,
+                strike,
+                resolver.ResolveTransformRestore(ev.Type, timeline.Unit.Footprint.IsLarge),
+                ev.DefinitionId,
+                ev.HitpointsAfter,
+                ev.MaxHitpointsAfter);
         }
 
         return Empty.Value;
@@ -684,7 +697,7 @@ internal sealed partial class BattleAnimationStateBuilder(
                 start,
                 duration));
 
-            AddHitpoints(timeline, swap, ev.Hitpoints);
+            AddFormHitpoints(timeline, swap, ev.Hitpoints, ev.MaxHitpoints);
             AddForm(timeline, swap, ev.ToDefinitionId, timeline.CurrentFacing);
         }
 
@@ -1170,11 +1183,16 @@ internal sealed partial class BattleAnimationStateBuilder(
         UnitTimeline timeline,
         TimeSpan at,
         AssetAnimationKey.BattleEffect.Status effect,
-        UnitDefinitionId definitionId)
+        UnitDefinitionId definitionId,
+        int hitpoints,
+        int maxHitpoints)
     {
+        TimeSpan swap = at + ResolveRevealOffset(effect);
+
         AddEffectClip(timeline.Unit.Footprint, at, effect);
         AddSound(at, new AssetSoundKey.BattleEffect.Status(AssetSoundKey.BattleEffect.StatusType.Transform));
-        AddForm(timeline, at + ResolveRevealOffset(effect), definitionId, timeline.CurrentFacing);
+        AddFormHitpoints(timeline, swap, hitpoints, maxHitpoints);
+        AddForm(timeline, swap, definitionId, timeline.CurrentFacing);
     }
 
     private void AddTurnAround(UnitTimeline timeline, TimeSpan at)
@@ -1295,6 +1313,23 @@ internal sealed partial class BattleAnimationStateBuilder(
         }
 
         RequireStep().ExtendTo(at + duration);
+    }
+
+    private void AddFormHitpoints(UnitTimeline timeline, TimeSpan at, int hitpoints, int maxHitpoints)
+    {
+        AddHitpoints(timeline, at, hitpoints);
+
+        if (maxHitpoints != timeline.CurrentMaxHitpoints)
+        {
+            AnimationProperty last = timeline.Hitpoints[^1];
+
+            timeline.MaxHitpoints.Add(last with
+            {
+                Target = new BattleAnimationTarget.UnitMaxHitpoints(timeline.Unit.Id),
+                From = timeline.CurrentMaxHitpoints,
+                To = maxHitpoints
+            });
+        }
     }
 
     private void AddForm(UnitTimeline timeline, TimeSpan at, UnitDefinitionId definitionId, BattleSide facing)

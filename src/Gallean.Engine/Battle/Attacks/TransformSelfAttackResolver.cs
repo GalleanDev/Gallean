@@ -50,7 +50,7 @@ internal sealed class TransformSelfAttackResolver : IBattleAttackResolver, IStat
         }
 
         UnitDefinition transformDefinition = context.Definitions.GetUnit(transformDefinitionId);
-        int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+        (int hitpointsAfter, int maxHitpointsAfter) = BattleTransformationCalculator.GetTransformedHitpoints(
             state,
             context,
             attackerId,
@@ -67,6 +67,7 @@ internal sealed class TransformSelfAttackResolver : IBattleAttackResolver, IStat
                     transformDefinitionId,
                     transformDefinition.Level,
                     hitpointsAfter,
+                    maxHitpointsAfter,
                     RemainingTurns: null)
             ],
             DidHit: false,

@@ -44,7 +44,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 80, 3),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 80, 100, 3),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -70,7 +70,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
-            new BattleUnitTransformRestoredEvent(defender.Id, BattleTransformType.Transform, defenderDefinition.Id),
+            new BattleUnitTransformRestoredEvent(defender.Id, BattleTransformType.Transform, defenderDefinition.Id, 80, 100),
             new BattleUnitEffectDurationDecreasedEvent(defender.Id)
         ]);
 
@@ -112,7 +112,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 80, 2),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 80, 100, 2),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
@@ -127,7 +127,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
-            new BattleUnitTransformRestoredEvent(defender.Id, BattleTransformType.Transform, defenderDefinition.Id),
+            new BattleUnitTransformRestoredEvent(defender.Id, BattleTransformType.Transform, defenderDefinition.Id, 80, 100),
             new BattleUnitEffectDurationDecreasedEvent(defender.Id)
         ]);
 
@@ -183,7 +183,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, largeTransformDefinition.Id, 1, 100, null),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, largeTransformDefinition.Id, 1, 100, 100, null),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -270,7 +270,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(cure.Id, new BattleAttackUnitTarget(transformed.Id), [cureDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(cure.Id, transformed.Id, cureDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(cure.Id, transformed.Id, cureDefinition.Attack.Id, 0),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100),
             new BattleUnitCuredEvent(transformed.Id),
             new BattleUnitTurnEndingEvent(cure.Id),
             new BattleUnitTurnEndedEvent(cure.Id),
@@ -408,7 +408,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(target.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, target.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, target.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, target.Id, BattleTransformType.Transform, secondTransformDefinition.Id, 1, 80, 2),
+            new BattleUnitTransformAppliedEvent(attacker.Id, target.Id, BattleTransformType.Transform, secondTransformDefinition.Id, 1, 80, 100, 2),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(target.Id, BattleUnitTurnType.Normal)),
@@ -443,7 +443,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(target.Id, BattleUnitTurnType.Normal)),
-            new BattleUnitTransformRestoredEvent(target.Id, BattleTransformType.Transform, originalDefinition.Id),
+            new BattleUnitTransformRestoredEvent(target.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100 ),
             new BattleUnitEffectDurationDecreasedEvent(target.Id)
         ]);
 
@@ -517,7 +517,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitDiedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(transformed.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100 ),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(transformed.Id, 1)
         ]);
@@ -588,7 +588,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitDiedEvent(transformed.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100 ),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(attacker.Id, 1)
         ]);
@@ -692,7 +692,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitTurnEndingEvent(summoner.Id),
             new BattleUnitUnsummonedEvent(impId),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100 ),
             new BattleEndedEvent(BattleSide.Defender),
             new BattleUnitExperienceGainedEvent(banshee.Id, 1)
         ]);
@@ -779,7 +779,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 90, null),
+            new BattleUnitTransformAppliedEvent(attacker.Id, defender.Id, BattleTransformType.Transform, transformedDefinition.Id, 1, 90, 120, null),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))

@@ -676,7 +676,7 @@ public sealed class BattleEngineAutoResolveTests
         [
             new BattleUnitUnsummonedEvent(imp.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(summoner.Id, 1)
         ]);

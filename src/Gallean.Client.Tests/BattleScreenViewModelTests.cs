@@ -88,6 +88,7 @@ public sealed class BattleScreenViewModelTests
         return target switch
         {
             BattleAnimationTarget.UnitHitpoints hitpoints => $"unit {hitpoints.UnitId.Value} hitpoints",
+            BattleAnimationTarget.UnitMaxHitpoints maxHitpoints => $"unit {maxHitpoints.UnitId.Value} max hitpoints",
             BattleAnimationTarget.UnitFeedback feedback => $"unit {feedback.UnitId.Value} feedback",
             _ => throw new ArgumentOutOfRangeException(nameof(target), target, null)
         };
@@ -115,6 +116,11 @@ public sealed class BattleScreenViewModelTests
         return rows;
     }
 
+    private static IReadOnlyList<string> FormatRange(AnimationRange range, double framesPerSecond)
+    {
+        return [.. FormatProperties(range.Current, framesPerSecond), .. FormatProperties(range.Maximum, framesPerSecond)];
+    }
+
     private static IReadOnlyList<string> FormatGrid(BattleGridViewModel grid, double framesPerSecond)
     {
         List<string> rows = [];
@@ -134,7 +140,7 @@ public sealed class BattleScreenViewModelTests
                 rows.AddRange(FormatProperties(feedback.Animation, framesPerSecond));
             }
 
-            rows.AddRange(FormatProperties(unit.HitpointsAnimation, framesPerSecond));
+            rows.AddRange(FormatRange(unit.HitpointsAnimation, framesPerSecond));
         }
 
         return rows;
@@ -267,7 +273,7 @@ public sealed class BattleScreenViewModelTests
                 null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 allyId,
                 new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter),
@@ -283,7 +289,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.AllyReachableColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
         Assert.That(viewModel.DefenderGrid.Units, Is.EqualTo([
             new BattleGridUnitViewModel(
@@ -301,7 +307,7 @@ public sealed class BattleScreenViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         Task turnTask = viewModel.ClickAsync(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter));
@@ -493,7 +499,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyReachableColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         Assert.That(viewModel.TargetUnit, Is.Null);
@@ -527,7 +533,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         BattleUnitCardViewModel target = Assert.NotNull(viewModel.TargetUnit);
@@ -540,7 +546,7 @@ public sealed class BattleScreenViewModelTests
         Assert.That(target.Name, Is.EqualTo("name"));
         Assert.That(target.Hitpoints, Is.EqualTo(30));
         Assert.That(target.MaxHitpoints, Is.EqualTo(30));
-        Assert.That(target.HitpointsAnimation, Is.Empty);
+        Assert.That(target.HitpointsAnimation, Is.EqualTo(AnimationRange.None));
         Assert.That(target.Statuses, Is.Empty);
         Assert.That(viewModel.DefenderUnit, Is.Null);
 
@@ -562,7 +568,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyReachableColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         Assert.That(viewModel.TargetUnit, Is.Null);
@@ -1534,7 +1540,7 @@ public sealed class BattleScreenViewModelTests
         Assert.That(animatedTarget.PortraitKey, Is.EqualTo(new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(enemyDefinition.Id))));
         Assert.That(animatedTarget.Hitpoints, Is.EqualTo(30));
         Assert.That(animatedTarget.MaxHitpoints, Is.EqualTo(30));
-        Assert.That(FormatProperties(animatedTarget.HitpointsAnimation, framesPerSecond), Is.EqualTo([
+        Assert.That(FormatRange(animatedTarget.HitpointsAnimation, framesPerSecond), Is.EqualTo([
             "unit 2 hitpoints 30 -> 20 at 7 for 12 frames Decelerate"
         ]));
 
@@ -1666,7 +1672,7 @@ public sealed class BattleScreenViewModelTests
         Assert.That(animatedCard.UnitId, Is.EqualTo(leaderId));
         Assert.That(animatedCard.Hitpoints, Is.EqualTo(60));
         Assert.That(animatedCard.MaxHitpoints, Is.EqualTo(100));
-        Assert.That(FormatProperties(animatedCard.HitpointsAnimation, framesPerSecond), Is.EqualTo([
+        Assert.That(FormatRange(animatedCard.HitpointsAnimation, framesPerSecond), Is.EqualTo([
             "unit 1 hitpoints 60 -> 90 at 0 for 12 frames Decelerate"
         ]));
         Assert.That(viewModel.TargetUnit, Is.Null);
@@ -1680,7 +1686,7 @@ public sealed class BattleScreenViewModelTests
         Assert.That(settledCard.PortraitKey, Is.EqualTo(new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(enemyDefinition.Id))));
         Assert.That(settledCard.Hitpoints, Is.EqualTo(30));
         Assert.That(settledCard.MaxHitpoints, Is.EqualTo(30));
-        Assert.That(settledCard.HitpointsAnimation, Is.Empty);
+        Assert.That(settledCard.HitpointsAnimation, Is.EqualTo(AnimationRange.None));
 
         Assert.That(FormatGrid(viewModel.AttackerGrid, framesPerSecond), Is.EqualTo([
             "unit 1 unit-face/leader at 2,1 span 1 hitpoints 90/100 Alive current False #ffac2c2a"
@@ -1792,7 +1798,7 @@ public sealed class BattleScreenViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         viewModel.Hover(backCenter);
@@ -2035,7 +2041,7 @@ public sealed class BattleScreenViewModelTests
                 null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 allyId,
                 new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter),
@@ -2051,7 +2057,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.SummonReachableColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
         Assert.That(viewModel.RenderState.Placeholders, Is.EqualTo([
             new Placeholder(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop), Theme.Battle.GroundMarker.SummonReachableColor),
@@ -2078,7 +2084,7 @@ public sealed class BattleScreenViewModelTests
                 null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 allyId,
                 new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter),
@@ -2094,7 +2100,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.SummonTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         Task turnTask = viewModel.ClickAsync(corpseTile);
@@ -2805,7 +2811,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         BattleUnitCardViewModel target = Assert.NotNull(viewModel.TargetUnit);
@@ -2926,7 +2932,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 secondId,
                 new BattleGridTile(BattleSide.Defender, GridPosition.FrontTop),
@@ -2942,7 +2948,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -3037,7 +3043,7 @@ public sealed class BattleScreenViewModelTests
                 Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -3960,7 +3966,7 @@ public sealed class BattleScreenViewModelTests
                         new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
                     ])
                 ],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         viewModel.ShowUnitDetails(attackerId);

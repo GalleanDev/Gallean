@@ -51,6 +51,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
             IdleOffset: TimeSpan.Zero,
             CorpseVariant: 0,
             Hitpoints: definition.MaxHitpoints,
+            MaxHitpoints: definition.MaxHitpoints,
             Presence: BattleUnitState.Presence.Alive,
             Marker: null,
             Highlight: null,

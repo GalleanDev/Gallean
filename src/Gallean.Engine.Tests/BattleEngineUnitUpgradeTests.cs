@@ -25,7 +25,7 @@ public sealed class BattleEngineUnitUpgradeTests
             .WithDefinition(squireDefinition)
             .WithDefinition(knightDefinition)
             .WithDefinition(defenderDefinition)
-            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(squireDefinition.Id, new BattleUnitUpgrade(knightDefinition.Id, 1, 20)))
+            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(squireDefinition.Id, new BattleUnitUpgrade(knightDefinition.Id, 1, 20, 20)))
             .WithAttacker(squire, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .Build();
@@ -39,7 +39,7 @@ public sealed class BattleEngineUnitUpgradeTests
             new BattleUnitTurnEndingEvent(squire.Id),
             new BattleRoundEndedEvent(),
             new BattleEndedEvent(BattleSide.Attacker),
-            new BattleUnitUpgradedEvent(squire.Id, squireDefinition.Id, knightDefinition.Id, 1, 20)
+            new BattleUnitUpgradedEvent(squire.Id, squireDefinition.Id, knightDefinition.Id, 1, 20, 20)
         ]);
 
         Assert.That(engine.State.GetUnit(squire.Id), Is.EqualTo(
@@ -58,7 +58,7 @@ public sealed class BattleEngineUnitUpgradeTests
         BattleEngine engine = new TestBattleEngineBuilder()
             .WithDefinition(squireDefinition)
             .WithDefinition(defenderDefinition)
-            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(squireDefinition.Id, new BattleUnitUpgrade(squireDefinition.Id, 2, 20)))
+            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(squireDefinition.Id, new BattleUnitUpgrade(squireDefinition.Id, 2, 20, 20)))
             .WithAttacker(squire, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .Build();
@@ -72,7 +72,7 @@ public sealed class BattleEngineUnitUpgradeTests
             new BattleUnitTurnEndingEvent(squire.Id),
             new BattleRoundEndedEvent(),
             new BattleEndedEvent(BattleSide.Attacker),
-            new BattleUnitUpgradedEvent(squire.Id, squireDefinition.Id, squireDefinition.Id, 2, 20)
+            new BattleUnitUpgradedEvent(squire.Id, squireDefinition.Id, squireDefinition.Id, 2, 20, 20)
         ]);
 
         Assert.That(engine.State.GetUnit(squire.Id), Is.EqualTo(
@@ -96,7 +96,7 @@ public sealed class BattleEngineUnitUpgradeTests
             .WithDefinition(guardDefinition)
             .WithDefinition(veteranDefinition)
             .WithDefinition(victimDefinition)
-            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(guardDefinition.Id, new BattleUnitUpgrade(veteranDefinition.Id, 2, 20)))
+            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(guardDefinition.Id, new BattleUnitUpgrade(veteranDefinition.Id, 2, 20, 20)))
             .WithAttacker(victim, GridPosition.FrontBottom)
             .WithDefender(guard, GridPosition.FrontBottom)
             .Build();
@@ -110,7 +110,7 @@ public sealed class BattleEngineUnitUpgradeTests
             new BattleUnitTurnEndingEvent(guard.Id),
             new BattleRoundEndedEvent(),
             new BattleEndedEvent(BattleSide.Defender),
-            new BattleUnitUpgradedEvent(guard.Id, guardDefinition.Id, veteranDefinition.Id, 2, 20)
+            new BattleUnitUpgradedEvent(guard.Id, guardDefinition.Id, veteranDefinition.Id, 2, 20, 20)
         ]);
 
         Assert.That(engine.State.GetUnit(guard.Id), Is.EqualTo(
@@ -232,7 +232,7 @@ public sealed class BattleEngineUnitUpgradeTests
             .WithDefinition(knightDefinition)
             .WithDefinition(enemyDefinition)
             .WithDefinition(fastRetreatModifier)
-            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(squireDefinition.Id, new BattleUnitUpgrade(knightDefinition.Id, 1, 20)))
+            .WithUpgradeResolver(new TestBattleUnitUpgradeResolver().WithUpgrade(squireDefinition.Id, new BattleUnitUpgrade(knightDefinition.Id, 1, 20, 20)))
             .WithAttacker(squire, GridPosition.FrontBottom)
             .WithDefender(enemy, GridPosition.FrontBottom)
             .Build();

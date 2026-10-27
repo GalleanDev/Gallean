@@ -32,7 +32,7 @@ internal sealed class DoppelgangerAttackResolver : IBattleAttackResolver, IStati
         }
 
         UnitDefinition transformDefinition = context.Definitions.GetUnit(targetUnit.DefinitionId);
-        int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+        (int hitpointsAfter, int maxHitpointsAfter) = BattleTransformationCalculator.GetTransformedHitpoints(
             state,
             context,
             attackerId,
@@ -55,6 +55,7 @@ internal sealed class DoppelgangerAttackResolver : IBattleAttackResolver, IStati
                     transformDefinition.Id,
                     transformDefinition.Level,
                     hitpointsAfter,
+                    maxHitpointsAfter,
                     remainingTurns)
             ],
             DidHit: false,

@@ -53,7 +53,7 @@ public sealed class BattleEngineReduceLevelAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(veteran.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, veteran.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, veteran.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 3, 110, null),
+            new BattleUnitTransformAppliedEvent(attacker.Id, veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 3, 110, 110, null),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(veteran.Id, BattleUnitTurnType.Normal))
@@ -138,7 +138,7 @@ public sealed class BattleEngineReduceLevelAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(veteran.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, veteran.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, veteran.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, veteran.Id, BattleTransformType.LevelDrain, recruitDefinition.Id, 1, 30, null),
+            new BattleUnitTransformAppliedEvent(attacker.Id, veteran.Id, BattleTransformType.LevelDrain, recruitDefinition.Id, 1, 30, 60, null),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(veteran.Id, BattleUnitTurnType.Normal))
@@ -236,11 +236,11 @@ public sealed class BattleEngineReduceLevelAttackTests
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(veteran.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, veteran.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, veteran.Id, attackerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(attacker.Id, veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 3, 110, 1),
+            new BattleUnitTransformAppliedEvent(attacker.Id, veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 3, 110, 110, 1),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(veteran.Id, BattleUnitTurnType.Normal)),
-            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id),
+            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 120, 120 ),
             new BattleUnitEffectDurationDecreasedEvent(veteran.Id)
         ]);
 
@@ -402,7 +402,7 @@ public sealed class BattleEngineReduceLevelAttackTests
             new BattleUnitDiedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(veteran.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id),
+            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 120, 120 ),
             new BattleEndedEvent(BattleSide.Defender),
             new BattleUnitExperienceGainedEvent(veteran.Id, 1)
         ]);

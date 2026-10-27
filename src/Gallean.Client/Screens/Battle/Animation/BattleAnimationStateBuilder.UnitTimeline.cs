@@ -8,6 +8,7 @@ internal sealed partial class BattleAnimationStateBuilder
     {
         public BattleRenderState.Unit Unit { get; } = unit;
         public List<AnimationProperty> Hitpoints { get; } = [];
+        public List<AnimationProperty> MaxHitpoints { get; } = [];
         public List<BattleAnimationState.BodyEntry> Body { get; } = [];
         public List<BattleAnimationState.FormEntry> Form { get; } = [];
         public List<BattleAnimationState.FeedbackEntry> Feedback { get; } = [];
@@ -27,6 +28,21 @@ internal sealed partial class BattleAnimationStateBuilder
                 else
                 {
                     return Unit.Hitpoints;
+                }
+            }
+        }
+
+        public int CurrentMaxHitpoints
+        {
+            get
+            {
+                if (MaxHitpoints.Count > 0)
+                {
+                    return (int)MaxHitpoints[^1].To;
+                }
+                else
+                {
+                    return Unit.MaxHitpoints;
                 }
             }
         }

@@ -76,7 +76,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         BattleGridViewModel defenderGridViewModel = new();
@@ -98,7 +98,7 @@ public sealed class BattleGridViewModelTests
                 marker: Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -172,7 +172,7 @@ public sealed class BattleGridViewModelTests
                 marker: Theme.Battle.GridMarker.EnemyReachableColor,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -249,7 +249,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
 
         BattleGridViewModel defenderGridViewModel = new();
@@ -271,7 +271,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -360,7 +360,7 @@ public sealed class BattleGridViewModelTests
                     new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Poison)),
                     new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Defend))
                 ],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -447,7 +447,7 @@ public sealed class BattleGridViewModelTests
                 [
                     new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Retreated))
                 ],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 new BattleUnitId(2),
                 new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop),
@@ -463,7 +463,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -487,7 +487,7 @@ public sealed class BattleGridViewModelTests
             marker: null,
             feedback: [],
             statuses: [],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         BattleGridUnitViewModel second = new(
             new BattleUnitId(2),
@@ -504,7 +504,7 @@ public sealed class BattleGridViewModelTests
             marker: null,
             feedback: [],
             statuses: [],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         BattleGridUnitViewModel equalFirst = new(
             new BattleUnitId(1),
@@ -521,7 +521,7 @@ public sealed class BattleGridViewModelTests
             marker: null,
             feedback: [],
             statuses: [],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         BattleGridUnitViewModel changedSecond = new(
             new BattleUnitId(2),
@@ -538,7 +538,7 @@ public sealed class BattleGridViewModelTests
             marker: Theme.Battle.GridMarker.EnemyTargetColor,
             feedback: [],
             statuses: [],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         grid.UpdateUnits([first, second]);
         grid.UpdateUnits([equalFirst, changedSecond]);
@@ -567,7 +567,7 @@ public sealed class BattleGridViewModelTests
             marker: null,
             feedback: [],
             statuses: [],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         BattleGridUnitViewModel second = new(
             new BattleUnitId(2),
@@ -584,7 +584,7 @@ public sealed class BattleGridViewModelTests
             marker: null,
             feedback: [],
             statuses: [],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         grid.UpdateUnits([first, second]);
         grid.UpdateUnits([first]);
@@ -615,7 +615,7 @@ public sealed class BattleGridViewModelTests
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Poison)),
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Paralyze))
             ],
-            hitpointsAnimation: []);
+            hitpointsAnimation: AnimationRange.None);
 
         Assert.That(unit.Overlay, Is.EqualTo(Theme.Battle.StatusEffect.PoisonOverlayColor));
     }
@@ -687,7 +687,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -771,7 +771,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [new BattleFeedbackViewModel(BattleUnitState.FeedbackType.Heal, "+40 XP", Animation: [])],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 new BattleUnitId(2),
                 new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop),
@@ -787,7 +787,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 new BattleUnitId(3),
                 new BattleGridTile(BattleSide.Attacker, GridPosition.FrontBottom),
@@ -803,7 +803,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: []),
+                hitpointsAnimation: AnimationRange.None),
             new BattleGridUnitViewModel(
                 new BattleUnitId(4),
                 new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter),
@@ -822,7 +822,7 @@ public sealed class BattleGridViewModelTests
                 [
                     new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Retreated))
                 ],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 
@@ -896,7 +896,7 @@ public sealed class BattleGridViewModelTests
                 marker: null,
                 feedback: [],
                 statuses: [],
-                hitpointsAnimation: [])
+                hitpointsAnimation: AnimationRange.None)
         ]));
     }
 }

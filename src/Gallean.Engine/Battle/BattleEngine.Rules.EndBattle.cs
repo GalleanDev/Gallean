@@ -82,7 +82,7 @@ internal partial class BattleEngine
             return EventRuleResult<BattleEvent>.Append(
             [
                 new BattleRoundEndedEvent(),
-                .. BattleTransformationCalculator.GetRestoreEvents(state),
+                .. BattleTransformationCalculator.GetRestoreEvents(state, context),
                 new BattleEndedEvent(outcome.WinningSide)
             ]);
         }

@@ -26,8 +26,8 @@ internal sealed class BarVisual : Control
     public static readonly StyledProperty<double> GainOpacityProperty =
         AvaloniaProperty.Register<BarVisual, double>(nameof(GainOpacity), 1);
 
-    public static readonly StyledProperty<IReadOnlyList<AnimationProperty>> AnimationProperty =
-        AvaloniaProperty.Register<BarVisual, IReadOnlyList<AnimationProperty>>(nameof(Animation), []);
+    public static readonly StyledProperty<AnimationRange> AnimationProperty =
+        AvaloniaProperty.Register<BarVisual, AnimationRange>(nameof(Animation), AnimationRange.None);
 
     public static readonly StyledProperty<string?> TextProperty =
         AvaloniaProperty.Register<BarVisual, string?>(nameof(Text));
@@ -80,7 +80,8 @@ internal sealed class BarVisual : Control
     public static readonly StyledProperty<double> OutlineThicknessProperty =
         AvaloniaProperty.Register<BarVisual, double>(nameof(OutlineThickness));
 
-    private readonly AnimationPropertyPlayer player = new();
+    private readonly AnimationPropertyPlayer currentPlayer = new();
+    private readonly AnimationPropertyPlayer maximumPlayer = new();
 
     static BarVisual()
     {
@@ -132,7 +133,7 @@ internal sealed class BarVisual : Control
         set => SetValue(GainOpacityProperty, value);
     }
 
-    public IReadOnlyList<AnimationProperty> Animation
+    public AnimationRange Animation
     {
         get => GetValue(AnimationProperty);
         set => SetValue(AnimationProperty, value);
@@ -320,7 +321,7 @@ internal sealed class BarVisual : Control
 
         if (e.Property == AnimationProperty && IsLoaded)
         {
-            player.Start(this, CurrentProperty, Animation);
+            StartAnimation();
         }
     }
 
@@ -328,14 +329,21 @@ internal sealed class BarVisual : Control
     {
         base.OnLoaded(e);
 
-        player.Start(this, CurrentProperty, Animation);
+        StartAnimation();
     }
 
     protected override void OnUnloaded(RoutedEventArgs e)
     {
         base.OnUnloaded(e);
 
-        player.Stop();
+        currentPlayer.Stop();
+        maximumPlayer.Stop();
+    }
+
+    private void StartAnimation()
+    {
+        currentPlayer.Start(this, CurrentProperty, Animation.Current);
+        maximumPlayer.Start(this, MaximumProperty, Animation.Maximum);
     }
 
     private void DrawGain(DrawingContext context, Rect rect)

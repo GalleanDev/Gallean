@@ -483,7 +483,7 @@ public sealed class BattleEngineAiActionTests
 
         engine.CheckCommand(new BattleAiActionCommand(), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(attacker.Id), [attackerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 50, null)
+            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 50, 50, null)
         ]);
 
         engine.CheckCommand(new BattleAiActionCommand(), [
@@ -756,7 +756,7 @@ public sealed class BattleEngineAiActionTests
 
         engine.CheckCommand(new BattleAiActionCommand(), [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(champion.Id), [doppelgangerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, championDefinition.Id, 1, 200, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, championDefinition.Id, 1, 200, 200, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),
@@ -800,7 +800,7 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitAttackEvent(transformer.Id, new BattleAttackUnitTarget(weak.Id), [transformerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(transformer.Id, weak.Id, transformerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(transformer.Id, weak.Id, transformerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(transformer.Id, weak.Id, BattleTransformType.Transform, beastDefinition.Id, 1, 10, null),
+            new BattleUnitTransformAppliedEvent(transformer.Id, weak.Id, BattleTransformType.Transform, beastDefinition.Id, 1, 10, 10, null),
             new BattleUnitTurnEndingEvent(transformer.Id),
             new BattleUnitTurnEndedEvent(transformer.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(strong.Id, BattleUnitTurnType.Normal))
@@ -838,7 +838,7 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitAttackEvent(transformer.Id, new BattleAttackUnitTarget(strong.Id), [transformerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(transformer.Id, strong.Id, transformerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(transformer.Id, strong.Id, transformerDefinition.Attack.Id, 0),
-            new BattleUnitTransformAppliedEvent(transformer.Id, strong.Id, BattleTransformType.Transform, beastDefinition.Id, 1, 80, null),
+            new BattleUnitTransformAppliedEvent(transformer.Id, strong.Id, BattleTransformType.Transform, beastDefinition.Id, 1, 80, 80, null),
             new BattleUnitTurnEndingEvent(transformer.Id),
             new BattleUnitTurnEndedEvent(transformer.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(strong.Id, BattleUnitTurnType.Normal))

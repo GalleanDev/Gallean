@@ -40,7 +40,7 @@ internal sealed class ReduceLevelAttackResolver : BattleAbstractAttackResolver, 
         if (unit is not null)
         {
             (UnitDefinitionId definitionId, int level) = unit.Value;
-            int hitpointsAfter = BattleTransformationCalculator.GetTransformedHitpoints(
+            (int hitpointsAfter, int maxHitpointsAfter) = BattleTransformationCalculator.GetTransformedHitpoints(
                 state,
                 context,
                 targetId,
@@ -63,6 +63,7 @@ internal sealed class ReduceLevelAttackResolver : BattleAbstractAttackResolver, 
                     definitionId,
                     level,
                     hitpointsAfter,
+                    maxHitpointsAfter,
                     remainingTurns)
             ];
         }

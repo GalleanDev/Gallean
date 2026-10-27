@@ -14,6 +14,7 @@ public sealed class BattleRenderStateExtensionsTests
             IdleOffset: idleOffset,
             CorpseVariant: 0,
             Hitpoints: 40,
+            MaxHitpoints: 40,
             Presence: BattleUnitState.Presence.Alive,
             Marker: null,
             Highlight: null,

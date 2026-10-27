@@ -57,8 +57,8 @@ internal sealed class BattleRenderStateBuilder(
 
         List<Unit> units =
         [
-            .. BuildSideUnits(baseState.AttackerGrid, BattleSide.Attacker),
-            .. BuildSideUnits(baseState.DefenderGrid, BattleSide.Defender),
+            .. BuildSideUnits(baseState, BattleSide.Attacker),
+            .. BuildSideUnits(baseState, BattleSide.Defender),
             .. BuildAbsentUnits()
         ];
 
@@ -115,7 +115,7 @@ internal sealed class BattleRenderStateBuilder(
                 marker,
                 BuildFeedback(unit, presence),
                 UnitStatusViewModel.CreateAll(StatusEffect.CreateAll(unit.StatusEffects).Where(effect => effect.Type is not StatusEffectType.Cure), modifiers),
-                hitpointsAnimation: []));
+                hitpointsAnimation: AnimationRange.None));
         }
 
         return units;
@@ -190,8 +190,8 @@ internal sealed class BattleRenderStateBuilder(
 
         List<Unit> allUnits =
         [
-            .. BuildSideUnits(currentState.AttackerGrid, BattleSide.Attacker),
-            .. BuildSideUnits(currentState.DefenderGrid, BattleSide.Defender)
+            .. BuildSideUnits(currentState, BattleSide.Attacker),
+            .. BuildSideUnits(currentState, BattleSide.Defender)
         ];
 
         List<Unit> absentUnits = [];
@@ -327,8 +327,9 @@ internal sealed class BattleRenderStateBuilder(
         return BattleRenderLayout.GetContentBounds(BattleRenderLayout.GetCorpsePlacement(unit.Footprint), content);
     }
 
-    private IReadOnlyList<Unit> BuildSideUnits(UnitGrid<BattleUnit> grid, BattleSide side)
+    private IReadOnlyList<Unit> BuildSideUnits(BattleState state, BattleSide side)
     {
+        UnitGrid<BattleUnit> grid = state.GetGrid(side);
         List<Unit> result = [];
 
         foreach ((BattleUnit unit, GridPosition position) in grid.GetUnits())
@@ -346,6 +347,7 @@ internal sealed class BattleRenderStateBuilder(
             Auras auras = Auras.Resolve(assets, definitionId, facing);
             TimeSpan idleOffset = ResolveIdleOffset(unit.Id, footprint);
             bool frozen = unit.HasStatusEffect<BattleAbstractDisableEffect>();
+            UnitStats unitStats = stats.GetBattleUnitStats(state, unit.Id);
 
             result.Add(new Unit(
                 unit.Id,
@@ -357,6 +359,7 @@ internal sealed class BattleRenderStateBuilder(
                 idleOffset,
                 unit.Id.Value.Mod(AssetSpriteKey.BattleCorpse.VariantCount),
                 unit.Hitpoints,
+                unitStats.MaxHitpoints,
                 presence,
                 marker,
                 highlight,

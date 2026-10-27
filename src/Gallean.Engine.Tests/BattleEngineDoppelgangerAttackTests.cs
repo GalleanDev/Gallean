@@ -56,7 +56,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
         engine.CheckCommand(new BattleAttackCommand(doppelganger.Id, new BattleAttackUnitTarget(knight.Id)),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(knight.Id), [doppelgangerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 60, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 60, 120, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),
@@ -121,7 +121,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
         engine.CheckCommand(new BattleAttackCommand(doppelganger.Id, new BattleAttackUnitTarget(healer.Id)),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(healer.Id), [doppelgangerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, healerDefinition.Id, 2, 40, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, healerDefinition.Id, 2, 40, 40, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),
@@ -280,7 +280,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
             new BattleUnitExperienceGainedEvent(doppelganger.Id, 400),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(doppelganger.Id, BattleTransformType.Doppelganger, doppelgangerDefinition.Id),
+            new BattleUnitTransformRestoredEvent(doppelganger.Id, BattleTransformType.Doppelganger, doppelgangerDefinition.Id, 60, 60),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(doppelganger.Id, 400)
         ]);
@@ -342,7 +342,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
             new BattleUnitExperienceGainedEvent(archer.Id, 20),
             new BattleUnitTurnEndingEvent(archer.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(doppelganger.Id, BattleTransformType.Doppelganger, doppelgangerDefinition.Id),
+            new BattleUnitTransformRestoredEvent(doppelganger.Id, BattleTransformType.Doppelganger, doppelgangerDefinition.Id, 0, 60 ),
             new BattleEndedEvent(BattleSide.Defender),
             new BattleUnitExperienceGainedEvent(knight.Id, 20),
             new BattleUnitExperienceGainedEvent(archer.Id, 20)
@@ -440,7 +440,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
         engine.CheckCommand(new BattleAttackCommand(doppelganger.Id, new BattleAttackUnitTarget(secondaryDoppelganger.Id)),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(secondaryDoppelganger.Id), [doppelgangerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, secondaryDoppelgangerDefinition.Id, 1, 90, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, secondaryDoppelgangerDefinition.Id, 1, 90, 90, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(otherDoppelganger.Id, BattleUnitTurnType.Doppelganger))
@@ -504,7 +504,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
         engine.CheckCommand(new BattleAttackCommand(doppelganger.Id, new BattleAttackUnitTarget(knight.Id)),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(knight.Id), [doppelgangerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 60, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 60, 120, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),

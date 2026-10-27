@@ -26,9 +26,17 @@ internal static class BattleTransformationCalculator
         return unit.StatusEffects.OfType<BattleTransformStatusEffect>().SingleOrDefault();
     }
 
-    public static BattleUnitTransformRestoredEvent GetRestoreEvent(BattleUnitId unitId, BattleTransformStatusEffect effect)
+    public static BattleUnitTransformRestoredEvent GetRestoreEvent(
+        BattleState state,
+        IEngineContext context,
+        BattleUnitId unitId,
+        BattleTransformStatusEffect effect)
     {
-        return new BattleUnitTransformRestoredEvent(unitId, effect.Type, effect.RestoreDefinitionId);
+        BattleState restoredState = Restore(state, context, unitId);
+        BattleUnit restoredUnit = restoredState.GetUnit(unitId);
+        UnitStats restoredStats = context.UnitStats.GetBattleUnitStats(restoredState, unitId);
+
+        return new BattleUnitTransformRestoredEvent(unitId, effect.Type, effect.RestoreDefinitionId, restoredUnit.Hitpoints, restoredStats.MaxHitpoints);
     }
 
     public static BattleState Restore(BattleState state, IEngineContext context, BattleUnitId unitId)
@@ -54,7 +62,7 @@ internal static class BattleTransformationCalculator
         return state.WithUnit(restoredUnit);
     }
 
-    public static ImmutableArray<BattleEvent> GetRestoreEvents(BattleState state)
+    public static ImmutableArray<BattleEvent> GetRestoreEvents(BattleState state, IEngineContext context)
     {
         ImmutableArray<BattleEvent>.Builder events = ImmutableArray.CreateBuilder<BattleEvent>();
 
@@ -62,14 +70,14 @@ internal static class BattleTransformationCalculator
         {
             if (GetTransformEffect(state.GetUnit(unitId)) is { } effect)
             {
-                events.Add(GetRestoreEvent(unitId, effect));
+                events.Add(GetRestoreEvent(state, context, unitId, effect));
             }
         }
 
         return events.ToImmutable();
     }
 
-    public static int GetTransformedHitpoints(
+    public static (int Hitpoints, int MaxHitpoints) GetTransformedHitpoints(
         BattleState state,
         IEngineContext context,
         BattleUnitId targetId,
@@ -88,7 +96,10 @@ internal static class BattleTransformationCalculator
             StatusEffects = target.StatusEffects.Add(effect)
         };
 
-        return GetScaledHitpoints(restoredState, context, transformed);
+        int hitpoints = GetScaledHitpoints(restoredState, context, transformed);
+        UnitStats transformedStats = context.UnitStats.GetBattleUnitStats(restoredState.WithUnit(transformed), targetId);
+
+        return (hitpoints, transformedStats.MaxHitpoints);
     }
 
     private static int GetScaledHitpoints(BattleState state, IEngineContext context, BattleUnit changedUnit)

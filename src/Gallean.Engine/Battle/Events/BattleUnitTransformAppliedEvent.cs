@@ -7,6 +7,7 @@ public sealed record BattleUnitTransformAppliedEvent(
     UnitDefinitionId DefinitionId,
     int Level,
     int HitpointsAfter,
+    int MaxHitpointsAfter,
     int? RemainingTurns) : BattleEvent
 {
     public override TResult Accept<TContext, TResult>(IBattleEventVisitor<TContext, TResult> visitor, TContext context)

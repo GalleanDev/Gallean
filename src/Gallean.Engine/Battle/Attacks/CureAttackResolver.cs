@@ -34,7 +34,7 @@ internal sealed class CureAttackResolver : BattleAbstractAttackResolver, IStatic
 
         if (transformEffect is not null && transformEffect.IsCurable())
         {
-            events.Add(BattleTransformationCalculator.GetRestoreEvent(targetId, transformEffect));
+            events.Add(BattleTransformationCalculator.GetRestoreEvent(state, context, targetId, transformEffect));
         }
 
         events.Add(new BattleUnitCuredEvent(targetId));

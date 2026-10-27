@@ -25,8 +25,8 @@ internal sealed class UnitPortrait : ContentControl
     public static readonly StyledProperty<double> MaxHitpointsProperty =
         AvaloniaProperty.Register<UnitPortrait, double>(nameof(MaxHitpoints));
 
-    public static readonly StyledProperty<IReadOnlyList<AnimationProperty>> HitpointsAnimationProperty =
-        AvaloniaProperty.Register<UnitPortrait, IReadOnlyList<AnimationProperty>>(nameof(HitpointsAnimation), []);
+    public static readonly StyledProperty<AnimationRange> HitpointsAnimationProperty =
+        AvaloniaProperty.Register<UnitPortrait, AnimationRange>(nameof(HitpointsAnimation), AnimationRange.None);
 
     public static readonly StyledProperty<bool> IsHitpointsVisibleProperty =
         AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsHitpointsVisible), true);
@@ -78,7 +78,7 @@ internal sealed class UnitPortrait : ContentControl
         set => SetValue(MaxHitpointsProperty, value);
     }
 
-    public IReadOnlyList<AnimationProperty> HitpointsAnimation
+    public AnimationRange HitpointsAnimation
     {
         get => GetValue(HitpointsAnimationProperty);
         set => SetValue(HitpointsAnimationProperty, value);

@@ -39,6 +39,6 @@ internal sealed class WorldBattleUnitUpgradeResolver(
     {
         UnitStats stats = UnitStatsCalculator.GetStats(definition, level, modifiers, context.Definitions, context.Globals);
 
-        return new BattleUnitUpgrade(definition.Id, level, stats.MaxHitpoints);
+        return new BattleUnitUpgrade(definition.Id, level, stats.MaxHitpoints, stats.MaxHitpoints);
     }
 }

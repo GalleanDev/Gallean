@@ -28,6 +28,7 @@ internal sealed record BattleRenderState(
         TimeSpan IdleOffset,
         int CorpseVariant,
         int Hitpoints,
+        int MaxHitpoints,
         BattleUnitState.Presence Presence,
         Color? Marker,
         Color? Highlight,
@@ -55,6 +56,7 @@ internal sealed record BattleRenderState(
                    IdleOffset == other.IdleOffset &&
                    CorpseVariant == other.CorpseVariant &&
                    Hitpoints == other.Hitpoints &&
+                   MaxHitpoints == other.MaxHitpoints &&
                    Presence == other.Presence &&
                    Marker == other.Marker &&
                    Highlight == other.Highlight &&
@@ -75,6 +77,7 @@ internal sealed record BattleRenderState(
             hash.Add(IdleOffset);
             hash.Add(CorpseVariant);
             hash.Add(Hitpoints);
+            hash.Add(MaxHitpoints);
             hash.Add(Presence);
             hash.Add(Marker);
             hash.Add(Highlight);

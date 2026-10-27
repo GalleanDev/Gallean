@@ -98,7 +98,7 @@ public sealed class BattleEngineAlternativeAttackTests
         engine.CheckCommand(new BattleAttackCommand(doppelganger.Id, new BattleAttackUnitTarget(knight.Id)),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(knight.Id), [new UnitAttackDefinitionId("doppelganger")]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 120, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 120, 120, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),
@@ -292,7 +292,7 @@ public sealed class BattleEngineAlternativeAttackTests
         engine.CheckCommand(new BattleAiActionCommand(),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(knight.Id), [new UnitAttackDefinitionId("doppelganger")]),
-            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 120, null),
+            new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 120, 120, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
             new BattleUnitTurnEndedEvent(doppelganger.Id),
             new BattleRoundEndedEvent(),

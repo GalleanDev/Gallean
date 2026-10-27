@@ -70,7 +70,7 @@ internal partial class BattleEngine
 
                     if (upgrade is not null)
                     {
-                        return new BattleUnitUpgradedEvent(unit.Id, unit.DefinitionId, upgrade.DefinitionId, upgrade.Level, upgrade.Hitpoints);
+                        return new BattleUnitUpgradedEvent(unit.Id, unit.DefinitionId, upgrade.DefinitionId, upgrade.Level, upgrade.Hitpoints, upgrade.MaxHitpoints);
                     }
                 }
 

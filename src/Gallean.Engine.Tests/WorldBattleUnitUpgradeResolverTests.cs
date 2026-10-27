@@ -23,7 +23,7 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([], []), new WorldPlayerBuildings([], []), context);
 
         BattleUnit unit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, soldierDefinition.Id, BattleSide.Attacker, hitpoints: 10);
-        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(soldierDefinition.Id, 2, 20)));
+        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(soldierDefinition.Id, 2, 20, 20)));
     }
 
     [Test]
@@ -48,7 +48,7 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([barracksId], [barracksId]), new WorldPlayerBuildings([barracksId], []), context);
 
         BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, squireDefinition.Id, BattleSide.Attacker, hitpoints: 10);
-        Assert.That(resolver.UpgradeUnit(attacker), Is.EqualTo(new BattleUnitUpgrade(knightDefinition.Id, 1, 20)));
+        Assert.That(resolver.UpgradeUnit(attacker), Is.EqualTo(new BattleUnitUpgrade(knightDefinition.Id, 1, 20, 20)));
 
         BattleUnit defender = attacker with { Side = BattleSide.Defender };
         Assert.That(resolver.UpgradeUnit(defender), Is.Null);
@@ -78,7 +78,7 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([], []), new WorldPlayerBuildings([], []), context);
 
         BattleUnit belowCap = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
-        Assert.That(resolver.UpgradeUnit(belowCap), Is.EqualTo(new BattleUnitUpgrade(leaderDefinition.Id, 2, 110)));
+        Assert.That(resolver.UpgradeUnit(belowCap), Is.EqualTo(new BattleUnitUpgrade(leaderDefinition.Id, 2, 110, 110)));
 
         BattleUnit atCap = belowCap with { Level = 2 };
         Assert.That(resolver.UpgradeUnit(atCap), Is.Null);
@@ -106,7 +106,7 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([], []), new WorldPlayerBuildings([], []), context);
 
         BattleUnit unit = new(new BattleUnitId(0), null, soldierDefinition.Id, BattleSide.Attacker, 10, 0, 0, 2, [], [], null, [], null, false);
-        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(soldierDefinition.Id, 3, 30)));
+        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(soldierDefinition.Id, 3, 30, 30)));
     }
 
     [Test]
@@ -136,7 +136,7 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([], []), new WorldPlayerBuildings([], []), context);
 
         BattleUnit unit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, squireDefinition.Id, BattleSide.Attacker, hitpoints: 10);
-        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20)));
+        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20, 20)));
     }
 
     [Test]
@@ -168,7 +168,7 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([barracksId, chapelId], [chapelId]), new WorldPlayerBuildings([], []), context);
 
         BattleUnit unit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, squireDefinition.Id, BattleSide.Attacker, hitpoints: 10);
-        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20)));
+        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20, 20)));
     }
 
     [Test]
@@ -195,6 +195,6 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([], []), new WorldPlayerBuildings([], []), context);
 
         BattleUnit unit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, squireDefinition.Id, BattleSide.Attacker, hitpoints: 10) with { IsTypeLocked = true };
-        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20)));
+        Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20, 20)));
     }
 }

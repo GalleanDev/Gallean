@@ -42,7 +42,7 @@ public sealed class BattleEngineTransformSelfAttackTests
         engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(attacker.Id)),
         [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(attacker.Id), [attackerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 40, null)
+            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 40, 50, null)
         ]);
 
         BattleUnit transformed = attacker with
@@ -323,7 +323,7 @@ public sealed class BattleEngineTransformSelfAttackTests
         engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(attacker.Id)),
         [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(attacker.Id), [attackerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, largeBeastDefinition.Id, 1, 120, null)
+            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, largeBeastDefinition.Id, 1, 120, 150, null)
         ]);
 
         BattleUnit transformed = attacker with
@@ -374,7 +374,7 @@ public sealed class BattleEngineTransformSelfAttackTests
             new BattleUnitDiedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(attacker.Id, BattleTransformType.TransformSelf, attackerDefinition.Id),
+            new BattleUnitTransformRestoredEvent(attacker.Id, BattleTransformType.TransformSelf, attackerDefinition.Id, 80, 100),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(attacker.Id, 1)
         ]);
@@ -570,7 +570,7 @@ public sealed class BattleEngineTransformSelfAttackTests
         engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(attacker.Id)),
         [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(attacker.Id), [attackerDefinition.Attack.Id]),
-            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 37, null)
+            new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 37, 50, null)
         ]);
 
         BattleUnit transformed = attacker with

@@ -19,7 +19,7 @@ internal sealed partial class BattleGridUnitViewModel(
     Color? marker,
     IReadOnlyList<BattleFeedbackViewModel> feedback,
     IReadOnlyList<UnitStatusViewModel> statuses,
-    IReadOnlyList<AnimationProperty> hitpointsAnimation) : ObservableObject, IEquatable<BattleGridUnitViewModel>
+    AnimationRange hitpointsAnimation) : ObservableObject, IEquatable<BattleGridUnitViewModel>
 {
     public BattleUnitId UnitId { get; } = unitId;
 
@@ -64,7 +64,7 @@ internal sealed partial class BattleGridUnitViewModel(
     public partial IReadOnlyList<UnitStatusViewModel> Statuses { get; private set; } = statuses;
 
     [ObservableProperty]
-    public partial IReadOnlyList<AnimationProperty> HitpointsAnimation { get; private set; } = hitpointsAnimation;
+    public partial AnimationRange HitpointsAnimation { get; private set; } = hitpointsAnimation;
 
     public Color? Overlay => ResolveOverlay(Statuses);
 
@@ -112,7 +112,7 @@ internal sealed partial class BattleGridUnitViewModel(
                Marker == other.Marker &&
                Feedback.SequenceEqual(other.Feedback) &&
                Statuses.SequenceEqual(other.Statuses) &&
-               HitpointsAnimation.SequenceEqual(other.HitpointsAnimation);
+               HitpointsAnimation == other.HitpointsAnimation;
     }
 
     public override bool Equals(object? obj)
@@ -138,7 +138,7 @@ internal sealed partial class BattleGridUnitViewModel(
         hash.Add(Marker);
         hash.AddSequence(Feedback);
         hash.AddSequence(Statuses);
-        hash.AddSequence(HitpointsAnimation);
+        hash.Add(HitpointsAnimation);
 
         return hash.ToHashCode();
     }

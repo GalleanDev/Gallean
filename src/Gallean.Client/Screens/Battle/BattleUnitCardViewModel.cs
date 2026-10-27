@@ -9,5 +9,5 @@ internal sealed record BattleUnitCardViewModel(
     int Level,
     int Hitpoints,
     int MaxHitpoints,
-    IReadOnlyList<AnimationProperty> HitpointsAnimation,
+    AnimationRange HitpointsAnimation,
     IReadOnlyList<UnitStatusViewModel> Statuses);

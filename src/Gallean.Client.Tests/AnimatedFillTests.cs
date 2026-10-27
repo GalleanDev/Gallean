@@ -30,16 +30,17 @@ public sealed class AnimatedFillTests
         AnimatedFill fill = new()
         {
             Fill = Brushes.Red,
-            Animation =
-            [
-                new AnimationProperty(
-                    new TestTarget("wound"),
-                    TimeSpan.Zero,
-                    TimeSpan.FromSeconds(10),
-                    From: 0,
-                    To: 1,
-                    AnimationEasing.Linear)
-            ]
+            Animation = new AnimationRange(
+                [
+                    new AnimationProperty(
+                        new TestTarget("wound"),
+                        TimeSpan.Zero,
+                        TimeSpan.FromSeconds(10),
+                        From: 0,
+                        To: 1,
+                        AnimationEasing.Linear)
+                ],
+                [])
         };
 
         Panel panel = new();
