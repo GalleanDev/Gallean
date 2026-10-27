@@ -14,7 +14,7 @@ namespace Gallean.Client;
 internal sealed partial class WorldVisual : AbstractAnimatedVisual
 {
     private const double CameraSpeed = 2000.0;
-    private const double ZoomStep = 0.12;
+    private const double ZoomStepFactor = 1.15;
     private const double FastForwardRate = 2.0;
     private const double InterfaceScrollMargin = 4.0;
 
@@ -142,8 +142,8 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 
         if (e.Delta.Y != 0)
         {
-            double step = e.Delta.Y > 0 ? ZoomStep : -ZoomStep;
-            camera.ZoomTo(camera.TargetZoom + step, e.GetPosition(this));
+            double factor = e.Delta.Y > 0 ? ZoomStepFactor : 1.0 / ZoomStepFactor;
+            camera.ZoomTo(camera.TargetZoom * factor, e.GetPosition(this));
 
             redrawRequested = true;
             e.Handled = true;
