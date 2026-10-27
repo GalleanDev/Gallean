@@ -114,7 +114,7 @@ internal partial class BattleEngine
                 BattleTransformStatusEffect? transformEffect = BattleTransformationCalculator.GetTransformEffect(unit);
                 if (transformEffect is { RemainingTurns: <= 1 })
                 {
-                    events.Add(BattleTransformationCalculator.GetRestoreEvent(state, context, ev.UnitId, transformEffect));
+                    events.Add(BattleTransformationCalculator.GetRestoreEvent(state, Context, ev.UnitId, transformEffect));
                 }
 
                 if (unit.StatusEffects.Any(effect => effect.Accept(TurnDurationVisitor.Instance, Empty.Value)))
