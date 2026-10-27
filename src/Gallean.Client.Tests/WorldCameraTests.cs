@@ -231,6 +231,20 @@ public sealed class WorldCameraTests
     }
 
     [Test]
+    public void ZoomClampTest()
+    {
+        WorldCamera camera = new();
+
+        camera.SetZoom(10.0);
+
+        Assert.That(camera.Zoom, Is.EqualTo(2.5));
+
+        camera.SetZoom(0.1);
+
+        Assert.That(camera.Zoom, Is.EqualTo(0.75));
+    }
+
+    [Test]
     public void NoBoundsTest()
     {
         WorldCamera camera = new();
