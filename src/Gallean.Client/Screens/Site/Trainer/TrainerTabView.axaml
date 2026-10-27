@@ -72,7 +72,7 @@
                                      Classes.maximum="{Binding IsMaximumLevel}"
                                      Classes.pending="{Binding IsPendingUpgrade}"
                                      Classes.gain="{Binding HasTrainableExperience}"
-                                     Value="{Binding Experience}"
+                                     Current="{Binding Experience}"
                                      Maximum="{Binding NextLevelExperience}"
                                      Gain="{Binding TrainableExperience}"
                                      Text="{Binding ExperienceText}" />

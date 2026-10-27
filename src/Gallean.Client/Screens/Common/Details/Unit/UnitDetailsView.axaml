@@ -162,14 +162,14 @@
         <StackPanel Margin="18,0,0,0" Spacing="12">
           <StackPanel>
             <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Hit points'}" />
-            <local:BarVisual Classes="details-bar hitpoints" Value="{Binding Hitpoints}" Maximum="{Binding MaxHitpoints}" />
+            <local:BarVisual Classes="details-bar hitpoints" Current="{Binding Hitpoints}" Maximum="{Binding MaxHitpoints}" />
           </StackPanel>
           <StackPanel>
             <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Experience'}" />
             <local:BarVisual Classes="details-bar experience"
                              Classes.maximum="{Binding IsMaximumLevel}"
                              Classes.pending="{Binding IsPendingUpgrade}"
-                             Value="{Binding Experience}"
+                             Current="{Binding Experience}"
                              Maximum="{Binding NextLevelExperience}" />
           </StackPanel>
           <TextBlock Text="{local:Text 'Upgrades after its next battle'}"

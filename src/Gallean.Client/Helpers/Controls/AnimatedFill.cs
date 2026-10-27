@@ -7,8 +7,8 @@ namespace Gallean.Client;
 
 internal sealed class AnimatedFill : Control
 {
-    public static readonly StyledProperty<double> ValueProperty =
-        AvaloniaProperty.Register<AnimatedFill, double>(nameof(Value));
+    public static readonly StyledProperty<double> CurrentProperty =
+        AvaloniaProperty.Register<AnimatedFill, double>(nameof(Current));
 
     public static readonly StyledProperty<double> MaximumProperty =
         AvaloniaProperty.Register<AnimatedFill, double>(nameof(Maximum));
@@ -23,7 +23,7 @@ internal sealed class AnimatedFill : Control
 
     static AnimatedFill()
     {
-        AffectsRender<AnimatedFill>(ValueProperty, MaximumProperty, FillProperty);
+        AffectsRender<AnimatedFill>(CurrentProperty, MaximumProperty, FillProperty);
     }
 
     public AnimatedFill()
@@ -31,10 +31,10 @@ internal sealed class AnimatedFill : Control
         IsHitTestVisible = false;
     }
 
-    public double Value
+    public double Current
     {
-        get => GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
+        get => GetValue(CurrentProperty);
+        set => SetValue(CurrentProperty, value);
     }
 
     public double Maximum
@@ -66,7 +66,7 @@ internal sealed class AnimatedFill : Control
             return;
         }
 
-        double top = Bounds.Height * GetValueRatio();
+        double top = Bounds.Height * GetRatio();
 
         if (top < Bounds.Height)
         {
@@ -74,11 +74,11 @@ internal sealed class AnimatedFill : Control
         }
     }
 
-    private double GetValueRatio()
+    private double GetRatio()
     {
         if (Maximum > 0)
         {
-            return Math.Clamp(Value / Maximum, 0, 1);
+            return Math.Clamp(Current / Maximum, 0, 1);
         }
         else
         {
@@ -92,7 +92,7 @@ internal sealed class AnimatedFill : Control
 
         if (e.Property == AnimationProperty && IsLoaded)
         {
-            player.Start(this, ValueProperty, Animation);
+            player.Start(this, CurrentProperty, Animation);
         }
     }
 
@@ -100,7 +100,7 @@ internal sealed class AnimatedFill : Control
     {
         base.OnLoaded(e);
 
-        player.Start(this, ValueProperty, Animation);
+        player.Start(this, CurrentProperty, Animation);
     }
 
     protected override void OnUnloaded(RoutedEventArgs e)

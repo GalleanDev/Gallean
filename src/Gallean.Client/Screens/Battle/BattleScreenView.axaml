@@ -407,7 +407,7 @@
                 </ItemsControl>
               </StackPanel>
               <local:BarVisual Classes="hitpoints target-hitpoints"
-                               Value="{Binding TargetUnit.Hitpoints}"
+                               Current="{Binding TargetUnit.Hitpoints}"
                                Maximum="{Binding TargetUnit.MaxHitpoints}"
                                Animation="{Binding TargetUnit.HitpointsAnimation}" />
             </StackPanel>

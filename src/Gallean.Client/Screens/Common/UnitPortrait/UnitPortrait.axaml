@@ -28,7 +28,7 @@
                   <local:SpriteVisual x:Name="PART_Face" Classes="portrait" SpriteKey="{TemplateBinding FaceKey}" Stretch="UniformToFill" />
                   <Image x:Name="PART_GrayOverlay" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
                   <local:AnimatedFill x:Name="PART_LostHitpoints"
-                                      Value="{TemplateBinding Hitpoints}"
+                                      Current="{TemplateBinding Hitpoints}"
                                       Maximum="{TemplateBinding MaxHitpoints}"
                                       Animation="{TemplateBinding HitpointsAnimation}" />
                   <Panel x:Name="PART_Overlay" IsVisible="{TemplateBinding Overlay, Converter={x:Static ObjectConverters.IsNotNull}}">
@@ -41,13 +41,13 @@
                     <local:OutlinedTextBlock x:Name="PART_Hitpoints">
                       <local:OutlinedTextBlock.Foreground>
                         <MultiBinding Converter="{x:Static local:HitpointsBrushConverter.Instance}">
-                          <Binding ElementName="PART_LostHitpoints" Path="Value" />
+                          <Binding ElementName="PART_LostHitpoints" Path="Current" />
                           <Binding ElementName="PART_LostHitpoints" Path="Maximum" />
                         </MultiBinding>
                       </local:OutlinedTextBlock.Foreground>
                       <local:OutlinedTextBlock.Text>
                         <MultiBinding StringFormat="{}{0:F0}/{1:F0}">
-                          <Binding ElementName="PART_LostHitpoints" Path="Value" />
+                          <Binding ElementName="PART_LostHitpoints" Path="Current" />
                           <Binding ElementName="PART_LostHitpoints" Path="Maximum" />
                         </MultiBinding>
                       </local:OutlinedTextBlock.Text>

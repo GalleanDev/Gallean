@@ -14,8 +14,8 @@ internal sealed class BarVisual : Control
     private const double BevelThickness = 1;
     private const double TextureOpacity = 0.45;
 
-    public static readonly StyledProperty<double> ValueProperty =
-        AvaloniaProperty.Register<BarVisual, double>(nameof(Value));
+    public static readonly StyledProperty<double> CurrentProperty =
+        AvaloniaProperty.Register<BarVisual, double>(nameof(Current));
 
     public static readonly StyledProperty<double> MaximumProperty =
         AvaloniaProperty.Register<BarVisual, double>(nameof(Maximum));
@@ -85,7 +85,7 @@ internal sealed class BarVisual : Control
     static BarVisual()
     {
         AffectsRender<BarVisual>(
-            ValueProperty,
+            CurrentProperty,
             MaximumProperty,
             GainProperty,
             GainOpacityProperty,
@@ -108,10 +108,10 @@ internal sealed class BarVisual : Control
             OutlineThicknessProperty);
     }
 
-    public double Value
+    public double Current
     {
-        get => GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
+        get => GetValue(CurrentProperty);
+        set => SetValue(CurrentProperty, value);
     }
 
     public double Maximum
@@ -282,9 +282,9 @@ internal sealed class BarVisual : Control
         Rect inner = outer.Deflate(EdgeThickness / 2.0);
         Geometry outline = Chevron(outer);
         Geometry face = Chevron(inner);
-        double valueRatio = GetRatio(Value);
-        Rect filled = new(inner.Left, inner.Top, inner.Width * valueRatio, inner.Height);
-        Rect gained = new(filled.Right, inner.Top, inner.Width * (GetRatio(Value + Gain) - valueRatio), inner.Height);
+        double currentRatio = GetRatio(Current);
+        Rect filled = new(inner.Left, inner.Top, inner.Width * currentRatio, inner.Height);
+        Rect gained = new(filled.Right, inner.Top, inner.Width * (GetRatio(Current + Gain) - currentRatio), inner.Height);
 
         using (context.PushGeometryClip(face))
         {
@@ -320,7 +320,7 @@ internal sealed class BarVisual : Control
 
         if (e.Property == AnimationProperty && IsLoaded)
         {
-            player.Start(this, ValueProperty, Animation);
+            player.Start(this, CurrentProperty, Animation);
         }
     }
 
@@ -328,7 +328,7 @@ internal sealed class BarVisual : Control
     {
         base.OnLoaded(e);
 
-        player.Start(this, ValueProperty, Animation);
+        player.Start(this, CurrentProperty, Animation);
     }
 
     protected override void OnUnloaded(RoutedEventArgs e)
@@ -398,7 +398,7 @@ internal sealed class BarVisual : Control
         }
         else
         {
-            return string.Create(CultureInfo.CurrentCulture, $"{Value:F0}/{Maximum:F0}");
+            return string.Create(CultureInfo.CurrentCulture, $"{Current:F0}/{Maximum:F0}");
         }
     }
 

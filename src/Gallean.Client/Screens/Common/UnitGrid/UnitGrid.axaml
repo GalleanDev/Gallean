@@ -41,7 +41,7 @@
   <Style Selector="ItemsControl.unit-grid local|UnitPortrait /template/ local|AnimatedFill#PART_LostHitpoints">
     <Setter Property="Transitions">
       <Transitions>
-        <DoubleTransition Property="Value" Duration="0:0:0.8" Easing="CubicEaseOut" />
+        <DoubleTransition Property="Current" Duration="0:0:0.8" Easing="CubicEaseOut" />
       </Transitions>
     </Setter>
   </Style>

@@ -10,17 +10,17 @@ public sealed class AnimatedFillTests
     private sealed record TestTarget(string Name) : AnimationTarget;
 
     [AvaloniaTest]
-    public void ValueTest()
+    public void CurrentTest()
     {
         AnimatedFill fill = new() { Fill = Brushes.Red, Maximum = 30 };
         Window window = new() { Content = fill };
         window.Show();
 
-        Assert.DoesNotThrow(() => fill.Value = 0);
-        Assert.DoesNotThrow(() => fill.Value = 15);
-        Assert.DoesNotThrow(() => fill.Value = 30);
-        Assert.DoesNotThrow(() => fill.Value = -2);
-        Assert.DoesNotThrow(() => fill.Value = 70);
+        Assert.DoesNotThrow(() => fill.Current = 0);
+        Assert.DoesNotThrow(() => fill.Current = 15);
+        Assert.DoesNotThrow(() => fill.Current = 30);
+        Assert.DoesNotThrow(() => fill.Current = -2);
+        Assert.DoesNotThrow(() => fill.Current = 70);
         Assert.DoesNotThrow(() => fill.Maximum = 0);
     }
 
