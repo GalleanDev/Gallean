@@ -13,7 +13,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private int autoSaveLimit;
     private BattleSpeed battleSpeed;
     private MovementSpeed movementSpeed;
-    private int? uiScale;
+    private UiSize uiSize;
     private bool lockCursor;
 
     public SettingsScreenViewModel(GameViewModel gameViewModel)
@@ -27,7 +27,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         autoSaveLimit = gameViewModel.Settings.AutoSaveLimit;
         battleSpeed = gameViewModel.Settings.BattleSpeed;
         movementSpeed = gameViewModel.Settings.MovementSpeed;
-        uiScale = gameViewModel.Settings.UiScale;
+        uiSize = gameViewModel.Settings.UiSize;
         lockCursor = gameViewModel.Settings.LockCursor;
 
         gameViewModel.PropertyChanged += OnGamePropertyChanged;
@@ -37,7 +37,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     public int MaxVolume => GameSettings.MaxVolume;
 
     public IReadOnlyList<int> RenderResolutions { get; } = [50, 75, 100];
-    public IReadOnlyList<UiScaleOption> UiScales { get; } = [new(null), new(100), new(125), new(150), new(175), new(200), new(250), new(300)];
+    public IReadOnlyList<UiSize> UiSizes { get; } = Enum.GetValues<UiSize>();
     public IReadOnlyList<int> AutoSaveIntervals { get; } = [1, 3, 5, 10, 0];
     public IReadOnlyList<int> AutoSaveLimits { get; } = [1, 3, 5, 10, 20];
     public IReadOnlyList<BattleSpeed> BattleSpeeds { get; } = Enum.GetValues<BattleSpeed>();
@@ -79,12 +79,12 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         }
     }
 
-    public UiScaleOption UiScale
+    public UiSize UiSize
     {
-        get => new(uiScale);
+        get => uiSize;
         set
         {
-            if (SetProperty(ref uiScale, value.Scale))
+            if (SetProperty(ref uiSize, value))
             {
                 Apply();
             }
@@ -173,7 +173,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
 
     private void Apply()
     {
-        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiScale, lockCursor, movementSpeed));
+        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed));
     }
 
     private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)

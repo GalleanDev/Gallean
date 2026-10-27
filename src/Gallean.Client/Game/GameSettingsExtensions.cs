@@ -9,7 +9,6 @@ internal static class GameSettingsExtensions
         public float SoundVolumeRatio => settings.SoundVolume / (float)GameSettings.MaxVolume;
         public float MusicVolumeRatio => settings.MusicVolume / (float)GameSettings.MaxVolume;
         public float RenderResolutionRatio => settings.RenderResolution / (float)GameSettings.MaxRenderResolution;
-        public double? UiScaleRatio => settings.UiScale / 100.0;
 
         public double BattleSpeedFactor => settings.BattleSpeed switch
         {
@@ -21,6 +20,13 @@ internal static class GameSettingsExtensions
         {
             MovementSpeed.Normal => 1.0,
             MovementSpeed.Fast => 1.3
+        };
+
+        public double UiSizeFactor => settings.UiSize switch
+        {
+            UiSize.Small => 0.85,
+            UiSize.Normal => 1.0,
+            UiSize.Large => 1.2
         };
     }
 }

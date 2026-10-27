@@ -18,7 +18,7 @@ public sealed class ClientTextIndexTests
             "Display",
             "Sound effects",
             "Game",
-            "Interface scale",
+            "Interface size",
             "Lock cursor to window",
             "Movement speed",
             "Music",

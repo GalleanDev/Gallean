@@ -502,7 +502,7 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
-    public async Task SettingsUiScaleTest()
+    public async Task SettingsUiSizeTest()
     {
         using Sandbox sb = Sandbox.Create();
 
@@ -511,7 +511,7 @@ public sealed class VisualTests
         gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
 
         SettingsScreenViewModel settings = new(gameViewModel);
-        settings.UiScale = new UiScaleOption(150);
+        settings.UiSize = UiSize.Large;
 
         gameViewModel.OpenScreen(settings);
 
@@ -5284,7 +5284,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, null, true, MovementSpeed.Normal));
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal));
         gameViewModel.ShowScreen(new BattleScreenViewModel(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0)));
 
         await WaitForBattleAsync(window);

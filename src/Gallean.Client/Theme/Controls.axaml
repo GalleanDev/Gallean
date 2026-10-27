@@ -300,6 +300,10 @@
     <Setter Property="Fill" Value="{StaticResource SliderDisabledFillBrush}" />
   </Style>
 
+  <Style Selector="Popup">
+    <Setter Property="InheritsTransform" Value="True" />
+  </Style>
+
   <Style Selector="ComboBox">
     <Setter Property="Height" Value="34" />
     <Setter Property="Padding" Value="16,0,5.5,0" />
@@ -347,8 +351,7 @@
                  Placement="BottomEdgeAlignedLeft"
                  MinWidth="{Binding $parent[ComboBox].Bounds.Width}"
                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                 IsLightDismissEnabled="True"
-                 InheritsTransform="True">
+                 IsLightDismissEnabled="True">
             <Border x:Name="PopupBorder"
                     Margin="0,4,0,0"
                     Padding="4"

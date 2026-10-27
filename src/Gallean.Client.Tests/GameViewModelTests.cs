@@ -1825,7 +1825,7 @@ public sealed class GameViewModelTests
 
         using GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithSaveStore(saveStore)
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 3, 2, BattleSpeed.Normal, null, true, MovementSpeed.Normal))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 3, 2, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal))
             .Build();
         WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
         gameViewModel.ShowScreen(world);
@@ -1895,7 +1895,7 @@ public sealed class GameViewModelTests
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithSaveStore(new GameSaveStore(sb.GetPath("saves"), 10))
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 0, 10, BattleSpeed.Normal, null, true, MovementSpeed.Normal))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal))
             .Build();
         WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
         gameViewModel.ShowScreen(world);

@@ -79,19 +79,19 @@
         <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="16">
           <TextBlock Grid.Row="0"
                      Grid.Column="0"
-                     Text="{local:Text 'Interface scale'}"
+                     Text="{local:Text 'Interface size'}"
                      Classes="body"
                      Foreground="{StaticResource PrimaryTextBrush}"
                      VerticalAlignment="Center" />
           <ComboBox Grid.Row="0"
                     Grid.Column="1"
-                    ItemsSource="{Binding UiScales}"
-                    SelectedItem="{Binding UiScale}"
+                    ItemsSource="{Binding UiSizes}"
+                    SelectedItem="{Binding UiSize}"
                     MinWidth="120"
                     VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
-              <DataTemplate x:DataType="local:UiScaleOption">
-                <TextBlock Text="{Binding Scale, StringFormat={}{0}%, TargetNullValue={local:Text 'Automatic (from DPI)'}}" Classes="body" />
+              <DataTemplate x:DataType="configuration:UiSize">
+                <TextBlock Text="{Binding Converter={x:Static local:UiSizeConverter.Instance}}" Classes="body" />
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>

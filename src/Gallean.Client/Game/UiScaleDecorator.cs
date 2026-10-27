@@ -48,6 +48,18 @@ internal sealed class UiScaleDecorator : Decorator
         return LayoutHelper.GetLayoutScale(element) * GetScalingFactor(element);
     }
 
+    public static double GetViewportScaling(double deviceHeight)
+    {
+        if (double.IsFinite(deviceHeight))
+        {
+            return Math.Max(deviceHeight / 1080, 1);
+        }
+        else
+        {
+            return 1.0;
+        }
+    }
+
     public static double GetScalingFactor(Visual element)
     {
         return element.GetValue(FactorProperty);
@@ -143,20 +155,22 @@ internal sealed class UiScaleDecorator : Decorator
 
     private double GetContentScalingFactor(Size availableSize)
     {
-        double actualFactor = GetActualScalingFactor();
+        double actualFactor = GetActualScalingFactor(availableSize);
         double fitFactor = Math.Min(availableSize.Width / MinContentWidth, availableSize.Height / MinContentHeight);
 
         return Math.Min(actualFactor, Math.Max(fitFactor, 1));
     }
 
-    private double GetActualScalingFactor()
+    private double GetActualScalingFactor(Size availableSize)
     {
         GameSettings settings = SettingsScope.GetSettings(this);
-        double? ratio = settings.UiScaleRatio;
 
-        if (ratio is not null && topLevel is not null)
+        if (topLevel is not null)
         {
-            return ratio.Value / topLevel.RenderScaling;
+            double renderScaling = topLevel.RenderScaling;
+            double viewportScaling = GetViewportScaling(availableSize.Height * renderScaling);
+
+            return viewportScaling * settings.UiSizeFactor / renderScaling;
         }
         else
         {

@@ -11,7 +11,7 @@ public sealed record GameSettings(
     int AutoSaveInterval = GameSettings.DefaultAutoSaveInterval,
     int AutoSaveLimit = GameSettings.DefaultAutoSaveLimit,
     BattleSpeed BattleSpeed = GameSettings.DefaultBattleSpeed,
-    int? UiScale = null,
+    UiSize UiSize = GameSettings.DefaultUiSize,
     bool LockCursor = true,
     MovementSpeed MovementSpeed = GameSettings.DefaultMovementSpeed)
 {
@@ -25,8 +25,7 @@ public sealed record GameSettings(
     public const int DefaultAutoSaveLimit = 10;
     public const BattleSpeed DefaultBattleSpeed = BattleSpeed.Normal;
     public const MovementSpeed DefaultMovementSpeed = MovementSpeed.Normal;
-    public const int MinUiScale = 100;
-    public const int MaxUiScale = 300;
+    public const UiSize DefaultUiSize = UiSize.Normal;
 
     public static GameSettings Default { get; } = Create(
         MaxVolume,
@@ -36,7 +35,7 @@ public sealed record GameSettings(
         DefaultAutoSaveInterval,
         DefaultAutoSaveLimit,
         DefaultBattleSpeed,
-        null,
+        DefaultUiSize,
         true,
         DefaultMovementSpeed);
 
@@ -45,7 +44,6 @@ public sealed record GameSettings(
     public int RenderResolution { get; } = Math.Clamp(RenderResolution, MinRenderResolution, MaxRenderResolution);
     public int AutoSaveInterval { get; } = Math.Max(AutoSaveInterval, 0);
     public int AutoSaveLimit { get; } = Math.Max(AutoSaveLimit, MinAutoSaveLimit);
-    public int? UiScale { get; } = UiScale is { } scale ? Math.Clamp(scale, MinUiScale, MaxUiScale) : null;
 
     public static GameSettings Create(
         int soundVolume,
@@ -55,7 +53,7 @@ public sealed record GameSettings(
         int autoSaveInterval,
         int autoSaveLimit,
         BattleSpeed battleSpeed,
-        int? uiScale,
+        UiSize uiSize,
         bool lockCursor,
         MovementSpeed movementSpeed)
     {
@@ -68,7 +66,7 @@ public sealed record GameSettings(
             autoSaveInterval,
             autoSaveLimit,
             battleSpeed,
-            uiScale,
+            uiSize,
             lockCursor,
             movementSpeed);
     }
