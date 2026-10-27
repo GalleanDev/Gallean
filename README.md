@@ -43,7 +43,7 @@ dotnet run --project src/Gallean.Client.MacOS
 
 ## Tests
 
-On Apple Silicon Macs, install the OpenMP runtime needed by the asset pipeline tests (`brew install libomp`). Umbra and Packer tests are skipped on Intel Macs because TorchSharp and Magick.NET no longer support that platform.
+On Apple Silicon Macs, install the OpenMP runtime needed by the asset pipeline tests (`brew install libomp`). Umbra and Packer tests are skipped on Intel Macs because TorchSharp and Magick.NET do not support that platform.
 
 ```bash
 dotnet test

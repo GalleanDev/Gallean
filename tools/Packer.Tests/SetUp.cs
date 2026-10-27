@@ -10,7 +10,7 @@ public sealed class SetUp
     {
         if (OperatingSystem.IsMacOS() && RuntimeInformation.ProcessArchitecture == Architecture.X64)
         {
-            Assert.Ignore("Magick.NET no longer supports Intel macOS.");
+            Assert.Ignore("Magick.NET does not support Intel macOS.");
         }
     }
 }
