@@ -503,6 +503,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
     private void UpdateCameraBounds()
     {
         camera.ViewportSize = Bounds.Size;
+        camera.UiScale = UiScaleDecorator.GetScalingFactor(this);
         camera.MapWidth = ViewModel.MapWidth;
         camera.MapHeight = ViewModel.MapHeight;
     }

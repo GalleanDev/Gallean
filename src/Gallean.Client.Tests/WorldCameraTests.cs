@@ -204,6 +204,33 @@ public sealed class WorldCameraTests
     }
 
     [Test]
+    public void UiScaleTest()
+    {
+        WorldCamera camera = new() { ViewportSize = new Size(200, 100), UiScale = 2.0 };
+        camera.LookAt(new Point(0, 0));
+
+        Assert.That(camera.ScreenToWorld(new Point(150, 25)), Is.EqualTo(new Point(100, -50)));
+    }
+
+    [Test]
+    public void UiScaleZoomAnchorTest()
+    {
+        WorldCamera camera = new() { ViewportSize = new Size(200, 100), UiScale = 2.0 };
+        camera.LookAt(new Point(0, 0));
+
+        Point anchor = new(150, 25);
+        camera.ZoomTo(1.25, anchor);
+
+        for (int i = 0; i < 1000; i++)
+        {
+            camera.Animate(TimeSpan.FromSeconds(0.016));
+        }
+
+        Assert.That(camera.Zoom, Is.EqualTo(1.25));
+        Assert.That(camera.ScreenToWorld(anchor), Is.EqualTo(new Point(100, -50.000007629394474)));
+    }
+
+    [Test]
     public void NoBoundsTest()
     {
         WorldCamera camera = new();

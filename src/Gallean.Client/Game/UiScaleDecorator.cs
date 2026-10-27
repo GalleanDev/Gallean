@@ -48,6 +48,11 @@ internal sealed class UiScaleDecorator : Decorator
         return LayoutHelper.GetLayoutScale(element) * GetScalingFactor(element);
     }
 
+    public static double GetScalingFactor(Visual element)
+    {
+        return element.GetValue(FactorProperty);
+    }
+
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -162,10 +167,5 @@ internal sealed class UiScaleDecorator : Decorator
     private void OnScalingChanged(object? sender, EventArgs e)
     {
         InvalidateMeasure();
-    }
-
-    private static double GetScalingFactor(Visual element)
-    {
-        return element.GetValue(FactorProperty);
     }
 }

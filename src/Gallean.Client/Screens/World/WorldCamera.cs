@@ -14,6 +14,7 @@ internal sealed class WorldCamera
         TimeSpan TimeToTarget,
         Point? ZoomAnchor,
         Size ViewportSize,
+        double UiScale,
         int MapWidth,
         int MapHeight);
 
@@ -37,6 +38,7 @@ internal sealed class WorldCamera
         TimeToTarget: TimeSpan.Zero,
         ZoomAnchor: null,
         ViewportSize: default,
+        UiScale: 1.0,
         MapWidth: 0,
         MapHeight: 0);
 
@@ -49,6 +51,12 @@ internal sealed class WorldCamera
     {
         get => currentState.ViewportSize;
         set => SetState(currentState with { ViewportSize = value });
+    }
+
+    public double UiScale
+    {
+        get => currentState.UiScale;
+        set => SetState(currentState with { UiScale = value });
     }
 
     public int MapWidth
@@ -267,8 +275,10 @@ internal sealed class WorldCamera
 
     private static Matrix GetViewMatrix(State state)
     {
+        double scale = state.Zoom / state.UiScale;
+
         return Matrix.CreateTranslation(-state.Center.X, -state.Center.Y) *
-               Matrix.CreateScale(state.Zoom, state.Zoom) *
+               Matrix.CreateScale(scale, scale) *
                Matrix.CreateTranslation(state.ViewportSize.Width / 2.0, state.ViewportSize.Height / 2.0);
     }
 
