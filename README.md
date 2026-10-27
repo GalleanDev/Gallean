@@ -20,7 +20,7 @@ Gallean is a full remake of Disciples II: Rise of the Elves: every campaign and 
 
 ## System requirements
 
-- **Operating system:** Windows 10 or newer (x64), Linux (x64), MacOS (64-bit Apple Silicon or Intel)
+- **Operating system:** Windows 10 or newer (x64), Linux (x64), macOS 14 or newer (arm64, x64)
 - **Processor:** Any 64-bit dual-core
 - **Memory:** 4 GB RAM
 - **Graphics:** 1 GB, DirectX 11 or OpenGL 3.0 (Integrated graphics work)
