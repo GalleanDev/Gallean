@@ -15,7 +15,7 @@ public sealed class BattleEngineDifficultyBonusTests
         BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
 
         BattleModifiers modifiers = new(
-            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 10, RandomDamageBonus: 0),
+            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 10, RandomDamageBonus: 0, CanRetreat: true),
             Defender: BattleSideModifiers.None);
 
         BattleEngine engine = new TestBattleEngineBuilder()
@@ -61,7 +61,7 @@ public sealed class BattleEngineDifficultyBonusTests
         BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
 
         BattleModifiers modifiers = new(
-            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0),
+            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true),
             Defender: BattleSideModifiers.None);
 
         BattleEngine engine = new TestBattleEngineBuilder()
@@ -104,7 +104,7 @@ public sealed class BattleEngineDifficultyBonusTests
         BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
 
         BattleModifiers modifiers = new(
-            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 6),
+            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 6, CanRetreat: true),
             Defender: BattleSideModifiers.None);
 
         BattleEngine engine = new TestBattleEngineBuilder()

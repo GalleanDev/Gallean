@@ -17,8 +17,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 20, AccuracyBonus: 0, RandomDamageBonus: 6)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 20, AccuracyBonus: 0, RandomDamageBonus: 6, CanRetreat: true)));
     }
 
     [Test]
@@ -36,7 +36,7 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, context),
+            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, canRetreat: true, context),
             Is.EqualTo(BattleSideModifiers.None));
     }
 
@@ -55,7 +55,7 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, context),
+            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, canRetreat: true, context),
             Is.EqualTo(BattleSideModifiers.None));
     }
 
@@ -74,7 +74,7 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, context),
+            WorldBattleModifierCalculator.GetModifiers(engine.State, human.Id, canRetreat: true, context),
             Is.EqualTo(BattleSideModifiers.None));
     }
 
@@ -93,8 +93,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true)));
     }
 
     [Test]
@@ -112,8 +112,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 25, AccuracyBonus: 0, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 25, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: true)));
     }
 
     [Test]
@@ -131,8 +131,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 50, AccuracyBonus: 5, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 50, AccuracyBonus: 5, RandomDamageBonus: 0, CanRetreat: true)));
     }
 
     [Test]
@@ -150,8 +150,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 100, AccuracyBonus: 10, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 100, AccuracyBonus: 10, RandomDamageBonus: 0, CanRetreat: true)));
     }
 
     [Test]
@@ -169,8 +169,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 10, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, ai.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 10, RandomDamageBonus: 0, CanRetreat: true)));
     }
 
     [Test]
@@ -188,8 +188,8 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, neutral.Id, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 10, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, neutral.Id, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 10, RandomDamageBonus: 0, CanRetreat: true)));
     }
 
     [Test]
@@ -207,7 +207,7 @@ public sealed class WorldBattleModifierCalculatorTests
             .BuildEngineWithContext();
 
         Assert.That(
-            WorldBattleModifierCalculator.GetModifiers(engine.State, ownerId: null, context),
-            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0)));
+            WorldBattleModifierCalculator.GetModifiers(engine.State, ownerId: null, canRetreat: true, context),
+            Is.EqualTo(new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true)));
     }
 }

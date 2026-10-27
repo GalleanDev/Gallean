@@ -757,7 +757,9 @@ public sealed class WorldEngineBattleRetreatTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None
+            Modifiers: new BattleModifiers(
+                Attacker: BattleSideModifiers.None,
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))
         );
 
         UnitGrid<WorldUnit> expectedAttackerUnits = new UnitGrid<WorldUnit>.Builder()
@@ -848,7 +850,9 @@ public sealed class WorldEngineBattleRetreatTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None
+            Modifiers: new BattleModifiers(
+                Attacker: BattleSideModifiers.None,
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))
         );
 
         UnitGrid<WorldUnit> expectedAttackerUnits = new UnitGrid<WorldUnit>.Builder()
@@ -1050,7 +1054,9 @@ public sealed class WorldEngineBattleRetreatTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None
+            Modifiers: new BattleModifiers(
+                Attacker: BattleSideModifiers.None,
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))
         );
 
         UnitGrid<WorldUnit> expectedAttackerUnits = new UnitGrid<WorldUnit>.Builder()
@@ -1268,5 +1274,97 @@ public sealed class WorldEngineBattleRetreatTests
         ]);
 
         Assert.That(engine.State.Stacks.Keys, Is.EqualTo([stack2.Id]));
+    }
+
+    [Test]
+    public void DefenderRetreatTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 3);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 10, initiative: 50, damage: 5),
+            movementPoints: 6, leadership: 6);
+
+        WorldStack stack1 = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player1.Id,
+            new WorldPosition(1, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leaderDefinition),
+            movementPoints: 3);
+
+        WorldStack stack2 = TestHelpers.SimpleStack(
+            new WorldStackId("Stack2"),
+            player2.Id,
+            new WorldPosition(2, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), enemyDefinition),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(stack1)
+            .WithStack(stack2)
+            .Build();
+
+        BattleState finalBattleState = new(
+            AttackerGrid: new UnitGrid<BattleUnit>.Builder()
+                .Place(
+                    TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("leader"), leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100),
+                    GridPosition.FrontBottom,
+                    false)
+                .Build(),
+            DefenderGrid: new UnitGrid<BattleUnit>.Builder()
+                .Place(
+                    TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("enemy"), enemyDefinition.Id, BattleSide.Defender, hitpoints: 10) with
+                    {
+                        StatusEffects = [new BattleRetreatedStatusEffect()]
+                    },
+                    GridPosition.FrontBottom,
+                    false)
+                .Build(),
+            CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [],
+            CurrentRound: BattleRound.Normal(1),
+            Outcome: new BattleOutcome(BattleSide.Attacker),
+            Modifiers: BattleModifiers.None
+        );
+
+        UnitGrid<WorldUnit> expectedAttackerUnits = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.FrontBottom, false)
+            .Build();
+
+        UnitGrid<WorldUnit> expectedDefenderUnits = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("enemy"), enemyDefinition), GridPosition.FrontBottom, false)
+            .Build();
+
+        engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
+            new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerUnits, expectedDefenderUnits),
+            new WorldStackRelocatedEvent(stack2.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(engine.State with
+        {
+            Stacks = engine.State.Stacks
+                .SetItem(stack1.Id, stack1 with { Units = expectedAttackerUnits, BattlesWon = 1 })
+                .SetItem(stack2.Id, stack2 with
+                {
+                    Units = expectedDefenderUnits,
+                    Position = new WorldPosition(3, 1),
+                    Direction = WorldStackDirection.SouthEast
+                })
+        }));
     }
 }

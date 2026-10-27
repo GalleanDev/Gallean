@@ -4548,7 +4548,7 @@ public sealed class BattleScreenViewModelTests
         BattleState battleState = new BattleStateBuilder(engine.Definitions)
             .Add(attacker)
             .Add(enemy)
-            .Build(new BattleModifiers(BattleSideModifiers.None, new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 5, RandomDamageBonus: 0)));
+            .Build(new BattleModifiers(BattleSideModifiers.None, new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 5, RandomDamageBonus: 0, CanRetreat: true)));
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
         await gameModel.RunAsync(() =>

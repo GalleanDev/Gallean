@@ -366,7 +366,7 @@ public sealed class BattleEngineRetreatTests
     }
 
     [Test]
-    public void DefenderCannotRetreatTest()
+    public void DefenderTest()
     {
         UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 50, damage: 5);
         UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 20, initiative: 40, damage: 5);
@@ -377,6 +377,43 @@ public sealed class BattleEngineRetreatTests
         BattleEngine engine = new TestBattleEngineBuilder()
             .WithDefinition(defenderDefinition)
             .WithDefinition(attackerDefinition)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .WithAttacker(attacker, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleRetreatCommand(defender.Id), [
+            new BattleUnitRetreatingEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(defender.Id),
+            new BattleUnitTurnEndedEvent(defender.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        BattleState expected = engine.State
+                .WithUnit(defender with { StatusEffects = [new BattleRetreatStatusEffect()] })
+            with
+            {
+                CurrentUnitTurn = new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal),
+                TurnQueue = []
+            };
+
+        Assert.That(engine.State, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void FortifiedDefenderTest()
+    {
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 50, damage: 5);
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 20, initiative: 40, damage: 5);
+
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(attackerDefinition)
+            .WithModifiers(new BattleModifiers(
+                Attacker: BattleSideModifiers.None,
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)))
             .WithDefender(defender, GridPosition.FrontBottom)
             .WithAttacker(attacker, GridPosition.FrontBottom)
             .Build();

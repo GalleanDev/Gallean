@@ -29,12 +29,17 @@ internal sealed class FearAttackResolver : BattleAbstractAttackResolver, IStatic
         UnitAttackStats attackStats)
     {
         BattleUnit target = state.GetUnit(targetId);
+        BattleSideModifiers targetModifiers = state.Modifiers.GetModifiers(target.Side);
 
-        if (target.Side == BattleSide.Defender)
+        if (targetModifiers.CanRetreat)
         {
-            return [];
+            return [new BattleUnitRetreatingEvent(targetId)];
         }
+        else
+        {
+            BattleParalyzeStatusEffect paralysis = new(context.Globals.DisableEffectMinDurationTurns);
 
-        return [new BattleUnitRetreatingEvent(targetId)];
+            return [new BattleUnitEffectAppliedEvent(attackerId, targetId, paralysis)];
+        }
     }
 }

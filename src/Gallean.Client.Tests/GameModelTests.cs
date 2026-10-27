@@ -71,7 +71,7 @@ public sealed class GameModelTests
                         WorldStackOrder.Normal.Instance,
                         new WorldAiTarget.Stack(humanStack.Id))))
         };
-        BattleState expectedBattle = WorldCommandHelpers.CreateStackBattleState(session.World.State, aiStack, humanStack, BattleModifiers.None, engine) with
+        BattleState expectedBattle = WorldCommandHelpers.CreateStackBattleState(session.World.State, aiStack, humanStack, engine) with
         {
             CurrentUnitTurn = new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
             TurnQueue = [new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal)],

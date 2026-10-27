@@ -190,8 +190,7 @@ internal partial class WorldEngine
             }
             else if (attackerLeaderDefinition.Category != UnitCategory.Illusion)
             {
-                BattleModifiers modifiers = WorldCommandHelpers.CreateModifiers(state, attacker.OwnerId, triggerer.OwnerId, Context);
-                BattleState battleState = WorldCommandHelpers.CreateStackBattleState(state, attacker, triggerer, modifiers, Context);
+                BattleState battleState = WorldCommandHelpers.CreateStackBattleState(state, attacker, triggerer, Context);
 
                 events.Add(new WorldStackBattleStartedEvent(attacker.Id, triggerer.Id, triggerer.Position, battleState, IsDuel: false));
             }

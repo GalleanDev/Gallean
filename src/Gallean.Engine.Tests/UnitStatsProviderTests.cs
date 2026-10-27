@@ -285,7 +285,7 @@ public sealed class UnitStatsProviderTests
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(definition).Build();
         GlobalVariables globals = new();
         BattleModifiers modifiers = new(
-            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0),
+            Attacker: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true),
             Defender: BattleSideModifiers.None);
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [], null, [], null, false);

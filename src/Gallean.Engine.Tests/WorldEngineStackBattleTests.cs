@@ -774,8 +774,8 @@ public sealed class WorldEngineStackBattleTests
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: new BattleModifiers(
-                Attacker: new BattleSideModifiers(ExperiencePercent: 20, AccuracyBonus: 0, RandomDamageBonus: 6),
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0)));
+                Attacker: new BattleSideModifiers(ExperiencePercent: 20, AccuracyBonus: 0, RandomDamageBonus: 6, CanRetreat: true),
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true)));
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, stack2.Position), [
             new WorldStackMovementConsumedEvent(stack1.Id, 3),

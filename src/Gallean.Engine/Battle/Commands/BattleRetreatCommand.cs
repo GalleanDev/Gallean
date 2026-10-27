@@ -12,8 +12,9 @@ public sealed record BattleRetreatCommand(BattleUnitId UnitId) : IBattleCommand<
         }
 
         BattleUnit unit = state.GetUnit(UnitId);
+        BattleSideModifiers sideModifiers = state.Modifiers.GetModifiers(unit.Side);
 
-        if (unit.Side == BattleSide.Defender)
+        if (!sideModifiers.CanRetreat)
         {
             return BattleCommandResult.Fail(BattleCommandError.UnitRetreatNotAllowed);
         }

@@ -2,12 +2,13 @@ namespace Gallean.Engine;
 
 internal static class WorldBattleModifierCalculator
 {
-    public static BattleSideModifiers GetModifiers(WorldState state, WorldPlayerId? ownerId, IEngineContext context)
+    public static BattleSideModifiers GetModifiers(WorldState state, WorldPlayerId? ownerId, bool canRetreat, IEngineContext context)
     {
         return new BattleSideModifiers(
             GetExperiencePercent(state, ownerId, context),
             GetAccuracyBonus(state, ownerId, context),
-            GetRandomDamageBonus(state, ownerId, context));
+            GetRandomDamageBonus(state, ownerId, context),
+            canRetreat);
     }
 
     private static int GetExperiencePercent(WorldState state, WorldPlayerId? ownerId, IEngineContext context)

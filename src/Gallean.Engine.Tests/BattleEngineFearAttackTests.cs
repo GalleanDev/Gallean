@@ -80,9 +80,64 @@ public sealed class BattleEngineFearAttackTests
             new BattleUnitAttackEvent(dreadlord.Id, new BattleAttackUnitTarget(golem.Id), [new UnitAttackDefinitionId("dreadlord")]),
             new BattleUnitAttackedEvent(dreadlord.Id, golem.Id, new UnitAttackDefinitionId("dreadlord")),
             new BattleUnitAttackHitEvent(dreadlord.Id, golem.Id, new UnitAttackDefinitionId("dreadlord"), 0),
+            new BattleUnitRetreatingEvent(golem.Id),
             new BattleUnitTurnEndingEvent(dreadlord.Id),
             new BattleUnitTurnEndedEvent(dreadlord.Id),
-            new BattleUnitTurnStartedEvent(new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal))
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitRetreatedEvent(golem.Id),
+            new BattleUnitTurnEndingEvent(golem.Id),
+            new BattleRoundEndedEvent(),
+            new BattleEndedEvent(BattleSide.Attacker),
+            new BattleUnitExperienceGainedEvent(dreadlord.Id, 1)
+        ]);
+
+        BattleState expected = engine.State
+                .WithUnit(golem with { StatusEffects = [new BattleRetreatedStatusEffect()] })
+                .WithUnit(dreadlord with { ExperienceGained = 1 })
+            with
+            {
+                CurrentRound = BattleRound.Normal(1),
+                Outcome = new BattleOutcome(BattleSide.Attacker)
+            };
+
+        Assert.That(engine.State, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void FortifiedDefenderTest()
+    {
+        UnitDefinition dreadlordDefinition = FearDefinition("dreadlord", initiative: 60);
+        UnitDefinition golemDefinition = TestHelpers.SimpleUnitDefinition("golem", maxHitpoints: 100, initiative: 40, damage: 2);
+
+        BattleUnit dreadlord = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, dreadlordDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit golem = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, golemDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(dreadlordDefinition)
+            .WithDefinition(golemDefinition)
+            .WithModifiers(new BattleModifiers(
+                Attacker: BattleSideModifiers.None,
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)))
+            .WithAttacker(dreadlord, GridPosition.FrontBottom)
+            .WithDefender(golem, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(dreadlord.Id, new BattleAttackUnitTarget(golem.Id)), [
+            new BattleUnitAttackEvent(dreadlord.Id, new BattleAttackUnitTarget(golem.Id), [new UnitAttackDefinitionId("dreadlord")]),
+            new BattleUnitAttackedEvent(dreadlord.Id, golem.Id, new UnitAttackDefinitionId("dreadlord")),
+            new BattleUnitAttackHitEvent(dreadlord.Id, golem.Id, new UnitAttackDefinitionId("dreadlord"), 0),
+            new BattleUnitEffectAppliedEvent(dreadlord.Id, golem.Id, new BattleParalyzeStatusEffect(1)),
+            new BattleUnitTurnEndingEvent(dreadlord.Id),
+            new BattleUnitTurnEndedEvent(dreadlord.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitEffectDurationDecreasedEvent(golem.Id),
+            new BattleUnitEffectExpiredEvent(golem.Id, new BattleParalyzeStatusEffect(0)),
+            new BattleUnitTurnSkippedEvent(golem.Id),
+            new BattleUnitTurnEndingEvent(golem.Id),
+            new BattleUnitTurnEndedEvent(golem.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Normal(2), [new BattleUnitTurn(dreadlord.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(dreadlord.Id, BattleUnitTurnType.Normal))
         ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -94,8 +149,8 @@ public sealed class BattleEngineFearAttackTests
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(golem, GridPosition.FrontBottom, false)
                     .Build(),
-                CurrentUnitTurn = new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal),
-                CurrentRound = BattleRound.Normal(1)
+                CurrentUnitTurn = new BattleUnitTurn(dreadlord.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(2)
             }));
     }
 

@@ -318,19 +318,13 @@ internal static class WorldCommandHelpers
         {
             if (enemyStack is not null)
             {
-                BattleModifiers modifiers = CreateModifiers(state, stack.OwnerId, enemyStack.OwnerId, context);
-                BattleState battleState = CreateStackBattleState(state, stack, enemyStack, modifiers, context);
+                BattleState battleState = CreateStackBattleState(state, stack, enemyStack, context);
 
                 events.Add(new WorldStackBattleStartedEvent(stack.Id, enemyStack.Id, enemyStack.Position, battleState, IsDuel: false));
             }
             else if (enemyFortification is not null)
             {
-                WorldPlayerId? fortificationOwnerId = FortificationCalculator.GetOwner(enemyFortification);
-
-                BattleModifiers modifiers = CreateModifiers(state, stack.OwnerId, fortificationOwnerId, context);
-                int fortificationArmor = FortificationCalculator.GetArmorBonus(enemyFortification, state, context.Definitions);
-                BattleState battleState = CreateGarrisonBattleState(
-                    stack, enemyFortification.Garrison, fortificationArmor, modifiers, context);
+                BattleState battleState = CreateGarrisonBattleState(state, stack, enemyFortification, context);
 
                 events.Add(new WorldFortificationBattleStartedEvent(stack.Id, enemyFortification.Id, enemyFortification.Entrance, battleState));
             }
@@ -339,26 +333,17 @@ internal static class WorldCommandHelpers
         return events;
     }
 
-    public static BattleModifiers CreateModifiers(
-        WorldState state,
-        WorldPlayerId? attackerOwnerId,
-        WorldPlayerId? defenderOwnerId,
-        IEngineContext context)
-    {
-        return new BattleModifiers(
-            WorldBattleModifierCalculator.GetModifiers(state, attackerOwnerId, context),
-            WorldBattleModifierCalculator.GetModifiers(state, defenderOwnerId, context));
-    }
-
     public static BattleState CreateStackBattleState(
         WorldState state,
         WorldStack attackerStack,
         WorldStack defenderStack,
-        BattleModifiers modifiers,
         IEngineContext context)
     {
         WorldPlan plan = WorldPlan.For(state);
         WorldFortification? defenderFortification = plan.GetFortificationAt(defenderStack.Position);
+        BattleModifiers modifiers = new(
+            WorldBattleModifierCalculator.GetModifiers(state, attackerStack.OwnerId, canRetreat: true, context),
+            WorldBattleModifierCalculator.GetModifiers(state, defenderStack.OwnerId, defenderFortification is null, context));
 
         int fortificationArmor;
         if (defenderFortification is not null)
@@ -425,11 +410,16 @@ internal static class WorldCommandHelpers
     }
 
     public static BattleState CreateDuelBattleState(
+        WorldState state,
         WorldStack attackerStack,
         WorldStack defenderStack,
-        BattleModifiers modifiers,
         IEngineContext context)
     {
+        WorldPlan plan = WorldPlan.For(state);
+        WorldFortification? defenderFortification = plan.GetFortificationAt(defenderStack.Position);
+        BattleModifiers modifiers = new(
+            WorldBattleModifierCalculator.GetModifiers(state, attackerStack.OwnerId, canRetreat: true, context),
+            WorldBattleModifierCalculator.GetModifiers(state, defenderStack.OwnerId, defenderFortification is null, context));
         WorldStack unfortifiedAttackerStack = attackerStack with
         {
             Units = FortificationCalculator.RemoveUnitModifiers(attackerStack.Units)
@@ -481,12 +471,16 @@ internal static class WorldCommandHelpers
     }
 
     public static BattleState CreateGarrisonBattleState(
+        WorldState state,
         WorldStack attackerStack,
-        UnitGrid<WorldUnit> defenderUnits,
-        int fortificationArmor,
-        BattleModifiers modifiers,
+        WorldFortification defenderFortification,
         IEngineContext context)
     {
+        WorldPlayerId? defenderOwnerId = FortificationCalculator.GetOwner(defenderFortification);
+        int fortificationArmor = FortificationCalculator.GetArmorBonus(defenderFortification, state, context.Definitions);
+        BattleModifiers modifiers = new(
+            WorldBattleModifierCalculator.GetModifiers(state, attackerStack.OwnerId, canRetreat: true, context),
+            WorldBattleModifierCalculator.GetModifiers(state, defenderOwnerId, canRetreat: false, context));
         BattleStateBuilder builder = new(context.Definitions);
         int index = 0;
 
@@ -514,7 +508,7 @@ internal static class WorldCommandHelpers
             index++;
         }
 
-        foreach ((WorldUnit unit, GridPosition position) in defenderUnits.GetUnits())
+        foreach ((WorldUnit unit, GridPosition position) in defenderFortification.Garrison.GetUnits())
         {
             BattleUnit newUnit = new(
                 new BattleUnitId(index),

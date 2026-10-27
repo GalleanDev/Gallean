@@ -53,7 +53,7 @@ public sealed class WorldAiEstimatorScenarioTests
         ScenarioFixture fixture = scenarios[scenarioId];
         WorldStack attacker = fixture.State.Stacks[new WorldStackId(attackerId)];
         WorldStack defender = fixture.State.Stacks[new WorldStackId(defenderId)];
-        BattleState battleState = WorldCommandHelpers.CreateStackBattleState(fixture.State, attacker, defender, BattleModifiers.None, fixture.Context);
+        BattleState battleState = WorldCommandHelpers.CreateStackBattleState(fixture.State, attacker, defender, fixture.Context);
 
         return FormatBattle(fixture, attackerId, defenderId, battleState);
     }
@@ -63,13 +63,7 @@ public sealed class WorldAiEstimatorScenarioTests
         ScenarioFixture fixture = scenarios[scenarioId];
         WorldStack attacker = fixture.State.Stacks[new WorldStackId(attackerId)];
         WorldFortification defender = fixture.State.Fortifications[new WorldFortificationId(fortificationId)];
-        int fortificationArmor = FortificationCalculator.GetArmorBonus(defender, fixture.State, fixture.Context.Definitions);
-        BattleState battleState = WorldCommandHelpers.CreateGarrisonBattleState(
-            attacker,
-            defender.Garrison,
-            fortificationArmor,
-            BattleModifiers.None,
-            fixture.Context);
+        BattleState battleState = WorldCommandHelpers.CreateGarrisonBattleState(fixture.State, attacker, defender, fixture.Context);
 
         return FormatBattle(fixture, attackerId, fortificationId, battleState);
     }
@@ -94,7 +88,7 @@ public sealed class WorldAiEstimatorScenarioTests
             Is.EqualTo("S095KC0011 (92) vs S095KC0000 (110): Defender wins, leader dead"));
         Assert.That(
             FormatStackBattle("S095SC0000", "S095KC001e", "S095KC0007"),
-            Is.EqualTo("S095KC001e (316) vs S095KC0007 (290): Attacker wins, leader dead"));
+            Is.EqualTo("S095KC001e (316) vs S095KC0007 (290): Defender wins, leader dead"));
         Assert.That(
             FormatStackBattle("S099SC0000", "S099KC0074", "S099KC0004"),
             Is.EqualTo("S099KC0074 (425) vs S099KC0004 (468): Defender wins, leader dead"));

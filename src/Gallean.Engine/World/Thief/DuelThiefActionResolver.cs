@@ -29,8 +29,7 @@ internal sealed class DuelThiefActionResolver(WorldThiefDuelAction action) : Abs
             return AttemptResult.Fail(WorldCommandError.ThiefTargetInvalid);
         }
 
-        BattleModifiers modifiers = WorldCommandHelpers.CreateModifiers(state, thief.OwnerId, defenderStack.OwnerId, context);
-        BattleState battleState = WorldCommandHelpers.CreateDuelBattleState(thief, defenderStack, modifiers, context);
+        BattleState battleState = WorldCommandHelpers.CreateDuelBattleState(state, thief, defenderStack, context);
 
         return AttemptResult.Success(
             WorldThiefActionType.Duel,

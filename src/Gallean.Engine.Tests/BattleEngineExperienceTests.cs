@@ -299,7 +299,7 @@ public sealed class BattleEngineExperienceTests
         BattleEngine engine = new TestBattleEngineBuilder()
             .WithDefinition(leaderDefinition)
             .WithDefinition(defenderDefinition)
-            .WithModifiers(new BattleModifiers(new BattleSideModifiers(20, 0, 0), BattleSideModifiers.None))
+            .WithModifiers(new BattleModifiers(new BattleSideModifiers(ExperiencePercent: 20, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: true), BattleSideModifiers.None))
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .Build();

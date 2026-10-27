@@ -704,7 +704,9 @@ public sealed class WorldEngineBattleItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None);
+            Modifiers: new BattleModifiers(
+                Attacker: BattleSideModifiers.None,
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedDefenderGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
