@@ -208,10 +208,10 @@
                             ItemsPanel="{TemplateBinding ItemsPanel}" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="16" Margin="0,8,0,4">
               <Button x:Name="PART_PreviousButton" Classes="icon-button page-arrow">
-                <local:IconVisual Moniker="Previous" />
+                <local:IconVisual Moniker="ChevronLeft" />
               </Button>
               <Button x:Name="PART_NextButton" Classes="icon-button page-arrow">
-                <local:IconVisual Moniker="Next" />
+                <local:IconVisual Moniker="ChevronRight" />
               </Button>
             </StackPanel>
           </Grid>

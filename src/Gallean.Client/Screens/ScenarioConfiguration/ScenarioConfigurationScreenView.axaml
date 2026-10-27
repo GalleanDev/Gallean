@@ -64,7 +64,7 @@
                       local:PlateChrome.TextureSeed="1"
                       Command="{Binding PreviousLordFaceCommand}"
                       ToolTip.Tip="{local:Text 'Previous portrait'}">
-                <local:IconVisual Moniker="Previous" />
+                <local:IconVisual Moniker="ChevronLeft" />
               </Button>
               <TextBlock Grid.Column="1"
                          Text="{local:Text 'Select portrait'}"
@@ -77,7 +77,7 @@
                       local:PlateChrome.TextureSeed="2"
                       Command="{Binding NextLordFaceCommand}"
                       ToolTip.Tip="{local:Text 'Next portrait'}">
-                <local:IconVisual Moniker="Next" />
+                <local:IconVisual Moniker="ChevronRight" />
               </Button>
             </Grid>
           </Panel>

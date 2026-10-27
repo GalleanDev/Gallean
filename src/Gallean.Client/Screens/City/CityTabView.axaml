@@ -16,7 +16,7 @@
         <ControlTemplate>
           <Grid ColumnDefinitions="Auto,*,Auto">
             <Button x:Name="PART_PreviousButton" Grid.Column="0" Classes="icon-button page-arrow">
-              <local:IconVisual Moniker="Previous" />
+              <local:IconVisual Moniker="ChevronLeft" />
             </Button>
             <WrapPanel Grid.Column="1" Classes="inventory-sockets">
                 <Panel Classes="inventory-slot empty">
@@ -61,7 +61,7 @@
                             HorizontalAlignment="Center"
                             ItemsPanel="{TemplateBinding ItemsPanel}" />
             <Button x:Name="PART_NextButton" Grid.Column="2" Classes="icon-button page-arrow">
-              <local:IconVisual Moniker="Next" />
+              <local:IconVisual Moniker="ChevronRight" />
             </Button>
           </Grid>
         </ControlTemplate>

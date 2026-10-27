@@ -2,7 +2,7 @@ namespace Gallean.Client;
 
 internal static partial class Icons
 {
-    private static readonly IconGeometry NextIcon = Create(
+    private static readonly IconGeometry ChevronRightIcon = Create(
         viewBox: 24,
         offsetX: 0,
         offsetY: 0,

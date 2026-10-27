@@ -905,14 +905,14 @@
       <ControlTemplate>
         <Grid ColumnDefinitions="Auto,*,Auto">
           <Button x:Name="PART_PreviousButton" Grid.Column="0" Classes="icon-button page-arrow">
-            <local:IconVisual Moniker="Previous" />
+            <local:IconVisual Moniker="ChevronLeft" />
           </Button>
           <ItemsPresenter x:Name="PART_ItemsPresenter"
                           Grid.Column="1"
                           HorizontalAlignment="Center"
                           ItemsPanel="{TemplateBinding ItemsPanel}" />
           <Button x:Name="PART_NextButton" Grid.Column="2" Classes="icon-button page-arrow">
-            <local:IconVisual Moniker="Next" />
+            <local:IconVisual Moniker="ChevronRight" />
           </Button>
           <ContentPresenter x:Name="PART_Blankslate"
                             Grid.Column="0"
