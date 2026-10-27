@@ -31,6 +31,11 @@ public static class ClientApp
                 MaxGpuResourceSizeBytes = MaxGpuResourceSizeBytes
             });
 
-        return useDirectRendering ? builder.WithDirectRendering() : builder;
+        if (useDirectRendering)
+        {
+            builder = builder.WithDirectRendering();
+        }
+
+        return builder;
     }
 }
