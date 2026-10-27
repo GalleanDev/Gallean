@@ -384,10 +384,6 @@
     </Grid>
 
     <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
-
-    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
-      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
-    </Canvas>
   </Grid>
 
 </UserControl>

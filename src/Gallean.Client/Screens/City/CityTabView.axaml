@@ -163,7 +163,8 @@
                   <local:OutlinedTextBlock Grid.Column="1" Text="{Binding GarrisonCapacity}" Classes="panel-title" Margin="12,0,0,0" />
                 </Grid>
                 <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,4">
-                  <ItemsControl Classes="unit-grid focus-group facing-left"
+                  <ItemsControl Classes="unit-grid focus-group"
+                                local:PortraitScope.IsFacingLeft="True"
                                 ItemsSource="{Binding GarrisonGrid.Slots}"
                                 ItemTemplate="{StaticResource UnitGridSlotTemplate}"
                                 ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
@@ -279,10 +280,6 @@
 
       <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
     </Panel>
-
-    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
-      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
-    </Canvas>
   </Grid>
 
 </UserControl>

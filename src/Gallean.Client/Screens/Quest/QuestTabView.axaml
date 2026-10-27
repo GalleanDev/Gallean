@@ -224,8 +224,8 @@
                           <DataTemplate x:DataType="local:QuestMessageViewModel">
                             <Grid Classes="dialog-line"
                                   Classes.right="{Binding HasRightPortrait}"
-                                  Classes.facing-left="{Binding HasRightPortrait}"
                                   Classes.narration="{Binding IsNarration}"
+                                  local:PortraitScope.IsFacingLeft="{Binding HasRightPortrait}"
                                   ColumnDefinitions="Auto,*,Auto">
                               <local:SpriteVisual Grid.Column="0" Classes="event-portrait portrait" SpriteKey="{Binding Message.PortraitKey}" Margin="0,0,12,0" IsVisible="{Binding HasLeftPortrait}" />
                               <Panel Grid.Column="1" Classes="dialog-bubble">

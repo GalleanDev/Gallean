@@ -234,7 +234,8 @@
                 </StackPanel>
               </Grid>
               <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,20">
-                <ItemsControl Classes="unit-grid focus-group facing-left"
+                <ItemsControl Classes="unit-grid focus-group"
+                              local:PortraitScope.IsFacingLeft="True"
                               ItemsSource="{Binding OtherStackGrid.Slots}"
                               ItemTemplate="{StaticResource UnitGridSlotTemplate}"
                               ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
@@ -269,15 +270,11 @@
       </Grid>
 
       <ContentControl Grid.Column="2" Classes="ornament-panel" VerticalAlignment="Top">
-        <ContentControl Margin="6,2" Classes="facing-left" Content="{Binding OtherLeader}" ClipToBounds="False" />
+        <ContentControl Margin="6,2" local:PortraitScope.IsFacingLeft="True" Content="{Binding OtherLeader}" ClipToBounds="False" />
       </ContentControl>
     </Grid>
 
     <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
-
-    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
-      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
-    </Canvas>
   </Grid>
 
 </UserControl>

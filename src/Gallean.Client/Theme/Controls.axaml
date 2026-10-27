@@ -1072,11 +1072,7 @@
     <Setter Property="Background" Value="{StaticResource SpellIconDarkBackgroundBrush}" />
   </Style>
 
-  <Style Selector=":is(Control).facing-left local|SpriteVisual.portrait">
-    <Setter Property="RenderTransform" Value="scaleX(-1)" />
-  </Style>
-
-  <Style Selector=":is(Control).facing-left local|SpriteVisual.portrait">
+  <Style Selector="local|SpriteVisual.portrait[(local|PortraitScope.IsFacingLeft)=True]">
     <Setter Property="RenderTransform" Value="scaleX(-1)" />
   </Style>
 

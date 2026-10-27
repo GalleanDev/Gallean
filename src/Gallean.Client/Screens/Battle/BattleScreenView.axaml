@@ -234,7 +234,7 @@
         </StackPanel>
       </Panel>
 
-      <Panel Classes="facing-left"
+      <Panel local:PortraitScope.IsFacingLeft="True"
              HorizontalAlignment="Right"
              VerticalAlignment="Bottom"
              IsVisible="{Binding DefenderUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
@@ -328,7 +328,7 @@
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
               <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
-                            Classes="facing-left"
+                            local:PortraitScope.IsFacingLeft="True"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridUnitTemplate}"
                             ItemContainerTheme="{StaticResource GridUnitContainerTheme}">

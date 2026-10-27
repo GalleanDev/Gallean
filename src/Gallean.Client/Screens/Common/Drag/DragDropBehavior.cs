@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
@@ -11,7 +12,7 @@ namespace Gallean.Client;
 internal sealed class DragDropBehavior(Control view)
 {
     private const double DragThreshold = 5;
-    private const string DragImageName = "DragImage";
+    private const string DragImageClass = "drag-image";
     private const string DropZoneClass = "drop-zone";
     private const string DragOverClass = "drag-over";
 
@@ -23,6 +24,7 @@ internal sealed class DragDropBehavior(Control view)
     private CursorDragImage? dragImage;
     private TopLevel? dragImageTopLevel;
     private Control? hoverZone;
+    private Visual? pressElement;
     private IDragSource? pressSource;
     private Point pressPosition;
     private double pressScale = 1;
@@ -48,15 +50,49 @@ internal sealed class DragDropBehavior(Control view)
         };
     }
 
-    private T? DataContextAt<T>(Point point) where T : class
+    private static CursorDragImage RenderDragImage(DragPreview preview, Visual source, double scale, double renderScaling)
+    {
+        double pixelScale = scale * renderScaling;
+        Size size = GetImageSize(preview.Type);
+        PixelSize pixelSize = PixelSize.FromSize(size, pixelScale);
+        Vector dpi = new(96 * pixelScale, 96 * pixelScale);
+
+        ContentControl adorner = new()
+        {
+            Content = preview,
+            Width = size.Width,
+            Height = size.Height
+        };
+
+        adorner.Classes.Add(DragImageClass);
+        AdornerLayer.SetAdorner(source, adorner);
+        adorner.Measure(size);
+        adorner.Arrange(new Rect(size));
+
+        using RenderTargetBitmap target = new(pixelSize, dpi);
+        target.Render(adorner);
+
+        AdornerLayer.SetAdorner(source, null);
+
+        SKImageInfo info = new(pixelSize.Width, pixelSize.Height, SKColorType.Bgra8888, SKAlphaType.Premul);
+
+        using SKBitmap pixels = new(info);
+        target.CopyPixels(new PixelRect(pixelSize), pixels.GetPixels(), pixels.ByteCount, pixels.RowBytes);
+
+        SKImage image = SKImage.FromBitmap(pixels);
+
+        return new CursorDragImage(image, size * scale);
+    }
+
+    private Visual? FindElementAt<T>(Point point) where T : class
     {
         foreach (Visual visual in view.GetVisualsAt(point))
         {
             for (Visual? current = visual; current is not null; current = current.GetVisualParent())
             {
-                if (current is StyledElement { DataContext: T context })
+                if (current.DataContext is T)
                 {
-                    return context;
+                    return current;
                 }
             }
         }
@@ -97,6 +133,7 @@ internal sealed class DragDropBehavior(Control view)
 
     private void OnDragPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        pressElement = null;
         pressSource = null;
 
         PointerPoint point = e.GetCurrentPoint(view);
@@ -104,10 +141,12 @@ internal sealed class DragDropBehavior(Control view)
         if (dragDrop is null && point.Properties.IsLeftButtonPressed)
         {
             Point position = e.GetPosition(view);
-            IDragSource? source = DataContextAt<IDragSource>(position);
+            Visual? element = FindElementAt<IDragSource>(position);
+            IDragSource? source = element?.DataContext as IDragSource;
 
             if (source?.DragPreview is not null)
             {
+                pressElement = element;
                 pressSource = source;
                 pressPosition = position;
                 pressScale = ScaleAt(position);
@@ -125,13 +164,15 @@ internal sealed class DragDropBehavior(Control view)
             UpdateHoverZone(point);
             e.Handled = true;
         }
-        else if (pressSource is not null && delta.Length >= DragThreshold)
+        else if (pressElement is not null && pressSource is not null && delta.Length >= DragThreshold)
         {
+            Visual element = pressElement;
             IDragSource source = pressSource;
 
+            pressElement = null;
             pressSource = null;
 
-            if (TryBeginDrag(source))
+            if (TryBeginDrag(element, source))
             {
                 e.Pointer.Capture(view);
                 UpdateHoverZone(point);
@@ -142,12 +183,14 @@ internal sealed class DragDropBehavior(Control view)
 
     private void OnDragPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
+        pressElement = null;
         pressSource = null;
 
         if (dragDrop is not null)
         {
             DragDropViewModel current = dragDrop;
-            IDropTarget? target = DataContextAt<IDropTarget>(e.GetPosition(view));
+            Visual? targetElement = FindElementAt<IDropTarget>(e.GetPosition(view));
+            IDropTarget? target = targetElement?.DataContext as IDropTarget;
 
             EndDragImage();
 
@@ -192,7 +235,7 @@ internal sealed class DragDropBehavior(Control view)
         }
     }
 
-    private bool TryBeginDrag(IDragSource source)
+    private bool TryBeginDrag(Visual element, IDragSource source)
     {
         DragPreview? preview = source.DragPreview;
 
@@ -203,7 +246,7 @@ internal sealed class DragDropBehavior(Control view)
             if (current.TryBeginDrag(source.DragReference))
             {
                 dragDrop = current;
-                ShowDragImage(preview, pressScale);
+                ShowDragImage(preview, element);
 
                 return true;
             }
@@ -212,47 +255,16 @@ internal sealed class DragDropBehavior(Control view)
         return false;
     }
 
-    private void ShowDragImage(DragPreview preview, double scale)
+    private void ShowDragImage(DragPreview preview, Visual source)
     {
         TopLevel? topLevel = TopLevel.GetTopLevel(view);
 
         if (topLevel is not null)
         {
-            dragImage = RenderDragImage(preview, scale, UiScaleDecorator.GetRenderScaling(view, topLevel));
+            dragImage = RenderDragImage(preview, source, pressScale, UiScaleDecorator.GetRenderScaling(view, topLevel));
             dragImageTopLevel = topLevel;
             CursorScope.SetDragImage(topLevel, dragImage);
         }
-    }
-
-    private CursorDragImage RenderDragImage(DragPreview preview, double scale, double renderScaling)
-    {
-        double pixelScale = scale * renderScaling;
-        ContentControl host = view.GetControl<ContentControl>(DragImageName);
-        Size size = GetImageSize(preview.Type);
-
-        host.Content = preview;
-        host.Width = size.Width;
-        host.Height = size.Height;
-        host.IsVisible = true;
-        host.UpdateLayout();
-
-        PixelSize pixelSize = PixelSize.FromSize(size, pixelScale);
-        Vector dpi = new(96 * pixelScale, 96 * pixelScale);
-
-        using RenderTargetBitmap target = new(pixelSize, dpi);
-        target.Render(host);
-
-        host.IsVisible = false;
-        host.Content = null;
-
-        SKImageInfo info = new(pixelSize.Width, pixelSize.Height, SKColorType.Bgra8888, SKAlphaType.Premul);
-
-        using SKBitmap pixels = new(info);
-        target.CopyPixels(new PixelRect(pixelSize), pixels.GetPixels(), pixels.ByteCount, pixels.RowBytes);
-
-        SKImage image = SKImage.FromBitmap(pixels);
-
-        return new CursorDragImage(image, size * scale);
     }
 
     private void UpdateHoverZone(Point point)

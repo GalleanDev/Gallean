@@ -228,8 +228,9 @@
       </local:PointerTiltDecorator>
 
       <local:PointerTiltDecorator Grid.Column="2"
-                                  Classes="event-portrait facing-left"
+                                  Classes="event-portrait"
                                   Classes.inactive="{Binding !RightPortrait.IsActive}"
+                                  local:PortraitScope.IsFacingLeft="True"
                                   IsVisible="{Binding RightPortrait.PortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}">
         <ContentControl Content="{Binding RightPortrait.PortraitKey}" />
       </local:PointerTiltDecorator>

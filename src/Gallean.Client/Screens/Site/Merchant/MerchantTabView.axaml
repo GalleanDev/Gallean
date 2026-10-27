@@ -126,10 +126,6 @@
       <ContentControl Grid.Column="2" Content="{Binding SellZone}" ContentTemplate="{StaticResource DropTargetTemplate}" />
 
     </Grid>
-
-    <Canvas x:Name="DragLayer" IsHitTestVisible="False">
-      <ContentControl x:Name="DragImage" Classes="drag-image" IsVisible="False" />
-    </Canvas>
   </Grid>
 
 </UserControl>
