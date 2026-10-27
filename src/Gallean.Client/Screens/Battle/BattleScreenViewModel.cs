@@ -628,6 +628,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
                 viewModel.UnitId,
                 viewModel.Tile,
                 viewModel.FaceKey,
+                viewModel.Facing,
                 viewModel.Row,
                 viewModel.Column,
                 viewModel.ColumnSpan,

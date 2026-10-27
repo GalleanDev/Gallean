@@ -798,7 +798,7 @@ public sealed class BattleRenderStateBuilderTests
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
                     Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
-                    Facing: BattleSide.Attacker,
+                    Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
                     Hitpoints: 60,

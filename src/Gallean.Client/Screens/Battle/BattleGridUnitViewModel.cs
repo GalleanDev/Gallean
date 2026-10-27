@@ -8,6 +8,7 @@ internal sealed partial class BattleGridUnitViewModel(
     BattleUnitId unitId,
     BattleGridTile tile,
     AssetSpriteKey faceKey,
+    BattleSide facing,
     int row,
     int column,
     int columnSpan,
@@ -28,6 +29,9 @@ internal sealed partial class BattleGridUnitViewModel(
 
     [ObservableProperty]
     public partial AssetSpriteKey FaceKey { get; private set; } = faceKey;
+
+    [ObservableProperty]
+    public partial BattleSide Facing { get; private set; } = facing;
 
     [ObservableProperty]
     public partial int Row { get; private set; } = row;
@@ -72,6 +76,7 @@ internal sealed partial class BattleGridUnitViewModel(
     {
         Tile = other.Tile;
         FaceKey = other.FaceKey;
+        Facing = other.Facing;
         Row = other.Row;
         Column = other.Column;
         ColumnSpan = other.ColumnSpan;
@@ -101,6 +106,7 @@ internal sealed partial class BattleGridUnitViewModel(
         return UnitId == other.UnitId &&
                Tile == other.Tile &&
                FaceKey == other.FaceKey &&
+               Facing == other.Facing &&
                Row == other.Row &&
                Column == other.Column &&
                ColumnSpan == other.ColumnSpan &&
@@ -127,6 +133,7 @@ internal sealed partial class BattleGridUnitViewModel(
         hash.Add(UnitId);
         hash.Add(Tile);
         hash.Add(FaceKey);
+        hash.Add(Facing);
         hash.Add(Row);
         hash.Add(Column);
         hash.Add(ColumnSpan);

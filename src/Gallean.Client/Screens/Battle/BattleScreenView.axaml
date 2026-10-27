@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:contracts="clr-namespace:Gallean.Engine.Contracts;assembly=Gallean.Engine.Contracts"
              x:Class="Gallean.Client.BattleScreenView"
              x:Name="Screen"
              x:DataType="local:BattleScreenViewModel">
@@ -141,6 +142,7 @@
              PointerReleased="OnGridUnitPointerReleased"
              PointerCaptureLost="OnGridUnitPointerCaptureLost">
         <local:UnitPortrait FaceKey="{Binding FaceKey}"
+                            local:PortraitScope.IsFacingLeft="{Binding Facing, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static contracts:BattleSide.Defender}}"
                             Hitpoints="{Binding Hitpoints}"
                             MaxHitpoints="{Binding MaxHitpoints}"
                             HitpointsAnimation="{Binding HitpointsAnimation}"
@@ -328,7 +330,6 @@
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
               <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
-                            local:PortraitScope.IsFacingLeft="True"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridUnitTemplate}"
                             ItemContainerTheme="{StaticResource GridUnitContainerTheme}">

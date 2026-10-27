@@ -93,6 +93,7 @@ internal sealed class BattleRenderStateBuilder(
             (int row, int column) = GetPanelCell(position, isLarge, isFacingRight);
             int columnSpan = isLarge ? 2 : 1;
             BattleGridTile tile = new(side, position);
+            BattleSide facing = GetFacing(unit, side);
             HighlightType highlightType = ResolveHighlightType(tile);
             Color? marker = ResolveGridMarker(highlightType);
             Presence presence = ResolvePresence(unit);
@@ -104,6 +105,7 @@ internal sealed class BattleRenderStateBuilder(
                 unit.Id,
                 tile,
                 new AssetSpriteKey.UnitFace(unit.DefinitionId),
+                facing,
                 row,
                 column,
                 columnSpan,
@@ -404,7 +406,7 @@ internal sealed class BattleRenderStateBuilder(
 
     private static BattleSide GetFacing(BattleUnit unit, BattleSide side)
     {
-        if (unit.HasStatusEffect<BattleRetreatStatusEffect>())
+        if (unit.HasAnyStatusEffect<BattleRetreatStatusEffect, BattleRetreatedStatusEffect>())
         {
             return side.GetOpposite();
         }
