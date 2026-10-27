@@ -43,8 +43,6 @@ dotnet run --project src/Gallean.Client.MacOS
 
 ## Tests
 
-On Apple Silicon Macs, install the OpenMP runtime needed by the asset pipeline tests (`brew install libomp`). Umbra and Packer tests are skipped on Intel Macs because TorchSharp and Magick.NET do not support that platform.
-
 ```bash
 dotnet test
 ```
@@ -54,6 +52,9 @@ Screenshot tests are explicit and need the game assets:
 ```bash
 dotnet test --filter TestCategory=Visual
 ```
+
+> [!INFO]
+> On Apple Silicon Macs, install the OpenMP runtime needed by the asset pipeline tests (`brew install libomp`).
 
 ## Publishing
 
@@ -65,7 +66,8 @@ dotnet publish
 
 The release will be in `dist/` at the root, for example `dist/Gallean-0.8.0-linux-x64.zip`.
 
-On macOS, use the [Microsoft .NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and install Xcode or its Command Line Tools (`xcode-select --install`). The Homebrew `dotnet@10` formula works for running from source, but its Native AOT runtime packs can depend on Homebrew libraries.
+> [!INFO]
+> On macOS, use the [Microsoft .NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and install Xcode or its Command Line Tools (`xcode-select --install`).
 
 ## Assets
 
