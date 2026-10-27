@@ -333,8 +333,8 @@
                       CornerRadius="10">
                 <local:IconVisual x:Name="DropDownGlyph"
                                   Moniker="Expand"
-                                  Width="11"
-                                  Height="11"
+                                  Width="12"
+                                  Height="12"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
                                   Foreground="{StaticResource AccentBrush}" />
@@ -677,8 +677,8 @@
     </Setter>
   </Style>
   <Style Selector="Button.icon-button local|IconVisual">
-    <Setter Property="Width" Value="13" />
-    <Setter Property="Height" Value="13" />
+    <Setter Property="Width" Value="14" />
+    <Setter Property="Height" Value="14" />
     <Setter Property="Foreground" Value="{StaticResource PlateTextBrush}" />
     <Setter Property="Effect">
       <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="2" Opacity="1" Color="{x:Static local:Theme+Plate.TextShadowColor}" />

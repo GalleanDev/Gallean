@@ -177,8 +177,8 @@
       <Setter Property="CornerRadius" Value="13" />
     </Style>
     <Style Selector="Border.node-badge.lock local|IconVisual">
-      <Setter Property="Width" Value="15" />
-      <Setter Property="Height" Value="15" />
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
     </Style>
     <Style Selector="Button.node.scenario-locked Border.node-badge.lock">
       <Setter Property="Background" Value="{StaticResource BuildingGraphNodeBackgroundBrush}" />
