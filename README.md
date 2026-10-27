@@ -73,4 +73,4 @@ The game needs a `.galleanpack` with its assets. [Packer](tools/Packer) can buil
 
 ---
 
-Gallean is an independent fan project, unaffiliated with Strategy First. Disciples is a trademark of its respective owners.
+<sub>Gallean is an independent fan project, unaffiliated with Strategy First. Disciples is a trademark of its respective owners.</sub>
