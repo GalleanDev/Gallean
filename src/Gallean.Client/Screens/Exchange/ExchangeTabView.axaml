@@ -226,12 +226,12 @@
 
           <ContentControl Grid.Column="1" Classes="ornament-panel" Margin="8,0,0,0">
             <Grid RowDefinitions="Auto,*" Margin="6,2">
-              <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Height="40">
-                <local:OutlinedTextBlock Grid.Column="0" Text="{Binding OtherStackGridTitle}" Classes="panel-title" />
-                <StackPanel Grid.Column="1" Classes="leadership" ToolTip.Tip="{local:Text 'Leadership'}">
+              <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Height="40">
+                <StackPanel Grid.Column="0" Classes="leadership" Margin="0,0,12,0" ToolTip.Tip="{local:Text 'Leadership'}">
                   <local:OutlinedTextBlock Text="{Binding OtherStackLeadership}" Classes="panel-title" />
                   <local:IconVisual Moniker="Leadership" />
                 </StackPanel>
+                <local:OutlinedTextBlock Grid.Column="1" Text="{Binding OtherStackGridTitle}" Classes="panel-title" HorizontalAlignment="Right" />
               </Grid>
               <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,20">
                 <ItemsControl Classes="unit-grid focus-group"
@@ -247,7 +247,16 @@
         <Grid Grid.Row="1" ColumnDefinitions="*,*" Margin="0,16,0,0">
           <ContentControl Grid.Column="0" Classes="ornament-panel" Margin="0,0,8,0" DataContext="{Binding InventoryTransfer.Inventory}" Classes.highlighted="{Binding IsHighlighted}">
             <Grid RowDefinitions="Auto,*" Margin="6,2" x:DataType="local:InventoryViewModel">
-              <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party inventory'}" Classes="panel-title" Height="34" />
+              <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Height="34">
+                <local:OutlinedTextBlock Grid.Column="0" Text="{local:Text 'Party inventory'}" Classes="panel-title" />
+                <Button Grid.Column="1"
+                        Classes="icon-button transfer-all"
+                        Command="{Binding $parent[local:ExchangeTabView].((local:ExchangeTabViewModel)DataContext).TransferAllCommand}"
+                        CommandParameter="{x:Static local:InventoryTransferDirection.ToOther}"
+                        ToolTip.Tip="{local:Text 'Transfer all items'}">
+                  <local:IconVisual Moniker="ChevronsRight" />
+                </Button>
+              </Grid>
               <local:PagedItemsControl Grid.Row="1"
                                        ItemsSource="{Binding Items}"
                                        Classes="inventory"
@@ -258,7 +267,16 @@
 
           <ContentControl Grid.Column="1" Classes="ornament-panel" Margin="8,0,0,0" DataContext="{Binding InventoryTransfer.OtherInventory}" Classes.highlighted="{Binding IsHighlighted}">
             <Grid RowDefinitions="Auto,*" Margin="6,2" x:DataType="local:InventoryViewModel">
-              <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party inventory'}" Classes="panel-title" Height="34" />
+              <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Height="34">
+                <Button Grid.Column="0"
+                        Classes="icon-button transfer-all"
+                        Command="{Binding $parent[local:ExchangeTabView].((local:ExchangeTabViewModel)DataContext).TransferAllCommand}"
+                        CommandParameter="{x:Static local:InventoryTransferDirection.FromOther}"
+                        ToolTip.Tip="{local:Text 'Transfer all items'}">
+                  <local:IconVisual Moniker="ChevronsLeft" />
+                </Button>
+                <local:OutlinedTextBlock Grid.Column="1" Text="{local:Text 'Party inventory'}" Classes="panel-title" HorizontalAlignment="Right" />
+              </Grid>
               <local:PagedItemsControl Grid.Row="1"
                                        ItemsSource="{Binding Items}"
                                        Classes="inventory"

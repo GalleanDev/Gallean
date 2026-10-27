@@ -2448,4 +2448,179 @@ public sealed class CityTabViewModelTests
 
         Assert.That(session.World.State, Is.EqualTo(initialState));
     }
+
+    [Test]
+    public async Task TransferAllItemsToStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        ItemDefinition potionDefinition = new(
+            new ItemDefinitionId("potion"),
+            new GlobalTextId("Potion"),
+            new GlobalTextId("Potion description"),
+            ItemCategory.PotionHeal,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
+        WorldItem potionItem = new(new WorldItemId("Potion"), potionDefinition.Id, Charges: null);
+        WorldItem secondPotionItem = new(new WorldItemId("SecondPotion"), potionDefinition.Id, Charges: null);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+                new WorldCityDefinitionId(WorldRace.Human, 3),
+                WorldResourceSet.Empty) with
+            {
+                VisionRadius = 5
+            };
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("Milonia"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(4, 4),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                Inventory = new WorldInventory([potionItem, secondPotionItem])
+            };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                city.Entrance,
+                TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)]),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(potionDefinition)
+            .WithDefinition(cityDefinition)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
+
+        Assert.That(screen.TransferAllCommand.CanExecute(InventoryTransferDirection.ToOther), Is.False);
+        Assert.That(screen.TransferAllCommand.CanExecute(InventoryTransferDirection.FromOther), Is.True);
+
+        await screen.TransferAllCommand.ExecuteAsync(InventoryTransferDirection.FromOther);
+
+        WorldStack updatedStack = session.World.State.Stacks[stack.Id];
+        WorldCity updatedCity = Assert.IsOfType<WorldCity>(session.World.State.Fortifications[city.Id]);
+
+        Assert.That(updatedStack, Is.EqualTo(stack with { Inventory = new WorldInventory([potionItem, secondPotionItem]) }));
+        Assert.That(updatedCity, Is.EqualTo(city with { Inventory = WorldInventory.Empty }));
+        Assert.That(screen.TransferAllCommand.CanExecute(InventoryTransferDirection.ToOther), Is.True);
+        Assert.That(screen.TransferAllCommand.CanExecute(InventoryTransferDirection.FromOther), Is.False);
+        Assert.That(screen.Game.Alert.Current, Is.Null);
+    }
+
+    [Test]
+    public async Task TransferItemToCityTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        ItemDefinition potionDefinition = new(
+            new ItemDefinitionId("potion"),
+            new GlobalTextId("Potion"),
+            new GlobalTextId("Potion description"),
+            ItemCategory.PotionHeal,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
+        WorldItem potionItem = new(new WorldItemId("Potion"), potionDefinition.Id, Charges: null);
+        WorldItem secondPotionItem = new(new WorldItemId("SecondPotion"), potionDefinition.Id, Charges: null);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+                new WorldCityDefinitionId(WorldRace.Human, 3),
+                WorldResourceSet.Empty) with
+            {
+                VisionRadius = 5
+            };
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("Milonia"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(4, 4),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                Inventory = new WorldInventory([])
+            };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                city.Entrance,
+                TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)]),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([potionItem, secondPotionItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(potionDefinition)
+            .WithDefinition(cityDefinition)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
+
+        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.Inventory.Items[0].Reference);
+
+        WorldStack updatedStack = session.World.State.Stacks[stack.Id];
+        WorldCity updatedCity = Assert.IsOfType<WorldCity>(session.World.State.Fortifications[city.Id]);
+
+        Assert.That(updatedStack, Is.EqualTo(stack with { Inventory = new WorldInventory([secondPotionItem]) }));
+        Assert.That(updatedCity, Is.EqualTo(city with { Inventory = new WorldInventory([potionItem]) }));
+        Assert.That(screen.Game.Alert.Current, Is.Null);
+    }
 }

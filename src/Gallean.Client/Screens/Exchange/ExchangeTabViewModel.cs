@@ -32,6 +32,8 @@ internal sealed partial class ExchangeTabViewModel
         DropZones = [DismissDropZone];
 
         RefreshView();
+
+        RegisterSnapshotGatedCommands(TransferAllCommand);
     }
 
     public override string TabHeader => Tr("Exchange");
@@ -164,6 +166,24 @@ internal sealed partial class ExchangeTabViewModel
         RefreshView();
     }
 
+    [RelayCommand(CanExecute = nameof(CanTransferAll))]
+    private async Task TransferAllAsync(InventoryTransferDirection direction)
+    {
+        await TryDispatchWorldActionAsync(BuildTransferAllCommand(direction));
+    }
+
+    private bool CanTransferAll(InventoryTransferDirection direction)
+    {
+        if (IsBusy)
+        {
+            return false;
+        }
+
+        WorldCommandResult commandResult = GameModel.World.DryRunCommand(BuildTransferAllCommand(direction));
+
+        return !commandResult.Failed;
+    }
+
     [RelayCommand]
     private void ClearSelection()
     {
@@ -221,6 +241,18 @@ internal sealed partial class ExchangeTabViewModel
         {
             InventoryTransferDirection.ToOther => new WorldTransferInventoryItemCommand(stackTarget, otherStackTarget, itemId),
             InventoryTransferDirection.FromOther => new WorldTransferInventoryItemCommand(otherStackTarget, stackTarget, itemId)
+        };
+    }
+
+    private WorldTransferInventoryCommand BuildTransferAllCommand(InventoryTransferDirection direction)
+    {
+        WorldUnitGroup stackTarget = new WorldUnitGroup.Stack(stackId);
+        WorldUnitGroup otherStackTarget = new WorldUnitGroup.Stack(otherStackId);
+
+        return direction switch
+        {
+            InventoryTransferDirection.ToOther => new WorldTransferInventoryCommand(stackTarget, otherStackTarget),
+            InventoryTransferDirection.FromOther => new WorldTransferInventoryCommand(otherStackTarget, stackTarget)
         };
     }
 
@@ -299,6 +331,8 @@ internal sealed partial class ExchangeTabViewModel
         StackGrid.Update(stack.Units, showsPurchaseHints: false, BuildUnitHighlight(StackGrid, dragged));
         OtherStackGrid.Update(otherStack.Units, showsPurchaseHints: false, BuildUnitHighlight(OtherStackGrid, dragged));
         InventoryTransfer.Update(stack.Inventory, otherStack.Inventory, WorldState.Players[ViewPlayerId].Resources, BuildTransferHighlight(dragged));
+
+        TransferAllCommand.NotifyCanExecuteChanged();
 
         StackLeaderViewModel leader = StackLeaderViewModel.Create(
             stack, WorldState.Players[stack.OwnerId], GameModel.Definitions, GameModel.Texts, GameModel.Stats);

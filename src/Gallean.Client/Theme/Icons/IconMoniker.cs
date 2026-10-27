@@ -34,6 +34,8 @@ internal enum IconMoniker
     Check,
     ChevronLeft,
     ChevronRight,
+    ChevronsLeft,
+    ChevronsRight,
     Close,
     Collapse,
     Computer,

@@ -47,7 +47,8 @@ internal sealed partial class CityTabViewModel
             LockTypeCommand,
             AutoFitCommand,
             ExitStackCommand,
-            UpgradeCommand);
+            UpgradeCommand,
+            TransferAllCommand);
     }
 
     public override string TabHeader => Tr("City");
@@ -165,6 +166,23 @@ internal sealed partial class CityTabViewModel
         };
     }
 
+    private WorldTransferInventoryCommand? BuildTransferAllCommand(InventoryTransferDirection direction)
+    {
+        if (visitingStack is null)
+        {
+            return null;
+        }
+
+        WorldUnitGroup stackTarget = new WorldUnitGroup.Stack(visitingStack.Id);
+        WorldUnitGroup fortificationTarget = new WorldUnitGroup.Fortification(fortificationId);
+
+        return direction switch
+        {
+            InventoryTransferDirection.ToOther => new WorldTransferInventoryCommand(stackTarget, fortificationTarget),
+            InventoryTransferDirection.FromOther => new WorldTransferInventoryCommand(fortificationTarget, stackTarget)
+        };
+    }
+
     private WorldItem? GetStackItem(InventorySlotReference slot)
     {
         if (slot.Inventory == InventoryTransfer.Inventory)
@@ -243,6 +261,38 @@ internal sealed partial class CityTabViewModel
         else
         {
             return CityUnitGridType.Garrison;
+        }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanTransferAll))]
+    private async Task TransferAllAsync(InventoryTransferDirection direction)
+    {
+        WorldTransferInventoryCommand? command = BuildTransferAllCommand(direction);
+
+        if (command is not null)
+        {
+            await TryDispatchWorldActionAsync(command);
+        }
+    }
+
+    private bool CanTransferAll(InventoryTransferDirection direction)
+    {
+        if (IsBusy)
+        {
+            return false;
+        }
+
+        WorldTransferInventoryCommand? command = BuildTransferAllCommand(direction);
+
+        if (command is not null)
+        {
+            WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
+
+            return !commandResult.Failed;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -832,6 +882,7 @@ internal sealed partial class CityTabViewModel
         UpgradeCost = ResolveUpgradeCost(cityInfo.Growth);
 
         UpgradeCommand.NotifyCanExecuteChanged();
+        TransferAllCommand.NotifyCanExecuteChanged();
 
         UpdateSpellDropZone(dragged);
         UpdateDismissDropZone(dragged);

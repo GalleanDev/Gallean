@@ -23,10 +23,18 @@ internal sealed class InventoryTransferViewModel(GameModel gameModel, IInventory
 
     public async Task DropItemAsync(InventorySlotReference source, InventoryReference target)
     {
+        if (target.Inventory != source.Inventory)
+        {
+            await TransferItemAsync(source);
+        }
+    }
+
+    public async Task TransferItemAsync(InventorySlotReference source)
+    {
         WorldItem? item = source.Inventory.GetItem(source.Index);
         InventoryTransferDirection? direction = GetTransferDirection(source);
 
-        if (item is not null && direction is not null && target.Inventory != source.Inventory)
+        if (item is not null && direction is not null)
         {
             await provider.TransferItemAsync(item.Id, direction.Value);
             provider.OnItemTransferred();

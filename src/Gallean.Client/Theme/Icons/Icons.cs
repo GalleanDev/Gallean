@@ -43,6 +43,8 @@ internal static partial class Icons
             IconMoniker.Check => CheckIcon,
             IconMoniker.ChevronLeft => ChevronLeftIcon,
             IconMoniker.ChevronRight => ChevronRightIcon,
+            IconMoniker.ChevronsLeft => ChevronsLeftIcon,
+            IconMoniker.ChevronsRight => ChevronsRightIcon,
             IconMoniker.Close => CloseIcon,
             IconMoniker.Collapse => CollapseIcon,
             IconMoniker.Computer => ComputerIcon,
