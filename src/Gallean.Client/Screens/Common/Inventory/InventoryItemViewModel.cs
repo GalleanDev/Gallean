@@ -1,10 +1,11 @@
 namespace Gallean.Client;
 
-internal sealed record InventoryItemViewModel : IDragSource, IDetailsSource
+internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
 {
     public InventoryItemViewModel(
         int index,
         WorldItemId itemId,
+        int count,
         AssetSpriteKey.ItemIcon? spriteKey,
         string name,
         string description,
@@ -15,6 +16,7 @@ internal sealed record InventoryItemViewModel : IDragSource, IDetailsSource
 
         Index = index;
         ItemId = itemId;
+        Count = count;
         SpriteKey = spriteKey;
         Name = name;
         Description = description;
@@ -24,8 +26,10 @@ internal sealed record InventoryItemViewModel : IDragSource, IDetailsSource
     public InventoryViewModel Inventory { get; }
     public int Index { get; }
     public WorldItemId ItemId { get; }
+    public int Count { get; }
 
-    public InventorySlotReference Reference => new(Inventory, Index);
+    public InventorySlotReference Reference => new(Inventory, Index, 1);
+    public InventorySlotReference GroupReference => new(Inventory, Index, Count);
 
     public AssetSpriteKey.ItemIcon? SpriteKey { get; }
     public string Name { get; }
@@ -49,6 +53,8 @@ internal sealed record InventoryItemViewModel : IDragSource, IDetailsSource
 
     IDragSourceReference IDragSource.DragReference => Reference;
 
+    IDragSourceReference IGroupDragSource.GroupDragReference => GroupReference;
+
     object? IDetailsSource.DetailsContent => Details;
 
     public bool Equals(InventoryItemViewModel? other)
@@ -66,6 +72,7 @@ internal sealed record InventoryItemViewModel : IDragSource, IDetailsSource
         return Inventory == other.Inventory &&
                Index == other.Index &&
                ItemId == other.ItemId &&
+               Count == other.Count &&
                SpriteKey == other.SpriteKey &&
                Name == other.Name &&
                Description == other.Description &&
@@ -79,6 +86,7 @@ internal sealed record InventoryItemViewModel : IDragSource, IDetailsSource
         hash.Add(Inventory);
         hash.Add(Index);
         hash.Add(ItemId);
+        hash.Add(Count);
         hash.Add(SpriteKey);
         hash.Add(Name);
         hash.Add(Description);

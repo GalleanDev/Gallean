@@ -196,32 +196,15 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
     {
         ImmutableArray<WorldItem> exportableItems = ScenarioExporter.GetExportableItems(WorldState, ViewPlayerId);
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
-        List<(ItemDefinitionId DefinitionId, int? Charges)> keys = [];
-        Dictionary<(ItemDefinitionId DefinitionId, int? Charges), List<WorldItem>> groups = [];
-
-        foreach (WorldItem item in exportableItems)
-        {
-            (ItemDefinitionId DefinitionId, int? Charges) key = (item.DefinitionId, item.Charges);
-
-            if (!groups.TryGetValue(key, out List<WorldItem>? group))
-            {
-                group = [];
-                groups.Add(key, group);
-                keys.Add(key);
-            }
-
-            group.Add(item);
-        }
-
+        ImmutableArray<ItemGroup> groups = ItemGroup.Build(exportableItems);
         bool limitReached = selectedItems.Count >= scenarioExporter.ItemLimit;
         List<LeaderExportItemViewModel> result = [];
 
-        foreach ((ItemDefinitionId DefinitionId, int? Charges) key in keys.OrderByDescending(key => GetPrice(key.DefinitionId)))
+        foreach (ItemGroup group in groups.OrderByDescending(group => GetPrice(group.DefinitionId)))
         {
-            List<WorldItem> items = groups[key];
             int selected = 0;
 
-            foreach (WorldItem item in items)
+            foreach (WorldItem item in group.Items)
             {
                 if (selectedItems.Contains(item))
                 {
@@ -230,19 +213,19 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
             }
 
             ItemDetailsViewModel details = ItemDetailsViewModel.Create(
-                key.DefinitionId,
-                key.Charges,
+                group.DefinitionId,
+                group.Charges,
                 resources,
                 GameModel.Definitions,
                 GameModel.Texts);
 
             result.Add(new LeaderExportItemViewModel(
                 this,
-                items,
-                ItemIconResolver.Resolve(GameModel.Definitions, key.DefinitionId),
-                ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, key.DefinitionId, key.Charges),
+                group.Items,
+                ItemIconResolver.Resolve(GameModel.Definitions, group.DefinitionId),
+                ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, group.DefinitionId, group.Charges),
                 selected,
-                canAdd: selected < items.Count && !limitReached,
+                canAdd: selected < group.Items.Length && !limitReached,
                 details));
         }
 

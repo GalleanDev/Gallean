@@ -3175,4 +3175,77 @@ public sealed class StackTabViewModelTests
             [],
             [])));
     }
+
+    [Test]
+    public async Task GroupsIdenticalItemsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                LeaderAbilities = LeaderAbility.WeaponArmorUse
+            };
+
+        UnitModifierDefinition weaponModifier = WeaponModifier();
+        ItemDefinition weapon = Weapon(weaponModifier.Id);
+        ItemDefinition potion = HealingPotion(new ItemDefinitionId("potion"), 50);
+        WorldItem firstWeaponItem = new(new WorldItemId("Weapon1"), weapon.Id, Charges: null);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+        WorldItem secondWeaponItem = new(new WorldItemId("Weapon2"), weapon.Id, Charges: null);
+        WorldItem chargedWeaponItem = new(new WorldItemId("Weapon3"), weapon.Id, Charges: 2);
+        WorldItem thirdWeaponItem = new(new WorldItemId("Weapon4"), weapon.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([firstWeaponItem, potionItem, secondWeaponItem, chargedWeaponItem, thirdWeaponItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(weaponModifier)
+            .WithDefinition(weapon)
+            .WithDefinition(potion)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        Assert.That(screen.Inventory.Items.Select(item => (item.Index, item.ItemId, item.Count)), Is.EqualTo([
+            (Index: 0, new WorldItemId("Weapon4"), Count: 3),
+            (Index: 1, new WorldItemId("Potion"), Count: 1),
+            (Index: 2, new WorldItemId("Weapon3"), Count: 1)
+        ]));
+
+        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        await screen.DragDrop.DropAsync(FindEquipmentSlot(screen, LeaderEquipmentSlot.Artifact1).Reference);
+
+        Assert.That(session.World.State.Stacks[stack.Id].Equipment, Is.EqualTo(LeaderEquipment.Empty.With(LeaderEquipmentSlot.Artifact1, thirdWeaponItem)));
+        Assert.That(screen.Inventory.Items.Select(item => (item.Index, item.ItemId, item.Count)), Is.EqualTo([
+            (Index: 0, new WorldItemId("Weapon2"), Count: 2),
+            (Index: 1, new WorldItemId("Potion"), Count: 1),
+            (Index: 2, new WorldItemId("Weapon3"), Count: 1)
+        ]));
+    }
 }

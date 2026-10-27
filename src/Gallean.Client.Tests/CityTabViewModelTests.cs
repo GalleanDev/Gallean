@@ -2614,13 +2614,13 @@ public sealed class CityTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
-        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.Inventory.Items[0].Reference);
+        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.Inventory.Items[0].GroupReference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
         WorldCity updatedCity = Assert.IsOfType<WorldCity>(session.World.State.Fortifications[city.Id]);
 
-        Assert.That(updatedStack, Is.EqualTo(stack with { Inventory = new WorldInventory([secondPotionItem]) }));
-        Assert.That(updatedCity, Is.EqualTo(city with { Inventory = new WorldInventory([potionItem]) }));
+        Assert.That(updatedStack, Is.EqualTo(stack with { Inventory = WorldInventory.Empty }));
+        Assert.That(updatedCity, Is.EqualTo(city with { Inventory = new WorldInventory([potionItem, secondPotionItem]) }));
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
 }

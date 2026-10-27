@@ -3287,7 +3287,19 @@ public sealed class VisualTests
             scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG7101")),
             scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG6001")),
             scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG7001")),
-            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG9001"))
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG9001")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG0003")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG0006")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG0007")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG0008")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG1002")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG1003")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG1004")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG2002")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG2003")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG3002")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG3003")),
+            scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG4002"))
         ];
 
         WorldMap map = TestHelpers.SimpleMap(8, 8);
@@ -3300,7 +3312,12 @@ public sealed class VisualTests
 
         for (int index = 0; index < 40; index++)
         {
-            items.Add(new WorldItem(new WorldItemId($"Item{index:D2}"), itemDefinitions[index % itemDefinitions.Length].Id, Charges: null));
+            items.Add(new WorldItem(new WorldItemId($"Item{index:D3}"), itemDefinitions[index % itemDefinitions.Length].Id, Charges: null));
+        }
+
+        for (int index = 40; index < 137; index++)
+        {
+            items.Add(new WorldItem(new WorldItemId($"Item{index:D3}"), itemDefinitions[0].Id, Charges: null));
         }
 
         WorldStack stack = TestHelpers.SimpleStack(

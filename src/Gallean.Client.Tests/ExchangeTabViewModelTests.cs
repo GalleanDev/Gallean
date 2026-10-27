@@ -582,6 +582,102 @@ public sealed class ExchangeTabViewModelTests
     }
 
     [Test]
+    public async Task ItemGroupToOtherStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit otherLeader = new(new WorldUnitId("otherLeader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        ItemDefinition potionDefinition = new(
+            new ItemDefinitionId("potion"),
+            new GlobalTextId("Potion"),
+            new GlobalTextId("Potion description"),
+            ItemCategory.PotionHeal,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+        ItemDefinition elixirDefinition = new(
+            new ItemDefinitionId("elixir"),
+            new GlobalTextId("Elixir"),
+            new GlobalTextId("Elixir description"),
+            ItemCategory.PotionHeal,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
+        WorldItem firstPotionItem = new(new WorldItemId("Potion1"), potionDefinition.Id, Charges: null);
+        WorldItem elixirItem = new(new WorldItemId("Elixir"), elixirDefinition.Id, Charges: null);
+        WorldItem secondPotionItem = new(new WorldItemId("Potion2"), potionDefinition.Id, Charges: null);
+        WorldItem thirdPotionItem = new(new WorldItemId("Potion3"), potionDefinition.Id, Charges: null);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                TestHelpers.StackUnitGrid(
+                    stackDefinitions,
+                    [(leader, GridPosition.FrontBottom)]),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([firstPotionItem, elixirItem, secondPotionItem, thirdPotionItem])
+            };
+
+        WorldStack otherStack = TestHelpers.SimpleStack(
+            new WorldStackId("Hugin"),
+            player.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(otherLeader, GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(potionDefinition)
+            .WithDefinition(elixirDefinition)
+            .WithStack(stack)
+            .WithStack(otherStack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
+
+        screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].GroupReference);
+        await screen.DragDrop.DropAsync(screen.InventoryTransfer.OtherInventory.DropReference);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = new WorldInventory([elixirItem]) }));
+        Assert.That(session.World.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with { Inventory = new WorldInventory([firstPotionItem, secondPotionItem, thirdPotionItem]) }));
+        Assert.That(screen.InventoryTransfer.Inventory.Items.Select(item => (item.Index, item.ItemId, item.Count)), Is.EqualTo([
+            (Index: 0, new WorldItemId("Elixir"), Count: 1)
+        ]));
+        Assert.That(screen.InventoryTransfer.OtherInventory.Items.Select(item => (item.Index, item.ItemId, item.Count)), Is.EqualTo([
+            (Index: 0, new WorldItemId("Potion3"), Count: 3)
+        ]));
+        Assert.That(screen.Game.Alert.Current, Is.Null);
+    }
+
+    [Test]
     public async Task TransferAllItemsTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
@@ -731,12 +827,12 @@ public sealed class ExchangeTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
-        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.Inventory.Items[1].Reference);
+        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.Inventory.Items[0].GroupReference);
 
-        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = new WorldInventory([potionItem]) }));
-        Assert.That(session.World.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with { Inventory = new WorldInventory([secondPotionItem]) }));
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = WorldInventory.Empty }));
+        Assert.That(session.World.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with { Inventory = new WorldInventory([potionItem, secondPotionItem]) }));
 
-        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.OtherInventory.Items[0].Reference);
+        await screen.InventoryTransfer.TransferItemAsync(screen.InventoryTransfer.OtherInventory.Items[0].GroupReference);
 
         Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = new WorldInventory([potionItem, secondPotionItem]) }));
         Assert.That(session.World.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with { Inventory = WorldInventory.Empty }));

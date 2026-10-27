@@ -4,14 +4,21 @@
   <Styles.Resources>
     <DataTemplate x:Key="InventoryItemTemplate" x:DataType="local:InventoryItemViewModel">
       <Button Classes="socket inventory-slot">
-        <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform">
-          <ToolTip.Tip>
-            <StackPanel Spacing="4">
-              <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
-              <TextBlock Text="{Binding Description}" />
-            </StackPanel>
-          </ToolTip.Tip>
-        </local:SpriteVisual>
+        <Panel>
+          <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform">
+            <ToolTip.Tip>
+              <StackPanel Spacing="4">
+                <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
+                <TextBlock Text="{Binding Description}" />
+              </StackPanel>
+            </ToolTip.Tip>
+          </local:SpriteVisual>
+          <Panel Classes="item-count"
+                 IsVisible="{Binding Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=1}">
+            <local:PlateChrome Classes="socket counter" />
+            <local:OutlinedTextBlock Classes="object-name compact" Text="{Binding Count}" />
+          </Panel>
+        </Panel>
       </Button>
     </DataTemplate>
 
@@ -26,6 +33,11 @@
             </StackPanel>
           </ToolTip.Tip>
         </local:SpriteVisual>
+        <Panel Classes="item-count"
+               IsVisible="{Binding Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=1}">
+          <local:PlateChrome Classes="socket counter" />
+          <local:OutlinedTextBlock Classes="object-name compact" Text="{Binding Count}" />
+        </Panel>
       </Panel>
     </DataTemplate>
   </Styles.Resources>
@@ -44,6 +56,28 @@
   </Style>
   <Style Selector="Panel.inventory-slot local|SpriteVisual">
     <Setter Property="Margin" Value="-4" />
+  </Style>
+  <Style Selector="Panel.item-count">
+    <Setter Property="Width" Value="24" />
+    <Setter Property="Height" Value="24" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+  </Style>
+  <Style Selector="Panel.item-count > local|PlateChrome.counter">
+    <Setter Property="StrokeThickness" Value="1.5" />
+    <Setter Property="Texture" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Panel.item-count > local|OutlinedTextBlock">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Effect" Value="{x:Null}" />
+  </Style>
+  <Style Selector="Button.inventory-slot Panel.item-count">
+    <Setter Property="Margin" Value="0,0,-13,-13" />
+  </Style>
+  <Style Selector="Panel.inventory-slot Panel.item-count">
+    <Setter Property="Margin" Value="0,0,-1,-1" />
   </Style>
   <Style Selector="Button.transfer-all">
     <Setter Property="Width" Value="26" />

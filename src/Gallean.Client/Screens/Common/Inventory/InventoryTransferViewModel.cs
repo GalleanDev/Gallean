@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Gallean.Client;
 
 internal sealed class InventoryTransferViewModel(GameModel gameModel, IInventoryTransferProvider provider)
@@ -31,12 +33,19 @@ internal sealed class InventoryTransferViewModel(GameModel gameModel, IInventory
 
     public async Task TransferItemAsync(InventorySlotReference source)
     {
-        WorldItem? item = source.Inventory.GetItem(source.Index);
+        ImmutableArray<WorldItem> items = source.Inventory.GetItems(source.Index, source.Count);
         InventoryTransferDirection? direction = GetTransferDirection(source);
 
-        if (item is not null && direction is not null)
+        if (items.Length > 0 && direction is not null)
         {
-            await provider.TransferItemAsync(item.Id, direction.Value);
+            foreach (WorldItem item in items)
+            {
+                if (!await provider.TransferItemAsync(item.Id, direction.Value))
+                {
+                    break;
+                }
+            }
+
             provider.OnItemTransferred();
         }
     }

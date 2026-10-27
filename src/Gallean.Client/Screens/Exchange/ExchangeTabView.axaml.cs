@@ -24,7 +24,7 @@ internal sealed partial class ExchangeTabView : UserControl
         {
             e.Handled = true;
 
-            viewModel.InventoryTransfer.TransferItemAsync(item.Reference).FileAndForget();
+            viewModel.InventoryTransfer.TransferItemAsync(item.GroupReference).FileAndForget();
         }
     }
 }

@@ -50,6 +50,18 @@ internal sealed class DragDropBehavior(Control view)
         };
     }
 
+    private static IDragSourceReference GetDragReference(IDragSource source, KeyModifiers modifiers)
+    {
+        if (modifiers.HasFlag(KeyModifiers.Shift) && source is IGroupDragSource groupSource)
+        {
+            return groupSource.GroupDragReference;
+        }
+        else
+        {
+            return source.DragReference;
+        }
+    }
+
     private static CursorDragImage RenderDragImage(DragPreview preview, Visual source, double scale, double renderScaling)
     {
         double pixelScale = scale * renderScaling;
@@ -172,7 +184,7 @@ internal sealed class DragDropBehavior(Control view)
             pressElement = null;
             pressSource = null;
 
-            if (TryBeginDrag(element, source))
+            if (TryBeginDrag(element, source, e.KeyModifiers))
             {
                 e.Pointer.Capture(view);
                 UpdateHoverZone(point);
@@ -235,7 +247,7 @@ internal sealed class DragDropBehavior(Control view)
         }
     }
 
-    private bool TryBeginDrag(Visual element, IDragSource source)
+    private bool TryBeginDrag(Visual element, IDragSource source, KeyModifiers modifiers)
     {
         DragPreview? preview = source.DragPreview;
 
@@ -243,7 +255,9 @@ internal sealed class DragDropBehavior(Control view)
         {
             DragDropViewModel current = host.DragDrop;
 
-            if (current.TryBeginDrag(source.DragReference))
+            IDragSourceReference reference = GetDragReference(source, modifiers);
+
+            if (current.TryBeginDrag(reference))
             {
                 dragDrop = current;
                 ShowDragImage(preview, element);

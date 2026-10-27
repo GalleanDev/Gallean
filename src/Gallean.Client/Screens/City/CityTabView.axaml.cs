@@ -24,7 +24,7 @@ internal sealed partial class CityTabView : UserControl
         {
             e.Handled = true;
 
-            viewModel.InventoryTransfer.TransferItemAsync(item.Reference).FileAndForget();
+            viewModel.InventoryTransfer.TransferItemAsync(item.GroupReference).FileAndForget();
         }
     }
 }

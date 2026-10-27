@@ -90,20 +90,11 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
 
     private static ImmutableArray<LootItem> CreateItems(GameModel gameModel, ImmutableArray<WorldItem> items)
     {
-        OrderedDictionary<(ItemDefinitionId DefinitionId, int? Charges), int> itemCount = [];
-
-        foreach (WorldItem item in items)
-        {
-            (ItemDefinitionId DefinitionId, int? Charges) key = (item.DefinitionId, item.Charges);
-
-            itemCount[key] = itemCount.GetValueOrDefault(key) + 1;
-        }
-
         List<LootItem> result = [];
 
-        foreach (((ItemDefinitionId DefinitionId, int? Charges) key, int quantity) in itemCount)
+        foreach (ItemGroup group in ItemGroup.Build(items))
         {
-            result.Add(CreateItem(gameModel, key.DefinitionId, key.Charges, quantity));
+            result.Add(CreateItem(gameModel, group.DefinitionId, group.Charges, group.Items.Length));
         }
 
         return [.. result];

@@ -194,8 +194,8 @@ internal abstract partial class StackTabViewModel
     {
         return source switch
         {
-            InventorySlotReference inventorySlot when inventorySlot.Index < stack.Inventory.Items.Length =>
-                stack.Inventory.Items[inventorySlot.Index],
+            InventorySlotReference inventorySlot =>
+                inventorySlot.Inventory.GetItem(inventorySlot.Index),
             LeaderEquipmentSlotReference equipmentSlot =>
                 stack.Equipment[equipmentSlot.Slot],
             _ => null
