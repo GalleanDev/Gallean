@@ -60,7 +60,7 @@ internal sealed class UiScaleDecorator : Decorator
         }
     }
 
-    public static double GetScalingFactor(Visual element)
+    private static double GetScalingFactor(Visual element)
     {
         return element.GetValue(FactorProperty);
     }
