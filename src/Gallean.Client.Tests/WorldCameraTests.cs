@@ -237,7 +237,7 @@ public sealed class WorldCameraTests
 
         camera.SetZoom(10.0);
 
-        Assert.That(camera.Zoom, Is.EqualTo(2.5));
+        Assert.That(camera.Zoom, Is.EqualTo(1.75));
 
         camera.SetZoom(0.1);
 

@@ -20,7 +20,7 @@ internal sealed class WorldCamera
 
     private const double DefaultZoom = 1.0;
     private const double MinimumZoom = 0.75;
-    private const double MaximumZoom = 2.5;
+    private const double MaximumZoom = 1.75;
     private const double PanSmoothTime = 0.0625;
     private const double FocusSmoothTime = 0.22;
     private const double ZoomSmoothing = 20.0;
