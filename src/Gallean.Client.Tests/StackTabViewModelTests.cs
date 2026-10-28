@@ -137,7 +137,7 @@ public sealed class StackTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.UnitGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.UnitGrid, GridPosition.BackCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
 
         Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([true, false, true, true, true, true]));
 
@@ -211,7 +211,7 @@ public sealed class StackTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.UnitGrid, GridPosition.FrontBottom);
         UnitGridSlotViewModel target = FindSlot(screen.UnitGrid, GridPosition.FrontCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -350,7 +350,7 @@ public sealed class StackTabViewModelTests
         ]));
 
         InventoryItemViewModel item = screen.Inventory.Items[0];
-        screen.DragDrop.TryBeginDrag(item.Reference);
+        screen.DragDrop.BeginDrag(item.Reference);
 
         Assert.That(screen.Equipment.Slots.Select(slot => (slot.Slot, HasItem: slot.ItemId is not null, slot.IsHighlighted)), Is.EqualTo([
             (LeaderEquipmentSlot.Banner, HasItem: false, IsHighlighted: false),
@@ -428,14 +428,14 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindEquipmentSlot(screen, LeaderEquipmentSlot.Artifact2).Reference);
 
         Assert.That(session.World.State.Stacks[stack.Id].Equipment, Is.EqualTo(
             LeaderEquipment.Empty.With(LeaderEquipmentSlot.Artifact2, weaponItem)));
         Assert.That(screen.Inventory.IsHighlighted, Is.False);
 
-        screen.DragDrop.TryBeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Artifact2).Reference);
+        screen.DragDrop.BeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Artifact2).Reference);
 
         Assert.That(screen.Inventory.IsHighlighted, Is.True);
 
@@ -505,7 +505,7 @@ public sealed class StackTabViewModelTests
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontBottom).IsHighlighted, Is.False);
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).IsHighlighted, Is.False);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
 
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontBottom).IsHighlighted, Is.False);
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).IsHighlighted, Is.True);
@@ -612,7 +612,7 @@ public sealed class StackTabViewModelTests
 
         Assert.That(screen.SpellDropZone.IsVisible, Is.False);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
 
         Assert.That(screen.SpellDropZone.IsVisible, Is.True);
         Assert.That(screen.SpellDropZone.Content, Is.EqualTo("Use name"));
@@ -622,7 +622,7 @@ public sealed class StackTabViewModelTests
 
         Assert.That(screen.SpellDropZone.IsVisible, Is.False);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(screen.SpellDropZone.DropReference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -695,7 +695,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
 
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).IsHighlighted, Is.False);
 
@@ -1376,12 +1376,12 @@ public sealed class StackTabViewModelTests
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.False);
 
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.UnitGrid, GridPosition.FrontBottom).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.UnitGrid, GridPosition.FrontBottom).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.False);
 
         screen.DragDrop.EndDrag();
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.True);
         Assert.That(screen.DismissDropZone.Content, Is.EqualTo("Dismiss name"));
@@ -1461,7 +1461,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Reference);
         await screen.DragDrop.DropAsync(screen.DismissDropZone.DropReference);
 
         ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
@@ -1666,7 +1666,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
 
         Assert.That(screen.Equipment.Slots.Select(slot => (slot.Slot, slot.ItemId, slot.IsHighlighted)), Is.EqualTo([
             (LeaderEquipmentSlot.Banner, ItemId: (ItemDefinitionId?)null, IsHighlighted: false),
@@ -1735,7 +1735,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle2).Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -1793,7 +1793,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
+        screen.DragDrop.BeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
         await screen.DragDrop.DropAsync(screen.Inventory.DropReference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -1855,7 +1855,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -1918,7 +1918,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
+        screen.DragDrop.BeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
 
         Assert.That(screen.Equipment.Slots.Select(slot => (slot.Slot, slot.IsHighlighted)), Is.EqualTo([
             (LeaderEquipmentSlot.Banner, IsHighlighted: false),
@@ -1997,7 +1997,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -2070,7 +2070,7 @@ public sealed class StackTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
         MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
+        screen.DragDrop.BeginDrag(FindEquipmentSlot(screen, LeaderEquipmentSlot.Battle1).Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -2531,7 +2531,7 @@ public sealed class StackTabViewModelTests
 
         Assert.That(soldierSlot.Hitpoints, Is.EqualTo(11));
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(soldierSlot.Reference);
 
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontCenter), Is.SameAs(soldierSlot));
@@ -3045,7 +3045,7 @@ public sealed class StackTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.UnitGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.UnitGrid, GridPosition.FrontTop);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.Reference);
 
         Assert.That(FindSlot(screen.UnitGrid, GridPosition.FrontCenter), Is.Not.SameAs(source));
@@ -3238,7 +3238,7 @@ public sealed class StackTabViewModelTests
             (Index: 2, new WorldItemId("Weapon3"), Count: 1)
         ]));
 
-        screen.DragDrop.TryBeginDrag(screen.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindEquipmentSlot(screen, LeaderEquipmentSlot.Artifact1).Reference);
 
         Assert.That(session.World.State.Stacks[stack.Id].Equipment, Is.EqualTo(LeaderEquipment.Empty.With(LeaderEquipmentSlot.Artifact1, thirdWeaponItem)));

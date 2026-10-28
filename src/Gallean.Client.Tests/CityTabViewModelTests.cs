@@ -148,7 +148,7 @@ public sealed class CityTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.GarrisonGrid, GridPosition.FrontBottom);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
 
         Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([true, false, true, true, true, true]));
         Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([true, true, true, true, true, true]));
@@ -238,7 +238,7 @@ public sealed class CityTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.StackGrid, GridPosition.BackCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -322,7 +322,7 @@ public sealed class CityTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontBottom);
         UnitGridSlotViewModel target = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -1196,7 +1196,7 @@ public sealed class CityTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.GarrisonGrid, GridPosition.BackCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.Reference);
 
         Assert.That(session.World.State.Fortifications[capital.Id], Is.EqualTo(capitalBeforeReposition with
@@ -1281,7 +1281,7 @@ public sealed class CityTabViewModelTests
         InventoryItemViewModel source = screen.InventoryTransfer.Inventory.Items[0];
         InventoryViewModel target = screen.InventoryTransfer.OtherInventory;
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
 
         Assert.That(target.IsHighlighted, Is.True);
         Assert.That(screen.InventoryTransfer.Inventory.IsHighlighted, Is.False);
@@ -1370,7 +1370,7 @@ public sealed class CityTabViewModelTests
         InventoryItemViewModel source = screen.InventoryTransfer.OtherInventory.Items[0];
         InventoryViewModel target = screen.InventoryTransfer.Inventory;
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
 
         Assert.That(target.IsHighlighted, Is.True);
         Assert.That(screen.InventoryTransfer.OtherInventory.IsHighlighted, Is.False);
@@ -1617,7 +1617,7 @@ public sealed class CityTabViewModelTests
             Assert.That(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).IsHighlighted, Is.False);
         }
 
-        screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
 
         using (Assert.EnterMultipleScope())
         {
@@ -1714,12 +1714,12 @@ public sealed class CityTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontBottom).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontBottom).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.False);
 
         screen.DragDrop.EndDrag();
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontCenter).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.True);
 
@@ -1993,7 +1993,7 @@ public sealed class CityTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.StackGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(session.World.State, Is.EqualTo(initialState with
@@ -2082,7 +2082,7 @@ public sealed class CityTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(session.World.State, Is.EqualTo(initialState));
@@ -2173,7 +2173,7 @@ public sealed class CityTabViewModelTests
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.False);
 
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.GarrisonGrid, GridPosition.BackCenter).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.GarrisonGrid, GridPosition.BackCenter).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.True);
         Assert.That(screen.DismissDropZone.Content, Is.EqualTo("Dismiss name"));

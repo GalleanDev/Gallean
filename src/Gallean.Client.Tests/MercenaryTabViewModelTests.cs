@@ -163,7 +163,7 @@ public sealed class MercenaryTabViewModelTests
         ]));
         Assert.That(screen.Stack.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
 
-        screen.DragDrop.TryBeginDrag(screen.Mercenaries[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Mercenaries[0].Reference);
 
         Assert.That(screen.Stack.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, true, true, true, true]));
 
@@ -234,7 +234,7 @@ public sealed class MercenaryTabViewModelTests
             "merc | name | description | Level 3 | Cost: 50 gold | available | not selected"
         ]));
 
-        screen.DragDrop.TryBeginDrag(screen.Mercenaries[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Mercenaries[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.Stack.UnitGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(session.World.State.Sites[site.Id], Is.EqualTo(site with
@@ -288,7 +288,7 @@ public sealed class MercenaryTabViewModelTests
             "merc | name | description | Level 1 | Cost: 50 gold (unaffordable) | unavailable | not selected"
         ]));
 
-        screen.DragDrop.TryBeginDrag(screen.Mercenaries[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Mercenaries[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.Stack.UnitGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack));
@@ -345,7 +345,7 @@ public sealed class MercenaryTabViewModelTests
         ]));
         Assert.That(screen.Stack.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
 
-        screen.DragDrop.TryBeginDrag(screen.Mercenaries[0].Reference);
+        screen.DragDrop.BeginDrag(screen.Mercenaries[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.Stack.UnitGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack));

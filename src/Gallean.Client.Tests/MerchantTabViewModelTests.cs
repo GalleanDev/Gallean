@@ -545,7 +545,7 @@ public sealed class MerchantTabViewModelTests
         Assert.That(screen.BuyZone.IsVisible, Is.False);
         Assert.That(screen.SellZone.IsVisible, Is.False);
 
-        screen.DragDrop.TryBeginDrag(screen.PurchaseItems[0].Reference);
+        screen.DragDrop.BeginDrag(screen.PurchaseItems[0].Reference);
 
         Assert.That(screen.BuyZone.IsVisible, Is.True);
         Assert.That(screen.BuyZone.Content, Is.EqualTo(new MerchantTradeDropViewModel("Buy name", new ResourceSetViewModel(new WorldResourceSet(30, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
@@ -558,7 +558,7 @@ public sealed class MerchantTabViewModelTests
         Assert.That(screen.BuyZone.IsVisible, Is.False);
         Assert.That(screen.Offer, Is.Null);
 
-        screen.DragDrop.TryBeginDrag(screen.SellItems[0].Reference);
+        screen.DragDrop.BeginDrag(screen.SellItems[0].Reference);
 
         Assert.That(screen.BuyZone.IsVisible, Is.False);
         Assert.That(screen.SellZone.IsVisible, Is.True);
@@ -606,7 +606,7 @@ public sealed class MerchantTabViewModelTests
 
         MerchantTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
 
-        screen.DragDrop.TryBeginDrag(screen.PurchaseItems[0].Reference);
+        screen.DragDrop.BeginDrag(screen.PurchaseItems[0].Reference);
 
         Assert.That(screen.BuyZone.IsVisible, Is.True);
         Assert.That(screen.BuyZone.Content, Is.EqualTo(new MerchantTradeDropViewModel("Buy name", new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All))));

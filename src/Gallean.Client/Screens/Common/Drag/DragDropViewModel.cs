@@ -7,17 +7,10 @@ internal sealed partial class DragDropViewModel(GameModel gameModel, IDragDropPr
     [ObservableProperty]
     public partial IDragSourceReference? Dragged { get; private set; }
 
-    public bool TryBeginDrag(IDragSourceReference source)
+    public void BeginDrag(IDragSourceReference source)
     {
-        if (gameModel.IsBusy)
-        {
-            return false;
-        }
-
         Dragged = source;
         provider.OnDragChanged();
-
-        return true;
     }
 
     public void EndDrag()

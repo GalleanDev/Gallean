@@ -82,7 +82,7 @@ public sealed class ExchangeTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.OtherStackGrid, GridPosition.FrontCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
 
         Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([true, false, true, true, true, true]));
         Assert.That(screen.OtherStackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, true, true, true, true]));
@@ -170,7 +170,7 @@ public sealed class ExchangeTabViewModelTests
         UnitGridSlotViewModel source = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
         UnitGridSlotViewModel target = FindSlot(screen.StackGrid, GridPosition.BackCenter);
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.Reference);
 
         WorldStack updatedStack = session.World.State.Stacks[stack.Id];
@@ -259,7 +259,7 @@ public sealed class ExchangeTabViewModelTests
         InventoryItemViewModel source = screen.InventoryTransfer.Inventory.Items[0];
         InventoryViewModel target = screen.InventoryTransfer.OtherInventory;
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
 
         Assert.That(target.IsHighlighted, Is.True);
         Assert.That(screen.InventoryTransfer.Inventory.IsHighlighted, Is.False);
@@ -342,7 +342,7 @@ public sealed class ExchangeTabViewModelTests
         InventoryItemViewModel source = screen.InventoryTransfer.OtherInventory.Items[0];
         InventoryViewModel target = screen.InventoryTransfer.Inventory;
 
-        screen.DragDrop.TryBeginDrag(source.Reference);
+        screen.DragDrop.BeginDrag(source.Reference);
         await screen.DragDrop.DropAsync(target.DropReference);
 
         Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = new WorldInventory([potionItem]) }));
@@ -553,12 +553,12 @@ public sealed class ExchangeTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontBottom).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.StackGrid, GridPosition.FrontBottom).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.False);
 
         screen.DragDrop.EndDrag();
-        screen.DragDrop.TryBeginDrag(FindSlot(screen.OtherStackGrid, GridPosition.FrontCenter).Reference);
+        screen.DragDrop.BeginDrag(FindSlot(screen.OtherStackGrid, GridPosition.FrontCenter).Reference);
 
         Assert.That(screen.DismissDropZone.IsVisible, Is.True);
 
@@ -663,7 +663,7 @@ public sealed class ExchangeTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
-        screen.DragDrop.TryBeginDrag(screen.InventoryTransfer.Inventory.Items[0].GroupReference);
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.Inventory.Items[0].GroupReference);
         await screen.DragDrop.DropAsync(screen.InventoryTransfer.OtherInventory.DropReference);
 
         Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = new WorldInventory([elixirItem]) }));

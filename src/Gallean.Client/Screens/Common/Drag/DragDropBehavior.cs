@@ -254,28 +254,20 @@ internal sealed class DragDropBehavior(Control view)
 
         if (preview is not null && topLevel is not null && view.DataContext is IDragDropHost host)
         {
-            DragDropViewModel current = host.DragDrop;
-
-            IDragSourceReference reference = GetDragReference(source, modifiers);
             double renderScaling = UiScaleDecorator.GetRenderScaling(view, topLevel);
-            CursorDragImage image = RenderDragImage(preview, element, pressScale, renderScaling);
 
-            if (current.TryBeginDrag(reference))
-            {
-                dragDrop = current;
-                dragImage = image;
-                dragImageTopLevel = topLevel;
-                CursorScope.SetDragImage(topLevel, image);
+            dragDrop = host.DragDrop;
+            dragImage = RenderDragImage(preview, element, pressScale, renderScaling);
+            dragImageTopLevel = topLevel;
+            CursorScope.SetDragImage(topLevel, dragImage);
+            dragDrop.BeginDrag(GetDragReference(source, modifiers));
 
-                return true;
-            }
-            else
-            {
-                image.Image.Dispose();
-            }
+            return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     private void UpdateHoverZone(Point point)

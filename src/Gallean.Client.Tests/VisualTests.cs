@@ -2199,7 +2199,7 @@ public sealed class VisualTests
 
         CityTabViewModel tab = Assert.IsOfType<CityTabViewModel>(management.SelectedTab);
         UnitGridSlotViewModel source = tab.StackGrid.Slots.First(slot => slot.Position == GridPosition.FrontCenter);
-        tab.DragDrop.TryBeginDrag(source.Reference);
+        tab.DragDrop.BeginDrag(source.Reference);
 
         await CaptureAsync(window, "drag");
     }
@@ -2268,7 +2268,7 @@ public sealed class VisualTests
         gameViewModel.OpenScreen(management);
 
         CityTabViewModel tab = Assert.IsOfType<CityTabViewModel>(management.SelectedTab);
-        tab.DragDrop.TryBeginDrag(tab.InventoryTransfer.Inventory.Items[0].Reference);
+        tab.DragDrop.BeginDrag(tab.InventoryTransfer.Inventory.Items[0].Reference);
 
         await CaptureAsync(window);
     }
@@ -2973,7 +2973,7 @@ public sealed class VisualTests
         StackTabViewModel tab = Assert.IsOfType<StackTabViewModel>(management.Tabs[0]);
         UnitGridSlotViewModel slot = tab.UnitGrid.Slots.First(slot => slot.Position == GridPosition.FrontCenter);
 
-        tab.DragDrop.TryBeginDrag(slot.Reference);
+        tab.DragDrop.BeginDrag(slot.Reference);
         await tab.DragDrop.DropAsync(tab.DismissDropZone.DropReference);
 
         await CaptureAsync(window);
@@ -3046,12 +3046,12 @@ public sealed class VisualTests
 
         StackTabViewModel tab = Assert.IsOfType<StackTabViewModel>(management.Tabs[0]);
 
-        tab.DragDrop.TryBeginDrag(tab.Inventory.Items[0].Reference);
+        tab.DragDrop.BeginDrag(tab.Inventory.Items[0].Reference);
 
         await CaptureAsync(window, "potion");
 
         tab.DragDrop.EndDrag();
-        tab.DragDrop.TryBeginDrag(tab.Inventory.Items[1].Reference);
+        tab.DragDrop.BeginDrag(tab.Inventory.Items[1].Reference);
 
         await CaptureAsync(window, "scroll");
 
@@ -3190,7 +3190,7 @@ public sealed class VisualTests
         gameViewModel.OpenScreen(management);
 
         StackTabViewModel tab = Assert.IsOfType<StackTabViewModel>(management.Tabs[0]);
-        tab.DragDrop.TryBeginDrag(tab.Equipment.Slots[0].Reference);
+        tab.DragDrop.BeginDrag(tab.Equipment.Slots[0].Reference);
 
         await CaptureAsync(window);
     }
@@ -3486,7 +3486,7 @@ public sealed class VisualTests
 
         ExchangeTabViewModel tab = Assert.IsOfType<ExchangeTabViewModel>(screen.Tabs[1]);
         UnitGridSlotViewModel source = tab.StackGrid.Slots.First(slot => slot.Position == GridPosition.FrontCenter);
-        tab.DragDrop.TryBeginDrag(source.Reference);
+        tab.DragDrop.BeginDrag(source.Reference);
 
         await CaptureAsync(window, "drag-unit");
     }
@@ -3589,7 +3589,7 @@ public sealed class VisualTests
         await CaptureAsync(window);
 
         ExchangeTabViewModel tab = Assert.IsOfType<ExchangeTabViewModel>(screen.Tabs[1]);
-        tab.DragDrop.TryBeginDrag(tab.InventoryTransfer.Inventory.Items[0].Reference);
+        tab.DragDrop.BeginDrag(tab.InventoryTransfer.Inventory.Items[0].Reference);
 
         await CaptureAsync(window, "drag");
     }
@@ -3829,11 +3829,11 @@ public sealed class VisualTests
 
         await CaptureAsync(window, "sell-selected");
 
-        merchant.DragDrop.TryBeginDrag(merchant.SellItems[0].Reference);
+        merchant.DragDrop.BeginDrag(merchant.SellItems[0].Reference);
         await CaptureAsync(window, "drag-sell");
         merchant.DragDrop.EndDrag();
 
-        merchant.DragDrop.TryBeginDrag(merchant.PurchaseItems[1].Reference);
+        merchant.DragDrop.BeginDrag(merchant.PurchaseItems[1].Reference);
         await CaptureAsync(window, "drag-purchase");
         merchant.DragDrop.EndDrag();
     }
