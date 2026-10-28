@@ -23,6 +23,21 @@ internal sealed class BitmapCacheBounds : AvaloniaObject
         return element.GetValue(OutsetProperty);
     }
 
+    private static (double Offset, double Size) SnapToPixels(double start, double end, double scale)
+    {
+        double firstPixel = Math.Floor(start * scale);
+        double lastPixel = Math.Ceiling(end * scale);
+        double offset = firstPixel / scale;
+        double size = (lastPixel / scale) - offset;
+
+        while ((int)((offset + size - offset) * scale) < lastPixel - firstPixel)
+        {
+            size = Math.BitIncrement(size);
+        }
+
+        return (offset, size);
+    }
+
     private static void OnOutsetChanged(Visual visual, AvaloniaPropertyChangedEventArgs e)
     {
         if (e.OldValue is null)
@@ -51,7 +66,7 @@ internal sealed class BitmapCacheBounds : AvaloniaObject
 
     private static void OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (e.Property == Visual.BoundsProperty)
+        if (e.Property == Visual.BoundsProperty || e.Property == UiScaleDecorator.RenderScalingProperty)
         {
             UpdateAnchor((Visual)sender!);
         }
@@ -74,10 +89,13 @@ internal sealed class BitmapCacheBounds : AvaloniaObject
                 ElementComposition.SetElementChildVisual(visual, child);
             }
 
-            Rect bounds = new Rect(visual.Bounds.Size).Inflate(outset.Value);
+            double scale = UiScaleDecorator.GetRenderScaling(visual);
+            Size size = visual.Bounds.Size;
+            (double x, double width) = SnapToPixels(-outset.Value, size.Width + outset.Value, scale);
+            (double y, double height) = SnapToPixels(-outset.Value, size.Height + outset.Value, scale);
 
-            child.Offset = new Vector3D(bounds.X, bounds.Y, 0);
-            child.Size = new Vector(bounds.Width, bounds.Height);
+            child.Offset = new Vector3D(x, y, 0);
+            child.Size = new Vector(width, height);
         }
     }
 }

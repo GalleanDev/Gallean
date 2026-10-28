@@ -61,7 +61,7 @@
             <BlurEffect Radius="30" />
           </Setter>
           <Setter Property="CacheMode">
-            <BitmapCache />
+            <local:BitmapCacheTemplate />
           </Setter>
         </Style>
       </ItemsControl.Styles>

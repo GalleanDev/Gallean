@@ -32,7 +32,7 @@ internal sealed class AnchorPanel : Panel
     protected override Size ArrangeOverride(Size finalSize)
     {
         Point anchor = Anchor.ToPixels(finalSize);
-        double scale = UiScaleDecorator.GetLayoutScaling(this);
+        double scale = UiScaleDecorator.GetRenderScaling(this);
 
         foreach (Control child in Children)
         {

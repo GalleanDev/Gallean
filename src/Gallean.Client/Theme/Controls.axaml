@@ -12,9 +12,25 @@
 
   <Style Selector=":is(Visual).cached">
     <Setter Property="CacheMode">
-      <BitmapCache SnapsToDevicePixels="True" />
+      <local:BitmapCacheTemplate SnapsToDevicePixels="True" />
     </Setter>
     <Setter Property="local:BitmapCacheBounds.Outset" Value="48" />
+  </Style>
+
+  <Style Selector="OverlayPopupHost">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <local:PopupLayoutTransformControl Transform="{TemplateBinding Transform}">
+          <VisualLayerManager Name="PART_VisualLayerManager">
+            <ContentPresenter Name="PART_ContentPresenter"
+                              Background="{TemplateBinding Background}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Padding="{TemplateBinding Padding}" />
+          </VisualLayerManager>
+        </local:PopupLayoutTransformControl>
+      </ControlTemplate>
+    </Setter>
   </Style>
 
   <Style Selector=":is(InputElement).focus-group">
@@ -1119,7 +1135,7 @@
       <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="18" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
     </Setter>
     <Setter Property="CacheMode">
-      <BitmapCache />
+      <local:BitmapCacheTemplate />
     </Setter>
   </Style>
 
@@ -1264,13 +1280,13 @@
       <DropShadowEffect OffsetX="0" OffsetY="6" BlurRadius="16" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
     </Setter>
   </Style>
+  <Style Selector=":is(Visual).cached.details-host">
+    <Setter Property="local:BitmapCacheBounds.Outset" Value="112" />
+  </Style>
   <Style Selector="Decorator.details-portrait">
     <Setter Property="IsHitTestVisible" Value="False" />
     <Setter Property="Effect">
       <DropShadowEffect OffsetX="0" OffsetY="8" BlurRadius="20" Color="{x:Static local:Theme+Artwork.PortraitShadowColor}" />
-    </Setter>
-    <Setter Property="CacheMode">
-      <BitmapCache />
     </Setter>
   </Style>
 

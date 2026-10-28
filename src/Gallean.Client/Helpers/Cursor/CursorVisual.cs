@@ -34,7 +34,7 @@ internal sealed class CursorVisual : Control
             Refresh();
         }
         else if (e.Property == AssetScope.AssetsProperty ||
-                 e.Property == UiScaleDecorator.FactorProperty)
+                 e.Property == UiScaleDecorator.RenderScalingProperty)
         {
             Reset();
             Refresh();
@@ -155,7 +155,7 @@ internal sealed class CursorVisual : Control
 
             CursorDragImage? dragImage = CursorScope.GetDragImage(topLevel);
 
-            current = CursorAnimation.Create(arrow.Value, overlay?.Value, dragImage, UiScaleDecorator.GetRenderScaling(this, topLevel));
+            current = CursorAnimation.Create(arrow.Value, overlay?.Value, dragImage, UiScaleDecorator.GetRenderScaling(this));
 
             cache.Add(type, current);
         }

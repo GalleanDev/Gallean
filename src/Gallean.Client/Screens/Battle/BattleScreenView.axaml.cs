@@ -165,6 +165,8 @@ internal sealed partial class BattleScreenView : UserControl
 
     private static void PlaceItemDetails(CustomPopupPlacement placement)
     {
+        double gap = ItemDetailsGap * UiScaleDecorator.GetScalingFactor(placement.Target);
+
         placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideX;
         placement.Anchor = PopupAnchor.Top;
         placement.Gravity = PopupGravity.Top;

@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Layout;
 using Avalonia.Media;
 using Gallean.Configuration;
 
@@ -10,6 +9,9 @@ internal sealed class UiScaleDecorator : Decorator
 {
     public static readonly AttachedProperty<double> FactorProperty =
         AvaloniaProperty.RegisterAttached<UiScaleDecorator, Visual, double>("Factor", 1.0, inherits: true);
+
+    public static readonly AttachedProperty<double> RenderScalingProperty =
+        AvaloniaProperty.RegisterAttached<UiScaleDecorator, Visual, double>("RenderScaling", 1.0, inherits: true);
 
     public static readonly StyledProperty<double> MinContentWidthProperty =
         AvaloniaProperty.Register<UiScaleDecorator, double>(nameof(MinContentWidth));
@@ -38,14 +40,9 @@ internal sealed class UiScaleDecorator : Decorator
         set => SetValue(MinContentHeightProperty, value);
     }
 
-    public static double GetRenderScaling(Visual element, TopLevel topLevel)
+    public static double GetRenderScaling(Visual element)
     {
-        return topLevel.RenderScaling * GetScalingFactor(element);
-    }
-
-    public static double GetLayoutScaling(Layoutable element)
-    {
-        return LayoutHelper.GetLayoutScale(element) * GetScalingFactor(element);
+        return element.GetValue(RenderScalingProperty);
     }
 
     public static double GetScalingFactor(Visual element)
@@ -123,8 +120,10 @@ internal sealed class UiScaleDecorator : Decorator
     protected override Size MeasureOverride(Size availableSize)
     {
         double factor = GetContentScalingFactor(availableSize);
+        double renderScaling = topLevel is null ? 1.0 : topLevel.RenderScaling;
 
         SetValue(FactorProperty, factor);
+        SetValue(RenderScalingProperty, factor * renderScaling);
 
         if (Child is not null)
         {

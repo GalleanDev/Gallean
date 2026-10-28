@@ -5,6 +5,6 @@
              x:DataType="local:DetailsViewModel"
              IsHitTestVisible="False">
 
-  <ContentControl Classes="cached" Content="{Binding Content}" ClipToBounds="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
+  <ContentControl Classes="cached details-host" Content="{Binding Content}" ClipToBounds="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 </UserControl>

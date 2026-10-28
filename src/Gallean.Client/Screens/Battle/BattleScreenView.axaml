@@ -178,7 +178,7 @@
           </ItemsControl>
         </local:UnitPortrait>
         <Popup Placement="Custom" CustomPopupPlacementCallback="PlaceUnitDetails" IsLightDismissEnabled="False">
-          <ContentControl Classes="cached"
+          <ContentControl Classes="cached details-host"
                           Content="{Binding #Screen.((local:BattleScreenViewModel)DataContext).InspectedUnit}"
                           ClipToBounds="False"
                           IsHitTestVisible="False" />
@@ -199,7 +199,7 @@
            PlacementTarget="{Binding #Battlefield}"
            Placement="Center"
            IsLightDismissEnabled="False">
-      <ContentControl Classes="cached" Content="{Binding InspectedUnit}" ClipToBounds="False" IsHitTestVisible="False" />
+      <ContentControl Classes="cached details-host" Content="{Binding InspectedUnit}" ClipToBounds="False" IsHitTestVisible="False" />
     </Popup>
 
     <Panel Classes="hud" Classes.shown="{Binding TransitionState, Converter={x:Static ObjectConverters.IsNull}}">

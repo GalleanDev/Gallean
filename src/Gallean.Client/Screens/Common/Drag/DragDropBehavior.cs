@@ -254,7 +254,7 @@ internal sealed class DragDropBehavior(Control view)
 
         if (preview is not null && topLevel is not null && view.DataContext is IDragDropHost host)
         {
-            double renderScaling = UiScaleDecorator.GetRenderScaling(view, topLevel);
+            double renderScaling = UiScaleDecorator.GetRenderScaling(view);
 
             dragDrop = host.DragDrop;
             dragImage = RenderDragImage(preview, element, pressScale, renderScaling);

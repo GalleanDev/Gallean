@@ -511,7 +511,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
         if (topLevel is not null)
         {
             double viewportScaling = UiScaleDecorator.GetViewportScaling(topLevel.ClientSize.Height * topLevel.RenderScaling);
-            camera.UiScale = UiScaleDecorator.GetRenderScaling(this, topLevel) / viewportScaling;
+            camera.UiScale = UiScaleDecorator.GetRenderScaling(this) / viewportScaling;
         }
     }
 
