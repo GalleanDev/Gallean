@@ -23,7 +23,7 @@ internal abstract partial class StackTabViewModel
         LeaderBlankslate = leaderBlankslate;
 
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
-        UnitGrid = new UnitGridViewModel(gameModel, unitSelection, frontOnRight: true);
+        UnitGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: false);
         Equipment = new LeaderEquipmentViewModel(gameModel);
         Inventory = new InventoryViewModel(gameModel);
         DragDrop = new DragDropViewModel(gameModel, this);

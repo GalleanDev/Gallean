@@ -25,7 +25,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="UnitGroupInfoGridTemplate" x:DataType="local:WorldUnitGroupInfoGridViewModel">
-      <Grid Width="230" Height="414">
+      <Grid Width="230" Height="414" local:PortraitScope.IsFacingLeft="{Binding IsFacingLeft}">
         <UniformGrid Rows="3" Columns="2">
           <local:UnitPortrait />
           <local:UnitPortrait />
@@ -430,7 +430,6 @@
                                   ClipToBounds="False" />
                   <ContentControl Grid.Column="1"
                                   Grid.Row="1"
-                                  local:PortraitScope.IsFacingLeft="True"
                                   Content="{Binding Defenses}"
                                   ContentTemplate="{StaticResource UnitGroupInfoGridTemplate}"
                                   ClipToBounds="False" />

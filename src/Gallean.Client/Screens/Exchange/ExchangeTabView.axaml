@@ -235,7 +235,6 @@
               </Grid>
               <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,20">
                 <ItemsControl Classes="unit-grid focus-group"
-                              local:PortraitScope.IsFacingLeft="True"
                               ItemsSource="{Binding OtherStackGrid.Slots}"
                               ItemTemplate="{StaticResource UnitGridSlotTemplate}"
                               ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />

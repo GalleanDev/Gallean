@@ -13,7 +13,10 @@
     </ControlTheme>
 
     <DataTemplate x:Key="UnitGridSlotTemplate" x:DataType="local:UnitGridSlotViewModel">
-      <Button Classes="slot" Classes.purchase="{Binding ShowsPurchaseHint}" Command="{Binding SelectCommand}">
+      <Button Classes="slot"
+              Classes.purchase="{Binding ShowsPurchaseHint}"
+              Command="{Binding SelectCommand}"
+              local:PortraitScope.IsFacingLeft="{Binding Grid.IsFacingLeft}">
         <local:UnitPortrait FaceKey="{Binding FaceKey}"
                             Hitpoints="{Binding Hitpoints}"
                             MaxHitpoints="{Binding MaxHitpoints}"

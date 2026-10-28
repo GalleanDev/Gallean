@@ -25,8 +25,8 @@ internal sealed partial class ExchangeTabViewModel
         this.otherStackId = otherStackId;
 
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
-        StackGrid = new UnitGridViewModel(gameModel, unitSelection, frontOnRight: true);
-        OtherStackGrid = new UnitGridViewModel(gameModel, unitSelection, frontOnRight: false);
+        StackGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: false);
+        OtherStackGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: true);
         InventoryTransfer = new InventoryTransferViewModel(gameModel, this);
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [DismissDropZone];

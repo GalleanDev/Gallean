@@ -32,7 +32,7 @@ internal sealed record WorldStackInfoViewModel(
                 raceName,
                 [TrSpans("Battles won: {0:*}", stack.BattlesWon)],
                 Note: null,
-                WorldUnitGroupInfoGridViewModel.Create(stack.Units, frontOnRight: true, definitions, texts, stats));
+                WorldUnitGroupInfoGridViewModel.Create(stack.Units, isFacingLeft: false, definitions, texts, stats));
         }
         else
         {

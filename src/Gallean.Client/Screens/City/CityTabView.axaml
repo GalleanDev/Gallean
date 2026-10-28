@@ -164,7 +164,6 @@
                 </Grid>
                 <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,4">
                   <ItemsControl Classes="unit-grid focus-group"
-                                local:PortraitScope.IsFacingLeft="True"
                                 ItemsSource="{Binding GarrisonGrid.Slots}"
                                 ItemTemplate="{StaticResource UnitGridSlotTemplate}"
                                 ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />

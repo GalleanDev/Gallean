@@ -127,6 +127,7 @@ public sealed class WorldFortificationInfoViewModelTests
                     ColumnSpan: 1,
                     Statuses: [])
             }));
+            Assert.That(info.Defenses.IsFacingLeft, Is.True);
         }
     }
 

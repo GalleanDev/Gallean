@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed partial class SiteStackViewModel(GameModel gameModel, UnitGridSelectionViewModel selection) : ObservableObject
 {
-    public UnitGridViewModel UnitGrid { get; } = new(gameModel, selection, frontOnRight: true);
+    public UnitGridViewModel UnitGrid { get; } = new(gameModel, selection, isFacingLeft: false);
 
     [ObservableProperty]
     public partial AssetSpriteKey.UnitPortrait? LeaderPortraitKey { get; private set; }

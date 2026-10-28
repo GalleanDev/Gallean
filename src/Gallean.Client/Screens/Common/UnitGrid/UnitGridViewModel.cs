@@ -4,8 +4,10 @@ using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionViewModel selection, bool frontOnRight)
+internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionViewModel selection, bool isFacingLeft)
 {
+    public bool IsFacingLeft { get; } = isFacingLeft;
+
     public ObservableCollection<UnitGridSlotViewModel> Slots { get; } = [];
 
     public void Update(UnitGrid<WorldUnit> units, bool showsPurchaseHints, IReadOnlySet<GridPosition>? highlight = null)
@@ -66,13 +68,13 @@ internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionVi
         {
             column = 0;
         }
-        else if (frontOnRight)
+        else if (IsFacingLeft)
         {
-            column = GridPosition.LineCount - 1 - position.Line;
+            column = position.Line;
         }
         else
         {
-            column = position.Line;
+            column = GridPosition.LineCount - 1 - position.Line;
         }
 
         if (unit is null || isLargeSlot)

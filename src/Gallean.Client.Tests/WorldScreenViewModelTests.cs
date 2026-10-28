@@ -5501,10 +5501,12 @@ public sealed class WorldScreenViewModelTests
             {
                 new(new AssetSpriteKey.UnitFace(leader.Id), "name", 100, 100, IsAlive: true, Row: 2, Column: 1, ColumnSpan: 1, Statuses: [])
             }));
+            Assert.That(info.VisitingStack.IsFacingLeft, Is.False);
             Assert.That(info.Defenses.Units, Is.EqualTo(new WorldUnitGroupInfoUnitViewModel[]
             {
                 new(new AssetSpriteKey.UnitFace(guard.Id), "name", 50, 50, IsAlive: true, Row: 2, Column: 0, ColumnSpan: 1, Statuses: [])
             }));
+            Assert.That(info.Defenses.IsFacingLeft, Is.True);
         }
     }
 

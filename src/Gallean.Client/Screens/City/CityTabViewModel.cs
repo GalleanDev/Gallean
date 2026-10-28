@@ -32,8 +32,8 @@ internal sealed partial class CityTabViewModel
         this.fortificationId = fortificationId;
 
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
-        StackGrid = new UnitGridViewModel(gameModel, unitSelection, frontOnRight: true);
-        GarrisonGrid = new UnitGridViewModel(gameModel, unitSelection, frontOnRight: false);
+        StackGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: false);
+        GarrisonGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: true);
         InventoryTransfer = new InventoryTransferViewModel(gameModel, this);
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [SpellDropZone, DismissDropZone];
