@@ -168,7 +168,7 @@ internal sealed partial class BattleScreenView : UserControl
         placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideX;
         placement.Anchor = PopupAnchor.Top;
         placement.Gravity = PopupGravity.Top;
-        placement.Offset = new Point(0, -ItemDetailsGap);
+        placement.Offset = new Point(0, -ItemDetailsGap * UiScaleDecorator.GetScalingFactor(placement.Target));
     }
 
     private static void PlaceUnitDetails(CustomPopupPlacement placement)
@@ -181,30 +181,28 @@ internal sealed partial class BattleScreenView : UserControl
 
         if (topLevel is not null && grid is not null)
         {
-            Point? unitOrigin = target.TranslatePoint(new Point(0, 0), topLevel);
-            Point? gridOrigin = grid.TranslatePoint(new Point(0, 0), topLevel);
+            Matrix? unitTransform = target.TransformToVisual(topLevel);
+            Matrix? gridTransform = grid.TransformToVisual(topLevel);
 
-            if (unitOrigin is not null && gridOrigin is not null)
+            if (unitTransform is not null && gridTransform is not null)
             {
-                double unitCenter = unitOrigin.Value.X + (target.Bounds.Width / 2.0);
+                Rect unitRect = new(target.Bounds.Size);
+                Rect gridRect = new(grid.Bounds.Size);
+                Rect unitBounds = unitRect.TransformToAABB(unitTransform.Value);
+                Rect gridBounds = gridRect.TransformToAABB(gridTransform.Value);
+                double gap = UnitDetailsGap * UiScaleDecorator.GetScalingFactor(target);
 
-                if (unitCenter < topLevel.ClientSize.Width / 2.0)
+                if (unitBounds.Center.X < topLevel.ClientSize.Width / 2.0)
                 {
-                    double gridRight = gridOrigin.Value.X + grid.Bounds.Width;
-                    double unitRight = unitOrigin.Value.X + target.Bounds.Width;
-
                     placement.Anchor = PopupAnchor.Right;
                     placement.Gravity = PopupGravity.Right;
-                    placement.Offset = new Point(gridRight - unitRight + UnitDetailsGap, 0);
+                    placement.Offset = new Point(gridBounds.Right - unitBounds.Right + gap, 0);
                 }
                 else
                 {
-                    double gridLeft = gridOrigin.Value.X;
-                    double unitLeft = unitOrigin.Value.X;
-
                     placement.Anchor = PopupAnchor.Left;
                     placement.Gravity = PopupGravity.Left;
-                    placement.Offset = new Point(gridLeft - unitLeft - UnitDetailsGap, 0);
+                    placement.Offset = new Point(gridBounds.Left - unitBounds.Left - gap, 0);
                 }
             }
         }

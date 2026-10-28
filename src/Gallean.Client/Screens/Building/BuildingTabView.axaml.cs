@@ -18,21 +18,23 @@ internal sealed partial class BuildingTabView : UserControl
     {
         placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideY;
 
-        if (FitsOnRight(placement))
+        double factor = UiScaleDecorator.GetScalingFactor(placement.Target);
+
+        if (FitsOnRight(placement, DetailsGap * factor))
         {
             placement.Anchor = PopupAnchor.TopRight;
             placement.Gravity = PopupGravity.BottomRight;
-            placement.Offset = new Point(DetailsGap, -DetailsRise);
+            placement.Offset = new Point(DetailsGap * factor, -DetailsRise * factor);
         }
         else
         {
             placement.Anchor = PopupAnchor.TopLeft;
             placement.Gravity = PopupGravity.BottomLeft;
-            placement.Offset = new Point(-DetailsGap, -DetailsRise);
+            placement.Offset = new Point(-DetailsGap * factor, -DetailsRise * factor);
         }
     }
 
-    private static bool FitsOnRight(CustomPopupPlacement placement)
+    private static bool FitsOnRight(CustomPopupPlacement placement, double gap)
     {
         Visual target = placement.Target;
         TopLevel? topLevel = TopLevel.GetTopLevel(target);
@@ -49,6 +51,6 @@ internal sealed partial class BuildingTabView : UserControl
             return true;
         }
 
-        return rightEdge.Value.X + DetailsGap + placement.PopupSize.Width <= topLevel.ClientSize.Width;
+        return rightEdge.Value.X + gap + placement.PopupSize.Width <= topLevel.ClientSize.Width;
     }
 }

@@ -300,8 +300,39 @@
     <Setter Property="Fill" Value="{StaticResource SliderDisabledFillBrush}" />
   </Style>
 
-  <Style Selector="Popup">
-    <Setter Property="InheritsTransform" Value="True" />
+  <Style Selector="OverlayPopupHost">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <local:PopupLayoutTransformControl Transform="{TemplateBinding Transform}">
+          <VisualLayerManager Name="PART_VisualLayerManager">
+            <ContentPresenter Name="PART_ContentPresenter"
+                              Background="{TemplateBinding Background}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Padding="{TemplateBinding Padding}" />
+          </VisualLayerManager>
+        </local:PopupLayoutTransformControl>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="PopupRoot">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <local:PopupLayoutTransformControl Transform="{TemplateBinding Transform}">
+          <Panel>
+            <Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
+            <VisualLayerManager Name="PART_VisualLayerManager">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Background="{TemplateBinding Background}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                Padding="{TemplateBinding Padding}" />
+            </VisualLayerManager>
+          </Panel>
+        </local:PopupLayoutTransformControl>
+      </ControlTemplate>
+    </Setter>
   </Style>
 
   <Style Selector="ComboBox">
@@ -351,7 +382,8 @@
                  Placement="BottomEdgeAlignedLeft"
                  MinWidth="{Binding $parent[ComboBox].Bounds.Width}"
                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                 IsLightDismissEnabled="True">
+                 IsLightDismissEnabled="True"
+                 InheritsTransform="True">
             <Border x:Name="PopupBorder"
                     Margin="0,4,0,0"
                     Padding="4"
