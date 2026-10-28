@@ -123,7 +123,7 @@ public sealed class WorldFortificationInfoViewModelTests
                     35,
                     IsAlive: true,
                     Row: 1,
-                    Column: 0,
+                    Column: 1,
                     ColumnSpan: 1,
                     Statuses: [])
             }));
@@ -300,7 +300,7 @@ public sealed class WorldFortificationInfoViewModelTests
                     35,
                     IsAlive: true,
                     Row: 2,
-                    Column: 1,
+                    Column: 0,
                     ColumnSpan: 1,
                     Statuses: [])
             }));

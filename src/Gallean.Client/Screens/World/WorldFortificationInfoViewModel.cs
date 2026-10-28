@@ -92,7 +92,7 @@ internal sealed record WorldFortificationInfoViewModel(
                 null,
                 visitingStackTitle,
                 CreateVisitingStack(visitingStack, world, viewPlayerId, definitions, texts, stats),
-                WorldUnitGroupInfoGridViewModel.Create(fortification.Garrison, definitions, texts, stats));
+                WorldUnitGroupInfoGridViewModel.Create(fortification.Garrison, frontOnRight: false, definitions, texts, stats));
         }
         else
         {
@@ -116,7 +116,7 @@ internal sealed record WorldFortificationInfoViewModel(
     {
         if (visitingStack is not null && WorldVisibility.KnowsPlayerContents(world, viewPlayerId, visitingStack.OwnerId))
         {
-            return WorldUnitGroupInfoGridViewModel.Create(visitingStack.Units, definitions, texts, stats);
+            return WorldUnitGroupInfoGridViewModel.Create(visitingStack.Units, frontOnRight: true, definitions, texts, stats);
         }
         else
         {

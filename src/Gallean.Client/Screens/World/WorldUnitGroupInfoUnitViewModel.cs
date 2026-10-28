@@ -18,6 +18,7 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
         WorldUnit unit,
         GridPosition position,
         bool isLarge,
+        bool frontOnRight,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts,
         IUnitStatsProvider stats)
@@ -30,9 +31,13 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
         {
             column = 0;
         }
-        else
+        else if (frontOnRight)
         {
             column = 1 - position.Line;
+        }
+        else
+        {
+            column = position.Line;
         }
 
         int columnSpan = isLarge ? 2 : 1;

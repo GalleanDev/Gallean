@@ -8,6 +8,7 @@ internal sealed record WorldUnitGroupInfoGridViewModel(IReadOnlyList<WorldUnitGr
 
     public static WorldUnitGroupInfoGridViewModel Create(
         UnitGrid<WorldUnit> grid,
+        bool frontOnRight,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts,
         IUnitStatsProvider stats)
@@ -18,7 +19,7 @@ internal sealed record WorldUnitGroupInfoGridViewModel(IReadOnlyList<WorldUnitGr
         {
             bool isLarge = grid.IsLargeAt(position);
 
-            units.Add(WorldUnitGroupInfoUnitViewModel.Create(unit, position, isLarge, definitions, texts, stats));
+            units.Add(WorldUnitGroupInfoUnitViewModel.Create(unit, position, isLarge, frontOnRight, definitions, texts, stats));
         }
 
         return new WorldUnitGroupInfoGridViewModel(units);

@@ -430,6 +430,7 @@
                                   ClipToBounds="False" />
                   <ContentControl Grid.Column="1"
                                   Grid.Row="1"
+                                  local:PortraitScope.IsFacingLeft="True"
                                   Content="{Binding Defenses}"
                                   ContentTemplate="{StaticResource UnitGroupInfoGridTemplate}"
                                   ClipToBounds="False" />

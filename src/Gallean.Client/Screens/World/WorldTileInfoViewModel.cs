@@ -149,7 +149,7 @@ internal sealed record WorldTileInfoViewModel(
         {
             return new WorldTileInfoViewModel(name, [])
             {
-                Garrison = WorldUnitGroupInfoGridViewModel.Create(ruin.Garrison, definitions, texts, stats),
+                Garrison = WorldUnitGroupInfoGridViewModel.Create(ruin.Garrison, frontOnRight: true, definitions, texts, stats),
                 Item = CreateItem(ruin.Item, definitions, texts),
                 Reward = CreateReward(ruin.Resources)
             };
