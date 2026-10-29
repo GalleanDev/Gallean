@@ -11,6 +11,7 @@
     <KeyBinding Gesture="W" Command="{Binding WaitCommand}" />
     <KeyBinding Gesture="S" Command="{Binding SkipCommand}" />
     <KeyBinding Gesture="R" Command="{Binding RetreatCommand}" />
+    <KeyBinding Gesture="I" Command="{Binding AutoResolveCommand}" />
     <KeyBinding Gesture="D1" Command="{Binding SelectFirstItemCommand}" />
     <KeyBinding Gesture="D2" Command="{Binding SelectSecondItemCommand}" />
   </UserControl.KeyBindings>
