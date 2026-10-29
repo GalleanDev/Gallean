@@ -7,7 +7,6 @@ internal sealed record StackLeaderViewModel(
     AssetSpriteKey.UnitEventPortrait PortraitKey,
     string Title,
     IReadOnlyList<StatRowViewModel> Stats,
-    IReadOnlyList<LeaderAbilityViewModel> Abilities,
     UnitDetailsViewModel Details) : IDetailsSource
 {
     object? IDetailsSource.DetailsContent => Details;
@@ -27,7 +26,6 @@ internal sealed record StackLeaderViewModel(
         return PortraitKey == other.PortraitKey &&
                Title == other.Title &&
                Stats.SequenceEqual(other.Stats) &&
-               Abilities.SequenceEqual(other.Abilities) &&
                Details == other.Details;
     }
 
@@ -41,7 +39,6 @@ internal sealed record StackLeaderViewModel(
         (WorldUnit Leader, GridPosition Position, UnitDefinition Definition) leader = stack.GetLeader(definitions);
         UnitStats leaderStats = stats.GetWorldUnitStats(leader.Leader);
         StackStats stackStats = stats.GetWorldStackStats(stack);
-        LeaderAbility leaderAbilities = stats.GetWorldUnitAbilities(leader.Leader);
 
         IReadOnlyList<StatRowViewModel> rows =
         [
@@ -55,7 +52,6 @@ internal sealed record StackLeaderViewModel(
             new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leader.Leader.DefinitionId)),
             UnitNameResolver.Resolve(leader.Leader, definitions, texts),
             rows,
-            LeaderAbilityViewModel.CreateList(leaderAbilities),
             UnitDetailsViewModel.CreateFromWorld(leader.Leader, owner, definitions, texts, stats));
     }
 
@@ -66,7 +62,6 @@ internal sealed record StackLeaderViewModel(
         hash.Add(PortraitKey);
         hash.Add(Title);
         hash.AddSequence(Stats);
-        hash.AddSequence(Abilities);
         hash.Add(Details);
 
         return hash.ToHashCode();

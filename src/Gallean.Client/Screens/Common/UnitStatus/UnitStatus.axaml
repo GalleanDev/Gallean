@@ -58,8 +58,8 @@
         <ToolTip.Tip>
           <StackPanel Classes="status-tooltip">
             <StackPanel Orientation="Horizontal" Spacing="8">
-              <local:IconVisual Classes="status-tooltip-icon" Moniker="{Binding Icon}" Foreground="{StaticResource LeaderAbilityIconBrush}" />
-              <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" VerticalAlignment="Center" Foreground="{StaticResource LeaderAbilityIconBrush}" />
+              <local:IconVisual Classes="status-tooltip-icon" Moniker="{Binding Icon}" Foreground="{StaticResource PermanentModifierIconBrush}" />
+              <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" VerticalAlignment="Center" Foreground="{StaticResource PermanentModifierIconBrush}" />
             </StackPanel>
             <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
             <TextBlock Text="{Binding Effects}"
@@ -175,8 +175,8 @@
   </Style>
   <Style Selector="Border.permanent-modifier">
     <Setter Property="Padding" Value="7,2,10,2" />
-    <Setter Property="Background" Value="{StaticResource LeaderAbilityFaceGradientBrush}" />
-    <Setter Property="BorderBrush" Value="{StaticResource LeaderAbilityBorderGradientBrush}" />
+    <Setter Property="Background" Value="{StaticResource PermanentModifierFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource PermanentModifierBorderGradientBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
   </Style>
@@ -184,12 +184,12 @@
     <Setter Property="Width" Value="14" />
     <Setter Property="Height" Value="14" />
     <Setter Property="VerticalAlignment" Value="Center" />
-    <Setter Property="Foreground" Value="{StaticResource LeaderAbilityIconBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource PermanentModifierIconBrush}" />
   </Style>
   <Style Selector="Border.permanent-modifier TextBlock">
     <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
   </Style>
   <Style Selector="Border.permanent-modifier TextBlock.permanent-modifier-count">
-    <Setter Property="Foreground" Value="{StaticResource LeaderAbilityIconBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource PermanentModifierIconBrush}" />
   </Style>
 </Styles>

@@ -26,7 +26,11 @@
 
     <ItemsControl Grid.Row="3" Margin="0,6,0,0" Classes="stat-table" ItemsSource="{Binding Stats}" />
 
-    <ItemsControl Grid.Row="4" Margin="0,8,0,0" Classes="leader-abilities" ItemsSource="{Binding Abilities}" IsVisible="{Binding !!Abilities.Count}" />
+    <ItemsControl Grid.Row="4"
+                  Margin="0,8,0,0"
+                  Classes="permanent-modifiers"
+                  ItemsSource="{Binding Details.PermanentModifiers}"
+                  IsVisible="{Binding Details.PermanentModifiers.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
   </Grid>
 
 </UserControl>

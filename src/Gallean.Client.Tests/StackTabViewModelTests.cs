@@ -765,7 +765,6 @@ public sealed class StackTabViewModelTests
                     new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0)),
                     new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0))
                 ],
-                [],
                 new UnitDetailsViewModel(
                     new AssetSpriteKey.UnitEventPortrait(new ScenarioEventPortraitId("leader")),
                     "name",
@@ -807,19 +806,31 @@ public sealed class StackTabViewModelTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
 
+        UnitModifierDefinition banner = TestHelpers.SimpleModifier("banner") with { LeaderAbilities = LeaderAbility.BannerUse };
+        UnitModifierDefinition armor = TestHelpers.SimpleModifier("armor") with { Armor = new UnitStatModifier(10, 0) };
         UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
                 TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
                 movementPoints: 20, leadership: 3) with
             {
-                LeaderAbilities = LeaderAbility.WeaponArmorUse | LeaderAbility.BannerUse
+                LeaderAbilities = LeaderAbility.WeaponArmorUse | LeaderAbility.OrbUse
             };
         UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit leader = new(
+            new WorldUnitId("leader"),
+            leaderDefinition.Id,
+            100,
+            0,
+            leaderDefinition.Level,
+            [UnitModifier.Permanent(banner.Id), UnitModifier.Permanent(armor.Id)],
+            null,
+            false);
         WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)
             .AddUnit(soldierDefinition)
+            .AddUnitModifier(banner)
+            .AddUnitModifier(armor)
             .Build();
 
         WorldStack stack = TestHelpers.SimpleStack(
@@ -840,6 +851,8 @@ public sealed class StackTabViewModelTests
             .WithPlayer(player)
             .WithDefinition(leaderDefinition)
             .WithDefinition(soldierDefinition)
+            .WithDefinition(banner)
+            .WithDefinition(armor)
             .WithStack(stack)
             .WithSubrace(TestHelpers.NeutralSubrace)
             .BuildSession();
@@ -859,10 +872,6 @@ public sealed class StackTabViewModelTests
                 new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0)),
                 new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0)),
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0))
-            ],
-            [
-                new LeaderAbilityViewModel(IconMoniker.AbilityWeaponArmorUse, "Weapon and armor use"),
-                new LeaderAbilityViewModel(IconMoniker.AbilityBannerUse, "Banner use")
             ],
             new UnitDetailsViewModel(
                 new AssetSpriteKey.UnitEventPortrait(new ScenarioEventPortraitId("leader")),
@@ -884,7 +893,7 @@ public sealed class StackTabViewModelTests
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
-                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
+                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 10)),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0)),
                     new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0))
                 ],
@@ -892,7 +901,12 @@ public sealed class StackTabViewModelTests
                 null,
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0)),
                 [],
-                []))));
+                [
+                    new UnitPermanentModifierViewModel(IconMoniker.AbilityWeaponArmorUse, "Weapon and armor use", "Innate", null, 1),
+                    new UnitPermanentModifierViewModel(IconMoniker.AbilityOrbUse, "Orb use", "Innate", null, 1),
+                    new UnitPermanentModifierViewModel(IconMoniker.AbilityBannerUse, "Banner use", "Permanent", null, 1),
+                    new UnitPermanentModifierViewModel(IconMoniker.Armor, "+10 armor", "Permanent", null, 1)
+                ]))));
     }
 
     [Test]

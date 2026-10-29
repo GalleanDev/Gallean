@@ -97,7 +97,7 @@ internal sealed record UnitDetailsViewModel(
         string name = UnitNameResolver.Resolve(unit, definitions, texts);
         UnitStats unitStats = stats.GetBattleUnitStats(state, unitId);
         UnitAttackStats attackStats = stats.GetBattleAttackStats(state, unitId, definition.Attack);
-        UnitStats baseStats = stats.GetWorldUnitStats(new WorldUnit(
+        WorldUnit baseUnit = new(
             PreviewUnitId,
             unit.DefinitionId,
             unit.Hitpoints,
@@ -105,8 +105,9 @@ internal sealed record UnitDetailsViewModel(
             unit.Level,
             GetScenarioModifiers(unit.Modifiers),
             unit.Name,
-            unit.IsTypeLocked));
+            unit.IsTypeLocked);
 
+        UnitStats baseStats = stats.GetWorldUnitStats(baseUnit);
         UnitExperience experience = stats.GetBattleUnitExperience(state, unitId);
 
         if (state.Outcome is not null)
@@ -118,8 +119,12 @@ internal sealed record UnitDetailsViewModel(
             UnitModifierViewModel.CreateAll(unit, definitions);
         IReadOnlyList<UnitStatusViewModel> statuses =
             UnitStatusViewModel.CreateAll(BattleUnitState.StatusEffect.CreateAll(unit.StatusEffects), modifiers);
-        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers =
-            UnitPermanentModifierViewModel.CreateAll(unit.Modifiers, GetLeaderUpgrades(owner, definitions), definitions, texts);
+        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierViewModel.CreateAll(
+            stats.GetWorldUnitAbilities(baseUnit),
+            unit.Modifiers,
+            GetLeaderUpgrades(owner, definitions),
+            definitions,
+            texts);
         bool isUpgradeBlocked = CheckUpgradeBlocked(unit.DefinitionId, unit.IsTypeLocked, experience, owner, stats);
 
         return Build(
@@ -151,13 +156,18 @@ internal sealed record UnitDetailsViewModel(
         UnitDefinition definition = definitions.GetUnit(unit.DefinitionId);
         string name = UnitNameResolver.Resolve(unit, definitions, texts);
         UnitStats unitStats = stats.GetWorldUnitStats(unit);
-        UnitStats baseStats = stats.GetWorldUnitStats(unit with { Modifiers = GetScenarioModifiers(unit.Modifiers) });
+        WorldUnit baseUnit = unit with { Modifiers = GetScenarioModifiers(unit.Modifiers) };
+        UnitStats baseStats = stats.GetWorldUnitStats(baseUnit);
         IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions);
         UnitExperience experience = stats.GetWorldUnitExperience(unit);
         bool isUpgradeBlocked = CheckUpgradeBlocked(unit.DefinitionId, unit.IsTypeLocked, experience, owner, stats);
         IReadOnlyList<UnitStatusViewModel> statuses = UnitStatusViewModel.CreateAll([], modifiers);
-        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers =
-            UnitPermanentModifierViewModel.CreateAll(unit.Modifiers, GetLeaderUpgrades(owner, definitions), definitions, texts);
+        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierViewModel.CreateAll(
+            stats.GetWorldUnitAbilities(baseUnit),
+            unit.Modifiers,
+            GetLeaderUpgrades(owner, definitions),
+            definitions,
+            texts);
 
         return Build(
             unit.DefinitionId,

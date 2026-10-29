@@ -153,14 +153,14 @@
   <SolidColorBrush x:Key="AttackSourceWaterBrush" Color="{x:Static local:Theme+AttackSource.WaterColor}" />
   <SolidColorBrush x:Key="AttackSourceEarthBrush" Color="{x:Static local:Theme+AttackSource.EarthColor}" />
   <SolidColorBrush x:Key="AttackSourceAirBrush" Color="{x:Static local:Theme+AttackSource.AirColor}" />
-  <SolidColorBrush x:Key="LeaderAbilityFaceTopBrush" Color="{x:Static local:Theme+LeaderAbility.FaceTopColor}" />
-  <SolidColorBrush x:Key="LeaderAbilityFaceBottomBrush" Color="{x:Static local:Theme+LeaderAbility.FaceBottomColor}" />
-  <SolidColorBrush x:Key="LeaderAbilityIconBrush" Color="{DynamicResource AccentColor}" />
-  <LinearGradientBrush x:Key="LeaderAbilityFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
-    <GradientStop Offset="0" Color="{x:Static local:Theme+LeaderAbility.FaceTopColor}" />
-    <GradientStop Offset="1" Color="{x:Static local:Theme+LeaderAbility.FaceBottomColor}" />
+  <SolidColorBrush x:Key="PermanentModifierFaceTopBrush" Color="{x:Static local:Theme+PermanentModifier.FaceTopColor}" />
+  <SolidColorBrush x:Key="PermanentModifierFaceBottomBrush" Color="{x:Static local:Theme+PermanentModifier.FaceBottomColor}" />
+  <SolidColorBrush x:Key="PermanentModifierIconBrush" Color="{DynamicResource AccentColor}" />
+  <LinearGradientBrush x:Key="PermanentModifierFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+PermanentModifier.FaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+PermanentModifier.FaceBottomColor}" />
   </LinearGradientBrush>
-  <LinearGradientBrush x:Key="LeaderAbilityBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%" Opacity="0.75">
+  <LinearGradientBrush x:Key="PermanentModifierBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%" Opacity="0.75">
     <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryColor}" />
     <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
   </LinearGradientBrush>

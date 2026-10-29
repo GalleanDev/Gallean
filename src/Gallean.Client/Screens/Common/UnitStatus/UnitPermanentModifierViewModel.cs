@@ -8,6 +8,7 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
     public string CountText => $"×{Count}";
 
     public static IReadOnlyList<UnitPermanentModifierViewModel> CreateAll(
+        LeaderAbility baseAbilities,
         ImmutableArray<UnitModifier> modifiers,
         ImmutableArray<LeaderUpgradeDefinition> leaderUpgrades,
         IGameDefinitionProvider definitions,
@@ -15,12 +16,20 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
     {
         return
         [
+            .. Enum.GetValues<LeaderAbility>()
+                .Where(ability => ability != LeaderAbility.None && baseAbilities.HasFlag(ability))
+                .Select(Create),
             .. modifiers
                 .Where(modifier => modifier.RemainingTurns is null && modifier.Source is not UnitModifierSource.Scenario)
                 .Select(modifier => Create(modifier, leaderUpgrades, definitions, texts))
                 .GroupBy(modifier => modifier)
                 .Select(group => group.Key with { Count = group.Count() })
         ];
+    }
+
+    private static UnitPermanentModifierViewModel Create(LeaderAbility ability)
+    {
+        return new UnitPermanentModifierViewModel(LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability), Tr("Innate"), null, 1);
     }
 
     private static UnitPermanentModifierViewModel Create(

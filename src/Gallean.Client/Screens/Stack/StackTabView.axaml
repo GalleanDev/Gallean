@@ -299,9 +299,9 @@
             <ItemsControl Width="300" Margin="0,6,0,0" Classes="stat-table" ItemsSource="{Binding Leader.Stats}" />
             <ItemsControl Width="300"
                           Margin="0,4,0,0"
-                          Classes="leader-abilities"
-                          ItemsSource="{Binding Leader.Abilities}"
-                          IsVisible="{Binding !!Leader.Abilities.Count}" />
+                          Classes="permanent-modifiers"
+                          ItemsSource="{Binding Leader.Details.PermanentModifiers}"
+                          IsVisible="{Binding Leader.Details.PermanentModifiers.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
           </StackPanel>
         </Grid>
 

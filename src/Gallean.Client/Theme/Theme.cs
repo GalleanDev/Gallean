@@ -157,7 +157,7 @@ internal static class Theme
         public static Color AirColor { get; } = Color.FromRgb(140, 226, 236);
     }
 
-    public static class LeaderAbility
+    public static class PermanentModifier
     {
         public static Color FaceTopColor { get; } = Color.FromArgb(220, 52, 44, 40);
         public static Color FaceBottomColor { get; } = Color.FromArgb(220, 30, 27, 31);

@@ -419,7 +419,6 @@ public sealed class ExchangeTabViewModelTests
                 new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0)),
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0))
             ],
-            [],
             new UnitDetailsViewModel(
                 new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
                 "name",
@@ -458,7 +457,6 @@ public sealed class ExchangeTabViewModelTests
                 new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("1 / 6"), 0)),
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0))
             ],
-            [],
             new UnitDetailsViewModel(
                 new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
                 "name",
