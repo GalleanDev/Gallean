@@ -25,6 +25,14 @@ Gallean is a full remake of Disciples II: Rise of the Elves: every campaign and 
 - **Memory:** 4 GB RAM
 - **Graphics:** 1 GB, DirectX 11 or OpenGL 3.0. Integrated graphics work.
 
+## Save games
+
+| Platform | Location |
+| --- | --- |
+| Windows | `%LOCALAPPDATA%\Gallean\Saves` |
+| Linux | `~/.local/share/Gallean/Saves` |
+| macOS | `~/Library/Application Support/Gallean/Saves` |
+
 ## Building
 
 You will need the .NET SDK 10. See [`global.json`](global.json).
