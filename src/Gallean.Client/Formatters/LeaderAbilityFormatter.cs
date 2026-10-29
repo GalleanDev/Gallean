@@ -25,16 +25,16 @@ internal static class LeaderAbilityFormatter
         {
             LeaderAbility.Zealot => Tr("Zealot"),
             LeaderAbility.Incorruptible => Tr("Incorruptible"),
-            LeaderAbility.WeaponMaster => Tr("Weapon master"),
-            LeaderAbility.WandScrollUse => Tr("Wand and scroll use"),
-            LeaderAbility.WeaponArmorUse => Tr("Weapon and armor use"),
-            LeaderAbility.BannerUse => Tr("Banner use"),
-            LeaderAbility.JewelryUse => Tr("Jewelry use"),
-            LeaderAbility.Rod => Tr("Rod planting"),
-            LeaderAbility.OrbUse => Tr("Orb use"),
-            LeaderAbility.TalismanUse => Tr("Talisman use"),
-            LeaderAbility.TravelItemUse => Tr("Travel item use"),
-            LeaderAbility.CriticalHit => Tr("Critical hit"),
+            LeaderAbility.WeaponMaster => Tr("Weapon Master"),
+            LeaderAbility.WandScrollUse => Tr("Read Parchments"),
+            LeaderAbility.WeaponArmorUse => Tr("Artifact Lore"),
+            LeaderAbility.BannerUse => Tr("Banner Bearer"),
+            LeaderAbility.JewelryUse => Tr("Arcane Knowledge"),
+            LeaderAbility.Rod => Tr("Plants Rods"),
+            LeaderAbility.OrbUse => Tr("Arcane Lore"),
+            LeaderAbility.TalismanUse => Tr("Arcane Power"),
+            LeaderAbility.TravelItemUse => Tr("Travel Lore"),
+            LeaderAbility.CriticalHit => Tr("Critical Hit"),
             _ => throw new ArgumentOutOfRangeException(nameof(ability), ability, null)
         };
     }
