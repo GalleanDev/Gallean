@@ -848,6 +848,7 @@ internal sealed partial class CityTabViewModel
 
         UnitGrid<WorldUnit> garrison = fortification.Garrison;
         UnitGrid<WorldUnit> stackUnits = visitingStack?.Units ?? UnitGrid<WorldUnit>.Empty;
+        WorldInventory stackInventory = visitingStack?.Inventory ?? WorldInventory.Empty;
         IDragSourceReference? dragged = DragDrop.Dragged;
 
         if (visitingStack is not null)
@@ -858,15 +859,16 @@ internal sealed partial class CityTabViewModel
             Leader = leader;
             StackGridTitle = Tr("{0}'s party", leader.Title);
             HasStack = true;
-            InventoryTransfer.Update(visitingStack.Inventory, fortification.Inventory, WorldState.Players[ViewPlayerId].Resources, BuildTransferHighlight(dragged));
         }
         else
         {
             Leader = null;
             StackGridTitle = string.Empty;
             HasStack = false;
-            InventoryTransfer.Reset();
         }
+
+        WorldPlayer player = WorldState.Players[ViewPlayerId];
+        InventoryTransfer.Update(stackInventory, fortification.Inventory, player.Resources, BuildTransferHighlight(dragged));
 
         StackLeadership = FormatStackLeadership(stackInfo);
         GarrisonCapacity = FormatGarrisonCapacity(garrisonInfo);

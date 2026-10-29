@@ -2623,4 +2623,62 @@ public sealed class CityTabViewModelTests
         Assert.That(updatedCity, Is.EqualTo(city with { Inventory = new WorldInventory([potionItem, secondPotionItem]) }));
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
+
+    [Test]
+    public void NoVisitingStackInventoryTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        ItemDefinition elixirDefinition = new(
+            new ItemDefinitionId("elixir"),
+            new GlobalTextId("Elixir"),
+            new GlobalTextId("Elixir description"),
+            ItemCategory.PotionPermanentBoost,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
+        WorldItem elixirItem = new(new WorldItemId("Elixir"), elixirDefinition.Id, Charges: null);
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+                new WorldFortificationId("cap"),
+                player.Id,
+                new WorldPosition(4, 4),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                Inventory = new WorldInventory([elixirItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(elixirDefinition)
+            .WithCapital(capital)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, capital.Id)]);
+        CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
+
+        Assert.That(screen.HasStack, Is.False);
+        Assert.That(screen.InventoryTransfer.Inventory.Items, Is.Empty);
+        Assert.That(screen.InventoryTransfer.OtherInventory.Items.Select(item => (item.Index, item.ItemId, item.Count)), Is.EqualTo([
+            (Index: 0, new WorldItemId("Elixir"), Count: 1)
+        ]));
+        Assert.That(screen.TransferAllCommand.CanExecute(InventoryTransferDirection.FromOther), Is.False);
+
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.OtherInventory.Items[0].Reference);
+
+        Assert.That(screen.InventoryTransfer.Inventory.IsHighlighted, Is.False);
+        Assert.That(screen.InventoryTransfer.OtherInventory.IsHighlighted, Is.False);
+    }
 }

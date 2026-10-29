@@ -59,10 +59,4 @@ internal sealed class InventoryTransferViewModel(GameModel gameModel, IInventory
         Inventory.Update(inventory, resources, highlight == InventoryTransferDirection.FromOther);
         OtherInventory.Update(otherInventory, resources, highlight == InventoryTransferDirection.ToOther);
     }
-
-    public void Reset()
-    {
-        Inventory.Reset();
-        OtherInventory.Reset();
-    }
 }
