@@ -49,13 +49,13 @@
       <Setter Property="MinWidth" Value="0" />
       <Setter Property="ItemsPanel">
         <ItemsPanelTemplate>
-          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" MinSlotSize="84,84" />
+          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" />
         </ItemsPanelTemplate>
       </Setter>
       <Setter Property="Template">
         <ControlTemplate>
           <Grid RowDefinitions="*,Auto">
-            <WrapPanel Grid.Row="0" Classes="inventory-sockets" Height="{Binding #PART_ItemsPresenter.Bounds.Height}">
+            <local:PagedStackPanel Grid.Row="0" Classes="inventory-sockets" FillsAvailableSpace="True">
               <Panel Classes="inventory-slot empty">
                 <local:PlateChrome Classes="socket" />
               </Panel>
@@ -200,7 +200,7 @@
               <Panel Classes="inventory-slot empty">
                 <local:PlateChrome Classes="socket" />
               </Panel>
-            </WrapPanel>
+            </local:PagedStackPanel>
             <ItemsPresenter x:Name="PART_ItemsPresenter"
                             Grid.Row="0"
                             HorizontalAlignment="Center"
@@ -224,7 +224,7 @@
     <Style Selector="local|PagedItemsControl.inventory /template/ Button.page-arrow local|IconVisual">
       <Setter Property="RenderTransform" Value="rotate(90deg)" />
     </Style>
-    <Style Selector="WrapPanel.inventory-sockets">
+    <Style Selector="local|PagedStackPanel.inventory-sockets">
       <Setter Property="HorizontalAlignment" Value="Center" />
       <Setter Property="VerticalAlignment" Value="Top" />
       <Setter Property="ClipToBounds" Value="True" />

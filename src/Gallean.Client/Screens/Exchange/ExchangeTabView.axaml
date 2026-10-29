@@ -9,7 +9,7 @@
       <Setter Property="MinWidth" Value="292" />
       <Setter Property="ItemsPanel">
         <ItemsPanelTemplate>
-          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" MinSlotSize="84,84" />
+          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" />
         </ItemsPanelTemplate>
       </Setter>
       <Setter Property="Template">
@@ -19,7 +19,7 @@
               <local:IconVisual Moniker="ChevronLeft" />
             </Button>
             <Panel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-              <WrapPanel Classes="inventory-sockets" Height="{Binding #PART_ItemsPresenter.Bounds.Height}">
+              <local:PagedStackPanel Classes="inventory-sockets" FillsAvailableSpace="True">
                 <Panel Classes="inventory-slot empty">
                   <local:PlateChrome Classes="socket" />
                 </Panel>
@@ -164,7 +164,7 @@
                 <Panel Classes="inventory-slot empty">
                   <local:PlateChrome Classes="socket" />
                 </Panel>
-              </WrapPanel>
+              </local:PagedStackPanel>
               <ItemsPresenter x:Name="PART_ItemsPresenter"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Top"
@@ -182,7 +182,7 @@
       <Setter Property="IsVisible" Value="True" />
     </Style>
 
-    <Style Selector="WrapPanel.inventory-sockets">
+    <Style Selector="local|PagedStackPanel.inventory-sockets">
       <Setter Property="HorizontalAlignment" Value="Center" />
       <Setter Property="VerticalAlignment" Value="Top" />
       <Setter Property="ClipToBounds" Value="True" />

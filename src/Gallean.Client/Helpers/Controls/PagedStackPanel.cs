@@ -15,9 +15,6 @@ internal sealed class PagedStackPanel : Panel
     public static readonly StyledProperty<bool> FillsAvailableSpaceProperty =
         AvaloniaProperty.Register<PagedStackPanel, bool>(nameof(FillsAvailableSpace));
 
-    public static readonly StyledProperty<Size> MinSlotSizeProperty =
-        AvaloniaProperty.Register<PagedStackPanel, Size>(nameof(MinSlotSize));
-
     public static readonly StyledProperty<int> MaxRowsProperty =
         AvaloniaProperty.Register<PagedStackPanel, int>(nameof(MaxRows), int.MaxValue, validate: value => value >= 1);
 
@@ -28,7 +25,7 @@ internal sealed class PagedStackPanel : Panel
     static PagedStackPanel()
     {
         AffectsArrange<PagedStackPanel>(FirstIndexProperty, OverflowProperty);
-        AffectsMeasure<PagedStackPanel>(FillsAvailableSpaceProperty, MinSlotSizeProperty, MaxRowsProperty);
+        AffectsMeasure<PagedStackPanel>(FillsAvailableSpaceProperty, MaxRowsProperty);
     }
 
     public int FirstIndex
@@ -47,12 +44,6 @@ internal sealed class PagedStackPanel : Panel
     {
         get => GetValue(FillsAvailableSpaceProperty);
         set => SetValue(FillsAvailableSpaceProperty, value);
-    }
-
-    public Size MinSlotSize
-    {
-        get => GetValue(MinSlotSizeProperty);
-        set => SetValue(MinSlotSizeProperty, value);
     }
 
     public int MaxRows
@@ -78,8 +69,8 @@ internal sealed class PagedStackPanel : Panel
 
     protected override Size MeasureOverride(Size availableSize)
     {
-        double width = MinSlotSize.Width;
-        double height = MinSlotSize.Height;
+        double width = 0;
+        double height = 0;
 
         foreach (Control child in Children)
         {
