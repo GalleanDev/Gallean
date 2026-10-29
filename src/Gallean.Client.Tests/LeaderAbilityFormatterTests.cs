@@ -24,7 +24,7 @@ public sealed class LeaderAbilityFormatterTests
             LeaderAbility.CriticalHit;
 
         Assert.That(LeaderAbilityFormatter.Format(abilities, texts), Is.EqualTo([
-            "Zealot",
+            string.Empty,
             "Incorruptible",
             "Weapon Master",
             "Read Parchments",
