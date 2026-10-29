@@ -801,6 +801,7 @@
   <SolidColorBrush x:Key="BattleGroundMarkerOverlayBrush" Color="{x:Static local:Theme+Battle+GroundMarker.OverlayColor}" />
   <SolidColorBrush x:Key="BattleGroundMarkerCurrentBrush" Color="{x:Static local:Theme+Battle+GroundMarker.CurrentColor}" />
   <SolidColorBrush x:Key="BattleGroundMarkerEnemyTargetBrush" Color="{x:Static local:Theme+Battle+GroundMarker.EnemyTargetColor}" />
+  <SolidColorBrush x:Key="BattleGroundMarkerEnemyReachableBrush" Color="{x:Static local:Theme+Battle+GroundMarker.EnemyReachableColor}" />
   <SolidColorBrush x:Key="BattleGroundMarkerAllyTargetBrush" Color="{x:Static local:Theme+Battle+GroundMarker.AllyTargetColor}" />
   <SolidColorBrush x:Key="BattleGroundMarkerAllyReachableBrush" Color="{x:Static local:Theme+Battle+GroundMarker.AllyReachableColor}" />
   <SolidColorBrush x:Key="BattleGroundMarkerSummonTargetBrush" Color="{x:Static local:Theme+Battle+GroundMarker.SummonTargetColor}" />
@@ -813,6 +814,7 @@
   <SolidColorBrush x:Key="BattleGridMarkerSummonReachableBrush" Color="{x:Static local:Theme+Battle+GridMarker.SummonReachableColor}" />
   <SolidColorBrush x:Key="BattleHighlightCurrentBrush" Color="{x:Static local:Theme+Battle+Highlight.CurrentColor}" />
   <SolidColorBrush x:Key="BattleHighlightEnemyTargetBrush" Color="{x:Static local:Theme+Battle+Highlight.EnemyTargetColor}" />
+  <SolidColorBrush x:Key="BattleHighlightEnemyReachableBrush" Color="{x:Static local:Theme+Battle+Highlight.EnemyReachableColor}" />
   <SolidColorBrush x:Key="BattleHighlightAllyTargetBrush" Color="{x:Static local:Theme+Battle+Highlight.AllyTargetColor}" />
   <SolidColorBrush x:Key="BattleHighlightAllyReachableBrush" Color="{x:Static local:Theme+Battle+Highlight.AllyReachableColor}" />
   <SolidColorBrush x:Key="BattleHighlightSummonTargetBrush" Color="{x:Static local:Theme+Battle+Highlight.SummonTargetColor}" />

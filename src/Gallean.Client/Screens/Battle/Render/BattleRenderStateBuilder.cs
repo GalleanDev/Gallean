@@ -29,6 +29,7 @@ internal sealed class BattleRenderStateBuilder(
         SummonTarget,
         AllyReachable,
         EnemyReachable,
+        EnemyCopyable,
         SummonReachable
     }
 
@@ -427,6 +428,7 @@ internal sealed class BattleRenderStateBuilder(
             HighlightType.SummonTarget => Theme.Battle.GridMarker.SummonTargetColor,
             HighlightType.AllyReachable => Theme.Battle.GridMarker.AllyReachableColor,
             HighlightType.EnemyReachable => Theme.Battle.GridMarker.EnemyReachableColor,
+            HighlightType.EnemyCopyable => Theme.Battle.GridMarker.EnemyReachableColor,
             HighlightType.SummonReachable => Theme.Battle.GridMarker.SummonReachableColor
         };
     }
@@ -442,6 +444,7 @@ internal sealed class BattleRenderStateBuilder(
             HighlightType.SummonTarget => Theme.Battle.GroundMarker.SummonTargetColor,
             HighlightType.AllyReachable => Theme.Battle.GroundMarker.AllyReachableColor,
             HighlightType.EnemyReachable => null,
+            HighlightType.EnemyCopyable => Theme.Battle.GroundMarker.EnemyReachableColor,
             HighlightType.SummonReachable => Theme.Battle.GroundMarker.SummonReachableColor
         };
     }
@@ -457,6 +460,7 @@ internal sealed class BattleRenderStateBuilder(
             HighlightType.SummonTarget => Theme.Battle.Highlight.SummonTargetColor,
             HighlightType.AllyReachable => Theme.Battle.Highlight.AllyReachableColor,
             HighlightType.EnemyReachable => null,
+            HighlightType.EnemyCopyable => Theme.Battle.Highlight.EnemyReachableColor,
             HighlightType.SummonReachable => Theme.Battle.Highlight.SummonReachableColor
         };
     }
@@ -507,6 +511,10 @@ internal sealed class BattleRenderStateBuilder(
                 {
                     return HighlightType.AllyReachable;
                 }
+                else if (IsDoppelganger(currentUnit))
+                {
+                    return HighlightType.EnemyCopyable;
+                }
                 else
                 {
                     return HighlightType.EnemyReachable;
@@ -517,6 +525,13 @@ internal sealed class BattleRenderStateBuilder(
                 return HighlightType.None;
             }
         }
+    }
+
+    private bool IsDoppelganger(BattleUnit unit)
+    {
+        UnitDefinition definition = definitions.GetUnit(unit.DefinitionId);
+
+        return definition.Attack.Type == UnitAttackType.Doppelganger;
     }
 
     private static AnimationRate ComputeRedrawRate(

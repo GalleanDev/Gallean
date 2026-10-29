@@ -2315,4 +2315,156 @@ public sealed class BattleRenderStateBuilderTests
 
         Assert.That(renderState, Is.EqualTo(expected));
     }
+
+    [Test]
+    public void DoppelgangerTargetsTest()
+    {
+        UnitDefinition doppelgangerDefinition = TestHelpers.SimpleUnitDefinition("DOP", maxHitpoints: 60, initiative: 50, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("DOP"), initiative: 50, damage: 5, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Doppelganger
+            }
+        };
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ALY", maxHitpoints: 50, initiative: 50, damage: 10);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("DEF", maxHitpoints: 40, initiative: 50, damage: 10);
+
+        BattleUnit doppelganger = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, doppelgangerDefinition.Id, BattleSide.Attacker, hitpoints: 60);
+
+        BattleUnit ally = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+
+        BattleUnit copyableDefender = TestHelpers.SimpleBattleUnit(new BattleUnitId(3), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 40);
+
+        BattleUnit uncopyableDefender = TestHelpers.SimpleBattleUnit(new BattleUnitId(4), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 40);
+
+        UnitGrid<BattleUnit> attackerGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(doppelganger, GridPosition.FrontCenter, isLarge: false)
+            .Place(ally, GridPosition.FrontBottom, isLarge: false)
+            .Build();
+
+        UnitGrid<BattleUnit> defenderGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(copyableDefender, GridPosition.FrontCenter, isLarge: false)
+            .Place(uncopyableDefender, GridPosition.FrontBottom, isLarge: false)
+            .Build();
+
+        BattleState state = new(
+            attackerGrid,
+            defenderGrid,
+            new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Doppelganger),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [],
+            CurrentRound: BattleRound.Opening(1),
+            Outcome: null,
+            Modifiers: BattleModifiers.None);
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(doppelgangerDefinition)
+            .AddUnit(allyDefinition)
+            .AddUnit(defenderDefinition)
+            .Build();
+        IUnitStatsProvider stats = new UnitStatsProvider(definitions, new GlobalVariables(), GameScenarioProvider.Empty.Definition);
+
+        AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0);
+        IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DOP"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("ALY"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .Build();
+        BattleRenderState renderState = new BattleRenderStateBuilder(
+            state, state, stats, definitions, assetMetadata,
+            background: background,
+            environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            isAiTurn: false,
+            selectedTarget: null,
+            actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
+            {
+                [new BattleGridTile(BattleSide.Attacker, GridPosition.FrontBottom)] = new BattleActionTarget.Unit([new BattleUnitId(2)]),
+                [new BattleGridTile(BattleSide.Defender, GridPosition.FrontCenter)] = new BattleActionTarget.Unit([new BattleUnitId(3)])
+            },
+            previousState: null).BuildState();
+
+        BattleRenderState expected = new(
+            background,
+            [
+                new BattleRenderState.Unit(
+                    Id: new BattleUnitId(1),
+                    DefinitionId: doppelgangerDefinition.Id,
+                    Race: WorldRace.Human,
+                    DeathAnimation: UnitDeathAnimation.Human,
+                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Facing: BattleSide.Attacker,
+                    IdleOffset: TimeSpan.FromTicks(7676067),
+                    CorpseVariant: 1,
+                    Hitpoints: 60,
+                    MaxHitpoints: 60,
+                    Presence: BattleUnitState.Presence.Alive,
+                    Marker: Theme.Battle.GroundMarker.CurrentColor,
+                    Highlight: Theme.Battle.Highlight.CurrentColor,
+                    Auras: BattleUnitState.Auras.None,
+                    Frozen: false),
+                new BattleRenderState.Unit(
+                    Id: new BattleUnitId(2),
+                    DefinitionId: allyDefinition.Id,
+                    Race: WorldRace.Human,
+                    DeathAnimation: UnitDeathAnimation.Human,
+                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontBottom, IsLarge: false),
+                    Facing: BattleSide.Attacker,
+                    IdleOffset: TimeSpan.FromTicks(7529470),
+                    CorpseVariant: 0,
+                    Hitpoints: 50,
+                    MaxHitpoints: 50,
+                    Presence: BattleUnitState.Presence.Alive,
+                    Marker: Theme.Battle.GroundMarker.AllyReachableColor,
+                    Highlight: Theme.Battle.Highlight.AllyReachableColor,
+                    Auras: BattleUnitState.Auras.None,
+                    Frozen: false),
+                new BattleRenderState.Unit(
+                    Id: new BattleUnitId(3),
+                    DefinitionId: defenderDefinition.Id,
+                    Race: WorldRace.Human,
+                    DeathAnimation: UnitDeathAnimation.Human,
+                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Facing: BattleSide.Defender,
+                    IdleOffset: TimeSpan.FromTicks(666057),
+                    CorpseVariant: 1,
+                    Hitpoints: 40,
+                    MaxHitpoints: 40,
+                    Presence: BattleUnitState.Presence.Alive,
+                    Marker: Theme.Battle.GroundMarker.EnemyReachableColor,
+                    Highlight: Theme.Battle.Highlight.EnemyReachableColor,
+                    Auras: BattleUnitState.Auras.None,
+                    Frozen: false),
+                new BattleRenderState.Unit(
+                    Id: new BattleUnitId(4),
+                    DefinitionId: defenderDefinition.Id,
+                    Race: WorldRace.Human,
+                    DeathAnimation: UnitDeathAnimation.Human,
+                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontBottom, IsLarge: false),
+                    Facing: BattleSide.Defender,
+                    IdleOffset: TimeSpan.FromTicks(9504349),
+                    CorpseVariant: 0,
+                    Hitpoints: 40,
+                    MaxHitpoints: 40,
+                    Presence: BattleUnitState.Presence.Alive,
+                    Marker: null,
+                    Highlight: null,
+                    Auras: BattleUnitState.Auras.None,
+                    Frozen: false)
+            ],
+            Placeholders: [],
+            HitTargets:
+            [
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter), new Rect(401.781, 242.818, 82.56, 123.84)),
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontBottom), new Rect(259.281, 305.338, 84.16, 126.24)),
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Defender, GridPosition.FrontCenter), new Rect(496.791, 313.946, 84.4, 126.6)),
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Defender, GridPosition.FrontBottom), new Rect(353.191, 377.566, 86.0, 129.0))
+            ],
+            BattleLightConfiguration.MakeMidday([]),
+            FluidConfigurations: [],
+            RainConfiguration: null,
+            new AnimationRate(60.0));
+
+        Assert.That(renderState, Is.EqualTo(expected));
+    }
 }

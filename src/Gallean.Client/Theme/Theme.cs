@@ -586,6 +586,7 @@ internal static class Theme
             public static Color OverlayColor { get; } = Color.FromRgb(216, 214, 222);
             public static Color CurrentColor { get; } = Color.FromRgb(243, 217, 147);
             public static Color EnemyTargetColor { get; } = Color.FromRgb(212, 71, 71);
+            public static Color EnemyReachableColor { get; } = Color.FromArgb(128, 212, 71, 71);
             public static Color AllyTargetColor { get; } = Color.FromRgb(116, 176, 255);
             public static Color AllyReachableColor { get; } = Color.FromArgb(128, 116, 176, 255);
             public static Color SummonTargetColor { get; } = Color.FromRgb(140, 224, 150);
@@ -606,6 +607,7 @@ internal static class Theme
         {
             public static Color CurrentColor { get; } = Color.FromArgb(110, 243, 217, 147);
             public static Color EnemyTargetColor { get; } = Color.FromArgb(150, 232, 36, 36);
+            public static Color EnemyReachableColor { get; } = Color.FromArgb(60, 232, 36, 36);
             public static Color AllyTargetColor { get; } = Color.FromArgb(150, 96, 164, 255);
             public static Color AllyReachableColor { get; } = Color.FromArgb(60, 96, 164, 255);
             public static Color SummonTargetColor { get; } = Color.FromArgb(150, 120, 224, 132);
