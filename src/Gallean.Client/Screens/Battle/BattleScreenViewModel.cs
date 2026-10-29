@@ -857,7 +857,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             {
                 if (itemActions.TryGetValue(item.Slot, out IReadOnlyDictionary<BattleGridTile, TileAction>? actions))
                 {
-                    bool canUse = !IsBusy && !item.Consumed && actions.Count > 0;
+                    bool canUse = !IsBusy && !item.Used && actions.Count > 0;
 
                     result.Add(new BattleItemViewModel(
                         this,

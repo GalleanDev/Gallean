@@ -36,7 +36,7 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         BattleGetItemInfoCommand.Result result = engine.CheckCommand(new BattleGetItemInfoCommand(leader.Id), []);
@@ -104,7 +104,7 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .WithDefender(secondDefender, GridPosition.FrontTop)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         BattleGetItemInfoCommand.Result result = engine.CheckCommand(new BattleGetItemInfoCommand(leader.Id), []);
@@ -175,7 +175,7 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(corpse, GridPosition.FrontCenter)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         BattleGetItemInfoCommand.Result result = engine.CheckCommand(new BattleGetItemInfoCommand(leader.Id), []);
@@ -236,7 +236,7 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         BattleGetItemInfoCommand.Result result = engine.CheckCommand(new BattleGetItemInfoCommand(leader.Id), []);
@@ -298,7 +298,7 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleGetItemInfoCommand(ally.Id), BattleCommandError.ItemUserNotLeader);
@@ -338,8 +338,8 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true))
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, potion.Id, Charges: null, Used: false))
             .Build();
 
         BattleGetItemInfoCommand.Result result = engine.CheckCommand(new BattleGetItemInfoCommand(leader.Id), []);
@@ -401,7 +401,7 @@ public sealed class BattleEngineGetItemInfoTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleGetItemInfoCommand(leader.Id), BattleCommandError.NotUnitTurn);

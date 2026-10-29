@@ -32,11 +32,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
             new BattleUnitHealedEvent(leader.Id, 90),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -49,7 +49,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -87,11 +87,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
             new BattleUnitHealedEvent(leader.Id, 100),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -104,7 +104,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -140,7 +140,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(attacker, GridPosition.FrontBottom)
             .WithDefender(leader, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(attacker.Id)), BattleCommandError.NotUnitTurn);
@@ -171,7 +171,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(soldier, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(soldier.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(soldier.Id)), BattleCommandError.ItemUserNotLeader);
@@ -207,14 +207,14 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle2, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.ItemNotEquipped);
     }
 
     [Test]
-    public void AlreadyConsumedTest()
+    public void AlreadyUsedTest()
     {
         UnitDefinition leaderDefinition = TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10) with
         {
@@ -243,7 +243,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.ItemNotEquipped);
@@ -279,7 +279,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(orb)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.MissingLeaderAbility);
@@ -315,7 +315,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(revivePotion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, revivePotion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, revivePotion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.ItemNotUsable);
@@ -352,7 +352,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(orb)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.ItemNotUsable);
@@ -392,11 +392,11 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(ally.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(ally.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(ally.Id)),
             new BattleUnitHealedEvent(ally.Id, 60),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -412,7 +412,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -448,7 +448,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -490,11 +490,11 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(ally.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(ally.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(ally.Id)),
             new BattleUnitRevivedEvent(ally.Id, 1),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -510,7 +510,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -550,7 +550,7 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -588,7 +588,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -630,7 +630,7 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -677,13 +677,13 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         BattleUnit summon = new(new BattleUnitId(2), null, summonDefinition.Id, BattleSide.Attacker, 20, 0, 0, 1, [], [], leader.Id, [], null, false);
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop), RemainingCharges: 4, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop)),
             new BattleUnitSummonedEvent(summon.Id, summonDefinition.Id, BattleSide.Attacker, GridPosition.FrontTop, 20, 1, leader.Id),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -699,7 +699,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 4, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -744,7 +744,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -791,7 +791,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -838,15 +838,15 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         BattleUnitId summonId = new(2);
         BattleUnit summon = new(summonId, null, summonDefinition.Id, BattleSide.Attacker, 20, 0, 0, 1, [], [], leader.Id, [], null, false);
-        BattleItem talismanItem = new(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 4, Consumed: false);
+        BattleItem talismanItem = new(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true);
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontCenter)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontCenter), RemainingCharges: 4, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontCenter)),
             new BattleUnitSummonedEvent(summonId, summonDefinition.Id, BattleSide.Attacker, GridPosition.FrontCenter, 20, 1, leader.Id),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -949,11 +949,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
             new BattleUnitModifierAppliedEvent(leader.Id, new UnitModifier(modifier.Id, 1)),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -968,7 +968,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1010,11 +1010,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
             new BattleUnitModifierAppliedEvent(leader.Id, new UnitModifier(modifier.Id, 1)),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -1033,7 +1033,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1088,7 +1088,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -1152,11 +1152,11 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(protector, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
             new BattleUnitModifierAppliedEvent(leader.Id, new UnitModifier(modifier.Id, 1)),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -1174,7 +1174,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [new BattleUnitTurn(protector.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1221,11 +1221,11 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(ally.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, leader.Id, new BattleAttackUnitTarget(ally.Id), RemainingCharges: null, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, leader.Id, new BattleAttackUnitTarget(ally.Id)),
             new BattleUnitAttackedEvent(leader.Id, ally.Id, new UnitAttackDefinitionId("heal")),
             new BattleUnitAttackHitEvent(leader.Id, ally.Id, new UnitAttackDefinitionId("heal"), 0),
             new BattleUnitHealedEvent(ally.Id, 100),
@@ -1243,7 +1243,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1285,11 +1285,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(defender.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id), RemainingCharges: 4, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id)),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, fireAttack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, fireAttack.Id, 25),
             new BattleUnitTurnEndingEvent(leader.Id),
@@ -1303,7 +1303,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 4, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1349,11 +1349,11 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .WithDefender(secondDefender, GridPosition.FrontTop)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(defender.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id), RemainingCharges: 4, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id)),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, frostAttack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, frostAttack.Id, 10),
             new BattleUnitAttackedEvent(leader.Id, secondDefender.Id, frostAttack.Id),
@@ -1372,7 +1372,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [new BattleUnitTurn(secondDefender.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 4, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1423,7 +1423,7 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(ally, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .WithDefender(backDefender, GridPosition.BackTop)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -1431,7 +1431,7 @@ public sealed class BattleEngineUseItemTests
             BattleCommandError.TargetNotReachable);
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(backDefender.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, leader.Id, new BattleAttackUnitTarget(backDefender.Id), RemainingCharges: null, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, leader.Id, new BattleAttackUnitTarget(backDefender.Id)),
             new BattleUnitAttackedEvent(leader.Id, backDefender.Id, fireAttack.Id),
             new BattleUnitAttackHitEvent(leader.Id, backDefender.Id, fireAttack.Id, 25),
             new BattleUnitTurnEndingEvent(leader.Id),
@@ -1451,7 +1451,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [new BattleUnitTurn(backDefender.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1504,11 +1504,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(defender.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id), RemainingCharges: 4, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id)),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, fireAttack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, fireAttack.Id, 25),
             new BattleUnitTurnEndingEvent(leader.Id),
@@ -1522,7 +1522,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 4, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1564,11 +1564,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 1, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 1, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(defender.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id), RemainingCharges: 0, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id)),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, fireAttack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, fireAttack.Id, 25),
             new BattleUnitTurnEndingEvent(leader.Id),
@@ -1582,7 +1582,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 0, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 1, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1619,7 +1619,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(scroll)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, scroll.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, scroll.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.ItemNotUsable);
@@ -1655,7 +1655,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -1692,11 +1692,11 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
             new BattleUnitHealedEvent(leader.Id, 90),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -1709,7 +1709,7 @@ public sealed class BattleEngineUseItemTests
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1757,7 +1757,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), BattleCommandError.ItemUserNotLeader);
@@ -1792,7 +1792,7 @@ public sealed class BattleEngineUseItemTests
             .WithDefinition(potion)
             .WithAttacker(summon, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(new BattleUseItemCommand(summon.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(summon.Id)), BattleCommandError.ItemUserNotLeader);
@@ -1832,7 +1832,7 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(
@@ -1879,7 +1879,7 @@ public sealed class BattleEngineUseItemTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.FrontTop)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommandError(

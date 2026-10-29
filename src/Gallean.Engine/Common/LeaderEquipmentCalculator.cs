@@ -118,7 +118,7 @@ internal static class LeaderEquipmentCalculator
             ItemCategory.PotionRevive => true,
             ItemCategory.PotionPermanentBoost => true,
             ItemCategory.Scroll => true,
-            ItemCategory.Orb => false,
+            ItemCategory.Orb => true,
             ItemCategory.Talisman => false,
             ItemCategory.Wand => false,
             ItemCategory.Weapon => false,

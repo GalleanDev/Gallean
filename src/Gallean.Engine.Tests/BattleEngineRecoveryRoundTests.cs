@@ -828,7 +828,7 @@ public sealed class BattleEngineRecoveryRoundTests
             .WithAttacker(warrior, GridPosition.FrontBottom)
             .WithAttacker(leader, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAttackCommand(warrior.Id, new BattleAttackUnitTarget(defender.Id)), [
@@ -844,7 +844,7 @@ public sealed class BattleEngineRecoveryRoundTests
         ]);
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(warrior.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(warrior.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(warrior.Id)),
             new BattleUnitHealedEvent(warrior.Id, 100),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleRoundEndedEvent(),
@@ -864,7 +864,7 @@ public sealed class BattleEngineRecoveryRoundTests
             CurrentUnitTurn: new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
             Modifiers: BattleModifiers.None)));
@@ -913,7 +913,7 @@ public sealed class BattleEngineRecoveryRoundTests
             .WithAttacker(warrior, GridPosition.FrontBottom)
             .WithAttacker(leader, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAttackCommand(warrior.Id, new BattleAttackUnitTarget(defender.Id)), [
@@ -943,7 +943,7 @@ public sealed class BattleEngineRecoveryRoundTests
             CurrentUnitTurn: new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Consumed: false)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Used: false)],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: null,
             Modifiers: BattleModifiers.None)));
@@ -1003,8 +1003,8 @@ public sealed class BattleEngineRecoveryRoundTests
             .WithAttacker(warrior, GridPosition.FrontBottom)
             .WithAttacker(leader, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAttackCommand(warrior.Id, new BattleAttackUnitTarget(defender.Id)), [

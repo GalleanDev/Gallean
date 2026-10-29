@@ -5740,8 +5740,8 @@ public sealed class VisualTests
         builder.Add(MakeBattleUnit(0, attackers.Leaders[0], BattleSide.Attacker, gameModel), new GridPosition(0, 1));
         builder.Add(MakeBattleUnit(1, attackers.Units[0], BattleSide.Attacker, gameModel), new GridPosition(0, 0));
         builder.Add(MakeBattleUnit(2, defenders.Units[0], BattleSide.Defender, gameModel), new GridPosition(0, 1));
-        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("G000IG0005"), Charges: null, Consumed: false));
-        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, new ItemDefinitionId("G000IG0006"), Charges: null, Consumed: false));
+        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("G000IG0005"), Charges: null, Used: false));
+        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, new ItemDefinitionId("G000IG0006"), Charges: null, Used: false));
 
         EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
 
@@ -5782,8 +5782,8 @@ public sealed class VisualTests
 
         builder.Add(MakeBattleUnit(0, attackers.Units[0], BattleSide.Attacker, gameModel), new GridPosition(0, 1));
         builder.Add(MakeBattleUnit(1, defenders.Leaders[0], BattleSide.Defender, gameModel), new GridPosition(0, 1));
-        builder.AddItem(new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("G000IG0005"), Charges: null, Consumed: false));
-        builder.AddItem(new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle2, new ItemDefinitionId("G000IG0006"), Charges: null, Consumed: false));
+        builder.AddItem(new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("G000IG0005"), Charges: null, Used: false));
+        builder.AddItem(new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle2, new ItemDefinitionId("G000IG0006"), Charges: null, Used: false));
 
         EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
 
@@ -5825,8 +5825,8 @@ public sealed class VisualTests
         builder.Add(MakeBattleUnit(0, attackers.Leaders[0], BattleSide.Attacker, gameModel), new GridPosition(0, 1));
         builder.Add(MakeBattleUnit(1, attackers.Units[0], BattleSide.Attacker, gameModel), new GridPosition(0, 0));
         builder.Add(MakeBattleUnit(2, defenders.Units[0], BattleSide.Defender, gameModel) with { Hitpoints = 40 }, new GridPosition(0, 1));
-        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("G000IG0005"), Charges: null, Consumed: false));
-        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, new ItemDefinitionId("G000IG0006"), Charges: null, Consumed: false));
+        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("G000IG0005"), Charges: null, Used: false));
+        builder.AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, new ItemDefinitionId("G000IG0006"), Charges: null, Used: false));
 
         EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
 

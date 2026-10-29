@@ -706,7 +706,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
 
         BattleState battle = BattleState(attackerDefinition, defenderDefinition) with
         {
-            Items = [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("SPHERE"), Charges: null, Consumed: false)]
+            Items = [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, new ItemDefinitionId("SPHERE"), Charges: null, Used: false)]
         };
 
         AssetPreloadPlan plan = new BattleAssetPreloadPlanBuilder(state, battle, definitions, assets).Build();

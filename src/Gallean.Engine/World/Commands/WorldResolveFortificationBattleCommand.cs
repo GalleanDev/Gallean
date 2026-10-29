@@ -44,7 +44,7 @@ public sealed record WorldResolveFortificationBattleCommand(
 
         List<WorldEvent> events =
         [
-            .. WorldCommandHelpers.CreateBattleItemEvents(FinalBattleState, BattleSide.Attacker, attackerStack),
+            .. WorldCommandHelpers.CreateBattleItemEvents(FinalBattleState, BattleSide.Attacker, attackerStack, context.Definitions),
             endedEvent,
             .. LeaderUpgradeCalculator.CreateUpgradeEvents(attackerStack, survivingAttackerUnits, context.Definitions, context.Globals)
         ];

@@ -5,4 +5,4 @@ public sealed record BattleItem(
     LeaderEquipmentSlot Slot,
     ItemDefinitionId ItemId,
     int? Charges,
-    bool Consumed);
+    bool Used);

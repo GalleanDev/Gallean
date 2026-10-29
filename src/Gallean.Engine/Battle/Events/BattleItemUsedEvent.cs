@@ -5,9 +5,7 @@ public sealed record BattleItemUsedEvent(
     LeaderEquipmentSlot Slot,
     ItemDefinitionId ItemId,
     BattleUnitId UnitId,
-    BattleAttackTarget Target,
-    int? RemainingCharges,
-    bool Consumed) : BattleEvent
+    BattleAttackTarget Target) : BattleEvent
 {
     public override TResult Accept<TContext, TResult>(IBattleEventVisitor<TContext, TResult> visitor, TContext context)
     {

@@ -893,11 +893,11 @@ public sealed class BattleEngineAiActionTests
             .WithAttacker(healthy, GridPosition.BackBottom)
             .WithAttacker(wounded, GridPosition.BackCenter)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(wounded.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(wounded.Id)),
             new BattleUnitHealedEvent(wounded.Id, 70),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -927,11 +927,11 @@ public sealed class BattleEngineAiActionTests
             .WithAttacker(summon, GridPosition.BackBottom)
             .WithAttacker(wounded, GridPosition.BackCenter)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(wounded.Id), RemainingCharges: null, Consumed: true),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(wounded.Id)),
             new BattleUnitHealedEvent(wounded.Id, 70),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -959,7 +959,7 @@ public sealed class BattleEngineAiActionTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(), [
@@ -992,7 +992,7 @@ public sealed class BattleEngineAiActionTests
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(), [
@@ -1027,7 +1027,7 @@ public sealed class BattleEngineAiActionTests
             .WithAttacker(ally, GridPosition.BackBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
             .WithDefender(reserve, GridPosition.FrontCenter)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(), [
@@ -1062,7 +1062,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefinition(potion)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(dragon, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(), [

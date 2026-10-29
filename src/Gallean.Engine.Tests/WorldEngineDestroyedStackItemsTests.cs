@@ -85,8 +85,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             WaitingQueue: [],
             Items:
             [
-                new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 3, Consumed: false),
-                new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle2, potion.Id, Charges: null, Consumed: true)
+                new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true),
+                new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle2, potion.Id, Charges: null, Used: true)
             ],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
@@ -101,7 +101,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack2.Id, talismanItem, RemainingCharges: 3, Consumed: false),
+            new WorldItemUsedEvent(stack2.Id, talismanItem, RemainingCharges: 4, Consumed: false),
             new WorldItemUsedEvent(stack2.Id, potionItem, RemainingCharges: null, Consumed: true),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
@@ -118,7 +118,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
                             carriedItem,
                             valuableItem,
                             bannerItem,
-                            new WorldItem(new WorldItemId("Talisman"), talisman.Id, Charges: 3)
+                            new WorldItem(new WorldItemId("Talisman"), talisman.Id, Charges: 4)
                         ]),
                         BattlesWon = 1
                     })

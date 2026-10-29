@@ -47,7 +47,7 @@ internal static partial class BattleItemCalculator
 
         foreach (BattleItem item in state.Items)
         {
-            if (item.Side == unit.Side && !item.Consumed)
+            if (item.Side == unit.Side && !item.Used)
             {
                 List<UseInfo> uses = [];
 
@@ -97,7 +97,7 @@ internal static partial class BattleItemCalculator
             return ItemInfo.Fail(BattleCommandError.ItemNotEquipped);
         }
 
-        if (item.Consumed)
+        if (item.Used)
         {
             return ItemInfo.Fail(BattleCommandError.ItemNotEquipped);
         }
@@ -127,21 +127,7 @@ internal static partial class BattleItemCalculator
             return effectInfo;
         }
 
-        int? remainingCharges;
-        bool consumed;
-
-        if (item.Charges is not null)
-        {
-            remainingCharges = item.Charges.Value - 1;
-            consumed = remainingCharges <= 0;
-        }
-        else
-        {
-            remainingCharges = null;
-            consumed = LeaderEquipmentCalculator.IsConsumable(itemDefinition.Category);
-        }
-
-        BattleItemUsedEvent usedEvent = new(unit.Side, slot, item.ItemId, unit.Id, target, remainingCharges, consumed);
+        BattleItemUsedEvent usedEvent = new(unit.Side, slot, item.ItemId, unit.Id, target);
 
         return new ItemInfo(effectInfo.Targets, [usedEvent, .. effectInfo.Events], null);
     }

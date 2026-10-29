@@ -86,8 +86,8 @@ public sealed class WorldEngineBattleItemTests
             WaitingQueue: [],
             Items:
             [
-                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, usedPotion.Id, Charges: null, Consumed: true),
-                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, keptItem.Id, Charges: null, Consumed: false)
+                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, usedPotion.Id, Charges: null, Used: true),
+                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, keptItem.Id, Charges: null, Used: false)
             ],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
@@ -282,8 +282,8 @@ public sealed class WorldEngineBattleItemTests
             WaitingQueue: [],
             Items:
             [
-                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, spentTalisman.Id, Charges: 3, Consumed: false),
-                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, untouchedTalisman.Id, Charges: 5, Consumed: false)
+                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, spentTalisman.Id, Charges: 5, Used: true),
+                new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, untouchedTalisman.Id, Charges: 5, Used: false)
             ],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
@@ -297,7 +297,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack1.Id, spentTalismanItem, RemainingCharges: 3, Consumed: false),
+            new WorldItemUsedEvent(stack1.Id, spentTalismanItem, RemainingCharges: 4, Consumed: false),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);
@@ -309,7 +309,7 @@ public sealed class WorldEngineBattleItemTests
                     .SetItem(stack1.Id, stack1 with
                     {
                         Units = expectedAttackerGrid,
-                        Equipment = equipment.With(LeaderEquipmentSlot.Battle1, new WorldItem(new WorldItemId("SpentTalisman"), spentTalisman.Id, Charges: 3)),
+                        Equipment = equipment.With(LeaderEquipmentSlot.Battle1, new WorldItem(new WorldItemId("SpentTalisman"), spentTalisman.Id, Charges: 4)),
                         BattlesWon = 1
                     })
                     .Remove(stack2.Id)
@@ -383,7 +383,7 @@ public sealed class WorldEngineBattleItemTests
             CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 0, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 1, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
             Modifiers: BattleModifiers.None);
@@ -604,7 +604,7 @@ public sealed class WorldEngineBattleItemTests
             CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
             Modifiers: BattleModifiers.None);
@@ -701,7 +701,7 @@ public sealed class WorldEngineBattleItemTests
             CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
             TurnQueue: [],
             WaitingQueue: [],
-            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
             Modifiers: new BattleModifiers(
@@ -727,6 +727,104 @@ public sealed class WorldEngineBattleItemTests
                 Stacks = engine.State.Stacks.Remove(stack1.Id),
                 Fortifications = engine.State.Fortifications.SetItem(city.Id, city with { Garrison = expectedDefenderGrid }),
                 Bags = ImmutableSortedDictionary<WorldBagId, WorldBag>.Empty
+            }));
+    }
+
+    [Test]
+    public void ResolveBattleConsumeOrbTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 3);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition dummyDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("dummy", maxHitpoints: 10, initiative: 50, damage: 5),
+            movementPoints: 6, leadership: 6);
+
+        ItemDefinition orb = new(
+            new ItemDefinitionId("orb"),
+            new GlobalTextId("name"),
+            new GlobalTextId("desc"),
+            ItemCategory.Orb,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: new AttackItemEffect(new UnitAttackDefinitionId("fire")),
+            AnimationUnitId: null);
+
+        WorldItem orbItem = new(new WorldItemId("Orb"), orb.Id, Charges: null);
+
+        LeaderEquipment equipment = LeaderEquipment.Empty.With(LeaderEquipmentSlot.Battle1, orbItem);
+
+        WorldStack stack1 = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                player1.Id,
+                new WorldPosition(0, 0),
+                new UnitGrid<WorldUnit>.Builder().Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition), GridPosition.FrontBottom, false).Build(),
+                movementPoints: 6) with
+            {
+                Equipment = equipment
+            };
+
+        WorldStack stack2 = TestHelpers.SimpleStack(
+            new WorldStackId("Stack2"),
+            player2.Id,
+            new WorldPosition(2, 0),
+            new UnitGrid<WorldUnit>.Builder().Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy2"), dummyDefinition), GridPosition.FrontBottom, false).Build(),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(dummyDefinition)
+            .WithDefinition(orb)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(stack1)
+            .WithStack(stack2)
+            .Build();
+
+        BattleUnit survivingUnit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("dummy"), dummyDefinition.Id, BattleSide.Attacker, hitpoints: 10);
+
+        BattleUnit deadDefender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("dummy"), dummyDefinition.Id, BattleSide.Defender, hitpoints: 0);
+
+        BattleState finalBattleState = new(
+            AttackerGrid: new UnitGrid<BattleUnit>.Builder().Place(survivingUnit, new GridPosition(0, 0), false).Build(),
+            DefenderGrid: new UnitGrid<BattleUnit>.Builder().Place(deadDefender, GridPosition.FrontBottom, false).Build(),
+            CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: true)],
+            CurrentRound: BattleRound.Normal(1),
+            Outcome: new BattleOutcome(BattleSide.Attacker),
+            Modifiers: BattleModifiers.None);
+
+        WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
+        UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
+
+        UnitGrid<WorldUnit> destroyedDefenderGrid = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
+            .Build();
+
+        engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
+            new WorldItemUsedEvent(stack1.Id, orbItem, RemainingCharges: null, Consumed: true),
+            new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
+            new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks
+                    .SetItem(stack1.Id, stack1 with
+                    {
+                        Units = expectedAttackerGrid,
+                        Equipment = LeaderEquipment.Empty,
+                        BattlesWon = 1
+                    })
+                    .Remove(stack2.Id)
             }));
     }
 }

@@ -45,8 +45,8 @@ public sealed record WorldResolveStackBattleCommand(
 
         List<WorldEvent> events =
         [
-            .. WorldCommandHelpers.CreateBattleItemEvents(FinalBattleState, BattleSide.Attacker, attackerStack),
-            .. WorldCommandHelpers.CreateBattleItemEvents(FinalBattleState, BattleSide.Defender, defenderStack),
+            .. WorldCommandHelpers.CreateBattleItemEvents(FinalBattleState, BattleSide.Attacker, attackerStack, context.Definitions),
+            .. WorldCommandHelpers.CreateBattleItemEvents(FinalBattleState, BattleSide.Defender, defenderStack, context.Definitions),
             endedEvent,
             .. LeaderUpgradeCalculator.CreateUpgradeEvents(attackerStack, attackerUnits, context.Definitions, context.Globals),
             .. LeaderUpgradeCalculator.CreateUpgradeEvents(defenderStack, defenderUnits, context.Definitions, context.Globals)

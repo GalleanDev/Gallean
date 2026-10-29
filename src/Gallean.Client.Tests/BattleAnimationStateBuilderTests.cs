@@ -3193,9 +3193,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("POTION"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(1)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(1))),
                 new BattleUnitHealedEvent(new BattleUnitId(1), HitpointsAfter: 60),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);
@@ -3279,9 +3277,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("POTION"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(2)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(2))),
                 new BattleUnitRevivedEvent(new BattleUnitId(2), HitpointsAfter: 30),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);
@@ -3347,9 +3343,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("TEMPORARY"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(1)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(1))),
                 new BattleUnitTurnEndingEvent(new BattleUnitId(1)),
                 new BattleUnitTurnEndedEvent(new BattleUnitId(1)),
                 new BattleItemUsedEvent(
@@ -3357,9 +3351,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle2,
                     new ItemDefinitionId("PERMANENT"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(1)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(1))),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
@@ -3447,9 +3439,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("POTION"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(2)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(2))),
                 new BattleUnitHealedEvent(new BattleUnitId(2), HitpointsAfter: 70),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);
@@ -3532,9 +3522,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("TALISMAN"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(2)),
-                    RemainingCharges: 4,
-                    Consumed: false),
+                    new BattleAttackUnitTarget(new BattleUnitId(2))),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(2), BattleUnitTurnType.Normal))
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
@@ -3630,9 +3618,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("SPHERE"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(2)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(2))),
                 new BattleUnitAttackStepEvent(new BattleUnitId(1), new BattleUnitId(2), [new UnitAttackDefinitionId("ORB")], AccuracyReduction: 0),
                 new BattleUnitAttackHitEvent(new BattleUnitId(1), new BattleUnitId(2), new UnitAttackDefinitionId("ORB"), 20),
                 new BattleUnitTurnEndingEvent(new BattleUnitId(1)),
@@ -3728,9 +3714,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("SPHERE"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(2)),
-                    RemainingCharges: null,
-                    Consumed: false),
+                    new BattleAttackUnitTarget(new BattleUnitId(2))),
                 new BattleUnitAttackEvent(new BattleUnitId(1), new BattleAttackUnitTarget(new BattleUnitId(2)), [new UnitAttackDefinitionId("FEAR")]),
                 new BattleUnitEffectAppliedEvent(new BattleUnitId(1), new BattleUnitId(2), new BattleParalyzeStatusEffect(RemainingTurns: 1)),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(2), BattleUnitTurnType.Normal))
@@ -4828,9 +4812,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("SCROLL"),
                     new BattleUnitId(1),
-                    new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop)),
                 new BattleUnitSummonedEvent(
                     new BattleUnitId(2),
                     new UnitDefinitionId("IMP"),
@@ -7465,9 +7447,7 @@ public sealed class BattleAnimationStateBuilderTests
                     LeaderEquipmentSlot.Battle1,
                     new ItemDefinitionId("POTION"),
                     new BattleUnitId(1),
-                    new BattleAttackUnitTarget(new BattleUnitId(2)),
-                    RemainingCharges: null,
-                    Consumed: true),
+                    new BattleAttackUnitTarget(new BattleUnitId(2))),
                 new BattleUnitModifierAppliedEvent(new BattleUnitId(2), new UnitModifier(new UnitModifierDefinitionId("BOOST"), RemainingTurns: 1)),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);

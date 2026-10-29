@@ -14,7 +14,7 @@ internal partial class BattleEngine
 
             if (item.Side == ev.Side && item.Slot == ev.Slot)
             {
-                items[index] = item with { Charges = ev.RemainingCharges, Consumed = ev.Consumed };
+                items[index] = item with { Used = true };
             }
         }
 

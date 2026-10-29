@@ -210,7 +210,7 @@ public sealed class BattleScreenViewModelTests
             .Add(leader)
             .Add(ally)
             .Add(enemy)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
@@ -322,7 +322,7 @@ public sealed class BattleScreenViewModelTests
 
         Assert.That(healedAlly.Hitpoints, Is.EqualTo(50));
         Assert.That(gameModel.Snapshot.BattleState.CurrentUnitId, Is.EqualTo(allyId));
-        Assert.That(gameModel.Snapshot.BattleState.Items, Is.EqualTo([new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: true)]));
+        Assert.That(gameModel.Snapshot.BattleState.Items, Is.EqualTo([new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)]));
 
         viewModel.CompleteAnimation(TimeSpan.Zero);
         await turnTask;
@@ -377,7 +377,7 @@ public sealed class BattleScreenViewModelTests
             .Add(soldier)
             .Add(leader)
             .Add(enemy)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
@@ -1604,7 +1604,7 @@ public sealed class BattleScreenViewModelTests
         BattleState battleState = new BattleStateBuilder(engine.Definitions)
             .Add(leader)
             .Add(enemy)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
@@ -2167,7 +2167,7 @@ public sealed class BattleScreenViewModelTests
         BattleState battleState = new BattleStateBuilder(engine.Definitions)
             .Add(leader)
             .Add(enemy)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: null, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: null, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
@@ -2870,7 +2870,7 @@ public sealed class BattleScreenViewModelTests
             .Add(leader)
             .Add(enemy, GridPosition.FrontBottom)
             .Add(second, GridPosition.FrontTop)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
@@ -3207,7 +3207,7 @@ public sealed class BattleScreenViewModelTests
             .Add(leader, GridPosition.BackBottom)
             .Add(guard, GridPosition.FrontBottom)
             .Add(enemy, GridPosition.FrontBottom)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
@@ -3452,7 +3452,7 @@ public sealed class BattleScreenViewModelTests
             .Add(leader, GridPosition.BackBottom)
             .Add(guard, GridPosition.FrontBottom)
             .Add(enemy, GridPosition.FrontBottom)
-            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Consumed: false))
+            .AddItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build(BattleModifiers.None);
 
         EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);

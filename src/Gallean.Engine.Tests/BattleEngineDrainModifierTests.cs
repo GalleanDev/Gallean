@@ -395,11 +395,11 @@ public sealed class BattleEngineDrainModifierTests
             .WithDefinition(talisman)
             .WithAttacker(leader, GridPosition.FrontBottom)
             .WithDefender(defender, GridPosition.FrontBottom)
-            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Consumed: false))
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: false))
             .Build();
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(defender.Id)), [
-            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id), RemainingCharges: 4, Consumed: false),
+            new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id)),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, new UnitAttackDefinitionId("scroll")),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, new UnitAttackDefinitionId("scroll"), 40),
             new BattleUnitTurnEndingEvent(leader.Id),
@@ -416,7 +416,7 @@ public sealed class BattleEngineDrainModifierTests
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(defender with { Hitpoints = 160 }, GridPosition.FrontBottom, false)
                     .Build(),
-                Items = [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 4, Consumed: false)],
+                Items = [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
                 CurrentUnitTurn = new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
                 CurrentRound = BattleRound.Normal(1)
             }));

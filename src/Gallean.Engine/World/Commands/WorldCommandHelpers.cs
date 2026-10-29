@@ -569,11 +569,15 @@ internal static class WorldCommandHelpers
     {
         if (stack.Equipment[slot] is { } item)
         {
-            builder.AddItem(new BattleItem(side, slot, item.DefinitionId, item.Charges, Consumed: false));
+            builder.AddItem(new BattleItem(side, slot, item.DefinitionId, item.Charges, Used: false));
         }
     }
 
-    public static List<WorldEvent> CreateBattleItemEvents(BattleState finalState, BattleSide side, WorldStack stack)
+    public static List<WorldEvent> CreateBattleItemEvents(
+        BattleState finalState,
+        BattleSide side,
+        WorldStack stack,
+        IGameDefinitionProvider definitions)
     {
         List<WorldEvent> events = [];
 
@@ -581,7 +585,7 @@ internal static class WorldCommandHelpers
         {
             if (item.Side == side)
             {
-                if (CreateBattleItemEvent(stack, item) is { } itemEvent)
+                if (CreateBattleItemEvent(stack, item, definitions) is { } itemEvent)
                 {
                     events.Add(itemEvent);
                 }
@@ -591,21 +595,31 @@ internal static class WorldCommandHelpers
         return events;
     }
 
-    private static WorldItemUsedEvent? CreateBattleItemEvent(WorldStack stack, BattleItem item)
+    private static WorldItemUsedEvent? CreateBattleItemEvent(WorldStack stack, BattleItem item, IGameDefinitionProvider definitions)
     {
         WorldItem? equippedItem = stack.Equipment[item.Slot];
 
-        if (equippedItem is null)
+        if (equippedItem is null || !item.Used)
         {
             return null;
         }
 
-        if (!item.Consumed && item.Charges == equippedItem.Charges)
+        ItemDefinition definition = definitions.GetItem(equippedItem.DefinitionId);
+        int? remainingCharges;
+        bool consumed;
+
+        if (equippedItem.Charges is not null)
         {
-            return null;
+            remainingCharges = equippedItem.Charges.Value - 1;
+            consumed = remainingCharges <= 0;
+        }
+        else
+        {
+            remainingCharges = null;
+            consumed = LeaderEquipmentCalculator.IsConsumable(definition.Category);
         }
 
-        return new WorldItemUsedEvent(stack.Id, equippedItem, item.Charges, item.Consumed);
+        return new WorldItemUsedEvent(stack.Id, equippedItem, remainingCharges, consumed);
     }
 
     public static UnitGrid<WorldUnit> BuildSurvivingGrid(
