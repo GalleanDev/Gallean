@@ -117,13 +117,13 @@
         <Button Classes="pill primary" Command="{Binding OpenCapitalCommand}">
           <StackPanel Orientation="Horizontal" Spacing="8">
             <local:IconVisual Moniker="Capital" />
-            <TextBlock Text="{local:Text 'Capital'}" />
+            <local:HotkeyLabel Text="{local:Text 'Capital'}" Hotkey="C" />
           </StackPanel>
         </Button>
         <Button Classes="pill" local:PlateChrome.TextureSeed="2" Command="{Binding OpenSpellbookCommand}">
           <StackPanel Orientation="Horizontal" Spacing="8">
             <local:IconVisual Moniker="Spellbook" />
-            <TextBlock Text="{local:Text 'Spellbook'}" />
+            <local:HotkeyLabel Text="{local:Text 'Spellbook'}" Hotkey="B" />
           </StackPanel>
         </Button>
         <Button Classes="pill" local:PlateChrome.TextureSeed="3" Command="{Binding OpenQuestCommand}">

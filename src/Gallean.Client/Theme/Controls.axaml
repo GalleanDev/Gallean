@@ -864,6 +864,9 @@
       <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="1" Color="{x:Static local:Theme+Pill.TextShadowColor}" />
     </Setter>
   </Style>
+  <Style Selector="Run.hotkey">
+    <Setter Property="TextDecorations" Value="Underline" />
+  </Style>
   <Style Selector="Button.pill local|IconVisual">
     <Setter Property="Width" Value="18" />
     <Setter Property="Height" Value="18" />
