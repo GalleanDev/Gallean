@@ -49,158 +49,20 @@
       <Setter Property="MinWidth" Value="0" />
       <Setter Property="ItemsPanel">
         <ItemsPanelTemplate>
-          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" />
+          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True">
+            <local:PagedStackPanel.SlotTemplate>
+              <Template>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+              </Template>
+            </local:PagedStackPanel.SlotTemplate>
+          </local:PagedStackPanel>
         </ItemsPanelTemplate>
       </Setter>
       <Setter Property="Template">
         <ControlTemplate>
           <Grid RowDefinitions="*,Auto">
-            <local:PagedStackPanel Grid.Row="0" Classes="inventory-sockets" FillsAvailableSpace="True">
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-              <Panel Classes="inventory-slot empty">
-                <local:PlateChrome Classes="socket" />
-              </Panel>
-            </local:PagedStackPanel>
             <ItemsPresenter x:Name="PART_ItemsPresenter"
                             Grid.Row="0"
                             HorizontalAlignment="Center"
@@ -223,11 +85,6 @@
     </Style>
     <Style Selector="local|PagedItemsControl.inventory /template/ Button.page-arrow local|IconVisual">
       <Setter Property="RenderTransform" Value="rotate(90deg)" />
-    </Style>
-    <Style Selector="local|PagedStackPanel.inventory-sockets">
-      <Setter Property="HorizontalAlignment" Value="Center" />
-      <Setter Property="VerticalAlignment" Value="Top" />
-      <Setter Property="ClipToBounds" Value="True" />
     </Style>
     <Style Selector="Panel.inventory-slot.empty">
       <Setter Property="Opacity" Value="0.55" />

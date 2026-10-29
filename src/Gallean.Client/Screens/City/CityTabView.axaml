@@ -9,7 +9,15 @@
       <Setter Property="MinWidth" Value="292" />
       <Setter Property="ItemsPanel">
         <ItemsPanelTemplate>
-          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" MaxRows="3" />
+          <local:PagedStackPanel Overflow="16" FillsAvailableSpace="True" MaxRows="3">
+            <local:PagedStackPanel.SlotTemplate>
+              <Template>
+                <Panel Classes="inventory-slot empty">
+                  <local:PlateChrome Classes="socket" />
+                </Panel>
+              </Template>
+            </local:PagedStackPanel.SlotTemplate>
+          </local:PagedStackPanel>
         </ItemsPanelTemplate>
       </Setter>
       <Setter Property="Template">
@@ -18,158 +26,11 @@
             <Button x:Name="PART_PreviousButton" Grid.Column="0" Classes="icon-button page-arrow">
               <local:IconVisual Moniker="ChevronLeft" />
             </Button>
-            <Panel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-              <local:PagedStackPanel Classes="inventory-sockets" FillsAvailableSpace="True" MaxRows="3">
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-                <Panel Classes="inventory-slot empty">
-                  <local:PlateChrome Classes="socket" />
-                </Panel>
-              </local:PagedStackPanel>
-              <ItemsPresenter x:Name="PART_ItemsPresenter"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Top"
-                              ItemsPanel="{TemplateBinding ItemsPanel}" />
-            </Panel>
+            <ItemsPresenter x:Name="PART_ItemsPresenter"
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            ItemsPanel="{TemplateBinding ItemsPanel}" />
             <Button x:Name="PART_NextButton" Grid.Column="2" Classes="icon-button page-arrow">
               <local:IconVisual Moniker="ChevronRight" />
             </Button>
@@ -180,12 +41,6 @@
 
     <Style Selector="local|PagedItemsControl.inventory:empty /template/ Button.page-arrow">
       <Setter Property="IsVisible" Value="True" />
-    </Style>
-
-    <Style Selector="local|PagedStackPanel.inventory-sockets">
-      <Setter Property="HorizontalAlignment" Value="Center" />
-      <Setter Property="VerticalAlignment" Value="Top" />
-      <Setter Property="ClipToBounds" Value="True" />
     </Style>
 
     <Style Selector="Viewbox.unit-grid-container">
