@@ -2290,17 +2290,20 @@ public sealed class VisualTests
             Resources = new WorldResourceSet(500, 0, 0, 0, 0, 0)
         };
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints, 0, leaderDefinition.Level, [], null, false);
-        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [], null, false);
-        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [], null, false);
+        WorldCityDefinition level1 = scenarioModel.Definitions.GetCity(new WorldCityDefinitionId(WorldRace.Human, 1));
+        WorldCityDefinition level2 = scenarioModel.Definitions.GetCity(new WorldCityDefinitionId(WorldRace.Human, 2));
+        UnitModifierDefinitionId protectionId = Assert.NotNull(level1.ProtectionModifierId);
+        UnitModifierDefinition protection = scenarioModel.Definitions.GetUnitModifier(protectionId);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints, 0, leaderDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
+        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
 
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)
             .AddUnit(soldierDefinition)
+            .AddUnitModifier(protection)
             .Build();
-
-        WorldCityDefinition level1 = scenarioModel.Definitions.GetCity(new WorldCityDefinitionId(WorldRace.Human, 1));
-        WorldCityDefinition level2 = scenarioModel.Definitions.GetCity(new WorldCityDefinitionId(WorldRace.Human, 2));
 
         WorldCity city = TestHelpers.SimpleCity(
             new WorldFortificationId("city"),
@@ -2331,6 +2334,7 @@ public sealed class VisualTests
             .WithDefinition(soldierDefinition)
             .WithDefinition(level1)
             .WithDefinition(level2)
+            .WithDefinition(protection)
             .WithCity(city)
             .WithStack(stack)
             .WithSubrace(TestHelpers.NeutralSubrace)
@@ -2366,9 +2370,11 @@ public sealed class VisualTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
 
-        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [], null, false);
-
         WorldCityDefinition cityDefinition = scenarioModel.Definitions.GetCity(new WorldCityDefinitionId(WorldRace.Human, 1));
+        UnitModifierDefinitionId protectionId = Assert.NotNull(cityDefinition.ProtectionModifierId);
+        UnitModifierDefinition protection = scenarioModel.Definitions.GetUnitModifier(protectionId);
+
+        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
 
         WorldCity city = TestHelpers.SimpleCity(
             new WorldFortificationId("city"),
@@ -2385,6 +2391,7 @@ public sealed class VisualTests
             .WithPlayer(player)
             .WithDefinition(soldierDefinition)
             .WithDefinition(cityDefinition)
+            .WithDefinition(protection)
             .WithCity(city)
             .WithSubrace(TestHelpers.NeutralSubrace)
             .BuildSession();
@@ -3229,9 +3236,11 @@ public sealed class VisualTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
 
-        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [], null, false);
-
         WorldCityDefinition cityDefinition = scenarioModel.Definitions.GetCity(new WorldCityDefinitionId(WorldRace.Human, 1));
+        UnitModifierDefinitionId protectionId = Assert.NotNull(cityDefinition.ProtectionModifierId);
+        UnitModifierDefinition protection = scenarioModel.Definitions.GetUnitModifier(protectionId);
+
+        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [UnitModifier.FromFortification(protection.Id)], null, false);
 
         WorldCity city = TestHelpers.SimpleCity(
             new WorldFortificationId("city"),
@@ -3248,6 +3257,7 @@ public sealed class VisualTests
             .WithPlayer(player)
             .WithDefinition(soldierDefinition)
             .WithDefinition(cityDefinition)
+            .WithDefinition(protection)
             .WithCity(city)
             .WithSubrace(TestHelpers.NeutralSubrace)
             .BuildSession();
