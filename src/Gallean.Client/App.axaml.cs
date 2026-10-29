@@ -51,7 +51,7 @@ internal sealed class App(ILog log) : Application
         GameSettingsStore gameSettingsStore = new(AppDirectories.Root);
         GameSettings gameSettings = await LoadSettingsAsync(gameSettingsStore);
 
-        Task<AudioOutput> audioOutputTask = Task.Run(() => new AudioOutput(log));
+        Task<AudioOutput> audioOutputTask = Task.Run(() => AudioOutput.CreateAsync(log));
         Task<AssetProvider> assetProviderTask = Task.Run(AssetProvider.LoadDefault);
         AudioOutput audioOutput = cleanupList.Add(await audioOutputTask);
         AssetProvider assetProvider = cleanupList.Add(await assetProviderTask);

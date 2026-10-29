@@ -12,14 +12,20 @@ internal sealed class AudioOutput : IDisposable
     private readonly MixingSampleProvider mixer = CreateMixer();
     private IWavePlayer? device;
 
-    public AudioOutput(ILog log)
+    private AudioOutput(ILog log)
     {
         this.log = log;
-
-        Start();
     }
 
     public bool IsOpen => device is not null;
+
+    public static async Task<AudioOutput> CreateAsync(ILog log)
+    {
+        AudioOutput output = new(log);
+        await output.StartAsync();
+
+        return output;
+    }
 
     public void AddInput(ISampleProvider input)
     {
@@ -41,13 +47,13 @@ internal sealed class AudioOutput : IDisposable
         };
     }
 
-    private static IWavePlayer CreateDevice()
+    private static async Task<IWavePlayer> CreateDeviceAsync()
     {
         if (OperatingSystem.IsWindows())
         {
             WasapiPlayerBuilder builder = new();
-            using var player = builder.WithDefaultDeviceStreamRouting().BuildAsync();
-            return player.Result;
+
+            return await builder.WithDefaultDeviceStreamRouting().BuildAsync();
         }
         else if (OperatingSystem.IsLinux())
         {
@@ -63,11 +69,11 @@ internal sealed class AudioOutput : IDisposable
         }
     }
 
-    private void Start()
+    private async Task StartAsync()
     {
         try
         {
-            device = CreateDevice();
+            device = await CreateDeviceAsync();
             device.PlaybackStopped += OnPlaybackStopped;
             device.Init(mixer);
             device.Play();
