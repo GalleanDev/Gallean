@@ -668,7 +668,6 @@ public sealed class BattleScreenViewModelTests
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("5"), 0),
             null,
-            null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
@@ -772,7 +771,6 @@ public sealed class BattleScreenViewModelTests
             "Damage",
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("50"), 25),
-            null,
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -889,7 +887,6 @@ public sealed class BattleScreenViewModelTests
             "Damage",
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("50"), 0),
-            null,
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -3991,7 +3988,6 @@ public sealed class BattleScreenViewModelTests
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("50"), 15),
             null,
-            null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 10)),
@@ -4611,7 +4607,6 @@ public sealed class BattleScreenViewModelTests
             "Damage",
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("5"), 0),
-            null,
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),

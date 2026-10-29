@@ -13,6 +13,7 @@ public interface IUnitStatsProvider
 
     StackStats GetWorldStackStats(WorldStack stack);
     UnitStats GetWorldUnitStats(WorldUnit unit);
+    UnitAttackStats GetWorldAttackStats(WorldUnit unit, UnitAttackDefinition attack);
     LeaderAbility GetWorldUnitAbilities(WorldUnit unit);
     int GetWorldUnitLeadership(WorldUnit unit);
     ImmutableArray<UnitWard> GetWorldUnitWards(WorldUnit unit);

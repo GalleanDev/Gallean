@@ -782,7 +782,6 @@ public sealed class StackTabViewModelTests
                     new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
                     new StatValueViewModel(TextSpans.FromText("10"), 0),
                     null,
-                    null,
                     [
                         new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                         new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
@@ -889,7 +888,6 @@ public sealed class StackTabViewModelTests
                 "Damage",
                 new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
                 new StatValueViewModel(TextSpans.FromText("10"), 0),
-                null,
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -1170,7 +1168,6 @@ public sealed class StackTabViewModelTests
                 new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
                 new StatValueViewModel(TextSpans.FromText("10"), 0),
                 null,
-                null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                     new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
@@ -1198,7 +1195,6 @@ public sealed class StackTabViewModelTests
                 "Damage",
                 new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
                 new StatValueViewModel(TextSpans.FromText("10"), 0),
-                null,
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -2172,7 +2168,6 @@ public sealed class StackTabViewModelTests
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("10"), 0),
             null,
-            null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0)),
@@ -2346,7 +2341,6 @@ public sealed class StackTabViewModelTests
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("10"), 5),
             null,
-            null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 15)),
@@ -2467,7 +2461,6 @@ public sealed class StackTabViewModelTests
             "Damage",
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("10"), 0),
-            null,
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -2797,7 +2790,6 @@ public sealed class StackTabViewModelTests
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
             new StatValueViewModel(TextSpans.FromText("15"), 0),
             null,
-            null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
                 new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("15"), 0)),
@@ -2885,7 +2877,6 @@ public sealed class StackTabViewModelTests
             "Summon",
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceDeath, "Death", Theme.AttackSource.DeathColor),
             new StatValueViewModel(TextSpans.FromText("—"), 0),
-            null,
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -2989,7 +2980,6 @@ public sealed class StackTabViewModelTests
                 "Damage",
                 new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
                 new StatValueViewModel(TextSpans.FromText("10"), 0),
-                null,
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -3151,7 +3141,6 @@ public sealed class StackTabViewModelTests
             "Damage",
             new UnitAttackSourceViewModel(IconMoniker.AttackSourceFire, "Fire", Theme.AttackSource.FireColor),
             new StatValueViewModel(TextSpans.FromText("10"), 0),
-            null,
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Melee)", TextStyle.Italic)]), 0)),

@@ -311,4 +311,20 @@ public sealed class UnitStatsProviderTests
 
         Assert.That(experience, Is.EqualTo(new UnitExperience(Current: 0, NextLevel: 100, CanGainExperience: true, IsMaximumLevel: false, IsPendingUpgrade: false)));
     }
+
+    [Test]
+    public void WorldSecondaryAttackTest()
+    {
+        UnitAttackDefinition poison = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("poison"), initiative: 50, damage: 10, accuracy: 80, reach: UnitAttackReach.Any) with { Type = UnitAttackType.Poison };
+        UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { SecondaryAttack = poison };
+        UnitModifierDefinition might = TestHelpers.SimpleModifier("might") with { Damage = new UnitStatModifier(0, 100) };
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(definition).AddUnitModifier(might).Build();
+        GlobalVariables globals = new();
+
+        WorldUnit unit = TestHelpers.SimpleUnit(new WorldUnitId("unit"), definition) with { Modifiers = [UnitModifier.Permanent(might.Id)] };
+        UnitStatsProvider provider = new(definitions, globals, GameScenarioProvider.Empty.Definition);
+
+        Assert.That(provider.GetWorldAttackStats(unit, definition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 50, Heal: 0, DrainPercent: 0)));
+        Assert.That(provider.GetWorldAttackStats(unit, poison), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 10, Heal: 0, DrainPercent: 0)));
+    }
 }

@@ -120,6 +120,19 @@
     <Style Selector="StackPanel.attack-line.secondary > TextBlock.attack-type">
       <Setter Property="Margin" Value="0" />
     </Style>
+    <Style Selector="StackPanel.damage-over-time">
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="5" />
+      <Setter Property="Margin" Value="6,6,0,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="StackPanel.damage-over-time > local|OutlinedTextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.damage-over-time > local|OutlinedTextBlock.separator">
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    </Style>
     <Style Selector="StackPanel.attack-line.secondary > TextBlock.attack-source">
       <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
     </Style>
@@ -211,7 +224,7 @@
 
         <Rectangle Classes="details-rule" />
 
-        <Grid ColumnDefinitions="Auto,Auto,*">
+        <Grid ColumnDefinitions="Auto,Auto,Auto,*">
           <local:OutlinedTextBlock Grid.Column="0"
                                    Classes="h1 primary-stat"
                                    Text="{Binding Damage.Text.Text}"
@@ -221,7 +234,16 @@
                                    Classes.decrease="{Binding Damage.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}"
                                    Text="{Binding Damage.ChangeText}"
                                    VerticalAlignment="Center" />
-          <StackPanel Grid.Column="2" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
+          <StackPanel Grid.Column="2"
+                      Classes="damage-over-time"
+                      ToolTip.Tip="{Binding DamageOverTime.Text}"
+                      IsVisible="{Binding DamageOverTime, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <local:OutlinedTextBlock Classes="h3 separator" Text="/" />
+            <local:OutlinedTextBlock Classes="h3"
+                                     Text="{Binding DamageOverTime.Damage}"
+                                     Foreground="{Binding DamageOverTime.Status.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+          </StackPanel>
+          <StackPanel Grid.Column="3" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
             <StackPanel Classes="attack-line">
               <TextBlock Text="{Binding AttackText}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
               <TextBlock Text="(" Classes="caption attack-source open" />
@@ -233,15 +255,15 @@
                          Foreground="{Binding AttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
               <TextBlock Text=")" Classes="caption attack-source close" />
             </StackPanel>
-            <StackPanel Classes="attack-line secondary" IsVisible="{Binding SecondaryAttackText, Converter={x:Static ObjectConverters.IsNotNull}}">
-              <TextBlock Text="{Binding SecondaryAttackText}" Classes="caption attack-type" Foreground="{StaticResource SecondaryTextBrush}" />
+            <StackPanel Classes="attack-line secondary" IsVisible="{Binding SecondaryAttack, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <TextBlock Text="{Binding SecondaryAttack.Text}" Classes="caption attack-type" Foreground="{StaticResource SecondaryTextBrush}" />
               <TextBlock Text="(" Classes="caption attack-source open" />
               <local:IconVisual Classes="attack-source"
-                                Moniker="{Binding SecondaryAttackSource.Icon}"
-                                Foreground="{Binding SecondaryAttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
-              <TextBlock Text="{Binding SecondaryAttackSource.Text}"
+                                Moniker="{Binding SecondaryAttack.Source.Icon}"
+                                Foreground="{Binding SecondaryAttack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+              <TextBlock Text="{Binding SecondaryAttack.Source.Text}"
                          Classes="caption attack-source"
-                         Foreground="{Binding SecondaryAttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                         Foreground="{Binding SecondaryAttack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
               <TextBlock Text=")" Classes="caption attack-source close" />
             </StackPanel>
           </StackPanel>

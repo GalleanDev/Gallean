@@ -152,19 +152,7 @@ public sealed class UnitStatsProvider(
         BattleUnit unit = state.GetUnit(unitId);
         UnitDefinition definition = definitions.GetUnit(unit.DefinitionId);
 
-        UnitAttackStats stats;
-        if (attack.Id == definition.Attack.Id || attack.Id == definition.Attack.AlternativeAttackId)
-        {
-            stats = UnitAttackStatsCalculator.CalculateForUnit(definition, attack, unit.Level, unit.Modifiers, definitions, globals);
-        }
-        else if (attack.Id == definition.SecondaryAttack?.Id)
-        {
-            stats = UnitAttackStatsCalculator.CalculateForUnit(definition, attack, unit.Level, [], definitions, globals);
-        }
-        else
-        {
-            stats = UnitAttackStatsCalculator.CalculateForItem(attack, globals);
-        }
+        UnitAttackStats stats = GetAttackStats(definition, unit.Level, unit.Modifiers, attack);
 
         int damageChange = 0;
 
@@ -180,6 +168,22 @@ public sealed class UnitStatsProvider(
             Damage = Math.Min(stats.Damage + damageChange, globals.MaxAttackDamage),
             Accuracy = Math.Clamp(stats.Accuracy + sideModifiers.AccuracyBonus, 0, globals.MaxAttackAccuracy)
         };
+    }
+
+    private UnitAttackStats GetAttackStats(UnitDefinition definition, int level, ImmutableArray<UnitModifier> modifiers, UnitAttackDefinition attack)
+    {
+        if (attack.Id == definition.Attack.Id || attack.Id == definition.Attack.AlternativeAttackId)
+        {
+            return UnitAttackStatsCalculator.CalculateForUnit(definition, attack, level, modifiers, definitions, globals);
+        }
+        else if (attack.Id == definition.SecondaryAttack?.Id)
+        {
+            return UnitAttackStatsCalculator.CalculateForUnit(definition, attack, level, [], definitions, globals);
+        }
+        else
+        {
+            return UnitAttackStatsCalculator.CalculateForItem(attack, globals);
+        }
     }
 
     public LeaderAbility GetBattleUnitAbilities(BattleState state, BattleUnitId unitId)
@@ -217,6 +221,11 @@ public sealed class UnitStatsProvider(
     public UnitStats GetWorldUnitStats(WorldUnit unit)
     {
         return UnitStatsCalculator.GetStats(definitions.GetUnit(unit.DefinitionId), unit.Level, unit.Modifiers, definitions, globals);
+    }
+
+    public UnitAttackStats GetWorldAttackStats(WorldUnit unit, UnitAttackDefinition attack)
+    {
+        return GetAttackStats(definitions.GetUnit(unit.DefinitionId), unit.Level, unit.Modifiers, attack);
     }
 
     public LeaderAbility GetWorldUnitAbilities(WorldUnit unit)

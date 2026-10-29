@@ -4856,6 +4856,49 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task DetailsDamageOverTimeTest()
+    {
+        GameModel gameModel = LoadScenario(null);
+
+        Window window = new()
+        {
+            WindowState = WindowState.Normal,
+            SizeToContent = SizeToContent.Manual,
+            Width = BaseWidth,
+            Height = BaseHeight,
+            Background = new SolidColorBrush(Theme.Common.WindowBackgroundColor)
+        };
+
+        AssetScope.SetAssets(window, assets);
+        RegisterWindow(window);
+        window.Show();
+
+        foreach ((string step, UnitDefinitionId definitionId) in new[]
+        {
+            ("poison", new UnitDefinitionId("G000UU0154")),
+            ("frostbite", new UnitDefinitionId("G000UU0159")),
+            ("blister", new UnitDefinitionId("G000UU0169")),
+            ("paralyze", new UnitDefinitionId("G000UU5033")),
+            ("none", new UnitDefinitionId("G000UU0019"))
+        })
+        {
+            UnitDefinition definition = gameModel.Definitions.GetUnit(definitionId);
+            WorldUnit unit = new(new WorldUnitId(step), definition.Id, definition.MaxHitpoints, 0, definition.Level, [], null, false);
+            UnitDetailsViewModel unitDetails = UnitDetailsViewModel.CreateFromWorld(unit, null, gameModel.Definitions, gameModel.Texts, gameModel.Stats);
+
+            window.Content = new ContentControl
+            {
+                Content = unitDetails,
+                ClipToBounds = false,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            await CaptureAsync(window, step);
+        }
+    }
+
+    [AvaloniaTest]
     public async Task DetailsUnitUpgradeBlockedTest()
     {
         GameModel gameModel = LoadScenario(null);

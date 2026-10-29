@@ -20,8 +20,7 @@ internal sealed record UnitDetailsViewModel(
     string AttackText,
     UnitAttackSourceViewModel AttackSource,
     StatValueViewModel Damage,
-    string? SecondaryAttackText,
-    UnitAttackSourceViewModel? SecondaryAttackSource,
+    UnitSecondaryAttackViewModel? SecondaryAttack,
     IReadOnlyList<StatRowViewModel> Stats,
     UnitWardGridViewModel? Immunities,
     UnitWardGridViewModel? Wards,
@@ -46,6 +45,8 @@ internal sealed record UnitDetailsViewModel(
     public static WorldUnitId PreviewUnitId { get; } = new("preview");
 
     public string LevelText => Tr("Level {0}", Level);
+
+    public UnitDamageOverTimeViewModel? DamageOverTime => SecondaryAttack?.DamageOverTime;
 
     public bool Equals(UnitDetailsViewModel? other)
     {
@@ -74,8 +75,7 @@ internal sealed record UnitDetailsViewModel(
                AttackText == other.AttackText &&
                AttackSource == other.AttackSource &&
                Damage == other.Damage &&
-               SecondaryAttackText == other.SecondaryAttackText &&
-               SecondaryAttackSource == other.SecondaryAttackSource &&
+               SecondaryAttack == other.SecondaryAttack &&
                Stats.SequenceEqual(other.Stats) &&
                Immunities == other.Immunities &&
                Wards == other.Wards &&
@@ -127,6 +127,17 @@ internal sealed record UnitDetailsViewModel(
             texts);
         bool isUpgradeBlocked = CheckUpgradeBlocked(unit.DefinitionId, unit.IsTypeLocked, experience, owner, stats);
 
+        UnitSecondaryAttackViewModel? secondaryAttack;
+        if (definition.SecondaryAttack is not null)
+        {
+            UnitAttackStats secondaryAttackStats = stats.GetBattleAttackStats(state, unitId, definition.SecondaryAttack);
+            secondaryAttack = UnitSecondaryAttackViewModel.Create(definition.SecondaryAttack, secondaryAttackStats.Damage);
+        }
+        else
+        {
+            secondaryAttack = null;
+        }
+
         return Build(
             unit.DefinitionId,
             definition,
@@ -134,6 +145,7 @@ internal sealed record UnitDetailsViewModel(
             unitStats,
             baseStats,
             attackStats.Damage,
+            secondaryAttack,
             unit.Hitpoints,
             unit.Level,
             experience,
@@ -169,6 +181,17 @@ internal sealed record UnitDetailsViewModel(
             definitions,
             texts);
 
+        UnitSecondaryAttackViewModel? secondaryAttack;
+        if (definition.SecondaryAttack is not null)
+        {
+            UnitAttackStats secondaryAttackStats = stats.GetWorldAttackStats(unit, definition.SecondaryAttack);
+            secondaryAttack = UnitSecondaryAttackViewModel.Create(definition.SecondaryAttack, secondaryAttackStats.Damage);
+        }
+        else
+        {
+            secondaryAttack = null;
+        }
+
         return Build(
             unit.DefinitionId,
             definition,
@@ -176,6 +199,7 @@ internal sealed record UnitDetailsViewModel(
             unitStats,
             baseStats,
             unitStats.Damage,
+            secondaryAttack,
             unit.Hitpoints,
             unit.Level,
             experience,
@@ -212,6 +236,7 @@ internal sealed record UnitDetailsViewModel(
         UnitStats unitStats,
         UnitStats baseStats,
         int attackDamage,
+        UnitSecondaryAttackViewModel? secondaryAttack,
         int hitpoints,
         int level,
         UnitExperience experience,
@@ -235,19 +260,6 @@ internal sealed record UnitDetailsViewModel(
         else
         {
             damage = new StatValueViewModel(TextSpans.FromText("—"), 0);
-        }
-
-        string? secondaryAttackText;
-        UnitAttackSourceViewModel? secondaryAttackSource;
-        if (definition.SecondaryAttack is not null)
-        {
-            secondaryAttackText = FormatAttack(definition.SecondaryAttack, attacksTwice: false);
-            secondaryAttackSource = UnitAttackSourceViewModel.Create(definition.SecondaryAttack.Source);
-        }
-        else
-        {
-            secondaryAttackText = null;
-            secondaryAttackSource = null;
         }
 
         int currentExperience;
@@ -296,8 +308,7 @@ internal sealed record UnitDetailsViewModel(
             FormatAttack(definition.Attack, definition.AttacksTwice),
             UnitAttackSourceViewModel.Create(definition.Attack.Source),
             damage,
-            secondaryAttackText,
-            secondaryAttackSource,
+            secondaryAttack,
             rows,
             CreateWardGrid(wards, UnitWardCategory.Always),
             CreateWardGrid(wards, UnitWardCategory.Once),
@@ -401,8 +412,7 @@ internal sealed record UnitDetailsViewModel(
         hash.Add(AttackText);
         hash.Add(AttackSource);
         hash.Add(Damage);
-        hash.Add(SecondaryAttackText);
-        hash.Add(SecondaryAttackSource);
+        hash.Add(SecondaryAttack);
         hash.AddSequence(Stats);
         hash.Add(Immunities);
         hash.Add(Wards);
