@@ -8,7 +8,9 @@ public sealed class LeaderAbilityFormatterTests
     [Test]
     public void OriginalNamesTest()
     {
-        (_, IGameTextProvider texts, _) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (_, IGameTextProvider texts, _) = gameLoader.LoadCampaigns();
+
         LeaderAbility abilities =
             LeaderAbility.Zealot |
             LeaderAbility.Incorruptible |
