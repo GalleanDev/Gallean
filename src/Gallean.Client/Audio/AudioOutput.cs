@@ -46,8 +46,8 @@ internal sealed class AudioOutput : IDisposable
         if (OperatingSystem.IsWindows())
         {
             WasapiPlayerBuilder builder = new();
-
-            return builder.Build();
+            using var player = builder.WithDefaultDeviceStreamRouting().BuildAsync();
+            return player.Result;
         }
         else if (OperatingSystem.IsLinux())
         {
