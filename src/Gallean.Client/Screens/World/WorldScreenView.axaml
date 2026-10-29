@@ -129,7 +129,7 @@
         <Button Classes="pill" local:PlateChrome.TextureSeed="3" Command="{Binding OpenQuestCommand}">
           <StackPanel Orientation="Horizontal" Spacing="8">
             <local:IconVisual Moniker="Quest" />
-            <TextBlock Text="{local:Text 'Quest'}" />
+            <local:HotkeyLabel Text="{local:Text 'Quest'}" Hotkey="U" />
           </StackPanel>
         </Button>
       </StackPanel>
