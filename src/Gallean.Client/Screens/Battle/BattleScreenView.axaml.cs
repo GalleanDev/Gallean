@@ -78,11 +78,20 @@ internal sealed partial class BattleScreenView : UserControl
 
     private void OnGridTilePointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is Control { DataContext: BattleGridTileViewModel tile })
+        if (sender is Control { DataContext: BattleGridTileViewModel tile } control)
         {
             PointerPoint point = e.GetCurrentPoint(this);
 
-            if (point.Properties.IsLeftButtonPressed)
+            if (point.Properties.IsRightButtonPressed)
+            {
+                if (ViewModel.TryShowUnitDetails(tile.Tile))
+                {
+                    SetDetailsOpen(control, true);
+                    e.Pointer.Capture(control);
+                    e.Handled = true;
+                }
+            }
+            else if (point.Properties.IsLeftButtonPressed)
             {
                 ViewModel.ClickAsync(tile.Tile).FileAndForget();
                 e.Handled = true;
@@ -106,7 +115,7 @@ internal sealed partial class BattleScreenView : UserControl
         }
     }
 
-    private void OnGridUnitPointerReleased(object? sender, PointerReleasedEventArgs e)
+    private void OnGridPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         if (e.InitialPressMouseButton == MouseButton.Right)
         {
@@ -115,7 +124,7 @@ internal sealed partial class BattleScreenView : UserControl
         }
     }
 
-    private void OnGridUnitPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
+    private void OnGridPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         ViewModel.HideUnitDetails();
         SetDetailsOpen(sender, false);

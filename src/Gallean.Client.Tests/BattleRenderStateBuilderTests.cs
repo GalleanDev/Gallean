@@ -1734,8 +1734,8 @@ public sealed class BattleRenderStateBuilderTests
                     Hitpoints: 0,
                     MaxHitpoints: 60,
                     Presence: BattleUnitState.Presence.Dead,
-                    Marker: Theme.Battle.GroundMarker.SummonReachableColor,
-                    Highlight: Theme.Battle.Highlight.SummonReachableColor,
+                    Marker: null,
+                    Highlight: null,
                     Auras: BattleUnitState.Auras.None,
                     Frozen: false),
                 new BattleRenderState.Unit(
@@ -1773,6 +1773,7 @@ public sealed class BattleRenderStateBuilderTests
             ],
             Placeholders:
             [
+                new BattleRenderState.Placeholder(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop), Theme.Battle.GroundMarker.SummonReachableColor),
                 new BattleRenderState.Placeholder(new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter), Theme.Battle.GroundMarker.SummonTargetColor)
             ],
             HitTargets:
@@ -1780,6 +1781,7 @@ public sealed class BattleRenderStateBuilderTests
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop), new Rect(520.411, 233.566, 44.66, 30.45)),
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter), new Rect(401.781, 242.818, 82.56, 123.84)),
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Defender, GridPosition.FrontCenter), new Rect(496.791, 313.946, 84.4, 126.6)),
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop), new Rect(502.141, 178.756, 81.2, 81.2)),
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter), new Rect(282.421, 158.374, 80.64, 80.64))
             ],
             BattleLightConfiguration.MakeMidday([]),

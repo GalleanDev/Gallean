@@ -95,7 +95,7 @@ internal sealed class BattleRenderStateBuilder(
             int columnSpan = isLarge ? 2 : 1;
             BattleGridTile tile = new(side, position);
             BattleSide facing = GetFacing(unit, side);
-            HighlightType highlightType = ResolveHighlightType(tile);
+            HighlightType highlightType = ResolveUnitHighlightType(tile);
             Color? marker = ResolveGridMarker(highlightType);
             Presence presence = ResolvePresence(unit);
             bool isCurrent = IsUnitCurrent(unit, presence);
@@ -144,12 +144,12 @@ internal sealed class BattleRenderStateBuilder(
     {
         List<BattleGridTileViewModel> tiles = [];
 
-        foreach (BattleGridTile tile in GetFreeSummonTiles())
+        foreach (BattleGridTile tile in GetSummonTiles())
         {
             if (tile.Side == side)
             {
                 (int row, int column) = GetPanelCell(tile.Position, isLarge: false, isFacingRight);
-                HighlightType highlightType = ResolveHighlightType(tile);
+                HighlightType highlightType = ResolvePlaceholderHighlightType(tile);
 
                 tiles.Add(new BattleGridTileViewModel(tile, row, column, ResolveGridMarker(highlightType)));
             }
@@ -214,9 +214,9 @@ internal sealed class BattleRenderStateBuilder(
     {
         List<Placeholder> result = [];
 
-        foreach (BattleGridTile tile in GetFreeSummonTiles())
+        foreach (BattleGridTile tile in GetSummonTiles())
         {
-            HighlightType highlightType = ResolveHighlightType(tile);
+            HighlightType highlightType = ResolvePlaceholderHighlightType(tile);
 
             result.Add(new Placeholder(tile, ResolveGroundMarker(highlightType)));
         }
@@ -247,7 +247,7 @@ internal sealed class BattleRenderStateBuilder(
         return BattleRenderDepth.GetUnitDepth(unit.Footprint);
     }
 
-    private IReadOnlyList<BattleGridTile> GetFreeSummonTiles()
+    private IReadOnlyList<BattleGridTile> GetSummonTiles()
     {
         List<BattleGridTile> tiles = [];
 
@@ -255,12 +255,7 @@ internal sealed class BattleRenderStateBuilder(
         {
             if (target is BattleActionTarget.Summon)
             {
-                UnitGrid<BattleUnit> grid = baseState.GetGrid(tile.Side);
-
-                if (grid[tile.Position] is null)
-                {
-                    tiles.Add(tile);
-                }
+                tiles.Add(tile);
             }
         }
 
@@ -344,7 +339,7 @@ internal sealed class BattleRenderStateBuilder(
             BattleGridTile tile = new(side, position);
             BattleSide facing = GetFacing(unit, side);
             Presence presence = ResolvePresence(unit);
-            HighlightType highlightType = ResolveHighlightType(tile);
+            HighlightType highlightType = ResolveUnitHighlightType(tile);
             Color? marker = ResolveGroundMarker(highlightType);
             Color? highlight = ResolveHighlight(highlightType);
             Auras auras = Auras.Resolve(assets, definitionId, facing);
@@ -477,7 +472,14 @@ internal sealed class BattleRenderStateBuilder(
                ResolvePresence(tileUnit) == Presence.Alive;
     }
 
-    private HighlightType ResolveHighlightType(BattleGridTile tile)
+    private HighlightType ResolvePlaceholderHighlightType(BattleGridTile tile)
+    {
+        bool isTarget = selectedTarget is BattleActionTarget.Summon summon && summon.Tiles.Contains(tile);
+
+        return isTarget ? HighlightType.SummonTarget : HighlightType.SummonReachable;
+    }
+
+    private HighlightType ResolveUnitHighlightType(BattleGridTile tile)
     {
         if (baseState.Outcome is not null)
         {
@@ -489,7 +491,6 @@ internal sealed class BattleRenderStateBuilder(
         BattleUnit currentUnit = baseState.GetUnit(baseState.CurrentUnitId);
         bool isAlly = tile.Side == currentUnit.Side;
         bool isTarget = tileUnit is not null && selectedTarget is BattleActionTarget.Unit unit && unit.Units.Contains(tileUnit.Id);
-        bool isTargetSummon = selectedTarget is BattleActionTarget.Summon summon && summon.Tiles.Contains(tile);
 
         if (isTarget)
         {
@@ -501,13 +502,11 @@ internal sealed class BattleRenderStateBuilder(
         }
         else
         {
-            if (actionTargets.TryGetValue(tile, out BattleActionTarget? actionTarget))
+            BattleActionTarget? actionTarget = actionTargets.GetValueOrDefault(tile);
+
+            if (actionTarget is BattleActionTarget.Unit)
             {
-                if (actionTarget is BattleActionTarget.Summon)
-                {
-                    return isTargetSummon ? HighlightType.SummonTarget : HighlightType.SummonReachable;
-                }
-                else if (isAlly)
+                if (isAlly)
                 {
                     return HighlightType.AllyReachable;
                 }

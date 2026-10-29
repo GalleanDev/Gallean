@@ -741,20 +741,18 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         foreach (BattleGridTile tile in EnumerateAllTiles())
         {
             BattleUnit? unit = FindUnit(tile);
+            BattleAttackTileTarget tileTarget = new(tile.Side, tile.Position);
 
-            BattleAttackTarget target;
-            if (unit is not null)
+            if (targetActions.TryGetValue(tileTarget, out TileAction? tileAction))
             {
-                target = new BattleAttackUnitTarget(unit.Id);
+                actions[tile] = tileAction;
             }
-            else
+            else if (unit is not null)
             {
-                target = new BattleAttackTileTarget(tile.Side, tile.Position);
-            }
-
-            if (targetActions.TryGetValue(target, out TileAction? action))
-            {
-                actions[tile] = action;
+                if (targetActions.TryGetValue(new BattleAttackUnitTarget(unit.Id), out TileAction? unitAction))
+                {
+                    actions[tile] = unitAction;
+                }
             }
         }
 

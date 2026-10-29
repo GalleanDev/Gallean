@@ -227,6 +227,10 @@
       <Style Selector="^:free /template/ Panel#PART_Portrait">
         <Setter Property="IsVisible" Value="False" />
       </Style>
+
+      <Style Selector="^.frame /template/ Border#PART_Background, ^.frame /template/ Border#PART_InnerShadow">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
     </ControlTheme>
   </Styles.Resources>
 </Styles>

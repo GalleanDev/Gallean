@@ -219,14 +219,9 @@ internal static partial class BattleItemCalculator
 
         foreach (BattleSide side in Enum.GetValues<BattleSide>())
         {
-            UnitGrid<BattleUnit> grid = state.GetGrid(side);
-
             foreach (GridPosition position in GridPosition.All)
             {
-                if (grid[position] is null)
-                {
-                    yield return new BattleAttackTileTarget(side, position);
-                }
+                yield return new BattleAttackTileTarget(side, position);
             }
         }
     }

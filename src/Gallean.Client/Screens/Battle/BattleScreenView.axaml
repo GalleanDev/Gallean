@@ -30,10 +30,20 @@
     </ControlTheme>
 
     <DataTemplate x:Key="GridTileTemplate" x:DataType="local:BattleGridTileViewModel">
-      <local:UnitPortrait PointerPressed="OnGridTilePointerPressed"
-                          PointerMoved="OnGridTilePointerMoved"
-                          PointerExited="OnGridPointerExited"
-                          Marker="{Binding Marker, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+      <Panel Background="Transparent"
+             PointerPressed="OnGridTilePointerPressed"
+             PointerMoved="OnGridTilePointerMoved"
+             PointerExited="OnGridPointerExited"
+             PointerReleased="OnGridPointerReleased"
+             PointerCaptureLost="OnGridPointerCaptureLost">
+        <local:UnitPortrait Classes="frame" Marker="{Binding Marker, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+        <Popup Placement="Custom" CustomPopupPlacementCallback="PlaceUnitDetails" IsLightDismissEnabled="False">
+          <ContentControl Classes="cached details-host"
+                          Content="{Binding #Screen.((local:BattleScreenViewModel)DataContext).InspectedUnit}"
+                          ClipToBounds="False"
+                          IsHitTestVisible="False" />
+        </Popup>
+      </Panel>
     </DataTemplate>
 
     <DataTemplate x:Key="ActionButtonsTemplate" x:DataType="local:BattleScreenViewModel">
@@ -141,8 +151,8 @@
              PointerPressed="OnGridUnitPointerPressed"
              PointerMoved="OnGridUnitPointerMoved"
              PointerExited="OnGridPointerExited"
-             PointerReleased="OnGridUnitPointerReleased"
-             PointerCaptureLost="OnGridUnitPointerCaptureLost">
+             PointerReleased="OnGridPointerReleased"
+             PointerCaptureLost="OnGridPointerCaptureLost">
         <local:UnitPortrait FaceKey="{Binding FaceKey}"
                             local:PortraitScope.IsFacingLeft="{Binding Facing, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static contracts:BattleSide.Defender}}"
                             Hitpoints="{Binding Hitpoints}"
@@ -284,20 +294,20 @@
                 <local:UnitPortrait Grid.Row="2" Grid.Column="0" />
                 <local:UnitPortrait Grid.Row="2" Grid.Column="1" />
               </Grid>
-              <ItemsControl ItemsSource="{Binding AttackerGrid.Tiles}"
+              <ItemsControl ItemsSource="{Binding AttackerGrid.Units}"
                             ClipToBounds="False"
-                            ItemTemplate="{StaticResource GridTileTemplate}"
-                            ItemContainerTheme="{StaticResource GridTileContainerTheme}">
+                            ItemTemplate="{StaticResource GridUnitTemplate}"
+                            ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
-              <ItemsControl ItemsSource="{Binding AttackerGrid.Units}"
+              <ItemsControl ItemsSource="{Binding AttackerGrid.Tiles}"
                             ClipToBounds="False"
-                            ItemTemplate="{StaticResource GridUnitTemplate}"
-                            ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
+                            ItemTemplate="{StaticResource GridTileTemplate}"
+                            ItemContainerTheme="{StaticResource GridTileContainerTheme}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
@@ -321,20 +331,20 @@
                 <local:UnitPortrait Grid.Row="2" Grid.Column="0" />
                 <local:UnitPortrait Grid.Row="2" Grid.Column="1" />
               </Grid>
-              <ItemsControl ItemsSource="{Binding DefenderGrid.Tiles}"
+              <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
                             ClipToBounds="False"
-                            ItemTemplate="{StaticResource GridTileTemplate}"
-                            ItemContainerTheme="{StaticResource GridTileContainerTheme}">
+                            ItemTemplate="{StaticResource GridUnitTemplate}"
+                            ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
-              <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
+              <ItemsControl ItemsSource="{Binding DefenderGrid.Tiles}"
                             ClipToBounds="False"
-                            ItemTemplate="{StaticResource GridUnitTemplate}"
-                            ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
+                            ItemTemplate="{StaticResource GridTileTemplate}"
+                            ItemContainerTheme="{StaticResource GridTileContainerTheme}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" />

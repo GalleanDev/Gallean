@@ -423,11 +423,13 @@ public sealed class BattleEngineTransformSelfAttackTests
         [
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackUnitTarget(attacker.Id), [new BattleAttackUnitTarget(attacker.Id)], null),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackUnitTarget(defender.Id), [], BattleCommandError.CanOnlyTransformSelf),
+            new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontBottom), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontCenter), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackBottom), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackCenter), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackTop), [], BattleCommandError.AttackRequiresUnitTarget),
+            new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontBottom), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontCenter), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontTop), [], BattleCommandError.AttackRequiresUnitTarget),
             new BattleGetAttackInfoCommand.AttackInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackBottom), [], BattleCommandError.AttackRequiresUnitTarget),
