@@ -605,13 +605,13 @@ internal static class Theme
 
         public static class Highlight
         {
-            public static Color CurrentColor { get; } = Color.FromArgb(110, 243, 217, 147);
-            public static Color EnemyTargetColor { get; } = Color.FromArgb(150, 232, 36, 36);
-            public static Color EnemyReachableColor { get; } = Color.FromArgb(60, 232, 36, 36);
-            public static Color AllyTargetColor { get; } = Color.FromArgb(150, 96, 164, 255);
-            public static Color AllyReachableColor { get; } = Color.FromArgb(60, 96, 164, 255);
-            public static Color SummonTargetColor { get; } = Color.FromArgb(150, 120, 224, 132);
-            public static Color SummonReachableColor { get; } = Color.FromArgb(60, 120, 224, 132);
+            public static Color CurrentColor { get; } = Color.FromArgb(73, 243, 217, 147);
+            public static Color EnemyTargetColor { get; } = Color.FromArgb(100, 232, 36, 36);
+            public static Color EnemyReachableColor { get; } = Color.FromArgb(40, 232, 36, 36);
+            public static Color AllyTargetColor { get; } = Color.FromArgb(100, 96, 164, 255);
+            public static Color AllyReachableColor { get; } = Color.FromArgb(40, 96, 164, 255);
+            public static Color SummonTargetColor { get; } = Color.FromArgb(100, 120, 224, 132);
+            public static Color SummonReachableColor { get; } = Color.FromArgb(40, 120, 224, 132);
         }
 
         public static class StatusEffect
