@@ -57,6 +57,7 @@ internal static class BattleRenderLayout
     public static Matrix SceneToGroundTransform { get; } = GroundToSceneTransform.Invert();
 
     private static double CameraElevation { get; } = ComputeCameraElevation();
+    public static Rect BackgroundBounds { get; } = new((SceneWidth - BackgroundWidth) / 2.0, 0, BackgroundWidth, SceneHeight);
     public static Point BattlefieldCenter { get; } = new(475, 350.3);
     public static Vector3D GroundNormal { get; } = new(0, -Math.Cos(CameraElevation), Math.Sin(CameraElevation));
     public static double GroundDepthPerPixel { get; } = 1.0 / Math.Sin(CameraElevation);
@@ -149,7 +150,7 @@ internal static class BattleRenderLayout
 
     public static Matrix GetViewMatrix(double viewportWidth, double viewportHeight)
     {
-        double scale = GetSceneScale(viewportWidth, viewportHeight);
+        double scale = GetSceneScale(viewportHeight);
 
         return Matrix.CreateScale(scale, scale) * Matrix.CreateTranslation(GetSceneOriginX(viewportWidth, scale), 0);
     }
@@ -285,9 +286,9 @@ internal static class BattleRenderLayout
         return new Point(Round(point.X), Round(point.Y));
     }
 
-    private static double GetSceneScale(double viewportWidth, double viewportHeight)
+    private static double GetSceneScale(double viewportHeight)
     {
-        return Math.Max(viewportWidth / BackgroundWidth, viewportHeight / SceneHeight);
+        return viewportHeight / SceneHeight;
     }
 
     private static double GetSceneOriginX(double viewportWidth, double scale)

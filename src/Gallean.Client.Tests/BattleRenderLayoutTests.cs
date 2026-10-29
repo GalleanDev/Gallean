@@ -50,9 +50,15 @@ public sealed class BattleRenderLayoutTests
     }
 
     [Test]
-    public void BackgroundWidthViewTest()
+    public void BackgroundBoundsTest()
     {
-        Assert.That(BattleRenderLayout.GetViewMatrix(2880, 600), Is.EqualTo(new Matrix(2, 0, 0, 2, 490, 0)));
+        Assert.That(BattleRenderLayout.BackgroundBounds, Is.EqualTo(new Rect(-245.0, 0.0, 1440.0, 600.0)));
+    }
+
+    [Test]
+    public void SceneHeightSuperUltraWideViewTest()
+    {
+        Assert.That(BattleRenderLayout.GetViewMatrix(5120, 1440), Is.EqualTo(new Matrix(2.4, 0.0, 0.0, 2.4, 1420, 0)));
     }
 
     [Test]

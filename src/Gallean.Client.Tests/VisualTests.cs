@@ -6242,6 +6242,54 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task BattleSuperUltraWideTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        BattleStateBuilder builder = new(gameModel.Definitions);
+
+        builder.Add(MakeBattleUnit(0, new UnitDefinitionId("g000uu0070"), BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(1, new UnitDefinitionId("g000uu0071"), BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(2, new UnitDefinitionId("g000uu0073"), BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(3, new UnitDefinitionId("g000uu0052"), BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(4, new UnitDefinitionId("g000uu0062"), BattleSide.Attacker, gameModel));
+        builder.Add(MakeBattleUnit(5, new UnitDefinitionId("g000uu0072"), BattleSide.Attacker, gameModel));
+
+        builder.Add(MakeBattleUnit(6, new UnitDefinitionId("g000uu5017"), BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(7, new UnitDefinitionId("g000uu5113"), BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(8, new UnitDefinitionId("g000uu5030"), BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(9, new UnitDefinitionId("g000uu5018"), BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(10, new UnitDefinitionId("g000uu5034"), BattleSide.Defender, gameModel));
+        builder.Add(MakeBattleUnit(11, new UnitDefinitionId("g000uu5031"), BattleSide.Defender, gameModel));
+
+        EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
+
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                engine,
+                builder.Build(BattleModifiers.None),
+                NullBattleUnitUpgradeResolver.Instance,
+                _ => { },
+                isAttackerAi: false,
+                isDefenderAi: false,
+                canAutoResolve: true,
+                new WorldPosition(44, 32)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1920, 720);
+
+        gameViewModel.ShowScreen(new BattleScreenViewModel(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0)));
+
+        await WaitForBattleAsync(window);
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task BattleInterleavedRowsTest()
     {
         using Sandbox sb = Sandbox.Create();

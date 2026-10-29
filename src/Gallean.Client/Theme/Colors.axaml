@@ -897,6 +897,7 @@
   <SolidColorBrush x:Key="BattleLightGlowingWaterBrush" Color="{x:Static local:Theme+Battle+Light.GlowingWaterColor}" />
   <SolidColorBrush x:Key="BattleLightGhostCrystalBrush" Color="{x:Static local:Theme+Battle+Light.GhostCrystalColor}" />
   <SolidColorBrush x:Key="BattleLightStormBrush" Color="{x:Static local:Theme+Battle+Light.StormColor}" />
+  <SolidColorBrush x:Key="BattleBackdropBrush" Color="{x:Static local:Theme+Battle.BackdropColor}" />
 
   <SolidColorBrush x:Key="WorldBackdropBrush" Color="{x:Static local:Theme+World.BackdropColor}" />
   <SolidColorBrush x:Key="WorldHoverCursorInnerBrush" Color="{x:Static local:Theme+World.HoverCursorInnerColor}" />

@@ -720,6 +720,8 @@ internal static class Theme
             public static Color GhostCrystalColor { get; } = Color.FromRgb(133, 255, 209);
             public static Color StormColor { get; } = Color.FromRgb(204, 218, 255);
         }
+
+        public static Color BackdropColor { get; } = Color.FromRgb(0, 0, 0);
     }
 
     public static class World

@@ -185,7 +185,10 @@ internal sealed partial class BattleRenderer
 
         ConfigureLighting(content, state.LightConfiguration, state.RainConfiguration, spriteLights, loopTime);
 
+        DrawBackdrop(canvas);
+
         canvas.Save();
+        canvas.ClipRect(BattleRenderLayout.BackgroundBounds.ToSKRect());
         canvas.Translate((float)shake.X, (float)shake.Y);
 
         DrawBackground(canvas, content);
@@ -614,6 +617,26 @@ internal sealed partial class BattleRenderer
         }
 
         return found;
+    }
+
+    private static void DrawBackdrop(SKCanvas canvas)
+    {
+        SKRect visible = canvas.LocalClipBounds;
+        SKRect background = BattleRenderLayout.BackgroundBounds.ToSKRect();
+
+        if (visible.Left < background.Left)
+        {
+            using SKPaint paint = SkiaHelpers.MakeFillPaint(Theme.Battle.BackdropColor);
+
+            canvas.DrawRect(new SKRect(visible.Left, visible.Top, background.Left, visible.Bottom), paint);
+        }
+
+        if (visible.Right > background.Right)
+        {
+            using SKPaint paint = SkiaHelpers.MakeFillPaint(Theme.Battle.BackdropColor);
+
+            canvas.DrawRect(new SKRect(background.Right, visible.Top, visible.Right, visible.Bottom), paint);
+        }
     }
 
     private static void DrawBackground(SKCanvas canvas, BattleRenderContent content)
