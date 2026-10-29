@@ -245,14 +245,14 @@
           </StackPanel>
           <StackPanel Grid.Column="3" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
             <StackPanel Classes="attack-line">
-              <TextBlock Text="{Binding AttackText}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
+              <TextBlock Text="{Binding Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
               <TextBlock Text="(" Classes="caption attack-source open" />
               <local:IconVisual Classes="attack-source"
-                                Moniker="{Binding AttackSource.Icon}"
-                                Foreground="{Binding AttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
-              <TextBlock Text="{Binding AttackSource.Text}"
+                                Moniker="{Binding Attack.Source.Icon}"
+                                Foreground="{Binding Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+              <TextBlock Text="{Binding Attack.Source.Text}"
                          Classes="caption attack-source"
-                         Foreground="{Binding AttackSource.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                         Foreground="{Binding Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
               <TextBlock Text=")" Classes="caption attack-source close" />
             </StackPanel>
             <StackPanel Classes="attack-line secondary" IsVisible="{Binding SecondaryAttack, Converter={x:Static ObjectConverters.IsNotNull}}">

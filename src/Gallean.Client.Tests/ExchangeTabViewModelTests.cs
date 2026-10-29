@@ -432,9 +432,9 @@ public sealed class ExchangeTabViewModelTests
                 false,
                 false,
                 false,
-                "Damage",
-                new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
+                new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor)),
                 new StatValueViewModel(TextSpans.FromText("10"), 0),
+                null,
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
@@ -469,9 +469,9 @@ public sealed class ExchangeTabViewModelTests
                 false,
                 false,
                 false,
-                "Damage",
-                new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor),
+                new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor)),
                 new StatValueViewModel(TextSpans.FromText("10"), 0),
+                null,
                 null,
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0)),
