@@ -2512,6 +2512,10 @@ public sealed class VisualTests
         gameViewModel.OpenScreen(ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, city.Id));
 
         await CaptureAsync(window);
+
+        gameViewModel.UpdateSettings(gameViewModel.Settings with { UiSize = UiSize.Small });
+
+        await CaptureAsync(window, "small");
     }
 
     [AvaloniaTest]

@@ -18,6 +18,9 @@ internal sealed class PagedStackPanel : Panel
     public static readonly StyledProperty<Size> MinSlotSizeProperty =
         AvaloniaProperty.Register<PagedStackPanel, Size>(nameof(MinSlotSize));
 
+    public static readonly StyledProperty<int> MaxRowsProperty =
+        AvaloniaProperty.Register<PagedStackPanel, int>(nameof(MaxRows), int.MaxValue, validate: value => value >= 1);
+
     private Size slot;
     private int columns;
     private int rows = 1;
@@ -25,7 +28,7 @@ internal sealed class PagedStackPanel : Panel
     static PagedStackPanel()
     {
         AffectsArrange<PagedStackPanel>(FirstIndexProperty, OverflowProperty);
-        AffectsMeasure<PagedStackPanel>(FillsAvailableSpaceProperty, MinSlotSizeProperty);
+        AffectsMeasure<PagedStackPanel>(FillsAvailableSpaceProperty, MinSlotSizeProperty, MaxRowsProperty);
     }
 
     public int FirstIndex
@@ -50,6 +53,12 @@ internal sealed class PagedStackPanel : Panel
     {
         get => GetValue(MinSlotSizeProperty);
         set => SetValue(MinSlotSizeProperty, value);
+    }
+
+    public int MaxRows
+    {
+        get => GetValue(MaxRowsProperty);
+        set => SetValue(MaxRowsProperty, value);
     }
 
     public int VisibleCount => columns * rows;
@@ -156,7 +165,7 @@ internal sealed class PagedStackPanel : Panel
     {
         if (slot.Height > 0 && columns > 0 && !double.IsInfinity(availableHeight))
         {
-            int count = Math.Max(1, (int)(availableHeight / slot.Height));
+            int count = Math.Clamp((int)(availableHeight / slot.Height), 1, MaxRows);
 
             if (FillsAvailableSpace)
             {
