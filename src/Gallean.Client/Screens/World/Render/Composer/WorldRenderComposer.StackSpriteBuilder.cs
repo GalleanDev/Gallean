@@ -48,7 +48,20 @@ internal sealed partial class WorldRenderComposer
 
                 if (cell.Terrain == WorldMapTerrain.Water && !isFlying)
                 {
-                    return new AssetAnimationKey.StackBoat(leaderDefinition.Race, pose, (int)direction);
+                    return new AssetAnimationKey.StackBoat(FixupBoatRace(leaderDefinition.Race), pose, (int)direction);
+
+                    static WorldRace FixupBoatRace(WorldRace race)
+                    {
+                        return race switch
+                        {
+                            WorldRace.Human => WorldRace.Human,
+                            WorldRace.Undead => WorldRace.Dwarf,
+                            WorldRace.Heretic => WorldRace.Heretic,
+                            WorldRace.Dwarf => WorldRace.Undead,
+                            WorldRace.Neutral => WorldRace.Neutral,
+                            WorldRace.Elf => WorldRace.Elf
+                        };
+                    }
                 }
                 else
                 {
