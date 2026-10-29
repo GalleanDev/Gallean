@@ -553,6 +553,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             State,
             GameModel.Stats,
             GameModel.Definitions,
+            GameModel.Texts,
             assets,
             backgroundKey,
             environment,
@@ -971,6 +972,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             State,
             GameModel.Stats,
             GameModel.Definitions,
+            GameModel.Texts,
             assets,
             backgroundKey,
             environment,
@@ -1208,7 +1210,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     private BattleUnitCardViewModel BuildUnitCard(BattleUnit unit)
     {
         UnitStats stats = GameModel.Stats.GetBattleUnitStats(State, unit.Id);
-        IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, GameModel.Definitions);
+        IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, GameModel.Definitions, GameModel.Texts);
 
         return new BattleUnitCardViewModel(
             unit.Id,

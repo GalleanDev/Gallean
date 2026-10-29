@@ -41,7 +41,7 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
         }
 
         int columnSpan = isLarge ? 2 : 1;
-        IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions);
+        IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions, texts);
         IReadOnlyList<UnitStatusViewModel> statuses = UnitStatusViewModel.CreateAll([], modifiers);
 
         return new WorldUnitGroupInfoUnitViewModel(

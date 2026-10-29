@@ -11,7 +11,7 @@ internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration
         UnitModifierType.Weaken => Theme.Battle.StatusEffect.WeakenModifierColor
     };
 
-    public static IReadOnlyList<UnitModifierViewModel> CreateAll(WorldUnit unit, IGameDefinitionProvider definitions)
+    public static IReadOnlyList<UnitModifierViewModel> CreateAll(WorldUnit unit, IGameDefinitionProvider definitions, IGameTextProvider texts)
     {
         List<UnitModifierViewModel> result = [];
 
@@ -19,14 +19,14 @@ internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration
         {
             if (modifier.RemainingTurns is { } remainingTurns)
             {
-                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), TrSpans("Turns left: {0:*}", remainingTurns)));
+                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), TrSpans("Turns left: {0:*}", remainingTurns), texts));
             }
         }
 
         return result;
     }
 
-    public static IReadOnlyList<UnitModifierViewModel> CreateAll(BattleUnit unit, IGameDefinitionProvider definitions)
+    public static IReadOnlyList<UnitModifierViewModel> CreateAll(BattleUnit unit, IGameDefinitionProvider definitions, IGameTextProvider texts)
     {
         List<UnitModifierViewModel> result = [];
 
@@ -34,22 +34,22 @@ internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration
         {
             if (modifier.RemainingTurns is not null)
             {
-                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), null));
+                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), null, texts));
             }
         }
 
         foreach (BattleUnitWardModifier wardModifier in unit.WardModifiers)
         {
-            result.Add(Create(definitions.GetUnitModifier(wardModifier.ModifierId), TrSpans("Until the caster's next turn")));
+            result.Add(Create(definitions.GetUnitModifier(wardModifier.ModifierId), TrSpans("Until the caster's next turn"), texts));
         }
 
         return result;
     }
 
-    private static UnitModifierViewModel Create(UnitModifierDefinition definition, TextSpans? duration)
+    private static UnitModifierViewModel Create(UnitModifierDefinition definition, TextSpans? duration, IGameTextProvider texts)
     {
         return new UnitModifierViewModel(
-            string.Join(", ", UnitModifierFormatter.FormatEffects(definition)),
+            string.Join(", ", UnitModifierFormatter.FormatEffects(definition, texts)),
             duration,
             ResolveType(definition));
     }

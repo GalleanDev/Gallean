@@ -46,7 +46,7 @@ internal sealed record ItemDetailsViewModel(
         if (definition.EquipmentModifierId is { } modifierId)
         {
             UnitModifierDefinition modifier = definitions.GetUnitModifier(modifierId);
-            effects = [.. UnitModifierFormatter.FormatEffects(modifier)];
+            effects = [.. UnitModifierFormatter.FormatEffects(modifier, texts)];
         }
 
         WorldResourceSet? castingCost = GetCastingCost(definition);

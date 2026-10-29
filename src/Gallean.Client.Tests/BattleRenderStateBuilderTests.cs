@@ -1,4 +1,5 @@
 using Avalonia;
+using Gallean.Common;
 using Gallean.Engine;
 using Gallean.Engine.Tests;
 
@@ -58,7 +59,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("ATK"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
-        BattleRenderState renderState = new BattleRenderStateBuilder(state, state, stats, definitions, assetMetadata, background: background, environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+        BattleRenderState renderState = new BattleRenderStateBuilder(state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background: background, environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(2)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -159,7 +160,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithSprite(new AssetSpriteKey.BattleCorpse(IsLarge: false, Variant: 1), corpseMetadata)
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -263,7 +264,7 @@ public sealed class BattleRenderStateBuilderTests
             .Build();
 
         BattleRenderState reachableState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -275,7 +276,7 @@ public sealed class BattleRenderStateBuilderTests
             previousState: null).BuildState();
 
         BattleRenderState selectedState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -443,7 +444,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -556,7 +557,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -669,7 +670,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -781,7 +782,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -876,7 +877,7 @@ public sealed class BattleRenderStateBuilderTests
 
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0);
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -930,7 +931,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1035,7 +1036,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1134,7 +1135,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1233,7 +1234,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1335,7 +1336,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1454,7 +1455,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("HEAL"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1565,7 +1566,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1707,7 +1708,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithSprite(new AssetSpriteKey.BattleCorpse(IsLarge: false, Variant: 1), corpseMetadata)
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -1851,7 +1852,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
 
-        BattleRenderState renderState = new BattleRenderStateBuilder(baseState, currentState, stats, definitions, assetMetadata, background: background, environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+        BattleRenderState renderState = new BattleRenderStateBuilder(baseState, currentState, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background: background, environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -1965,7 +1966,7 @@ public sealed class BattleRenderStateBuilderTests
             .Build();
 
         BattleRenderState first = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -2005,7 +2006,7 @@ public sealed class BattleRenderStateBuilderTests
         BattleRenderState completed = first.WithFinishedAnimation(animation, TimeSpan.FromSeconds(100));
 
         BattleRenderState carried = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
@@ -2049,7 +2050,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Undead), 0);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: true, Storm: false),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: true, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2088,7 +2089,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.City(), 3);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2133,7 +2134,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Capital(WorldRace.Elf), 0);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2178,7 +2179,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Capital(WorldRace.Human), 0);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Dusk, Rain: false, Storm: false),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Dusk, Rain: false, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2221,7 +2222,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Undead), 0);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2260,7 +2261,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Undead), 0);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: true, Storm: true),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: true, Storm: true),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2299,7 +2300,7 @@ public sealed class BattleRenderStateBuilderTests
         AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Undead), 0);
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Dusk, Rain: true, Storm: false),
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Dusk, Rain: true, Storm: false),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2374,7 +2375,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(
-            state, state, stats, definitions, assetMetadata,
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
             isAiTurn: false,

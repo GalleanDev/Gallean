@@ -18,7 +18,7 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
         [
             .. Enum.GetValues<LeaderAbility>()
                 .Where(ability => ability != LeaderAbility.None && baseAbilities.HasFlag(ability))
-                .Select(Create),
+                .Select(ability => Create(ability, texts)),
             .. modifiers
                 .Where(modifier => modifier.RemainingTurns is null && modifier.Source is not UnitModifierSource.Scenario)
                 .Select(modifier => Create(modifier, leaderUpgrades, definitions, texts))
@@ -27,9 +27,9 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
         ];
     }
 
-    private static UnitPermanentModifierViewModel Create(LeaderAbility ability)
+    private static UnitPermanentModifierViewModel Create(LeaderAbility ability, IGameTextProvider texts)
     {
-        return new UnitPermanentModifierViewModel(LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability), Tr("Innate"), null, 1);
+        return new UnitPermanentModifierViewModel(LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability, texts), Tr("Innate"), null, 1);
     }
 
     private static UnitPermanentModifierViewModel Create(
@@ -40,7 +40,7 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
     {
         UnitModifierDefinition modifierDefinition = definitions.GetUnitModifier(modifier.DefinitionId);
         IconMoniker icon = UnitModifierIconResolver.Resolve(modifierDefinition);
-        string effects = string.Join(", ", UnitModifierFormatter.FormatEffects(modifierDefinition));
+        string effects = string.Join(", ", UnitModifierFormatter.FormatEffects(modifierDefinition, texts));
         LeaderUpgradeDefinition? upgradeDefinition = leaderUpgrades.FirstOrDefault(upgrade => upgrade.ModifierId == modifier.DefinitionId);
 
         if (modifier.Source is UnitModifierSource.Unit && upgradeDefinition is not null)

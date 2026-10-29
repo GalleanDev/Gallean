@@ -900,9 +900,9 @@ public sealed class StackTabViewModelTests
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0)),
                 [],
                 [
-                    new UnitPermanentModifierViewModel(IconMoniker.AbilityWeaponArmorUse, "Artifact Lore", "Innate", null, 1),
-                    new UnitPermanentModifierViewModel(IconMoniker.AbilityOrbUse, "Arcane Lore", "Innate", null, 1),
-                    new UnitPermanentModifierViewModel(IconMoniker.AbilityBannerUse, "Banner Bearer", "Permanent", null, 1),
+                    new UnitPermanentModifierViewModel(IconMoniker.AbilityWeaponArmorUse, "X000TGA001", "Innate", null, 1),
+                    new UnitPermanentModifierViewModel(IconMoniker.AbilityOrbUse, "X000TGA005", "Innate", null, 1),
+                    new UnitPermanentModifierViewModel(IconMoniker.AbilityBannerUse, "X000TGA003", "Permanent", null, 1),
                     new UnitPermanentModifierViewModel(IconMoniker.Armor, "+10 armor", "Permanent", null, 1)
                 ]))));
     }

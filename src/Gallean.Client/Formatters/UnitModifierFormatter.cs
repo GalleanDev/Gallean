@@ -4,7 +4,7 @@ namespace Gallean.Client;
 
 internal static class UnitModifierFormatter
 {
-    public static IEnumerable<string> FormatEffects(UnitModifierDefinition modifier)
+    public static IEnumerable<string> FormatEffects(UnitModifierDefinition modifier, IGameTextProvider texts)
     {
         foreach (string value in FormatValues(modifier.Hitpoints))
         {
@@ -78,7 +78,7 @@ internal static class UnitModifierFormatter
             yield return Tr("{0}% lower prices", modifier.PurchaseDiscountPercent);
         }
 
-        foreach (string ability in LeaderAbilityFormatter.Format(modifier.LeaderAbilities))
+        foreach (string ability in LeaderAbilityFormatter.Format(modifier.LeaderAbilities, texts))
         {
             yield return ability;
         }

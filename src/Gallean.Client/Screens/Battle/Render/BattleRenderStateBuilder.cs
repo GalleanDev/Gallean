@@ -12,6 +12,7 @@ internal sealed class BattleRenderStateBuilder(
     BattleState currentState,
     IUnitStatsProvider stats,
     IGameDefinitionProvider definitions,
+    IGameTextProvider texts,
     IAssetMetadataProvider assets,
     AssetSpriteKey.BattleBackground background,
     BattleEnvironment environment,
@@ -100,7 +101,7 @@ internal sealed class BattleRenderStateBuilder(
             Presence presence = ResolvePresence(unit);
             bool isCurrent = IsUnitCurrent(unit, presence);
             UnitExperience experience = stats.GetBattleUnitExperience(baseState, unit.Id);
-            IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions);
+            IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions, texts);
 
             units.Add(new BattleGridUnitViewModel(
                 unit.Id,
