@@ -843,7 +843,6 @@ internal sealed partial class CityTabViewModel
         visitingStack = ResolveVisitingStack(fortification);
         stackInfo = ResolveStackInfo(visitingStack);
         garrisonInfo = ResolveGarrisonInfo();
-
         cityInfo = ResolveCityInfo();
 
         UnitGrid<WorldUnit> garrison = fortification.Garrison;
