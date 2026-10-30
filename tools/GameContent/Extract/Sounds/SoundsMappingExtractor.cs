@@ -109,20 +109,29 @@ public sealed class SoundsMappingExtractor
 
         return unitTypeSounds;
 
-        IReadOnlyList<string> ResolveSoundList(string soundListName)
+        IReadOnlyList<string> ResolveSoundList(string soundName)
         {
-            if (string.IsNullOrEmpty(soundListName))
+            if (string.IsNullOrEmpty(soundName))
             {
                 return [];
             }
 
-            if (!soundListsByName.TryGetValue(soundListName, out IReadOnlyList<string>? soundList))
-            {
-                soundList = ReadSoundList(archive, stream, soundListName);
-                soundListsByName.Add(soundListName, soundList);
-            }
+            string extension = Path.GetExtension(soundName);
 
-            return soundList;
+            if (extension.Equals(".LST", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!soundListsByName.TryGetValue(soundName, out IReadOnlyList<string>? soundList))
+                {
+                    soundList = ReadSoundList(archive, stream, soundName);
+                    soundListsByName.Add(soundName, soundList);
+                }
+
+                return soundList;
+            }
+            else
+            {
+                return [soundName];
+            }
         }
     }
 
