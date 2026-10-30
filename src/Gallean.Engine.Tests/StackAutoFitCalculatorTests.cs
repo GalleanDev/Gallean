@@ -1120,4 +1120,85 @@ public sealed class StackAutoFitCalculatorTests
                 .With(LeaderEquipmentSlot.Battle2, boostPotionItem)
         )));
     }
+
+    [Test]
+    public void LeaderAbilityTest()
+    {
+        UnitDefinition leaderDefinition = CreateLeaderDefinition(LeaderAbility.None);
+        UnitModifierDefinition bannerLore = TestHelpers.SimpleModifier("banner-lore") with { LeaderAbilities = LeaderAbility.BannerUse };
+        ItemDefinition banner = CreateItem("banner", ItemCategory.Banner, 200, modifier: null);
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnitModifier(bannerLore)
+            .AddItem(banner)
+            .Build();
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, 1, [UnitModifier.Permanent(bannerLore.Id)], null, false);
+        WorldItem bannerItem = new(new WorldItemId("Banner"), banner.Id, Charges: null);
+
+        UnitGrid<WorldUnit> stack = new UnitGrid<WorldUnit>.Builder()
+            .Place(leader, GridPosition.FrontBottom, false)
+            .Build();
+
+        StackAutoFitCalculator.Result result = CheckCalculate(
+            stack,
+            UnitGrid<WorldUnit>.Empty,
+            new WorldInventory([bannerItem]),
+            WorldInventory.Empty,
+            LeaderEquipment.Empty,
+            GridPosition.Count,
+            definitions);
+
+        Assert.That(result, Is.EqualTo(new StackAutoFitCalculator.Result(
+            StackUnits: new UnitGrid<WorldUnit>.Builder()
+                .Place(leader, GridPosition.FrontCenter, false)
+                .Build(),
+            GarrisonUnits: UnitGrid<WorldUnit>.Empty,
+            StackInventory: WorldInventory.Empty,
+            GarrisonInventory: WorldInventory.Empty,
+            Equipment: LeaderEquipment.Empty.With(LeaderEquipmentSlot.Banner, bannerItem)
+        )));
+    }
+
+    [Test]
+    public void EquipmentAbilityTest()
+    {
+        UnitDefinition leaderDefinition = CreateLeaderDefinition(LeaderAbility.None);
+        UnitModifierDefinition bannerLore = TestHelpers.SimpleModifier("banner-lore") with { LeaderAbilities = LeaderAbility.BannerUse };
+        ItemDefinition tome = CreateItem("tome", ItemCategory.Jewel, 300, bannerLore.Id);
+        ItemDefinition banner = CreateItem("banner", ItemCategory.Banner, 200, modifier: null);
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnitModifier(bannerLore)
+            .AddItem(tome)
+            .AddItem(banner)
+            .Build();
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, 1, [UnitModifier.FromEquipment(bannerLore.Id)], null, false);
+        WorldItem tomeItem = new(new WorldItemId("Tome"), tome.Id, Charges: null);
+        WorldItem bannerItem = new(new WorldItemId("Banner"), banner.Id, Charges: null);
+
+        UnitGrid<WorldUnit> stack = new UnitGrid<WorldUnit>.Builder()
+            .Place(leader, GridPosition.FrontBottom, false)
+            .Build();
+
+        StackAutoFitCalculator.Result result = CheckCalculate(
+            stack,
+            UnitGrid<WorldUnit>.Empty,
+            new WorldInventory([bannerItem]),
+            WorldInventory.Empty,
+            LeaderEquipment.Empty.With(LeaderEquipmentSlot.Tome, tomeItem),
+            GridPosition.Count,
+            definitions);
+
+        Assert.That(result, Is.EqualTo(new StackAutoFitCalculator.Result(
+            StackUnits: new UnitGrid<WorldUnit>.Builder()
+                .Place(leader with { Modifiers = [] }, GridPosition.FrontCenter, false)
+                .Build(),
+            GarrisonUnits: UnitGrid<WorldUnit>.Empty,
+            StackInventory: new WorldInventory([tomeItem, bannerItem]),
+            GarrisonInventory: WorldInventory.Empty,
+            Equipment: LeaderEquipment.Empty
+        )));
+    }
 }

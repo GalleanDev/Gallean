@@ -109,12 +109,13 @@ internal static partial class StackAutoFitCalculator
         pool.AddRange(garrisonInventory.Items);
 
         UnitGrid<WorldUnit> updatedGarrison = LeaderEquipmentCalculator.UpdateUnitModifiers(garrisonUnits, LeaderEquipment.Empty, definitions);
-        UnitDefinition? leaderDefinition = TryGetLeaderDefinition(stackUnits, definitions);
+        UnitGrid<WorldUnit> updatedStack = LeaderEquipmentCalculator.UpdateUnitModifiers(stackUnits, LeaderEquipment.Empty, definitions);
+        LeaderAbility? leaderAbilities = TryGetLeaderAbilities(updatedStack, definitions);
 
-        if (leaderDefinition is null)
+        if (leaderAbilities is null)
         {
             return new Result(
-                LeaderEquipmentCalculator.UpdateUnitModifiers(stackUnits, LeaderEquipment.Empty, definitions),
+                updatedStack,
                 updatedGarrison,
                 new WorldInventory([.. pool]),
                 WorldInventory.Empty,
@@ -127,7 +128,7 @@ internal static partial class StackAutoFitCalculator
         {
             ItemDefinition item = definitions.GetItem(pool[index].DefinitionId);
 
-            if (IsEquippable(item, leaderDefinition))
+            if (IsEquippable(item, leaderAbilities.Value))
             {
                 equippableItems.Add((item, index, GetEquipmentCategory(item.Category), GetItemScore(item)));
             }
@@ -165,7 +166,7 @@ internal static partial class StackAutoFitCalculator
         return new Result(finalStack, updatedGarrison, updatedInventory, WorldInventory.Empty, updatedEquipment);
     }
 
-    private static UnitDefinition? TryGetLeaderDefinition(UnitGrid<WorldUnit> units, IGameDefinitionProvider definitions)
+    private static LeaderAbility? TryGetLeaderAbilities(UnitGrid<WorldUnit> units, IGameDefinitionProvider definitions)
     {
         foreach ((WorldUnit unit, _) in units.GetUnits())
         {
@@ -173,7 +174,7 @@ internal static partial class StackAutoFitCalculator
 
             if (definition.Leadership is > 0)
             {
-                return definition;
+                return UnitStatsCalculator.GetLeaderAbilities(definition, unit.Modifiers, definitions);
             }
         }
 
@@ -213,7 +214,7 @@ internal static partial class StackAutoFitCalculator
         return 0;
     }
 
-    private static bool IsEquippable(ItemDefinition item, UnitDefinition leaderDefinition)
+    private static bool IsEquippable(ItemDefinition item, LeaderAbility leaderAbilities)
     {
         EquipmentCategory category = GetEquipmentCategory(item.Category);
 
@@ -222,7 +223,7 @@ internal static partial class StackAutoFitCalculator
         {
             LeaderAbility? requiredAbility = LeaderEquipmentCalculator.GetRequiredAbility(item.Category);
 
-            return requiredAbility is null || leaderDefinition.LeaderAbilities.HasFlag(requiredAbility.Value);
+            return requiredAbility is null || leaderAbilities.HasFlag(requiredAbility.Value);
         }
         else
         {
