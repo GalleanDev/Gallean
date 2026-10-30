@@ -156,9 +156,12 @@ public sealed class UnitStatsProvider(
 
         int damageChange = 0;
 
-        foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
+        if (attack.Type is UnitAttackType.Damage or UnitAttackType.DrainLife or UnitAttackType.DrainLifeOverflow)
         {
-            damageChange += effect.Accept(BattleDamageChangeVisitor.Instance, stats.Damage);
+            foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
+            {
+                damageChange += effect.Accept(BattleDamageChangeVisitor.Instance, stats.Damage);
+            }
         }
 
         BattleSideModifiers sideModifiers = state.Modifiers.GetModifiers(unit.Side);

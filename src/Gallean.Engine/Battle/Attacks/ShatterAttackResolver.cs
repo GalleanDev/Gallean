@@ -17,7 +17,7 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
             return BattleCommandError.TargetIncorrect;
         }
 
-        if (GetShatteredArmor(context, target, attack) == 0)
+        if (GetShatteredArmor(context, target, attackStats) == 0)
         {
             return BattleCommandError.TargetIncorrect;
         }
@@ -34,7 +34,7 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
         UnitAttackStats attackStats)
     {
         BattleUnit target = state.GetUnit(targetId);
-        int shatteredArmor = GetShatteredArmor(context, target, attack);
+        int shatteredArmor = GetShatteredArmor(context, target, attackStats);
 
         if (shatteredArmor != 0)
         {
@@ -46,7 +46,7 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
         }
     }
 
-    private static int GetShatteredArmor(IEngineContext context, BattleUnit target, UnitAttackDefinition attack)
+    private static int GetShatteredArmor(IEngineContext context, BattleUnit target, UnitAttackStats attackStats)
     {
         int alreadyShattered = 0;
         foreach (BattleShatterArmorStatusEffect effect in target.StatusEffects.OfType<BattleShatterArmorStatusEffect>())
@@ -57,7 +57,7 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
         UnitStats unitStats = UnitStatsCalculator.GetStats(targetDefinition, target.Level, target.Modifiers, context.Definitions, context.Globals);
 
-        int shatteredArmor = attack.Damage;
+        int shatteredArmor = attackStats.Damage;
         if (shatteredArmor > 0)
         {
             int remainingArmor = Math.Max(0, unitStats.Armor - alreadyShattered);

@@ -15,7 +15,7 @@ internal abstract class BattleAbstractDamageOverTimeAttackResolver : BattleAbstr
             return BattleCommandError.TargetIncorrect;
         }
 
-        if (FindEffect(target) is { } effect && effect.Damage > attack.Damage)
+        if (FindEffect(target) is { } effect && effect.Damage > attackStats.Damage)
         {
             return BattleCommandError.TargetIncorrect;
         }
@@ -42,7 +42,7 @@ internal abstract class BattleAbstractDamageOverTimeAttackResolver : BattleAbstr
             remainingTurns = 1;
         }
 
-        return [new BattleUnitEffectAppliedEvent(attackerId, targetId, CreateEffect(remainingTurns, attack.Damage))];
+        return [new BattleUnitEffectAppliedEvent(attackerId, targetId, CreateEffect(remainingTurns, attackStats.Damage))];
     }
 
     protected abstract BattleAbstractStatusEffect CreateEffect(int remainingTurns, int damage);

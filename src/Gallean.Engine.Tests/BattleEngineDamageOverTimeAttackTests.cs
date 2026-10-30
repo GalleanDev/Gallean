@@ -718,14 +718,18 @@ public sealed class BattleEngineDamageOverTimeAttackTests
     {
         UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("poisoner", maxHitpoints: 10, initiative: 50, damage: 5) with
         {
-            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("poisoner-poison"), initiative: 50, damage: 3, accuracy: 100, reach: UnitAttackReach.Any) with
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("poisoner-blade"), initiative: 50, damage: 5, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Level = 1
+            },
+            SecondaryAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("poisoner-poison"), initiative: 50, damage: 3, accuracy: 100, reach: UnitAttackReach.Any) with
             {
                 Type = UnitAttackType.Poison,
                 Source = UnitAttackSource.Death,
                 Level = 1
             }
         };
-        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 10, initiative: 40, damage: 5);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5);
 
         UnitModifierDefinition damageBonus = TestHelpers.SimpleModifier("damage") with
         {
@@ -733,7 +737,7 @@ public sealed class BattleEngineDamageOverTimeAttackTests
         };
 
         BattleUnit attacker = new(new BattleUnitId(0), null, attackerDefinition.Id, BattleSide.Attacker, 10, 0, 0, 1, [UnitModifier.Permanent(damageBonus.Id)], [], null, [], null, false);
-        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 10);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
 
         BattleEngine engine = new TestBattleEngineBuilder()
             .WithDefinition(attackerDefinition)
@@ -744,7 +748,9 @@ public sealed class BattleEngineDamageOverTimeAttackTests
             .Build();
 
         engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(defender.Id)), [
-            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("poisoner-poison")]),
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("poisoner-blade"), new UnitAttackDefinitionId("poisoner-poison")]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("poisoner-blade")),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("poisoner-blade"), 10),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("poisoner-poison")),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("poisoner-poison"), 0),
             new BattleUnitEffectAppliedEvent(attacker.Id, defender.Id, new BattlePoisonStatusEffect(1, 3)),
@@ -764,6 +770,69 @@ public sealed class BattleEngineDamageOverTimeAttackTests
                     .Build(),
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
                     .Place(defender with { Hitpoints = 7 }, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(1)
+            }));
+    }
+
+    [Test]
+    public void LevelUpgradeTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("assassin", maxHitpoints: 10, initiative: 50, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("assassin-blade"), initiative: 50, damage: 5, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Level = 1
+            },
+            SecondaryAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("assassin-poison"), initiative: 50, damage: 20, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Poison,
+                Source = UnitAttackSource.Death,
+                Level = 1
+            }
+        };
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5);
+        UnitDynamicUpgradeDefinition dynamicUpgrade = new(
+            attackerDefinition.Id,
+            UpgradeChangeLevel: 10,
+            LowLevelUpgrade: UnitDynamicUpgrade.Empty with { Damage = 6 },
+            HighLevelUpgrade: UnitDynamicUpgrade.Empty);
+
+        BattleUnit attacker = new(new BattleUnitId(0), null, attackerDefinition.Id, BattleSide.Attacker, 10, 0, 0, 3, [], [], null, [], null, false);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(dynamicUpgrade)
+            .WithAttacker(attacker, GridPosition.FrontBottom)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(defender.Id)), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("assassin-blade"), new UnitAttackDefinitionId("assassin-poison")]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("assassin-blade")),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("assassin-blade"), 17),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("assassin-poison")),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, new UnitAttackDefinitionId("assassin-poison"), 0),
+            new BattleUnitEffectAppliedEvent(attacker.Id, defender.Id, new BattlePoisonStatusEffect(1, 32)),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitDamagedByEffectEvent(defender.Id, new BattlePoisonStatusEffect(1, 32), 32, 51),
+            new BattleUnitEffectDurationDecreasedEvent(defender.Id),
+            new BattleUnitEffectExpiredEvent(defender.Id, new BattlePoisonStatusEffect(0, 32))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(attacker, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(defender with { Hitpoints = 51 }, GridPosition.FrontBottom, false)
                     .Build(),
                 CurrentUnitTurn = new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
                 CurrentRound = BattleRound.Normal(1)
