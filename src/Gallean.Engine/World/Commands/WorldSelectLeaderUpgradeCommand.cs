@@ -22,9 +22,9 @@ public sealed record WorldSelectLeaderUpgradeCommand(
 
         IReadOnlyList<LeaderUpgradeDefinition> available = LeaderUpgradeCalculator.GetAvailableUpgrades(
             state.Players[stack.OwnerId],
-            leader.Level,
-            leader.Modifiers,
-            context.Definitions);
+            leader,
+            context.Definitions,
+            context.UnitStats);
 
         bool isAvailable = false;
 

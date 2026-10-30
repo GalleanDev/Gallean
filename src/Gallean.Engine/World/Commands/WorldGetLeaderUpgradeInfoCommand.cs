@@ -49,9 +49,9 @@ public sealed record WorldGetLeaderUpgradeInfoCommand(WorldStackId StackId) : IW
 
         IReadOnlyList<LeaderUpgradeDefinition> availableUpgrades = LeaderUpgradeCalculator.GetAvailableUpgrades(
             state.Players[stack.OwnerId],
-            leader.Level,
-            leader.Modifiers,
-            context.Definitions);
+            leader,
+            context.Definitions,
+            context.UnitStats);
 
         LeaderUpgradeDefinition? preferredUpgrade = LeaderUpgradeCalculator.GetPreferredUpgrade(availableUpgrades);
 

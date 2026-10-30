@@ -784,4 +784,47 @@ public sealed class WorldEngineLeaderUpgradeTests
             new WorldGetLeaderUpgradeInfoCommand.Upgrade(Upgrade(player.LordId, "orb", minLevel: 2, priority: 99), IsPreferred: true, Error: null)
         ])));
     }
+
+    [Test]
+    public void KnownAbilityTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 4, leadership: 4) with
+            {
+                LeaderAbilities = LeaderAbility.BannerUse
+            };
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                player.Id,
+                new WorldPosition(0, 0),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leaderDefinition),
+                movementPoints: 4) with
+            {
+                PendingLeaderUpgrades = 1
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(AbilityModifier("banner", LeaderAbility.BannerUse))
+            .WithDefinition(AbilityModifier("orb", LeaderAbility.OrbUse))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "banner", minLevel: 1, priority: 99))
+            .WithLeaderUpgrade(Upgrade(player.LordId, "orb", minLevel: 1, priority: 80))
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        WorldGetLeaderUpgradeInfoCommand.Result result = engine.CheckCommand(new WorldGetLeaderUpgradeInfoCommand(stack.Id), []);
+
+        Assert.That(result, Is.EqualTo(new WorldGetLeaderUpgradeInfoCommand.Result(
+        [
+            new WorldGetLeaderUpgradeInfoCommand.Upgrade(Upgrade(player.LordId, "orb", minLevel: 1, priority: 80), IsPreferred: true, Error: null)
+        ])));
+    }
 }

@@ -1,5 +1,3 @@
-using System.Collections.Immutable;
-
 namespace Gallean.Engine;
 
 internal partial class WorldEngine
@@ -30,19 +28,17 @@ internal partial class WorldEngine
         {
             (WorldUnit leader, GridPosition _, UnitDefinition _) = stack.GetLeader(Context.Definitions);
 
-            ImmutableArray<UnitModifier> modifiers = leader.Modifiers;
-
             for (int i = 0; i < stack.PendingLeaderUpgrades; i++)
             {
                 IReadOnlyList<LeaderUpgradeDefinition> available = LeaderUpgradeCalculator.GetAvailableUpgrades(
                     player,
-                    leader.Level,
-                    modifiers,
-                    Context.Definitions);
+                    leader,
+                    Context.Definitions,
+                    Context.UnitStats);
 
                 if (LeaderUpgradeCalculator.GetPreferredUpgrade(available) is { } upgrade)
                 {
-                    modifiers = modifiers.Add(UnitModifier.Permanent(upgrade.ModifierId));
+                    leader = leader with { Modifiers = leader.Modifiers.Add(UnitModifier.Permanent(upgrade.ModifierId)) };
 
                     yield return new WorldLeaderUpgradeSelectedEvent(stack.Id, upgrade.ModifierId);
 

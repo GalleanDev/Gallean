@@ -1721,4 +1721,47 @@ public sealed class GameDefinitionProviderTests
             "RiotCity 100 X000TG0113 X000TG0133"
         ]));
     }
+
+    [Test]
+    public void PegasusKnightUpgradesTest()
+    {
+        GameDefinitionProvider provider = CreateProvider();
+        IUnitStatsProvider stats = new UnitStatsProvider(provider, new GlobalVariables(), GameScenarioProvider.Empty.Definition);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, TestHelpers.SimpleMap(3, 1)) with
+        {
+            LordId = new LordDefinitionId("G000LR0001")
+        };
+        UnitDefinition leaderDefinition = provider.GetUnit(new UnitDefinitionId("g000uu0019"));
+        WorldUnit leader = TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Level = 15 };
+
+        IReadOnlyList<LeaderUpgradeDefinition> upgrades = LeaderUpgradeCalculator.GetAvailableUpgrades(player, leader, provider, stats);
+
+        Assert.That(FormatLeaderUpgrades(upgrades), Is.EqualTo([
+            "2 85 g000um4002 x000tga002",
+            "2 85 g000um4003 x000tga003",
+            "2 80 g000um4004 x000tga004",
+            "3 99 g000um4006 x000tga006",
+            "3 95 g000um4005 x000tga005",
+            "3 85 g000um4007 x000tga007",
+            "4 85 g000um4009 x000tga009",
+            "4 60 g000um4008 x000tga008",
+            "5 95 g000um4010 x000tga010",
+            "5 70 g000um4011 x000tga011",
+            "6 99 g000um4013 x000tga013",
+            "6 80 g000um4012 x000tga012",
+            "7 60 g000um4014 x000tga014",
+            "7 60 g000um4015 x000tga015",
+            "8 99 g000um4101 x000tga006",
+            "8 80 g000um4016 x000tga016",
+            "8 80 g000um4017 x000tga017",
+            "9 80 g000um4018 x000tga018",
+            "10 99 g000um4102 x000tga006",
+            "10 80 g000um4019 x000tga019",
+            "12 80 g000um4021 x000tga021",
+            "13 60 g000um4022 x000tga022",
+            "14 80 g000um4023 x000tga023",
+            "15 80 g000um4024 x000tga024",
+            "15 80 g000um4103 x160tgc253"
+        ]));
+    }
 }
