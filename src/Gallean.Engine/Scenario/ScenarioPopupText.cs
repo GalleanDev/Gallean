@@ -32,12 +32,7 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
 
         if (line.StartsWith('"') && (name.Length == 0 || hasName))
         {
-            line = line[1..];
-
-            if (line.EndsWith('"'))
-            {
-                line = line[..^1];
-            }
+            line = RemoveFinalQuote(line[1..]);
 
             string? speaker = name.Length > 0 ? name : null;
 
@@ -47,5 +42,29 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
         {
             return new ScenarioPopupText(Speaker: null, text.Trim());
         }
+    }
+
+    private static string RemoveFinalQuote(string line)
+    {
+        int index = line.LastIndexOf('"');
+
+        if (index < 0)
+        {
+            return line;
+        }
+
+        for (int i = index + 1; i < line.Length; i++)
+        {
+            if (line[i] is '.' or '!' or '?' or '…')
+            {
+                continue;
+            }
+            else
+            {
+                return line;
+            }
+        }
+
+        return line.Remove(index, 1);
     }
 }
