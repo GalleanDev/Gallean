@@ -1,3 +1,4 @@
+using System.Text;
 using Gallean.Tests.Common;
 using GameContent;
 
@@ -17,7 +18,8 @@ public sealed class ExtractTests
         await TestContext.Progress.WriteLineAsync($"Extracting database from '{GamePath}'.");
         await TestContext.Progress.WriteLineAsync($"Outputting files to '{sb.RootPath}'.");
 
-        await ExtractDatabaseCommand.ExecuteAsync(GamePath, sb.RootPath);
+        Encoding encoding = ExtractDatabaseCommand.GetEncoding(ExtractDatabaseCommand.DefaultCodePage);
+        await ExtractDatabaseCommand.ExecuteAsync(GamePath, sb.RootPath, encoding);
     }
 
     [Test]
