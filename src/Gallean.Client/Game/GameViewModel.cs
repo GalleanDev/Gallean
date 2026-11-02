@@ -270,14 +270,16 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
     public void UpdateSettings(GameSettings settings)
     {
-        if (settings.Language != Settings.Language)
+        Language language = settings.EffectiveLanguage;
+
+        if (language != Settings.EffectiveLanguage)
         {
-            TextCatalog catalog = TextCatalogLoader.Load(settings.Language);
+            TextCatalog catalog = TextCatalogLoader.Load(language);
             catalog.MakeCurrent();
 
             if (activeGame is not null)
             {
-                _ = ReloadGameTextsAsync(activeGame, settings.Language);
+                _ = ReloadGameTextsAsync(activeGame, language);
             }
         }
 
@@ -368,11 +370,11 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     {
         if (configuration.Configuration is not null)
         {
-            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration, Settings.Language);
+            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration, Settings.EffectiveLanguage);
         }
         else
         {
-            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null, Settings.Language);
+            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null, Settings.EffectiveLanguage);
         }
     }
 
@@ -514,7 +516,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 return;
             }
 
-            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState, Settings.Language));
+            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState, Settings.EffectiveLanguage));
 
             gameModel = new GameModel(session, texts, log, scheduler);
         }
@@ -680,7 +682,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         try
         {
-            return await RunAsync(() => gameLoader.LoadCampaigns(Settings.Language));
+            return await RunAsync(() => gameLoader.LoadCampaigns(Settings.EffectiveLanguage));
         }
         catch (Exception ex)
         {

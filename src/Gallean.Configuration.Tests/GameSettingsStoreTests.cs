@@ -141,7 +141,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(100, 0, true, 50, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(100, 0, true, 50, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null)));
     }
 
     [Test]
@@ -175,7 +175,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null)));
     }
 
     [Test]
@@ -189,7 +189,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null)));
     }
 
     [Test]
@@ -219,7 +219,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null)));
     }
 
     [Test]
@@ -233,7 +233,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null)));
     }
 
     [Test]
@@ -247,7 +247,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null)));
     }
 
     [Test]
@@ -261,6 +261,6 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null)));
     }
 }

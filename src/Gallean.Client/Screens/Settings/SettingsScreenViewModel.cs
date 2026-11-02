@@ -15,7 +15,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private MovementSpeed movementSpeed;
     private UiSize uiSize;
     private bool lockCursor;
-    private Language language;
+    private Language? language;
 
     public SettingsScreenViewModel(GameViewModel gameViewModel)
     {
@@ -156,7 +156,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
 
     public Language Language
     {
-        get => language;
+        get => language ?? gameViewModel.Settings.EffectiveLanguage;
         set
         {
             if (SetProperty(ref language, value))

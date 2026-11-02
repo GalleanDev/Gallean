@@ -5,7 +5,7 @@ public sealed class GameSettingsTests
     [Test]
     public void DefaultTest()
     {
-        Assert.That(GameSettings.Default, Is.EqualTo(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English)));
+        Assert.That(GameSettings.Default, Is.EqualTo(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null)));
     }
 
     [Test]

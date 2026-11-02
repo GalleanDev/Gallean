@@ -1,3 +1,4 @@
+using System.Globalization;
 using Gallean.Configuration;
 
 namespace Gallean.Client;
@@ -17,5 +18,21 @@ internal static class LanguageExtensions
             Language.Russian => "ru",
             Language.Spanish => "es"
         };
+    }
+
+    extension(Language)
+    {
+        public static Language FromCulture(CultureInfo culture)
+        {
+            foreach (Language language in Enum.GetValues<Language>())
+            {
+                if (language.Code == culture.TwoLetterISOLanguageName)
+                {
+                    return language;
+                }
+            }
+
+            return Language.English;
+        }
     }
 }

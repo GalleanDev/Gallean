@@ -50,7 +50,7 @@ internal sealed class App(ILog log) : Application
     {
         GameSettingsStore gameSettingsStore = new(AppDirectories.Root);
         GameSettings gameSettings = await LoadSettingsAsync(gameSettingsStore);
-        TextCatalog textCatalog = TextCatalogLoader.Load(gameSettings.Language);
+        TextCatalog textCatalog = TextCatalogLoader.Load(gameSettings.EffectiveLanguage);
         textCatalog.MakeCurrent();
 
         Task<AudioOutput> audioOutputTask = Task.Run(() => AudioOutput.CreateAsync(log));

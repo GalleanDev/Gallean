@@ -1,3 +1,4 @@
+using System.Globalization;
 using Gallean.Configuration;
 
 namespace Gallean.Client;
@@ -9,6 +10,8 @@ internal static class GameSettingsExtensions
         public float SoundVolumeRatio => settings.SoundVolume / (float)GameSettings.MaxVolume;
         public float MusicVolumeRatio => settings.MusicVolume / (float)GameSettings.MaxVolume;
         public float RenderResolutionRatio => settings.RenderResolution / (float)GameSettings.MaxRenderResolution;
+
+        public Language EffectiveLanguage => settings.Language ?? Language.FromCulture(CultureInfo.CurrentUICulture);
 
         public double BattleSpeedFactor => settings.BattleSpeed switch
         {
