@@ -260,10 +260,7 @@ internal sealed class WorldEventActionBuilder(
 
     private WorldEventAction BuildObjectiveChange(Entry.ObjectiveChange objectiveChange)
     {
-        string text = texts.GetScenarioText(objectiveChange.TextId);
-        string objective = ScenarioFormatter.FormatObjective(text);
-
-        return new WorldEventAction.ObjectiveChange([], objective);
+        return new WorldEventAction.ObjectiveChange([], objectiveChange.TextId);
     }
 
     private WorldEventAction BuildStackIdle(Entry.StackIdle stackIdle)

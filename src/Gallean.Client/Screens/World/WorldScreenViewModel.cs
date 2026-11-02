@@ -30,6 +30,7 @@ internal sealed partial class WorldScreenViewModel :
     private WorldPosition? infoTile;
     private WorldPosition? infoObject;
     private WorldStackId? infoStackId;
+    private ScenarioTextId? objectiveTextId;
     private TimeSpan stackIdleRemaining;
     private WorldRenderRequest? renderRequest;
 
@@ -45,9 +46,9 @@ internal sealed partial class WorldScreenViewModel :
         eventQueue.EnqueueEntry(new Entry.GameStart(WorldState));
         finishedStacks = new WorldFinishedStacks(gameModel.World.Events);
         musicQueue = BuildWorldMusicQueue(random);
+        objectiveTextId = WorldState.ScenarioState.ObjectiveTextId;
 
         UpdateWorld();
-        UpdateObjective();
         FocusCamera(ResolveInitialFocusPosition(), TimeSpan.Zero);
         RestartStackIdleTimer();
 
@@ -1125,7 +1126,8 @@ internal sealed partial class WorldScreenViewModel :
 
     private void OnActionObjectiveChange(WorldEventAction.ObjectiveChange action)
     {
-        ObjectiveText = action.Text;
+        objectiveTextId = action.TextId;
+        UpdateObjective();
         IsObjectiveExpanded = true;
         ObjectiveChanged?.Invoke();
     }
@@ -1207,6 +1209,7 @@ internal sealed partial class WorldScreenViewModel :
         UpdateReachable();
         UpdatePositionInfo();
         UpdateStatus();
+        UpdateObjective();
         UpdateCursorType();
         UpdateStackActions();
     }
@@ -1561,11 +1564,9 @@ internal sealed partial class WorldScreenViewModel :
 
     private void UpdateObjective()
     {
-        ScenarioTextId? textId = WorldState.ScenarioState.ObjectiveTextId;
-
-        if (textId is not null)
+        if (objectiveTextId is not null)
         {
-            string text = GameModel.Texts.GetScenarioText(textId.Value);
+            string text = GameModel.Texts.GetScenarioText(objectiveTextId.Value);
 
             ObjectiveText = ScenarioFormatter.FormatObjective(text);
         }

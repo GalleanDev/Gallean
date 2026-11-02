@@ -4,7 +4,7 @@ namespace Gallean.Client;
 
 internal abstract partial record WorldEventAction
 {
-    public sealed record ObjectiveChange(ImmutableArray<AssetSoundKey> Sounds, string Text) : WorldEventAction(Sounds)
+    public sealed record ObjectiveChange(ImmutableArray<AssetSoundKey> Sounds, ScenarioTextId TextId) : WorldEventAction(Sounds)
     {
         public override TResult Accept<TResult>(IWorldEventActionVisitor<TResult> visitor)
         {
