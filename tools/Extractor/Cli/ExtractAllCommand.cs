@@ -1,4 +1,5 @@
 using System.CommandLine;
+using System.Text;
 
 namespace Extractor;
 
@@ -22,7 +23,8 @@ internal class ExtractAllCommand : Command
         Console.WriteLine($"Extracting all resources from '{gamePath}'...");
         Console.WriteLine();
 
-        await ExtractDatabaseCommand.ExecuteAsync(gamePath, output, cancellationToken);
+        Encoding encoding = ExtractDatabaseCommand.GetEncoding(ExtractDatabaseCommand.DefaultCodePage);
+        await ExtractDatabaseCommand.ExecuteAsync(gamePath, output, encoding, cancellationToken);
         await ExtractImagesCommand.ExecuteAsync(gamePath, output, cancellationToken);
         await ExtractInterfaceCommand.ExecuteAsync(gamePath, output, cancellationToken);
         await ExtractSoundsCommand.ExecuteAsync(gamePath, output, cancellationToken);

@@ -1,4 +1,5 @@
 using System.CommandLine;
+using System.CommandLine.Parsing;
 using System.Text;
 using System.Text.Json;
 using DbfDataReader;
@@ -7,7 +8,8 @@ namespace Extractor;
 
 internal class ExtractDatabaseCommand : Command
 {
-    private const int DatabaseEncoding = 866;
+    public const int DefaultCodePage = 866;
+
     private const string ScenarioColumn = "NO_SCEN";
 
     private static readonly string[] ScenarioRootTables = ["Sinfo.json"];
@@ -15,28 +17,47 @@ internal class ExtractDatabaseCommand : Command
     public ExtractDatabaseCommand(Option<string> gamePathOption, Option<string> outputOption)
         : base("extract-database", "Extracts database resources.")
     {
+        Option<int> codePageOption = new("--code-page")
+        {
+            Description = "Code page of the database",
+            DefaultValueFactory = _ => DefaultCodePage,
+            Validators =
+            {
+                option =>
+                {
+                    foreach (Token token in option.Tokens)
+                    {
+                        if (int.TryParse(token.Value, out int codePage) && TryGetEncoding(codePage) is null)
+                        {
+                            option.AddError($"Unknown code page '{token.Value}'.");
+                        }
+                    }
+                }
+            }
+        };
+
         Options.Add(gamePathOption);
+        Options.Add(codePageOption);
 
         SetAction(async (parseResult, cancellationToken) =>
         {
             string gamePath = parseResult.GetRequiredValue(gamePathOption);
             string output = parseResult.GetRequiredValue(outputOption);
-            await ExecuteAsync(gamePath, output, cancellationToken);
+            int codePage = parseResult.GetRequiredValue(codePageOption);
+            await ExecuteAsync(gamePath, output, GetEncoding(codePage), cancellationToken);
         });
     }
 
-    internal static async Task ExecuteAsync(string gamePath, string output, CancellationToken cancellationToken = default)
+    internal static async Task ExecuteAsync(string gamePath, string output, Encoding encoding, CancellationToken cancellationToken = default)
     {
         string outputPath = Path.Combine(output, "Database");
         Directory.CreateDirectory(outputPath);
 
         Console.WriteLine($"Extracting database resources from '{gamePath}'...");
 
-        Encoding dbfEncoding = CodePagesEncodingProvider.Instance.GetEncoding(DatabaseEncoding)!;
-
         DbfDataReaderOptions dbfOptions = new()
         {
-            Encoding = dbfEncoding,
+            Encoding = encoding,
             SkipDeletedRecords = true,
             StringTrimming = StringTrimmingOption.TrimEnd
         };
@@ -91,6 +112,30 @@ internal class ExtractDatabaseCommand : Command
         }
 
         Console.WriteLine($"Database extraction completed -> {outputPath}");
+    }
+
+    internal static Encoding GetEncoding(int codePage)
+    {
+        Encoding? encoding = TryGetEncoding(codePage);
+
+        if (encoding is null)
+        {
+            throw new InvalidDataException($"Unknown code page '{codePage}'.");
+        }
+
+        return encoding;
+    }
+
+    private static Encoding? TryGetEncoding(int codePage)
+    {
+        if (codePage is >= 0 and <= 65535)
+        {
+            return CodePagesEncodingProvider.Instance.GetEncoding(codePage);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private static object? GetValue(DbfDataReader.DbfDataReader reader, int ordinal)
