@@ -196,6 +196,20 @@ public sealed class GameTextProviderTests
     }
 
     [Test]
+    public void EscapedLineBreaksTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        GameTextProvider provider = new(
+            LoadGlobalDatabase(),
+            scenarioDb,
+            [.. scenarioDb.TextScenarios, new Db.TextScenario(ScenarioId, new Db.Id("S095EV00ff"), "POPUP_TXT", @"Prima parte.\n\nSeconda parte.", 0)]);
+
+        string actual = provider.GetScenarioText(new ScenarioTextId("S095EV00ff:POPUP_TXT:0"));
+
+        Assert.That(actual, Is.EqualTo("Prima parte.\n\nSeconda parte."));
+    }
+
+    [Test]
     public void UnitAndBuildingTextsTest()
     {
         GlobalDatabase globalDb = LoadGlobalDatabase();
