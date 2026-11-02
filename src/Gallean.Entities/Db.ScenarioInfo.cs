@@ -47,7 +47,7 @@ public static partial class Db
         [property: JsonPropertyName("DEBUNKW3")] string? DebunkWin3,
         [property: JsonPropertyName("DEBUNKW4")] string? DebunkWin4,
         [property: JsonPropertyName("DEBUNKW5")] string? DebunkWin5,
-        [property: JsonPropertyName("DEBUNKL")] string DebunkLose,
+        [property: JsonPropertyName("DEBUNKL")] string? DebunkLose,
         [property: JsonPropertyName("SUGG_LVL")] int SuggestedLevel,
         [property: JsonPropertyName("O")] bool O
     );
