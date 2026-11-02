@@ -13,12 +13,18 @@
         <Button x:Name="CloseButton" Margin="0,24,0,0" HorizontalAlignment="Right" Content="{local:Text 'Close'}" Classes="pill" Command="{Binding CloseCommand}" MinWidth="150" />
       </local:ModalPanel.Footer>
 
-      <StackPanel Spacing="20">
+      <StackPanel Spacing="16" Grid.IsSharedSizeScope="True">
         <Border Classes="heading" Margin="-28,0" Padding="28,8">
           <local:OutlinedTextBlock Text="{local:Text 'Sound and music'}" Classes="label" />
         </Border>
 
-        <Grid ColumnDefinitions="120,*,48" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+        <Grid RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="48" />
+          </Grid.ColumnDefinitions>
+
           <TextBlock Grid.Row="0"
                      Grid.Column="0"
                      Text="{local:Text 'Sound effects'}"
@@ -76,7 +82,12 @@
           <TextBlock Text="{local:Text 'Lock cursor to window'}" Classes="body" Foreground="{StaticResource PrimaryTextBrush}" />
         </CheckBox>
 
-        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+        <Grid RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
           <TextBlock Grid.Row="0"
                      Grid.Column="0"
                      Text="{local:Text 'Interface size'}"
@@ -120,14 +131,38 @@
           <local:OutlinedTextBlock Text="{local:Text 'Game'}" Classes="label" />
         </Border>
 
-        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="16">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
           <TextBlock Grid.Row="0"
+                     Grid.Column="0"
+                     Text="{local:Text 'Language'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="0"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Languages}"
+                    SelectedItem="{Binding Language}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="configuration:Language">
+                <TextBlock Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="1"
                      Grid.Column="0"
                      Text="{local:Text 'Autosave interval'}"
                      Classes="body"
                      Foreground="{StaticResource PrimaryTextBrush}"
                      VerticalAlignment="Center" />
-          <ComboBox Grid.Row="0"
+          <ComboBox Grid.Row="1"
                     Grid.Column="1"
                     ItemsSource="{Binding AutoSaveIntervals}"
                     SelectedItem="{Binding AutoSaveInterval}"
@@ -140,13 +175,13 @@
             </ComboBox.ItemTemplate>
           </ComboBox>
 
-          <TextBlock Grid.Row="1"
+          <TextBlock Grid.Row="2"
                      Grid.Column="0"
                      Text="{local:Text 'Autosave limit'}"
                      Classes="body"
                      Foreground="{StaticResource PrimaryTextBrush}"
                      VerticalAlignment="Center" />
-          <ComboBox Grid.Row="1"
+          <ComboBox Grid.Row="2"
                     Grid.Column="1"
                     ItemsSource="{Binding AutoSaveLimits}"
                     SelectedItem="{Binding AutoSaveLimit}"
@@ -159,13 +194,13 @@
             </ComboBox.ItemTemplate>
           </ComboBox>
 
-          <TextBlock Grid.Row="2"
+          <TextBlock Grid.Row="3"
                      Grid.Column="0"
                      Text="{local:Text 'Battle speed'}"
                      Classes="body"
                      Foreground="{StaticResource PrimaryTextBrush}"
                      VerticalAlignment="Center" />
-          <ComboBox Grid.Row="2"
+          <ComboBox Grid.Row="3"
                     Grid.Column="1"
                     ItemsSource="{Binding BattleSpeeds}"
                     SelectedItem="{Binding BattleSpeed}"
@@ -178,13 +213,13 @@
             </ComboBox.ItemTemplate>
           </ComboBox>
 
-          <TextBlock Grid.Row="3"
+          <TextBlock Grid.Row="4"
                      Grid.Column="0"
                      Text="{local:Text 'Movement speed'}"
                      Classes="body"
                      Foreground="{StaticResource PrimaryTextBrush}"
                      VerticalAlignment="Center" />
-          <ComboBox Grid.Row="3"
+          <ComboBox Grid.Row="4"
                     Grid.Column="1"
                     ItemsSource="{Binding MovementSpeeds}"
                     SelectedItem="{Binding MovementSpeed}"

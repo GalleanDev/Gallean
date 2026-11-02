@@ -1175,7 +1175,7 @@ internal sealed partial class WorldScreenViewModel :
             isVictory,
             GameModel.Texts.GetScenarioText(infoTexts.Name),
             GameModel.Texts.GetScenarioText(debriefingTextId),
-            new ScenarioTextFormatter(GameModel.Scenario.Names),
+            new ScenarioTextFormatter(GameModel.Texts.Names),
             MenuBackgroundViewModel.TryCreateRaceSelection(race),
             ScreenMusic.Tracks(MusicQueue.Create([music], isLooping: false)),
             Game,

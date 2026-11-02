@@ -16,7 +16,7 @@ public sealed record BattleUnit(
     ImmutableArray<BattleAbstractStatusEffect> StatusEffects,
     BattleUnitId? SummonerId,
     ImmutableArray<UnitAttackDefinitionId> EquipmentAttackIds,
-    string? Name,
+    UnitName? Name,
     bool IsTypeLocked)
 {
     public ImmutableArray<UnitWard> Wards { get; init; } = [];

@@ -45,13 +45,11 @@ internal sealed partial class DevToolsViewModel(GameViewModel game) : Observable
         else
         {
             activationPrompt = new ConfirmPromptViewModel(
-                "Developer tools",
-                new TextSpans([
-                    new TextSpan("Developer tools are meant ", TextStyle.None),
-                    new TextSpan("for development only", TextStyle.Highlight),
-                    new TextSpan(". They reveal hidden information and change how the game looks and plays, which spoils the game experience.", TextStyle.None)
-                ]),
-                "Show tools",
+                Tr("Developer tools"),
+                TrSpans(
+                    "Developer tools are meant {0:*}. They reveal hidden information and change how the game looks and plays, which spoils the game experience.",
+                    Tr("for development only")),
+                Tr("Show tools"),
                 ConfirmPromptType.Primary,
                 async () =>
                 {

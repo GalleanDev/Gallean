@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 
 namespace Gallean.Engine;
 
-public sealed class ScenarioExporter(IGameDefinitionProvider definitions, GlobalVariables globals)
+public sealed class ScenarioExporter(IGameDefinitionProvider definitions, IGameTextProvider texts, GlobalVariables globals)
 {
     public int ItemLimit => globals.LeaderExportItemLimit;
 
@@ -79,8 +79,10 @@ public sealed class ScenarioExporter(IGameDefinitionProvider definitions, Global
             }
         }
 
+        UnitName? name = leader.Name?.Accept(new ExportedNameVisitor(texts));
+
         return new ScenarioLeader(
-            leader with { Modifiers = modifiers.ToImmutable() },
+            leader with { Modifiers = modifiers.ToImmutable(), Name = name },
             equipment,
             new WorldInventory([.. remaining]),
             stack.PendingLeaderUpgrades,
@@ -92,5 +94,23 @@ public sealed class ScenarioExporter(IGameDefinitionProvider definitions, Global
         (WorldUnit leader, _, _) = stack.GetLeader(definitions);
 
         return race.Leaders.Contains(leader.DefinitionId) && !ThiefCalculator.IsThief(stack, definitions);
+    }
+
+    private sealed class ExportedNameVisitor(IGameTextProvider texts) : IUnitNameVisitor<UnitName>
+    {
+        public UnitName Visit(LiteralUnitName name)
+        {
+            return name;
+        }
+
+        public UnitName Visit(ScenarioUnitName name)
+        {
+            return new LiteralUnitName(texts.GetScenarioText(name.Id));
+        }
+
+        public UnitName Visit(LeaderUnitName name)
+        {
+            return name;
+        }
     }
 }

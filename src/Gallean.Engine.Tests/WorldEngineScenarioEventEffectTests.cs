@@ -8,10 +8,10 @@ public sealed class WorldEngineScenarioEventEffectTests
     private static BattleState ExpectedBattleState(
         UnitDefinition attacker,
         WorldUnitId attackerId,
-        string? attackerName,
+        UnitName? attackerName,
         UnitDefinition defender,
         WorldUnitId defenderId,
-        string? defenderName)
+        UnitName? defenderName)
     {
         BattleUnit attackerUnit = new(
             Id: new BattleUnitId(0),
@@ -1516,7 +1516,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 player.Id,
                 new WorldPosition(4, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -1594,7 +1594,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 player.Id,
                 new WorldPosition(0, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -1672,7 +1672,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 player.Id,
                 new WorldPosition(0, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -1818,7 +1818,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 player.Id,
                 new WorldPosition(2, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -4121,7 +4121,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 player.Id,
                 new WorldPosition(0, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -4660,7 +4660,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 enemy.Id,
                 new WorldPosition(4, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), raider) with { Name = "Konrad" }, GridPosition.FrontBottom, raider.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), raider) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, raider.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -4681,7 +4681,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                     createdId,
                     stack.Id,
                     new WorldPosition(1, 0),
-                    ExpectedBattleState(raider, new WorldUnitId("Unit0001"), attackerName: "Konrad", leader, new WorldUnitId("leader"), defenderName: null), IsDuel: false),
+                    ExpectedBattleState(raider, new WorldUnitId("Unit0001"), attackerName: new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)), leader, new WorldUnitId("leader"), defenderName: null), IsDuel: false),
                 new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
             ]);
 
@@ -4690,7 +4690,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 enemy.Id,
                 new WorldPosition(2, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), raider) with { Name = "Konrad" }, GridPosition.FrontBottom, raider.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), raider) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, raider.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -5969,7 +5969,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             player.Id,
             new WorldPosition(0, 0),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                 .Build(),
             movementPoints: 6);
 
@@ -6016,7 +6016,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                     scenarioEvent.Id,
                     new ScenarioTextId("Ambush!"),
                     ScenarioEventPortraitId.Unit(leader.Id),
-                    "Konrad",
+                    new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)),
                     IsPortraitLeft: true,
                     player.Id,
                     TriggererPosition: new WorldPosition(0, 1),
@@ -6041,7 +6041,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             player.Id,
             new WorldPosition(0, 0),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                 .Build(),
             movementPoints: 6);
 
@@ -6113,7 +6113,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             player.Id,
             new WorldPosition(0, 0),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                 .Build(),
             movementPoints: 6);
 
@@ -6375,7 +6375,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 player.Id,
                 new WorldPosition(0, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -6753,7 +6753,7 @@ public sealed class WorldEngineScenarioEventEffectTests
                 neutral.Id,
                 new WorldPosition(2, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), dragon) with { Name = "Konrad" }, GridPosition.FrontBottom, dragon.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), dragon) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, dragon.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {

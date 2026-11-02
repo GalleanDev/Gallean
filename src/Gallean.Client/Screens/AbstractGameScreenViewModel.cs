@@ -81,6 +81,10 @@ internal abstract partial class AbstractGameScreenViewModel : AbstractScreenView
             OnSnapshotChanged(Snapshot);
             NotifySnapshotGatedCommandsChanged();
         }
+        else if (e.PropertyName is nameof(GameModel.Texts))
+        {
+            OnSnapshotChanged(Snapshot);
+        }
     }
 
     protected void NotifySnapshotGatedCommandsChanged()

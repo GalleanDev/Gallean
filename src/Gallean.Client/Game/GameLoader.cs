@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Entities;
 using Gallean.Entities.GameData;
@@ -19,13 +20,16 @@ internal sealed class GameLoader(IRandomProvider random)
     private readonly Lazy<GlobalDatabaseIndex> globalDatabaseIndex = new(() => GlobalDatabaseLoader.LoadIndex(RiseOfTheElves.GlobalDatabasePath));
     private readonly Lazy<ScenarioDatabaseIndex> scenarioDatabaseIndex = new(() => ScenarioDatabaseLoader.LoadIndex(RiseOfTheElves.ScenarioDatabasePath));
 
-    public (IReadOnlyList<GameCampaign> Campaigns, IGameTextProvider Texts, IGameDefinitionProvider Definitions) LoadCampaigns()
+    public (IReadOnlyList<GameCampaign> Campaigns, IGameTextProvider Texts, IGameDefinitionProvider Definitions) LoadCampaigns(Language language)
     {
         IReadOnlyList<ScenarioCampaign> campaigns = ScenarioLoader.EnumerateCampaigns(
             globalDatabaseIndex.Value,
             scenarioDatabaseIndex.Value,
             campaignDatabase.Value);
-        IGameTextProvider texts = new GameTextProvider(globalDatabaseIndex.Value, scenarioDatabaseIndex.Value, []);
+        LanguageDatabase languageDatabase = LanguageDatabaseLoader.LoadIndex(
+            RiseOfTheElves.GetLanguageGlobalDatabasePath(language.Code),
+            RiseOfTheElves.GetLanguageScenarioDatabasePath(language.Code));
+        IGameTextProvider texts = new GameTextProvider(globalDatabaseIndex.Value, scenarioDatabaseIndex.Value, [], languageDatabase);
         IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDatabase.Value);
 
         List<GameCampaign> result = [];
@@ -71,7 +75,7 @@ internal sealed class GameLoader(IRandomProvider random)
         }
     }
 
-    public (GameSession Session, IGameTextProvider Texts) LoadScenario(string scenarioId, WorldState? worldState)
+    public (GameSession Session, IGameTextProvider Texts) LoadScenario(string scenarioId, WorldState? worldState, Language language)
     {
         return LoadInternal(
             scenarioId,
@@ -82,10 +86,11 @@ internal sealed class GameLoader(IRandomProvider random)
                 new ScenarioId(scenarioId),
                 definitions,
                 globals),
-            worldState);
+            worldState,
+            language);
     }
 
-    public (GameSession Session, IGameTextProvider Texts) CreateScenario(string scenarioId, ScenarioConfiguration configuration)
+    public (GameSession Session, IGameTextProvider Texts) CreateScenario(string scenarioId, ScenarioConfiguration configuration, Language language)
     {
         return LoadInternal(
             scenarioId,
@@ -97,17 +102,26 @@ internal sealed class GameLoader(IRandomProvider random)
                 definitions,
                 globals,
                 configuration),
-            worldState: null);
+            worldState: null,
+            language);
+    }
+
+    public IGameTextProvider LoadTexts(string scenarioId, Language language)
+    {
+        ScenarioDatabase scenarioDatabase = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, scenarioId);
+
+        return CreateTextProvider(scenarioDatabase, scenarioId, language);
     }
 
     private (GameSession Session, IGameTextProvider Texts) LoadInternal(
         string scenarioId,
         ScenarioLoadFunc loadFunc,
-        WorldState? worldState)
+        WorldState? worldState,
+        Language language)
     {
         IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDatabase.Value);
         ScenarioDatabase scenarioDatabase = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, scenarioId);
-        IGameTextProvider texts = new GameTextProvider(globalDatabase.Value, scenarioDatabase, scenarioDatabase.TextScenarios);
+        IGameTextProvider texts = CreateTextProvider(scenarioDatabase, scenarioId, language);
         GlobalVariables globals = new();
         Scenario scenario = loadFunc(scenarioDatabase, definitions, globals);
 
@@ -116,5 +130,15 @@ internal sealed class GameLoader(IRandomProvider random)
         GameSession session = new(engineContext, worldState ?? scenario.State);
 
         return (session, texts);
+    }
+
+    private IGameTextProvider CreateTextProvider(ScenarioDatabase scenarioDatabase, string scenarioId, Language language)
+    {
+        LanguageDatabase languageDatabase = LanguageDatabaseLoader.Load(
+            RiseOfTheElves.GetLanguageGlobalDatabasePath(language.Code),
+            RiseOfTheElves.GetLanguageScenarioDatabasePath(language.Code),
+            scenarioId);
+
+        return new GameTextProvider(globalDatabase.Value, scenarioDatabase, scenarioDatabase.TextScenarios, languageDatabase);
     }
 }

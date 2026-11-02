@@ -29,8 +29,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -104,8 +104,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -171,8 +171,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -216,8 +216,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -278,8 +278,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -337,8 +337,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -396,8 +396,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -456,8 +456,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -529,8 +529,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -589,8 +589,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -638,8 +638,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -708,8 +708,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -763,8 +763,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -832,8 +832,8 @@ public sealed class WorldEnginePurchaseUnitTests
             Cities: [],
             Leaders: [],
             Units: [unitDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {

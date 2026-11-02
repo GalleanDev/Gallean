@@ -12,7 +12,6 @@ internal sealed class GameScenarioProvider : IGameScenarioProvider
     public GameScenarioProvider(
         IEnumerable<ScenarioEventDefinition> events,
         IEnumerable<ScenarioLocationDefinition> locations,
-        IEnumerable<ScenarioName> names,
         IEnumerable<ScenarioStackTemplateDefinition> stackTemplates,
         IEnumerable<ScenarioVariableDefinition> variables,
         ScenarioDefinition definition)
@@ -24,8 +23,6 @@ internal sealed class GameScenarioProvider : IGameScenarioProvider
         ImmutableArray<ScenarioLocationDefinition> allLocations = [.. locations];
         Locations = allLocations;
         locationsById = allLocations.ToImmutableDictionary(l => l.Id);
-
-        Names = [.. names];
 
         ImmutableArray<ScenarioStackTemplateDefinition> allStackTemplates = [.. stackTemplates];
         StackTemplates = allStackTemplates;
@@ -39,7 +36,6 @@ internal sealed class GameScenarioProvider : IGameScenarioProvider
     }
 
     public static GameScenarioProvider Empty { get; } = new(
-        [],
         [],
         [],
         [],
@@ -61,7 +57,6 @@ internal sealed class GameScenarioProvider : IGameScenarioProvider
 
     public IReadOnlyList<ScenarioEventDefinition> Events { get; }
     public IReadOnlyList<ScenarioLocationDefinition> Locations { get; }
-    public IReadOnlyList<ScenarioName> Names { get; }
     public IReadOnlyList<ScenarioStackTemplateDefinition> StackTemplates { get; }
     public IReadOnlyList<ScenarioVariableDefinition> Variables { get; }
     public ScenarioDefinition Definition { get; }

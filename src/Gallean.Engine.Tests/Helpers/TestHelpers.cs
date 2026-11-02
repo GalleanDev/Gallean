@@ -239,8 +239,8 @@ internal static class TestHelpers
             Cities: [],
             Leaders: [],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
     }
 
     public static WorldCityDefinition SimpleCityDefinition(WorldCityDefinitionId id, WorldResourceSet upgradeCost)

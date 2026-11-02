@@ -4,7 +4,6 @@ public interface IGameScenarioProvider
 {
     IReadOnlyList<ScenarioEventDefinition> Events { get; }
     IReadOnlyList<ScenarioLocationDefinition> Locations { get; }
-    IReadOnlyList<ScenarioName> Names { get; }
     IReadOnlyList<ScenarioStackTemplateDefinition> StackTemplates { get; }
     IReadOnlyList<ScenarioVariableDefinition> Variables { get; }
     ScenarioDefinition Definition { get; }

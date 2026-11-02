@@ -491,7 +491,7 @@ public sealed class WorldTileInfoViewModelTests
             .WithPlayer(undead)
             .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
             .WithPlayer(neutral)
-            .WithTomb(new WorldTomb(new WorldTombId("tomb1"), new WorldPosition(1, 0), human.Id, knight.Id, "Aldric", undead.Id, orcKing.Id, "Morwen", Turn: 3))
+            .WithTomb(new WorldTomb(new WorldTombId("tomb1"), new WorldPosition(1, 0), human.Id, knight.Id, new LiteralUnitName("Aldric"), undead.Id, orcKing.Id, new LiteralUnitName("Morwen"), Turn: 3))
             .WithTomb(new WorldTomb(new WorldTombId("tomb2"), new WorldPosition(1, 0), human.Id, knight.Id, LeaderName: null, undead.Id, orcKing.Id, DestroyerLeaderName: null, Turn: 4))
             .WithTomb(new WorldTomb(new WorldTombId("tomb3"), new WorldPosition(1, 0), human.Id, knight.Id, LeaderName: null, undead.Id, DestroyerLeaderDefinitionId: null, DestroyerLeaderName: null, Turn: 5))
             .WithTomb(new WorldTomb(new WorldTombId("tomb4"), new WorldPosition(1, 0), human.Id, knight.Id, LeaderName: null, neutral.Id, orcKing.Id, DestroyerLeaderName: null, Turn: 6))
@@ -529,7 +529,7 @@ public sealed class WorldTileInfoViewModelTests
                 Variant: new WorldObjectVariant(0),
                 Inventory: WorldInventory.Empty,
                 AiPriority: 1))
-            .WithTomb(new WorldTomb(new WorldTombId("tomb"), new WorldPosition(1, 0), player.Id, new UnitDefinitionId("leader"), "Aldric", DestroyerPlayerId: null, DestroyerLeaderDefinitionId: null, DestroyerLeaderName: null, Turn: 1))
+            .WithTomb(new WorldTomb(new WorldTombId("tomb"), new WorldPosition(1, 0), player.Id, new UnitDefinitionId("leader"), new LiteralUnitName("Aldric"), DestroyerPlayerId: null, DestroyerLeaderDefinitionId: null, DestroyerLeaderName: null, Turn: 1))
             .BuildSession();
 
         WorldTileInfoViewModel info = CreateInfo(session, engine, new WorldPosition(1, 0));

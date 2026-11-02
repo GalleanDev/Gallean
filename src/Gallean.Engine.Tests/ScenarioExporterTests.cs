@@ -1,3 +1,4 @@
+using Gallean.Common;
 namespace Gallean.Engine.Tests;
 
 public sealed class ScenarioExporterTests
@@ -52,8 +53,8 @@ public sealed class ScenarioExporterTests
             [],
             [leaderDefinition.Id, thiefDefinition.Id],
             [],
-            ["Uther"],
-            ["Elena"]);
+            1,
+            1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         WorldPlayer foreignPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Dwarf, map);
@@ -131,7 +132,7 @@ public sealed class ScenarioExporterTests
                 UnitModifier.FromEquipment(BannerModifier.Id),
                 new UnitModifier(UpgradeModifier.Id, RemainingTurns: 2)
             ],
-            Name: "Uther",
+            Name: new LiteralUnitName("Uther"),
             IsTypeLocked: false);
         WorldUnit soldier = new(new WorldUnitId("soldier"), new UnitDefinitionId("soldier"), 100, 0, 1, [UnitModifier.FromEquipment(BannerModifier.Id)], null, false);
 
@@ -168,7 +169,7 @@ public sealed class ScenarioExporterTests
         WorldStack stack = CreateHeroStack();
         (WorldState state, IGameDefinitionProvider definitions) = BuildWorld(stack);
 
-        ScenarioExporter exporter = new(definitions, new GlobalVariables());
+        ScenarioExporter exporter = new(definitions, TestGameTextProvider.Instance, new GlobalVariables());
 
         Assert.That(exporter.GetExportableStacks(state, new WorldPlayerId(1)), Is.EqualTo([state.Stacks[stack.Id]]));
     }
@@ -179,7 +180,7 @@ public sealed class ScenarioExporterTests
         WorldStack stack = CreateHeroStack();
         (_, IGameDefinitionProvider definitions) = BuildWorld(stack);
 
-        ScenarioExporter exporter = new(definitions, new GlobalVariables());
+        ScenarioExporter exporter = new(definitions, TestGameTextProvider.Instance, new GlobalVariables());
         ScenarioLeader exported = exporter.ExportLeader(stack, [Potion, Gem, Banner]);
 
         Assert.That(exported, Is.EqualTo(new ScenarioLeader(
@@ -190,7 +191,7 @@ public sealed class ScenarioExporterTests
                 Experience: 250,
                 Level: 3,
                 [UnitModifier.Permanent(UpgradeModifier.Id)],
-                Name: "Uther",
+                Name: new LiteralUnitName("Uther"),
                 IsTypeLocked: false),
             LeaderEquipment.Empty.With(LeaderEquipmentSlot.Banner, Banner),
             new WorldInventory([Potion, Gem]),
@@ -204,7 +205,7 @@ public sealed class ScenarioExporterTests
         WorldStack stack = CreateHeroStack();
         (_, IGameDefinitionProvider definitions) = BuildWorld(stack);
 
-        ScenarioExporter exporter = new(definitions, new GlobalVariables());
+        ScenarioExporter exporter = new(definitions, TestGameTextProvider.Instance, new GlobalVariables());
 
         Assert.That(exporter.ItemLimit, Is.EqualTo(5));
         Assert.That(

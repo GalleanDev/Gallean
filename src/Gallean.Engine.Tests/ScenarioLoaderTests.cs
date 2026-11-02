@@ -176,7 +176,7 @@ public sealed class ScenarioLoaderTests
         ScenarioId scenarioId = new(id);
         Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
 
-        GameTextProvider texts = new(globalDb, scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider texts = new(globalDb, scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         IEnumerable<string> popupTexts = scenario.Provider.Events
             .SelectMany(scenarioEvent => scenarioEvent.Effects)
@@ -201,7 +201,7 @@ public sealed class ScenarioLoaderTests
     {
         ScenarioId scenarioId = new(id);
         Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
-        GameTextProvider texts = new(globalDb, scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider texts = new(globalDb, scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         List<ScenarioTextId> textIds = [];
 
@@ -542,7 +542,7 @@ public sealed class ScenarioLoaderTests
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S095UN0014"), u5035, 370, 0, 1, [], null, false), GridPosition.FrontBottom, true)
-            .Place(new WorldUnit(new WorldUnitId("S095UN0012"), u5136, 420, 0, 1, [], Name: "Giant Spider", IsTypeLocked: false), GridPosition.FrontTop, true)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0012"), u5136, 420, 0, 1, [], Name: new ScenarioUnitName(new ScenarioTextId("S095UN0012:NAME_TXT:0")), IsTypeLocked: false), GridPosition.FrontTop, true)
             .Build();
 
         Assert.That(scenario.State.Stacks[new WorldStackId("S095KC0003")], Is.EqualTo(new WorldStack(
@@ -577,7 +577,7 @@ public sealed class ScenarioLoaderTests
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S096UN0115"), u0171, 120, 0, 3, [], null, false), GridPosition.BackBottom, false)
-            .Place(new WorldUnit(new WorldUnitId("S096UN0113"), u0072, 135, 0, 8, [UnitModifier.FromScenario(new UnitModifierDefinitionId("G000UM9024"))], Name: "Ysnegrak", IsTypeLocked: false), GridPosition.BackCenter, false)
+            .Place(new WorldUnit(new WorldUnitId("S096UN0113"), u0072, 135, 0, 8, [UnitModifier.FromScenario(new UnitModifierDefinitionId("G000UM9024"))], Name: new ScenarioUnitName(new ScenarioTextId("S096UN0113:NAME_TXT:0")), IsTypeLocked: false), GridPosition.BackCenter, false)
             .Place(new WorldUnit(new WorldUnitId("S096UN0114"), u0058, 270, 0, 2, [], null, false), GridPosition.FrontTop, true)
             .Build();
 
@@ -617,7 +617,7 @@ public sealed class ScenarioLoaderTests
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S095UN0045"), u5017, 50, 0, 1, [], null, false), GridPosition.FrontBottom, false)
             .Place(new WorldUnit(new WorldUnitId("S095UN0043"), u5018, 40, 0, 1, [], null, false), GridPosition.BackBottom, false)
-            .Place(new WorldUnit(new WorldUnitId("S095UN0042"), u5117, 50, 0, 1, [], Name: "Goblin", IsTypeLocked: false), GridPosition.FrontTop, false)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0042"), u5117, 50, 0, 1, [], Name: new ScenarioUnitName(new ScenarioTextId("S095UN0042:NAME_TXT:0")), IsTypeLocked: false), GridPosition.FrontTop, false)
             .Place(new WorldUnit(new WorldUnitId("S095UN0044"), u5018, 40, 0, 1, [], null, false), GridPosition.BackTop, false)
             .Build();
 
@@ -654,7 +654,7 @@ public sealed class ScenarioLoaderTests
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S095UN0082"), u0053, 170, 0, 2, [], null, false), GridPosition.FrontBottom, false)
             .Place(new WorldUnit(new WorldUnitId("S095UN0083"), u0053, 170, 0, 2, [], null, false), GridPosition.FrontTop, false)
-            .Place(new WorldUnit(new WorldUnitId("S095UN0081"), u0072, 85, 0, 3, [], Name: "Lofemyr", IsTypeLocked: false), GridPosition.BackBottom, false)
+            .Place(new WorldUnit(new WorldUnitId("S095UN0081"), u0072, 85, 0, 3, [], Name: new ScenarioUnitName(new ScenarioTextId("S095UN0081:NAME_TXT:0")), IsTypeLocked: false), GridPosition.BackBottom, false)
             .Place(new WorldUnit(new WorldUnitId("S095UN0084"), u0063, 75, 0, 2, [], null, false), GridPosition.BackTop, false)
             .Build();
 
@@ -693,7 +693,7 @@ public sealed class ScenarioLoaderTests
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S095UN00bd"), u0005, 180, 0, 3, [], null, false), GridPosition.FrontBottom, false)
             .Place(
-                new WorldUnit(new WorldUnitId("S095UN00aa"), u6008, 200, 0, 1, [UnitModifier.FromScenario(new UnitModifierDefinitionId("G000UM9034"))], Name: "Hubert de Lalye", IsTypeLocked: false),
+                new WorldUnit(new WorldUnitId("S095UN00aa"), u6008, 200, 0, 1, [UnitModifier.FromScenario(new UnitModifierDefinitionId("G000UM9034"))], Name: new ScenarioUnitName(new ScenarioTextId("S095UN00aa:NAME_TXT:0")), IsTypeLocked: false),
                 GridPosition.FrontTop,
                 false)
             .Place(new WorldUnit(new WorldUnitId("S095UN00ac"), u0153, 95, 0, 3, [], null, false), GridPosition.BackBottom, false)
@@ -795,7 +795,7 @@ public sealed class ScenarioLoaderTests
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S112UN0105"), u0015, 175, 0, 4, [], null, false), GridPosition.FrontBottom, false)
             .Place(
-                new WorldUnit(new WorldUnitId("S112UN0101"), u5356, 225, 0, 1, [UnitModifier.FromScenario(new UnitModifierDefinitionId("G000UM9037"))], Name: "Knight Dasannar", IsTypeLocked: false),
+                new WorldUnit(new WorldUnitId("S112UN0101"), u5356, 225, 0, 1, [UnitModifier.FromScenario(new UnitModifierDefinitionId("G000UM9037"))], Name: new ScenarioUnitName(new ScenarioTextId("S112UN0101:NAME_TXT:0")), IsTypeLocked: false),
                 GridPosition.FrontCenter,
                 false)
             .Place(new WorldUnit(new WorldUnitId("S112UN0104"), u0015, 175, 0, 4, [], null, false), GridPosition.FrontTop, false)
@@ -2167,7 +2167,7 @@ public sealed class ScenarioLoaderTests
     {
         ScenarioId scenarioId = new("S112SC0000");
         Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
-        GameTextProvider texts = new(globalDb, scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider texts = new(globalDb, scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         List<string> rows = [];
 
@@ -2196,7 +2196,7 @@ public sealed class ScenarioLoaderTests
 
         WorldStack stack = scenario.State.Stacks[new WorldStackId("S095KC0000")];
 
-        WorldUnit expectedUnit = new(new WorldUnitId("S095UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], Name: "Ardobert", IsTypeLocked: false);
+        WorldUnit expectedUnit = new(new WorldUnitId("S095UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))], Name: new ScenarioUnitName(new ScenarioTextId("S095UN0001:NAME_TXT:0")), IsTypeLocked: false);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(expectedUnit, new GridPosition(0, 1), false)
@@ -3128,7 +3128,7 @@ public sealed class ScenarioLoaderTests
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
             .Place(new WorldUnit(new WorldUnitId("S095UN0014"), u5035, 370, 0, 1, [bannerModifier], null, false), GridPosition.FrontBottom, true)
             .Place(
-                new WorldUnit(new WorldUnitId("S095UN0012"), u5136, 420, 0, 1, [bannerModifier, tomeModifier, weaponModifier, armorModifier, bootsModifier], Name: "Giant Spider", IsTypeLocked: false),
+                new WorldUnit(new WorldUnitId("S095UN0012"), u5136, 420, 0, 1, [bannerModifier, tomeModifier, weaponModifier, armorModifier, bootsModifier], Name: new ScenarioUnitName(new ScenarioTextId("S095UN0012:NAME_TXT:0")), IsTypeLocked: false),
                 GridPosition.FrontTop,
                 true)
             .Build();
@@ -3196,7 +3196,7 @@ public sealed class ScenarioLoaderTests
                 Experience: 120,
                 Level: 3,
                 [UnitModifier.Permanent(new UnitModifierDefinitionId("G000UM4008"))],
-                Name: "Uther",
+                Name: new ScenarioUnitName(new ScenarioTextId("S108UN0001:NAME_TXT:0")),
                 IsTypeLocked: false),
             LeaderEquipment.Empty.With(LeaderEquipmentSlot.Banner, banner),
             new WorldInventory([gem]),
@@ -3218,7 +3218,7 @@ public sealed class ScenarioLoaderTests
                         UnitModifier.FromEquipment(new UnitModifierDefinitionId("G000UM2101")),
                         UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))
                     ],
-                    Name: "Uther",
+                    Name: new ScenarioUnitName(new ScenarioTextId("S108UN0001:NAME_TXT:0")),
                     IsTypeLocked: false),
                 GridPosition.FrontCenter,
                 false)
@@ -3506,11 +3506,11 @@ public sealed class ScenarioLoaderTests
     [Test]
     public void LoadNamesTest()
     {
-        ScenarioId scenarioId = new("S135SC0000");
-        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
+        ScenarioDatabase scenarioTextsDb = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, "S135SC0000");
+        GameTextProvider texts = new(globalDb, scenarioTextsDb, scenarioTextsDb.TextScenarios, LanguageDatabase.Empty);
 
         Assert.That(
-            FormatNames(scenario.Provider.Names),
+            FormatNames(texts.Names),
             Is.EqualTo(
             [
                 "Faction Servants of Mortis",
@@ -4078,7 +4078,7 @@ public sealed class ScenarioLoaderTests
                     Experience: 0,
                     Level: 10,
                     [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))],
-                    Name: "Godefroy",
+                    Name: new ScenarioUnitName(new ScenarioTextId("S201UN0001:NAME_TXT:0")),
                     IsTypeLocked: false),
                 GridPosition.FrontCenter,
                 false)

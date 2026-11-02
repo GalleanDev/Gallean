@@ -51,8 +51,8 @@ public sealed class WorldEngineAiThiefTests
             [],
             [warDefinition.Id, thiefDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         WorldStack mainStack = TestHelpers.SimpleStack(
             new WorldStackId("Main"),
@@ -85,7 +85,7 @@ public sealed class WorldEngineAiThiefTests
         ]));
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
-            .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), thiefDefinition) with { Name = "Nigosh" }, GridPosition.BackCenter, false)
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), thiefDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.BackCenter, false)
             .Build();
 
         Assert.That(session.World.State.Stacks[new WorldStackId("Stack0001")], Is.EqualTo(TestHelpers.SimpleStack(

@@ -99,7 +99,7 @@ public sealed class VisualTests
     private GameModel LoadScenario(WorldState? worldState)
     {
         GameLoader loader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState);
+        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState, Language.English);
 
         return cleanupList.Add(new GameModel(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance));
     }
@@ -466,6 +466,25 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task SettingsRussianTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
+
+        SettingsScreenViewModel settings = new(gameViewModel);
+        settings.Language = Language.Russian;
+
+        gameViewModel.OpenScreen(settings);
+
+        await CaptureAsync(window);
+
+        settings.Language = Language.English;
+    }
+
+    [AvaloniaTest]
     public async Task SettingsFocusTest()
     {
         using Sandbox sb = Sandbox.Create();
@@ -650,7 +669,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
@@ -664,7 +683,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1600, 900);
 
@@ -678,7 +697,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1720, 720);
 
@@ -692,7 +711,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1920, 1080);
 
@@ -706,7 +725,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
@@ -722,7 +741,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
@@ -734,11 +753,28 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task ScenarioSelectRussianTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.Russian);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian));
+        gameViewModel.ShowScreen(new ScenarioSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+
+        await CaptureAsync(window);
+
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English));
+    }
+
+    [AvaloniaTest]
     public async Task ScenarioSelectTest()
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
@@ -752,7 +788,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameScenario scenario = campaigns[0].Scenarios[1];
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
@@ -767,7 +803,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameCampaign campaign = campaigns[2];
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
@@ -1082,7 +1118,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, null);
+        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, null, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
@@ -2066,7 +2102,7 @@ public sealed class VisualTests
         WorldStack neutralStack = state.Stacks.Values.First(stack => state.Players[stack.OwnerId].Race == WorldRace.Neutral);
         (WorldUnit neutralLeader, _, _) = neutralStack.GetLeader(scenario.Definitions);
 
-        WorldTomb heroTomb = new(new WorldTombId("Tomb0001"), new WorldPosition(12, 14), hero.OwnerId, heroLeader.DefinitionId, "Aldric", neutralStack.OwnerId, neutralLeader.DefinitionId, neutralLeader.Name, Turn: 1);
+        WorldTomb heroTomb = new(new WorldTombId("Tomb0001"), new WorldPosition(12, 14), hero.OwnerId, heroLeader.DefinitionId, new LiteralUnitName("Aldric"), neutralStack.OwnerId, neutralLeader.DefinitionId, neutralLeader.Name, Turn: 1);
         WorldTomb neutralTomb = new(new WorldTombId("Tomb0002"), new WorldPosition(12, 14), neutralStack.OwnerId, neutralLeader.DefinitionId, LeaderName: null, hero.OwnerId, heroLeader.DefinitionId, heroLeader.Name, Turn: 1);
 
         GameModel gameModel = LoadScenario(state with { Tombs = state.Tombs.Add(heroTomb.Id, heroTomb).Add(neutralTomb.Id, neutralTomb) });
@@ -4370,8 +4406,8 @@ public sealed class VisualTests
             Cities: [],
             Leaders: [],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("capital"),
@@ -5377,7 +5413,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal));
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English));
         gameViewModel.ShowScreen(new BattleScreenViewModel(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0)));
 
         await WaitForBattleAsync(window);

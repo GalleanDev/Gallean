@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Tests.Common;
 
@@ -35,7 +36,7 @@ public sealed class LeaderExportScreenViewModelTests
     {
         GameLoader gameLoader = new(new RandomProvider(0));
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null)], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
@@ -97,7 +98,7 @@ public sealed class LeaderExportScreenViewModelTests
             new WorldPosition(11, 63),
             WorldStackDirection.SouthWest,
             new UnitGrid<WorldUnit>.Builder()
-                .Place(new WorldUnit(new WorldUnitId("S108UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("g000um6001"))], Name: "Hatton", IsTypeLocked: false), GridPosition.FrontCenter, false)
+                .Place(new WorldUnit(new WorldUnitId("S108UN0001"), new UnitDefinitionId("G000UU0019"), 150, 0, 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("g000um6001"))], Name: new LiteralUnitName("Hatton"), IsTypeLocked: false), GridPosition.FrontCenter, false)
                 .Build(),
             MovementPoints: 20,
             new WorldInventory([
@@ -121,7 +122,7 @@ public sealed class LeaderExportScreenViewModelTests
     public void BackTest()
     {
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = gameLoader.LoadScenario("S107SC0000", worldState: null);
+        (GameSession session, IGameTextProvider texts) = gameLoader.LoadScenario("S107SC0000", worldState: null, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
@@ -138,7 +139,7 @@ public sealed class LeaderExportScreenViewModelTests
     {
         GameLoader gameLoader = new(new RandomProvider(0));
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null)], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 

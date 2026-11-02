@@ -6,19 +6,13 @@ namespace Gallean.Client;
 
 internal sealed partial class QuestTabViewModel : ManagementTabViewModel
 {
-    private readonly ScenarioTextFormatter formatter;
-
     public QuestTabViewModel(GameModel gameModel, GameViewModel gameViewModel, ManagementScreenViewModel screen)
         : base(gameModel, gameViewModel)
     {
-        ScenarioInfoTexts infoTexts = gameModel.Scenario.Definition.InfoTexts;
         WorldPlayer player = WorldState.Players[ViewPlayerId];
 
         Screen = screen;
-        formatter = new ScenarioTextFormatter(gameModel.Scenario.Names);
         LordPortraitKey = new AssetSpriteKey.LordFace(player.Race, player.FaceVariant.Value, IsLarge: true);
-        Title = gameModel.Texts.GetScenarioText(infoTexts.Name);
-        Briefing = FormatBriefing(infoTexts.Briefing);
 
         RefreshView();
     }
@@ -28,9 +22,14 @@ internal sealed partial class QuestTabViewModel : ManagementTabViewModel
 
     public ManagementScreenViewModel Screen { get; }
     public AssetSpriteKey.LordFace LordPortraitKey { get; }
-    public string Title { get; }
-    public ImmutableArray<ScenarioTextSpan> Briefing { get; }
     public bool HasBriefing => !Briefing.IsEmpty;
+
+    [ObservableProperty]
+    public partial string Title { get; private set; } = string.Empty;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasBriefing))]
+    public partial ImmutableArray<ScenarioTextSpan> Briefing { get; private set; } = [];
 
     [ObservableProperty]
     public partial string? Objective { get; private set; }
@@ -54,7 +53,7 @@ internal sealed partial class QuestTabViewModel : ManagementTabViewModel
                left.Audience.SequenceEqual(right.Audience);
     }
 
-    private ImmutableArray<ScenarioTextSpan> FormatBriefing(ScenarioTextId? textId)
+    private ImmutableArray<ScenarioTextSpan> FormatBriefing(ScenarioTextFormatter formatter, ScenarioTextId? textId)
     {
         if (textId is not null)
         {
@@ -84,12 +83,17 @@ internal sealed partial class QuestTabViewModel : ManagementTabViewModel
 
     private void RefreshView()
     {
+        ScenarioInfoTexts infoTexts = GameModel.Scenario.Definition.InfoTexts;
+        ScenarioTextFormatter formatter = new(GameModel.Texts.Names);
+
+        Title = GameModel.Texts.GetScenarioText(infoTexts.Name);
+        Briefing = FormatBriefing(formatter, infoTexts.Briefing);
         Objective = FormatObjective(WorldState.ScenarioState.ObjectiveTextId);
         TurnText = Tr("Turn {0}", WorldState.TurnInfo.TurnNumber);
-        Dialogs = BuildDialogs();
+        Dialogs = BuildDialogs(formatter);
     }
 
-    private IReadOnlyList<QuestDialogViewModel> BuildDialogs()
+    private IReadOnlyList<QuestDialogViewModel> BuildDialogs(ScenarioTextFormatter formatter)
     {
         List<QuestDialogViewModel> dialogs = [];
         List<QuestMessageViewModel> messages = [];

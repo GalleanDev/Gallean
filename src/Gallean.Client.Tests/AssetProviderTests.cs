@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client.Tests;
@@ -14,7 +15,7 @@ public sealed class AssetProviderTests
         provider = TestAssets.LoadOrIgnore();
 
         GameLoader loader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState: null);
+        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState: null, Language.English);
         using GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         definitions = gameModel.Definitions;
     }
@@ -465,7 +466,7 @@ public sealed class AssetProviderTests
     public void BuildingIconTest()
     {
         GameLoader loader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState: null);
+        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState: null, Language.English);
         using GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
 
         IEnumerable<WorldPlayerBuildingDefinitionId> buildingIds = gameModel.Snapshot.WorldState.Players.Values

@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Tests.Common;
 
@@ -34,7 +35,7 @@ public sealed class RaceSelectScreenViewModelTests
                 new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
                 new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))
             ]);
-        (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         RaceSelectScreenViewModel viewModel = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, scenario);
 
@@ -69,7 +70,7 @@ public sealed class RaceSelectScreenViewModelTests
                 new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
                 new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))
             ]);
-        (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns();
+        (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         RaceSelectScreenViewModel viewModel = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, scenario);
 

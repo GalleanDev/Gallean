@@ -13,5 +13,5 @@ public sealed record WorldRaceDefinition(
     ImmutableArray<WorldCityDefinitionId> Cities,
     ImmutableArray<UnitDefinitionId> Leaders,
     ImmutableArray<UnitDefinitionId> Units,
-    ImmutableArray<string> MaleLeaderNames,
-    ImmutableArray<string> FemaleLeaderNames);
+    int MaleLeaderNameCount,
+    int FemaleLeaderNameCount);

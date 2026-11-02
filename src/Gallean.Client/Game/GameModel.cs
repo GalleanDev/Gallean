@@ -30,7 +30,6 @@ internal sealed partial class GameModel : ObservableObject, IDisposable
     }
 
     public IGameDefinitionProvider Definitions { get; }
-    public IGameTextProvider Texts { get; }
     public IUnitStatsProvider Stats { get; }
     public IGameScenarioProvider Scenario { get; }
     public GlobalVariables Globals { get; }
@@ -40,6 +39,10 @@ internal sealed partial class GameModel : ObservableObject, IDisposable
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsBusy))]
     public partial GameSnapshot Snapshot { get; private set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ScenarioName))]
+    public partial IGameTextProvider Texts { get; set; }
 
     public string ScenarioId => Scenario.Definition.Id.Value;
     public string ScenarioName => Texts.GetScenarioText(Scenario.Definition.InfoTexts.Name);

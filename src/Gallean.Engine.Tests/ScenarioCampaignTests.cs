@@ -16,7 +16,7 @@ public sealed class ScenarioCampaignTests
         globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
         scenarioDb = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath);
         campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
-        texts = new GameTextProvider(globalDb, scenarioDb, scenarioDb.TextScenarios);
+        texts = new GameTextProvider(globalDb, scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
     }
 
     private static IReadOnlyList<string> FormatCampaigns(IReadOnlyList<ScenarioCampaign> campaigns, IGameTextProvider texts)

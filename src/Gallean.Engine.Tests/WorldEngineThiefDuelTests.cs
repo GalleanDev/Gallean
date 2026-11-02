@@ -21,7 +21,7 @@ public sealed class WorldEngineThiefDuelTests
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
 
-        WorldUnit thiefUnit = new(new WorldUnitId("thiefUnit"), thief.Id, 100, 7, 1, [], Name: "Sneak", IsTypeLocked: false);
+        WorldUnit thiefUnit = new(new WorldUnitId("thiefUnit"), thief.Id, 100, 7, 1, [], Name: new LiteralUnitName("Sneak"), IsTypeLocked: false);
         WorldUnit warlordUnit = new(new WorldUnitId("warlordUnit"), warlord.Id, 80, 11, 1, [], null, false);
         WorldUnit soldierUnit = new(new WorldUnitId("soldierUnit"), soldier.Id, 60, 3, 1, [], null, false);
 
@@ -72,7 +72,7 @@ public sealed class WorldEngineThiefDuelTests
             StatusEffects: [],
             SummonerId: null,
             EquipmentAttackIds: [],
-            Name: "Sneak",
+            Name: new LiteralUnitName("Sneak"),
             IsTypeLocked: false);
 
         BattleUnit defenderLeader = new(

@@ -15,6 +15,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private MovementSpeed movementSpeed;
     private UiSize uiSize;
     private bool lockCursor;
+    private Language language;
 
     public SettingsScreenViewModel(GameViewModel gameViewModel)
     {
@@ -29,6 +30,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         movementSpeed = gameViewModel.Settings.MovementSpeed;
         uiSize = gameViewModel.Settings.UiSize;
         lockCursor = gameViewModel.Settings.LockCursor;
+        language = gameViewModel.Settings.Language;
 
         gameViewModel.PropertyChanged += OnGamePropertyChanged;
     }
@@ -37,11 +39,12 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     public int MaxVolume => GameSettings.MaxVolume;
 
     public IReadOnlyList<int> RenderResolutions { get; } = [50, 75, 100];
-    public IReadOnlyList<UiSize> UiSizes { get; } = Enum.GetValues<UiSize>();
-    public IReadOnlyList<int> AutoSaveIntervals { get; } = [1, 3, 5, 10, 0];
+    public IReadOnlyList<UiSize> UiSizes => Enum.GetValues<UiSize>();
+    public IReadOnlyList<int> AutoSaveIntervals => [1, 3, 5, 10, 0];
     public IReadOnlyList<int> AutoSaveLimits { get; } = [1, 3, 5, 10, 20];
-    public IReadOnlyList<BattleSpeed> BattleSpeeds { get; } = Enum.GetValues<BattleSpeed>();
-    public IReadOnlyList<MovementSpeed> MovementSpeeds { get; } = Enum.GetValues<MovementSpeed>();
+    public IReadOnlyList<BattleSpeed> BattleSpeeds => Enum.GetValues<BattleSpeed>();
+    public IReadOnlyList<MovementSpeed> MovementSpeeds => Enum.GetValues<MovementSpeed>();
+    public IReadOnlyList<Language> Languages { get; } = Enum.GetValues<Language>();
 
     public int SoundVolume
     {
@@ -151,6 +154,19 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         }
     }
 
+    public Language Language
+    {
+        get => language;
+        set
+        {
+            if (SetProperty(ref language, value))
+            {
+                Apply();
+                RefreshSettingNames();
+            }
+        }
+    }
+
     public bool Windowed
     {
         get => gameViewModel.IsWindowed;
@@ -173,7 +189,15 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
 
     private void Apply()
     {
-        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed));
+        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed, language));
+    }
+
+    private void RefreshSettingNames()
+    {
+        OnPropertyChanged(nameof(UiSizes));
+        OnPropertyChanged(nameof(AutoSaveIntervals));
+        OnPropertyChanged(nameof(BattleSpeeds));
+        OnPropertyChanged(nameof(MovementSpeeds));
     }
 
     private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)

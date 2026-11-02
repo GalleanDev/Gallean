@@ -240,7 +240,7 @@ internal sealed record WorldTileInfoViewModel(
         IGameDefinitionProvider definitions,
         IGameTextProvider texts)
     {
-        string name = tomb.LeaderName ?? FormatUnitTypeName(tomb.LeaderDefinitionId, definitions, texts);
+        string name = FormatLeaderName(tomb.LeaderName, tomb.LeaderDefinitionId, definitions, texts);
 
         if (tomb.DestroyerPlayerId is not null)
         {
@@ -254,6 +254,22 @@ internal sealed record WorldTileInfoViewModel(
         }
     }
 
+    private static string FormatLeaderName(
+        UnitName? name,
+        UnitDefinitionId definitionId,
+        IGameDefinitionProvider definitions,
+        IGameTextProvider texts)
+    {
+        if (name is not null)
+        {
+            return texts.GetUnitName(name);
+        }
+        else
+        {
+            return FormatUnitTypeName(definitionId, definitions, texts);
+        }
+    }
+
     private static string FormatDestroyer(
         WorldTomb tomb,
         WorldPlayer destroyer,
@@ -262,7 +278,7 @@ internal sealed record WorldTileInfoViewModel(
     {
         if (tomb.DestroyerLeaderDefinitionId is not null)
         {
-            return tomb.DestroyerLeaderName ?? FormatUnitTypeName(tomb.DestroyerLeaderDefinitionId.Value, definitions, texts);
+            return FormatLeaderName(tomb.DestroyerLeaderName, tomb.DestroyerLeaderDefinitionId.Value, definitions, texts);
         }
         else
         {

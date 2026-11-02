@@ -4,7 +4,7 @@ namespace Gallean.Entities;
 
 public static partial class Db
 {
-    [GlobalDataFile("GItem.json")]
+    [GlobalDataFile("GItem.json", Index = true)]
     public record Item(
         [property: JsonPropertyName("ITEM_CAT")] MagicItemType ItemCategory,
         [property: DataKey, JsonPropertyName("ITEM_ID")] Id ItemId,

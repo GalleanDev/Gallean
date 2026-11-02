@@ -6,9 +6,20 @@ public static class RiseOfTheElves
     private const string GlobalsDirectoryName = "Globals";
     private const string ScenariosDirectoryName = "Scens";
     private const string CampaignsDirectoryName = "Campaign";
+    private const string LanguagesDirectoryName = "Languages";
 
     public static string RootPath => Path.Combine(AppContext.BaseDirectory, RootDirectoryName);
     public static string GlobalDatabasePath => Path.Combine(RootPath, GlobalsDirectoryName);
     public static string ScenarioDatabasePath => Path.Combine(RootPath, ScenariosDirectoryName);
     public static string CampaignDatabasePath => Path.Combine(RootPath, CampaignsDirectoryName);
+
+    public static string GetLanguageGlobalDatabasePath(string languageCode)
+    {
+        return Path.Combine(RootPath, LanguagesDirectoryName, languageCode, GlobalsDirectoryName);
+    }
+
+    public static string GetLanguageScenarioDatabasePath(string languageCode)
+    {
+        return Path.Combine(RootPath, LanguagesDirectoryName, languageCode, ScenariosDirectoryName);
+    }
 }

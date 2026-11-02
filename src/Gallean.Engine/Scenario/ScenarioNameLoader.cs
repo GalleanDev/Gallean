@@ -5,13 +5,11 @@ namespace Gallean.Engine;
 internal static class ScenarioNameLoader
 {
     public static ImmutableArray<ScenarioName> Load(
-        GlobalDatabase globalDb,
-        ScenarioDatabase scenarioDb,
-        Db.ScenarioId scenarioId)
+        IGlobalDatabaseIndex globalDb,
+        ImmutableDictionary<GlobalTextId, GlobalText> globalTexts,
+        ImmutableArray<Db.TextScenario> scenarioTexts)
     {
-        ImmutableArray<Db.TextScenario> scenarioTexts = [.. scenarioDb.TextScenariosByScenario[scenarioId]];
-        ImmutableDictionary<GlobalTextId, string> globalTexts = LoadGlobalTexts(globalDb);
-        HashSet<string> commonWords = LoadCommonWords(scenarioDb, scenarioTexts, globalTexts);
+        HashSet<string> commonWords = LoadCommonWords(scenarioTexts, globalTexts);
 
         List<ScenarioName> names = [];
         HashSet<string> nameTexts = [];
@@ -35,22 +33,14 @@ internal static class ScenarioNameLoader
         return [.. names];
     }
 
-    private static ImmutableDictionary<GlobalTextId, string> LoadGlobalTexts(GlobalDatabase globalDb)
-    {
-        return globalDb.TextGlobals.Values.ToImmutableDictionary(
-            text => new GlobalTextId(text.TextId),
-            text => text.Text ?? string.Empty);
-    }
-
     private static HashSet<string> LoadCommonWords(
-        ScenarioDatabase scenarioDb,
         ImmutableArray<Db.TextScenario> scenarioTexts,
-        ImmutableDictionary<GlobalTextId, string> globalTexts)
+        ImmutableDictionary<GlobalTextId, GlobalText> globalTexts)
     {
         HashSet<string> words = [];
         HashSet<string>.AlternateLookup<ReadOnlySpan<char>> lookup = words.GetAlternateLookup<ReadOnlySpan<char>>();
 
-        foreach (string? text in LoadTexts(scenarioDb, scenarioTexts, globalTexts))
+        foreach (string? text in LoadTexts(scenarioTexts, globalTexts))
         {
             if (text is not null)
             {
@@ -70,21 +60,12 @@ internal static class ScenarioNameLoader
     }
 
     private static IEnumerable<string?> LoadTexts(
-        ScenarioDatabase scenarioDb,
         ImmutableArray<Db.TextScenario> scenarioTexts,
-        ImmutableDictionary<GlobalTextId, string> globalTexts)
+        ImmutableDictionary<GlobalTextId, GlobalText> globalTexts)
     {
-        foreach (string text in globalTexts.Values)
+        foreach (GlobalText text in globalTexts.Values)
         {
-            yield return text;
-        }
-
-        foreach (Db.ScenarioInfo info in scenarioDb.ScenarioInfos)
-        {
-            foreach (Db.TextScenario text in ScenarioInfoTextDecoder.DecodeTexts(info))
-            {
-                yield return text.Text;
-            }
+            yield return text.Text;
         }
 
         foreach (Db.TextScenario text in scenarioTexts)
@@ -102,9 +83,9 @@ internal static class ScenarioNameLoader
     }
 
     private static IEnumerable<ScenarioName> LoadLabels(
-        GlobalDatabase globalDb,
+        IGlobalDatabaseIndex globalDb,
         ImmutableArray<Db.TextScenario> scenarioTexts,
-        ImmutableDictionary<GlobalTextId, string> globalTexts)
+        ImmutableDictionary<GlobalTextId, GlobalText> globalTexts)
     {
         foreach (Db.TextScenario text in scenarioTexts)
         {
@@ -118,7 +99,7 @@ internal static class ScenarioNameLoader
 
         foreach (Db.Unit unit in globalDb.Units.Values)
         {
-            yield return new ScenarioName(globalTexts[new GlobalTextId(unit.NameText)], ScenarioNameType.Character);
+            yield return new ScenarioName(globalTexts[new GlobalTextId(unit.NameText)].Text, ScenarioNameType.Character);
         }
     }
 
@@ -151,9 +132,9 @@ internal static class ScenarioNameLoader
     }
 
     private static IEnumerable<ScenarioName> LoadTitles(
-        GlobalDatabase globalDb,
+        IGlobalDatabaseIndex globalDb,
         ImmutableArray<Db.TextScenario> scenarioTexts,
-        ImmutableDictionary<GlobalTextId, string> globalTexts)
+        ImmutableDictionary<GlobalTextId, GlobalText> globalTexts)
     {
         foreach (Db.TextScenario text in scenarioTexts)
         {
@@ -165,12 +146,12 @@ internal static class ScenarioNameLoader
 
         foreach (Db.Race race in globalDb.Races.Values)
         {
-            yield return new ScenarioName(globalTexts[new GlobalTextId(race.NameText)], ScenarioNameType.Faction);
+            yield return new ScenarioName(globalTexts[new GlobalTextId(race.NameText)].Text, ScenarioNameType.Faction);
         }
 
         foreach (Db.Item item in globalDb.Items.Values)
         {
-            yield return new ScenarioName(globalTexts[new GlobalTextId(item.NameText)], ScenarioNameType.Item);
+            yield return new ScenarioName(globalTexts[new GlobalTextId(item.NameText)].Text, ScenarioNameType.Item);
         }
     }
 

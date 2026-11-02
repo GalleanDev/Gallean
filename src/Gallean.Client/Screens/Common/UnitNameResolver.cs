@@ -14,7 +14,7 @@ internal static class UnitNameResolver
         }
         else
         {
-            return unit.Name;
+            return texts.GetUnitName(unit.Name);
         }
     }
 
@@ -28,7 +28,7 @@ internal static class UnitNameResolver
         }
         else
         {
-            return unit.Name;
+            return texts.GetUnitName(unit.Name);
         }
     }
 }

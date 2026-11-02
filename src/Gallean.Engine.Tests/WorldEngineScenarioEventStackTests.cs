@@ -1888,7 +1888,7 @@ public sealed class WorldEngineScenarioEventStackTests
                 enemy.Id,
                 new WorldPosition(2, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {
@@ -1994,7 +1994,7 @@ public sealed class WorldEngineScenarioEventStackTests
                 player.Id,
                 new WorldPosition(2, 0),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = "Konrad" }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)) }, GridPosition.FrontBottom, leader.IsLarge)
                     .Build(),
                 movementPoints: 6) with
             {

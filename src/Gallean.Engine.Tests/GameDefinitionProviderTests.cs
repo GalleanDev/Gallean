@@ -43,7 +43,7 @@ public sealed class GameDefinitionProviderTests
         {
             WorldRaceDefinition definition = provider.GetRace(race);
 
-            rows.Add($"{race} {definition.MaleLeaderNames.Length} male, {definition.FemaleLeaderNames.Length} female");
+            rows.Add($"{race} {definition.MaleLeaderNameCount} male, {definition.FemaleLeaderNameCount} female");
         }
 
         return rows;
@@ -1306,10 +1306,10 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.That(provider.GetRace(WorldRace.Human).MaleLeaderNames[0], Is.EqualTo("Konrad"));
-        Assert.That(provider.GetRace(WorldRace.Human).FemaleLeaderNames[0], Is.EqualTo("Zolian"));
-        Assert.That(provider.GetRace(WorldRace.Neutral).MaleLeaderNames, Is.EqualTo(["Neutrals"]));
-        Assert.That(provider.GetRace(WorldRace.Neutral).FemaleLeaderNames, Is.EqualTo(["Neutrals"]));
+        Assert.That(provider.GetRace(WorldRace.Human).MaleLeaderNameCount, Is.EqualTo(30));
+        Assert.That(provider.GetRace(WorldRace.Human).FemaleLeaderNameCount, Is.EqualTo(15));
+        Assert.That(provider.GetRace(WorldRace.Neutral).MaleLeaderNameCount, Is.EqualTo(1));
+        Assert.That(provider.GetRace(WorldRace.Neutral).FemaleLeaderNameCount, Is.EqualTo(1));
     }
 
     [Test]

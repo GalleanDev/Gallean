@@ -24,7 +24,7 @@ public sealed class WorldEngineTombTests
             player1.Id,
             new WorldPosition(0, 0),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker) with { Name = "Morgana" }, GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker) with { Name = new LiteralUnitName("Morgana") }, GridPosition.FrontBottom, false)
                 .Build(),
             movementPoints: 6);
 
@@ -33,7 +33,7 @@ public sealed class WorldEngineTombTests
             player2.Id,
             new WorldPosition(1, 0),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defender) with { Name = "Aldric" }, GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defender) with { Name = new LiteralUnitName("Aldric") }, GridPosition.FrontBottom, false)
                 .Build(),
             movementPoints: 6);
 
@@ -51,10 +51,10 @@ public sealed class WorldEngineTombTests
 
         BattleState finalBattleState = new(
             AttackerGrid: new UnitGrid<BattleUnit>.Builder()
-                .Place(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("attacker"), attacker.Id, BattleSide.Attacker, hitpoints: 10) with { Name = "Morgana" }, GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("attacker"), attacker.Id, BattleSide.Attacker, hitpoints: 10) with { Name = new LiteralUnitName("Morgana") }, GridPosition.FrontBottom, false)
                 .Build(),
             DefenderGrid: new UnitGrid<BattleUnit>.Builder()
-                .Place(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("defender"), defender.Id, BattleSide.Defender, hitpoints: 0) with { Name = "Aldric" }, GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("defender"), defender.Id, BattleSide.Defender, hitpoints: 0) with { Name = new LiteralUnitName("Aldric") }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(new BattleUnitId(0), BattleUnitTurnType.Normal),
             TurnQueue: [],
@@ -66,11 +66,11 @@ public sealed class WorldEngineTombTests
             Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
-            .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker) with { Name = "Morgana" }, GridPosition.FrontBottom, false)
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker) with { Name = new LiteralUnitName("Morgana") }, GridPosition.FrontBottom, false)
             .Build();
 
         UnitGrid<WorldUnit> destroyedDefenderGrid = new UnitGrid<WorldUnit>.Builder()
-            .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defender) with { Hitpoints = 0, Name = "Aldric" }, GridPosition.FrontBottom, false)
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defender) with { Hitpoints = 0, Name = new LiteralUnitName("Aldric") }, GridPosition.FrontBottom, false)
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
@@ -89,7 +89,7 @@ public sealed class WorldEngineTombTests
                     new WorldTomb(
                         new WorldTombId("Tomb0001"),
                         new WorldPosition(1, 0),
-                        player2.Id, defender.Id, "Aldric", player1.Id, attacker.Id, "Morgana", Turn: 1))
+                        player2.Id, defender.Id, new LiteralUnitName("Aldric"), player1.Id, attacker.Id, new LiteralUnitName("Morgana"), Turn: 1))
             }));
     }
 
@@ -122,7 +122,7 @@ public sealed class WorldEngineTombTests
             TestHelpers.SingleUnitGrid(new WorldUnitId("defender"), defender),
             movementPoints: 6);
 
-        WorldTomb tomb = new(new WorldTombId("Tomb0001"), new WorldPosition(1, 0), player1.Id, attacker.Id, "Morwen", player2.Id, defender.Id, DestroyerLeaderName: null, Turn: 2);
+        WorldTomb tomb = new(new WorldTombId("Tomb0001"), new WorldPosition(1, 0), player1.Id, attacker.Id, new LiteralUnitName("Morwen"), player2.Id, defender.Id, DestroyerLeaderName: null, Turn: 2);
 
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)

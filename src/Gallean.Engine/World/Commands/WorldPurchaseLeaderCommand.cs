@@ -58,7 +58,7 @@ public sealed record WorldPurchaseLeaderCommand(
             return WorldCommandResult.Fail(WorldCommandError.TargetOccupied);
         }
 
-        string? leaderName = LeaderNameCalculator.TryGetName(leaderDefinition, context.Definitions, context.Random);
+        UnitName? leaderName = LeaderNameCalculator.TryGetName(leaderDefinition, context.Definitions, context.Random);
 
         WorldStackBuilder stackBuilder = new WorldStackBuilder(context.Definitions)
             .PlaceUnit(

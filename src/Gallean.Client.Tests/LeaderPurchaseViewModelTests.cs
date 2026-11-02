@@ -82,8 +82,8 @@ public sealed class LeaderPurchaseViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Konrad"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -131,7 +131,7 @@ public sealed class LeaderPurchaseViewModelTests
                 capital.Entrance,
                 TestHelpers.StackUnitGrid(
                     engine.Definitions,
-                    [(new WorldUnit(new WorldUnitId("Unit0001"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: "Konrad", IsTypeLocked: false), GridPosition.FrontCenter)]),
+                    [(new WorldUnit(new WorldUnitId("Unit0001"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)), IsTypeLocked: false), GridPosition.FrontCenter)]),
                 movementPoints: 20) with
             {
                 SubraceId = subrace.Id
@@ -195,8 +195,8 @@ public sealed class LeaderPurchaseViewModelTests
             Cities: [],
             Leaders: [expensiveLeader.Id, gatedLeader.Id, blockedLeader.Id],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -269,8 +269,8 @@ public sealed class LeaderPurchaseViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Konrad"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
             new WorldCityDefinitionId(WorldRace.Human, 3),
@@ -324,7 +324,7 @@ public sealed class LeaderPurchaseViewModelTests
                 city.Entrance,
                 TestHelpers.StackUnitGrid(
                     engine.Definitions,
-                    [(new WorldUnit(new WorldUnitId("Unit0001"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: "Konrad", IsTypeLocked: false), GridPosition.FrontCenter)]),
+                    [(new WorldUnit(new WorldUnitId("Unit0001"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0)), IsTypeLocked: false), GridPosition.FrontCenter)]),
                 movementPoints: 20) with
             {
                 SubraceId = subrace.Id

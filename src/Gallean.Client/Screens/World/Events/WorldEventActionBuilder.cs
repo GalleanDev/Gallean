@@ -244,7 +244,7 @@ internal sealed class WorldEventActionBuilder(
     {
         if (scenarioPopup.Messages[0].Audience.Contains(ViewPlayerId))
         {
-            ScenarioTextFormatter formatter = new(scenario.Names);
+            ScenarioTextFormatter formatter = new(texts.Names);
             ImmutableArray<ScenarioEventPopupMessage> messages =
             [
                 .. scenarioPopup.Messages.Select(message => ScenarioEventPopupMessage.Create(texts, definitions, formatter, message))

@@ -15,8 +15,8 @@ public sealed class BattleEngineAccuracyReductionTests
             [],
             [.. leaders],
             [],
-            [],
-            []);
+            0,
+            0);
     }
 
     [Test]

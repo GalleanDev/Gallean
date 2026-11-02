@@ -612,8 +612,8 @@ public sealed class WorldEngineAiTests
             [],
             [leaderDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         WorldRaceDefinition enemyRace = new(
             WorldRace.Heretic,
@@ -626,8 +626,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [],
-            [],
-            []);
+            0,
+            0);
 
         WorldStack enemy = TestHelpers.SimpleStack(
             new WorldStackId("Enemy"),
@@ -716,8 +716,8 @@ public sealed class WorldEngineAiTests
             [],
             [warDefinition.Id, rodDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         WorldStack mainStack = TestHelpers.SimpleStack(
             new WorldStackId("Main"),
@@ -750,7 +750,7 @@ public sealed class WorldEngineAiTests
         ]));
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
-            .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), rodDefinition) with { Name = "Nigosh" }, GridPosition.BackCenter, false)
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), rodDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.BackCenter, false)
             .Build();
 
         Assert.That(session.World.State.Stacks[new WorldStackId("Stack0001")], Is.EqualTo(TestHelpers.SimpleStack(
@@ -813,8 +813,8 @@ public sealed class WorldEngineAiTests
             [],
             [mageDefinition.Id, fighterDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -877,8 +877,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [rangedDefinition.Id, meleeDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -946,8 +946,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [soldierDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -1012,8 +1012,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [rangedDefinition.Id, meleeDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -1092,8 +1092,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [rangedDefinition.Id, meleeDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -1160,8 +1160,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [largeDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -3371,8 +3371,8 @@ public sealed class WorldEngineAiTests
             [],
             [fighterDefinition.Id],
             [soldierDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -3434,8 +3434,8 @@ public sealed class WorldEngineAiTests
             [],
             [fighterDefinition.Id],
             [soldierDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -3506,8 +3506,8 @@ public sealed class WorldEngineAiTests
             [],
             [fighterDefinition.Id, explorerDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -3592,8 +3592,8 @@ public sealed class WorldEngineAiTests
             [],
             [fighterDefinition.Id],
             [soldierDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -4048,8 +4048,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [rangedDefinition.Id, meleeDefinition.Id],
-            [],
-            []);
+            0,
+            0);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -4404,8 +4404,8 @@ public sealed class WorldEngineAiTests
             [],
             [fighterDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         WorldStack guardStack = MyStack(new WorldUnitId("guard"), "Guard", player.Id, new WorldPosition(7, 4), fighterDefinition, 100, 0, WorldStackOrder.Stand.Instance);
 
@@ -4558,8 +4558,8 @@ public sealed class WorldEngineAiTests
             [],
             [mageDefinition.Id, fighterDefinition.Id],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         WorldStack mainStack = MyStack(new WorldUnitId("main"), "Main", player.Id, new WorldPosition(7, 4), fighterDefinition, 100, 0, WorldStackOrder.Normal.Instance);
 
@@ -4613,8 +4613,8 @@ public sealed class WorldEngineAiTests
             [],
             [],
             [],
-            ["Nigosh"],
-            ["Orissia"]);
+            1,
+            1);
 
         WorldStack guardStack = MyStack(new WorldUnitId("guardLeader"), "Guard", player.Id, new WorldPosition(4, 4), guard, 100, 6, WorldStackOrder.Stand.Instance);
         WorldStack mainStack = TestHelpers.SimpleStack(

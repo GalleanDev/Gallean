@@ -981,18 +981,18 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
                 cityDefinitions.Add(city.Id);
             }
 
-            List<string> maleLeaderNames = [];
-            List<string> femaleLeaderNames = [];
+            int maleLeaderNameCount = 0;
+            int femaleLeaderNameCount = 0;
 
             foreach (Db.TextLeader leaderName in leaderNamesByRace[raceInfo.RaceId])
             {
                 if (leaderName.IsMale == true)
                 {
-                    maleLeaderNames.Add(leaderName.Text);
+                    maleLeaderNameCount++;
                 }
                 else
                 {
-                    femaleLeaderNames.Add(leaderName.Text);
+                    femaleLeaderNameCount++;
                 }
             }
 
@@ -1007,8 +1007,8 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
                 [.. cityDefinitions],
                 [.. leaderDefinitions],
                 [.. unitDefinitions],
-                [.. maleLeaderNames],
-                [.. femaleLeaderNames]);
+                maleLeaderNameCount,
+                femaleLeaderNameCount);
         }
     }
 

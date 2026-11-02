@@ -35,8 +35,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -72,7 +72,7 @@ public sealed class WorldEnginePurchaseLeaderTests
                 player.Id,
                 new WorldPosition(4, 4),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
                     .Build(),
                 movementPoints: 20) with
             {
@@ -126,8 +126,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -145,7 +145,7 @@ public sealed class WorldEnginePurchaseLeaderTests
             player.Id,
             new WorldPosition(3, 3),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontBottom, leaderDefinition.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontBottom, leaderDefinition.IsLarge)
                 .Build(),
             movementPoints: 20);
 
@@ -167,7 +167,7 @@ public sealed class WorldEnginePurchaseLeaderTests
             player.Id,
             new WorldPosition(4, 4),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0002"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0002"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
                 .Build(),
             movementPoints: 20);
 
@@ -217,8 +217,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -236,7 +236,7 @@ public sealed class WorldEnginePurchaseLeaderTests
             player.Id,
             new WorldPosition(4, 4),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontBottom, leaderDefinition.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontBottom, leaderDefinition.IsLarge)
                 .Build(),
             movementPoints: 20);
 
@@ -281,8 +281,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -328,8 +328,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -392,8 +392,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [],
             Units: [leaderDefinition.Id],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -453,8 +453,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -514,8 +514,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -576,8 +576,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -631,8 +631,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -674,7 +674,7 @@ public sealed class WorldEnginePurchaseLeaderTests
                 player.Id,
                 new WorldPosition(4, 4),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
                     .Build(),
                 movementPoints: 20) with
             {
@@ -721,8 +721,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -793,8 +793,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -812,7 +812,7 @@ public sealed class WorldEnginePurchaseLeaderTests
                 player.Id,
                 new WorldPosition(3, 3),
                 new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontBottom, leaderDefinition.IsLarge)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontBottom, leaderDefinition.IsLarge)
                     .Build(),
                 movementPoints: 20) with
             {
@@ -837,7 +837,7 @@ public sealed class WorldEnginePurchaseLeaderTests
             player.Id,
             new WorldPosition(4, 4),
             new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = "Ardobert" }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leaderDefinition) with { Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)) }, GridPosition.FrontCenter, leaderDefinition.IsLarge)
                 .Build(),
             movementPoints: 20);
 
@@ -894,8 +894,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [thiefDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -962,8 +962,8 @@ public sealed class WorldEnginePurchaseLeaderTests
             Cities: [],
             Leaders: [thiefDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Ardobert"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {

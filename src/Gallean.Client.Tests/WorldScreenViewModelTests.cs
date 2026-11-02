@@ -2195,8 +2195,8 @@ public sealed class WorldScreenViewModelTests
             Cities: [],
             Leaders: [leader.Id],
             Units: [],
-            MaleLeaderNames: ["Nigosh"],
-            FemaleLeaderNames: ["Orissia"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {

@@ -20,7 +20,7 @@ public sealed class GameTextProviderTests
     public void GetGlobalTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         GlobalText actual = provider.GetGlobalText(new GlobalTextId("X000TG2001"));
 
@@ -35,7 +35,7 @@ public sealed class GameTextProviderTests
     public void CaseInsensitiveIdTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         GlobalText lower = provider.GetGlobalText(new GlobalTextId("x000tg2001"));
         GlobalText upper = provider.GetGlobalText(new GlobalTextId("X000TG2001"));
@@ -56,7 +56,7 @@ public sealed class GameTextProviderTests
     public void UnknownTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         Assert.Throws<KeyNotFoundException>(() => provider.GetGlobalText(new GlobalTextId("invalid")));
     }
@@ -65,7 +65,7 @@ public sealed class GameTextProviderTests
     public void EmptyTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         Assert.Throws<InvalidDataException>(() => provider.GetGlobalText(new GlobalTextId("x000tg7000")));
     }
@@ -74,7 +74,7 @@ public sealed class GameTextProviderTests
     public void GetScenarioTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095EV0003:POPUP_TXT:0"));
 
@@ -85,7 +85,7 @@ public sealed class GameTextProviderTests
     public void ScenarioTextCaseInsensitiveIdTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string lower = provider.GetScenarioText(new ScenarioTextId("s095ev0003:popup_txt:0"));
         string upper = provider.GetScenarioText(new ScenarioTextId("S095EV0003:POPUP_TXT:0"));
@@ -98,7 +98,7 @@ public sealed class GameTextProviderTests
     public void UnknownScenarioTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         Assert.Throws<KeyNotFoundException>(() => provider.GetScenarioText(new ScenarioTextId("invalid")));
     }
@@ -107,7 +107,7 @@ public sealed class GameTextProviderTests
     public void ScenarioInfoNameTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095IF0000:NAME:0"));
 
@@ -118,7 +118,7 @@ public sealed class GameTextProviderTests
     public void ScenarioInfoQuotedNameTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S256IF0000:NAME:0"));
 
@@ -129,7 +129,7 @@ public sealed class GameTextProviderTests
     public void ScenarioInfoJoinedPartsTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095IF0000:DEBUNKW:0"));
 
@@ -140,7 +140,7 @@ public sealed class GameTextProviderTests
     public void ScenarioInfoBriefingTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095IF0000:BRIEFLONG:0"));
 
@@ -151,7 +151,7 @@ public sealed class GameTextProviderTests
     public void ScenarioInfoParagraphMarkersTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S142IF0000:DEBUNKW:0"));
 
@@ -164,7 +164,7 @@ public sealed class GameTextProviderTests
     public void ScenarioInfoMissingBriefingTextTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S253IF0000:BRIEFLONG:0"));
 
@@ -177,7 +177,7 @@ public sealed class GameTextProviderTests
         GameTextProvider provider = new(
             GlobalDatabaseLoader.LoadIndex(RiseOfTheElves.GlobalDatabasePath),
             ScenarioDatabaseLoader.LoadIndex(RiseOfTheElves.ScenarioDatabasePath),
-            []);
+            [], LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095IF0000:BRIEFING:0"));
 
@@ -188,7 +188,7 @@ public sealed class GameTextProviderTests
     public void ParagraphBreakTextTest()
     {
         ScenarioDatabase scenarioDb = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, "S101SC0000");
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S101EV000a:POPUP_TXT:0"));
 
@@ -202,7 +202,8 @@ public sealed class GameTextProviderTests
         GameTextProvider provider = new(
             LoadGlobalDatabase(),
             scenarioDb,
-            [.. scenarioDb.TextScenarios, new Db.TextScenario(ScenarioId, new Db.Id("S095EV00ff"), "POPUP_TXT", @"Prima parte.\n\nSeconda parte.", 0)]);
+            [.. scenarioDb.TextScenarios, new Db.TextScenario(ScenarioId, new Db.Id("S095EV00ff"), "POPUP_TXT", @"Prima parte.\n\nSeconda parte.", 0)],
+            LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095EV00ff:POPUP_TXT:0"));
 
@@ -210,11 +211,43 @@ public sealed class GameTextProviderTests
     }
 
     [Test]
+    public void EscapedLineBreaksInLanguageScenarioTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [],
+            [],
+            [],
+            [new Db.TextScenario(ScenarioId, new Db.Id("S095IF0000"), "BRIEFLONG", "Prima parte.\\n\\nSeconda parte.", 0)]);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        string actual = provider.GetScenarioText(new ScenarioTextId("S095IF0000:BRIEFLONG:0"));
+
+        Assert.That(actual, Is.EqualTo("Prima parte.\n\nSeconda parte."));
+    }
+
+    [Test]
+    public void EscapedLineBreaksInLanguageGlobalTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [new Db.TextGlobal(new Db.Id("x160tgc229"), "Totschläger\\nKritischer Treffer", false, null)],
+            [],
+            [],
+            []);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        GlobalText actual = provider.GetGlobalText(new GlobalTextId("x160tgc229"));
+
+        Assert.That(actual.Text, Is.EqualTo("Totschläger\nKritischer Treffer"));
+    }
+
+    [Test]
     public void UnitAndBuildingTextsTest()
     {
         GlobalDatabase globalDb = LoadGlobalDatabase();
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(globalDb, scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(globalDb, scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         List<string> textIds = [];
 
@@ -252,7 +285,7 @@ public sealed class GameTextProviderTests
     public void CityNameTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095FT0002:NAME_TXT:0"));
 
@@ -263,7 +296,7 @@ public sealed class GameTextProviderTests
     public void RuinNameTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095RU0000:TITLE:0"));
 
@@ -274,10 +307,168 @@ public sealed class GameTextProviderTests
     public void PlayerNameTest()
     {
         ScenarioDatabase scenarioDb = LoadScenarioDatabase();
-        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
 
         string actual = provider.GetScenarioText(new ScenarioTextId("S095PL0009:NAME_TXT:0"));
 
         Assert.That(actual, Is.EqualTo("Goar"));
+    }
+
+    [Test]
+    public void LanguageGlobalTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [new Db.TextGlobal(new Db.Id("X000TG2001"), "Сквайр", true, "Unit name")],
+            [],
+            [],
+            []);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        GlobalText actual = provider.GetGlobalText(new GlobalTextId("x000tg2001"));
+
+        Assert.That(actual, Is.EqualTo(new GlobalText(
+            new GlobalTextId("X000TG2001"),
+            "Сквайр",
+            true,
+            "Unit name")));
+    }
+
+    [Test]
+    public void LanguageEmptyGlobalTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [new Db.TextGlobal(new Db.Id("x000tg2001"), "", null, null)],
+            [],
+            [],
+            []);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        GlobalText actual = provider.GetGlobalText(new GlobalTextId("x000tg2001"));
+
+        Assert.That(actual, Is.EqualTo(new GlobalText(
+            new GlobalTextId("x000tg2001"),
+            "Squire",
+            false,
+            null)));
+    }
+
+    [Test]
+    public void LanguageUntranslatedGlobalTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [new Db.TextGlobal(new Db.Id("x000tg2001"), "Сквайр", null, null)],
+            [],
+            [],
+            []);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        GlobalText actual = provider.GetGlobalText(new GlobalTextId("x000tg2002"));
+
+        Assert.That(actual, Is.EqualTo(new GlobalText(
+            new GlobalTextId("x000tg2002"),
+            "Knight",
+            false,
+            null)));
+    }
+
+    [Test]
+    public void LanguageScenarioTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [],
+            [],
+            [],
+            [new Db.TextScenario("S095SC0000", new Db.Id("S095EV0003"), "POPUP_TXT", "Копейщик", 0)]);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        Assert.That(provider.GetScenarioText(new ScenarioTextId("S095EV0003:POPUP_TXT:0")), Is.EqualTo("Копейщик"));
+        Assert.That(provider.GetScenarioText(new ScenarioTextId("S095LO0000:NAME_TXT:0")), Is.EqualTo("Dragon Guard"));
+    }
+
+    [Test]
+    public void LanguageEmptyScenarioTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [],
+            [],
+            [],
+            [new Db.TextScenario("S095SC0000", new Db.Id("S095LO0000"), "NAME_TXT", null, 0)]);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        Assert.That(provider.GetScenarioText(new ScenarioTextId("S095LO0000:NAME_TXT:0")), Is.EqualTo("Dragon Guard"));
+    }
+
+    [Test]
+    public void LanguageScenarioInfoTextTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [],
+            [],
+            [scenarioDb.ScenarioInfos[0] with { Name = "'Антагонисты'", Description = null }],
+            []);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        Assert.That(provider.GetScenarioText(new ScenarioTextId("S095IF0000:NAME:0")), Is.EqualTo("Антагонисты"));
+        Assert.That(
+            provider.GetScenarioText(new ScenarioTextId("S095IF0000:DESC:0")),
+            Is.EqualTo("The Emperor Demosthene decided to move his court to the north, in the fortified city of Fhindar. Once there, the Inquisitor Philip d'Agincourt would surely protect him."));
+    }
+
+    [Test]
+    public void LeaderNameTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
+
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Human, true, 0)), Is.EqualTo("Konrad"));
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Human, false, 0)), Is.EqualTo("Zolian"));
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Neutral, true, 0)), Is.EqualTo("Neutrals"));
+    }
+
+    [Test]
+    public void UnknownLeaderNameTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
+
+        Assert.Throws<KeyNotFoundException>(() => provider.GetLeaderName(new LeaderNameId(WorldRace.Human, true, 30)));
+    }
+
+    [Test]
+    public void LanguageLeaderNameTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        LanguageDatabase language = new(
+            [],
+            [
+                new Db.TextLeader(new Db.Id("G000RR0000"), true, "Конрад", null, null),
+                new Db.TextLeader(new Db.Id("G000RR0000"), true, "", null, null),
+                new Db.TextLeader(new Db.Id("G000RR0000"), false, "Золиан", null, null)
+            ],
+            [],
+            []);
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, language);
+
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Human, true, 0)), Is.EqualTo("Конрад"));
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Human, true, 1)), Is.EqualTo("Ardobert"));
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Human, true, 2)), Is.EqualTo("Clovis"));
+        Assert.That(provider.GetLeaderName(new LeaderNameId(WorldRace.Human, false, 0)), Is.EqualTo("Золиан"));
+    }
+
+    [Test]
+    public void UnitNameTest()
+    {
+        ScenarioDatabase scenarioDb = LoadScenarioDatabase();
+        GameTextProvider provider = new(LoadGlobalDatabase(), scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
+
+        Assert.That(provider.GetUnitName(new LiteralUnitName("Uther")), Is.EqualTo("Uther"));
+        Assert.That(provider.GetUnitName(new ScenarioUnitName(new ScenarioTextId("S095LO0000:NAME_TXT:0"))), Is.EqualTo("Dragon Guard"));
+        Assert.That(provider.GetUnitName(new LeaderUnitName(new LeaderNameId(WorldRace.Human, true, 0))), Is.EqualTo("Konrad"));
     }
 }

@@ -105,8 +105,8 @@ public sealed class ManagementScreenViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -595,8 +595,8 @@ public sealed class ManagementScreenViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -696,8 +696,8 @@ public sealed class ManagementScreenViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -755,8 +755,8 @@ public sealed class ManagementScreenViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),

@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client.Tests;
@@ -9,7 +10,7 @@ public sealed class LeaderAbilityFormatterTests
     public void OriginalNamesTest()
     {
         GameLoader gameLoader = new(new RandomProvider(0));
-        (_, IGameTextProvider texts, _) = gameLoader.LoadCampaigns();
+        (_, IGameTextProvider texts, _) = gameLoader.LoadCampaigns(Language.English);
 
         LeaderAbility abilities =
             LeaderAbility.Incorruptible |

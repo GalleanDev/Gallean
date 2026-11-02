@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Tests.Common;
 
@@ -13,7 +14,7 @@ public sealed class WorldRenderStatePerformanceTests
     public async Task BuildStateTest(string scenarioId)
     {
         GameLoader loader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = loader.LoadScenario(scenarioId, worldState: null);
+        (GameSession session, IGameTextProvider texts) = loader.LoadScenario(scenarioId, worldState: null, Language.English);
         using GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
 
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());

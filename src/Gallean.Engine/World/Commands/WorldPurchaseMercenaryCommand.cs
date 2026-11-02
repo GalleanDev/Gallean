@@ -55,7 +55,7 @@ public sealed record WorldPurchaseMercenaryCommand(
         }
 
         UnitStats mercenaryStats = UnitStatsCalculator.GetStats(unitDefinition, Level, [], context.Definitions, context.Globals);
-        string? mercenaryName = LeaderNameCalculator.TryGetName(unitDefinition, context.Definitions, context.Random);
+        UnitName? mercenaryName = LeaderNameCalculator.TryGetName(unitDefinition, context.Definitions, context.Random);
         WorldUnit newUnit = new(
             WorldCommandHelpers.GenerateUnitIds(state).First(),
             UnitDefinitionId,

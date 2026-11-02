@@ -54,7 +54,7 @@ public sealed record WorldPurchaseUnitCommand(
             builder.PlaceUnit(unit, position);
         }
 
-        string? name = LeaderNameCalculator.TryGetName(unitDefinition, context.Definitions, context.Random);
+        UnitName? name = LeaderNameCalculator.TryGetName(unitDefinition, context.Definitions, context.Random);
         WorldUnit newUnit = new(
             WorldCommandHelpers.GenerateUnitIds(state).First(),
             UnitDefinitionId,

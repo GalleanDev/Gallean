@@ -8,6 +8,8 @@ public sealed class TextCatalog(IEnumerable<KeyValuePair<string, string>> transl
 
     internal static TextCatalog Current { get; private set; } = new([]);
 
+    public IReadOnlyDictionary<string, string> Translations => entries;
+
     public static string Tr(string text)
     {
         return Current.Translate(text);
@@ -38,9 +40,11 @@ public sealed class TextCatalog(IEnumerable<KeyValuePair<string, string>> transl
         return TextSpansFormatter.Format(Current.Translate(text), arguments);
     }
 
-    public void Activate()
+    public void MakeCurrent()
     {
         Current = this;
+
+        TextKey.NotifyTranslationChanged();
     }
 
     public string Translate(string text)

@@ -501,8 +501,8 @@ public sealed class BuildingTabViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),

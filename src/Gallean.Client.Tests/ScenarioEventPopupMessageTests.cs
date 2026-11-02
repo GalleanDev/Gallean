@@ -9,7 +9,7 @@ public sealed class ScenarioEventPopupMessageTests
     private static ScenarioEventPopupMessage Create(
         string text,
         ScenarioEventPortraitId? portraitId,
-        string? portraitName,
+        UnitName? portraitName,
         IReadOnlyList<ScenarioName> names)
     {
         WorldMap map = TestHelpers.SimpleMap(1, 1);
@@ -113,7 +113,7 @@ public sealed class ScenarioEventPopupMessageTests
     public void LeaderNameTest()
     {
         Assert.That(
-            Create("\"Well met.\"", new ScenarioEventPortraitId("speaker"), "Konrad", names: []),
+            Create("\"Well met.\"", new ScenarioEventPortraitId("speaker"), new LiteralUnitName("Konrad"), names: []),
             Is.EqualTo(new ScenarioEventPopupMessage([new ScenarioTextSpan("Well met.", ScenarioTextSpanType.Text)], "Konrad", new AssetSpriteKey.UnitEventPortrait(new ScenarioEventPortraitId("speaker")), IsPortraitLeft: true)));
     }
 
@@ -121,7 +121,7 @@ public sealed class ScenarioEventPopupMessageTests
     public void TextSpeakerOverLeaderNameTest()
     {
         Assert.That(
-            Create("Scout \n\"Well met.\"", new ScenarioEventPortraitId("speaker"), "Konrad", names: []),
+            Create("Scout \n\"Well met.\"", new ScenarioEventPortraitId("speaker"), new LiteralUnitName("Konrad"), names: []),
             Is.EqualTo(new ScenarioEventPopupMessage([new ScenarioTextSpan("Well met.", ScenarioTextSpanType.Text)], "Scout", new AssetSpriteKey.UnitEventPortrait(new ScenarioEventPortraitId("speaker")), IsPortraitLeft: true)));
     }
 

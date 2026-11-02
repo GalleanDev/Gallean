@@ -46,7 +46,7 @@ public sealed class WorldStateJsonSerializerTests
             Experience: 88,
             Level: 3,
             [new UnitModifier(new UnitModifierDefinitionId("modifier"), RemainingTurns: 6)],
-            Name: "Ardobert",
+            Name: new LiteralUnitName("Ardobert"),
             IsTypeLocked: false);
         UnitGrid<WorldUnit> garrison = new UnitGrid<WorldUnit>.Builder()
             .Place(largeUnit, GridPosition.FrontBottom, isLarge: true)
@@ -281,7 +281,7 @@ public sealed class WorldStateJsonSerializerTests
                         new ScenarioEventId("event-0"),
                         new ScenarioTextId("Hold the pass."),
                         new ScenarioEventPortraitId("unit-0"),
-                        "Captain",
+                        new LiteralUnitName("Captain"),
                         IsPortraitLeft: true,
                         player.Id,
                         [player.Id]),
@@ -748,7 +748,7 @@ public sealed class WorldStateJsonSerializerTests
             Tombs = ImmutableSortedDictionary<WorldTombId, WorldTomb>.Empty
                 .Add(
                     new WorldTombId("Tomb0001"),
-                    new WorldTomb(new WorldTombId("Tomb0001"), new WorldPosition(1, 1), new WorldPlayerId(2), new UnitDefinitionId("hero"), "Aldric", new WorldPlayerId(1), new UnitDefinitionId("orc"), "Morwen", Turn: 3))
+                    new WorldTomb(new WorldTombId("Tomb0001"), new WorldPosition(1, 1), new WorldPlayerId(2), new UnitDefinitionId("hero"), new LiteralUnitName("Aldric"), new WorldPlayerId(1), new UnitDefinitionId("orc"), new LiteralUnitName("Morwen"), Turn: 3))
                 .Add(
                     new WorldTombId("Tomb0002"),
                     new WorldTomb(new WorldTombId("Tomb0002"), new WorldPosition(1, 1), new WorldPlayerId(1), new UnitDefinitionId("hero"), LeaderName: null, DestroyerPlayerId: null, DestroyerLeaderDefinitionId: null, DestroyerLeaderName: null, Turn: 5))

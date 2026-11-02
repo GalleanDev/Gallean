@@ -19,7 +19,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
         Debug.Assert(gameModel.Scenario.Definition.NextScenarioId is not null);
 
         nextScenarioId = gameModel.Scenario.Definition.NextScenarioId.Value;
-        scenarioExporter = new ScenarioExporter(gameModel.Definitions, gameModel.Globals);
+        scenarioExporter = new ScenarioExporter(gameModel.Definitions, gameModel.Texts, gameModel.Globals);
         Leaders = BuildLeaders();
         SelectedLeader = Leaders.Count > 0 ? Leaders[0] : null;
 
@@ -43,7 +43,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
     public static bool CanExportLeader(GameModel gameModel)
     {
         GameSnapshot snapshot = gameModel.Snapshot;
-        ScenarioExporter exporter = new(gameModel.Definitions, gameModel.Globals);
+        ScenarioExporter exporter = new(gameModel.Definitions, gameModel.Texts, gameModel.Globals);
         ImmutableArray<WorldStack> stacks = exporter.GetExportableStacks(snapshot.WorldState, snapshot.ViewPlayerId);
 
         return stacks.Length > 0;

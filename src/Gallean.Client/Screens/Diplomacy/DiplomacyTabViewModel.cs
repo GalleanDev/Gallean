@@ -342,7 +342,7 @@ internal sealed partial class DiplomacyTabViewModel : ManagementTabViewModel
                 this,
                 DiplomacyActionType.ExchangeMap,
                 Tr("Exchange map information"),
-                Tr("Exchange maps once per turn, revealing territory explored by either side."),
+                Tr("Exchange maps, revealing territory explored by either side."),
                 FormatUnavailableReason(info.ExchangeMapError))
         ];
 

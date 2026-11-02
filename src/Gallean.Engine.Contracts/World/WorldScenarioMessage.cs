@@ -8,7 +8,7 @@ public sealed record WorldScenarioMessage(
     ScenarioEventId EventId,
     ScenarioTextId TextId,
     ScenarioEventPortraitId? PortraitId,
-    string? PortraitName,
+    UnitName? PortraitName,
     bool IsPortraitLeft,
     WorldPlayerId TriggererId,
     ImmutableArray<WorldPlayerId> Audience)

@@ -90,7 +90,8 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                     Settings.BattleSpeed,
                     Settings.UiSize,
                     Settings.LockCursor,
-                    Settings.MovementSpeed));
+                    Settings.MovementSpeed,
+                    Settings.Language));
             }
         }
     }
@@ -269,6 +270,17 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
     public void UpdateSettings(GameSettings settings)
     {
+        if (settings.Language != Settings.Language)
+        {
+            TextCatalog catalog = TextCatalogLoader.Load(settings.Language);
+            catalog.MakeCurrent();
+
+            if (activeGame is not null)
+            {
+                _ = ReloadGameTextsAsync(activeGame, settings.Language);
+            }
+        }
+
         Settings = settings;
 
         audioPlayer.SoundVolume = settings.SoundVolumeRatio;
@@ -337,7 +349,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
             BriefingScreenViewModel briefingViewModel = new(
                 gameModel.Texts.GetScenarioText(nameId),
                 gameModel.Texts.GetScenarioText(briefingId.Value),
-                new ScenarioTextFormatter(gameModel.Scenario.Names),
+                new ScenarioTextFormatter(gameModel.Texts.Names),
                 gameModel.Texts.GetScenarioText(objectiveId),
                 MenuBackgroundViewModel.TryCreateRaceSelection(GetViewPlayerRace(gameModel)),
                 TryGetBriefingVoice(gameModel),
@@ -356,11 +368,11 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     {
         if (configuration.Configuration is not null)
         {
-            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration);
+            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration, Settings.Language);
         }
         else
         {
-            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null);
+            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null, Settings.Language);
         }
     }
 
@@ -502,7 +514,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 return;
             }
 
-            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState));
+            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState, Settings.Language));
 
             gameModel = new GameModel(session, texts, log, scheduler);
         }
@@ -668,7 +680,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         try
         {
-            return await RunAsync(gameLoader.LoadCampaigns);
+            return await RunAsync(() => gameLoader.LoadCampaigns(Settings.Language));
         }
         catch (Exception ex)
         {
@@ -740,6 +752,23 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         OnPropertyChanged(nameof(RootScreen));
         OnPropertyChanged(nameof(TopScreen));
         OnPropertyChanged(nameof(PaintsOwnBackground));
+    }
+
+    private async Task ReloadGameTextsAsync(GameModel gameModel, Language language)
+    {
+        try
+        {
+            IGameTextProvider texts = await RunAsync(() => gameLoader.LoadTexts(gameModel.ScenarioId, language));
+
+            if (activeGame == gameModel)
+            {
+                gameModel.Texts = texts;
+            }
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to reload the game texts.", ex);
+        }
     }
 
     private Task<TResult> RunAsync<TResult>(Func<TResult> work)

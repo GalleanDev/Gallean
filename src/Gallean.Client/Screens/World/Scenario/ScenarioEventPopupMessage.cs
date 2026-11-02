@@ -30,7 +30,7 @@ internal sealed record ScenarioEventPopupMessage(
             }
             else if (message.PortraitName is not null)
             {
-                speakerName = message.PortraitName;
+                speakerName = texts.GetUnitName(message.PortraitName);
             }
             else
             {

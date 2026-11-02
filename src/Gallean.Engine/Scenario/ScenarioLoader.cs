@@ -151,8 +151,6 @@ public static class ScenarioLoader
             LoadEvents(scenarioDb, scenarioId, playerIds, subraces, locations, variableDefinitions, globals);
         List<ScenarioLocationDefinition> locationDefinitions =
             LoadLocations(scenarioDb, scenarioId);
-        ImmutableArray<ScenarioName> names =
-            ScenarioNameLoader.Load(globalDb, scenarioDb, scenarioId);
         List<ScenarioStackTemplateDefinition> stackTemplates =
             LoadStackTemplates(scenarioDb, scenarioId, playerIds, definitions, globals, locations);
 
@@ -215,7 +213,6 @@ public static class ScenarioLoader
         GameScenarioProvider scenarioProvider = new(
             eventDefinitions,
             locationDefinitions,
-            names,
             stackTemplates,
             variableDefinitions,
             scenarioDefinition);
@@ -2516,13 +2513,13 @@ public static class ScenarioLoader
         return true;
     }
 
-    private static string? LoadUnitName(ILookup<Db.Id, Db.TextScenario> unitNamesByUnit, Db.Id unitId)
+    private static UnitName? LoadUnitName(ILookup<Db.Id, Db.TextScenario> unitNamesByUnit, Db.Id unitId)
     {
         foreach (Db.TextScenario text in unitNamesByUnit[unitId])
         {
-            if (text.Text is { Length: > 0 } name)
+            if (!string.IsNullOrEmpty(text.Text))
             {
-                return name;
+                return new ScenarioUnitName(ScenarioTextId.MakeInternal(text.IdObject, text.IdString, text.SeqNum));
             }
         }
 

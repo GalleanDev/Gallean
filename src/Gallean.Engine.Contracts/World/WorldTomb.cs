@@ -5,8 +5,8 @@ public sealed record WorldTomb(
     WorldPosition Position,
     WorldPlayerId OwnerId,
     UnitDefinitionId LeaderDefinitionId,
-    string? LeaderName,
+    UnitName? LeaderName,
     WorldPlayerId? DestroyerPlayerId,
     UnitDefinitionId? DestroyerLeaderDefinitionId,
-    string? DestroyerLeaderName,
+    UnitName? DestroyerLeaderName,
     int Turn);

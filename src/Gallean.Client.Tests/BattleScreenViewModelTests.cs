@@ -4196,7 +4196,7 @@ public sealed class BattleScreenViewModelTests
         BattleUnitId attackerId = new(1);
         BattleUnitId enemyId = new(2);
 
-        BattleUnit attacker = TestHelpers.SimpleBattleUnit(attackerId, null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100) with { Name = "Uther" };
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(attackerId, null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100) with { Name = new LiteralUnitName("Uther") };
         BattleUnit enemy = TestHelpers.SimpleBattleUnit(enemyId, null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 30);
 
         BattleState battleState = new BattleStateBuilder(engine.Definitions)
@@ -4283,7 +4283,7 @@ public sealed class BattleScreenViewModelTests
         BattleUnitId attackerId = new(1);
         BattleUnitId enemyId = new(2);
 
-        BattleUnit attacker = TestHelpers.SimpleBattleUnit(attackerId, null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100) with { Name = "Uther" };
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(attackerId, null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100) with { Name = new LiteralUnitName("Uther") };
         BattleUnit enemy = TestHelpers.SimpleBattleUnit(enemyId, null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 30);
 
         BattleState battleState = new BattleStateBuilder(engine.Definitions)

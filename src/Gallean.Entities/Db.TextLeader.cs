@@ -4,7 +4,7 @@ namespace Gallean.Entities;
 
 public static partial class Db
 {
-    [GlobalDataFile("Tleader.json")]
+    [GlobalDataFile("Tleader.json", Index = true)]
     public record TextLeader(
         [property: JsonPropertyName("RACE_ID")] Id RaceId,
         [property: JsonPropertyName("SEX_M")] bool? IsMale,

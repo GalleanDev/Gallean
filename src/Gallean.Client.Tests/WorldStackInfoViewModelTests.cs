@@ -36,7 +36,7 @@ public sealed class WorldStackInfoViewModelTests
             NameTextId = new GlobalTextId("Squire")
         };
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: "Ardobert", IsTypeLocked: false);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: new LiteralUnitName("Ardobert"), IsTypeLocked: false);
         WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 30, 0, soldierDefinition.Level, [], null, false);
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)

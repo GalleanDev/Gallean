@@ -127,7 +127,7 @@ public sealed class WorldEngineStackBattleTests
             TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 10, initiative: 50, damage: 5),
             movementPoints: 6, leadership: 6);
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints, 0, 1, [], Name: "Nigosh", IsTypeLocked: false);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints, 0, 1, [], Name: new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0)), IsTypeLocked: false);
         WorldUnit enemy = new(new WorldUnitId("enemy"), enemyDefinition.Id, 10, 0, 1, [], null, false);
 
         WorldStack stack1 = TestHelpers.SimpleStack(
@@ -158,7 +158,7 @@ public sealed class WorldEngineStackBattleTests
 
         BattleUnit battleLeader = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("leader"), leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100) with
         {
-            Name = "Nigosh"
+            Name = new LeaderUnitName(new LeaderNameId(WorldRace.Undead, true, 0))
         };
 
         BattleUnit battleEnemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("enemy"), enemyDefinition.Id, BattleSide.Defender, hitpoints: 10);

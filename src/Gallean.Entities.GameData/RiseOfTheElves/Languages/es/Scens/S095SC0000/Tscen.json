@@ -1,0 +1,1699 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardia drag\u00F3n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar T1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar 2-A",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar 2-B",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Entrar Fhindar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ej\u00E9rcito de Hubert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ej\u00E9rcito de Uther",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aviso Bosque de la Seda",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mercader",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Compro y vendo cualquier objeto.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mercader",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "\u00C9chale un vistazo a mis mercanc\u00EDas; puede que te interese algo.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Torre de Mago",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Poseo muchos conjuros potentes.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Torre de Mago",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Poseo muchos conjuros m\u00E1gicos en venta.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrales",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ninguna descripci\u00F3n de raza",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095PL0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095PL0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "En su juventud, este poderoso se\u00F1or se mantuvo firme contra un ej\u00E9rcito de los infiernos y sin apoyo de nadie lo derrot\u00F3 sellando la entrada que los arrojaba. Entonces se convirti\u00F3 en soberano de este reino.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095PL000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Asumuel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095PL000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cualquier ni\u00F1o tiembla al o\u00EDr su nombre infame. Este se\u00F1or del infierno es conocido por su sed de sangre y crueldad. Se dice que una vez devor\u00F3 1000 esclavos en un banquete dado por Bethrezen por una victoria contra el reino de la luz.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ardobert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zaorish",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1a roja gigante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1a roja gigante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1a roja gigante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1a roja gigante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1a gigante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar T1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0000",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nobar el Viajero\n\u0022\u00A1Saludos, mi se\u00F1or! Me alegro de veros a salvo. El Inquisidor Philip d\u0027Agincourt est\u00E1 esper\u00E1ndoos en la ciudad de Fhindar, al norte. Os guiar\u00E9...\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar T2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nobar el Viajero\n \u0022\u00A1Cuidado! \u00A1Esos r\u00EDos est\u00E1n habitados por brujas marinas que atacan a los viajeros desprevenidos! \u00A1No permanezc\u00E1is en el agua!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar muerto",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar central 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lancero\n\u0022Lo siento, Nobar... Nadie excepto t\u00FA puede pasar. \u00A1\u00D3rdenes de Philip!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar Central 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lancero \n\u0022Saludos, Nobar. Excepto t\u00FA, nadie puede cruzar este punto. \u00C9sas son las \u00F3rdenes de Philip d\u0027Agincourt...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1a deambular T10",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ej\u00E9rcito de Hubert T30",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hubert de Lalye\n\u0022\u00BFTe gustan mis aterciopelados amigos? Deber\u00EDas haberte unido a m\u00ED como los otros... \u00A1Ahora morir\u00E1s y Fhindar ser\u00E1 m\u00EDa! Ja ja ja ja...\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Explorador\n\u0022\u00A1Se\u00F1or! \u00A1Debemos detener a Hubert de Lalye antes de que capture la ciudad de Fhindar!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0007",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Destruir a Hubert de Lalye antes de que capture la ciudad de Fhindar. Uther debe sobrevivir.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ara\u00F1as deambular T20",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Explorador\n\u0022\u00A1Algo est\u00E1 expulsando a las ara\u00F1as de su guarida! Nuestros batidores vieron humo saliendo del Bosque de la Seda... \u00BFQui\u00E9n podr\u00EDa hacer algo as\u00ED?\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Llegada Uther T33",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Uther\n\u0022\u00A1Limpiar\u00E9 el Imperio de los de tu sucia clase, Hubert de Lalye! Prep\u00E1rate a morir... \u00A1Le devolver\u00E9 el Imperio a su verdadero due\u00F1o!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hubert de Lalye \n\u0022\u00BFUn chico? \u00A1Ja ja ja! \u00A1\u00C9sta es toda la protecci\u00F3n del Imperio! Dem\u00F3stenes es un cobarde.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aviso Bosque de la Seda",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nobar el Viajero\n\u0022Aquellos bosques se llaman Bosques de la Seda. Pocos se aventuran all\u00ED porque temen a las salvajes criaturas que acechan en el lugar...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Entrar Fhindar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nobar el Viajero\n\u0022\u00A1Fhindar est\u00E1 cerca! Debes ir al oeste. Hay m\u00E1s de un paso que lleva hasta all\u00ED...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar T5",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nobar el Viajero\n\u0022Philip d\u0027Agincourt es muy precavido... Ha bloqueado todos los pasos a Fhindar. \u00A1Espero que te permita pasar!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero bajo muere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero alto muere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Victoria b\u00FAsqueda (Matar a Hubert)",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hubert de Lalye\n\u0022T\u00FA... T\u00FA... \u00A1Me has derrotado! \u00BFC\u00F3mo es posible? \u00A1Maldito seas, Uther!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Uther \n\u0022Todos los enemigos del Imperio correr\u00E1n la misma suerte. \u00A1Ayudar\u00E9 a mi padre a restablecer la paz en el reino de Nevendaar!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0034",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Oso polar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hubert gana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0011",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hubert de Lalye\n\u0022\u00A1Ja ja ja! Ahora que poseo la ciudad de Fhindar, no podr\u00E1s resistirte a m\u00ED... \u00A1La llegada de Uther no sirvi\u00F3 de nada!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Texto de la ciudad de Torre\u00F3n de Khazan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arquero\n\u0022Han desaparecido muchos pescadores en el mar... \u00A1Los campesinos dicen que fueron devorados por criaturas marinas!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sirena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Texto de la ciudad de Silveria",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lancero\n\u0022Fhindar est\u00E1 un poco m\u00E1s al norte. Esperemos que el Emperador gane esta guerra... \u00A1Hubert ha enviado a la milicia para que asegure todas las ciudades de estas tierras!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Movimiento Lofemyr T8",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0037",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar T30",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nobar el Viajero\n\u0022\u00A1Philip d\u0027Agincourt os ha atrapado, mi Se\u00F1or! Todo era un truco, \u00A1cuidado!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Uther muere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Cl\u00E9rigo\n\u0022\u00BFQu\u00E9 hemos hecho? \u00A1Uther, el hijo del emperador, ha muerto! \u00A1Ahora, el imperio est\u00E1 condenado!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Area de Fhindar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Uther\n\u0022\u00A1He venido en nombre de mi padre! Soy Uther, el heredero de Nevendaar. \u00A1Un\u00EDos a m\u00ED en la batalla contra los enemigos del Imperio! \u00A1Limpiar\u00E9 el reino de los de tu sucia clase, de Lalye! Prep\u00E1rate a morir...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095EV0019",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Destruir a Hubert de Lalye. Uther no debe morir.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN003c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sirena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN003e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0040",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0044",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0045",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0047",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0048",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN004a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN004b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN004f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0050",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0051",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0055",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0056",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campesino",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN005a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN005b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bandido",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN005d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0060",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0061",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bandido l\u00EDder",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0067",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0068",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0069",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN006a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN006b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN006c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN006d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN006e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0070",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0071",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0072",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0074",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0075",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0076",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0077",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0079",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN007a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN007b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN007c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN007d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0081",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lofemyr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0082",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0083",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0084",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0086",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0087",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0088",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ciudad de Fergal",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0089",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Satoria",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN008a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fhindar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN008b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bandido",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Torre\u00F3n de Khazan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN008c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Silveria",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN008d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Runia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095FT0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN008e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN008f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0090",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0091",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0092",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0096",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nobar el Viajero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0097",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0098",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN0099",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN009b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN009d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN009e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN009f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00aa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hubert de Lalye",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00ad",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lancero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Uther",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095UN00bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardias de Hubert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Batidor de Hubert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Uther",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ballestero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Torre\u00F3n en ruinas",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0000",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Templo abandonado",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0001",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Cubil",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0002",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Mastaba perdida",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0003",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Perthin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095RU0004",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S095SC0000",
+      "ID_OBJECT": "S095SR000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aasgoroth",
+      "SEQ_NUM": 0
+    }
+  ]
+}

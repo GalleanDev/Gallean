@@ -919,7 +919,7 @@ public sealed class StackTabViewModelTests
             movementPoints: 20, leadership: 3);
         UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: "Ardobert", IsTypeLocked: false);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: new LiteralUnitName("Ardobert"), IsTypeLocked: false);
         WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)
@@ -2209,8 +2209,8 @@ public sealed class StackTabViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [],
-            MaleLeaderNames: ["Konrad"],
-            FemaleLeaderNames: ["Zolian"]);
+            MaleLeaderNameCount: 1,
+            FemaleLeaderNameCount: 1);
 
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
             new WorldCityDefinitionId(WorldRace.Human, 3),

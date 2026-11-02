@@ -370,7 +370,7 @@ internal sealed class TestWorldEngineBuilder
         TestWorldStateValidator.Validate(state, definitions);
 
         ScenarioDefinition scenarioDefinition = new(scenarioId, MakeTexts(scenarioId), suggestedLevel, maxLeaderLevel, maxCityLevel, NextScenarioId: null);
-        EngineContext context = new(random, definitions, new UnitStatsProvider(definitions, globals, scenarioDefinition), new GameScenarioProvider(scenarioEvents, scenarioLocations, [], scenarioStackTemplates, scenarioVariables, scenarioDefinition), globals);
+        EngineContext context = new(random, definitions, new UnitStatsProvider(definitions, globals, scenarioDefinition), new GameScenarioProvider(scenarioEvents, scenarioLocations, scenarioStackTemplates, scenarioVariables, scenarioDefinition), globals);
 
         return (new WorldEngine(context, state), context);
     }
@@ -418,7 +418,7 @@ internal sealed class TestWorldEngineBuilder
         TestWorldStateValidator.Validate(state, definitions);
 
         ScenarioDefinition scenarioDefinition = new(scenarioId, MakeTexts(scenarioId), suggestedLevel, maxLeaderLevel, maxCityLevel, NextScenarioId: null);
-        EngineContext context = new(random, definitions, new UnitStatsProvider(definitions, globals, scenarioDefinition), new GameScenarioProvider(scenarioEvents, scenarioLocations, [], scenarioStackTemplates, scenarioVariables, scenarioDefinition), globals);
+        EngineContext context = new(random, definitions, new UnitStatsProvider(definitions, globals, scenarioDefinition), new GameScenarioProvider(scenarioEvents, scenarioLocations, scenarioStackTemplates, scenarioVariables, scenarioDefinition), globals);
         GameSession session = new(context, state);
 
         return (session, context);

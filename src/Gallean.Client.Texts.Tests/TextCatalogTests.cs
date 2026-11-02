@@ -6,7 +6,7 @@ public sealed class TextCatalogTests
     [TearDown]
     public void TearDown()
     {
-        new TextCatalog([]).Activate();
+        new TextCatalog([]).MakeCurrent();
     }
 
     [Test]
@@ -24,7 +24,7 @@ public sealed class TextCatalogTests
     [Test]
     public void TranslationTest()
     {
-        new TextCatalog([new KeyValuePair<string, string>("Close", "Schliessen")]).Activate();
+        new TextCatalog([new KeyValuePair<string, string>("Close", "Schliessen")]).MakeCurrent();
 
         Assert.That(TextCatalog.Tr("Close"), Is.EqualTo("Schliessen"));
     }
@@ -32,7 +32,7 @@ public sealed class TextCatalogTests
     [Test]
     public void PartialTranslationTest()
     {
-        new TextCatalog([new KeyValuePair<string, string>("Close", "Schliessen")]).Activate();
+        new TextCatalog([new KeyValuePair<string, string>("Close", "Schliessen")]).MakeCurrent();
 
         Assert.That(TextCatalog.Tr("Settings"), Is.EqualTo("Settings"));
     }
@@ -40,7 +40,7 @@ public sealed class TextCatalogTests
     [Test]
     public void TranslatedFormatTest()
     {
-        new TextCatalog([new KeyValuePair<string, string>("Every {0} turns", "Alle {0} Runden")]).Activate();
+        new TextCatalog([new KeyValuePair<string, string>("Every {0} turns", "Alle {0} Runden")]).MakeCurrent();
 
         Assert.That(TextCatalog.Tr("Every {0} turns", 5), Is.EqualTo("Alle 5 Runden"));
     }
@@ -113,7 +113,7 @@ public sealed class TextCatalogTests
     [Test]
     public void TranslatedSpansTest()
     {
-        new TextCatalog([new KeyValuePair<string, string>("Owner: {0:*}", "{0:*} gehört es")]).Activate();
+        new TextCatalog([new KeyValuePair<string, string>("Owner: {0:*}", "{0:*} gehört es")]).MakeCurrent();
 
         TextSpans text = TextCatalog.TrSpans("Owner: {0:*}", "Empire");
 

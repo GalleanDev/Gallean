@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Engine.Tests;
 using Gallean.Tests.Common;
@@ -88,5 +90,20 @@ public sealed class GameModelTests
         Assert.That(gameModel.Snapshot, Is.EqualTo(expectedSnapshot));
         BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
         Assert.That(battle.Position, Is.EqualTo(new WorldPosition(2, 0)));
+    }
+
+    [Test]
+    public void SwitchTextsTest()
+    {
+        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, worldState: null, Language.English);
+        using GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        List<string?> changes = [];
+        gameModel.PropertyChanged += (_, e) => changes.Add(e.PropertyName);
+
+        gameModel.Texts = TestGameTextProvider.Instance;
+
+        Assert.That(changes, Is.EqualTo(["Texts", "ScenarioName"]));
+        Assert.That(gameModel.Texts, Is.SameAs(TestGameTextProvider.Instance));
+        Assert.That(gameModel.ScenarioName, Is.EqualTo("S253IF0000:NAME:0"));
     }
 }

@@ -4,7 +4,7 @@ namespace Gallean.Entities;
 
 public static partial class Db
 {
-    [GlobalDataFile("Gunits.json")]
+    [GlobalDataFile("Gunits.json", Index = true)]
     public record Unit(
         [property: DataKey, JsonPropertyName("UNIT_ID")] Id UnitId,
         [property: JsonPropertyName("UNIT_CAT")] UnitCategoryType UnitCategory,

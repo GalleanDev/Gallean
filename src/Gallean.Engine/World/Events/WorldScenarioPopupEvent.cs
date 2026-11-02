@@ -7,7 +7,7 @@ public sealed record WorldScenarioPopupEvent(
     ScenarioEventId EventId,
     ScenarioTextId TextId,
     ScenarioEventPortraitId? PortraitId,
-    string? PortraitName,
+    UnitName? PortraitName,
     bool IsPortraitLeft,
     WorldPlayerId TriggererId,
     WorldPosition? TriggererPosition,

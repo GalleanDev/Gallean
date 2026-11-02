@@ -1,9 +1,13 @@
+using Avalonia.Data;
+
 namespace Gallean.Client;
 
-internal sealed class TextExtension(string text) : TextKey(text)
+internal sealed class TextExtension(string text)
 {
-    public string ProvideValue()
+    public BindingBase ProvideValue()
     {
-        return Translate();
+        TextKey source = TextKey.For(text);
+
+        return CompiledBinding.Create<TextKey, string>(key => key.Translation, source);
     }
 }

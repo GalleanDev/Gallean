@@ -11,7 +11,7 @@ public sealed record WorldUnit(
     int Experience,
     int Level,
     ImmutableArray<UnitModifier> Modifiers,
-    string? Name,
+    UnitName? Name,
     bool IsTypeLocked)
 {
     [JsonIgnore]

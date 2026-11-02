@@ -456,8 +456,8 @@ public sealed class CityTabViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -572,8 +572,8 @@ public sealed class CityTabViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [expensiveDefinition.Id, gatedDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),
@@ -718,8 +718,8 @@ public sealed class CityTabViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
             new WorldCityDefinitionId(WorldRace.Human, 3),
@@ -1096,8 +1096,8 @@ public sealed class CityTabViewModelTests
             Cities: [],
             Leaders: [leaderDefinition.Id],
             Units: [soldierDefinition.Id],
-            MaleLeaderNames: [],
-            FemaleLeaderNames: []);
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
 
         WorldCapital capital = TestHelpers.SimpleCapital(
             new WorldFortificationId("cap"),

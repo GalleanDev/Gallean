@@ -13,7 +13,8 @@ public sealed record GameSettings(
     BattleSpeed BattleSpeed = GameSettings.DefaultBattleSpeed,
     UiSize UiSize = GameSettings.DefaultUiSize,
     bool LockCursor = true,
-    MovementSpeed MovementSpeed = GameSettings.DefaultMovementSpeed)
+    MovementSpeed MovementSpeed = GameSettings.DefaultMovementSpeed,
+    Language Language = GameSettings.DefaultLanguage)
 {
     public const int CurrentFormatVersion = 6;
     public const int MinVolume = 0;
@@ -26,6 +27,7 @@ public sealed record GameSettings(
     public const BattleSpeed DefaultBattleSpeed = BattleSpeed.Normal;
     public const MovementSpeed DefaultMovementSpeed = MovementSpeed.Normal;
     public const UiSize DefaultUiSize = UiSize.Normal;
+    public const Language DefaultLanguage = Language.English;
 
     public static GameSettings Default { get; } = Create(
         MaxVolume,
@@ -37,7 +39,8 @@ public sealed record GameSettings(
         DefaultBattleSpeed,
         DefaultUiSize,
         true,
-        DefaultMovementSpeed);
+        DefaultMovementSpeed,
+        DefaultLanguage);
 
     public int SoundVolume { get; } = Math.Clamp(SoundVolume, MinVolume, MaxVolume);
     public int MusicVolume { get; } = Math.Clamp(MusicVolume, MinVolume, MaxVolume);
@@ -55,7 +58,8 @@ public sealed record GameSettings(
         BattleSpeed battleSpeed,
         UiSize uiSize,
         bool lockCursor,
-        MovementSpeed movementSpeed)
+        MovementSpeed movementSpeed,
+        Language language)
     {
         return new GameSettings(
             CurrentFormatVersion,
@@ -68,6 +72,7 @@ public sealed record GameSettings(
             battleSpeed,
             uiSize,
             lockCursor,
-            movementSpeed);
+            movementSpeed,
+            language);
     }
 }
