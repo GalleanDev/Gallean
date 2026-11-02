@@ -41,7 +41,7 @@
       </ItemsControl>
 
       <Grid Grid.Row="3"
-            ColumnDefinitions="Auto,Auto,Auto"
+            ColumnDefinitions="Auto,Auto,*"
             Classes="details-effect"
             Margin="22,16,22,0"
             IsVisible="{Binding CastingCost, Converter={x:Static ObjectConverters.IsNotNull}}">
