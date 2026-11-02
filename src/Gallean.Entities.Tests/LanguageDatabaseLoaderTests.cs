@@ -34,8 +34,14 @@ public sealed class LanguageDatabaseLoaderTests
         Assert.That(other.TextScenarios, Is.Empty);
     }
 
-    [Test]
-    public void LanguagesTest()
+    [TestCase("cs", 2292, 251, 70)]
+    [TestCase("de", 2292, 251, 63)]
+    [TestCase("es", 2292, 251, 58)]
+    [TestCase("fr", 2292, 251, 63)]
+    [TestCase("it", 2292, 251, 58)]
+    [TestCase("pl", 2292, 251, 86)]
+    [TestCase("ru", 2292, 251, 108)]
+    public void LanguagesTest(string code, int textGlobals, int textLeaders, int scenarioInfos)
     {
         GlobalDatabaseIndex globalDb = GlobalDatabaseLoader.LoadIndex(RiseOfTheElves.GlobalDatabasePath);
         ScenarioDatabaseIndex scenarioDb = ScenarioDatabaseLoader.LoadIndex(RiseOfTheElves.ScenarioDatabasePath);
@@ -52,35 +58,22 @@ public sealed class LanguageDatabaseLoaderTests
             scenarioInfoIds.Add(info.InfoId.Value);
         }
 
-        List<string> rows = [];
+        LanguageDatabase db = LanguageDatabaseLoader.LoadIndex(
+            RiseOfTheElves.GetLanguageGlobalDatabasePath(code),
+            RiseOfTheElves.GetLanguageScenarioDatabasePath(code));
 
-        foreach (string code in new[] { "cs", "de", "es", "fr", "it", "pl", "ru" })
+        foreach (Db.TextGlobal text in db.TextGlobals)
         {
-            LanguageDatabase db = LanguageDatabaseLoader.LoadIndex(
-                RiseOfTheElves.GetLanguageGlobalDatabasePath(code),
-                RiseOfTheElves.GetLanguageScenarioDatabasePath(code));
-
-            foreach (Db.TextGlobal text in db.TextGlobals)
-            {
-                Assert.That(globalTextIds, Does.Contain(text.TextId.Value));
-            }
-
-            foreach (Db.ScenarioInfo info in db.ScenarioInfos)
-            {
-                Assert.That(scenarioInfoIds, Does.Contain(info.InfoId.Value));
-            }
-
-            rows.Add($"{code} {db.TextGlobals.Count} {db.TextLeaders.Count} {db.ScenarioInfos.Count}");
+            Assert.That(globalTextIds, Does.Contain(text.TextId.Value));
         }
 
-        Assert.That(rows, Is.EqualTo([
-            "cs 2292 251 70",
-            "de 2292 251 63",
-            "es 2292 251 58",
-            "fr 2292 251 63",
-            "it 2292 251 58",
-            "pl 2292 251 86",
-            "ru 2292 251 108"
-        ]));
+        foreach (Db.ScenarioInfo info in db.ScenarioInfos)
+        {
+            Assert.That(scenarioInfoIds, Does.Contain(info.InfoId.Value));
+        }
+
+        Assert.That(db.TextGlobals.Count, Is.EqualTo(textGlobals));
+        Assert.That(db.TextLeaders.Count, Is.EqualTo(textLeaders));
+        Assert.That(db.ScenarioInfos.Count, Is.EqualTo(scenarioInfos));
     }
 }
