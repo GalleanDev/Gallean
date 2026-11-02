@@ -184,17 +184,14 @@ internal class ExtractDatabaseCommand : Command
     {
         Dictionary<string, List<Dictionary<string, object?>>> recordsByScenario = [];
         List<string> scenarioOrder = [];
+        int skipped = 0;
 
         foreach (Dictionary<string, object?> record in records)
         {
             if (record[ScenarioColumn] is not string scenarioId)
             {
-                throw new InvalidOperationException($"Table '{fileName}' has a record without a '{ScenarioColumn}' value.");
-            }
-
-            if (scenarioId.Length <= 0)
-            {
-                throw new InvalidOperationException($"Table '{fileName}' specifies an empty scenario ID.");
+                skipped++;
+                continue;
             }
 
             if (!recordsByScenario.TryGetValue(scenarioId, out List<Dictionary<string, object?>>? scenarioRecords))
@@ -205,6 +202,11 @@ internal class ExtractDatabaseCommand : Command
             }
 
             scenarioRecords.Add(record);
+        }
+
+        if (skipped > 0)
+        {
+            Console.WriteLine($"Skipped {skipped} records of '{fileName}' without a '{ScenarioColumn}' value.");
         }
 
         foreach (string scenarioId in scenarioOrder)
