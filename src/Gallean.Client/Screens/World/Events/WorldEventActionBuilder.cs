@@ -9,7 +9,6 @@ namespace Gallean.Client;
 internal sealed class WorldEventActionBuilder(
     IGameDefinitionProvider definitions,
     IGameTextProvider texts,
-    IGameScenarioProvider scenario,
     IRandomProvider random,
     GameSnapshot snapshot,
     BattleModel? activeBattle,

@@ -1038,7 +1038,6 @@ internal sealed partial class WorldScreenViewModel :
             WorldEventActionBuilder builder = new(
                 GameModel.Definitions,
                 GameModel.Texts,
-                GameModel.Scenario,
                 random,
                 Snapshot,
                 GameModel.ActiveBattle,
