@@ -151,7 +151,14 @@
                     VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
               <DataTemplate x:DataType="configuration:Language">
-                <TextBlock Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" Classes="body" />
+                <TextBlock Classes="body" VerticalAlignment="Center">
+                  <InlineUIContainer BaselineAlignment="Baseline">
+                    <local:IconVisual Moniker="{Binding Converter={x:Static local:LanguageIconConverter.Instance}}"
+                                      Width="18"
+                                      Height="18"
+                                      Margin="0,0,8,-3" />
+                  </InlineUIContainer><Run Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" />
+                </TextBlock>
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>

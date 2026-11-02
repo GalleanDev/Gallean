@@ -521,6 +521,26 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task SettingsLanguageDropDownTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
+
+        SettingsScreenViewModel settings = new(gameViewModel);
+        gameViewModel.OpenScreen(settings);
+
+        await SkipFramesAsync(5);
+
+        ComboBox comboBox = window.GetVisualDescendants().OfType<ComboBox>().First(candidate => candidate.ItemsSource == settings.Languages);
+        comboBox.IsDropDownOpen = true;
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task SettingsUiSizeTest()
     {
         using Sandbox sb = Sandbox.Create();
