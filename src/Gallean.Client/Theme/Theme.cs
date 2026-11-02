@@ -161,6 +161,30 @@ internal static class Theme
     {
         public static Color FaceTopColor { get; } = Color.FromArgb(220, 52, 44, 40);
         public static Color FaceBottomColor { get; } = Color.FromArgb(220, 30, 27, 31);
+
+        public static class Common
+        {
+            public static Color CapTopColor { get; } = Color.FromArgb(64, 0, 0, 0);
+            public static Color CapBottomColor { get; } = Color.FromArgb(28, 0, 0, 0);
+        }
+
+        public static class Skill
+        {
+            public static Color CapTopColor { get; } = Color.FromArgb(90, 96, 140, 214);
+            public static Color CapBottomColor { get; } = Color.FromArgb(40, 96, 140, 214);
+        }
+
+        public static class Leadership
+        {
+            public static Color CapTopColor { get; } = Color.FromArgb(100, 222, 136, 60);
+            public static Color CapBottomColor { get; } = Color.FromArgb(44, 222, 136, 60);
+        }
+
+        public static class Protection
+        {
+            public static Color CapTopColor { get; } = Color.FromArgb(90, 160, 124, 196);
+            public static Color CapBottomColor { get; } = Color.FromArgb(40, 160, 124, 196);
+        }
     }
 
     public static class MainMenu

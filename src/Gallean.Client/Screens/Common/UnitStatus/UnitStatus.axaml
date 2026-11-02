@@ -54,7 +54,10 @@
     </DataTemplate>
 
     <DataTemplate x:Key="UnitPermanentModifierTemplate" x:DataType="local:UnitPermanentModifierViewModel">
-      <Border Classes="permanent-modifier">
+      <Border Classes="permanent-modifier"
+              Classes.skill="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:UnitPermanentModifierType.Skill}}"
+              Classes.leadership="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:UnitPermanentModifierType.Leadership}}"
+              Classes.protection="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:UnitPermanentModifierType.Protection}}">
         <ToolTip.Tip>
           <StackPanel Classes="status-tooltip">
             <StackPanel Orientation="Horizontal" Spacing="8">
@@ -68,13 +71,15 @@
                        IsVisible="{Binding Effects, Converter={x:Static ObjectConverters.IsNotNull}}" />
           </StackPanel>
         </ToolTip.Tip>
-        <StackPanel Orientation="Horizontal" Spacing="6">
-          <local:IconVisual Classes="permanent-modifier-icon" Moniker="{Binding Icon}" />
-          <TextBlock Classes="caption" Text="{Binding Name}" VerticalAlignment="Center" />
-          <TextBlock Classes="caption permanent-modifier-count"
-                     Text="{Binding CountText}"
-                     VerticalAlignment="Center"
-                     IsVisible="{Binding Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=1}" />
+        <StackPanel Orientation="Horizontal">
+          <Border Classes="permanent-modifier-cap">
+            <local:IconVisual Classes="permanent-modifier-icon" Moniker="{Binding Icon}" />
+          </Border>
+          <TextBlock Classes="caption permanent-modifier-name" Text="{Binding Name}" VerticalAlignment="Center" />
+          <StackPanel Orientation="Horizontal" IsVisible="{Binding Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=1}">
+            <Rectangle Classes="permanent-modifier-divider" />
+            <TextBlock Classes="caption permanent-modifier-count" Text="{Binding CountText}" VerticalAlignment="Center" />
+          </StackPanel>
         </StackPanel>
       </Border>
     </DataTemplate>
@@ -174,7 +179,6 @@
     <Setter Property="ItemTemplate" Value="{StaticResource UnitPermanentModifierTemplate}" />
   </Style>
   <Style Selector="Border.permanent-modifier">
-    <Setter Property="Padding" Value="7,2,10,2" />
     <Setter Property="Background" Value="{StaticResource PermanentModifierFaceGradientBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource PermanentModifierBorderGradientBrush}" />
     <Setter Property="BorderThickness" Value="1" />
@@ -185,6 +189,30 @@
     <Setter Property="Height" Value="14" />
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="Foreground" Value="{StaticResource PermanentModifierIconBrush}" />
+  </Style>
+  <Style Selector="Border.permanent-modifier Border.permanent-modifier-cap">
+    <Setter Property="Background" Value="{StaticResource PermanentModifierCommonCapGradientBrush}" />
+    <Setter Property="Padding" Value="7,2,5,2" />
+    <Setter Property="CornerRadius" Value="9,0,0,9" />
+  </Style>
+  <Style Selector="Border.permanent-modifier TextBlock.permanent-modifier-name">
+    <Setter Property="Margin" Value="6,2,10,2" />
+  </Style>
+  <Style Selector="Border.permanent-modifier Rectangle.permanent-modifier-divider">
+    <Setter Property="Width" Value="1" />
+    <Setter Property="Fill" Value="{StaticResource PermanentModifierDividerDashBrush}" />
+  </Style>
+  <Style Selector="Border.permanent-modifier TextBlock.permanent-modifier-count">
+    <Setter Property="Margin" Value="6,2,9,2" />
+  </Style>
+  <Style Selector="Border.permanent-modifier.skill Border.permanent-modifier-cap">
+    <Setter Property="Background" Value="{StaticResource PermanentModifierSkillCapGradientBrush}" />
+  </Style>
+  <Style Selector="Border.permanent-modifier.leadership Border.permanent-modifier-cap">
+    <Setter Property="Background" Value="{StaticResource PermanentModifierLeadershipCapGradientBrush}" />
+  </Style>
+  <Style Selector="Border.permanent-modifier.protection Border.permanent-modifier-cap">
+    <Setter Property="Background" Value="{StaticResource PermanentModifierProtectionCapGradientBrush}" />
   </Style>
   <Style Selector="Border.permanent-modifier TextBlock">
     <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />

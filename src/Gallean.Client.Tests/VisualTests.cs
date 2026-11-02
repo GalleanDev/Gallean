@@ -3510,6 +3510,80 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task StackPermanentModifierDetailsTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel scenarioModel = LoadScenario(null);
+        UnitDefinition leaderDefinition = scenarioModel.Definitions.GetUnit(new UnitDefinitionId("g000uu8009"));
+        UnitModifierDefinition leadership = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um4006"));
+        UnitModifierDefinition ward = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um0001"));
+        UnitModifierDefinition armor = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um0012"));
+
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        WorldUnit leader = new(
+            new WorldUnitId("leader"),
+            leaderDefinition.Id,
+            leaderDefinition.MaxHitpoints,
+            0,
+            leaderDefinition.Level,
+            [UnitModifier.Permanent(leadership.Id), UnitModifier.Permanent(leadership.Id), UnitModifier.FromEquipment(ward.Id), UnitModifier.Permanent(armor.Id)],
+            null,
+            false);
+
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnitModifier(leadership)
+            .AddUnitModifier(ward)
+            .AddUnitModifier(armor)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("leader"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(leadership)
+            .WithDefinition(ward)
+            .WithDefinition(armor)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, scenarioModel.Texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        gameViewModel.OpenScreen(ManagementScreenViewModel.CreateForStack(gameModel, gameViewModel, stack.Id));
+
+        await CaptureAsync(window, "stack");
+
+        PointerTiltDecorator portrait = window.GetVisualDescendants().OfType<PointerTiltDecorator>().First(candidate => candidate.DataContext is StackLeaderViewModel);
+        Point center = new(portrait.Bounds.Width / 2.0, portrait.Bounds.Height / 2.0);
+
+        window.MouseDown(Assert.NotNull(portrait.TranslatePoint(center, window)), MouseButton.Right);
+
+        await SkipFramesAsync(5);
+
+        DetailsViewModel details = Assert.IsOfType<DetailsViewModel>(gameViewModel.TopScreen);
+
+        Assert.IsOfType<UnitDetailsViewModel>(details.Content);
+
+        await CaptureAsync(window, "details");
+    }
+
+    [AvaloniaTest]
     public async Task ExchangeTest()
     {
         using Sandbox sb = Sandbox.Create();

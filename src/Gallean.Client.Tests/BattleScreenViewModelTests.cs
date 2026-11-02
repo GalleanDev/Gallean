@@ -4006,7 +4006,7 @@ public sealed class BattleScreenViewModelTests
                     new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
                 ])
             ],
-            [new UnitPermanentModifierViewModel(IconMoniker.Armor, "+10 armor", "From equipment", null, 1)])));
+            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "From equipment", null, 1)])));
     }
 
     [Test]

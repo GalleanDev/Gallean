@@ -3,7 +3,7 @@ using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string Name, string Description, string? Effects, int Count)
+internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType Type, IconMoniker Icon, string Name, string Description, string? Effects, int Count)
 {
     public string CountText => $"×{Count}";
 
@@ -29,7 +29,7 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
 
     private static UnitPermanentModifierViewModel Create(LeaderAbility ability, IGameTextProvider texts)
     {
-        return new UnitPermanentModifierViewModel(LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability, texts), Tr("Innate"), null, 1);
+        return new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability, texts), Tr("Innate"), null, 1);
     }
 
     private static UnitPermanentModifierViewModel Create(
@@ -39,6 +39,7 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
         IGameTextProvider texts)
     {
         UnitModifierDefinition modifierDefinition = definitions.GetUnitModifier(modifier.DefinitionId);
+        UnitPermanentModifierType type = ResolveType(modifierDefinition);
         IconMoniker icon = UnitModifierIconResolver.Resolve(modifierDefinition);
         string effects = string.Join(", ", UnitModifierFormatter.FormatEffects(modifierDefinition, texts));
         LeaderUpgradeDefinition? upgradeDefinition = leaderUpgrades.FirstOrDefault(upgrade => upgrade.ModifierId == modifier.DefinitionId);
@@ -48,11 +49,31 @@ internal sealed record UnitPermanentModifierViewModel(IconMoniker Icon, string N
             GlobalText name = texts.GetGlobalText(upgradeDefinition.NameTextId);
             GlobalText description = texts.GetGlobalText(upgradeDefinition.DescriptionTextId);
 
-            return new UnitPermanentModifierViewModel(icon, name.Text, description.Text, effects, 1);
+            return new UnitPermanentModifierViewModel(type, icon, name.Text, description.Text, effects, 1);
         }
         else
         {
-            return new UnitPermanentModifierViewModel(icon, effects, FormatSource(modifier.Source), null, 1);
+            return new UnitPermanentModifierViewModel(type, icon, effects, FormatSource(modifier.Source), null, 1);
+        }
+    }
+
+    private static UnitPermanentModifierType ResolveType(UnitModifierDefinition modifier)
+    {
+        if (modifier.LeaderAbilities != LeaderAbility.None)
+        {
+            return UnitPermanentModifierType.Skill;
+        }
+        else if (modifier.Wards.Length > 0)
+        {
+            return UnitPermanentModifierType.Protection;
+        }
+        else if (modifier.Leadership.Flat > 0 || modifier.Leadership.Percent > 0)
+        {
+            return UnitPermanentModifierType.Leadership;
+        }
+        else
+        {
+            return UnitPermanentModifierType.Common;
         }
     }
 

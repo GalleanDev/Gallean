@@ -164,6 +164,36 @@
     <GradientStop Offset="0" Color="{DynamicResource AccentSecondaryColor}" />
     <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
   </LinearGradientBrush>
+  <SolidColorBrush x:Key="PermanentModifierDividerBrush" Color="{DynamicResource AccentSecondaryColor}" Opacity="0.6" />
+  <DrawingBrush x:Key="PermanentModifierDividerDashBrush" TileMode="Tile" SourceRect="0,0,1,4" DestinationRect="0,0,1,4">
+    <DrawingBrush.Drawing>
+      <GeometryDrawing Brush="{StaticResource PermanentModifierDividerBrush}" Geometry="M 0,0 H 1 V 2 H 0 Z" />
+    </DrawingBrush.Drawing>
+  </DrawingBrush>
+  <SolidColorBrush x:Key="PermanentModifierCommonCapTopBrush" Color="{x:Static local:Theme+PermanentModifier+Common.CapTopColor}" />
+  <SolidColorBrush x:Key="PermanentModifierCommonCapBottomBrush" Color="{x:Static local:Theme+PermanentModifier+Common.CapBottomColor}" />
+  <LinearGradientBrush x:Key="PermanentModifierCommonCapGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+PermanentModifier+Common.CapTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+PermanentModifier+Common.CapBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="PermanentModifierSkillCapTopBrush" Color="{x:Static local:Theme+PermanentModifier+Skill.CapTopColor}" />
+  <SolidColorBrush x:Key="PermanentModifierSkillCapBottomBrush" Color="{x:Static local:Theme+PermanentModifier+Skill.CapBottomColor}" />
+  <LinearGradientBrush x:Key="PermanentModifierSkillCapGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+PermanentModifier+Skill.CapTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+PermanentModifier+Skill.CapBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="PermanentModifierLeadershipCapTopBrush" Color="{x:Static local:Theme+PermanentModifier+Leadership.CapTopColor}" />
+  <SolidColorBrush x:Key="PermanentModifierLeadershipCapBottomBrush" Color="{x:Static local:Theme+PermanentModifier+Leadership.CapBottomColor}" />
+  <LinearGradientBrush x:Key="PermanentModifierLeadershipCapGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+PermanentModifier+Leadership.CapTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+PermanentModifier+Leadership.CapBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="PermanentModifierProtectionCapTopBrush" Color="{x:Static local:Theme+PermanentModifier+Protection.CapTopColor}" />
+  <SolidColorBrush x:Key="PermanentModifierProtectionCapBottomBrush" Color="{x:Static local:Theme+PermanentModifier+Protection.CapBottomColor}" />
+  <LinearGradientBrush x:Key="PermanentModifierProtectionCapGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+PermanentModifier+Protection.CapTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+PermanentModifier+Protection.CapBottomColor}" />
+  </LinearGradientBrush>
   <SolidColorBrush x:Key="UnitDetailsPrimaryStatBrush" Color="{DynamicResource AccentColor}" />
   <SolidColorBrush x:Key="UnitDetailsWarningBrush" Color="{x:Static local:Theme+OfferStatus.ReasonColor}" />
 
