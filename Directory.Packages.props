@@ -40,7 +40,7 @@
     <PackageVersion Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Win32" Version="$(SkiaSharpVersion)" />
-    <PackageVersion Include="System.CommandLine" Version="2.0.13" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.14" />
     <PackageVersion Include="System.Reactive" Version="7.0.0" />
     <PackageVersion Include="TorchSharp" Version="$(TorchSharpVersion)" />
     <PackageVersion Include="libtorch-cpu-linux-x64" Version="$(LibTorchVersion)" />
