@@ -99,6 +99,7 @@
                            Foreground="{StaticResource AssetPackErrorStepTitleBrush}" />
                 <TextBlock Text="{local:Text 'Find and download a community-provided asset pack.'}"
                            Classes="caption"
+                           TextWrapping="Wrap"
                            Foreground="{StaticResource SecondaryTextBrush}" />
               </StackPanel>
               <local:LinkButton x:Name="DownloadButton"
