@@ -24,6 +24,7 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
     private BattleAnimationState? lastAnimationState;
     private BattleRenderState? lastRenderState;
     private Exception? renderException;
+    private Task? contentBuildTask;
     private int lastFrameIndex = -1;
     private bool lastFrameDidRedraw;
     private long lastFrameTimestamp;
@@ -54,6 +55,7 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
     private IAssetProvider Assets => AssetScope.GetRequiredAssets(this);
     private IAudioPlayer Audio => AudioScope.GetRequiredAudio(this);
     private DiagnosticsRecorder Diagnostics => ViewModel.Game.DevTools.Diagnostics;
+    private bool IsContentBuilt => contentBuildTask is { IsCompleted: true };
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -158,6 +160,8 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
             TimeSpan now = animationClock.Now;
             BattleAnimationState? animation = ViewModel.AnimationState;
 
+            contentBuildTask ??= BuildContentAsync(ViewModel.RenderState, Assets);
+
             RegisterSequence(animation?.Sequence, now);
             PlaySequenceSounds(animation, now);
 
@@ -166,7 +170,10 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
                 ViewModel.CompleteAnimation(now);
             }
 
-            transitionPlayback.Register(ViewModel.TransitionState, now);
+            if (IsContentBuilt)
+            {
+                transitionPlayback.Register(ViewModel.TransitionState, now);
+            }
 
             if (transitionPlayback.TryComplete(now))
             {
@@ -226,50 +233,64 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
     {
         base.Render(context);
 
-        BattleRenderState state = ViewModel.RenderState;
-        BattleAnimationState? animation = ViewModel.AnimationState;
-        TimeSpan loopTime = animationClock.Now;
+        if (IsContentBuilt)
+        {
+            BattleRenderState state = ViewModel.RenderState;
+            BattleAnimationState? animation = ViewModel.AnimationState;
+            TimeSpan loopTime = animationClock.Now;
+            BattleWorldTransitionState? transition = ViewModel.TransitionState;
 
-        BattleWorldTransitionState? transition = ViewModel.TransitionState;
+            RegisterSequence(animation?.Sequence, loopTime);
 
-        RegisterSequence(animation?.Sequence, loopTime);
+            TimeSpan sequenceTime = GetSequenceTime(animation, loopTime);
+            TimeSpan transitionTime = transitionPlayback.GetElapsed(loopTime);
+            Matrix view = BattleRenderLayout.GetViewMatrix(Bounds.Width, Bounds.Height);
 
-        TimeSpan sequenceTime = GetSequenceTime(animation, loopTime);
-        TimeSpan transitionTime = transitionPlayback.GetElapsed(loopTime);
-        Matrix view = BattleRenderLayout.GetViewMatrix(Bounds.Width, Bounds.Height);
+            IAssetProvider assets = Assets;
+            BattleRenderContent content;
 
-        IAssetProvider assets = Assets;
-        BattleRenderContent content;
+            try
+            {
+                content = contentProvider.Get(state, assets);
+            }
+            catch (Exception ex)
+            {
+                renderException = ex;
+                return;
+            }
 
+            Rect bounds = GetSurfaceBounds();
+            GameSettings settings = SettingsScope.GetSettings(this);
+
+            context.Custom(new BattleRenderOperation(
+                bounds,
+                view,
+                state,
+                content,
+                animation,
+                transition,
+                assets,
+                renderer,
+                loopTime,
+                sequenceTime,
+                transitionTime,
+                settings.RenderResolutionRatio,
+                IsLightOverlayVisible,
+                IsHitboxOverlayVisible,
+                Diagnostics));
+        }
+    }
+
+    private async Task BuildContentAsync(BattleRenderState state, IAssetProvider assets)
+    {
         try
         {
-            content = contentProvider.Get(state, assets);
+            await Task.Run(() => contentProvider.Get(state, assets));
         }
         catch (Exception ex)
         {
             renderException = ex;
-            return;
         }
-
-        Rect bounds = GetSurfaceBounds();
-        GameSettings settings = SettingsScope.GetSettings(this);
-
-        context.Custom(new BattleRenderOperation(
-            bounds,
-            view,
-            state,
-            content,
-            animation,
-            transition,
-            assets,
-            renderer,
-            loopTime,
-            sequenceTime,
-            transitionTime,
-            settings.RenderResolutionRatio,
-            IsLightOverlayVisible,
-            IsHitboxOverlayVisible,
-            Diagnostics));
     }
 
     private Rect GetSurfaceBounds()
