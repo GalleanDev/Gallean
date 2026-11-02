@@ -22,7 +22,10 @@ internal static class ScenarioTextNormalizer
         bool hasSpace = false;
         int lineBreaks = 0;
 
-        foreach (char ch in text.ReplaceLineEndings("\n").Replace("\\n", "\n"))
+        text = text.ReplaceLineEndings("\n");
+        text = text.Replace("\\n", "\n");
+
+        foreach (char ch in text)
         {
             if (ch == '\n')
             {
