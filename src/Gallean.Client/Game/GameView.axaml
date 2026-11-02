@@ -20,6 +20,11 @@
       <Panel>
         <local:AnimatedTextSegmentShaderPrecompileVisual />
         <local:AnimatedTextSmokeShaderPrecompileVisual />
+        <local:BattleBackgroundShaderPrecompileVisual />
+        <local:BattleFluidShaderPrecompileVisual />
+        <local:BattleRainShaderPrecompileVisual />
+        <local:BattleShadowShaderPrecompileVisual />
+        <local:BattleUnitShaderPrecompileVisual />
         <local:BattleWorldTransitionShaderPrecompileVisual />
         <local:WorldBattleTransitionShaderPrecompileVisual />
         <local:WorldHighlightShaderPrecompileVisual />
