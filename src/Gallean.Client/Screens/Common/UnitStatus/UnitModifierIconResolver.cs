@@ -22,7 +22,7 @@ internal static class UnitModifierIconResolver
         }
         else if (modifier.MoveAbility != UnitMoveAbility.None)
         {
-            return IconMoniker.Boot;
+            return UnitMoveAbilityIconResolver.Resolve(modifier.MoveAbility);
         }
         else if (HasValue(modifier.Leadership))
         {

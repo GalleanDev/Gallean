@@ -51,7 +51,7 @@ internal static class UnitModifierFormatter
             yield return Tr("{0} vision", value);
         }
 
-        string? moveAbility = FormatMoveAbility(modifier.MoveAbility);
+        string? moveAbility = UnitMoveAbilityFormatter.Format(modifier.MoveAbility);
 
         if (moveAbility is not null)
         {
@@ -95,17 +95,6 @@ internal static class UnitModifierFormatter
         {
             yield return $"{stat.Percent:+0;-0}%";
         }
-    }
-
-    private static string? FormatMoveAbility(UnitMoveAbility ability)
-    {
-        return ability switch
-        {
-            UnitMoveAbility.None => null,
-            UnitMoveAbility.Forest => Tr("Forest movement"),
-            UnitMoveAbility.Water => Tr("Water movement"),
-            UnitMoveAbility.Flying => Tr("Flight")
-        };
     }
 
     private static string FormatWard(UnitWard ward)

@@ -124,6 +124,7 @@ internal sealed record UnitDetailsViewModel(
             UnitStatusViewModel.CreateAll(BattleUnitState.StatusEffect.CreateAll(unit.StatusEffects), modifiers);
         IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierViewModel.CreateAll(
             stats.GetWorldUnitAbilities(baseUnit),
+            definition.MoveAbility,
             unit.Modifiers,
             GetLeaderUpgrades(owner, definitions),
             definitions,
@@ -185,6 +186,7 @@ internal sealed record UnitDetailsViewModel(
         IReadOnlyList<UnitStatusViewModel> statuses = UnitStatusViewModel.CreateAll([], modifiers);
         IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierViewModel.CreateAll(
             stats.GetWorldUnitAbilities(baseUnit),
+            definition.MoveAbility,
             unit.Modifiers,
             GetLeaderUpgrades(owner, definitions),
             definitions,

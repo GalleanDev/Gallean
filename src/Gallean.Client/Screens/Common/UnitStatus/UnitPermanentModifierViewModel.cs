@@ -9,6 +9,7 @@ internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType 
 
     public static IReadOnlyList<UnitPermanentModifierViewModel> CreateAll(
         LeaderAbility baseAbilities,
+        UnitMoveAbility baseMoveAbility,
         ImmutableArray<UnitModifier> modifiers,
         ImmutableArray<LeaderUpgradeDefinition> leaderUpgrades,
         IGameDefinitionProvider definitions,
@@ -19,6 +20,7 @@ internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType 
             .. Enum.GetValues<LeaderAbility>()
                 .Where(ability => ability != LeaderAbility.None && baseAbilities.HasFlag(ability))
                 .Select(ability => Create(ability, texts)),
+            .. AddMoveAbility(baseMoveAbility),
             .. modifiers
                 .Where(modifier => modifier.RemainingTurns is null && modifier.Source is not UnitModifierSource.Scenario)
                 .Select(modifier => Create(modifier, leaderUpgrades, definitions, texts))
@@ -30,6 +32,22 @@ internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType 
     private static UnitPermanentModifierViewModel Create(LeaderAbility ability, IGameTextProvider texts)
     {
         return new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability, texts), Tr("Innate"), null, 1);
+    }
+
+    private static IEnumerable<UnitPermanentModifierViewModel> AddMoveAbility(UnitMoveAbility ability)
+    {
+        string? name = UnitMoveAbilityFormatter.Format(ability);
+
+        if (name is not null)
+        {
+            yield return new UnitPermanentModifierViewModel(
+                UnitPermanentModifierType.Skill,
+                UnitMoveAbilityIconResolver.Resolve(ability),
+                name,
+                Tr("Innate"),
+                null,
+                1);
+        }
     }
 
     private static UnitPermanentModifierViewModel Create(
