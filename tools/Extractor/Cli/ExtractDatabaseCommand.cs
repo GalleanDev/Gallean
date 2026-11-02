@@ -8,11 +8,13 @@ namespace Extractor;
 
 internal class ExtractDatabaseCommand : Command
 {
-    public const int DefaultCodePage = 866;
+    private const int DefaultCodePage = 866;
 
     private const string ScenarioColumn = "NO_SCEN";
 
     private static readonly string[] ScenarioRootTables = ["Sinfo.json"];
+
+    public static Encoding DefaultEncoding { get; } = GetEncoding(DefaultCodePage);
 
     public ExtractDatabaseCommand(Option<string> gamePathOption, Option<string> outputOption)
         : base("extract-database", "Extracts database resources.")
@@ -114,7 +116,7 @@ internal class ExtractDatabaseCommand : Command
         Console.WriteLine($"Database extraction completed -> {outputPath}");
     }
 
-    internal static Encoding GetEncoding(int codePage)
+    private static Encoding GetEncoding(int codePage)
     {
         Encoding? encoding = TryGetEncoding(codePage);
 
