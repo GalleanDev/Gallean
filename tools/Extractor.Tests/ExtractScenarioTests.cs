@@ -43,14 +43,14 @@ public sealed class ExtractScenarioTests
         return [.. counts.OrderBy(entry => entry.Key, StringComparer.Ordinal).Select(entry => $"{entry.Key} {entry.Value}")];
     }
 
-    private static IReadOnlyList<string> FormatStackLeaders(WorldState state, IGameDefinitionProvider definitions)
+    private static IReadOnlyList<string> FormatStackLeaders(WorldState state, IGameDefinitionProvider definitions, IGameTextProvider texts)
     {
         List<string> result = [];
 
         foreach (WorldStack stack in state.Stacks.Values)
         {
             (WorldUnit leader, GridPosition _, UnitDefinition definition) = stack.GetLeader(definitions);
-            result.Add($"{stack.Id.Value} {definition.Id.Value} {leader.Name}");
+            result.Add($"{stack.Id.Value} {definition.Id.Value} {texts.GetUnitName(leader.Name)}");
         }
 
         return result;
@@ -222,12 +222,13 @@ public sealed class ExtractScenarioTests
         CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
         ScenarioDatabase scenarioDb = ScenarioDatabaseLoader.Load(Path.Combine(output, "Scens"), new Db.ScenarioId("S200SC0000"));
         IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+        IGameTextProvider texts = new GameTextProvider(globalDb, scenarioDb, scenarioDb.TextScenarios, LanguageDatabase.Empty);
         WorldState state = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables()).State;
 
-        Assert.That(FormatStackLeaders(state, definitions), Is.EqualTo([
+        Assert.That(FormatStackLeaders(state, definitions, texts), Is.EqualTo([
             "S200KC0000 g000uu0044 Sigulf",
             "S200KC0001 g000uu8009 Thorne",
-            "S200KC0002 g000uu5120 Helthmor Dragon Of Realm ",
+            "S200KC0002 g000uu5120 Helthmor Dragon Of Realm",
             "S200KC0003 g000uu5121 Wyndor Dragon Of The South Sea",
             "S200KC0004 g000uu8144 Dark Elf Gast",
             "S200KC0005 g000uu8009 Erwylle",
