@@ -91,7 +91,8 @@ public sealed class WorldEngineBattleItemTests
             ],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
@@ -176,7 +177,8 @@ public sealed class WorldEngineBattleItemTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition), GridPosition.FrontBottom, false)
@@ -287,7 +289,8 @@ public sealed class WorldEngineBattleItemTests
             ],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
@@ -386,7 +389,8 @@ public sealed class WorldEngineBattleItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 1, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
@@ -485,7 +489,8 @@ public sealed class WorldEngineBattleItemTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> modifiedGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Modifiers = [new UnitModifier(modifierDefinition.Id, RemainingTurns: 1)] }, GridPosition.FrontBottom, false)
@@ -607,7 +612,8 @@ public sealed class WorldEngineBattleItemTests
             Items: [new BattleItem(BattleSide.Defender, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
@@ -706,7 +712,8 @@ public sealed class WorldEngineBattleItemTests
             Outcome: new BattleOutcome(BattleSide.Defender),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedDefenderGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();
@@ -799,7 +806,8 @@ public sealed class WorldEngineBattleItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 0, 1, [], null, false);
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder().Place(expectedUnit, new GridPosition(0, 0), false).Build();

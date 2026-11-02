@@ -52,7 +52,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
 
         engine.CheckCommandError(new BattleDefendCommand(leader.Id), BattleCommandError.NotUnitTurn);
     }
@@ -107,7 +108,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -415,7 +417,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -513,7 +516,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -702,7 +706,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -865,7 +870,8 @@ public sealed class BattleEngineUseItemTests
             Items: [talismanItem],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
 
         engine.CheckCommand(new BattleSkipCommand(defender.Id), [
             new BattleUnitTurnSkippedEvent(defender.Id),
@@ -888,7 +894,8 @@ public sealed class BattleEngineUseItemTests
             Items: [talismanItem],
             CurrentRound: BattleRound.Normal(2),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
 
         engine.CheckCommand(new BattleAttackCommand(summonId, new BattleAttackUnitTarget(defender.Id)), [
             new BattleUnitAttackEvent(summonId, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("imp")]),
@@ -911,7 +918,8 @@ public sealed class BattleEngineUseItemTests
             Items: [talismanItem],
             CurrentRound: BattleRound.Normal(2),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -971,7 +979,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1036,7 +1045,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1177,7 +1187,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1246,7 +1257,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1306,7 +1318,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1375,7 +1388,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1454,7 +1468,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, orb.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1525,7 +1540,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 5, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1585,7 +1601,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, Charges: 1, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1712,7 +1729,8 @@ public sealed class BattleEngineUseItemTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
 
         engine.CheckCommandError(new BattleDefendCommand(leader.Id), BattleCommandError.NotUnitTurn);
     }

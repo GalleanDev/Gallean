@@ -62,7 +62,8 @@ public sealed class WorldEngineTombTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker) with { Name = "Morgana" }, GridPosition.FrontBottom, false)
@@ -150,7 +151,8 @@ public sealed class WorldEngineTombTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)
@@ -248,7 +250,8 @@ public sealed class WorldEngineTombTests
             Outcome: new BattleOutcome(BattleSide.Defender),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedDefenderGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defender), new GridPosition(0, 0), false)
@@ -334,7 +337,8 @@ public sealed class WorldEngineTombTests
             Outcome: new BattleOutcome(BattleSide.Defender),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedGuardGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("guard"), guard), GridPosition.FrontBottom, false)
@@ -504,7 +508,8 @@ public sealed class WorldEngineTombTests
             Outcome: new BattleOutcome(BattleSide.Attacker),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)
@@ -585,7 +590,8 @@ public sealed class WorldEngineTombTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)
@@ -666,7 +672,8 @@ public sealed class WorldEngineTombTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)

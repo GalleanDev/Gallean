@@ -18,7 +18,7 @@ public sealed class BattleTurnOrderCalculatorTests
         BattleState state = new BattleStateBuilder(definitions)
             .Add(faster, GridPosition.FrontBottom)
             .Add(slower, GridPosition.FrontBottom)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         GlobalVariables globals = new() { BattleInitiativeVariance = 0 };
         IEngineContext context = new EngineContext(
@@ -49,7 +49,7 @@ public sealed class BattleTurnOrderCalculatorTests
         BattleState state = new BattleStateBuilder(definitions)
             .Add(leader, GridPosition.FrontBottom)
             .Add(follower, GridPosition.FrontBottom)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         GlobalVariables globals = new() { BattleInitiativeVariance = 10 };
         IEngineContext context = new EngineContext(
@@ -84,7 +84,7 @@ public sealed class BattleTurnOrderCalculatorTests
             .Add(summoner, GridPosition.BackBottom)
             .Add(defender, GridPosition.FrontBottom)
             .Add(imp, GridPosition.FrontBottom)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         GlobalVariables globals = new() { BattleInitiativeVariance = 0 };
         IEngineContext context = new EngineContext(
@@ -131,7 +131,7 @@ public sealed class BattleTurnOrderCalculatorTests
             .Add(slow, GridPosition.BackBottom)
             .Add(knight, GridPosition.FrontBottom)
             .Add(fast, GridPosition.FrontBottom)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         GlobalVariables globals = new() { BattleInitiativeVariance = 0 };
         IEngineContext context = new EngineContext(

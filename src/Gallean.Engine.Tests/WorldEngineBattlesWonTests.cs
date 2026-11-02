@@ -68,7 +68,8 @@ public sealed class WorldEngineBattlesWonTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.FrontBottom, false)
@@ -156,7 +157,8 @@ public sealed class WorldEngineBattlesWonTests
             Outcome: new BattleOutcome(BattleSide.Defender),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Hitpoints = 40 }, GridPosition.FrontBottom, false)

@@ -90,7 +90,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             ],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition), new GridPosition(0, 0), false)
@@ -177,7 +178,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition), new GridPosition(0, 0), false)
@@ -439,7 +441,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             Outcome: new BattleOutcome(BattleSide.Defender),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedDefenderGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition), new GridPosition(0, 0), false)
@@ -959,7 +962,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             Outcome: new BattleOutcome(BattleSide.Attacker),
             Modifiers: new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition), new GridPosition(0, 0), false)
@@ -1051,7 +1055,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> destroyedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("dummy"), dummyDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
@@ -1135,7 +1140,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { Experience = 3, ExperienceGained = 4 }, new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Defender)
             };

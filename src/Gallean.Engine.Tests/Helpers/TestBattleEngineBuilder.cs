@@ -9,6 +9,7 @@ internal sealed class TestBattleEngineBuilder
     private readonly TestGameDefinitionProviderBuilder definitionsBuilder = new();
     private readonly List<BattleItem> items = [];
     private BattleModifiers modifiers = BattleModifiers.None;
+    private BattleInfo info = TestHelpers.SimpleBattleInfo();
     private GlobalVariables globals = new() { BattleInitiativeVariance = 0, BattleDamageVariance = 0 };
     private IRandomProvider random = new TestSeedRandomProvider();
     private int roundNumber = 1;
@@ -23,6 +24,12 @@ internal sealed class TestBattleEngineBuilder
     public TestBattleEngineBuilder WithModifiers(BattleModifiers newModifiers)
     {
         modifiers = newModifiers;
+        return this;
+    }
+
+    public TestBattleEngineBuilder WithInfo(BattleInfo newInfo)
+    {
+        info = newInfo;
         return this;
     }
 
@@ -118,7 +125,7 @@ internal sealed class TestBattleEngineBuilder
             stateBuilder.AddItem(item);
         }
 
-        BattleState state = stateBuilder.Build(modifiers) with { CurrentRound = BattleRound.Normal(roundNumber) };
+        BattleState state = stateBuilder.Build(modifiers, info) with { CurrentRound = BattleRound.Normal(roundNumber) };
         BattleEngine engine = new(
             new EngineContext(random, definitions, new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition), GameScenarioProvider.Empty, globals),
             state,

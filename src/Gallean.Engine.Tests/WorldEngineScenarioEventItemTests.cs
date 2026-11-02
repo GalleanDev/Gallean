@@ -1991,7 +1991,8 @@ public sealed class WorldEngineScenarioEventItemTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader), GridPosition.FrontBottom, false)

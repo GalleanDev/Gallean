@@ -344,6 +344,9 @@ internal static class WorldCommandHelpers
         BattleModifiers modifiers = new(
             WorldBattleModifierCalculator.GetModifiers(state, attackerStack.OwnerId, canRetreat: true, context),
             WorldBattleModifierCalculator.GetModifiers(state, defenderStack.OwnerId, defenderFortification is null, context));
+        BattleInfo info = new(
+            WorldBattleSideInfoCalculator.GetInfo(state, attackerStack.OwnerId),
+            WorldBattleSideInfoCalculator.GetInfo(state, defenderStack.OwnerId));
 
         int fortificationArmor;
         if (defenderFortification is not null)
@@ -406,7 +409,7 @@ internal static class WorldCommandHelpers
         AddBattleItems(builder, BattleSide.Attacker, attackerStack);
         AddBattleItems(builder, BattleSide.Defender, defenderStack);
 
-        return builder.Build(modifiers);
+        return builder.Build(modifiers, info);
     }
 
     public static BattleState CreateDuelBattleState(
@@ -420,6 +423,9 @@ internal static class WorldCommandHelpers
         BattleModifiers modifiers = new(
             WorldBattleModifierCalculator.GetModifiers(state, attackerStack.OwnerId, canRetreat: true, context),
             WorldBattleModifierCalculator.GetModifiers(state, defenderStack.OwnerId, defenderFortification is null, context));
+        BattleInfo info = new(
+            WorldBattleSideInfoCalculator.GetInfo(state, attackerStack.OwnerId),
+            WorldBattleSideInfoCalculator.GetInfo(state, defenderStack.OwnerId));
         WorldStack unfortifiedAttackerStack = attackerStack with
         {
             Units = FortificationCalculator.RemoveUnitModifiers(attackerStack.Units)
@@ -467,7 +473,7 @@ internal static class WorldCommandHelpers
         AddBattleItems(builder, BattleSide.Attacker, attackerStack);
         AddBattleItems(builder, BattleSide.Defender, defenderStack);
 
-        return builder.Build(modifiers);
+        return builder.Build(modifiers, info);
     }
 
     public static BattleState CreateGarrisonBattleState(
@@ -481,6 +487,9 @@ internal static class WorldCommandHelpers
         BattleModifiers modifiers = new(
             WorldBattleModifierCalculator.GetModifiers(state, attackerStack.OwnerId, canRetreat: true, context),
             WorldBattleModifierCalculator.GetModifiers(state, defenderOwnerId, canRetreat: false, context));
+        BattleInfo info = new(
+            WorldBattleSideInfoCalculator.GetInfo(state, attackerStack.OwnerId),
+            WorldBattleSideInfoCalculator.GetInfo(state, defenderOwnerId));
         BattleStateBuilder builder = new(context.Definitions);
         int index = 0;
 
@@ -532,7 +541,7 @@ internal static class WorldCommandHelpers
 
         AddBattleItems(builder, BattleSide.Attacker, attackerStack);
 
-        return builder.Build(modifiers);
+        return builder.Build(modifiers, info);
     }
 
     private static ImmutableArray<BattleAbstractStatusEffect> CreateFortificationStatusEffects(int fortificationArmor)

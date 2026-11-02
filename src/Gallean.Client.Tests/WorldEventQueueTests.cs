@@ -182,7 +182,8 @@ public sealed class WorldEventQueueTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         return new EngineStep<WorldState, WorldEvent>(
             state,

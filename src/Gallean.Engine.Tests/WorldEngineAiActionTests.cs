@@ -505,7 +505,7 @@ public sealed class WorldEngineAiActionTests
         BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(thief).AddUnit(enemy).Build())
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("thief"), thief.Id, BattleSide.Attacker, hitpoints: 100), GridPosition.FrontBottom)
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("enemy"), enemy.Id, BattleSide.Defender, hitpoints: 5), GridPosition.FrontBottom)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         WorldAiMemory memory = new WorldAiMemory(
                 new WorldAiTurnMemory(1, ai.Id, 1, 0, 0, []))

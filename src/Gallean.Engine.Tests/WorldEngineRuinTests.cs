@@ -62,7 +62,8 @@ public sealed class WorldEngineRuinTests
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10), new GridPosition(0, 0))
             .Build(new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                new BattleInfo(new BattleSideInfo(IsNeutral: false), new BattleSideInfo(IsNeutral: true)));
 
         engine.CheckCommand(
             new WorldMoveStackCommand(new WorldStackId("stack1"), new WorldPosition(2, 2)),
@@ -135,7 +136,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 10) with { Experience = 3, ExperienceGained = 4 }, new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Attacker)
             };
@@ -229,7 +231,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { Experience = 3, ExperienceGained = 4 }, new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Defender)
             };
@@ -324,7 +327,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 10) with { Experience = 3, ExperienceGained = 4 }, new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Attacker)
             };
@@ -420,7 +424,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Defender, hitpoints: 0), new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Attacker)
             };
@@ -519,7 +524,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(2), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Defender, hitpoints: 0), new GridPosition(0, 1))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Defender)
             };
@@ -604,7 +610,8 @@ public sealed class WorldEngineRuinTests
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit2"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10), new GridPosition(0, 0))
             .Build(new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                new BattleInfo(new BattleSideInfo(IsNeutral: false), new BattleSideInfo(IsNeutral: true)));
 
         engine.CheckCommand(
             new WorldMoveStackCommand(new WorldStackId("Stack1"), new WorldPosition(2, 2)),
@@ -674,7 +681,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 10) with { Experience = 3, ExperienceGained = 4 }, new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Attacker)
             };
@@ -768,7 +776,8 @@ public sealed class WorldEngineRuinTests
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Attacker, hitpoints: 0), new GridPosition(0, 0))
                 .Build(new BattleModifiers(
                     Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false))) with
+                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Attacker)
             };

@@ -674,7 +674,8 @@ public sealed class WorldEngineBannerTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         engine.CheckCommand(new WorldMoveStackCommand(attackerStack.Id, defenderStack.Position), [
             new WorldStackMovementConsumedEvent(attackerStack.Id, 3),

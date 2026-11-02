@@ -20,7 +20,8 @@ public sealed class BattleStateTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
         BattleState equalState = new(
             AttackerGrid: new UnitGrid<BattleUnit>.Builder()
@@ -35,7 +36,8 @@ public sealed class BattleStateTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         Assert.That(equalState.AttackerGrid, Is.Not.SameAs(state.AttackerGrid));

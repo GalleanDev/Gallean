@@ -81,13 +81,13 @@ internal sealed partial class WorldAiEstimator(IEngineContext context)
     {
         UnitGrid<BattleUnit> units = state.GetGrid(side);
         UnitGrid<BattleUnit> targets = state.GetGrid(side.GetOpposite());
-        int targetCount = targets.GetUnits().Count(entry => entry.Unit.IsAlive);
+        int targetCount = targets.GetUnits().Count(entry => entry.Unit.IsActive());
 
         int power = 0;
 
         foreach ((BattleUnit unit, _) in units.GetUnits())
         {
-            if (unit.IsAlive)
+            if (unit.IsActive())
             {
                 UnitDefinition definition = context.Definitions.GetUnit(unit.DefinitionId);
                 UnitStats stats = context.UnitStats.GetBattleUnitStats(state, unit.Id);

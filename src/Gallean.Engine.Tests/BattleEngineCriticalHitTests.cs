@@ -49,7 +49,8 @@ public sealed class BattleEngineCriticalHitTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -98,7 +99,8 @@ public sealed class BattleEngineCriticalHitTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -154,7 +156,8 @@ public sealed class BattleEngineCriticalHitTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -206,6 +209,7 @@ public sealed class BattleEngineCriticalHitTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 }

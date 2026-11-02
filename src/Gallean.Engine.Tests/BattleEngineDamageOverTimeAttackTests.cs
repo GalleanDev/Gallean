@@ -710,7 +710,8 @@ public sealed class BattleEngineDamageOverTimeAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(4),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]

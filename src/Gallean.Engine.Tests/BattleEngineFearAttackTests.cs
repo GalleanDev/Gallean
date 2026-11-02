@@ -253,7 +253,8 @@ public sealed class BattleEngineFearAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(3),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -317,6 +318,7 @@ public sealed class BattleEngineFearAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 }

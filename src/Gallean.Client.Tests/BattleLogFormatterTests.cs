@@ -31,7 +31,7 @@ public sealed class BattleLogFormatterTests
         BattleState state = new BattleStateBuilder(definitions)
             .Add(warrior)
             .Add(scout)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
@@ -74,7 +74,7 @@ public sealed class BattleLogFormatterTests
         BattleState state = new BattleStateBuilder(definitions)
             .Add(warrior)
             .Add(scout)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
@@ -147,12 +147,12 @@ public sealed class BattleLogFormatterTests
 
         BattleState stateBeforeSummon = new BattleStateBuilder(definitions)
             .Add(warrior)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleState stateAfterSummon = new BattleStateBuilder(definitions)
             .Add(warrior)
             .Add(imp)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
@@ -220,7 +220,7 @@ public sealed class BattleLogFormatterTests
         BattleState state = new BattleStateBuilder(definitions)
             .Add(warrior)
             .Add(scout)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
@@ -254,7 +254,7 @@ public sealed class BattleLogFormatterTests
 
         BattleState state = new BattleStateBuilder(definitions)
             .Add(warrior)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
@@ -275,7 +275,7 @@ public sealed class BattleLogFormatterTests
 
         BattleState state = new BattleStateBuilder(definitions)
             .Add(warrior)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 
@@ -302,7 +302,7 @@ public sealed class BattleLogFormatterTests
 
         BattleState state = new BattleStateBuilder(definitions)
             .Add(warrior)
-            .Build(BattleModifiers.None);
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         BattleLogFormatter formatter = new(definitions, TestGameTextProvider.Instance);
 

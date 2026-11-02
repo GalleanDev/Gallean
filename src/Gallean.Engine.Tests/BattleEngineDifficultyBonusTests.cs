@@ -45,7 +45,8 @@ public sealed class BattleEngineDifficultyBonusTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: modifiers)));
+            Modifiers: modifiers,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -91,7 +92,8 @@ public sealed class BattleEngineDifficultyBonusTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: modifiers)));
+            Modifiers: modifiers,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -135,6 +137,7 @@ public sealed class BattleEngineDifficultyBonusTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: modifiers)));
+            Modifiers: modifiers,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 }

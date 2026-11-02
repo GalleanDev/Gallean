@@ -10,7 +10,7 @@ public sealed class BattleEngineFortificationArmorTests
         GlobalVariables globals = new();
 
         BattleUnit defender = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 10, 0, 0, 1, [], [new BattleFortificationStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(defender, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(defender, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, defender.Id);
 
@@ -25,7 +25,7 @@ public sealed class BattleEngineFortificationArmorTests
         GlobalVariables globals = new();
 
         BattleUnit defender = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 10, 0, 0, 1, [], [new BattleDefendStatusEffect(), new BattleFortificationStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(defender, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(defender, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, defender.Id);
 

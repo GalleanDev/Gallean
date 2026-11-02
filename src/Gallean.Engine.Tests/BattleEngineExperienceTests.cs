@@ -68,7 +68,8 @@ public sealed class BattleEngineExperienceTests
             [],
             BattleRound.Normal(1),
             new BattleOutcome(BattleSide.Attacker),
-            BattleModifiers.None)));
+            BattleModifiers.None,
+            TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -142,7 +143,8 @@ public sealed class BattleEngineExperienceTests
             [],
             BattleRound.Normal(1),
             new BattleOutcome(BattleSide.Attacker),
-            BattleModifiers.None)));
+            BattleModifiers.None,
+            TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -213,7 +215,8 @@ public sealed class BattleEngineExperienceTests
             [],
             BattleRound.Normal(1),
             new BattleOutcome(BattleSide.Attacker),
-            BattleModifiers.None)));
+            BattleModifiers.None,
+            TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -278,7 +281,8 @@ public sealed class BattleEngineExperienceTests
             [],
             BattleRound.Normal(1),
             new BattleOutcome(BattleSide.Attacker),
-            BattleModifiers.None)));
+            BattleModifiers.None,
+            TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]

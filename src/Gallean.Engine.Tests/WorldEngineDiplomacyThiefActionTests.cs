@@ -274,7 +274,8 @@ public sealed class WorldEngineDiplomacyThiefActionTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 

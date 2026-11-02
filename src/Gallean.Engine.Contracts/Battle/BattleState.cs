@@ -12,7 +12,8 @@ public sealed record BattleState(
     ImmutableArray<BattleItem> Items,
     BattleRound CurrentRound,
     BattleOutcome? Outcome,
-    BattleModifiers Modifiers)
+    BattleModifiers Modifiers,
+    BattleInfo Info)
 {
     public BattleUnitId CurrentUnitId => CurrentUnitTurn.UnitId;
     public int RoundNumber => CurrentRound.Number;
@@ -37,7 +38,8 @@ public sealed record BattleState(
                Items.SequenceEqual(other.Items) &&
                CurrentRound == other.CurrentRound &&
                Outcome == other.Outcome &&
-               Modifiers == other.Modifiers;
+               Modifiers == other.Modifiers &&
+               Info == other.Info;
     }
 
     public override int GetHashCode()
@@ -53,6 +55,7 @@ public sealed record BattleState(
         hash.Add(CurrentRound);
         hash.Add(Outcome);
         hash.Add(Modifiers);
+        hash.Add(Info);
 
         return hash.ToHashCode();
     }

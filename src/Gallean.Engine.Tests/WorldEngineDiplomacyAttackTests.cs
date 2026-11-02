@@ -71,7 +71,8 @@ public sealed class WorldEngineDiplomacyAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 
@@ -148,7 +149,8 @@ public sealed class WorldEngineDiplomacyAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 
@@ -225,7 +227,8 @@ public sealed class WorldEngineDiplomacyAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: new BattleInfo(new BattleSideInfo(IsNeutral: false), new BattleSideInfo(IsNeutral: true)));
 
         WorldState before = engine.State;
 
@@ -301,7 +304,8 @@ public sealed class WorldEngineDiplomacyAttackTests
             .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("leader2"), leader.Id, BattleSide.Defender, hitpoints: 100), GridPosition.FrontBottom)
             .Build(new BattleModifiers(
                 Attacker: BattleSideModifiers.None,
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 
@@ -385,7 +389,8 @@ public sealed class WorldEngineDiplomacyAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 
@@ -472,7 +477,8 @@ public sealed class WorldEngineDiplomacyAttackTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 

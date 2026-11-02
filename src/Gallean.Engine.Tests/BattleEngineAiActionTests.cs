@@ -1074,4 +1074,156 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(dragon.Id, BattleUnitTurnType.Normal))
         ]);
     }
+
+    [Test]
+    public void RetreatSimpleTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 50, initiative: 50, damage: 10);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 300, initiative: 30, damage: 50);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit enemy = Unit(1, enemyDefinition.Id, BattleSide.Defender, hitpoints: 300);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(enemy, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(enemy.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, enemy.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, enemy.Id, attackerDefinition.Attack.Id, 10),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void RetreatImmuneEnemyTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("leader"), initiative: 60, damage: 10, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Source = UnitAttackSource.Fire
+            }
+        };
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 20, summonUnitId: null);
+        UnitDefinition immuneDefinition = TestHelpers.SimpleUnitDefinition("immune", maxHitpoints: 50, initiative: 40, damage: 5) with
+        {
+            Wards = [new UnitAttackSourceWard(UnitAttackSource.Fire, UnitWardCategory.Always)]
+        };
+
+        BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Attacker, hitpoints: 30);
+        BattleUnit immune = Unit(2, immuneDefinition.Id, BattleSide.Defender, hitpoints: 50);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(immuneDefinition)
+            .WithAttacker(leader, new GridPosition(0, 0))
+            .WithAttacker(healer, new GridPosition(0, 1))
+            .WithDefender(immune, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(), [
+            new BattleUnitRetreatingEvent(leader.Id),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void RetreatStrongEnemyTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 10);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 300, initiative: 30, damage: 50);
+
+        BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit enemy = Unit(2, enemyDefinition.Id, BattleSide.Defender, hitpoints: 300);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithAttacker(leader, new GridPosition(0, 0))
+            .WithAttacker(ally, new GridPosition(0, 1))
+            .WithDefender(enemy, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(), [
+            new BattleUnitRetreatingEvent(leader.Id),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void RetreatNeutralLeaderTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 10);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 300, initiative: 30, damage: 50);
+
+        BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit enemy = Unit(2, enemyDefinition.Id, BattleSide.Defender, hitpoints: 300);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithInfo(new BattleInfo(new BattleSideInfo(IsNeutral: true), new BattleSideInfo(IsNeutral: false)))
+            .WithAttacker(leader, new GridPosition(0, 0))
+            .WithAttacker(ally, new GridPosition(0, 1))
+            .WithDefender(enemy, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(enemy.Id), [leaderDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id, 10),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void RetreatSamePowerTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 10);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 100, initiative: 30, damage: 20);
+
+        BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit enemy = Unit(2, enemyDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithAttacker(leader, new GridPosition(0, 0))
+            .WithAttacker(ally, new GridPosition(0, 1))
+            .WithDefender(enemy, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(enemy.Id), [leaderDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id, 10),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
 }

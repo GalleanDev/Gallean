@@ -29,7 +29,7 @@ public sealed class WorldAiEstimatorTests
         battleBuilder.Add(CreateUnit(0, definition, BattleSide.Attacker, 100), GridPosition.FrontTop);
         battleBuilder.Add(CreateUnit(1, definition, BattleSide.Attacker, 25), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(2, definition, BattleSide.Defender, 100), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(75, 50)));
@@ -43,7 +43,7 @@ public sealed class WorldAiEstimatorTests
         BattleStateBuilder battleBuilder = new(context.Definitions);
         battleBuilder.Add(CreateUnit(0, definition, BattleSide.Attacker, 100), GridPosition.FrontTop);
         battleBuilder.Add(CreateUnit(1, definition, BattleSide.Attacker, 0), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(50, 0)));
@@ -59,7 +59,7 @@ public sealed class WorldAiEstimatorTests
         battleBuilder.Add(
             CreateUnit(1, definition, BattleSide.Defender, 100) with { StatusEffects = [new BattleFortificationStatusEffect(50)] },
             GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(50, 71)));
@@ -74,7 +74,7 @@ public sealed class WorldAiEstimatorTests
         BattleStateBuilder battleBuilder = new(context.Definitions);
         battleBuilder.Add(CreateUnit(0, definition, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(1, armored, BattleSide.Defender, 100), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(50, 158)));
@@ -95,7 +95,7 @@ public sealed class WorldAiEstimatorTests
         battleBuilder.Add(
             CreateUnit(1, definition, BattleSide.Defender, 100) with { Modifiers = [UnitModifier.Permanent(weapon.Id)] },
             GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(50, 100)));
@@ -119,7 +119,7 @@ public sealed class WorldAiEstimatorTests
         BattleStateBuilder battleBuilder = new(context.Definitions);
         battleBuilder.Add(CreateUnit(0, definition, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(1, inaccurate, BattleSide.Defender, 100), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(100, 50)));
@@ -134,7 +134,7 @@ public sealed class WorldAiEstimatorTests
         BattleStateBuilder battleBuilder = new(context.Definitions);
         battleBuilder.Add(CreateUnit(0, definition, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(1, doubleAttacker, BattleSide.Defender, 100), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(50, 71)));
@@ -160,7 +160,7 @@ public sealed class WorldAiEstimatorTests
         battleBuilder.Add(CreateUnit(1, definition, BattleSide.Attacker, 100), GridPosition.FrontCenter);
         battleBuilder.Add(CreateUnit(2, definition, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(3, area, BattleSide.Defender, 100), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(150, 67)));
@@ -184,7 +184,7 @@ public sealed class WorldAiEstimatorTests
         BattleStateBuilder battleBuilder = new(context.Definitions);
         battleBuilder.Add(CreateUnit(0, definition, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(1, harmless, BattleSide.Defender, 100), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimatePower(state), Is.EqualTo(new WorldAiEstimator.PowerEstimate(50, 10)));
@@ -202,7 +202,7 @@ public sealed class WorldAiEstimatorTests
         battleBuilder.Add(CreateUnit(0, leader, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, weak.Id, BattleSide.Attacker, hitpoints: 0) with { Experience = 300 }, GridPosition.FrontTop);
         battleBuilder.Add(CreateUnit(2, weak, BattleSide.Defender, 10), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimateBattle(state), Is.EqualTo(new WorldAiEstimator.BattleEstimate(
@@ -231,7 +231,7 @@ public sealed class WorldAiEstimatorTests
         BattleStateBuilder battleBuilder = new(context.Definitions);
         battleBuilder.Add(CreateUnit(0, leader, BattleSide.Attacker, 100), GridPosition.FrontBottom);
         battleBuilder.Add(CreateUnit(1, weak, BattleSide.Defender, 10), GridPosition.FrontBottom);
-        BattleState state = battleBuilder.Build(BattleModifiers.None);
+        BattleState state = battleBuilder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         WorldAiEstimator estimator = new(context);
 
         Assert.That(estimator.EstimateBattle(state), Is.EqualTo(new WorldAiEstimator.BattleEstimate(

@@ -33,7 +33,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(attackerDefinition)
@@ -132,7 +133,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(attackerDefinition)
@@ -214,7 +216,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(attackerDefinition)
@@ -324,7 +327,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(attackerDefinition)
@@ -414,7 +418,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(retreatedDefinition)
@@ -667,7 +672,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(attackerDefinition)
@@ -754,7 +760,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(definition)
@@ -883,7 +890,8 @@ public sealed class BattleGridViewModelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(attackerDefinition)

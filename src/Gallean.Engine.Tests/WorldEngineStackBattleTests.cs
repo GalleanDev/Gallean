@@ -90,7 +90,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, stack2.Position), [
@@ -171,7 +172,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, stack2.Position), [
             new WorldStackMovingEvent(stack1.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 4, [], stack2.Position),
@@ -264,7 +266,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, stack2.Position), [
@@ -336,7 +339,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, new WorldPosition(2, 0)), [
@@ -413,7 +417,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, new WorldPosition(2, 0)), [
@@ -551,7 +556,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, new WorldPosition(0, 2)), [
@@ -775,7 +781,8 @@ public sealed class WorldEngineStackBattleTests
             Outcome: null,
             Modifiers: new BattleModifiers(
                 Attacker: new BattleSideModifiers(ExperiencePercent: 20, AccuracyBonus: 0, RandomDamageBonus: 6, CanRetreat: true),
-                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true)));
+                Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: -15, RandomDamageBonus: 0, CanRetreat: true)),
+            Info: TestHelpers.SimpleBattleInfo());
 
         engine.CheckCommand(new WorldMoveStackCommand(stack1.Id, stack2.Position), [
             new WorldStackMovementConsumedEvent(stack1.Id, 3),
@@ -856,7 +863,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         WorldUnit expectedUnit = new(new WorldUnitId("dummy"), dummyDefinition.Id, 10, 12, 1, [], null, false);
@@ -958,7 +966,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
@@ -1061,7 +1070,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> expectedAttackerGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
@@ -1152,7 +1162,8 @@ public sealed class WorldEngineStackBattleTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         );
 
         WorldUnit expectedUnit = new(

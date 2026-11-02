@@ -44,11 +44,16 @@ internal static partial class UtilityScore
 
     public static Consideration InverseRatio(int part, int whole)
     {
+        return InverseRatio(part, whole, ResponseCurve.Linear);
+    }
+
+    public static Consideration InverseRatio(int part, int whole, ResponseCurve curve)
+    {
         if (whole <= 0)
         {
             return Full;
         }
 
-        return Of(MaxScore - part * MaxScore / whole);
+        return Of(MaxScore - part * MaxScore / whole, curve);
     }
 }

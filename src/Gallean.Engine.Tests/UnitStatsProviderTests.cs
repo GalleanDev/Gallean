@@ -10,7 +10,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -25,7 +25,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -40,7 +40,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleShatterArmorStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -55,7 +55,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleShatterArmorStatusEffect(30), new BattleShatterArmorStatusEffect(10)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -70,7 +70,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleFortificationStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -85,7 +85,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleFortificationStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -100,7 +100,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleFortificationStatusEffect(30), new BattleShatterArmorStatusEffect(45)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -116,7 +116,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [UnitModifier.FromFortification(protection.Id)], [new BattleFortificationStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -132,7 +132,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [UnitModifier.FromFortification(protection.Id)], [new BattleFortificationStatusEffect(30)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -148,7 +148,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [UnitModifier.FromFortification(protection.Id)], [new BattleFortificationStatusEffect(30), new BattleShatterArmorStatusEffect(60)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -163,7 +163,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleDefendStatusEffect()], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -178,7 +178,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleDefendStatusEffect()], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -193,7 +193,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleDefendStatusEffect()], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -208,7 +208,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleFortificationStatusEffect(50), new BattleDefendStatusEffect()], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
 
@@ -223,7 +223,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleIncreaseDamageStatusEffect(25, false), new BattleReduceDamageStatusEffect(50, false)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitAttackStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleAttackStats(state, unit.Id, definition.Attack);
 
@@ -238,7 +238,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleReduceInitiativeStatusEffect(50, false)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
         UnitStatsProvider provider = new(definitions, globals, GameScenarioProvider.Empty.Definition);
 
         Assert.That(provider.GetBattleUnitInitiative(state, unit.Id, 9), Is.EqualTo(30));
@@ -254,7 +254,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleIncreaseDamageStatusEffect(50, false)], null, [weapon.Id], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitAttackStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleAttackStats(state, unit.Id, weapon);
 
@@ -270,7 +270,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleIncreaseDamageStatusEffect(50, false)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitAttackStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleAttackStats(state, unit.Id, weapon);
 
@@ -286,7 +286,7 @@ public sealed class UnitStatsProviderTests
         GlobalVariables globals = new();
 
         BattleUnit unit = new(new BattleUnitId(0), null, transformedDefinition.Id, BattleSide.Defender, 30, 500, 0, 1, [], [new BattleTransformStatusEffect(BattleTransformType.Transform, originalDefinition.Id, 1, [], null)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitExperience experience = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitExperience(state, unit.Id);
 

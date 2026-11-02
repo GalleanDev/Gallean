@@ -100,7 +100,8 @@ public sealed class WorldEngineThiefDuelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         WorldState before = engine.State;
 
@@ -210,7 +211,8 @@ public sealed class WorldEngineThiefDuelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefDuelAction(new WorldPosition(3, 2))),
@@ -362,7 +364,8 @@ public sealed class WorldEngineThiefDuelTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefDuelAction(new WorldPosition(3, 2))),

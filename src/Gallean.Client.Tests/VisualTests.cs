@@ -5265,7 +5265,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5309,7 +5309,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5365,7 +5365,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5418,7 +5418,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5464,7 +5464,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5505,7 +5505,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5548,7 +5548,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5594,7 +5594,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5645,7 +5645,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5694,7 +5694,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5740,7 +5740,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5785,7 +5785,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5827,7 +5827,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5870,7 +5870,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5915,7 +5915,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -5962,7 +5962,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6046,7 +6046,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6121,7 +6121,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6170,7 +6170,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6253,7 +6253,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6301,7 +6301,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6349,7 +6349,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6389,7 +6389,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6430,7 +6430,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6486,7 +6486,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6540,7 +6540,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,
@@ -6600,7 +6600,7 @@ public sealed class VisualTests
         {
             gameModel.Session.StartBattle(new BattleSession(
                 engine,
-                builder.Build(BattleModifiers.None),
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
                 NullBattleUnitUpgradeResolver.Instance,
                 _ => { },
                 isAttackerAi: false,

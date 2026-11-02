@@ -175,7 +175,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -219,7 +220,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(18),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -269,7 +271,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(18),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -310,7 +313,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(2),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -362,7 +366,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(18),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -410,7 +415,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(2),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -462,7 +468,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Recovery(3),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -510,7 +517,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(34),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -554,7 +562,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(47),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -601,7 +610,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -664,7 +674,8 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
         BattleEngine engine = new(
             new EngineContext(new TestSeedRandomProvider(), definitions, new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition), GameScenarioProvider.Empty, globals),
             state,
@@ -700,6 +711,7 @@ public sealed class BattleEngineAutoResolveTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 }

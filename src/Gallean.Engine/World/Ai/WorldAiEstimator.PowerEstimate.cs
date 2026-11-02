@@ -4,6 +4,12 @@ internal sealed partial class WorldAiEstimator
 {
     public sealed record PowerEstimate(int Attacker, int Defender)
     {
+        public int GetPower(BattleSide side) => side switch
+        {
+            BattleSide.Attacker => Attacker,
+            BattleSide.Defender => Defender
+        };
+
         public bool AtLeast(BattleSide side, int percent)
         {
             int power = GetPower(side);
@@ -11,11 +17,5 @@ internal sealed partial class WorldAiEstimator
 
             return (long)power * 100 >= (long)oppositePower * percent;
         }
-
-        private int GetPower(BattleSide side) => side switch
-        {
-            BattleSide.Attacker => Attacker,
-            BattleSide.Defender => Defender
-        };
     }
 }

@@ -110,6 +110,11 @@ internal static class TestHelpers
         return new WorldUnit(id, definition.Id, definition.MaxHitpoints, 0, definition.Level, [], null, false);
     }
 
+    public static BattleInfo SimpleBattleInfo()
+    {
+        return new BattleInfo(new BattleSideInfo(IsNeutral: false), new BattleSideInfo(IsNeutral: false));
+    }
+
     public static BattleUnit SimpleBattleUnit(
         BattleUnitId id,
         WorldUnitId? worldUnitId,

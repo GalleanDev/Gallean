@@ -60,7 +60,8 @@ public sealed class BattleEngineTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo()
         )));
     }
 

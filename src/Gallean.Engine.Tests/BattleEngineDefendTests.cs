@@ -178,7 +178,7 @@ public sealed class BattleEngineDefendTests
         GlobalVariables globals = new();
 
         BattleUnit defending = new(new BattleUnitId(0), null, definition.Id, BattleSide.Attacker, 10, 0, 0, 1, [], [new BattleDefendStatusEffect()], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(defending, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        BattleState state = new BattleStateBuilder(definitions).Add(defending, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, defending.Id);
 

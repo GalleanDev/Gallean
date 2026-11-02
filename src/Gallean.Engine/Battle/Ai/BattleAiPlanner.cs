@@ -39,6 +39,7 @@ internal sealed partial class BattleAiPlanner(IEngineContext context, bool canUs
         {
             return
             [
+                new RetreatAction(context, Priority: 3),
                 new HealItemAction(context, Priority: 3),
                 new AttackAction(context, Priority: 3),
                 new DefendAction(context, Priority: 3),
@@ -49,6 +50,7 @@ internal sealed partial class BattleAiPlanner(IEngineContext context, bool canUs
         {
             return
             [
+                new RetreatAction(context, Priority: 3),
                 new AttackAction(context, Priority: 3),
                 new DefendAction(context, Priority: 3),
                 new SkipAction(context, Priority: 1)

@@ -74,7 +74,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
 
         engine.CheckCommand(new BattleAttackCommand(cleric.Id, new BattleAttackUnitTarget(warrior.Id)), [
             new BattleUnitAttackEvent(cleric.Id, new BattleAttackUnitTarget(warrior.Id), [new UnitAttackDefinitionId("cleric")]),
@@ -102,7 +103,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -151,7 +153,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -200,7 +203,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -273,7 +277,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -334,7 +339,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Defender),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -401,7 +407,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -468,7 +475,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -535,7 +543,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -584,7 +593,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -633,7 +643,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -682,7 +693,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -745,7 +757,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
 
         engine.CheckCommand(new BattleAttackCommand(warrior.Id, new BattleAttackUnitTarget(defender.Id)), [
             new BattleUnitAttackEvent(warrior.Id, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("warrior")]),
@@ -790,7 +803,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -867,7 +881,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: true)],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -946,7 +961,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle2, talisman.Id, Charges: 5, Used: false)],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 
     [Test]
@@ -1095,7 +1111,8 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
         BattleEngine engine = new(
             new EngineContext(new TestSeedRandomProvider(), definitions, new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition), GameScenarioProvider.Empty, globals),
             state,
@@ -1126,6 +1143,7 @@ public sealed class BattleEngineRecoveryRoundTests
             Items: [],
             CurrentRound: BattleRound.Recovery(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None)));
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
     }
 }

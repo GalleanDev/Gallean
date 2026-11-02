@@ -19,7 +19,7 @@ public sealed class BattleAiStatCalculatorTests
 
     private static BattleState BuildState(IEngineContext context, BattleUnit unit)
     {
-        return new BattleStateBuilder(context.Definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None);
+        return new BattleStateBuilder(context.Definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
     }
 
     private static BattleUnit CreateUnit(UnitDefinition definition, int hitpoints, ImmutableArray<BattleAbstractStatusEffect> statusEffects)

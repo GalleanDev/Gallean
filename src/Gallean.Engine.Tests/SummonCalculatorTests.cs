@@ -33,7 +33,8 @@ public sealed class SummonCalculatorTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IReadOnlyList<BattleSummonPlacement> actual = SummonCalculator.GetSummonPlacements(
             SummonAttack(meleeDefinition.Id, rangedDefinition.Id),
@@ -68,7 +69,8 @@ public sealed class SummonCalculatorTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IReadOnlyList<BattleSummonPlacement> actual = SummonCalculator.GetSummonPlacements(
             SummonAttack(meleeDefinition.Id, rangedDefinition.Id),
@@ -109,7 +111,8 @@ public sealed class SummonCalculatorTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IReadOnlyList<BattleSummonPlacement> actual = SummonCalculator.GetSummonPlacements(
             SummonAttack(largeDefinition.Id, smallDefinition.Id),
@@ -144,7 +147,8 @@ public sealed class SummonCalculatorTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IReadOnlyList<BattleSummonPlacement> actual = SummonCalculator.GetSummonPlacements(
             SummonAttack(smallDefinition.Id, largeDefinition.Id),
@@ -177,7 +181,8 @@ public sealed class SummonCalculatorTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         IReadOnlyList<BattleSummonPlacement> actual = SummonCalculator.GetSummonPlacements(
             SummonAttack(largeDefinition.Id),

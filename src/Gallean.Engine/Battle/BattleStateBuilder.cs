@@ -41,12 +41,12 @@ internal sealed class BattleStateBuilder(IGameDefinitionProvider definitions)
         return this;
     }
 
-    public BattleState Build(BattleModifiers modifiers)
+    public BattleState Build(BattleModifiers modifiers, BattleInfo info)
     {
         UnitGrid<BattleUnit> attackerGrid = BuildGrid(positionedUnits, BattleSide.Attacker, definitions);
         UnitGrid<BattleUnit> defenderGrid = BuildGrid(positionedUnits, BattleSide.Defender, definitions);
 
-        return new BattleState(attackerGrid, defenderGrid, default, [], [], [.. items], BattleRound.Normal(1), null, modifiers);
+        return new BattleState(attackerGrid, defenderGrid, default, [], [], [.. items], BattleRound.Normal(1), null, modifiers, info);
     }
 
     private static UnitGrid<BattleUnit> BuildGrid(

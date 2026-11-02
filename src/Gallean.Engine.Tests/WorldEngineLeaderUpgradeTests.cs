@@ -94,7 +94,8 @@ public sealed class WorldEngineLeaderUpgradeTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> survivingDefenderGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defenderDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
@@ -320,7 +321,8 @@ public sealed class WorldEngineLeaderUpgradeTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> survivingDefenderGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defenderDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
@@ -613,7 +615,8 @@ public sealed class WorldEngineLeaderUpgradeTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> survivingDefenderGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defenderDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
@@ -711,7 +714,8 @@ public sealed class WorldEngineLeaderUpgradeTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: new BattleOutcome(BattleSide.Attacker),
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> survivingDefenderGrid = new UnitGrid<WorldUnit>.Builder()
             .Place(TestHelpers.SimpleUnit(new WorldUnitId("defender"), defenderDefinition) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)

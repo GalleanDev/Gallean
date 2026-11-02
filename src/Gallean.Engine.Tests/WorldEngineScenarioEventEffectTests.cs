@@ -54,7 +54,8 @@ public sealed class WorldEngineScenarioEventEffectTests
             Items: [],
             CurrentRound: BattleRound.Normal(1),
             Outcome: null,
-            Modifiers: BattleModifiers.None);
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
     }
 
     private static UnitDefinition SummonedUnitDefinition(string id)
@@ -2558,7 +2559,7 @@ public sealed class WorldEngineScenarioEventEffectTests
 
         BattleState finalBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).Build())
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("leader"), leader.Id, BattleSide.Attacker, hitpoints: leader.MaxHitpoints), GridPosition.FrontBottom)
-                .Build(BattleModifiers.None) with
+                .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Attacker)
             };
@@ -4816,7 +4817,7 @@ public sealed class WorldEngineScenarioEventEffectTests
 
         BattleState finalBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).Build())
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("leader"), leader.Id, BattleSide.Defender, hitpoints: leader.MaxHitpoints), GridPosition.FrontBottom)
-                .Build(BattleModifiers.None) with
+                .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Defender)
             };
@@ -5921,7 +5922,7 @@ public sealed class WorldEngineScenarioEventEffectTests
 
         BattleState finalBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).Build())
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("leader"), leader.Id, BattleSide.Defender, hitpoints: leader.MaxHitpoints), GridPosition.FrontBottom)
-                .Build(BattleModifiers.None) with
+                .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Defender)
             };
