@@ -50,7 +50,8 @@ public sealed class ExtractScenarioTests
         foreach (WorldStack stack in state.Stacks.Values)
         {
             (WorldUnit leader, GridPosition _, UnitDefinition definition) = stack.GetLeader(definitions);
-            result.Add($"{stack.Id.Value} {definition.Id.Value} {texts.GetUnitName(leader.Name)}");
+            UnitName name = Assert.NotNull(leader.Name);
+            result.Add($"{stack.Id.Value} {definition.Id.Value} {texts.GetUnitName(name)}");
         }
 
         return result;
