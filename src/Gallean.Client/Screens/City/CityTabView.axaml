@@ -64,6 +64,12 @@
       <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style Selector="Panel.ui-toggle">
+      <Setter Property="Margin" Value="16,0,0,12" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
     <Style Selector=":is(Control).inactive">
       <Setter Property="IsHitTestVisible" Value="False" />
       <Setter Property="Opacity" Value="0.3" />
@@ -73,11 +79,20 @@
   <Grid Background="Transparent">
     <ContentControl Content="{Binding CapitalScene}" />
 
-    <Border Background="{StaticResource CapitalSceneFootOverlayGradientBrush}" IsHitTestVisible="False" />
+    <Border Background="{StaticResource CapitalSceneFootOverlayGradientBrush}" IsHitTestVisible="False" IsVisible="{Binding IsUiVisible}" />
+
+    <Panel Classes="ui-toggle" IsVisible="{Binding CapitalScene, Converter={x:Static ObjectConverters.IsNotNull}}">
+      <Button Classes="icon-button" Command="{Binding ToggleUiCommand}" IsVisible="{Binding IsUiVisible}" ToolTip.Tip="{local:Text 'Hide interface'}">
+        <local:IconVisual Moniker="Vision" />
+      </Button>
+      <Button Classes="icon-button" Command="{Binding ToggleUiCommand}" IsVisible="{Binding !IsUiVisible}" ToolTip.Tip="{local:Text 'Show interface'}">
+        <local:IconVisual Moniker="Vision" />
+      </Button>
+    </Panel>
 
     <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CancelTargetingCommand}" IsVisible="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
-    <Panel>
+    <Panel IsVisible="{Binding IsUiVisible}">
       <Grid ColumnDefinitions="270,*,270" Margin="16,12">
 
         <ContentControl Grid.Column="0" Classes="ornament-panel" Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" VerticalAlignment="Top" IsVisible="{Binding HasStack}">

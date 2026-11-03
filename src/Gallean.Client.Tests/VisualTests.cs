@@ -2200,6 +2200,26 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task CityHiddenUiTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        ManagementScreenViewModel management = ManagementScreenViewModel.CreateForFortification(gameModel, gameViewModel, new WorldFortificationId("S107FT0000"));
+        gameViewModel.OpenScreen(management);
+
+        CityTabViewModel tab = Assert.IsOfType<CityTabViewModel>(management.SelectedTab);
+        tab.ToggleUiCommand.Execute(null);
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task CityFullHdTest()
     {
         using Sandbox sb = Sandbox.Create();

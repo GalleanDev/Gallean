@@ -101,6 +101,9 @@ internal sealed partial class CityTabViewModel
     [ObservableProperty]
     public partial UnitActionType? TargetedAction { get; private set; }
 
+    [ObservableProperty]
+    public partial bool IsUiVisible { get; private set; } = true;
+
     void IInventoryTransferProvider.OnItemTransferred()
     {
         RefreshView();
@@ -339,6 +342,12 @@ internal sealed partial class CityTabViewModel
         }
 
         return visitingStack is not null;
+    }
+
+    [RelayCommand]
+    private void ToggleUi()
+    {
+        IsUiVisible = !IsUiVisible;
     }
 
     [RelayCommand(CanExecute = nameof(CanTargetUnitAction))]
