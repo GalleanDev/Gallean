@@ -228,14 +228,20 @@
                 </Panel>
               </StackPanel>
             </Button>
-            <Panel IsVisible="{Binding IsObjectiveExpanded}">
+            <StackPanel IsVisible="{Binding IsObjectiveExpanded}" Spacing="2">
+              <Panel>
+                <local:OutlinedTextBlock Classes="world-objective-text"
+                                         Text="{Binding ObjectiveText}"
+                                         Foreground="{StaticResource PrimaryTextBrush}" />
+                <local:OutlinedTextBlock x:Name="ObjectiveHighlight"
+                                         Classes="world-objective-text highlight"
+                                         Text="{Binding ObjectiveText}" />
+              </Panel>
               <local:OutlinedTextBlock Classes="world-objective-text"
-                                       Text="{Binding ObjectiveText}"
-                                       Foreground="{StaticResource PrimaryTextBrush}" />
-              <local:OutlinedTextBlock x:Name="ObjectiveHighlight"
-                                       Classes="world-objective-text highlight"
-                                       Text="{Binding ObjectiveText}" />
-            </Panel>
+                                       Text="{Binding ObjectiveProgressText}"
+                                       Foreground="{StaticResource SecondaryTextBrush}"
+                                       IsVisible="{Binding ObjectiveProgressText, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            </StackPanel>
           </StackPanel>
         </Panel>
       </StackPanel>

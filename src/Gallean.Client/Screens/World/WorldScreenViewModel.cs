@@ -86,6 +86,9 @@ internal sealed partial class WorldScreenViewModel :
     public partial string? ObjectiveText { get; private set; }
 
     [ObservableProperty]
+    public partial string? ObjectiveProgressText { get; private set; }
+
+    [ObservableProperty]
     public partial bool IsObjectiveExpanded { get; private set; } = true;
 
     [ObservableProperty]
@@ -1209,6 +1212,7 @@ internal sealed partial class WorldScreenViewModel :
         UpdatePositionInfo();
         UpdateStatus();
         UpdateObjective();
+        UpdateObjectiveProgress();
         UpdateCursorType();
         UpdateStackActions();
     }
@@ -1573,6 +1577,29 @@ internal sealed partial class WorldScreenViewModel :
         {
             ObjectiveText = null;
         }
+    }
+
+    private void UpdateObjectiveProgress()
+    {
+        string? text = null;
+
+        if (Snapshot.IsViewPlayerTurn)
+        {
+            ICommandResult<WorldCommandError, WorldEvent, WorldGetObjectiveInfoCommand.Result> commandResult =
+                GameModel.World.DryRunCommand(new WorldGetObjectiveInfoCommand());
+
+            if (!commandResult.Failed)
+            {
+                WorldGetObjectiveInfoCommand.Result objectiveInfo = commandResult.Data;
+
+                if (objectiveInfo.Land is not null)
+                {
+                    text = Tr("Land transformed: {0}%", objectiveInfo.Land.Percentage);
+                }
+            }
+        }
+
+        ObjectiveProgressText = text;
     }
 
     private void UpdateSelection()

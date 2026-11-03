@@ -45,6 +45,27 @@ internal static partial class ObjectiveCalculator
         ];
     }
 
+    public static int? GetRequiredLandPercentage(IGameScenarioProvider scenario, WorldState state, WorldPlayerId playerId)
+    {
+        WorldPlayer player = state.Players[playerId];
+
+        foreach (ScenarioEventDefinition definition in scenario.Events)
+        {
+            if (IsObjective(definition, state, player))
+            {
+                foreach (ScenarioEventCondition condition in definition.Conditions)
+                {
+                    if (condition is ScenarioEventTransformingLandCondition landCondition)
+                    {
+                        return landCondition.LandPercentage;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
     private static bool IsObjective(ScenarioEventDefinition definition, WorldState state, WorldPlayer player)
     {
         if (!ScenarioEventCalculator.IsEnabled(state.ScenarioState, definition))

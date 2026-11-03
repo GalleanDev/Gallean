@@ -6133,6 +6133,7 @@ public sealed class WorldScreenViewModelTests
         world.CompleteGameStart();
 
         Assert.That(world.ObjectiveText, Is.EqualTo("Hold the pass."));
+        Assert.That(world.ObjectiveProgressText, Is.Null);
         Assert.That(world.IsObjectiveExpanded, Is.True);
 
         world.ToggleObjectiveCommand.Execute(null);
@@ -6142,6 +6143,44 @@ public sealed class WorldScreenViewModelTests
         world.ToggleObjectiveCommand.Execute(null);
 
         Assert.That(world.IsObjectiveExpanded, Is.True);
+    }
+
+    [Test]
+    public void LandObjectiveProgressTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "HH..",
+            "...."
+        ]);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            Id: new ScenarioEventId("Event1"),
+            AffectedRaces: [WorldRace.Human],
+            VerifiedRaces: [WorldRace.Human],
+            Conditions: [new ScenarioEventTransformingLandCondition(50)],
+            Effects: [new ScenarioEventWinEffect(player.Id)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithScenarioEvent(scenarioEvent)
+            .WithScenarioState(WorldScenarioState.Empty with { ObjectiveTextId = new ScenarioTextId("Transform half the land.") })
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        Assert.That(world.ObjectiveText, Is.EqualTo("Transform half the land."));
+        Assert.That(world.ObjectiveProgressText, Is.EqualTo("Land transformed: 25%"));
     }
 
     [Test]
