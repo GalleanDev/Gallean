@@ -609,6 +609,49 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         }
     }
 
+    [RelayCommand]
+    private async Task QuickSaveAsync()
+    {
+        if (activeGame is not null && activeGame.Snapshot.IsSaveAllowed)
+        {
+            string name = Tr("Quick save");
+
+            if (await TryAutoSaveAsync(activeGame, name, GameSaveType.Quick, activeGame.Snapshot.WorldState))
+            {
+                ShowInfo(IconMoniker.SaveGame, Tr("Game saved"), name);
+            }
+        }
+        else
+        {
+            audioPlayer.PlaySound(new AssetSoundKey.Beep());
+        }
+    }
+
+    [RelayCommand]
+    private async Task QuickLoadAsync()
+    {
+        if (TopScreen is LoadingScreenViewModel)
+        {
+            return;
+        }
+
+        IReadOnlyList<GameSaveEntry>? saves = await TryEnumerateSavesAsync();
+
+        if (saves is not null)
+        {
+            GameSaveEntry? quickSave = saves.FirstOrDefault(entry => entry.Metadata is { IsSuccessful: true, Value.Type: GameSaveType.Quick });
+
+            if (quickSave is not null)
+            {
+                await LoadGameAsync(quickSave);
+            }
+            else
+            {
+                audioPlayer.PlaySound(new AssetSoundKey.Beep());
+            }
+        }
+    }
+
     public async Task<bool> TryAutoSaveAsync(GameModel gameModel, string name, GameSaveType type, WorldState state)
     {
         GameSaveMetadata metadata = new(

@@ -268,7 +268,8 @@ public sealed class GameSaveStore(string saveDirectory, int autoSaveLimit)
                 GameSaveType.Turn => (metadata.Type, null),
                 GameSaveType.Victory => (metadata.Type, metadata.ScenarioId),
                 GameSaveType.Exit => (metadata.Type, metadata.ScenarioId),
-                GameSaveType.Manual => (metadata.Type, metadata.ScenarioId)
+                GameSaveType.Manual => (metadata.Type, metadata.ScenarioId),
+                GameSaveType.Quick => (metadata.Type, null)
             };
         }
     }
@@ -280,7 +281,8 @@ public sealed class GameSaveStore(string saveDirectory, int autoSaveLimit)
             GameSaveType.Turn => AutoSaveLimit,
             GameSaveType.Victory => int.MaxValue,
             GameSaveType.Exit => 1,
-            GameSaveType.Manual => int.MaxValue
+            GameSaveType.Manual => int.MaxValue,
+            GameSaveType.Quick => 1
         };
     }
 

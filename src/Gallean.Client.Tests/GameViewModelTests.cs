@@ -2202,4 +2202,142 @@ public sealed class GameViewModelTests
             "Sound:interface-open"
         ]));
     }
+
+    [Test]
+    public async Task QuickSaveTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        WorldState state = session.World.State with
+        {
+            TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
+        };
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+
+        await saveStore.SaveAsync(
+            new GameSaveId(1),
+            new GameSaveMetadata("First save", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"),
+            state);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder().WithGameLoader(gameLoader).WithSaveStore(saveStore).Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(new GameSaveEntry(
+            new GameSaveId(1),
+            Result<GameSaveMetadata>.FromValue(new GameSaveMetadata("First save", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"))));
+
+        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        world.CompleteGameStart();
+
+        await gameViewModel.QuickSaveCommand.ExecuteAsync(null);
+
+        GameSave saved = Assert.NotNull(await saveStore.TryLoadAsync(new GameSaveId(2)));
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.SaveGame, "Game saved", "Quick save")));
+        Assert.That(
+            $"{saved.Metadata.Name} | {saved.Metadata.Type} | {saved.Metadata.ScenarioId} | {saved.Metadata.ScenarioName} | {saved.Metadata.TurnNumber}",
+            Is.EqualTo("Quick save | Quick | S137SC0000 | Conquest of Thelena | 9"));
+        Assert.That(saved.WorldState, Is.EqualTo(state));
+    }
+
+    [Test]
+    public async Task QuickSaveNoGameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        TestAudioPlayer audioPlayer = new();
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAudioPlayer(audioPlayer).WithSaveStore(saveStore).Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        MainMenuScreenViewModel menu = Assert.IsOfType<MainMenuScreenViewModel>(gameViewModel.RootScreen);
+
+        await gameViewModel.QuickSaveCommand.ExecuteAsync(null);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([menu]));
+        Assert.That(await saveStore.EnumerateAsync(), Is.Empty);
+        Assert.That(audioPlayer.Actions, Is.EqualTo(["Music:menu-music from track 0", "Sound:beep"]));
+    }
+
+    [Test]
+    public async Task QuickLoadTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        WorldState firstState = session.World.State with
+        {
+            TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
+        };
+        WorldState quickState = session.World.State with
+        {
+            TurnInfo = new WorldTurnInfo(12, new WorldPlayerId(2))
+        };
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+
+        await saveStore.SaveAsync(
+            new GameSaveId(1),
+            new GameSaveMetadata("First save", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"),
+            firstState);
+        await saveStore.SaveAsync(
+            new GameSaveId(2),
+            new GameSaveMetadata("Quick save", GameSaveType.Quick, "S137SC0000", "Conquest of Thelena", 12, new DateTimeOffset(2026, 1, 3, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"),
+            quickState);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder().WithGameLoader(gameLoader).WithSaveStore(saveStore).Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(new GameSaveEntry(
+            new GameSaveId(1),
+            Result<GameSaveMetadata>.FromValue(new GameSaveMetadata("First save", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"))));
+
+        WorldScreenViewModel firstWorld = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        firstWorld.CompleteGameStart();
+
+        await gameViewModel.QuickLoadCommand.ExecuteAsync(null);
+
+        ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { firstWorld, prompt }));
+        Assert.That(prompt.Message, Is.EqualTo(TextSpans.FromText("Do you want to load \"Quick save\"? Unsaved progress will be lost.")));
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        WorldScreenViewModel quickWorld = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        quickWorld.CompleteGameStart();
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([quickWorld]));
+        Assert.That(quickWorld.GameModel.Snapshot, Is.EqualTo(
+            new GameSnapshot(quickState, BattleState: null, ActiveActions: 0, ViewPlayerId: new WorldPlayerId(2))));
+    }
+
+    [Test]
+    public async Task QuickLoadNoSaveTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        TestAudioPlayer audioPlayer = new();
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+
+        await saveStore.SaveAsync(
+            new GameSaveId(1),
+            new GameSaveMetadata("Saved game", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"),
+            session.World.State);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder().WithGameLoader(gameLoader).WithAudioPlayer(audioPlayer).WithSaveStore(saveStore).Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        MainMenuScreenViewModel menu = Assert.IsOfType<MainMenuScreenViewModel>(gameViewModel.RootScreen);
+
+        await gameViewModel.QuickLoadCommand.ExecuteAsync(null);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([menu]));
+        Assert.That(audioPlayer.Actions, Is.EqualTo(["Music:menu-music from track 0", "Sound:beep"]));
+    }
 }

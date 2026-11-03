@@ -5,5 +5,6 @@ public enum GameSaveType
     Manual,
     Turn,
     Victory,
-    Exit
+    Exit,
+    Quick
 }

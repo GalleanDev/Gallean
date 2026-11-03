@@ -50,6 +50,8 @@
 
   <Window.KeyBindings>
     <KeyBinding Gesture="Escape" Command="{Binding EscapeCommand}" />
+    <KeyBinding Gesture="F5" Command="{Binding QuickSaveCommand}" />
+    <KeyBinding Gesture="F9" Command="{Binding QuickLoadCommand}" />
     <KeyBinding Gesture="F11" Command="{Binding ToggleWindowedCommand}" />
     <KeyBinding Gesture="F12" Command="{Binding DevTools.ToggleCommand}" />
   </Window.KeyBindings>

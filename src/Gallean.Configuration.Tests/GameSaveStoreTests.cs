@@ -824,4 +824,33 @@ public sealed class GameSaveStoreTests
             FormatEntries(await store.EnumerateAsync()),
             Is.EqualTo(["1 | Manual", "3 | Victory", "5 | Newer", "6 | Newest"]));
     }
+
+    [Test]
+    public async Task QuickSaveTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        WorldMap map = TestHelpers.SimpleMap(1, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .BuildSession();
+        WorldState state = session.World.State;
+        GameSaveMetadata manual = new("Manual", GameSaveType.Manual, "scenario-1", "Scenario One", 4, new DateTimeOffset(2026, 1, 1, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300");
+        GameSaveMetadata quick = new("Quick", GameSaveType.Quick, "scenario-1", "Scenario One", 5, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300");
+        GameSaveMetadata newerQuick = new("Newer quick", GameSaveType.Quick, "scenario-2", "Scenario Two", 7, new DateTimeOffset(2026, 1, 3, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300");
+        GameSaveStore store = new(sb.GetPath("saves"), 10);
+
+        await store.SaveAsync(null, manual, state);
+        await store.SaveAsync(null, quick, state);
+
+        Assert.That(
+            await store.SaveAsync(null, newerQuick, state),
+            Is.EqualTo(new GameSaveEntry(new GameSaveId(3), Result<GameSaveMetadata>.FromValue(newerQuick))));
+        Assert.That(
+            FormatEntries(await store.EnumerateAsync()),
+            Is.EqualTo(["1 | Manual", "3 | Newer quick"]));
+    }
 }
