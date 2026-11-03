@@ -14,8 +14,6 @@ internal class ExtractDatabaseCommand : Command
 
     private static readonly string[] ScenarioRootTables = ["Sinfo.json"];
 
-    public static Encoding DefaultEncoding { get; } = GetEncoding(DefaultCodePage);
-
     public ExtractDatabaseCommand(Option<string> gamePathOption, Option<string> outputOption)
         : base("extract-database", "Extracts database resources.")
     {
@@ -49,6 +47,8 @@ internal class ExtractDatabaseCommand : Command
             await ExecuteAsync(gamePath, output, GetEncoding(codePage), cancellationToken);
         });
     }
+
+    public static Encoding DefaultEncoding { get; } = GetEncoding(DefaultCodePage);
 
     internal static async Task ExecuteAsync(string gamePath, string output, Encoding encoding, CancellationToken cancellationToken = default)
     {

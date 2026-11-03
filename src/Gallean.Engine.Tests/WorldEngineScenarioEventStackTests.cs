@@ -942,8 +942,8 @@ public sealed class WorldEngineScenarioEventStackTests
         BattleState finalBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).Build())
                 .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("leader"), leader.Id, BattleSide.Defender, hitpoints: leader.MaxHitpoints), GridPosition.FrontBottom)
                 .Build(new BattleModifiers(
-                    Attacker: BattleSideModifiers.None,
-                    Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                        Attacker: BattleSideModifiers.None,
+                        Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
                     TestHelpers.SimpleBattleInfo()) with
             {
                 Outcome = new BattleOutcome(BattleSide.Defender)

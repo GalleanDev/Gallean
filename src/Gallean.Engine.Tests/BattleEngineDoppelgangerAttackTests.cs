@@ -342,7 +342,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
             new BattleUnitExperienceGainedEvent(archer.Id, 20),
             new BattleUnitTurnEndingEvent(archer.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(doppelganger.Id, BattleTransformType.Doppelganger, doppelgangerDefinition.Id, 0, 60 ),
+            new BattleUnitTransformRestoredEvent(doppelganger.Id, BattleTransformType.Doppelganger, doppelgangerDefinition.Id, 0, 60),
             new BattleEndedEvent(BattleSide.Defender),
             new BattleUnitExperienceGainedEvent(knight.Id, 20),
             new BattleUnitExperienceGainedEvent(archer.Id, 20)

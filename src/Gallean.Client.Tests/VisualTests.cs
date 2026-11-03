@@ -5060,13 +5060,13 @@ public sealed class VisualTests
         window.Show();
 
         foreach ((string step, UnitDefinitionId definitionId) in new[]
-        {
-            ("poison", new UnitDefinitionId("G000UU0154")),
-            ("frostbite", new UnitDefinitionId("G000UU0159")),
-            ("blister", new UnitDefinitionId("G000UU0169")),
-            ("paralyze", new UnitDefinitionId("G000UU5033")),
-            ("none", new UnitDefinitionId("G000UU0019"))
-        })
+            {
+                ("poison", new UnitDefinitionId("G000UU0154")),
+                ("frostbite", new UnitDefinitionId("G000UU0159")),
+                ("blister", new UnitDefinitionId("G000UU0169")),
+                ("paralyze", new UnitDefinitionId("G000UU5033")),
+                ("none", new UnitDefinitionId("G000UU0019"))
+            })
         {
             UnitDefinition definition = gameModel.Definitions.GetUnit(definitionId);
             WorldUnit unit = new(new WorldUnitId(step), definition.Id, definition.MaxHitpoints, 0, definition.Level, [], null, false);
@@ -6787,6 +6787,7 @@ public sealed class VisualTests
         Assert.That(battle.State.TurnQueue, Is.EqualTo([
             new BattleUnitTurn(new BattleUnitId(3), BattleUnitTurnType.Normal),
             new BattleUnitTurn(new BattleUnitId(4), BattleUnitTurnType.Normal),
-            new BattleUnitTurn(new BattleUnitId(5), BattleUnitTurnType.Normal)]));
+            new BattleUnitTurn(new BattleUnitId(5), BattleUnitTurnType.Normal)
+        ]));
     }
 }

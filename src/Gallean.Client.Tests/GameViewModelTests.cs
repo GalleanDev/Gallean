@@ -144,6 +144,48 @@ public sealed class GameViewModelTests
         return ScreenMusic.Tracks(MusicQueue.Create([key], isLooping: true));
     }
 
+    [AvaloniaTest]
+    [NonParallelizable]
+    public async Task SwitchLanguageInGameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S095SC0000", worldState: null, Language.English);
+        GameSaveMetadata metadata = new("Saved game", GameSaveType.Manual, "S095SC0000", "Antagonists", 1, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300");
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+
+        await saveStore.SaveAsync(new GameSaveId(1), metadata, session.World.State);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithGameLoader(gameLoader)
+            .WithSaveStore(saveStore)
+            .WithSettingsStore(new GameSettingsStore(sb.GetPath("config")))
+            .Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+        await gameViewModel.LoadGameCommand.ExecuteAsync(new GameSaveEntry(new GameSaveId(1), Result<GameSaveMetadata>.FromValue(metadata)));
+
+        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        world.CompleteGameStart();
+
+        Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Antagonists"));
+        Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
+        Assert.That(world.ObjectiveText, Is.EqualTo("Destroy Hubert de Lalye"));
+
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian));
+
+        Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Противостояние"));
+        Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Империя"));
+        Assert.That(world.GameModel.Texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Крепость Хазан"));
+        Assert.That(world.ObjectiveText, Is.EqualTo("Уничтожить Юбера де Лали"));
+
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English));
+
+        Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Antagonists"));
+        Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
+        Assert.That(world.ObjectiveText, Is.EqualTo("Destroy Hubert de Lalye"));
+    }
+
     [Test]
     public async Task SaveGameTest()
     {
@@ -432,48 +474,6 @@ public sealed class GameViewModelTests
         Assert.That(FormatStacks(snapshot.WorldState, snapshot.ViewPlayerId), Is.EqualTo([
             "S138KC004e G000UU8009 level=1 xp=0"
         ]));
-    }
-
-    [AvaloniaTest]
-    [NonParallelizable]
-    public async Task SwitchLanguageInGameTest()
-    {
-        using Sandbox sb = Sandbox.Create();
-
-        GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S095SC0000", worldState: null, Language.English);
-        GameSaveMetadata metadata = new("Saved game", GameSaveType.Manual, "S095SC0000", "Antagonists", 1, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300");
-        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
-
-        await saveStore.SaveAsync(new GameSaveId(1), metadata, session.World.State);
-
-        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
-            .WithGameLoader(gameLoader)
-            .WithSaveStore(saveStore)
-            .WithSettingsStore(new GameSettingsStore(sb.GetPath("config")))
-            .Build();
-        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
-        await gameViewModel.LoadGameCommand.ExecuteAsync(new GameSaveEntry(new GameSaveId(1), Result<GameSaveMetadata>.FromValue(metadata)));
-
-        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
-        world.CompleteGameStart();
-
-        Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Antagonists"));
-        Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
-        Assert.That(world.ObjectiveText, Is.EqualTo("Destroy Hubert de Lalye"));
-
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian));
-
-        Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Противостояние"));
-        Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Империя"));
-        Assert.That(world.GameModel.Texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Крепость Хазан"));
-        Assert.That(world.ObjectiveText, Is.EqualTo("Уничтожить Юбера де Лали"));
-
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English));
-
-        Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Antagonists"));
-        Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
-        Assert.That(world.ObjectiveText, Is.EqualTo("Destroy Hubert de Lalye"));
     }
 
     [Test]

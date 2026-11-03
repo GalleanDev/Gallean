@@ -443,7 +443,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(target.Id, BattleUnitTurnType.Normal)),
-            new BattleUnitTransformRestoredEvent(target.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100 ),
+            new BattleUnitTransformRestoredEvent(target.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100),
             new BattleUnitEffectDurationDecreasedEvent(target.Id)
         ]);
 
@@ -517,7 +517,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitDiedEvent(defender.Id),
             new BattleUnitTurnEndingEvent(transformed.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100 ),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 80, 100),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(transformed.Id, 1)
         ]);
@@ -588,7 +588,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitDiedEvent(transformed.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100 ),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100),
             new BattleEndedEvent(BattleSide.Attacker),
             new BattleUnitExperienceGainedEvent(attacker.Id, 1)
         ]);
@@ -692,7 +692,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitTurnEndingEvent(summoner.Id),
             new BattleUnitUnsummonedEvent(impId),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100 ),
+            new BattleUnitTransformRestoredEvent(transformed.Id, BattleTransformType.Transform, originalDefinition.Id, 0, 100),
             new BattleEndedEvent(BattleSide.Defender),
             new BattleUnitExperienceGainedEvent(banshee.Id, 1)
         ]);

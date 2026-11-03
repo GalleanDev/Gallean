@@ -240,7 +240,7 @@ public sealed class BattleEngineReduceLevelAttackTests
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(veteran.Id, BattleUnitTurnType.Normal)),
-            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 120, 120 ),
+            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 120, 120),
             new BattleUnitEffectDurationDecreasedEvent(veteran.Id)
         ]);
 
@@ -402,7 +402,7 @@ public sealed class BattleEngineReduceLevelAttackTests
             new BattleUnitDiedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(veteran.Id),
             new BattleRoundEndedEvent(),
-            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 120, 120 ),
+            new BattleUnitTransformRestoredEvent(veteran.Id, BattleTransformType.LevelDrain, veteranDefinition.Id, 120, 120),
             new BattleEndedEvent(BattleSide.Defender),
             new BattleUnitExperienceGainedEvent(veteran.Id, 1)
         ]);

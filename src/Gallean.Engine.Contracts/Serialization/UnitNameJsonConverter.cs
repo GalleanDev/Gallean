@@ -6,6 +6,38 @@ namespace Gallean.Engine.Contracts;
 
 internal sealed class UnitNameJsonConverter : JsonConverter<UnitName>
 {
+    private sealed class Writer(Utf8JsonWriter writer) : IUnitNameVisitor<Empty>
+    {
+        public Empty Visit(LiteralUnitName name)
+        {
+            writer.WriteStringValue(name.Text);
+
+            return Empty.Value;
+        }
+
+        public Empty Visit(ScenarioUnitName name)
+        {
+            writer.WriteStartObject();
+            writer.WriteString(ScenarioPropertyName, name.Id.Value);
+            writer.WriteEndObject();
+
+            return Empty.Value;
+        }
+
+        public Empty Visit(LeaderUnitName name)
+        {
+            writer.WriteStartObject();
+            writer.WriteStartObject(LeaderPropertyName);
+            writer.WriteString(RacePropertyName, name.Id.Race.ToString());
+            writer.WriteBoolean(IsMalePropertyName, name.Id.IsMale);
+            writer.WriteNumber(IndexPropertyName, name.Id.Index);
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+
+            return Empty.Value;
+        }
+    }
+
     private const string ScenarioPropertyName = "scenario";
     private const string LeaderPropertyName = "leader";
     private const string RacePropertyName = "race";
@@ -113,38 +145,6 @@ internal sealed class UnitNameJsonConverter : JsonConverter<UnitName>
         if (!reader.Read() || reader.TokenType != tokenType)
         {
             throw new JsonException("Invalid unit name.");
-        }
-    }
-
-    private sealed class Writer(Utf8JsonWriter writer) : IUnitNameVisitor<Empty>
-    {
-        public Empty Visit(LiteralUnitName name)
-        {
-            writer.WriteStringValue(name.Text);
-
-            return Empty.Value;
-        }
-
-        public Empty Visit(ScenarioUnitName name)
-        {
-            writer.WriteStartObject();
-            writer.WriteString(ScenarioPropertyName, name.Id.Value);
-            writer.WriteEndObject();
-
-            return Empty.Value;
-        }
-
-        public Empty Visit(LeaderUnitName name)
-        {
-            writer.WriteStartObject();
-            writer.WriteStartObject(LeaderPropertyName);
-            writer.WriteString(RacePropertyName, name.Id.Race.ToString());
-            writer.WriteBoolean(IsMalePropertyName, name.Id.IsMale);
-            writer.WriteNumber(IndexPropertyName, name.Id.Index);
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-
-            return Empty.Value;
         }
     }
 }

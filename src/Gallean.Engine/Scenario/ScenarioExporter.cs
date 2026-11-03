@@ -4,6 +4,24 @@ namespace Gallean.Engine;
 
 public sealed class ScenarioExporter(IGameDefinitionProvider definitions, IGameTextProvider texts, GlobalVariables globals)
 {
+    private sealed class ExportedNameVisitor(IGameTextProvider texts) : IUnitNameVisitor<UnitName>
+    {
+        public UnitName Visit(LiteralUnitName name)
+        {
+            return name;
+        }
+
+        public UnitName Visit(ScenarioUnitName name)
+        {
+            return new LiteralUnitName(texts.GetScenarioText(name.Id));
+        }
+
+        public UnitName Visit(LeaderUnitName name)
+        {
+            return name;
+        }
+    }
+
     public int ItemLimit => globals.LeaderExportItemLimit;
 
     public ImmutableArray<WorldStack> GetExportableStacks(WorldState state, WorldPlayerId playerId)
@@ -94,23 +112,5 @@ public sealed class ScenarioExporter(IGameDefinitionProvider definitions, IGameT
         (WorldUnit leader, _, _) = stack.GetLeader(definitions);
 
         return race.Leaders.Contains(leader.DefinitionId) && !ThiefCalculator.IsThief(stack, definitions);
-    }
-
-    private sealed class ExportedNameVisitor(IGameTextProvider texts) : IUnitNameVisitor<UnitName>
-    {
-        public UnitName Visit(LiteralUnitName name)
-        {
-            return name;
-        }
-
-        public UnitName Visit(ScenarioUnitName name)
-        {
-            return new LiteralUnitName(texts.GetScenarioText(name.Id));
-        }
-
-        public UnitName Visit(LeaderUnitName name)
-        {
-            return name;
-        }
     }
 }

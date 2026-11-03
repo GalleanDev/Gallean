@@ -159,9 +159,6 @@ internal static class Theme
 
     public static class PermanentModifier
     {
-        public static Color FaceTopColor { get; } = Color.FromArgb(220, 52, 44, 40);
-        public static Color FaceBottomColor { get; } = Color.FromArgb(220, 30, 27, 31);
-
         public static class Common
         {
             public static Color CapTopColor { get; } = Color.FromArgb(64, 0, 0, 0);
@@ -185,6 +182,9 @@ internal static class Theme
             public static Color CapTopColor { get; } = Color.FromArgb(90, 160, 124, 196);
             public static Color CapBottomColor { get; } = Color.FromArgb(40, 160, 124, 196);
         }
+
+        public static Color FaceTopColor { get; } = Color.FromArgb(220, 52, 44, 40);
+        public static Color FaceBottomColor { get; } = Color.FromArgb(220, 30, 27, 31);
     }
 
     public static class MainMenu

@@ -8150,13 +8150,13 @@ public sealed class WorldScreenViewModelTests
             .Build();
 
         WorldCapital capital = TestHelpers.SimpleCapital(
-            new WorldFortificationId("EnemyCapital"),
-            enemy.Id,
-            new WorldPosition(4, 4),
-            UnitGrid<WorldUnit>.Empty) with
-        {
-            CapturedById = player.Id
-        };
+                new WorldFortificationId("EnemyCapital"),
+                enemy.Id,
+                new WorldPosition(4, 4),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                CapturedById = player.Id
+            };
 
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack"),
