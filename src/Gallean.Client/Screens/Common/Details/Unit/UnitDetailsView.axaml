@@ -44,9 +44,9 @@
       <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     </Style>
     <Style Selector="StackPanel.block-header">
+      <Setter Property="Margin" Value="0,0,0,2" />
       <Setter Property="Orientation" Value="Horizontal" />
       <Setter Property="Spacing" Value="8" />
-      <Setter Property="Margin" Value="0,0,0,2" />
     </Style>
     <Style Selector="StackPanel.block-header > local|IconVisual">
       <Setter Property="Width" Value="16" />
@@ -73,21 +73,21 @@
     </Style>
     <Style Selector="Grid.ward-item > Panel.ward-item-icon > local|GlowVisual.ward-glow">
       <Setter Property="Margin" Value="-7" />
-      <Setter Property="Opacity" Value="0.5" />
       <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0.5" />
     </Style>
     <Style Selector="Grid.ward-item > TextBlock">
-      <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
       <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
       <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
     <Style Selector="Grid.ward-item local|IconVisual.inactive">
-      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
       <Setter Property="Opacity" Value="0.35" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     </Style>
     <Style Selector="Grid.ward-item TextBlock.inactive">
-      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
       <Setter Property="Opacity" Value="0.35" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     </Style>
     <Style Selector="ContentControl.leadership-row Border.stat-row">
       <Setter Property="Background" Value="{StaticResource StatRowStripeBrush}" />
@@ -121,9 +121,9 @@
       <Setter Property="Margin" Value="0" />
     </Style>
     <Style Selector="StackPanel.damage-over-time">
+      <Setter Property="Margin" Value="6,6,0,0" />
       <Setter Property="Orientation" Value="Horizontal" />
       <Setter Property="Spacing" Value="5" />
-      <Setter Property="Margin" Value="6,6,0,0" />
       <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="Background" Value="Transparent" />
     </Style>

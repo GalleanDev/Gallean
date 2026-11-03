@@ -191,8 +191,8 @@
     <Setter Property="Foreground" Value="{StaticResource PermanentModifierIconBrush}" />
   </Style>
   <Style Selector="Border.permanent-modifier Border.permanent-modifier-cap">
-    <Setter Property="Background" Value="{StaticResource PermanentModifierCommonCapGradientBrush}" />
     <Setter Property="Padding" Value="7,2,5,2" />
+    <Setter Property="Background" Value="{StaticResource PermanentModifierCommonCapGradientBrush}" />
     <Setter Property="CornerRadius" Value="9,0,0,9" />
   </Style>
   <Style Selector="Border.permanent-modifier TextBlock.permanent-modifier-name">

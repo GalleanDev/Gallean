@@ -127,8 +127,14 @@
             <ContentControl Grid.Column="1" Classes="ornament-panel" Margin="8,0,0,0">
               <Grid RowDefinitions="Auto,*" Margin="6,2">
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Height="40">
-                  <local:OutlinedTextBlock Grid.Column="0" Text="{Binding GarrisonCapacity}" Classes="panel-title" Margin="0,0,12,0" />
-                  <local:OutlinedTextBlock Grid.Column="1" Text="{local:Text 'Garrison'}" Classes="panel-title" HorizontalAlignment="Right" />
+                  <local:OutlinedTextBlock Grid.Column="0"
+                                           Text="{Binding GarrisonCapacity}"
+                                           Classes="panel-title"
+                                           Margin="0,0,12,0" />
+                  <local:OutlinedTextBlock Grid.Column="1"
+                                           Text="{local:Text 'Garrison'}"
+                                           Classes="panel-title"
+                                           HorizontalAlignment="Right" />
                 </Grid>
                 <Viewbox Grid.Row="1" Classes="unit-grid-container" Margin="0,8,0,4">
                   <ItemsControl Classes="unit-grid focus-group"

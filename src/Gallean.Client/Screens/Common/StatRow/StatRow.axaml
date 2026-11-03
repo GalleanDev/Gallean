@@ -48,8 +48,8 @@
     <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
   </Style>
   <Style Selector="Border.stat-row StackPanel.stat-value">
-    <Setter Property="Orientation" Value="Horizontal" />
     <Setter Property="Margin" Value="12,0,0,0" />
+    <Setter Property="Orientation" Value="Horizontal" />
     <Setter Property="HorizontalAlignment" Value="Right" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
