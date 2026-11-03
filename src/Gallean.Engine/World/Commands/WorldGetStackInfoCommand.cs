@@ -49,12 +49,19 @@ public sealed record WorldGetStackInfoCommand(WorldStackId StackId) : IWorldComm
 
         foreach ((WorldUnit unit, GridPosition _) in stack.Units.GetUnits())
         {
-            WorldCommandResult healResult = new WorldHealUnitCommand(group, unit.Id).Execute(state, context);
-            WorldCommandResult resurrectResult = new WorldResurrectUnitCommand(group, unit.Id).Execute(state, context);
+            WorldHealCalculator.HealInfo heal = WorldHealCalculator.GetHealInfo(state, group, unit.Id, context);
+            WorldHealCalculator.ResurrectInfo resurrect = WorldHealCalculator.GetResurrectInfo(state, group, unit.Id, context);
             WorldCommandResult disbandResult = new WorldDisbandUnitCommand(group, unit.Id).Execute(state, context);
             WorldCommandResult lockTypeResult = new WorldLockUnitTypeCommand(group, unit.Id).Execute(state, context);
 
-            units.Add(new WorldUnitActionInfo(unit.Id, healResult.Error, resurrectResult.Error, disbandResult.Error, lockTypeResult.Error));
+            units.Add(new WorldUnitActionInfo(
+                unit.Id,
+                heal.Cost,
+                heal.Error,
+                resurrect.Cost,
+                resurrect.Error,
+                disbandResult.Error,
+                lockTypeResult.Error));
         }
 
         int occupiedLeadership = StackCalculator.GetOccupiedLeadership(stack.Units, context.Definitions);

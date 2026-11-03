@@ -65,19 +65,25 @@ public sealed class WorldEngineGetGarrisonInfoTests
             [
                 new WorldUnitActionInfo(
                     new WorldUnitId("soldier"),
+                    HealCost: new WorldResourceSet(70, 0, 0, 0, 0, 0),
                     HealError: null,
+                    ResurrectCost: WorldResourceSet.Empty,
                     ResurrectError: WorldCommandError.UnitNotDead,
                     DisbandError: null,
                     LockTypeError: WorldCommandError.UnitTypeLockForbidden),
                 new WorldUnitActionInfo(
                     new WorldUnitId("soldier2"),
+                    HealCost: WorldResourceSet.Empty,
                     HealError: WorldCommandError.UnitDead,
+                    ResurrectCost: new WorldResourceSet(50, 0, 0, 0, 0, 0),
                     ResurrectError: null,
                     DisbandError: null,
                     LockTypeError: WorldCommandError.UnitTypeLockForbidden),
                 new WorldUnitActionInfo(
                     new WorldUnitId("soldier3"),
+                    HealCost: WorldResourceSet.Empty,
                     HealError: WorldCommandError.UnitNotWounded,
+                    ResurrectCost: WorldResourceSet.Empty,
                     ResurrectError: WorldCommandError.UnitNotDead,
                     DisbandError: null,
                     LockTypeError: WorldCommandError.UnitTypeLockForbidden)
@@ -165,13 +171,17 @@ public sealed class WorldEngineGetGarrisonInfoTests
             [
                 new WorldUnitActionInfo(
                     new WorldUnitId("soldier"),
+                    HealCost: WorldResourceSet.Empty,
                     HealError: WorldCommandError.HealBuildingRequired,
+                    ResurrectCost: WorldResourceSet.Empty,
                     ResurrectError: WorldCommandError.HealBuildingRequired,
                     DisbandError: null,
                     LockTypeError: WorldCommandError.UnitTypeLockForbidden),
                 new WorldUnitActionInfo(
                     new WorldUnitId("large"),
+                    HealCost: WorldResourceSet.Empty,
                     HealError: WorldCommandError.HealBuildingRequired,
+                    ResurrectCost: WorldResourceSet.Empty,
                     ResurrectError: WorldCommandError.HealBuildingRequired,
                     DisbandError: null,
                     LockTypeError: WorldCommandError.UnitTypeLockForbidden)
