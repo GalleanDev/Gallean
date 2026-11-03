@@ -694,13 +694,7 @@ internal partial class WorldEngine
 
             WorldMovementCalculator.MovementProfile profile = WorldMovementCalculator.GetMovementProfile(stack, context.Definitions);
 
-            WorldPosition[] positions =
-            [
-                location.Position,
-                .. ScenarioLocationCalculator.EnumerateTiles(location, state.Map)
-            ];
-
-            foreach (WorldPosition position in positions)
+            foreach (WorldPosition position in EnumeratePositions(location.Position, 3))
             {
                 if (plan.CanPlaceStackAt(position, profile))
                 {
@@ -709,6 +703,25 @@ internal partial class WorldEngine
             }
 
             return null;
+
+            static IEnumerable<WorldPosition> EnumeratePositions(WorldPosition center, int distance)
+            {
+                for (int current = 0; current <= distance; current++)
+                {
+                    for (int x = center.X - current; x <= center.X + current; x++)
+                    {
+                        for (int y = center.Y - current; y <= center.Y + current; y++)
+                        {
+                            WorldPosition position = new(x, y);
+
+                            if (position.GetDistance(center) == current)
+                            {
+                                yield return position;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private bool TryMoveBeside(WorldStack stack, WorldStack triggerer, WorldState state, out ScenarioEventEffectResult result)
