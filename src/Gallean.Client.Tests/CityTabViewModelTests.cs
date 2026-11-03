@@ -1470,6 +1470,10 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.Heal));
             Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+            Assert.That(screen.TargetPrices, Is.EqualTo(new Dictionary<WorldUnitId, ResourceSetViewModel>
+            {
+                [new WorldUnitId("woundedSoldier")] = new ResourceSetViewModel(new WorldResourceSet(30, 0, 0, 0, 0, 0), ResourceSetProjection.All)
+            }));
         }
 
         UnitGridSlotViewModel stackSlot = FindSlot(screen.StackGrid, GridPosition.FrontCenter);
@@ -1479,6 +1483,7 @@ public sealed class CityTabViewModelTests
         {
             Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.Heal));
             Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+            Assert.That(screen.TargetPrices, Is.Empty);
         }
 
         screen.ResurrectCommand.Execute(null);
@@ -1488,6 +1493,10 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.Resurrect));
             Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
+            Assert.That(screen.TargetPrices, Is.EqualTo(new Dictionary<WorldUnitId, ResourceSetViewModel>
+            {
+                [new WorldUnitId("deadSoldier")] = new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All)
+            }));
         }
 
         UnitGridSlotViewModel garrisonSlot = FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter);
@@ -1499,6 +1508,7 @@ public sealed class CityTabViewModelTests
         {
             Assert.That(screen.TargetedAction, Is.Null);
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+            Assert.That(screen.TargetPrices, Is.Empty);
         }
 
         Assert.That(session.World.State, Is.EqualTo(initialState with

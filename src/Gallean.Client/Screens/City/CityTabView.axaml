@@ -70,6 +70,17 @@
       <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
 
+    <Style Selector="ItemsControl.unit-grid Button.slot" x:DataType="local:UnitGridSlotViewModel">
+      <Setter Property="ToolTip.Placement" Value="Top" />
+      <Setter Property="ToolTip.ShowDelay" Value="0" />
+      <Setter Property="ToolTip.Tip">
+        <MultiBinding Converter="{x:Static local:UnitPriceConverter.Instance}">
+          <Binding Path="UnitId" />
+          <Binding Path="$parent[local:CityTabView].((local:CityTabViewModel)DataContext).TargetPrices" />
+        </MultiBinding>
+      </Setter>
+    </Style>
+
     <Style Selector=":is(Control).inactive">
       <Setter Property="IsHitTestVisible" Value="False" />
       <Setter Property="Opacity" Value="0.3" />

@@ -102,6 +102,9 @@ internal sealed partial class CityTabViewModel
     public partial UnitActionType? TargetedAction { get; private set; }
 
     [ObservableProperty]
+    public partial IReadOnlyDictionary<WorldUnitId, ResourceSetViewModel> TargetPrices { get; private set; } = new Dictionary<WorldUnitId, ResourceSetViewModel>();
+
+    [ObservableProperty]
     public partial bool IsUiVisible { get; private set; } = true;
 
     void IInventoryTransferProvider.OnItemTransferred()
@@ -481,6 +484,16 @@ internal sealed partial class CityTabViewModel
         };
     }
 
+    private static WorldResourceSet? GetActionCost(UnitActionType type, WorldUnitActionInfo unit)
+    {
+        return type switch
+        {
+            UnitActionType.Heal => unit.HealCost,
+            UnitActionType.Resurrect => unit.ResurrectCost,
+            UnitActionType.LockType => null
+        };
+    }
+
     async Task<bool> IUnitGridSelectionProvider.TryInvokeUnitSlotAsync(UnitGridSlotReference target)
     {
         if (TargetedAction is not null)
@@ -662,6 +675,26 @@ internal sealed partial class CityTabViewModel
         }
 
         return positions;
+    }
+
+    private IReadOnlyDictionary<WorldUnitId, ResourceSetViewModel> BuildTargetPrices(IDragSourceReference? reference)
+    {
+        Dictionary<WorldUnitId, ResourceSetViewModel> prices = [];
+
+        if (reference is null && TargetedAction is not null)
+        {
+            foreach (WorldUnitActionInfo unitInfo in stackInfo.Units.Concat(garrisonInfo.Units))
+            {
+                WorldResourceSet? cost = GetActionCost(TargetedAction.Value, unitInfo);
+
+                if (cost is not null && GetActionError(TargetedAction.Value, unitInfo) is null)
+                {
+                    prices.Add(unitInfo.UnitId, new ResourceSetViewModel(cost.Value, ResourceSetProjection.All));
+                }
+            }
+        }
+
+        return prices;
     }
 
     private IReadOnlySet<GridPosition> BuildMoveHighlight(UnitGridSlotReference source, UnitGridViewModel grid)
@@ -882,6 +915,7 @@ internal sealed partial class CityTabViewModel
         GarrisonCapacity = FormatGarrisonCapacity(garrisonInfo);
         StackGrid.Update(stackUnits, showsPurchaseHints: false, BuildUnitHighlight(StackGrid, stackUnits, dragged));
         GarrisonGrid.Update(garrison, showsPurchaseHints: true, BuildUnitHighlight(GarrisonGrid, garrison, dragged));
+        TargetPrices = BuildTargetPrices(dragged);
 
         CityTitle = GameModel.Texts.GetScenarioText(fortification.NameTextId);
         CitySummary = FormatCitySummary(fortification);
