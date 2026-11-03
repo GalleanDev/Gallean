@@ -20,7 +20,7 @@ Gallean is a full remake of Disciples II: Rise of the Elves: every campaign and 
 
 ## Localization
 
-Gallean is fully localized into eight languages, which you can switch in the middle of a game.
+Gallean is fully localized into eight languages, which you can switch in the middle of a game. The game starts in your system language.
 
 | | Language | Status |
 | --- | --- | --- |
@@ -32,8 +32,6 @@ Gallean is fully localized into eight languages, which you can switch in the mid
 | 🇵🇱 | Polish | ✅ Supported |
 | 🇷🇺 | Russian | ✅ Supported |
 | 🇪🇸 | Spanish | ✅ Supported |
-
-The game starts in your system language.
 
 ## System requirements
 
