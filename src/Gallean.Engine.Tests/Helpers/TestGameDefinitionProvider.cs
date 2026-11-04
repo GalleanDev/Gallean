@@ -214,13 +214,13 @@ internal sealed class TestGameDefinitionProvider : IGameDefinitionProvider
     {
         return
         [
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Small, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145),
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Medium, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145),
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Large, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145),
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Humongous, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145),
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.SmallNoExpansion, 100, 115, 120, 0, 0, 0, 95, 100, 70, 100, 130, 145),
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.MediumNoExpansion, 100, 115, 120, 0, 0, 0, 95, 100, 70, 100, 130, 145),
-            new WorldAiAttitudeDefinition(WorldAiAttitudeType.MediumNoExpansionNoRuins, 100, 115, 120, 0, 0, 0, 95, 0, 70, 100, 130, 145)
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Small, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145, 0, 2, 4, 6),
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Medium, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145, 0, 2, 4, 6),
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Large, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145, 0, 2, 4, 6),
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.Humongous, 100, 115, 120, 110, 110, 110, 95, 100, 70, 100, 130, 145, 0, 2, 4, 6),
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.SmallNoExpansion, 100, 115, 120, 0, 0, 0, 95, 100, 70, 100, 130, 145, 0, 2, 4, 6),
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.MediumNoExpansion, 100, 115, 120, 0, 0, 0, 95, 100, 70, 100, 130, 145, 0, 2, 4, 6),
+            new WorldAiAttitudeDefinition(WorldAiAttitudeType.MediumNoExpansionNoRuins, 100, 115, 120, 0, 0, 0, 95, 0, 70, 100, 130, 145, 0, 2, 4, 6)
         ];
     }
 

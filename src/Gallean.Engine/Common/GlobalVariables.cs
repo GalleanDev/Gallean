@@ -11,6 +11,8 @@ public sealed record GlobalVariables
     internal int AccuracyReductionPerTarget { get; init; } = 10;
     internal int ActionMovementCostPercent { get; init; } = 50;
     internal int AiDefaultPriority { get; init; } = 3;
+    internal int AiAutoExperienceGarrisonMultiplier { get; init; } = 2;
+    internal int AiAutoExperienceNeutralMaxSuggestedLevel { get; init; } = 9;
     internal int AiGlobalSpellMinMana { get; init; } = 1000;
     internal int AiGlobalSpellMinStacks { get; init; } = 2;
     internal int AiGlobalSpellMinSuggestedLevel { get; init; } = 10;

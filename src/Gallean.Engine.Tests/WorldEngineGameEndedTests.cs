@@ -222,6 +222,9 @@ public sealed class WorldEngineGameEndedTests
             {
                 Position = capital.Entrance,
                 Direction = WorldStackDirection.NorthWest,
+                Units = new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Experience = 20 }, GridPosition.FrontBottom, false)
+                    .Build(),
                 MovementPoints = 2
             }),
             Fortifications = engine.State.Fortifications.SetItem(capital.Id, capital with

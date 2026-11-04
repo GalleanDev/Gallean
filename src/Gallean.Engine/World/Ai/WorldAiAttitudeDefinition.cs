@@ -13,4 +13,8 @@ public sealed record WorldAiAttitudeDefinition(
     int EasyIncomePercent,
     int AverageIncomePercent,
     int HardIncomePercent,
-    int VeryHardIncomePercent);
+    int VeryHardIncomePercent,
+    int EasyAutoExperiencePercent,
+    int AverageAutoExperiencePercent,
+    int HardAutoExperiencePercent,
+    int VeryHardAutoExperiencePercent);
