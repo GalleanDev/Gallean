@@ -39,9 +39,11 @@ public sealed class GameSettingsExtensionsTests
     {
         GameSettings normal = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English);
         GameSettings fast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, Language.English);
+        GameSettings veryFast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.VeryFast, UiSize.Normal, true, MovementSpeed.Normal, Language.English);
 
         Assert.That(normal.BattleSpeedFactor, Is.EqualTo(1.2));
         Assert.That(fast.BattleSpeedFactor, Is.EqualTo(1.5));
+        Assert.That(veryFast.BattleSpeedFactor, Is.EqualTo(2.4));
     }
 
     [Test]
@@ -49,9 +51,11 @@ public sealed class GameSettingsExtensionsTests
     {
         GameSettings normal = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English);
         GameSettings fast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, Language.English);
+        GameSettings veryFast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.VeryFast, Language.English);
 
         Assert.That(normal.MovementSpeedFactor, Is.EqualTo(1.0));
         Assert.That(fast.MovementSpeedFactor, Is.EqualTo(1.3));
+        Assert.That(veryFast.MovementSpeedFactor, Is.EqualTo(2.0));
     }
 
     [Test]

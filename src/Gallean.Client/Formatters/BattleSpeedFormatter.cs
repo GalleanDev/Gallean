@@ -9,7 +9,8 @@ internal static class BattleSpeedFormatter
         return speed switch
         {
             BattleSpeed.Normal => Tr("Normal"),
-            BattleSpeed.Fast => Tr("Fast")
+            BattleSpeed.Fast => Tr("Fast"),
+            BattleSpeed.VeryFast => Tr("Very fast")
         };
     }
 }

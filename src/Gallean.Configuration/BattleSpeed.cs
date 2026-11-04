@@ -3,5 +3,6 @@ namespace Gallean.Configuration;
 public enum BattleSpeed
 {
     Normal,
-    Fast
+    Fast,
+    VeryFast
 }

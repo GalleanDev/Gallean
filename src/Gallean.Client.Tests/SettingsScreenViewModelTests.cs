@@ -214,7 +214,7 @@ public sealed class SettingsScreenViewModelTests
 
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
-        Assert.That(screen.BattleSpeeds, Is.EqualTo([BattleSpeed.Normal, BattleSpeed.Fast]));
+        Assert.That(screen.BattleSpeeds, Is.EqualTo([BattleSpeed.Normal, BattleSpeed.Fast, BattleSpeed.VeryFast]));
         Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(100, 100, true, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
@@ -235,7 +235,7 @@ public sealed class SettingsScreenViewModelTests
 
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
-        Assert.That(screen.MovementSpeeds, Is.EqualTo([MovementSpeed.Normal, MovementSpeed.Fast]));
+        Assert.That(screen.MovementSpeeds, Is.EqualTo([MovementSpeed.Normal, MovementSpeed.Fast, MovementSpeed.VeryFast]));
         Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(100, 100, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
