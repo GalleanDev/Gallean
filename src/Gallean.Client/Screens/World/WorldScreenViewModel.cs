@@ -312,21 +312,41 @@ internal sealed partial class WorldScreenViewModel :
             return false;
         }
 
-        if (cursor.ReachablePositions.Contains(position))
-        {
-            WorldPathSelection? path = BuildPathSelection(selected, position);
+        bool inReach = cursor.ReachablePositions.Contains(position);
 
-            if (path is not null)
-            {
-                await MoveSelectedStackAsync(selected, path);
-            }
-
-            return true;
-        }
-        else
+        if (!CanMoveTo(selected, position, inReach))
         {
             return false;
         }
+
+        WorldPathSelection? path = BuildPathSelection(selected, position);
+
+        if (path is null)
+        {
+            return inReach;
+        }
+
+        await MoveSelectedStackAsync(selected, path);
+
+        return true;
+    }
+
+    // Reachable this turn, or a plain tile further out: the engine then walks as far as possible now.
+    // Visible interactive destinations (cities, sites, stacks, bags) keep their single-turn behavior.
+    private bool CanMoveTo(WorldStack selected, WorldPosition position, bool inReach)
+    {
+        return inReach || (selected.MovementPoints > 0 && IsPlainTarget(position));
+    }
+
+    private bool IsPlainTarget(WorldPosition position)
+    {
+        WorldPlan plan = WorldPlan.For(WorldState);
+        WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
+
+        return visibility.GetStackAt(plan, position, ViewPlayerId) is null &&
+               visibility.GetFortificationAt(plan, position) is null &&
+               visibility.GetSiteAt(plan, position) is null &&
+               visibility.GetBagAt(plan, position) is null;
     }
 
     private bool TryHandleFortificationAction(WorldPosition position)
@@ -512,7 +532,7 @@ internal sealed partial class WorldScreenViewModel :
         if (hoverTarget is not null &&
             selected is not null &&
             current.Action is null &&
-            current.ReachablePositions.Contains(hoverTarget.Value))
+            CanMoveTo(selected, hoverTarget.Value, current.ReachablePositions.Contains(hoverTarget.Value)))
         {
             if (current.HoverPath is not null && current.HoverPath.Destination == hoverTarget.Value)
             {
@@ -1428,6 +1448,7 @@ internal sealed partial class WorldScreenViewModel :
         }
         else if (selectedStack is not null &&
                  !cursor.ReachablePositions.Contains(position) &&
+                 cursor.HoverPath?.Destination != position &&
                  (fortification is null || fortification.Owner != ViewPlayerId))
         {
             return AssetAnimationKey.CursorType.Default;

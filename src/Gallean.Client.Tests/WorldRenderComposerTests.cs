@@ -3800,6 +3800,152 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
+    public void MultiTurnHoverPathTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0),
+            new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), Cost: 2, Turn: 1)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            HoverPath = new WorldPathSelection(new WorldPosition(3, 1), path, new WorldPath([]), Encounter: null)
+        };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
+
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new PathOverlay(new WorldPosition(1, 1), [
+            new PathStep(new WorldPosition(2, 1), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+            new PathStep(new WorldPosition(3, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+1")
+        ])));
+        Assert.That(renderState.Cursors.Single().InnerColor, Is.EqualTo(Theme.World.Path.UnreachedInnerColor));
+    }
+
+    [Test]
+    public void MultiTurnThreeDayHoverPathTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0),
+            new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), Cost: 2, Turn: 1),
+            new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(3, 2), Cost: 3, Turn: 1),
+            new WorldPathSegment(new WorldPosition(3, 2), new WorldPosition(2, 2), Cost: 2, Turn: 2),
+            new WorldPathSegment(new WorldPosition(2, 2), new WorldPosition(1, 2), Cost: 1, Turn: 2)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            HoverPath = new WorldPathSelection(new WorldPosition(1, 2), path, new WorldPath([]), Encounter: null)
+        };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
+
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new PathOverlay(new WorldPosition(1, 1), [
+            new PathStep(new WorldPosition(2, 1), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+            new PathStep(new WorldPosition(3, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+1"),
+            new PathStep(new WorldPosition(3, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, ""),
+            new PathStep(new WorldPosition(2, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+2"),
+            new PathStep(new WorldPosition(1, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "")
+        ])));
+        Assert.That(renderState.Cursors.Single().InnerColor, Is.EqualTo(Theme.World.Path.UnreachedInnerColor));
+    }
+
+    [Test]
+    public void MultiTurnHostileInReachHoverPathTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0),
+            new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), Cost: 2, Turn: 0)
+        ]);
+        WorldPath remainder = new([
+            new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(3, 2), Cost: 2, Turn: 0),
+            new WorldPathSegment(new WorldPosition(3, 2), new WorldPosition(2, 2), Cost: 2, Turn: 1),
+            new WorldPathSegment(new WorldPosition(2, 2), new WorldPosition(1, 2), Cost: 2, Turn: 1)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            HoverPath = new WorldPathSelection(new WorldPosition(1, 2), path, remainder, new WorldPathEncounter.Battle(new WorldPosition(3, 2)))
+        };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
+
+        // A hostile stack within this turn's route keeps attack colors; later days stay unreached.
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new PathOverlay(new WorldPosition(1, 1), [
+            new PathStep(new WorldPosition(2, 1), Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, "2"),
+            new PathStep(new WorldPosition(3, 1), Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, "4"),
+            new PathStep(new WorldPosition(3, 2), Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, "6"),
+            new PathStep(new WorldPosition(2, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+1"),
+            new PathStep(new WorldPosition(1, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "")
+        ])));
+        Assert.That(renderState.Cursors.Single().InnerColor, Is.EqualTo(Theme.World.Path.UnreachedInnerColor));
+    }
+
+    [Test]
+    public void MultiTurnInterceptedHoverPathTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0)
+        ]);
+        WorldPath remainder = new([
+            new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), Cost: 2, Turn: 1),
+            new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(4, 1), Cost: 2, Turn: 1)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            HoverPath = new WorldPathSelection(new WorldPosition(4, 1), path, remainder, new WorldPathEncounter.Battle(new WorldPosition(3, 1)))
+        };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
+
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new PathOverlay(new WorldPosition(1, 1), [
+            new PathStep(new WorldPosition(2, 1), Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, "2"),
+            new PathStep(new WorldPosition(3, 1), Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, "+1"),
+            new PathStep(new WorldPosition(4, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "")
+        ])));
+        Assert.That(renderState.Cursors, Is.Empty);
+    }
+
+    [Test]
+    public void MultiTurnSameDayRemainderHoverPathTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0),
+            new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), Cost: 2, Turn: 1)
+        ]);
+        WorldPath remainder = new([
+            new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(3, 2), Cost: 3, Turn: 1),
+            new WorldPathSegment(new WorldPosition(3, 2), new WorldPosition(2, 2), Cost: 2, Turn: 2)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            HoverPath = new WorldPathSelection(new WorldPosition(2, 2), path, remainder, Encounter: null)
+        };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
+
+        // The remainder continues the day started by the path: same-day legs show no repeat marker.
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new PathOverlay(new WorldPosition(1, 1), [
+            new PathStep(new WorldPosition(2, 1), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+            new PathStep(new WorldPosition(3, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+1"),
+            new PathStep(new WorldPosition(3, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, ""),
+            new PathStep(new WorldPosition(2, 2), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+2")
+        ])));
+        Assert.That(renderState.Cursors.Single().InnerColor, Is.EqualTo(Theme.World.Path.UnreachedInnerColor));
+    }
+
+    [Test]
     public void InterceptedHoverPathTest()
     {
         (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));

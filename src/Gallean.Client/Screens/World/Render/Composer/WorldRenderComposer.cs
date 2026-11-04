@@ -450,29 +450,61 @@ internal sealed partial class WorldRenderComposer(
         }
 
         List<PathStep> steps = [];
-        int totalCost = 0;
+        int turnCost = 0;
+        int previousTurn = -1;
 
         foreach (WorldPathSegment segment in selection.Path.Segments)
         {
-            totalCost += segment.Cost;
-            steps.Add(new PathStep(segment.End, innerColor, outerColor, FormatCost(totalCost)));
+            string label = NextLabel(segment);
+
+            // Legs beyond the current turn need extra days: grey them out.
+            if (segment.Turn > 0)
+            {
+                steps.Add(new PathStep(segment.End, Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, label));
+            }
+            else
+            {
+                steps.Add(new PathStep(segment.End, innerColor, outerColor, label));
+            }
         }
 
         foreach (WorldPathSegment segment in selection.Remainder.Segments)
         {
-            totalCost += segment.Cost;
+            string label = NextLabel(segment);
 
             if (segment.End == hostileTarget)
             {
-                steps.Add(new PathStep(segment.End, Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, FormatCost(totalCost)));
+                steps.Add(new PathStep(segment.End, Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, label));
             }
             else
             {
-                steps.Add(new PathStep(segment.End, Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, FormatCost(totalCost)));
+                steps.Add(new PathStep(segment.End, Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, label));
             }
         }
 
         return steps;
+
+        // Points are per day: today's legs show step costs, future legs show
+        // only a day marker on the first step of each day, no grand total.
+        string NextLabel(WorldPathSegment segment)
+        {
+            bool newDay = segment.Turn != previousTurn;
+
+            if (newDay)
+            {
+                previousTurn = segment.Turn;
+                turnCost = 0;
+            }
+
+            turnCost += segment.Cost;
+
+            if (segment.Turn == 0)
+            {
+                return FormatCost(turnCost);
+            }
+
+            return newDay ? $"+{segment.Turn.ToString(CultureInfo.InvariantCulture)}" : "";
+        }
     }
 
     private static string FormatCost(int cost)

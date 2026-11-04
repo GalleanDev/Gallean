@@ -2598,6 +2598,635 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
+    public async Task HoverFarPathTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leader)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(new WorldUnit(new WorldUnitId("leader"), leader.Id, 100, 0, 1, [], null, false), GridPosition.FrontBottom)]),
+            movementPoints: 4);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+
+        // Only 4 of the 12 needed points remain: preview still shows the full path,
+        // with legs beyond this turn greyed out.
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        WorldRenderState renderState = BuildWorldState(world);
+
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new WorldRenderState.PathOverlay(new WorldPosition(0, 0),
+        [
+            new WorldRenderState.PathStep(new WorldPosition(1, 0), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+            new WorldRenderState.PathStep(new WorldPosition(2, 0), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "4"),
+            new WorldRenderState.PathStep(new WorldPosition(3, 0), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "+1"),
+            new WorldRenderState.PathStep(new WorldPosition(4, 0), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, ""),
+            new WorldRenderState.PathStep(new WorldPosition(5, 0), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, ""),
+            new WorldRenderState.PathStep(new WorldPosition(6, 0), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "")
+        ])));
+        Assert.That(renderState.Cursors.Select(cursor => cursor.Position), Is.EqualTo([new WorldPosition(6, 0)]));
+        Assert.That(renderState.Cursors.Single().InnerColor, Is.EqualTo(Theme.World.Path.UnreachedInnerColor));
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Move));
+
+        // Clicking walks as far as possible this turn.
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].MovementPoints, Is.EqualTo(0));
+    }
+
+    [Test]
+    public async Task FarPathInReachBattlePromptsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 2);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player1.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 10);
+        WorldStack enemy = TestHelpers.SimpleStack(
+            new WorldStackId("Enemy"),
+            player2.Id,
+            new WorldPosition(3, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), leader),
+            movementPoints: 10);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithStack(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+
+        // Destination is plain and far, but the path runs into an enemy within this turn:
+        // the encounter prompt must win over the partway multi-turn move.
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Not.Null);
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+
+        AttackPromptViewModel prompt = Assert.IsOfType<AttackPromptViewModel>(gameViewModel.TopScreen);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+
+        // Confirming dispatches the far destination, but the engine stops and fights at the interception.
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(gameModel.ActiveBattle, Is.Not.Null);
+    }
+
+    [Test]
+    public async Task FarPathBeyondReachBattleDefersTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 2);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player1.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+        WorldStack enemy = TestHelpers.SimpleStack(
+            new WorldStackId("Enemy"),
+            player2.Id,
+            new WorldPosition(5, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), leader),
+            movementPoints: 10);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithStack(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        // Enemy beyond this turn cannot trigger yet: walk partway with no prompt and no battle.
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].MovementPoints, Is.EqualTo(0));
+    }
+
+    [Test]
+    public async Task FarPathBeyondReachThiefDefersTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 2);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition enemyLeader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("enemy-leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("Thief"),
+            player1.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 4);
+        WorldStack enemy = TestHelpers.SimpleStack(
+            new WorldStackId("Enemy"),
+            player2.Id,
+            new WorldPosition(5, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), enemyLeader),
+            movementPoints: 10);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(enemyLeader)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Spy, 100))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        // Thief target beyond this turn cannot trigger yet: walk partway with no prompt and no battle.
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[thiefStack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[thiefStack.Id].MovementPoints, Is.EqualTo(0));
+    }
+
+    [Test]
+    public async Task FarEnemyStackNoPreviewTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player1.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+        WorldStack enemy = TestHelpers.SimpleStack(
+            new WorldStackId("Enemy"),
+            player2.Id,
+            new WorldPosition(6, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), leader),
+            movementPoints: 10);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithStack(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        // Far interactive target keeps single-turn behavior: no multi-turn preview.
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+    }
+
+    [Test]
+    public async Task FarConcealedEnemyStackPreviewTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player1.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+        WorldStack enemy = TestHelpers.SimpleStack(
+            new WorldStackId("Enemy"),
+            player2.Id,
+            new WorldPosition(6, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), leader),
+            movementPoints: 10) with
+        {
+            Concealed = true
+        };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithStack(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        // Concealed enemy stays hidden: the tile previews like a far plain target.
+        WorldRenderState preview = BuildWorldState(world);
+
+        Assert.That(preview.SelectedPath, Is.Not.Null);
+        Assert.That(preview.SelectedPath!.Steps.Select(step => step.Position), Is.EqualTo([
+            new WorldPosition(1, 0),
+            new WorldPosition(2, 0),
+            new WorldPosition(3, 0),
+            new WorldPosition(4, 0),
+            new WorldPosition(5, 0),
+            new WorldPosition(6, 0)
+        ]));
+        Assert.That(preview.Cursors.Single().InnerColor, Is.EqualTo(Theme.World.Path.UnreachedInnerColor));
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Move));
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        // Beyond-reach encounter cannot trigger yet: walk partway with no prompt and no battle.
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].MovementPoints, Is.EqualTo(0));
+    }
+
+    [Test]
+    public async Task FarBagNoPreviewTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+
+        ItemDefinition potion = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("Potion"), ItemCategory.PotionHeal);
+        WorldBag bag = new(
+            new WorldBagId("Bag1"),
+            new WorldPosition(6, 0),
+            new WorldObjectVariant(0),
+            new WorldInventory([new WorldItem(new WorldItemId("Potion"), potion.Id, Charges: null)]),
+            AiPriority: 3);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(potion)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithBag(bag)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        // Far bag keeps single-turn behavior: no multi-turn preview.
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Bags.Count, Is.EqualTo(1));
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+    }
+
+    [Test]
+    public async Task FarSiteNoPreviewTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+
+        WorldTrainerSite site = new(
+            Id: new WorldSiteId("trainer"),
+            Footprint: new WorldFootprint(new WorldPosition(6, 0), 1, 1),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            VisitorIds: [],
+            AiPriority: 3);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        // Far site keeps single-turn behavior: no multi-turn preview.
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+    }
+
+    [Test]
+    public async Task FarFortificationNoPreviewTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player1.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Heretic, 1),
+            WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("EnemyCity"),
+            cityDefinition,
+            player2.Id,
+            new WorldPosition(6, 6),
+            UnitGrid<WorldUnit>.Empty);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithCity(city)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 6), null);
+
+        // Far fortification keeps single-turn behavior: no multi-turn preview.
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 6), null, 1);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(gameModel.Snapshot.BattleState, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+    }
+
+    [Test]
+    public async Task FarPlainZeroMovementNoPreviewTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 0);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+    }
+
+    [Test]
+    public async Task FarPlainBlockedNoPreviewTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "...^...."
+        ]);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 24, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 4);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+        world.UpdateHover(new WorldPosition(6, 0), null);
+
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Default));
+
+        await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+    }
+
+    [Test]
     public async Task SelectionAcrossTurnsTest()
     {
         WorldMap map = TestHelpers.SimpleMap(4, 1);
