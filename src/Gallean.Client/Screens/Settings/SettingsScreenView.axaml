@@ -151,14 +151,23 @@
                     VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
               <DataTemplate x:DataType="configuration:Language">
-                <TextBlock Classes="body" VerticalAlignment="Center">
-                  <InlineUIContainer BaselineAlignment="Baseline">
-                    <local:IconVisual Moniker="{Binding Converter={x:Static local:LanguageIconConverter.Instance}}"
-                                      Width="18"
-                                      Height="18"
-                                      Margin="0,0,8,-3" />
-                  </InlineUIContainer><Run Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" />
-                </TextBlock>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:IconVisual Moniker="{Binding Converter={x:Static local:LanguageIconConverter.Instance}}"
+                                    Width="18"
+                                    Height="18"
+                                    VerticalAlignment="Center">
+                    <local:IconVisual.Effect>
+                      <DropShadowEffect OffsetX="0"
+                                        OffsetY="1"
+                                        BlurRadius="1"
+                                        Opacity="0.35"
+                                        Color="{x:Static local:Theme+Field.TextShadowColor}" />
+                    </local:IconVisual.Effect>
+                  </local:IconVisual>
+                  <TextBlock Classes="body"
+                             VerticalAlignment="Center"
+                             Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" />
+                </StackPanel>
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>
