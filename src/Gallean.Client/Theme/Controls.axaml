@@ -360,7 +360,7 @@
     <Setter Property="FocusAdorner" Value="{x:Null}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel>
+        <Panel RenderOptions.RequiresFullOpacityHandling="True">
           <Border x:Name="Field"
                   Background="{StaticResource FieldFaceGradientBrush}"
                   BorderBrush="{StaticResource FieldBorderGradientBrush}"
@@ -443,7 +443,7 @@
   <Style Selector="ComboBox:dropdownopen /template/ local|IconVisual#DropDownGlyph">
     <Setter Property="Moniker" Value="Collapse" />
   </Style>
-  <Style Selector="ComboBox:pressed">
+  <Style Selector="ComboBox:pressed /template/ Border#Field">
     <Setter Property="Opacity" Value="0.9" />
   </Style>
   <Style Selector="ComboBox:disabled">
