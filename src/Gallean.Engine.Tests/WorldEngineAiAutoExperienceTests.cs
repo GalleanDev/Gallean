@@ -323,4 +323,57 @@ public sealed class WorldEngineAiAutoExperienceTests
 
         Assert.That(engine.State.Stacks[neutralStack.Id], Is.EqualTo(neutralStack with { Units = expectedUnits }));
     }
+
+    [Test]
+    public void NeutralCityTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 5);
+
+        UnitDefinition soldier = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 50, initiative: 40, damage: 5);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            FogOfWar = TestHelpers.BuildFogOfWar(["..??????", "..??????", "..??????", "..??????", "..??????"])
+        };
+        WorldPlayer neutral = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Neutral, map) with
+        {
+            IsAi = true
+        };
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Neutral, 1), WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            neutral.Id,
+            new WorldPosition(7, 4),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldier), GridPosition.FrontBottom, false)
+                .Build());
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithSuggestedLevel(9)
+            .WithDefinition(soldier)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
+            .WithPlayer(neutral)
+            .WithCity(city)
+            .Build();
+
+        engine.CheckCommand(new WorldEndTurnCommand(), [
+            new WorldTurnEndedEvent(human.Id),
+            new WorldTurnStartingEvent(neutral.Id),
+            new WorldTurnStartedEvent(neutral.Id),
+            new WorldTurnResourcesGeneratedEvent(neutral.Id, WorldResourceSet.Empty),
+            new WorldUnitExperienceGainedEvent(new WorldUnitGroup.Fortification(city.Id), new WorldUnitId("soldier"), 40)
+        ]);
+
+        UnitGrid<WorldUnit> expectedGarrison = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldier) with { Experience = 40 }, GridPosition.FrontBottom, false)
+            .Build();
+
+        Assert.That(engine.State.Fortifications[city.Id], Is.EqualTo(city with { Garrison = expectedGarrison }));
+    }
 }
