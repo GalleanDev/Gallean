@@ -9,7 +9,7 @@ internal static class UnitExperienceCalculator
         UnitStats stats,
         ScenarioDefinition scenario)
     {
-        bool canGainExperience = definition.Category is not (UnitCategory.Summon or UnitCategory.Illusion);
+        bool canGainExperience = CanGainExperience(definition.Category);
         bool isMaximumLevel;
         bool isPendingUpgrade;
 
@@ -33,5 +33,20 @@ internal static class UnitExperienceCalculator
         }
 
         return new UnitExperience(experience, stats.ExperienceNextLevel, canGainExperience, isMaximumLevel, isPendingUpgrade);
+    }
+
+    private static bool CanGainExperience(UnitCategory category)
+    {
+        return category switch
+        {
+            UnitCategory.Soldier => true,
+            UnitCategory.Thief => true,
+            UnitCategory.Leader => true,
+            UnitCategory.Summon => false,
+            UnitCategory.Illusion => false,
+            UnitCategory.NeutralLeader => true,
+            UnitCategory.NeutralSoldier => true,
+            UnitCategory.Guardian => false
+        };
     }
 }

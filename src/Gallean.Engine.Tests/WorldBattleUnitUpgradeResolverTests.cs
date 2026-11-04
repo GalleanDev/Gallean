@@ -197,4 +197,31 @@ public sealed class WorldBattleUnitUpgradeResolverTests
         BattleUnit unit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, squireDefinition.Id, BattleSide.Attacker, hitpoints: 10) with { IsTypeLocked = true };
         Assert.That(resolver.UpgradeUnit(unit), Is.EqualTo(new BattleUnitUpgrade(squireDefinition.Id, 2, 20, 20)));
     }
+
+    [Test]
+    public void GuardianTest()
+    {
+        UnitDefinition guardianDefinition = TestHelpers.SimpleUnitDefinition("guardian", maxHitpoints: 10, initiative: 50, damage: 5) with
+        {
+            Category = UnitCategory.Guardian
+        };
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, TestHelpers.SimpleMap(1, 1));
+
+        IEngineContext context = new TestWorldEngineBuilder()
+            .WithMap(TestHelpers.SimpleMap(1, 1))
+            .WithDefinition(guardianDefinition)
+            .WithUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(
+                guardianDefinition.Id,
+                UpgradeChangeLevel: 3,
+                UnitDynamicUpgrade.Empty with { MaxHitpoints = 10, Damage = 3, ExperienceKilled = 2, ExperienceNextLevel = 5 },
+                UnitDynamicUpgrade.Empty with { MaxHitpoints = 5, Damage = 1, ExperienceKilled = 1, ExperienceNextLevel = 5 }))
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .BuildContext();
+
+        WorldBattleUnitUpgradeResolver resolver = new(new WorldPlayerBuildings([], []), new WorldPlayerBuildings([], []), context);
+
+        BattleUnit unit = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, guardianDefinition.Id, BattleSide.Defender, hitpoints: 10);
+        Assert.That(resolver.UpgradeUnit(unit), Is.Null);
+    }
 }
