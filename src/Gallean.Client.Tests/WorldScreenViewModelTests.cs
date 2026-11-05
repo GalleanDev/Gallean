@@ -2840,7 +2840,7 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
-    public async Task FarEnemyStackNoPreviewTest()
+    public async Task FarEnemyStackPreviewTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 1);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
@@ -2883,15 +2883,29 @@ public sealed class WorldScreenViewModelTests
         await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
         world.UpdateHover(new WorldPosition(6, 0), null);
 
-        // Far interactive target keeps single-turn behavior: no multi-turn preview.
-        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        // Far hostile target previews the multi-turn path and walks partway: no prompt or battle yet.
+        WorldRenderState enemyPreview = BuildWorldState(world);
+
+        Assert.That(enemyPreview.SelectedPath, Is.Not.Null);
+        Assert.That(enemyPreview.SelectedPath!.Steps.Select(step => step.Position), Is.EqualTo([
+            new WorldPosition(1, 0),
+            new WorldPosition(2, 0),
+            new WorldPosition(3, 0),
+            new WorldPosition(4, 0),
+            new WorldPosition(5, 0),
+            new WorldPosition(6, 0)
+        ]));
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.CastSpell));
 
         await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(gameModel.Snapshot.BattleState, Is.Null);
-        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
-        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].MovementPoints, Is.EqualTo(0));
     }
 
     [Test]
@@ -3080,7 +3094,7 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
-    public async Task FarFortificationNoPreviewTest()
+    public async Task FarFortificationPreviewTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
@@ -3128,19 +3142,25 @@ public sealed class WorldScreenViewModelTests
         await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
         world.UpdateHover(new WorldPosition(6, 6), null);
 
-        // Far fortification keeps single-turn behavior: no multi-turn preview.
-        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        // Far hostile fortification previews the multi-turn path and walks partway: no battle yet.
+        WorldRenderState fortPreview = BuildWorldState(world);
+
+        Assert.That(fortPreview.SelectedPath, Is.Not.Null);
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.CastSpell));
 
         await world.HandleMapClickAsync(new WorldPosition(6, 6), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(gameModel.Snapshot.BattleState, Is.Null);
-        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
-        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.Not.EqualTo(new WorldPosition(0, 0)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].MovementPoints, Is.EqualTo(0));
     }
 
     [Test]
-    public async Task FarPlainZeroMovementNoPreviewTest()
+    public async Task FarPlainZeroMovementPreviewTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 1);
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
@@ -3173,12 +3193,25 @@ public sealed class WorldScreenViewModelTests
         await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
         world.UpdateHover(new WorldPosition(6, 0), null);
 
-        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        // Zero movement still previews the multi-turn path for planning, but clicking preserves selection without moving.
+        WorldRenderState zeroPreview = BuildWorldState(world);
+
+        Assert.That(zeroPreview.SelectedPath, Is.Not.Null);
+        Assert.That(zeroPreview.SelectedPath!.Steps.Select(step => step.Position), Is.EqualTo([
+            new WorldPosition(1, 0),
+            new WorldPosition(2, 0),
+            new WorldPosition(3, 0),
+            new WorldPosition(4, 0),
+            new WorldPosition(5, 0),
+            new WorldPosition(6, 0)
+        ]));
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Move));
 
         await world.HandleMapClickAsync(new WorldPosition(6, 0), null, 1);
 
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(0, 0)));
-        Assert.That(BuildWorldState(world).SelectedPath, Is.Null);
+        Assert.That(BuildWorldState(world).SelectedPath, Is.Not.Null);
     }
 
     [Test]
