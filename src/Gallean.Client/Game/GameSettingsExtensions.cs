@@ -16,13 +16,15 @@ internal static class GameSettingsExtensions
         public double BattleSpeedFactor => settings.BattleSpeed switch
         {
             BattleSpeed.Normal => 1.2,
-            BattleSpeed.Fast => 1.5
+            BattleSpeed.Fast => 1.5,
+            BattleSpeed.VeryFast => 2.4
         };
 
         public double MovementSpeedFactor => settings.MovementSpeed switch
         {
             MovementSpeed.Normal => 1.0,
-            MovementSpeed.Fast => 1.3
+            MovementSpeed.Fast => 1.3,
+            MovementSpeed.VeryFast => 2.0
         };
 
         public double UiSizeFactor => settings.UiSize switch

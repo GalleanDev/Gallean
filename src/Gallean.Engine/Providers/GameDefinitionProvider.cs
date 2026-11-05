@@ -182,7 +182,11 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
                 attitude.DifficultyEasyResourcePercent,
                 attitude.DifficultyAverageResourcePercent,
                 attitude.DifficultyHardResourcePercent,
-                attitude.DifficultyVeryHardResourcePercent);
+                attitude.DifficultyVeryHardResourcePercent,
+                attitude.DifficultyEasyExperience,
+                attitude.DifficultyAverageExperience,
+                attitude.DifficultyHardExperience,
+                attitude.DifficultyVeryHardExperience);
         }
     }
 

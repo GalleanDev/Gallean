@@ -9,7 +9,8 @@ internal static class MovementSpeedFormatter
         return speed switch
         {
             MovementSpeed.Normal => Tr("Normal"),
-            MovementSpeed.Fast => Tr("Fast")
+            MovementSpeed.Fast => Tr("Fast"),
+            MovementSpeed.VeryFast => Tr("Very fast")
         };
     }
 }

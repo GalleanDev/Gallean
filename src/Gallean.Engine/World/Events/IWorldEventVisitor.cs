@@ -91,6 +91,7 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldTurnEndedEvent ev, TContext context);
     TResult Visit(WorldUnitDisbandedEvent ev, TContext context);
     TResult Visit(WorldUnitDamagedEvent ev, TContext context);
+    TResult Visit(WorldUnitExperienceGainedEvent ev, TContext context);
     TResult Visit(WorldUnitHealedEvent ev, TContext context);
     TResult Visit(WorldUnitModifierAppliedEvent ev, TContext context);
     TResult Visit(WorldUnitModifierDurationDecreasedEvent ev, TContext context);
@@ -100,4 +101,5 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldUnitResurrectedEvent ev, TContext context);
     TResult Visit(WorldUnitTransferredEvent ev, TContext context);
     TResult Visit(WorldUnitTypeLockedEvent ev, TContext context);
+    TResult Visit(WorldUnitUpgradedEvent ev, TContext context);
 }
