@@ -312,20 +312,97 @@ internal sealed partial class WorldScreenViewModel :
             return false;
         }
 
-        if (cursor.ReachablePositions.Contains(position))
-        {
-            WorldPathSelection? path = BuildPathSelection(selected, position);
+        bool inReach = cursor.ReachablePositions.Contains(position);
 
-            if (path is not null)
+        if (!CanMoveTo(selected, position, inReach))
+        {
+            return false;
+        }
+
+        WorldPathSelection? path = BuildPathSelection(selected, position);
+
+        if (path is null)
+        {
+            return inReach;
+        }
+
+        // No movement left: keep selection and preview for planning, don't dispatch.
+        if (selected.MovementPoints <= 0)
+        {
+            return true;
+        }
+
+        await MoveSelectedStackAsync(selected, path);
+
+        return true;
+    }
+
+    // Reachable this turn, or a plain/hostile tile further out: the engine then walks as far as possible now.
+    // Other visible interactive destinations (cities, sites, stacks, bags) keep their single-turn behavior.
+    private bool CanMoveTo(WorldStack selected, WorldPosition position, bool inReach)
+    {
+        return inReach || IsPlainTarget(position) || IsHostileBattleTarget(position);
+    }
+
+    private bool IsPlainTarget(WorldPosition position)
+    {
+        WorldPlan plan = WorldPlan.For(WorldState);
+        WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
+
+        return visibility.GetStackAt(plan, position, ViewPlayerId) is null &&
+               visibility.GetFortificationAt(plan, position) is null &&
+               visibility.GetSiteAt(plan, position) is null &&
+               visibility.GetBagAt(plan, position) is null;
+    }
+
+    private bool IsHostileBattleTarget(WorldPosition position)
+    {
+        WorldPlan plan = WorldPlan.For(WorldState);
+        WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
+
+        WorldStack? stack = visibility.GetStackAt(plan, position, ViewPlayerId);
+
+        if (stack is not null && stack.OwnerId != ViewPlayerId)
+        {
+            return IsHostile(stack.OwnerId);
+        }
+
+        WorldFortification? fortification = visibility.GetFortificationAt(plan, position);
+
+        if (fortification is not null && fortification.Owner != ViewPlayerId)
+        {
+            // Unowned ruins count as hostile: the engine battles guardians if any, else walks in.
+            WorldPlayerId? owner = fortification.Owner;
+
+            if (owner is null)
             {
-                await MoveSelectedStackAsync(selected, path);
+                return true;
             }
 
-            return true;
+            return IsHostile(owner.Value);
+        }
+
+        return false;
+    }
+
+    private bool IsHostile(WorldPlayerId otherId)
+    {
+        if (otherId == ViewPlayerId)
+        {
+            return false;
+        }
+
+        WorldPlayer player = WorldState.Players[ViewPlayerId];
+        WorldPlayer other = WorldState.Players[otherId];
+        WorldRelationId relationId = new(player.Race, other.Race);
+
+        if (WorldState.Relations.TryGetValue(relationId, out WorldRelation? relation))
+        {
+            return !relation.Alliance;
         }
         else
         {
-            return false;
+            return true;
         }
     }
 
@@ -512,7 +589,7 @@ internal sealed partial class WorldScreenViewModel :
         if (hoverTarget is not null &&
             selected is not null &&
             current.Action is null &&
-            current.ReachablePositions.Contains(hoverTarget.Value))
+            CanMoveTo(selected, hoverTarget.Value, current.ReachablePositions.Contains(hoverTarget.Value)))
         {
             if (current.HoverPath is not null && current.HoverPath.Destination == hoverTarget.Value)
             {
@@ -889,6 +966,14 @@ internal sealed partial class WorldScreenViewModel :
 
     private async Task MoveSelectedStackAsync(WorldStack stack, WorldPathSelection path)
     {
+        // Far site/thief target beyond this turn: walk partway now, defer the action until in reach.
+        if (path.Encounter is WorldPathEncounter.Site or WorldPathEncounter.Thief && IsMultiTurn(path))
+        {
+            await TryDispatchWorldActionAsync(new WorldMoveStackCommand(stack.Id, path.Destination));
+
+            return;
+        }
+
         if (path.Encounter is null)
         {
             await TryDispatchWorldActionAsync(new WorldMoveStackCommand(stack.Id, path.Destination));
@@ -897,6 +982,19 @@ internal sealed partial class WorldScreenViewModel :
         {
             await path.Encounter.Accept(this, new SelectedMove(stack, path));
         }
+    }
+
+    private static bool IsMultiTurn(WorldPathSelection path)
+    {
+        foreach (WorldPathSegment segment in path.Path.Segments)
+        {
+            if (segment.Turn > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     async Task IWorldPathEncounterVisitor<SelectedMove, Task>.Visit(WorldPathEncounter.Battle encounter, SelectedMove move)
@@ -1428,6 +1526,7 @@ internal sealed partial class WorldScreenViewModel :
         }
         else if (selectedStack is not null &&
                  !cursor.ReachablePositions.Contains(position) &&
+                 cursor.HoverPath?.Destination != position &&
                  (fortification is null || fortification.Owner != ViewPlayerId))
         {
             return AssetAnimationKey.CursorType.Default;
