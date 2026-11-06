@@ -11,6 +11,7 @@ internal static class Program
         ClientApp
             .Configure(useDirectRendering: false)
             .UsePlatformDetect()
+            .AfterSetup(_ => PlatformFullScreen.Install())
             .StartWithClassicDesktopLifetime(args);
     }
 }
