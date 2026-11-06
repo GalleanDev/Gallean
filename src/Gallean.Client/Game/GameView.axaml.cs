@@ -20,6 +20,7 @@ internal sealed partial class GameView : Window
 
     private readonly Size minSize;
     private Task? exitSaveTask;
+    private bool isOpened;
 
     public GameView()
     {
@@ -38,6 +39,10 @@ internal sealed partial class GameView : Window
 
     private GameViewModel? ViewModel => (GameViewModel?)DataContext;
 
+    private static IFullScreenPresenter? FullScreen => FullScreenPresenter.Current;
+
+    private bool IsFullScreen => FullScreen?.IsFullScreen(this) ?? WindowState == WindowState.FullScreen;
+
     public bool IsWindowed
     {
         get => GetValue(IsWindowedProperty);
@@ -54,6 +59,8 @@ internal sealed partial class GameView : Window
     {
         base.OnOpened(e);
 
+        isOpened = true;
+        FullScreen?.SetFullScreen(this, !IsWindowed);
         FitToScreen();
     }
 
@@ -133,11 +140,22 @@ internal sealed partial class GameView : Window
 
         if (e.Property == IsWindowedProperty)
         {
-            bool windowed = WindowState != WindowState.FullScreen;
-
-            if (IsWindowed != windowed)
+            if (FullScreen is { } presenter)
             {
-                WindowState = IsWindowed ? WindowState.Normal : WindowState.FullScreen;
+                if (isOpened)
+                {
+                    presenter.SetFullScreen(this, !IsWindowed);
+                    FitToScreen();
+                }
+            }
+            else
+            {
+                bool windowed = WindowState != WindowState.FullScreen;
+
+                if (IsWindowed != windowed)
+                {
+                    WindowState = IsWindowed ? WindowState.Normal : WindowState.FullScreen;
+                }
             }
         }
         else if (e.Property == TopScreenProperty)
@@ -146,11 +164,9 @@ internal sealed partial class GameView : Window
         }
         else if (e.Property == WindowStateProperty)
         {
-            bool windowed = WindowState != WindowState.FullScreen;
-
-            if (WindowState != WindowState.Minimized)
+            if (FullScreen is null && WindowState != WindowState.Minimized)
             {
-                SetCurrentValue(IsWindowedProperty, windowed);
+                SetCurrentValue(IsWindowedProperty, WindowState != WindowState.FullScreen);
             }
 
             FitToScreen();
@@ -186,7 +202,8 @@ internal sealed partial class GameView : Window
     {
         Screen? screen = Screens.ScreenFromWindow(this);
 
-        if (screen is null)
+        // The platform full-screen mode sizes the window itself.
+        if (screen is null || FullScreen is not null && IsFullScreen)
         {
             return;
         }
