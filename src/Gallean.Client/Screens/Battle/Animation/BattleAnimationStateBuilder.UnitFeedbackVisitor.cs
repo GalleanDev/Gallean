@@ -74,7 +74,7 @@ internal sealed partial class BattleAnimationStateBuilder
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitDefendedEvent ev, Empty context)
         {
-            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Defend")));
+            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Defending")));
         }
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitDamagedByEffectEvent ev, Empty context)
@@ -188,7 +188,7 @@ internal sealed partial class BattleAnimationStateBuilder
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitTurnSkippedEvent ev, Empty context)
         {
-            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Skip")));
+            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Skipped")));
         }
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitTurnEndingEvent ev, Empty context)
@@ -203,7 +203,7 @@ internal sealed partial class BattleAnimationStateBuilder
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitWaitedEvent ev, Empty context)
         {
-            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Wait")));
+            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Waiting")));
         }
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitWardConsumedEvent ev, Empty context)
@@ -223,7 +223,7 @@ internal sealed partial class BattleAnimationStateBuilder
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitRetreatingEvent ev, Empty context)
         {
-            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Retreat")));
+            return (ev.UnitId, new Feedback(FeedbackType.Action, Tr("Retreating")));
         }
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitRetreatedEvent ev, Empty context)
