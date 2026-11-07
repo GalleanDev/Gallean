@@ -247,6 +247,23 @@ internal sealed partial class WorldEventQueue
             }
         }
 
+        public sealed record TerrainExpansion(
+            WorldState State,
+            WorldMap OldMap,
+            WorldPosition Position,
+            WorldPlayerId? PlayerId) : Animated(State)
+        {
+            public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
+            {
+                return new WorldAnimationState.TerrainExpansion(OldMap);
+            }
+
+            public override WorldEventFocus GetFocus()
+            {
+                return new WorldEventFocus(Position, PlayerId);
+            }
+        }
+
         public sealed record Unfog(
             WorldState State,
             WorldPosition Position,

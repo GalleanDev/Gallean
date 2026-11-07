@@ -4475,4 +4475,112 @@ public sealed class WorldRenderComposerTests
                 Theme.World.Highlight.HostileColor)
         ])));
     }
+
+    [Test]
+    public void TerrainExpansionTest()
+    {
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().Build();
+
+        WorldMap map = TestHelpers.BuildMap([
+            "H..",
+            "..."
+        ]);
+
+        WorldMap expandedMap = TestHelpers.BuildMap([
+            "HH.",
+            "..."
+        ]);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        WorldState state = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .Build()
+            .State;
+
+        WorldAnimationState.TerrainExpansion animation = new(map);
+        WorldRenderComposer composer = new(definitions, GameScenarioProvider.Empty, new TestMetadataProviderBuilder().Build());
+        WorldRenderState first = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty) with { Animation = animation });
+        WorldRenderState second = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty with { HoverTile = new WorldPosition(2, 1) }) with { Animation = animation });
+
+        Assert.That(first.Animation, Is.EqualTo(new TerrainExpansion(
+            new MapTerrain(
+                map,
+                [
+                    new MapTile(new WorldPosition(0, 0), new MapTileSurface.Ground(WorldMapTerrain.Human), RoadKey: null),
+                    new MapTile(new WorldPosition(1, 0), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null),
+                    new MapTile(new WorldPosition(2, 0), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null),
+                    new MapTile(new WorldPosition(0, 1), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null),
+                    new MapTile(new WorldPosition(1, 1), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null),
+                    new MapTile(new WorldPosition(2, 1), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null)
+                ],
+                [WorldMapTerrain.Neutral, WorldMapTerrain.Human],
+                [
+                    new MapTileBorder.Blend(
+                        new WorldPosition(1, 0),
+                        new AssetSpriteKey.GroundBorder(
+                            AssetSpriteKey.GroundBorderSet.Mask,
+                            new AssetSpriteKey.GroundBorderShape.Edges(AssetSpriteKey.GroundBorderEdges.West),
+                            19504349),
+                        WorldMapTerrain.Human),
+                    new MapTileBorder.Blend(
+                        new WorldPosition(0, 1),
+                        new AssetSpriteKey.GroundBorder(
+                            AssetSpriteKey.GroundBorderSet.Mask,
+                            new AssetSpriteKey.GroundBorderShape.Edges(AssetSpriteKey.GroundBorderEdges.North),
+                            187676067),
+                        WorldMapTerrain.Human),
+                    new MapTileBorder.Blend(
+                        new WorldPosition(1, 1),
+                        new AssetSpriteKey.GroundBorder(
+                            AssetSpriteKey.GroundBorderSet.Mask,
+                            new AssetSpriteKey.GroundBorderShape.Corners(AssetSpriteKey.GroundBorderCorners.NorthWest),
+                            250666057),
+                        WorldMapTerrain.Human)
+                ]),
+            [
+                new TerrainExpansionTile(
+                    new WorldPosition(0, 0),
+                    TimeSpan.FromMilliseconds(370.0),
+                    TimeSpan.FromMilliseconds(149.0),
+                    TimeSpan.FromMilliseconds(57.0),
+                    TimeSpan.FromMilliseconds(367.0)),
+                new TerrainExpansionTile(
+                    new WorldPosition(1, 0),
+                    TimeSpan.FromMilliseconds(149.0),
+                    TimeSpan.FromMilliseconds(354.0),
+                    TimeSpan.FromMilliseconds(427.0),
+                    TimeSpan.FromMilliseconds(57.0)),
+                new TerrainExpansionTile(
+                    new WorldPosition(2, 0),
+                    TimeSpan.FromMilliseconds(354.0),
+                    TimeSpan.FromMilliseconds(441.0),
+                    TimeSpan.FromMilliseconds(372.0),
+                    TimeSpan.FromMilliseconds(427.0)),
+                new TerrainExpansionTile(
+                    new WorldPosition(0, 1),
+                    TimeSpan.FromMilliseconds(367.0),
+                    TimeSpan.FromMilliseconds(57.0),
+                    TimeSpan.FromMilliseconds(447.0),
+                    TimeSpan.FromMilliseconds(433.0)),
+                new TerrainExpansionTile(
+                    new WorldPosition(1, 1),
+                    TimeSpan.FromMilliseconds(57.0),
+                    TimeSpan.FromMilliseconds(427.0),
+                    TimeSpan.FromMilliseconds(380.0),
+                    TimeSpan.FromMilliseconds(447.0)),
+                new TerrainExpansionTile(
+                    new WorldPosition(2, 1),
+                    TimeSpan.FromMilliseconds(427.0),
+                    TimeSpan.FromMilliseconds(372.0),
+                    TimeSpan.FromMilliseconds(474.0),
+                    TimeSpan.FromMilliseconds(380.0))
+            ],
+            [],
+            TimeSpan.FromMilliseconds(500.0),
+            TimeSpan.FromMilliseconds(974.0))));
+        Assert.That(second.Animation, Is.SameAs(first.Animation));
+    }
 }

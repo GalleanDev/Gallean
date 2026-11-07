@@ -139,6 +139,66 @@ internal sealed partial record WorldRenderState
         }
     }
 
+    public sealed record TerrainExpansion(
+        MapTerrain OldTerrain,
+        IReadOnlyList<TerrainExpansionTile> Tiles,
+        IReadOnlyList<TerrainExpansionTree> Trees,
+        TimeSpan Fade,
+        TimeSpan Duration) : WorldAnimation
+    {
+        public override TimeSpan Duration { get; } = Duration;
+
+        public override TResult Accept<TContext, TResult>(IWorldAnimationVisitor<TContext, TResult> visitor, TContext context)
+        {
+            return visitor.Visit(this, context);
+        }
+
+        public bool Equals(TerrainExpansion? other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return OldTerrain == other.OldTerrain &&
+                   Tiles.SequenceEqual(other.Tiles) &&
+                   Trees.SequenceEqual(other.Trees) &&
+                   Fade == other.Fade &&
+                   Duration == other.Duration;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new();
+
+            hash.Add(OldTerrain);
+            hash.AddSequence(Tiles);
+            hash.AddSequence(Trees);
+            hash.Add(Fade);
+            hash.Add(Duration);
+
+            return hash.ToHashCode();
+        }
+    }
+
+    public sealed record TerrainExpansionTile(
+        WorldPosition Position,
+        TimeSpan TopStart,
+        TimeSpan RightStart,
+        TimeSpan BottomStart,
+        TimeSpan LeftStart);
+
+    public sealed record TerrainExpansionTree(
+        WorldPosition Position,
+        int Depth,
+        AssetSpriteKey AssetKey,
+        TimeSpan Start);
+
     public abstract record SpellCastLayer(int Depth)
     {
         public sealed record Effect(

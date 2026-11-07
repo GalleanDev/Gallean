@@ -84,6 +84,7 @@ public sealed class WorldRenderContentProviderTests
         Assert.That(second.MapClip, Is.SameAs(first.MapClip));
         Assert.That(second.MinimapImage, Is.SameAs(first.MinimapImage));
         Assert.That(second.HitTargets, Is.SameAs(first.HitTargets));
+        Assert.That(second.TerrainExpansion, Is.SameAs(first.TerrainExpansion));
     }
 
     [Test]
@@ -196,5 +197,40 @@ public sealed class WorldRenderContentProviderTests
                 new AssetSpriteKey.GroundBorderShape.Edges(AssetSpriteKey.GroundBorderEdges.North),
                 Variant: 0)
         ]));
+    }
+
+    [Test]
+    public void TerrainExpansionHoverChangeTest()
+    {
+        using TestAssetProvider assets = CreateAssets();
+        WorldRenderContentProvider provider = new();
+        WorldRenderState plain = BuildState();
+        WorldRenderState state = plain with
+        {
+            Animation = new TerrainExpansion(
+                new MapTerrain(
+                    plain.Terrain.Map,
+                    [new MapTile(new WorldPosition(2, 1), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null)],
+                    [WorldMapTerrain.Neutral],
+                    []),
+                [
+                    new TerrainExpansionTile(
+                        new WorldPosition(2, 1),
+                        TimeSpan.FromMilliseconds(0.0),
+                        TimeSpan.FromMilliseconds(0.0),
+                        TimeSpan.FromMilliseconds(0.0),
+                        TimeSpan.FromMilliseconds(0.0))
+                ],
+                [],
+                TimeSpan.FromMilliseconds(500.0),
+                TimeSpan.FromMilliseconds(500.0))
+        };
+
+        WorldRenderContent first = provider.Get(state, assets);
+        WorldRenderState hovered = state with { Cursors = [new Cursor(new WorldPosition(1, 1), 1344, Theme.World.HoverCursorInnerColor, Theme.World.HoverCursorOuterColor, 1.0)] };
+        WorldRenderContent second = provider.Get(hovered, assets);
+
+        Assert.That(first.TerrainExpansion, Is.Not.Null);
+        CheckSameState(first, second);
     }
 }

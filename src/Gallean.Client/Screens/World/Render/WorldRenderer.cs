@@ -138,7 +138,7 @@ internal sealed partial class WorldRenderer
         IReadOnlyList<AnimationRenderItem> animations = BuildAnimationRenderItems(state, loopTime, animationTime);
 
         DrawBackdrop(canvas, content, visible);
-        DrawTerrain(canvas, content, frameIndex, loopTime, visible);
+        DrawTerrain(canvas, content, frameIndex, loopTime, animationTime, visible);
         DrawReach(canvas, content);
 
         foreach (ObjectiveMarker marker in state.ObjectiveMarkers)
@@ -170,7 +170,7 @@ internal sealed partial class WorldRenderer
         }
     }
 
-    private static void DrawTerrain(SKCanvas canvas, WorldRenderContent content, int frameIndex, TimeSpan loopTime, Rect visible)
+    private static void DrawTerrain(SKCanvas canvas, WorldRenderContent content, int frameIndex, TimeSpan loopTime, TimeSpan animationTime, Rect visible)
     {
         using SKPaint terrainPaint = SkiaHelpers.MakeImagePaint();
 
@@ -194,7 +194,65 @@ internal sealed partial class WorldRenderer
         content.RoadAtlas.UpdateAnimations(frameIndex, visible);
         content.RoadAtlas.Draw(canvas, terrainPaint, visible);
 
+        if (content.TerrainExpansion is not null &&
+            animationTime < content.TerrainExpansion.Duration &&
+            visible.Intersects(content.TerrainExpansion.Bounds))
+        {
+            DrawTerrainExpansion(canvas, content, content.TerrainExpansion, terrainPaint, frameIndex, loopTime, animationTime, visible);
+        }
+
         canvas.Restore();
+    }
+
+    private static void DrawTerrainExpansion(
+        SKCanvas canvas,
+        WorldRenderContent content,
+        TerrainExpansionLayer terrainExpansion,
+        SKPaint terrainPaint,
+        int frameIndex,
+        TimeSpan loopTime,
+        TimeSpan animationTime,
+        Rect visible)
+    {
+        using SKColorFilter filter = MakeColorFilter();
+        using SKPaint maskPaint = new() { BlendMode = SKBlendMode.DstIn, ColorFilter = filter };
+        Rect layerBounds = terrainExpansion.Bounds.Intersect(visible);
+
+        canvas.SaveLayer(layerBounds.ToSKRect(), null);
+        canvas.ClipPath(terrainExpansion.Clip, antialias: true);
+
+        Water.Draw(canvas, content.Water, loopTime, canvas.TotalMatrix.ScaleX, frameIndex);
+
+        terrainExpansion.CoastAtlas.UpdateAnimations(frameIndex, visible);
+        terrainExpansion.CoastAtlas.Draw(canvas, terrainPaint, visible);
+
+        foreach (GroundLayer layer in terrainExpansion.GroundLayers)
+        {
+            terrainPaint.Shader = layer.TerrainShader;
+            canvas.DrawVertices(layer.Mesh, SKBlendMode.Modulate, terrainPaint);
+        }
+
+        terrainPaint.Shader = null;
+        terrainExpansion.BorderAtlas.UpdateAnimations(frameIndex, visible);
+        terrainExpansion.BorderAtlas.Draw(canvas, terrainPaint, visible);
+        content.RoadAtlas.Draw(canvas, terrainPaint, visible);
+
+        canvas.DrawVertices(terrainExpansion.Mask, SKBlendMode.Dst, maskPaint);
+        canvas.Restore();
+
+        SKColorFilter MakeColorFilter()
+        {
+            float scale = (float)(terrainExpansion.Duration / terrainExpansion.Fade);
+            float offset = (float)((terrainExpansion.Fade - animationTime) / terrainExpansion.Fade);
+
+            return SKColorFilter.CreateColorMatrix(
+            [
+                0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                scale, 0.0f, 0.0f, 0.0f, offset
+            ]);
+        }
     }
 
     private static void DrawObjects(
@@ -852,7 +910,7 @@ internal sealed partial class WorldRenderer
         DrawStackFrame(canvas, paint, lease.Value, center, frameIndex, visible);
 
         using AssetCache<Sprite>.Lease bannerLease = assets.GetRequiredSprite(bannerKey);
-        DrawStackBanner(canvas, paint, bannerLease.Value, center, visible);
+        DrawSprite(canvas, paint, bannerLease.Value, center, visible);
     }
 
     private static Rect GetStackBodyBounds(IAssetProvider assets, Point center, AssetAnimationKey assetKey, AssetSpriteKey bannerKey)
@@ -868,7 +926,7 @@ internal sealed partial class WorldRenderer
         return body.Union(bannerBounds);
     }
 
-    private static void DrawStackBanner(SKCanvas canvas, SKPaint atlasPaint, Sprite sprite, Point center, Rect visible)
+    private static void DrawSprite(SKCanvas canvas, SKPaint atlasPaint, Sprite sprite, Point center, Rect visible)
     {
         double x = center.X + sprite.Metadata.OffsetX;
         double y = center.Y + sprite.Metadata.OffsetY;

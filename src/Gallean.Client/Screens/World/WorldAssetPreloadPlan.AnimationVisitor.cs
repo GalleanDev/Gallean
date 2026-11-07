@@ -67,6 +67,18 @@ internal static partial class WorldAssetPreloadPlan
             return Empty.Value;
         }
 
+        public Empty Visit(TerrainExpansion animation, Empty context)
+        {
+            AddTerrain(required, animation.OldTerrain);
+
+            foreach (TerrainExpansionTree tree in animation.Trees)
+            {
+                required.Add(new AssetPreloadItem.Sprite(tree.AssetKey));
+            }
+
+            return Empty.Value;
+        }
+
         public Empty Visit(StackBattle animation, Empty context)
         {
             required.Add(new AssetPreloadItem.Animation(animation.AssetKey));

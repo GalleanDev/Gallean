@@ -16,6 +16,8 @@ internal sealed partial class WorldRenderContentProvider
 
     private sealed record FogContent(FogLayer? Layer);
 
+    private sealed record TerrainExpansionContent(TerrainExpansionLayer? Layer);
+
     private sealed record WaterContent(WaterLayer? Layer);
 
     private sealed record StackLayer(IReadOnlyList<StackSprite> Stacks, IReadOnlyList<DirectSprite> DirectSprites);
@@ -61,7 +63,9 @@ internal sealed partial class WorldRenderContentProvider
     private readonly Part<MapTerrain, SpriteAtlas> roadAtlasPart = new();
     private readonly TexturePart roadAtlasTexturePart = new();
     private readonly Part<IReadOnlyList<MapObject>, StackLayer> stackLayerPart = new();
-    private readonly Part<MapTerrain, Terrains> terrainsPart = new();
+    private readonly OverlayPart<IReadOnlyList<MapTileBorder>, LandOverlayKey> terrainExpansionLandOverlayPart = new();
+    private readonly Part<WorldRenderState, WorldAnimation?, TerrainExpansionContent> terrainExpansionPart = new(static state => state.Animation);
+    private readonly Part<WorldRenderState, (MapTerrain Terrain, TerrainExpansion? TerrainExpansion), Terrains> terrainsPart = new(static state => (state.Terrain, state.Animation as TerrainExpansion));
     private readonly Part<Terrains, Terrains, IReadOnlyDictionary<WorldMapTerrain, TerrainTexture>> terrainTexturesPart = new(static terrains => terrains);
     private readonly Part<WaterTiles, WaterTiles, WaterContent> waterPart = new(static tiles => tiles);
     private readonly Part<MapTerrain, WaterTiles> waterTilesPart = new();
@@ -71,14 +75,15 @@ internal sealed partial class WorldRenderContentProvider
 
     public WorldRenderContent Get(WorldRenderState state, IAssetProvider assets)
     {
-        Terrains terrains = terrainsPart.Resolve(state.Terrain, Terrains.Build);
+        Terrains terrains = terrainsPart.Resolve(state, Terrains.Build);
         IReadOnlyDictionary<WorldMapTerrain, TerrainTexture> terrainTextures = terrainTexturesPart.Resolve(terrains, source => BuildTerrainTextures(source, assets));
         IReadOnlyList<GroundLayer> groundLayers = groundLayersPart.Resolve(state.Terrain, terrain => BuildGroundLayers(terrain, terrainTextures));
         WaterTiles waterTiles = waterTilesPart.Resolve(state.Terrain, WaterTiles.Build);
         WaterContent water = waterPart.Resolve(waterTiles, tiles => new WaterContent(Water.Build(tiles, assets)));
         SpriteAtlas coastAtlas = coastAtlasPart.Resolve(state.Terrain, terrain => BuildCoastAtlas(terrain, assets));
-        SpriteAtlas borderAtlas = borderAtlasPart.Resolve(state.Terrain, terrain => BuildBorderAtlas(terrain, terrainTextures, assets));
+        SpriteAtlas borderAtlas = borderAtlasPart.Resolve(state.Terrain, terrain => BuildBorderAtlas(terrain, terrainTextures, assets, landOverlayPart));
         SpriteAtlas roadAtlas = roadAtlasPart.Resolve(state.Terrain, terrain => BuildRoadAtlas(terrain, assets));
+        TerrainExpansionContent terrainExpansion = terrainExpansionPart.Resolve(state, source => new TerrainExpansionContent(BuildTerrainExpansion(source.Animation, terrainTextures, assets)));
         ObjectLayer objectLayer = objectAtlasPart.Resolve(state.MapObjects, objects => BuildObjectAtlas(objects, assets));
         StackLayer stackLayer = stackLayerPart.Resolve(state.Stacks, objects => BuildStackLayer(objects, assets));
         IReadOnlyList<DirectSprite> directSprites = directSpritesPart.Resolve(new DirectSpriteContent(objectLayer.DirectSprites, stackLayer.DirectSprites), MergeDirectSprites);
@@ -96,6 +101,7 @@ internal sealed partial class WorldRenderContentProvider
             coastAtlas,
             borderAtlas,
             roadAtlas,
+            terrainExpansion.Layer,
             objectLayer.Atlas,
             objectLayer.SpriteDepths,
             directSprites,
@@ -225,11 +231,15 @@ internal sealed partial class WorldRenderContentProvider
         return new SKPointI(left.Mod(texture.Image.Width / texture.Scale), top.Mod(texture.Image.Height / texture.Scale));
     }
 
-    private SpriteAtlas BuildBorderAtlas(MapTerrain terrain, IReadOnlyDictionary<WorldMapTerrain, TerrainTexture> terrainTextures, IAssetProvider assets)
+    private SpriteAtlas BuildBorderAtlas(
+        MapTerrain terrain,
+        IReadOnlyDictionary<WorldMapTerrain, TerrainTexture> terrainTextures,
+        IAssetProvider assets,
+        OverlayPart<IReadOnlyList<MapTileBorder>, LandOverlayKey> landOverlays)
     {
         using CleanupList leases = new();
 
-        List<SpriteAtlasSource.AbstractSprite> sprites = [.. GetBorderSprites(terrain.Borders, terrainTextures, assets, leases)];
+        List<SpriteAtlasSource.AbstractSprite> sprites = [.. GetBorderSprites(terrain.Borders, terrainTextures, assets, leases, landOverlays)];
         SpriteAtlasSource.Plan plan = SpriteAtlasSource.CreatePlan(sprites);
         AtlasTexture texture = borderAtlasTexturePart.Resolve(plan.Regions, AtlasTexture.Build);
 
@@ -240,7 +250,8 @@ internal sealed partial class WorldRenderContentProvider
         IReadOnlyList<MapTileBorder> borders,
         IReadOnlyDictionary<WorldMapTerrain, TerrainTexture> terrainTextures,
         IAssetProvider assets,
-        CleanupList leases)
+        CleanupList leases,
+        OverlayPart<IReadOnlyList<MapTileBorder>, LandOverlayKey> landOverlays)
     {
         Dictionary<AssetSpriteKey, SKImage> maskImages = [];
         Dictionary<int, EdgeOverlayPixel[]> edgePixels = [];
@@ -250,7 +261,7 @@ internal sealed partial class WorldRenderContentProvider
             TerrainTexture terrainTexture = terrainTextures[border.GroundTerrain];
             SKPointI phase = GetTerrainPhase(border.Position, terrainTexture);
 
-            SKImage overlayImage = landOverlayPart.Resolve(
+            SKImage overlayImage = landOverlays.Resolve(
                 borders,
                 new LandOverlayKey(border.MaskKey, border.GroundTerrain, phase),
                 () => RenderLandOverlay(terrainTexture, phase, GetMaskImage(border.MaskKey), GetEdgePixels(terrainTexture.Scale)));

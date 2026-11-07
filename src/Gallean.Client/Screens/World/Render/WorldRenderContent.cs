@@ -11,6 +11,7 @@ internal sealed record WorldRenderContent(
     SpriteAtlas CoastAtlas,
     SpriteAtlas BorderAtlas,
     SpriteAtlas RoadAtlas,
+    WorldRenderContent.TerrainExpansionLayer? TerrainExpansion,
     SpriteAtlas ObjectAtlas,
     IReadOnlyList<int> ObjectSpriteDepths,
     IReadOnlyList<WorldRenderContent.DirectSprite> DirectSprites,
@@ -26,6 +27,16 @@ internal sealed record WorldRenderContent(
     WorldBattleTransitionShaderProgram BattleTransitionShaderProgram)
 {
     public sealed record GroundLayer(SKVertices Mesh, SKShader TerrainShader);
+
+    public sealed record TerrainExpansionLayer(
+        IReadOnlyList<GroundLayer> GroundLayers,
+        SpriteAtlas CoastAtlas,
+        SpriteAtlas BorderAtlas,
+        SKPath Clip,
+        SKVertices Mask,
+        Rect Bounds,
+        TimeSpan Fade,
+        TimeSpan Duration);
 
     public sealed record WaterLayer(SKVertices Mesh, WaterShaderProgram ShaderProgram, IReadOnlyList<SKShader> Albedo);
 

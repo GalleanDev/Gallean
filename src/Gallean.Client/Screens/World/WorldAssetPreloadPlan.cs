@@ -10,35 +10,7 @@ internal static partial class WorldAssetPreloadPlan
         List<AssetPreloadItem> required = [];
         List<AssetPreloadItem> optional = [];
 
-        foreach (WorldMapTerrain terrain in GroundTerrains(state.Terrain.MapTiles))
-        {
-            required.Add(new AssetPreloadItem.Sprite(new AssetSpriteKey.Ground(terrain)));
-        }
-
-        required.Add(new AssetPreloadItem.Animation(new AssetAnimationKey.Water()));
-
-        foreach (MapTile tile in state.Terrain.MapTiles)
-        {
-            if (tile.RoadKey is not null)
-            {
-                required.Add(new AssetPreloadItem.Sprite(tile.RoadKey));
-            }
-        }
-
-        foreach (MapTileBorder border in state.Terrain.Borders)
-        {
-            switch (border)
-            {
-                case MapTileBorder.Blend blend:
-                    required.Add(new AssetPreloadItem.Sprite(blend.MaskKey));
-                    break;
-
-                case MapTileBorder.Coast coast:
-                    required.Add(new AssetPreloadItem.Sprite(coast.CoastKey));
-                    required.Add(new AssetPreloadItem.Sprite(coast.MaskKey));
-                    break;
-            }
-        }
+        AddTerrain(required, state.Terrain);
 
         foreach (MapObject item in state.MapObjects)
         {
@@ -169,6 +141,39 @@ internal static partial class WorldAssetPreloadPlan
     private static AssetPreloadPlan MakePlan(List<AssetPreloadItem> required, List<AssetPreloadItem> optional)
     {
         return new AssetPreloadPlan([.. required.Distinct()], [.. optional.Distinct()], []);
+    }
+
+    private static void AddTerrain(List<AssetPreloadItem> required, MapTerrain terrain)
+    {
+        foreach (WorldMapTerrain groundTerrain in GroundTerrains(terrain.MapTiles))
+        {
+            required.Add(new AssetPreloadItem.Sprite(new AssetSpriteKey.Ground(groundTerrain)));
+        }
+
+        required.Add(new AssetPreloadItem.Animation(new AssetAnimationKey.Water()));
+
+        foreach (MapTile tile in terrain.MapTiles)
+        {
+            if (tile.RoadKey is not null)
+            {
+                required.Add(new AssetPreloadItem.Sprite(tile.RoadKey));
+            }
+        }
+
+        foreach (MapTileBorder border in terrain.Borders)
+        {
+            switch (border)
+            {
+                case MapTileBorder.Blend blend:
+                    required.Add(new AssetPreloadItem.Sprite(blend.MaskKey));
+                    break;
+
+                case MapTileBorder.Coast coast:
+                    required.Add(new AssetPreloadItem.Sprite(coast.CoastKey));
+                    required.Add(new AssetPreloadItem.Sprite(coast.MaskKey));
+                    break;
+            }
+        }
     }
 
     private static IEnumerable<WorldMapTerrain> GroundTerrains(IReadOnlyList<MapTile> tiles)

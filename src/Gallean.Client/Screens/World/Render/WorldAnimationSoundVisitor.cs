@@ -11,4 +11,5 @@ internal sealed class WorldAnimationSoundVisitor : IWorldAnimationVisitor<Empty,
     public AssetSoundKey? Visit(Pause animation, Empty context) => null;
     public AssetSoundKey? Visit(StackBattle animation, Empty context) => null;
     public AssetSoundKey? Visit(BattleTransition animation, Empty context) => null;
+    public AssetSoundKey? Visit(TerrainExpansion animation, Empty context) => null;
 }

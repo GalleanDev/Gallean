@@ -3547,7 +3547,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(capturedCity.OwnerId, Is.EqualTo(ai.Id));
         Assert.That(world.CameraFocus, Is.EqualTo(humanCity.Entrance));
-        Assert.That(world.RenderRequest.Animation, Is.EqualTo(new WorldAnimationState.Pause(TimeSpan.FromSeconds(0.75))));
+        Assert.That(world.RenderRequest.Animation, Is.EqualTo(new WorldAnimationState.TerrainExpansion(map)));
 
         world.CompleteAnimation();
 
@@ -4548,7 +4548,7 @@ public sealed class WorldScreenViewModelTests
     [Test]
     public async Task ConsecutivePauseAnimationsTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(6, 6, 'U');
 
         UnitDefinition rodLeaderDefinition = TestHelpers.SimpleUnitDefinition("rod-leader", maxHitpoints: 100, initiative: 50, damage: 10) with
         {
@@ -4637,7 +4637,7 @@ public sealed class WorldScreenViewModelTests
     [Test]
     public async Task AnimationAcrossRefreshesTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(6, 6, 'U');
 
         UnitDefinition rodLeaderDefinition = TestHelpers.SimpleUnitDefinition("rod-leader", maxHitpoints: 100, initiative: 50, damage: 10) with
         {
