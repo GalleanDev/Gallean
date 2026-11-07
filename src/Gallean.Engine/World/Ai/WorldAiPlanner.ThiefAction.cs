@@ -240,7 +240,7 @@ internal sealed partial class WorldAiPlanner
                 WorldThiefActionType.PoisonCity => [(new WorldThiefPoisonAction(position), Considerations.Poison())],
                 WorldThiefActionType.StealSpell => CreateStealSpellActions(approach),
                 WorldThiefActionType.Bribe => [(new WorldThiefBribeAction(position), Considerations.Bribe(approach, Context))],
-                WorldThiefActionType.StealGold => [(new WorldThiefStealGoldAction(position), Considerations.StealGold(approach))],
+                WorldThiefActionType.StealGold => [(new WorldThiefStealGoldAction(position), Considerations.StealGold(approach, Context))],
                 WorldThiefActionType.StealMerchant => CreateStealItemActions(approach),
                 WorldThiefActionType.StealMage => CreateStealSpellActions(approach),
                 WorldThiefActionType.SpyRuin => [(new WorldThiefSpyRuinAction(position), Considerations.SpyRuin())],

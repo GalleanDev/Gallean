@@ -17,10 +17,9 @@ internal sealed partial class WorldAiPlanner
             private const int CounterfeitOrdersValue = MaxScore / 10;
             private const int SpyRuinValue = MaxScore / 10;
             private const int PoisonValue = MaxScore / 20;
-            private const int StealGoldValue = 2000;
-            private const int StealItemValue = 1000;
-            private const int StealSpellValue = 1000;
-            private const int DuelValue = 200;
+            private const int GoldMaxValue = 1000;
+            private const int DuelExperienceMaxValue = 200;
+            private const int PercentMax = 100;
 
             public static UtilityScore.Consideration SuccessChance(int chance)
             {
@@ -103,7 +102,7 @@ internal sealed partial class WorldAiPlanner
             {
                 ItemDefinition item = context.Engine.Definitions.GetItem(itemId);
 
-                return UtilityScore.Ratio(item.Value.Gold, StealItemValue);
+                return UtilityScore.Ratio(item.Value.Gold, GoldMaxValue);
             }
 
             public static UtilityScore.Consideration Assassinate()
@@ -122,7 +121,7 @@ internal sealed partial class WorldAiPlanner
 
                     if (estimate is { IsWinner: true, IsLeaderAlive: true })
                     {
-                        return UtilityScore.Ratio(leaderStats.ExperienceKilled, DuelValue);
+                        return UtilityScore.Ratio(leaderStats.ExperienceKilled, DuelExperienceMaxValue);
                     }
                     else
                     {
@@ -139,7 +138,7 @@ internal sealed partial class WorldAiPlanner
             {
                 WorldSpellDefinition spell = context.Engine.Definitions.GetSpell(spellId);
 
-                return UtilityScore.Ratio(spell.PurchaseCost.Gold, StealSpellValue);
+                return UtilityScore.Ratio(spell.PurchaseCost.Gold, GoldMaxValue);
             }
 
             public static UtilityScore.Consideration Bribe(Approach approach, WorldAiContext context)
@@ -157,13 +156,14 @@ internal sealed partial class WorldAiPlanner
                 }
             }
 
-            public static UtilityScore.Consideration StealGold(Approach approach)
+            public static UtilityScore.Consideration StealGold(Approach approach, WorldAiContext context)
             {
                 if (approach.Target.OwnerId is not null)
                 {
                     WorldPlayer owner = approach.State.Players[approach.Target.OwnerId.Value];
+                    int maxGold = owner.Resources.Gold * context.Engine.Globals.StealGoldPlayerPercent / PercentMax;
 
-                    return UtilityScore.Ratio(owner.Resources.Gold, StealGoldValue);
+                    return UtilityScore.Ratio(maxGold / 2, GoldMaxValue);
                 }
                 else
                 {

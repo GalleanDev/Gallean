@@ -625,7 +625,7 @@ public sealed class WorldEngineAiThiefTests
 
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with
         {
-            Resources = new WorldResourceSet(2000, 0, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(8000, 0, 0, 0, 0, 0)
         };
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
@@ -673,8 +673,8 @@ public sealed class WorldEngineAiThiefTests
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
             "[P2 175] Steal gold thief -> (3, 3)"
         ]));
-        Assert.That(session.World.State.Players[player1.Id].Resources, Is.EqualTo(new WorldResourceSet(161, 0, 0, 0, 0, 0)));
-        Assert.That(session.World.State.Players[player2.Id].Resources, Is.EqualTo(new WorldResourceSet(1939, 0, 0, 0, 25, 0)));
+        Assert.That(session.World.State.Players[player1.Id].Resources, Is.EqualTo(new WorldResourceSet(641, 0, 0, 0, 0, 0)));
+        Assert.That(session.World.State.Players[player2.Id].Resources, Is.EqualTo(new WorldResourceSet(7459, 0, 0, 0, 25, 0)));
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
     }
 
