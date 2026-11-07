@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gallean.Common;
@@ -17,8 +18,11 @@ internal sealed partial class WorldScreenViewModel :
 {
     private sealed record SelectedMove(WorldStack Stack, WorldPathSelection Selection);
 
+    private sealed record ActiveMove(WorldStackId StackId, WorldPosition Destination, TaskCompletionSource<bool> Completion);
+
     private static readonly TimeSpan StackIdleDelay = TimeSpan.FromMinutes(1);
     private static readonly TimeSpan StackIdleInterval = TimeSpan.FromMinutes(2);
+    private static readonly TimeSpan StackStepThreshold = TimeSpan.FromMilliseconds(100);
 
     private readonly CursorTypeVisitor cursorTypeVisitor;
     private readonly EventActionPlayer eventActionPlayer;
@@ -33,6 +37,7 @@ internal sealed partial class WorldScreenViewModel :
     private ScenarioTextId? objectiveTextId;
     private TimeSpan stackIdleRemaining;
     private WorldRenderRequest? renderRequest;
+    private ActiveMove? activeMove;
 
     public WorldScreenViewModel(GameModel gameModel, GameViewModel gameViewModel, IRandomProvider random)
         : base(gameModel, gameViewModel)
@@ -136,7 +141,7 @@ internal sealed partial class WorldScreenViewModel :
 
     public override ScreenMusic Music => ScreenMusic.Tracks(musicQueue);
 
-    protected override bool IsBusy => base.IsBusy || !Snapshot.IsViewPlayerTurn || !eventQueue.IsIdle;
+    protected override bool IsBusy => base.IsBusy || !Snapshot.IsViewPlayerTurn || !eventQueue.IsIdle || activeMove is not null;
 
     private bool FogEnabled => Game.DevTools.IsFogEnabled;
 
@@ -192,6 +197,16 @@ internal sealed partial class WorldScreenViewModel :
         WorldPosition? objectPosition,
         int clickCount)
     {
+        if (activeMove is not null)
+        {
+            if (clickCount == 1)
+            {
+                StopMove();
+            }
+
+            return;
+        }
+
         if (!WorldState.Map.IsValidPosition(tile))
         {
             return;
@@ -324,7 +339,7 @@ internal sealed partial class WorldScreenViewModel :
 
             if (path is not null)
             {
-                await MoveSelectedStackAsync(selected, path);
+                MoveSelectedStackAsync(selected, path).FileAndForget();
             }
 
             return true;
@@ -786,7 +801,11 @@ internal sealed partial class WorldScreenViewModel :
 
     protected override bool TryClose()
     {
-        if (cursor.Action is not null)
+        if (activeMove is not null)
+        {
+            StopMove();
+        }
+        else if (cursor.Action is not null)
         {
             ClearSelectedAction();
         }
@@ -898,7 +917,7 @@ internal sealed partial class WorldScreenViewModel :
     {
         if (path.Encounter is null)
         {
-            await TryDispatchWorldActionAsync(new WorldMoveStackCommand(stack.Id, path.Destination));
+            await MoveStackAsync(stack.Id, path.Destination);
         }
         else
         {
@@ -906,17 +925,102 @@ internal sealed partial class WorldScreenViewModel :
         }
     }
 
-    async Task IWorldPathEncounterVisitor<SelectedMove, Task>.Visit(WorldPathEncounter.Battle encounter, SelectedMove move)
+    private async Task<bool> MoveStackAsync(WorldStackId stackId, WorldPosition destination)
     {
-        WorldMoveStackCommand command = new(move.Stack.Id, move.Selection.Destination);
+        WorldStepStackCommand command = new(stackId, destination);
+        WorldCommandResult? commandResult = await DispatchWorldActionAsync(command);
 
-        if (encounter.TargetPosition == move.Selection.Destination)
+        if (commandResult is not null)
         {
-            await TryDispatchWorldActionAsync(command);
+            ActiveMove move = new(stackId, destination, new TaskCompletionSource<bool>());
+            activeMove = move;
+            FinishMoveStep(move, commandResult);
+
+            return await move.Completion.Task;
         }
         else
         {
-            Game.OpenScreen(CreateAttackPrompt(encounter.TargetPosition, async () => await TryDispatchWorldActionAsync(command)));
+            return false;
+        }
+    }
+
+    private async Task StepMoveAsync(ActiveMove move)
+    {
+        WorldStepStackCommand command = new(move.StackId, move.Destination);
+        WorldCommandResult commandResult = await GameModel.World.DispatchCommandAsync(command);
+
+        FinishMoveStep(move, commandResult);
+    }
+
+    private void FinishMoveStep(ActiveMove move, WorldCommandResult commandResult)
+    {
+        WorldStack? stack = WorldState.Stacks.GetValueOrDefault(move.StackId);
+        bool complete = stack is not null && stack.Position == move.Destination;
+
+        if (complete)
+        {
+            EndMove(move, complete);
+        }
+        else if (!IsStep(move.StackId, commandResult.Events))
+        {
+            EndMove(move, complete);
+        }
+
+        static bool IsStep(WorldStackId stackId, ImmutableList<WorldEvent> events)
+        {
+            return events is [.., WorldStackMovedEvent moved] && moved.StackId == stackId;
+        }
+    }
+
+    [MemberNotNullWhen(true, nameof(activeMove))]
+    private bool CanStepMove()
+    {
+        if (activeMove is null)
+        {
+            return false;
+        }
+
+        WorldStack? stack = WorldState.Stacks.GetValueOrDefault(activeMove.StackId);
+
+        return !Snapshot.IsBusy &&
+               stack is not null &&
+               eventQueue.PlayingEntry is Entry.StackMove move &&
+               move.StackId == activeMove.StackId &&
+               move.Steps[^1].Position == stack.Position;
+    }
+
+    private void StopMove()
+    {
+        if (activeMove is not null)
+        {
+            EndMove(activeMove, arrived: false);
+        }
+    }
+
+    private void EndMove(ActiveMove current, bool arrived)
+    {
+        if (ReferenceEquals(activeMove, current))
+        {
+            activeMove = null;
+            ProcessEventQueue();
+            current.Completion.SetResult(arrived);
+        }
+    }
+
+    async Task IWorldPathEncounterVisitor<SelectedMove, Task>.Visit(WorldPathEncounter.Battle encounter, SelectedMove move)
+    {
+        if (encounter.TargetPosition == move.Selection.Destination)
+        {
+            await MoveStackAsync(move.Stack.Id, move.Selection.Destination);
+        }
+        else
+        {
+            Game.OpenScreen(CreateAttackPrompt(
+                encounter.TargetPosition,
+                async () =>
+                {
+                    MoveStackAsync(move.Stack.Id, move.Selection.Destination).FileAndForget();
+                }));
         }
     }
 
@@ -956,7 +1060,7 @@ internal sealed partial class WorldScreenViewModel :
             path = path[..^1];
         }
 
-        if (path.IsEmpty || await TryDispatchWorldActionAsync(new WorldMoveStackCommand(move.Stack.Id, path[^1])))
+        if (path.IsEmpty || await MoveStackAsync(move.Stack.Id, path[^1]))
         {
             EnqueueEntry(new Entry.ThiefAction(WorldState, move.Stack.Id, encounter.TargetPosition));
         }
@@ -969,7 +1073,7 @@ internal sealed partial class WorldScreenViewModel :
 
     async Task IWorldPathEncounterVisitor<SelectedMove, Task>.Visit(WorldPathEncounter.Site encounter, SelectedMove move)
     {
-        if (await TryDispatchWorldActionAsync(new WorldMoveStackCommand(move.Stack.Id, move.Selection.Destination)))
+        if (await MoveStackAsync(move.Stack.Id, move.Selection.Destination))
         {
             EnqueueEntry(new Entry.SiteEnter(WorldState, move.Stack.Id, encounter.SiteId));
         }
@@ -987,6 +1091,23 @@ internal sealed partial class WorldScreenViewModel :
             }
 
             UpdateStackIdleTimer(delta);
+            UpdateMove(animationElapsed);
+        }
+    }
+
+    private void UpdateMove(TimeSpan animationElapsed)
+    {
+        if (CanStepMove())
+        {
+            if (RenderRequest.Animation is WorldAnimationState.StackMove move)
+            {
+                TimeSpan remaining = move.Steps[^1].Start - animationElapsed;
+
+                if (remaining <= StackStepThreshold)
+                {
+                    StepMoveAsync(activeMove).FileAndForget();
+                }
+            }
         }
     }
 
@@ -1017,7 +1138,15 @@ internal sealed partial class WorldScreenViewModel :
         if (eventQueue.PlayingEntry is Entry.Animated ||
             eventActionPlayer.ActiveAnimation is WorldAnimationState.BattleEnd)
         {
+            ActiveMove? move = CanStepMove() ? activeMove : null;
+
             StopEntry();
+
+            if (move is not null)
+            {
+                StepMoveAsync(move).FileAndForget();
+            }
+
             ProcessEventQueue();
         }
     }
@@ -1053,6 +1182,13 @@ internal sealed partial class WorldScreenViewModel :
                 GameModel.ActiveBattle,
                 Game.Settings,
                 FogEnabled);
+
+            if (eventQueue.TryExtendPlaying(out Entry? newEntry))
+            {
+                WorldEventAction action = builder.Build(newEntry);
+
+                action.Accept(eventActionPlayer);
+            }
 
             while (eventQueue.PlayNext() is { } entry)
             {

@@ -2024,6 +2024,44 @@ public sealed class WorldEventQueueTests
     }
 
     [Test]
+    public void ExtendPlayingTest()
+    {
+        WorldState firstState = BuildState();
+        WorldState secondState = BuildState();
+        Subject<EngineStep<WorldState, WorldEvent>> events = new();
+        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
+
+        events.OnNext(Moved(firstState, new WorldStackId("s1"), new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest));
+
+        Entry? first = queue.PlayNext();
+
+        events.OnNext(Moved(secondState, new WorldStackId("s1"), new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast));
+
+        Assert.That(queue.TryExtendPlaying(out Entry? extended), Is.True);
+        Assert.That(first, Is.EqualTo(new Entry.StackMove(
+            firstState,
+            new WorldStackId("s1"),
+            [
+                new Entry.StackMove.Step(new WorldPosition(0, 0), WorldStackDirection.SouthWest),
+                new Entry.StackMove.Step(new WorldPosition(0, 1), WorldStackDirection.SouthWest)
+            ])));
+        Assert.That(extended, Is.EqualTo(new Entry.StackMove(
+            secondState,
+            new WorldStackId("s1"),
+            [
+                new Entry.StackMove.Step(new WorldPosition(0, 0), WorldStackDirection.SouthWest),
+                new Entry.StackMove.Step(new WorldPosition(0, 1), WorldStackDirection.SouthEast),
+                new Entry.StackMove.Step(new WorldPosition(1, 1), WorldStackDirection.SouthEast)
+            ])));
+        Assert.That(queue.PlayingEntry, Is.SameAs(extended));
+        Assert.That(queue.PlayNext(), Is.Null);
+
+        queue.Stop();
+
+        Assert.That(queue.IsIdle, Is.True);
+    }
+
+    [Test]
     public void ResourcesCapturedTest()
     {
         WorldState state = BuildStateWithStack(new WorldUnitId("leader"), new WorldStackId("Stack1"), new WorldPlayerId(1), new WorldPlayerId(2));

@@ -23,6 +23,12 @@ internal sealed class AnimationPlayback<T> where T : class, IAnimationObject
         return true;
     }
 
+    public void Continue(T animation)
+    {
+        Current = animation;
+        completed = false;
+    }
+
     public TimeSpan GetElapsed(TimeSpan now)
     {
         return Current is not null ? now - start : TimeSpan.Zero;

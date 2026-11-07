@@ -10,6 +10,11 @@ internal sealed partial record WorldRenderState
         public abstract TimeSpan Duration { get; }
 
         public abstract TResult Accept<TContext, TResult>(IWorldAnimationVisitor<TContext, TResult> visitor, TContext context);
+
+        public virtual bool Continues(WorldAnimation previous)
+        {
+            return false;
+        }
     }
 
     public sealed record StackMoveStep(
@@ -34,6 +39,14 @@ internal sealed partial record WorldRenderState
         public override TResult Accept<TContext, TResult>(IWorldAnimationVisitor<TContext, TResult> visitor, TContext context)
         {
             return visitor.Visit(this, context);
+        }
+
+        public override bool Continues(WorldAnimation previous)
+        {
+            return previous is StackMove move &&
+                   move.StackId == StackId &&
+                   move.Steps.Count <= Steps.Count &&
+                   move.Steps[^1].Position == Steps[move.Steps.Count - 1].Position;
         }
 
         public bool Equals(StackMove? other)

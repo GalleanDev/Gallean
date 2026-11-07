@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Gallean.Common;
 using Gallean.Engine;
 
@@ -86,6 +87,29 @@ internal sealed partial class WorldEventQueue :
             queue.RemoveAt(0);
 
             return playingEntry;
+        }
+    }
+
+    public bool TryExtendPlaying([NotNullWhen(true)] out Entry? entry)
+    {
+        lock (locker)
+        {
+            if (playingEntry is null || queue.Count == 0)
+            {
+                entry = null;
+
+                return false;
+            }
+
+            entry = playingEntry.TryExtend(queue[0]);
+
+            if (entry is not null)
+            {
+                playingEntry = entry;
+                queue.RemoveAt(0);
+            }
+
+            return entry is not null;
         }
     }
 

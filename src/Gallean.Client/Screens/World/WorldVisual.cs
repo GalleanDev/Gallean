@@ -428,9 +428,14 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
             RegisterAnimation(snapshotWorker.Current, now);
             ViewModel.Update(delta, animationPlayback.GetElapsed(now));
 
-            if (animationPlayback.TryComplete(now))
+            WorldScreenSnapshot? snapshot = snapshotWorker.Current;
+
+            if (snapshot is not null && snapshot.RenderRequest.Animation == ViewModel.RenderRequest.Animation)
             {
-                ViewModel.CompleteAnimation();
+                if (animationPlayback.TryComplete(now))
+                {
+                    ViewModel.CompleteAnimation();
+                }
             }
 
             int frameIndex = AnimationRate.Sprites.GetFrameIndex(animationClock.Now);
@@ -603,14 +608,18 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
     {
         WorldRenderState.WorldAnimation? animation = snapshot?.WorldState.Animation;
 
-        if (!animationPlayback.Register(animation, now) || animation is null)
+        if (animation is not null &&
+            animationPlayback.Current is not null &&
+            animation.Continues(animationPlayback.Current))
         {
-            return;
+            animationPlayback.Continue(animation);
         }
-
-        if (animation.Accept(WorldAnimationSoundVisitor.Instance, Empty.Value) is { } soundKey)
+        else if (animationPlayback.Register(animation, now) && animation is not null)
         {
-            Audio.PlaySound(soundKey);
+            if (animation.Accept(WorldAnimationSoundVisitor.Instance, Empty.Value) is { } soundKey)
+            {
+                Audio.PlaySound(soundKey);
+            }
         }
     }
 }

@@ -87,6 +87,23 @@ internal sealed partial class WorldEventQueue
                 }
             }
 
+            public override Entry? TryExtend(Entry next)
+            {
+                if (next is StackMove move && move.StackId == StackId && move.Steps[0].Position == Steps[^1].Position)
+                {
+                    List<Step> steps = [.. Steps];
+
+                    steps[^1] = new Step(steps[^1].Position, move.Steps[0].Direction);
+                    steps.AddRange(move.Steps.Skip(1));
+
+                    return this with { State = move.State, Steps = steps };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
             public override WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings)
             {
                 TimeSpan stepDuration = DefaultStepDuration / settings.MovementSpeedFactor;
@@ -631,6 +648,11 @@ internal sealed partial class WorldEventQueue
         }
 
         public virtual Entry? TryExtend(EngineStep<WorldState, WorldEvent> step)
+        {
+            return null;
+        }
+
+        public virtual Entry? TryExtend(Entry next)
         {
             return null;
         }

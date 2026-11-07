@@ -203,7 +203,7 @@ public sealed class WorldRenderRebuildTests
         Fixture fixture = CreateWorld();
         await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
         await fixture.World.HandleMapClickAsync(NearTile, null, 1);
-        await fixture.World.HandleMapClickAsync(NearTile, null, 1);
+        fixture.World.CompleteAnimation();
         RebuildProbe probe = new(fixture.World);
 
         RebuildState rebuildState = probe.Measure(fixture.World.CompleteAnimation);
@@ -439,6 +439,8 @@ public sealed class WorldRenderRebuildTests
             ("Hover same tile again", probe.Measure(() => world.UpdateHover(NearTile, null))),
             ("Clear hover", probe.Measure(world.ClearHover)),
             ("Click reachable tile (move stack)", await probe.MeasureAsync(() => world.HandleMapClickAsync(FarTile, null, 1))),
+            ("Complete first step animation", probe.Measure(world.CompleteAnimation)),
+            ("Complete second step animation", probe.Measure(world.CompleteAnimation)),
             ("Complete movement animation", probe.Measure(world.CompleteAnimation)),
             ("Select stack item", probe.Measure(() => world.SelectStackItemCommand.Execute(new WorldStackId("Bravo")))),
             ("Show info", probe.Measure(() => world.ShowPositionInfo(BravoStart, null))),
@@ -507,6 +509,22 @@ public sealed class WorldRenderRebuildTests
                 World: true,
                 Minimap: false)),
             ("Click reachable tile (move stack)", new RebuildState(
+                NewRequest: true,
+                Terrain: false,
+                Fog: false,
+                Objects: false,
+                Stacks: true,
+                World: true,
+                Minimap: true)),
+            ("Complete first step animation", new RebuildState(
+                NewRequest: true,
+                Terrain: false,
+                Fog: false,
+                Objects: false,
+                Stacks: true,
+                World: true,
+                Minimap: true)),
+            ("Complete second step animation", new RebuildState(
                 NewRequest: true,
                 Terrain: false,
                 Fog: false,
