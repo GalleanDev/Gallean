@@ -69,6 +69,8 @@ internal static partial class WorldAssetPreloadPlan
 
         public Empty Visit(TerrainExpansion animation, Empty context)
         {
+            optional.Add(new AssetPreloadItem.Sound(animation.SoundKey));
+
             AddTerrain(required, animation.OldTerrain);
 
             foreach (TerrainExpansionTree tree in animation.Trees)

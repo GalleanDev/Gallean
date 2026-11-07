@@ -140,6 +140,7 @@ internal sealed partial record WorldRenderState
     }
 
     public sealed record TerrainExpansion(
+        AssetSoundKey SoundKey,
         MapTerrain OldTerrain,
         IReadOnlyList<TerrainExpansionTile> Tiles,
         IReadOnlyList<TerrainExpansionTree> Trees,
@@ -165,7 +166,8 @@ internal sealed partial record WorldRenderState
                 return true;
             }
 
-            return OldTerrain == other.OldTerrain &&
+            return SoundKey == other.SoundKey &&
+                   OldTerrain == other.OldTerrain &&
                    Tiles.SequenceEqual(other.Tiles) &&
                    Trees.SequenceEqual(other.Trees) &&
                    Fade == other.Fade &&
@@ -176,6 +178,7 @@ internal sealed partial record WorldRenderState
         {
             HashCode hash = new();
 
+            hash.Add(SoundKey);
             hash.Add(OldTerrain);
             hash.AddSequence(Tiles);
             hash.AddSequence(Trees);

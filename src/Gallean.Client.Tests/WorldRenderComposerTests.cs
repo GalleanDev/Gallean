@@ -4506,6 +4506,7 @@ public sealed class WorldRenderComposerTests
         WorldRenderState second = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty with { HoverTile = new WorldPosition(2, 1) }) with { Animation = animation });
 
         Assert.That(first.Animation, Is.EqualTo(new TerrainExpansion(
+            new AssetSoundKey.Occupy(),
             new MapTerrain(
                 map,
                 [

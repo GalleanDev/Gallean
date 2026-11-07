@@ -208,6 +208,7 @@ public sealed class WorldRenderContentProviderTests
         WorldRenderState state = plain with
         {
             Animation = new TerrainExpansion(
+                new AssetSoundKey.Occupy(),
                 new MapTerrain(
                     plain.Terrain.Map,
                     [new MapTile(new WorldPosition(2, 1), new MapTileSurface.Ground(WorldMapTerrain.Neutral), RoadKey: null)],

@@ -123,6 +123,7 @@ internal sealed partial class WorldRenderComposer
             }
 
             return new TerrainExpansion(
+                new AssetSoundKey.Occupy(),
                 new MapTerrain(oldMap, oldTiles, oldGroundTerrains, oldBorders),
                 tiles,
                 trees,
