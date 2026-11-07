@@ -2022,4 +2022,21 @@ public sealed class WorldEventQueueTests
 
         Assert.That(queue.IsIdle, Is.True);
     }
+
+    [Test]
+    public void ResourcesCapturedTest()
+    {
+        WorldState state = BuildStateWithStack(new WorldUnitId("leader"), new WorldStackId("Stack1"), new WorldPlayerId(1), new WorldPlayerId(2));
+        Subject<EngineStep<WorldState, WorldEvent>> events = new();
+        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
+
+        events.OnNext(new EngineStep<WorldState, WorldEvent>(
+            state,
+            state,
+            new WorldResourcesCapturedEvent(new WorldPlayerId(1), new WorldPlayerId(2), new WorldResourceSet(300, 0, 0, 0, 50, 0))));
+
+        Entry entry = Assert.NotNull(queue.PlayNext());
+        Assert.That(entry, Is.EqualTo(new Entry.ResourcesCapture(state, new WorldPlayerId(1), new WorldResourceSet(300, 0, 0, 0, 50, 0))));
+        Assert.That(entry.GetFocusPosition(new WorldPlayerId(1)), Is.Null);
+    }
 }

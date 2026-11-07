@@ -799,4 +799,74 @@ public sealed class WorldEngineCapitalTests
             }
         }));
     }
+
+    [Test]
+    public void CaptureCapitalResourcesTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 5);
+
+        WorldPlayer attacker = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer defender = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with
+        {
+            Resources = new WorldResourceSet(300, 0, 0, 0, 50, 0)
+        };
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 2, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            attacker.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 2);
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            defender.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(attacker.LordId, attacker.Race, LordCategory.Warrior))
+            .WithPlayer(attacker)
+            .WithDefinition(TestHelpers.SimpleLord(defender.LordId, defender.Race, LordCategory.Warrior))
+            .WithPlayer(defender)
+            .WithStack(stack)
+            .WithCapital(capital)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommand(new WorldMoveStackCommand(stack.Id, capital.Entrance), [
+            new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null),
+            new WorldFortificationEnteredEvent(new WorldStackId("stack"), new WorldFortificationId("capital")),
+            new WorldFortificationCapturingEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldResourcesCapturedEvent(attacker.Id, defender.Id, new WorldResourceSet(300, 0, 0, 0, 50, 0)),
+            new WorldPlayerDefeatedEvent(defender.Id),
+            new WorldScenarioEndedEvent(attacker.Id),
+            new WorldFortificationCapturedEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(engine.State with
+        {
+            Players = engine.State.Players
+                .SetItem(attacker.Id, attacker with { Resources = new WorldResourceSet(400, 25, 0, 0, 50, 0) })
+                .SetItem(defender.Id, defender with { Resources = WorldResourceSet.Empty }),
+            Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+            {
+                Position = capital.Entrance,
+                Direction = WorldStackDirection.NorthWest,
+                MovementPoints = 2
+            }),
+            Fortifications = engine.State.Fortifications.SetItem(capital.Id, capital with { CapturedById = attacker.Id }),
+            ScenarioState = WorldScenarioState.Empty with
+            {
+                IsEnded = true,
+                Winner = attacker.Id
+            }
+        }));
+    }
 }

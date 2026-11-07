@@ -81,6 +81,15 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
         return new LootScreenViewModel(Tr("New spells"), text, null, [.. spells.Select(spellId => CreateSpell(gameModel, spellId))]);
     }
 
+    public static LootScreenViewModel CreateForCapturedResources(WorldResourceSet resources)
+    {
+        return new LootScreenViewModel(
+            Tr("Treasure"),
+            Tr("You have captured resources."),
+            new ResourceSetViewModel(resources, ResourceSetProjection.All),
+            []);
+    }
+
     protected override bool TryClose()
     {
         CloseSelf();

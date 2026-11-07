@@ -13,6 +13,7 @@ internal sealed partial class WorldEngine(IEngineContext context, WorldState ini
             new BattleEndedRetreatStackRule(context),
             new UnitDamagedDestroyStackRule(context),
             new BattleEndedCaptureFortificationRule(context),
+            new FortificationCapturingCaptureResourcesRule(context),
             new FortificationCapturingReceiveSpellsRule(context),
             new FortificationCapturingRiotRule(context),
             new FortificationCapturingDefeatRule(context),

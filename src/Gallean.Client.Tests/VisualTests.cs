@@ -1377,6 +1377,26 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task WorldCapturedResourcesLootTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        await WaitForWorldAsync(window);
+
+        gameViewModel.OpenScreen(LootScreenViewModel.CreateForCapturedResources(new WorldResourceSet(1250, 0, 0, 0, 180, 0)));
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task WorldThiefActionResultTest()
     {
         using Sandbox sb = Sandbox.Create();

@@ -44,6 +44,7 @@ internal sealed class WorldEventActionBuilder(
             Entry.BagPickUp data => BuildBagPickUp(data),
             Entry.ItemsReceive data => BuildItemsReceive(data),
             Entry.SpellsReceive data => BuildSpellsReceive(data),
+            Entry.ResourcesCapture data => BuildResourcesCapture(data),
             Entry.LeaderUpgrade data => BuildLeaderUpgrade(data),
             Entry.DiplomacyProposal data => BuildDiplomacyProposal(data),
             Entry.ThiefAction data => BuildThiefAction(data),
@@ -464,6 +465,21 @@ internal sealed class WorldEventActionBuilder(
                 [new AssetSoundKey.BagPickUp()],
                 spellsReceive.GetFocusPosition(ViewPlayerId),
                 spellsReceive.Spells);
+        }
+        else
+        {
+            return WorldEventAction.None;
+        }
+    }
+
+    private WorldEventAction BuildResourcesCapture(Entry.ResourcesCapture resourcesCapture)
+    {
+        if (resourcesCapture.PlayerId == ViewPlayerId)
+        {
+            return new WorldEventAction.ResourcesCapture(
+                [new AssetSoundKey.BagPickUp()],
+                resourcesCapture.GetFocusPosition(ViewPlayerId),
+                resourcesCapture.Resources);
         }
         else
         {

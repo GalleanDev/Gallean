@@ -132,6 +132,7 @@ public sealed class WorldEngineGameEndedTests
             new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null),
             new WorldFortificationEnteredEvent(new WorldStackId("stack"), new WorldFortificationId("capital")),
             new WorldFortificationCapturingEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldResourcesCapturedEvent(attacker.Id, defender.Id, new WorldResourceSet(100, 0, 0, 0, 25, 0)),
             new WorldPlayerDefeatedEvent(defender.Id),
             new WorldScenarioEndedEvent(null),
             new WorldFortificationCapturedEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
@@ -146,10 +147,9 @@ public sealed class WorldEngineGameEndedTests
                 Direction = WorldStackDirection.NorthWest,
                 MovementPoints = 2
             }),
-            Players = engine.State.Players.SetItem(defender.Id, defender with
-            {
-                Resources = new WorldResourceSet(100, 0, 0, 0, 25, 0)
-            }),
+            Players = engine.State.Players
+                .SetItem(attacker.Id, attacker with { Resources = new WorldResourceSet(200, 25, 0, 0, 25, 0) })
+                .SetItem(defender.Id, defender),
             Fortifications = engine.State.Fortifications.SetItem(capital.Id, capital with
             {
                 CapturedById = attacker.Id
@@ -211,6 +211,7 @@ public sealed class WorldEngineGameEndedTests
             new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null),
             new WorldFortificationEnteredEvent(new WorldStackId("stack"), new WorldFortificationId("capital")),
             new WorldFortificationCapturingEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldResourcesCapturedEvent(attacker.Id, defender.Id, new WorldResourceSet(100, 0, 0, 0, 25, 0)),
             new WorldPlayerDefeatedEvent(defender.Id),
             new WorldFortificationCapturedEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
             new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null)
@@ -218,6 +219,9 @@ public sealed class WorldEngineGameEndedTests
 
         Assert.That(engine.State, Is.EqualTo(engine.State with
         {
+            Players = engine.State.Players
+                .SetItem(attacker.Id, attacker with { Resources = new WorldResourceSet(200, 25, 0, 0, 25, 0) })
+                .SetItem(defender.Id, defender),
             Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
             {
                 Position = capital.Entrance,

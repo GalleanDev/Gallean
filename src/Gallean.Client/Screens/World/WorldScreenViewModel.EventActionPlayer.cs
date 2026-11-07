@@ -154,6 +154,11 @@ internal sealed partial class WorldScreenViewModel
             return LootScreenViewModel.CreateForSpells(parent.GameModel, action.Spells);
         }
 
+        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ResourcesCapture action)
+        {
+            return LootScreenViewModel.CreateForCapturedResources(action.Resources);
+        }
+
         AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.LeaderUpgrade action)
         {
             return new LeaderUpgradeViewModel(parent.GameModel, parent.Game, action.StackId);

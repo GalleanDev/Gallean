@@ -629,6 +629,13 @@ internal sealed partial class WorldEventQueue
         return Empty.Value;
     }
 
+    Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldResourcesCapturedEvent ev, EngineStep<WorldState, WorldEvent> step)
+    {
+        queue.Add(new Entry.ResourcesCapture(step.NewState, ev.PlayerId, ev.Resources));
+
+        return Empty.Value;
+    }
+
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldGoldGivenEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
         return Empty.Value;

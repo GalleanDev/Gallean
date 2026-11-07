@@ -551,6 +551,17 @@ internal sealed partial class WorldEventQueue
             }
         }
 
+        public sealed record ResourcesCapture(
+            WorldState State,
+            WorldPlayerId PlayerId,
+            WorldResourceSet Resources) : Entry(State)
+        {
+            public override WorldEventFocus? GetFocus()
+            {
+                return null;
+            }
+        }
+
         public sealed record LeaderUpgrade(WorldState State, WorldStackId StackId) : Entry(State)
         {
             public override WorldEventFocus? GetFocus()

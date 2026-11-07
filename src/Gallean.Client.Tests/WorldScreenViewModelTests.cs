@@ -8235,4 +8235,67 @@ public sealed class WorldScreenViewModelTests
         ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
         Assert.IsOfType<StackTabViewModel>(screen.SelectedTab);
     }
+
+    [Test]
+    public async Task CaptureCapitalResourcesTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 5);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer defender = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(300, 0, 0, 0, 50, 0)
+        };
+        WorldPlayer otherPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(3), WorldRace.Human, map) with { IsAi = true };
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 2, leadership: 6);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            player.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 2);
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            defender.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(defender.LordId, defender.Race, LordCategory.Warrior))
+            .WithPlayer(defender)
+            .WithDefinition(TestHelpers.SimpleLord(otherPlayer.LordId, otherPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(otherPlayer)
+            .WithStack(stack)
+            .WithCapital(capital)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        await gameModel.World.DispatchCommandAsync(new WorldMoveStackCommand(stack.Id, capital.Entrance));
+
+        world.CompleteAnimation();
+
+        LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(loot.Title, Is.EqualTo("Treasure"));
+        Assert.That(loot.Text, Is.EqualTo("You have captured resources."));
+        Assert.That(loot.Resources, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(300, 0, 0, 0, 50, 0), ResourceSetProjection.All)));
+        Assert.That(loot.Items, Is.Empty);
+
+        loot.Close();
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+        Assert.That(world.IsActive, Is.True);
+    }
 }

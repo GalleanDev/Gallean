@@ -29,6 +29,7 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldGoldGivenEvent ev, TContext context);
     TResult Visit(WorldRelationChangedEvent ev, TContext context);
     TResult Visit(WorldResourcesStolenEvent ev, TContext context);
+    TResult Visit(WorldResourcesCapturedEvent ev, TContext context);
     TResult Visit(WorldInventoryItemTransferredEvent ev, TContext context);
     TResult Visit(WorldItemEquippedEvent ev, TContext context);
     TResult Visit(WorldItemsReceivedEvent ev, TContext context);
