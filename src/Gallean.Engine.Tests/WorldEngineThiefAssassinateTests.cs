@@ -58,7 +58,7 @@ public sealed class WorldEngineThiefAssassinateTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefAssassinateAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldUnitDamagedEvent(new WorldUnitGroup.Stack(targetStack.Id), new WorldUnitId("soldier"), 0, thiefStack.OwnerId),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -120,7 +120,7 @@ public sealed class WorldEngineThiefAssassinateTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefAssassinateAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(targetStack.Id, new WorldUnitGroup.Stack(thiefStack.Id), thiefStack.OwnerId),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -187,7 +187,7 @@ public sealed class WorldEngineThiefAssassinateTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefAssassinateAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 
@@ -366,7 +366,7 @@ public sealed class WorldEngineThiefAssassinateTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefAssassinateAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldUnitDamagedEvent(new WorldUnitGroup.Stack(targetStack.Id), new WorldUnitId("squire"), 0, thiefStack.OwnerId),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -434,7 +434,7 @@ public sealed class WorldEngineThiefAssassinateTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefAssassinateAction(city.Entrance)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldUnitDamagedEvent(new WorldUnitGroup.Fortification(city.Id), new WorldUnitId("squire"), 0, thiefStack.OwnerId),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);

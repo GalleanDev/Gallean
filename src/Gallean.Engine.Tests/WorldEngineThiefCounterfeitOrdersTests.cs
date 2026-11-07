@@ -62,7 +62,7 @@ public sealed class WorldEngineThiefCounterfeitOrdersTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefCounterfeitOrdersAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldUnitsShuffledEvent(new WorldUnitGroup.Stack(targetStack.Id), shuffled),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -139,7 +139,7 @@ public sealed class WorldEngineThiefCounterfeitOrdersTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefCounterfeitOrdersAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldUnitsShuffledEvent(new WorldUnitGroup.Stack(targetStack.Id), shuffled),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -206,7 +206,7 @@ public sealed class WorldEngineThiefCounterfeitOrdersTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefCounterfeitOrdersAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 
@@ -376,7 +376,7 @@ public sealed class WorldEngineThiefCounterfeitOrdersTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefCounterfeitOrdersAction(city.Entrance)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.CounterfeitOrders, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldUnitsShuffledEvent(new WorldUnitGroup.Fortification(city.Id), shuffled),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);

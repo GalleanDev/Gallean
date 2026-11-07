@@ -77,7 +77,7 @@ public sealed class WorldEngineDiplomacyThiefActionTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 35),
                 new WorldStackPoisonedEvent(targetStack.Id, poisonedUnits),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
@@ -140,7 +140,7 @@ public sealed class WorldEngineDiplomacyThiefActionTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefRiotAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.RiotCity, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.RiotCity, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 35),
                 new WorldCityRiotStartedEvent(city.Id, 3),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
@@ -206,7 +206,7 @@ public sealed class WorldEngineDiplomacyThiefActionTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, neutral.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, neutral.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldFortificationPoisonedEvent(city.Id, poisonedGarrison),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -282,7 +282,7 @@ public sealed class WorldEngineDiplomacyThiefActionTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefDuelAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 35),
                 new WorldStackBattleStartedEvent(thiefStack.Id, targetStack.Id, targetStack.Position, expectedBattleState, IsDuel: true),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 28),

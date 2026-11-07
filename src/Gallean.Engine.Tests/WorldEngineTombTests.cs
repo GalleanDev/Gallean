@@ -793,7 +793,7 @@ public sealed class WorldEngineTombTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, Destroyer: null, DestroyerPlayerId: null)
             ]);
 

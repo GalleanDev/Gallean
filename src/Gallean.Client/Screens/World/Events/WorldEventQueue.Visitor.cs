@@ -714,7 +714,7 @@ internal sealed partial class WorldEventQueue
     {
         if (step.NewState.Stacks.TryGetValue(ev.ThiefStackId, out WorldStack? thief))
         {
-            queue.Add(new Entry.ThiefActionResult(step.NewState, thief.Position, thief.OwnerId, ev.Action, IsSuccess: true));
+            queue.Add(new Entry.ThiefActionResult(step.NewState, thief.Position, thief.OwnerId, ev.TargetPlayerId, ev.Target, ev.Action, true));
         }
 
         return Empty.Value;
@@ -724,7 +724,7 @@ internal sealed partial class WorldEventQueue
     {
         if (step.NewState.Stacks.TryGetValue(ev.ThiefStackId, out WorldStack? thief))
         {
-            queue.Add(new Entry.ThiefActionResult(step.NewState, thief.Position, thief.OwnerId, ev.Action, IsSuccess: false));
+            queue.Add(new Entry.ThiefActionResult(step.NewState, thief.Position, thief.OwnerId, ev.TargetPlayerId, ev.Target, ev.Action, false));
         }
 
         return Empty.Value;

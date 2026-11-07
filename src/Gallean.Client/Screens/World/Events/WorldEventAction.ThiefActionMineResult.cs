@@ -4,7 +4,7 @@ namespace Gallean.Client;
 
 internal abstract partial record WorldEventAction
 {
-    public sealed record ThiefActionResult(
+    public sealed record ThiefActionMineResult(
         ImmutableArray<AssetSoundKey> Sounds,
         WorldPosition? FocusPosition,
         WorldThiefActionType Type,

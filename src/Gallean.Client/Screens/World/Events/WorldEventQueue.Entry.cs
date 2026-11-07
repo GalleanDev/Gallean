@@ -413,6 +413,8 @@ internal sealed partial class WorldEventQueue
             WorldState State,
             WorldPosition Position,
             WorldPlayerId PlayerId,
+            WorldPlayerId? TargetPlayerId,
+            WorldUnitGroup? Target,
             WorldThiefActionType Type,
             bool IsSuccess) : Animated(State)
         {

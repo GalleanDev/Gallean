@@ -83,7 +83,7 @@ public sealed class WorldEngineThiefBribeTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefBribeAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldCityBribedEvent(thiefStack.Id, city.Id, new WorldResourceSet(300, 0, 0, 0, 0, 0)),
                 new WorldFortificationCapturingEvent(city.Id, neutral.Id, player.Id, thiefStack.Id),
                 new WorldFortificationCapturedEvent(city.Id, neutral.Id, player.Id, thiefStack.Id),
@@ -139,7 +139,7 @@ public sealed class WorldEngineThiefBribeTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefBribeAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldCityBribedEvent(thiefStack.Id, city.Id, new WorldResourceSet(600, 0, 0, 0, 0, 0)),
                 new WorldFortificationCapturingEvent(city.Id, neutral.Id, player.Id, thiefStack.Id),
                 new WorldFortificationCapturedEvent(city.Id, neutral.Id, player.Id, thiefStack.Id),
@@ -206,7 +206,7 @@ public sealed class WorldEngineThiefBribeTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefBribeAction(new WorldPosition(2, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldStackDestroyedEvent(occupant.Id, new WorldUnitGroup.Stack(thiefStack.Id), thiefStack.OwnerId),
                 new WorldCityBribedEvent(thiefStack.Id, city.Id, new WorldResourceSet(750, 0, 0, 0, 0, 0)),
                 new WorldFortificationCapturingEvent(city.Id, neutral.Id, player.Id, thiefStack.Id),

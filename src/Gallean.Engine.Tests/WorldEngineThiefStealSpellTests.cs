@@ -86,7 +86,7 @@ public sealed class WorldEngineThiefStealSpellTests
                 thiefStack.Id,
                 new WorldThiefStealSpellAction(new WorldPosition(3, 3), spell.Id)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealSpell, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealSpell, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldSpellStolenEvent(thiefStack.Id, player2.Id, spell.Id),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -134,7 +134,7 @@ public sealed class WorldEngineThiefStealSpellTests
                 thiefStack.Id,
                 new WorldThiefStealSpellAction(new WorldPosition(4, 4), spell.Id)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealMage, null),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealMage, null, null),
                 new WorldSpellStolenEvent(thiefStack.Id, null, spell.Id),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -200,7 +200,7 @@ public sealed class WorldEngineThiefStealSpellTests
                 thiefStack.Id,
                 new WorldThiefStealSpellAction(new WorldPosition(3, 3), spell.Id)),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.StealSpell, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.StealSpell, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 

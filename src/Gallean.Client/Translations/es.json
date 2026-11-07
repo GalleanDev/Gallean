@@ -10,6 +10,7 @@
     "<No log>": "<Sin registro>",
     "A city can only be upgraded once per turn": "Una ciudad solo puede mejorarse una vez por turno",
     "A gift of gold improves relations.": "Un tributo de oro mejora las relaciones.",
+    "A riot has been provoked inside the city!": "¡El espía ha provocado una revuelta dentro de la ciudad!",
     "A rod cannot be planted there": "Ahí no se puede colocar un cetro",
     "A spell has been stolen from the enemy!": "¡El espía ha conseguido copiar un conjuro del enemigo!",
     "A spell has been stolen from the mage tower!": "¡El espía ha conseguido copiar un conjuro de la torre mágica!",
@@ -698,6 +699,17 @@
     "{0} damage": "{0} de daño",
     "{0} defined": "{0} definidos",
     "{0} gold to the {1}": "{0} monedas de oro para los {1}",
+    "{0} has assassinated one of your soldiers.": "{0} ha asesinado a una de tus unidades.",
+    "{0} has bribed your city.": "{0} ha sobornado a tu ciudad.",
+    "{0} has disorganized your troops.": "{0} ha desorganizado las tropas del grupo.",
+    "{0} has placed a spy in your army.": "{0} ha infiltrado un espía en tu ejército.",
+    "{0} has placed a spy in your city.": "{0} ha infiltrado un espía en tu ciudad.",
+    "{0} has poisoned your city.": "{0} ha envenenado a los defensores de la ciudad.",
+    "{0} has poisoned your party.": "{0} ha envenenado al grupo.",
+    "{0} has provoked your leader into a duel.": "{0} ha retado a un duelo al líder de grupo.",
+    "{0} has stolen a spell from you.": "{0} ha copiado uno de tus conjuros.",
+    "{0} has stolen an item from you.": "{0} te ha robado un objeto.",
+    "{0} has stolen gold from you.": "{0} ha robado parte de tu oro.",
     "{0} hit points": "{0} puntos de vida",
     "{0} initiative": "{0} de iniciativa",
     "{0} leadership": "{0} de liderazgo",
@@ -713,6 +725,7 @@
     "{0}%": "{0}%",
     "{0}% lower prices": "Descuento del {0}% en los precios",
     "{0}'s party": "Grupo de {0}",
+    "{0}'s thief has been captured and executed!": "¡El espía de {0} ha sido capturado y ejecutado antes de que llevara a cabo su acción!",
     "{0}, turn {1}": "{0}, turno {1}"
   }
 }

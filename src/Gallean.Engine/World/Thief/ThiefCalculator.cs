@@ -40,6 +40,11 @@ internal static partial class ThiefCalculator
         return target.Accept(ReachVisitor.Instance, thief);
     }
 
+    public static WorldUnitGroup? GetUnitGroup(ThiefTarget target)
+    {
+        return target.Accept(UnitGroupVisitor.Instance, Empty.Value);
+    }
+
     public static ImmutableArray<WorldThiefActionType> GetActionTypes(ThiefTarget target)
     {
         return target.Accept(ActionTypesVisitor.Instance, Empty.Value);

@@ -550,11 +550,23 @@ internal sealed class WorldEventActionBuilder(
     {
         if (result.PlayerId == ViewPlayerId)
         {
-            return new WorldEventAction.ThiefActionResult(
+            return new WorldEventAction.ThiefActionMineResult(
                 [new AssetSoundKey.ThiefAction()],
                 result.GetFocusPosition(ViewPlayerId),
                 result.Type,
                 result.IsSuccess);
+        }
+        else if (result.Target is not null && result.TargetPlayerId == ViewPlayerId)
+        {
+            WorldPlayer player = result.State.Players[result.PlayerId];
+
+            return new WorldEventAction.ThiefActionTheirResult(
+                [new AssetSoundKey.ThiefAction()],
+                result.GetFocusPosition(ViewPlayerId),
+                result.Type,
+                result.Target,
+                result.IsSuccess,
+                WorldPlayerFormatter.FormatLordName(texts, player));
         }
         else
         {

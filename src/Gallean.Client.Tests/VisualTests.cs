@@ -1436,7 +1436,7 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        gameViewModel.OpenScreen(new ThiefActionResultScreenViewModel(WorldThiefActionType.StealGold, isSuccess: true));
+        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateMineResult(WorldThiefActionType.StealGold, isSuccess: true));
 
         await CaptureAsync(window);
     }
@@ -1456,7 +1456,7 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        gameViewModel.OpenScreen(new ThiefActionResultScreenViewModel(WorldThiefActionType.StealGold, isSuccess: false));
+        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateMineResult(WorldThiefActionType.StealGold, isSuccess: false));
 
         await CaptureAsync(window);
     }

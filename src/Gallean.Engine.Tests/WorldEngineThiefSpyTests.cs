@@ -48,7 +48,7 @@ public sealed class WorldEngineThiefSpyTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefSpyAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Spy, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Spy, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldSpyAddedEvent(player1.Id, player2.Id),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -112,7 +112,7 @@ public sealed class WorldEngineThiefSpyTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefSpyAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Spy, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Spy, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldSpyAddedEvent(player1.Id, player2.Id),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -276,7 +276,7 @@ public sealed class WorldEngineThiefSpyTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefSpyRuinAction(new WorldPosition(4, 4))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.SpyRuin, null),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.SpyRuin, null, null),
                 new WorldRuinSpiedEvent(player1.Id, ruin.Id),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);

@@ -80,7 +80,7 @@ public sealed class WorldEngineThiefStealItemTests
                 thiefStack.Id,
                 new WorldThiefStealItemAction(new WorldPosition(3, 2), itemDefinition.Id)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealItem, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealItem, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldInventoryItemTransferredEvent(
                     new WorldUnitGroup.Stack(targetStack.Id),
                     new WorldUnitGroup.Stack(thiefStack.Id),
@@ -139,7 +139,7 @@ public sealed class WorldEngineThiefStealItemTests
                 thiefStack.Id,
                 new WorldThiefStealItemAction(new WorldPosition(4, 4), itemDefinition.Id)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealMerchant, null),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealMerchant, null, null),
                 new WorldMerchantItemStolenEvent(thiefStack.Id, site.Id, new WorldItem(new WorldItemId("Item0001"), itemDefinition.Id, Charges: null)),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -197,7 +197,7 @@ public sealed class WorldEngineThiefStealItemTests
                 thiefStack.Id,
                 new WorldThiefStealItemAction(new WorldPosition(4, 4), itemDefinition.Id)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealMerchant, null),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealMerchant, null, null),
                 new WorldMerchantItemStolenEvent(thiefStack.Id, site.Id, new WorldItem(new WorldItemId("Item0001"), itemDefinition.Id, Charges: null)),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -254,7 +254,7 @@ public sealed class WorldEngineThiefStealItemTests
                 thiefStack.Id,
                 new WorldThiefStealItemAction(new WorldPosition(4, 4), itemDefinition.Id)),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.StealMerchant, null),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.StealMerchant, null, null),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 

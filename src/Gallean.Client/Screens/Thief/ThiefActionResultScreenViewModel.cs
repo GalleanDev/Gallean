@@ -1,11 +1,43 @@
+using Gallean.Engine;
+
 namespace Gallean.Client;
 
-internal sealed class ThiefActionResultScreenViewModel(WorldThiefActionType type, bool isSuccess) : AbstractScreenViewModel
+internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
 {
-    public bool IsSuccess { get; } = isSuccess;
-    public string Title { get; } = FormatTitle(isSuccess);
-    public string Text { get; } = FormatText(type, isSuccess);
-    public AssetSpriteKey.ThiefActionImage ImageKey { get; } = new(type, IsLarge: true);
+    private ThiefActionResultScreenViewModel(string title, string text, WorldThiefActionType type, bool isSuccess)
+    {
+        IsSuccess = isSuccess;
+        Title = title;
+        Text = text;
+        ImageKey = new AssetSpriteKey.ThiefActionImage(type, IsLarge: true);
+    }
+
+    public bool IsSuccess { get; }
+    public string Title { get; }
+    public string Text { get; }
+    public AssetSpriteKey.ThiefActionImage ImageKey { get; }
+
+    public static ThiefActionResultScreenViewModel CreateMineResult(
+        WorldThiefActionType type,
+        bool isSuccess)
+    {
+        string title = FormatTitle(isSuccess);
+        string text = FormatMineText(type, isSuccess);
+
+        return new ThiefActionResultScreenViewModel(title, text, type, isSuccess);
+    }
+
+    public static ThiefActionResultScreenViewModel CreateTheirResult(
+        WorldThiefActionType type,
+        WorldUnitGroup target,
+        bool isSuccess,
+        string theirLordName)
+    {
+        string title = FormatTitle(isSuccess);
+        string text = FormatTheirText(type, target, isSuccess, theirLordName);
+
+        return new ThiefActionResultScreenViewModel(title, text, type, isSuccess);
+    }
 
     public override bool CanContinue => true;
 
@@ -28,11 +60,11 @@ internal sealed class ThiefActionResultScreenViewModel(WorldThiefActionType type
         }
     }
 
-    private static string FormatText(WorldThiefActionType type, bool isSuccess)
+    private static string FormatMineText(WorldThiefActionType type, bool isSuccess)
     {
         if (isSuccess)
         {
-            return FormatSuccess(type);
+            return FormatMineSuccess(type);
         }
         else
         {
@@ -40,7 +72,7 @@ internal sealed class ThiefActionResultScreenViewModel(WorldThiefActionType type
         }
     }
 
-    private static string FormatSuccess(WorldThiefActionType type)
+    private static string FormatMineSuccess(WorldThiefActionType type)
     {
         return type switch
         {
@@ -59,5 +91,53 @@ internal sealed class ThiefActionResultScreenViewModel(WorldThiefActionType type
             WorldThiefActionType.SpyRuin => Tr("Your thief has scouted the ruin. Right-click it to reveal information about it!"),
             WorldThiefActionType.RiotCity => Tr("Your thief has incited a riot in the city!")
         };
+    }
+
+    private static string FormatTheirText(
+        WorldThiefActionType type,
+        WorldUnitGroup target,
+        bool isSuccess,
+        string theirLordName)
+    {
+        if (isSuccess)
+        {
+            return FormatTheirSuccess(type, target, theirLordName);
+        }
+        else
+        {
+            return Tr("{0}'s thief has been captured and executed!", theirLordName);
+        }
+    }
+
+    private static string FormatTheirSuccess(WorldThiefActionType type, WorldUnitGroup target, string theirLordName)
+    {
+        return type switch
+        {
+            WorldThiefActionType.PoisonStack => Tr("{0} has poisoned your party.", theirLordName),
+            WorldThiefActionType.Spy => FormatTheirSpy(target, theirLordName),
+            WorldThiefActionType.StealItem => Tr("{0} has stolen an item from you.", theirLordName),
+            WorldThiefActionType.Assassinate => Tr("{0} has assassinated one of your soldiers.", theirLordName),
+            WorldThiefActionType.CounterfeitOrders => Tr("{0} has disorganized your troops.", theirLordName),
+            WorldThiefActionType.Duel => Tr("{0} has provoked your leader into a duel.", theirLordName),
+            WorldThiefActionType.PoisonCity => Tr("{0} has poisoned your city.", theirLordName),
+            WorldThiefActionType.StealSpell => Tr("{0} has stolen a spell from you.", theirLordName),
+            WorldThiefActionType.Bribe => Tr("{0} has bribed your city.", theirLordName),
+            WorldThiefActionType.StealGold => Tr("{0} has stolen gold from you.", theirLordName),
+            WorldThiefActionType.RiotCity => Tr("A riot has been provoked inside the city!"),
+            WorldThiefActionType.StealMerchant or WorldThiefActionType.StealMage or WorldThiefActionType.SpyRuin =>
+                throw new ArgumentOutOfRangeException(nameof(type), type, "A thief action on a site or a ruin has no target player.")
+        };
+    }
+
+    private static string FormatTheirSpy(WorldUnitGroup target, string theirLordName)
+    {
+        if (target is WorldUnitGroup.Fortification)
+        {
+            return Tr("{0} has placed a spy in your city.", theirLordName);
+        }
+        else
+        {
+            return Tr("{0} has placed a spy in your army.", theirLordName);
+        }
     }
 }

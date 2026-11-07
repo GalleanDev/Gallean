@@ -10,6 +10,7 @@
     "<No log>": "<Nessun registro>",
     "A city can only be upgraded once per turn": "Una città può crescere solo una volta per turno",
     "A gift of gold improves relations.": "Un tributo in oro migliora i rapporti.",
+    "A riot has been provoked inside the city!": "La spia ha provocato una rivolta nella città!",
     "A rod cannot be planted there": "Non è possibile piantare un bastone lì",
     "A spell has been stolen from the enemy!": "La spia è riuscita a copiare un incantesimo al nemico!",
     "A spell has been stolen from the mage tower!": "La spia è riuscita a copiare un incantesimo dalla torre magica!",
@@ -698,6 +699,17 @@
     "{0} damage": "{0} danno",
     "{0} defined": "{0} definito",
     "{0} gold to the {1}": "{0} monete d'oro alla razza {1}",
+    "{0} has assassinated one of your soldiers.": "{0} ha assassinato una delle tue unità.",
+    "{0} has bribed your city.": "{0} ha corrotto la tua città.",
+    "{0} has disorganized your troops.": "{0} ha disorganizzato le truppe della squadra.",
+    "{0} has placed a spy in your army.": "{0} ha infiltrato una spia nel tuo esercito.",
+    "{0} has placed a spy in your city.": "{0} ha infiltrato una spia nella tua città.",
+    "{0} has poisoned your city.": "{0} ha avvelenato i difensori della città.",
+    "{0} has poisoned your party.": "{0} ha avvelenato la tua squadra.",
+    "{0} has provoked your leader into a duel.": "{0} ha sfidato il tuo leader a duello.",
+    "{0} has stolen a spell from you.": "{0} ha copiato uno dei tuoi incantesimi.",
+    "{0} has stolen an item from you.": "{0} ti ha rubato un oggetto.",
+    "{0} has stolen gold from you.": "{0} ha rubato parte del tuo oro.",
     "{0} hit points": "{0} punti di vita",
     "{0} initiative": "{0} iniziativa",
     "{0} leadership": "{0} leadership",
@@ -713,6 +725,7 @@
     "{0}%": "{0}%",
     "{0}% lower prices": "Prezzi ridotti del {0}%",
     "{0}'s party": "Squadra di {0}",
+    "{0}'s thief has been captured and executed!": "La spia di {0} è stata catturata e giustiziata prima di portare a termine la sua azione!",
     "{0}, turn {1}": "{0}, turno {1}"
   }
 }

@@ -10,6 +10,7 @@
     "<No log>": "<Журнал пуст>",
     "A city can only be upgraded once per turn": "Город можно отстраивать только раз за ход",
     "A gift of gold improves relations.": "Подарок в виде золота улучшает отношения.",
+    "A riot has been provoked inside the city!": "В городе было спровоцировано восстание!",
     "A rod cannot be planted there": "Здесь нельзя водрузить жезл власти",
     "A spell has been stolen from the enemy!": "У врага украдено заклинание!",
     "A spell has been stolen from the mage tower!": "Из волшебной лавки украдено заклинание!",
@@ -698,6 +699,17 @@
     "{0} damage": "{0} урона",
     "{0} defined": "{0} определена",
     "{0} gold to the {1}": "{0} золота расе {1}",
+    "{0} has assassinated one of your soldiers.": "{0} убил одного из ваших солдат.",
+    "{0} has bribed your city.": "{0} подкупил ваш город.",
+    "{0} has disorganized your troops.": "{0} дезорганизовал ваши войска.",
+    "{0} has placed a spy in your army.": "{0} заслал шпиона в вашу армию.",
+    "{0} has placed a spy in your city.": "{0} заслал шпиона в ваш город.",
+    "{0} has poisoned your city.": "{0} отравил колодец в вашем городе.",
+    "{0} has poisoned your party.": "{0} отравил ваш отряд.",
+    "{0} has provoked your leader into a duel.": "{0} спровоцировал вашего предводителя на поединок.",
+    "{0} has stolen a spell from you.": "{0} украл у вас заклинание.",
+    "{0} has stolen an item from you.": "{0} украл у вас магический предмет.",
+    "{0} has stolen gold from you.": "{0} украл у вас золото.",
     "{0} hit points": "{0} здоровья",
     "{0} initiative": "{0} инициативы",
     "{0} leadership": "{0} лидерства",
@@ -713,6 +725,7 @@
     "{0}%": "{0}%",
     "{0}% lower prices": "Скидка {0}%",
     "{0}'s party": "Отряд предводителя {0}",
+    "{0}'s thief has been captured and executed!": "{0} потерял одного из своих лучших шпионов!",
     "{0}, turn {1}": "{0}, ход {1}"
   }
 }

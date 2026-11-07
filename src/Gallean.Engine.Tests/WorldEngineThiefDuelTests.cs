@@ -108,7 +108,7 @@ public sealed class WorldEngineThiefDuelTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefDuelAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackBattleStartedEvent(thiefStack.Id, targetStack.Id, targetStack.Position, expectedBattleState, IsDuel: true),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -217,7 +217,7 @@ public sealed class WorldEngineThiefDuelTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefDuelAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackBattleStartedEvent(thiefStack.Id, targetStack.Id, targetStack.Position, initialBattleState, IsDuel: true),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -370,7 +370,7 @@ public sealed class WorldEngineThiefDuelTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefDuelAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Duel, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackBattleStartedEvent(thiefStack.Id, targetStack.Id, targetStack.Position, initialBattleState, IsDuel: true),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);

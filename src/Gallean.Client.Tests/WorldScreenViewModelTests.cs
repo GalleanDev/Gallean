@@ -6281,7 +6281,7 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
-    public async Task ThiefActionResultTest()
+    public async Task ThiefActionMineResultTest()
     {
         WorldMap map = TestHelpers.SimpleMap(3, 3);
 
@@ -6355,7 +6355,7 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
-    public async Task ThiefActionFailedResultTest()
+    public async Task ThiefActionMineFailedResultTest()
     {
         WorldMap map = TestHelpers.SimpleMap(3, 3);
 
@@ -6426,6 +6426,68 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(world.IsActive, Is.True);
+    }
+
+    [Test]
+    public async Task ThiefActionTheirResultTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 3);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer ai = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with { IsAi = true };
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            ai.Id,
+            new WorldPosition(1, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 20);
+
+        WorldStack humanStack = TestHelpers.SimpleStack(
+            new WorldStackId("human"),
+            human.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithTurnInfo(new WorldTurnInfo(1, ai.Id))
+            .WithRandom(new TestSequenceRandomProvider(0, 0))
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithDefinition(TestHelpers.SimpleLord(ai.LordId, ai.Race, LordCategory.Warrior))
+            .WithPlayer(ai)
+            .WithStack(thiefStack)
+            .WithStack(humanStack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await gameModel.World.DispatchCommandAsync(new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(humanStack.Position)));
+
+        ThiefActionResultScreenViewModel result = Assert.IsOfType<ThiefActionResultScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(result.Title, Is.EqualTo("Success!"));
+        Assert.That(result.Text, Is.EqualTo("Player2 has poisoned your party."));
+        Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.PoisonStack, IsLarge: true)));
+
+        gameViewModel.EscapeCommand.Execute(null);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
     }
 
     [Test]

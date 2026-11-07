@@ -67,7 +67,7 @@ public sealed class WorldEngineThiefStealGoldTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefStealGoldAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealGold, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealGold, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldResourcesStolenEvent(thiefStack.Id, player2.Id, new WorldResourceSet(200, 0, 0, 0, 0, 0)),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -117,7 +117,7 @@ public sealed class WorldEngineThiefStealGoldTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefStealGoldAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealGold, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.StealGold, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldResourcesStolenEvent(thiefStack.Id, player2.Id, WorldResourceSet.Empty),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -201,7 +201,7 @@ public sealed class WorldEngineThiefStealGoldTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefStealGoldAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.StealGold, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.StealGold, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 

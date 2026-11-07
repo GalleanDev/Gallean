@@ -10,6 +10,7 @@
     "<No log>": "<Brak dziennika>",
     "A city can only be upgraded once per turn": "Miasto można rozbudować tylko raz na turę",
     "A gift of gold improves relations.": "Dar w złocie poprawia stosunki.",
+    "A riot has been provoked inside the city!": "W mieście wybuchły zamieszki!",
     "A rod cannot be planted there": "Nie można tu ustawić rózgi",
     "A spell has been stolen from the enemy!": "Nieprzyjacielowi skradziono czar!",
     "A spell has been stolen from the mage tower!": "Z magicznej wieży skradziono czar!",
@@ -698,6 +699,17 @@
     "{0} damage": "Obrażenia {0}",
     "{0} defined": "{0} – określony",
     "{0} gold to the {1}": "{0} sztuk złota dla rasy {1}",
+    "{0} has assassinated one of your soldiers.": "{0} zabił jednego z twoich żołnierzy.",
+    "{0} has bribed your city.": "{0} przekupił twoje miasto.",
+    "{0} has disorganized your troops.": "{0} zdezorganizował twoje oddziały.",
+    "{0} has placed a spy in your army.": "{0} umieścił szpiega w twojej armii.",
+    "{0} has placed a spy in your city.": "{0} umieścił szpiega w twoim mieście.",
+    "{0} has poisoned your city.": "{0} zatruł twoje miasto.",
+    "{0} has poisoned your party.": "{0} zatruł twoją drużynę.",
+    "{0} has provoked your leader into a duel.": "{0} wyzwał twojego dowódcę na pojedynek.",
+    "{0} has stolen a spell from you.": "{0} ukradł ci czar.",
+    "{0} has stolen an item from you.": "{0} ukradł ci przedmiot.",
+    "{0} has stolen gold from you.": "{0} ukradł ci złoto.",
     "{0} hit points": "Punkty życia {0}",
     "{0} initiative": "Inicjatywa {0}",
     "{0} leadership": "Dowodzenie {0}",
@@ -713,6 +725,7 @@
     "{0}%": "{0}%",
     "{0}% lower prices": "Ceny niższe o {0}%",
     "{0}'s party": "Drużyna: {0}",
+    "{0}'s thief has been captured and executed!": "Złodziej gracza {0} został schwytany i stracony!",
     "{0}, turn {1}": "{0}, tura {1}"
   }
 }

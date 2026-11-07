@@ -10,6 +10,7 @@
     "<No log>": "<Kein Protokoll>",
     "A city can only be upgraded once per turn": "Eine Stadt kann nur einmal pro Tag ausgebaut werden",
     "A gift of gold improves relations.": "Ein Goldgeschenk verbessert die Beziehungen.",
+    "A riot has been provoked inside the city!": "In der Stadt wurde ein Aufstand angezettelt!",
     "A rod cannot be planted there": "Dort kann kein Stecken gepflanzt werden",
     "A spell has been stolen from the enemy!": "Ein Zauber wurde dem Feind gestohlen!",
     "A spell has been stolen from the mage tower!": "Ein Zauber wurde aus dem Magischen Turm entwendet!",
@@ -698,6 +699,17 @@
     "{0} damage": "{0} Schaden",
     "{0} defined": "{0} festgelegt",
     "{0} gold to the {1}": "{0} Gold an {1}",
+    "{0} has assassinated one of your soldiers.": "{0} hat einen Eurer Soldaten ermordet.",
+    "{0} has bribed your city.": "{0} hat Eure Stadt bestochen.",
+    "{0} has disorganized your troops.": "{0} hat Eure Truppen durcheinandergebracht.",
+    "{0} has placed a spy in your army.": "{0} hat einen Spion in Eure Armee eingeschleust.",
+    "{0} has placed a spy in your city.": "{0} hat einen Spion in Eure Stadt eingeschleust.",
+    "{0} has poisoned your city.": "{0} hat Eure Stadt vergiftet.",
+    "{0} has poisoned your party.": "{0} hat Eure Armee vergiftet.",
+    "{0} has provoked your leader into a duel.": "{0} hat Euren Anführer zu einem Duell herausgefordert.",
+    "{0} has stolen a spell from you.": "{0} hat Euch einen Zauber gestohlen.",
+    "{0} has stolen an item from you.": "{0} hat Euch einen Gegenstand gestohlen.",
+    "{0} has stolen gold from you.": "{0} hat Euch Gold gestohlen.",
     "{0} hit points": "{0} Trefferpunkte",
     "{0} initiative": "{0} Initiative",
     "{0} leadership": "{0} Führerschaft",
@@ -713,6 +725,7 @@
     "{0}%": "{0}%",
     "{0}% lower prices": "{0}% niedrigere Preise",
     "{0}'s party": "Armee von {0}",
+    "{0}'s thief has been captured and executed!": "{0}s Dieb wurde gefangen genommen und hingerichtet!",
     "{0}, turn {1}": "{0}, Tag {1}"
   }
 }

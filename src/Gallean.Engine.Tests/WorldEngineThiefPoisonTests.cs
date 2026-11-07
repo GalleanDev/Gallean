@@ -56,7 +56,7 @@ public sealed class WorldEngineThiefPoisonTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackPoisonedEvent(targetStack.Id, poisonedUnits),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -124,7 +124,7 @@ public sealed class WorldEngineThiefPoisonTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldFortificationPoisonedEvent(city.Id, poisonedGarrison),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -243,7 +243,7 @@ public sealed class WorldEngineThiefPoisonTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackPoisonedEvent(targetStack.Id, poisonedUnits),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -566,7 +566,7 @@ public sealed class WorldEngineThiefPoisonTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 3))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldFortificationPoisonedEvent(city.Id, poisonedGarrison),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -628,7 +628,7 @@ public sealed class WorldEngineThiefPoisonTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(5, 5))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonCity, player2.Id, new WorldUnitGroup.Fortification(capital.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 

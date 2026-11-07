@@ -33,6 +33,7 @@ internal abstract partial class AbstractThiefActionResolver(WorldPosition target
         }
 
         WorldThiefActionDefinition definition = context.Definitions.GetThiefAction(attempt.Type);
+        WorldUnitGroup? targetGroup = ThiefCalculator.GetUnitGroup(target);
         WorldStack? targetStack = target is ThiefStackTarget stackTarget ? stackTarget.Stack : null;
         bool succeeded;
         WorldStack? destroyer;
@@ -57,7 +58,7 @@ internal abstract partial class AbstractThiefActionResolver(WorldPosition target
             return WorldCommandResult.Success(
                 Empty.Value,
                 [
-                    new WorldThiefActionSucceededEvent(thief.Id, attempt.Type, attempt.TargetPlayerId),
+                    new WorldThiefActionSucceededEvent(thief.Id, attempt.Type, attempt.TargetPlayerId, targetGroup),
                     .. attempt.Events,
                     new WorldStackMovementConsumedEvent(thief.Id, movementPoints)
                 ]);
@@ -69,7 +70,7 @@ internal abstract partial class AbstractThiefActionResolver(WorldPosition target
             return WorldCommandResult.Success(
                 Empty.Value,
                 [
-                    new WorldThiefActionFailedEvent(thief.Id, attempt.Type, attempt.TargetPlayerId),
+                    new WorldThiefActionFailedEvent(thief.Id, attempt.Type, attempt.TargetPlayerId, targetGroup),
                     new WorldStackDestroyedEvent(thief.Id, destroyerGroup, destroyer?.OwnerId)
                 ]);
         }

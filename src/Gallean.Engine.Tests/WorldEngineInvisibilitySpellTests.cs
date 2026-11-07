@@ -567,7 +567,7 @@ public sealed class WorldEngineInvisibilitySpellTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(targetStack.Position)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, enemy.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, enemy.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackRevealedEvent(thiefStack.Id),
                 new WorldStackPoisonedEvent(targetStack.Id, poisoned),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)

@@ -774,7 +774,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, null, null)
             ]);
 
@@ -1148,7 +1148,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefAssassinateAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(targetStack.Id, new WorldUnitGroup.Stack(thiefStack.Id), thiefStack.OwnerId),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
@@ -1252,7 +1252,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefBribeAction(new WorldPosition(2, 2))),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Bribe, neutral.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldStackDestroyedEvent(occupant.Id, new WorldUnitGroup.Stack(thiefStack.Id), thiefStack.OwnerId),
                 new WorldCityBribedEvent(thiefStack.Id, city.Id, new WorldResourceSet(750, 0, 0, 0, 0, 0)),
                 new WorldFortificationCapturingEvent(city.Id, neutral.Id, player.Id, thiefStack.Id),
@@ -1345,7 +1345,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefPoisonAction(new WorldPosition(3, 2))),
             [
-                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id),
+                new WorldThiefActionFailedEvent(thiefStack.Id, WorldThiefActionType.PoisonStack, player2.Id, new WorldUnitGroup.Stack(targetStack.Id)),
                 new WorldStackDestroyedEvent(thiefStack.Id, new WorldUnitGroup.Stack(targetStack.Id), targetStack.OwnerId)
             ]);
 

@@ -10,6 +10,7 @@
     "<No log>": "<Aucun journal>",
     "A city can only be upgraded once per turn": "Une ville ne peut se développer qu'une fois par tour",
     "A gift of gold improves relations.": "Donner de l'or améliore les relations.",
+    "A riot has been provoked inside the city!": "Quelqu'un a déclenché une émeute dans la ville!",
     "A rod cannot be planted there": "Impossible de placer un sceptre à cet endroit",
     "A spell has been stolen from the enemy!": "Vous avez dérobé un sort à l'ennemi!",
     "A spell has been stolen from the mage tower!": "Vous avez dérobé un sort à la tour de magie!",
@@ -698,6 +699,17 @@
     "{0} damage": "Dégâts: {0}",
     "{0} defined": "{0} défini",
     "{0} gold to the {1}": "{0} pièces d'or données à {1}",
+    "{0} has assassinated one of your soldiers.": "{0} a commandité l'assassinat d'une de vos unités.",
+    "{0} has bribed your city.": "{0} a soudoyé votre ville.",
+    "{0} has disorganized your troops.": "{0} est parvenu à semer le trouble au sein de vos troupes.",
+    "{0} has placed a spy in your army.": "{0} a réussi à infiltrer un espion dans votre armée.",
+    "{0} has placed a spy in your city.": "{0} est parvenu à introduire un espion dans l'enceinte de votre ville.",
+    "{0} has poisoned your city.": "{0} a empoisonné les réserves de nourriture de votre ville.",
+    "{0} has poisoned your party.": "{0} a empoisonné votre groupe.",
+    "{0} has provoked your leader into a duel.": "{0} a défié votre leader en combat singulier.",
+    "{0} has stolen a spell from you.": "{0} vous a volé un sort.",
+    "{0} has stolen an item from you.": "{0} est parvenu à vous dérober un objet.",
+    "{0} has stolen gold from you.": "{0} vous a détroussé.",
     "{0} hit points": "Points de vie: {0}",
     "{0} initiative": "Initiative: {0}",
     "{0} leadership": "Commandement: {0}",
@@ -713,6 +725,7 @@
     "{0}%": "{0}%",
     "{0}% lower prices": "Prix réduits de {0}%",
     "{0}'s party": "Groupe de {0}",
+    "{0}'s thief has been captured and executed!": "Le voleur de {0} a été capturé et exécuté sur le champ!",
     "{0}, turn {1}": "{0}, tour {1}"
   }
 }

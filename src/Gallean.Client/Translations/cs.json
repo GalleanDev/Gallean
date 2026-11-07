@@ -10,6 +10,7 @@
     "<No log>": "<Žádný záznam>",
     "A city can only be upgraded once per turn": "Město lze rozšířit pouze jednou za tah",
     "A gift of gold improves relations.": "Dar zlata zlepšuje vztahy.",
+    "A riot has been provoked inside the city!": "Ve městě byly vyprovokovány nepokoje!",
     "A rod cannot be planted there": "Sem nelze umístit žezlo",
     "A spell has been stolen from the enemy!": "Nepříteli bylo ukradeno kouzlo!",
     "A spell has been stolen from the mage tower!": "Z magické věže bylo ukradeno kouzlo!",
@@ -698,6 +699,17 @@
     "{0} damage": "Zranění {0}",
     "{0} defined": "{0} stanoven",
     "{0} gold to the {1}": "{0} zlata národu {1}",
+    "{0} has assassinated one of your soldiers.": "{0} zavraždil jednoho z vašich vojáků.",
+    "{0} has bribed your city.": "{0} podplatil vaše město.",
+    "{0} has disorganized your troops.": "{0} dezorganizoval vaše vojenské síly.",
+    "{0} has placed a spy in your army.": "{0} vám do armády nasadil zvěda.",
+    "{0} has placed a spy in your city.": "{0} vám nasadil do města zvěda.",
+    "{0} has poisoned your city.": "{0} otrávil vaše město.",
+    "{0} has poisoned your party.": "{0} otrávil vaši družinu.",
+    "{0} has provoked your leader into a duel.": "{0} vyzval vašeho velitele na souboj.",
+    "{0} has stolen a spell from you.": "{0} vám ukradl nějaké kouzlo.",
+    "{0} has stolen an item from you.": "{0} ukořistil nějaký váš předmět.",
+    "{0} has stolen gold from you.": "{0} vám ukradl zlato.",
     "{0} hit points": "Životy {0}",
     "{0} initiative": "Iniciativa {0}",
     "{0} leadership": "Vedení {0}",
@@ -713,6 +725,7 @@
     "{0}%": "{0} %",
     "{0}% lower prices": "Ceny nižší o {0} %",
     "{0}'s party": "Družina velitele {0}",
+    "{0}'s thief has been captured and executed!": "Zloděj, jehož vyslal {0}, byl zajat a popraven!",
     "{0}, turn {1}": "{0}, tah {1}"
   }
 }

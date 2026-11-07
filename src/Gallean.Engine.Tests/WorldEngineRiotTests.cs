@@ -295,7 +295,7 @@ public sealed class WorldEngineRiotTests
         engine.CheckCommand(
             new WorldThiefActionCommand(thiefStack.Id, new WorldThiefRiotAction(city.Entrance)),
             [
-                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.RiotCity, player2.Id),
+                new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.RiotCity, player2.Id, new WorldUnitGroup.Fortification(city.Id)),
                 new WorldCityRiotStartedEvent(city.Id, 3),
                 new WorldStackMovementConsumedEvent(thiefStack.Id, 10)
             ]);
