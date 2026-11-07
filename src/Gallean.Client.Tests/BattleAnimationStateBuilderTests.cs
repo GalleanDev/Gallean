@@ -3775,7 +3775,7 @@ public sealed class BattleAnimationStateBuilderTests
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
             "sequence 19 frames",
             "@0 unit 1 form ATK facing Defender",
-            "@0 unit 1 feedback +15 Action Retreat"
+            "@0 unit 1 feedback +15 Action Retreating"
         ]));
     }
 
@@ -3897,7 +3897,7 @@ public sealed class BattleAnimationStateBuilderTests
             "@0 unit 2 body Attack Alive for 16 frames",
             "@0 sound battle-unit-attack/def/4",
             "@7 unit 1 form WARRIOR facing Defender",
-            "@7 unit 1 feedback +15 Action Retreat",
+            "@7 unit 1 feedback +15 Action Retreating",
             "@7 sound battle-unit-touch/def/4",
             "@16 unit 2 body Idle Alive"
         ]));
@@ -4053,7 +4053,7 @@ public sealed class BattleAnimationStateBuilderTests
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
             "sequence 19 frames",
-            "@0 unit 1 feedback +15 Action Defend"
+            "@0 unit 1 feedback +15 Action Defending"
         ]));
     }
 
@@ -4101,7 +4101,7 @@ public sealed class BattleAnimationStateBuilderTests
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
             "sequence 19 frames",
-            "@0 unit 1 feedback +15 Action Wait"
+            "@0 unit 1 feedback +15 Action Waiting"
         ]));
     }
 
@@ -4149,7 +4149,7 @@ public sealed class BattleAnimationStateBuilderTests
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
             "sequence 19 frames",
-            "@0 unit 1 feedback +15 Action Skip"
+            "@0 unit 1 feedback +15 Action Skipped"
         ]));
     }
 
@@ -4895,7 +4895,7 @@ public sealed class BattleAnimationStateBuilderTests
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
             "sequence 40 frames",
-            "@0 unit 2 feedback +15 Action Defend",
+            "@0 unit 2 feedback +15 Action Defending",
             "@19 unit 1 body Hit Alive for 9 frames",
             "@28 unit 1 body Idle Alive",
             "@28 clip battle-effect-death/human/small for 12 frames at defender front-center small",
@@ -4986,7 +4986,7 @@ public sealed class BattleAnimationStateBuilderTests
             "@7 unit 2 frozen True",
             "@7 sound battle-unit-touch/atk/4",
             "@16 unit 1 body Idle Alive",
-            "@26 unit 2 feedback +15 Action Skip",
+            "@26 unit 2 feedback +15 Action Skipped",
             "@41 unit 2 frozen False"
         ]));
     }
