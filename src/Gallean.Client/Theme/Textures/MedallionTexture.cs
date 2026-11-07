@@ -17,28 +17,25 @@ internal static class MedallionTexture
 
     private const int Scale = 2;
     private const int Seed = 5303;
-    private const float EdgeFeather = 1.0f * Scale;
-    private const float HaloWidth = 6.0f * Scale;
     private const float GrainAmplitude = 1.6f;
     private const float Curvature = 1.2f;
-
-    public const double Size = 180;
-    private const int Pixels = (int)Size * Scale;
-    private const float Center = Pixels / 2.0f;
-    private const float OuterRadius = 84.0f * Scale;
-    private const float BorderRadius = 80.5f * Scale;
-    private const float OrnamentRadius = 72.0f * Scale;
-    private const float BevelThickness = 1.2f * Scale;
-    private const float InsetRadius = 58.5f * Scale;
-    private const float FaceRadius = 56.0f * Scale;
-    public const double MetalThickness = (OuterRadius - InsetRadius) / Scale;
-    public const double FaceSize = 2.0 * FaceRadius / Scale;
-    private const int FacePixels = (int)(2 * FaceRadius);
+    private const float Diameter = 180.0f;
+    private const float Center = Diameter / 2;
+    private const float OuterRadius = 84.0f;
+    private const float BorderRadius = 80.5f;
+    private const float OrnamentRadius = 72.0f;
+    private const float BevelThickness = 1.2f;
+    private const float InsetRadius = 58.5f;
+    private const float FaceRadius = 56.0f;
+    private const float EdgeFeather = 1.0f;
+    private const float HaloWidth = 6.0f;
     private const int SlotCount = 36;
     private const float SlotShare = 0.3f;
-    private const float SlotMargin = 2.6f * Scale;
+    private const float SlotMargin = 2.6f;
     private const int ToothCount = 60;
-    private const float ToothDepth = 5.0f * Scale;
+    private const float ToothDepth = 5.0f;
+    private const int Pixels = (int)(Diameter * Scale);
+    private const int FacePixels = (int)(2 * FaceRadius * Scale);
 
     private static readonly Lazy<WriteableBitmap> RingTexture = new(() => Create(State.Dark, faceOnly: false));
     private static readonly Lazy<WriteableBitmap> FaceDarkHoverTexture = new(() => Create(State.DarkHover, faceOnly: true));
@@ -46,8 +43,11 @@ internal static class MedallionTexture
     private static readonly Lazy<WriteableBitmap> FaceLitHoverTexture = new(() => Create(State.LitHover, faceOnly: true));
     private static readonly Lazy<WriteableBitmap> FaceOverlayTexture = new(CreateFaceOverlay);
 
-    public static Thickness MetalMargin { get; } = new((Size / 2.0) - (OuterRadius / Scale));
-    public static CornerRadius FaceCornerRadius { get; } = new(FaceRadius / Scale);
+    public static double Size => Diameter;
+    public static Thickness MetalMargin { get; } = new(Center - OuterRadius);
+    public static double MetalThickness => OuterRadius - InsetRadius;
+    public static double FaceSize => 2 * FaceRadius;
+    public static CornerRadius FaceCornerRadius { get; } = new(FaceRadius);
 
     public static WriteableBitmap Ring => RingTexture.Value;
     public static WriteableBitmap FaceDarkHover => FaceDarkHoverTexture.Value;
@@ -64,8 +64,8 @@ internal static class MedallionTexture
             for (int x = 0; x < Pixels; x++)
             {
                 int index = (y * Pixels) + x;
-                float dx = x + 0.5f - Center;
-                float dy = y + 0.5f - Center;
+                float dx = ((x + 0.5f) / Scale) - Center;
+                float dy = ((y + 0.5f) / Scale) - Center;
                 float distance = MathF.Sqrt((dx * dx) + (dy * dy));
                 float angle = MathF.Atan2(dx, -dy);
 
@@ -120,8 +120,8 @@ internal static class MedallionTexture
             for (int x = 0; x < FacePixels; x++)
             {
                 int index = (y * FacePixels) + x;
-                float dx = x + 0.5f - FaceRadius;
-                float dy = y + 0.5f - FaceRadius;
+                float dx = ((x + 0.5f) / Scale) - FaceRadius;
+                float dy = ((y + 0.5f) / Scale) - FaceRadius;
                 float distance = MathF.Sqrt((dx * dx) + (dy * dy));
                 float disc = Disc(distance, FaceRadius);
 
