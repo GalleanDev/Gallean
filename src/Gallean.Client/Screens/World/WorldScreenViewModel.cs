@@ -15,7 +15,7 @@ internal sealed partial class WorldScreenViewModel :
     IWorldPathEncounterVisitor<WorldScreenViewModel.SelectedMove, Task>,
     IWorldStackActionVisitor<Task>
 {
-    internal sealed record SelectedMove(WorldStack Stack, WorldPathSelection Selection);
+    private sealed record SelectedMove(WorldStack Stack, WorldPathSelection Selection);
 
     private static readonly TimeSpan StackIdleDelay = TimeSpan.FromMinutes(1);
     private static readonly TimeSpan StackIdleInterval = TimeSpan.FromMinutes(2);
