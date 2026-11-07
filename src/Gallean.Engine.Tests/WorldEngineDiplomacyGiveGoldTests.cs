@@ -39,7 +39,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(250)),
             [
-                new WorldGoldGivenEvent(player1.Id, player2.Id, 250),
+                new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(250, 0, 0, 0, 0, 0)),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 5)
             ]);
 
@@ -79,7 +79,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
 
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(250)),
-            [new WorldGoldGivenEvent(player1.Id, player2.Id, 250)]);
+            [new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(250, 0, 0, 0, 0, 0))]);
 
         Assert.That(engine.State, Is.EqualTo(
             before with
@@ -124,7 +124,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(5000)),
             [
-                new WorldGoldGivenEvent(player1.Id, player2.Id, 5000),
+                new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(5000, 0, 0, 0, 0, 0)),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 100)
             ]);
 
@@ -171,7 +171,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
 
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(1000)),
-            [new WorldGoldGivenEvent(player1.Id, player2.Id, 1000)]);
+            [new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(1000, 0, 0, 0, 0, 0))]);
 
         Assert.That(engine.State, Is.EqualTo(
             before with
@@ -215,7 +215,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
 
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(30)),
-            [new WorldGoldGivenEvent(player1.Id, player2.Id, 30)]);
+            [new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(30, 0, 0, 0, 0, 0))]);
 
         Assert.That(engine.State, Is.EqualTo(
             before with
@@ -379,7 +379,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(500)),
             [
-                new WorldGoldGivenEvent(player1.Id, player2.Id, 500),
+                new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(500, 0, 0, 0, 0, 0)),
                 new WorldRelationChangedEvent(player1.Id, player2.Id, 10),
                 new WorldRelationChangedEvent(player1.Id, enemy.Id, 45)
             ]);
@@ -433,7 +433,7 @@ public sealed class WorldEngineDiplomacyGiveGoldTests
         engine.CheckCommand(
             new WorldDiplomacyActionCommand(player2.Id, new WorldDiplomacyGiveGoldAction(500)),
             [
-                new WorldGoldGivenEvent(player1.Id, player2.Id, 500),
+                new WorldResourcesGivenEvent(player1.Id, player2.Id, new WorldResourceSet(500, 0, 0, 0, 0, 0)),
                 new WorldRelationChangedEvent(player1.Id, enemy.Id, 45)
             ]);
 

@@ -6,9 +6,9 @@ internal partial class WorldEngine
 {
     private sealed class DiplomacyRelationRule(IEngineContext context) : WorldEventRule(context)
     {
-        public override EventRuleResult<WorldEvent> Visit(WorldGoldGivenEvent ev, WorldState state)
+        public override EventRuleResult<WorldEvent> Visit(WorldResourcesGivenEvent ev, WorldState state)
         {
-            int change = DiplomacyCalculator.GetGiftRelationChange(ev.Gold, Context.Globals);
+            int change = DiplomacyCalculator.GetGiftRelationChange(ev.Resources.Gold, Context.Globals);
 
             return UpdateRelation(state, ev.PlayerId, ev.TargetPlayerId, change);
         }

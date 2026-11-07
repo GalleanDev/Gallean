@@ -1,9 +1,9 @@
 namespace Gallean.Engine;
 
-public sealed record WorldGoldGivenEvent(
+public sealed record WorldResourcesGivenEvent(
     WorldPlayerId PlayerId,
     WorldPlayerId TargetPlayerId,
-    int Gold) : WorldEvent
+    WorldResourceSet Resources) : WorldEvent
 {
     public override TResult Accept<TContext, TResult>(IWorldEventVisitor<TContext, TResult> visitor, TContext context)
     {

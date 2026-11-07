@@ -69,7 +69,7 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldFortificationPoisonedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldFortificationBattleEndedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldGameResumedEvent ev, WorldState state) => Empty.Value;
-    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldGoldGivenEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesGivenEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRelationChangedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesStolenEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesCapturedEvent ev, WorldState state) => Empty.Value;

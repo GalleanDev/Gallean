@@ -20,6 +20,6 @@ internal sealed class GiveGoldDiplomacyActionResolver(WorldDiplomacyGiveGoldActi
 
         return WorldCommandResult.Success(
             Empty.Value,
-            [new WorldGoldGivenEvent(player, targetPlayer, action.Gold)]);
+            [new WorldResourcesGivenEvent(player, targetPlayer, new WorldResourceSet(action.Gold, 0, 0, 0, 0, 0))]);
     }
 }
