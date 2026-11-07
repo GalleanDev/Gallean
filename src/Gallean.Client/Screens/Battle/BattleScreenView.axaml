@@ -182,7 +182,7 @@
                           Classes.heal="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Heal}}"
                           Classes.effect="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Effect}}"
                           Classes.action="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+FeedbackType.Action}}">
-                    <local:OutlinedTextBlock Classes="feedback-label" Text="{Binding Text}" />
+                    <local:AutoFitTextBlock Classes="feedback-label" Text="{Binding Text}" />
                   </Border>
                 </local:AnimatedOpacity>
               </DataTemplate>

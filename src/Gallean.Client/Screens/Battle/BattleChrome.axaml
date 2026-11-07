@@ -16,11 +16,12 @@
   </Style>
 
   <Style Selector=":is(TextBlock).feedback-label">
+    <Setter Property="local:OutlinedTextBlock.Outline" Value="{StaticResource TextOutlineBrush}" />
+    <Setter Property="local:OutlinedTextBlock.OutlineThickness" Value="1" />
     <Setter Property="Margin" Value="4,0" />
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="TextAlignment" Value="Center" />
-    <Setter Property="TextWrapping" Value="Wrap" />
   </Style>
   <Style Selector="Border.feedback.damage">
     <Setter Property="Background" Value="{StaticResource BattleFeedbackDamageOverlayBrush}" />
