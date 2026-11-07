@@ -147,6 +147,8 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     public override ScreenMusic Music => ScreenMusic.Tracks(musicQueue);
 
+    public override bool CanContinue => CanExitBattle();
+
     public BattleRenderState RenderState
     {
         get
