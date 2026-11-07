@@ -176,7 +176,7 @@ internal sealed partial class WorldAiPlanner
             Approach approach = new(state, thief, target, targetPath.Position);
             WorldPlayer player = state.Players[thief.OwnerId];
             WorldAiAttitudeDefinition attitude = Context.Engine.Definitions.GetAiAttitude(player.AiAttitude);
-            int interest = targetPath.Target.Accept(new WorldAiTargetInterestVisitor(attitude), new WorldAiTargetInterestVisitor.Context(state, thief.OwnerId));
+            int interest = targetPath.Target.Accept(new WorldAiThiefTargetInterestVisitor(attitude), new WorldAiTargetInterestVisitor.Context(state, thief.OwnerId));
             int priority = targetPath.Target.Accept(new WorldAiTargetPriorityVisitor(), new WorldAiTargetPriorityVisitor.Context(state));
             StackStats stackStats = Context.Engine.UnitStats.GetWorldStackStats(thief);
 

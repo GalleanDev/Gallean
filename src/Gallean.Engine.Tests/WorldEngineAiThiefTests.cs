@@ -317,7 +317,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 275] Riot thief -> (3, 3)"
+            "[P2 250] Riot thief -> (3, 3)"
         ]));
         Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 1 }));
         Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo(ImmutableSortedSet<WorldPlayerId>.Empty));
@@ -379,7 +379,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 275] Riot thief -> (3, 3)"
+            "[P2 250] Riot thief -> (3, 3)"
         ]));
         Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 1 }));
         Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
@@ -644,7 +644,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 193] Steal gold thief -> (3, 3)"
+            "[P2 175] Steal gold thief -> (3, 3)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].Resources, Is.EqualTo(new WorldResourceSet(161, 0, 0, 0, 0, 0)));
         Assert.That(session.World.State.Players[player2.Id].Resources, Is.EqualTo(new WorldResourceSet(1939, 0, 0, 0, 25, 0)));
@@ -712,7 +712,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 193] Steal spell thief -> (3, 3)"
+            "[P2 175] Steal spell thief -> (3, 3)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].Spellbook, Is.EqualTo(new WorldPlayerSpellbook([], [spell.Id])));
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
@@ -842,7 +842,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 193] Bribe thief -> (3, 3)"
+            "[P2 175] Bribe thief -> (3, 3)"
         ]));
         Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with
         {
