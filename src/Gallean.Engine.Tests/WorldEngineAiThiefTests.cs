@@ -126,6 +126,7 @@ public sealed class WorldEngineAiThiefTests
             movementPoints: 6);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -249,6 +250,7 @@ public sealed class WorldEngineAiThiefTests
             movementPoints: 6);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -313,6 +315,7 @@ public sealed class WorldEngineAiThiefTests
                 .Build());
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(soldier)
@@ -377,6 +380,7 @@ public sealed class WorldEngineAiThiefTests
                 .Build());
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(soldier)
@@ -511,6 +515,7 @@ public sealed class WorldEngineAiThiefTests
             movementPoints: 6);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -582,6 +587,7 @@ public sealed class WorldEngineAiThiefTests
             };
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -648,6 +654,7 @@ public sealed class WorldEngineAiThiefTests
             TestHelpers.SingleUnitGrid(new WorldUnitId("soldier"), soldier));
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(soldier)
@@ -716,6 +723,7 @@ public sealed class WorldEngineAiThiefTests
             TestHelpers.SingleUnitGrid(new WorldUnitId("soldier"), soldier));
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(soldier)
@@ -782,6 +790,7 @@ public sealed class WorldEngineAiThiefTests
             movementPoints: 6);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -849,6 +858,7 @@ public sealed class WorldEngineAiThiefTests
             TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), guard));
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(guard)
@@ -929,6 +939,7 @@ public sealed class WorldEngineAiThiefTests
             };
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -1066,6 +1077,7 @@ public sealed class WorldEngineAiThiefTests
             movementPoints: 6);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -1384,6 +1396,7 @@ public sealed class WorldEngineAiThiefTests
             };
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(leader)
@@ -1414,5 +1427,69 @@ public sealed class WorldEngineAiThiefTests
             MovementPoints = 0,
             Inventory = new WorldInventory([gemItem])
         }));
+    }
+
+    [Test]
+    public void EasyDifficultyTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 40, damage: 5),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition soldier = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 50, initiative: 30, damage: 5);
+
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            SpiedPlayers = [player2.Id]
+        };
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldStack targetStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            new WorldPosition(3, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader), GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldier), GridPosition.FrontCenter, false)
+                .Build(),
+            movementPoints: 6);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.Easy)
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(soldier)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Spy, 100))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealItem, 80))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 70))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(targetStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 14] Poison thief -> (3, 0)"
+        ]));
+        Assert.That(session.World.State.Stacks[targetStack.Id], Is.EqualTo(targetStack));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
     }
 }

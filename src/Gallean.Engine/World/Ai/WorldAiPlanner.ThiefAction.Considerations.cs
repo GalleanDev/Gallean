@@ -33,6 +33,47 @@ internal sealed partial class WorldAiPlanner
                 }
             }
 
+            public static UtilityScore.Consideration Difficulty(WorldThiefActionType type, WorldDifficulty difficulty, GlobalVariables globals)
+            {
+                if (IsExtendedAction(type))
+                {
+                    int percent = difficulty switch
+                    {
+                        WorldDifficulty.Easy => globals.AiThiefExtendedActionPercentEasy,
+                        WorldDifficulty.Average => globals.AiThiefExtendedActionPercentAverage,
+                        WorldDifficulty.Hard => globals.AiThiefExtendedActionPercentHard,
+                        WorldDifficulty.VeryHard => globals.AiThiefExtendedActionPercentVeryHard
+                    };
+
+                    return UtilityScore.Ratio(percent, PercentMax);
+                }
+                else
+                {
+                    return UtilityScore.Full;
+                }
+            }
+
+            private static bool IsExtendedAction(WorldThiefActionType type)
+            {
+                return type switch
+                {
+                    WorldThiefActionType.PoisonStack => false,
+                    WorldThiefActionType.Spy => false,
+                    WorldThiefActionType.StealItem => true,
+                    WorldThiefActionType.Assassinate => true,
+                    WorldThiefActionType.CounterfeitOrders => true,
+                    WorldThiefActionType.Duel => false,
+                    WorldThiefActionType.PoisonCity => false,
+                    WorldThiefActionType.StealSpell => true,
+                    WorldThiefActionType.Bribe => true,
+                    WorldThiefActionType.StealGold => true,
+                    WorldThiefActionType.StealMerchant => false,
+                    WorldThiefActionType.StealMage => false,
+                    WorldThiefActionType.SpyRuin => false,
+                    WorldThiefActionType.RiotCity => true
+                };
+            }
+
             public static UtilityScore.Consideration TargetInterest(int interest)
             {
                 return UtilityScore.Ratio(interest, MaxInterest);

@@ -210,6 +210,7 @@ internal sealed partial class WorldAiPlanner
                         int score = UtilityScore.Combine(
                         [
                             value,
+                            Considerations.Difficulty(type, state.Difficulty, Context.Engine.Globals),
                             Considerations.SuccessChance(chance),
                             .. considerations
                         ]);

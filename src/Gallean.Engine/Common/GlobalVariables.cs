@@ -23,6 +23,10 @@ public sealed record GlobalVariables
     internal int AiRandomCastChance { get; init; } = 2;
     internal int AiStackDefendRange { get; init; } = 5;
     internal int AiStackGuardRange { get; init; } = 5;
+    internal int AiThiefExtendedActionPercentEasy { get; init; } = 10;
+    internal int AiThiefExtendedActionPercentAverage { get; init; } = 40;
+    internal int AiThiefExtendedActionPercentHard { get; init; } = 70;
+    internal int AiThiefExtendedActionPercentVeryHard { get; init; } = 100;
     internal int BagRange { get; init; } = 1;
     internal int BattleDamageVariance { get; init; } = 6;
     internal int BattleInitiativeVariance { get; init; } = 10;

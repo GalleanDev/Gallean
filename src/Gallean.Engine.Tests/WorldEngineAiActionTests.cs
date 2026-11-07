@@ -432,6 +432,7 @@ public sealed class WorldEngineAiActionTests
             movementPoints: 0);
 
         WorldEngine engine = new TestWorldEngineBuilder()
+            .WithDifficulty(WorldDifficulty.VeryHard)
             .WithMap(map)
             .WithDefinition(thief)
             .WithDefinition(enemy)
