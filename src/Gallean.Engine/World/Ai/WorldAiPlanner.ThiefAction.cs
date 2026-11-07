@@ -235,7 +235,7 @@ internal sealed partial class WorldAiPlanner
                 WorldThiefActionType.PoisonStack => [(new WorldThiefPoisonAction(position), Considerations.Poison())],
                 WorldThiefActionType.Spy => [(new WorldThiefSpyAction(position), Considerations.Spy(approach))],
                 WorldThiefActionType.StealItem => CreateStealItemActions(approach),
-                WorldThiefActionType.Assassinate => [(new WorldThiefAssassinateAction(position), Considerations.Assassinate())],
+                WorldThiefActionType.Assassinate => [(new WorldThiefAssassinateAction(position), Considerations.Assassinate(approach))],
                 WorldThiefActionType.CounterfeitOrders => [(new WorldThiefCounterfeitOrdersAction(position), Considerations.CounterfeitOrders(approach, Context))],
                 WorldThiefActionType.Duel => [(new WorldThiefDuelAction(position), Considerations.Duel(approach, Context))],
                 WorldThiefActionType.PoisonCity => [(new WorldThiefPoisonAction(position), Considerations.Poison())],

@@ -146,9 +146,25 @@ internal sealed partial class WorldAiPlanner
                 return UtilityScore.Ratio(item.Value.Gold, GoldMaxValue);
             }
 
-            public static UtilityScore.Consideration Assassinate()
+            public static UtilityScore.Consideration Assassinate(Approach approach)
             {
-                return UtilityScore.Of(AssassinateValue);
+                if (approach.Target.OwnerId is not null)
+                {
+                    WorldPlayer owner = approach.State.Players[approach.Target.OwnerId.Value];
+
+                    if (WorldHelpers.IsRacePlayable(owner.Race))
+                    {
+                        return UtilityScore.Of(AssassinateValue);
+                    }
+                    else
+                    {
+                        return UtilityScore.None;
+                    }
+                }
+                else
+                {
+                    return UtilityScore.None;
+                }
             }
 
             public static UtilityScore.Consideration Duel(Approach approach, WorldAiContext context)
