@@ -154,6 +154,5 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldUnitPurchasedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldUnitRepositionedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldUnitResurrectedEvent ev, WorldState state) => Empty.Value;
-    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldUnitUpgradedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldUnitTransferredEvent ev, WorldState state) => Empty.Value;
 }

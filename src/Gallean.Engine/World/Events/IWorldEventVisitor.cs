@@ -102,5 +102,4 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldUnitResurrectedEvent ev, TContext context);
     TResult Visit(WorldUnitTransferredEvent ev, TContext context);
     TResult Visit(WorldUnitTypeLockedEvent ev, TContext context);
-    TResult Visit(WorldUnitUpgradedEvent ev, TContext context);
 }
