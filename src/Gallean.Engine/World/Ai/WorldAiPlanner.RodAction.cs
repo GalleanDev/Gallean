@@ -4,9 +4,13 @@ namespace Gallean.Engine;
 
 internal sealed partial class WorldAiPlanner
 {
-    private sealed record RodAction(WorldAiContext Context, int Priority) : AbstractStackAction(Context, Priority)
+    private sealed partial record RodAction(WorldAiContext Context, int Priority) : AbstractStackAction(Context, Priority)
     {
-        private readonly record struct RodTarget(WorldPosition Position, int Range, IWorldCommand<Empty> Command);
+        private const int MoveTurnLimit = 10;
+
+        private readonly record struct Target(WorldPosition Position, int Range, int Interest, IWorldCommand<Empty> Command);
+
+        private readonly record struct Candidate(Target Target, WorldPosition Position, int Cost, int Score);
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {
@@ -107,54 +111,89 @@ internal sealed partial class WorldAiPlanner
                 return null;
             }
 
-            List<RodTarget> targets = GetTargets(state, stack, pathMap);
+            StackStats stackStats = Context.Engine.UnitStats.GetWorldStackStats(stack);
+            Candidate? best = null;
 
-            foreach (RodTarget target in targets)
+            foreach (Target target in EnumerateTargets(state, stack, pathMap))
+            {
+                Candidate? candidate = FindBestCandidate(state, stack, pathMap, stackStats, target);
+
+                if (candidate is not null && (best is null || candidate.Value.Score > best.Value.Score))
+                {
+                    best = candidate;
+                }
+            }
+
+            if (best is null)
+            {
+                return null;
+            }
+
+            if (best.Value.Position == stack.Position)
+            {
+                return MakePlan(best.Value.Score, best.Value.Target.Command, context.Memory);
+            }
+            else
+            {
+                return PlanMoveToward(context, pathMap, best.Value);
+            }
+        }
+
+        private Candidate? FindBestCandidate(WorldState state, WorldStack stack, WorldPathMap pathMap, StackStats stackStats, Target target)
+        {
+            if (stack.Position.GetDistance(target.Position) <= target.Range)
             {
                 WorldCommandResult commandResult = target.Command.Execute(state, Context.Engine);
 
                 if (!commandResult.Failed)
                 {
-                    return MakePlan(MaxScore, target.Command, context.Memory);
+                    int score = Score(target, 0, stackStats);
+
+                    if (score > 0)
+                    {
+                        return new Candidate(target, stack.Position, 0, score);
+                    }
                 }
+
+                return null;
             }
 
-            (WorldPosition Position, int Cost)? destination = null;
+            Candidate? best = null;
 
-            foreach (RodTarget target in targets)
+            foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(target.Position, target.Range, state.Map))
             {
-                if (stack.Position.GetDistance(target.Position) <= target.Range)
+                if (position != target.Position && pathMap.TryGetPath(position, WorldMovementLimit.Unlimited, out WorldPath? path))
                 {
-                    continue;
-                }
+                    int score = Score(target, path.Cost, stackStats);
 
-                foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(target.Position, target.Range, state.Map))
-                {
-                    if (position != target.Position &&
-                        pathMap.TryGetPath(position, WorldMovementLimit.Unlimited, out WorldPath? path) &&
-                        (destination is null || path.Cost < destination.Value.Cost))
+                    if (score > 0 && (best is null || score > best.Value.Score))
                     {
                         PathTraversalCalculator.TraversalInfo traversal = Context.Pathfinding.GetTraversalInfo(state, stack, path);
 
                         if (traversal.Encounter is not PathTraversalCalculator.Encounter.Battle)
                         {
-                            destination = (position, path.Cost);
+                            best = new Candidate(target, position, path.Cost, score);
                         }
                     }
                 }
             }
 
-            if (destination is null)
-            {
-                return null;
-            }
-
-            return PlanMoveToward(context, pathMap, destination.Value.Position);
+            return best;
         }
 
-        private List<RodTarget> GetTargets(WorldState state, WorldStack stack, WorldPathMap pathMap)
+        private static int Score(Target target, int cost, StackStats stackStats)
         {
-            List<RodTarget> targets = [];
+            return UtilityScore.Combine(
+            [
+                Considerations.TargetInterest(target.Interest),
+                Considerations.TargetMoveCost(cost, stackStats.MaxMovementPoints * MoveTurnLimit)
+            ]);
+        }
+
+        private IEnumerable<Target> EnumerateTargets(WorldState state, WorldStack stack, WorldPathMap pathMap)
+        {
+            WorldPlayer player = state.Players[stack.OwnerId];
+            WorldAiAttitudeDefinition attitude = Context.Engine.Definitions.GetAiAttitude(player.AiAttitude);
 
             foreach (WorldRod rod in state.Rods.Values)
             {
@@ -162,11 +201,9 @@ internal sealed partial class WorldAiPlanner
                 {
                     WorldRemoveRodCommand command = new(stack.Id, rod.Position);
 
-                    targets.Add(new RodTarget(rod.Position, Context.Engine.Globals.RodRemoveRange, command));
+                    yield return new Target(rod.Position, Context.Engine.Globals.RodRemoveRange, attitude.RemoveRodInterest, command);
                 }
             }
-
-            WorldPlayer player = state.Players[stack.OwnerId];
 
             if (ResourceSetCalculator.CanAfford(player.Resources, Context.Engine.Globals.RodCost))
             {
@@ -187,14 +224,12 @@ internal sealed partial class WorldAiPlanner
                             {
                                 WorldCreateRodCommand command = new(stack.Id, position);
 
-                                targets.Add(new RodTarget(position, Context.Engine.Globals.RodPlantRange, command));
+                                yield return new Target(position, Context.Engine.Globals.RodPlantRange, attitude.CreateRodInterest, command);
                             }
                         }
                     }
                 }
             }
-
-            return targets;
         }
 
         private static bool HasAdjacentRod(WorldState state, WorldPlan plan, WorldResourceNode node)
@@ -210,16 +245,17 @@ internal sealed partial class WorldAiPlanner
             return false;
         }
 
-        private WorldAiActionPlan? PlanMoveToward(ActionContext context, WorldPathMap pathMap, WorldPosition targetPosition)
+        private WorldAiActionPlan? PlanMoveToward(ActionContext context, WorldPathMap pathMap, Candidate candidate)
         {
             WorldStack stack = context.Stack;
-            WorldPosition? movePosition = Context.Pathfinding.FindMoveTowardCell(context.State, stack, pathMap, targetPosition);
 
-            if (movePosition is not null && pathMap.TryGetPath(movePosition.Value, WorldMovementLimit.Unlimited, out WorldPath? path))
+            WorldPosition? movePosition = Context.Pathfinding.FindMoveTowardCell(context.State, stack, pathMap, candidate.Position);
+
+            if (movePosition is not null)
             {
-                UtilityScore.Consideration consideration = UtilityScore.Ratio(path.Cost, stack.MovementPoints);
+                WorldAiMoveStackCommand command = new(stack.Id, movePosition.Value);
 
-                return MakePlan(consideration.Score, new WorldAiMoveStackCommand(stack.Id, movePosition.Value), context.Memory);
+                return MakePlan(candidate.Score, command, context.Memory);
             }
 
             return null;
