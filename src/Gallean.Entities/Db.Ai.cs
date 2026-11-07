@@ -43,7 +43,7 @@ public static partial class Db
         [property: JsonPropertyName("I_N_CITIES")] int InterestNeutralCities,
         [property: JsonPropertyName("I_N_STACK")] int InterestNeutralStack,
         [property: JsonPropertyName("I_TRAINER")] int InterestTrainer,
-        [property: JsonPropertyName("I_OBJ_M")] int InterestObjM,
+        [property: JsonPropertyName("I_OBJ_M")] int InterestObj,
         [property: JsonPropertyName("D_EASY_M")] int DifficultyEasyResourcePercent,
         [property: JsonPropertyName("D_AVG_M")] int DifficultyAverageResourcePercent,
         [property: JsonPropertyName("D_HARD_M")] int DifficultyHardResourcePercent,
