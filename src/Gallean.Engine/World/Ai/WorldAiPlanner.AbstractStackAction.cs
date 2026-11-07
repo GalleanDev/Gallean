@@ -20,27 +20,34 @@ internal sealed partial class WorldAiPlanner
             WorldPosition TargetPosition,
             WorldPosition BattlePosition,
             BattleState BattleState,
-            WorldAiEstimator.PowerEstimate Power);
+            WorldAiEstimator.PowerEstimate Power,
+            int RequiredPowerPercent);
 
-        private sealed class BattleStateVisitor : PathTraversalCalculator.IEncounterVisitor<BattleStateVisitor.Context, BattleState?>
+        private sealed class BattleStateVisitor : PathTraversalCalculator.IEncounterVisitor<BattleStateVisitor.Context, BattleStateVisitor.Battle?>
         {
             public sealed record Context(WorldState State, WorldStack Stack, IEngineContext Engine);
 
+            public sealed record Battle(BattleState State, WorldPlayerId? DefenderId);
+
             public static readonly BattleStateVisitor Instance = new();
 
-            public BattleState? Visit(PathTraversalCalculator.Encounter.Bag encounter, Context context)
+            public Battle? Visit(PathTraversalCalculator.Encounter.Bag encounter, Context context)
             {
                 return null;
             }
 
-            public BattleState? Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
+            public Battle? Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
             {
-                return WorldCommandHelpers.CreateStackBattleState(context.State, context.Stack, encounter.Stack, context.Engine);
+                BattleState state = WorldCommandHelpers.CreateStackBattleState(context.State, context.Stack, encounter.Stack, context.Engine);
+
+                return new Battle(state, encounter.Stack.OwnerId);
             }
 
-            public BattleState? Visit(PathTraversalCalculator.Encounter.FortificationBattle encounter, Context context)
+            public Battle? Visit(PathTraversalCalculator.Encounter.FortificationBattle encounter, Context context)
             {
-                return WorldCommandHelpers.CreateGarrisonBattleState(context.State, context.Stack, encounter.Fortification, context.Engine);
+                BattleState state = WorldCommandHelpers.CreateGarrisonBattleState(context.State, context.Stack, encounter.Fortification, context.Engine);
+
+                return new Battle(state, FortificationCalculator.GetOwner(encounter.Fortification));
             }
         }
 
@@ -88,16 +95,43 @@ internal sealed partial class WorldAiPlanner
                 return null;
             }
 
-            BattleState? battleState = encounter.Accept(BattleStateVisitor.Instance, new BattleStateVisitor.Context(state, stack, aiContext.Engine));
+            BattleStateVisitor.Battle? battle = encounter.Accept(BattleStateVisitor.Instance, new BattleStateVisitor.Context(state, stack, aiContext.Engine));
 
-            if (battleState is null)
+            if (battle is null)
             {
                 return null;
             }
 
-            WorldAiEstimator.PowerEstimate power = aiContext.Estimator.EstimatePower(battleState);
+            WorldAiEstimator.PowerEstimate power = aiContext.Estimator.EstimatePower(battle.State);
+            WorldAiAttackPowerPercent attackPowerPercent = GetAttackPowerPercent(state.Difficulty, aiContext.Engine.Globals);
+            int requiredPowerPercent = IsHumanPlayer(state, battle.DefenderId) ? attackPowerPercent.HumanTarget : attackPowerPercent.OtherTarget;
 
-            return new BattleInfo(target, targetPosition, encounter.Position, battleState, power);
+            return new BattleInfo(target, targetPosition, encounter.Position, battle.State, power, requiredPowerPercent);
+        }
+
+        private static WorldAiAttackPowerPercent GetAttackPowerPercent(WorldDifficulty difficulty, GlobalVariables globals)
+        {
+            return difficulty switch
+            {
+                WorldDifficulty.Easy => globals.AiAttackPowerPercentEasy,
+                WorldDifficulty.Average => globals.AiAttackPowerPercentAverage,
+                WorldDifficulty.Hard => globals.AiAttackPowerPercentHard,
+                WorldDifficulty.VeryHard => globals.AiAttackPowerPercentVeryHard
+            };
+        }
+
+        private static bool IsHumanPlayer(WorldState state, WorldPlayerId? playerId)
+        {
+            if (playerId is not null)
+            {
+                WorldPlayer player = state.Players[playerId.Value];
+
+                return player.Race != WorldRace.Neutral && !player.IsAi;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

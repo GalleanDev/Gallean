@@ -272,7 +272,7 @@ internal sealed partial class WorldAiPlanner
 
         private int ScorePrefilteredBattle(ActionContext context, BattleInfo battle)
         {
-            UtilityScore.Consideration prefilter = Considerations.PowerPrefilter(battle.Power);
+            UtilityScore.Consideration prefilter = Considerations.PowerPrefilter(battle);
 
             if (prefilter.Score > 0)
             {
@@ -293,7 +293,7 @@ internal sealed partial class WorldAiPlanner
 
         private int ScoreSimulatedBattle(ActionContext context, BattleInfo battle)
         {
-            UtilityScore.Consideration prefilter = Considerations.PowerPrefilter(battle.Power);
+            UtilityScore.Consideration prefilter = Considerations.PowerPrefilter(battle);
 
             if (prefilter.Score > 0)
             {

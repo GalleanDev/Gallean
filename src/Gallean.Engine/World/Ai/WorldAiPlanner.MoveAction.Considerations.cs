@@ -8,7 +8,6 @@ internal sealed partial class WorldAiPlanner
         {
             private const int MaxInterest = 200;
             private const int MaxPriority = 6;
-            private const int PrefilterPowerPercent = 80;
             private const int VitalPowerPercent = 140;
             private const int VitalThreatRadius = 3;
             private const int VitalThreatPowerPercent = 140;
@@ -49,7 +48,7 @@ internal sealed partial class WorldAiPlanner
                 }
                 else
                 {
-                    return UtilityScore.Flag(battleInfo.Power.AtLeast(BattleSide.Attacker, PrefilterPowerPercent));
+                    return UtilityScore.Flag(battleInfo.Power.AtLeast(BattleSide.Attacker, battleInfo.RequiredPowerPercent));
                 }
             }
 

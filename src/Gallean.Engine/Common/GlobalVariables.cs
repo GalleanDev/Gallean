@@ -11,6 +11,10 @@ public sealed record GlobalVariables
     internal int AccuracyReductionPerTarget { get; init; } = 10;
     internal int ActionMovementCostPercent { get; init; } = 50;
     internal int AiDefaultPriority { get; init; } = 3;
+    internal WorldAiAttackPowerPercent AiAttackPowerPercentEasy { get; init; } = new(HumanTarget: 150, OtherTarget: 80);
+    internal WorldAiAttackPowerPercent AiAttackPowerPercentAverage { get; init; } = new(HumanTarget: 80, OtherTarget: 80);
+    internal WorldAiAttackPowerPercent AiAttackPowerPercentHard { get; init; } = new(HumanTarget: 80, OtherTarget: 80);
+    internal WorldAiAttackPowerPercent AiAttackPowerPercentVeryHard { get; init; } = new(HumanTarget: 80, OtherTarget: 80);
     internal int AiAutoExperienceGarrisonMultiplier { get; init; } = 2;
     internal int AiAutoExperienceNeutralMaxSuggestedLevel { get; init; } = 9;
     internal int AiGlobalSpellMinMana { get; init; } = 1000;

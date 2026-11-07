@@ -6,7 +6,6 @@ internal sealed partial class WorldAiPlanner
     {
         private static class Considerations
         {
-            private const int PrefilterPowerPercent = 80;
             private const int RoamingPowerPercent = 140;
             private const int VitalPowerPercent = 140;
             private const int ExperienceFloor = MaxScore / 5;
@@ -42,9 +41,9 @@ internal sealed partial class WorldAiPlanner
                 return UtilityScore.Flag(power.AtLeast(BattleSide.Attacker, RoamingPowerPercent));
             }
 
-            public static UtilityScore.Consideration PowerPrefilter(WorldAiEstimator.PowerEstimate power)
+            public static UtilityScore.Consideration PowerPrefilter(BattleInfo battle)
             {
-                return UtilityScore.Flag(power.AtLeast(BattleSide.Attacker, PrefilterPowerPercent));
+                return UtilityScore.Flag(battle.Power.AtLeast(BattleSide.Attacker, battle.RequiredPowerPercent));
             }
 
             public static UtilityScore.Consideration PowerRatio(WorldAiEstimator.PowerEstimate power)

@@ -4739,4 +4739,37 @@ public sealed class WorldEngineAiTests
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
         Assert.That(session.World.State.Rods.Values, Is.Empty);
     }
+
+    [Test]
+    public void EasyDifficultyEnemyTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        UnitDefinition main = Leader("main", damage: 50, movementPoints: 6);
+        UnitDefinition enemy = Leader("enemy", damage: 50, movementPoints: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack mainStack = MyStack(new WorldUnitId("mainLeader"), "Main", player1.Id, new WorldPosition(0, 0), main, 100, 6, WorldStackOrder.Normal.Instance);
+        WorldStack enemyStack = EnemyStack(new WorldUnitId("enemyUnit"), "Enemy", player2.Id, new WorldPosition(2, 0), enemy, 100);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDifficulty(WorldDifficulty.Easy)
+            .WithDefinition(main)
+            .WithDefinition(enemy)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(mainStack)
+            .WithStack(enemyStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
+        Assert.That(session.World.State.Stacks[enemyStack.Id], Is.EqualTo(enemyStack with { MovementPoints = 6 }));
+    }
 }
