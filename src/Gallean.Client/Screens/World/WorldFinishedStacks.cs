@@ -69,10 +69,6 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldFortificationPoisonedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldFortificationBattleEndedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldGameResumedEvent ev, WorldState state) => Empty.Value;
-    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesGivenEvent ev, WorldState state) => Empty.Value;
-    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRelationChangedEvent ev, WorldState state) => Empty.Value;
-    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesStolenEvent ev, WorldState state) => Empty.Value;
-    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesCapturedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldInventoryItemTransferredEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemEquippedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemsReceivedEvent ev, WorldState state) => Empty.Value;
@@ -88,6 +84,10 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldMerchantItemStolenEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldMountainsRemovedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldPlayerDefeatedEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRelationChangedEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesCapturedEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesGivenEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldResourcesStolenEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRodCreatedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRodDestroyedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRoundStartedEvent ev, WorldState state) => Empty.Value;

@@ -26,10 +26,6 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldFortificationPoisonedEvent ev, TContext context);
     TResult Visit(WorldFortificationBattleEndedEvent ev, TContext context);
     TResult Visit(WorldGameResumedEvent ev, TContext context);
-    TResult Visit(WorldResourcesGivenEvent ev, TContext context);
-    TResult Visit(WorldRelationChangedEvent ev, TContext context);
-    TResult Visit(WorldResourcesStolenEvent ev, TContext context);
-    TResult Visit(WorldResourcesCapturedEvent ev, TContext context);
     TResult Visit(WorldInventoryItemTransferredEvent ev, TContext context);
     TResult Visit(WorldItemEquippedEvent ev, TContext context);
     TResult Visit(WorldItemsReceivedEvent ev, TContext context);
@@ -45,6 +41,10 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldMerchantItemStolenEvent ev, TContext context);
     TResult Visit(WorldMountainsRemovedEvent ev, TContext context);
     TResult Visit(WorldPlayerDefeatedEvent ev, TContext context);
+    TResult Visit(WorldRelationChangedEvent ev, TContext context);
+    TResult Visit(WorldResourcesCapturedEvent ev, TContext context);
+    TResult Visit(WorldResourcesGivenEvent ev, TContext context);
+    TResult Visit(WorldResourcesStolenEvent ev, TContext context);
     TResult Visit(WorldRodCreatedEvent ev, TContext context);
     TResult Visit(WorldRodDestroyedEvent ev, TContext context);
     TResult Visit(WorldRoundStartedEvent ev, TContext context);

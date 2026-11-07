@@ -34,6 +34,7 @@ internal partial class WorldEngine
         public virtual EventRuleResult<WorldEvent> Visit(WorldFortificationCapturedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldFortificationPoisonedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldFortificationBattleEndedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldGameResumedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldInventoryItemTransferredEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldItemEquippedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldItemsReceivedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
@@ -49,6 +50,10 @@ internal partial class WorldEngine
         public virtual EventRuleResult<WorldEvent> Visit(WorldMerchantItemStolenEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldMountainsRemovedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldPlayerDefeatedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldRelationChangedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldResourcesCapturedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldResourcesGivenEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldResourcesStolenEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldRodCreatedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldRodDestroyedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldRoundStartedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
@@ -70,11 +75,6 @@ internal partial class WorldEngine
         public virtual EventRuleResult<WorldEvent> Visit(WorldSpellStolenEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldSpyAddedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldSpyRemovedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
-        public virtual EventRuleResult<WorldEvent> Visit(WorldGameResumedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
-        public virtual EventRuleResult<WorldEvent> Visit(WorldResourcesGivenEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
-        public virtual EventRuleResult<WorldEvent> Visit(WorldRelationChangedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
-        public virtual EventRuleResult<WorldEvent> Visit(WorldResourcesStolenEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
-        public virtual EventRuleResult<WorldEvent> Visit(WorldResourcesCapturedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldStackAutoFittedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldStackBattleStartedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldStackBattleEndedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
