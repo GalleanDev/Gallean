@@ -379,7 +379,7 @@ public sealed class WorldEngineCreateRodTests
     }
 
     [Test]
-    public void NearbyRodTest()
+    public void NearRodTest()
     {
         WorldMap map = TestHelpers.SimpleMap(7, 3);
 
