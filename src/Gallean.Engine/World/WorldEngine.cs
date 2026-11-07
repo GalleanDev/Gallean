@@ -17,6 +17,7 @@ internal sealed partial class WorldEngine(IEngineContext context, WorldState ini
             new FortificationCapturingRiotRule(context),
             new FortificationCapturingDefeatRule(context),
             new PlayerDefeatedDestroyStacksRule(context),
+            new PlayerDefeatedDestroyRodsRule(context),
             new PlayerDefeatedEndScenarioRule(context),
             new FogConcealedRevealVisionRule(context),
             new StackMovingRevealFogRule(context),
