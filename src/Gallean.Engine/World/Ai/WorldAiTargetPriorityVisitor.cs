@@ -21,7 +21,7 @@ internal sealed class WorldAiTargetPriorityVisitor
 
     public int Visit(WorldAiTarget.Location target, Context context)
     {
-        throw new InvalidOperationException("Invalid world AI target type.");
+        return 0;
     }
 
     public int Visit(WorldAiTarget.Bag target, Context context)
