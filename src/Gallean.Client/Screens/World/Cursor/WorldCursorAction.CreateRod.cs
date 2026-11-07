@@ -8,7 +8,6 @@ internal abstract partial record WorldCursorAction
     public sealed record CreateRod(WorldStackId StackId) : WorldCursorAction
     {
         public override WorldStackId? SelectedStackId => StackId;
-
         public override string SelectionText => Tr("Select a tile to plant a rod on.");
 
         public override IWorldCommand<Empty> CreateCommand(WorldPosition position)

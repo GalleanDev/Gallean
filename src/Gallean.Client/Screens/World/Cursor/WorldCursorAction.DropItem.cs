@@ -8,7 +8,6 @@ internal abstract partial record WorldCursorAction
     public sealed record DropItem(WorldStackId StackId, WorldItemId ItemId) : WorldCursorAction
     {
         public override WorldStackId? SelectedStackId => StackId;
-
         public override string SelectionText => Tr("Select a tile to drop the item on.");
 
         public override IWorldCommand<Empty> CreateCommand(WorldPosition position)

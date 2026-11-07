@@ -8,7 +8,6 @@ internal abstract partial record WorldCursorAction
     public sealed record UseItem(WorldStackId StackId, WorldItemId ItemId) : WorldCursorAction
     {
         public override WorldStackId? SelectedStackId => StackId;
-
         public override string SelectionText => Tr("Select a target for the item on the map.");
 
         public override IWorldCommand<Empty> CreateCommand(WorldPosition position)

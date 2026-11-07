@@ -8,7 +8,6 @@ internal abstract partial record WorldCursorAction
     public sealed record CastSpell(WorldSpellDefinitionId SpellId) : WorldCursorAction
     {
         public override WorldStackId? SelectedStackId => null;
-
         public override string SelectionText => Tr("Select a target for the spell on the map.");
 
         public override IWorldCommand<Empty> CreateCommand(WorldPosition position)
