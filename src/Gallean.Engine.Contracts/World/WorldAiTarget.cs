@@ -7,6 +7,7 @@ namespace Gallean.Engine.Contracts;
 [JsonDerivedType(typeof(Fortification), "fortification")]
 [JsonDerivedType(typeof(Location), "location")]
 [JsonDerivedType(typeof(Bag), "bag")]
+[JsonDerivedType(typeof(Site), "site")]
 public abstract record WorldAiTarget
 {
     public sealed record Stack(WorldStackId StackId) : WorldAiTarget
@@ -34,6 +35,14 @@ public abstract record WorldAiTarget
     }
 
     public sealed record Bag(WorldBagId BagId) : WorldAiTarget
+    {
+        public override TResult Accept<TContext, TResult>(IWorldAiTargetVisitor<TContext, TResult> visitor, TContext context)
+        {
+            return visitor.Visit(this, context);
+        }
+    }
+
+    public sealed record Site(WorldSiteId SiteId) : WorldAiTarget
     {
         public override TResult Accept<TContext, TResult>(IWorldAiTargetVisitor<TContext, TResult> visitor, TContext context)
         {

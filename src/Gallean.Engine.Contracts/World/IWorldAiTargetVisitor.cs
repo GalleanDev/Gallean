@@ -6,4 +6,5 @@ public interface IWorldAiTargetVisitor<in TContext, out TResult>
     TResult Visit(WorldAiTarget.Fortification target, TContext context);
     TResult Visit(WorldAiTarget.Location target, TContext context);
     TResult Visit(WorldAiTarget.Bag target, TContext context);
+    TResult Visit(WorldAiTarget.Site target, TContext context);
 }

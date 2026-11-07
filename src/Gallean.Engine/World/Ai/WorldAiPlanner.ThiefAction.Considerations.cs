@@ -12,7 +12,11 @@ internal sealed partial class WorldAiPlanner
             private const int MinimumSuccessChance = 50;
             private const int SpyValue = MaxScore / 2;
             private const int AssassinateValue = MaxScore / 2;
+            private const int RiotValue = MaxScore / 2;
             private const int NeutralRiotValue = MaxScore / 10;
+            private const int CounterfeitOrdersValue = MaxScore / 10;
+            private const int SpyRuinValue = MaxScore / 10;
+            private const int PoisonValue = MaxScore / 20;
             private const int StealGoldValue = 2000;
             private const int StealItemValue = 1000;
             private const int StealSpellValue = 1000;
@@ -61,6 +65,38 @@ internal sealed partial class WorldAiPlanner
                 {
                     return UtilityScore.None;
                 }
+            }
+
+            public static UtilityScore.Consideration SpyRuin()
+            {
+                return UtilityScore.Of(SpyRuinValue);
+            }
+
+            public static UtilityScore.Consideration Poison()
+            {
+                return UtilityScore.Of(PoisonValue);
+            }
+
+            public static UtilityScore.Consideration CounterfeitOrders(Approach approach, WorldAiContext context)
+            {
+                WorldUnitGroup? group = ThiefCalculator.GetUnitGroup(approach.Target);
+
+                if (group is not null)
+                {
+                    UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(approach.State, group);
+
+                    foreach ((WorldUnit unit, GridPosition _) in units.GetUnits())
+                    {
+                        UnitDefinition definition = context.Engine.Definitions.GetUnit(unit.DefinitionId);
+
+                        if (unit.IsAlive && definition.Attack.Reach is UnitAttackReach.Any or UnitAttackReach.All)
+                        {
+                            return UtilityScore.Of(CounterfeitOrdersValue);
+                        }
+                    }
+                }
+
+                return UtilityScore.None;
             }
 
             public static UtilityScore.Consideration StealItem(ItemDefinitionId itemId, WorldAiContext context)
@@ -143,7 +179,7 @@ internal sealed partial class WorldAiPlanner
 
                     if (WorldHelpers.IsRacePlayable(owner.Race))
                     {
-                        return UtilityScore.Full;
+                        return UtilityScore.Of(RiotValue);
                     }
                     else
                     {

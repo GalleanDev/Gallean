@@ -179,6 +179,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
                 attitude.InterestCitiesPlayer,
                 attitude.InterestBags,
                 attitude.InterestRuins,
+                attitude.InterestTowers,
                 attitude.InterestMerchant,
                 attitude.InterestHireUnits,
                 attitude.InterestHireMercenaries,

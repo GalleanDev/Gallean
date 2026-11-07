@@ -1,5 +1,3 @@
-using System.Collections.Immutable;
-
 namespace Gallean.Engine.Tests;
 
 public sealed class WorldEngineAiThiefTests
@@ -107,7 +105,10 @@ public sealed class WorldEngineAiThiefTests
             TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 40, damage: 5),
             movementPoints: 6, leadership: 6);
 
-        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
 
         WorldStack thiefStack = TestHelpers.SimpleStack(
@@ -145,10 +146,12 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 149] Spy thief -> (3, 0)"
+            "[P2 149] Spy thief -> (3, 0)",
+            "[P2 104] Assassinate thief -> (3, 0)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
-        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 10 }));
+        Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([thiefStack.Id]));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
     }
 
     [Test]
@@ -161,7 +164,10 @@ public sealed class WorldEngineAiThiefTests
             TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 40, damage: 5),
             movementPoints: 6, leadership: 6);
 
-        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
 
         WorldStack thiefStack = TestHelpers.SimpleStack(
@@ -224,6 +230,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -261,8 +268,17 @@ public sealed class WorldEngineAiThiefTests
 
         TestWorldAiRunner runner = new(session, engine);
 
-        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(Array.Empty<string>()));
-        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack));
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 99] Move thief -> (5, 0)",
+            "[P2 104] Assassinate thief -> (6, 0)"
+        ]));
+        Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([thiefStack.Id]));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
+        {
+            Position = new WorldPosition(5, 0),
+            Direction = WorldStackDirection.SouthEast,
+            MovementPoints = 0
+        }));
     }
 
     [Test]
@@ -274,7 +290,10 @@ public sealed class WorldEngineAiThiefTests
         UnitDefinition soldier = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 5);
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
 
-        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
 
         WorldStack thiefStack = TestHelpers.SimpleStack(
@@ -306,7 +325,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Bribe, 100))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.RiotCity, 100))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -317,11 +336,12 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 250] Riot thief -> (3, 3)"
+            "[P2 125] Spy thief -> (3, 3)",
+            "[P2 125] Riot thief -> (3, 3)"
         ]));
-        Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 1 }));
-        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo(ImmutableSortedSet<WorldPlayerId>.Empty));
-        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 10 }));
+        Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 3 }));
+        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
     }
 
     [Test]
@@ -336,6 +356,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -368,7 +389,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Bribe, 100))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.RiotCity, 100))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -379,7 +400,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 250] Riot thief -> (3, 3)"
+            "[P2 125] Riot thief -> (3, 3)"
         ]));
         Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 1 }));
         Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
@@ -402,6 +423,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -446,7 +468,7 @@ public sealed class WorldEngineAiThiefTests
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
         {
             Units = new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("thief"), thief) with { Hitpoints = 87, Experience = 100 }, GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("thief"), thief) with { Hitpoints = 86, Experience = 100 }, GridPosition.FrontBottom, false)
                 .Build(),
             Direction = WorldStackDirection.SouthEast,
             MovementPoints = 0,
@@ -470,6 +492,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -507,9 +530,11 @@ public sealed class WorldEngineAiThiefTests
 
         TestWorldAiRunner runner = new(session, engine);
 
-        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(Array.Empty<string>()));
-        Assert.That(session.World.State.Stacks[targetStack.Id], Is.EqualTo(targetStack));
-        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack));
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 104] Assassinate thief -> (3, 0)"
+        ]));
+        Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([thiefStack.Id]));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
     }
 
     [Test]
@@ -535,6 +560,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -567,7 +593,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 70))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -603,6 +629,7 @@ public sealed class WorldEngineAiThiefTests
         };
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -633,7 +660,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Bribe, 100))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.RiotCity, 40))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -670,6 +697,7 @@ public sealed class WorldEngineAiThiefTests
         };
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -701,7 +729,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Bribe, 100))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.RiotCity, 40))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -732,6 +760,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -763,7 +792,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 70))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -800,6 +829,7 @@ public sealed class WorldEngineAiThiefTests
 
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
         };
         WorldPlayer neutral = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Neutral, map);
@@ -831,7 +861,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Bribe, 100))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.RiotCity, 100))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
             .WithPlayer(neutral)
@@ -870,6 +900,7 @@ public sealed class WorldEngineAiThiefTests
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
+            IsAi = true,
             SpiedPlayers = [player2.Id]
         };
 
@@ -908,7 +939,7 @@ public sealed class WorldEngineAiThiefTests
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 70))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
-            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Guildmaster))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
             .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
             .WithPlayer(player2)
@@ -931,6 +962,457 @@ public sealed class WorldEngineAiThiefTests
             Direction = WorldStackDirection.SouthEast,
             MovementPoints = 0,
             Inventory = new WorldInventory([item])
+        }));
+    }
+
+    [Test]
+    public void PoisonTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 300, initiative: 60, damage: 50),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            SpiedPlayers = [player2.Id]
+        };
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldStack targetStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            new WorldPosition(3, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Hitpoints = 100 }, GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Spy, 100))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealItem, 80))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 40))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(targetStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 14] Poison thief -> (3, 0)"
+        ]));
+        Assert.That(session.World.State.Stacks[targetStack.Id], Is.EqualTo(targetStack with
+        {
+            Units = new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Hitpoints = 140 }, GridPosition.FrontBottom, false)
+                .Build()
+        }));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
+    }
+
+    [Test]
+    public void CounterfeitOrdersTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 300, initiative: 60, damage: 50),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition archer = TestHelpers.SimpleUnitDefinition("archer", maxHitpoints: 100, initiative: 40, damage: 20);
+
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            SpiedPlayers = [player2.Id]
+        };
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldStack targetStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            new WorldPosition(3, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader), GridPosition.FrontBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("archer"), archer), GridPosition.BackBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(archer)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Spy, 100))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealItem, 80))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 40))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(targetStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 27] Counterfeit orders thief -> (3, 0)"
+        ]));
+        Assert.That(session.World.State.Stacks[targetStack.Id], Is.EqualTo(targetStack with
+        {
+            Units = new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("archer"), archer), GridPosition.FrontCenter, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader), GridPosition.FrontTop, false)
+                .Build()
+        }));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
+    }
+
+    [Test]
+    public void SpyRuinTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition guard = TestHelpers.SimpleUnitDefinition("guard", maxHitpoints: 100, initiative: 40, damage: 5);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldRuin ruin = new(
+            new WorldFortificationId("ruin"),
+            new ScenarioTextId("Ruin"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            new WorldObjectVariant(0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), guard),
+            new WorldResourceSet(300, 0, 0, 0, 0, 0),
+            Item: null,
+            LooterId: null,
+            AiPriority: 3);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(guard)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.SpyRuin, 90))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithRuin(ruin)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 23] Spy ruin thief -> (4, 4)"
+        ]));
+        Assert.That(session.World.State.Players[player1.Id].SpiedRuins, Is.EqualTo([ruin.Id]));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
+    }
+
+    [Test]
+    public void StealMerchantTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        ItemDefinition cheapDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("cheap"), ItemCategory.Valuable) with
+        {
+            Value = new WorldResourceSet(300, 0, 0, 0, 0, 0)
+        };
+        ItemDefinition dearDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("dear"), ItemCategory.Valuable) with
+        {
+            Value = new WorldResourceSet(900, 0, 0, 0, 0, 0)
+        };
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldMerchantSite site = new(
+            new WorldSiteId("site"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            [new WorldMerchantItem(cheapDefinition.Id, 1), new WorldMerchantItem(dearDefinition.Id, 1)],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithRandom(new TestSeedRandomProvider(3))
+            .WithDefinition(thief)
+            .WithDefinition(cheapDefinition)
+            .WithDefinition(dearDefinition)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealMerchant, 60))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithSite(site)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 134] Steal dear thief -> (4, 4)"
+        ]));
+        Assert.That(session.World.State.Sites[site.Id], Is.EqualTo(site with { Items = [new WorldMerchantItem(cheapDefinition.Id, 1)] }));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
+        {
+            MovementPoints = 0,
+            Inventory = new WorldInventory([new WorldItem(new WorldItemId("Item0001"), dearDefinition.Id, Charges: null)])
+        }));
+    }
+
+    [Test]
+    public void SiteEntranceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        ItemDefinition cheapDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("cheap"), ItemCategory.Valuable) with
+        {
+            Value = new WorldResourceSet(300, 0, 0, 0, 0, 0)
+        };
+        ItemDefinition dearDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("dear"), ItemCategory.Valuable) with
+        {
+            Value = new WorldResourceSet(900, 0, 0, 0, 0, 0)
+        };
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldMerchantSite site = new(
+            new WorldSiteId("site"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            [new WorldMerchantItem(cheapDefinition.Id, 1), new WorldMerchantItem(dearDefinition.Id, 1)],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(cheapDefinition)
+            .WithDefinition(dearDefinition)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealMerchant, 60))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithSite(site)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(Array.Empty<string>()));
+        Assert.That(session.World.State.Sites[site.Id], Is.EqualTo(site));
+    }
+
+    [Test]
+    public void StealMageTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        WorldSpellDefinition cheapSpell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("cheap"), new WorldFogSpellEffect()) with
+        {
+            PurchaseCost = new WorldResourceSet(300, 0, 0, 0, 0, 0)
+        };
+        WorldSpellDefinition dearSpell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("dear"), new WorldFogSpellEffect()) with
+        {
+            PurchaseCost = new WorldResourceSet(900, 0, 0, 0, 0, 0)
+        };
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldMageSite site = new(
+            new WorldSiteId("site"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            [cheapSpell.Id, dearSpell.Id],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithRandom(new TestSeedRandomProvider(3))
+            .WithDefinition(thief)
+            .WithDefinition(cheapSpell)
+            .WithDefinition(dearSpell)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealMage, 60))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithSite(site)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 134] Steal dear thief -> (4, 4)"
+        ]));
+        Assert.That(session.World.State.Players[player1.Id].Spellbook, Is.EqualTo(new WorldPlayerSpellbook([], [dearSpell.Id])));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
+    }
+
+    [Test]
+    public void StealSpecialItemTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 1);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 40, damage: 5),
+            movementPoints: 6, leadership: 6);
+        ItemDefinition gemDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("gem"), ItemCategory.Valuable) with
+        {
+            Value = new WorldResourceSet(900, 0, 0, 0, 0, 0)
+        };
+        ItemDefinition specialDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("special"), ItemCategory.Special) with
+        {
+            Value = new WorldResourceSet(5000, 0, 0, 0, 0, 0)
+        };
+        WorldItem gemItem = new(new WorldItemId("Gem"), gemDefinition.Id, Charges: null);
+        WorldItem specialItem = new(new WorldItemId("Special"), specialDefinition.Id, Charges: null);
+
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            SpiedPlayers = [player2.Id]
+        };
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 10);
+
+        WorldStack targetStack = TestHelpers.SimpleStack(
+                new WorldStackId("enemy"),
+                player2.Id,
+                new WorldPosition(3, 0),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+                movementPoints: 6) with
+            {
+                Inventory = new WorldInventory([gemItem, specialItem])
+            };
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(leader)
+            .WithDefinition(gemDefinition)
+            .WithDefinition(specialDefinition)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Spy, 100))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealItem, 80))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Assassinate, 70))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.CounterfeitOrders, 90))
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Duel, 100))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(thiefStack)
+            .WithStack(targetStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 214] Steal gem thief -> (3, 0)"
+        ]));
+        Assert.That(session.World.State.Stacks[targetStack.Id], Is.EqualTo(targetStack with { Inventory = new WorldInventory([specialItem]) }));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
+        {
+            MovementPoints = 0,
+            Inventory = new WorldInventory([gemItem])
         }));
     }
 }

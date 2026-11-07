@@ -453,16 +453,17 @@ public sealed class WorldEngineAiActionTests
                 new WorldAiTurnMemory(1, ai.Id, 0, 0, 0, [thiefStack.Id]))
             .WithStackMemory(thiefStack.Id, new WorldAiStackMemory(WorldStackOrder.Explore.Instance, null));
 
+        WorldAiMemory chosenMemory = new WorldAiMemory(
+                new WorldAiTurnMemory(1, ai.Id, 1, 0, 0, []))
+            .WithStackMemory(thiefStack.Id, new WorldAiStackMemory(WorldStackOrder.Explore.Instance, new WorldAiTarget.Stack(enemyStack.Id)));
+        WorldThiefActionCommand command = new(thiefStack.Id, new WorldThiefAssassinateAction(enemyStack.Position));
+
         engine.CheckCommand(new WorldAiActionCommand(), [
-            new WorldAiActionStartedEvent(WorldAiActionPlan.EndTurn(memory)),
-            new WorldTurnEndedEvent(ai.Id),
-            new WorldRoundEndedEvent(),
-            new WorldRoundStartedEvent(),
-            new WorldTurnStartingEvent(human.Id),
-            new WorldStackMovementRestoredEvent(enemyStack.Id, 6),
-            new WorldTurnStartedEvent(human.Id),
-            new WorldTurnResourcesGeneratedEvent(human.Id, new WorldResourceSet(100, 0, 0, 0, 25, 0)),
-            new WorldAiActionEndedEvent(ai.Id, memory)
+            new WorldAiActionStartedEvent(new WorldAiActionPlan(new WorldAiActionScore(2, 104), command, chosenMemory)),
+            new WorldThiefActionSucceededEvent(thiefStack.Id, WorldThiefActionType.Assassinate, human.Id, new WorldUnitGroup.Stack(enemyStack.Id)),
+            new WorldStackDestroyedEvent(enemyStack.Id, new WorldUnitGroup.Stack(thiefStack.Id), ai.Id),
+            new WorldStackMovementConsumedEvent(thiefStack.Id, 10),
+            new WorldAiActionEndedEvent(ai.Id, chosenMemory)
         ]);
     }
 

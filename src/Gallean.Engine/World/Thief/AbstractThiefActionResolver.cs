@@ -25,9 +25,10 @@ internal abstract partial class AbstractThiefActionResolver(WorldPosition target
             return WorldCommandResult.Fail(error);
         }
 
-        LordDefinition lord = context.Definitions.GetLord(state.Players[player].LordId);
+        WorldPlayer thiefPlayer = state.Players[player];
+        LordDefinition lord = context.Definitions.GetLord(thiefPlayer.LordId);
 
-        if (!ThiefCalculator.IsActionAllowed(attempt.Type, lord))
+        if (!ThiefCalculator.IsActionAllowed(attempt.Type, thiefPlayer, lord))
         {
             return WorldCommandResult.Fail(WorldCommandError.ThiefActionNotAllowed);
         }

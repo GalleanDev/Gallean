@@ -38,4 +38,14 @@ public sealed class WorldAiTargetPositionVisitor : IWorldAiTargetVisitor<WorldSt
 
         return null;
     }
+
+    public WorldPosition? Visit(WorldAiTarget.Site target, WorldState context)
+    {
+        if (context.Sites.TryGetValue(target.SiteId, out WorldSite? site))
+        {
+            return site.Entrance;
+        }
+
+        return null;
+    }
 }

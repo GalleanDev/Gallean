@@ -30,4 +30,11 @@ internal sealed class WorldAiTargetPriorityVisitor
 
         return bag.AiPriority;
     }
+
+    public int Visit(WorldAiTarget.Site target, Context context)
+    {
+        WorldSite site = context.State.Sites[target.SiteId];
+
+        return site.AiPriority;
+    }
 }

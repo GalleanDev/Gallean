@@ -25,6 +25,11 @@ public sealed class WorldAiTargetTests
         {
             return $"bag {target.BagId}";
         }
+
+        public string Visit(WorldAiTarget.Site target, Empty context)
+        {
+            return $"site {target.SiteId}";
+        }
     }
 
     private static string Format(WorldAiTarget target)
@@ -40,14 +45,16 @@ public sealed class WorldAiTargetTests
             new WorldAiTarget.Stack(new WorldStackId("Stack1")),
             new WorldAiTarget.Fortification(new WorldFortificationId("City1")),
             new WorldAiTarget.Location(new WorldPosition(7, 8)),
-            new WorldAiTarget.Bag(new WorldBagId("Bag1"))
+            new WorldAiTarget.Bag(new WorldBagId("Bag1")),
+            new WorldAiTarget.Site(new WorldSiteId("Site1"))
         ];
 
         Assert.That(targets.Select(Format), Is.EqualTo([
             "stack Stack1",
             "fortification City1",
             "location (7, 8)",
-            "bag Bag1"
+            "bag Bag1",
+            "site Site1"
         ]));
     }
 

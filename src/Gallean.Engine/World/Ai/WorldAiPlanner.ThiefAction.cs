@@ -115,7 +115,7 @@ internal sealed partial class WorldAiPlanner
             }
 
             WorldAiStackMemory stackMemory = context.Memory.GetStackMemory(stack);
-            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack.OwnerId, TargetType.Enemy, area: null);
+            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack.OwnerId, TargetType.Enemy | TargetType.Ruin | TargetType.Site, area: null);
             IReadOnlyList<WorldAiPathfinding.TargetPath> paths = Context.Pathfinding.GetTargetPaths(state, pathMap, targets);
             Candidate? best = FindBestCandidate(context, paths, stackMemory.Target);
 
@@ -163,6 +163,11 @@ internal sealed partial class WorldAiPlanner
 
         private Candidate? FindBestAction(ActionContext context, WorldAiPathfinding.TargetPath targetPath)
         {
+            if (targetPath.Path.Segments.IsEmpty)
+            {
+                return null;
+            }
+
             WorldPosition position = targetPath.Path.Segments[^1].Start;
             WorldStack thief = context.Stack with { Position = position };
             WorldState state = context.State with { Stacks = context.State.Stacks.SetItem(thief.Id, thief) };
@@ -226,19 +231,19 @@ internal sealed partial class WorldAiPlanner
 
             return type switch
             {
-                WorldThiefActionType.PoisonStack => [(new WorldThiefPoisonAction(position), UtilityScore.None)],
+                WorldThiefActionType.PoisonStack => [(new WorldThiefPoisonAction(position), Considerations.Poison())],
                 WorldThiefActionType.Spy => [(new WorldThiefSpyAction(position), Considerations.Spy(approach))],
                 WorldThiefActionType.StealItem => CreateStealItemActions(approach),
                 WorldThiefActionType.Assassinate => [(new WorldThiefAssassinateAction(position), Considerations.Assassinate())],
-                WorldThiefActionType.CounterfeitOrders => [(new WorldThiefCounterfeitOrdersAction(position), UtilityScore.None)],
+                WorldThiefActionType.CounterfeitOrders => [(new WorldThiefCounterfeitOrdersAction(position), Considerations.CounterfeitOrders(approach, Context))],
                 WorldThiefActionType.Duel => [(new WorldThiefDuelAction(position), Considerations.Duel(approach, Context))],
-                WorldThiefActionType.PoisonCity => [(new WorldThiefPoisonAction(position), UtilityScore.None)],
+                WorldThiefActionType.PoisonCity => [(new WorldThiefPoisonAction(position), Considerations.Poison())],
                 WorldThiefActionType.StealSpell => CreateStealSpellActions(approach),
                 WorldThiefActionType.Bribe => [(new WorldThiefBribeAction(position), Considerations.Bribe(approach, Context))],
                 WorldThiefActionType.StealGold => [(new WorldThiefStealGoldAction(position), Considerations.StealGold(approach))],
                 WorldThiefActionType.StealMerchant => CreateStealItemActions(approach),
                 WorldThiefActionType.StealMage => CreateStealSpellActions(approach),
-                WorldThiefActionType.SpyRuin => [(new WorldThiefSpyRuinAction(position), UtilityScore.None)],
+                WorldThiefActionType.SpyRuin => [(new WorldThiefSpyRuinAction(position), Considerations.SpyRuin())],
                 WorldThiefActionType.RiotCity => [(new WorldThiefRiotAction(position), Considerations.Riot(approach))]
             };
         }
@@ -249,11 +254,38 @@ internal sealed partial class WorldAiPlanner
 
             foreach (ItemDefinitionId itemId in ThiefCalculator.GetStealableItems(approach.Target))
             {
-                if (itemIds.Add(itemId))
+                ItemDefinition item = Context.Engine.Definitions.GetItem(itemId);
+
+                if (CanStealItem(item.Category))
                 {
-                    yield return (new WorldThiefStealItemAction(approach.Position, itemId), Considerations.StealItem(itemId, Context));
+                    if (itemIds.Add(itemId))
+                    {
+                        yield return (new WorldThiefStealItemAction(approach.Position, itemId), Considerations.StealItem(itemId, Context));
+                    }
                 }
             }
+        }
+
+        private static bool CanStealItem(ItemCategory category)
+        {
+            return category switch
+            {
+                ItemCategory.Armor => true,
+                ItemCategory.Jewel => true,
+                ItemCategory.Weapon => true,
+                ItemCategory.Banner => true,
+                ItemCategory.PotionTemporaryBoost => true,
+                ItemCategory.PotionHeal => true,
+                ItemCategory.PotionRevive => true,
+                ItemCategory.PotionPermanentBoost => true,
+                ItemCategory.Scroll => true,
+                ItemCategory.Wand => true,
+                ItemCategory.Valuable => true,
+                ItemCategory.Orb => true,
+                ItemCategory.Talisman => true,
+                ItemCategory.TravelItem => true,
+                ItemCategory.Special => false
+            };
         }
 
         private IEnumerable<(WorldThiefAction Action, UtilityScore.Consideration Value)> CreateStealSpellActions(Approach approach)

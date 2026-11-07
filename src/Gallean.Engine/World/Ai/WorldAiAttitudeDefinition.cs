@@ -10,6 +10,7 @@ public sealed record WorldAiAttitudeDefinition(
     int HumanPlayerCityInterest,
     int BagInterest,
     int RuinInterest,
+    int MageInterest,
     int MerchantInterest,
     int UnitPurchaseInterest,
     int MercenaryInterest,

@@ -10,6 +10,7 @@ internal static class WorldAiTargetEnumerator
         EnemyFortification = 1 << 1,
         Ruin = 1 << 2,
         Bag = 1 << 3,
+        Site = 1 << 4,
         Enemy = EnemyStack | EnemyFortification
     }
 
@@ -46,6 +47,14 @@ internal static class WorldAiTargetEnumerator
         if (types.HasFlag(TargetType.Bag))
         {
             foreach (WorldAiTarget target in EnumerateBags(state, player, area))
+            {
+                yield return target;
+            }
+        }
+
+        if (types.HasFlag(TargetType.Site))
+        {
+            foreach (WorldAiTarget target in EnumerateSites(state, player, area))
             {
                 yield return target;
             }
@@ -118,6 +127,17 @@ internal static class WorldAiTargetEnumerator
             if (bag.AiPriority > 0 && IsExplored(player, bag.Position) && IsWithinArea(bag.Position, area))
             {
                 yield return new WorldAiTarget.Bag(bag.Id);
+            }
+        }
+    }
+
+    private static IEnumerable<WorldAiTarget> EnumerateSites(WorldState state, WorldPlayer player, TargetArea? area)
+    {
+        foreach (WorldSite site in state.Sites.Values)
+        {
+            if (site.AiPriority > 0 && IsExplored(player, site.Entrance) && IsWithinArea(site.Entrance, area))
+            {
+                yield return new WorldAiTarget.Site(site.Id);
             }
         }
     }

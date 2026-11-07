@@ -1,7 +1,8 @@
 namespace Gallean.Engine;
 
 internal sealed class WorldAiTargetInterestVisitor(WorldAiAttitudeDefinition attitude)
-    : IWorldAiTargetVisitor<WorldAiTargetInterestVisitor.Context, int>
+    : IWorldAiTargetVisitor<WorldAiTargetInterestVisitor.Context, int>,
+      IWorldSiteVisitor<WorldAiTargetInterestVisitor.Context, int>
 {
     internal readonly record struct Context(WorldState State, WorldPlayerId PlayerId);
 
@@ -46,6 +47,33 @@ internal sealed class WorldAiTargetInterestVisitor(WorldAiAttitudeDefinition att
     public int Visit(WorldAiTarget.Bag target, Context context)
     {
         return attitude.BagInterest;
+    }
+
+    public int Visit(WorldAiTarget.Site target, Context context)
+    {
+        WorldSite site = context.State.Sites[target.SiteId];
+
+        return site.Accept(this, context);
+    }
+
+    public int Visit(WorldMerchantSite site, Context context)
+    {
+        return attitude.MerchantInterest;
+    }
+
+    public int Visit(WorldMageSite site, Context context)
+    {
+        return attitude.MageInterest;
+    }
+
+    public int Visit(WorldMercenarySite site, Context context)
+    {
+        return attitude.MercenaryInterest;
+    }
+
+    public int Visit(WorldTrainerSite site, Context context)
+    {
+        return attitude.TrainerInterest;
     }
 
     private static int MapInterest(Context context, WorldPlayerId ownerId, int neutralInterest, int aiPlayerInterest, int humanPlayerInterest)
