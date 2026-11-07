@@ -294,6 +294,28 @@
   <Style Selector="Button.world-medallion:pressed">
     <Setter Property="RenderTransform" Value="scale(0.98)" />
   </Style>
+  <Style Selector="Button.world-medallion Border.current-player-portrait">
+    <Setter Property="Width" Value="{x:Static local:MedallionTexture.FaceSize}" />
+    <Setter Property="Height" Value="{x:Static local:MedallionTexture.FaceSize}" />
+    <Setter Property="CornerRadius" Value="{x:Static local:MedallionTexture.FaceCornerRadius}" />
+    <Setter Property="ClipToBounds" Value="True" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Delay="0:0:0.5" Duration="0:0:0.3" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.world-medallion Border.current-player-portrait.shown">
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+  <Style Selector="Button.world-medallion Border.current-player-portrait local|SpriteVisual">
+    <Setter Property="Stretch" Value="UniformToFill" />
+  </Style>
+  <Style Selector="Button.world-medallion Border.current-player-portrait Image">
+    <Setter Property="Stretch" Value="Fill" />
+  </Style>
 
   <Style Selector="StackPanel.world-stack-card-actions">
     <Setter Property="Margin" Value="0,-24,0,0" />

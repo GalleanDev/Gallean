@@ -999,6 +999,7 @@
   <SolidColorBrush x:Key="MedallionFaceLitHoverBrush" Color="{x:Static local:Theme+Medallion.FaceLitHoverColor}" />
   <SolidColorBrush x:Key="MedallionFaceLitHoverEdgeBrush" Color="{x:Static local:Theme+Medallion.FaceLitHoverEdgeColor}" />
   <SolidColorBrush x:Key="MedallionFaceLitHoverGlowBrush" Color="{x:Static local:Theme+Medallion.FaceLitHoverGlowColor}" />
+  <SolidColorBrush x:Key="MedallionFaceOverlayBrush" Color="{x:Static local:Theme+Medallion.FaceOverlayColor}" />
   <SolidColorBrush x:Key="MedallionInkBrush" Color="{x:Static local:Theme+Medallion.InkColor}" />
 
   <SolidColorBrush x:Key="MinimapViewportBrush" Color="{x:Static local:Theme+Minimap.ViewportColor}" />

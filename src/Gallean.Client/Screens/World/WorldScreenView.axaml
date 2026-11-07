@@ -334,10 +334,20 @@
                     Classes="world-medallion cached"
                     Classes.highlighted="{Binding IsEndTurnHighlighted}"
                     Command="{Binding EndTurnCommand}">
-              <StackPanel Spacing="4">
-                <local:EndTurnIconDecorator IsSpinning="{Binding !IsViewPlayerTurn}" />
-                <local:OutlinedTextBlock Text="{local:Text 'End turn'}" />
-              </StackPanel>
+              <Panel>
+                <Border Classes="current-player-portrait"
+                        Classes.shown="{Binding CurrentPlayerPortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}"
+                        IsVisible="{Binding CurrentPlayerPortraitKey, Converter={x:Static ObjectConverters.IsNotNull}}">
+                  <Panel>
+                    <local:SpriteVisual SpriteKey="{Binding CurrentPlayerPortraitKey}" />
+                    <Image Source="{x:Static local:MedallionTexture.FaceOverlay}" />
+                  </Panel>
+                </Border>
+                <StackPanel Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                  <local:EndTurnIconDecorator IsSpinning="{Binding !IsViewPlayerTurn}" />
+                  <local:OutlinedTextBlock Text="{local:Text 'End turn'}" />
+                </StackPanel>
+              </Panel>
             </Button>
           </Panel>
         </local:MedallionCornerDecorator>

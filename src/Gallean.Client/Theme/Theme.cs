@@ -847,6 +847,7 @@ internal static class Theme
         public static Color FaceLitHoverColor { get; } = Color.FromRgb(30, 130, 160);
         public static Color FaceLitHoverEdgeColor { get; } = Color.FromRgb(90, 200, 224);
         public static Color FaceLitHoverGlowColor { get; } = Color.FromRgb(210, 248, 252);
+        public static Color FaceOverlayColor { get; } = Color.FromArgb(60, 2, 3, 5);
         public static Color InkColor { get; } = Color.FromRgb(238, 240, 242);
     }
 

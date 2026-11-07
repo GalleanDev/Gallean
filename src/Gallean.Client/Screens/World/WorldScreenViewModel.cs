@@ -100,6 +100,9 @@ internal sealed partial class WorldScreenViewModel :
     [ObservableProperty]
     public partial bool IsViewPlayerTurn { get; private set; }
 
+    [ObservableProperty]
+    public partial AssetSpriteKey.LordFace? CurrentPlayerPortraitKey { get; private set; }
+
     public ObservableCollection<WorldStackItemViewModel> StackItems { get; } = [];
 
     [ObservableProperty]
@@ -1225,7 +1228,6 @@ internal sealed partial class WorldScreenViewModel :
     {
         WorldStack? selected = ResolveSelectedStack();
         WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
-        bool viewPlayerTurn = Snapshot.IsViewPlayerTurn;
         List<WorldStack> stacks = [];
 
         foreach (WorldStack stack in WorldState.Stacks.Values)
@@ -1249,8 +1251,6 @@ internal sealed partial class WorldScreenViewModel :
         {
             ActionWheel = null;
         }
-
-        IsViewPlayerTurn = viewPlayerTurn;
 
         UpdateActionWheelVisible();
         UpdateStackItems(stacks);
@@ -1732,12 +1732,28 @@ internal sealed partial class WorldScreenViewModel :
         if (SetProperty(ref renderRequest, request, nameof(RenderRequest)))
         {
             IsInBattle = request.Animation is WorldAnimationState.BattleStart;
+            IsViewPlayerTurn = request.State.TurnInfo.CurrentPlayerId == ViewPlayerId;
+            CurrentPlayerPortraitKey = ResolveCurrentPlayerPortraitKey(request.State);
             FastForwardCommand.NotifyCanExecuteChanged();
 
-            if (request.State.TurnInfo.CurrentPlayerId == ViewPlayerId)
+            if (IsViewPlayerTurn)
             {
                 IsFastForward = false;
             }
+        }
+    }
+
+    private AssetSpriteKey.LordFace? ResolveCurrentPlayerPortraitKey(WorldState state)
+    {
+        WorldPlayer currentPlayer = state.Players[state.TurnInfo.CurrentPlayerId];
+
+        if (currentPlayer.Id != ViewPlayerId)
+        {
+            return new AssetSpriteKey.LordFace(currentPlayer.Race, currentPlayer.FaceVariant.Value, true);
+        }
+        else
+        {
+            return null;
         }
     }
 

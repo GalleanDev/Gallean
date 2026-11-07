@@ -32,6 +32,8 @@ internal static class MedallionTexture
     private const float InsetRadius = 58.5f * Scale;
     private const float FaceRadius = 56.0f * Scale;
     public const double MetalThickness = (OuterRadius - InsetRadius) / Scale;
+    public const double FaceSize = 2.0 * FaceRadius / Scale;
+    private const int FacePixels = (int)(2 * FaceRadius);
     private const int SlotCount = 36;
     private const float SlotShare = 0.3f;
     private const float SlotMargin = 2.6f * Scale;
@@ -42,13 +44,16 @@ internal static class MedallionTexture
     private static readonly Lazy<WriteableBitmap> FaceDarkHoverTexture = new(() => Create(State.DarkHover, faceOnly: true));
     private static readonly Lazy<WriteableBitmap> FaceLitTexture = new(() => Create(State.Lit, faceOnly: true));
     private static readonly Lazy<WriteableBitmap> FaceLitHoverTexture = new(() => Create(State.LitHover, faceOnly: true));
+    private static readonly Lazy<WriteableBitmap> FaceOverlayTexture = new(CreateFaceOverlay);
 
     public static Thickness MetalMargin { get; } = new((Size / 2.0) - (OuterRadius / Scale));
+    public static CornerRadius FaceCornerRadius { get; } = new(FaceRadius / Scale);
 
     public static WriteableBitmap Ring => RingTexture.Value;
     public static WriteableBitmap FaceDarkHover => FaceDarkHoverTexture.Value;
     public static WriteableBitmap FaceLit => FaceLitTexture.Value;
     public static WriteableBitmap FaceLitHover => FaceLitHoverTexture.Value;
+    public static WriteableBitmap FaceOverlay => FaceOverlayTexture.Value;
 
     private static WriteableBitmap Create(State state, bool faceOnly)
     {
@@ -106,15 +111,40 @@ internal static class MedallionTexture
         return buffer.ToPremultipliedBitmap();
     }
 
+    private static WriteableBitmap CreateFaceOverlay()
+    {
+        TextureBuffer buffer = new(FacePixels, FacePixels);
+
+        for (int y = 0; y < FacePixels; y++)
+        {
+            for (int x = 0; x < FacePixels; x++)
+            {
+                int index = (y * FacePixels) + x;
+                float dx = x + 0.5f - FaceRadius;
+                float dy = y + 0.5f - FaceRadius;
+                float distance = MathF.Sqrt((dx * dx) + (dy * dy));
+                float disc = Disc(distance, FaceRadius);
+
+                TexturePixel pixel = default;
+                pixel = pixel.Over(Theme.Medallion.FaceOverlayColor, Theme.Medallion.FaceOverlayColor.A / 255.0f * disc);
+                pixel = pixel.Over(Theme.Medallion.FaceEdgeColor, FaceDepth(distance) * disc);
+                pixel = pixel.Over(Theme.Medallion.FaceGlowColor, FaceGlowLight(distance) * disc);
+
+                buffer.Set(index, pixel);
+            }
+        }
+
+        return buffer.ToPremultipliedBitmap();
+    }
+
     private static Color Face(float distance, State state, int x, int y)
     {
         Color center = ResolveFaceCenter(state);
         Color edge = ResolveFaceEdge(state);
         Color glow = ResolveFaceGlow(state);
 
-        float t = Math.Clamp(distance / FaceRadius, 0, 1);
-        float depth = t * t * t;
-        float glowLight = MathF.Pow(Math.Clamp((t - 0.68f) / 0.32f, 0, 1), 2.2f);
+        float depth = FaceDepth(distance);
+        float glowLight = FaceGlowLight(distance);
         float grain = TextureNoise.Grain(x, y, Seed + 5, GrainAmplitude) * 0.5f;
 
         float red = TextureHelpers.Lerp(center.R, edge.R, depth);
@@ -126,6 +156,20 @@ internal static class MedallionTexture
         blue = TextureHelpers.Lerp(blue, glow.B, glowLight);
 
         return TextureHelpers.ToColor(red + grain, green + grain, blue + grain);
+    }
+
+    private static float FaceDepth(float distance)
+    {
+        float t = Math.Clamp(distance / FaceRadius, 0, 1);
+
+        return t * t * t;
+    }
+
+    private static float FaceGlowLight(float distance)
+    {
+        float t = Math.Clamp(distance / FaceRadius, 0, 1);
+
+        return MathF.Pow(Math.Clamp((t - 0.68f) / 0.32f, 0, 1), 2.2f);
     }
 
     private static Color Gold(float distance, float angle, float inner, float outer, int x, int y)

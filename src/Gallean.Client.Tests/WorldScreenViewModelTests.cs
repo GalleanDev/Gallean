@@ -8330,4 +8330,76 @@ public sealed class WorldScreenViewModelTests
             Details: null)));
         Assert.That(world.ActionPromptText, Is.Null);
     }
+
+    [Test]
+    public async Task AiTurnPortraitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 1);
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer ai = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with
+        {
+            IsAi = true,
+            FaceVariant = new WorldObjectVariant(2)
+        };
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leader)
+            .Build();
+
+        WorldStack mover = TestHelpers.SimpleStack(
+                new WorldStackId("Mover"),
+                ai.Id,
+                new WorldPosition(0, 0),
+                TestHelpers.StackUnitGrid(
+                    stackDefinitions,
+                    [(new WorldUnit(new WorldUnitId("leader"), leader.Id, 100, 0, 1, [], null, false), GridPosition.FrontBottom)]),
+                movementPoints: 6) with
+            {
+                Order = new WorldStackOrder.MoveToLocation(new ScenarioLocationId("Target"), new WorldPosition(2, 0), Radius: 0)
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithDefinition(TestHelpers.SimpleLord(ai.LordId, ai.Race, LordCategory.Warrior))
+            .WithPlayer(ai)
+            .WithStack(mover)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        Assert.That(world.IsViewPlayerTurn, Is.True);
+        Assert.That(world.CurrentPlayerPortraitKey, Is.Null);
+
+        await world.EndTurnCommand.ExecuteAsync(null);
+
+        Assert.That(gameModel.Snapshot.WorldState.TurnInfo.CurrentPlayerId, Is.EqualTo(human.Id));
+        Assert.That(world.RenderRequest.Animation, Is.EqualTo(new WorldAnimationState.StackMove(
+            mover.Id,
+            [
+                new WorldAnimationState.StackMoveStep(new WorldPosition(0, 0), WorldStackDirection.SouthEast, TimeSpan.Zero),
+                new WorldAnimationState.StackMoveStep(new WorldPosition(1, 0), WorldStackDirection.SouthEast, TimeSpan.FromMilliseconds(200)),
+                new WorldAnimationState.StackMoveStep(new WorldPosition(2, 0), WorldStackDirection.SouthEast, TimeSpan.FromMilliseconds(400))
+            ])));
+        Assert.That(world.IsViewPlayerTurn, Is.False);
+        Assert.That(world.CurrentPlayerPortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Heretic, 2, IsLarge: true)));
+
+        world.CompleteAnimation();
+
+        Assert.That(world.RenderRequest.Animation, Is.Null);
+        Assert.That(world.IsViewPlayerTurn, Is.True);
+        Assert.That(world.CurrentPlayerPortraitKey, Is.Null);
+    }
 }

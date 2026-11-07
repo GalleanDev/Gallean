@@ -1090,6 +1090,31 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task WorldEnemyTurnTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        await gameModel.World.DispatchCommandAsync(new WorldEndTurnCommand());
+
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        WorldScreenView view = await WaitForWorldAsync(window);
+        Border portrait = view.GetVisualDescendants().OfType<Border>().First(border => border.Classes.Contains("current-player-portrait"));
+        await WaitUntilAsync(() => portrait.Opacity >= 1);
+
+        Assert.That(world.IsViewPlayerTurn, Is.False);
+        Assert.That(portrait.Opacity, Is.EqualTo(1.0));
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task WorldObjectiveCollapsedTest()
     {
         using Sandbox sb = Sandbox.Create();
