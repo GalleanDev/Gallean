@@ -7,6 +7,7 @@ internal sealed partial class WorldAiPlanner
     private sealed record CastSpellAction(WorldAiContext Context, int Priority) : AbstractEconomyAction(Context, Priority)
     {
         private const int CityThreatRange = 7;
+        private const int NearRange = 7;
 
         public override WorldAiActionPlan? Plan(WorldState state, WorldPlayerId playerId, WorldAiMemory memory)
         {
@@ -51,7 +52,9 @@ internal sealed partial class WorldAiPlanner
         {
             WorldPlayer player = state.Players[playerId];
             List<WorldSpellDefinition> attackSpells = [];
+            List<WorldSpellDefinition> weakenSpells = [];
             List<WorldSpellDefinition> healSpells = [];
+            List<WorldSpellDefinition> restoreMovementSpells = [];
 
             foreach (WorldSpellDefinition spell in spells)
             {
@@ -61,7 +64,9 @@ internal sealed partial class WorldAiPlanner
                 {
                     WorldAiSpellEffectType.Attack => attackSpells,
                     WorldAiSpellEffectType.Summon => attackSpells,
+                    WorldAiSpellEffectType.Weaken => weakenSpells,
                     WorldAiSpellEffectType.Heal => healSpells,
+                    WorldAiSpellEffectType.RestoreMovement => restoreMovementSpells,
                     WorldAiSpellEffectType.Boost => null,
                     WorldAiSpellEffectType.Invisibility => null,
                     null => null
@@ -85,9 +90,24 @@ internal sealed partial class WorldAiPlanner
                 }
             }
 
+            if (command is null && weakenSpells.Count > 0)
+            {
+                command = FindCast(state, weakenSpells, EnumerateNearEnemies(state, playerId));
+
+                if (command is null && Context.Engine.Random.Next(100) < Context.Engine.Globals.AiRandomCastChance)
+                {
+                    command = FindCast(state, weakenSpells, EnumerateEnemyStacks(state, playerId));
+                }
+            }
+
             if (command is null)
             {
                 command = FindCast(state, healSpells, EnumerateWoundedStacks(state, playerId));
+            }
+
+            if (command is null)
+            {
+                command = FindCast(state, restoreMovementSpells, EnumerateStacksOutOfMovement(state, playerId));
             }
 
             return command;
@@ -141,6 +161,7 @@ internal sealed partial class WorldAiPlanner
         private WorldCastSpellCommand? FindGlobalCast(WorldState state, WorldPlayerId playerId, List<WorldSpellDefinition> spells)
         {
             List<WorldStack> stacks = [.. EnumerateOutsideStacks(state, playerId)];
+            List<WorldStack> stacksOutOfMovement = [.. EnumerateStacksOutOfMovement(state, playerId)];
 
             foreach (WorldSpellDefinition spell in spells)
             {
@@ -151,8 +172,10 @@ internal sealed partial class WorldAiPlanner
                     WorldAiSpellEffectType.Heal => stacks.Any(HasDamagedUnit),
                     WorldAiSpellEffectType.Boost => stacks.Count >= Context.Engine.Globals.AiGlobalSpellMinStacks,
                     WorldAiSpellEffectType.Invisibility => stacks.Count >= Context.Engine.Globals.AiGlobalSpellMinStacks,
+                    WorldAiSpellEffectType.RestoreMovement => stacksOutOfMovement.Count >= Context.Engine.Globals.AiGlobalSpellMinStacks,
                     WorldAiSpellEffectType.Summon => false,
                     WorldAiSpellEffectType.Attack => false,
+                    WorldAiSpellEffectType.Weaken => false,
                     null => false
                 };
 
@@ -210,6 +233,35 @@ internal sealed partial class WorldAiPlanner
                 WorldPlayer owner = state.Players[stack.OwnerId];
 
                 if (DiplomacyCalculator.IsHostile(state, playerId, stack.OwnerId) && WorldHelpers.IsRacePlayable(owner.Race))
+                {
+                    yield return stack;
+                }
+            }
+        }
+
+        private static IEnumerable<WorldStack> EnumerateNearEnemies(WorldState state, WorldPlayerId playerId)
+        {
+            foreach (WorldStack stack in state.Stacks.Values)
+            {
+                if (stack.OwnerId == playerId && stack.MovementPoints > 0)
+                {
+                    foreach (WorldStack enemy in state.Stacks.Values)
+                    {
+                        if (DiplomacyCalculator.IsHostile(state, playerId, enemy.OwnerId) &&
+                            stack.Position.GetDistance(enemy.Position) <= NearRange)
+                        {
+                            yield return enemy;
+                        }
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<WorldStack> EnumerateStacksOutOfMovement(WorldState state, WorldPlayerId playerId)
+        {
+            foreach (WorldStack stack in EnumerateOutsideStacks(state, playerId))
+            {
+                if (stack.MovementPoints <= 0)
                 {
                     yield return stack;
                 }

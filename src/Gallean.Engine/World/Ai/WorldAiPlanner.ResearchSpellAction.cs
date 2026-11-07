@@ -14,7 +14,9 @@ internal sealed partial class WorldAiPlanner
         [
             WorldAiSpellEffectType.Summon,
             WorldAiSpellEffectType.Attack,
-            WorldAiSpellEffectType.Heal
+            WorldAiSpellEffectType.Heal,
+            WorldAiSpellEffectType.Weaken,
+            WorldAiSpellEffectType.RestoreMovement
         ];
 
         public override WorldAiActionPlan? Plan(WorldState state, WorldPlayerId playerId, WorldAiMemory memory)

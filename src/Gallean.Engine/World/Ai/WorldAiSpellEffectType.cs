@@ -4,7 +4,9 @@ internal enum WorldAiSpellEffectType
 {
     Summon,
     Attack,
+    Weaken,
     Heal,
     Boost,
-    Invisibility
+    Invisibility,
+    RestoreMovement
 }

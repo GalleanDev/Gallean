@@ -11,7 +11,7 @@ internal sealed class WorldAiSpellEffectTypeVisitor : IWorldSpellEffectVisitor<E
 
     public WorldAiSpellEffectType? Visit(WorldWeakenSpellEffect effect, Empty context)
     {
-        return null;
+        return WorldAiSpellEffectType.Weaken;
     }
 
     public WorldAiSpellEffectType? Visit(WorldHealSpellEffect effect, Empty context)
@@ -41,7 +41,7 @@ internal sealed class WorldAiSpellEffectTypeVisitor : IWorldSpellEffectVisitor<E
 
     public WorldAiSpellEffectType? Visit(WorldRestoreMovementSpellEffect effect, Empty context)
     {
-        return null;
+        return WorldAiSpellEffectType.RestoreMovement;
     }
 
     public WorldAiSpellEffectType? Visit(WorldInvisibilitySpellEffect effect, Empty context)
