@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Gallean.Common;
 
 namespace Gallean.Engine.Tests;
 
@@ -976,6 +977,8 @@ public sealed class WorldEngineScenarioEventCityTests
         WorldPlayer attacker = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         WorldPlayer defender = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer otherPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(3), WorldRace.Dwarf, map);
+        WorldPlayer neutral = TestHelpers.SimplePlayer(new WorldPlayerId(4), WorldRace.Neutral, map) with { IsAi = true };
+        WorldSubrace neutralSubrace = new(new WorldSubraceId("neutral"), neutral.Id, WorldSubraceType.Neutral, new WorldObjectVariant(4));
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
             TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
             movementPoints: 2, leadership: 6);
@@ -1030,6 +1033,9 @@ public sealed class WorldEngineScenarioEventCityTests
             .WithPlayer(defender)
             .WithDefinition(TestHelpers.SimpleLord(otherPlayer.LordId, otherPlayer.Race, LordCategory.Warrior))
             .WithPlayer(otherPlayer)
+            .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
+            .WithPlayer(neutral)
+            .WithSubrace(neutralSubrace)
             .WithStack(stack)
             .WithStack(defenderStack)
             .WithStack(otherDefenderStack)
@@ -1045,24 +1051,39 @@ public sealed class WorldEngineScenarioEventCityTests
             new WorldFortificationEnteredEvent(stack.Id, capital.Id),
             new WorldFortificationCapturingEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
             new WorldPlayerDefeatedEvent(defender.Id),
-            new WorldStackDestroyedEvent(defenderStack.Id, Destroyer: null, DestroyerPlayerId: null),
-            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, attacker.Id, new ScenarioEventStackDestroyedTrigger(null)),
-            new WorldScenarioPopupEvent(scenarioEvent.Id, new ScenarioTextId("The capital is ours!"), PortraitId: null, PortraitName: null, IsPortraitLeft: true, attacker.Id, TriggererPosition: null, [attacker.Id]),
-            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, attacker.Id, new ScenarioEventStackDestroyedTrigger(null)),
-            new WorldStackDestroyedEvent(otherDefenderStack.Id, Destroyer: null, DestroyerPlayerId: null),
+            new WorldStackOwnerChangedEvent(defenderStack.Id, neutral.Id, neutralSubrace.Id, PlayAnimation: false),
+            new WorldStackOrderChangedEvent(defenderStack.Id, WorldStackOrder.Berserk.Instance),
+            new WorldStackOwnerChangedEvent(otherDefenderStack.Id, neutral.Id, neutralSubrace.Id, PlayAnimation: false),
+            new WorldStackOrderChangedEvent(otherDefenderStack.Id, WorldStackOrder.Berserk.Instance),
             new WorldFortificationCapturedEvent(capital.Id, defender.Id, attacker.Id, stack.Id),
+            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, attacker.Id, new ScenarioEventFortificationCapturedTrigger(capital.Id, stack.Id)),
+            new WorldScenarioPopupEvent(scenarioEvent.Id, new ScenarioTextId("The capital is ours!"), PortraitId: null, PortraitName: null, IsPortraitLeft: true, attacker.Id, TriggererPosition: capital.Entrance, [attacker.Id]),
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, attacker.Id, new ScenarioEventFortificationCapturedTrigger(capital.Id, stack.Id)),
             new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 4), capital.Entrance, WorldStackDirection.NorthWest, 2, [], null)
         ]);
 
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
-                Stacks = ImmutableSortedDictionary<WorldStackId, WorldStack>.Empty.Add(stack.Id, stack with
-                {
-                    Position = capital.Entrance,
-                    Direction = WorldStackDirection.NorthWest,
-                    MovementPoints = 2
-                }),
+                Stacks = ImmutableSortedDictionary<WorldStackId, WorldStack>.Empty
+                    .Add(stack.Id, stack with
+                    {
+                        Position = capital.Entrance,
+                        Direction = WorldStackDirection.NorthWest,
+                        MovementPoints = 2
+                    })
+                    .Add(defenderStack.Id, defenderStack with
+                    {
+                        OwnerId = neutral.Id,
+                        SubraceId = neutralSubrace.Id,
+                        Order = WorldStackOrder.Berserk.Instance
+                    })
+                    .Add(otherDefenderStack.Id, otherDefenderStack with
+                    {
+                        OwnerId = neutral.Id,
+                        SubraceId = neutralSubrace.Id,
+                        Order = WorldStackOrder.Berserk.Instance
+                    }),
                 Fortifications = engine.State.Fortifications.SetItem(capital.Id, capital with { CapturedById = attacker.Id }),
                 ScenarioState = WorldScenarioState.Empty with
                 {
@@ -1078,11 +1099,6 @@ public sealed class WorldEngineScenarioEventCityTests
                             IsPortraitLeft: true,
                             attacker.Id,
                             [attacker.Id])
-                    ],
-                    DestroyedStacks =
-                    [
-                        new ScenarioDestroyedStack(defenderStack.Id, DestroyerPlayerId: null, SourceTemplateId: null),
-                        new ScenarioDestroyedStack(otherDefenderStack.Id, DestroyerPlayerId: null, SourceTemplateId: null)
                     ]
                 }
             }));
