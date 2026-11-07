@@ -151,6 +151,12 @@
                     ToolTip.Tip="{local:Text 'Cancel'}">
               <local:IconVisual Moniker="Close" />
             </Button>
+            <ContentControl DockPanel.Dock="Right"
+                            Content="{Binding ActionPromptCost}"
+                            Classes="body"
+                            Foreground="{StaticResource PrimaryTextBrush}"
+                            Margin="12,0,0,0"
+                            VerticalAlignment="Center" />
             <local:OutlinedTextBlock Text="{Binding ActionPromptText}"
                                      Classes="body"
                                      Foreground="{StaticResource AccentBrush}"

@@ -83,6 +83,9 @@ internal sealed partial class WorldScreenViewModel :
     public partial string? ActionPromptText { get; private set; }
 
     [ObservableProperty]
+    public partial ResourceSetViewModel? ActionPromptCost { get; private set; }
+
+    [ObservableProperty]
     public partial string? ObjectiveText { get; private set; }
 
     [ObservableProperty]
@@ -856,6 +859,7 @@ internal sealed partial class WorldScreenViewModel :
 
             cursor = newCursor;
             ActionPromptText = newCursor.Action?.SelectionText;
+            ActionPromptCost = newCursor.Action?.SelectionCost;
             RefreshRenderRequest();
             UpdateCursorType();
 
@@ -1328,7 +1332,17 @@ internal sealed partial class WorldScreenViewModel :
 
     async Task IWorldStackActionVisitor<Task>.Visit(WorldStackAction.CreateRod action)
     {
-        SelectAction(new WorldCursorAction.CreateRod(action.StackId));
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetRodInfoCommand.Result> result =
+            GameModel.World.DryRunCommand(new WorldGetRodInfoCommand(action.StackId));
+
+        if (result.Failed)
+        {
+            Game.ShowError(WorldCommandErrorFormatter.Format(result.Error.Value));
+        }
+        else
+        {
+            SelectAction(new WorldCursorAction.CreateRod(action.StackId, result.Data.Cost, result.Data.Positions));
+        }
     }
 
     async Task IWorldStackActionVisitor<Task>.Visit(WorldStackAction.DestroyRod action)

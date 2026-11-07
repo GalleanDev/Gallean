@@ -7,6 +7,8 @@ internal abstract partial record WorldCursorAction
 {
     public abstract WorldStackId? SelectedStackId { get; }
     public abstract string SelectionText { get; }
+    public virtual ResourceSetViewModel? SelectionCost => null;
+    public virtual IReadOnlyList<WorldPosition> TargetPositions => [];
 
     public abstract IWorldCommand<Empty> CreateCommand(WorldPosition position);
 

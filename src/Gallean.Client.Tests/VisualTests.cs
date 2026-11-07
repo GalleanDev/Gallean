@@ -1924,6 +1924,41 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task WorldPlantRodTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel scenario = LoadScenario(null);
+
+        WorldState state = scenario.World.State;
+        WorldPlan plan = WorldPlan.For(state);
+        WorldStack hero = Assert.NotNull(plan.GetStackAt(new WorldPosition(10, 14)));
+        (WorldUnit heroLeader, _, _) = hero.GetLeader(scenario.Definitions);
+        WorldUnit rodLeader = heroLeader with { DefinitionId = new UnitDefinitionId("G000UU0022") };
+        WorldStack planter = hero with { Position = new WorldPosition(13, 18), Units = hero.Units.Replace(heroLeader, rodLeader) };
+
+        GameModel gameModel = LoadScenario(state with { Stacks = state.Stacks.SetItem(hero.Id, planter) });
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        WorldScreenViewModel viewModel = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(viewModel);
+
+        WorldScreenView view = await WaitForWorldAsync(window);
+
+        await viewModel.HandleMapClickAsync(new WorldPosition(13, 18), null, 1);
+        view.Camera.LookAt(WorldTransform.ToWorldPoint(new WorldPosition(13, 18)));
+
+        await viewModel.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.CreateRod(planter.Id));
+
+        Assert.That(viewModel.ActionPromptText, Is.EqualTo("Select a tile to plant a rod on."));
+        Assert.That(viewModel.ActionPromptCost, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(150, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
+
+        await CaptureAsync(window, "prompt");
+    }
+
+    [AvaloniaTest]
     public async Task WorldStackCardClickTest()
     {
         using Sandbox sb = Sandbox.Create();

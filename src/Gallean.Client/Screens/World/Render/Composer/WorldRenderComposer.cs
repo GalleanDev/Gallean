@@ -396,10 +396,15 @@ internal sealed partial class WorldRenderComposer(
     {
         WorldCursor cursor = request.Cursor;
 
-        if (cursor.StackId is not null &&
-            cursor.StackId != animatedStackId &&
-            cursor.Action is null &&
-            cursor.ReachablePositions.Count > 0)
+        if (cursor.Action is not null &&
+            cursor.Action.TargetPositions.Count > 0)
+        {
+            return new ReachOverlay(cursor.Action.TargetPositions);
+        }
+        else if (cursor.StackId is not null &&
+                 cursor.StackId != animatedStackId &&
+                 cursor.Action is null &&
+                 cursor.ReachablePositions.Count > 0)
         {
             WorldStack? stack = request.State.Stacks.GetValueOrDefault(cursor.StackId.Value);
 

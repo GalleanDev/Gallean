@@ -6586,6 +6586,7 @@ public sealed class WorldScreenViewModelTests
         await world.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.CreateRod(stack.Id));
 
         Assert.That(world.ActionPromptText, Is.EqualTo("Select a tile to plant a rod on."));
+        Assert.That(world.ActionPromptCost, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(150, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
 
         await world.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.DestroyRod(stack.Id));
 
@@ -8299,5 +8300,34 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(world.IsActive, Is.True);
+    }
+
+    [Test]
+    public async Task MissingRodStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.CreateRod(new WorldStackId("missing")));
+
+        Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(
+            AlertType.Error,
+            IconMoniker.Warning,
+            "This party is no longer available",
+            Details: null)));
+        Assert.That(world.ActionPromptText, Is.Null);
     }
 }
