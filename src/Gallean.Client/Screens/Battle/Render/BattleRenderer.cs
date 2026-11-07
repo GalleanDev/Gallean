@@ -1396,7 +1396,7 @@ internal sealed partial class BattleRenderer
             Style = SKPaintStyle.Fill,
             IsAntialias = true,
             Color = Theme.Battle.GroundMarker.OverlayColor.ToSKColor(),
-            BlendMode = SKBlendMode.Multiply
+            BlendMode = SKBlendMode.Modulate
         };
 
         canvas.DrawPath(BattleMarkerGeometry.Plate, paint);

@@ -26,7 +26,7 @@
               <Panel>
                 <Panel x:Name="PART_Portrait">
                   <local:SpriteVisual x:Name="PART_Face" Classes="portrait" SpriteKey="{TemplateBinding FaceKey}" Stretch="UniformToFill" />
-                  <Image x:Name="PART_GrayOverlay" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                  <local:DesaturationOverlay x:Name="PART_GrayOverlay" />
                   <local:AnimatedFill x:Name="PART_LostHitpoints"
                                       Current="{Binding Hitpoints, RelativeSource={RelativeSource TemplatedParent}}"
                                       Maximum="{Binding MaxHitpoints, RelativeSource={RelativeSource TemplatedParent}}"
@@ -143,7 +143,7 @@
         </Setter>
       </Style>
 
-      <Style Selector="^ /template/ Image#PART_GrayOverlay">
+      <Style Selector="^ /template/ local|DesaturationOverlay#PART_GrayOverlay">
         <Setter Property="Opacity" Value="0" />
         <Setter Property="Transitions">
           <Transitions>
@@ -151,7 +151,7 @@
           </Transitions>
         </Setter>
       </Style>
-      <Style Selector="^:dead /template/ Image#PART_GrayOverlay">
+      <Style Selector="^:dead /template/ local|DesaturationOverlay#PART_GrayOverlay">
         <Setter Property="Opacity" Value="0.7" />
       </Style>
 

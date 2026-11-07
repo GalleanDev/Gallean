@@ -6,11 +6,11 @@
              x:DataType="local:SpellbookTabViewModel">
 
   <UserControl.Styles>
-    <Style Selector="Image.desaturate">
+    <Style Selector="local|DesaturationOverlay.desaturate">
       <Setter Property="IsHitTestVisible" Value="False" />
       <Setter Property="Opacity" Value="0" />
     </Style>
-    <Style Selector=".locked Image.desaturate">
+    <Style Selector=".locked local|DesaturationOverlay.desaturate">
       <Setter Property="Opacity" Value="0.9" />
     </Style>
 
@@ -192,7 +192,7 @@
               <Border Classes="spell-icon" Classes.dark-background="{Binding Details.Icon.Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
                 <Panel>
                   <local:SpriteVisual SpriteKey="{Binding Details.Icon.Key}" Stretch="UniformToFill" />
-                  <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                  <local:DesaturationOverlay Classes="desaturate" />
                   <Border Classes="spell-locked-overlay" />
                   <Border Classes="spell-research-overlay" />
                 </Panel>
@@ -246,7 +246,7 @@
                 <Border Grid.Column="0" Classes="spell-icon spell-popup-icon" Classes.dark-background="{Binding Details.Icon.Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
                   <Panel>
                     <local:SpriteVisual SpriteKey="{Binding Details.Icon.Key}" Stretch="UniformToFill" />
-                    <Image Classes="desaturate" Source="{x:Static local:SolidTexture.Gray}" Stretch="Fill" RenderOptions.BitmapBlendingMode="Saturation" />
+                    <local:DesaturationOverlay Classes="desaturate" />
                   </Panel>
                 </Border>
                 <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
