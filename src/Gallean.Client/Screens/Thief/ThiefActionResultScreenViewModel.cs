@@ -7,6 +7,8 @@ internal sealed class ThiefActionResultScreenViewModel(WorldThiefActionType type
     public string Text { get; } = FormatText(type, isSuccess);
     public AssetSpriteKey.ThiefActionImage ImageKey { get; } = new(type, IsLarge: true);
 
+    public override bool CanContinue => true;
+
     protected override bool TryClose()
     {
         CloseSelf();

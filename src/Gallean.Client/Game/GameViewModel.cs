@@ -547,6 +547,17 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         TopScreen?.Close();
     }
 
+    [RelayCommand(CanExecute = nameof(CanContinue))]
+    private void Continue()
+    {
+        TopScreen?.Close();
+    }
+
+    private bool CanContinue()
+    {
+        return TopScreen is { CanContinue: true };
+    }
+
     [RelayCommand]
     private async Task ExitGameAsync()
     {

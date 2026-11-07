@@ -23,6 +23,7 @@ internal sealed class ScenarioEventPopupViewModel : AbstractLiveBackgroundScreen
 
     public override TimeSpan RevealDuration => TimeSpan.FromMilliseconds(250);
     public override AssetSoundKey OpenSound => new AssetSoundKey.InterfaceOpen();
+    public override bool CanContinue => true;
 
     protected override bool TryClose()
     {

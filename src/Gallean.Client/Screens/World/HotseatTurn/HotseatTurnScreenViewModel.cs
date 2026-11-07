@@ -10,6 +10,7 @@ internal sealed class HotseatTurnScreenViewModel(
     public AssetSpriteKey.LordFace PortraitKey { get; } = portraitKey;
 
     public override AssetSoundKey OpenSound => new AssetSoundKey.InterfaceOpen();
+    public override bool CanContinue => true;
 
     protected override bool TryClose()
     {

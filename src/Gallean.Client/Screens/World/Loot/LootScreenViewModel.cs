@@ -18,6 +18,8 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
     public ResourceSetViewModel? Resources { get; }
     public ImmutableArray<LootItem> Items { get; }
 
+    public override bool CanContinue => true;
+
     public static LootScreenViewModel CreateForRuin(GameModel gameModel, WorldResourceSet resources, WorldItem? item)
     {
         ImmutableArray<WorldItem> items = [];

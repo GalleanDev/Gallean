@@ -17,6 +17,7 @@ internal abstract partial class AbstractScreenViewModel : ObservableObject, IDis
     public virtual AssetSoundKey? CloseSound => null;
     public virtual bool PaintsOwnBackground => false;
     public virtual bool BlurBackdrop => false;
+    public virtual bool CanContinue => false;
     public virtual TimeSpan RevealDelay => TimeSpan.Zero;
     public virtual TimeSpan RevealDuration => TimeSpan.Zero;
 
