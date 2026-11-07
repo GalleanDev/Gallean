@@ -51,7 +51,7 @@ internal sealed class GameScenarioProvider : IGameScenarioProvider
                 new ScenarioTextId(string.Empty),
                 Creator: null),
             SuggestedLevel: 0,
-            MaxLeaderLevel: 0,
+            MaxLeaderLevel: int.MaxValue,
             MaxCityLevel: 0,
             NextScenarioId: null));
 

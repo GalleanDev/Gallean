@@ -31,7 +31,7 @@ internal partial class BattleEngine
 
                 if (unit.SummonerId is null &&
                     unit.IsAlive &&
-                    unitExperience.CanGainExperience)
+                    !unitExperience.IsMaximumLevel)
                 {
                     int experience = GetExperienceGained(unit, isWinner, leaderBonusPercent, sideBonusPercent);
 

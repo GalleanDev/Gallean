@@ -122,14 +122,14 @@ internal partial class WorldEngine
         {
             UnitExperience experience = Context.UnitStats.GetWorldUnitExperience(unit);
 
-            if (!unit.IsAlive || !experience.CanGainExperience)
+            if (!unit.IsAlive || experience.IsMaximumLevel)
             {
                 return unit;
             }
 
             int newExperience = experience.Current + (experience.NextLevel * percent / 100);
 
-            if (newExperience >= experience.NextLevel && !experience.IsMaximumLevel)
+            if (newExperience >= experience.NextLevel)
             {
                 WorldUnit? upgradedUnit = FindUpgradedUnit(unit, buildings);
 

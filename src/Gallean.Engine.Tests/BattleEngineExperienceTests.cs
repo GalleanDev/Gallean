@@ -359,4 +359,64 @@ public sealed class BattleEngineExperienceTests
         Assert.That(engine.State.GetUnit(attacker.Id), Is.EqualTo(attacker with { ExperienceGained = 1 }));
         Assert.That(engine.State.GetUnit(ally.Id), Is.EqualTo(ally with { ExperienceGained = 1 }));
     }
+
+    [Test]
+    public void MaximumLevelLeaderTest()
+    {
+        UnitDefinition leaderDefinition = Fighter("leader", maxHitpoints: 100, initiative: 50, damage: 10, experienceNextLevel: 1000, experienceKilled: 0) with
+        {
+            Category = UnitCategory.Leader,
+            LeaderCategory = UnitLeaderCategory.Fighter,
+            Leadership = 6
+        };
+        UnitDefinition allyDefinition = Fighter("ally", maxHitpoints: 10, initiative: 30, damage: 1, experienceNextLevel: 1000, experienceKilled: 0);
+        UnitDefinition defenderDefinition = Fighter("defender", maxHitpoints: 10, initiative: 40, damage: 1, experienceNextLevel: 10, experienceKilled: 10);
+
+        BattleUnit leader = new(new BattleUnitId(0), null, leaderDefinition.Id, BattleSide.Attacker, 100, 3, 0, 2, [], [], null, [], null, false);
+        BattleUnit ally = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, allyDefinition.Id, BattleSide.Attacker, hitpoints: 10);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 10);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(new UnitDynamicUpgradeDefinition(leaderDefinition.Id, UpgradeChangeLevel: 3, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .WithMaxLeaderLevel(2)
+            .WithAttacker(leader, GridPosition.FrontBottom)
+            .WithAttacker(ally, GridPosition.FrontTop)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(leader.Id, new BattleAttackUnitTarget(defender.Id)), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("leader")]),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, new UnitAttackDefinitionId("leader")),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, new UnitAttackDefinitionId("leader"), 10),
+            new BattleUnitDiedEvent(defender.Id),
+            new BattleUnitExperienceGainedEvent(ally.Id, 5),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleRoundEndedEvent(),
+            new BattleEndedEvent(BattleSide.Attacker),
+            new BattleUnitExperienceGainedEvent(ally.Id, 5)
+        ]);
+
+        UnitGrid<BattleUnit> expectedAttackerGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(leader, GridPosition.FrontBottom, false)
+            .Place(ally with { ExperienceGained = 5 }, GridPosition.FrontTop, false)
+            .Build();
+        UnitGrid<BattleUnit> expectedDefenderGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
+            .Build();
+
+        Assert.That(engine.State, Is.EqualTo(new BattleState(
+            expectedAttackerGrid,
+            expectedDefenderGrid,
+            new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal),
+            [new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
+            [],
+            [],
+            BattleRound.Normal(1),
+            new BattleOutcome(BattleSide.Attacker),
+            BattleModifiers.None,
+            TestHelpers.SimpleBattleInfo())));
+    }
 }

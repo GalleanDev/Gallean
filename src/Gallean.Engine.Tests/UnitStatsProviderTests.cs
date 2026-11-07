@@ -290,7 +290,7 @@ public sealed class UnitStatsProviderTests
 
         UnitExperience experience = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitExperience(state, unit.Id);
 
-        Assert.That(experience, Is.EqualTo(new UnitExperience(Current: 0, NextLevel: 100, CanGainExperience: true, IsMaximumLevel: false, IsPendingUpgrade: false)));
+        Assert.That(experience, Is.EqualTo(new UnitExperience(Current: 0, NextLevel: 100, IsMaximumLevel: false, IsPendingUpgrade: false)));
     }
 
     [Test]

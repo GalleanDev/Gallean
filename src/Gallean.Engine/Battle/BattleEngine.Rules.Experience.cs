@@ -45,7 +45,7 @@ internal partial class BattleEngine
             {
                 UnitExperience receiverExperience = Context.UnitStats.GetBattleUnitExperience(state, receiver.Id);
 
-                if (receiverExperience.CanGainExperience)
+                if (!receiverExperience.IsMaximumLevel)
                 {
                     events.Add(new BattleUnitExperienceGainedEvent(receiver.Id, receiver.ExperienceGained + experience));
                 }

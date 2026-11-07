@@ -9,11 +9,10 @@ internal static class UnitExperienceCalculator
         UnitStats stats,
         ScenarioDefinition scenario)
     {
-        bool canGainExperience = CanGainExperience(definition.Category);
         bool isMaximumLevel;
         bool isPendingUpgrade;
 
-        if (canGainExperience)
+        if (CanGainExperience(definition.Category))
         {
             isMaximumLevel = definition.Leadership is > 0 && level >= scenario.MaxLeaderLevel;
 
@@ -32,7 +31,7 @@ internal static class UnitExperienceCalculator
             isPendingUpgrade = false;
         }
 
-        return new UnitExperience(experience, stats.ExperienceNextLevel, canGainExperience, isMaximumLevel, isPendingUpgrade);
+        return new UnitExperience(experience, stats.ExperienceNextLevel, isMaximumLevel, isPendingUpgrade);
     }
 
     private static bool CanGainExperience(UnitCategory category)

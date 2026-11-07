@@ -11,6 +11,7 @@ internal sealed class TestBattleEngineBuilder
     private BattleModifiers modifiers = BattleModifiers.None;
     private BattleInfo info = TestHelpers.SimpleBattleInfo();
     private GlobalVariables globals = new() { BattleInitiativeVariance = 0, BattleDamageVariance = 0 };
+    private int maxLeaderLevel = int.MaxValue;
     private IRandomProvider random = new TestSeedRandomProvider();
     private int roundNumber = 1;
     private IBattleUnitUpgradeResolver upgradeResolver = NullBattleUnitUpgradeResolver.Instance;
@@ -81,6 +82,12 @@ internal sealed class TestBattleEngineBuilder
         return this;
     }
 
+    public TestBattleEngineBuilder WithMaxLeaderLevel(int newMaxLeaderLevel)
+    {
+        maxLeaderLevel = newMaxLeaderLevel;
+        return this;
+    }
+
     public TestBattleEngineBuilder WithRandom(IRandomProvider newRandom)
     {
         random = newRandom;
@@ -126,8 +133,9 @@ internal sealed class TestBattleEngineBuilder
         }
 
         BattleState state = stateBuilder.Build(modifiers, info) with { CurrentRound = BattleRound.Normal(roundNumber) };
+        ScenarioDefinition scenarioDefinition = GameScenarioProvider.Empty.Definition with { MaxLeaderLevel = maxLeaderLevel };
         BattleEngine engine = new(
-            new EngineContext(random, definitions, new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition), GameScenarioProvider.Empty, globals),
+            new EngineContext(random, definitions, new UnitStatsProvider(definitions, globals, scenarioDefinition), new GameScenarioProvider([], [], [], [], scenarioDefinition), globals),
             state,
             upgradeResolver);
 
