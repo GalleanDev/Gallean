@@ -165,11 +165,14 @@ internal sealed partial class WorldAiPlanner
             WorldStack stack = context.Stack;
             WorldPosition? movePositions = Context.Pathfinding.FindMoveTowardCell(context.State, stack, pathMap, targetPosition);
 
-            if (movePositions is not null && pathMap.TryGetPath(movePositions.Value, WorldMovementLimit.Unlimited, out WorldPath? path))
+            if (movePositions is not null)
             {
-                int score = UtilityScore.Ratio(path.Cost, stack.MovementPoints).Score;
+                if (pathMap.TryGetPath(movePositions.Value, WorldMovementLimit.Unlimited, out WorldPath? path))
+                {
+                    int score = UtilityScore.Ratio(path.Cost, stack.MovementPoints).Score;
 
-                return MakePlan(score, new WorldAiMoveStackCommand(stack.Id, movePositions.Value), context.Memory);
+                    return MakePlan(score, new WorldAiMoveStackCommand(stack.Id, movePositions.Value), context.Memory);
+                }
             }
 
             return null;
