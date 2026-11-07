@@ -10,4 +10,7 @@ internal sealed record BattleUnitCardViewModel(
     int Hitpoints,
     int MaxHitpoints,
     AnimationRange HitpointsAnimation,
-    IReadOnlyList<UnitStatusViewModel> Statuses);
+    IReadOnlyList<UnitStatusViewModel> Statuses)
+{
+    public string LevelText => Tr("Lv. {0}", Level);
+}

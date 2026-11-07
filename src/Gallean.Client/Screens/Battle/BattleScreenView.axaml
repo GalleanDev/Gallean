@@ -407,7 +407,7 @@
             <local:UnitIcon Classes="target-face" SpriteKey="{Binding TargetUnit.IconKey}" />
             <StackPanel Spacing="4" VerticalAlignment="Center">
               <StackPanel Orientation="Horizontal" Spacing="8" Margin="14,0,0,0">
-                <local:OutlinedTextBlock Classes="object-name row" VerticalAlignment="Center"><Run Text="{Binding TargetUnit.Name}" /><Run Text="  " /><Run Classes="target-level" Text="{Binding TargetUnit.Level, StringFormat='Lv. {0}'}" /></local:OutlinedTextBlock>
+                <local:OutlinedTextBlock Classes="object-name row" VerticalAlignment="Center"><Run Text="{Binding TargetUnit.Name}" /><Run Text="  " /><Run Classes="target-level" Text="{Binding TargetUnit.LevelText}" /></local:OutlinedTextBlock>
                 <ItemsControl Classes="status-badges"
                               ItemsSource="{Binding TargetUnit.Statuses}"
                               ItemTemplate="{StaticResource UnitStatusBadgeTemplate}"
