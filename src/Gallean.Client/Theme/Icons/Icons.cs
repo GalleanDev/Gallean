@@ -114,6 +114,7 @@ internal static partial class Icons
             IconMoniker.TemporaryModifier => TemporaryModifierIcon,
             IconMoniker.ThiefAssassinate => ThiefAssassinateIcon,
             IconMoniker.ThiefBribe => ThiefBribeIcon,
+            IconMoniker.ThiefCaptured => ThiefCapturedIcon,
             IconMoniker.ThiefCounterfeitOrders => ThiefCounterfeitOrdersIcon,
             IconMoniker.ThiefDuel => ThiefDuelIcon,
             IconMoniker.ThiefPoisonCity => ThiefPoisonCityIcon,
@@ -190,6 +191,18 @@ internal static partial class Icons
             stops,
             startPoint: new RelativePoint(start, RelativeUnit.Absolute),
             endPoint: new RelativePoint(end, RelativeUnit.Absolute));
+    }
+
+    private static IImmutableBrush MakeRadialGradientBrush(Point center, double radiusX, double radiusY, ImmutableGradientStop[] stops)
+    {
+        RelativePoint origin = new(center, RelativeUnit.Absolute);
+
+        return new ImmutableRadialGradientBrush(
+            stops,
+            center: origin,
+            gradientOrigin: origin,
+            radiusX: new RelativeScalar(radiusX, RelativeUnit.Absolute),
+            radiusY: new RelativeScalar(radiusY, RelativeUnit.Absolute));
     }
 
     private static ImmutableGradientStop MakeGradientStop(string color, double offset)

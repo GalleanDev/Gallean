@@ -6338,6 +6338,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(result.Title, Is.EqualTo("Success!"));
         Assert.That(result.Text, Is.EqualTo("Your spy has infiltrated the enemy ranks. Right-click enemy parties and cities to reveal information about them!"));
+        Assert.That(result.IsSuccess, Is.True);
         Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.Spy, IsLarge: true)));
 
         gameViewModel.EscapeCommand.Execute(null);
@@ -6411,6 +6412,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(result.Title, Is.EqualTo("Failure!"));
         Assert.That(result.Text, Is.EqualTo("Your thief has been captured and executed!"));
+        Assert.That(result.IsSuccess, Is.False);
         Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.PoisonStack, IsLarge: true)));
 
         gameViewModel.EscapeCommand.Execute(null);

@@ -1417,6 +1417,26 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task WorldThiefActionCapturedTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        await WaitForWorldAsync(window);
+
+        gameViewModel.OpenScreen(new ThiefActionResultScreenViewModel(WorldThiefActionType.StealGold, isSuccess: false));
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task WorldHotseatTurnTest()
     {
         using Sandbox sb = Sandbox.Create();

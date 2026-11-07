@@ -2,6 +2,7 @@ namespace Gallean.Client;
 
 internal sealed class ThiefActionResultScreenViewModel(WorldThiefActionType type, bool isSuccess) : AbstractScreenViewModel
 {
+    public bool IsSuccess { get; } = isSuccess;
     public string Title { get; } = FormatTitle(isSuccess);
     public string Text { get; } = FormatText(type, isSuccess);
     public AssetSpriteKey.ThiefActionImage ImageKey { get; } = new(type, IsLarge: true);

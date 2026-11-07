@@ -15,7 +15,10 @@
 
       <StackPanel Spacing="16">
         <Border Classes="frame" Width="254" Height="254" BorderThickness="2" HorizontalAlignment="Center">
-          <local:SpriteVisual SpriteKey="{Binding ImageKey}" Stretch="Uniform" />
+          <Panel>
+            <local:SpriteVisual SpriteKey="{Binding ImageKey}" Stretch="Uniform" IsVisible="{Binding IsSuccess}" />
+            <local:IconVisual Moniker="ThiefCaptured" IsVisible="{Binding !IsSuccess}" />
+          </Panel>
         </Border>
 
         <TextBlock Text="{Binding Text}"

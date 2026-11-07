@@ -105,6 +105,7 @@ internal enum IconMoniker
     TemporaryModifier,
     ThiefAssassinate,
     ThiefBribe,
+    ThiefCaptured,
     ThiefCounterfeitOrders,
     ThiefDuel,
     ThiefPoisonCity,
