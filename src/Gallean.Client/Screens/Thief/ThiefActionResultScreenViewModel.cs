@@ -21,7 +21,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         WorldThiefActionType type,
         bool isSuccess)
     {
-        string title = FormatTitle(isSuccess);
+        string title = FormatMineTitle(isSuccess);
         string text = FormatMineText(type, isSuccess);
 
         return new ThiefActionResultScreenViewModel(title, text, type, isSuccess);
@@ -33,7 +33,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         bool isSuccess,
         string theirLordName)
     {
-        string title = FormatTitle(isSuccess);
+        string title = Tr("Thief actions");
         string text = FormatTheirText(type, target, isSuccess, theirLordName);
 
         return new ThiefActionResultScreenViewModel(title, text, type, isSuccess);
@@ -48,7 +48,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         return true;
     }
 
-    private static string FormatTitle(bool isSuccess)
+    private static string FormatMineTitle(bool isSuccess)
     {
         if (isSuccess)
         {

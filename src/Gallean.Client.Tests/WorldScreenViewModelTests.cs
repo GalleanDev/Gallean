@@ -6481,7 +6481,7 @@ public sealed class WorldScreenViewModelTests
 
         ThiefActionResultScreenViewModel result = Assert.IsOfType<ThiefActionResultScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(result.Title, Is.EqualTo("Success!"));
+        Assert.That(result.Title, Is.EqualTo("Thief actions"));
         Assert.That(result.Text, Is.EqualTo("Player2 has poisoned your party."));
         Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.PoisonStack, IsLarge: true)));
 
