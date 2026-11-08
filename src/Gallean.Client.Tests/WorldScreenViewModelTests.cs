@@ -6625,8 +6625,6 @@ public sealed class WorldScreenViewModelTests
             new WorldPosition(5, 5),
             [
                 new WorldActionWheelItemViewModel("Learn a new ability (1)", IconMoniker.LearnAbility, ItemIconKey: null, IsHighlighted: true, new WorldStackAction.LearnAbility(stack.Id)),
-                new WorldActionWheelItemViewModel("Plant rod", IconMoniker.PlantRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.CreateRod(stack.Id)),
-                new WorldActionWheelItemViewModel("Destroy rod", IconMoniker.DestroyRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.DestroyRod(stack.Id)),
                 new WorldActionWheelItemViewModel("Use scroll-name", Icon: null, new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Scroll(WorldRace.Human)), IsHighlighted: false, new WorldStackAction.UseItem(stack.Id, scrollItem.Id)),
                 new WorldActionWheelItemViewModel("Use wand-name (3)", Icon: null, new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(wand.Id)), IsHighlighted: false, new WorldStackAction.UseItem(stack.Id, wandItem.Id))
             ])));
@@ -6650,8 +6648,6 @@ public sealed class WorldScreenViewModelTests
             new WorldPosition(5, 5),
             [
                 new WorldActionWheelItemViewModel("Learn a new ability (1)", IconMoniker.LearnAbility, ItemIconKey: null, IsHighlighted: true, new WorldStackAction.LearnAbility(stack.Id)),
-                new WorldActionWheelItemViewModel("Plant rod", IconMoniker.PlantRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.CreateRod(stack.Id)),
-                new WorldActionWheelItemViewModel("Destroy rod", IconMoniker.DestroyRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.DestroyRod(stack.Id)),
                 new WorldActionWheelItemViewModel("Use wand-name (3)", Icon: null, new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(wand.Id)), IsHighlighted: false, new WorldStackAction.UseItem(stack.Id, wandItem.Id))
             ])));
 
@@ -6690,6 +6686,83 @@ public sealed class WorldScreenViewModelTests
         gameViewModel.CloseScreen(cityScreen);
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+    }
+
+    [Test]
+    public async Task ActionWheelRodTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                LeaderAbilities = LeaderAbility.Rod
+            };
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Human, 1),
+            WorldResourceSet.Empty);
+
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("City"),
+            cityDefinition,
+            player.Id,
+            new WorldPosition(5, 5),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack outside = TestHelpers.SimpleStack(
+            new WorldStackId("Outside"),
+            player.Id,
+            new WorldPosition(1, 1),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(new WorldUnit(new WorldUnitId("outside-leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false), GridPosition.FrontBottom)]),
+            movementPoints: 20);
+        WorldStack inCity = TestHelpers.SimpleStack(
+            new WorldStackId("InCity"),
+            player.Id,
+            new WorldPosition(5, 5),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(new WorldUnit(new WorldUnitId("city-leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false), GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCity(city)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(outside)
+            .WithStack(inCity)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(1, 1), null, 1);
+
+        Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
+            new WorldPosition(1, 1),
+            [
+                new WorldActionWheelItemViewModel("Plant rod", IconMoniker.PlantRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.CreateRod(outside.Id)),
+                new WorldActionWheelItemViewModel("Destroy rod", IconMoniker.DestroyRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.DestroyRod(outside.Id))
+            ])));
+
+        await world.HandleMapClickAsync(new WorldPosition(5, 5), null, 1);
+
+        Assert.That(world.ActionWheel, Is.Null);
     }
 
     [Test]

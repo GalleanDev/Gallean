@@ -27,6 +27,7 @@ internal sealed record WorldActionWheelViewModel(WorldPosition Position, IReadOn
         IGameTextProvider texts,
         IUnitStatsProvider stats)
     {
+        WorldPlan plan = WorldPlan.For(world);
         (WorldUnit leader, GridPosition _, UnitDefinition _) = stack.GetLeader(definitions);
         LeaderAbility leaderAbilities = stats.GetWorldUnitAbilities(leader);
 
@@ -52,7 +53,9 @@ internal sealed record WorldActionWheelViewModel(WorldPosition Position, IReadOn
                 new WorldStackAction.LearnAbility(stack.Id)));
         }
 
-        if (leaderAbilities.HasFlag(LeaderAbility.Rod))
+        WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
+
+        if (leaderAbilities.HasFlag(LeaderAbility.Rod) && fortification is not (WorldCity or WorldCapital))
         {
             items.Add(new WorldActionWheelItemViewModel(
                 Tr("Plant rod"),
