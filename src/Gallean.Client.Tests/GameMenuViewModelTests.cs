@@ -94,7 +94,7 @@ public sealed class GameMenuViewModelTests
 
         Assert.IsOfType<WorldScreenViewModel>(gameViewModel.TopScreen);
         Assert.That(picker.IsOpen, Is.False);
-        Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Human, "Leader exported", "Edwin")));
+        Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Leader, "Leader exported", "Edwin")));
         Assert.That(await store.EnumerateAsync(), Is.EqualTo([
             new LeaderEntry(
                 new LeaderId(1),

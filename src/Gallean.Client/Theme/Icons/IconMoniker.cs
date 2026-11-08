@@ -66,6 +66,7 @@ internal enum IconMoniker
     LanguagePolish,
     LanguageRussian,
     LanguageSpanish,
+    Leader,
     Leadership,
     LearnAbility,
     Locked,

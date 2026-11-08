@@ -58,7 +58,7 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
 
         if (await Game.TryExportLeaderAsync(scenarioLeader))
         {
-            Game.ShowInfo(IconMoniker.Human, Tr("Leader exported"), SelectedLeader.Name);
+            Game.ShowInfo(IconMoniker.Leader, Tr("Leader exported"), SelectedLeader.Name);
             Game.CloseScreen(owner);
         }
     }

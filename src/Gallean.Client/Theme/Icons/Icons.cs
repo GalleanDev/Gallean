@@ -75,6 +75,7 @@ internal static partial class Icons
             IconMoniker.LanguagePolish => LanguagePolishIcon,
             IconMoniker.LanguageRussian => LanguageRussianIcon,
             IconMoniker.LanguageSpanish => LanguageSpanishIcon,
+            IconMoniker.Leader => AttackSourceWeaponIcon,
             IconMoniker.Leadership => LeadershipIcon,
             IconMoniker.LearnAbility => LearnAbilityIcon,
             IconMoniker.Locked => LockedIcon,
