@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace Gallean.Client;
 
-internal sealed record ClientVersion(string Version, string? Revision)
+internal sealed record ClientVersion(string Version, string? Revision) : IComparable<ClientVersion>
 {
     public static ClientVersion Get()
     {
@@ -41,5 +41,33 @@ internal sealed record ClientVersion(string Version, string? Revision)
         {
             return Version;
         }
+    }
+
+    public int CompareTo(ClientVersion? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
+
+        Version? version = TryParse(Version);
+        Version? otherVersion = TryParse(other.Version);
+
+        return Comparer<Version?>.Default.Compare(version, otherVersion);
+
+        static Version? TryParse(string value)
+        {
+            return System.Version.TryParse(value, out Version? number) ? number : null;
+        }
+    }
+
+    public static bool operator <(ClientVersion left, ClientVersion right)
+    {
+        return left.CompareTo(right) < 0;
+    }
+
+    public static bool operator >(ClientVersion left, ClientVersion right)
+    {
+        return left.CompareTo(right) > 0;
     }
 }

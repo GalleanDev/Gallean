@@ -6890,4 +6890,19 @@ public sealed class VisualTests
             new BattleUnitTurn(new BattleUnitId(5), BattleUnitTurnType.Normal)
         ]));
     }
+
+    [AvaloniaTest]
+    public async Task UpdatePromptTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
+        gameViewModel.OpenScreen(new UpdatePromptViewModel(
+            new UpdateInfo(new ClientVersion("0.14.0", null), new Uri("https://github.com/GalleanDev/Gallean/releases/tag/v0.14.0")),
+            new ClientVersion("0.13.0", "2d40300")));
+
+        await CaptureAsync(window);
+    }
 }

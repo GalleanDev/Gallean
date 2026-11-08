@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.UpdatePromptView"
+             x:DataType="local:UpdatePromptViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Classes="accent" MinWidth="440" MaxWidth="620" Padding="28,24" Title="{local:Text 'Update available'}" InitialFocus="{Binding #DownloadButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,Auto,*">
+          <Button x:Name="DownloadButton"
+                  Grid.Column="1"
+                  Content="{local:Text 'Download'}"
+                  Classes="pill primary"
+                  local:PlateChrome.TextureSeed="1"
+                  Click="OnDownloadClick"
+                  MinWidth="150"
+                  Margin="0,0,16,0" />
+          <Button Grid.Column="2"
+                  Content="{local:Text 'Later'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="2"
+                  Command="{Binding CloseCommand}"
+                  MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <TextBlock local:TextRuns.Spans="{Binding Message}"
+                 Classes="body"
+                 Foreground="{StaticResource PrimaryTextBrush}"
+                 TextWrapping="Wrap"
+                 TextAlignment="Center" />
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

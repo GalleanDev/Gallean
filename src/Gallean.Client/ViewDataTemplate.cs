@@ -62,6 +62,7 @@ internal sealed class ViewDataTemplate : IDataTemplate
             TrainerTabViewModel => new TrainerTabView(),
             UnitDetailsViewModel => new UnitDetailsView(),
             UnitPurchaseViewModel => new UnitPurchaseView(),
+            UpdatePromptViewModel => new UpdatePromptView(),
             WorldScreenViewModel world => new WorldScreenView(world.GameModel.Definitions, world.GameModel.Scenario, world.Game.DevTools.Diagnostics),
             _ => throw new NotSupportedException()
         };

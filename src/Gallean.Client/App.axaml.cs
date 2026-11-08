@@ -53,6 +53,10 @@ internal sealed class App(ILog log) : Application
         TextCatalog textCatalog = TextCatalogLoader.Load(gameSettings.EffectiveLanguage);
         textCatalog.MakeCurrent();
 
+        ClientVersion clientVersion = ClientVersion.Get();
+        UpdateClient updateClient = cleanupList.Add(new UpdateClient(clientVersion, log));
+        Task<UpdateInfo?> latestUpdateTask = Task.Run(updateClient.TryGetLatestAsync);
+
         Task<AudioOutput> audioOutputTask = Task.Run(() => AudioOutput.CreateAsync(log));
         Task<AssetProvider> assetProviderTask = Task.Run(AssetProvider.LoadDefault);
         AudioOutput audioOutput = cleanupList.Add(await audioOutputTask);
@@ -60,7 +64,6 @@ internal sealed class App(ILog log) : Application
 
         CheckAssetPack(assetProvider);
 
-        ClientVersion clientVersion = ClientVersion.Get();
         FreeThreadedRandomProvider random = new();
         GameLoader gameLoader = new(random);
         GameSaveStore gameSaveStore = new(AppDirectories.Saves, gameSettings.AutoSaveLimit);
@@ -92,7 +95,17 @@ internal sealed class App(ILog log) : Application
         gameView.Show();
 
         currentGame = gameViewModel;
-        gameViewModel.ShowMainMenuCommand.Execute(null);
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        UpdateInfo? latestUpdate = await latestUpdateTask;
+
+        if (latestUpdate is not null && latestUpdate.Version > clientVersion)
+        {
+            if (gameViewModel.TopScreen is MainMenuScreenViewModel)
+            {
+                gameViewModel.OpenScreen(new UpdatePromptViewModel(latestUpdate, clientVersion));
+            }
+        }
     }
 
     private static void CheckAssetPack(IAssetMetadataProvider assets)
