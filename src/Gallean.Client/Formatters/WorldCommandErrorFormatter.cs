@@ -47,6 +47,7 @@ internal static class WorldCommandErrorFormatter
             WorldCommandError.ItemNotAvailable => Tr("This item is not available"),
             WorldCommandError.ItemAlreadyUsedThisTurn => Tr("This item cannot be used again this turn"),
             WorldCommandError.ItemNotFound => Tr("This item is no longer available"),
+            WorldCommandError.ItemNotSellable => Tr("The merchant will not buy this item"),
             WorldCommandError.ItemNotUsable => Tr("The item cannot be used"),
             WorldCommandError.ItemSlotMismatch => Tr("The item cannot go in that slot"),
             WorldCommandError.ItemTargetInvalid => Tr("This item cannot be used on that target"),

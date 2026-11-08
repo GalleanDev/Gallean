@@ -461,4 +461,46 @@ public sealed class WorldEngineSellItemTests
                 })
             }));
     }
+
+    [Test]
+    public void SpecialItemTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 4);
+        ItemDefinition itemDefinition = Item("ring", new WorldResourceSet(0, 0, 0, 0, 0, 0)) with
+        {
+            Category = ItemCategory.Special
+        };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        WorldItem ringItem = new(new WorldItemId("Ring"), itemDefinition.Id, Charges: null);
+        WorldStack stack = Stack(new WorldUnitId("leader"), player.Id, new WorldPosition(4, 4), leaderDefinition, [ringItem]);
+        WorldMerchantSite site = Site();
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(itemDefinition)
+            .WithRace(TestHelpers.SimpleRace(WorldRace.Undead, new GlobalTextId("Undead Hordes"), WorldMapTerrain.Undead))
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(stack)
+            .WithSite(site)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommandError(
+            new WorldSellItemCommand(stack.Id, site.Id, ringItem.Id),
+            WorldCommandError.ItemNotSellable
+        );
+    }
 }

@@ -33,9 +33,37 @@ internal static class MerchantSiteCalculator
     public static SellInfo GetSellInfo(WorldItem item, IEngineContext context)
     {
         ItemDefinition definition = context.Definitions.GetItem(item.DefinitionId);
-        WorldResourceSet value = GetItemValue(definition, item.Charges ?? context.Globals.TalismanCharges);
+        WorldResourceSet itemValue = GetItemValue(definition, item.Charges ?? context.Globals.TalismanCharges);
+        WorldResourceSet value = ResourceSetCalculator.ScalePercent(itemValue, context.Globals.SellItemPercent);
 
-        return new SellInfo(ResourceSetCalculator.ScalePercent(value, context.Globals.SellItemPercent), Error: null);
+        if (!CanSellItem(definition.Category))
+        {
+            return new SellInfo(value, WorldCommandError.ItemNotSellable);
+        }
+
+        return new SellInfo(value, Error: null);
+    }
+
+    private static bool CanSellItem(ItemCategory category)
+    {
+        return category switch
+        {
+            ItemCategory.Armor => true,
+            ItemCategory.Jewel => true,
+            ItemCategory.Weapon => true,
+            ItemCategory.Banner => true,
+            ItemCategory.PotionTemporaryBoost => true,
+            ItemCategory.PotionHeal => true,
+            ItemCategory.PotionRevive => true,
+            ItemCategory.PotionPermanentBoost => true,
+            ItemCategory.Scroll => true,
+            ItemCategory.Wand => true,
+            ItemCategory.Valuable => true,
+            ItemCategory.Orb => true,
+            ItemCategory.Talisman => true,
+            ItemCategory.TravelItem => true,
+            ItemCategory.Special => false
+        };
     }
 
     private static WorldResourceSet GetItemValue(ItemDefinition definition, int charges)

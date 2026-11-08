@@ -41,6 +41,7 @@ public enum WorldCommandError
     ItemAlreadyUsedThisTurn,
     ItemNotAvailable,
     ItemNotFound,
+    ItemNotSellable,
     ItemNotUsable,
     ItemSlotMismatch,
     ItemTargetInvalid,
