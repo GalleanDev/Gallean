@@ -22,8 +22,9 @@ internal sealed partial class WorldAiScenario(IEngineContext engine)
         return targets.ToImmutable();
     }
 
-    public ImmutableHashSet<WorldAiTarget> GetBlockedTargets(WorldState state)
+    public ImmutableHashSet<WorldAiTarget> GetBlockedTargets(WorldState state, WorldPlayerId playerId)
     {
+        WorldPlayer player = state.Players[playerId];
         ImmutableHashSet<ItemDefinitionId> items = GetItems(state);
         ImmutableHashSet<WorldAiTarget>.Builder targets = ImmutableHashSet.CreateBuilder<WorldAiTarget>();
 
@@ -32,6 +33,14 @@ internal sealed partial class WorldAiScenario(IEngineContext engine)
             if (bag.Inventory.Items.Any(item => items.Contains(item.DefinitionId)))
             {
                 targets.Add(new WorldAiTarget.Bag(bag.Id));
+            }
+        }
+
+        foreach (ScenarioLocationDefinition zone in GetDefeatZones(state, player))
+        {
+            foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(zone, state.Map))
+            {
+                targets.Add(new WorldAiTarget.Location(position));
             }
         }
 
@@ -102,6 +111,29 @@ internal sealed partial class WorldAiScenario(IEngineContext engine)
         {
             return defeatEvents.ToImmutable();
         }
+    }
+
+    private ImmutableArray<ScenarioLocationDefinition> GetDefeatZones(WorldState state, WorldPlayer player)
+    {
+        ImmutableArray<ScenarioLocationDefinition>.Builder zones = ImmutableArray.CreateBuilder<ScenarioLocationDefinition>();
+
+        foreach (ScenarioEventDefinition definition in engine.Scenario.Events)
+        {
+            ScenarioEventWinEffect? effect = CheckWinScenarioEffect(definition, state, player);
+
+            if (effect is not null && effect.WinnerId is null)
+            {
+                foreach (ScenarioEventCondition condition in definition.Conditions)
+                {
+                    if (condition is ScenarioEventEnteringZoneCondition zoneCondition)
+                    {
+                        zones.Add(engine.Scenario.GetLocation(zoneCondition.Zone));
+                    }
+                }
+            }
+        }
+
+        return zones.ToImmutable();
     }
 
     private static ScenarioEventWinEffect? CheckWinScenarioEffect(ScenarioEventDefinition definition, WorldState state, WorldPlayer player)

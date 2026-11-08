@@ -4772,4 +4772,47 @@ public sealed class WorldEngineAiTests
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
         Assert.That(session.World.State.Stacks[enemyStack.Id], Is.EqualTo(enemyStack with { MovementPoints = 6 }));
     }
+
+    [Test]
+    public void EndingZoneTest()
+    {
+        WorldMap map = TestHelpers.BuildMap(["........."]);
+
+        UnitDefinition main = Leader("main", damage: 50, movementPoints: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            FogOfWar = TestHelpers.BuildFogOfWar(["?.......?"])
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack mainStack = MyStack(new WorldUnitId("mainLeader"), "Main", player1.Id, new WorldPosition(5, 0), main, 100, 6, WorldStackOrder.Normal.Instance);
+
+        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone"), new ScenarioTextId("Zone"), new WorldPosition(7, 0), 0);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(main)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(mainStack)
+            .WithScenarioLocation(zone)
+            .WithScenarioEvent(new ScenarioEventDefinition(
+                new ScenarioEventId("Defeat"),
+                [WorldRace.Undead],
+                [],
+                [new ScenarioEventEnteringZoneCondition(zone.Id)],
+                [new ScenarioEventWinEffect(WinnerId: null)],
+                Enabled: true,
+                OccurOnce: true,
+                Chance: 100,
+                Order: 0))
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P1 1000] Move Main -> (2, 0)"]));
+    }
 }

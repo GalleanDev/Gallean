@@ -301,6 +301,11 @@ internal sealed partial class WorldAiPlanner
                     return null;
                 }
 
+                if (context.BlockedTargets.Contains(new WorldAiTarget.Location(target)))
+                {
+                    return null;
+                }
+
                 int hiddenCount = CountAdjacentHiddenCells(state, player, target);
 
                 if (hiddenCount <= 0)
