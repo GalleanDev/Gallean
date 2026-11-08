@@ -246,13 +246,13 @@
             <Button Classes="pill action" local:PlateChrome.TextureSeed="3" Command="{Binding HealCommand}">
               <Grid ColumnDefinitions="Auto,*">
                 <local:IconVisual Grid.Column="0" Moniker="Heal" Foreground="{Binding $parent[Button].Foreground}" />
-                <TextBlock Grid.Column="1" Text="{local:Text 'Heal'}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Heal unit'}" />
               </Grid>
             </Button>
             <Button Classes="pill action" local:PlateChrome.TextureSeed="4" Command="{Binding ResurrectCommand}">
               <Grid ColumnDefinitions="Auto,*">
                 <local:IconVisual Grid.Column="0" Moniker="Resurrect" Foreground="{Binding $parent[Button].Foreground}" />
-                <TextBlock Grid.Column="1" Text="{local:Text 'Resurrect'}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Resurrect unit'}" />
               </Grid>
             </Button>
             <Button Classes="pill action" local:PlateChrome.TextureSeed="5" Command="{Binding LockTypeCommand}">
