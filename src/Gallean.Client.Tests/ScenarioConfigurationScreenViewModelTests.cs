@@ -261,7 +261,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     }
 
     [Test]
-    public async Task ImportTest()
+    public async Task ImportLeaderTest()
     {
         using Sandbox sb = Sandbox.Create();
 
@@ -351,7 +351,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     }
 
     [Test]
-    public async Task ImportOrderTest()
+    public async Task ImportLeaderOrderTest()
     {
         using Sandbox sb = Sandbox.Create();
 
@@ -385,7 +385,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     }
 
     [Test]
-    public void HotseatNoImportTest()
+    public void HotseatImportLeaderTest()
     {
         GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
@@ -405,7 +405,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     }
 
     [Test]
-    public void SagaNoImportTest()
+    public void SagaImportLeaderTest()
     {
         GameScenario scenario = new("S107SC0000", "Saga", null, null, 1, 48, 5, null, IsSkirmish: false, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
