@@ -29,7 +29,7 @@
       <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     </Style>
     <Style Selector="TextBlock.details-value">
-      <Setter Property="Margin" Value="0,0,0,8" />
+      <Setter Property="Margin" Value="0,1,0,7" />
       <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
       <Setter Property="TextWrapping" Value="Wrap" />
