@@ -88,7 +88,7 @@
     <Setter Property="FontSize" Value="24" />
   </Style>
   <Style Selector="Border.rune.purchase">
-    <Setter Property="ToolTip.Tip" Value="Hire a new unit" />
+    <Setter Property="ToolTip.Tip" Value="{local:Text 'Hire a new unit'}" />
   </Style>
   <Style Selector="Border.rune.purchase > TextBlock">
     <Setter Property="Padding" Value="10" />

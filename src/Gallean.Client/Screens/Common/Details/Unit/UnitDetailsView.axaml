@@ -150,7 +150,7 @@
       <Setter Property="Height" Value="20" />
     </Style>
     <Style Selector="local|BarVisual.details-bar.maximum">
-      <Setter Property="Text" Value="Max" />
+      <Setter Property="Text" Value="{local:Text 'Max'}" />
     </Style>
 
     <Style Selector="Line.status-divider">

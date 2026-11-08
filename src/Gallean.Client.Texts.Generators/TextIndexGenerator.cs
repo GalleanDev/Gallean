@@ -36,7 +36,7 @@ public class TextIndexGenerator : IIncrementalGenerator
     ];
 
     private static readonly Regex AttributeExpression = new(
-        "(?<name>[A-Za-z][A-Za-z0-9_.:]*)\\s*=\\s*\"(?<value>[^\"]*)\"",
+        @"(?:Property\s*=\s*""(?<name>[A-Za-z][A-Za-z0-9_.:]*)""\s+Value|(?<name>[A-Za-z][A-Za-z0-9_.:]*))\s*=\s*""(?<value>[^""]*)""",
         RegexOptions.Compiled);
 
     private static readonly Regex MarkerExpression = new(
