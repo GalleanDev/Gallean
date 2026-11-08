@@ -362,7 +362,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
                 }
                 else
                 {
-                    await DispatchBattleActionAsync(new BattleAiActionCommand(CanUseItems: !IsAutoBattle), animate: true);
+                    await DispatchBattleActionAsync(new BattleAiActionCommand(CanUseItems: battle.IsAiTurn), animate: true);
                 }
             }
         }
