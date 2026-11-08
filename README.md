@@ -37,7 +37,7 @@ Gallean is fully localized into eight languages, which you can switch in the mid
 
 - **Operating system:** Windows 10 or newer (x64), Linux (x64), macOS (64-bit Apple Silicon or Intel)
 - **Processor:** Any 64-bit dual-core
-- **Memory:** 4 GB RAM
+- **Memory:** 6 GB RAM
 - **Graphics:** 1 GB, DirectX 11 or OpenGL 3.0. Integrated graphics work.
 
 ## Save games
