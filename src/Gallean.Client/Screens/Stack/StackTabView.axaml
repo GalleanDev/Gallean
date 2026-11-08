@@ -155,7 +155,7 @@
                                      TextTrimming="CharacterEllipsis" />
             <ItemsControl Width="300" Margin="0,6,0,0" Classes="stat-table" ItemsSource="{Binding Leader.Stats}" />
             <ItemsControl Width="300"
-                          Margin="0,4,0,0"
+                          Margin="0,10,0,0"
                           Classes="permanent-modifiers"
                           ItemsSource="{Binding Leader.Details.PermanentModifiers}"
                           IsVisible="{Binding Leader.Details.PermanentModifiers.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />

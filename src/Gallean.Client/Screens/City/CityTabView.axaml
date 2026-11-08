@@ -104,7 +104,7 @@
     <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CancelTargetingCommand}" IsVisible="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
     <Panel IsVisible="{Binding IsUiVisible}">
-      <Grid ColumnDefinitions="270,*,270" Margin="16,12">
+      <Grid ColumnDefinitions="320,*,320" Margin="16,12">
 
         <ContentControl Grid.Column="0" Classes="ornament-panel" Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" VerticalAlignment="Top" IsVisible="{Binding HasStack}">
           <ContentControl Margin="6,2" Content="{Binding Leader}" ClipToBounds="False" />

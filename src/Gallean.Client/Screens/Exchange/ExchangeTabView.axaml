@@ -53,7 +53,7 @@
   </UserControl.Styles>
 
   <Grid Background="Transparent">
-    <Grid ColumnDefinitions="270,*,270" Margin="16,32,16,16">
+    <Grid ColumnDefinitions="320,*,320" Margin="16,32,16,16">
 
       <ContentControl Grid.Column="0" Classes="ornament-panel" VerticalAlignment="Top">
         <ContentControl Margin="6,2" Content="{Binding Leader}" ClipToBounds="False" />
