@@ -101,7 +101,7 @@
       </Button>
     </Panel>
 
-    <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CancelTargetingCommand}" IsVisible="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" />
+    <Border Background="{StaticResource ModalBackdropBrush}" IsVisible="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
     <Panel IsVisible="{Binding IsUiVisible}">
       <Grid ColumnDefinitions="320,*,320" Margin="16,12">
@@ -281,6 +281,29 @@
       </Grid>
 
       <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
+
+      <Border Classes="hud-prompt"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="0,12,0,0"
+              IsVisible="{Binding TargetingPromptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+        <DockPanel>
+          <Button DockPanel.Dock="Right"
+                  Classes="dismiss"
+                  Margin="12,0,0,0"
+                  VerticalAlignment="Center"
+                  Command="{Binding CancelTargetingCommand}"
+                  ToolTip.Tip="{local:Text 'Cancel'}">
+            <local:IconVisual Moniker="Close" />
+          </Button>
+          <local:OutlinedTextBlock Text="{Binding TargetingPromptText}"
+                                   Classes="body"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center" />
+        </DockPanel>
+      </Border>
     </Panel>
   </Grid>
 

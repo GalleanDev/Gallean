@@ -102,6 +102,9 @@ internal sealed partial class CityTabViewModel
     public partial UnitActionType? TargetedAction { get; private set; }
 
     [ObservableProperty]
+    public partial string? TargetingPromptText { get; private set; }
+
+    [ObservableProperty]
     public partial IReadOnlyDictionary<WorldUnitId, ResourceSetViewModel> TargetPrices { get; private set; } = new Dictionary<WorldUnitId, ResourceSetViewModel>();
 
     [ObservableProperty]
@@ -228,7 +231,11 @@ internal sealed partial class CityTabViewModel
 
     async Task IUnitGridSelectionProvider.InvokeEmptySlotAsync(UnitGridSlotReference target)
     {
-        if (GetGridType(target.Grid) == CityUnitGridType.Garrison && fortification is not null)
+        if (TargetedAction is not null)
+        {
+            CancelTargeting();
+        }
+        else if (GetGridType(target.Grid) == CityUnitGridType.Garrison && fortification is not null)
         {
             Game.OpenScreen(new UnitPurchaseViewModel(GameModel, Game, fortificationId, target.Position));
         }
@@ -442,6 +449,17 @@ internal sealed partial class CityTabViewModel
             TargetedAction = null;
             RefreshView();
         }
+    }
+
+    private static string? FormatTargetingPrompt(UnitActionType? type)
+    {
+        return type switch
+        {
+            null => null,
+            UnitActionType.Heal => Tr("Select a unit to heal it."),
+            UnitActionType.Resurrect => Tr("Select a unit to resurrect it."),
+            UnitActionType.LockType => Tr("Select a unit to lock its type.")
+        };
     }
 
     private bool HasActionTarget(UnitActionType type)
@@ -916,6 +934,7 @@ internal sealed partial class CityTabViewModel
         StackGrid.Update(stackUnits, showsPurchaseHints: false, BuildUnitHighlight(StackGrid, stackUnits, dragged));
         GarrisonGrid.Update(garrison, showsPurchaseHints: true, BuildUnitHighlight(GarrisonGrid, garrison, dragged));
         TargetPrices = BuildTargetPrices(dragged);
+        TargetingPromptText = FormatTargetingPrompt(TargetedAction);
 
         CityTitle = GameModel.Texts.GetScenarioText(fortification.NameTextId);
         CitySummary = FormatCitySummary(fortification);
