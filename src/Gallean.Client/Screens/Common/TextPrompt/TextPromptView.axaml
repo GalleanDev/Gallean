@@ -5,7 +5,7 @@
              x:DataType="local:TextPromptViewModel">
 
   <Border Background="{StaticResource ModalBackdropBrush}">
-    <local:ModalPanel Classes="accent" Width="480" Padding="28,24" Title="{Binding Title}" InitialFocus="{Binding #TextInput}">
+    <local:ModalPanel Classes="accent" Width="480" Padding="28,24" Title="{Binding Title}" InitialFocus="{Binding #InputTextBox}">
 
       <local:ModalPanel.Footer>
         <Grid ColumnDefinitions="*,Auto,Auto,*">
@@ -31,7 +31,7 @@
                    Foreground="{StaticResource PrimaryTextBrush}"
                    TextWrapping="Wrap"
                    TextAlignment="Center" />
-        <TextBox x:Name="TextInput"
+        <TextBox x:Name="InputTextBox"
                  Text="{Binding Text}"
                  MaxLength="{Binding MaxLength}"
                  PlaceholderText="{Binding Placeholder}">
