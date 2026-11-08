@@ -391,18 +391,16 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         ScenarioId? nextScenarioId = activeGame.Scenario.Definition.NextScenarioId;
 
-        if (nextScenarioId is null)
+        if (nextScenarioId is not null)
         {
-            return;
-        }
-
-        if (LeaderExportScreenViewModel.CanExportLeader(activeGame))
-        {
-            OpenScreen(new LeaderExportScreenViewModel(activeGame, this));
-        }
-        else
-        {
-            await StartNextScenarioAsync(activeGame, nextScenarioId.Value, scenarioLeader: null);
+            if (LeaderExportScreenViewModel.CanExportLeader(activeGame))
+            {
+                OpenScreen(new LeaderExportScreenViewModel(activeGame, this));
+            }
+            else
+            {
+                await StartNextScenarioAsync(activeGame, nextScenarioId.Value, scenarioLeader: null);
+            }
         }
     }
 
