@@ -9,6 +9,7 @@ internal sealed class LeaderExportItemViewModel : IDetailsSource
         IReadOnlyList<WorldItem> items,
         AssetSpriteKey.ItemIcon iconKey,
         string name,
+        OfferPriceViewModel price,
         int selected,
         bool canAdd,
         ItemDetailsViewModel details)
@@ -16,6 +17,8 @@ internal sealed class LeaderExportItemViewModel : IDetailsSource
         Items = items;
         IconKey = iconKey;
         Name = name;
+        CountText = TrSpans("Available: {0:*}", items.Count);
+        Price = price;
         Selected = selected;
         Details = details;
         AddCommand = new RelayCommand(() => owner.AddItem(this), () => canAdd);
@@ -25,11 +28,11 @@ internal sealed class LeaderExportItemViewModel : IDetailsSource
     public IReadOnlyList<WorldItem> Items { get; }
     public AssetSpriteKey.ItemIcon IconKey { get; }
     public string Name { get; }
+    public TextSpans CountText { get; }
+    public OfferPriceViewModel Price { get; }
     public int Selected { get; }
     public ItemDetailsViewModel Details { get; }
 
-    public string AvailableText => $"×{Items.Count}";
-    public string SelectedText => Tr("{0} selected", Selected);
     public bool IsSelected => Selected > 0;
 
     public IRelayCommand AddCommand { get; }

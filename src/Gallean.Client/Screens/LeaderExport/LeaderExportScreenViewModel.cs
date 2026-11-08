@@ -206,6 +206,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
                 }
             }
 
+            ItemDefinition definition = GameModel.Definitions.GetItem(group.DefinitionId);
             ItemDetailsViewModel details = ItemDetailsViewModel.Create(
                 group.DefinitionId,
                 group.Charges,
@@ -218,6 +219,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
                 group.Items,
                 ItemIconResolver.Resolve(GameModel.Definitions, group.DefinitionId),
                 ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, group.DefinitionId, group.Charges),
+                new OfferPriceViewModel(definition.Value),
                 selected,
                 canAdd: selected < group.Items.Length && !limitReached,
                 details));

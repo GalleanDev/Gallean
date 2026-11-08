@@ -4,6 +4,15 @@
              x:Class="Gallean.Client.LeaderExportScreenView"
              x:DataType="local:LeaderExportScreenViewModel">
 
+  <UserControl.Styles>
+    <Style Selector="Border.item-row">
+      <Setter Property="Margin" Value="0,1" />
+      <Setter Property="Padding" Value="10,8" />
+      <Setter Property="Background" Value="{StaticResource CardBackgroundGradientBrush}" />
+      <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
+    </Style>
+  </UserControl.Styles>
+
   <Border Background="{StaticResource ModalBackdropBrush}">
     <local:ModalPanel Width="820" MaxHeight="680" Padding="20,16,20,24" Title="{local:Text 'Export leader'}" InitialFocus="{Binding #ExportButton}">
 
@@ -28,7 +37,7 @@
         </Grid>
       </local:ModalPanel.Footer>
 
-      <Grid ColumnDefinitions="*,24,*" RowDefinitions="Auto,*">
+      <Grid ColumnDefinitions="2*,24,3*" RowDefinitions="Auto,*">
 
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
@@ -65,7 +74,7 @@
 
         <Grid Grid.Row="1" Grid.Column="2" RowDefinitions="Auto,*">
           <local:OutlinedTextBlock Grid.Row="0" Text="{Binding ItemsTitle}" Classes="label" Margin="0,0,0,8" />
-          <ScrollViewer Classes="list" Grid.Row="1" MinHeight="220" VerticalScrollBarVisibility="Auto">
+          <ScrollViewer Classes="list" Grid.Row="1" MinHeight="300" VerticalScrollBarVisibility="Auto">
             <ItemsControl Classes="focus-group" Padding="0,6,12,6" ItemsSource="{Binding Items}">
               <local:Blankslate.Content>
                 <TextBlock Text="{local:Text 'No items can be brought to the next quest.'}"
@@ -76,29 +85,32 @@
               </local:Blankslate.Content>
               <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="local:LeaderExportItemViewModel">
-                  <Border Padding="0,6" BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerBrush}" Background="Transparent">
-                    <Grid ColumnDefinitions="56,*,Auto,Auto" VerticalAlignment="Center">
-                      <Border Grid.Column="0" Classes="frame" Width="56" Height="56" BorderThickness="2">
+                  <Border Classes="item-row">
+                    <Grid ColumnDefinitions="64,*,Auto">
+                      <Border Grid.Column="0" Classes="frame" Width="64" Height="64" BorderThickness="2">
                         <local:SpriteVisual SpriteKey="{Binding IconKey}" Stretch="Uniform" />
                       </Border>
-                      <StackPanel Grid.Column="1" Spacing="1" Margin="12,0,12,0" VerticalAlignment="Center">
+                      <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center" Spacing="2">
                         <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextWrapping="Wrap" />
-                        <StackPanel Orientation="Horizontal" Spacing="12">
-                          <TextBlock Text="{Binding AvailableText}"
-                                     Classes="caption"
-                                     Foreground="{StaticResource SecondaryTextBrush}" />
-                          <TextBlock Text="{Binding SelectedText}"
-                                     Classes="caption"
-                                     Foreground="{StaticResource PrimaryTextBrush}"
-                                     IsVisible="{Binding IsSelected}" />
-                        </StackPanel>
+                        <TextBlock local:TextRuns.Spans="{Binding CountText}"
+                                   Classes="caption"
+                                   Foreground="{StaticResource SecondaryTextBrush}" />
+                        <ContentControl Content="{Binding Price}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
                       </StackPanel>
-                      <Button Grid.Column="2" Classes="icon-button" Command="{Binding RemoveCommand}" Margin="0,0,8,0">
-                        <local:IconVisual Moniker="Minus" />
-                      </Button>
-                      <Button Grid.Column="3" Classes="icon-button" Command="{Binding AddCommand}">
-                        <local:IconVisual Moniker="Plus" />
-                      </Button>
+                      <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                        <Button Classes="icon-button" Command="{Binding RemoveCommand}">
+                          <local:IconVisual Moniker="Minus" />
+                        </Button>
+                        <TextBlock Text="{Binding Selected}"
+                                   Classes="body"
+                                   Foreground="{StaticResource PrimaryTextBrush}"
+                                   MinWidth="20"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center" />
+                        <Button Classes="icon-button" Command="{Binding AddCommand}">
+                          <local:IconVisual Moniker="Plus" />
+                        </Button>
+                      </StackPanel>
                     </Grid>
                   </Border>
                 </DataTemplate>

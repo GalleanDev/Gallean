@@ -25,10 +25,22 @@ public sealed class LeaderExportScreenViewModelTests
 
         foreach (LeaderExportItemViewModel item in items)
         {
-            rows.Add($"{item.Items[0].DefinitionId} {item.Name} {item.AvailableText} {item.SelectedText} add={item.AddCommand.CanExecute(null)} remove={item.RemoveCommand.CanExecute(null)}");
+            rows.Add($"{item.Items[0].DefinitionId} {item.Name} | {item.CountText.Text} | {FormatPrice(item.Price)} | selected={item.Selected} add={item.AddCommand.CanExecute(null)} remove={item.RemoveCommand.CanExecute(null)}");
         }
 
         return rows;
+    }
+
+    private static string FormatPrice(OfferPriceViewModel price)
+    {
+        List<string> items = [];
+
+        foreach (OfferPriceItemViewModel item in price.Items)
+        {
+            items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()}");
+        }
+
+        return string.Join(", ", items);
     }
 
     [Test]
@@ -49,8 +61,8 @@ public sealed class LeaderExportScreenViewModelTests
         ]));
         Assert.That(screen.SelectedLeader, Is.EqualTo(screen.Leaders[0]));
         Assert.That(FormatItems(screen.Items), Is.EqualTo([
-            "G000IG0001 Life Potion ×1 0 selected add=True remove=False",
-            "G000IG0006 Potion of Restoration ×3 0 selected add=True remove=False"
+            "G000IG0001 Life Potion | Available: 1 | 400 gold | selected=0 add=True remove=False",
+            "G000IG0006 Potion of Restoration | Available: 3 | 300 gold | selected=0 add=True remove=False"
         ]));
         Assert.That(screen.ItemsTitle, Is.EqualTo("Items (0 / 5)"));
 
@@ -60,16 +72,16 @@ public sealed class LeaderExportScreenViewModelTests
         screen.Items[0].AddCommand.Execute(null);
 
         Assert.That(FormatItems(screen.Items), Is.EqualTo([
-            "G000IG0001 Life Potion ×1 1 selected add=False remove=True",
-            "G000IG0006 Potion of Restoration ×3 3 selected add=False remove=True"
+            "G000IG0001 Life Potion | Available: 1 | 400 gold | selected=1 add=False remove=True",
+            "G000IG0006 Potion of Restoration | Available: 3 | 300 gold | selected=3 add=False remove=True"
         ]));
         Assert.That(screen.ItemsTitle, Is.EqualTo("Items (4 / 5)"));
 
         screen.Items[1].RemoveCommand.Execute(null);
 
         Assert.That(FormatItems(screen.Items), Is.EqualTo([
-            "G000IG0001 Life Potion ×1 1 selected add=False remove=True",
-            "G000IG0006 Potion of Restoration ×3 2 selected add=True remove=True"
+            "G000IG0001 Life Potion | Available: 1 | 400 gold | selected=1 add=False remove=True",
+            "G000IG0006 Potion of Restoration | Available: 3 | 300 gold | selected=2 add=True remove=True"
         ]));
 
         await screen.ExportCommand.ExecuteAsync(null);
