@@ -28,7 +28,7 @@
                   Margin="0,0,12,0" />
           <Button x:Name="ExportButton"
                   Grid.Column="2"
-                  Content="{local:Text 'Export leader'}"
+                  Content="{local:Text 'Continue'}"
                   Classes="pill success"
                   local:PlateChrome.TextureSeed="2"
                   MinWidth="160"
