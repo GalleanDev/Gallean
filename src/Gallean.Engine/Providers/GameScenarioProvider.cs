@@ -40,20 +40,7 @@ internal sealed class GameScenarioProvider : IGameScenarioProvider
         [],
         [],
         [],
-        new ScenarioDefinition(
-            new ScenarioId(string.Empty),
-            new ScenarioInfoTexts(
-                new ScenarioTextId(string.Empty),
-                Description: null,
-                new ScenarioTextId(string.Empty),
-                Briefing: null,
-                new ScenarioTextId(string.Empty),
-                new ScenarioTextId(string.Empty),
-                Creator: null),
-            SuggestedLevel: 0,
-            MaxLeaderLevel: int.MaxValue,
-            MaxCityLevel: 0,
-            NextScenarioId: null));
+        ScenarioDefinition.Empty);
 
     public IReadOnlyList<ScenarioEventDefinition> Events { get; }
     public IReadOnlyList<ScenarioLocationDefinition> Locations { get; }

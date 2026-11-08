@@ -11,6 +11,7 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
     private readonly IGameTextProvider texts;
     private readonly IGameDefinitionProvider definitions;
     private readonly WorldRace race;
+    private readonly IUnitStatsProvider stats;
 
     public LeaderImportScreenViewModel(
         GameViewModel gameViewModel,
@@ -25,6 +26,7 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
         this.definitions = definitions;
         this.race = race;
 
+        stats = new UnitStatsProvider(definitions, new GlobalVariables(), ScenarioDefinition.Empty);
         Game = gameViewModel;
         Leaders = BuildLeaders(entries);
         SelectedLeader = ResolveSelection();
@@ -90,6 +92,8 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
                 itemIcons.Add(ItemIconResolver.Resolve(definitions, item.DefinitionId));
             }
 
+            UnitDetailsViewModel details = UnitDetailsViewModel.CreateFromWorld(leader.Unit, null, definitions, texts, stats);
+
             result.Add(new LeaderImportLeaderViewModel(
                 entry,
                 new AssetSpriteKey.UnitPortrait(leader.Unit.DefinitionId),
@@ -97,6 +101,7 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
                 LeaderFormatter.FormatLevel(leader.Unit.Level),
                 LeaderFormatter.FormatBattlesWon(leader.BattlesWon),
                 itemIcons,
+                details,
                 raceDefinition.Leaders.Contains(leader.Unit.DefinitionId)));
         }
 

@@ -10,4 +10,8 @@ internal sealed record LeaderImportLeaderViewModel(
     string LevelText,
     string BattlesWonText,
     IReadOnlyList<AssetSpriteKey.ItemIcon> ItemIcons,
-    bool IsAvailable);
+    UnitDetailsViewModel Details,
+    bool IsAvailable) : IDetailsSource
+{
+    object? IDetailsSource.DetailsContent => Details;
+}
