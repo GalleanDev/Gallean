@@ -29,7 +29,7 @@ public sealed class WorldEngineAiThiefTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
-            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(300, 0, 0, 0, 0, 0)
         };
 
         WorldCapital capital = TestHelpers.SimpleCapital(
@@ -92,7 +92,84 @@ public sealed class WorldEngineAiThiefTests
             new WorldPosition(4, 4),
             expectedUnits,
             movementPoints: 20)));
-        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(WorldResourceSet.Empty));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(200, 0, 0, 0, 0, 0)));
+    }
+
+    [Test]
+    public void ThiefReserveTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^^^",
+            "^^^^^^^^",
+            "^^^^^^^^",
+            "^^^^^^^^",
+            "^^^^...."
+        ]);
+
+        UnitDefinition thiefDefinition = TestHelpers.SimpleThiefDefinition() with
+        {
+            Race = WorldRace.Undead,
+            PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        UnitDefinition warDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("war", maxHitpoints: 100, initiative: 50, damage: 50),
+                movementPoints: 6, leadership: 6) with
+            {
+                Race = WorldRace.Undead,
+                PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+            };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldRaceDefinition race = new(
+            WorldRace.Undead,
+            new GlobalTextId("Undead"),
+            WorldResourceSet.Empty,
+            WorldMapTerrain.Undead,
+            true,
+            35,
+            null,
+            [],
+            [warDefinition.Id, thiefDefinition.Id],
+            [],
+            1,
+            1);
+
+        WorldStack mainStack = TestHelpers.SimpleStack(
+            new WorldStackId("Main"),
+            player.Id,
+            new WorldPosition(7, 4),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("war"), warDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 0);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thiefDefinition)
+            .WithDefinition(warDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCapital(capital)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithRace(race)
+            .WithStack(mainStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(100, 0, 0, 0, 0, 0)));
     }
 
     [Test]

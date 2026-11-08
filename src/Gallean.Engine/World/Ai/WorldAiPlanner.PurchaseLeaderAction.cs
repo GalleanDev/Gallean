@@ -60,6 +60,7 @@ internal sealed partial class WorldAiPlanner
             List<UtilityScore.Consideration> considerations =
             [
                 Considerations.Affordability(leader, player),
+                Considerations.Reserve(leader, player),
                 Considerations.Repetition(leader, player, ownedStacks)
             ];
 
