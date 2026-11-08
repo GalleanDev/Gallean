@@ -51,13 +51,6 @@ internal sealed partial class WorldScreenViewModel
             return Empty.Value;
         }
 
-        Empty IWorldEventActionVisitor<Empty>.Visit(WorldEventAction.StackExhaust action)
-        {
-            parent.OnActionStackExhaust(action);
-
-            return Empty.Value;
-        }
-
         Empty IWorldEventActionVisitor<Empty>.Visit(WorldEventAction.Animation action)
         {
             ActiveAnimation = action.State;

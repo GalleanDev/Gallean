@@ -609,14 +609,6 @@ public sealed class WorldEventQueueTests
 
         queue.Stop();
 
-        Entry? exhaustEntry = queue.PlayNext();
-
-        Entry.StackExhaust exhaust = Assert.IsOfType<Entry.StackExhaust>(exhaustEntry);
-
-        Assert.That(exhaust.StackId, Is.EqualTo(stack.Id));
-
-        queue.Stop();
-
         Assert.That(queue.IsIdle, Is.True);
     }
 

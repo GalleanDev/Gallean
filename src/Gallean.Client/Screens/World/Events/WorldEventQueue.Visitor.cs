@@ -21,11 +21,6 @@ internal sealed partial class WorldEventQueue
 
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldStackMovedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
-        if (ev.NewMovementPoints <= 0)
-        {
-            queue.Add(new Entry.StackExhaust(step.NewState, ev.StackId));
-        }
-
         return Empty.Value;
     }
 
@@ -248,13 +243,6 @@ internal sealed partial class WorldEventQueue
 
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldStackMovementConsumedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
-        WorldStack stack = step.OldState.Stacks[ev.StackId];
-
-        if (stack.MovementPoints > 0 && ev.NewMovementPoints <= 0)
-        {
-            queue.Add(new Entry.StackExhaust(step.NewState, ev.StackId));
-        }
-
         return Empty.Value;
     }
 

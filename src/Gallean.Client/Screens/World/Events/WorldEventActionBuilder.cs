@@ -33,7 +33,6 @@ internal sealed class WorldEventActionBuilder(
             Entry.ScenarioPopup data => BuildScenarioPopup(data),
             Entry.ObjectiveChange data => BuildObjectiveChange(data),
             Entry.StackIdle data => BuildStackIdle(data),
-            Entry.StackExhaust data => BuildStackExhaust(data),
             Entry.TurnStart data => BuildTurnStart(data),
             Entry.HotseatTurn data => BuildHotseatTurn(data),
             Entry.ScenarioEnd data => BuildScenarioEnd(data),
@@ -270,18 +269,6 @@ internal sealed class WorldEventActionBuilder(
             int variant = random.Next(AssetSoundKey.StackUnitIdle.VariantCount);
 
             return Sound(new AssetSoundKey.StackUnitIdle(leader.DefinitionId, variant));
-        }
-        else
-        {
-            return WorldEventAction.None;
-        }
-    }
-
-    private WorldEventAction BuildStackExhaust(Entry.StackExhaust exhaust)
-    {
-        if (exhaust.State.Stacks.TryGetValue(exhaust.StackId, out WorldStack? stack) && stack.OwnerId == ViewPlayerId)
-        {
-            return new WorldEventAction.StackExhaust([], stack.Id);
         }
         else
         {

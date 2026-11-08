@@ -1302,20 +1302,6 @@ internal sealed partial class WorldScreenViewModel :
         UpdateReachable();
     }
 
-    private void OnActionStackExhaust(WorldEventAction.StackExhaust action)
-    {
-        if (cursor.StackId == action.StackId)
-        {
-            WorldStackItemViewModel? nextStack = FindNextUnfinishedStackItem(action.StackId);
-
-            if (nextStack is not null)
-            {
-                ClearSelectedAction();
-                FocusStack(WorldState.Stacks[nextStack.StackId]);
-            }
-        }
-    }
-
     private void ShowGameEndedScreen()
     {
         WorldPlayerId? winnerId = WorldState.ScenarioState.Winner;

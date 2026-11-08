@@ -7889,7 +7889,7 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
-    public async Task ExhaustedStackFinishesTest()
+    public async Task ExhaustedStackTest()
     {
         WorldMap map = TestHelpers.SimpleMap(5, 1);
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
@@ -7933,19 +7933,19 @@ public sealed class WorldScreenViewModelTests
         world.CompleteAnimation();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
+            "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | selected | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+        ]));
+        Assert.That(cameraFocusRequests, Is.EqualTo([new WorldPosition(1, 0)]));
+        Assert.That(world.FinishStackCommand.CanExecute(null), Is.False);
+
+        world.SelectNextStackCommand.Execute(null);
+
+        Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
             "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | -",
             "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
         ]));
         Assert.That(cameraFocusRequests, Is.EqualTo([new WorldPosition(1, 0), new WorldPosition(4, 0)]));
-        Assert.That(world.FinishStackCommand.CanExecute(null), Is.True);
-
-        world.SelectStackItemCommand.Execute(alpha.Id);
-
-        Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | selected | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
-        ]));
-        Assert.That(world.FinishStackCommand.CanExecute(null), Is.False);
     }
 
     [Test]

@@ -202,7 +202,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
             (Key.Tab or Key.N, KeyModifiers.None) => [ViewModel.SelectNextStackCommand],
             (Key.T, KeyModifiers.None) => [ViewModel.InspectStackCommand],
             (Key.Space, KeyModifiers.None) => [ViewModel.FastForwardCommand],
-            (Key.Enter, KeyModifiers.None) => [ViewModel.FastForwardCommand, ViewModel.FinishStackCommand],
+            (Key.Enter, KeyModifiers.None) => [ViewModel.FastForwardCommand, ViewModel.FinishStackCommand, ViewModel.SelectNextStackCommand],
             (Key.Enter, KeyModifiers.Control) => [ViewModel.EndTurnCommand],
             (Key.E, KeyModifiers.None) => [ViewModel.EndTurnCommand],
             (Key.C, KeyModifiers.None) => [ViewModel.OpenCapitalCommand],
