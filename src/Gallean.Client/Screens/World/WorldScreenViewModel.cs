@@ -586,19 +586,12 @@ internal sealed partial class WorldScreenViewModel :
     [RelayCommand(CanExecute = nameof(CanSelectPreviousStack))]
     private void SelectPreviousStack()
     {
-        int index = FindStackItemIndex(cursor.StackId);
-        WorldStackItemViewModel previous;
+        WorldStackItemViewModel? previous = FindNextUnfinishedStackItem([.. StackItems.Reverse()], cursor.StackId);
 
-        if (index > 0)
+        if (previous is not null)
         {
-            previous = StackItems[index - 1];
+            FocusStack(WorldState.Stacks[previous.StackId]);
         }
-        else
-        {
-            previous = StackItems[^1];
-        }
-
-        FocusStack(WorldState.Stacks[previous.StackId]);
     }
 
     private bool CanSelectPreviousStack()
@@ -608,25 +601,18 @@ internal sealed partial class WorldScreenViewModel :
             return false;
         }
 
-        return StackItems.Count > 0;
+        return FindNextUnfinishedStackItem([.. StackItems.Reverse()], cursor.StackId) is not null;
     }
 
     [RelayCommand(CanExecute = nameof(CanSelectNextStack))]
     private void SelectNextStack()
     {
-        int index = FindStackItemIndex(cursor.StackId);
-        WorldStackItemViewModel next;
+        WorldStackItemViewModel? next = FindNextUnfinishedStackItem(StackItems, cursor.StackId);
 
-        if (index >= 0 && index < StackItems.Count - 1)
+        if (next is not null)
         {
-            next = StackItems[index + 1];
+            FocusStack(WorldState.Stacks[next.StackId]);
         }
-        else
-        {
-            next = StackItems[0];
-        }
-
-        FocusStack(WorldState.Stacks[next.StackId]);
     }
 
     private bool CanSelectNextStack()
@@ -636,14 +622,14 @@ internal sealed partial class WorldScreenViewModel :
             return false;
         }
 
-        return StackItems.Count > 0;
+        return FindNextUnfinishedStackItem(StackItems, cursor.StackId) is not null;
     }
 
-    private int FindStackItemIndex(WorldStackId? stackId)
+    private static int FindStackItemIndex(IReadOnlyList<WorldStackItemViewModel> items, WorldStackId? stackId)
     {
-        for (int index = 0; index < StackItems.Count; index++)
+        for (int index = 0; index < items.Count; index++)
         {
-            if (StackItems[index].StackId == stackId)
+            if (items[index].StackId == stackId)
             {
                 return index;
             }
@@ -689,7 +675,7 @@ internal sealed partial class WorldScreenViewModel :
         UpdateStackActions();
         UpdateEndTurnHighlighted();
 
-        WorldStackItemViewModel? nextStack = FindNextUnfinishedStackItem(stack.Id);
+        WorldStackItemViewModel? nextStack = FindNextUnfinishedStackItem(StackItems, stack.Id);
 
         if (nextStack is not null)
         {
@@ -713,13 +699,13 @@ internal sealed partial class WorldScreenViewModel :
         return stack is not null && stack.MovementPoints > 0 && !IsFinished(stack);
     }
 
-    private WorldStackItemViewModel? FindNextUnfinishedStackItem(WorldStackId stackId)
+    private static WorldStackItemViewModel? FindNextUnfinishedStackItem(IReadOnlyList<WorldStackItemViewModel> items, WorldStackId? stackId)
     {
-        int index = FindStackItemIndex(stackId);
+        int index = FindStackItemIndex(items, stackId);
 
-        for (int offset = 1; offset <= StackItems.Count; offset++)
+        for (int offset = 1; offset <= items.Count; offset++)
         {
-            WorldStackItemViewModel item = StackItems[(index + offset).Mod(StackItems.Count)];
+            WorldStackItemViewModel item = items[(index + offset).Mod(items.Count)];
 
             if (item is { MovementPoints: > 0, IsFinished: false })
             {
