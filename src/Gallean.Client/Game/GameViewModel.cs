@@ -16,6 +16,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     private readonly IAudioPlayer audioPlayer;
     private readonly GameLoader gameLoader;
     private readonly GameSaveStore gameSaveStore;
+    private readonly LeaderStore leaderStore;
     private readonly GameSettingsStore gameSettingsStore;
     private readonly ClientVersion clientVersion;
     private readonly ILog log;
@@ -32,6 +33,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         IAudioPlayer audioPlayer,
         GameLoader gameLoader,
         GameSaveStore gameSaveStore,
+        LeaderStore leaderStore,
         GameSettingsStore gameSettingsStore,
         GameSettings settings,
         ClientVersion clientVersion,
@@ -44,6 +46,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         this.audioPlayer = audioPlayer;
         this.gameLoader = gameLoader;
         this.gameSaveStore = gameSaveStore;
+        this.leaderStore = leaderStore;
         this.gameSettingsStore = gameSettingsStore;
         this.clientVersion = clientVersion;
         this.log = log;
@@ -400,6 +403,54 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         else
         {
             await StartNextScenarioAsync(activeGame, nextScenarioId.Value, scenarioLeader: null);
+        }
+    }
+
+    public async Task<IReadOnlyList<LeaderEntry>> EnumerateLeadersAsync()
+    {
+        try
+        {
+            return await leaderStore.EnumerateAsync();
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to list exported leaders.", ex);
+
+            return [];
+        }
+    }
+
+    public async Task<bool> TryExportLeaderAsync(ScenarioLeader leader)
+    {
+        try
+        {
+            await leaderStore.SaveAsync(leader);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to export the leader.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to export the leader.\n{0}", ex.Message), Tr("Close")));
+
+            return false;
+        }
+    }
+
+    public async Task<bool> TryDeleteLeaderAsync(LeaderId id)
+    {
+        try
+        {
+            await leaderStore.DeleteAsync(id);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to delete the exported leader.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to delete the exported leader.\n{0}", ex.Message), Tr("Close")));
+
+            return false;
         }
     }
 

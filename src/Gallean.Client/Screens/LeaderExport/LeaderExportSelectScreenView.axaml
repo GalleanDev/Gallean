@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             xmlns:assets="clr-namespace:Gallean.Assets;assembly=Gallean.Assets"
+             x:Class="Gallean.Client.LeaderExportSelectScreenView"
+             x:DataType="local:LeaderExportSelectScreenViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Width="560" MaxHeight="640" Padding="20,16,20,24" Title="{local:Text 'Export leader'}" InitialFocus="{Binding #ExportButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid ColumnDefinitions="*,Auto,Auto">
+          <Button Grid.Column="1"
+                  Content="{local:Text 'Cancel'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="1"
+                  MinWidth="110"
+                  VerticalAlignment="Center"
+                  Command="{Binding CloseCommand}"
+                  Margin="0,0,12,0" />
+          <Button x:Name="ExportButton"
+                  Grid.Column="2"
+                  Content="{local:Text 'Export'}"
+                  Classes="pill success"
+                  local:PlateChrome.TextureSeed="2"
+                  MinWidth="160"
+                  VerticalAlignment="Center"
+                  Command="{Binding ExportCommand}" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <ListBox Classes="select-list" MinHeight="240" ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}">
+        <local:Blankslate.Content>
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+            <local:IconVisual Moniker="Human"
+                              Width="36"
+                              Height="36"
+                              HorizontalAlignment="Center"
+                              Foreground="{StaticResource SecondaryTextBrush}" />
+            <TextBlock Text="{local:Text 'No leaders to export.'}"
+                       Classes="body"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center" />
+          </StackPanel>
+        </local:Blankslate.Content>
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="local:LeaderExportCandidateViewModel">
+            <Border Classes="row">
+              <Grid ColumnDefinitions="56,*">
+                <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="56" Height="56" />
+                <StackPanel Grid.Column="1" Spacing="4" Margin="12,0,12,0" VerticalAlignment="Center">
+                  <StackPanel Orientation="Horizontal" Spacing="10">
+                    <local:OutlinedTextBlock Classes="object-name row" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"><Run Text="{Binding Name}" /><Run Text="  " /><Run Classes="row-level" Text="{Binding LevelText}" /></local:OutlinedTextBlock>
+                    <ItemsControl ItemsSource="{Binding ItemIcons}"
+                                  VerticalAlignment="Center"
+                                  IsVisible="{Binding ItemIcons.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
+                      <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <StackPanel Orientation="Horizontal" Spacing="4" />
+                        </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="assets:AssetSpriteKey">
+                          <local:SpriteVisual SpriteKey="{Binding}" Stretch="Uniform" Width="24" Height="24" />
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </StackPanel>
+                  <TextBlock Text="{Binding BattlesWonText}"
+                             Classes="caption"
+                             Foreground="{StaticResource SecondaryTextBrush}"
+                             TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+              </Grid>
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

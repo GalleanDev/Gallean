@@ -41,6 +41,12 @@ internal sealed partial class GameMenuViewModel : AbstractGameScreenViewModel
         return Snapshot.IsSaveAllowed;
     }
 
+    [RelayCommand]
+    private void ExportLeader()
+    {
+        Game.OpenScreen(new LeaderExportSelectScreenViewModel(GameModel, Game, this));
+    }
+
     private static string? FormatSaveTip(GameSnapshot snapshot)
     {
         if (snapshot.BattleState is not null)

@@ -27,6 +27,10 @@
                 Classes="plate"
                 local:PlateChrome.TextureSeed="3"
                 Command="{Binding Game.ShowLoadGameCommand}" />
+        <Button Content="{local:Text 'Export leader'}"
+                Classes="plate"
+                local:PlateChrome.TextureSeed="6"
+                Command="{Binding ExportLeaderCommand}" />
 
         <Button Content="{local:Text 'Settings'}"
                 Classes="plate"

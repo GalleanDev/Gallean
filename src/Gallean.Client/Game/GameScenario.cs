@@ -11,4 +11,5 @@ internal sealed record GameScenario(
     int MapSize,
     int CityCount,
     string? Creator,
+    bool IsSkirmish,
     IReadOnlyList<ScenarioRace> PlayableRaces);

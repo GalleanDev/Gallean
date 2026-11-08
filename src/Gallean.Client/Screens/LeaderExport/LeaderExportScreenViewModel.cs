@@ -141,18 +141,6 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
         };
     }
 
-    private static string FormatBattlesWon(int battlesWon)
-    {
-        if (battlesWon == 1)
-        {
-            return Tr("1 battle won");
-        }
-        else
-        {
-            return Tr("{0} battles won", battlesWon);
-        }
-    }
-
     private IReadOnlyList<LeaderExportCandidateViewModel> BuildLeaders()
     {
         List<LeaderExportCandidateViewModel> result = [];
@@ -164,6 +152,12 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
         foreach (WorldStack stack in stacks)
         {
             (WorldUnit leader, _, _) = stack.GetLeader(GameModel.Definitions);
+            List<AssetSpriteKey.ItemIcon> itemIcons = [];
+
+            foreach (WorldItem item in stack.Equipment.Items.Values)
+            {
+                itemIcons.Add(ItemIconResolver.Resolve(GameModel.Definitions, item.DefinitionId));
+            }
 
             UnitDetailsViewModel details = UnitDetailsViewModel.CreateFromWorld(
                 leader, WorldState.Players[stack.OwnerId], GameModel.Definitions, GameModel.Texts, GameModel.Stats);
@@ -172,8 +166,9 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
                 stack.Id,
                 new AssetSpriteKey.UnitPortrait(leader.DefinitionId),
                 UnitNameResolver.Resolve(leader, GameModel.Definitions, GameModel.Texts),
-                Tr("Lv. {0}", leader.Level),
-                FormatBattlesWon(stack.BattlesWon),
+                LeaderFormatter.FormatLevel(leader.Level),
+                LeaderFormatter.FormatBattlesWon(stack.BattlesWon),
+                itemIcons,
                 details));
         }
 

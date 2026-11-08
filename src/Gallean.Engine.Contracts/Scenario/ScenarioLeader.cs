@@ -1,4 +1,4 @@
-namespace Gallean.Engine;
+namespace Gallean.Engine.Contracts;
 
 public sealed record ScenarioLeader(
     WorldUnit Unit,

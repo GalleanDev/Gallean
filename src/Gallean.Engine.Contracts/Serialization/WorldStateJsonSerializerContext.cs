@@ -17,6 +17,7 @@ namespace Gallean.Engine.Contracts;
         typeof(UnitNameJsonConverter)
     ])]
 [JsonSerializable(typeof(WorldState))]
+[JsonSerializable(typeof(ScenarioLeader))]
 [JsonSerializable(typeof(WorldStackOrder))]
 [JsonSerializable(typeof(ImmutableBitmapJsonConverter.BitmapJson))]
 [JsonSerializable(typeof(WorldUnitGridJsonConverter.UnitGridEntryJson[]))]

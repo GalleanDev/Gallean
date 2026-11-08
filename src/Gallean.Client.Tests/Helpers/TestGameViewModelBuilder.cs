@@ -10,6 +10,7 @@ internal sealed class TestGameViewModelBuilder
     private IAudioPlayer audioPlayer = new NullAudioPlayer();
     private GameLoader gameLoader = new(new RandomProvider(0));
     private GameSaveStore saveStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "saves"), GameSettings.DefaultAutoSaveLimit);
+    private LeaderStore leaderStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "leaders"));
     private GameSettingsStore settingsStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "settings"));
     private GameSettings settings = GameSettings.Default;
     private ClientVersion clientVersion = new("0.1.0", "2d40300");
@@ -46,6 +47,13 @@ internal sealed class TestGameViewModelBuilder
     public TestGameViewModelBuilder WithSaveStore(GameSaveStore newSaveStore)
     {
         saveStore = newSaveStore;
+
+        return this;
+    }
+
+    public TestGameViewModelBuilder WithLeaderStore(LeaderStore newLeaderStore)
+    {
+        leaderStore = newLeaderStore;
 
         return this;
     }
@@ -87,6 +95,7 @@ internal sealed class TestGameViewModelBuilder
             audioPlayer,
             gameLoader,
             saveStore,
+            leaderStore,
             settingsStore,
             settings,
             clientVersion,

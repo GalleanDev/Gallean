@@ -13,7 +13,7 @@ public sealed class LeaderExportScreenViewModelTests
 
         foreach (LeaderExportCandidateViewModel leader in leaders)
         {
-            rows.Add($"{leader.StackId} {leader.Name} {leader.LevelText} | {leader.BattlesWonText}");
+            rows.Add($"{leader.StackId} {leader.Name} {leader.LevelText} | {leader.BattlesWonText} | items={leader.ItemIcons.Count}");
         }
 
         return rows;
@@ -57,7 +57,7 @@ public sealed class LeaderExportScreenViewModelTests
 
         Assert.That(screen.Instruction, Is.EqualTo("Select a leader and up to 5 items to bring to the next quest."));
         Assert.That(FormatLeaders(screen.Leaders), Is.EqualTo([
-            "S107KC0000 Hatton Lv. 1 | 0 battles won"
+            "S107KC0000 Hatton Lv. 1 | 0 battles won | items=0"
         ]));
         Assert.That(screen.SelectedLeader, Is.EqualTo(screen.Leaders[0]));
         Assert.That(FormatItems(screen.Items), Is.EqualTo([
@@ -114,9 +114,9 @@ public sealed class LeaderExportScreenViewModelTests
                 .Build(),
             MovementPoints: 20,
             new WorldInventory([
-                new WorldItem(new WorldItemId("S107IM0000"), new ItemDefinitionId("G000IG0006"), Charges: null),
-                new WorldItem(new WorldItemId("S107IM0001"), new ItemDefinitionId("G000IG0006"), Charges: null),
-                new WorldItem(new WorldItemId("S107IM0030"), new ItemDefinitionId("G000IG0001"), Charges: null)
+                new WorldItem(new WorldItemId("Exported1"), new ItemDefinitionId("G000IG0006"), Charges: null),
+                new WorldItem(new WorldItemId("Exported2"), new ItemDefinitionId("G000IG0006"), Charges: null),
+                new WorldItem(new WorldItemId("Exported3"), new ItemDefinitionId("G000IG0001"), Charges: null)
             ]),
             LeaderEquipment.Empty,
             new WorldSubraceId("S108SR0001"),

@@ -31,6 +31,7 @@ public sealed class RaceSelectScreenViewModelTests
             48,
             4,
             "Strategy First",
+            IsSkirmish: true,
             [
                 new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
                 new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))
@@ -66,6 +67,7 @@ public sealed class RaceSelectScreenViewModelTests
             48,
             4,
             "Strategy First",
+            IsSkirmish: true,
             [
                 new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
                 new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))

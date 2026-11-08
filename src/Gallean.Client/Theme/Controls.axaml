@@ -1455,6 +1455,9 @@
     <Setter Property="Background" Value="{StaticResource ScenarioSelectRowSelectedGradientBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource ScenarioSelectAccentBrush}" />
   </Style>
+  <Style Selector="ListBox.select-list ListBoxItem:disabled Border.row">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
   <Style Selector="Run.row-level">
     <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />

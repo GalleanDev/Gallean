@@ -10,6 +10,7 @@ public sealed class ScenarioExporterTests
     private static readonly WorldItem Gem = new(new WorldItemId("gem-1"), new ItemDefinitionId("gem"), Charges: null);
     private static readonly UnitModifierDefinition BannerModifier = TestHelpers.SimpleModifier("banner-modifier");
     private static readonly UnitModifierDefinition UpgradeModifier = TestHelpers.SimpleModifier("upgrade-modifier");
+    private static readonly UnitModifierDefinition PotionModifier = TestHelpers.SimpleModifier("potion-modifier");
 
     private static ItemDefinition CreateItem(string id, ItemCategory category, UnitModifierDefinitionId? modifier)
     {
@@ -101,6 +102,8 @@ public sealed class ScenarioExporterTests
             .WithDefinition(soldierDefinition)
             .WithDefinition(BannerModifier)
             .WithDefinition(UpgradeModifier)
+            .WithDefinition(PotionModifier)
+            .WithLeaderUpgrade(new LeaderUpgradeDefinition(player.LordId, UpgradeModifier.Id, 1, 50, new GlobalTextId("upgrade"), new GlobalTextId("upgrade-description")))
             .WithDefinition(CreateItem("banner", ItemCategory.Banner, BannerModifier.Id))
             .WithDefinition(CreateItem("potion", ItemCategory.PotionHeal, null))
             .WithDefinition(CreateItem("gem", ItemCategory.Valuable, null))
@@ -130,6 +133,7 @@ public sealed class ScenarioExporterTests
             Level: 3,
             [
                 UnitModifier.Permanent(UpgradeModifier.Id),
+                UnitModifier.Permanent(PotionModifier.Id),
                 UnitModifier.FromEquipment(BannerModifier.Id),
                 new UnitModifier(UpgradeModifier.Id, RemainingTurns: 2)
             ],
@@ -191,13 +195,44 @@ public sealed class ScenarioExporterTests
                 Hitpoints: 40,
                 Experience: 250,
                 Level: 3,
-                [UnitModifier.Permanent(UpgradeModifier.Id)],
+                [UnitModifier.Permanent(UpgradeModifier.Id), UnitModifier.Permanent(PotionModifier.Id)],
                 Name: new LiteralUnitName("Uther"),
                 IsTypeLocked: false),
-            LeaderEquipment.Empty.With(LeaderEquipmentSlot.Banner, Banner),
-            new WorldInventory([Potion, Gem]),
+            LeaderEquipment.Empty.With(LeaderEquipmentSlot.Banner, new WorldItem(new WorldItemId("Exported1"), new ItemDefinitionId("banner"), Charges: null)),
+            new WorldInventory([
+                new WorldItem(new WorldItemId("Exported2"), new ItemDefinitionId("potion"), Charges: null),
+                new WorldItem(new WorldItemId("Exported3"), new ItemDefinitionId("gem"), Charges: null)
+            ]),
             PendingLeaderUpgrades: 1,
             BattlesWon: 4)));
+    }
+
+    [Test]
+    public void ExportEquippedTest()
+    {
+        WorldStack stack = CreateHeroStack() with
+        {
+            Equipment = LeaderEquipment.Empty
+                .With(LeaderEquipmentSlot.Banner, Banner)
+                .With(LeaderEquipmentSlot.Tome, Gem)
+                .With(LeaderEquipmentSlot.Battle1, Potion)
+                .With(LeaderEquipmentSlot.Battle2, SecondPotion)
+                .With(LeaderEquipmentSlot.Artifact1, new WorldItem(new WorldItemId("gem-2"), new ItemDefinitionId("gem"), Charges: null))
+                .With(LeaderEquipmentSlot.Artifact2, new WorldItem(new WorldItemId("gem-3"), new ItemDefinitionId("gem"), Charges: 2))
+        };
+        (WorldState state, IGameDefinitionProvider definitions) = BuildWorld(stack);
+
+        ScenarioExporter exporter = new(definitions, TestGameTextProvider.Instance, new GlobalVariables());
+        ScenarioLeader exported = exporter.ExportLeader(stack, state.Players[stack.OwnerId]);
+
+        Assert.That(exported.Equipment, Is.EqualTo(LeaderEquipment.Empty
+            .With(LeaderEquipmentSlot.Banner, new WorldItem(new WorldItemId("Exported1"), new ItemDefinitionId("banner"), Charges: null))
+            .With(LeaderEquipmentSlot.Tome, new WorldItem(new WorldItemId("Exported2"), new ItemDefinitionId("gem"), Charges: null))
+            .With(LeaderEquipmentSlot.Battle1, new WorldItem(new WorldItemId("Exported3"), new ItemDefinitionId("potion"), Charges: null))
+            .With(LeaderEquipmentSlot.Battle2, new WorldItem(new WorldItemId("Exported4"), new ItemDefinitionId("potion"), Charges: null))
+            .With(LeaderEquipmentSlot.Artifact1, new WorldItem(new WorldItemId("Exported5"), new ItemDefinitionId("gem"), Charges: null))
+            .With(LeaderEquipmentSlot.Artifact2, new WorldItem(new WorldItemId("Exported6"), new ItemDefinitionId("gem"), Charges: 2))));
+        Assert.That(exported.Inventory, Is.EqualTo(WorldInventory.Empty));
     }
 
     [Test]

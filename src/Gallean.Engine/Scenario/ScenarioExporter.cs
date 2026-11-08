@@ -72,29 +72,48 @@ public sealed class ScenarioExporter(IGameDefinitionProvider definitions, IGameT
             throw new ArgumentException($"At most {ItemLimit} items can be exported with a leader.");
         }
 
+        return BuildLeader(stack, modifier => modifier.Source is UnitModifierSource.Unit or UnitModifierSource.Scenario, items);
+    }
+
+    public ScenarioLeader ExportLeader(WorldStack stack, WorldPlayer owner)
+    {
+        ImmutableArray<LeaderUpgradeDefinition> upgrades = definitions.GetLeaderUpgrades(owner.LordId);
+
+        return BuildLeader(stack, modifier => IsUpgrade(modifier, upgrades), [.. stack.Equipment.Items.Values]);
+    }
+
+    private ScenarioLeader BuildLeader(WorldStack stack, Func<UnitModifier, bool> filterModifierFunc, IReadOnlyList<WorldItem> items)
+    {
         (WorldUnit leader, _, _) = stack.GetLeader(definitions);
         ImmutableArray<UnitModifier>.Builder modifiers = ImmutableArray.CreateBuilder<UnitModifier>();
 
         foreach (UnitModifier modifier in leader.Modifiers)
         {
-            if (modifier.Source is UnitModifierSource.Unit or UnitModifierSource.Scenario)
+            if (modifier.RemainingTurns is null && filterModifierFunc(modifier))
             {
-                if (modifier.RemainingTurns is null)
-                {
-                    modifiers.Add(modifier);
-                }
+                modifiers.Add(modifier);
             }
         }
 
         List<WorldItem> remaining = [.. items];
         LeaderEquipment equipment = LeaderEquipment.Empty;
+        int itemIndex = 0;
 
         foreach ((LeaderEquipmentSlot slot, WorldItem item) in stack.Equipment.Items)
         {
             if (remaining.Remove(item))
             {
-                equipment = equipment.With(slot, item);
+                itemIndex++;
+                equipment = equipment.With(slot, item with { Id = GetExportItemId(itemIndex) });
             }
+        }
+
+        ImmutableArray<WorldItem>.Builder inventory = ImmutableArray.CreateBuilder<WorldItem>();
+
+        foreach (WorldItem item in remaining)
+        {
+            itemIndex++;
+            inventory.Add(item with { Id = GetExportItemId(itemIndex) });
         }
 
         UnitName? name = leader.Name?.Accept(new ExportedNameVisitor(texts));
@@ -102,9 +121,37 @@ public sealed class ScenarioExporter(IGameDefinitionProvider definitions, IGameT
         return new ScenarioLeader(
             leader with { Modifiers = modifiers.ToImmutable(), Name = name },
             equipment,
-            new WorldInventory([.. remaining]),
+            new WorldInventory(inventory.ToImmutable()),
             stack.PendingLeaderUpgrades,
             stack.BattlesWon);
+    }
+
+    private static bool IsUpgrade(UnitModifier modifier, ImmutableArray<LeaderUpgradeDefinition> upgrades)
+    {
+        if (modifier.Source == UnitModifierSource.Scenario)
+        {
+            return true;
+        }
+
+        if (modifier.Source != UnitModifierSource.Unit)
+        {
+            return false;
+        }
+
+        foreach (LeaderUpgradeDefinition upgrade in upgrades)
+        {
+            if (upgrade.ModifierId == modifier.DefinitionId)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static WorldItemId GetExportItemId(int index)
+    {
+        return new WorldItemId($"Exported{index}");
     }
 
     private bool IsRaceLord(WorldRaceDefinition race, WorldStack stack)

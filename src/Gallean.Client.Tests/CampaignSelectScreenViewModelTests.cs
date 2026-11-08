@@ -32,6 +32,7 @@ public sealed class CampaignSelectScreenViewModelTests
             48,
             4,
             "Strategy First",
+            IsSkirmish: false,
             []);
         GameScenario secondScenario = new(
             "scenario-2",
@@ -42,6 +43,7 @@ public sealed class CampaignSelectScreenViewModelTests
             72,
             8,
             null,
+            IsSkirmish: false,
             []);
         GameScenario elvenScenario = new(
             "elven-scenario",
@@ -52,6 +54,7 @@ public sealed class CampaignSelectScreenViewModelTests
             96,
             13,
             "Erin Martel",
+            IsSkirmish: false,
             []);
         GameCampaign campaign = new(
             "campaign",

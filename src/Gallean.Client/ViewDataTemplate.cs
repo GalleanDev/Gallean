@@ -32,6 +32,8 @@ internal sealed class ViewDataTemplate : IDataTemplate
             ItemDetailsViewModel => new ItemDetailsView(),
             LeaderBlankslateViewModel => new LeaderBlankslateView(),
             LeaderExportScreenViewModel => new LeaderExportScreenView(),
+            LeaderExportSelectScreenViewModel => new LeaderExportSelectScreenView(),
+            LeaderImportScreenViewModel => new LeaderImportScreenView(),
             LeaderPurchaseViewModel => new LeaderPurchaseView(),
             LeaderUpgradeViewModel => new LeaderUpgradeView(),
             LoadGameScreenViewModel => new LoadGameScreenView(),

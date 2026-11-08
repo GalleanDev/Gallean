@@ -67,6 +67,7 @@ internal sealed class App(ILog log) : Application
         FreeThreadedRandomProvider random = new();
         GameLoader gameLoader = new(random);
         GameSaveStore gameSaveStore = new(AppDirectories.Saves, gameSettings.AutoSaveLimit);
+        LeaderStore leaderStore = new(AppDirectories.Leaders);
         AssetPreloader assetPreloader = new(assetProvider);
         AudioPlayer audioPlayer = new(assetProvider, audioOutput, log, gameSettings.SoundVolumeRatio, gameSettings.MusicVolumeRatio);
         GameViewModel gameViewModel = cleanupList.Add(new GameViewModel(
@@ -76,6 +77,7 @@ internal sealed class App(ILog log) : Application
             audioPlayer,
             gameLoader,
             gameSaveStore,
+            leaderStore,
             gameSettingsStore,
             gameSettings,
             clientVersion,
