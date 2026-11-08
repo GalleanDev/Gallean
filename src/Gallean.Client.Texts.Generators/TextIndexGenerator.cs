@@ -20,6 +20,7 @@ public class TextIndexGenerator : IIncrementalGenerator
     private sealed record ViewMetadata(IReadOnlyList<TextMetadata> Texts, IReadOnlyList<UnlocalizedTextMetadata> Unlocalized);
 
     private const string TextTypeName = "Gallean.Client.Texts.TextCatalog";
+
     private static readonly HashSet<string> TranslateMethodNames =
     [
         "Tr",
