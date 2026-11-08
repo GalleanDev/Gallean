@@ -262,6 +262,12 @@ internal sealed partial class WorldScreenViewModel :
             WorldPlan plan = WorldPlan.For(WorldState);
             WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
             WorldFortification? fortification = visibility.GetFortificationAt(plan, selected.Position);
+            WorldSite? site = visibility.GetSiteAt(plan, selected.Position);
+
+            if (site is not null)
+            {
+                return false;
+            }
 
             if (fortification is not null && fortification.Owner == ViewPlayerId)
             {
@@ -318,6 +324,15 @@ internal sealed partial class WorldScreenViewModel :
             if (fortification is not null && fortification.Owner == ViewPlayerId)
             {
                 OpenFortification(fortification);
+            }
+            else
+            {
+                WorldPathSelection? path = BuildPathSelection(stack, stack.Position);
+
+                if (path is not null && path.Encounter is not null)
+                {
+                    MoveSelectedStackAsync(stack, path).FileAndForget();
+                }
             }
         }
 
@@ -1073,7 +1088,11 @@ internal sealed partial class WorldScreenViewModel :
 
     async Task IWorldPathEncounterVisitor<SelectedMove, Task>.Visit(WorldPathEncounter.Site encounter, SelectedMove move)
     {
-        if (await MoveStackAsync(move.Stack.Id, move.Selection.Destination))
+        if (move.Stack.Position == move.Selection.Destination)
+        {
+            EnqueueEntry(new Entry.SiteEnter(WorldState, move.Stack.Id, encounter.SiteId));
+        }
+        else if (await MoveStackAsync(move.Stack.Id, move.Selection.Destination))
         {
             EnqueueEntry(new Entry.SiteEnter(WorldState, move.Stack.Id, encounter.SiteId));
         }
@@ -1570,6 +1589,10 @@ internal sealed partial class WorldScreenViewModel :
             else if (fortification is not null && fortification.Owner == ViewPlayerId)
             {
                 return AssetAnimationKey.CursorType.ViewCity;
+            }
+            else if (site is not null)
+            {
+                return AssetAnimationKey.CursorType.Visit;
             }
             else
             {
