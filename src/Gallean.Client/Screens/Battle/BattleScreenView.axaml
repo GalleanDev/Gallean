@@ -11,7 +11,7 @@
     <KeyBinding Gesture="W" Command="{Binding WaitCommand}" />
     <KeyBinding Gesture="S" Command="{Binding SkipCommand}" />
     <KeyBinding Gesture="R" Command="{Binding RetreatCommand}" />
-    <KeyBinding Gesture="A" Command="{Binding AutoResolveCommand}" />
+    <KeyBinding Gesture="A" Command="{Binding ToggleAutoBattleCommand}" />
     <KeyBinding Gesture="I" Command="{Binding AutoResolveCommand}" />
     <KeyBinding Gesture="D1" Command="{Binding SelectFirstItemCommand}" />
     <KeyBinding Gesture="D2" Command="{Binding SelectSecondItemCommand}" />
@@ -364,17 +364,26 @@
                                    VerticalAlignment="Center" />
           <StackPanel Orientation="Horizontal" Spacing="5">
             <Button Classes="pill"
+                    Classes.selected="{Binding IsAutoBattle}"
+                    local:PlateChrome.TextureSeed="1"
+                    Command="{Binding ToggleAutoBattleCommand}"
+                    ToolTip.Tip="{local:Text 'Let the computer fight the battle for you'}">
+              <local:HotkeyLabel Text="{local:Text 'Auto-play'}" Hotkey="A" />
+            </Button>
+            <Button Classes="pill"
                     local:PlateChrome.TextureSeed="2"
                     Command="{Binding AutoResolveCommand}"
                     ToolTip.Tip="{Binding AutoResolveTip}"
                     ToolTip.ShowOnDisabled="True">
-              <local:HotkeyLabel Text="{local:Text 'Auto-resolve'}" Hotkey="A" />
+              <local:HotkeyLabel Text="{local:Text 'Instant resolve'}" Hotkey="I" />
             </Button>
-            <Button Classes="pill"
+            <Button Classes="icon-button"
                     local:PlateChrome.TextureSeed="3"
+                    Width="36"
+                    Height="36"
                     Command="{Binding OpenLogCommand}"
                     ToolTip.Tip="{local:Text 'Show the battle log'}">
-              <TextBlock Text="{local:Text 'Show log'}" />
+              <local:IconVisual Moniker="Quest" />
             </Button>
           </StackPanel>
         </StackPanel>

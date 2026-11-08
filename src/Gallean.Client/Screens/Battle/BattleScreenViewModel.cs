@@ -81,6 +81,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             WaitCommand,
             RetreatCommand,
             SkipCommand,
+            ToggleAutoBattleCommand,
             AutoResolveCommand,
             ExitBattleCommand);
     }
@@ -131,6 +132,9 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     public partial bool HasTargets { get; private set; }
 
     [ObservableProperty]
+    public partial bool IsAutoBattle { get; private set; }
+
+    [ObservableProperty]
     public partial UnitDetailsViewModel? InspectedUnit { get; private set; }
 
     [ObservableProperty]
@@ -173,6 +177,8 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private bool IsFinished => State.Outcome is not null;
 
+    private bool IsAiTurn => battle.IsAiTurn || IsAutoBattle;
+
     public async Task LoadAsync()
     {
         await PreloadAssetsAsync([.. assetPlan.InitialRequired, .. assetPlan.InitialOptional]);
@@ -208,7 +214,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     public async Task ClickAsync(BattleGridTile tile)
     {
-        if (IsBusy || IsFinished || battle.IsAiTurn)
+        if (IsBusy || IsFinished || IsAiTurn)
         {
             return;
         }
@@ -350,7 +356,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         {
             while (true)
             {
-                if (IsBusy || IsFinished || !battle.IsAiTurn)
+                if (IsBusy || IsFinished || !IsAiTurn)
                 {
                     break;
                 }
@@ -418,6 +424,14 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         }
     }
 
+    [RelayCommand(CanExecute = nameof(CanToggleAutoBattle), AllowConcurrentExecutions = true)]
+    private async Task ToggleAutoBattleAsync()
+    {
+        IsAutoBattle = !IsAutoBattle;
+
+        await PlayAiTurnAsync();
+    }
+
     [RelayCommand(CanExecute = nameof(CanAutoResolve))]
     private void AutoResolve()
     {
@@ -460,7 +474,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             return false;
         }
 
-        return !IsFinished && !battle.IsAiTurn;
+        return !IsFinished && !IsAiTurn;
     }
 
     private bool CanWait()
@@ -481,6 +495,11 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         }
 
         return canRetreat;
+    }
+
+    private bool CanToggleAutoBattle()
+    {
+        return !IsFinished;
     }
 
     private bool CanAutoResolve()
@@ -558,7 +577,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             assets,
             backgroundKey,
             environment,
-            battle.IsAiTurn,
+            IsAiTurn,
             ResolveSelectedTarget(),
             tileActions.ToDictionary(entry => entry.Key, entry => entry.Value.Target),
             renderState);
@@ -707,7 +726,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private IReadOnlyDictionary<BattleGridTile, TileAction> ComputeAttackActions()
     {
-        if (IsFinished || battle.IsAiTurn)
+        if (IsFinished || IsAiTurn)
         {
             return new Dictionary<BattleGridTile, TileAction>();
         }
@@ -797,7 +816,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     {
         Dictionary<LeaderEquipmentSlot, IReadOnlyDictionary<BattleGridTile, TileAction>> actions = [];
 
-        if (IsFinished || battle.IsAiTurn)
+        if (IsFinished || IsAiTurn)
         {
             return actions;
         }
@@ -846,7 +865,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private IReadOnlyList<BattleItemViewModel> BuildItems()
     {
-        if (IsFinished || battle.IsAiTurn)
+        if (IsFinished || IsAiTurn)
         {
             return [];
         }
@@ -977,7 +996,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             assets,
             backgroundKey,
             environment,
-            battle.IsAiTurn,
+            IsAiTurn,
             ResolveSelectedTarget(),
             tileActions.ToDictionary(entry => entry.Key, entry => entry.Value.Target),
             renderState);
@@ -1007,7 +1026,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private void UpdateCursorType()
     {
-        if (IsBusy || IsFinished || battle.IsAiTurn)
+        if (IsBusy || IsFinished || IsAiTurn)
         {
             CursorType = AssetAnimationKey.CursorType.BattleDefault;
         }
@@ -1178,7 +1197,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         CurrentUnit = BuildUnitCard(State.CurrentUnit);
         TargetUnit = BuildTargetUnit();
         IsBattleOver = false;
-        IsPlayerTurn = !battle.IsAiTurn;
+        IsPlayerTurn = !IsAiTurn;
         StatusText = Tr("Round {0}", State.RoundNumber);
     }
 
@@ -1232,6 +1251,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         WaitCommand.NotifyCanExecuteChanged();
         RetreatCommand.NotifyCanExecuteChanged();
         SkipCommand.NotifyCanExecuteChanged();
+        ToggleAutoBattleCommand.NotifyCanExecuteChanged();
         AutoResolveCommand.NotifyCanExecuteChanged();
         ExitBattleCommand.NotifyCanExecuteChanged();
     }

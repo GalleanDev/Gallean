@@ -896,6 +896,17 @@
   <Style Selector="Button.pill.success:pointerover /template/ local|PlateChrome#PlateChrome">
     <Setter Property="Fill" Value="{StaticResource PillSuccessHoverFaceGradientBrush}" />
   </Style>
+  <Style Selector="Button.pill.selected">
+    <Setter Property="Foreground" Value="{StaticResource PillHoverTextBrush}" />
+  </Style>
+  <Style Selector="Button.pill.selected /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryFaceGradientBrush}" />
+    <Setter Property="Glow" Value="{StaticResource PlateGlowBrush}" />
+    <Setter Property="GlowHalo" Value="{StaticResource PlateGlowHaloBrush}" />
+  </Style>
+  <Style Selector="Button.pill.selected:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource PillPrimaryHoverFaceGradientBrush}" />
+  </Style>
   <Style Selector="Button.pill:focus-visible /template/ local|PlateChrome#PlateChrome">
     <Setter Property="Glow" Value="{StaticResource PlateFocusGlowBrush}" />
   </Style>
