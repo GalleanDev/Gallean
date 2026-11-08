@@ -4,7 +4,8 @@ internal sealed record LeaderExportCandidateViewModel(
     WorldStackId StackId,
     AssetSpriteKey.UnitPortrait PortraitKey,
     string Name,
-    string Summary,
+    string LevelText,
+    string BattlesWonText,
     UnitDetailsViewModel Details) : IDetailsSource
 {
     object? IDetailsSource.DetailsContent => Details;

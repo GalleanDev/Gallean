@@ -9,11 +9,6 @@
 
       <local:ModalPanel.Footer>
         <Grid ColumnDefinitions="*,Auto,Auto">
-          <TextBlock Grid.Column="0"
-                     local:TextRuns.Spans="{Binding SelectedItemsText}"
-                     Classes="body"
-                     Foreground="{StaticResource PrimaryTextBrush}"
-                     VerticalAlignment="Center" />
           <Button Grid.Column="1"
                   Content="{local:Text 'Back'}"
                   Classes="pill"
@@ -42,6 +37,8 @@
                    Classes="body"
                    Foreground="{StaticResource SecondaryTextBrush}"
                    TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
                    Margin="0,0,0,12" />
 
         <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="Auto,*">
@@ -52,9 +49,9 @@
                 <Border Classes="row">
                   <Grid ColumnDefinitions="56,*">
                     <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="56" Height="56" />
-                    <StackPanel Grid.Column="1" Spacing="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                      <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" TextTrimming="CharacterEllipsis" />
-                      <TextBlock Text="{Binding Summary}"
+                    <StackPanel Grid.Column="1" Spacing="4" Margin="12,0,0,0" VerticalAlignment="Center">
+                      <local:OutlinedTextBlock Classes="object-name row" TextTrimming="CharacterEllipsis"><Run Text="{Binding Name}" /><Run Text="  " /><Run Classes="row-level" Text="{Binding LevelText}" /></local:OutlinedTextBlock>
+                      <TextBlock Text="{Binding BattlesWonText}"
                                  Classes="caption"
                                  Foreground="{StaticResource SecondaryTextBrush}"
                                  TextTrimming="CharacterEllipsis" />
@@ -67,8 +64,8 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="2" RowDefinitions="Auto,*">
-          <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Items'}" Classes="label" Margin="0,0,0,8" />
-          <ScrollViewer Classes="list" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+          <local:OutlinedTextBlock Grid.Row="0" Text="{Binding ItemsTitle}" Classes="label" Margin="0,0,0,8" />
+          <ScrollViewer Classes="list" Grid.Row="1" MinHeight="220" VerticalScrollBarVisibility="Auto">
             <ItemsControl Classes="focus-group" Padding="0,6,12,6" ItemsSource="{Binding Items}">
               <local:Blankslate.Content>
                 <TextBlock Text="{local:Text 'No items can be brought to the next quest.'}"

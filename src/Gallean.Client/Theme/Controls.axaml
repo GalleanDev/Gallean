@@ -1444,6 +1444,11 @@
     <Setter Property="Background" Value="{StaticResource ScenarioSelectRowSelectedGradientBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource ScenarioSelectAccentBrush}" />
   </Style>
+  <Style Selector="Run.row-level">
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
+  </Style>
   <Style Selector="ListBox.select-list ListBoxItem TextBlock.row-title">
     <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
   </Style>

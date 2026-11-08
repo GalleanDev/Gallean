@@ -13,7 +13,7 @@ public sealed class LeaderExportScreenViewModelTests
 
         foreach (LeaderExportCandidateViewModel leader in leaders)
         {
-            rows.Add($"{leader.StackId} {leader.Name} | {leader.Summary}");
+            rows.Add($"{leader.StackId} {leader.Name} {leader.LevelText} | {leader.BattlesWonText}");
         }
 
         return rows;
@@ -45,14 +45,14 @@ public sealed class LeaderExportScreenViewModelTests
 
         Assert.That(screen.Instruction, Is.EqualTo("Select a leader and up to 5 items to bring to the next quest."));
         Assert.That(FormatLeaders(screen.Leaders), Is.EqualTo([
-            "S107KC0000 Hatton | Level 1 · 0 battles won"
+            "S107KC0000 Hatton Lv. 1 | 0 battles won"
         ]));
         Assert.That(screen.SelectedLeader, Is.EqualTo(screen.Leaders[0]));
         Assert.That(FormatItems(screen.Items), Is.EqualTo([
             "G000IG0001 Life Potion ×1 0 selected add=True remove=False",
             "G000IG0006 Potion of Restoration ×3 0 selected add=True remove=False"
         ]));
-        Assert.That(screen.SelectedItemsText.Text, Is.EqualTo("Selected items: 0 / 5"));
+        Assert.That(screen.ItemsTitle, Is.EqualTo("Items (0 / 5)"));
 
         screen.Items[1].AddCommand.Execute(null);
         screen.Items[1].AddCommand.Execute(null);
@@ -63,7 +63,7 @@ public sealed class LeaderExportScreenViewModelTests
             "G000IG0001 Life Potion ×1 1 selected add=False remove=True",
             "G000IG0006 Potion of Restoration ×3 3 selected add=False remove=True"
         ]));
-        Assert.That(screen.SelectedItemsText.Text, Is.EqualTo("Selected items: 4 / 5"));
+        Assert.That(screen.ItemsTitle, Is.EqualTo("Items (4 / 5)"));
 
         screen.Items[1].RemoveCommand.Execute(null);
 
@@ -151,7 +151,7 @@ public sealed class LeaderExportScreenViewModelTests
         screen.Items[1].AddCommand.Execute(null);
         screen.Items[0].AddCommand.Execute(null);
 
-        Assert.That(screen.SelectedItemsText.Text, Is.EqualTo("Selected items: 4 / 5"));
+        Assert.That(screen.ItemsTitle, Is.EqualTo("Items (4 / 5)"));
 
         await screen.ExportCommand.ExecuteAsync(null);
 

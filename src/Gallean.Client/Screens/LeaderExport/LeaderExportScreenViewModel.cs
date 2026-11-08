@@ -2,7 +2,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Gallean.Common;
 using Gallean.Engine;
 
 namespace Gallean.Client;
@@ -34,7 +33,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
     public partial IReadOnlyList<LeaderExportItemViewModel> Items { get; private set; } = [];
 
     [ObservableProperty]
-    public partial TextSpans SelectedItemsText { get; private set; } = TextSpans.Empty;
+    public partial string ItemsTitle { get; private set; } = "";
 
     public IReadOnlyList<LeaderExportCandidateViewModel> Leaders { get; }
 
@@ -142,22 +141,16 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
         };
     }
 
-    private static string FormatLeaderSummary(int level, int battlesWon)
+    private static string FormatBattlesWon(int battlesWon)
     {
-        JoinStringBuilder sb = new(" · ");
-
-        sb.Add(Tr("Level {0}", level));
-
         if (battlesWon == 1)
         {
-            sb.Add(Tr("1 battle won"));
+            return Tr("1 battle won");
         }
         else
         {
-            sb.Add(Tr("{0} battles won", battlesWon));
+            return Tr("{0} battles won", battlesWon);
         }
-
-        return sb.ToString();
     }
 
     private IReadOnlyList<LeaderExportCandidateViewModel> BuildLeaders()
@@ -179,7 +172,8 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
                 stack.Id,
                 new AssetSpriteKey.UnitPortrait(leader.DefinitionId),
                 UnitNameResolver.Resolve(leader, GameModel.Definitions, GameModel.Texts),
-                FormatLeaderSummary(leader.Level, stack.BattlesWon),
+                Tr("Lv. {0}", leader.Level),
+                FormatBattlesWon(stack.BattlesWon),
                 details));
         }
 
@@ -189,7 +183,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
     private void RefreshItems()
     {
         Items = BuildItems();
-        SelectedItemsText = TrSpans("Selected items: {0:*} / {1:*}", selectedItems.Count, scenarioExporter.ItemLimit);
+        ItemsTitle = Tr("Items ({0} / {1})", selectedItems.Count, scenarioExporter.ItemLimit);
     }
 
     private IReadOnlyList<LeaderExportItemViewModel> BuildItems()
