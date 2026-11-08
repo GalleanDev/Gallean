@@ -49,7 +49,8 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
         }
 
         selectedModifierId = item.ModifierId;
-        RefreshView();
+
+        ApplySelection();
     }
 
     [RelayCommand(CanExecute = nameof(CanLearn))]
@@ -124,19 +125,23 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
             TrSpans("Upgrades to select: {0:*}", stack.PendingLeaderUpgrades),
             UnitDetailsViewModel.CreateFromWorld(leader, owner, GameModel.Definitions, GameModel.Texts, GameModel.Stats));
 
-        IReadOnlyList<LeaderUpgradeItemViewModel> options = BuildOptions();
+        Options = BuildOptions();
 
-        if (!options.Any(option => option.Status.IsAvailable && option.ModifierId == selectedModifierId))
+        ApplySelection();
+    }
+
+    private void ApplySelection()
+    {
+        if (!Options.Any(option => option.Status.IsAvailable && option.ModifierId == selectedModifierId))
         {
             selectedModifierId = null;
         }
 
-        foreach (LeaderUpgradeItemViewModel option in options)
+        foreach (LeaderUpgradeItemViewModel option in Options)
         {
             option.IsSelected = option.ModifierId == selectedModifierId;
         }
 
-        Options = options;
         HasSelectedUpgrade = selectedModifierId is not null;
     }
 
