@@ -168,7 +168,38 @@ internal sealed partial class BattleAnimationStateBuilder
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitEffectExpiredEvent ev, Empty context)
         {
-            return null;
+            StatusEffect effect = StatusEffect.Create(ev.Effect);
+
+            string? text = effect.Type switch
+            {
+                StatusEffectType.Paralyze => Tr("Paralysis broken!"),
+                StatusEffectType.Petrify => Tr("Petrification broken!"),
+                StatusEffectType.Defend => null,
+                StatusEffectType.Poison => null,
+                StatusEffectType.Frostbite => null,
+                StatusEffectType.Blister => null,
+                StatusEffectType.Retreat => null,
+                StatusEffectType.Retreated => null,
+                StatusEffectType.Fortification => null,
+                StatusEffectType.IncreaseDamage => null,
+                StatusEffectType.ReduceDamage => null,
+                StatusEffectType.ReduceInitiative => null,
+                StatusEffectType.ShatterArmor => null,
+                StatusEffectType.Cure => null,
+                StatusEffectType.Transform => null,
+                StatusEffectType.TransformSelf => null,
+                StatusEffectType.Doppelganger => null,
+                StatusEffectType.LevelDrain => null
+            };
+
+            if (text is not null)
+            {
+                return (ev.UnitId, new Feedback(FeedbackType.Effect, text));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public (BattleUnitId Unit, Feedback Feedback)? Visit(BattleUnitExperienceGainedEvent ev, Empty context)

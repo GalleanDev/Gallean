@@ -72,7 +72,11 @@ internal sealed partial class BattleAnimationStateBuilder(
         {
             battleEvent.Accept(this, Empty.Value);
 
-            if (battleEvent is BattleUnitAttackMissedEvent && currentAttack is { Origin: AttackOrigin.Secondary })
+            if (IsSecondaryMissEvent(battleEvent))
+            {
+                continue;
+            }
+            else if (IsThawSkipEvent(battleEvent))
             {
                 continue;
             }
@@ -139,6 +143,19 @@ internal sealed partial class BattleAnimationStateBuilder(
             animations,
             BuildShakes(),
             rate);
+
+        bool IsSecondaryMissEvent(BattleEvent battleEvent)
+        {
+            return battleEvent is BattleUnitAttackMissedEvent &&
+                   currentAttack is { Origin: AttackOrigin.Secondary };
+        }
+
+        bool IsThawSkipEvent(BattleEvent battleEvent)
+        {
+            return battleEvent is BattleUnitTurnSkippedEvent skippedEvent &&
+                   timelines.TryGetValue(skippedEvent.UnitId, out UnitTimeline? timeline) &&
+                   timeline.Status is [.., { Frozen: false }];
+        }
     }
 
     private static IReadOnlyList<BattleAnimationState.BodyEntry> BuildBody(UnitTimeline timeline)
