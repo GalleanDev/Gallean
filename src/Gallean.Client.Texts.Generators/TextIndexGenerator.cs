@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,10 +36,6 @@ public class TextIndexGenerator : IIncrementalGenerator
         "PlaceholderText",
         "ToolTip.Tip"
     ];
-
-    private static readonly Regex AttributeExpression = new(
-        @"(?:Property\s*=\s*""(?<name>[A-Za-z][A-Za-z0-9_.:]*)""\s+Value|(?<name>[A-Za-z][A-Za-z0-9_.:]*))\s*=\s*""(?<value>[^""]*)""",
-        RegexOptions.Compiled);
 
     private static readonly Regex MarkerExpression = new(
         @"^\{\s*(?:[A-Za-z0-9_]+:)?Text(?:Extension)?\s+'(?<text>[^']*)'\s*\}$",
@@ -181,34 +179,77 @@ public class TextIndexGenerator : IIncrementalGenerator
         }
 
         string content = source.ToString();
+        XDocument document;
+
+        try
+        {
+            document = XDocument.Parse(content, LoadOptions.SetLineInfo);
+        }
+        catch (XmlException)
+        {
+            return new ViewMetadata([], []);
+        }
+
         string file = MakeRelativePath(view.Path, projectDirectory);
         List<TextMetadata> texts = [];
         List<UnlocalizedTextMetadata> unlocalized = [];
 
-        foreach (Match match in AttributeExpression.Matches(content))
+        foreach (XAttribute attribute in GetTextAttributes(document))
         {
-            if (TextAttributes.Contains(match.Groups["name"].Value))
+            string value = attribute.Value;
+            Match marker = MarkerExpression.Match(value);
+            IXmlLineInfo lineInfo = attribute;
+            Location location = GetValueLocation(view.Path, source, content, lineInfo);
+
+            if (marker.Success)
             {
-                Group value = match.Groups["value"];
-                Match marker = MarkerExpression.Match(value.Value);
-                TextSpan span = new(value.Index, value.Length);
-                Location location = Location.Create(view.Path, span, source.Lines.GetLinePositionSpan(span));
-                int line = source.Lines.GetLinePosition(value.Index).Line + 1;
+                string text = marker.Groups["text"].Value;
 
-                if (marker.Success)
-                {
-                    string text = marker.Groups["text"].Value;
-
-                    texts.Add(new TextMetadata(text, CountPlaceholders(text), null, file, line, location));
-                }
-                else if (!value.Value.StartsWith("{", StringComparison.Ordinal) && HasLetter(value.Value))
-                {
-                    unlocalized.Add(new UnlocalizedTextMetadata(value.Value, location));
-                }
+                texts.Add(new TextMetadata(text, CountPlaceholders(text), null, file, lineInfo.LineNumber, location));
+            }
+            else if (!value.StartsWith("{", StringComparison.Ordinal) && HasLetter(value))
+            {
+                unlocalized.Add(new UnlocalizedTextMetadata(value, location));
             }
         }
 
         return new ViewMetadata(texts, unlocalized);
+    }
+
+    private static IEnumerable<XAttribute> GetTextAttributes(XDocument document)
+    {
+        foreach (XElement element in document.Descendants())
+        {
+            foreach (XAttribute attribute in element.Attributes())
+            {
+                if (TextAttributes.Contains(attribute.Name.LocalName))
+                {
+                    yield return attribute;
+                }
+            }
+
+            if (element.Name.LocalName == "Setter")
+            {
+                XAttribute? property = element.Attribute("Property");
+                XAttribute? value = element.Attribute("Value");
+
+                if (property is not null && value is not null && TextAttributes.Contains(property.Value))
+                {
+                    yield return value;
+                }
+            }
+        }
+    }
+
+    private static Location GetValueLocation(string path, SourceText source, string content, IXmlLineInfo attribute)
+    {
+        LinePosition position = new(attribute.LineNumber - 1, attribute.LinePosition - 1);
+        int start = source.Lines.GetPosition(position);
+        int quote = content.IndexOfAny(['"', '\''], start);
+        int end = content.IndexOf(content[quote], quote + 1);
+        TextSpan span = TextSpan.FromBounds(quote + 1, end);
+
+        return Location.Create(path, span, source.Lines.GetLinePositionSpan(span));
     }
 
     private static bool HasLetter(string value)
