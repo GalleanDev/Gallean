@@ -755,6 +755,7 @@ internal static class Theme
             public static Color SelectedColor { get; } = Color.FromRgb(116, 176, 255);
             public static Color ExhaustedColor { get; } = Color.FromRgb(168, 170, 176);
             public static Color HostileColor { get; } = Color.FromRgb(232, 64, 52);
+            public static Color RiotColor { get; } = Color.FromArgb(128, 255, 150, 40);
         }
 
         public static class Reach

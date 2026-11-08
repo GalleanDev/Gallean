@@ -65,19 +65,18 @@ internal sealed partial class WorldRenderComposer(
         IReadOnlyList<AmbientSound> ambientSounds = ambientSoundsPart.Resolve(new AmbientSounds.Input(state.Fortifications, state.Landmarks, state.Sites, state.ResourceNodes, playerRaces, visibility));
         MinimapState minimap = minimapPart.Resolve(new Minimap.Input(state.Map, state.Fortifications, state.Stacks, playerRaces, visibility, request.ViewPlayerId, request.FogEnabled));
 
-        ReachOverlay? reach;
-        HighlightOverlay highlights;
+        ReachOverlay? reach = null;
+        List<Highlight> highlights = [];
 
-        if (animation is StackBattle or BattleTransition)
-        {
-            reach = null;
-            highlights = new HighlightOverlay([]);
-        }
-        else
+        highlights.AddRange(BuildRiotHighlights(state.Fortifications, fortifications));
+
+        if (animation is not (StackBattle or BattleTransition))
         {
             reach = BuildReachOverlay(request, animatedStackId);
-            highlights = BuildHighlights(request, plan, stacks, fortifications, animatedStackId);
+            highlights.AddRange(BuildCursorHighlights(request, plan, stacks, fortifications, animatedStackId));
         }
+
+        HighlightOverlay highlightOverlay = new(highlights);
 
         PathOverlay? selectedPathOverlay = BuildSelectedPathOverlay(request);
         IReadOnlyList<Cursor> cursors = BuildCursors(request, visibility, plan, definitions, selectedPathOverlay);
@@ -93,7 +92,7 @@ internal sealed partial class WorldRenderComposer(
             ambientSounds,
             cursors,
             reach,
-            highlights,
+            highlightOverlay,
             selectedPathOverlay,
             minimap);
 
@@ -319,7 +318,30 @@ internal sealed partial class WorldRenderComposer(
         return cursors;
     }
 
-    private static HighlightOverlay BuildHighlights(
+    private static IReadOnlyList<Highlight> BuildRiotHighlights(
+        ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications,
+        IReadOnlyList<MapObject> fortificationObjects)
+    {
+        List<Highlight> highlights = [];
+
+        foreach (WorldFortification fortification in fortifications.Values)
+        {
+            if (fortification is WorldCity { RiotTurns: > 0 })
+            {
+                foreach (MapObject item in fortificationObjects)
+                {
+                    if (item is Fortification target && target.Footprint == fortification.Footprint)
+                    {
+                        highlights.Add(new Highlight(target, Theme.World.Highlight.RiotColor));
+                    }
+                }
+            }
+        }
+
+        return highlights;
+    }
+
+    private static IReadOnlyList<Highlight> BuildCursorHighlights(
         WorldRenderRequest request,
         WorldPlan plan,
         IReadOnlyList<MapObject> stacks,
@@ -359,7 +381,7 @@ internal sealed partial class WorldRenderComposer(
             }
         }
 
-        return new HighlightOverlay(highlights);
+        return highlights;
 
         MapObject? FindStackObject(WorldPosition position)
         {

@@ -4584,4 +4584,91 @@ public sealed class WorldRenderComposerTests
             TimeSpan.FromMilliseconds(974.0))));
         Assert.That(second.Animation, Is.SameAs(first.Animation));
     }
+
+    [Test]
+    public void RiotHighlightsTest()
+    {
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().Build();
+
+        WorldMap map = TestHelpers.SimpleMap(10, 10);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            FogOfWar = TestHelpers.BuildFogOfWar([
+                "..........",
+                "..........",
+                "..........",
+                "..........",
+                "..........",
+                "??????????",
+                "??????????",
+                "??????????",
+                "??????????",
+                "??????????"
+            ])
+        };
+
+        WorldCity riotCity = new(
+            Id: new WorldFortificationId("c1"),
+            NameTextId: new ScenarioTextId("Name"),
+            DefinitionId: new WorldCityDefinitionId(WorldRace.Human, 2),
+            OwnerId: human.Id,
+            SubraceId: TestHelpers.NeutralSubrace.Id,
+            Footprint: new WorldFootprint(new WorldPosition(0, 0), 4, 4),
+            Garrison: UnitGrid<WorldUnit>.Empty,
+            Inventory: WorldInventory.Empty,
+            AiPriority: 3,
+            RiotTurns: 2,
+            GrowthTurn: 0);
+
+        WorldCity calmCity = new(
+            Id: new WorldFortificationId("c2"),
+            NameTextId: new ScenarioTextId("Name"),
+            DefinitionId: new WorldCityDefinitionId(WorldRace.Human, 2),
+            OwnerId: human.Id,
+            SubraceId: TestHelpers.NeutralSubrace.Id,
+            Footprint: new WorldFootprint(new WorldPosition(5, 0), 4, 4),
+            Garrison: UnitGrid<WorldUnit>.Empty,
+            Inventory: WorldInventory.Empty,
+            AiPriority: 3,
+            RiotTurns: 0,
+            GrowthTurn: 0);
+
+        WorldCity foggedRiotCity = new(
+            Id: new WorldFortificationId("c3"),
+            NameTextId: new ScenarioTextId("Name"),
+            DefinitionId: new WorldCityDefinitionId(WorldRace.Human, 2),
+            OwnerId: human.Id,
+            SubraceId: TestHelpers.NeutralSubrace.Id,
+            Footprint: new WorldFootprint(new WorldPosition(5, 5), 4, 4),
+            Garrison: UnitGrid<WorldUnit>.Empty,
+            Inventory: WorldInventory.Empty,
+            AiPriority: 3,
+            RiotTurns: 3,
+            GrowthTurn: 0);
+
+        WorldState state = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithDefinition(TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 2), WorldResourceSet.Empty))
+            .WithCity(riotCity)
+            .WithCity(calmCity)
+            .WithCity(foggedRiotCity)
+            .Build()
+            .State;
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: WorldCursor.Empty);
+
+        Assert.That(renderState.Highlights, Is.EqualTo(new HighlightOverlay(
+        [
+            new Highlight(
+                new Fortification(
+                    Position: new WorldPosition(3, 3),
+                    Depth: 1949,
+                    Footprint: riotCity.Footprint,
+                    AssetKey: new AssetAnimationKey.City(2)),
+                Theme.World.Highlight.RiotColor)
+        ])));
+    }
 }
