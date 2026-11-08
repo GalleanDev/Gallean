@@ -297,7 +297,7 @@ public sealed class BattleEngineAlternativeAttackTests
             .WithDefender(guardian, GridPosition.FrontTop)
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(),
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(knight.Id), [new UnitAttackDefinitionId("doppelganger")]),
             new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, knightDefinition.Id, 2, 120, 120, null),
@@ -329,7 +329,7 @@ public sealed class BattleEngineAlternativeAttackTests
             .WithDefender(guardian, GridPosition.FrontBottom)
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(),
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true),
         [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(guardian.Id), [new UnitAttackDefinitionId("slash")]),
             new BattleUnitAttackedEvent(doppelganger.Id, guardian.Id, new UnitAttackDefinitionId("slash")),

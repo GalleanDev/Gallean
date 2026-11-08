@@ -102,7 +102,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 5),
@@ -132,7 +132,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(wounded, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(wounded.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, wounded.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, wounded.Id, attackerDefinition.Attack.Id, 5),
@@ -162,7 +162,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(target, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(target.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, target.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, target.Id, attackerDefinition.Attack.Id, 5),
@@ -195,7 +195,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(reachable, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(reachable.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, reachable.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, reachable.Id, attackerDefinition.Attack.Id, 10),
@@ -228,7 +228,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitDefendedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
@@ -258,7 +258,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(healer.Id, new BattleAttackUnitTarget(heavilyWounded.Id), [healerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(healer.Id, heavilyWounded.Id, healerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(healer.Id, heavilyWounded.Id, healerDefinition.Attack.Id, 0),
@@ -289,7 +289,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitDefendedEvent(healer.Id),
             new BattleUnitTurnEndingEvent(healer.Id),
             new BattleUnitTurnEndedEvent(healer.Id),
@@ -321,7 +321,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(booster.Id, new BattleAttackUnitTarget(unboosted.Id), [boosterDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(booster.Id, unboosted.Id, boosterDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(booster.Id, unboosted.Id, boosterDefinition.Attack.Id, 0),
@@ -354,7 +354,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(curer.Id, new BattleAttackUnitTarget(poisoned.Id), [curerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(curer.Id, poisoned.Id, curerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(curer.Id, poisoned.Id, curerDefinition.Attack.Id, 0),
@@ -387,7 +387,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(reviver.Id, new BattleAttackUnitTarget(corpse.Id), [reviverDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(reviver.Id, corpse.Id, reviverDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(reviver.Id, corpse.Id, reviverDefinition.Attack.Id, 0),
@@ -418,7 +418,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitDefendedEvent(reviver.Id),
             new BattleUnitTurnEndingEvent(reviver.Id),
             new BattleUnitTurnEndedEvent(reviver.Id),
@@ -447,7 +447,7 @@ public sealed class BattleEngineAiActionTests
         BattleUnitId summonedId = new(2);
         GridPosition summonPosition = new(0, 1);
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(summoner.Id, new BattleAttackTileTarget(BattleSide.Attacker, summonPosition), [summonerDefinition.Attack.Id]),
             new BattleUnitSummonedEvent(summonedId, summonedDefinition.Id, BattleSide.Attacker, summonPosition, 20, 1, summoner.Id),
             new BattleUnitTurnEndingEvent(summoner.Id),
@@ -481,12 +481,12 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(defender, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(attacker.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitTransformAppliedEvent(attacker.Id, attacker.Id, BattleTransformType.TransformSelf, beastDefinition.Id, 1, 50, 50, null)
         ]);
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [beastDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, defender.Id, beastDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, defender.Id, beastDefinition.Attack.Id, 9),
@@ -516,7 +516,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(strong, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(paralyzer.Id, new BattleAttackUnitTarget(strong.Id), [paralyzerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(paralyzer.Id, strong.Id, paralyzerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(paralyzer.Id, strong.Id, paralyzerDefinition.Attack.Id, 0),
@@ -551,7 +551,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(weak, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(paralyzer.Id, new BattleAttackUnitTarget(weak.Id), [paralyzerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(paralyzer.Id, weak.Id, paralyzerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(paralyzer.Id, weak.Id, paralyzerDefinition.Attack.Id, 0),
@@ -592,7 +592,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(enemy, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(alchemist.Id, new BattleAttackUnitTarget(strong.Id), [alchemistDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(alchemist.Id, strong.Id, alchemistDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(alchemist.Id, strong.Id, alchemistDefinition.Attack.Id, 0),
@@ -626,7 +626,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(normal, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(normal.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, normal.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, normal.Id, attackerDefinition.Attack.Id, 5),
@@ -659,7 +659,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(unwarded, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(unwarded.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, unwarded.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, unwarded.Id, attackerDefinition.Attack.Id, 5),
@@ -689,7 +689,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(warded, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(warded.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, warded.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackBlockedEvent(attacker.Id, warded.Id, attackerDefinition.Attack.Id, ward),
@@ -719,7 +719,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(immune, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitDefendedEvent(attacker.Id),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleUnitTurnEndedEvent(attacker.Id),
@@ -754,7 +754,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(champion, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(doppelganger.Id, new BattleAttackUnitTarget(champion.Id), [doppelgangerDefinition.Attack.Id]),
             new BattleUnitTransformAppliedEvent(doppelganger.Id, doppelganger.Id, BattleTransformType.Doppelganger, championDefinition.Id, 1, 200, 200, null),
             new BattleUnitTurnEndingEvent(doppelganger.Id),
@@ -796,7 +796,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(weak, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(transformer.Id, new BattleAttackUnitTarget(weak.Id), [transformerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(transformer.Id, weak.Id, transformerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(transformer.Id, weak.Id, transformerDefinition.Attack.Id, 0),
@@ -834,7 +834,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(weak, new GridPosition(0, 1))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(transformer.Id, new BattleAttackUnitTarget(strong.Id), [transformerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(transformer.Id, strong.Id, transformerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(transformer.Id, strong.Id, transformerDefinition.Attack.Id, 0),
@@ -861,7 +861,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(armored, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(armored.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, armored.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, armored.Id, attackerDefinition.Attack.Id, 1),
@@ -896,9 +896,44 @@ public sealed class BattleEngineAiActionTests
             .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(wounded.Id)),
             new BattleUnitHealedEvent(wounded.Id, 70),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void HealPotionForbiddenTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 100, initiative: 30, damage: 10);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 50, initiative: 40, damage: 5);
+        ItemDefinition potion = PotionDefinition("potion", ItemCategory.PotionHeal, new HealItemEffect(50));
+
+        BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healthy = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 40);
+        BattleUnit wounded = Unit(2, allyDefinition.Id, BattleSide.Attacker, hitpoints: 20);
+        BattleUnit defender = Unit(3, defenderDefinition.Id, BattleSide.Defender, hitpoints: 50);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(potion)
+            .WithAttacker(leader, GridPosition.FrontBottom)
+            .WithAttacker(healthy, GridPosition.BackBottom)
+            .WithAttacker(wounded, GridPosition.BackCenter)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: false), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [leaderDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id, 10),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -930,7 +965,7 @@ public sealed class BattleEngineAiActionTests
             .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(wounded.Id)),
             new BattleUnitHealedEvent(wounded.Id, 70),
             new BattleUnitTurnEndingEvent(leader.Id),
@@ -962,7 +997,7 @@ public sealed class BattleEngineAiActionTests
             .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [leaderDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id, 10),
@@ -995,7 +1030,7 @@ public sealed class BattleEngineAiActionTests
             .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [leaderDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id, 10),
@@ -1030,7 +1065,7 @@ public sealed class BattleEngineAiActionTests
             .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [leaderDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id, 10),
@@ -1065,7 +1100,7 @@ public sealed class BattleEngineAiActionTests
             .WithItem(new BattleItem(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, Charges: null, Used: false))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(dragon.Id), [leaderDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(leader.Id, dragon.Id, leaderDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(leader.Id, dragon.Id, leaderDefinition.Attack.Id, 10),
@@ -1091,7 +1126,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(enemy, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(enemy.Id), [attackerDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(attacker.Id, enemy.Id, attackerDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(attacker.Id, enemy.Id, attackerDefinition.Attack.Id, 10),
@@ -1130,7 +1165,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(immune, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitRetreatingEvent(leader.Id),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -1158,7 +1193,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(enemy, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitRetreatingEvent(leader.Id),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
@@ -1187,7 +1222,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(enemy, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(enemy.Id), [leaderDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id, 10),
@@ -1217,7 +1252,7 @@ public sealed class BattleEngineAiActionTests
             .WithDefender(enemy, new GridPosition(0, 0))
             .Build();
 
-        engine.CheckCommand(new BattleAiActionCommand(), [
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(enemy.Id), [leaderDefinition.Attack.Id]),
             new BattleUnitAttackedEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id),
             new BattleUnitAttackHitEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id, 10),

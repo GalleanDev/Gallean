@@ -2,7 +2,7 @@ using Gallean.Common;
 
 namespace Gallean.Engine;
 
-public sealed record BattleAiActionCommand : IBattleCommand<Empty>
+public sealed record BattleAiActionCommand(bool CanUseItems) : IBattleCommand<Empty>
 {
     public BattleCommandResult Execute(BattleState state, IEngineContext context)
     {
@@ -11,7 +11,7 @@ public sealed record BattleAiActionCommand : IBattleCommand<Empty>
             return BattleCommandResult.Fail(BattleCommandError.ActionNotAvailable);
         }
 
-        BattleAiActionPlan plan = new BattleAiPlanner(context, canUseItems: true).DecideAction(state);
+        BattleAiActionPlan plan = new BattleAiPlanner(context, canUseItems: CanUseItems).DecideAction(state);
 
         return plan.Command.Execute(state, context);
     }

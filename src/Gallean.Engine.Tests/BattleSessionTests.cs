@@ -114,7 +114,7 @@ public sealed class BattleSessionTests
         Assert.That(battle.State.GetUnit(defenderUnitId).Hitpoints, Is.EqualTo(5));
         Assert.That(battle.State.CurrentUnitId, Is.EqualTo(defenderUnitId));
         Assert.That(battle.IsAiTurn, Is.True);
-        BattleCommandResult aiActionResult = battle.DispatchCommand(new BattleAiActionCommand());
+        BattleCommandResult aiActionResult = battle.DispatchCommand(new BattleAiActionCommand(CanUseItems: true));
         Assert.That(aiActionResult.Error, Is.Null);
 
         Assert.That(battle.State.GetUnit(attackerUnitId).Hitpoints, Is.EqualTo(5));
