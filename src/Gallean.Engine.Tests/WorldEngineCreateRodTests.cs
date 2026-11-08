@@ -266,7 +266,7 @@ public sealed class WorldEngineCreateRodTests
 
         engine.CheckCommandError(
             new WorldCreateRodCommand(stack.Id, new WorldPosition(4, 4)),
-            WorldCommandError.RodInvalidLocation);
+            WorldCommandError.RodLeaderInCity);
     }
 
     [Test]

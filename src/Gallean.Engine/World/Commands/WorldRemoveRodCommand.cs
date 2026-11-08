@@ -32,7 +32,7 @@ public sealed record WorldRemoveRodCommand(
 
         if (plan.GetFortificationAt(stack.Position) is WorldCity or WorldCapital)
         {
-            return WorldCommandResult.Fail(WorldCommandError.RodInvalidLocation);
+            return WorldCommandResult.Fail(WorldCommandError.RodLeaderInCity);
         }
 
         if (!state.Map.IsValidPosition(TargetPosition))

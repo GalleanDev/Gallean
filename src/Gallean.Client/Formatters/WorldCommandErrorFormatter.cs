@@ -64,6 +64,7 @@ internal static class WorldCommandErrorFormatter
             WorldCommandError.RodInvalidLocation => Tr("A rod cannot be planted there"),
             WorldCommandError.RodNotFound => Tr("There is no rod at that location"),
             WorldCommandError.RodLeaderDead => Tr("The party leader must be alive to plant a rod"),
+            WorldCommandError.RodLeaderInCity => Tr("Leave the city before planting or destroying a rod"),
             WorldCommandError.RodLeaderRequired => Tr("Only a leader with the Rod Planting ability can plant rods"),
             WorldCommandError.SiteNotFound => Tr("This site is no longer available"),
             WorldCommandError.SpellAlreadyCastThisTurn => Tr("This spell has already been cast this turn"),

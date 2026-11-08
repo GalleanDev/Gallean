@@ -222,7 +222,7 @@ public sealed class WorldEngineRemoveRodTests
 
         engine.CheckCommandError(
             new WorldRemoveRodCommand(stack.Id, new WorldPosition(4, 4)),
-            WorldCommandError.RodInvalidLocation);
+            WorldCommandError.RodLeaderInCity);
     }
 
     [Test]

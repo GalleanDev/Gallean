@@ -58,6 +58,7 @@ public enum WorldCommandError
     RodInvalidLocation,
     RodNotFound,
     RodLeaderDead,
+    RodLeaderInCity,
     RodLeaderRequired,
     SiteNotFound,
     SpellAlreadyCastThisTurn,
