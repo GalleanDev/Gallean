@@ -52,11 +52,6 @@
         </ListBox.Styles>
         <local:Blankslate.Content>
           <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-            <local:IconVisual Moniker="Human"
-                              Width="36"
-                              Height="36"
-                              HorizontalAlignment="Center"
-                              Foreground="{StaticResource SecondaryTextBrush}" />
             <TextBlock Text="{local:Text 'No exported leaders yet.'}"
                        Classes="body"
                        Foreground="{StaticResource PrimaryTextBrush}"
