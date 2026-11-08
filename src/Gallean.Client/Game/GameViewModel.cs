@@ -406,6 +406,17 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         }
     }
 
+    [RelayCommand]
+    private void ExportLeader()
+    {
+        if (activeGame is null)
+        {
+            return;
+        }
+
+        OpenScreen(new LeaderExportSelectScreenViewModel(activeGame, this, CloseScreen));
+    }
+
     public async Task<IReadOnlyList<LeaderEntry>> EnumerateLeadersAsync()
     {
         try

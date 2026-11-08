@@ -7,13 +7,16 @@ namespace Gallean.Client;
 
 internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameScreenViewModel
 {
-    private readonly GameMenuViewModel owner;
+    private readonly Action<AbstractScreenViewModel> onExported;
     private readonly ScenarioExporter scenarioExporter;
 
-    public LeaderExportSelectScreenViewModel(GameModel gameModel, GameViewModel gameViewModel, GameMenuViewModel owner)
+    public LeaderExportSelectScreenViewModel(
+        GameModel gameModel,
+        GameViewModel gameViewModel,
+        Action<AbstractScreenViewModel> onExported)
         : base(gameModel, gameViewModel)
     {
-        this.owner = owner;
+        this.onExported = onExported;
 
         scenarioExporter = new ScenarioExporter(gameModel.Definitions, gameModel.Texts, gameModel.Globals);
         Leaders = BuildLeaders(Snapshot);
@@ -59,7 +62,7 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
         if (await Game.TryExportLeaderAsync(scenarioLeader))
         {
             Game.ShowInfo(IconMoniker.Leader, Tr("Leader exported"), SelectedLeader.Name);
-            Game.CloseScreen(owner);
+            onExported(this);
         }
     }
 
