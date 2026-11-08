@@ -13,6 +13,17 @@ internal sealed partial class CityTabView : UserControl
 
         DragDropBehavior.Attach(this);
         AddHandler(PointerReleasedEvent, OnItemPointerReleased, RoutingStrategies.Bubble, true);
+        AddHandler(PointerPressedEvent, OnTargetingPointerPressed, RoutingStrategies.Bubble);
+    }
+
+    private void OnTargetingPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (DataContext is CityTabViewModel { TargetedAction: not null } viewModel)
+        {
+            e.Handled = true;
+
+            viewModel.CancelTargetingCommand.Execute(null);
+        }
     }
 
     private void OnItemPointerReleased(object? sender, PointerReleasedEventArgs e)
