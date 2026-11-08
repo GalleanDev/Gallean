@@ -47,8 +47,8 @@ public sealed class LeaderStoreTests
 
         Assert.That(await store.EnumerateAsync(), Is.Empty);
 
-        LeaderEntry first = await store.SaveAsync(Uther);
-        LeaderEntry second = await store.SaveAsync(Elena);
+        LeaderEntry first = await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
+        LeaderEntry second = await store.SaveAsync(Elena, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
 
         Assert.That(first, Is.EqualTo(new LeaderEntry(new LeaderId(1), Uther)));
         Assert.That(second, Is.EqualTo(new LeaderEntry(new LeaderId(2), Elena)));
@@ -66,15 +66,15 @@ public sealed class LeaderStoreTests
 
         LeaderStore store = new(sb.RootPath);
 
-        await store.SaveAsync(Uther);
-        await store.SaveAsync(Elena);
+        await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
+        await store.SaveAsync(Elena, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
         await store.DeleteAsync(new LeaderId(1));
 
         Assert.That(await store.EnumerateAsync(), Is.EqualTo([
             new LeaderEntry(new LeaderId(2), Elena)
         ]));
 
-        LeaderEntry entry = await store.SaveAsync(Uther);
+        LeaderEntry entry = await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
 
         Assert.That(entry.Id, Is.EqualTo(new LeaderId(3)));
     }
@@ -86,7 +86,7 @@ public sealed class LeaderStoreTests
 
         File.WriteAllLines(sb.GetPath("leader-4.json"), [
             "{",
-            "  \"formatVersion\": 1,",
+            "  \"formatVersion\": 2,",
             "  \"leader\": {",
             "    \"unit\": {",
             "      \"id\": \"S107UN0001\",",
@@ -116,7 +116,9 @@ public sealed class LeaderStoreTests
             "    \"inventory\": [],",
             "    \"pendingLeaderUpgrades\": 1,",
             "    \"battlesWon\": 7",
-            "  }",
+            "  },",
+            "  \"savedAt\": \"2001-02-03T04:05:06+00:00\",",
+            "  \"savedBy\": \"1.2.3+4567\"",
             "}"
         ]);
 
@@ -134,11 +136,11 @@ public sealed class LeaderStoreTests
 
         LeaderStore store = new(sb.RootPath);
 
-        await store.SaveAsync(Elena);
+        await store.SaveAsync(Elena, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
 
         Assert.That(File.ReadAllLines(sb.GetPath("leader-1.json")), Is.EqualTo([
             "{",
-            "  \"formatVersion\": 1,",
+            "  \"formatVersion\": 2,",
             "  \"leader\": {",
             "    \"unit\": {",
             "      \"id\": \"S108UN0001\",",
@@ -156,7 +158,9 @@ public sealed class LeaderStoreTests
             "    \"inventory\": [],",
             "    \"pendingLeaderUpgrades\": 0,",
             "    \"battlesWon\": 0",
-            "  }",
+            "  },",
+            "  \"savedAt\": \"2001-02-03T04:05:06+00:00\",",
+            "  \"savedBy\": \"1.2.3\\u002B4567\"",
             "}"
         ]));
     }
@@ -168,7 +172,7 @@ public sealed class LeaderStoreTests
 
         LeaderStore store = new(sb.RootPath);
 
-        await store.SaveAsync(Uther);
+        await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), "1.2.3+4567");
 
         File.WriteAllText(sb.GetPath("leader-2.json"), "not a leader");
         File.WriteAllText(sb.GetPath("leader-3.json"), "{\"formatVersion\":99,\"leader\":null}");

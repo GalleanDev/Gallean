@@ -36,7 +36,7 @@ public sealed class LeaderStore(string directory)
         return entries;
     }
 
-    public async Task<LeaderEntry> SaveAsync(ScenarioLeader leader, CancellationToken cancellationToken = default)
+    public async Task<LeaderEntry> SaveAsync(ScenarioLeader leader, DateTimeOffset savedAt, string? savedBy, CancellationToken cancellationToken = default)
     {
         using IDisposable operation = await BeginOperationAsync(cancellationToken);
 
@@ -48,7 +48,7 @@ public sealed class LeaderStore(string directory)
 
         await JsonSerializer.SerializeAsync(
             writer.Stream,
-            LeaderFile.Create(leader),
+            LeaderFile.Create(leader, savedAt, savedBy),
             LeaderJsonSerializerContext.Default.LeaderFile,
             cancellationToken);
 

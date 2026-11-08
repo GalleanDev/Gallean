@@ -424,7 +424,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     {
         try
         {
-            await leaderStore.SaveAsync(leader);
+            await leaderStore.SaveAsync(leader, DateTimeOffset.Now, clientVersion.Serialize());
 
             return true;
         }

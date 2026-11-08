@@ -930,8 +930,8 @@ public sealed class VisualTests
             BattlesWon: 90);
         LeaderStore store = new(sb.GetPath("leaders"));
 
-        await store.SaveAsync(leader);
-        await store.SaveAsync(dwarfLeader);
+        await store.SaveAsync(leader, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
+        await store.SaveAsync(dwarfLeader, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
