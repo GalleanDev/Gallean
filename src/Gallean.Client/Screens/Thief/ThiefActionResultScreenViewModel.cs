@@ -4,31 +4,42 @@ namespace Gallean.Client;
 
 internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
 {
-    private ThiefActionResultScreenViewModel(string title, string text, WorldThiefActionType type, bool isSuccess)
+    private ThiefActionResultScreenViewModel(
+        string title,
+        string text,
+        WorldThiefActionType type,
+        string actionName,
+        bool isSuccess)
     {
         IsSuccess = isSuccess;
         Title = title;
         Text = text;
+        ActionName = actionName;
+        ActionIcon = ThiefActionIconResolver.Resolve(type);
         ImageKey = new AssetSpriteKey.ThiefActionImage(type, IsLarge: true);
     }
 
     public bool IsSuccess { get; }
     public string Title { get; }
     public string Text { get; }
+    public string ActionName { get; }
+    public IconMoniker ActionIcon { get; }
     public AssetSpriteKey.ThiefActionImage ImageKey { get; }
 
     public static ThiefActionResultScreenViewModel CreateMineResult(
         WorldThiefActionType type,
+        string actionName,
         bool isSuccess)
     {
         string title = FormatMineTitle(isSuccess);
         string text = FormatMineText(type, isSuccess);
 
-        return new ThiefActionResultScreenViewModel(title, text, type, isSuccess);
+        return new ThiefActionResultScreenViewModel(title, text, type, actionName, isSuccess);
     }
 
     public static ThiefActionResultScreenViewModel CreateTheirResult(
         WorldThiefActionType type,
+        string actionName,
         WorldUnitGroup target,
         bool isSuccess,
         string theirLordName)
@@ -36,7 +47,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         string title = Tr("Thief actions");
         string text = FormatTheirText(type, target, isSuccess, theirLordName);
 
-        return new ThiefActionResultScreenViewModel(title, text, type, isSuccess);
+        return new ThiefActionResultScreenViewModel(title, text, type, actionName, isSuccess);
     }
 
     public override bool CanContinue => true;

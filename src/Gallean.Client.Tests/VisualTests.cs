@@ -1587,7 +1587,10 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateMineResult(WorldThiefActionType.StealGold, isSuccess: true));
+        WorldThiefActionDefinition definition = gameModel.Definitions.GetThiefAction(WorldThiefActionType.StealGold);
+        GlobalText actionName = gameModel.Texts.GetGlobalText(definition.NameTextId);
+
+        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateMineResult(WorldThiefActionType.StealGold, actionName.Text, isSuccess: true));
 
         await CaptureAsync(window);
     }
@@ -1607,7 +1610,72 @@ public sealed class VisualTests
 
         await WaitForWorldAsync(window);
 
-        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateMineResult(WorldThiefActionType.StealGold, isSuccess: false));
+        WorldThiefActionDefinition definition = gameModel.Definitions.GetThiefAction(WorldThiefActionType.StealGold);
+        GlobalText actionName = gameModel.Texts.GetGlobalText(definition.NameTextId);
+
+        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateMineResult(WorldThiefActionType.StealGold, actionName.Text, isSuccess: false));
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
+    public async Task WorldThiefActionTheirResultTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        await WaitForWorldAsync(window);
+
+        GameSnapshot snapshot = gameModel.Snapshot;
+        WorldPlayer thiefOwner = snapshot.WorldState.Players.Values.First(player => player.Id != snapshot.ViewPlayerId && player.Race != WorldRace.Neutral);
+        WorldStack target = snapshot.WorldState.Stacks.Values.First(stack => stack.OwnerId == snapshot.ViewPlayerId);
+        WorldThiefActionDefinition definition = gameModel.Definitions.GetThiefAction(WorldThiefActionType.StealItem);
+        GlobalText actionName = gameModel.Texts.GetGlobalText(definition.NameTextId);
+
+        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateTheirResult(
+            WorldThiefActionType.StealItem,
+            actionName.Text,
+            new WorldUnitGroup.Stack(target.Id),
+            isSuccess: true,
+            WorldPlayerFormatter.FormatLordName(gameModel.Texts, thiefOwner)));
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
+    public async Task WorldThiefActionTheirCapturedTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+
+        await WaitForWorldAsync(window);
+
+        GameSnapshot snapshot = gameModel.Snapshot;
+        WorldPlayer thiefOwner = snapshot.WorldState.Players.Values.First(player => player.Id != snapshot.ViewPlayerId && player.Race != WorldRace.Neutral);
+        WorldStack target = snapshot.WorldState.Stacks.Values.First(stack => stack.OwnerId == snapshot.ViewPlayerId);
+        WorldThiefActionDefinition definition = gameModel.Definitions.GetThiefAction(WorldThiefActionType.StealItem);
+        GlobalText actionName = gameModel.Texts.GetGlobalText(definition.NameTextId);
+
+        gameViewModel.OpenScreen(ThiefActionResultScreenViewModel.CreateTheirResult(
+            WorldThiefActionType.StealItem,
+            actionName.Text,
+            new WorldUnitGroup.Stack(target.Id),
+            isSuccess: false,
+            WorldPlayerFormatter.FormatLordName(gameModel.Texts, thiefOwner)));
 
         await CaptureAsync(window);
     }

@@ -11,6 +11,12 @@ internal sealed class ModalPanel : ContentControl
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<ModalPanel, string?>(nameof(Title));
 
+    public static readonly StyledProperty<string?> SubtitleProperty =
+        AvaloniaProperty.Register<ModalPanel, string?>(nameof(Subtitle));
+
+    public static readonly StyledProperty<IconMoniker?> SubtitleIconProperty =
+        AvaloniaProperty.Register<ModalPanel, IconMoniker?>(nameof(SubtitleIcon));
+
     public static readonly StyledProperty<object?> FooterProperty =
         AvaloniaProperty.Register<ModalPanel, object?>(nameof(Footer));
 
@@ -21,6 +27,18 @@ internal sealed class ModalPanel : ContentControl
     {
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
+    }
+
+    public string? Subtitle
+    {
+        get => GetValue(SubtitleProperty);
+        set => SetValue(SubtitleProperty, value);
+    }
+
+    public IconMoniker? SubtitleIcon
+    {
+        get => GetValue(SubtitleIconProperty);
+        set => SetValue(SubtitleIconProperty, value);
     }
 
     public object? Footer

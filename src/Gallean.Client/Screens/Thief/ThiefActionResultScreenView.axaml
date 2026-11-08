@@ -5,7 +5,7 @@
              x:DataType="local:ThiefActionResultScreenViewModel">
 
   <Border Background="{StaticResource ModalBackdropBrush}">
-    <local:ModalPanel Width="440" Padding="28,24" Title="{Binding Title}" InitialFocus="{Binding #ContinueButton}">
+    <local:ModalPanel Width="440" Padding="28,24" Title="{Binding Title}" Subtitle="{Binding ActionName}" SubtitleIcon="{Binding ActionIcon}" InitialFocus="{Binding #ContinueButton}">
 
       <local:ModalPanel.Footer>
         <Grid ColumnDefinitions="*,Auto,*">

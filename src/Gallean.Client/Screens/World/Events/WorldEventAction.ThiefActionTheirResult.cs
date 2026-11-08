@@ -9,6 +9,7 @@ internal abstract partial record WorldEventAction
         ImmutableArray<AssetSoundKey> Sounds,
         WorldPosition? FocusPosition,
         WorldThiefActionType Type,
+        string ActionName,
         WorldUnitGroup Target,
         bool IsSuccess,
         string TheirLordName) : Screen(Sounds, FocusPosition)

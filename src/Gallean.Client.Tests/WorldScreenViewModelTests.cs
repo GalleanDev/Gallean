@@ -6345,6 +6345,8 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(result.Title, Is.EqualTo("Success!"));
         Assert.That(result.Text, Is.EqualTo("Your spy has infiltrated the enemy ranks. Right-click enemy parties and cities to reveal information about them!"));
+        Assert.That(result.ActionName, Is.EqualTo("Spy-name"));
+        Assert.That(result.ActionIcon, Is.EqualTo(IconMoniker.ThiefSpy));
         Assert.That(result.IsSuccess, Is.True);
         Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.Spy, IsLarge: true)));
 
@@ -6419,6 +6421,8 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(result.Title, Is.EqualTo("Failure!"));
         Assert.That(result.Text, Is.EqualTo("Your thief has been captured and executed!"));
+        Assert.That(result.ActionName, Is.EqualTo("PoisonStack-name"));
+        Assert.That(result.ActionIcon, Is.EqualTo(IconMoniker.ThiefPoisonStack));
         Assert.That(result.IsSuccess, Is.False);
         Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.PoisonStack, IsLarge: true)));
 
@@ -6483,6 +6487,8 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(result.Title, Is.EqualTo("Thief actions"));
         Assert.That(result.Text, Is.EqualTo("Player2 has poisoned your party."));
+        Assert.That(result.ActionName, Is.EqualTo("PoisonStack-name"));
+        Assert.That(result.ActionIcon, Is.EqualTo(IconMoniker.ThiefPoisonStack));
         Assert.That(result.ImageKey, Is.EqualTo(new AssetSpriteKey.ThiefActionImage(WorldThiefActionType.PoisonStack, IsLarge: true)));
 
         gameViewModel.EscapeCommand.Execute(null);

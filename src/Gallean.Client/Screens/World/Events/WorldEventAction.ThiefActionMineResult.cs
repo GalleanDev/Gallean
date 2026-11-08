@@ -8,6 +8,7 @@ internal abstract partial record WorldEventAction
         ImmutableArray<AssetSoundKey> Sounds,
         WorldPosition? FocusPosition,
         WorldThiefActionType Type,
+        string ActionName,
         bool IsSuccess) : Screen(Sounds, FocusPosition)
     {
         public override TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor)

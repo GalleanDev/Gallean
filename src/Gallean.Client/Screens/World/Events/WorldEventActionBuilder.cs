@@ -531,12 +531,17 @@ internal sealed class WorldEventActionBuilder(
 
     private WorldEventAction BuildThiefActionResult(Entry.ThiefActionResult result)
     {
+        WorldThiefActionDefinition definition = definitions.GetThiefAction(result.Type);
+
+        string actionName = texts.GetGlobalText(definition.NameTextId).Text;
+
         if (result.PlayerId == ViewPlayerId)
         {
             return new WorldEventAction.ThiefActionMineResult(
                 [new AssetSoundKey.ThiefAction()],
                 result.GetFocusPosition(ViewPlayerId),
                 result.Type,
+                actionName,
                 result.IsSuccess);
         }
         else if (result.Target is not null && result.TargetPlayerId == ViewPlayerId)
@@ -547,6 +552,7 @@ internal sealed class WorldEventActionBuilder(
                 [new AssetSoundKey.ThiefAction()],
                 result.GetFocusPosition(ViewPlayerId),
                 result.Type,
+                actionName,
                 result.Target,
                 result.IsSuccess,
                 WorldPlayerFormatter.FormatLordName(texts, player));
