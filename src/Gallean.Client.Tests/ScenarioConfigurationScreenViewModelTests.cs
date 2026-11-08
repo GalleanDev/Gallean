@@ -351,6 +351,40 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     }
 
     [Test]
+    public async Task ImportOrderTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        LeaderStore store = new(sb.GetPath("leaders"));
+
+        await store.SaveAsync(Uther with { Unit = Uther.Unit with { Name = new LiteralUnitName("Novice") }, BattlesWon = 5 });
+        await store.SaveAsync(Uther with { Unit = Uther.Unit with { Name = new LiteralUnitName("Veteran") }, BattlesWon = 60 });
+        await store.SaveAsync(Uther);
+
+        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);
+        (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
+        ScenarioConfigurationScreenViewModel viewModel = new(
+            gameViewModel,
+            texts,
+            definitions,
+            scenario,
+            [new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))]);
+
+        gameViewModel.ShowScreen(viewModel);
+
+        await viewModel.ImportLeaderCommand.ExecuteAsync(null);
+
+        LeaderImportScreenViewModel picker = Assert.IsOfType<LeaderImportScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(FormatImportLeaders(picker.Leaders), Is.EqualTo([
+            "2 Veteran Lv. 12 | 60 battles won | items=1 | available",
+            "3 Uther Lv. 12 | 34 battles won | items=1 | available",
+            "1 Novice Lv. 12 | 5 battles won | items=1 | available"
+        ]));
+    }
+
+    [Test]
     public void HotseatNoImportTest()
     {
         GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);

@@ -68,6 +68,12 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
             return rv;
         }
 
+        rv = right.Entry.Leader.BattlesWon.CompareTo(left.Entry.Leader.BattlesWon);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
         rv = left.Entry.Id.Value.CompareTo(right.Entry.Id.Value);
         if (rv != 0)
         {
