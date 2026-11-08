@@ -61,7 +61,7 @@
                       </ItemsControl.ItemsPanel>
                       <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="assets:AssetSpriteKey">
-                          <local:SpriteVisual SpriteKey="{Binding}" Stretch="Uniform" Width="24" Height="24" />
+                          <local:SpriteVisual SpriteKey="{Binding}" Stretch="Uniform" Width="32" Height="32" />
                         </DataTemplate>
                       </ItemsControl.ItemTemplate>
                     </ItemsControl>
