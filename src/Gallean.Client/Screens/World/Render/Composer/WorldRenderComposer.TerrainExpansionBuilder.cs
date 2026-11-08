@@ -53,9 +53,20 @@ internal sealed partial class WorldRenderComposer
         private static readonly TimeSpan StartVariation = TimeSpan.FromMilliseconds(200);
         private static readonly TimeSpan FadeDuration = TimeSpan.FromSeconds(0.5);
 
-        public TerrainExpansion Build()
+        public TerrainExpansionAnimation? Build()
         {
+            if (oldMap.Width != map.Width || oldMap.Height != map.Height)
+            {
+                return null;
+            }
+
             Dictionary<WorldPosition, TileDiff> diff = ComputeDiff();
+
+            if (diff.Count <= 0)
+            {
+                return null;
+            }
+
             Dictionary<Corner, TimeSpan> starts = ComputeStarts(diff);
             MapTerrain oldTerrain = Terrain.Build(new Terrain.Input(oldMap));
 
@@ -122,7 +133,7 @@ internal sealed partial class WorldRenderComposer
                 }
             }
 
-            return new TerrainExpansion(
+            return new TerrainExpansionAnimation(
                 new AssetSoundKey.Occupy(),
                 new MapTerrain(oldMap, oldTiles, oldGroundTerrains, oldBorders),
                 tiles,

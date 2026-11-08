@@ -48,6 +48,7 @@ internal sealed partial class WorldRenderComposer(
         WorldStackId? animatedStackId = animation?.Accept(WorldAnimationStackVisitor.Instance, Empty.Value);
 
         MapTerrain terrain = terrainPart.Resolve(new Terrain.Input(state.Map));
+        TerrainExpansionAnimation? terrainExpansion = ResolveTerrainExpansion(terrain);
         IReadOnlyList<Cloud> clouds = cloudsPart.Resolve(new Clouds.Input(state.Map.Width, state.Map.Height));
         IReadOnlyList<FogTile> fogTiles = fogPart.Resolve(new Fog.Input(visibility));
         IReadOnlyList<MapObject> landmarks = landmarksPart.Resolve(new Landmarks.Input(state.Landmarks, state.Map, visibility));
@@ -86,6 +87,7 @@ internal sealed partial class WorldRenderComposer(
             mapObjects,
             stacks,
             animation,
+            terrainExpansion,
             clouds,
             fogTiles,
             objectiveMarkers,
@@ -106,6 +108,7 @@ internal sealed partial class WorldRenderComposer(
         IReadOnlyList<MapObject> mapObjects,
         IReadOnlyList<MapObject> stacks,
         WorldAnimation? animation,
+        TerrainExpansionAnimation? terrainExpansion,
         IReadOnlyList<Cloud> clouds,
         IReadOnlyList<FogTile> fogTiles,
         IReadOnlyList<ObjectiveMarker> objectiveMarkers,
@@ -121,6 +124,7 @@ internal sealed partial class WorldRenderComposer(
             ReferenceEquals(previousState.MapObjects, mapObjects) &&
             ReferenceEquals(previousState.Stacks, stacks) &&
             ReferenceEquals(previousState.Animation, animation) &&
+            ReferenceEquals(previousState.TerrainExpansion, terrainExpansion) &&
             ReferenceEquals(previousState.Clouds, clouds) &&
             ReferenceEquals(previousState.FogTiles, fogTiles) &&
             ReferenceEquals(previousState.ObjectiveMarkers, objectiveMarkers) &&
@@ -140,6 +144,7 @@ internal sealed partial class WorldRenderComposer(
                 mapObjects,
                 stacks,
                 animation,
+                terrainExpansion,
                 clouds,
                 fogTiles,
                 objectiveMarkers,
@@ -182,7 +187,6 @@ internal sealed partial class WorldRenderComposer(
                 WorldAnimationState.StackCreate data => AnimationBuilder.BuildStackCreate(assets, data.Position),
                 WorldAnimationState.StackOwnerChange data => AnimationBuilder.BuildStackOwnerChange(assets, data.Position),
                 WorldAnimationState.MountainRemove data => AnimationBuilder.BuildMountainRemove(assets, data.Center, data.Radius),
-                WorldAnimationState.TerrainExpansion data => new TerrainExpansionBuilder(data.OldMap, request.State.Map).Build(),
                 WorldAnimationState.Pause data => new Pause(data.Duration),
                 WorldAnimationState.StackBattle data => AnimationBuilder.BuildStackBattle(assets, data.Position),
                 WorldAnimationState.BattleStart data => new BattleTransition(data.Position, BattleTransitionType.In),
@@ -201,6 +205,22 @@ internal sealed partial class WorldRenderComposer(
         }
 
         return currentAnimation;
+    }
+
+    private TerrainExpansionAnimation? ResolveTerrainExpansion(MapTerrain terrain)
+    {
+        TerrainExpansionAnimation? previous = previousState?.TerrainExpansion;
+
+        if (previousState is not null && !ReferenceEquals(previousState.Terrain, terrain))
+        {
+            TerrainExpansionBuilder builder = new(previousState.Terrain.Map, terrain.Map);
+
+            return builder.Build() ?? previous;
+        }
+        else
+        {
+            return previous;
+        }
     }
 
     private static IReadOnlyList<Cursor> BuildCursors(

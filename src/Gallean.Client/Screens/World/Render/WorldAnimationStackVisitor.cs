@@ -11,5 +11,4 @@ internal sealed class WorldAnimationStackVisitor : IWorldAnimationVisitor<Empty,
     public WorldStackId? Visit(Pause animation, Empty context) => null;
     public WorldStackId? Visit(StackBattle animation, Empty context) => null;
     public WorldStackId? Visit(BattleTransition animation, Empty context) => null;
-    public WorldStackId? Visit(TerrainExpansion animation, Empty context) => null;
 }

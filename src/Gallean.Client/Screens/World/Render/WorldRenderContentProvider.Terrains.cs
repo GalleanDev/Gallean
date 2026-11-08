@@ -13,9 +13,9 @@ internal sealed partial class WorldRenderContentProvider
 
             Add(terrains, state.Terrain);
 
-            if (state.Animation is TerrainExpansion terrainExpansion)
+            if (state.TerrainExpansion is not null)
             {
-                Add(terrains, terrainExpansion.OldTerrain);
+                Add(terrains, state.TerrainExpansion.OldTerrain);
             }
 
             return new Terrains(terrains);

@@ -16,6 +16,7 @@ internal sealed class WorldRenderOperation(
     IAssetProvider assets,
     TimeSpan loopTime,
     TimeSpan animationTime,
+    TimeSpan terrainExpansionTime,
     float renderResolution,
     bool hitboxOverlay,
     DiagnosticsRecorder diagnostics) : ICustomDrawOperation
@@ -50,7 +51,7 @@ internal sealed class WorldRenderOperation(
         bool measure = diagnostics.IsEnabled;
         long renderStartTimestamp = measure ? Stopwatch.GetTimestamp() : 0;
 
-        renderer.Render(canvas, content, state, assets, loopTime, animationTime, renderResolution, hitboxOverlay);
+        renderer.Render(canvas, content, state, assets, loopTime, animationTime, terrainExpansionTime, renderResolution, hitboxOverlay);
 
         canvas.Restore();
 

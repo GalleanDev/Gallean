@@ -64,23 +64,6 @@ internal sealed partial class WorldRenderer
             return [];
         }
 
-        public IReadOnlyList<AnimationRenderItem> Visit(TerrainExpansion animation, TimeSpan animationTime)
-        {
-            List<AnimationRenderItem> items = [];
-
-            foreach (TerrainExpansionTree tree in animation.Trees)
-            {
-                double opacity = 1 - animationTime.ToAnimationProgress(tree.Start, animation.Fade);
-
-                if (opacity > 0)
-                {
-                    items.Add(new AnimationRenderItem.TileFeature(tree.AssetKey, tree.Position, opacity, tree.Depth));
-                }
-            }
-
-            return items;
-        }
-
         public IReadOnlyList<AnimationRenderItem> Visit(StackBattle animation, TimeSpan animationTime)
         {
             int frameIndex = AnimationRate.Sprites.GetFrameIndex(animationTime).Mod(animation.FrameCount);

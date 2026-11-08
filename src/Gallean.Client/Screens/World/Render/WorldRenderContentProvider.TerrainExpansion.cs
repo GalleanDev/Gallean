@@ -9,11 +9,11 @@ namespace Gallean.Client;
 internal sealed partial class WorldRenderContentProvider
 {
     private TerrainExpansionLayer? BuildTerrainExpansion(
-        WorldAnimation? animation,
+        TerrainExpansionAnimation? terrainExpansion,
         IReadOnlyDictionary<WorldMapTerrain, TerrainTexture> terrainTextures,
         IAssetProvider assets)
     {
-        if (animation is not TerrainExpansion terrainExpansion)
+        if (terrainExpansion is null)
         {
             return null;
         }
@@ -53,7 +53,7 @@ internal sealed partial class WorldRenderContentProvider
         return builder.Detach();
     }
 
-    private static SKVertices BuildTerrainExpansionMask(TerrainExpansion terrainExpansion)
+    private static SKVertices BuildTerrainExpansionMask(TerrainExpansionAnimation terrainExpansion)
     {
         Dictionary<(int X, int Y), ushort> corners = [];
         List<SKPoint> positions = [];

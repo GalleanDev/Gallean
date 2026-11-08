@@ -66,8 +66,8 @@ internal sealed partial class WorldRenderContentProvider
     private readonly TexturePart roadAtlasTexturePart = new();
     private readonly Part<IReadOnlyList<MapObject>, StackLayer> stackLayerPart = new();
     private readonly OverlayPart<IReadOnlyList<MapTileBorder>, LandOverlayKey> terrainExpansionLandOverlayPart = new();
-    private readonly Part<WorldRenderState, WorldAnimation?, TerrainExpansionContent> terrainExpansionPart = new(static state => state.Animation);
-    private readonly Part<WorldRenderState, (MapTerrain Terrain, TerrainExpansion? TerrainExpansion), Terrains> terrainsPart = new(static state => (state.Terrain, state.Animation as TerrainExpansion));
+    private readonly Part<WorldRenderState, TerrainExpansionAnimation?, TerrainExpansionContent> terrainExpansionPart = new(static state => state.TerrainExpansion);
+    private readonly Part<WorldRenderState, (MapTerrain Terrain, TerrainExpansionAnimation? TerrainExpansion), Terrains> terrainsPart = new(static state => (state.Terrain, state.TerrainExpansion));
     private readonly Part<Terrains, Terrains, IReadOnlyDictionary<WorldMapTerrain, TerrainTexture>> terrainTexturesPart = new(static terrains => terrains);
     private readonly Part<WaterTiles, WaterTiles, WaterContent> waterPart = new(static tiles => tiles);
     private readonly Part<MapTerrain, WaterTiles> waterTilesPart = new();
@@ -86,7 +86,7 @@ internal sealed partial class WorldRenderContentProvider
         SpriteAtlas coastAtlas = coastAtlasPart.Resolve(state.Terrain, terrain => BuildCoastAtlas(terrain, assets));
         SpriteAtlas borderAtlas = borderAtlasPart.Resolve(state.Terrain, terrain => BuildBorderAtlas(terrain, terrainTextures, assets, landOverlayPart));
         SpriteAtlas roadAtlas = roadAtlasPart.Resolve(state.Terrain, terrain => BuildRoadAtlas(terrain, assets));
-        TerrainExpansionContent terrainExpansion = terrainExpansionPart.Resolve(state, source => new TerrainExpansionContent(BuildTerrainExpansion(source.Animation, terrainTextures, assets)));
+        TerrainExpansionContent terrainExpansion = terrainExpansionPart.Resolve(state, source => new TerrainExpansionContent(BuildTerrainExpansion(source.TerrainExpansion, terrainTextures, assets)));
         ObjectLayer objectLayer = objectAtlasPart.Resolve(state.MapObjects, objects => BuildObjectAtlas(objects, assets));
         IReadOnlyList<MountainCloudSprite> mountainClouds = mountainCloudsPart.Resolve(state.MapObjects, objects => BuildMountainClouds(objects, assets));
         StackLayer stackLayer = stackLayerPart.Resolve(state.Stacks, objects => BuildStackLayer(objects, assets));

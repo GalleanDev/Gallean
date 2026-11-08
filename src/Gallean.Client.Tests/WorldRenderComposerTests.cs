@@ -1339,6 +1339,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -1433,6 +1434,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -1527,6 +1529,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -2208,6 +2211,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -2461,6 +2465,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -2521,6 +2526,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -2729,6 +2735,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -2784,6 +2791,7 @@ public sealed class WorldRenderComposerTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -4573,12 +4581,13 @@ public sealed class WorldRenderComposerTests
             .Build()
             .State;
 
-        WorldAnimationState.TerrainExpansion animation = new(map);
         WorldRenderComposer composer = new(definitions, GameScenarioProvider.Empty, new TestMetadataProviderBuilder().Build());
-        WorldRenderState first = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty) with { Animation = animation });
-        WorldRenderState second = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty with { HoverTile = new WorldPosition(2, 1) }) with { Animation = animation });
+        WorldRenderState initial = composer.Compose(MakeSceneRequest(state, fogEnabled: true, cursor: WorldCursor.Empty));
+        WorldRenderState first = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty));
+        WorldRenderState second = composer.Compose(MakeSceneRequest(state with { Map = expandedMap }, fogEnabled: true, cursor: WorldCursor.Empty with { HoverTile = new WorldPosition(2, 1) }));
 
-        Assert.That(first.Animation, Is.EqualTo(new TerrainExpansion(
+        Assert.That(initial.TerrainExpansion, Is.Null);
+        Assert.That(first.TerrainExpansion, Is.EqualTo(new TerrainExpansionAnimation(
             new AssetSoundKey.Occupy(),
             new MapTerrain(
                 map,
@@ -4655,7 +4664,7 @@ public sealed class WorldRenderComposerTests
             [],
             TimeSpan.FromMilliseconds(500.0),
             TimeSpan.FromMilliseconds(974.0))));
-        Assert.That(second.Animation, Is.SameAs(first.Animation));
+        Assert.That(second.TerrainExpansion, Is.SameAs(first.TerrainExpansion));
     }
 
     [Test]

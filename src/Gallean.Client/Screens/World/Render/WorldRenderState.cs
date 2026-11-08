@@ -7,6 +7,7 @@ internal sealed partial record WorldRenderState(
     IReadOnlyList<WorldRenderState.MapObject> MapObjects,
     IReadOnlyList<WorldRenderState.MapObject> Stacks,
     WorldRenderState.WorldAnimation? Animation,
+    WorldRenderState.TerrainExpansionAnimation? TerrainExpansion,
     IReadOnlyList<WorldRenderState.Cloud> Clouds,
     IReadOnlyList<WorldRenderState.FogTile> FogTiles,
     IReadOnlyList<WorldRenderState.ObjectiveMarker> ObjectiveMarkers,
@@ -33,6 +34,7 @@ internal sealed partial record WorldRenderState(
                MapObjects.SequenceEqual(other.MapObjects) &&
                Stacks.SequenceEqual(other.Stacks) &&
                Animation == other.Animation &&
+               TerrainExpansion == other.TerrainExpansion &&
                Clouds.SequenceEqual(other.Clouds) &&
                FogTiles.SequenceEqual(other.FogTiles) &&
                ObjectiveMarkers.SequenceEqual(other.ObjectiveMarkers) &&
@@ -52,6 +54,7 @@ internal sealed partial record WorldRenderState(
         hash.AddSequence(MapObjects);
         hash.AddSequence(Stacks);
         hash.Add(Animation);
+        hash.Add(TerrainExpansion);
         hash.AddSequence(Clouds);
         hash.AddSequence(FogTiles);
         hash.AddSequence(ObjectiveMarkers);

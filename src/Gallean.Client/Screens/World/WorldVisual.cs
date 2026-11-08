@@ -27,6 +27,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
     private readonly AnimationClock animationClock = new();
     private readonly PlaybackClock playbackClock = new();
     private readonly AnimationPlayback<WorldRenderState.WorldAnimation> animationPlayback = new();
+    private readonly AnimationPlayback<WorldRenderState.TerrainExpansionAnimation> terrainExpansionPlayback = new();
     private readonly HashSet<Key> pressedKeys = [];
     private readonly WorldRenderer renderer = new();
     private readonly ScrollHelper scrollHelper = new();
@@ -461,7 +462,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
                 }
             }
 
-            if (animationPlayback.IsPlaying)
+            if (animationPlayback.IsPlaying || terrainExpansionPlayback.IsPlaying)
             {
                 redraw = true;
             }
@@ -587,6 +588,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
         RegisterAnimation(snapshot, playbackTime);
 
         TimeSpan animationTime = animationPlayback.GetElapsed(playbackTime);
+        TimeSpan terrainExpansionTime = terrainExpansionPlayback.GetElapsed(playbackTime);
         Matrix view = camera.GetViewMatrix();
         GameSettings settings = SettingsScope.GetSettings(this);
 
@@ -599,6 +601,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
             Assets,
             loopTime,
             animationTime,
+            terrainExpansionTime,
             settings.RenderResolutionRatio,
             IsHitboxOverlayVisible,
             Diagnostics));
@@ -607,6 +610,12 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
     private void RegisterAnimation(WorldScreenSnapshot? snapshot, TimeSpan now)
     {
         WorldRenderState.WorldAnimation? animation = snapshot?.WorldState.Animation;
+        WorldRenderState.TerrainExpansionAnimation? terrainExpansion = snapshot?.WorldState.TerrainExpansion;
+
+        if (terrainExpansionPlayback.Register(terrainExpansion, now) && terrainExpansion is not null)
+        {
+            Audio.PlaySound(terrainExpansion.SoundKey);
+        }
 
         if (animation is not null &&
             animationPlayback.Current is not null &&

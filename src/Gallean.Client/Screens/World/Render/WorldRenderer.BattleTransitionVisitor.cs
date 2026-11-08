@@ -13,6 +13,5 @@ internal sealed partial class WorldRenderer
         public BattleTransition? Visit(Pause animation, Empty context) => null;
         public BattleTransition? Visit(StackBattle animation, Empty context) => null;
         public BattleTransition? Visit(BattleTransition animation, Empty context) => animation;
-        public BattleTransition? Visit(TerrainExpansion animation, Empty context) => null;
     }
 }

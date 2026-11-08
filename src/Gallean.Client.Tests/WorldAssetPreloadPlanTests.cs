@@ -65,6 +65,7 @@ public sealed class WorldAssetPreloadPlanTests
             Highlights: new WorldRenderState.HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 

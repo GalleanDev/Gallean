@@ -27,7 +27,6 @@ internal sealed class WorldEventActionBuilder(
             Entry.StackCreate data => BuildStackCreate(data),
             Entry.StackOwnerChange data => BuildStackOwnerChange(data),
             Entry.MountainRemove data => BuildMountainRemove(data),
-            Entry.TerrainExpansion data => BuildTerrainExpansion(data),
             Entry.Unfog data => BuildUnfog(data),
             Entry.SpellCast data => BuildSpellCast(data),
             Entry.GlobalSpellCast data => BuildGlobalSpellCast(data),
@@ -137,20 +136,6 @@ internal sealed class WorldEventActionBuilder(
         if (visibility.IsRevealed(mountainRemove.Center))
         {
             return Animate(mountainRemove, visibility);
-        }
-        else
-        {
-            return WorldEventAction.None;
-        }
-    }
-
-    private WorldEventAction BuildTerrainExpansion(Entry.TerrainExpansion terrainExpansion)
-    {
-        WorldVisibility visibility = WorldVisibility.Create(terrainExpansion.State, ViewPlayerId, fogEnabled);
-
-        if (visibility.IsRevealed(terrainExpansion.Position))
-        {
-            return Animate(terrainExpansion, visibility);
         }
         else
         {

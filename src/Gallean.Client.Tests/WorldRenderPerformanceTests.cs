@@ -42,7 +42,7 @@ public sealed class WorldRenderPerformanceTests
     {
         PerformanceTimer timer = new();
         WorldRenderContent content = provider.Get(state, assets);
-        renderer.Render(canvas, content, state, assets, animationTime, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(canvas, content, state, assets, animationTime, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         canvas.Flush();
 
         return timer.Stop(iterations: 1);
@@ -61,7 +61,7 @@ public sealed class WorldRenderPerformanceTests
 
         for (int index = 0; index < warmup; index++)
         {
-            renderer.Render(canvas, provider.Get(state, assets), state, assets, animationTime, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+            renderer.Render(canvas, provider.Get(state, assets), state, assets, animationTime, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         }
 
         canvas.Flush();
@@ -70,7 +70,7 @@ public sealed class WorldRenderPerformanceTests
 
         for (int index = 0; index < iterations; index++)
         {
-            renderer.Render(canvas, provider.Get(state, assets), state, assets, animationTime, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+            renderer.Render(canvas, provider.Get(state, assets), state, assets, animationTime, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         }
 
         canvas.Flush();
@@ -117,7 +117,7 @@ public sealed class WorldRenderPerformanceTests
         SKCanvas canvas = recorder.BeginRecording(new SKRect(0, 0, ViewportWidth, ViewportHeight));
         canvas.SetMatrix(view);
 
-        renderer.Render(canvas, provider.Get(state, assets), state, assets, animationTime, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(canvas, provider.Get(state, assets), state, assets, animationTime, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         using SKPicture picture = recorder.EndRecording();
     }
@@ -193,7 +193,7 @@ public sealed class WorldRenderPerformanceTests
 
         WorldMap map = new(mapSide, mapSide, cells.MoveToImmutable());
 
-        return new WorldRenderState(Terrain: new MapTerrain(map, tiles, [WorldMapTerrain.Human], []), MapObjects: [], Stacks: [], Animation: null, Clouds: [], FogTiles: fogTiles, ObjectiveMarkers: [], AmbientSounds: [], SelectedPath: null, Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), Minimap: new MinimapState(mapSide, mapSide, [], []));
+        return new WorldRenderState(Terrain: new MapTerrain(map, tiles, [WorldMapTerrain.Human], []), MapObjects: [], Stacks: [], Animation: null, TerrainExpansion: null, Clouds: [], FogTiles: fogTiles, ObjectiveMarkers: [], AmbientSounds: [], SelectedPath: null, Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), Minimap: new MinimapState(mapSide, mapSide, [], []));
     }
 
     private static WorldRenderState AddMapObjects(WorldRenderState state)

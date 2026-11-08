@@ -139,22 +139,15 @@ internal sealed partial record WorldRenderState
         }
     }
 
-    public sealed record TerrainExpansion(
+    public sealed record TerrainExpansionAnimation(
         AssetSoundKey SoundKey,
         MapTerrain OldTerrain,
         IReadOnlyList<TerrainExpansionTile> Tiles,
         IReadOnlyList<TerrainExpansionTree> Trees,
         TimeSpan Fade,
-        TimeSpan Duration) : WorldAnimation
+        TimeSpan Duration) : IAnimationObject
     {
-        public override TimeSpan Duration { get; } = Duration;
-
-        public override TResult Accept<TContext, TResult>(IWorldAnimationVisitor<TContext, TResult> visitor, TContext context)
-        {
-            return visitor.Visit(this, context);
-        }
-
-        public bool Equals(TerrainExpansion? other)
+        public bool Equals(TerrainExpansionAnimation? other)
         {
             if (other is null)
             {

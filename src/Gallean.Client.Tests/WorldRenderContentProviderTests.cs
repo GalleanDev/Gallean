@@ -62,6 +62,7 @@ public sealed class WorldRenderContentProviderTests
             MapObjects: [.. objects.OrderBy(item => item.Depth)],
             Stacks: [],
             Animation: null,
+            TerrainExpansion: null,
             Clouds: [],
             FogTiles: fogTiles,
             SelectedPath: null,
@@ -207,7 +208,7 @@ public sealed class WorldRenderContentProviderTests
         WorldRenderState plain = BuildState();
         WorldRenderState state = plain with
         {
-            Animation = new TerrainExpansion(
+            TerrainExpansion = new TerrainExpansionAnimation(
                 new AssetSoundKey.Occupy(),
                 new MapTerrain(
                     plain.Terrain.Map,

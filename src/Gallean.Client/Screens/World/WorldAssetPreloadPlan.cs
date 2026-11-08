@@ -27,6 +27,18 @@ internal static partial class WorldAssetPreloadPlan
             state.Animation.Accept(new AnimationVisitor(required, optional), Empty.Value);
         }
 
+        if (state.TerrainExpansion is not null)
+        {
+            optional.Add(new AssetPreloadItem.Sound(state.TerrainExpansion.SoundKey));
+
+            AddTerrain(required, state.TerrainExpansion.OldTerrain);
+
+            foreach (TerrainExpansionTree tree in state.TerrainExpansion.Trees)
+            {
+                required.Add(new AssetPreloadItem.Sprite(tree.AssetKey));
+            }
+        }
+
         foreach (Cloud cloud in state.Clouds)
         {
             required.Add(new AssetPreloadItem.Animation(cloud.AssetKey));

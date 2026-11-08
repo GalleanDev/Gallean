@@ -1264,6 +1264,7 @@ public sealed class WorldScreenViewModelTests
             MapObjects: [],
             Stacks: [],
             Animation: null,
+            TerrainExpansion: null,
             Clouds: [],
             FogTiles:
             [
@@ -3547,7 +3548,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(capturedCity.OwnerId, Is.EqualTo(ai.Id));
         Assert.That(world.CameraFocus, Is.EqualTo(humanCity.Entrance));
-        Assert.That(world.RenderRequest.Animation, Is.EqualTo(new WorldAnimationState.TerrainExpansion(map)));
+        Assert.That(world.RenderRequest.Animation, Is.EqualTo(new WorldAnimationState.Pause(TimeSpan.FromSeconds(0.75))));
 
         world.CompleteAnimation();
 
@@ -8632,5 +8633,71 @@ public sealed class WorldScreenViewModelTests
         Assert.That(world.RenderRequest.Animation, Is.Null);
         Assert.That(world.IsViewPlayerTurn, Is.True);
         Assert.That(world.CurrentPlayerPortraitKey, Is.Null);
+    }
+
+    [Test]
+    public async Task CaptureTerrainExpansionTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(10, 10);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Heretic, map);
+        WorldPlayer ai = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map) with { IsAi = true };
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("City"),
+            cityDefinition,
+            ai.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack"),
+            human.Id,
+            new WorldPosition(1, 5),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithDefinition(TestHelpers.SimpleLord(ai.LordId, ai.Race, LordCategory.Warrior))
+            .WithPlayer(ai)
+            .WithCity(city)
+            .WithStack(stack)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await gameModel.World.DispatchCommandAsync(new WorldMoveStackCommand(stack.Id, city.Entrance));
+
+        world.CompleteAnimation();
+
+        Assert.That(world.RenderRequest.Animation, Is.Null);
+        Assert.That(world.EndTurnCommand.CanExecute(null), Is.True);
+        Assert.That(TestHelpers.SerializeMap(world.RenderRequest.State.Map), Is.EqualTo([
+            "..........",
+            "...R......",
+            "..RRR.....",
+            ".RR.RR....",
+            "..RRR.....",
+            "..RRR.....",
+            "...R......",
+            "..........",
+            "..........",
+            ".........."
+        ]));
     }
 }

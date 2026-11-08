@@ -70,7 +70,7 @@ public sealed class WorldObjectRenderTests
     {
         Bag bag = new(new WorldPosition(0, 0), bagDepth, new AssetSpriteKey.Bag(IsWater: false, 0));
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -80,7 +80,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> colors = ReadColors(surface, [new SKPointI(81, 73)]);
 
@@ -91,7 +91,7 @@ public sealed class WorldObjectRenderTests
     {
         Bag bag = new(new WorldPosition(0, 0), bagDepth, new AssetSpriteKey.Bag(IsWater: false, 0));
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: animation, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: animation, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -101,7 +101,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> colors = ReadColors(surface, [new SKPointI(64, 64)]);
 
@@ -113,7 +113,7 @@ public sealed class WorldObjectRenderTests
         Bag bag = new(new WorldPosition(0, 0), bagDepth, new AssetSpriteKey.Bag(IsWater: false, 0));
         Stack stack = new(new WorldPosition(0, 0), stackDepth, new AssetAnimationKey.StackBoat(WorldRace.Human, AssetAnimationKey.StackUnitPose.Stop, 0), ShadowKey: null, AuraKey: null, new AssetSpriteKey.StackBanner(4), Opacity: 1.0);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -123,7 +123,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> colors = ReadColors(surface, [new SKPointI(65, 65)]);
 
@@ -132,7 +132,7 @@ public sealed class WorldObjectRenderTests
 
     private static SKColor RenderObjectsOverTile(TestAssetProvider assets, MapTerrain terrain, IReadOnlyList<MapObject> objects)
     {
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: objects, Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: objects, Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -142,7 +142,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> colors = ReadColors(surface, [new SKPointI(64, 64)]);
 
@@ -151,7 +151,7 @@ public sealed class WorldObjectRenderTests
 
     private static SKColor RenderSpellOverBag(TestAssetProvider assets, MapTerrain terrain, Bag bag, SpellCast spellCast)
     {
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: spellCast, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: spellCast, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -161,7 +161,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Translate(64, 64);
         surface.Canvas.Clear(SKColors.Transparent);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> colors = ReadColors(surface, [new SKPointI(64, 64)]);
 
@@ -210,7 +210,7 @@ public sealed class WorldObjectRenderTests
                     new MapTileSurface.Ground(WorldMapTerrain.Human),
                     RoadKey: null)
             ], [WorldMapTerrain.Human], []);
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: objects, Stacks: stacks, Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: objects, Stacks: stacks, Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -224,11 +224,11 @@ public sealed class WorldObjectRenderTests
         ];
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> firstFrame = ReadColors(surface, samplePoints);
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> secondFrame = ReadColors(surface, samplePoints);
 
         Assert.That(firstFrame, Is.EqualTo([SKColors.Red, SKColors.Blue, SKColors.Blue]));
@@ -275,7 +275,7 @@ public sealed class WorldObjectRenderTests
             new WorldFootprint(position, 1, 1),
             new AssetAnimationKey.Landmark(new WorldLandmarkDefinitionId("lmark1")));
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -287,11 +287,11 @@ public sealed class WorldObjectRenderTests
         IReadOnlyList<SKPointI> samplePoints = [new(63, 45)];
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> firstFrame = ReadColors(surface, samplePoints);
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> secondFrame = ReadColors(surface, samplePoints);
 
         Assert.That(firstFrame, Is.EqualTo([SKColors.Blue]));
@@ -338,7 +338,7 @@ public sealed class WorldObjectRenderTests
             new WorldFootprint(position, 1, 1),
             new AssetAnimationKey.Landmark(new WorldLandmarkDefinitionId("lmark1")));
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -350,11 +350,11 @@ public sealed class WorldObjectRenderTests
         IReadOnlyList<SKPointI> samplePoints = [new(63, 45), new(67, 45)];
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> firstFrame = ReadColors(surface, samplePoints);
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> secondFrame = ReadColors(surface, samplePoints);
 
         SKColor backdrop = Theme.World.BackdropColor.ToSKColor();
@@ -405,7 +405,7 @@ public sealed class WorldObjectRenderTests
             new AssetSpriteKey.StackBanner(4),
             Opacity: 1.0);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
 
         WorldRenderContent content = provider.Get(state, assets);
@@ -469,7 +469,7 @@ public sealed class WorldObjectRenderTests
             new AssetSpriteKey.StackBanner(4),
             Opacity: 1.0);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
 
         WorldRenderContent content = provider.Get(state, assets);
@@ -517,7 +517,7 @@ public sealed class WorldObjectRenderTests
             IsObjective: false,
             Highlight: null);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -527,7 +527,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> midFlight = ReadColors(
             surface,
@@ -536,7 +536,7 @@ public sealed class WorldObjectRenderTests
         Assert.That(midFlight, Is.EqualTo([SKColors.Blue]));
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(2), renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(2), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> arrived = ReadColors(
             surface,
@@ -595,7 +595,7 @@ public sealed class WorldObjectRenderTests
             IsObjective: false,
             Highlight: null);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -605,7 +605,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> midFlight = ReadColors(
             surface,
@@ -614,7 +614,7 @@ public sealed class WorldObjectRenderTests
         Assert.That(midFlight, Is.EqualTo([SKColors.Blue, SKColors.Yellow]));
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(2), renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(2), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> arrived = ReadColors(
             surface,
@@ -779,7 +779,7 @@ public sealed class WorldObjectRenderTests
             IsObjective: false,
             Highlight: null);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackMove, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -789,7 +789,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, stackMove.Duration / 2.0, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> bodyPixels = ReadColors(surface, [new SKPointI(81, 73)]);
         int shadowPixels = CountColor(surface, shadowColor);
@@ -851,6 +851,7 @@ public sealed class WorldObjectRenderTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
         WorldRenderContentProvider provider = new();
@@ -862,7 +863,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         IReadOnlyList<SKColor> colors = ReadColors(surface, [new SKPointI(64, 64), new SKPointI(128, 96)]);
 
@@ -915,6 +916,7 @@ public sealed class WorldObjectRenderTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -929,6 +931,7 @@ public sealed class WorldObjectRenderTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -938,12 +941,12 @@ public sealed class WorldObjectRenderTests
         using SKSurface foggedSurface = SKSurface.Create(info);
         foggedSurface.Canvas.Clear(SKColors.Transparent);
         foggedSurface.Canvas.Translate(64, 64);
-        renderer.Render(foggedSurface.Canvas, new WorldRenderContentProvider().Get(foggedState, assets), foggedState, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(foggedSurface.Canvas, new WorldRenderContentProvider().Get(foggedState, assets), foggedState, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         using SKSurface exploredSurface = SKSurface.Create(info);
         exploredSurface.Canvas.Clear(SKColors.Transparent);
         exploredSurface.Canvas.Translate(64, 64);
-        renderer.Render(exploredSurface.Canvas, new WorldRenderContentProvider().Get(exploredState, assets), exploredState, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(exploredSurface.Canvas, new WorldRenderContentProvider().Get(exploredState, assets), exploredState, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         Assert.That(ReadColors(foggedSurface, [new SKPointI(64, 40), new SKPointI(64, 64)]), Is.EqualTo([Theme.World.BackdropColor.ToSKColor(), SKColors.Black]));
         Assert.That(ReadColors(exploredSurface, [new SKPointI(64, 40), new SKPointI(64, 64)]), Is.EqualTo([SKColors.Red, SKColors.Red]));
@@ -1003,6 +1006,7 @@ public sealed class WorldObjectRenderTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -1012,7 +1016,7 @@ public sealed class WorldObjectRenderTests
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
-        renderer.Render(surface.Canvas, new WorldRenderContentProvider().Get(state, assets), state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, new WorldRenderContentProvider().Get(state, assets), state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         Assert.That(ReadColors(surface, [new SKPointI(64, 40)]), Is.EqualTo([Theme.World.BackdropColor.ToSKColor()]));
     }
@@ -1076,6 +1080,7 @@ public sealed class WorldObjectRenderTests
             Highlights: new HighlightOverlay([]),
             SelectedPath: null,
             Animation: null,
+            TerrainExpansion: null,
             ObjectiveMarkers: [], AmbientSounds: [],
             Clouds: []);
 
@@ -1085,7 +1090,7 @@ public sealed class WorldObjectRenderTests
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
-        renderer.Render(surface.Canvas, new WorldRenderContentProvider().Get(state, assets), state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, new WorldRenderContentProvider().Get(state, assets), state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         Assert.That(ReadColors(surface, [new SKPointI(64, 40)]), Is.EqualTo([SKColors.Red]));
     }
@@ -1130,7 +1135,7 @@ public sealed class WorldObjectRenderTests
             new WorldFootprint(position, 1, 1),
             new AssetAnimationKey.Landmark(new WorldLandmarkDefinitionId("lmark1")));
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1142,11 +1147,11 @@ public sealed class WorldObjectRenderTests
         IReadOnlyList<SKPointI> samplePoints = [new(63, 45)];
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> firstFrame = ReadColors(surface, samplePoints);
 
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.FromSeconds(0.1), TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
         IReadOnlyList<SKColor> secondFrame = ReadColors(surface, samplePoints);
 
         IReadOnlyList<DirectSprite> expectedSprites =
@@ -1250,7 +1255,7 @@ public sealed class WorldObjectRenderTests
             new AssetAnimationKey.StackDestroyEffect(),
             FrameCount: 3);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackDestroy, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackDestroy, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1265,7 +1270,7 @@ public sealed class WorldObjectRenderTests
         foreach (double seconds in new[] { 0.0, 0.07, 0.14, 0.21 })
         {
             surface.Canvas.Clear(SKColors.Transparent);
-            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), renderResolution: 1.0f, hitboxOverlay: false);
+            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
             IReadOnlyList<SKColor> colors = ReadColors(surface, samplePoints);
             frames.Add(colors[0]);
@@ -1317,7 +1322,7 @@ public sealed class WorldObjectRenderTests
             new AssetAnimationKey.StackCreateEffect(),
             FrameCount: 3);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackCreate, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: stackCreate, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1332,7 +1337,7 @@ public sealed class WorldObjectRenderTests
         foreach (double seconds in new[] { 0.0, 0.07, 0.14, 0.21 })
         {
             surface.Canvas.Clear(SKColors.Transparent);
-            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), renderResolution: 1.0f, hitboxOverlay: false);
+            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
             IReadOnlyList<SKColor> colors = ReadColors(surface, samplePoints);
             frames.Add(colors[0]);
@@ -1395,7 +1400,7 @@ public sealed class WorldObjectRenderTests
             new WorldStackId("summoned"),
             FrameCount: 4);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: spellCast, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: spellCast, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1411,7 +1416,7 @@ public sealed class WorldObjectRenderTests
         foreach (double seconds in new[] { 0.0, 0.07, 0.14, 0.21, 0.28 })
         {
             surface.Canvas.Clear(SKColors.Transparent);
-            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), renderResolution: 1.0f, hitboxOverlay: false);
+            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
             IReadOnlyList<SKColor> colors = ReadColors(surface, samplePoints);
             effectSamples.Add(colors[0]);
@@ -1644,7 +1649,7 @@ public sealed class WorldObjectRenderTests
             new AssetAnimationKey.MountainRemoveEffect(5),
             FrameCount: 3);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: mountainRemove, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: mountainRemove, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1659,7 +1664,7 @@ public sealed class WorldObjectRenderTests
         foreach (double seconds in new[] { 0.0, 0.07, 0.14, 0.21 })
         {
             surface.Canvas.Clear(SKColors.Transparent);
-            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), renderResolution: 1.0f, hitboxOverlay: false);
+            renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.FromSeconds(seconds), TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
             IReadOnlyList<SKColor> colors = ReadColors(surface, samplePoints);
             frames.Add(colors[0]);
@@ -1716,7 +1721,7 @@ public sealed class WorldObjectRenderTests
             new AssetSpriteKey.StackBanner(4),
             Opacity: 0.5);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [bag], Stacks: [stack], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1726,7 +1731,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         Assert.That(ReadColors(surface, [new SKPointI(65, 65)]), Is.EqualTo([new SKColor(127, 0, 128, 255)]));
     }
@@ -1842,7 +1847,7 @@ public sealed class WorldObjectRenderTests
 
         Cursor cursor = new(position, Depth: 0, Theme.World.HoverCursorInnerColor, Theme.World.HoverCursorOuterColor, Scale: 1.0);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [cursor], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [landmark], Stacks: [], Minimap: new MinimapState(1, 1, [], []), Cursors: [cursor], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1851,7 +1856,7 @@ public sealed class WorldObjectRenderTests
         using SKSurface surface = SKSurface.Create(info);
         surface.Canvas.Translate(64, 64);
         surface.Canvas.Clear(SKColors.Transparent);
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         Assert.That(ReadColors(surface, [new SKPointI(83, 64), new SKPointI(10, 10)]), Is.EqualTo([new SKColor(250, 68, 40, 255), SKColors.Red]));
     }
@@ -1897,7 +1902,7 @@ public sealed class WorldObjectRenderTests
         Stack rear = new(new WorldPosition(0, 0), 3, new AssetAnimationKey.StackBoat(WorldRace.Elf, AssetAnimationKey.StackUnitPose.Stop, 0), ShadowKey: null, AuraKey: null, new AssetSpriteKey.StackBanner(4), Opacity: 1.0);
         Stack front = new(new WorldPosition(0, 0), 5, new AssetAnimationKey.StackBoat(WorldRace.Human, AssetAnimationKey.StackUnitPose.Stop, 0), ShadowKey: null, AuraKey: null, new AssetSpriteKey.StackBanner(4), Opacity: 1.0);
 
-        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [rear, front], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, Clouds: []);
+        WorldRenderState state = new(Terrain: terrain, FogTiles: [], ObjectiveMarkers: [], AmbientSounds: [], MapObjects: [], Stacks: [rear, front], Minimap: new MinimapState(1, 1, [], []), Cursors: [], Reach: null, Highlights: new HighlightOverlay([]), SelectedPath: null, Animation: null, TerrainExpansion: null, Clouds: []);
         WorldRenderContentProvider provider = new();
         WorldRenderer renderer = new();
         WorldRenderContent content = provider.Get(state, assets);
@@ -1907,7 +1912,7 @@ public sealed class WorldObjectRenderTests
         surface.Canvas.Clear(SKColors.Transparent);
         surface.Canvas.Translate(64, 64);
 
-        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
+        renderer.Render(surface.Canvas, content, state, assets, TimeSpan.Zero, TimeSpan.Zero, TimeSpan.Zero, renderResolution: 1.0f, hitboxOverlay: false);
 
         Assert.That(ReadColors(surface, [new SKPointI(65, 65)]), Is.EqualTo([SKColors.Blue]));
     }
