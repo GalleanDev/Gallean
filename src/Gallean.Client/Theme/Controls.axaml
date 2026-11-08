@@ -951,6 +951,12 @@
   <Style Selector="Button.pill.success:disabled /template/ local|PlateChrome#PlateChrome">
     <Setter Property="Fill" Value="{StaticResource PillSuccessDisabledFaceGradientBrush}" />
   </Style>
+  <Style Selector="StackPanel.pill-group">
+    <Setter Property="Spacing" Value="5" />
+  </Style>
+  <Style Selector="Grid.pill-group">
+    <Setter Property="ColumnSpacing" Value="5" />
+  </Style>
 
   <Style Selector="Button.row">
     <Setter Property="Margin" Value="0,1" />

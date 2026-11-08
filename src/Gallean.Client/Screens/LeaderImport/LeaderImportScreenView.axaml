@@ -9,7 +9,7 @@
     <local:ModalPanel Width="560" MaxHeight="640" Padding="20,16,20,24" Title="{local:Text 'Import leader'}" InitialFocus="{Binding #ImportButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+        <Grid Classes="pill-group" ColumnDefinitions="Auto,*,Auto,Auto">
           <Button Grid.Column="0"
                   Classes="pill danger"
                   local:PlateChrome.TextureSeed="3"
@@ -31,8 +31,7 @@
                   local:PlateChrome.TextureSeed="1"
                   MinWidth="110"
                   VerticalAlignment="Center"
-                  Command="{Binding CloseCommand}"
-                  Margin="0,0,12,0" />
+                  Command="{Binding CloseCommand}" />
           <Button x:Name="ImportButton"
                   Grid.Column="3"
                   Content="{local:Text 'Import'}"

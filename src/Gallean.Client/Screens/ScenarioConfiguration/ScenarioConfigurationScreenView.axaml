@@ -154,20 +154,19 @@
         </StackPanel>
       </Grid>
 
-      <Grid Grid.Row="3" Classes="focus-group" ColumnDefinitions="*,*" Width="440" Margin="0,40,0,0" HorizontalAlignment="Center">
+      <Grid Grid.Row="3" Classes="focus-group pill-group" ColumnDefinitions="*,*" Width="440" Margin="0,40,0,0" HorizontalAlignment="Center">
         <Button Grid.Column="0"
                 Classes="pill"
                 local:PlateChrome.TextureSeed="3"
                 Content="{local:Text 'Back'}"
-                Command="{Binding CloseCommand}"
-                Margin="0,0,6,0" />
+                Command="{Binding CloseCommand}" />
         <Button Grid.Column="1"
                 Classes="pill primary"
                 local:PlateChrome.TextureSeed="4"
                 Content="{local:Text 'Next'}"
                 Command="{Binding NextCommand}"
                 IsVisible="{Binding !IsLastPlayer}"
-                Margin="6,0,0,0" />
+                />
         <Button Grid.Column="1"
                 Classes="pill success"
                 local:PlateChrome.TextureSeed="4"
@@ -175,7 +174,7 @@
                 Command="{Binding Game.StartGameCommand}"
                 CommandParameter="{Binding GameConfiguration}"
                 IsVisible="{Binding IsLastPlayer}"
-                Margin="6,0,0,0" />
+                />
       </Grid>
     </Grid>
   </Grid>

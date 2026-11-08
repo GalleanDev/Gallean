@@ -8,7 +8,7 @@
     <local:ModalPanel Classes="accent" Width="620" Padding="28,24" Title="{local:Text 'Load game'}" InitialFocus="{Binding #LoadButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+        <Grid Classes="pill-group" ColumnDefinitions="Auto,*,Auto,Auto">
           <Button Grid.Column="0"
                   Classes="pill danger"
                   local:PlateChrome.TextureSeed="1"
@@ -30,8 +30,7 @@
                   local:PlateChrome.TextureSeed="2"
                   Command="{Binding Game.LoadGameCommand}"
                   CommandParameter="{Binding SaveList.SelectedSave.Entry}"
-                  MinWidth="130"
-                  Margin="0,0,16,0" />
+                  MinWidth="130" />
           <Button Grid.Column="3"
                   Content="{local:Text 'Close'}"
                   Classes="pill"

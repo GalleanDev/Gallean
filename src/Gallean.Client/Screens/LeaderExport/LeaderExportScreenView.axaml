@@ -17,15 +17,14 @@
     <local:ModalPanel Width="820" MaxHeight="680" Padding="20,16,20,24" Title="{local:Text 'Export leader'}" InitialFocus="{Binding #ExportButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="*,Auto,Auto">
+        <Grid Classes="pill-group" ColumnDefinitions="*,Auto,Auto">
           <Button Grid.Column="1"
                   Content="{local:Text 'Back'}"
                   Classes="pill"
                   local:PlateChrome.TextureSeed="1"
                   MinWidth="110"
                   VerticalAlignment="Center"
-                  Command="{Binding CloseCommand}"
-                  Margin="0,0,12,0" />
+                  Command="{Binding CloseCommand}" />
           <Button x:Name="ExportButton"
                   Grid.Column="2"
                   Content="{local:Text 'Continue'}"

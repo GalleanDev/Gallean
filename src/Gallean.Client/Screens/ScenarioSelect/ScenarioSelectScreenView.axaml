@@ -85,14 +85,13 @@
         </ListBox.ItemTemplate>
       </ListBox>
 
-      <Grid Grid.Row="4" Grid.Column="0" Classes="focus-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
+      <Grid Grid.Row="4" Grid.Column="0" Classes="focus-group pill-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
         <Button Grid.Column="0"
                 Classes="pill"
                 local:PlateChrome.TextureSeed="1"
                 Content="{local:Text 'Back'}"
-                Command="{Binding Game.ShowMainMenuCommand}"
-                Margin="0,0,6,0" />
-        <Button Grid.Column="1" Classes="pill primary" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Start game'}" Command="{Binding StartCommand}" Margin="6,0,0,0" />
+                Command="{Binding Game.ShowMainMenuCommand}" />
+        <Button Grid.Column="1" Classes="pill primary" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Start game'}" Command="{Binding StartCommand}" />
       </Grid>
 
       <StackPanel Grid.Row="2"

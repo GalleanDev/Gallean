@@ -8,13 +8,12 @@
     <local:ModalPanel Classes="accent" Width="560" MaxHeight="680" Padding="28,24" InitialFocus="{Binding #CloseButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="*,Auto,Auto">
+        <Grid Classes="pill-group" ColumnDefinitions="*,Auto,Auto">
           <Button Grid.Column="1"
                   Content="{local:Text 'Learn'}"
                   Classes="pill success"
                   local:PlateChrome.TextureSeed="1"
                   MinWidth="110"
-                  Margin="0,0,16,0"
                   VerticalAlignment="Center"
                   Command="{Binding LearnCommand}" />
           <Button x:Name="CloseButton"
