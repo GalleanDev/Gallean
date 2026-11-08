@@ -69,7 +69,7 @@
           <ItemsControl Classes="focus-group" ItemsSource="{Binding Options}">
             <ItemsControl.ItemTemplate>
               <DataTemplate x:DataType="local:LeaderUpgradeItemViewModel">
-                <Button Classes="row" Classes.selected="{Binding IsSelected}" Command="{Binding SelectCommand}">
+                <Button Classes="row" Classes.selected="{Binding IsSelected}" Command="{Binding SelectCommand}" DoubleTapped="OnUpgradeDoubleTapped">
                   <Grid ColumnDefinitions="Auto,*">
                     <local:IconVisual Grid.Column="0"
                                       Moniker="{Binding Icon}"
