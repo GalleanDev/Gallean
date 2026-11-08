@@ -133,12 +133,12 @@
         </Button>
       </StackPanel>
 
-      <StackPanel x:Name="TopCenter" Classes="cached" Spacing="6" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
-        <Border Classes="world-plate" HorizontalAlignment="Center">
+      <StackPanel x:Name="TopCenter" Spacing="6" VerticalAlignment="Top" Margin="0,10,0,0">
+        <Border Classes="world-plate cached" HorizontalAlignment="Center">
           <ContentControl Content="{Binding Status.Resources}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
         </Border>
 
-        <Border Classes="hud-prompt"
+        <Border Classes="hud-prompt cached"
                 HorizontalAlignment="Center"
                 IsVisible="{Binding ActionPromptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
           <DockPanel>
