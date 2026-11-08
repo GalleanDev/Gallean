@@ -40,6 +40,7 @@ internal static class WorldCommandErrorFormatter
             WorldCommandError.GuardianTransferForbidden => Tr("The guardian cannot be transferred"),
             WorldCommandError.GuildBuildingRequired => Tr("Guild must be built in your capital"),
             WorldCommandError.HealBuildingRequired => Tr("Temple must be built in your capital"),
+            WorldCommandError.IllusionAttackForbidden => Tr("Illusions cannot attack"),
             WorldCommandError.InsufficientMovement => Tr("Not enough movement points"),
             WorldCommandError.InsufficientResources => Tr("Not enough resources"),
             WorldCommandError.InvalidUnitPosition => Tr("Invalid position"),

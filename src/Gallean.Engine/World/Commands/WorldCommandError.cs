@@ -34,6 +34,7 @@ public enum WorldCommandError
     GuardianTransferForbidden,
     GuildBuildingRequired,
     HealBuildingRequired,
+    IllusionAttackForbidden,
     InsufficientMovement,
     InsufficientResources,
     InvalidUnitPosition,

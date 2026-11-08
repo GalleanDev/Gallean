@@ -63,6 +63,11 @@ internal static partial class PathTraversalCalculator
         WorldPosition position,
         IGameDefinitionProvider definitions)
     {
+        if (profile.IsIllusion)
+        {
+            return null;
+        }
+
         foreach (WorldPosition adjacentPosition in position.GetAdjacentPositions())
         {
             WorldStack? adjacentStack = plan.GetStackAt(adjacentPosition);

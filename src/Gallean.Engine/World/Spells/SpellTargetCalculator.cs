@@ -36,7 +36,12 @@ internal static class SpellTargetCalculator
     public static WorldPosition? FindSummonTarget(WorldState state, WorldSpellTarget target, UnitDefinition unit)
     {
         WorldPlan plan = WorldPlan.For(state);
-        WorldMovementCalculator.MovementProfile profile = new(unit.MoveAbility, unit.IsWaterOnly, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(
+            unit.MoveAbility,
+            unit.IsWaterOnly,
+            IsLeaderDead: false,
+            IsThief: false,
+            IsIllusion: unit.Category == UnitCategory.Illusion);
 
         foreach (WorldPosition position in EnumerateTarget(state, target))
         {

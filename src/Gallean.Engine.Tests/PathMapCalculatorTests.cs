@@ -7,7 +7,7 @@ namespace Gallean.Engine.Tests;
 public sealed class PathMapCalculatorTests
 {
     private static readonly WorldMovementCalculator.MovementProfile DefaultProfile =
-        new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
     private static WorldState CreateEmptyState(WorldMap map)
     {
@@ -502,7 +502,7 @@ public sealed class PathMapCalculatorTests
             ".~."
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Water, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Water, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
         WorldPlan plan = WorldPlan.For(CreateEmptyState(map));
         WorldPath path = Assert.NotNull(plan.GetPath(new WorldPosition(0, 0), new WorldPosition(2, 0), CreateFullFog(map), profile, WorldMovementLimit.Unlimited));
 
@@ -519,7 +519,7 @@ public sealed class PathMapCalculatorTests
             ".+."
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Forest, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Forest, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
         WorldPlan plan = WorldPlan.For(CreateEmptyState(map));
         WorldPath path = Assert.NotNull(plan.GetPath(new WorldPosition(0, 0), new WorldPosition(2, 0), CreateFullFog(map), profile, WorldMovementLimit.Unlimited));
 
@@ -538,7 +538,7 @@ public sealed class PathMapCalculatorTests
             "~~~."
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false, IsIllusion: false);
         WorldPlan plan = WorldPlan.For(CreateEmptyState(map));
         WorldPath path = Assert.NotNull(plan.GetPath(new WorldPosition(0, 0), new WorldPosition(3, 0), CreateFullFog(map), profile, WorldMovementLimit.Unlimited));
 
@@ -557,7 +557,7 @@ public sealed class PathMapCalculatorTests
             "~~."
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false, IsIllusion: false);
         WorldPlan plan = WorldPlan.For(CreateEmptyState(map));
         WorldPath? path = plan.GetPath(new WorldPosition(0, 0), new WorldPosition(1, 0), CreateFullFog(map), profile, WorldMovementLimit.Unlimited);
 
@@ -571,7 +571,7 @@ public sealed class PathMapCalculatorTests
             "~~."
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false, IsIllusion: false);
         WorldPlan plan = WorldPlan.For(CreateEmptyState(map));
         WorldPath? path = plan.GetPath(new WorldPosition(0, 0), new WorldPosition(2, 0), CreateFullFog(map), profile, WorldMovementLimit.Unlimited);
 

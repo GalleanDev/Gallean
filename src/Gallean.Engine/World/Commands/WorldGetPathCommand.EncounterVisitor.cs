@@ -41,7 +41,11 @@ public sealed partial record WorldGetPathCommand
                 return null;
             }
 
-            if (context.Profile.IsThief)
+            if (context.Profile.IsIllusion)
+            {
+                return null;
+            }
+            else if (context.Profile.IsThief)
             {
                 ThiefTarget? target = ThiefCalculator.ResolveTarget(context.State, context.Engine, context.Stack.OwnerId, encounter.Position);
 
@@ -49,9 +53,15 @@ public sealed partial record WorldGetPathCommand
                 {
                     return new WorldPathEncounter.Thief(encounter.Position);
                 }
+                else
+                {
+                    return new WorldPathEncounter.Battle(encounter.Position);
+                }
             }
-
-            return new WorldPathEncounter.Battle(encounter.Position);
+            else
+            {
+                return new WorldPathEncounter.Battle(encounter.Position);
+            }
         }
     }
 }

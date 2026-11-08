@@ -6588,14 +6588,14 @@ public sealed class WorldEngineScenarioEventEffectTests
                     new WorldPosition(0, 1),
                     WorldStackDirection.SouthWest,
                     4,
-                    [], ambush.Position),
+                    [], null),
                 new WorldStackMovedEvent(
                     stack.Id,
                     new WorldPosition(0, 0),
                     new WorldPosition(0, 1),
                     WorldStackDirection.SouthWest,
                     4,
-                    [], ambush.Position),
+                    [], null),
                 new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
                 new WorldStackDestroyedEvent(stack.Id, new WorldUnitGroup.Stack(ambush.Id), enemy.Id),
                 new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))

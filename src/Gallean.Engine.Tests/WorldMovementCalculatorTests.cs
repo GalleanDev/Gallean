@@ -38,7 +38,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.None,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -58,7 +59,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.None,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: true)));
+            IsThief: true,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -83,7 +85,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.Water,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -108,7 +111,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.Forest,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -135,7 +139,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.Water,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -162,7 +167,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.Forest,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -187,7 +193,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.None,
             IsWaterOnly: true,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -209,7 +216,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.None,
             IsWaterOnly: false,
             IsLeaderDead: true,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -238,7 +246,8 @@ public sealed class WorldMovementCalculatorTests
             MoveAbility: UnitMoveAbility.None,
             IsWaterOnly: false,
             IsLeaderDead: false,
-            IsThief: false)));
+            IsThief: false,
+            IsIllusion: false)));
     }
 
     [Test]
@@ -248,7 +257,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         int[] costs =
         [
@@ -275,7 +284,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Water, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Water, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         int[] costs =
         [
@@ -302,7 +311,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Forest, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Forest, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         int[] costs =
         [
@@ -329,7 +338,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Flying, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Flying, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         int[] costs =
         [
@@ -358,7 +367,7 @@ public sealed class WorldMovementCalculatorTests
             "~~~~"
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         int[] costs =
         [
@@ -381,7 +390,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: true, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: true, IsThief: false, IsIllusion: false);
 
         Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(0, 0), profile), Is.EqualTo(4));
         Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(1, 0), profile), Is.EqualTo(8));
@@ -397,7 +406,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         bool[] passability =
         [
@@ -424,7 +433,7 @@ public sealed class WorldMovementCalculatorTests
             ".+^~~~="
         ]);
 
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: true, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         bool[] passability =
         [

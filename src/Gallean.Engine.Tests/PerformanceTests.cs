@@ -225,7 +225,7 @@ public sealed class PerformanceTests
         ImmutableBitmap fogOfWar = ImmutableBitmap.Create(state.Map.Width, state.Map.Height, initialValue: true);
         WorldPosition start = new(0, 0);
         WorldPosition end = new(79, 79);
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
 
         RunBenchmark("Pathfinding", 10, () =>
         {
@@ -248,7 +248,7 @@ public sealed class PerformanceTests
 
         ImmutableBitmap blocked = blockedCells.ToImmutable();
         ImmutableBitmap terminalCells = ImmutableBitmap.Create(map.Width, map.Height);
-        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false);
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.None, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
         WorldPosition start = new(0, 0);
         Func<WorldPosition, WorldPosition, int> stepCost = (from, to) => WorldMovementCalculator.GetMovementCost(map, to, profile);
 

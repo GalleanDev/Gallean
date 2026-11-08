@@ -6,7 +6,8 @@ internal static class WorldMovementCalculator
         UnitMoveAbility MoveAbility,
         bool IsWaterOnly,
         bool IsLeaderDead,
-        bool IsThief);
+        bool IsThief,
+        bool IsIllusion);
 
     public static MovementProfile GetMovementProfile(WorldStack stack, IGameDefinitionProvider definitions)
     {
@@ -24,8 +25,9 @@ internal static class WorldMovementCalculator
         bool isWaterOnly = leaderDefinition.IsWaterOnly;
         bool leaderDead = !leader.IsAlive;
         bool isThief = leaderDefinition.LeaderCategory == UnitLeaderCategory.Thief;
+        bool isIllusion = leaderDefinition.Category == UnitCategory.Illusion;
 
-        return new MovementProfile(moveAbility, isWaterOnly, leaderDead, isThief);
+        return new MovementProfile(moveAbility, isWaterOnly, leaderDead, isThief, isIllusion);
     }
 
     public static int GetMovementCost(WorldMap map, WorldPosition position, MovementProfile profile)

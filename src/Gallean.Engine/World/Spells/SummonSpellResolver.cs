@@ -22,8 +22,12 @@ internal sealed class SummonSpellResolver : IWorldSpellResolver<WorldSummonStack
 
         if (tile is null)
         {
-            WorldMovementCalculator.MovementProfile movementProfile =
-                new(unitDefinition.MoveAbility, unitDefinition.IsWaterOnly, IsLeaderDead: false, IsThief: false);
+            WorldMovementCalculator.MovementProfile movementProfile = new(
+                unitDefinition.MoveAbility,
+                unitDefinition.IsWaterOnly,
+                IsLeaderDead: false,
+                IsThief: false,
+                IsIllusion: unitDefinition.Category == UnitCategory.Illusion);
 
             if (state.Map.IsValidPosition(target.Center) &&
                 WorldMovementCalculator.IsPassable(state.Map, target.Center, movementProfile))

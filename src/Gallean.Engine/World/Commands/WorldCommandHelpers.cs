@@ -310,24 +310,20 @@ internal static class WorldCommandHelpers
         StackStats stackStats = context.UnitStats.GetWorldStackStats(stack);
         int actionCost = WorldMovementCalculator.GetActionCost(stackStats, context.Globals);
         int movementPoints = Math.Max(0, stack.MovementPoints - actionCost);
-        (_, _, UnitDefinition leaderDefinition) = stack.GetLeader(context.Definitions);
 
         List<WorldEvent> events = [new WorldStackMovementConsumedEvent(stack.Id, movementPoints)];
 
-        if (leaderDefinition.Category != UnitCategory.Illusion)
+        if (enemyStack is not null)
         {
-            if (enemyStack is not null)
-            {
-                BattleState battleState = CreateStackBattleState(state, stack, enemyStack, context);
+            BattleState battleState = CreateStackBattleState(state, stack, enemyStack, context);
 
-                events.Add(new WorldStackBattleStartedEvent(stack.Id, enemyStack.Id, enemyStack.Position, battleState, IsDuel: false));
-            }
-            else if (enemyFortification is not null)
-            {
-                BattleState battleState = CreateGarrisonBattleState(state, stack, enemyFortification, context);
+            events.Add(new WorldStackBattleStartedEvent(stack.Id, enemyStack.Id, enemyStack.Position, battleState, IsDuel: false));
+        }
+        else if (enemyFortification is not null)
+        {
+            BattleState battleState = CreateGarrisonBattleState(state, stack, enemyFortification, context);
 
-                events.Add(new WorldFortificationBattleStartedEvent(stack.Id, enemyFortification.Id, enemyFortification.Entrance, battleState));
-            }
+            events.Add(new WorldFortificationBattleStartedEvent(stack.Id, enemyFortification.Id, enemyFortification.Entrance, battleState));
         }
 
         return events;

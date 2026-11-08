@@ -65,40 +65,33 @@ public abstract partial record AbstractWorldMoveStackCommand(WorldStackId StackI
         PathTraversalCalculator.TraversalInfo traversal = PathTraversalCalculator.Calculate(state, stack, path, profile, context.Definitions);
         ImmutableArray<WorldPosition> approach = traversal.Path.Positions;
 
-        if (approach.IsEmpty)
+        if (!approach.IsEmpty)
         {
-            if (traversal.Encounter is null)
+            WorldFortification? enteredFortification = plan.GetFortificationAt(approach[^1]);
+
+            if (enteredFortification is not null &&
+                FortificationCalculator.GetOwner(enteredFortification) is { } enteredOwner &&
+                DiplomacyCalculator.IsHostile(state, stack.OwnerId, enteredOwner) &&
+                !FortificationCalculator.CanCapture(stack, context.Definitions))
             {
-                return WorldCommandResult.Fail(WorldCommandError.InsufficientMovement);
+                return WorldCommandResult.Fail(WorldCommandError.FortificationCaptureForbidden);
             }
-
-            return traversal.Encounter.Accept(EncounterVisitor.Instance, new EncounterVisitor.Context(state, stack, context));
         }
 
-        WorldFortification? enteredFortification = plan.GetFortificationAt(approach[^1]);
-
-        if (enteredFortification is not null &&
-            FortificationCalculator.GetOwner(enteredFortification) is { } enteredOwner &&
-            DiplomacyCalculator.IsHostile(state, stack.OwnerId, enteredOwner) &&
-            !FortificationCalculator.CanCapture(stack, context.Definitions))
+        if (traversal.Encounter is not null)
         {
-            return WorldCommandResult.Fail(WorldCommandError.FortificationCaptureForbidden);
+            return traversal.Encounter.Accept(EncounterVisitor.Instance, new EncounterVisitor.Context(state, stack, profile, plan, approach, context));
         }
-
-        WorldPosition? encounterPosition;
-
-        if (traversal.Encounter is PathTraversalCalculator.Encounter.Battle { CanBegin: false })
+        else if (approach.IsEmpty)
         {
-            encounterPosition = null;
+            return WorldCommandResult.Fail(WorldCommandError.InsufficientMovement);
         }
         else
         {
-            encounterPosition = traversal.Encounter?.Position;
-        }
+            WorldStackMovingEvent stepEvent = WorldCommandHelpers.CreateMoveStepEvent(stack, plan, profile, approach, null);
 
-        return WorldCommandResult.Success(
-            Empty.Value,
-            [WorldCommandHelpers.CreateMoveStepEvent(stack, plan, profile, approach, encounterPosition)]);
+            return WorldCommandResult.Success(Empty.Value, [stepEvent]);
+        }
     }
 
     private protected abstract ImmutableBitmap? GetFogOfWar(WorldState state, WorldStack stack);

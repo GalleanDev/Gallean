@@ -680,15 +680,161 @@ public sealed class WorldEngineIllusionTests
 
         WorldState before = engine.State;
 
-        engine.CheckCommand(
+        engine.CheckCommandError(
             new WorldMoveStackCommand(illusionStack.Id, enemyStack.Position),
-            [new WorldStackMovementConsumedEvent(illusionStack.Id, 7)]);
+            WorldCommandError.IllusionAttackForbidden);
+
+        Assert.That(engine.State, Is.EqualTo(before));
+    }
+
+    [Test]
+    public void EnemyTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 2);
+
+        UnitDefinition illusion = TestHelpers.SimpleUnitDefinition("illusion", maxHitpoints: 100, initiative: 50, damage: 10) with
+        {
+            Category = UnitCategory.Illusion,
+            Leadership = 1,
+            MovementPoints = 15,
+            Lifetime = 3
+        };
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack illusionStack = TestHelpers.SimpleStack(
+                new WorldStackId("illusion"),
+                player1.Id,
+                new WorldPosition(0, 0),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("illusion"), illusion),
+                movementPoints: 15) with
+            {
+                ExpirationTurn = 3
+            };
+
+        WorldStack enemyStack = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            player2.Id,
+            new WorldPosition(2, 1),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(illusion)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(illusionStack)
+            .WithStack(enemyStack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldState before = engine.State;
+
+        WorldGetPathCommand.Result path = engine.CheckCommand(
+            new WorldGetPathCommand(illusionStack.Id, new WorldPosition(3, 0)),
+            []);
+
+        Assert.That(path, Is.EqualTo(new WorldGetPathCommand.Result(
+            new WorldPath(
+            [
+                new WorldPathSegment(new WorldPosition(0, 0), new WorldPosition(1, 0), 2, Turn: 0),
+                new WorldPathSegment(new WorldPosition(1, 0), new WorldPosition(2, 0), 2, Turn: 0),
+                new WorldPathSegment(new WorldPosition(2, 0), new WorldPosition(3, 0), 2, Turn: 0)
+            ]),
+            new WorldPath([]),
+            Encounter: null)));
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(illusionStack.Id, new WorldPosition(3, 0)),
+            [
+                new WorldStackMovingEvent(illusionStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 13, [new WorldPosition(2, 0), new WorldPosition(3, 0)], null),
+                new WorldStackMovedEvent(illusionStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 13, [new WorldPosition(2, 0), new WorldPosition(3, 0)], null),
+                new WorldStackMovingEvent(illusionStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 11, [new WorldPosition(3, 0)], null),
+                new WorldStackMovedEvent(illusionStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 11, [new WorldPosition(3, 0)], null),
+                new WorldStackMovingEvent(illusionStack.Id, new WorldPosition(2, 0), new WorldPosition(3, 0), WorldStackDirection.SouthEast, 9, [], null),
+                new WorldStackMovedEvent(illusionStack.Id, new WorldPosition(2, 0), new WorldPosition(3, 0), WorldStackDirection.SouthEast, 9, [], null)
+            ]);
 
         Assert.That(engine.State, Is.EqualTo(
             before with
             {
-                Stacks = before.Stacks.SetItem(illusionStack.Id, before.Stacks[illusionStack.Id] with { MovementPoints = 7 })
+                Stacks = before.Stacks.SetItem(illusionStack.Id, before.Stacks[illusionStack.Id] with
+                {
+                    Position = new WorldPosition(3, 0),
+                    Direction = WorldStackDirection.SouthEast,
+                    MovementPoints = 9
+                })
             }));
+    }
+
+    [Test]
+    public void AttackCityTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^",
+            "^^^^^",
+            "^^^^^",
+            "^^^.."
+        ]);
+
+        WorldPlayer attacker = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer defender = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        UnitDefinition illusion = TestHelpers.SimpleUnitDefinition("illusion", maxHitpoints: 100, initiative: 50, damage: 10) with
+        {
+            Category = UnitCategory.Illusion,
+            Leadership = 1,
+            MovementPoints = 2,
+            Lifetime = 3
+        };
+        UnitDefinition guard = TestHelpers.SimpleUnitDefinition("guard", maxHitpoints: 100, initiative: 50, damage: 10);
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("stack"),
+                attacker.Id,
+                new WorldPosition(4, 3),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("illusion"), illusion),
+                movementPoints: 2) with
+            {
+                ExpirationTurn = 3
+            };
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            defender.Id,
+            new WorldPosition(3, 3),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), guard));
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(illusion)
+            .WithDefinition(guard)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(attacker.LordId, attacker.Race, LordCategory.Warrior))
+            .WithPlayer(attacker)
+            .WithDefinition(TestHelpers.SimpleLord(defender.LordId, defender.Race, LordCategory.Warrior))
+            .WithPlayer(defender)
+            .WithStack(stack)
+            .WithCity(city)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldState before = engine.State;
+
+        engine.CheckCommandError(
+            new WorldMoveStackCommand(stack.Id, city.Entrance),
+            WorldCommandError.IllusionAttackForbidden);
+
+        Assert.That(engine.State, Is.EqualTo(before));
     }
 
     [Test]
