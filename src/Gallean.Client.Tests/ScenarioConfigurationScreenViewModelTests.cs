@@ -110,6 +110,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.SelectedLordCategory, Is.EqualTo(LordCategory.Warrior));
         Assert.That(viewModel.SelectedLeader, Is.SameAs(viewModel.Leaders[0]));
         Assert.That(viewModel.SelectedDifficulty, Is.EqualTo(WorldDifficulty.Average));
+        Assert.That(viewModel.LeaderName, Is.EqualTo(""));
         Assert.That(
             viewModel.SelectedLordDescription,
             Is.EqualTo("The Warrior Lord's units recover 15% of their lost hit points each day, but spell research is limited to level four."));
@@ -117,7 +118,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.Background?.SpriteKey, Is.EqualTo(new AssetSpriteKey.RaceSelectionBackground(WorldRace.Human)));
         Assert.That(
             viewModel.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"))], WorldDifficulty.Average, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: null)], WorldDifficulty.Average, Leader: null))));
 
         viewModel.SelectedLordCategory = LordCategory.Mage;
         viewModel.SelectedLeader = viewModel.Leaders[2];
@@ -130,20 +131,34 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Human, 3, IsLarge: true)));
         Assert.That(
             viewModel.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(3), new UnitDefinitionId("G000UU0021"))], WorldDifficulty.Hard, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(3), new UnitDefinitionId("G000UU0021"), LeaderName: null)], WorldDifficulty.Hard, Leader: null))));
 
         viewModel.SelectedLordCategory = LordCategory.Guildmaster;
         viewModel.SelectedLeader = viewModel.Leaders[1];
+        viewModel.EditLeaderNameCommand.Execute(null);
+
+        TextPromptViewModel prompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(prompt.Title, Is.EqualTo("Hero name"));
+        Assert.That(prompt.Message, Is.EqualTo("Enter a name for your starting hero."));
+        Assert.That(prompt.Text, Is.EqualTo(""));
+        Assert.That(prompt.Placeholder, Is.EqualTo("Default name"));
+        Assert.That(prompt.MaxLength, Is.EqualTo(20));
+
+        prompt.Text = "  Aldric ";
+        prompt.ConfirmCommand.Execute(null);
         viewModel.NextLordFaceCommand.Execute(null);
         viewModel.NextLordFaceCommand.Execute(null);
 
         Assert.That(
             viewModel.SelectedLordDescription,
             Is.EqualTo("The Guildmaster's spell research is limited to level four, but thieves can perform more actions and cities cost 50% less to upgrade."));
+        Assert.That(viewModel.LeaderName, Is.EqualTo("Aldric"));
+        Assert.That(prompt.IsOpen, Is.False);
         Assert.That(viewModel.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Human, 1, IsLarge: true)));
         Assert.That(
             viewModel.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(1), new UnitDefinitionId("G000UU0020"))], WorldDifficulty.Hard, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(1), new UnitDefinitionId("G000UU0020"), new LiteralUnitName("Aldric"))], WorldDifficulty.Hard, Leader: null))));
     }
 
     [Test]
@@ -164,11 +179,12 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(gameViewModel.RootScreen, Is.SameAs(campaignSelect));
         Assert.That(
             scenarioConfiguration.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"))], WorldDifficulty.Average, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: null)], WorldDifficulty.Average, Leader: null))));
 
         scenarioConfiguration.SelectedLordCategory = LordCategory.Mage;
         scenarioConfiguration.SelectedLeader = scenarioConfiguration.Leaders[1];
         scenarioConfiguration.SelectedDifficulty = WorldDifficulty.VeryHard;
+        scenarioConfiguration.LeaderName = "Aldric";
         scenarioConfiguration.NextLordFaceCommand.Execute(null);
         scenarioConfiguration.NextLordFaceCommand.Execute(null);
         await gameViewModel.StartGameCommand.ExecuteAsync(scenarioConfiguration.GameConfiguration);
@@ -187,7 +203,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(player.LordId, Is.EqualTo(new LordDefinitionId("G000LR0003")));
         Assert.That(player.FaceVariant, Is.EqualTo(new WorldObjectVariant(2)));
         Assert.That(player.Resources, Is.EqualTo(new WorldResourceSet(175, 0, 0, 25, 0, 0)));
-        Assert.That(leader, Is.EqualTo(new WorldUnit(new WorldUnitId("S107UN0001"), new UnitDefinitionId("G000UU0020"), Hitpoints: 90, Experience: 0, Level: 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("g000um6001"))], Name: new ScenarioUnitName(new ScenarioTextId("S107UN0001:NAME_TXT:0")), IsTypeLocked: false)));
+        Assert.That(leader, Is.EqualTo(new WorldUnit(new WorldUnitId("S107UN0001"), new UnitDefinitionId("G000UU0020"), Hitpoints: 90, Experience: 0, Level: 1, [UnitModifier.FromFortification(new UnitModifierDefinitionId("g000um6001"))], Name: new LiteralUnitName("Aldric"), IsTypeLocked: false)));
         Assert.That(campaignSelect.IsOpen, Is.False);
         Assert.That(scenarioConfiguration.IsOpen, Is.False);
     }
@@ -315,7 +331,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         ]));
         Assert.That(viewModel.SelectedLeader, Is.EqualTo(viewModel.Leaders[3]));
         Assert.That(viewModel.GameConfiguration, Is.EqualTo(new GameConfiguration("S202SC0000", new ScenarioConfiguration(
-            [new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null)],
+            [new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)],
             WorldDifficulty.Average,
             Uther))));
 
@@ -345,7 +361,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         viewModel.SelectedLeader = viewModel.Leaders[1];
 
         Assert.That(viewModel.GameConfiguration, Is.EqualTo(new GameConfiguration("S202SC0000", new ScenarioConfiguration(
-            [new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("g000uu0020"))],
+            [new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("g000uu0020"), LeaderName: null)],
             WorldDifficulty.Average,
             Leader: null))));
     }

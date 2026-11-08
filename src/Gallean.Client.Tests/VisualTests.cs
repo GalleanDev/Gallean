@@ -880,6 +880,28 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task ScenarioConfigurationLeaderNameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
+        GameCampaign campaign = campaigns[2];
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        ScenarioConfigurationScreenViewModel screen = new(gameViewModel, texts, definitions, campaign.Scenarios[0], [campaign.PlayRace]);
+
+        gameViewModel.ShowScreen(screen);
+        screen.EditLeaderNameCommand.Execute(null);
+
+        TextPromptViewModel prompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
+
+        prompt.Text = "Aldric";
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task ScenarioConfigurationImportTest()
     {
         using Sandbox sb = Sandbox.Create();

@@ -482,7 +482,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
         (GameSession session, _) = gameLoader.CreateScenario("S137SC0000", configuration, Language.English);
         WorldState savedState = session.World.State with
         {

@@ -58,6 +58,7 @@ internal sealed class ViewDataTemplate : IDataTemplate
             SpellbookTabViewModel => new SpellbookTabView(),
             StackLeaderViewModel => new StackLeaderView(),
             StackTabViewModel => new StackTabView(),
+            TextPromptViewModel => new TextPromptView(),
             ThiefActionResultScreenViewModel => new ThiefActionResultScreenView(),
             ThiefActionScreenViewModel => new ThiefActionScreenView(),
             ThiefStealScreenViewModel => new ThiefStealScreenView(),

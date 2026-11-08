@@ -9,6 +9,8 @@ namespace Gallean.Client;
 
 internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScreenViewModel
 {
+    private const int MaxLeaderNameLength = 20;
+
     private readonly IGameTextProvider texts;
     private readonly IGameDefinitionProvider definitions;
     private readonly GameScenario scenario;
@@ -75,6 +77,10 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GameConfiguration))]
+    public partial string LeaderName { get; set; } = "";
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(GameConfiguration))]
     public partial WorldDifficulty SelectedDifficulty { get; set; }
 
     [ObservableProperty]
@@ -126,7 +132,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
 
         foreach (ScenarioRace race in humanRaces)
         {
-            ScenarioPlayerConfiguration playerConfiguration = new(race.Race, LordCategory.Warrior, new WorldObjectVariant(0), null);
+            ScenarioPlayerConfiguration playerConfiguration = new(race.Race, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null);
 
             humanPlayers.Add(playerConfiguration);
         }
@@ -210,7 +216,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
             importedLeader = configuration.Leader;
         }
 
-        ScenarioPlayerConfiguration player = new(race, SelectedLordCategory, new WorldObjectVariant(LordFaceVariant), startingLeaderId);
+        ScenarioPlayerConfiguration player = new(race, SelectedLordCategory, new WorldObjectVariant(LordFaceVariant), startingLeaderId, BuildLeaderName());
 
         return configuration with
         {
@@ -218,6 +224,32 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
             Difficulty = SelectedDifficulty,
             Leader = importedLeader
         };
+    }
+
+    private UnitName? BuildLeaderName()
+    {
+        string name = LeaderName.Trim();
+
+        if (name.Length > 0)
+        {
+            return new LiteralUnitName(name);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    [RelayCommand]
+    private void EditLeaderName()
+    {
+        Game.OpenScreen(new TextPromptViewModel(
+            Tr("Hero name"),
+            Tr("Enter a name for your starting hero."),
+            LeaderName,
+            Tr("Default name"),
+            MaxLeaderNameLength,
+            name => LeaderName = name.Trim()));
     }
 
     [RelayCommand]

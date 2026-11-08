@@ -11,7 +11,7 @@ public sealed class GameMenuViewModelTests
 
     private static GameModel LoadSeasonedHero(GameLoader gameLoader)
     {
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
         (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S202SC0000", configuration, Language.English);
         GameModel start = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         WorldState state = start.Snapshot.WorldState;
@@ -33,7 +33,7 @@ public sealed class GameMenuViewModelTests
 
     private static GameModel LoadWithoutLeaders(GameLoader gameLoader)
     {
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
         (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S202SC0000", configuration, Language.English);
         GameModel start = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         WorldState state = start.Snapshot.WorldState;

@@ -364,7 +364,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S137SC0000_ConfigurationTest()
     {
         ScenarioId scenarioId = new("S137SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
 
         WorldPlayer expectedNeutral = new(
@@ -3202,7 +3202,7 @@ public sealed class ScenarioLoaderTests
             new WorldInventory([gem]),
             PendingLeaderUpgrades: 1,
             BattlesWon: 7);
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null)], WorldDifficulty.Average, scenarioLeader);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)], WorldDifficulty.Average, scenarioLeader);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
@@ -3387,7 +3387,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S217SC0000_ConfiguredRaceTest()
     {
         ScenarioId scenarioId = new("S217SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(3), null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(3), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
 
         Assert.That(FormatPlayers(scenarioId, scenario.State), Is.EqualTo([
@@ -3401,7 +3401,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S217SC0000_NeutralRaceTest()
     {
         ScenarioId scenarioId = new("S217SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Neutral, LordCategory.Warrior, new WorldObjectVariant(0), null)], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Neutral, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)], WorldDifficulty.Average, Leader: null);
 
         InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration));
 
@@ -3412,7 +3412,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S217SC0000_MissingRaceTest()
     {
         ScenarioId scenarioId = new("S217SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Undead, LordCategory.Warrior, new WorldObjectVariant(0), null)], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Undead, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)], WorldDifficulty.Average, Leader: null);
 
         InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration));
 
@@ -3425,8 +3425,8 @@ public sealed class ScenarioLoaderTests
         ScenarioId scenarioId = new("S217SC0000");
         ScenarioConfiguration configuration = new(
             [
-                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(2), null),
-                new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Guildmaster, new WorldObjectVariant(1), null)
+                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: null),
+                new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Guildmaster, new WorldObjectVariant(1), null, LeaderName: null)
             ],
             WorldDifficulty.Easy,
             Leader: null);
@@ -3449,8 +3449,8 @@ public sealed class ScenarioLoaderTests
         ScenarioId scenarioId = new("S217SC0000");
         ScenarioConfiguration configuration = new(
             [
-                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null),
-                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(1), null)
+                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null),
+                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(1), null, LeaderName: null)
             ],
             WorldDifficulty.Average,
             Leader: null);
@@ -4066,7 +4066,7 @@ public sealed class ScenarioLoaderTests
     [Test]
     public void StartingLeaderTest()
     {
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"))], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: null)], WorldDifficulty.Average, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S201SC0000"), definitions, globals, configuration);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
@@ -4079,6 +4079,47 @@ public sealed class ScenarioLoaderTests
                     Level: 10,
                     [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))],
                     Name: new ScenarioUnitName(new ScenarioTextId("S201UN0001:NAME_TXT:0")),
+                    IsTypeLocked: false),
+                GridPosition.FrontCenter,
+                false)
+            .Build();
+
+        Assert.That(scenario.State.Stacks[new WorldStackId("S201KC0000")], Is.EqualTo(new WorldStack(
+            new WorldStackId("S201KC0000"),
+            new WorldPlayerId(2),
+            new WorldPosition(109, 31),
+            WorldStackDirection.SouthWest,
+            expectedUnits,
+            MovementPoints: 29,
+            WorldInventory.Empty,
+            LeaderEquipment.Empty,
+            new WorldSubraceId("S201SR0001"),
+            AiPriority: 3,
+            AiIgnore: false,
+            Concealed: false,
+            WorldStackOrder.Normal.Instance,
+            ExpirationTurn: null,
+            PendingLeaderUpgrades: 9,
+            BattlesWon: 0,
+            SourceTemplateId: null)));
+    }
+
+    [Test]
+    public void LeaderNameTest()
+    {
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), new LiteralUnitName("Aldric"))], WorldDifficulty.Average, Leader: null);
+        Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S201SC0000"), definitions, globals, configuration);
+
+        UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
+            .Place(
+                new WorldUnit(
+                    new WorldUnitId("S201UN0001"),
+                    new UnitDefinitionId("G000UU0019"),
+                    Hitpoints: 285,
+                    Experience: 0,
+                    Level: 10,
+                    [UnitModifier.FromFortification(new UnitModifierDefinitionId("G000UM6001"))],
+                    Name: new LiteralUnitName("Aldric"),
                     IsTypeLocked: false),
                 GridPosition.FrontCenter,
                 false)

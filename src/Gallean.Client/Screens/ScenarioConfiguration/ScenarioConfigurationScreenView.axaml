@@ -106,7 +106,14 @@
                      Margin="16,10,8,0" />
 
           <StackPanel IsVisible="{Binding Leaders.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" Margin="0,24,0,0">
-            <local:OutlinedTextBlock Text="{local:Text 'Starting hero'}" Classes="label" Margin="16,0,0,6" />
+            <Grid ColumnDefinitions="*,Auto" Margin="16,0,8,6">
+              <local:OutlinedTextBlock Text="{local:Text 'Starting hero'}" Classes="label" />
+              <Button Grid.Column="1"
+                      Classes="link"
+                      Content="{local:Text 'Edit name'}"
+                      Command="{Binding EditLeaderNameCommand}"
+                      VerticalAlignment="Bottom" />
+            </Grid>
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
               <ComboBox ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}" HorizontalAlignment="Stretch">
                 <ComboBox.ItemTemplate>

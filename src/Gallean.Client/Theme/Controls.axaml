@@ -831,6 +831,28 @@
     <Setter Property="Outline" Value="{StaticResource PillOutlineBrush}" />
   </Style>
 
+  <Style Selector="Button.link">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeMd}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Background="Transparent"
+                          Content="{TemplateBinding Content}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Padding="{TemplateBinding Padding}" />
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.link TextBlock">
+    <Setter Property="TextDecorations" Value="Underline" />
+  </Style>
+  <Style Selector="Button.link:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+  </Style>
+
   <Style Selector="Button.pill">
     <Setter Property="Height" Value="36" />
     <Setter Property="Padding" Value="24,0" />
