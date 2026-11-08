@@ -1252,41 +1252,6 @@ public sealed class WorldEventQueueTests
     }
 
     [Test]
-    public void CityRiotEndedTest()
-    {
-        WorldMap map = TestHelpers.SimpleMap(8, 8);
-
-        WorldPlayer owner = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
-        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
-            new WorldCityDefinitionId(WorldRace.Human, 1),
-            WorldResourceSet.Empty);
-        WorldCity city = TestHelpers.SimpleCity(
-            new WorldFortificationId("City1"),
-            cityDefinition,
-            owner.Id,
-            new WorldPosition(3, 3),
-            UnitGrid<WorldUnit>.Empty);
-
-        (GameSession session, _) = new TestWorldEngineBuilder()
-            .WithMap(map)
-            .WithDefinition(cityDefinition)
-            .WithDefinition(TestHelpers.SimpleLord(owner.LordId, owner.Race, LordCategory.Warrior))
-            .WithPlayer(owner)
-            .WithCity(city)
-            .BuildSession();
-
-        WorldState state = session.World.State;
-        Subject<EngineStep<WorldState, WorldEvent>> events = new();
-        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
-
-        events.OnNext(new EngineStep<WorldState, WorldEvent>(state, state, new WorldCityRiotEndedEvent(city.Id)));
-
-        Entry entry = Assert.NotNull(queue.PlayNext());
-        Assert.That(entry, Is.EqualTo(new Entry.CityRiotEnd(state, city.Entrance)));
-        Assert.That(entry.GetFocusPosition(owner.Id), Is.Null);
-    }
-
-    [Test]
     public void FortificationEnteredTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);

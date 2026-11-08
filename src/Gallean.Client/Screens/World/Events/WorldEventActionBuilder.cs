@@ -38,7 +38,6 @@ internal sealed class WorldEventActionBuilder(
             Entry.TurnStart data => BuildTurnStart(data),
             Entry.HotseatTurn data => BuildHotseatTurn(data),
             Entry.ScenarioEnd data => BuildScenarioEnd(data),
-            Entry.CityRiotEnd data => BuildCityRiotEnd(data),
             Entry.FortificationEnter data => BuildFortificationEnter(data),
             Entry.FortificationExit data => BuildFortificationExit(data),
             Entry.RuinLoot data => BuildRuinLoot(data),
@@ -355,22 +354,6 @@ internal sealed class WorldEventActionBuilder(
         if (scenarioEnd.WinnerId is not null && scenarioEnd.WinnerId.Value == ViewPlayerId)
         {
             return new WorldEventAction.AutoSave([], GameSaveType.Victory, Tr("Victory"));
-        }
-        else
-        {
-            return WorldEventAction.None;
-        }
-    }
-
-    private WorldEventAction BuildCityRiotEnd(Entry.CityRiotEnd riotEnd)
-    {
-        WorldPlan plan = WorldPlan.For(snapshot.WorldState);
-        WorldVisibility visibility = WorldVisibility.Create(snapshot.WorldState, ViewPlayerId, fogEnabled);
-        WorldFortification? fortification = visibility.GetFortificationAt(plan, riotEnd.Position);
-
-        if (fortification is not null)
-        {
-            return Sound(new AssetSoundKey.CityRiotEnd());
         }
         else
         {

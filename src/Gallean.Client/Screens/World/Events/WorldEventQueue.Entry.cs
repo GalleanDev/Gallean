@@ -481,14 +481,6 @@ internal sealed partial class WorldEventQueue
             }
         }
 
-        public sealed record CityRiotEnd(WorldState State, WorldPosition Position) : Entry(State)
-        {
-            public override WorldEventFocus? GetFocus()
-            {
-                return null;
-            }
-        }
-
         public sealed record FortificationEnter(WorldState State, WorldPosition Position) : Entry(State)
         {
             public override WorldEventFocus? GetFocus()

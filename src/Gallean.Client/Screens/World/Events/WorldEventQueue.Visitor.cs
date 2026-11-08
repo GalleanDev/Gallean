@@ -133,11 +133,6 @@ internal sealed partial class WorldEventQueue
 
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldCityRiotEndedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
-        if (step.NewState.Fortifications.TryGetValue(ev.CityId, out WorldFortification? fortification))
-        {
-            queue.Add(new Entry.CityRiotEnd(step.NewState, fortification.Entrance));
-        }
-
         return Empty.Value;
     }
 

@@ -5163,7 +5163,7 @@ public sealed class WorldScreenViewModelTests
 
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
-        Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:turn-start", "Sound:city-riot-end"]));
+        Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:turn-start"]));
     }
 
     [Test]
