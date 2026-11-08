@@ -33,11 +33,11 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(ImportCommand))]
     [NotifyCanExecuteChangedFor(nameof(DeleteCommand))]
-    public partial LeaderImportCandidateViewModel? SelectedLeader { get; set; }
+    public partial LeaderImportLeaderViewModel? SelectedLeader { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEmpty))]
-    public partial IReadOnlyList<LeaderImportCandidateViewModel> Leaders { get; private set; } = [];
+    public partial IReadOnlyList<LeaderImportLeaderViewModel> Leaders { get; private set; } = [];
 
     public GameViewModel Game { get; }
 
@@ -50,7 +50,7 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
         return true;
     }
 
-    private static int CompareCandidates(LeaderImportCandidateViewModel left, LeaderImportCandidateViewModel right)
+    private static int CompareLeaders(LeaderImportLeaderViewModel left, LeaderImportLeaderViewModel right)
     {
         int rv;
 
@@ -75,10 +75,10 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
         return 0;
     }
 
-    private IReadOnlyList<LeaderImportCandidateViewModel> BuildLeaders(IReadOnlyList<LeaderEntry> entries)
+    private IReadOnlyList<LeaderImportLeaderViewModel> BuildLeaders(IReadOnlyList<LeaderEntry> entries)
     {
         WorldRaceDefinition raceDefinition = definitions.GetRace(race);
-        List<LeaderImportCandidateViewModel> result = [];
+        List<LeaderImportLeaderViewModel> result = [];
 
         foreach (LeaderEntry entry in entries)
         {
@@ -90,7 +90,7 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
                 itemIcons.Add(ItemIconResolver.Resolve(definitions, item.DefinitionId));
             }
 
-            result.Add(new LeaderImportCandidateViewModel(
+            result.Add(new LeaderImportLeaderViewModel(
                 entry,
                 new AssetSpriteKey.UnitPortrait(leader.Unit.DefinitionId),
                 UnitNameResolver.Resolve(leader.Unit, definitions, texts),
@@ -100,14 +100,14 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
                 raceDefinition.Leaders.Contains(leader.Unit.DefinitionId)));
         }
 
-        result.Sort(CompareCandidates);
+        result.Sort(CompareLeaders);
 
         return result;
     }
 
-    private LeaderImportCandidateViewModel? ResolveSelection()
+    private LeaderImportLeaderViewModel? ResolveSelection()
     {
-        foreach (LeaderImportCandidateViewModel leader in Leaders)
+        foreach (LeaderImportLeaderViewModel leader in Leaders)
         {
             if (leader.IsAvailable)
             {

@@ -246,11 +246,11 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(secondPlayer.IsOpen, Is.False);
     }
 
-    private static IReadOnlyList<string> FormatCandidates(IReadOnlyList<LeaderImportCandidateViewModel> leaders)
+    private static IReadOnlyList<string> FormatImportLeaders(IReadOnlyList<LeaderImportLeaderViewModel> leaders)
     {
         List<string> rows = [];
 
-        foreach (LeaderImportCandidateViewModel leader in leaders)
+        foreach (LeaderImportLeaderViewModel leader in leaders)
         {
             string availability = leader.IsAvailable ? "available" : "unavailable";
 
@@ -289,7 +289,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
 
         LeaderImportScreenViewModel picker = Assert.IsOfType<LeaderImportScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(FormatCandidates(picker.Leaders), Is.EqualTo([
+        Assert.That(FormatImportLeaders(picker.Leaders), Is.EqualTo([
             "3 Uther Lv. 12 | 34 battles won | items=1 | available",
             "1 Elena Lv. 3 | 1 battle won | items=0 | available",
             "2 Thorin Lv. 20 | 90 battles won | items=0 | unavailable"
@@ -423,7 +423,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(picker));
         Assert.That(await store.EnumerateAsync(), Is.Empty);
-        Assert.That(FormatCandidates(picker.Leaders), Is.Empty);
+        Assert.That(FormatImportLeaders(picker.Leaders), Is.Empty);
         Assert.That(picker.IsEmpty, Is.True);
         Assert.That(picker.SelectedLeader, Is.Null);
         Assert.That(picker.ImportCommand.CanExecute(null), Is.False);

@@ -27,7 +27,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(ExportCommand))]
-    public partial LeaderExportCandidateViewModel? SelectedLeader { get; set; }
+    public partial LeaderExportLeaderViewModel? SelectedLeader { get; set; }
 
     [ObservableProperty]
     public partial IReadOnlyList<LeaderExportItemViewModel> Items { get; private set; } = [];
@@ -35,7 +35,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
     [ObservableProperty]
     public partial string ItemsTitle { get; private set; } = "";
 
-    public IReadOnlyList<LeaderExportCandidateViewModel> Leaders { get; }
+    public IReadOnlyList<LeaderExportLeaderViewModel> Leaders { get; }
 
     public string Instruction => Tr("Select a leader and up to {0} items to bring to the next quest.", scenarioExporter.ItemLimit);
 
@@ -141,9 +141,9 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
         };
     }
 
-    private IReadOnlyList<LeaderExportCandidateViewModel> BuildLeaders()
+    private IReadOnlyList<LeaderExportLeaderViewModel> BuildLeaders()
     {
-        List<LeaderExportCandidateViewModel> result = [];
+        List<LeaderExportLeaderViewModel> result = [];
 
         IEnumerable<WorldStack> stacks = scenarioExporter
             .GetExportableStacks(WorldState, ViewPlayerId)
@@ -162,7 +162,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
             UnitDetailsViewModel details = UnitDetailsViewModel.CreateFromWorld(
                 leader, WorldState.Players[stack.OwnerId], GameModel.Definitions, GameModel.Texts, GameModel.Stats);
 
-            result.Add(new LeaderExportCandidateViewModel(
+            result.Add(new LeaderExportLeaderViewModel(
                 stack.Id,
                 new AssetSpriteKey.UnitPortrait(leader.DefinitionId),
                 UnitNameResolver.Resolve(leader, GameModel.Definitions, GameModel.Texts),

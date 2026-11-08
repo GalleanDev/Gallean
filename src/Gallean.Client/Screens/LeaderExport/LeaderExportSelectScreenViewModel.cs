@@ -22,11 +22,11 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(ExportCommand))]
-    public partial LeaderExportCandidateViewModel? SelectedLeader { get; set; }
+    public partial LeaderExportLeaderViewModel? SelectedLeader { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEmpty))]
-    public partial IReadOnlyList<LeaderExportCandidateViewModel> Leaders { get; private set; } = [];
+    public partial IReadOnlyList<LeaderExportLeaderViewModel> Leaders { get; private set; } = [];
 
     public bool IsEmpty => Leaders.Count == 0;
 
@@ -68,9 +68,9 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
         return SelectedLeader is not null;
     }
 
-    private LeaderExportCandidateViewModel? ResolveSelection(WorldStackId? stackId)
+    private LeaderExportLeaderViewModel? ResolveSelection(WorldStackId? stackId)
     {
-        foreach (LeaderExportCandidateViewModel leader in Leaders)
+        foreach (LeaderExportLeaderViewModel leader in Leaders)
         {
             if (leader.StackId == stackId)
             {
@@ -81,7 +81,7 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
         return Leaders.Count > 0 ? Leaders[0] : null;
     }
 
-    private IReadOnlyList<LeaderExportCandidateViewModel> BuildLeaders(GameSnapshot snapshot)
+    private IReadOnlyList<LeaderExportLeaderViewModel> BuildLeaders(GameSnapshot snapshot)
     {
         WorldState state = snapshot.WorldState;
         ImmutableArray<WorldStack> exportableStacks = scenarioExporter.GetExportableStacks(state, snapshot.ViewPlayerId);
@@ -89,7 +89,7 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
 
         stacks.Sort(CompareStacks);
 
-        List<LeaderExportCandidateViewModel> result = [];
+        List<LeaderExportLeaderViewModel> result = [];
 
         foreach (WorldStack stack in stacks)
         {
@@ -104,7 +104,7 @@ internal sealed partial class LeaderExportSelectScreenViewModel : AbstractGameSc
             UnitDetailsViewModel details = UnitDetailsViewModel.CreateFromWorld(
                 leader, state.Players[stack.OwnerId], GameModel.Definitions, GameModel.Texts, GameModel.Stats);
 
-            result.Add(new LeaderExportCandidateViewModel(
+            result.Add(new LeaderExportLeaderViewModel(
                 stack.Id,
                 new AssetSpriteKey.UnitPortrait(leader.DefinitionId),
                 UnitNameResolver.Resolve(leader, GameModel.Definitions, GameModel.Texts),

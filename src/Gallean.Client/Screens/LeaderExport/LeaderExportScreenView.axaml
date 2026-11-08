@@ -54,7 +54,7 @@
           <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Leader'}" Classes="label" Margin="0,0,0,8" />
           <ListBox Grid.Row="1" Classes="select-list" ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}">
             <ListBox.ItemTemplate>
-              <DataTemplate x:DataType="local:LeaderExportCandidateViewModel">
+              <DataTemplate x:DataType="local:LeaderExportLeaderViewModel">
                 <Border Classes="row">
                   <Grid ColumnDefinitions="56,*">
                     <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="56" Height="56" />

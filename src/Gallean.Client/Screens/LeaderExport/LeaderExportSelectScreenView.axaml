@@ -45,7 +45,7 @@
           </StackPanel>
         </local:Blankslate.Content>
         <ListBox.ItemTemplate>
-          <DataTemplate x:DataType="local:LeaderExportCandidateViewModel">
+          <DataTemplate x:DataType="local:LeaderExportLeaderViewModel">
             <Border Classes="row">
               <Grid ColumnDefinitions="56,*">
                 <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="56" Height="56" />

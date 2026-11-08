@@ -61,11 +61,11 @@ public sealed class GameMenuViewModelTests
         return Assert.IsOfType<LeaderExportSelectScreenViewModel>(gameViewModel.TopScreen);
     }
 
-    private static IReadOnlyList<string> FormatCandidates(IReadOnlyList<LeaderExportCandidateViewModel> leaders)
+    private static IReadOnlyList<string> FormatLeaders(IReadOnlyList<LeaderExportLeaderViewModel> leaders)
     {
         List<string> rows = [];
 
-        foreach (LeaderExportCandidateViewModel leader in leaders)
+        foreach (LeaderExportLeaderViewModel leader in leaders)
         {
             rows.Add($"{leader.StackId} {leader.Name} {leader.LevelText} | {leader.BattlesWonText} | items={leader.ItemIcons.Count}");
         }
@@ -84,7 +84,7 @@ public sealed class GameMenuViewModelTests
 
         LeaderExportSelectScreenViewModel picker = OpenExport(gameModel, gameViewModel);
 
-        Assert.That(FormatCandidates(picker.Leaders), Is.EqualTo([
+        Assert.That(FormatLeaders(picker.Leaders), Is.EqualTo([
             "S202KC0000 Edwin Lv. 12 | 34 battles won | items=1"
         ]));
         Assert.That(picker.SelectedLeader, Is.EqualTo(picker.Leaders[0]));
@@ -123,7 +123,7 @@ public sealed class GameMenuViewModelTests
 
         LeaderExportSelectScreenViewModel picker = OpenExport(gameModel, gameViewModel);
 
-        Assert.That(FormatCandidates(picker.Leaders), Is.Empty);
+        Assert.That(FormatLeaders(picker.Leaders), Is.Empty);
         Assert.That(picker.IsEmpty, Is.True);
         Assert.That(picker.SelectedLeader, Is.Null);
         Assert.That(picker.ExportCommand.CanExecute(null), Is.False);

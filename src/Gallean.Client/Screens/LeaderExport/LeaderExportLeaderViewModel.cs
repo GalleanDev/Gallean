@@ -1,13 +1,15 @@
-using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal sealed record LeaderImportCandidateViewModel(
-    LeaderEntry Entry,
+internal sealed record LeaderExportLeaderViewModel(
+    WorldStackId StackId,
     AssetSpriteKey.UnitPortrait PortraitKey,
     string Name,
     string LevelText,
     string BattlesWonText,
     IReadOnlyList<AssetSpriteKey.ItemIcon> ItemIcons,
-    bool IsAvailable);
+    UnitDetailsViewModel Details) : IDetailsSource
+{
+    object? IDetailsSource.DetailsContent => Details;
+}

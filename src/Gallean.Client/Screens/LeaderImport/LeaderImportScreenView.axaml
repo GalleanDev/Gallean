@@ -46,7 +46,7 @@
 
       <ListBox Classes="select-list" MinHeight="240" ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}">
         <ListBox.Styles>
-          <Style Selector="ListBoxItem" x:DataType="local:LeaderImportCandidateViewModel">
+          <Style Selector="ListBoxItem" x:DataType="local:LeaderImportLeaderViewModel">
             <Setter Property="IsEnabled" Value="{Binding IsAvailable}" />
           </Style>
         </ListBox.Styles>
@@ -70,7 +70,7 @@
           </StackPanel>
         </local:Blankslate.Content>
         <ListBox.ItemTemplate>
-          <DataTemplate x:DataType="local:LeaderImportCandidateViewModel">
+          <DataTemplate x:DataType="local:LeaderImportLeaderViewModel">
             <Border Classes="row">
               <Grid ColumnDefinitions="56,*">
                 <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="56" Height="56" />

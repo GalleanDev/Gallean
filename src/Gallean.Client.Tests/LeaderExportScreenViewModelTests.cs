@@ -7,11 +7,11 @@ namespace Gallean.Client.Tests;
 
 public sealed class LeaderExportScreenViewModelTests
 {
-    private static IReadOnlyList<string> FormatLeaders(IReadOnlyList<LeaderExportCandidateViewModel> leaders)
+    private static IReadOnlyList<string> FormatLeaders(IReadOnlyList<LeaderExportLeaderViewModel> leaders)
     {
         List<string> rows = [];
 
-        foreach (LeaderExportCandidateViewModel leader in leaders)
+        foreach (LeaderExportLeaderViewModel leader in leaders)
         {
             rows.Add($"{leader.StackId} {leader.Name} {leader.LevelText} | {leader.BattlesWonText} | items={leader.ItemIcons.Count}");
         }
