@@ -58,7 +58,12 @@ internal sealed partial class WorldScreenView : UserControl
         {
             PointerPoint point = e.GetCurrentPoint(card);
 
-            if (point.Properties.IsRightButtonPressed)
+            if (point.Properties.IsRightButtonPressed && ViewModel.CancelSelectedActionCommand.CanExecute(null))
+            {
+                ViewModel.CancelSelectedActionCommand.Execute(null);
+                e.Handled = true;
+            }
+            else if (point.Properties.IsRightButtonPressed)
             {
                 Matrix? transform = card.TransformToVisual(World);
 

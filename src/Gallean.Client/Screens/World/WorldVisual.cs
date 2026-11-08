@@ -277,7 +277,14 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 
         if (point.Properties.IsRightButtonPressed)
         {
-            ViewModel.ShowPositionInfo(WorldTransform.FromWorldPoint(worldPoint), hitPosition);
+            if (ViewModel.CancelSelectedActionCommand.CanExecute(null))
+            {
+                ViewModel.CancelSelectedActionCommand.Execute(null);
+            }
+            else
+            {
+                ViewModel.ShowPositionInfo(WorldTransform.FromWorldPoint(worldPoint), hitPosition);
+            }
 
             e.Handled = true;
         }

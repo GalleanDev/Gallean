@@ -91,6 +91,10 @@ internal sealed partial class WorldScreenViewModel :
     public partial ResourceSetViewModel? ActionPromptCost { get; private set; }
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(CancelSelectedActionCommand))]
+    public partial bool HasSelectedAction { get; private set; }
+
+    [ObservableProperty]
     public partial string? ObjectiveText { get; private set; }
 
     [ObservableProperty]
@@ -791,7 +795,7 @@ internal sealed partial class WorldScreenViewModel :
         UpdateReachable();
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(HasSelectedAction))]
     private void CancelSelectedAction()
     {
         if (cursor.Action is not null)
@@ -883,6 +887,7 @@ internal sealed partial class WorldScreenViewModel :
             cursor = newCursor;
             ActionPromptText = newCursor.Action?.SelectionText;
             ActionPromptCost = newCursor.Action?.SelectionCost;
+            HasSelectedAction = newCursor.Action is not null;
             RefreshRenderRequest();
             UpdateCursorType();
 
