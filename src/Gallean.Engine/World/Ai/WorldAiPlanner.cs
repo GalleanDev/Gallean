@@ -131,6 +131,7 @@ internal sealed partial class WorldAiPlanner(WorldAiContext context)
             new ThiefAction(context, Priority: 2),
             new RodAction(context, Priority: 2),
             new EnterCityAction(context, Priority: 2),
+            new TakeBagAction(context, Priority: 2),
             new MoveAction(context, Priority: 1),
             new ChangeOrderAction(context, Priority: 0)
         ];

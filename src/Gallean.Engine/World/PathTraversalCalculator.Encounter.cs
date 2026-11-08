@@ -2,9 +2,9 @@ namespace Gallean.Engine;
 
 internal static partial class PathTraversalCalculator
 {
-    public abstract record Encounter(WorldPosition Position)
+    public abstract record Encounter(WorldPosition Position, bool CanBegin)
     {
-        public sealed record Bag(WorldBag Target) : Encounter(Target.Position)
+        public sealed record Bag(WorldBag Target, bool CanBegin) : Encounter(Target.Position, CanBegin)
         {
             public override TResult Accept<TContext, TResult>(IEncounterVisitor<TContext, TResult> visitor, TContext context)
             {
@@ -12,7 +12,7 @@ internal static partial class PathTraversalCalculator
             }
         }
 
-        public abstract record Battle(WorldPosition Position, bool CanBegin) : Encounter(Position);
+        public abstract record Battle(WorldPosition Position, bool CanBegin) : Encounter(Position, CanBegin);
 
         public sealed record StackBattle(WorldStack Stack, bool CanBegin) : Battle(Stack.Position, CanBegin)
         {

@@ -454,36 +454,5 @@ internal sealed partial class WorldAiPlanner
                 }
             }
         }
-
-        private bool CanPickUpBags(WorldState state, WorldStack stack)
-        {
-            WorldPlayer owner = state.Players[stack.OwnerId];
-
-            if (WorldHelpers.IsRacePlayable(owner.Race))
-            {
-                (_, _, UnitDefinition leaderDefinition) = stack.GetLeader(Context.Engine.Definitions);
-
-                if (leaderDefinition.Category is UnitCategory.Summon or UnitCategory.Illusion)
-                {
-                    return false;
-                }
-                else
-                {
-                    return leaderDefinition.LeaderCategory switch
-                    {
-                        UnitLeaderCategory.Fighter => true,
-                        UnitLeaderCategory.Explorer => true,
-                        UnitLeaderCategory.Mage => true,
-                        UnitLeaderCategory.Thief => true,
-                        UnitLeaderCategory.Rod => false,
-                        null => false
-                    };
-                }
-            }
-            else
-            {
-                return true;
-            }
-        }
     }
 }

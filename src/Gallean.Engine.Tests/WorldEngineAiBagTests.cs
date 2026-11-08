@@ -51,7 +51,7 @@ public sealed class WorldEngineAiBagTests
             .WithStackMemory(moverStack.Id, new WorldAiStackMemory(WorldStackOrder.Normal.Instance, null));
 
         WorldAiActionPlan plan = new(
-            new WorldAiActionScore(1, 1000),
+            new WorldAiActionScore(2, 760),
             new WorldAiMoveStackCommand(moverStack.Id, bag.Position),
             memory);
 
@@ -115,7 +115,7 @@ public sealed class WorldEngineAiBagTests
         WorldAiMemory memory = new(new WorldAiTurnMemory(1, player1.Id, 1, 0, 0, []));
 
         WorldAiActionPlan plan = new(
-            new WorldAiActionScore(1, 600),
+            new WorldAiActionScore(2, 760),
             new WorldAiMoveStackCommand(moverStack.Id, bag.Position),
             memory);
 
@@ -464,5 +464,74 @@ public sealed class WorldEngineAiBagTests
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
         Assert.That(session.World.State.Stacks[moverStack.Id], Is.EqualTo(moverStack));
         Assert.That(session.World.State.Bags[bag.Id], Is.EqualTo(bag));
+    }
+
+    [Test]
+    public void PriorityTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(20, 5);
+
+        UnitDefinition mover = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("mover", maxHitpoints: 100, initiative: 40, damage: 50),
+            movementPoints: 10, leadership: 6);
+        UnitDefinition enemy = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 10, initiative: 10, damage: 5),
+            movementPoints: 10, leadership: 6);
+        ItemDefinitionId item = new("item");
+        WorldItem bagItem = new(new WorldItemId("BagItem"), item, Charges: null);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack moverStack = TestHelpers.SimpleStack(
+            new WorldStackId("Mover"),
+            player1.Id,
+            new WorldPosition(6, 2),
+            new UnitGrid<WorldUnit>.Builder().Place(TestHelpers.SimpleUnit(new WorldUnitId("mover"), mover), GridPosition.FrontBottom, false).Build(),
+            movementPoints: 10);
+
+        WorldStack enemyStack = TestHelpers.SimpleStack(
+            new WorldStackId("Enemy"),
+            player2.Id,
+            new WorldPosition(16, 2),
+            new UnitGrid<WorldUnit>.Builder().Place(TestHelpers.SimpleUnit(new WorldUnitId("enemy"), enemy), GridPosition.FrontBottom, false).Build(),
+            movementPoints: 10);
+
+        WorldBag bag = new(
+            Id: new WorldBagId("Bag"),
+            Position: new WorldPosition(4, 2),
+            Variant: new WorldObjectVariant(0),
+            Inventory: new WorldInventory([bagItem]),
+            AiPriority: 3);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(mover)
+            .WithDefinition(enemy)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(moverStack)
+            .WithStack(enemyStack)
+            .WithBag(bag)
+            .Build();
+
+        WorldAiMemory memory = new WorldAiMemory(
+                new WorldAiTurnMemory(1, player1.Id, 1, 0, 0, []))
+            .WithStackMemory(moverStack.Id, new WorldAiStackMemory(WorldStackOrder.Normal.Instance, null));
+
+        WorldAiActionPlan plan = new(
+            new WorldAiActionScore(2, 760),
+            new WorldAiMoveStackCommand(moverStack.Id, bag.Position),
+            memory);
+
+        engine.CheckCommand(new WorldAiActionCommand(), [
+            new WorldAiActionStartedEvent(plan),
+            new WorldStackMovingEvent(moverStack.Id, new WorldPosition(6, 2), new WorldPosition(5, 2), WorldStackDirection.NorthWest, 8, [], bag.Position),
+            new WorldStackMovedEvent(moverStack.Id, new WorldPosition(6, 2), new WorldPosition(5, 2), WorldStackDirection.NorthWest, 8, [], bag.Position),
+            new WorldBagPickedUpEvent(moverStack.Id, bag.Id, new WorldInventory([bagItem])),
+            new WorldAiActionEndedEvent(player1.Id, memory)
+        ]);
     }
 }

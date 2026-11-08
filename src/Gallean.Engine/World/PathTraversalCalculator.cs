@@ -17,18 +17,18 @@ internal static partial class PathTraversalCalculator
         {
             WorldPosition position = path.Positions[i];
             WorldPath approachPath = path.Truncate(i);
-            bool canBeginBattle = WorldMovementCalculator.CanBeginBattle(stack.MovementPoints, approachPath.Cost);
+            bool canBegin = approachPath.Cost < stack.MovementPoints;
 
             WorldBag? traverseBag = plan.GetBagAt(position);
             if (traverseBag is not null)
             {
-                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.Bag(traverseBag));
+                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.Bag(traverseBag, canBegin));
             }
 
             WorldStack? traverseStack = plan.GetStackAt(position);
             if (traverseStack is not null && DiplomacyCalculator.IsHostile(state, stack.OwnerId, traverseStack.OwnerId))
             {
-                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.StackBattle(traverseStack, canBeginBattle));
+                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.StackBattle(traverseStack, canBegin));
             }
 
             WorldFortification? traverseFortification = plan.GetFortificationAt(position);
@@ -38,7 +38,7 @@ internal static partial class PathTraversalCalculator
 
                 if (fortificationOwner is null || DiplomacyCalculator.IsHostile(state, stack.OwnerId, fortificationOwner.Value))
                 {
-                    return new TraversalInfo(approachPath, path.Skip(i), new Encounter.FortificationBattle(traverseFortification, canBeginBattle));
+                    return new TraversalInfo(approachPath, path.Skip(i), new Encounter.FortificationBattle(traverseFortification, canBegin));
                 }
             }
 
@@ -48,7 +48,7 @@ internal static partial class PathTraversalCalculator
                 return new TraversalInfo(
                     path.Truncate(i + 1),
                     path.Skip(i + 1),
-                    new Encounter.StackBattle(interceptingStack, canBeginBattle));
+                    new Encounter.StackBattle(interceptingStack, canBegin));
             }
         }
 

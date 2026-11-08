@@ -97,11 +97,6 @@ internal static class WorldMovementCalculator
         }
     }
 
-    public static bool CanBeginBattle(int movementPoints, int totalCost)
-    {
-        return totalCost < movementPoints;
-    }
-
     public static int GetActionCost(StackStats stackStats, GlobalVariables globals)
     {
         return (stackStats.MaxMovementPoints * globals.ActionMovementCostPercent + 99) / 100;
