@@ -22,6 +22,7 @@ public sealed class ShaderLibraryTests
             new ShaderKey("Water", "Water.sksl"),
             new ShaderKey("WorldBattleTransition", "WorldBattleTransition.sksl"),
             new ShaderKey("WorldHighlight", "WorldHighlight.sksl"),
+            new ShaderKey("WorldMountainCloud", "WorldMountainCloud.sksl"),
             new ShaderKey("WorldReach", "WorldReach.sksl")
         ]));
     }

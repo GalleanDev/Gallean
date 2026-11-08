@@ -1,0 +1,66 @@
+uniform shader mask;
+uniform shader noise;
+
+uniform float time;
+uniform float phase;
+uniform float noiseScale;
+uniform float strength;
+uniform float4 lightColor;
+uniform float4 shadowColor;
+
+const float2 Wind = float2(0.94, -0.34);
+const float DriftSpeed = 3.2;
+const float WarpStrength = 40.0;
+const float MaskWeight = 0.45;
+const float ThresholdLow = 0.44;
+const float ThresholdHigh = 0.62;
+const float Softness = 0.22;
+const float BreathRate = 0.09;
+const float MaxAlpha = 0.78;
+const float2 SunOffset = float2(-12.0, -9.0);
+const float ShadowGain = 4.2;
+const float EdgeLight = 0.25;
+const float2x2 Rotate1 = float2x2(0.7986, 0.6018, -0.6018, 0.7986);
+const float2x2 Rotate2 = float2x2(0.2924, 0.9563, -0.9563, 0.2924);
+
+float density(float2 world, float2 drift, float detail) {
+    float2 point = world * noiseScale;
+    half4 warpSample = noise.eval(point * 0.55 + drift * 0.6 + 31.0);
+    float2 warp = (float2(warpSample.g, warpSample.b) - 0.5) * WarpStrength;
+
+    point += warp;
+
+    float broad = float(noise.eval(point + drift).r);
+    float medium = float(noise.eval(Rotate1 * point * 2.3 + drift * 1.6 + 71.0).g);
+    float fine = float(noise.eval(Rotate2 * point * 5.1 + drift * 2.4 + 113.0).b);
+
+    return broad * 0.5 + medium * 0.32 + fine * 0.18 * detail;
+}
+
+half4 main(float2 coord) {
+    float cover = float(mask.eval(coord).a);
+
+    if (cover <= 0.004) {
+        return half4(0.0);
+    }
+
+    float2 drift = Wind * time * DriftSpeed * noiseScale + phase * 517.0;
+    float thickness = density(coord, drift, 1.0);
+    float breath = 0.5 + 0.5 * sin(time * BreathRate + phase * 6.2831853);
+    float threshold = mix(ThresholdHigh, ThresholdLow, breath);
+    float field = thickness + (cover - 0.5) * MaskWeight;
+    float body = smoothstep(threshold, threshold + Softness, field);
+    float alpha = body * cover * MaxAlpha * strength;
+
+    if (alpha <= 0.002) {
+        return half4(0.0);
+    }
+
+    float towardSun = density(coord + SunOffset, drift, 0.0);
+    float shadow = clamp((towardSun - thickness) * ShadowGain + 0.5, 0.0, 1.0);
+    float3 color = mix(lightColor.rgb, shadowColor.rgb, shadow);
+
+    color = mix(color, lightColor.rgb, (1.0 - body) * EdgeLight);
+
+    return half4(half3(color * alpha), half(alpha));
+}

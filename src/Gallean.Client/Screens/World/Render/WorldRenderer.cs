@@ -146,7 +146,7 @@ internal sealed partial class WorldRenderer
             DrawObjectiveMarker(canvas, marker, visible);
         }
 
-        DrawObjects(canvas, content, animations, assets, frameIndex, visible);
+        DrawObjects(canvas, content, animations, assets, frameIndex, loopTime, visible);
 
         foreach (Cursor cursor in state.Cursors)
         {
@@ -261,6 +261,7 @@ internal sealed partial class WorldRenderer
         IReadOnlyList<AnimationRenderItem> animations,
         IAssetProvider assets,
         int frameIndex,
+        TimeSpan loopTime,
         Rect visible)
     {
         using SKPaint atlasPaint = SkiaHelpers.MakeImagePaint();
@@ -271,23 +272,27 @@ internal sealed partial class WorldRenderer
         int objectCount = content.ObjectAtlas.SpriteCount;
         IReadOnlyList<int> objectDepths = content.ObjectSpriteDepths;
         IReadOnlyList<DirectSprite> directSprites = content.DirectSprites;
+        IReadOnlyList<MountainCloudSprite> clouds = content.MountainClouds;
         IReadOnlyList<StackSprite> stacks = content.Stacks;
         int directCount = directSprites.Count;
+        int cloudCount = clouds.Count;
         int stackCount = stacks.Count;
         int animationCount = animations.Count;
 
         int objectCursor = 0;
         int directCursor = 0;
+        int cloudCursor = 0;
         int stackCursor = 0;
         int animationCursor = 0;
 
-        while (objectCursor < objectCount || directCursor < directCount || stackCursor < stackCount || animationCursor < animationCount)
+        while (objectCursor < objectCount || directCursor < directCount || cloudCursor < cloudCount || stackCursor < stackCount || animationCursor < animationCount)
         {
             int objectDepth = objectCursor < objectCount ? objectDepths[objectCursor] : int.MaxValue;
             int directDepth = directCursor < directCount ? directSprites[directCursor].Depth : int.MaxValue;
+            int cloudDepth = cloudCursor < cloudCount ? clouds[cloudCursor].Depth : int.MaxValue;
             int stackDepth = stackCursor < stackCount ? stacks[stackCursor].Stack.Depth : int.MaxValue;
             int animationDepth = animationCursor < animationCount ? animations[animationCursor].Depth : int.MaxValue;
-            int limit = Math.Min(directDepth, Math.Min(stackDepth, animationDepth));
+            int limit = Math.Min(Math.Min(directDepth, cloudDepth), Math.Min(stackDepth, animationDepth));
 
             if (objectDepth <= limit)
             {
@@ -300,7 +305,7 @@ internal sealed partial class WorldRenderer
 
                 content.ObjectAtlas.DrawRange(canvas, atlasPaint, visible, start, objectCursor - start);
             }
-            else if (directDepth <= Math.Min(stackDepth, animationDepth))
+            else if (directDepth <= Math.Min(cloudDepth, Math.Min(stackDepth, animationDepth)))
             {
                 DirectSprite sprite = directSprites[directCursor];
 
@@ -311,6 +316,17 @@ internal sealed partial class WorldRenderer
                 }
 
                 directCursor++;
+            }
+            else if (cloudDepth <= Math.Min(stackDepth, animationDepth))
+            {
+                MountainCloudSprite cloud = clouds[cloudCursor];
+
+                if (visible.Intersects(cloud.Bounds))
+                {
+                    MountainClouds.Draw(canvas, content.MountainCloudShaderProgram, cloud, loopTime);
+                }
+
+                cloudCursor++;
             }
             else if (stackDepth <= animationDepth)
             {

@@ -799,6 +799,12 @@ internal static class Theme
             public static Color SunColor { get; } = Color.FromRgb(176, 238, 252);
         }
 
+        public static class MountainCloud
+        {
+            public static Color LightColor { get; } = Color.FromRgb(236, 232, 226);
+            public static Color ShadowColor { get; } = Color.FromRgb(112, 122, 144);
+        }
+
         public static class Race
         {
             public static Color HumanColor { get; } = Color.FromRgb(54, 112, 218);

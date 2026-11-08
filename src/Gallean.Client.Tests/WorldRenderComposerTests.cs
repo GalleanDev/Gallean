@@ -1099,6 +1099,79 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
+    public void MountainCloudsTest()
+    {
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().Build();
+
+        WorldMap map = TestHelpers.SimpleMap(12, 12);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        WorldMountain cloudedMountain = new(
+            Id: new WorldMountainId(1),
+            Footprint: new WorldFootprint(new WorldPosition(1, 1), 5, 5),
+            Race: WorldRace.Neutral,
+            Variant: new WorldObjectVariant(2));
+
+        WorldMountain clearMountain = new(
+            Id: new WorldMountainId(2),
+            Footprint: new WorldFootprint(new WorldPosition(0, 0), 5, 5),
+            Race: WorldRace.Neutral,
+            Variant: new WorldObjectVariant(3));
+
+        WorldMountain smallMountain = new(
+            Id: new WorldMountainId(3),
+            Footprint: new WorldFootprint(new WorldPosition(2, 0), 1, 1),
+            Race: WorldRace.Neutral,
+            Variant: new WorldObjectVariant(0));
+
+        WorldState state = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithMountain(cloudedMountain)
+            .WithMountain(clearMountain)
+            .WithMountain(smallMountain)
+            .Build()
+            .State;
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: WorldCursor.Empty);
+
+        Assert.That(renderState.MapObjects, Is.EqualTo(new MapObject[]
+        {
+            new Mountain(
+                Position: new WorldPosition(2, 0),
+                Depth: 1416,
+                Footprint: smallMountain.Footprint,
+                AssetKey: new AssetSpriteKey.Mountain(WorldRace.Neutral, 1, 0)),
+            new Mountain(
+                Position: new WorldPosition(0, 0),
+                Depth: 2440,
+                Footprint: clearMountain.Footprint,
+                AssetKey: new AssetSpriteKey.Mountain(WorldRace.Neutral, 5, 3)),
+            new MountainCloud(
+                Position: new WorldPosition(1, 1),
+                Depth: 3459,
+                Footprint: cloudedMountain.Footprint,
+                MountainKey: new AssetSpriteKey.Mountain(WorldRace.Neutral, 5, 2),
+                Phase: 0.5289394550625884,
+                Layer: MountainCloudLayer.Back),
+            new Mountain(
+                Position: new WorldPosition(1, 1),
+                Depth: 3464,
+                Footprint: cloudedMountain.Footprint,
+                AssetKey: new AssetSpriteKey.Mountain(WorldRace.Neutral, 5, 2)),
+            new MountainCloud(
+                Position: new WorldPosition(1, 1),
+                Depth: 3466,
+                Footprint: cloudedMountain.Footprint,
+                MountainKey: new AssetSpriteKey.Mountain(WorldRace.Neutral, 5, 2),
+                Phase: 0.5289394550625884,
+                Layer: MountainCloudLayer.Front)
+        }));
+    }
+
+    [Test]
     public void BagTest()
     {
         IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().Build();

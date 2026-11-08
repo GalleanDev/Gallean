@@ -46,6 +46,14 @@ internal sealed partial record WorldRenderState
         WorldFootprint Footprint,
         AssetSpriteKey AssetKey) : MapObject(Position, Depth);
 
+    public sealed record MountainCloud(
+        WorldPosition Position,
+        int Depth,
+        WorldFootprint Footprint,
+        AssetSpriteKey MountainKey,
+        double Phase,
+        MountainCloudLayer Layer) : MapObject(Position, Depth);
+
     public sealed record LocationBanner(
         WorldPosition Position,
         int Depth,

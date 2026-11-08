@@ -56,6 +56,8 @@ internal sealed partial class WorldRenderContentProvider
     private readonly Part<MapTerrain, SKPath> mapClipPart = new();
     private readonly Part<MinimapContent, MinimapContent, SKImage> minimapImagePart = new(static content => content);
     private readonly Part<MapTerrain, SKImage> minimapTerrainPart = new();
+    private readonly OverlayPart<IReadOnlyList<MapObject>, AssetSpriteKey> mountainCloudMaskPart = new();
+    private readonly Part<IReadOnlyList<MapObject>, IReadOnlyList<MountainCloudSprite>> mountainCloudsPart = new();
     private readonly Part<IReadOnlyList<MapObject>, ObjectLayer> objectAtlasPart = new();
     private readonly TexturePart objectAtlasTexturePart = new();
     private readonly Part<WorldRenderState, HighlightOverlay, IReadOnlyList<HighlightLayer>> highlightsPart = new(static state => state.Highlights);
@@ -71,6 +73,7 @@ internal sealed partial class WorldRenderContentProvider
     private readonly Part<MapTerrain, WaterTiles> waterTilesPart = new();
     private readonly WorldReachShaderProgram reachShaderProgram = Reach.BuildProgram();
     private readonly WorldHighlightShaderProgram highlightShaderProgram = new();
+    private readonly WorldMountainCloudShaderProgram mountainCloudShaderProgram = MountainClouds.BuildProgram();
     private readonly WorldBattleTransitionShaderProgram battleTransitionShaderProgram = new();
 
     public WorldRenderContent Get(WorldRenderState state, IAssetProvider assets)
@@ -85,6 +88,7 @@ internal sealed partial class WorldRenderContentProvider
         SpriteAtlas roadAtlas = roadAtlasPart.Resolve(state.Terrain, terrain => BuildRoadAtlas(terrain, assets));
         TerrainExpansionContent terrainExpansion = terrainExpansionPart.Resolve(state, source => new TerrainExpansionContent(BuildTerrainExpansion(source.Animation, terrainTextures, assets)));
         ObjectLayer objectLayer = objectAtlasPart.Resolve(state.MapObjects, objects => BuildObjectAtlas(objects, assets));
+        IReadOnlyList<MountainCloudSprite> mountainClouds = mountainCloudsPart.Resolve(state.MapObjects, objects => BuildMountainClouds(objects, assets));
         StackLayer stackLayer = stackLayerPart.Resolve(state.Stacks, objects => BuildStackLayer(objects, assets));
         IReadOnlyList<DirectSprite> directSprites = directSpritesPart.Resolve(new DirectSpriteContent(objectLayer.DirectSprites, stackLayer.DirectSprites), MergeDirectSprites);
         FogContent fog = fogPart.Resolve(state.FogTiles, fogTiles => Fog.Build(fogTiles, state.Terrain.Map));
@@ -105,6 +109,7 @@ internal sealed partial class WorldRenderContentProvider
             objectLayer.Atlas,
             objectLayer.SpriteDepths,
             directSprites,
+            mountainClouds,
             stackLayer.Stacks,
             fog.Layer,
             reach.Layer,
@@ -114,6 +119,7 @@ internal sealed partial class WorldRenderContentProvider
             hitTargets,
             reachShaderProgram,
             highlightShaderProgram,
+            mountainCloudShaderProgram,
             battleTransitionShaderProgram);
     }
 
@@ -655,6 +661,26 @@ internal sealed partial class WorldRenderContentProvider
 
             return pixels <= MaxPackedObjectPixels;
         }
+    }
+
+    private IReadOnlyList<MountainCloudSprite> BuildMountainClouds(IReadOnlyList<MapObject> objects, IAssetProvider assets)
+    {
+        using CleanupList leases = new();
+
+        List<MountainCloudSprite> clouds = [];
+
+        foreach (MapObject item in objects)
+        {
+            if (item is MountainCloud cloud)
+            {
+                Sprite sprite = leases.Add(assets.GetRequiredSprite(cloud.MountainKey)).Value;
+                SKImage mask = mountainCloudMaskPart.Resolve(objects, cloud.MountainKey, () => MountainClouds.BuildMask(sprite));
+
+                clouds.Add(MountainClouds.BuildSprite(cloud, sprite, mask));
+            }
+        }
+
+        return clouds;
     }
 
     private static IReadOnlyList<DirectSprite> MergeDirectSprites(DirectSpriteContent content)
