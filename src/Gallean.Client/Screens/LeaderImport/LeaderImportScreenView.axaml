@@ -44,7 +44,11 @@
         </Grid>
       </local:ModalPanel.Footer>
 
-      <ListBox Classes="select-list" MinHeight="240" ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}">
+      <ListBox Classes="select-list"
+               MinHeight="240"
+               ItemsSource="{Binding Leaders}"
+               SelectedItem="{Binding SelectedLeader}"
+               DoubleTapped="OnLeaderDoubleTapped">
         <ListBox.Styles>
           <Style Selector="ListBoxItem" x:DataType="local:LeaderImportLeaderViewModel">
             <Setter Property="IsEnabled" Value="{Binding IsAvailable}" />

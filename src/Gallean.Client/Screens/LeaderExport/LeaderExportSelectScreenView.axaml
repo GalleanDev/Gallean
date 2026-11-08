@@ -29,7 +29,11 @@
         </Grid>
       </local:ModalPanel.Footer>
 
-      <ListBox Classes="select-list" MinHeight="240" ItemsSource="{Binding Leaders}" SelectedItem="{Binding SelectedLeader}">
+      <ListBox Classes="select-list"
+               MinHeight="240"
+               ItemsSource="{Binding Leaders}"
+               SelectedItem="{Binding SelectedLeader}"
+               DoubleTapped="OnLeaderDoubleTapped">
         <local:Blankslate.Content>
           <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
             <TextBlock Text="{local:Text 'No leaders to export.'}"
