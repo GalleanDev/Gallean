@@ -217,6 +217,7 @@ internal sealed partial class WorldAiPlanner
                     foreach (WorldStack stack in state.Stacks.Values)
                     {
                         if (DiplomacyCalculator.IsHostile(state, playerId, stack.OwnerId) &&
+                            stack.Order is WorldStackOrder.Normal &&
                             entrance.GetDistance(stack.Position) <= CityThreatRange)
                         {
                             yield return stack;

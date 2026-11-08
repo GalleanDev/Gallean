@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Gallean.Common;
 
 namespace Gallean.Engine.Tests;
 
@@ -216,6 +217,52 @@ public sealed class WorldEngineAiSpellTests
         Assert.That(session.World.State.Stacks, Is.EqualTo(ImmutableSortedDictionary.CreateRange([
             new KeyValuePair<WorldStackId, WorldStack>(defender.Id, defender),
             new KeyValuePair<WorldStackId, WorldStack>(near.Id, near with { MovementPoints = 6 })
+        ])));
+    }
+
+    [Test]
+    public void StandOrderStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        WorldSpellDefinition attack = Spell("attack", level: 1, new WorldAttackSpellEffect(UnitAttackSource.Fire, 40));
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(0, 100, 0, 0, 0, 0),
+            Spellbook = new WorldPlayerSpellbook([attack.Id], [attack.Id])
+        };
+        WorldPlayer neutral = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Neutral, map);
+
+        WorldStack guard = UnitStack(new WorldUnitId("guardLeader"), "Guard", neutral.Id, new WorldPosition(10, 10), leader, hitpoints: 100) with
+        {
+            Order = WorldStackOrder.Stand.Instance
+        };
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(attack)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
+            .WithPlayer(neutral)
+            .WithCapital(TestHelpers.SimpleCapital(new WorldFortificationId("Capital"), player.Id, new WorldPosition(5, 5), UnitGrid<WorldUnit>.Empty))
+            .WithStack(guard)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo(Array.Empty<string>()));
+        Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player));
+        Assert.That(session.World.State.Stacks, Is.EqualTo(ImmutableSortedDictionary.CreateRange([
+            new KeyValuePair<WorldStackId, WorldStack>(guard.Id, guard with { MovementPoints = 6 })
         ])));
     }
 
