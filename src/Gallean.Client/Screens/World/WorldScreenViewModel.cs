@@ -586,7 +586,7 @@ internal sealed partial class WorldScreenViewModel :
     [RelayCommand(CanExecute = nameof(CanSelectPreviousStack))]
     private void SelectPreviousStack()
     {
-        WorldStackItemViewModel? previous = FindNextUnfinishedStackItem([.. StackItems.Reverse()], cursor.StackId);
+        WorldStackItemViewModel? previous = FindNextAvailableStackItem([.. StackItems.Reverse()], cursor.StackId);
 
         if (previous is not null)
         {
@@ -601,13 +601,13 @@ internal sealed partial class WorldScreenViewModel :
             return false;
         }
 
-        return FindNextUnfinishedStackItem([.. StackItems.Reverse()], cursor.StackId) is not null;
+        return FindNextAvailableStackItem([.. StackItems.Reverse()], cursor.StackId) is not null;
     }
 
     [RelayCommand(CanExecute = nameof(CanSelectNextStack))]
     private void SelectNextStack()
     {
-        WorldStackItemViewModel? next = FindNextUnfinishedStackItem(StackItems, cursor.StackId);
+        WorldStackItemViewModel? next = FindNextAvailableStackItem(StackItems, cursor.StackId);
 
         if (next is not null)
         {
@@ -622,7 +622,7 @@ internal sealed partial class WorldScreenViewModel :
             return false;
         }
 
-        return FindNextUnfinishedStackItem(StackItems, cursor.StackId) is not null;
+        return FindNextAvailableStackItem(StackItems, cursor.StackId) is not null;
     }
 
     private static int FindStackItemIndex(IReadOnlyList<WorldStackItemViewModel> items, WorldStackId? stackId)
@@ -675,7 +675,7 @@ internal sealed partial class WorldScreenViewModel :
         UpdateStackActions();
         UpdateEndTurnHighlighted();
 
-        WorldStackItemViewModel? nextStack = FindNextUnfinishedStackItem(StackItems, stack.Id);
+        WorldStackItemViewModel? nextStack = FindNextAvailableStackItem(StackItems, stack.Id);
 
         if (nextStack is not null)
         {
@@ -699,7 +699,7 @@ internal sealed partial class WorldScreenViewModel :
         return stack is not null && stack.MovementPoints > 0 && !IsFinished(stack);
     }
 
-    private static WorldStackItemViewModel? FindNextUnfinishedStackItem(IReadOnlyList<WorldStackItemViewModel> items, WorldStackId? stackId)
+    private static WorldStackItemViewModel? FindNextAvailableStackItem(IReadOnlyList<WorldStackItemViewModel> items, WorldStackId? stackId)
     {
         int index = FindStackItemIndex(items, stackId);
 
@@ -1390,10 +1390,10 @@ internal sealed partial class WorldScreenViewModel :
 
     private void UpdateEndTurnHighlighted()
     {
-        IsEndTurnHighlighted = Snapshot.IsViewPlayerTurn && eventQueue.IsIdle && !HasUnfinishedStack();
+        IsEndTurnHighlighted = Snapshot.IsViewPlayerTurn && eventQueue.IsIdle && !HasAvailableStack();
     }
 
-    private bool HasUnfinishedStack()
+    private bool HasAvailableStack()
     {
         foreach (WorldStack stack in WorldState.Stacks.Values)
         {
