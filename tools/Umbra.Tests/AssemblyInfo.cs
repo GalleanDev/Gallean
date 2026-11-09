@@ -1,0 +1,1 @@
+[assembly: SetCulture("en-US")]
