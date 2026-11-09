@@ -20,7 +20,7 @@ internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType 
             .. Enum.GetValues<LeaderAbility>()
                 .Where(ability => ability != LeaderAbility.None && baseAbilities.HasFlag(ability))
                 .Select(ability => Create(ability, texts)),
-            .. AddMoveAbility(baseMoveAbility),
+            .. AddMoveAbility(baseMoveAbility, texts),
             .. modifiers
                 .Where(modifier => modifier.RemainingTurns is null && modifier.Source is not UnitModifierSource.Scenario)
                 .Select(modifier => Create(modifier, leaderUpgrades, definitions, texts))
@@ -31,21 +31,28 @@ internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType 
 
     private static UnitPermanentModifierViewModel Create(LeaderAbility ability, IGameTextProvider texts)
     {
-        return new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, LeaderAbilityIconResolver.Resolve(ability), LeaderAbilityFormatter.FormatName(ability, texts), Tr("Innate"), null, 1);
+        return new UnitPermanentModifierViewModel(
+            UnitPermanentModifierType.Skill,
+            LeaderAbilityIconResolver.Resolve(ability),
+            LeaderAbilityFormatter.FormatName(ability, texts),
+            LeaderAbilityFormatter.FormatDescription(ability, texts),
+            Tr("Innate"),
+            1);
     }
 
-    private static IEnumerable<UnitPermanentModifierViewModel> AddMoveAbility(UnitMoveAbility ability)
+    private static IEnumerable<UnitPermanentModifierViewModel> AddMoveAbility(UnitMoveAbility ability, IGameTextProvider texts)
     {
         string? name = UnitMoveAbilityFormatter.Format(ability);
+        string? description = UnitMoveAbilityFormatter.FormatDescription(ability, texts);
 
-        if (name is not null)
+        if (name is not null && description is not null)
         {
             yield return new UnitPermanentModifierViewModel(
                 UnitPermanentModifierType.Skill,
                 UnitMoveAbilityIconResolver.Resolve(ability),
                 name,
+                description,
                 Tr("Innate"),
-                null,
                 1);
         }
     }

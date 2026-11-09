@@ -39,6 +39,26 @@ internal static class LeaderAbilityFormatter
         };
     }
 
+    public static string FormatDescription(LeaderAbility ability, IGameTextProvider texts)
+    {
+        return ability switch
+        {
+            LeaderAbility.Zealot => string.Empty,
+            LeaderAbility.Incorruptible => FormatGlobalText(texts, "X000TGA118"),
+            LeaderAbility.WeaponMaster => FormatGlobalText(texts, "X000TGA112"),
+            LeaderAbility.WandScrollUse => Tr("Allows the leader to use Wands and Scrolls"),
+            LeaderAbility.WeaponArmorUse => FormatGlobalText(texts, "X000TGA101"),
+            LeaderAbility.BannerUse => FormatGlobalText(texts, "X000TGA103"),
+            LeaderAbility.JewelryUse => FormatGlobalText(texts, "X000TGA102"),
+            LeaderAbility.Rod => Tr("Allows the leader to transform the lands by planting Rods"),
+            LeaderAbility.OrbUse => FormatGlobalText(texts, "X000TGA105"),
+            LeaderAbility.TalismanUse => FormatGlobalText(texts, "X000TGA110"),
+            LeaderAbility.TravelItemUse => FormatGlobalText(texts, "X000TGA107"),
+            LeaderAbility.CriticalHit => FormatGlobalText(texts, "X160TGC261"),
+            _ => throw new ArgumentOutOfRangeException(nameof(ability), ability, null)
+        };
+    }
+
     private static string FormatGlobalText(IGameTextProvider texts, string id)
     {
         GlobalText text = texts.GetGlobalText(new GlobalTextId(id));
