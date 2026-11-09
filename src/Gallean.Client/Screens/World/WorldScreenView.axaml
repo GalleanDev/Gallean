@@ -302,6 +302,21 @@
                     </local:AnchorPanel>
                   </Panel>
                   <Panel>
+                    <Button x:Name="ContinueButton"
+                            Classes="socket world card"
+                            Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).ContinuePathCommand}">
+                      <local:IconVisual Moniker="ChevronsRight" />
+                    </Button>
+                    <local:AnchorPanel Classes="world-caption-anchor" IsVisible="{Binding #ContinueButton.IsPointerOver}">
+                      <StackPanel Classes="world-caption">
+                        <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'Continue'}" />
+                        <Border Classes="hotkey-pill">
+                          <TextBlock Text="{local:Text 'M'}" />
+                        </Border>
+                      </StackPanel>
+                    </local:AnchorPanel>
+                  </Panel>
+                  <Panel>
                     <Button x:Name="FinishButton"
                             Classes="socket world card"
                             Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).FinishStackCommand}">

@@ -8984,4 +8984,71 @@ public sealed class WorldScreenViewModelTests
             ])
         }));
     }
+
+    [Test]
+    public async Task ContinuePathTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(4, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 4, leadership: 6);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leader)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(new WorldUnit(new WorldUnitId("leader"), leader.Id, 100, 0, 1, [], null, false), GridPosition.FrontBottom)]),
+            movementPoints: 4);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        Assert.That(world.ContinuePathCommand.CanExecute(null), Is.False);
+
+        await world.HandleMapClickAsync(new WorldPosition(0, 0), null, 1);
+
+        Assert.That(world.ContinuePathCommand.CanExecute(null), Is.False);
+
+        await world.HandleMapClickAsync(new WorldPosition(3, 0), null, 1);
+
+        Assert.That(world.ContinuePathCommand.CanExecute(null), Is.True);
+
+        world.ContinuePathCommand.Execute(null);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        WorldRenderState renderState = BuildWorldState(world);
+
+        Assert.That(renderState, Is.EqualTo(renderState with
+        {
+            Cursors = [new WorldRenderState.Cursor(new WorldPosition(3, 0), 1856, Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, 1.0)],
+            SelectedPath = new WorldRenderState.PathOverlay(new WorldPosition(2, 0),
+            [
+                new WorldRenderState.PathStep(new WorldPosition(3, 0), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "2")
+            ]),
+            Animation = null
+        }));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
+        Assert.That(world.ContinuePathCommand.CanExecute(null), Is.False);
+    }
 }

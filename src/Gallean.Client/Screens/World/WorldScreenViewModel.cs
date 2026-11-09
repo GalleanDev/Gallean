@@ -67,6 +67,7 @@ internal sealed partial class WorldScreenViewModel :
             EndTurnCommand,
             ActivateStackActionCommand,
             InspectStackCommand,
+            ContinuePathCommand,
             FinishStackCommand,
             SelectPreviousStackCommand,
             SelectNextStackCommand,
@@ -702,6 +703,30 @@ internal sealed partial class WorldScreenViewModel :
         return stack is not null && stack.MovementPoints > 0 && !IsFinished(stack);
     }
 
+    [RelayCommand(CanExecute = nameof(CanContinuePath))]
+    private void ContinuePath()
+    {
+        WorldStack? stack = ResolveSelectedStack();
+        WorldPathSelection? path = cursor.Path;
+
+        if (stack is not null && path is not null)
+        {
+            MoveSelectedStackAsync(stack, path).FileAndForget();
+        }
+    }
+
+    private bool CanContinuePath()
+    {
+        if (IsBusy)
+        {
+            return false;
+        }
+
+        WorldStack? stack = ResolveSelectedStack();
+
+        return stack is not null && stack.MovementPoints > 0 && cursor.Path is not null;
+    }
+
     private static WorldStackItemViewModel? FindNextAvailableStackItem(IReadOnlyList<WorldStackItemViewModel> items, WorldStackId? stackId)
     {
         int index = FindStackItemIndex(items, stackId);
@@ -882,6 +907,7 @@ internal sealed partial class WorldScreenViewModel :
         if (cursor != newCursor)
         {
             bool selectionChanged = newCursor.StackId != cursor.StackId;
+            bool pathChanged = newCursor.Path != cursor.Path;
 
             cursor = newCursor;
             ActionPromptText = newCursor.Action?.SelectionText;
@@ -894,6 +920,10 @@ internal sealed partial class WorldScreenViewModel :
             {
                 NotifySelectionCommandsChanged();
                 UpdateStackActions();
+            }
+            else if (pathChanged)
+            {
+                ContinuePathCommand.NotifyCanExecuteChanged();
             }
         }
     }
@@ -1348,6 +1378,7 @@ internal sealed partial class WorldScreenViewModel :
     private void NotifySelectionCommandsChanged()
     {
         InspectStackCommand.NotifyCanExecuteChanged();
+        ContinuePathCommand.NotifyCanExecuteChanged();
         FinishStackCommand.NotifyCanExecuteChanged();
         OpenStackCommand.NotifyCanExecuteChanged();
     }
