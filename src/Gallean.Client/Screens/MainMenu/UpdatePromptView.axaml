@@ -12,7 +12,7 @@
           <Button x:Name="DownloadButton"
                   Grid.Column="1"
                   Content="{local:Text 'Download'}"
-                  Classes="pill primary"
+                  Classes="pill success"
                   local:PlateChrome.TextureSeed="1"
                   Click="OnDownloadClick"
                   MinWidth="150"
