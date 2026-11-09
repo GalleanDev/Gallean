@@ -37,7 +37,7 @@ internal sealed partial class AssetPackErrorViewModel(
         return exception switch
         {
             InstalledAssetPackNotFoundException =>
-                Tr("Gallean is an open-source implementation of Disciples II game mechanics. To play, you need an asset pack built from the original game assets."),
+                Tr("Gallean is an open-source implementation of Disciples II game mechanics. To play, you need an asset pack."),
             InstalledAssetPackIncompatibleException =>
                 Tr("The installed asset pack was made for a different version of Gallean. Replace it with a pack made for this version."),
             InstalledAssetPackNotEnhancedException =>
