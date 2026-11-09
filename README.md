@@ -88,7 +88,7 @@ The release will be in `dist/` at the root, for example `dist/Gallean-0.8.0-linu
 
 ## Assets
 
-The game needs a `.galleanpack` with its assets. [Packer](tools/Packer) can build one from your own copy of the original game and can enhance it with the 4K asset pipeline.
+The game needs a `.galleanpack` with assets. [Packer](tools/Packer) can build one from your own copy of the original game and can enhance it with the 4K asset pipeline.
 
 ---
 
