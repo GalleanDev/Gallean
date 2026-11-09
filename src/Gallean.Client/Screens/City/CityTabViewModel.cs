@@ -451,11 +451,10 @@ internal sealed partial class CityTabViewModel
         }
     }
 
-    private static string? FormatTargetingPrompt(UnitActionType? type)
+    private static string FormatTargetingPrompt(UnitActionType type)
     {
         return type switch
         {
-            null => null,
             UnitActionType.Heal => Tr("Select a unit to heal it."),
             UnitActionType.Resurrect => Tr("Select a unit to resurrect it."),
             UnitActionType.LockType => Tr("Select a unit to lock its type.")
@@ -934,7 +933,15 @@ internal sealed partial class CityTabViewModel
         StackGrid.Update(stackUnits, showsPurchaseHints: false, BuildUnitHighlight(StackGrid, stackUnits, dragged));
         GarrisonGrid.Update(garrison, showsPurchaseHints: true, BuildUnitHighlight(GarrisonGrid, garrison, dragged));
         TargetPrices = BuildTargetPrices(dragged);
-        TargetingPromptText = FormatTargetingPrompt(TargetedAction);
+
+        if (TargetedAction is not null)
+        {
+            TargetingPromptText = FormatTargetingPrompt(TargetedAction.Value);
+        }
+        else
+        {
+            TargetingPromptText = null;
+        }
 
         CityTitle = GameModel.Texts.GetScenarioText(fortification.NameTextId);
         CitySummary = FormatCitySummary(fortification);
