@@ -5,13 +5,12 @@ namespace Gallean.Client;
 internal sealed record WorldCursor(
     WorldStackId? StackId,
     IReadOnlyList<WorldPosition> ReachablePositions,
+    WorldPathSelection? Path,
     WorldPosition? HoverTile,
-    WorldPosition? HoverTarget,
-    WorldPathSelection? HoverPath,
     WorldPosition? HoverObject,
     WorldCursorAction? Action)
 {
-    public static readonly WorldCursor Empty = new(null, [], null, null, null, null, null);
+    public static readonly WorldCursor Empty = new(null, [], null, null, null, null);
 
     public bool Equals(WorldCursor? other)
     {
@@ -27,16 +26,15 @@ internal sealed record WorldCursor(
 
         return StackId == other.StackId &&
                ReachablePositions.SequenceEqual(other.ReachablePositions) &&
+               Path == other.Path &&
                HoverTile == other.HoverTile &&
-               HoverTarget == other.HoverTarget &&
-               HoverPath == other.HoverPath &&
                HoverObject == other.HoverObject &&
                Action == other.Action;
     }
 
     public WorldCursor SelectStack(WorldStackId? stackId)
     {
-        return this with { StackId = stackId, ReachablePositions = [], HoverPath = null };
+        return this with { StackId = stackId, ReachablePositions = [], Path = null };
     }
 
     public WorldCursor ReconcileWith(WorldState world)
@@ -55,9 +53,8 @@ internal sealed record WorldCursor(
 
         hash.Add(StackId);
         hash.AddSequence(ReachablePositions);
+        hash.Add(Path);
         hash.Add(HoverTile);
-        hash.Add(HoverTarget);
-        hash.Add(HoverPath);
         hash.Add(HoverObject);
         hash.Add(Action);
 

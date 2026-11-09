@@ -389,7 +389,7 @@ internal sealed partial class WorldRenderComposer(
             }
         }
 
-        WorldPosition? hostileTarget = cursor.HoverPath?.Encounter?.Accept(HostileEncounterVisitor.Instance, Empty.Value);
+        WorldPosition? hostileTarget = cursor.Path?.Encounter?.Accept(HostileEncounterVisitor.Instance, Empty.Value);
 
         if (hostileTarget is not null)
         {
@@ -463,9 +463,10 @@ internal sealed partial class WorldRenderComposer(
     private static PathOverlay? BuildSelectedPathOverlay(WorldRenderRequest request)
     {
         WorldCursor cursor = request.Cursor;
-        WorldPathSelection? selection = cursor.HoverPath;
+        WorldPathSelection? selection = cursor.Path;
 
         if (selection is not null &&
+            cursor.Action is null &&
             cursor.StackId is not null &&
             request.State.Stacks.TryGetValue(cursor.StackId.Value, out WorldStack? stack))
         {
@@ -502,8 +503,22 @@ internal sealed partial class WorldRenderComposer(
 
         foreach (WorldPathSegment segment in selection.Path.Segments)
         {
+            Color stepInnerColor;
+            Color stepOuterColor;
+
+            if (segment.Turn > 0)
+            {
+                stepInnerColor = Theme.World.Path.UnreachedInnerColor;
+                stepOuterColor = Theme.World.Path.UnreachedOuterColor;
+            }
+            else
+            {
+                stepInnerColor = innerColor;
+                stepOuterColor = outerColor;
+            }
+
             totalCost += segment.Cost;
-            steps.Add(new PathStep(segment.End, innerColor, outerColor, FormatCost(totalCost)));
+            steps.Add(new PathStep(segment.End, stepInnerColor, stepOuterColor, FormatCost(totalCost)));
         }
 
         foreach (WorldPathSegment segment in selection.Remainder.Segments)

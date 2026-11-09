@@ -1832,6 +1832,7 @@ public sealed class VisualTests
 
         await world.HandleMapClickAsync(stack.Position, null, 1);
         await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.InstanceOf<AttackPromptViewModel>());
 
@@ -1900,6 +1901,7 @@ public sealed class VisualTests
         await WaitForWorldAsync(window);
 
         await world.HandleMapClickAsync(stack.Position, null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
         await world.HandleMapClickAsync(new WorldPosition(3, 3), null, 1);
 
         Assert.That(gameViewModel.TopScreen, Is.InstanceOf<AttackPromptViewModel>());
@@ -2124,6 +2126,7 @@ public sealed class VisualTests
 
         await viewModel.HandleMapClickAsync(new WorldPosition(10, 14), null, 1);
         viewModel.UpdateHover(new WorldPosition(13, 18), null);
+        await viewModel.HandleMapClickAsync(new WorldPosition(13, 18), null, 1);
 
         await CaptureAsync(window);
     }

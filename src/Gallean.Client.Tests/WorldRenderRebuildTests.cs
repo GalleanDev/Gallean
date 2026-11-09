@@ -160,13 +160,13 @@ public sealed class WorldRenderRebuildTests
     }
 
     [Test]
-    public async Task HoverPathTest()
+    public async Task PathTest()
     {
         Fixture fixture = CreateWorld();
         await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
         RebuildProbe probe = new(fixture.World);
 
-        RebuildState rebuildState = probe.Measure(() => fixture.World.UpdateHover(NearTile, null));
+        RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(NearTile, null, 1));
 
         Assert.That(rebuildState, Is.EqualTo(new RebuildState(
             NewRequest: true,
@@ -183,6 +183,7 @@ public sealed class WorldRenderRebuildTests
     {
         Fixture fixture = CreateWorld();
         await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
+        await fixture.World.HandleMapClickAsync(NearTile, null, 1);
         RebuildProbe probe = new(fixture.World);
 
         RebuildState rebuildState = await probe.MeasureAsync(() => fixture.World.HandleMapClickAsync(NearTile, null, 1));
@@ -202,6 +203,7 @@ public sealed class WorldRenderRebuildTests
     {
         Fixture fixture = CreateWorld();
         await fixture.World.HandleMapClickAsync(AlphaStart, null, 1);
+        await fixture.World.HandleMapClickAsync(NearTile, null, 1);
         await fixture.World.HandleMapClickAsync(NearTile, null, 1);
         fixture.World.CompleteAnimation();
         RebuildProbe probe = new(fixture.World);
@@ -233,7 +235,7 @@ public sealed class WorldRenderRebuildTests
             Fog: false,
             Objects: false,
             Stacks: false,
-            World: true,
+            World: false,
             Minimap: false)));
     }
 
@@ -291,7 +293,7 @@ public sealed class WorldRenderRebuildTests
             Fog: false,
             Objects: false,
             Stacks: false,
-            World: true,
+            World: false,
             Minimap: false)));
     }
 
@@ -438,6 +440,7 @@ public sealed class WorldRenderRebuildTests
             ("Hover reachable tile (selected)", probe.Measure(() => world.UpdateHover(NearTile, null))),
             ("Hover same tile again", probe.Measure(() => world.UpdateHover(NearTile, null))),
             ("Clear hover", probe.Measure(world.ClearHover)),
+            ("Click reachable tile (build path)", await probe.MeasureAsync(() => world.HandleMapClickAsync(FarTile, null, 1))),
             ("Click reachable tile (move stack)", await probe.MeasureAsync(() => world.HandleMapClickAsync(FarTile, null, 1))),
             ("Complete first step animation", probe.Measure(world.CompleteAnimation)),
             ("Complete second step animation", probe.Measure(world.CompleteAnimation)),
@@ -490,7 +493,7 @@ public sealed class WorldRenderRebuildTests
                 Fog: false,
                 Objects: false,
                 Stacks: false,
-                World: true,
+                World: false,
                 Minimap: false)),
             ("Hover same tile again", new RebuildState(
                 NewRequest: false,
@@ -501,6 +504,14 @@ public sealed class WorldRenderRebuildTests
                 World: false,
                 Minimap: false)),
             ("Clear hover", new RebuildState(
+                NewRequest: true,
+                Terrain: false,
+                Fog: false,
+                Objects: false,
+                Stacks: false,
+                World: false,
+                Minimap: false)),
+            ("Click reachable tile (build path)", new RebuildState(
                 NewRequest: true,
                 Terrain: false,
                 Fog: false,

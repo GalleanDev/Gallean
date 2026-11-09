@@ -3420,8 +3420,7 @@ public sealed class WorldRenderComposerTests
         {
             ReachablePositions = [new WorldPosition(1, 0)],
             HoverTile = new WorldPosition(1, 0),
-            HoverTarget = new WorldPosition(1, 0),
-            HoverPath = new WorldPathSelection(new WorldPosition(1, 0), path, new WorldPath([]), Encounter: null)
+            Path = new WorldPathSelection(new WorldPosition(1, 0), path, new WorldPath([]), Encounter: null)
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
@@ -3485,8 +3484,7 @@ public sealed class WorldRenderComposerTests
             ReachablePositions = [new WorldPosition(1, 0), new WorldPosition(2, 0)],
             HoverObject = new WorldPosition(2, 0),
             HoverTile = new WorldPosition(1, 0),
-            HoverTarget = new WorldPosition(1, 0),
-            HoverPath = new WorldPathSelection(new WorldPosition(1, 0), path, new WorldPath([]), Encounter: null)
+            Path = new WorldPathSelection(new WorldPosition(1, 0), path, new WorldPath([]), Encounter: null)
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
@@ -3529,7 +3527,7 @@ public sealed class WorldRenderComposerTests
             .Build()
             .State;
 
-        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0), HoverTarget = new WorldPosition(2, 0) };
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0) };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
 
@@ -3572,7 +3570,7 @@ public sealed class WorldRenderComposerTests
             .Build()
             .State;
 
-        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0), HoverTarget = new WorldPosition(2, 0) };
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0) };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
 
@@ -3858,7 +3856,7 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
-    public void HoverPathTest()
+    public void PathTest()
     {
         (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
 
@@ -3869,7 +3867,7 @@ public sealed class WorldRenderComposerTests
 
         WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
         {
-            HoverPath = new WorldPathSelection(new WorldPosition(3, 1), path, new WorldPath([]), Encounter: null)
+            Path = new WorldPathSelection(new WorldPosition(3, 1), path, new WorldPath([]), Encounter: null)
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
@@ -3881,7 +3879,7 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
-    public void InterceptedHoverPathTest()
+    public void InterceptedPathTest()
     {
         (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
 
@@ -3895,7 +3893,7 @@ public sealed class WorldRenderComposerTests
 
         WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
         {
-            HoverPath = new WorldPathSelection(new WorldPosition(4, 1), path, remainder, new WorldPathEncounter.Battle(new WorldPosition(3, 0)))
+            Path = new WorldPathSelection(new WorldPosition(4, 1), path, remainder, new WorldPathEncounter.Battle(new WorldPosition(3, 0)))
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
@@ -3909,7 +3907,7 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
-    public void AttackHoverPathTest()
+    public void AttackPathTest()
     {
         (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
 
@@ -3922,7 +3920,7 @@ public sealed class WorldRenderComposerTests
 
         WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
         {
-            HoverPath = new WorldPathSelection(new WorldPosition(3, 1), path, remainder, new WorldPathEncounter.Battle(new WorldPosition(3, 1)))
+            Path = new WorldPathSelection(new WorldPosition(3, 1), path, remainder, new WorldPathEncounter.Battle(new WorldPosition(3, 1)))
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
@@ -3938,7 +3936,7 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
-    public void BagHoverPathTest()
+    public void BagPathTest()
     {
         (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
 
@@ -3951,7 +3949,7 @@ public sealed class WorldRenderComposerTests
 
         WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
         {
-            HoverPath = new WorldPathSelection(new WorldPosition(3, 1), path, remainder, new WorldPathEncounter.Bag(new WorldBagId("Bag")))
+            Path = new WorldPathSelection(new WorldPosition(3, 1), path, remainder, new WorldPathEncounter.Bag(new WorldBagId("Bag")))
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
@@ -4395,8 +4393,7 @@ public sealed class WorldRenderComposerTests
         {
             ReachablePositions = [new WorldPosition(0, 1)],
             HoverObject = new WorldPosition(1, 1),
-            HoverTile = new WorldPosition(2, 1),
-            HoverTarget = new WorldPosition(2, 1)
+            HoverTile = new WorldPosition(2, 1)
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
@@ -4530,7 +4527,7 @@ public sealed class WorldRenderComposerTests
 
         WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with
         {
-            HoverPath = new WorldPathSelection(city.Entrance, path, remainder, new WorldPathEncounter.Battle(city.Entrance))
+            Path = new WorldPathSelection(city.Entrance, path, remainder, new WorldPathEncounter.Battle(city.Entrance))
         };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
@@ -4751,6 +4748,31 @@ public sealed class WorldRenderComposerTests
                     Footprint: riotCity.Footprint,
                     AssetKey: new AssetAnimationKey.City(2)),
                 Theme.World.Highlight.RiotColor)
+        ])));
+    }
+
+    [Test]
+    public void NextTurnPathTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0),
+            new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), Cost: 3, Turn: 1),
+            new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(4, 1), Cost: 3, Turn: 2)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            Path = new WorldPathSelection(new WorldPosition(4, 1), path, new WorldPath([]), Encounter: null)
+        };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
+
+        Assert.That(renderState.SelectedPath, Is.EqualTo(new PathOverlay(new WorldPosition(1, 1), [
+            new PathStep(new WorldPosition(2, 1), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+            new PathStep(new WorldPosition(3, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "5"),
+            new PathStep(new WorldPosition(4, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "8")
         ])));
     }
 }
