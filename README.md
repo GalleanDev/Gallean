@@ -50,7 +50,7 @@ Gallean is fully localized into eight languages, which you can switch in the mid
 
 ## Building
 
-You will need the .NET SDK 10. See [`global.json`](global.json).
+You will need the .NET SDK 11. See [`global.json`](global.json).
 
 ```bash
 dotnet build
