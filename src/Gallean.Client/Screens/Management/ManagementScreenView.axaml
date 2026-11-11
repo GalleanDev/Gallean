@@ -97,13 +97,10 @@
       <Setter Property="VerticalAlignment" Value="Top" />
       <Setter Property="HorizontalContentAlignment" Value="Center" />
       <Setter Property="VerticalContentAlignment" Value="Center" />
-      <Setter Property="Background" Value="{StaticResource TabBarHotkeyFaceBrush}" />
-      <Setter Property="Foreground" Value="{StaticResource TabBarHotkeyTextBrush}" />
-      <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
-      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource KeycapTextBrush}" />
       <Setter Property="Template">
         <ControlTemplate>
-          <Border Background="{TemplateBinding Background}" CornerRadius="7">
+          <Border x:Name="Keycap" Classes="keycap">
             <ContentPresenter Content="{TemplateBinding Content}"
                               ContentTemplate="{TemplateBinding ContentTemplate}"
                               Margin="{TemplateBinding Padding}"
@@ -113,11 +110,17 @@
         </ControlTemplate>
       </Setter>
     </Style>
-    <Style Selector="Button.hotkey:pointerover">
-      <Setter Property="Background" Value="{StaticResource TabBarHotkeyHoverFaceBrush}" />
+    <Style Selector="Button.hotkey /template/ Border#Keycap">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
     </Style>
-    <Style Selector="Button.hotkey:pressed">
-      <Setter Property="Opacity" Value="0.9" />
+    <Style Selector="Button.hotkey:pointerover /template/ Border#Keycap">
+      <Setter Property="Background" Value="{StaticResource KeycapHoverFaceGradientBrush}" />
+    </Style>
+    <Style Selector="Button.hotkey:pressed /template/ Border#Keycap">
+      <Setter Property="Margin" Value="0,2,0,0" />
+      <Setter Property="BorderThickness" Value="1" />
     </Style>
   </UserControl.Styles>
 

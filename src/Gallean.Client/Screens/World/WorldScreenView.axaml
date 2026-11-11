@@ -295,7 +295,7 @@
                     <local:AnchorPanel Classes="world-caption-anchor" IsVisible="{Binding #InspectButton.IsPointerOver}">
                       <StackPanel Classes="world-caption">
                         <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'Inspect'}" />
-                        <Border Classes="hotkey-pill">
+                        <Border Classes="keycap">
                           <TextBlock Text="{local:Text 'T'}" />
                         </Border>
                       </StackPanel>
@@ -310,7 +310,7 @@
                     <local:AnchorPanel Classes="world-caption-anchor" IsVisible="{Binding #ContinueButton.IsPointerOver}">
                       <StackPanel Classes="world-caption">
                         <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'Continue'}" />
-                        <Border Classes="hotkey-pill">
+                        <Border Classes="keycap">
                           <TextBlock Text="{local:Text 'M'}" />
                         </Border>
                       </StackPanel>
@@ -325,7 +325,7 @@
                     <local:AnchorPanel Classes="world-caption-anchor" IsVisible="{Binding #FinishButton.IsPointerOver}">
                       <StackPanel Classes="world-caption">
                         <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'Done'}" />
-                        <Border Classes="hotkey-pill">
+                        <Border Classes="keycap">
                           <TextBlock Text="{local:Text 'Enter'}" />
                         </Border>
                       </StackPanel>
@@ -367,11 +367,11 @@
         </local:MedallionCornerDecorator>
         <local:AnchorPanel Classes="world-caption-anchor medallion" IsVisible="{Binding #EndTurnButton.IsPointerOver}">
           <StackPanel Classes="world-caption">
-            <Border Classes="hotkey-pill">
+            <Border Classes="keycap">
               <TextBlock Text="{local:Text 'E'}" />
             </Border>
             <local:OutlinedTextBlock Classes="world-caption" Text="{local:Text 'or'}" />
-            <Border Classes="hotkey-pill">
+            <Border Classes="keycap">
               <TextBlock Text="{local:Text 'Ctrl+Enter'}" />
             </Border>
           </StackPanel>

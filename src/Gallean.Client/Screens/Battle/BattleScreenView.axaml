@@ -54,7 +54,7 @@
               <ToolTip Classes="action-caption">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                   <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Defend'}" />
-                  <Border Classes="hotkey-pill">
+                  <Border Classes="keycap">
                     <TextBlock Text="{local:Text 'D'}" />
                   </Border>
                 </StackPanel>
@@ -68,7 +68,7 @@
               <ToolTip Classes="action-caption">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                   <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Wait'}" />
-                  <Border Classes="hotkey-pill">
+                  <Border Classes="keycap">
                     <TextBlock Text="{local:Text 'W'}" />
                   </Border>
                 </StackPanel>
@@ -82,7 +82,7 @@
               <ToolTip Classes="action-caption">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                   <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Skip'}" />
-                  <Border Classes="hotkey-pill">
+                  <Border Classes="keycap">
                     <TextBlock Text="{local:Text 'S'}" />
                   </Border>
                 </StackPanel>
@@ -96,7 +96,7 @@
               <ToolTip Classes="action-caption">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                   <local:OutlinedTextBlock Classes="action-caption" Text="{local:Text 'Retreat'}" />
-                  <Border Classes="hotkey-pill">
+                  <Border Classes="keycap">
                     <TextBlock Text="{local:Text 'R'}" />
                   </Border>
                 </StackPanel>
@@ -126,7 +126,7 @@
                   <ToolTip Classes="action-caption">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                       <local:OutlinedTextBlock Classes="action-caption" Text="{Binding Name}" />
-                      <Border Classes="hotkey-pill">
+                      <Border Classes="keycap">
                         <TextBlock Text="{Binding Hotkey}" />
                       </Border>
                     </StackPanel>

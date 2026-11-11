@@ -89,19 +89,6 @@
     <Setter Property="Margin" Value="-7" />
   </Style>
 
-  <Style Selector="Border.hotkey-pill">
-    <Setter Property="Padding" Value="9,1" />
-    <Setter Property="HorizontalAlignment" Value="Center" />
-    <Setter Property="Background" Value="{StaticResource HudHotkeyPillBrush}" />
-    <Setter Property="BorderBrush" Value="{StaticResource HudHotkeyPillBorderBrush}" />
-    <Setter Property="BorderThickness" Value="2" />
-    <Setter Property="CornerRadius" Value="12" />
-  </Style>
-  <Style Selector="Border.hotkey-pill TextBlock">
-    <Setter Property="Foreground" Value="{StaticResource HudHotkeyTextBrush}" />
-    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
-  </Style>
-
   <Style Selector="StackPanel.action-row">
     <Setter Property="Orientation" Value="Horizontal" />
     <Setter Property="Spacing" Value="12" />
@@ -199,9 +186,6 @@
         <ContentPresenter Content="{TemplateBinding Content}" />
       </ControlTemplate>
     </Setter>
-  </Style>
-  <Style Selector="ToolTip.action-caption Border.hotkey-pill">
-    <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
   <Style Selector="local|OutlinedTextBlock.action-caption">
     <Setter Property="VerticalAlignment" Value="Center" />

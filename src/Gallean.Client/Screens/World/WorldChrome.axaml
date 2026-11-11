@@ -354,18 +354,6 @@
     <Setter Property="Margin" Value="0" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
-  <Style Selector="Border.hotkey-pill">
-    <Setter Property="Padding" Value="9,1" />
-    <Setter Property="VerticalAlignment" Value="Center" />
-    <Setter Property="Background" Value="{StaticResource HudHotkeyPillBrush}" />
-    <Setter Property="BorderBrush" Value="{StaticResource HudHotkeyPillBorderBrush}" />
-    <Setter Property="BorderThickness" Value="2" />
-    <Setter Property="CornerRadius" Value="12" />
-  </Style>
-  <Style Selector="Border.hotkey-pill TextBlock">
-    <Setter Property="Foreground" Value="{StaticResource HudHotkeyTextBrush}" />
-    <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
-  </Style>
 
   <Style Selector="local|HoverItemsControl.world-wheel">
     <Setter Property="Margin" Value="0,0,0,96" />

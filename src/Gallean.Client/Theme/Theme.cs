@@ -77,6 +77,42 @@ internal static class Theme
         });
     }
 
+    public static class Keycap
+    {
+        public static Color FaceTopColor { get; } = Color.FromRgb(56, 54, 52);
+        public static Color FaceBottomColor { get; } = Color.FromRgb(44, 43, 41);
+        public static Color HoverFaceTopColor { get; } = Color.FromRgb(78, 73, 64);
+        public static Color HoverFaceBottomColor { get; } = Color.FromRgb(60, 56, 49);
+        public static Color EdgeLightColor { get; } = Color.FromRgb(84, 81, 76);
+        public static Color EdgeColor { get; } = Color.FromRgb(36, 35, 34);
+        public static Color EdgeDarkColor { get; } = Color.FromRgb(24, 23, 23);
+        public static Color TextColor { get; } = Color.FromRgb(188, 177, 157);
+
+        private static Color ShadowColor { get; } = Color.FromArgb(120, 8, 7, 10);
+        private static Color BevelColor { get; } = Color.FromArgb(22, 255, 255, 255);
+
+        public static BoxShadows Shadow { get; } = new(
+            new BoxShadow
+            {
+                OffsetX = 0,
+                OffsetY = 1,
+                Blur = 3,
+                Spread = 0,
+                Color = ShadowColor
+            },
+            [
+                new BoxShadow
+                {
+                    OffsetX = 0,
+                    OffsetY = 1,
+                    Blur = 0,
+                    Spread = 0,
+                    Color = BevelColor,
+                    IsInset = true
+                }
+            ]);
+    }
+
     public static class Loading
     {
         public static Color BackdropColor { get; } = Color.FromArgb(72, 8, 7, 10);
@@ -89,9 +125,6 @@ internal static class Theme
         public static Color PanelColor { get; } = Color.FromArgb(240, 19, 19, 21);
         public static Color InkColor { get; } = Color.FromRgb(226, 214, 192);
         public static Color DisabledInkColor { get; } = Color.FromRgb(83, 81, 78);
-        public static Color HotkeyTextColor { get; } = Color.FromRgb(152, 141, 122);
-        public static Color HotkeyPillColor { get; } = Color.FromRgb(35, 36, 35);
-        public static Color HotkeyPillBorderColor { get; } = Color.FromRgb(55, 53, 53);
         public static Color PlateShadowColor { get; } = Color.FromArgb(180, 8, 7, 10);
 
         public static BoxShadows PlateShadow { get; } = new(new BoxShadow
@@ -262,9 +295,6 @@ internal static class Theme
         public static Color OrnamentColor { get; } = Color.FromRgb(150, 112, 70);
         public static Color PatternColor { get; } = Color.FromRgb(170, 130, 82);
         public static Color PatternDarkColor { get; } = Color.FromRgb(112, 82, 52);
-        public static Color HotkeyFaceColor { get; } = Color.FromRgb(242, 241, 238);
-        public static Color HotkeyHoverFaceColor { get; } = Color.FromRgb(255, 236, 196);
-        public static Color HotkeyTextColor { get; } = Color.FromRgb(31, 30, 29);
         public static Color OrnamentShadowColor { get; } = Color.FromArgb(200, 0, 0, 0);
     }
 
