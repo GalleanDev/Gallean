@@ -13,13 +13,12 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
     private WorldPlayerBuildingDefinitionId? selectedBuildingId;
     private WorldPlayerBuildingDefinitionId? constructedBuildingId;
 
-    private readonly ManagementScreenViewModel screen;
     private readonly CleanupList assetLeases = new();
 
     public BuildingTabViewModel(GameModel gameModel, GameViewModel gameViewModel, ManagementScreenViewModel screen)
         : base(gameModel, gameViewModel)
     {
-        this.screen = screen;
+        Screen = screen;
 
         Game.PropertyChanged += OnGamePropertyChanged;
         Game.Alert.PropertyChanged += OnAlertPropertyChanged;
@@ -29,7 +28,8 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
     }
 
     public override string TabHeader => Tr("Buildings");
-    public bool IsInForeground => ReferenceEquals(Game.TopScreen, screen) && Game.Alert.Current is null;
+    public ManagementScreenViewModel Screen { get; }
+    public bool IsInForeground => ReferenceEquals(Game.TopScreen, Screen) && Game.Alert.Current is null;
 
     [ObservableProperty]
     public partial BuildingGraphViewModel Graph { get; private set; } = BuildingGraphViewModel.Empty;

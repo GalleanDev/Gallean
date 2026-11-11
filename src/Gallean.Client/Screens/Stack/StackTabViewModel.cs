@@ -30,7 +30,7 @@ internal abstract partial class StackTabViewModel
         DropZones = [SpellDropZone, GroundDropZone, DismissDropZone];
     }
 
-    protected ManagementScreenViewModel Screen { get; }
+    public ManagementScreenViewModel Screen { get; }
 
     public override string TabHeader => Tr("Party");
 

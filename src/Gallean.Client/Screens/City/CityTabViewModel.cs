@@ -17,7 +17,6 @@ internal sealed partial class CityTabViewModel
     }
 
     private readonly WorldFortificationId fortificationId;
-    private readonly ManagementScreenViewModel screen;
     private readonly UnitGridSelectionViewModel unitSelection;
     private WorldFortification? fortification;
     private WorldStack? visitingStack;
@@ -28,7 +27,7 @@ internal sealed partial class CityTabViewModel
     public CityTabViewModel(GameModel gameModel, GameViewModel gameViewModel, ManagementScreenViewModel screen, WorldFortificationId fortificationId)
         : base(gameModel, gameViewModel)
     {
-        this.screen = screen;
+        Screen = screen;
         this.fortificationId = fortificationId;
 
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
@@ -53,6 +52,7 @@ internal sealed partial class CityTabViewModel
 
     public override string TabHeader => Tr("City");
 
+    public ManagementScreenViewModel Screen { get; }
     public UnitGridViewModel StackGrid { get; }
     public UnitGridViewModel GarrisonGrid { get; }
     public InventoryTransferViewModel InventoryTransfer { get; }
@@ -339,7 +339,7 @@ internal sealed partial class CityTabViewModel
 
             if (await TryDispatchWorldActionAsync(command))
             {
-                screen.Close();
+                Screen.Close();
             }
         }
     }
@@ -894,7 +894,7 @@ internal sealed partial class CityTabViewModel
         if (fortification is null)
         {
             visitingStack = null;
-            screen.Close();
+            Screen.Close();
 
             return;
         }
@@ -981,7 +981,7 @@ internal sealed partial class CityTabViewModel
             if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(visitingStack.Id, item.Id, Target: null)))
             {
                 Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
-                screen.Close();
+                Screen.Close();
             }
             else
             {
@@ -990,7 +990,7 @@ internal sealed partial class CityTabViewModel
         }
         else if (Game.RootScreen is WorldScreenViewModel world)
         {
-            screen.Close();
+            Screen.Close();
             world.SelectAction(new WorldCursorAction.UseItem(visitingStack.Id, item.Id));
         }
     }

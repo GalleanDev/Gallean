@@ -101,7 +101,7 @@
     </Style>
   </UserControl.Styles>
 
-  <Grid Background="Transparent">
+  <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
     <ContentControl Classes="ornament-panel"
                     Background="{StaticResource CapitalScenePanelBodyGradientBrush}"
                     HorizontalAlignment="Center"

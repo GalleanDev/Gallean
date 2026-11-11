@@ -87,7 +87,7 @@
     </Style>
   </UserControl.Styles>
 
-  <Grid Background="Transparent">
+  <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
     <ContentControl Content="{Binding CapitalScene}" />
 
     <Border Background="{StaticResource CapitalSceneFootOverlayGradientBrush}" IsHitTestVisible="False" IsVisible="{Binding IsUiVisible}" />

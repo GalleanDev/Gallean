@@ -399,7 +399,7 @@
     </DataTemplate>
   </UserControl.Resources>
 
-  <Grid Background="Transparent">
+  <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
     <ContentControl Content="{Binding CapitalScene}" />
 
     <Panel Classes="building-panels" Classes.hidden="{Binding !PanelsVisible}">
@@ -409,10 +409,16 @@
       <Button Theme="{StaticResource BackgroundButtonTheme}"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
-              Command="{Binding ClearSelectionCommand}" />
+              Command="{Binding ClearSelectionCommand}"
+              IsVisible="{Binding SelectedBuilding, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
       <Viewbox Classes="cached" Stretch="Uniform" Margin="24,4,24,4" ClipToBounds="False">
         <Grid ClipToBounds="False">
+          <Button Theme="{StaticResource BackgroundButtonTheme}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Command="{Binding ClearSelectionCommand}" />
+
           <local:BuildingHubVisual Classes="cached"
                                    Graph="{Binding Graph}"
                                    UnitSize="{StaticResource BuildingGraphUnitSize}"
