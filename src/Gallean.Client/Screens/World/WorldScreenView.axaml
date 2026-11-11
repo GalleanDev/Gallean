@@ -480,7 +480,8 @@
                                          Classes="h4"
                                          Foreground="{StaticResource PrimaryTextBrush}"
                                          HorizontalAlignment="Center"
-                                         TextTrimming="CharacterEllipsis" />
+                                         TextAlignment="Center"
+                                         TextWrapping="Wrap" />
                 <Rectangle Classes="details-rule" IsVisible="{Binding HasDetails}" />
                 <ItemsControl ItemsSource="{Binding Lines}"
                               ItemTemplate="{StaticResource UnitGroupInfoLineTemplate}"
