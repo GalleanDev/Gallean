@@ -162,7 +162,6 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
             if (SetProperty(ref language, value))
             {
                 Apply();
-                RefreshSettingNames();
             }
         }
     }
@@ -190,14 +189,6 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private void Apply()
     {
         gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed, language));
-    }
-
-    private void RefreshSettingNames()
-    {
-        OnPropertyChanged(nameof(UiSizes));
-        OnPropertyChanged(nameof(AutoSaveIntervals));
-        OnPropertyChanged(nameof(BattleSpeeds));
-        OnPropertyChanged(nameof(MovementSpeeds));
     }
 
     private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)

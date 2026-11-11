@@ -5,6 +5,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using Avalonia.Platform;
 using Avalonia.VisualTree;
 
@@ -17,6 +18,9 @@ internal sealed partial class GameView : Window
 
     public static readonly StyledProperty<AbstractScreenViewModel?> TopScreenProperty =
         AvaloniaProperty.Register<GameView, AbstractScreenViewModel?>(nameof(TopScreen));
+
+    public static readonly StyledProperty<Language> LanguageProperty =
+        AvaloniaProperty.Register<GameView, Language>(nameof(Language));
 
     private readonly Size minSize;
     private Task? exitSaveTask;
@@ -48,6 +52,12 @@ internal sealed partial class GameView : Window
     {
         get => GetValue(TopScreenProperty);
         set => SetValue(TopScreenProperty, value);
+    }
+
+    public Language Language
+    {
+        get => GetValue(LanguageProperty);
+        set => SetValue(LanguageProperty, value);
     }
 
     protected override void OnOpened(EventArgs e)
@@ -144,6 +154,10 @@ internal sealed partial class GameView : Window
         {
             FocusTopScreen();
         }
+        else if (e.Property == LanguageProperty)
+        {
+            UpdateBindingTargets();
+        }
         else if (e.Property == WindowStateProperty)
         {
             bool windowed = WindowState != WindowState.FullScreen;
@@ -165,6 +179,55 @@ internal sealed partial class GameView : Window
         }
 
         FocusTopScreen();
+    }
+
+    private void UpdateBindingTargets()
+    {
+        HashSet<AvaloniaObject> visited = [];
+        Stack<AvaloniaObject> stack = new();
+
+        stack.Push(this);
+
+        while (stack.TryPop(out AvaloniaObject? target))
+        {
+            if (visited.Add(target))
+            {
+                Type type = target.GetType();
+
+                UpdateBindingTargets(target, AvaloniaPropertyRegistry.Instance.GetRegistered(type));
+                UpdateBindingTargets(target, AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(type));
+                UpdateBindingTargets(target, AvaloniaPropertyRegistry.Instance.GetRegisteredDirect(type));
+
+                if (target is Visual visual)
+                {
+                    foreach (Visual child in visual.GetVisualChildren())
+                    {
+                        stack.Push(child);
+                    }
+                }
+
+                if (target is ILogical logical)
+                {
+                    foreach (ILogical child in logical.LogicalChildren)
+                    {
+                        if (child is AvaloniaObject logicalChild)
+                        {
+                            stack.Push(logicalChild);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void UpdateBindingTargets(AvaloniaObject target, IReadOnlyList<AvaloniaProperty> properties)
+    {
+        foreach (AvaloniaProperty property in properties)
+        {
+            BindingExpressionBase? expression = BindingOperations.GetBindingExpressionBase(target, property);
+
+            expression?.UpdateTarget();
+        }
     }
 
     private void OnScalingChanged(object? sender, EventArgs e)

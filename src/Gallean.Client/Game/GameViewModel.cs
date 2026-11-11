@@ -58,6 +58,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         AssetPreloader = assetPreloader;
         Settings = gameSettingsSource.Current;
+        Language = Settings.EffectiveLanguage;
 
         screens = new ScreenStack(audioPlayer);
         screens.Changed += OnScreensChanged;
@@ -78,6 +79,9 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsWindowed))]
     public partial GameSettings Settings { get; private set; }
+
+    [ObservableProperty]
+    public partial Language Language { get; private set; }
 
     public bool IsWindowed
     {
@@ -285,13 +289,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         if (language != Settings.EffectiveLanguage)
         {
-            TextCatalog catalog = TextCatalogLoader.Load(language);
-            catalog.MakeCurrent();
-
-            if (activeGame is not null)
-            {
-                _ = ReloadGameTextsAsync(activeGame, language);
-            }
+            _ = SwitchLanguageAsync(language);
         }
 
         Settings = settings;
@@ -876,6 +874,19 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         OnPropertyChanged(nameof(RootScreen));
         OnPropertyChanged(nameof(TopScreen));
         OnPropertyChanged(nameof(PaintsOwnBackground));
+    }
+
+    private async Task SwitchLanguageAsync(Language language)
+    {
+        TextCatalog catalog = TextCatalogLoader.Load(language);
+        catalog.MakeCurrent();
+
+        if (activeGame is not null)
+        {
+            await ReloadGameTextsAsync(activeGame, language);
+        }
+
+        Language = language;
     }
 
     private async Task ReloadGameTextsAsync(GameModel gameModel, Language language)

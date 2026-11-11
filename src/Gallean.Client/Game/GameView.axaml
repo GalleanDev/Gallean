@@ -6,6 +6,7 @@
         Title="{local:Text 'Gallean'}"
         IsWindowed="{Binding IsWindowed}"
         TopScreen="{Binding TopScreen}"
+        Language="{Binding Language}"
         local:SettingsScope.Settings="{Binding Settings}"
         local:CursorLock.IsEnabled="{Binding Settings.LockCursor}"
         WindowStartupLocation="CenterScreen"

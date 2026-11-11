@@ -67,7 +67,8 @@ public sealed class TextExtensionTests
             .Build();
 
         SettingsScreenViewModel settings = new(gameViewModel);
-        Window window = new() { Content = new SettingsScreenView { DataContext = settings } };
+        GameView window = new() { DataContext = gameViewModel };
+        gameViewModel.ShowScreen(settings);
         window.Show();
 
         Assert.That(GetTexts(window), Does.Contain("Windowed mode (F11)"));
