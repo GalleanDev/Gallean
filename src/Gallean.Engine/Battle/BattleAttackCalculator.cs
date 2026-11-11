@@ -4,7 +4,7 @@ using Gallean.Common;
 
 namespace Gallean.Engine;
 
-internal static class BattleAttackCalculator
+internal static partial class BattleAttackCalculator
 {
     public sealed record AttackInfo(
         ImmutableArray<UnitAttackDefinition> Attacks,
@@ -168,76 +168,9 @@ internal static class BattleAttackCalculator
         }
 
         BattleUnit attacker = state.GetUnit(attackerId);
-        BattleSide? targetSide = GetTargetSide(targetType, attacker);
-        BattleAttackTileTarget? tileTarget = target.GetTileTarget();
+        TargetResolver.Context resolverContext = new(state, attacker, attack);
 
-        if (attack.Reach == UnitAttackReach.All && tileTarget is not null)
-        {
-            if (targetSide is not null && tileTarget.Side != targetSide)
-            {
-                return new TargetInfo([], BattleCommandError.TargetIncorrect);
-            }
-
-            List<BattleAttackTarget> targets = GetSideTargets(state, tileTarget.Side, attack);
-
-            if (targets.Count <= 0)
-            {
-                return new TargetInfo([], BattleCommandError.TargetIncorrect);
-            }
-
-            return new TargetInfo(targets, null);
-        }
-        else
-        {
-            BattleUnitId? targetUnitId = target.GetUnitId();
-            if (targetUnitId is null)
-            {
-                return new TargetInfo([], BattleCommandError.AttackRequiresUnitTarget);
-            }
-
-            BattleUnit targetUnit = state.GetUnit(targetUnitId.Value);
-
-            if (targetSide is not null && targetUnit.Side != targetSide)
-            {
-                return new TargetInfo([], BattleCommandError.TargetIncorrect);
-            }
-
-            if (attack.Reach == UnitAttackReach.All)
-            {
-                List<BattleAttackTarget> targets = GetSideTargets(state, targetUnit.Side, attack);
-
-                if (!targets.Contains(target))
-                {
-                    return new TargetInfo([], BattleCommandError.TargetIncorrect);
-                }
-
-                return new TargetInfo(targets, null);
-            }
-            else
-            {
-                if (targetType == UnitAttackTargetType.Enemy && !ReachCalculator.IsTargetReachable(state, attacker, targetUnit, attack))
-                {
-                    return new TargetInfo([], BattleCommandError.TargetNotReachable);
-                }
-
-                return new TargetInfo([target], null);
-            }
-        }
-    }
-
-    private static List<BattleAttackTarget> GetSideTargets(BattleState state, BattleSide side, UnitAttackDefinition attack)
-    {
-        List<BattleAttackTarget> targets = [];
-
-        foreach ((BattleUnit unit, _) in state.GetGrid(side).GetUnits())
-        {
-            if (CanTarget(unit, attack))
-            {
-                targets.Add(new BattleAttackUnitTarget(unit.Id));
-            }
-        }
-
-        return targets;
+        return target.Accept(TargetResolver.Instance, resolverContext);
     }
 
     public static BattleAttackResult ResolveAttackStep(
@@ -324,31 +257,6 @@ internal static class BattleAttackCalculator
         }
 
         return attacks.ToImmutable();
-    }
-
-    private static BattleSide? GetTargetSide(UnitAttackTargetType targetType, BattleUnit attacker)
-    {
-        return targetType switch
-        {
-            UnitAttackTargetType.Enemy => attacker.Side.GetOpposite(),
-            UnitAttackTargetType.Ally => attacker.Side,
-            UnitAttackTargetType.Any => null,
-            UnitAttackTargetType.Tile => attacker.Side
-        };
-    }
-
-    private static bool CanTarget(BattleUnit unit, UnitAttackDefinition attack)
-    {
-        UnitAttackTypeInfo attackTypeInfo = attack.Type.GetInfo();
-
-        if (attackTypeInfo.TargetsDead)
-        {
-            return unit is { IsAlive: false, IsRevived: false };
-        }
-        else
-        {
-            return unit.IsActive();
-        }
     }
 
     private static int GetAccuracyReductionPerTarget(BattleState state, IEngineContext context, BattleUnitId attackerId)
