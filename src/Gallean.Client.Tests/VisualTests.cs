@@ -5757,6 +5757,48 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task BattleReachAllTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel gameModel = LoadScenario(null);
+        WorldRaceDefinition attackers = gameModel.Definitions.GetRace(WorldRace.Human);
+        WorldRaceDefinition defenders = gameModel.Definitions.GetRace(WorldRace.Human);
+
+        BattleStateBuilder builder = new(gameModel.Definitions);
+
+        builder.Add(MakeBattleUnit(0, attackers.Leaders[2], BattleSide.Attacker, gameModel));
+
+        builder.Add(MakeBattleUnit(1, defenders.Units[3], BattleSide.Defender, gameModel), GridPosition.FrontBottom);
+        builder.Add(MakeBattleUnit(2, defenders.Units[3], BattleSide.Defender, gameModel), GridPosition.FrontTop);
+        builder.Add(MakeBattleUnit(3, defenders.Units[3], BattleSide.Defender, gameModel), GridPosition.BackCenter);
+
+        EngineContext engine = new(new RandomProvider(0), gameModel.Definitions, gameModel.Stats, GameScenarioProvider.Empty, new GlobalVariables());
+
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                engine,
+                builder.Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo()),
+                NullBattleUnitUpgradeResolver.Instance,
+                _ => { },
+                isAttackerAi: false,
+                isDefenderAi: false,
+                canAutoResolve: true,
+                new WorldPosition(0, 0)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        gameViewModel.ShowScreen(new BattleScreenViewModel(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0)));
+
+        await WaitForBattleAsync(window);
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task BattleAutoBattleTest()
     {
         using Sandbox sb = Sandbox.Create();

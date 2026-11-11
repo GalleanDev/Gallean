@@ -143,16 +143,25 @@ internal sealed class BattleRenderStateBuilder(
 
     public IReadOnlyList<BattleGridTileViewModel> BuildTiles(BattleSide side, bool isFacingRight)
     {
+        UnitGrid<BattleUnit> grid = baseState.GetGrid(side);
         List<BattleGridTileViewModel> tiles = [];
 
-        foreach (BattleGridTile tile in GetSummonTiles())
+        foreach ((BattleGridTile tile, BattleActionTarget target) in actionTargets)
         {
             if (tile.Side == side)
             {
                 (int row, int column) = GetPanelCell(tile.Position, isLarge: false, isFacingRight);
-                HighlightType highlightType = ResolvePlaceholderHighlightType(tile);
 
-                tiles.Add(new BattleGridTileViewModel(tile, row, column, ResolveGridMarker(highlightType)));
+                if (target is BattleActionTarget.Summon)
+                {
+                    HighlightType highlightType = ResolvePlaceholderHighlightType(tile);
+
+                    tiles.Add(new BattleGridTileViewModel(tile, row, column, ResolveGridMarker(highlightType)));
+                }
+                else if (target is BattleActionTarget.Unit && grid[tile.Position] is null)
+                {
+                    tiles.Add(new BattleGridTileViewModel(tile, row, column, marker: null));
+                }
             }
         }
 
@@ -504,8 +513,20 @@ internal sealed class BattleRenderStateBuilder(
         else
         {
             BattleActionTarget? actionTarget = actionTargets.GetValueOrDefault(tile);
+            bool isReachable;
 
-            if (actionTarget is BattleActionTarget.Unit)
+            if (tileUnit is not null &&
+                actionTarget is BattleActionTarget.Unit unitTarget &&
+                unitTarget.Units.Contains(tileUnit.Id))
+            {
+                isReachable = true;
+            }
+            else
+            {
+                isReachable = false;
+            }
+
+            if (isReachable)
             {
                 if (isAlly)
                 {

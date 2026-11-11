@@ -33,7 +33,7 @@ internal sealed partial class BattleAiPlanner
 
             public int Visit(BattleAttackTileTarget target, Context context)
             {
-                return UtilityScore.Combine([FreePosition(target.Position)]);
+                return UtilityScore.Combine([FreePosition(context, target.Position)]);
             }
 
             private static IEnumerable<UtilityScore.Consideration> GetConsiderations(Context context, BattleUnit target)
@@ -185,9 +185,16 @@ internal sealed partial class BattleAiPlanner
                 }
             }
 
-            private static UtilityScore.Consideration FreePosition(GridPosition position)
+            private static UtilityScore.Consideration FreePosition(Context context, GridPosition position)
             {
-                return UtilityScore.Flag(position.IsFrontLine, MinTargetValue);
+                if (context.Attack.Type == UnitAttackType.Summon)
+                {
+                    return UtilityScore.Flag(position.IsFrontLine, MinTargetValue);
+                }
+                else
+                {
+                    return UtilityScore.None;
+                }
             }
         }
 

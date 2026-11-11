@@ -340,6 +340,64 @@ public sealed class BattleEngineTests
     }
 
     [Test]
+    public void AllReachTileTargetTest()
+    {
+        UnitDefinition warriorDefinition = TestHelpers.SimpleUnitDefinition("warrior", maxHitpoints: 20, initiative: 50, damage: 10);
+        UnitDefinition mageDefinition = TestHelpers.SimpleUnitDefinition("mage", maxHitpoints: 10, initiative: 40, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("mage"), initiative: 40, damage: 5, accuracy: 100, reach: UnitAttackReach.All)
+        };
+        UnitDefinition healerDefinition = TestHelpers.SimpleUnitDefinition("healer", maxHitpoints: 10, initiative: 30, damage: 0);
+        UnitDefinition defenderWarriorDefinition = TestHelpers.SimpleUnitDefinition("defender_warrior", maxHitpoints: 10, initiative: 20, damage: 10);
+
+        BattleUnit warrior = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, warriorDefinition.Id, BattleSide.Attacker, hitpoints: 20);
+        BattleUnit mage = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, mageDefinition.Id, BattleSide.Attacker, hitpoints: 10);
+        BattleUnit healer = TestHelpers.SimpleBattleUnit(new BattleUnitId(3), null, healerDefinition.Id, BattleSide.Defender, hitpoints: 10);
+        BattleUnit defenderWarrior = TestHelpers.SimpleBattleUnit(new BattleUnitId(4), null, defenderWarriorDefinition.Id, BattleSide.Defender, hitpoints: 10);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(warriorDefinition)
+            .WithDefinition(mageDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderWarriorDefinition)
+            .WithAttacker(warrior, GridPosition.FrontBottom)
+            .WithAttacker(mage, GridPosition.BackCenter)
+            .WithDefender(healer, GridPosition.FrontBottom)
+            .WithDefender(defenderWarrior, GridPosition.FrontCenter)
+            .Build();
+
+        engine.CheckCommand(
+            new BattleAttackCommand(warrior.Id, new BattleAttackUnitTarget(healer.Id)),
+            [
+                new BattleUnitAttackEvent(warrior.Id, new BattleAttackUnitTarget(healer.Id), [new UnitAttackDefinitionId("warrior")]),
+                new BattleUnitAttackedEvent(warrior.Id, healer.Id, new UnitAttackDefinitionId("warrior")),
+                new BattleUnitAttackHitEvent(warrior.Id, healer.Id, new UnitAttackDefinitionId("warrior"), 10),
+                new BattleUnitDiedEvent(healer.Id),
+                new BattleUnitTurnEndingEvent(warrior.Id),
+                new BattleUnitTurnEndedEvent(warrior.Id),
+                new BattleUnitTurnStartedEvent(new BattleUnitTurn(mage.Id, BattleUnitTurnType.Normal))
+            ]
+        );
+
+        engine.CheckCommandError(
+            new BattleAttackCommand(mage.Id, new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop)),
+            BattleCommandError.TargetIncorrect
+        );
+
+        engine.CheckCommand(
+            new BattleAttackCommand(mage.Id, new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontBottom)),
+            [
+                new BattleUnitAttackEvent(mage.Id, new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontBottom), [new UnitAttackDefinitionId("mage")]),
+                new BattleUnitAttackedEvent(mage.Id, defenderWarrior.Id, new UnitAttackDefinitionId("mage")),
+                new BattleUnitAttackHitEvent(mage.Id, defenderWarrior.Id, new UnitAttackDefinitionId("mage"), 5),
+                new BattleUnitTurnEndingEvent(mage.Id),
+                new BattleUnitTurnEndedEvent(mage.Id),
+                new BattleUnitTurnStartedEvent(new BattleUnitTurn(defenderWarrior.Id, BattleUnitTurnType.Normal))
+            ]
+        );
+    }
+
+    [Test]
     public void NoActiveBattleTest()
     {
         UnitDefinition warriorDefinition = TestHelpers.SimpleUnitDefinition("warrior", maxHitpoints: 20, initiative: 50, damage: 25);

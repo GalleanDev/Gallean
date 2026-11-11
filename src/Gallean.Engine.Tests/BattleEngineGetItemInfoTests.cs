@@ -116,18 +116,18 @@ public sealed class BattleEngineGetItemInfoTests
                 new BattleGetItemInfoCommand.ItemInfo(new BattleAttackUnitTarget(leader.Id), [], BattleCommandError.TargetIncorrect),
                 new BattleGetItemInfoCommand.ItemInfo(new BattleAttackUnitTarget(defender.Id), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
                 new BattleGetItemInfoCommand.ItemInfo(new BattleAttackUnitTarget(secondDefender.Id), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontBottom), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontCenter), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackBottom), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackCenter), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackTop), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontBottom), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontCenter), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontTop), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackBottom), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackCenter), [], BattleCommandError.AttackRequiresUnitTarget),
-                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackTop), [], BattleCommandError.AttackRequiresUnitTarget)
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontBottom), [], BattleCommandError.TargetIncorrect),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontCenter), [], BattleCommandError.TargetIncorrect),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.FrontTop), [], BattleCommandError.TargetIncorrect),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackBottom), [], BattleCommandError.TargetIncorrect),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackCenter), [], BattleCommandError.TargetIncorrect),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Attacker, GridPosition.BackTop), [], BattleCommandError.TargetIncorrect),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontBottom), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontCenter), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.FrontTop), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackBottom), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackCenter), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null),
+                new BattleGetItemInfoCommand.ItemInfo(new BattleAttackTileTarget(BattleSide.Defender, GridPosition.BackTop), [new BattleAttackUnitTarget(defender.Id), new BattleAttackUnitTarget(secondDefender.Id)], null)
             ])
         ])));
     }
