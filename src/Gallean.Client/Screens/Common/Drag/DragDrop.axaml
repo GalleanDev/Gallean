@@ -22,10 +22,11 @@
                             FaceKey="{Binding SpriteKey}"
                             IsHitpointsVisible="False"
                             IsVisible="{Binding Type, Converter={x:Static local:EnumNotEqualsConverter.Instance}, ConverterParameter={x:Static local:DragPreviewType.Item}}" />
-        <Border Classes="drag-image-item"
-                IsVisible="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DragPreviewType.Item}}">
-          <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="UniformToFill" />
-        </Border>
+        <Panel Classes="drag-image-item"
+               IsVisible="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:DragPreviewType.Item}}">
+          <local:PlateChrome Classes="socket" />
+          <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform" />
+        </Panel>
       </Panel>
     </DataTemplate>
 
@@ -118,12 +119,8 @@
   <Style Selector="local|UnitPortrait.drag-image-unit">
     <Setter Property="Margin" Value="0" />
   </Style>
-  <Style Selector="Border.drag-image-item">
-    <Setter Property="Background" Value="{StaticResource SlotBackgroundBrush}" />
-    <Setter Property="BorderBrush" Value="{StaticResource SlotSelectedBorderBrush}" />
-    <Setter Property="BorderThickness" Value="3" />
-    <Setter Property="CornerRadius" Value="38" />
-    <Setter Property="ClipToBounds" Value="True" />
+  <Style Selector="Panel.drag-image-item > local|PlateChrome">
+    <Setter Property="Margin" Value="3" />
   </Style>
 
   <Style Selector="Border.drop-target">

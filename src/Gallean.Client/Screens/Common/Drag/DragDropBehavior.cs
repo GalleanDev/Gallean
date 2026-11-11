@@ -18,7 +18,7 @@ internal sealed class DragDropBehavior(Control view)
 
     private static readonly Size SmallUnitImageSize = new(76, 91);
     private static readonly Size LargeUnitImageSize = new(156, 91);
-    private static readonly Size ItemImageSize = new(76, 76);
+    private static readonly Size ItemImageSize = new(78, 78);
 
     private DragDropViewModel? dragDrop;
     private CursorDragImage? dragImage;
