@@ -84,7 +84,7 @@ internal static class UnitModifierFormatter
         }
     }
 
-    private static IEnumerable<string> FormatValues(UnitStatModifier stat)
+    public static IEnumerable<string> FormatValues(UnitStatModifier stat)
     {
         if (stat.Flat != 0)
         {

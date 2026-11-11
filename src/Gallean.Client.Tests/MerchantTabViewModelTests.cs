@@ -658,7 +658,9 @@ public sealed class MerchantTabViewModelTests
             "name",
             "Healing potion",
             "desc",
-            [],
+            Attack: null,
+            [new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("+50"), 0), null)],
+            SpellEffect: null,
             CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
         Assert.That(screen.SellItems[0].Details, Is.EqualTo(new ItemDetailsViewModel(
@@ -666,7 +668,9 @@ public sealed class MerchantTabViewModelTests
             "name",
             "Healing potion",
             "desc",
-            [],
+            Attack: null,
+            [new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("+50"), 0), null)],
+            SpellEffect: null,
             CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(80, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
     }

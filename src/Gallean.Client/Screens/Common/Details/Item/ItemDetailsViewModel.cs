@@ -8,7 +8,9 @@ internal sealed record ItemDetailsViewModel(
     string Name,
     string CategoryText,
     string Description,
-    IReadOnlyList<string> Effects,
+    ItemAttackViewModel? Attack,
+    IReadOnlyList<StatRowViewModel> Stats,
+    string? SpellEffect,
     OfferPriceViewModel? CastingCost,
     ResourceSetViewModel Value)
 {
@@ -28,7 +30,9 @@ internal sealed record ItemDetailsViewModel(
                Name == other.Name &&
                CategoryText == other.CategoryText &&
                Description == other.Description &&
-               Effects.SequenceEqual(other.Effects) &&
+               Attack == other.Attack &&
+               Stats.SequenceEqual(other.Stats) &&
+               SpellEffect == other.SpellEffect &&
                CastingCost == other.CastingCost &&
                Value == other.Value;
     }
@@ -41,13 +45,7 @@ internal sealed record ItemDetailsViewModel(
         IGameTextProvider texts)
     {
         ItemDefinition definition = definitions.GetItem(definitionId);
-        IReadOnlyList<string> effects = [];
-
-        if (definition.EquipmentModifierId is { } modifierId)
-        {
-            UnitModifierDefinition modifier = definitions.GetUnitModifier(modifierId);
-            effects = [.. UnitModifierFormatter.FormatEffects(modifier, texts)];
-        }
+        IReadOnlyList<StatRowViewModel> stats = [.. ItemStatRowBuilder.Build(definition, definitions, texts)];
 
         WorldResourceSet? castingCost = GetCastingCost(definition);
         OfferPriceViewModel? castingCostViewModel;
@@ -66,7 +64,9 @@ internal sealed record ItemDetailsViewModel(
             ItemFormatter.FormatName(definitions, texts, definitionId, charges),
             ItemFormatter.FormatCategory(definition.Category),
             ItemFormatter.FormatDescription(definitions, texts, definitionId),
-            effects,
+            CreateAttack(definition, definitions),
+            stats,
+            GetSpellEffect(definition, definitions, texts),
             castingCostViewModel,
             new ResourceSetViewModel(definition.Value, ResourceSetProjection.All));
     }
@@ -79,11 +79,51 @@ internal sealed record ItemDetailsViewModel(
         hash.Add(Name);
         hash.Add(CategoryText);
         hash.Add(Description);
-        hash.AddSequence(Effects);
+        hash.Add(Attack);
+        hash.AddSequence(Stats);
+        hash.Add(SpellEffect);
         hash.Add(CastingCost);
         hash.Add(Value);
 
         return hash.ToHashCode();
+    }
+
+    private static ItemAttackViewModel? CreateAttack(ItemDefinition definition, IGameDefinitionProvider definitions)
+    {
+        UnitAttackDefinitionId? attackId;
+
+        if (definition.Effect is AttackItemEffect effect)
+        {
+            attackId = effect.AttackId;
+        }
+        else
+        {
+            attackId = definition.EquipmentAttackId;
+        }
+
+        if (attackId is null)
+        {
+            return null;
+        }
+
+        UnitAttackDefinition attack = definitions.GetAttack(attackId.Value);
+
+        return ItemAttackViewModel.Create(attack);
+    }
+
+    private static string? GetSpellEffect(ItemDefinition definition, IGameDefinitionProvider definitions, IGameTextProvider texts)
+    {
+        if (definition.Effect is SpellItemEffect effect)
+        {
+            WorldSpellDefinition spell = definitions.GetSpell(effect.SpellId);
+            GlobalText text = texts.GetGlobalText(spell.EffectDescriptionTextId);
+
+            return text.Text;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private static WorldResourceSet? GetCastingCost(ItemDefinition definition)

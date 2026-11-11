@@ -2640,6 +2640,11 @@ public sealed class StackTabViewModelTests
         UnitModifierDefinition weaponModifier = WeaponModifier();
         ItemDefinition weapon = Weapon(weaponModifier.Id) with { Value = WorldResourceSet.Empty with { Gold = 150 } };
 
+        UnitAttackDefinition talismanAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("talismanAttack"), initiative: 50, damage: 25, accuracy: 80, UnitAttackReach.All) with
+        {
+            Source = UnitAttackSource.Fire
+        };
+
         ItemDefinition talisman = new(
             new ItemDefinitionId("talisman1"),
             new GlobalTextId("Talisman of Fire"),
@@ -2648,7 +2653,7 @@ public sealed class StackTabViewModelTests
             WorldResourceSet.Empty,
             EquipmentModifierId: null,
             EquipmentAttackId: null,
-            Effect: null,
+            Effect: new AttackItemEffect(talismanAttack.Id),
             AnimationUnitId: null);
 
         WorldItem weaponItem = new(new WorldItemId("Weapon"), weapon.Id, Charges: null);
@@ -2676,6 +2681,7 @@ public sealed class StackTabViewModelTests
             .WithDefinition(leaderDefinition)
             .WithDefinition(weaponModifier)
             .WithDefinition(weapon)
+            .WithDefinition(talismanAttack)
             .WithDefinition(talisman)
             .WithStack(stack)
             .WithSubrace(TestHelpers.NeutralSubrace)
@@ -2704,7 +2710,9 @@ public sealed class StackTabViewModelTests
                 "name",
                 "Weapon",
                 "desc",
-                ["+20 damage"],
+                Attack: null,
+                [new StatRowViewModel(IconMoniker.Damage, "Damage", new StatValueViewModel(TextSpans.FromText("+20"), 0), null)],
+                SpellEffect: null,
                 CastingCost: null,
                 new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 150 }, ResourceSetProjection.All))));
             Assert.That(talismanDetails, Is.EqualTo(new ItemDetailsViewModel(
@@ -2712,7 +2720,12 @@ public sealed class StackTabViewModelTests
                 "Talisman of Fire (2)",
                 "Talisman",
                 "desc",
-                [],
+                new ItemAttackViewModel("25", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceFire, "Fire", Theme.AttackSource.FireColor))),
+                [
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("6", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(All)", TextStyle.Italic)]), 0), null),
+                    new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("80%"), 0), null)
+                ],
+                SpellEffect: null,
                 CastingCost: null,
                 new ResourceSetViewModel(WorldResourceSet.Empty, ResourceSetProjection.All))));
             Assert.That(details.Content, Is.EqualTo(weaponDetails));
@@ -2793,7 +2806,9 @@ public sealed class StackTabViewModelTests
                 "Staff of Thunder",
                 "Staff",
                 "desc",
+                Attack: null,
                 [],
+                "effect",
                 new OfferPriceViewModel(WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }, WorldResourceSet.Empty with { LifeMana = 150, RuneMana = 20 }),
                 new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 600 }, ResourceSetProjection.All))));
             Assert.That(FormatPrice(Assert.NotNull(details.CastingCost)), Is.EqualTo("100 life mana, 50 rune mana (unaffordable)"));

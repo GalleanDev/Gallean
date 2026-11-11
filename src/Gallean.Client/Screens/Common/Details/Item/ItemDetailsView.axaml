@@ -5,8 +5,45 @@
              x:DataType="local:ItemDetailsViewModel"
              ClipToBounds="False">
 
+  <UserControl.Styles>
+    <Style Selector=":is(TextBlock).primary-stat">
+      <Setter Property="Foreground" Value="{StaticResource UnitDetailsPrimaryStatBrush}" />
+    </Style>
+    <Style Selector="StackPanel.attack-line">
+      <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source.open">
+      <Setter Property="Margin" Value="5,0,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > local|IconVisual.attack-source">
+      <Setter Property="Width" Value="13" />
+      <Setter Property="Height" Value="13" />
+      <Setter Property="Margin" Value="1,2,2,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source.close">
+      <Setter Property="Margin" Value="3,0,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-type">
+      <Setter Property="Margin" Value="0,3,0,0" />
+    </Style>
+
+    <Style Selector="Border.stat-row ContentControl.stat-icon">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+    <Style Selector="Border.stat-row TextBlock.stat-label">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+  </UserControl.Styles>
+
   <local:ModalFrameDecorator Width="400" Margin="0,60,52,0">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
 
       <StackPanel Grid.Row="0" Classes="details-header" Margin="22,20,124,0">
         <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
@@ -29,28 +66,52 @@
         <TextBlock Grid.Column="1" Text="{Binding Description}" Classes="body details-flavor" />
       </Grid>
 
-      <ItemsControl Grid.Row="2" ItemsSource="{Binding Effects}" Margin="22,16,22,0" IsVisible="{Binding Effects.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate x:DataType="x:String">
-            <Grid ColumnDefinitions="Auto,*" Classes="details-effect">
-              <Rectangle Grid.Column="0" Classes="details-bullet" />
-              <TextBlock Grid.Column="1" Text="{Binding}" Classes="body" />
-            </Grid>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
+      <StackPanel Grid.Row="2" Margin="22,16,22,0">
+        <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,8" IsVisible="{Binding Attack, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <local:OutlinedTextBlock Grid.Column="0"
+                                   Classes="h1 primary-stat"
+                                   Margin="0,0,14,0"
+                                   Text="{Binding Attack.Amount}"
+                                   VerticalAlignment="Center"
+                                   IsVisible="{Binding Attack.Amount, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          <StackPanel Grid.Column="1" Classes="attack-line" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Attack.Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
+            <TextBlock Text="(" Classes="caption attack-source open" />
+            <local:IconVisual Classes="attack-source"
+                              Moniker="{Binding Attack.Attack.Source.Icon}"
+                              Foreground="{Binding Attack.Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+            <TextBlock Text="{Binding Attack.Attack.Source.Text}"
+                       Classes="caption attack-source"
+                       Foreground="{Binding Attack.Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+            <TextBlock Text=")" Classes="caption attack-source close" />
+          </StackPanel>
+        </Grid>
 
-      <Grid Grid.Row="3"
-            ColumnDefinitions="Auto,Auto,*"
-            Classes="details-effect"
-            Margin="22,16,22,0"
-            IsVisible="{Binding CastingCost, Converter={x:Static ObjectConverters.IsNotNull}}">
-        <Rectangle Grid.Column="0" Classes="details-bullet" />
-        <TextBlock Grid.Column="1" Text="{local:Text 'Casting cost:'}" Classes="body" Margin="0,0,8,0" />
-        <ContentControl Grid.Column="2" Content="{Binding CastingCost}" Classes="body details-value" />
-      </Grid>
+        <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
 
-      <ContentControl Grid.Row="4"
+        <Border Classes="stat-row"
+                Background="{StaticResource StatRowStripeBrush}"
+                IsVisible="{Binding SpellEffect, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <Grid ColumnDefinitions="Auto,*">
+            <ContentControl Grid.Column="0" Classes="stat-icon">
+              <Rectangle Classes="details-bullet" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </ContentControl>
+            <TextBlock Grid.Column="1" Classes="body stat-label" Text="{Binding SpellEffect}" Foreground="{StaticResource ModalEffectBrush}" TextWrapping="Wrap" />
+          </Grid>
+        </Border>
+
+        <Border Classes="stat-row" IsVisible="{Binding CastingCost, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <Grid ColumnDefinitions="Auto,Auto,*">
+            <ContentControl Grid.Column="0" Classes="stat-icon">
+              <local:IconVisual Moniker="Spellbook" />
+            </ContentControl>
+            <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Casting cost'}" />
+            <ContentControl Grid.Column="2" Classes="body details-value" Content="{Binding CastingCost}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+          </Grid>
+        </Border>
+      </StackPanel>
+
+      <ContentControl Grid.Row="3"
                       Classes="body details-value"
                       Content="{Binding Value}"
                       Margin="22,18,22,16"
