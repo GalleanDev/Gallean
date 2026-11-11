@@ -105,6 +105,7 @@
   <Style Selector="StackPanel.action-row">
     <Setter Property="Orientation" Value="Horizontal" />
     <Setter Property="Spacing" Value="12" />
+    <Setter Property="MinHeight" Value="70" />
   </Style>
   <Style Selector="local|ModalFrameDecorator.action-bar">
     <Setter Property="VerticalAlignment" Value="Center" />
