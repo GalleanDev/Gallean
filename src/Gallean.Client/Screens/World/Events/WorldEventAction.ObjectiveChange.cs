@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldEventAction
+internal closed partial record WorldEventAction
 {
     public sealed record ObjectiveChange(ImmutableArray<AssetSoundKey> Sounds, ScenarioTextId TextId) : WorldEventAction(Sounds)
     {

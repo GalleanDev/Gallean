@@ -2,7 +2,7 @@ namespace Gallean.Engine;
 
 internal static partial class UtilityScore
 {
-    public abstract record ResponseCurve
+    public closed record ResponseCurve
     {
         public sealed record Polynomial(int Slope, int Exponent, int XShift, int YShift) : ResponseCurve
         {

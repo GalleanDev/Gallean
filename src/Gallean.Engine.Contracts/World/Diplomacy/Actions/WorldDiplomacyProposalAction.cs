@@ -7,7 +7,7 @@ namespace Gallean.Engine.Contracts;
 [JsonDerivedType(typeof(WorldDiplomacyTradeSpellAction), "tradeSpell")]
 [JsonDerivedType(typeof(WorldDiplomacyProposeAllianceAction), "proposeAlliance")]
 [JsonDerivedType(typeof(WorldDiplomacyExchangeMapAction), "exchangeMap")]
-public abstract record WorldDiplomacyProposalAction : WorldDiplomacyAction
+public closed record WorldDiplomacyProposalAction : WorldDiplomacyAction
 {
     public abstract TResult AcceptProposal<TContext, TResult>(
         IWorldDiplomacyProposalActionVisitor<TContext, TResult> visitor,

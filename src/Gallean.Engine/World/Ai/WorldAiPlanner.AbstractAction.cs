@@ -4,7 +4,7 @@ namespace Gallean.Engine;
 
 internal sealed partial class WorldAiPlanner
 {
-    internal abstract record AbstractAction(WorldAiContext Context, int Priority)
+    internal closed record AbstractAction(WorldAiContext Context, int Priority)
     {
         protected const int MaxScore = UtilityScore.MaxScore;
 

@@ -1,3 +1,3 @@
 namespace Gallean.Client;
 
-internal abstract partial record BattleAnimationTarget : AnimationTarget;
+internal closed partial record BattleAnimationTarget : AnimationTarget;

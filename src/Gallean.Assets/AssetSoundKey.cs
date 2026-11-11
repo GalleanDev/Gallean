@@ -5,7 +5,7 @@ using Gallean.Engine.Contracts;
 
 namespace Gallean.Assets;
 
-public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
+public closed record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 {
     private const char LanguageSeparator = '@';
 
@@ -389,7 +389,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
         }
     }
 
-    public abstract record BattleEffect : AssetSoundKey
+    public closed record BattleEffect : AssetSoundKey
     {
         public sealed record Heal : BattleEffect
         {

@@ -4,7 +4,7 @@ namespace Gallean.Engine;
 
 internal sealed partial class BattleAiPlanner
 {
-    private abstract record AbstractAction(IEngineContext Context, int Priority)
+    private closed record AbstractAction(IEngineContext Context, int Priority)
     {
         protected const int MaxScore = UtilityScore.MaxScore;
 

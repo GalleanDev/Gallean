@@ -55,8 +55,7 @@ internal static class UpscaleMap
             AssetSpriteKey.Tree => UpscalerType.Mosr,
             AssetSpriteKey.UnitEventPortrait => UpscalerType.Mosr,
             AssetSpriteKey.UnitFace => UpscalerType.Mosr,
-            AssetSpriteKey.UnitPortrait => UpscalerType.Mosr,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.UnitPortrait => UpscalerType.Mosr
         };
     }
 
@@ -103,8 +102,7 @@ internal static class UpscaleMap
             AssetAnimationKey.StackUnitShadow => UpscalerType.Mosr,
             AssetAnimationKey.Water => UpscalerType.Mosr,
             AssetAnimationKey.WaterLandmark => UpscalerType.Mosr,
-            AssetAnimationKey.WorldSpellEffect => UpscalerType.Mosr,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetAnimationKey.WorldSpellEffect => UpscalerType.Mosr
         };
     }
 }

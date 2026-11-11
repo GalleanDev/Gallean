@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract record AssetPreloadItem
+internal closed record AssetPreloadItem
 {
     public sealed record Sprite(AssetSpriteKey Key) : AssetPreloadItem
     {

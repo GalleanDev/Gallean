@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract partial record WorldAnimationState
+internal closed partial record WorldAnimationState
 {
     public readonly record struct FocusInfo(WorldPosition Position, TimeSpan Duration);
 }

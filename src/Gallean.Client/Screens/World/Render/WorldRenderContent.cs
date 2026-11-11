@@ -54,7 +54,7 @@ internal sealed record WorldRenderContent(
 
     public sealed record MountainCloudSprite(int Depth, Rect Bounds, SKShader Mask, float Phase, float Strength);
 
-    public abstract record DirectSprite(Point Anchor, int Depth, Rect Bounds, double Opacity)
+    public closed record DirectSprite(Point Anchor, int Depth, Rect Bounds, double Opacity)
     {
         public sealed record Animation(AssetAnimationKey Key, Point Anchor, int Depth, Rect Bounds, double Opacity)
             : DirectSprite(Anchor, Depth, Bounds, Opacity);

@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract record IconViewModel
+internal closed record IconViewModel
 {
     public sealed record Item(AssetSpriteKey.ItemIcon Key) : IconViewModel;
 

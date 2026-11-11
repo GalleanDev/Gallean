@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract record CapitalSceneLayerDefinition
+internal closed record CapitalSceneLayerDefinition
 {
     public sealed record Background(int Index) : CapitalSceneLayerDefinition;
 

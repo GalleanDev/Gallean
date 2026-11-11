@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract record PackEnhancerProgress
+internal closed record PackEnhancerProgress
 {
     public sealed record Selected(
         int EntryCount,

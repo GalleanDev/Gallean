@@ -116,8 +116,7 @@ public sealed class BattleAnimationStateBuilderTests
         {
             AnimationEasing.LinearEasing => "Linear",
             AnimationEasing.SmoothEasing => "Smooth",
-            AnimationEasing.DecelerateEasing => "Decelerate",
-            _ => throw new ArgumentOutOfRangeException(nameof(easing), easing, null)
+            AnimationEasing.DecelerateEasing => "Decelerate"
         };
     }
 

@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed class SpriteAtlasSource
 {
-    public abstract record AbstractSprite;
+    public closed record AbstractSprite;
 
     public sealed record StaticSprite(
         AtlasTexture.RegionKey Region,

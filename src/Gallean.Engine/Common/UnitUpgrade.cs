@@ -1,6 +1,6 @@
 namespace Gallean.Engine;
 
-public abstract record UnitUpgrade
+public closed record UnitUpgrade
 {
     public sealed record TypeUpgrade(UnitDefinitionId ToUnitId) : UnitUpgrade;
 

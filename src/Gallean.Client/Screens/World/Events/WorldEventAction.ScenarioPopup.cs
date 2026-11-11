@@ -3,7 +3,7 @@ using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldEventAction
+internal closed partial record WorldEventAction
 {
     public sealed record ScenarioPopup(
         ImmutableArray<AssetSoundKey> Sounds,

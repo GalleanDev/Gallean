@@ -34,8 +34,7 @@ internal static class ScenarioEventTriggererCalculator
             {
                 WorldUnitGroup.Stack data => state.Stacks.GetValueOrDefault(data.StackId),
                 WorldUnitGroup.Fortification => null,
-                null => null,
-                _ => throw new ArgumentOutOfRangeException(nameof(trigger))
+                null => null
             };
         }
 
@@ -44,8 +43,7 @@ internal static class ScenarioEventTriggererCalculator
             return trigger.Receiver switch
             {
                 WorldUnitGroup.Stack data => state.Stacks.GetValueOrDefault(data.StackId),
-                WorldUnitGroup.Fortification => null,
-                _ => throw new ArgumentOutOfRangeException(nameof(trigger))
+                WorldUnitGroup.Fortification => null
             };
         }
     }

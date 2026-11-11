@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract record ScreenMusic
+internal closed record ScreenMusic
 {
     private sealed record NoneMusic : ScreenMusic;
 

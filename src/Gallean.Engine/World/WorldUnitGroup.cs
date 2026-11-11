@@ -1,6 +1,6 @@
 namespace Gallean.Engine;
 
-public abstract record WorldUnitGroup
+public closed record WorldUnitGroup
 {
     public sealed record Stack(WorldStackId StackId) : WorldUnitGroup;
 

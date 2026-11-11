@@ -3,7 +3,7 @@ using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldCursorAction
+internal closed partial record WorldCursorAction
 {
     public sealed record DropItem(WorldStackId StackId, WorldItemId ItemId) : WorldCursorAction
     {

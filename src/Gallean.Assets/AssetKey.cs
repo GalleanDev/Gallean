@@ -5,7 +5,7 @@ using Gallean.Engine.Contracts;
 
 namespace Gallean.Assets;
 
-public abstract record AssetKey : IFormattable, IParsable<AssetKey>
+public closed record AssetKey : IFormattable, IParsable<AssetKey>
 {
     public abstract string CanonicalId { get; }
 

@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract partial record BuildingStatus
+internal closed partial record BuildingStatus
 {
     public sealed record ScenarioLocked : BuildingStatus
     {

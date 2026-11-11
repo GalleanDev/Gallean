@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract partial record PackImageEntry(string Id, IReadOnlyList<AssetTransform> Transforms) : PackEntry(Id)
+internal closed partial record PackImageEntry(string Id, IReadOnlyList<AssetTransform> Transforms) : PackEntry(Id)
 {
     public abstract AssetKey Key { get; }
     public abstract IReadOnlyList<AssetSpriteMetadata> FrameMetadata { get; }

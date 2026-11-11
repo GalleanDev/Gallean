@@ -8,9 +8,9 @@ namespace Gallean.Client;
 
 internal sealed partial class WorldEventQueue
 {
-    public abstract record Entry(WorldState State)
+    public closed record Entry(WorldState State)
     {
-        public abstract record Animated(WorldState State) : Entry(State)
+        public closed record Animated(WorldState State) : Entry(State)
         {
             public abstract WorldAnimationState CreateAnimation(IGameDefinitionProvider definitions, WorldVisibility visibility, GameSettings settings);
         }

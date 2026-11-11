@@ -8,7 +8,7 @@ namespace Gallean.Engine.Contracts;
 [JsonDerivedType(typeof(Location), "location")]
 [JsonDerivedType(typeof(Bag), "bag")]
 [JsonDerivedType(typeof(Site), "site")]
-public abstract record WorldAiTarget
+public closed record WorldAiTarget
 {
     public sealed record Stack(WorldStackId StackId) : WorldAiTarget
     {

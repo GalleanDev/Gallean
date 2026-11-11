@@ -24,7 +24,7 @@ internal sealed partial class WorldRenderContentProvider
 
     private sealed record DirectSpriteContent(IReadOnlyList<DirectSprite> ObjectSprites, IReadOnlyList<DirectSprite> ShieldSprites);
 
-    private abstract record ObjectSprite
+    private closed record ObjectSprite
     {
         public sealed record Packed(SpriteAtlasSource.AbstractSprite Sprite) : ObjectSprite;
 

@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract record BattleActionTarget
+internal closed record BattleActionTarget
 {
     public sealed record Unit(IReadOnlyCollection<BattleUnitId> Units) : BattleActionTarget;
 

@@ -2,7 +2,7 @@ namespace Gallean.Engine;
 
 internal static partial class PathTraversalCalculator
 {
-    public abstract record Encounter(WorldPosition Position, bool CanBegin)
+    public closed record Encounter(WorldPosition Position, bool CanBegin)
     {
         public sealed record Bag(WorldBag Target, bool CanBegin) : Encounter(Target.Position, CanBegin)
         {
@@ -12,7 +12,7 @@ internal static partial class PathTraversalCalculator
             }
         }
 
-        public abstract record Battle(WorldPosition Position, bool CanBegin) : Encounter(Position, CanBegin);
+        public closed record Battle(WorldPosition Position, bool CanBegin) : Encounter(Position, CanBegin);
 
         public sealed record StackBattle(WorldStack Stack, bool CanBegin) : Battle(Stack.Position, CanBegin)
         {

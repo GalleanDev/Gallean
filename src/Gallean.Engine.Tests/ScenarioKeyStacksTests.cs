@@ -9,8 +9,7 @@ public sealed class ScenarioKeyStacksTests
         return reference switch
         {
             ScenarioStackReference.Stack stack => stack.StackId.Value,
-            ScenarioStackReference.Template template => template.TemplateId.Value,
-            _ => throw new ArgumentOutOfRangeException(nameof(reference), reference, null)
+            ScenarioStackReference.Template template => template.TemplateId.Value
         };
     }
 
@@ -32,8 +31,7 @@ public sealed class ScenarioKeyStacksTests
         return reference switch
         {
             ScenarioStackReference.Stack stack => scenario.State.Stacks.ContainsKey(stack.StackId),
-            ScenarioStackReference.Template template => HasTemplate(scenario, template.TemplateId),
-            _ => throw new ArgumentOutOfRangeException(nameof(reference), reference, null)
+            ScenarioStackReference.Template template => HasTemplate(scenario, template.TemplateId)
         };
     }
 

@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed partial class WorldRenderer
 {
-    private abstract partial record AnimationRenderItem(int Depth)
+    private closed partial record AnimationRenderItem(int Depth)
     {
         public abstract void Render(
             SKCanvas canvas,

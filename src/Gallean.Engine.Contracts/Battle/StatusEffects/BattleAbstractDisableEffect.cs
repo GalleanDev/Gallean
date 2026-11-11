@@ -1,3 +1,3 @@
 namespace Gallean.Engine.Contracts;
 
-public abstract record BattleAbstractDisableEffect(int RemainingTurns) : BattleAbstractStatusEffect;
+public closed record BattleAbstractDisableEffect(int RemainingTurns) : BattleAbstractStatusEffect;

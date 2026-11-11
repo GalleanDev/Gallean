@@ -10,8 +10,7 @@ public sealed class GameAssetCatalogTests
         {
             GameAssetDescriptor.Sprite => "sprite",
             GameAssetDescriptor.Animation => "animation",
-            GameAssetDescriptor.Sound => "sound",
-            _ => throw new ArgumentOutOfRangeException(nameof(descriptor), descriptor, null)
+            GameAssetDescriptor.Sound => "sound"
         };
     }
 

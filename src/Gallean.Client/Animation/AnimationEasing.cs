@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract record AnimationEasing
+internal closed record AnimationEasing
 {
     public sealed record LinearEasing : AnimationEasing
     {

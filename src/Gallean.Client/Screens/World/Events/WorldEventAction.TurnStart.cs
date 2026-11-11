@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldEventAction
+internal closed partial record WorldEventAction
 {
     public sealed record TurnStart(ImmutableArray<AssetSoundKey> Sounds, AutoSave? Save) : WorldEventAction(Sounds)
     {

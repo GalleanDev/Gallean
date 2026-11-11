@@ -915,8 +915,7 @@ internal static class RefineMap
             AssetSpriteKey.Tree => true,
             AssetSpriteKey.UnitEventPortrait => true,
             AssetSpriteKey.UnitFace => true,
-            AssetSpriteKey.UnitPortrait => true,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.UnitPortrait => true
         };
     }
 
@@ -963,8 +962,7 @@ internal static class RefineMap
             AssetAnimationKey.StackUnitShadow => true,
             AssetAnimationKey.Water => true,
             AssetAnimationKey.WaterLandmark => true,
-            AssetAnimationKey.WorldSpellEffect => true,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetAnimationKey.WorldSpellEffect => true
         };
     }
 }

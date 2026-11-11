@@ -99,8 +99,7 @@ internal sealed partial class WorldRenderComposer
             {
                 WorldCity => new AssetSoundKey.Ambient(AssetSoundKey.AmbientSoundType.City),
                 WorldCapital capital => new AssetSoundKey.AmbientCapital(playerRaces[capital.OwnerId]),
-                WorldRuin ruin => new AssetSoundKey.AmbientRuin(GetRuinVariant(ruin)),
-                _ => throw new ArgumentOutOfRangeException(nameof(fortification), fortification, null)
+                WorldRuin ruin => new AssetSoundKey.AmbientRuin(GetRuinVariant(ruin))
             };
         }
 
@@ -119,8 +118,7 @@ internal sealed partial class WorldRenderComposer
                 WorldMerchantSite when site.Variant.Value == 0 => new AssetSoundKey.Ambient(AssetSoundKey.AmbientSoundType.Windmill),
                 WorldMerchantSite => null,
                 WorldMercenarySite => null,
-                WorldTrainerSite => null,
-                _ => throw new ArgumentOutOfRangeException(nameof(site), site, null)
+                WorldTrainerSite => null
             };
         }
     }

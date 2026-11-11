@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract partial record PackEntry(string Id)
+internal closed partial record PackEntry(string Id)
 {
     public abstract void CopyTo(AssetPack pack, AssetPack.Writer writer);
 

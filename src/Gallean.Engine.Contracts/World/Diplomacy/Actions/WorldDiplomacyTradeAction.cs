@@ -1,3 +1,3 @@
 namespace Gallean.Engine.Contracts;
 
-public abstract record WorldDiplomacyTradeAction(int Price) : WorldDiplomacyProposalAction;
+public closed record WorldDiplomacyTradeAction(int Price) : WorldDiplomacyProposalAction;

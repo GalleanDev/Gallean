@@ -50,8 +50,7 @@ internal sealed class WorldEventActionBuilder(
             Entry.SiteEnter data => BuildSiteEnter(data),
             Entry.Pause data => BuildPause(data),
             Entry.Battle data => BuildBattle(data),
-            Entry.GameStart data => BuildGameStart(data),
-            _ => throw new ArgumentOutOfRangeException(nameof(entry), entry, null)
+            Entry.GameStart data => BuildGameStart(data)
         };
     }
 

@@ -6,7 +6,7 @@ using Gallean.Engine.Contracts;
 
 namespace Gallean.Assets;
 
-public abstract record AssetAnimationKey : AssetKey, IParsable<AssetAnimationKey>
+public closed record AssetAnimationKey : AssetKey, IParsable<AssetAnimationKey>
 {
     public sealed record Water : AssetAnimationKey
     {
@@ -247,7 +247,7 @@ public abstract record AssetAnimationKey : AssetKey, IParsable<AssetAnimationKey
         }
     }
 
-    public abstract record BattleEffect : AssetAnimationKey
+    public closed record BattleEffect : AssetAnimationKey
     {
         public sealed record Attack(
             UnitDefinitionId AttackerUnitId,
@@ -480,8 +480,7 @@ public abstract record AssetAnimationKey : AssetKey, IParsable<AssetAnimationKey
             AssetSpriteKey.BattleLocation.Boat => $"{Category}/boat/{Variant}/{Layer}",
             AssetSpriteKey.BattleLocation.City => $"{Category}/city/{Variant}/{Layer}",
             AssetSpriteKey.BattleLocation.Ruin => $"{Category}/ruin/{Variant}/{Layer}",
-            AssetSpriteKey.BattleLocation.Capital capital => $"{Category}/capital/{Token(capital.Race)}/{Layer}",
-            _ => throw new ArgumentOutOfRangeException(nameof(Location), Location, null)
+            AssetSpriteKey.BattleLocation.Capital capital => $"{Category}/capital/{Token(capital.Race)}/{Layer}"
         };
 
         internal static BattleBackgroundOverlay? Parse(IReadOnlyList<string> tokens)

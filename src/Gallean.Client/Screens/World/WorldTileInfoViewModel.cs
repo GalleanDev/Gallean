@@ -208,8 +208,7 @@ internal sealed record WorldTileInfoViewModel(
             WorldMerchantSite => Tr("Merchant"),
             WorldMageSite => Tr("Mage tower"),
             WorldMercenarySite => Tr("Mercenary camp"),
-            WorldTrainerSite => Tr("Trainer"),
-            _ => throw new ArgumentOutOfRangeException(nameof(site), site, null)
+            WorldTrainerSite => Tr("Trainer")
         };
     }
 

@@ -67,8 +67,7 @@ internal sealed class GameIconSource(
         return source switch
         {
             AssetSpriteKey.ItemIconSource.Item item => iconItems.TryGetSprite(item.ItemId.Value),
-            AssetSpriteKey.ItemIconSource.Scroll scroll => iconItems.TryGetSprite(Icons.Scroll(scroll.Race)),
-            _ => throw new ArgumentOutOfRangeException(nameof(source), source, null)
+            AssetSpriteKey.ItemIconSource.Scroll scroll => iconItems.TryGetSprite(Icons.Scroll(scroll.Race))
         };
     }
 }

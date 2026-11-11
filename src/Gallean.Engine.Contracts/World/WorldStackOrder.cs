@@ -20,7 +20,7 @@ namespace Gallean.Engine.Contracts;
 [JsonDerivedType(typeof(DefendCity), "defendCity")]
 [JsonDerivedType(typeof(Heal), "heal")]
 [JsonDerivedType(typeof(Reinforce), "reinforce")]
-public abstract record WorldStackOrder
+public closed record WorldStackOrder
 {
     public sealed record Normal : WorldCanonicalStackOrder, IStaticInstance<Normal>
     {

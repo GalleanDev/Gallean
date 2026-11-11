@@ -43,8 +43,7 @@ internal static class EncodingMap
             AssetSpriteKey.Tree => EncodingType.Palette,
             AssetSpriteKey.UnitEventPortrait => EncodingType.None,
             AssetSpriteKey.UnitFace => EncodingType.None,
-            AssetSpriteKey.UnitPortrait => EncodingType.None,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.UnitPortrait => EncodingType.None
         };
     }
 
@@ -91,8 +90,7 @@ internal static class EncodingMap
             AssetAnimationKey.StackUnitShadow => EncodingType.Palette,
             AssetAnimationKey.Water => EncodingType.Palette,
             AssetAnimationKey.WaterLandmark => EncodingType.Palette,
-            AssetAnimationKey.WorldSpellEffect => EncodingType.Lossy,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetAnimationKey.WorldSpellEffect => EncodingType.Lossy
         };
     }
 }

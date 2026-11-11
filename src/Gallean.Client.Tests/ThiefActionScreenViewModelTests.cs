@@ -25,8 +25,7 @@ public sealed class ThiefActionScreenViewModelTests
         {
             IconViewModel.Item item => item.Key.CanonicalId,
             IconViewModel.Unit unit => unit.Key.CanonicalId,
-            IconViewModel.Spell spell => $"{spell.Key.CanonicalId} {spell.Background}",
-            _ => throw new ArgumentOutOfRangeException(nameof(icon), icon, null)
+            IconViewModel.Spell spell => $"{spell.Key.CanonicalId} {spell.Background}"
         };
     }
 

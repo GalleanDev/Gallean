@@ -23,8 +23,7 @@ internal static class FluidMap
             (AssetSpriteKey.BattleLocation.Capital { Race: WorldRace.Elf }, _) => [MakeLiquidConfiguration(GetSeed(key, 0))],
             (AssetSpriteKey.BattleLocation.Capital, _) => [MakeGasConfiguration(GetSeed(key, 0))],
             (AssetSpriteKey.BattleLocation.Boat, 0 or 1) => [MakeGasConfiguration(GetSeed(key, 0))],
-            (AssetSpriteKey.BattleLocation.Boat, _) => [],
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            (AssetSpriteKey.BattleLocation.Boat, _) => []
         };
     }
 
@@ -36,8 +35,7 @@ internal static class FluidMap
             AssetSpriteKey.BattleLocation.City => CitySalt,
             AssetSpriteKey.BattleLocation.Ruin => RuinSalt,
             AssetSpriteKey.BattleLocation.Capital capital => CapitalSalt + (int)capital.Race,
-            AssetSpriteKey.BattleLocation.Boat => BoatSalt,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.BattleLocation.Boat => BoatSalt
         };
 
         return (layer * LayerSalt) + (location * Variants) + key.Variant;

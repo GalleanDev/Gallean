@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract record PreviewBuilderResult
+internal closed record PreviewBuilderResult
 {
     public sealed record Written(IReadOnlyList<string> OutputPaths) : PreviewBuilderResult;
 

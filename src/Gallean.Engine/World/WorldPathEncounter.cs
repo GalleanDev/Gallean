@@ -1,6 +1,6 @@
 namespace Gallean.Engine;
 
-public abstract record WorldPathEncounter
+public closed record WorldPathEncounter
 {
     public sealed record Battle(WorldPosition TargetPosition) : WorldPathEncounter
     {

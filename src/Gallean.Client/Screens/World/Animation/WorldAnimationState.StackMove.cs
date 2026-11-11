@@ -2,7 +2,7 @@ using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldAnimationState
+internal closed partial record WorldAnimationState
 {
     public sealed record StackMove(WorldStackId StackId, IReadOnlyList<StackMoveStep> Steps) : WorldAnimationState
     {

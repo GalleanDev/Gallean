@@ -1442,8 +1442,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             {
                 WorldCapital capital => new AssetSpriteKey.BattleLocation.Capital(world.Players[capital.OwnerId].Race),
                 WorldCity => new AssetSpriteKey.BattleLocation.City(),
-                WorldRuin => new AssetSpriteKey.BattleLocation.Ruin(),
-                _ => throw new ArgumentOutOfRangeException(nameof(fortification), fortification, null)
+                WorldRuin => new AssetSpriteKey.BattleLocation.Ruin()
             };
         }
         else if (mapCell.Terrain == WorldMapTerrain.Water)

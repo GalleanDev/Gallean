@@ -1,4 +1,4 @@
 namespace Gallean.Client;
 
-internal abstract class InstalledAssetPackException(string message, Exception? innerException)
+internal closed class InstalledAssetPackException(string message, Exception? innerException)
     : Exception(message, innerException);

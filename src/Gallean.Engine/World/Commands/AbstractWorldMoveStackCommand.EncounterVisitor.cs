@@ -3,7 +3,7 @@ using Gallean.Common;
 
 namespace Gallean.Engine;
 
-public abstract partial record AbstractWorldMoveStackCommand
+public closed partial record AbstractWorldMoveStackCommand
 {
     private sealed class EncounterVisitor : PathTraversalCalculator.IEncounterVisitor<EncounterVisitor.Context, WorldCommandResult>, IStaticInstance<EncounterVisitor>
     {

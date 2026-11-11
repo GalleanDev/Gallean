@@ -8,7 +8,7 @@ namespace GameContent;
 [JsonDerivedType(typeof(TextBlockSceneElement), "TextBlock")]
 [JsonDerivedType(typeof(TextListBoxSceneElement), "TextListBox")]
 [JsonDerivedType(typeof(ToggleButtonSceneElement), "ToggleButton")]
-public abstract record SceneElement
+public closed record SceneElement
 {
     public abstract SceneElementType Type { get; }
     public required string Name { get; init; }

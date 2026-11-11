@@ -6,7 +6,7 @@ using Gallean.Engine.Contracts;
 
 namespace Gallean.Assets;
 
-public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
+public closed record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
 {
     public sealed record Ground(WorldMapTerrain Terrain) : AssetSpriteKey
     {
@@ -24,7 +24,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
         }
     }
 
-    public abstract record GroundBorderShape
+    public closed record GroundBorderShape
     {
         public sealed record Edges(GroundBorderEdges Value) : GroundBorderShape;
 
@@ -103,8 +103,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
             return Shape switch
             {
                 GroundBorderShape.Edges edges => $"edge/{EdgesToken(edges.Value)}",
-                GroundBorderShape.Corners corners => $"corner/{CornersToken(corners.Value)}",
-                _ => throw new ArgumentOutOfRangeException(nameof(Shape), Shape, null)
+                GroundBorderShape.Corners corners => $"corner/{CornersToken(corners.Value)}"
             };
         }
 
@@ -402,7 +401,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
         }
     }
 
-    public abstract record BattleLocation
+    public closed record BattleLocation
     {
         public sealed record Terrain(WorldMapTerrain Value) : BattleLocation;
 
@@ -427,8 +426,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
             BattleLocation.Boat => $"{Category}/boat/{Variant}",
             BattleLocation.City => $"{Category}/city/{Variant}",
             BattleLocation.Ruin => $"{Category}/ruin/{Variant}",
-            BattleLocation.Capital capital => $"{Category}/capital/{Token(capital.Race)}",
-            _ => throw new ArgumentOutOfRangeException(nameof(Location), Location, null)
+            BattleLocation.Capital capital => $"{Category}/capital/{Token(capital.Race)}"
         };
 
         internal static BattleBackground? Parse(IReadOnlyList<string> tokens)
@@ -473,8 +471,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
                 BattleLocation.Boat => 2,
                 BattleLocation.City => 5,
                 BattleLocation.Ruin => 3,
-                BattleLocation.Capital => 1,
-                _ => throw new ArgumentOutOfRangeException(nameof(location), location, null)
+                BattleLocation.Capital => 1
             };
         }
 
@@ -600,7 +597,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
         }
     }
 
-    public abstract record ItemIconSource
+    public closed record ItemIconSource
     {
         public sealed record Item(ItemDefinitionId ItemId) : ItemIconSource;
 
@@ -614,8 +611,7 @@ public abstract record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
         public override string CanonicalId => Source switch
         {
             ItemIconSource.Item item => $"{Category}/{Token(item.ItemId)}",
-            ItemIconSource.Scroll scroll => $"{Category}/scroll/{Token(scroll.Race)}",
-            _ => throw new ArgumentOutOfRangeException(nameof(Source), Source, null)
+            ItemIconSource.Scroll scroll => $"{Category}/scroll/{Token(scroll.Race)}"
         };
 
         internal static ItemIcon? Parse(IReadOnlyList<string> tokens)

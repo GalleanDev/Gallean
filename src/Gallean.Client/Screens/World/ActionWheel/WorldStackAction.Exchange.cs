@@ -1,6 +1,6 @@
 namespace Gallean.Client;
 
-internal abstract partial record WorldStackAction
+internal closed partial record WorldStackAction
 {
     public sealed record Exchange(WorldStackId StackId) : WorldStackAction(StackId)
     {

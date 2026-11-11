@@ -2,7 +2,7 @@ using GameContent;
 
 namespace Packer;
 
-internal abstract record PackBuilderEntry(AssetKey Key, bool Required)
+internal closed record PackBuilderEntry(AssetKey Key, bool Required)
 {
     public sealed record GameAsset(GameAssetDescriptor Descriptor)
         : PackBuilderEntry(Descriptor.Key, Descriptor.Required);

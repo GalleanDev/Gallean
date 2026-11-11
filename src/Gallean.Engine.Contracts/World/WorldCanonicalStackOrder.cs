@@ -1,3 +1,3 @@
 namespace Gallean.Engine.Contracts;
 
-public abstract record WorldCanonicalStackOrder : WorldStackOrder;
+public closed record WorldCanonicalStackOrder : WorldStackOrder;

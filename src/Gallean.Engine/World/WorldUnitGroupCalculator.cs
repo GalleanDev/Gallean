@@ -197,8 +197,7 @@ internal static class WorldUnitGroupCalculator
         return group switch
         {
             WorldUnitGroup.Stack data => state.Stacks[data.StackId].Units,
-            WorldUnitGroup.Fortification data => state.Fortifications[data.FortificationId].Garrison,
-            _ => throw new ArgumentOutOfRangeException(nameof(group), group, null)
+            WorldUnitGroup.Fortification data => state.Fortifications[data.FortificationId].Garrison
         };
     }
 
@@ -207,8 +206,7 @@ internal static class WorldUnitGroupCalculator
         return group switch
         {
             WorldUnitGroup.Stack data => state.Stacks[data.StackId].Equipment,
-            WorldUnitGroup.Fortification => LeaderEquipment.Empty,
-            _ => throw new ArgumentOutOfRangeException(nameof(group), group, null)
+            WorldUnitGroup.Fortification => LeaderEquipment.Empty
         };
     }
 
@@ -217,8 +215,7 @@ internal static class WorldUnitGroupCalculator
         return group switch
         {
             WorldUnitGroup.Stack data => state.Stacks[data.StackId].OwnerId,
-            WorldUnitGroup.Fortification data => FortificationCalculator.GetOwner(state.Fortifications[data.FortificationId]),
-            _ => throw new ArgumentOutOfRangeException(nameof(group), group, null)
+            WorldUnitGroup.Fortification data => FortificationCalculator.GetOwner(state.Fortifications[data.FortificationId])
         };
     }
 
@@ -227,8 +224,7 @@ internal static class WorldUnitGroupCalculator
         return group switch
         {
             WorldUnitGroup.Stack data => state.Stacks[data.StackId].Inventory,
-            WorldUnitGroup.Fortification data => state.Fortifications[data.FortificationId].Inventory,
-            _ => throw new ArgumentOutOfRangeException(nameof(group), group, null)
+            WorldUnitGroup.Fortification data => state.Fortifications[data.FortificationId].Inventory
         };
     }
 

@@ -31,8 +31,7 @@ internal static class PackBuilderCatalog
             {
                 GameAssetDescriptor.Sprite sprite => new PackBuilderEntry.GameAsset(sprite),
                 GameAssetDescriptor.Animation animation => GetAnimationEntry(animation, animations),
-                GameAssetDescriptor.Sound sound => GetSoundEntry(sound, sounds),
-                _ => throw new ArgumentOutOfRangeException(nameof(descriptor), descriptor, null)
+                GameAssetDescriptor.Sound sound => GetSoundEntry(sound, sounds)
             };
 
             entries.Add(entry);

@@ -3,7 +3,7 @@ using Gallean.Configuration;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldEventAction
+internal closed partial record WorldEventAction
 {
     public sealed record AutoSave(
         ImmutableArray<AssetSoundKey> Sounds,

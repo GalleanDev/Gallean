@@ -146,8 +146,7 @@ public sealed class BuildingTabViewModelTests
             BuildingStatus.BranchLocked => $"branch-locked: {node.StatusText}",
             BuildingStatus.MissingPrerequisite => $"missing: {node.StatusText}",
             BuildingStatus.ScenarioLocked => $"scenario-locked: {node.StatusText}",
-            BuildingStatus.Unavailable => $"unavailable: {node.StatusText}",
-            _ => throw new ArgumentOutOfRangeException(nameof(node), node.Status, null)
+            BuildingStatus.Unavailable => $"unavailable: {node.StatusText}"
         };
     }
 

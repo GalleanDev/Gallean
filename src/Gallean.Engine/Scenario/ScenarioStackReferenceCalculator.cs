@@ -63,8 +63,7 @@ internal static class ScenarioStackReferenceCalculator
         return reference switch
         {
             ScenarioStackReference.Stack stack => stack.StackId == stackId,
-            ScenarioStackReference.Template template => template.TemplateId == sourceTemplateId,
-            _ => throw new ArgumentOutOfRangeException(nameof(reference), reference, null)
+            ScenarioStackReference.Template template => template.TemplateId == sourceTemplateId
         };
     }
 

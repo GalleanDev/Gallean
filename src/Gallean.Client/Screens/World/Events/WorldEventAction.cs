@@ -3,7 +3,7 @@ using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal abstract partial record WorldEventAction(ImmutableArray<AssetSoundKey> Sounds)
+internal closed partial record WorldEventAction(ImmutableArray<AssetSoundKey> Sounds)
 {
     public static WorldEventAction None { get; } = new OneShot([]);
 

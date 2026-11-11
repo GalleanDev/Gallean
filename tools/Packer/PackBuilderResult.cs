@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract record PackBuilderResult(string OutputPath)
+internal closed record PackBuilderResult(string OutputPath)
 {
     public sealed record Packed(string OutputPath) : PackBuilderResult(OutputPath);
 

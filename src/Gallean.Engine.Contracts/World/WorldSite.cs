@@ -8,7 +8,7 @@ namespace Gallean.Engine.Contracts;
 [JsonDerivedType(typeof(WorldMercenarySite), "mercenary")]
 [JsonDerivedType(typeof(WorldMerchantSite), "merchant")]
 [JsonDerivedType(typeof(WorldTrainerSite), "trainer")]
-public abstract record WorldSite(
+public closed record WorldSite(
     WorldSiteId Id,
     WorldFootprint Footprint,
     WorldObjectVariant Variant,

@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed partial class WorldRenderer
 {
-    private abstract partial record AnimationRenderItem
+    private closed partial record AnimationRenderItem
     {
         public sealed record TileFeature(
             AssetSpriteKey AssetKey,

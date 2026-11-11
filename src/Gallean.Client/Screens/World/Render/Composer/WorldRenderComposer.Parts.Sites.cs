@@ -57,8 +57,7 @@ internal sealed partial class WorldRenderComposer
                 WorldMerchantSite => AssetAnimationKey.SiteType.Merchant,
                 WorldMageSite => AssetAnimationKey.SiteType.Mage,
                 WorldMercenarySite => AssetAnimationKey.SiteType.Mercenary,
-                WorldTrainerSite => AssetAnimationKey.SiteType.Trainer,
-                _ => throw new ArgumentOutOfRangeException(nameof(site), site, null)
+                WorldTrainerSite => AssetAnimationKey.SiteType.Trainer
             };
         }
     }

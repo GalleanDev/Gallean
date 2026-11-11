@@ -47,8 +47,7 @@ internal static partial class ScenarioEventCalculator
                 return condition.Stack switch
                 {
                     ScenarioStackReference.Stack stack => IsStackAt(stack.StackId, condition.Location, context),
-                    ScenarioStackReference.Template => AnyPlayerReferencedStackAt(context.TriggererId, condition.Stack, condition.Location, context),
-                    _ => throw new ArgumentOutOfRangeException(nameof(condition))
+                    ScenarioStackReference.Template => AnyPlayerReferencedStackAt(context.TriggererId, condition.Stack, condition.Location, context)
                 };
             }
         }

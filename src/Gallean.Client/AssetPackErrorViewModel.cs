@@ -27,8 +27,7 @@ internal sealed partial class AssetPackErrorViewModel(
         {
             InstalledAssetPackNotFoundException => Tr("Asset pack is required"),
             InstalledAssetPackIncompatibleException => Tr("Incompatible asset pack"),
-            InstalledAssetPackNotEnhancedException => Tr("Unexpected asset pack"),
-            _ => throw new ArgumentOutOfRangeException(nameof(exception), exception, null)
+            InstalledAssetPackNotEnhancedException => Tr("Unexpected asset pack")
         };
     }
 
@@ -41,8 +40,7 @@ internal sealed partial class AssetPackErrorViewModel(
             InstalledAssetPackIncompatibleException =>
                 Tr("The installed asset pack was made for a different version of Gallean. Replace it with a pack made for this version."),
             InstalledAssetPackNotEnhancedException =>
-                Tr("The installed asset pack does not include the enhanced assets. Replace it with an appropriate pack."),
-            _ => throw new ArgumentOutOfRangeException(nameof(exception), exception, null)
+                Tr("The installed asset pack does not include the enhanced assets. Replace it with an appropriate pack.")
         };
     }
 }

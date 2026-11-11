@@ -86,8 +86,7 @@ internal static class EnhancementMap
             AssetSpriteKey.Tree => [EnhancementType.Upscale],
             AssetSpriteKey.UnitEventPortrait => [EnhancementType.Upscale],
             AssetSpriteKey.UnitFace => [EnhancementType.Upscale],
-            AssetSpriteKey.UnitPortrait => [EnhancementType.Upscale],
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.UnitPortrait => [EnhancementType.Upscale]
         };
     }
 
@@ -154,8 +153,7 @@ internal static class EnhancementMap
             AssetAnimationKey.StackUnitShadow => [EnhancementType.Upscale],
             AssetAnimationKey.Water => [],
             AssetAnimationKey.WaterLandmark => [EnhancementType.Upscale],
-            AssetAnimationKey.WorldSpellEffect => [EnhancementType.Upscale],
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetAnimationKey.WorldSpellEffect => [EnhancementType.Upscale]
         };
     }
 }

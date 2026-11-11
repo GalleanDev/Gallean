@@ -2,7 +2,7 @@ namespace Gallean.Client;
 
 internal sealed partial record WorldRenderState
 {
-    public abstract record MapObject(
+    public closed record MapObject(
         WorldPosition Position,
         int Depth);
 

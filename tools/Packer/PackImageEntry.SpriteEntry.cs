@@ -2,7 +2,7 @@ using ImageMagick;
 
 namespace Packer;
 
-internal abstract partial record PackImageEntry
+internal closed partial record PackImageEntry
 {
     private sealed record SpriteEntry(AssetManifestSprite Manifest)
         : PackImageEntry(Manifest.Id, Manifest.Transforms)

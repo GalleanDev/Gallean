@@ -4,7 +4,7 @@ namespace Gallean.Engine;
 
 internal sealed partial class WorldAiPlanner
 {
-    private abstract record AbstractStackAction(WorldAiContext Context, int Priority)
+    private closed record AbstractStackAction(WorldAiContext Context, int Priority)
         : AbstractAction(Context, Priority), IWorldStackOrderVisitor<AbstractStackAction.ActionContext, WorldAiActionPlan?>
     {
         internal readonly record struct ActionContext(

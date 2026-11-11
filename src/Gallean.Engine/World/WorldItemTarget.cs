@@ -1,6 +1,6 @@
 namespace Gallean.Engine;
 
-public abstract record WorldItemTarget
+public closed record WorldItemTarget
 {
     public sealed record Unit(WorldUnitId UnitId) : WorldItemTarget;
 

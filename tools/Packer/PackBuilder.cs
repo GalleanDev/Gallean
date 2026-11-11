@@ -31,8 +31,7 @@ internal sealed class PackBuilder(
                     PackBuilderEntry.UnitSound sound => PrepareUnitSound(sound, id),
                     PackBuilderEntry.UnitAttack attack => PrepareUnitAttack(attack, id),
                     PackBuilderEntry.Background background => PrepareBackground(background, id),
-                    PackBuilderEntry.BackgroundOverlay overlay => PrepareBackgroundOverlay(overlay, id),
-                    _ => throw new ArgumentOutOfRangeException(nameof(entry), entry, null)
+                    PackBuilderEntry.BackgroundOverlay overlay => PrepareBackgroundOverlay(overlay, id)
                 };
             }
 
@@ -42,8 +41,7 @@ internal sealed class PackBuilder(
                 {
                     GameAssetDescriptor.Sprite spriteDescriptor => PrepareSprite(spriteDescriptor, id),
                     GameAssetDescriptor.Animation animationDescriptor => PrepareAnimation(animationDescriptor, id),
-                    GameAssetDescriptor.Sound soundDescriptor => PrepareSound(soundDescriptor, id),
-                    _ => throw new ArgumentOutOfRangeException(nameof(descriptor), descriptor, null)
+                    GameAssetDescriptor.Sound soundDescriptor => PrepareSound(soundDescriptor, id)
                 };
             }
 

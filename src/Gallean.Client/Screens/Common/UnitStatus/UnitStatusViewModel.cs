@@ -2,7 +2,7 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal abstract record UnitStatusViewModel
+internal closed record UnitStatusViewModel
 {
     public abstract string Name { get; }
     public abstract TextSpans Description { get; }

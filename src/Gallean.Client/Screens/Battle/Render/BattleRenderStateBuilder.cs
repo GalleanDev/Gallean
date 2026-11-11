@@ -661,8 +661,7 @@ internal sealed class BattleRenderStateBuilder(
                 BattleLight.MakeGlowingWater(new Point(657, 167), range: 78, power: 2.04)
             ],
             (AssetSpriteKey.BattleLocation.Capital, _) => [],
-            (AssetSpriteKey.BattleLocation.Boat, _) => [],
-            _ => throw new ArgumentOutOfRangeException(nameof(background), background, null)
+            (AssetSpriteKey.BattleLocation.Boat, _) => []
         };
     }
 
@@ -687,8 +686,7 @@ internal sealed class BattleRenderStateBuilder(
             (AssetSpriteKey.BattleLocation.Capital { Race: WorldRace.Elf }, _) => [FluidWaterConfiguration],
             (AssetSpriteKey.BattleLocation.Capital, _) => [],
             (AssetSpriteKey.BattleLocation.Boat, 0 or 1) => [FluidFogConfiguration],
-            (AssetSpriteKey.BattleLocation.Boat, _) => [],
-            _ => throw new ArgumentOutOfRangeException(nameof(background), background, null)
+            (AssetSpriteKey.BattleLocation.Boat, _) => []
         };
     }
 
@@ -710,8 +708,7 @@ internal sealed class BattleRenderStateBuilder(
             (AssetSpriteKey.BattleLocation.Ruin, _) => RainType.None,
             (AssetSpriteKey.BattleLocation.Capital, _) => RainType.None,
             (AssetSpriteKey.BattleLocation.Boat, 0) => RainType.Always,
-            (AssetSpriteKey.BattleLocation.Boat, _) => RainType.None,
-            _ => throw new ArgumentOutOfRangeException(nameof(background), background, null)
+            (AssetSpriteKey.BattleLocation.Boat, _) => RainType.None
         };
     }
 

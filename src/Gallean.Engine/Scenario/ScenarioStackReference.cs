@@ -1,6 +1,6 @@
 namespace Gallean.Engine;
 
-public abstract record ScenarioStackReference
+public closed record ScenarioStackReference
 {
     public sealed record Stack(WorldStackId StackId) : ScenarioStackReference;
 

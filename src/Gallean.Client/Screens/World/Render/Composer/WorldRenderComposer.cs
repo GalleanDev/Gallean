@@ -199,8 +199,7 @@ internal sealed partial class WorldRenderComposer(
                     assets,
                     data.SpellId,
                     data.Position,
-                    data.SummonedStackId),
-                _ => throw new ArgumentOutOfRangeException(nameof(request), request.Animation, null)
+                    data.SummonedStackId)
             };
         }
 

@@ -46,7 +46,7 @@ internal sealed partial record WorldRenderState
         MapTileSurface Surface,
         AssetSpriteKey? RoadKey);
 
-    public abstract record MapTileBorder(
+    public closed record MapTileBorder(
         WorldPosition Position,
         AssetSpriteKey MaskKey,
         WorldMapTerrain GroundTerrain)
@@ -63,7 +63,7 @@ internal sealed partial record WorldRenderState
             AssetSpriteKey MaskKey) : MapTileBorder(Position, MaskKey, GroundTerrain);
     }
 
-    public abstract record MapTileSurface
+    public closed record MapTileSurface
     {
         public sealed record Ground(
             WorldMapTerrain Terrain) : MapTileSurface;

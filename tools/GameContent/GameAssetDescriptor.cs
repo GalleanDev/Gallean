@@ -1,6 +1,6 @@
 namespace GameContent;
 
-public abstract record GameAssetDescriptor(AssetKey Key, bool Required)
+public closed record GameAssetDescriptor(AssetKey Key, bool Required)
 {
     public sealed record Sprite : GameAssetDescriptor
     {

@@ -54,8 +54,7 @@ internal static class RefineRepaintMap
             AssetSpriteKey.Tree => [],
             AssetSpriteKey.UnitEventPortrait => [],
             AssetSpriteKey.UnitFace => [],
-            AssetSpriteKey.UnitPortrait => [],
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.UnitPortrait => []
         };
     }
 

@@ -3,7 +3,7 @@ using Gallean.Common;
 
 namespace Gallean.Engine;
 
-public abstract partial record AbstractWorldMoveStackCommand(WorldStackId StackId, WorldPosition TargetPosition) : IWorldCommand<Empty>
+public closed partial record AbstractWorldMoveStackCommand(WorldStackId StackId, WorldPosition TargetPosition) : IWorldCommand<Empty>
 {
     public WorldCommandResult Execute(WorldState state, IEngineContext context)
     {

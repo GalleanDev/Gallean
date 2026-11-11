@@ -62,8 +62,7 @@ internal sealed partial class WorldRenderComposer
             {
                 WorldCity => Layer.Villages,
                 WorldCapital => Layer.Capitals,
-                WorldRuin => Layer.Ruins,
-                _ => throw new ArgumentOutOfRangeException(nameof(fortification), fortification, null)
+                WorldRuin => Layer.Ruins
             };
         }
 
@@ -75,8 +74,7 @@ internal sealed partial class WorldRenderComposer
             {
                 WorldCity city => new AssetAnimationKey.City(city.DefinitionId.Level),
                 WorldCapital capital => new AssetAnimationKey.Capital(playerRaces[capital.OwnerId], capital.CapturedById is not null),
-                WorldRuin ruin => new AssetAnimationKey.Ruin(ruin.LooterId is not null, ruin.Variant.Value),
-                _ => throw new ArgumentOutOfRangeException(nameof(fortification), fortification, null)
+                WorldRuin ruin => new AssetAnimationKey.Ruin(ruin.LooterId is not null, ruin.Variant.Value)
             };
         }
     }

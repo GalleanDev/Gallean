@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed partial record WorldRenderState
 {
-    public abstract record WorldAnimation : IAnimationObject
+    public closed record WorldAnimation : IAnimationObject
     {
         public abstract TimeSpan Duration { get; }
 
@@ -195,7 +195,7 @@ internal sealed partial record WorldRenderState
         AssetSpriteKey AssetKey,
         TimeSpan Start);
 
-    public abstract record SpellCastLayer(int Depth)
+    public closed record SpellCastLayer(int Depth)
     {
         public sealed record Effect(
             AssetAnimationKey AssetKey,

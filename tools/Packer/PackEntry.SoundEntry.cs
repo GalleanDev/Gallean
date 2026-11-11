@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract partial record PackEntry
+internal closed partial record PackEntry
 {
     private sealed record SoundEntry(AssetManifestSound Manifest) : PackEntry(Manifest.Id)
     {

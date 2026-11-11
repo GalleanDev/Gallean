@@ -1,6 +1,6 @@
 namespace Packer;
 
-internal abstract record PackEnhancerResult
+internal closed record PackEnhancerResult
 {
     public sealed record Enhanced(string? OutputPath, int EntryCount, int CacheEntryCount) : PackEnhancerResult;
 
