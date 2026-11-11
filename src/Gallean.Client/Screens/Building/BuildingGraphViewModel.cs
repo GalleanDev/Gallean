@@ -20,7 +20,10 @@ internal sealed record BuildingGraphViewModel(
     {
         foreach (BuildingNodeViewModel node in Nodes)
         {
-            yield return new AssetPreloadItem.Sprite(node.IconKey);
+            if (node.IconKey is not null)
+            {
+                yield return new AssetPreloadItem.Sprite(node.IconKey);
+            }
 
             foreach (BuildingUnitViewModel unit in node.Units)
             {

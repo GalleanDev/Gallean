@@ -6,7 +6,7 @@ namespace Gallean.Client;
 internal sealed partial class BuildingNodeViewModel : ObservableObject, BuildingStatus.IVisitor<string?>, IDetailsSource
 {
     public BuildingNodeViewModel(
-        WorldPlayerBuildingDefinitionId buildingId,
+        WorldPlayerBuildingDefinitionId? buildingId,
         string name,
         string description,
         string levelText,
@@ -22,7 +22,7 @@ internal sealed partial class BuildingNodeViewModel : ObservableObject, Building
         IReadOnlyList<WorldPlayerBuildingDefinitionId> lockedIds)
     {
         BuildingId = buildingId;
-        IconKey = new AssetSpriteKey.BuildingIcon(buildingId);
+        IconKey = buildingId is null ? null : new AssetSpriteKey.BuildingIcon(buildingId.Value);
         Name = name;
         Description = description;
         LevelText = levelText;
@@ -44,9 +44,9 @@ internal sealed partial class BuildingNodeViewModel : ObservableObject, Building
     private static string BranchLockedStatusText => Tr("Branch closed");
     private static string ScenarioLockedText => Tr("Not available in this quest");
 
-    public WorldPlayerBuildingDefinitionId BuildingId { get; }
-    public AssetSpriteKey.BuildingIcon IconKey { get; }
-    public AssetSpriteKey PortraitKey { get; }
+    public WorldPlayerBuildingDefinitionId? BuildingId { get; }
+    public AssetSpriteKey.BuildingIcon? IconKey { get; }
+    public AssetSpriteKey? PortraitKey { get; }
     public string Name { get; }
     public string Description { get; }
     public string LevelText { get; }
@@ -81,9 +81,13 @@ internal sealed partial class BuildingNodeViewModel : ObservableObject, Building
             {
                 return Units[0].Details;
             }
-            else
+            else if (IconKey is not null)
             {
                 return new BuildingDetailsViewModel(IconKey, Name, Description);
+            }
+            else
+            {
+                return null;
             }
         }
     }
@@ -97,7 +101,7 @@ internal sealed partial class BuildingNodeViewModel : ObservableObject, Building
     [ObservableProperty]
     public partial bool IsSelectionLocked { get; set; }
 
-    private static AssetSpriteKey ResolvePortraitKey(IReadOnlyList<BuildingUnitViewModel> units, AssetSpriteKey.BuildingIcon iconKey)
+    private static AssetSpriteKey? ResolvePortraitKey(IReadOnlyList<BuildingUnitViewModel> units, AssetSpriteKey.BuildingIcon? iconKey)
     {
         if (units.Count > 0)
         {

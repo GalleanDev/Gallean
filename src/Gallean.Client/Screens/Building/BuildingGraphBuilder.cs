@@ -16,9 +16,8 @@ internal sealed class BuildingGraphBuilder(
     private const double CommonSpacing = 1.6;
     private const double CommonDiameter = 1.3125;
 
-    private const double RootRadius = 3.4;
+    private const double RootRadius = 2.65;
     private const double ExtentMargin = 0.6;
-    private const double ForkInset = 0.6;
     private const double LevelStep = 1.25;
     private const double ProjectionY = 0.8;
     private const double SectorHalfSpanDegrees = 38.0;
@@ -62,10 +61,7 @@ internal sealed class BuildingGraphBuilder(
 
             if (members.Count > 0)
             {
-                double forkAngle = double.DegreesToRadians(GetSectorCenterDegrees(type));
-                double forkX = Math.Round(Math.Cos(forkAngle) * (RootRadius - ForkInset), 2);
-                double forkY = Math.Round(Math.Sin(forkAngle) * (RootRadius - ForkInset) * ProjectionY, 2);
-                BuildingBranchViewModel branch = new(type, forkX, forkY);
+                BuildingBranchViewModel branch = new(type);
                 (List<BuildingNodeViewModel> branchNodes, List<BuildingLink> branchLinks) = ProcessBranch(branch, members, levels);
 
                 nodes.AddRange(branchNodes);
@@ -250,6 +246,21 @@ internal sealed class BuildingGraphBuilder(
             }
         }
 
+        foreach (BuildingBranchType type in Enum.GetValues<BuildingBranchType>())
+        {
+            IReadOnlyList<WorldPlayerBuildingDefinition> members = CollectMembers(type, branches);
+
+            if (members.Count > 0)
+            {
+                UnitDefinition baseUnit = FindBaseUnit(members);
+
+                if (!levels.Contains(baseUnit.Level))
+                {
+                    levels.Add(baseUnit.Level);
+                }
+            }
+        }
+
         levels.Sort();
 
         return levels;
@@ -286,7 +297,7 @@ internal sealed class BuildingGraphBuilder(
                 double x = Math.Round(entry.X * hubSize, 2);
                 double y = Math.Round(entry.Y * hubSize, 2);
 
-                nodes.Add(BuildNode(commons[index], branch: null, isBranchRoot: false, x, y));
+                nodes.Add(BuildNode(commons[index], branch: null, x, y));
             }
         }
         else
@@ -295,7 +306,7 @@ internal sealed class BuildingGraphBuilder(
             {
                 double x = (index - (commons.Count - 1) / 2.0) * CommonSpacing;
 
-                nodes.Add(BuildNode(commons[index], branch: null, isBranchRoot: false, x, 0.0));
+                nodes.Add(BuildNode(commons[index], branch: null, x, 0.0));
             }
         }
 
@@ -321,15 +332,23 @@ internal sealed class BuildingGraphBuilder(
 
         double slotDegrees = 2.0 * SectorHalfSpanDegrees / totalLeaves;
         double startDegrees = GetSectorCenterDegrees(branch.Type) - SectorHalfSpanDegrees;
-        List<BuildingNodeViewModel> nodes = [];
+        UnitDefinition baseUnit = FindBaseUnit(members);
+        double angle = double.DegreesToRadians(GetSectorCenterDegrees(branch.Type));
+        double radius = GetRingRadius(levels.IndexOf(baseUnit.Level));
+        double x = Math.Round(Math.Cos(angle) * radius, 2);
+        double y = Math.Round(Math.Sin(angle) * radius * ProjectionY, 2);
+
+        BuildingNodeViewModel node = BuildBaseNode(baseUnit, branch, x, y);
+        List<BuildingNodeViewModel> nodes = [node];
         List<BuildingLink> links = [];
         int firstLeaf = 0;
 
         foreach (WorldPlayerBuildingDefinition root in roots)
         {
             (List<BuildingNodeViewModel> subtreeNodes, List<BuildingLink> subtreeLinks) =
-                ProcessSubtree(root, branch, true, firstLeaf, members, levels, startDegrees, slotDegrees);
+                ProcessSubtree(root, branch, firstLeaf, members, levels, startDegrees, slotDegrees);
 
+            links.Add(new BuildingLink(node, subtreeNodes[0], ResolveLinkType(root)));
             nodes.AddRange(subtreeNodes);
             links.AddRange(subtreeLinks);
             firstLeaf += CountLeaves(root, members);
@@ -341,7 +360,6 @@ internal sealed class BuildingGraphBuilder(
     private (List<BuildingNodeViewModel> Nodes, List<BuildingLink> Links) ProcessSubtree(
         WorldPlayerBuildingDefinition building,
         BuildingBranchViewModel branch,
-        bool isBranchRoot,
         int firstLeaf,
         IReadOnlyList<WorldPlayerBuildingDefinition> members,
         List<int> levels,
@@ -355,7 +373,7 @@ internal sealed class BuildingGraphBuilder(
         double x = Math.Round(Math.Cos(angle) * radius, 2);
         double y = Math.Round(Math.Sin(angle) * radius * ProjectionY, 2);
 
-        BuildingNodeViewModel node = BuildNode(building, branch, isBranchRoot, x, y);
+        BuildingNodeViewModel node = BuildNode(building, branch, x, y);
         List<BuildingNodeViewModel> nodes = [node];
         List<BuildingLink> links = [];
         int childFirstLeaf = firstLeaf;
@@ -363,7 +381,7 @@ internal sealed class BuildingGraphBuilder(
         foreach (WorldPlayerBuildingDefinition child in children)
         {
             (List<BuildingNodeViewModel> childNodes, List<BuildingLink> childLinks) =
-                ProcessSubtree(child, branch, isBranchRoot: false, childFirstLeaf, members, levels, startDegrees, slotDegrees);
+                ProcessSubtree(child, branch, childFirstLeaf, members, levels, startDegrees, slotDegrees);
 
             links.Add(new BuildingLink(node, childNodes[0], ResolveLinkType(child)));
             nodes.AddRange(childNodes);
@@ -392,7 +410,6 @@ internal sealed class BuildingGraphBuilder(
     private BuildingNodeViewModel BuildNode(
         WorldPlayerBuildingDefinition building,
         BuildingBranchViewModel? branch,
-        bool isBranchRoot,
         double x,
         double y)
     {
@@ -424,11 +441,34 @@ internal sealed class BuildingGraphBuilder(
             status,
             BuildUnits(building),
             branch,
-            isBranchRoot,
+            isBranchRoot: false,
             x,
             y,
             lockedText,
             lockedIds);
+    }
+
+    private BuildingNodeViewModel BuildBaseNode(
+        UnitDefinition unitDefinition,
+        BuildingBranchViewModel branch,
+        double x,
+        double y)
+    {
+        return new BuildingNodeViewModel(
+            null,
+            texts.GetGlobalText(unitDefinition.NameTextId).Text,
+            texts.GetGlobalText(unitDefinition.DescriptionTextId).Text,
+            Tr("Level {0}", unitDefinition.Level),
+            WorldResourceSet.Empty,
+            resources,
+            new BuildingStatus.Built(),
+            [BuildUnit(unitDefinition)],
+            branch,
+            isBranchRoot: true,
+            x,
+            y,
+            null,
+            []);
     }
 
     private IReadOnlyList<WorldPlayerBuildingDefinitionId> CollectLockedIds(IReadOnlyList<WorldPlayerBuildingDefinitionId> lockedIds)
@@ -507,17 +547,34 @@ internal sealed class BuildingGraphBuilder(
 
             if (unitDefinition is not null)
             {
-                WorldUnit unit = new(UnitDetailsViewModel.PreviewUnitId, unitId, unitDefinition.MaxHitpoints, Experience: 0, unitDefinition.Level, [], null, false);
-
-                units.Add(new BuildingUnitViewModel(
-                    new AssetSpriteKey.UnitFace(unitId),
-                    new AssetSpriteKey.UnitPortrait(unitId),
-                    texts.GetGlobalText(unitDefinition.NameTextId).Text,
-                    UnitDetailsViewModel.CreateFromWorld(unit, null, definitions, texts, stats)));
+                units.Add(BuildUnit(unitDefinition));
             }
         }
 
         return units;
+    }
+
+    private UnitDefinition FindBaseUnit(IReadOnlyList<WorldPlayerBuildingDefinition> members)
+    {
+        UnitDefinition unitDefinition = definitions.GetUnit(members[0].UnitIds[0]);
+
+        while (unitDefinition.PreviousUnitId is not null)
+        {
+            unitDefinition = definitions.GetUnit(unitDefinition.PreviousUnitId.Value);
+        }
+
+        return unitDefinition;
+    }
+
+    private BuildingUnitViewModel BuildUnit(UnitDefinition unitDefinition)
+    {
+        WorldUnit unit = new(UnitDetailsViewModel.PreviewUnitId, unitDefinition.Id, unitDefinition.MaxHitpoints, Experience: 0, unitDefinition.Level, [], null, false);
+
+        return new BuildingUnitViewModel(
+            new AssetSpriteKey.UnitFace(unitDefinition.Id),
+            new AssetSpriteKey.UnitPortrait(unitDefinition.Id),
+            texts.GetGlobalText(unitDefinition.NameTextId).Text,
+            UnitDetailsViewModel.CreateFromWorld(unit, null, definitions, texts, stats));
     }
 
     private static bool IsSideshow(WorldPlayerBuildingDefinition building)

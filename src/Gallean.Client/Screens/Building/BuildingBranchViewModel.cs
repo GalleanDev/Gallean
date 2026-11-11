@@ -2,7 +2,7 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed record BuildingBranchViewModel(BuildingBranchType Type, double ForkX, double ForkY)
+internal sealed record BuildingBranchViewModel(BuildingBranchType Type)
 {
     public string Title => Type switch
     {

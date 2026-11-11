@@ -104,22 +104,23 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
     [RelayCommand(CanExecute = nameof(CanConstruct))]
     private async Task ConstructAsync()
     {
-        if (SelectedBuilding is null)
+        if (SelectedBuilding is null || SelectedBuilding.BuildingId is null)
         {
             return;
         }
 
         BuildingNodeViewModel building = SelectedBuilding;
+        WorldPlayerBuildingDefinitionId buildingId = SelectedBuilding.BuildingId.Value;
 
-        constructedBuildingId = building.BuildingId;
+        constructedBuildingId = buildingId;
 
-        if (await TryDispatchWorldActionAsync(new WorldConstructBuildingCommand(ViewPlayerId, building.BuildingId)))
+        if (await TryDispatchWorldActionAsync(new WorldConstructBuildingCommand(ViewPlayerId, buildingId)))
         {
             Game.PlaySound(new AssetSoundKey.BuildingConstruct());
             Game.ShowInfo(IconMoniker.Capital, Tr("Building constructed"), building.Name);
             selectedBuildingId = null;
             PanelsVisible = false;
-            RestorePanelsAsync(building.BuildingId).FileAndForget();
+            RestorePanelsAsync(buildingId).FileAndForget();
         }
 
         RefreshView();
@@ -179,7 +180,7 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
         foreach (BuildingNodeViewModel node in Graph.Nodes)
         {
             node.IsSelected = ReferenceEquals(node, selected);
-            node.IsSelectionLocked = selected is not null && selected.LockedIds.Contains(node.BuildingId);
+            node.IsSelectionLocked = selected is not null && node.BuildingId is not null && selected.LockedIds.Contains(node.BuildingId.Value);
         }
 
         SelectedBuilding = selected;
@@ -190,7 +191,7 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
     {
         foreach (BuildingNodeViewModel node in Graph.Nodes)
         {
-            if (node.BuildingId == buildingId)
+            if (node.BuildingId is not null && node.BuildingId == buildingId)
             {
                 return node;
             }

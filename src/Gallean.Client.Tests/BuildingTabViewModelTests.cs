@@ -36,7 +36,7 @@ public sealed class BuildingTabViewModelTests
 
         foreach (BuildingBranchViewModel branch in graph.Branches)
         {
-            rows.Add($"legend {branch.Type}: {branch.Title} {branch.Icon} | fork ({branch.ForkX:F2}, {branch.ForkY:F2})");
+            rows.Add($"legend {branch.Type}: {branch.Title} {branch.Icon}");
         }
 
         foreach (BuildingRingViewModel ring in graph.Rings)
@@ -175,6 +175,28 @@ public sealed class BuildingTabViewModelTests
         WorldPlayerBuildingDefinitionId templeId = new("bb23");
         WorldPlayerBuildingDefinitionId citadelId = new("bb30");
 
+        UnitDefinition squire = TestHelpers.SimpleUnitDefinition("Squire", maxHitpoints: 100, initiative: 50, damage: 25) with
+        {
+            NameTextId = new GlobalTextId("Squire")
+        };
+
+        UnitDefinition knight = TestHelpers.SimpleUnitDefinition("Knight", maxHitpoints: 150, initiative: 50, damage: 40) with
+        {
+            NameTextId = new GlobalTextId("Knight"),
+            PreviousUnitId = squire.Id
+        };
+
+        UnitDefinition apprentice = TestHelpers.SimpleUnitDefinition("Apprentice", maxHitpoints: 35, initiative: 40, damage: 15) with
+        {
+            NameTextId = new GlobalTextId("Apprentice")
+        };
+
+        UnitDefinition mage = TestHelpers.SimpleUnitDefinition("Mage", maxHitpoints: 65, initiative: 40, damage: 30) with
+        {
+            NameTextId = new GlobalTextId("Mage"),
+            PreviousUnitId = apprentice.Id
+        };
+
         UnitDefinition paladin = TestHelpers.SimpleUnitDefinition("Paladin", maxHitpoints: 100, initiative: 50, damage: 35) with
         {
             NameTextId = new GlobalTextId("Paladin")
@@ -220,7 +242,7 @@ public sealed class BuildingTabViewModelTests
             })
             .WithPlayer(player)
             .WithDefinition(BuildingDefinition(citadelId, "Citadel", holyStatueId, UnitBranch.Fighter, 6, cost, []))
-            .WithDefinition(BuildingDefinition(stableId, "Stable", null, UnitBranch.Fighter, 2, cost, []))
+            .WithDefinition(BuildingDefinition(stableId, "Stable", null, UnitBranch.Fighter, 2, cost, [knight.Id]))
             .WithDefinition(BuildingDefinition(imperialStableId, "Imperial Stable", stableId, UnitBranch.Fighter, 3, cost, []))
             .WithDefinition(BuildingDefinition(shrineId, "Shrine", imperialStableId, UnitBranch.Fighter, 4, cost, [paladin.Id]))
             .WithDefinition(BuildingDefinition(holyStatueId, "Holy Statue", shrineId, UnitBranch.Fighter, 5, cost, [holyAvenger.Id]))
@@ -229,9 +251,13 @@ public sealed class BuildingTabViewModelTests
             .WithDefinition(BuildingDefinition(dungeonId, "Dungeon", null, UnitBranch.Fighter, 2, cost, []))
             .WithDefinition(BuildingDefinition(tortureChamberId, "Torture Chamber", dungeonId, UnitBranch.Fighter, 3, cost, []))
             .WithDefinition(BuildingDefinition(magistrateId, "Magistrate", tortureChamberId, UnitBranch.Fighter, 4, cost, []))
-            .WithDefinition(BuildingDefinition(libraryId, "Library", null, UnitBranch.Mage, 2, cost, []))
+            .WithDefinition(BuildingDefinition(libraryId, "Library", null, UnitBranch.Mage, 2, cost, [mage.Id]))
             .WithDefinition(BuildingDefinition(ruinedTempleId, "Ruined Temple", libraryId, UnitBranch.Sideshow, 3, cost, [titan.Id]))
             .WithDefinition(BuildingDefinition(templeId, "Temple", null, null, 2, cost, []))
+            .WithDefinition(squire)
+            .WithDefinition(knight)
+            .WithDefinition(apprentice)
+            .WithDefinition(mage)
             .WithDefinition(paladin)
             .WithDefinition(holyAvenger)
             .WithDefinition(titan)
@@ -247,42 +273,48 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatGraph(screen),
             Is.EqualTo([
-                "hub 1.70x1.90 size 0.00 projection 0.80 | extent 9.00x7.32",
-                "legend Fighter: Fighters Damage | fork (-1.87, -1.66)",
-                "legend Mage: Mages Spellbook | fork (-1.87, 1.66)",
-                "ring Level 2 3.40",
-                "ring Level 3 4.65",
-                "ring Level 4 5.90",
-                "ring Level 5 7.15",
-                "ring Level 6 8.40",
+                "hub 1.70x1.90 size 0.00 projection 0.80 | extent 9.50x7.72",
+                "legend Fighter: Fighters Damage",
+                "legend Mage: Mages Spellbook",
+                "ring Level 1 2.65",
+                "ring Level 2 3.90",
+                "ring Level 3 5.15",
+                "ring Level 4 6.40",
+                "ring Level 5 7.65",
+                "ring Level 6 8.90",
                 "Common (0.00, 0.00): Temple | constructible |  | 100 gold",
-                "Fighter root (-2.66, -1.69): Stable | built |  | 100 gold",
-                "Fighter (-3.64, -2.32): Imperial Stable | built |  | 100 gold",
-                "Fighter (-5.16, -2.29): Shrine | constructible | Paladin | 100 gold",
-                "Fighter (-6.74, -1.91): Holy Statue | missing: Requires Shrine | Holy Avenger | 100 gold",
-                "Fighter (-7.92, -2.24): Citadel | scenario-locked: Not available in this quest |  | 100 gold",
-                "Fighter (-5.60, -3.56): Chapel | missing: Requires Shrine |  | 100 gold",
-                "Fighter (-3.17, -3.98): Fountain of Life | constructible |  | 100 gold",
-                "Fighter root (-0.79, -2.64): Dungeon | branch-locked: Branch closed |  | 100 gold",
-                "Fighter (-1.09, -3.62): Torture Chamber | branch-locked: Branch closed |  | 100 gold",
-                "Fighter (-1.38, -4.59): Magistrate | branch-locked: Branch closed |  | 100 gold",
-                "Mage root (-2.28, 2.02): Library | constructible |  | 100 gold",
-                "Mage (-3.11, 2.76): Ruined Temple | missing: Requires Library | Titan | 100 gold",
+                "Fighter root (-1.77, -1.58): Squire | built | Squire | 0 gold",
+                "Fighter (-3.05, -1.94): Stable | built | Knight | 100 gold",
+                "Fighter (-4.03, -2.56): Imperial Stable | built |  | 100 gold",
+                "Fighter (-5.60, -2.48): Shrine | constructible | Paladin | 100 gold",
+                "Fighter (-7.21, -2.04): Holy Statue | missing: Requires Shrine | Holy Avenger | 100 gold",
+                "Fighter (-8.39, -2.38): Citadel | scenario-locked: Not available in this quest |  | 100 gold",
+                "Fighter (-5.99, -3.81): Chapel | missing: Requires Shrine |  | 100 gold",
+                "Fighter (-3.44, -4.32): Fountain of Life | constructible |  | 100 gold",
+                "Fighter (-0.91, -3.03): Dungeon | branch-locked: Branch closed |  | 100 gold",
+                "Fighter (-1.20, -4.01): Torture Chamber | branch-locked: Branch closed |  | 100 gold",
+                "Fighter (-1.49, -4.98): Magistrate | branch-locked: Branch closed |  | 100 gold",
+                "Mage root (-1.77, 1.58): Apprentice | built | Apprentice | 0 gold",
+                "Mage (-2.61, 2.32): Library | constructible | Mage | 100 gold",
+                "Mage (-3.45, 3.06): Ruined Temple | missing: Requires Library | Titan | 100 gold",
+                "Squire -> Stable | Upgrade",
                 "Stable -> Imperial Stable | Upgrade",
                 "Imperial Stable -> Shrine | Upgrade",
                 "Shrine -> Holy Statue | Upgrade",
                 "Holy Statue -> Citadel | Upgrade",
                 "Shrine -> Chapel | Upgrade",
                 "Imperial Stable -> Fountain of Life | Upgrade",
+                "Squire -> Dungeon | Upgrade",
                 "Dungeon -> Torture Chamber | Upgrade",
                 "Torture Chamber -> Magistrate | Upgrade",
+                "Apprentice -> Library | Upgrade",
                 "Library -> Ruined Temple | Requirement"
             ]));
 
         Assert.That(screen.SelectedBuilding, Is.Null);
         Assert.That(screen.ConstructCommand.CanExecute(null), Is.False);
 
-        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[3]);
+        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[4]);
 
         Assert.That(
             FormatDetails(screen),
@@ -295,28 +327,28 @@ public sealed class BuildingTabViewModelTests
             ]));
 
         Assert.That(
-            screen.Graph.Nodes[3].LockedText,
+            screen.Graph.Nodes[4].LockedText,
             Is.EqualTo(new TextSpans([
                 new TextSpan("Permanently locks out ", TextStyle.None),
                 new TextSpan("Fountain of Life", TextStyle.Italic)
             ])));
-        Assert.That(screen.Graph.Nodes[3].IsSelected, Is.True);
+        Assert.That(screen.Graph.Nodes[4].IsSelected, Is.True);
         Assert.That(screen.ConstructCommand.CanExecute(null), Is.True);
 
-        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[11]);
+        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[13]);
 
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Library | constructible |  | Level 2 | 100 gold | affordable | building-icon/bb12",
-                "details: Library | building-icon/bb12 | description",
+                "Library | constructible | Mage | Level 2 | 100 gold | affordable | unit-face/mage",
+                "details: Mage",
                 "Build Library"
             ]));
 
-        Assert.That(screen.Graph.Nodes[3].IsSelected, Is.False);
-        Assert.That(screen.Graph.Nodes[11].IsSelected, Is.True);
+        Assert.That(screen.Graph.Nodes[4].IsSelected, Is.False);
+        Assert.That(screen.Graph.Nodes[13].IsSelected, Is.True);
 
-        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[12]);
+        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[14]);
 
         Assert.That(
             FormatDetails(screen),
@@ -328,7 +360,7 @@ public sealed class BuildingTabViewModelTests
 
         Assert.That(screen.ConstructCommand.CanExecute(null), Is.False);
 
-        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[9]);
+        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[10]);
 
         Assert.That(
             FormatDetails(screen),
@@ -338,7 +370,7 @@ public sealed class BuildingTabViewModelTests
                 "Build Torture Chamber"
             ]));
 
-        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[5]);
+        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[6]);
 
         Assert.That(
             FormatDetails(screen),
@@ -353,7 +385,7 @@ public sealed class BuildingTabViewModelTests
         screen.ClearSelectionCommand.Execute(null);
 
         Assert.That(screen.SelectedBuilding, Is.Null);
-        Assert.That(screen.Graph.Nodes[9].IsSelected, Is.False);
+        Assert.That(screen.Graph.Nodes[10].IsSelected, Is.False);
     }
 
     [Test]
@@ -371,13 +403,33 @@ public sealed class BuildingTabViewModelTests
             Buildings = new WorldPlayerBuildings([barracksId, advancedBarracksId, mageGuildId], [])
         };
 
+        UnitDefinition fighter = TestHelpers.SimpleUnitDefinition("Fighter", maxHitpoints: 120, initiative: 50, damage: 25) with
+        {
+            NameTextId = new GlobalTextId("Fighter")
+        };
+
+        UnitDefinition zombie = TestHelpers.SimpleUnitDefinition("Zombie", maxHitpoints: 170, initiative: 50, damage: 40) with
+        {
+            NameTextId = new GlobalTextId("Zombie"),
+            PreviousUnitId = fighter.Id
+        };
+
+        UnitDefinition templar = TestHelpers.SimpleUnitDefinition("Templar", maxHitpoints: 220, initiative: 50, damage: 60) with
+        {
+            NameTextId = new GlobalTextId("Templar"),
+            PreviousUnitId = zombie.Id
+        };
+
         (GameSession session, _) = new TestWorldEngineBuilder()
             .WithMap(map)
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
-            .WithDefinition(BuildingDefinition(barracksId, "Barracks", null, UnitBranch.Fighter, 1, cost, []))
-            .WithDefinition(BuildingDefinition(advancedBarracksId, "Advanced barracks", barracksId, UnitBranch.Fighter, 2, cost, []))
+            .WithDefinition(BuildingDefinition(barracksId, "Barracks", null, UnitBranch.Fighter, 2, cost, [zombie.Id]))
+            .WithDefinition(BuildingDefinition(advancedBarracksId, "Advanced barracks", barracksId, UnitBranch.Fighter, 3, cost, [templar.Id]))
             .WithDefinition(BuildingDefinition(mageGuildId, "Mage guild", null, null, 1, cost, []))
+            .WithDefinition(fighter)
+            .WithDefinition(zombie)
+            .WithDefinition(templar)
             .BuildSession();
 
         session.World.DispatchCommand(new WorldStartGameCommand());
@@ -390,17 +442,20 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatGraph(screen),
             Is.EqualTo([
-                "hub 1.70x1.90 size 0.00 projection 0.80 | extent 5.25x4.32",
-                "legend Fighter: Fighters Damage | fork (-1.87, -1.66)",
-                "ring Level 1 3.40",
-                "ring Level 2 4.65",
+                "hub 1.70x1.90 size 0.00 projection 0.80 | extent 5.75x4.72",
+                "legend Fighter: Fighters Damage",
+                "ring Level 1 2.65",
+                "ring Level 2 3.90",
+                "ring Level 3 5.15",
                 "Common (0.00, 0.00): Mage guild | constructible |  | 100 gold",
-                "Fighter root (-2.28, -2.02): Barracks | constructible |  | 100 gold",
-                "Fighter (-3.11, -2.76): Advanced barracks | missing: Requires Barracks |  | 100 gold",
+                "Fighter root (-1.77, -1.58): Fighter | built | Fighter | 0 gold",
+                "Fighter (-2.61, -2.32): Barracks | constructible | Zombie | 100 gold",
+                "Fighter (-3.45, -3.06): Advanced barracks | missing: Requires Barracks | Templar | 100 gold",
+                "Fighter -> Barracks | Upgrade",
                 "Barracks -> Advanced barracks | Upgrade"
             ]));
 
-        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[1]);
+        screen.SelectBuildingCommand.Execute(screen.Graph.Nodes[2]);
 
         await screen.ConstructCommand.ExecuteAsync(null);
 
@@ -411,13 +466,16 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatGraph(screen),
             Is.EqualTo([
-                "hub 1.70x1.90 size 0.00 projection 0.80 | extent 5.25x4.32",
-                "legend Fighter: Fighters Damage | fork (-1.87, -1.66)",
-                "ring Level 1 3.40",
-                "ring Level 2 4.65",
+                "hub 1.70x1.90 size 0.00 projection 0.80 | extent 5.75x4.72",
+                "legend Fighter: Fighters Damage",
+                "ring Level 1 2.65",
+                "ring Level 2 3.90",
+                "ring Level 3 5.15",
                 "Common (0.00, 0.00): Mage guild | unavailable: You have already constructed a building this turn |  | 100 gold",
-                "Fighter root (-2.28, -2.02): Barracks | built |  | 100 gold",
-                "Fighter (-3.11, -2.76): Advanced barracks | unavailable: You have already constructed a building this turn |  | 100 gold",
+                "Fighter root (-1.77, -1.58): Fighter | built | Fighter | 0 gold",
+                "Fighter (-2.61, -2.32): Barracks | built | Zombie | 100 gold",
+                "Fighter (-3.45, -3.06): Advanced barracks | unavailable: You have already constructed a building this turn | Templar | 100 gold",
+                "Fighter -> Barracks | Upgrade",
                 "Barracks -> Advanced barracks | Upgrade"
             ]));
 

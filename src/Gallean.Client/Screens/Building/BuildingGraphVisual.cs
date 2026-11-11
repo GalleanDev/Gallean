@@ -15,8 +15,6 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
     private const double RingThickness = 1;
     private const double RingEndSize = 2;
     private const double LabelPadding = 14;
-    private const double ForkRadius = 4;
-    private const double ForkOutlineThickness = 1.5;
     private const double LabelAngleDegrees = 180;
     private const double LabelGap = 4;
 
@@ -35,9 +33,6 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
 
     public static readonly StyledProperty<IBrush?> RingBrushProperty =
         AvaloniaProperty.Register<BuildingGraphVisual, IBrush?>(nameof(RingBrush));
-
-    public static readonly StyledProperty<IBrush?> ForkOutlineBrushProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, IBrush?>(nameof(ForkOutlineBrush));
 
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner<BuildingGraphVisual>();
@@ -64,7 +59,6 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
             SelectedNodeProperty,
             UnitSizeProperty,
             RingBrushProperty,
-            ForkOutlineBrushProperty,
             ForegroundProperty,
             FontFamilyProperty,
             FontSizeProperty,
@@ -100,12 +94,6 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
     {
         get => GetValue(RingBrushProperty);
         set => SetValue(RingBrushProperty, value);
-    }
-
-    public IBrush? ForkOutlineBrush
-    {
-        get => GetValue(ForkOutlineBrushProperty);
-        set => SetValue(ForkOutlineBrushProperty, value);
     }
 
     public IBrush? Foreground
@@ -440,51 +428,13 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
 
     private void DrawTrunks(DrawingContext context, BuildingGraphViewModel graph, Point origin)
     {
-        foreach (BuildingBranchViewModel branch in graph.Branches)
+        foreach (BuildingNodeViewModel node in graph.Nodes)
         {
-            List<BuildingNodeViewModel> roots = [];
-
-            foreach (BuildingNodeViewModel node in graph.Nodes)
+            if (node.IsBranchRoot)
             {
-                if (node.IsBranchRoot && node.Branch == branch)
-                {
-                    roots.Add(node);
-                }
-            }
-
-            if (roots.Count > 0)
-            {
-                Point fork = ToPoint(origin, branch.ForkX, branch.ForkY);
-                LinkStyle style = ResolveStyle(roots[0]);
-
-                foreach (BuildingNodeViewModel root in roots)
-                {
-                    LinkStyle rootStyle = ResolveStyle(root);
-
-                    if (rootStyle.Order > style.Order)
-                    {
-                        style = rootStyle;
-                    }
-                }
-
-                DrawCurve(context, origin, HubEdgeTowards(graph, origin, branch.ForkX, branch.ForkY), fork, branch.Color, style);
-
-                foreach (BuildingNodeViewModel root in roots)
-                {
-                    DrawConnection(context, origin, fork, root, ResolveStyle(root));
-                }
-
-                DrawFork(context, fork, branch.Color, style);
+                DrawConnection(context, origin, HubEdgeTowards(graph, origin, node.X, node.Y), node, ResolveStyle(node));
             }
         }
-    }
-
-    private void DrawFork(DrawingContext context, Point fork, Color color, LinkStyle style)
-    {
-        ImmutableSolidColorBrush fill = new(WithOpacity(color, style.Opacity));
-        Pen? outline = ForkOutlineBrush is null ? null : new Pen(ForkOutlineBrush, ForkOutlineThickness);
-
-        context.DrawEllipse(fill, outline, fork, ForkRadius, ForkRadius);
     }
 
     private void DrawLinks(DrawingContext context, BuildingGraphViewModel graph, Point origin)
