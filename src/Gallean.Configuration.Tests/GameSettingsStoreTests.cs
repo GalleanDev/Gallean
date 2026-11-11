@@ -1,3 +1,4 @@
+using Gallean.Engine.Contracts;
 using Gallean.Tests.Common;
 
 namespace Gallean.Configuration.Tests;

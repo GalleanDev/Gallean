@@ -18,6 +18,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     private readonly GameSaveStore gameSaveStore;
     private readonly LeaderStore leaderStore;
     private readonly GameSettingsStore gameSettingsStore;
+    private readonly GameSettingsSource gameSettingsSource;
     private readonly ClientVersion clientVersion;
     private readonly ILog log;
     private readonly IRandomProvider random;
@@ -35,7 +36,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         GameSaveStore gameSaveStore,
         LeaderStore leaderStore,
         GameSettingsStore gameSettingsStore,
-        GameSettings settings,
+        GameSettingsSource gameSettingsSource,
         ClientVersion clientVersion,
         ILog log,
         IRandomProvider random,
@@ -53,8 +54,10 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         this.random = random;
         this.scheduler = scheduler;
 
+        this.gameSettingsSource = gameSettingsSource;
+
         AssetPreloader = assetPreloader;
-        Settings = settings;
+        Settings = gameSettingsSource.Current;
 
         screens = new ScreenStack(audioPlayer);
         screens.Changed += OnScreensChanged;
@@ -269,6 +272,11 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     private void ToggleWindowed()
     {
         IsWindowed = !IsWindowed;
+    }
+
+    partial void OnSettingsChanged(GameSettings value)
+    {
+        gameSettingsSource.Current = value;
     }
 
     public void UpdateSettings(GameSettings settings)

@@ -1,3 +1,5 @@
+using Gallean.Configuration;
+
 namespace Gallean.Client.Tests;
 
 internal static class TestAssets
@@ -8,7 +10,7 @@ internal static class TestAssets
 
         try
         {
-            provider = AssetProvider.TryLoadDefault();
+            provider = AssetProvider.TryLoadDefault(new GameSettingsSource(GameSettings.Default));
         }
         catch (InstalledAssetPackIncompatibleException ex)
         {

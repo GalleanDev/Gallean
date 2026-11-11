@@ -58,7 +58,8 @@ internal sealed class App(ILog log) : Application
         Task<UpdateInfo?> latestUpdateTask = Task.Run(updateClient.TryGetLatestAsync);
 
         Task<AudioOutput> audioOutputTask = Task.Run(() => AudioOutput.CreateAsync(log));
-        Task<AssetProvider> assetProviderTask = Task.Run(AssetProvider.LoadDefault);
+        GameSettingsSource gameSettingsSource = new(gameSettings);
+        Task<AssetProvider> assetProviderTask = Task.Run(() => AssetProvider.LoadDefault(gameSettingsSource));
         AudioOutput audioOutput = cleanupList.Add(await audioOutputTask);
         AssetProvider assetProvider = cleanupList.Add(await assetProviderTask);
 
@@ -79,7 +80,7 @@ internal sealed class App(ILog log) : Application
             gameSaveStore,
             leaderStore,
             gameSettingsStore,
-            gameSettings,
+            gameSettingsSource,
             clientVersion,
             log,
             random,

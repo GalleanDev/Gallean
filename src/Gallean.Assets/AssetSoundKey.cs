@@ -7,11 +7,32 @@ namespace Gallean.Assets;
 
 public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 {
+    private const char LanguageSeparator = '@';
+
+    public Language? Language { get; init; }
+
+    public sealed override string CanonicalId
+    {
+        get
+        {
+            if (Language is not null)
+            {
+                return $"{NeutralId}{LanguageSeparator}{Language.Value.Code}";
+            }
+            else
+            {
+                return NeutralId;
+            }
+        }
+    }
+
+    protected abstract string NeutralId { get; }
+
     public sealed record MenuMusic : AssetSoundKey
     {
         internal const string Category = "menu-music";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record WorldMusic(int Variant) : AssetSoundKey
@@ -22,7 +43,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Variant}";
 
         internal static WorldMusic? Parse(IReadOnlyList<string> tokens)
         {
@@ -42,7 +63,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Variant}";
 
         internal static AmbientMusic? Parse(IReadOnlyList<string> tokens)
         {
@@ -62,7 +83,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(Race)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(Race)}/{Variant}";
 
         internal static CapitalMusic? Parse(IReadOnlyList<string> tokens)
         {
@@ -82,7 +103,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Variant}";
 
         internal static BattleMusic? Parse(IReadOnlyList<string> tokens)
         {
@@ -98,14 +119,14 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "briefing-music";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record VictoryMusic(ScenarioId ScenarioId) : AssetSoundKey
     {
         internal const string Category = "victory-music";
 
-        public override string CanonicalId => $"{Category}/{Token(ScenarioId)}";
+        protected override string NeutralId => $"{Category}/{Token(ScenarioId)}";
 
         internal static VictoryMusic? Parse(IReadOnlyList<string> tokens)
         {
@@ -121,7 +142,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "briefing-voice";
 
-        public override string CanonicalId => $"{Category}/{Token(ScenarioId)}";
+        protected override string NeutralId => $"{Category}/{Token(ScenarioId)}";
 
         internal static BriefingVoice? Parse(IReadOnlyList<string> tokens)
         {
@@ -137,147 +158,147 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "interface-open";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record Beep : AssetSoundKey
     {
         internal const string Category = "beep";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record BookOpen : AssetSoundKey
     {
         internal const string Category = "book-open";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record BookClose : AssetSoundKey
     {
         internal const string Category = "book-close";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record TurnStart : AssetSoundKey
     {
         internal const string Category = "turn-start";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record WorldBattleStart : AssetSoundKey
     {
         internal const string Category = "world-battle-start";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record Occupy : AssetSoundKey
     {
         internal const string Category = "occupy";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record RuinEnter : AssetSoundKey
     {
         internal const string Category = "ruin-enter";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record RuinLoot : AssetSoundKey
     {
         internal const string Category = "ruin-loot";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record BuildingConstruct : AssetSoundKey
     {
         internal const string Category = "building-construct";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record CityGrow : AssetSoundKey
     {
         internal const string Category = "city-grow";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record CityEnter : AssetSoundKey
     {
         internal const string Category = "city-enter";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record CityExit : AssetSoundKey
     {
         internal const string Category = "city-exit";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record CityRiotEnd : AssetSoundKey
     {
         internal const string Category = "city-riot-end";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record BagPickUp : AssetSoundKey
     {
         internal const string Category = "bag-pick-up";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record UnitPurchase : AssetSoundKey
     {
         internal const string Category = "unit-purchase";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record SitePurchase : AssetSoundKey
     {
         internal const string Category = "site-purchase";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record SiteEnter : AssetSoundKey
     {
         internal const string Category = "site-enter";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record ItemUse : AssetSoundKey
     {
         internal const string Category = "item-use";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record SpellResearch : AssetSoundKey
     {
         internal const string Category = "spell-research";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record ThiefAction : AssetSoundKey
     {
         internal const string Category = "thief-action";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record BattleUnitAttack(UnitDefinitionId DefinitionId, int Variant) : AssetSoundKey
@@ -288,7 +309,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static BattleUnitAttack? Parse(IReadOnlyList<string> tokens)
         {
@@ -310,7 +331,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static BattleUnitHit? Parse(IReadOnlyList<string> tokens)
         {
@@ -332,7 +353,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static BattleUnitTouch? Parse(IReadOnlyList<string> tokens)
         {
@@ -354,7 +375,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static BattleUnitDamaged? Parse(IReadOnlyList<string> tokens)
         {
@@ -374,21 +395,21 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
         {
             internal const string Category = "battle-effect-sound-heal";
 
-            public override string CanonicalId => Category;
+            protected override string NeutralId => Category;
         }
 
         public sealed record Death : BattleEffect
         {
             internal const string Category = "battle-effect-sound-death";
 
-            public override string CanonicalId => Category;
+            protected override string NeutralId => Category;
         }
 
         public sealed record Status(StatusType Type) : BattleEffect
         {
             internal const string Category = "battle-effect-sound-status";
 
-            public override string CanonicalId => $"{Category}/{Token(Type)}";
+            protected override string NeutralId => $"{Category}/{Token(Type)}";
 
             internal static Status? Parse(IReadOnlyList<string> tokens)
             {
@@ -404,7 +425,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
         {
             internal const string Category = "battle-effect-sound-potion";
 
-            public override string CanonicalId => $"{Category}/{Token(Type)}";
+            protected override string NeutralId => $"{Category}/{Token(Type)}";
 
             internal static Potion? Parse(IReadOnlyList<string> tokens)
             {
@@ -442,7 +463,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static StackUnitMove? Parse(IReadOnlyList<string> tokens)
         {
@@ -460,7 +481,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "stack-boat-move";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record StackUnitResponse(UnitDefinitionId DefinitionId, int Variant) : AssetSoundKey
@@ -471,7 +492,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static StackUnitResponse? Parse(IReadOnlyList<string> tokens)
         {
@@ -489,7 +510,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "stack-unit-attack";
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}";
 
         internal static StackUnitAttack? Parse(IReadOnlyList<string> tokens)
         {
@@ -509,7 +530,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}/{Variant}";
 
         internal static StackUnitIdle? Parse(IReadOnlyList<string> tokens)
         {
@@ -527,7 +548,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "stack-unit-death";
 
-        public override string CanonicalId => $"{Category}/{Token(DefinitionId)}";
+        protected override string NeutralId => $"{Category}/{Token(DefinitionId)}";
 
         internal static StackUnitDeath? Parse(IReadOnlyList<string> tokens)
         {
@@ -543,28 +564,28 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "stack-destroy";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record StackSummonDestroy : AssetSoundKey
     {
         internal const string Category = "stack-summon-destroy";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record StackCreate : AssetSoundKey
     {
         internal const string Category = "stack-create";
 
-        public override string CanonicalId => Category;
+        protected override string NeutralId => Category;
     }
 
     public sealed record WorldSpellCast(WorldSpellDefinitionId SpellId) : AssetSoundKey
     {
         internal const string Category = "world-spell-cast";
 
-        public override string CanonicalId => $"{Category}/{Token(SpellId)}";
+        protected override string NeutralId => $"{Category}/{Token(SpellId)}";
 
         internal static WorldSpellCast? Parse(IReadOnlyList<string> tokens)
         {
@@ -580,7 +601,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "ambient";
 
-        public override string CanonicalId => $"{Category}/{Token(Type)}";
+        protected override string NeutralId => $"{Category}/{Token(Type)}";
 
         internal static Ambient? Parse(IReadOnlyList<string> tokens)
         {
@@ -596,7 +617,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "ambient-capital";
 
-        public override string CanonicalId => $"{Category}/{Token(Race)}";
+        protected override string NeutralId => $"{Category}/{Token(Race)}";
 
         internal static AmbientCapital? Parse(IReadOnlyList<string> tokens)
         {
@@ -616,7 +637,7 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 
-        public override string CanonicalId => $"{Category}/{Variant}";
+        protected override string NeutralId => $"{Category}/{Variant}";
 
         internal static AmbientRuin? Parse(IReadOnlyList<string> tokens)
         {
@@ -741,6 +762,40 @@ public abstract record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
             return null;
         }
 
+        int separator = id.LastIndexOf(LanguageSeparator);
+
+        if (separator >= 0)
+        {
+            AssetSoundKey? key = ParseNeutralKey(id[..separator]);
+
+            if (key is null)
+            {
+                return null;
+            }
+
+            return key with { Language = ParseLanguage(id[(separator + 1)..]) };
+        }
+        else
+        {
+            return ParseNeutralKey(id);
+        }
+    }
+
+    private static Language ParseLanguage(string token)
+    {
+        foreach (Language language in Enum.GetValues<Language>())
+        {
+            if (language.Code == token)
+            {
+                return language;
+            }
+        }
+
+        return default;
+    }
+
+    private static AssetSoundKey? ParseNeutralKey(string id)
+    {
         string[] tokens = id.Split('/');
 
         if (Parsers.TryGetValue(tokens[0], out Func<IReadOnlyList<string>, AssetSoundKey?>? parse))

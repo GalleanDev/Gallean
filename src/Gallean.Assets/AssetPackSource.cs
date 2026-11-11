@@ -1,3 +1,5 @@
+using Gallean.Engine.Contracts;
+
 namespace Gallean.Assets;
 
 public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
@@ -32,6 +34,19 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
             foreach (AssetManifestSound sound in pack.Manifest.Sounds)
             {
                 soundLookup[sound.Id] = (pack, sound);
+            }
+        }
+
+        foreach (KeyValuePair<string, (AssetPack, AssetManifestSound)> entry in soundLookup.ToArray())
+        {
+            if (AssetSoundKey.TryParse(entry.Key, null, out AssetSoundKey? key) && key.Language is null)
+            {
+                foreach (Language language in Enum.GetValues<Language>())
+                {
+                    AssetSoundKey localizedKey = key with { Language = language };
+
+                    soundLookup.TryAdd(localizedKey.CanonicalId, entry.Value);
+                }
             }
         }
 

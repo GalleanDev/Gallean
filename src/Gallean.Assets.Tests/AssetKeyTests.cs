@@ -248,6 +248,15 @@ public sealed class AssetKeyTests
     }
 
     [Test]
+    public void SoundLanguageCanonicalIdTest()
+    {
+        Assert.That(new MenuMusic { Language = Language.German }.CanonicalId, Is.EqualTo("menu-music@de"));
+        Assert.That(new BriefingVoice(new ScenarioId("S108SC0000")) { Language = Language.Russian }.CanonicalId, Is.EqualTo("briefing-voice/s108sc0000@ru"));
+        Assert.That(new StackUnitResponse(new UnitDefinitionId("G000UU0001"), 2) { Language = Language.English }.CanonicalId, Is.EqualTo("stack-unit-response/g000uu0001/2@en"));
+        Assert.That(new AssetSoundKey.BattleEffect.Heal { Language = Language.Czech }.CanonicalId, Is.EqualTo("battle-effect-sound-heal@cs"));
+    }
+
+    [Test]
     public void ParseTest()
     {
         using (Assert.EnterMultipleScope())
@@ -333,6 +342,9 @@ public sealed class AssetKeyTests
             Assert.That(AssetSoundKey.Parse("stack-unit-attack/g000uu0001", null), Is.EqualTo(new StackUnitAttack(new UnitDefinitionId("G000UU0001"))));
             Assert.That(AssetSoundKey.Parse("ambient/city-in-flames", null), Is.EqualTo(new Ambient(AmbientSoundType.CityInFlames)));
             Assert.That(AssetSoundKey.Parse("ambient-ruin/3", null), Is.EqualTo(new AmbientRuin(3)));
+            Assert.That(AssetSoundKey.Parse("menu-music@de", null), Is.EqualTo(new MenuMusic { Language = Language.German }));
+            Assert.That(AssetSoundKey.Parse("briefing-voice/s108sc0000@ru", null), Is.EqualTo(new BriefingVoice(new ScenarioId("S108SC0000")) { Language = Language.Russian }));
+            Assert.That(AssetKey.Parse("stack-unit-response/g000uu0001/2@en", null), Is.EqualTo(new StackUnitResponse(new UnitDefinitionId("G000UU0001"), 2) { Language = Language.English }));
         }
     }
 
@@ -358,6 +370,11 @@ public sealed class AssetKeyTests
             Assert.That(AssetAnimationKey.TryParse("battle-unit-shadow/g000uu0001/paralyzed/attacker", null, out _), Is.False);
             Assert.That(AssetAnimationKey.TryParse("battle-unit-aura/g000uu0001/paralyzed/attacker", null, out _), Is.False);
             Assert.That(AssetSoundKey.TryParse("battle-effect-sound-status/shatterarmor", null, out _), Is.False);
+            Assert.That(AssetSoundKey.TryParse("menu-music@", null, out _), Is.False);
+            Assert.That(AssetSoundKey.TryParse("menu-music@klingon", null, out _), Is.False);
+            Assert.That(AssetSoundKey.TryParse("menu-music@RU", null, out _), Is.False);
+            Assert.That(AssetSoundKey.TryParse("menu-musik@ru", null, out _), Is.False);
+            Assert.That(AssetSoundKey.TryParse("menu-music@ru@ru", null, out _), Is.False);
         }
     }
 

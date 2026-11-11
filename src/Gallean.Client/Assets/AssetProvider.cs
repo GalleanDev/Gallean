@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using SkiaSharp;
 
 namespace Gallean.Client;
@@ -10,13 +11,15 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
     private const long SoundCacheSize = 128L * 1024 * 1024;
 
     private readonly IAssetSource<SKImage> assetSource;
+    private readonly GameSettingsSource gameSettingsSource;
     private readonly AssetCache<Sprite> spriteCache;
     private readonly AssetCache<Animation> animationCache;
     private readonly AssetCache<Sound> soundCache;
 
-    private AssetProvider(IAssetSource<SKImage> assetSource)
+    private AssetProvider(IAssetSource<SKImage> assetSource, GameSettingsSource gameSettingsSource)
     {
         this.assetSource = assetSource;
+        this.gameSettingsSource = gameSettingsSource;
 
         spriteCache = new AssetCache<Sprite>(SpriteCacheSize, LoadSprite, MeasureSprite, DisposeSprite);
         animationCache = new AssetCache<Animation>(AnimationCacheSize, LoadAnimation, MeasureAnimation, DisposeAnimation);
@@ -45,17 +48,30 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
 
     public AssetSoundMetadata? GetOptionalSoundMetadata(AssetSoundKey key)
     {
-        return assetSource.TryGetSoundMetadata(key);
+        AssetSoundKey localizedKey = MakeLocalizedSoundKey(key);
+
+        return assetSource.TryGetSoundMetadata(localizedKey);
     }
 
     public AssetCache<Sound>.Lease? GetOptionalSound(AssetSoundKey key)
     {
-        return soundCache.Acquire(key);
+        AssetSoundKey localizedKey = MakeLocalizedSoundKey(key);
+
+        return soundCache.Acquire(localizedKey);
     }
 
     public AssetStream? GetOptionalStream(AssetKey key)
     {
-        return assetSource.TryGetStream(key);
+        if (key is AssetSoundKey soundKey)
+        {
+            AssetSoundKey localizedKey = MakeLocalizedSoundKey(soundKey);
+
+            return assetSource.TryGetStream(localizedKey);
+        }
+        else
+        {
+            return assetSource.TryGetStream(key);
+        }
     }
 
     public void Dispose()
@@ -66,9 +82,9 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         assetSource.Dispose();
     }
 
-    public static AssetProvider LoadDefault()
+    public static AssetProvider LoadDefault(GameSettingsSource settings)
     {
-        AssetProvider? provider = TryLoadDefault();
+        AssetProvider? provider = TryLoadDefault(settings);
 
         if (provider is null)
         {
@@ -78,7 +94,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         return provider;
     }
 
-    public static AssetProvider? TryLoadDefault()
+    public static AssetProvider? TryLoadDefault(GameSettingsSource settings)
     {
         AssetPackSource<SKImage>? source = LoadPackSource();
 
@@ -87,7 +103,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
             return null;
         }
 
-        return new AssetProvider(source);
+        return new AssetProvider(source, settings);
     }
 
     private static AssetPackSource<SKImage>? LoadPackSource()
@@ -102,6 +118,13 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         {
             return null;
         }
+    }
+
+    private AssetSoundKey MakeLocalizedSoundKey(AssetSoundKey key)
+    {
+        GameSettings settings = gameSettingsSource.Current;
+
+        return key with { Language = key.Language ?? settings.EffectiveLanguage };
     }
 
     private Sprite? LoadSprite(AssetKey key)

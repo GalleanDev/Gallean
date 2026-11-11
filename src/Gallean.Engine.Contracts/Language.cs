@@ -1,4 +1,4 @@
-namespace Gallean.Configuration;
+namespace Gallean.Engine.Contracts;
 
 public enum Language
 {

@@ -716,4 +716,34 @@ public sealed class AssetPackTests
         Assert.That(pack.Manifest.Sparse, Is.True);
         Assert.That(FormatPack(pack), Is.EqualTo(["ground/human/0/0 sprite 10x12 px 10x12 @0,0 - [1]"]));
     }
+
+    [Test]
+    public void LocalizedSoundTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        using (AssetPack.Writer writer = AssetPack.Writer.Create(sb.GetPath("test.galleanpack"), sparse: false, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"))
+        {
+            writer.AddSound("briefing-voice/s108sc0000", MakeSound([1, 1]));
+            writer.AddSound("briefing-voice/s108sc0000@de", MakeSound([2, 2]));
+            writer.AddSound("menu-music", MakeSound([3, 3]));
+
+            writer.Complete();
+        }
+
+        using AssetPack pack = AssetPack.Read(sb.GetPath("test.galleanpack"));
+        AssetPackSource<ReadOnlyMemory<byte>> source = new([pack], NullDecoder.Instance);
+
+        AssetSoundKey voice = new AssetSoundKey.BriefingVoice(new ScenarioId("S108SC0000"));
+        AssetSoundKey music = new AssetSoundKey.MenuMusic();
+
+        Assert.That(ReadAll(Assert.NotNull(source.TryGetStream(voice))), Is.EqualTo(new byte[] { 1, 1 }));
+        Assert.That(ReadAll(Assert.NotNull(source.TryGetStream(voice with { Language = Language.German }))), Is.EqualTo(new byte[] { 2, 2 }));
+        Assert.That(ReadAll(Assert.NotNull(source.TryGetStream(voice with { Language = Language.Polish }))), Is.EqualTo(new byte[] { 1, 1 }));
+        Assert.That(ReadAll(Assert.NotNull(source.TryGetStream(music with { Language = Language.German }))), Is.EqualTo(new byte[] { 3, 3 }));
+        Assert.That(ReadAll(Assert.NotNull(source.TryGetSound(voice with { Language = Language.German })).Data), Is.EqualTo(new byte[] { 2, 2 }));
+        Assert.That(ReadAll(Assert.NotNull(source.TryGetSound(voice with { Language = Language.Polish })).Data), Is.EqualTo(new byte[] { 1, 1 }));
+        Assert.That(source.TryGetSoundMetadata(music with { Language = Language.German }), Is.EqualTo(new AssetSoundMetadata(null, null)));
+        Assert.That(source.TryGetSoundMetadata(new AssetSoundKey.BriefingMusic { Language = Language.German }), Is.Null);
+    }
 }

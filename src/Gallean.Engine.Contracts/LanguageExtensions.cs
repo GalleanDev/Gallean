@@ -1,9 +1,8 @@
 using System.Globalization;
-using Gallean.Configuration;
 
-namespace Gallean.Client;
+namespace Gallean.Engine.Contracts;
 
-internal static class LanguageExtensions
+public static class LanguageExtensions
 {
     extension(Language language)
     {

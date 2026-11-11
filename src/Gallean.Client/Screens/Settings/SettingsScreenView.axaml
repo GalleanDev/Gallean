@@ -3,6 +3,7 @@
              xmlns:local="clr-namespace:Gallean.Client"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:configuration="clr-namespace:Gallean.Configuration;assembly=Gallean.Configuration"
+             xmlns:contracts="clr-namespace:Gallean.Engine.Contracts;assembly=Gallean.Engine.Contracts"
              x:Class="Gallean.Client.SettingsScreenView"
              x:DataType="local:SettingsScreenViewModel">
 
@@ -150,7 +151,7 @@
                     MinWidth="120"
                     VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
-              <DataTemplate x:DataType="configuration:Language">
+              <DataTemplate x:DataType="contracts:Language">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                   <local:IconVisual Moniker="{Binding Converter={x:Static local:LanguageIconConverter.Instance}}"
                                     Width="18"

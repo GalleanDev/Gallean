@@ -1,3 +1,5 @@
+using Gallean.Engine.Contracts;
+
 namespace Gallean.Configuration.Tests;
 
 public sealed class GameSettingsTests

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Gallean.Engine.Contracts;
 
 namespace Gallean.Configuration;
 
