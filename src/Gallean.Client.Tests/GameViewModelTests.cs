@@ -171,6 +171,7 @@ public sealed class GameViewModelTests
         Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Antagonists"));
         Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
         Assert.That(world.ObjectiveText, Is.EqualTo("Destroy Hubert de Lalye"));
+        Assert.That(world.Status.TurnText, Is.EqualTo("Turn 2"));
 
         gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian));
 
@@ -178,12 +179,14 @@ public sealed class GameViewModelTests
         Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Империя"));
         Assert.That(world.GameModel.Texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Крепость Хазан"));
         Assert.That(world.ObjectiveText, Is.EqualTo("Уничтожить Юбера де Лали"));
+        Assert.That(world.Status.TurnText, Is.EqualTo("Ход 2"));
 
         gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English));
 
         Assert.That(world.GameModel.ScenarioName, Is.EqualTo("Antagonists"));
         Assert.That(world.GameModel.Texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
         Assert.That(world.ObjectiveText, Is.EqualTo("Destroy Hubert de Lalye"));
+        Assert.That(world.Status.TurnText, Is.EqualTo("Turn 2"));
     }
 
     [Test]

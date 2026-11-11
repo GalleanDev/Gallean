@@ -37,7 +37,7 @@ public sealed class WorldStatusViewModelTests
 
         WorldStatusViewModel expected = new(
             human.Id,
-            7,
+            "Turn 7",
             new AssetSpriteKey.LordFace(WorldRace.Human, 0, IsLarge: false),
             new ResourceSetViewModel(new WorldResourceSet(250, 1, 2, 3, 4, 5), ResourceSetProjection.All));
 

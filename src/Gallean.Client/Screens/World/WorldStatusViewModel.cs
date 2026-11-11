@@ -2,19 +2,17 @@ namespace Gallean.Client;
 
 internal sealed record WorldStatusViewModel(
     WorldPlayerId PlayerId,
-    int TurnNumber,
+    string TurnText,
     AssetSpriteKey.LordFace PortraitKey,
     ResourceSetViewModel Resources)
 {
-    public string TurnText => Tr("Turn {0}", TurnNumber);
-
     public static WorldStatusViewModel Create(WorldState state, WorldPlayerId playerId, WorldStatusViewModel? previous)
     {
         WorldPlayer player = state.Players[playerId];
 
         return new WorldStatusViewModel(
             playerId,
-            state.TurnInfo.TurnNumber,
+            Tr("Turn {0}", state.TurnInfo.TurnNumber),
             new AssetSpriteKey.LordFace(player.Race, player.FaceVariant.Value, false),
             CreateResources(player, previous));
     }
