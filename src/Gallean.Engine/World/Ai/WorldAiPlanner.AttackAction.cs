@@ -245,6 +245,7 @@ internal sealed partial class WorldAiPlanner
             return UtilityScore.Combine(
             [
                 Considerations.SummonRange(distance),
+                Considerations.PlayableDefender(context, battle),
                 Considerations.PowerRatio(battle.Power),
                 Considerations.ScenarioObjective(context, battle.Target),
                 Considerations.Survival(Context.Estimator, context, battle)

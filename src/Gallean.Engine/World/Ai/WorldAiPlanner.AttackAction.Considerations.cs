@@ -23,6 +23,7 @@ internal sealed partial class WorldAiPlanner
             private const int ProximityLimit = 250;
             private const int SummonAttackRange = 5;
             private const int SummonDistancePenaltyPercent = 16;
+            private const int NeutralDefenderScore = MaxScore / 10;
 
             private static readonly UtilityScore.ResponseCurve ExperienceCurve =
                 new UtilityScore.ResponseCurve.Polynomial(
@@ -74,6 +75,20 @@ internal sealed partial class WorldAiPlanner
                 else
                 {
                     return UtilityScore.Ratio((SummonAttackRange + 1 - distance) * SummonDistancePenaltyPercent, 100);
+                }
+            }
+
+            public static UtilityScore.Consideration PlayableDefender(ActionContext context, BattleInfo battle)
+            {
+                if (battle.DefenderId is not null)
+                {
+                    WorldPlayer defender = context.State.Players[battle.DefenderId.Value];
+
+                    return UtilityScore.Flag(WorldHelpers.IsRacePlayable(defender.Race), NeutralDefenderScore);
+                }
+                else
+                {
+                    return UtilityScore.Of(NeutralDefenderScore);
                 }
             }
 
