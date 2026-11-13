@@ -147,7 +147,8 @@ public sealed class DiplomacyTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        DiplomacyTabViewModel diplomacy = new(gameModel, gameViewModel);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new DiplomacyTabViewModel(gameModel, gameViewModel, owner)]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(management.Tabs[0]);
 
         Assert.That(diplomacy.TabHeader, Is.EqualTo("Diplomacy"));
         Assert.That(diplomacy.Step, Is.EqualTo(DiplomacyStep.Actions));
@@ -203,7 +204,8 @@ public sealed class DiplomacyTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        DiplomacyTabViewModel diplomacy = new(gameModel, gameViewModel);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new DiplomacyTabViewModel(gameModel, gameViewModel, owner)]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(management.Tabs[0]);
 
         diplomacy.SelectAction(diplomacy.Actions[1]);
 
@@ -301,7 +303,8 @@ public sealed class DiplomacyTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        DiplomacyTabViewModel diplomacy = new(gameModel, gameViewModel);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new DiplomacyTabViewModel(gameModel, gameViewModel, owner)]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(management.Tabs[0]);
 
         diplomacy.SelectAction(diplomacy.Actions[0]);
 
@@ -375,7 +378,8 @@ public sealed class DiplomacyTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        DiplomacyTabViewModel diplomacy = new(gameModel, gameViewModel);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new DiplomacyTabViewModel(gameModel, gameViewModel, owner)]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(management.Tabs[0]);
 
         diplomacy.SelectAction(diplomacy.Actions[0]);
 
@@ -434,7 +438,8 @@ public sealed class DiplomacyTabViewModelTests
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        DiplomacyTabViewModel diplomacy = new(gameModel, gameViewModel);
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new DiplomacyTabViewModel(gameModel, gameViewModel, owner)]);
+        DiplomacyTabViewModel diplomacy = Assert.IsOfType<DiplomacyTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatPlayers(diplomacy.Players), Is.EqualTo([
             "Ydrazel | Legions of the Damned | lord-face/heretic/0/small | lord-face/heretic/0/large | Peace (100) | Allied | selected"
