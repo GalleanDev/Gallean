@@ -390,7 +390,12 @@ internal sealed partial class WorldRenderComposer(
             }
         }
 
-        WorldPosition? hostileTarget = cursor.Path?.Encounter?.Accept(HostileEncounterVisitor.Instance, Empty.Value);
+        WorldPosition? hostileTarget = null;
+
+        if (!request.IsPlayingEvent || cursor.StackId == animatedStackId)
+        {
+            hostileTarget = cursor.Path?.Encounter?.Accept(HostileEncounterVisitor.Instance, Empty.Value);
+        }
 
         if (hostileTarget is not null)
         {
