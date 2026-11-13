@@ -1821,7 +1821,7 @@ public sealed class CityTabViewModelTests
         {
             Assert.That(screen.UpgradeLabel, Is.EqualTo("Upgrade city"));
             Assert.That(screen.UpgradeCost, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(150, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
-            Assert.That(screen.GarrisonSummary.Text, Is.EqualTo("Units in city: 1"));
+            Assert.That(screen.GarrisonSummary.Text, Is.EqualTo("Garrison: 1 / 1"));
             Assert.That(screen.UpgradeCommand.CanExecute(null), Is.True);
         }
 
@@ -1906,7 +1906,7 @@ public sealed class CityTabViewModelTests
         {
             Assert.That(screen.UpgradeLabel, Is.EqualTo("Upgrade city"));
             Assert.That(screen.UpgradeCost, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(75, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
-            Assert.That(screen.GarrisonSummary.Text, Is.EqualTo("Units in city: 1"));
+            Assert.That(screen.GarrisonSummary.Text, Is.EqualTo("Garrison: 1 / 1"));
             Assert.That(screen.UpgradeCommand.CanExecute(null), Is.True);
         }
 

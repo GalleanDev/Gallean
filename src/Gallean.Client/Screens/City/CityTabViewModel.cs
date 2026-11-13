@@ -948,7 +948,7 @@ internal sealed partial class CityTabViewModel
 
         CityTitle = GameModel.Texts.GetScenarioText(fortification.NameTextId);
         CitySummary = FormatCitySummary(fortification);
-        GarrisonSummary = FormatGarrisonSummary(garrison);
+        GarrisonSummary = FormatGarrisonSummary(garrisonInfo);
         CityStats = BuildCityStats(cityInfo);
         CityImageKey = ResolveCityImageKey(fortification);
         CapitalScene = BuildCapitalScene(fortification);
@@ -1052,9 +1052,9 @@ internal sealed partial class CityTabViewModel
         }
     }
 
-    private static TextSpans FormatGarrisonSummary(UnitGrid<WorldUnit> garrison)
+    private static TextSpans FormatGarrisonSummary(WorldGetGarrisonInfoCommand.Result info)
     {
-        return TrSpans("Units in city: {0:*}", garrison.GetUnits().Count());
+        return TrSpans("Garrison: {0:*} / {1:*}", info.OccupiedCapacity, info.TotalCapacity);
     }
 
     private static IReadOnlyList<StatRowViewModel> BuildCityStats(WorldGetCityInfoCommand.Result info)
