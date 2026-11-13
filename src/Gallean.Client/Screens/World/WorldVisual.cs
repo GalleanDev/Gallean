@@ -39,7 +39,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
     private bool lastFrameDidRedraw;
     private int lastFrameIndex = -1;
     private long lastFrameTimestamp;
-    private WorldScreenSnapshot? lastSnapshot;
+    private WorldRenderState? lastWorldState;
 
     static WorldVisual()
     {
@@ -447,6 +447,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
                 }
             }
 
+            WorldRenderState? worldState = snapshot?.WorldState;
             int frameIndex = AnimationRate.Sprites.GetFrameIndex(animationClock.Now);
             bool redraw = false;
 
@@ -455,7 +456,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
                 redraw = true;
             }
 
-            if (!ReferenceEquals(snapshotWorker.Current, lastSnapshot))
+            if (!ReferenceEquals(worldState, lastWorldState))
             {
                 redraw = true;
             }
@@ -494,7 +495,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
                 didRedraw = true;
                 redrawRequested = false;
                 lastFrameIndex = frameIndex;
-                lastSnapshot = snapshotWorker.Current;
+                lastWorldState = worldState;
                 InvalidateVisual();
             }
         }

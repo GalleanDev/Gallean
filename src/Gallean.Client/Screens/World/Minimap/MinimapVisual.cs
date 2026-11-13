@@ -14,7 +14,7 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
     private bool dragging;
     private Point lastCameraCenter;
     private double lastCameraZoom = double.NaN;
-    private WorldScreenSnapshot? lastSnapshot;
+    private WorldRenderState? lastWorldState;
     private bool redrawRequested = true;
     private WorldScreenSnapshotWorker snapshotWorker = null!;
 
@@ -83,6 +83,7 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
 
     protected override void OnFrame(TimeSpan frameTime)
     {
+        WorldRenderState? worldState = snapshotWorker.Current?.WorldState;
         bool redraw = false;
 
         if (redrawRequested)
@@ -95,7 +96,7 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
             redraw = true;
         }
 
-        if (!ReferenceEquals(snapshotWorker.Current, lastSnapshot))
+        if (!ReferenceEquals(worldState, lastWorldState))
         {
             redraw = true;
         }
@@ -110,7 +111,7 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
                 lastCameraZoom = camera.Zoom;
             }
 
-            lastSnapshot = snapshotWorker.Current;
+            lastWorldState = worldState;
             InvalidateVisual();
         }
     }

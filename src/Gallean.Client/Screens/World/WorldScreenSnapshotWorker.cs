@@ -84,10 +84,10 @@ internal sealed class WorldScreenSnapshotWorker(
                 }
             }
 
-            WorldScreenSnapshot? snapshot;
+            WorldScreenSnapshot snapshot;
             try
             {
-                snapshot = await BuildAsync(input);
+                snapshot = await GetSnapshotAsync(input);
             }
             catch (Exception ex)
             {
@@ -100,26 +100,37 @@ internal sealed class WorldScreenSnapshotWorker(
                 return;
             }
 
-            if (snapshot is not null)
-            {
-                current = snapshot;
-            }
-
+            current = snapshot;
             built = input;
         }
     }
 
-    private async Task<WorldScreenSnapshot?> BuildAsync(WorldRenderRequest request)
+    private async Task<WorldScreenSnapshot> GetSnapshotAsync(WorldRenderRequest request)
+    {
+        long startTimestamp = Stopwatch.GetTimestamp();
+        WorldRenderState state = composer.Compose(request);
+        WorldScreenSnapshot? snapshot = current;
+        WorldScreenSnapshot result;
+
+        if (snapshot is null || !ReferenceEquals(snapshot.WorldState, state))
+        {
+            result = await BuildAsync(request, state, snapshot, startTimestamp);
+        }
+        else
+        {
+            result = snapshot with { RenderRequest = request };
+        }
+
+        return result;
+    }
+
+    private async Task<WorldScreenSnapshot> BuildAsync(
+        WorldRenderRequest request,
+        WorldRenderState state,
+        WorldScreenSnapshot? previous,
+        long startTimestamp)
     {
         bool measure = diagnostics.IsEnabled;
-        long buildStartTimestamp = measure ? Stopwatch.GetTimestamp() : 0;
-        WorldRenderState state = composer.Compose(request);
-        WorldScreenSnapshot? previous = current;
-
-        if (previous is not null && ReferenceEquals(previous.WorldState, state))
-        {
-            return null;
-        }
 
         if (measure && previous is not null && !state.Cursors.SequenceEqual(previous.WorldState.Cursors))
         {
@@ -132,7 +143,7 @@ internal sealed class WorldScreenSnapshotWorker(
 
         if (measure)
         {
-            diagnostics.AddBuild(Stopwatch.GetElapsedTime(buildStartTimestamp));
+            diagnostics.AddBuild(Stopwatch.GetElapsedTime(startTimestamp));
         }
 
         return new WorldScreenSnapshot(request, worldContent, state);
