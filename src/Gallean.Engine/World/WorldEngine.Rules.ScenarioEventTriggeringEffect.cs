@@ -562,15 +562,13 @@ internal partial class WorldEngine
                 return EventRuleResult<WorldEvent>.Empty;
             }
 
-            return EventRuleResult<WorldEvent>.Append(new WorldScenarioEffectEvent(ev, EffectIndex: 0, Checks: []));
+            return EventRuleResult<WorldEvent>.Append(new WorldScenarioEffectEvent(ev, definition.Effects[0], definition.Effects[1..], []));
         }
 
         public override EventRuleResult<WorldEvent> Visit(WorldScenarioEffectEvent ev, WorldState state)
         {
-            ScenarioEventDefinition definition = Context.Scenario.GetEvent(ev.TriggeredEvent.EventId);
-            ScenarioEventEffect effect = definition.Effects[ev.EffectIndex];
             ScenarioEventEffectContext effectContext = new(ev.TriggeredEvent, state);
-            ScenarioEventEffectResult result = effect.Accept(this, effectContext);
+            ScenarioEventEffectResult result = ev.Effect.Accept(this, effectContext);
             List<WorldScenarioCheckEvent> checks = [.. ev.Checks];
 
             foreach (WorldEvent effectEvent in result.Events)
@@ -586,11 +584,9 @@ internal partial class WorldEngine
                 }
             }
 
-            int nextEffectIndex = ev.EffectIndex + 1;
-
-            if (nextEffectIndex < definition.Effects.Length)
+            if (!ev.RemainingEffects.IsEmpty)
             {
-                WorldScenarioEffectEvent nextEffectEvent = new(ev.TriggeredEvent, nextEffectIndex, [.. checks]);
+                WorldScenarioEffectEvent nextEffectEvent = new(ev.TriggeredEvent, ev.RemainingEffects[0], ev.RemainingEffects[1..], [.. checks]);
 
                 return EventRuleResult<WorldEvent>.Consume([.. result.Events, nextEffectEvent]);
             }
