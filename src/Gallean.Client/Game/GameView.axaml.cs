@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
+using Avalonia.Data.Core;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
@@ -228,7 +229,22 @@ internal sealed partial class GameView : Window
         {
             BindingExpressionBase? expression = BindingOperations.GetBindingExpressionBase(target, property);
 
-            expression?.UpdateTarget();
+            if (expression is not null)
+            {
+                if (ReadsNamedElement(expression))
+                {
+                    continue;
+                }
+                else
+                {
+                    expression.UpdateTarget();
+                }
+            }
+        }
+
+        static bool ReadsNamedElement(BindingExpressionBase expression)
+        {
+            return expression is UntypedBindingExpressionBase untyped && untyped.Description.Contains('#');
         }
     }
 
