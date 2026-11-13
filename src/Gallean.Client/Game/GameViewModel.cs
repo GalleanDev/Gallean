@@ -272,6 +272,12 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     }
 
     [RelayCommand]
+    private void OpenExitPrompt()
+    {
+        OpenScreen(new ExitPromptViewModel(this));
+    }
+
+    [RelayCommand]
     private void ToggleWindowed()
     {
         IsWindowed = !IsWindowed;

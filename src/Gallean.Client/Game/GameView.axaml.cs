@@ -83,7 +83,14 @@ internal sealed partial class GameView : Window
 
         e.Cancel = true;
 
-        if (exitSaveTask is null)
+        if (e.CloseReason == WindowCloseReason.WindowClosing)
+        {
+            if (game.TopScreen is not ExitPromptViewModel)
+            {
+                game.OpenExitPromptCommand.Execute(null);
+            }
+        }
+        else if (exitSaveTask is null)
         {
             exitSaveTask = SaveAndCloseAsync(game);
             exitSaveTask.FileAndForget();

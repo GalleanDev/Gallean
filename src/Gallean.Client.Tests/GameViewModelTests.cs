@@ -2351,4 +2351,50 @@ public sealed class GameViewModelTests
         Assert.That(gameViewModel.Screens, Is.EqualTo([menu]));
         Assert.That(audioPlayer.Actions, Is.EqualTo(["Music:menu-music from track 0", "Sound:beep"]));
     }
+
+    [Test]
+    public async Task ExitPromptTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+
+        await saveStore.SaveAsync(
+            new GameSaveId(1),
+            new GameSaveMetadata("First save", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"),
+            session.World.State);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder().WithGameLoader(gameLoader).WithSaveStore(saveStore).Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(new GameSaveEntry(
+            new GameSaveId(1),
+            Result<GameSaveMetadata>.FromValue(new GameSaveMetadata("First save", GameSaveType.Manual, "S137SC0000", "Conquest of Thelena", 9, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"))));
+
+        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        world.CompleteGameStart();
+
+        gameViewModel.OpenExitPromptCommand.Execute(null);
+
+        ExitPromptViewModel prompt = Assert.IsOfType<ExitPromptViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo<AbstractScreenViewModel>([world, prompt]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz"]));
+
+        gameViewModel.EscapeCommand.Execute(null);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz"]));
+
+        gameViewModel.OpenExitPromptCommand.Execute(null);
+
+        ExitPromptViewModel secondPrompt = Assert.IsOfType<ExitPromptViewModel>(gameViewModel.TopScreen);
+
+        await secondPrompt.ExitCommand.ExecuteAsync(null);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo<AbstractScreenViewModel>([world, secondPrompt]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz", "saves/save-2.json.gz"]));
+    }
 }

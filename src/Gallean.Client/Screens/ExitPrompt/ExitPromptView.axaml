@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.ExitPromptView"
+             x:DataType="local:ExitPromptViewModel">
+
+  <Border Background="{StaticResource ModalBackdropBrush}">
+    <local:ModalPanel Classes="accent" MinWidth="440" MaxWidth="620" Padding="28,24" Title="{local:Text 'Exit the game'}" InitialFocus="{Binding #ExitButton}">
+
+      <local:ModalPanel.Footer>
+        <Grid Classes="pill-group" ColumnDefinitions="*,Auto,Auto,*">
+          <Button x:Name="ExitButton"
+                  Grid.Column="1"
+                  Content="{local:Text 'Exit'}"
+                  Classes="pill primary"
+                  local:PlateChrome.TextureSeed="1"
+                  Command="{Binding ExitCommand}"
+                  MinWidth="150" />
+          <Button Grid.Column="2"
+                  Content="{local:Text 'Cancel'}"
+                  Classes="pill"
+                  local:PlateChrome.TextureSeed="2"
+                  Command="{Binding CloseCommand}"
+                  MinWidth="150" />
+        </Grid>
+      </local:ModalPanel.Footer>
+
+      <TextBlock Text="{local:Text 'Do you want to exit the game?'}"
+                 Classes="body"
+                 Foreground="{StaticResource PrimaryTextBrush}"
+                 TextWrapping="Wrap"
+                 TextAlignment="Center" />
+
+    </local:ModalPanel>
+  </Border>
+
+</UserControl>

@@ -26,6 +26,7 @@ internal sealed class ViewDataTemplate : IDataTemplate
             DiplomacyTabViewModel => new DiplomacyTabView(),
             ErrorScreenViewModel => new ErrorScreenView(),
             ExchangeTabViewModel => new ExchangeTabView(),
+            ExitPromptViewModel => new ExitPromptView(),
             GameEndedScreenViewModel => new GameEndedScreenView(),
             GameMenuViewModel => new GameMenuView(),
             HotseatTurnScreenViewModel => new HotseatTurnScreenView(),
