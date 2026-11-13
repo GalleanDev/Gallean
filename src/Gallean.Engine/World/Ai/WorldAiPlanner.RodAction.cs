@@ -99,7 +99,7 @@ internal sealed partial class WorldAiPlanner
             (WorldUnit leader, _, _) = stack.GetLeader(Context.Engine.Definitions);
             LeaderAbility leaderAbilities = Context.Engine.UnitStats.GetWorldUnitAbilities(leader);
 
-            if (!leaderAbilities.HasFlag(LeaderAbility.Rod) || stack.MovementPoints <= 0)
+            if (!leaderAbilities.HasFlag(LeaderAbility.Rod) || !leader.IsAlive || stack.MovementPoints <= 0)
             {
                 return null;
             }
