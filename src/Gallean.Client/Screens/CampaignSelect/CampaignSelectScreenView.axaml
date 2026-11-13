@@ -120,6 +120,7 @@
                                HorizontalAlignment="Left"
                                Reveal="{x:Static local:AnimatedTextReveal.SmokeGlyphs}"
                                SmokeColor="{x:Static local:Theme+ScenarioSelect.SmokeColor}"
+                               IsSkippable="False"
                                RevealDelay="0:0:0.2" />
 
       <Border Grid.Row="1"

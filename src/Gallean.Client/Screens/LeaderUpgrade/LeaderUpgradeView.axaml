@@ -47,6 +47,7 @@
                                      Foreground="{StaticResource PrimaryTextBrush}"
                                      TextWrapping="Wrap"
                                      Reveal="{x:Static local:AnimatedTextReveal.SmokeWords}"
+                                     IsSkippable="False"
                                      RevealDelay="0:0:0.2"
                                      GlowColor="{x:Static local:Theme+LeaderUpgrade.GlowColor}"
                                      SmokeColor="{x:Static local:Theme+LeaderUpgrade.SmokeColor}"

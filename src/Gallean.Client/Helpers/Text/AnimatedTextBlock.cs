@@ -36,6 +36,9 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
     public static readonly StyledProperty<TimeSpan> RevealDelayProperty =
         AvaloniaProperty.Register<AnimatedTextBlock, TimeSpan>(nameof(RevealDelay));
 
+    public static readonly StyledProperty<bool> IsSkippableProperty =
+        AvaloniaProperty.Register<AnimatedTextBlock, bool>(nameof(IsSkippable), true);
+
     public static readonly StyledProperty<Color> GlowColorProperty =
         AvaloniaProperty.Register<AnimatedTextBlock, Color>(nameof(GlowColor));
 
@@ -73,6 +76,12 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
     {
         get => GetValue(RevealDelayProperty);
         set => SetValue(RevealDelayProperty, value);
+    }
+
+    public bool IsSkippable
+    {
+        get => GetValue(IsSkippableProperty);
+        set => SetValue(IsSkippableProperty, value);
     }
 
     public Color GlowColor
@@ -407,7 +416,7 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
 
     private void OnTopLevelPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (!IsAnimationComplete())
+        if (IsSkippable && !IsAnimationComplete())
         {
             e.Handled = true;
             CompleteAnimation();
@@ -416,7 +425,7 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
 
     private void OnTopLevelKeyDown(object? sender, KeyEventArgs e)
     {
-        if (!IsAnimationComplete())
+        if (IsSkippable && !IsAnimationComplete())
         {
             e.Handled = true;
             CompleteAnimation();
