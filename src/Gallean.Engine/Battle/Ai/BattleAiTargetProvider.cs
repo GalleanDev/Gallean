@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Gallean.Engine;
 
 internal sealed class BattleAiTargetProvider(IEngineContext context)
@@ -5,9 +7,9 @@ internal sealed class BattleAiTargetProvider(IEngineContext context)
     private readonly IEngineContext engineContext =
         new EngineContext(new FixedRandomProvider(), context.Definitions, context.UnitStats, context.Scenario, context.Globals);
 
-    public IReadOnlyList<(BattleAttackTarget Target, UnitAttackDefinition Attack)> GetAttackTargets(BattleState state, BattleUnit attacker)
+    public IReadOnlyList<(BattleAttackTarget Target, ImmutableArray<UnitAttackDefinition> Attacks)> GetAttackTargets(BattleState state, BattleUnit attacker)
     {
-        List<(BattleAttackTarget Target, UnitAttackDefinition Attack)> targets = [];
+        List<(BattleAttackTarget Target, ImmutableArray<UnitAttackDefinition> Attacks)> targets = [];
 
         foreach (BattleUnitId id in state.GetAllUnitIds())
         {
@@ -16,7 +18,7 @@ internal sealed class BattleAiTargetProvider(IEngineContext context)
 
             if (!info.Failed)
             {
-                targets.Add((target, info.Attacks[0]));
+                targets.Add((target, info.Attacks));
             }
         }
 
@@ -27,7 +29,7 @@ internal sealed class BattleAiTargetProvider(IEngineContext context)
 
             if (!info.Failed)
             {
-                targets.Add((target, info.Attacks[0]));
+                targets.Add((target, info.Attacks));
             }
         }
 

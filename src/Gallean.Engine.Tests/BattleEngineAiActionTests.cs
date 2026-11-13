@@ -1261,4 +1261,54 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
         ]);
     }
+
+    [Test]
+    public void WardHealAttackTest()
+    {
+        UnitWard ward = new UnitAttackSourceWard(UnitAttackSource.Fire, UnitWardCategory.Once);
+        UnitModifierDefinition wardModifier = TestHelpers.SimpleModifier("fireward") with { Wards = [ward] };
+        UnitDefinition healerDefinition = TestHelpers.SimpleUnitDefinition("healer", maxHitpoints: 30, initiative: 50, damage: 0) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("healer-ward"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.GiveProtection,
+                WardModifierIds = [wardModifier.Id]
+            },
+            SecondaryAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("healer-heal"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Heal,
+                Heal = 10
+            },
+            Wards = [ward]
+        };
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 5) with
+        {
+            Wards = [ward]
+        };
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 30, initiative: 10, damage: 5);
+
+        BattleUnit healer = Unit(0, healerDefinition.Id, BattleSide.Attacker, hitpoints: 30);
+        BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 20);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 30);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(healerDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(wardModifier)
+            .WithAttacker(healer, new GridPosition(0, 0))
+            .WithAttacker(ally, new GridPosition(0, 1))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(healer.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("healer-ward"), new UnitAttackDefinitionId("healer-heal")]),
+            new BattleUnitAttackedEvent(healer.Id, ally.Id, new UnitAttackDefinitionId("healer-heal")),
+            new BattleUnitAttackHitEvent(healer.Id, ally.Id, new UnitAttackDefinitionId("healer-heal"), 0),
+            new BattleUnitHealedEvent(ally.Id, 30),
+            new BattleUnitTurnEndingEvent(healer.Id),
+            new BattleUnitTurnEndedEvent(healer.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
 }
