@@ -4875,4 +4875,53 @@ public sealed class WorldEngineAiTests
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P1 1000] Move Main -> (2, 0)"]));
     }
+
+    [Test]
+    public void CreateRodAlliedLandTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(9, 5, 'H');
+
+        UnitDefinition planterDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("planter", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 2) with
+            {
+                LeaderCategory = UnitLeaderCategory.Rod,
+                LeaderAbilities = LeaderAbility.Rod
+            };
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(150, 0, 0, 0, 0, 0)
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldRelation alliance = new(
+            new WorldRelationId(WorldRace.Undead, WorldRace.Human),
+            Current: 100,
+            Previous: 100,
+            Alliance: true,
+            AllianceTurn: 1,
+            PermanentWar: false,
+            PermanentAlliance: false);
+
+        WorldStack planterStack = MyStack(new WorldUnitId("planter"), "Planter", player1.Id, new WorldPosition(0, 2), planterDefinition, 100, 20, WorldStackOrder.Normal.Instance);
+        WorldResourceNode node = new(new WorldResourceNodeId("node"), new WorldPosition(4, 2), WorldResourceType.Gold, AiPriority: 3);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(planterDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithRelation(alliance)
+            .WithStack(planterStack)
+            .WithResourceNode(node)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
+        Assert.That(session.World.State.Rods.Values, Is.Empty);
+    }
 }

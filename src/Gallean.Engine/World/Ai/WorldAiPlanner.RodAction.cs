@@ -211,20 +211,20 @@ internal sealed partial class WorldAiPlanner
 
                 foreach (WorldResourceNode node in state.ResourceNodes.Values)
                 {
-                    if (plan.GetLandOwner(node.Position) == stack.OwnerId)
-                    {
-                        continue;
-                    }
+                    WorldPlayerId? landOwner = plan.GetLandOwner(node.Position);
 
-                    if (!HasAdjacentRod(state, plan, node))
+                    if (landOwner is null || DiplomacyCalculator.IsHostile(state, stack.OwnerId, landOwner.Value))
                     {
-                        foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(node.Position, 1, state.Map))
+                        if (!HasAdjacentRod(state, plan, node))
                         {
-                            if (pathMap.TryGetPath(position, WorldMovementLimit.Unlimited, out WorldPath? _))
+                            foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(node.Position, 1, state.Map))
                             {
-                                WorldCreateRodCommand command = new(stack.Id, position);
+                                if (pathMap.TryGetPath(position, WorldMovementLimit.Unlimited, out WorldPath? _))
+                                {
+                                    WorldCreateRodCommand command = new(stack.Id, position);
 
-                                yield return new Target(position, Context.Engine.Globals.RodPlantRange, attitude.CreateRodInterest, command);
+                                    yield return new Target(position, Context.Engine.Globals.RodPlantRange, attitude.CreateRodInterest, command);
+                                }
                             }
                         }
                     }
