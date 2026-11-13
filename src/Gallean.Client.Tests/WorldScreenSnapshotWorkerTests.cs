@@ -28,7 +28,8 @@ public sealed class WorldScreenSnapshotWorkerTests
             state.TurnInfo.CurrentPlayerId,
             Cursor: WorldCursor.Empty,
             FogEnabled: false,
-            Animation: null);
+            Animation: null,
+            IsPlayingEvent: false);
     }
 
     [Test]

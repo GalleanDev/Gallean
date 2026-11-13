@@ -1957,7 +1957,8 @@ internal sealed partial class WorldScreenViewModel :
             ViewPlayerId,
             cursor,
             FogEnabled,
-            eventActionPlayer.ActiveAnimation));
+            eventActionPlayer.ActiveAnimation,
+            eventQueue.PlayingEntry is not null));
     }
 
     private void SetRenderRequest(WorldRenderRequest request)

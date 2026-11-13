@@ -27,7 +27,8 @@ public sealed class WorldRenderStatePerformanceTests
             state.TurnInfo.CurrentPlayerId,
             Cursor: WorldCursor.Empty,
             FogEnabled: true,
-            Animation: null);
+            Animation: null,
+            IsPlayingEvent: false);
 
         PerformanceMeasurement measurement = PerformanceTestHelpers.Measure(() =>
         {

@@ -14,7 +14,8 @@ public sealed class WorldRenderComposerTests
             state.TurnInfo.CurrentPlayerId,
             Cursor: cursor,
             FogEnabled: fogEnabled,
-            Animation: null);
+            Animation: null,
+            IsPlayingEvent: false);
     }
 
     private static WorldRenderState Compose(
@@ -4382,6 +4383,30 @@ public sealed class WorldRenderComposerTests
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
 
         Assert.That(renderState.Reach, Is.EqualTo(new ReachOverlay([new WorldPosition(1, 1), new WorldPosition(0, 1), new WorldPosition(2, 1)])));
+    }
+
+    [Test]
+    public void PlayingEventTest()
+    {
+        (WorldState state, IGameDefinitionProvider definitions, WorldStackId stackId) = BuildStackWorld(new WorldUnitId("leader"));
+
+        WorldPath path = new([
+            new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), Cost: 2, Turn: 0)
+        ]);
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stackId) with
+        {
+            ReachablePositions = [new WorldPosition(0, 1), new WorldPosition(2, 1)],
+            Path = new WorldPathSelection(new WorldPosition(2, 1), path, new WorldPath([]), Encounter: null)
+        };
+
+        WorldRenderRequest request = MakeSceneRequest(state, fogEnabled: false, cursor: cursor) with { IsPlayingEvent = true };
+        WorldRenderComposer composer = new(definitions, GameScenarioProvider.Empty, new TestMetadataProviderBuilder().Build());
+        WorldRenderState renderState = composer.Compose(request);
+
+        Assert.That(renderState.Reach, Is.Null);
+        Assert.That(renderState.SelectedPath, Is.Null);
+        Assert.That(renderState.Highlights, Is.EqualTo(new HighlightOverlay([])));
     }
 
     [Test]

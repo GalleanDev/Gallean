@@ -7,7 +7,8 @@ internal sealed record WorldRenderRequest(
     WorldPlayerId ViewPlayerId,
     WorldCursor Cursor,
     bool FogEnabled,
-    WorldAnimationState? Animation)
+    WorldAnimationState? Animation,
+    bool IsPlayingEvent)
 {
     public bool Equals(WorldRenderRequest? other)
     {
@@ -25,7 +26,8 @@ internal sealed record WorldRenderRequest(
                ViewPlayerId == other.ViewPlayerId &&
                Cursor == other.Cursor &&
                FogEnabled == other.FogEnabled &&
-               Animation == other.Animation;
+               Animation == other.Animation &&
+               IsPlayingEvent == other.IsPlayingEvent;
     }
 
     public override int GetHashCode()
@@ -37,6 +39,7 @@ internal sealed record WorldRenderRequest(
         hash.Add(Cursor);
         hash.Add(FogEnabled);
         hash.Add(Animation);
+        hash.Add(IsPlayingEvent);
 
         return hash.ToHashCode();
     }

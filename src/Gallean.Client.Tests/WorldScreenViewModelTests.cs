@@ -988,10 +988,13 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
         Assert.That(world.RenderRequest.Animation, Is.EqualTo(new WorldAnimationState.Pause(TimeSpan.FromSeconds(0.25))));
+        Assert.That(world.RenderRequest.IsPlayingEvent, Is.True);
 
         world.CompleteAnimation();
 
         ScenarioEventPopupViewModel popup = Assert.IsOfType<ScenarioEventPopupViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(world.RenderRequest.IsPlayingEvent, Is.True);
 
         Assert.That(
             popup.Messages,
@@ -999,6 +1002,10 @@ public sealed class WorldScreenViewModelTests
             {
                 new(new ScenarioEventPopupMessage([new ScenarioTextSpan("Welcome.", ScenarioTextSpanType.Text)], "name", new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leader.Id)), IsPortraitLeft: false))
             }));
+
+        gameViewModel.CloseScreen(popup);
+
+        Assert.That(world.RenderRequest.IsPlayingEvent, Is.False);
     }
 
     [Test]
