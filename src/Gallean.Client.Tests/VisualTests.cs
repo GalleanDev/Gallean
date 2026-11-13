@@ -4281,6 +4281,7 @@ public sealed class VisualTests
         UnitDefinition leaderDefinition = scenarioModel.Definitions.GetUnit(humans.Leaders[0]);
         ItemDefinition healingPotion = scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG0001"));
         ItemDefinition manaPotion = scenarioModel.Definitions.GetItem(new ItemDefinitionId("G000IG0002"));
+        UnitModifierDefinition manaPotionBoost = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um2002"));
 
         WorldMap map = TestHelpers.SimpleMap(8, 8);
 
@@ -4328,6 +4329,7 @@ public sealed class VisualTests
             .WithDefinition(leaderDefinition)
             .WithDefinition(healingPotion)
             .WithDefinition(manaPotion)
+            .WithDefinition(manaPotionBoost)
             .WithStack(stack)
             .WithSite(site)
             .WithSubrace(TestHelpers.NeutralSubrace)
