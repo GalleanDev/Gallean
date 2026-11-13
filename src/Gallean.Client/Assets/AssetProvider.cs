@@ -11,14 +11,16 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
     private const long SoundCacheSize = 128L * 1024 * 1024;
 
     private readonly IAssetSource<SKImage> assetSource;
+    private readonly AssetImageDecoder imageDecoder;
     private readonly GameSettingsSource gameSettingsSource;
     private readonly AssetCache<Sprite> spriteCache;
     private readonly AssetCache<Animation> animationCache;
     private readonly AssetCache<Sound> soundCache;
 
-    private AssetProvider(IAssetSource<SKImage> assetSource, GameSettingsSource gameSettingsSource)
+    private AssetProvider(IAssetSource<SKImage> assetSource, AssetImageDecoder imageDecoder, GameSettingsSource gameSettingsSource)
     {
         this.assetSource = assetSource;
+        this.imageDecoder = imageDecoder;
         this.gameSettingsSource = gameSettingsSource;
 
         spriteCache = new AssetCache<Sprite>(SpriteCacheSize, LoadSprite, MeasureSprite, DisposeSprite);
@@ -74,6 +76,16 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         }
     }
 
+    public void SetMaxPixelScale(int maxPixelScale)
+    {
+        if (imageDecoder.MaxPixelScale != maxPixelScale)
+        {
+            imageDecoder.MaxPixelScale = maxPixelScale;
+            spriteCache.Clear();
+            animationCache.Clear();
+        }
+    }
+
     public void Dispose()
     {
         spriteCache.Dispose();
@@ -96,23 +108,24 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
 
     public static AssetProvider? TryLoadDefault(GameSettingsSource settings)
     {
-        AssetPackSource<SKImage>? source = LoadPackSource();
+        AssetImageDecoder imageDecoder = new();
+        AssetPackSource<SKImage>? source = LoadPackSource(imageDecoder);
 
         if (source is null)
         {
             return null;
         }
 
-        return new AssetProvider(source, settings);
+        return new AssetProvider(source, imageDecoder, settings);
     }
 
-    private static AssetPackSource<SKImage>? LoadPackSource()
+    private static AssetPackSource<SKImage>? LoadPackSource(AssetImageDecoder imageDecoder)
     {
         IReadOnlyList<AssetPack>? packs = PackLoader.Load();
 
         if (packs is not null)
         {
-            return new AssetPackSource<SKImage>(packs, ImageDecoder.Instance);
+            return new AssetPackSource<SKImage>(packs, imageDecoder);
         }
         else
         {

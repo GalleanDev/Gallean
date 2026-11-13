@@ -267,4 +267,35 @@ public sealed class AssetCacheTests
 
         Assert.That(content.Disposed, Is.True);
     }
+
+    [Test]
+    public void ClearTest()
+    {
+        TestLoader loader = new(contentSize: 100);
+        using AssetCache<TestContent> cache = new(sizeLimit: long.MaxValue, loader.Load, Measure, Dispose);
+
+        AssetCache<TestContent>.Lease held = Assert.NotNull(cache.Acquire(Key(1)));
+        TestContent heldContent = held;
+        AssetCache<TestContent>.Lease released = Assert.NotNull(cache.Acquire(Key(2)));
+        TestContent releasedContent = released;
+
+        released.Dispose();
+        cache.Clear();
+
+        Assert.That(cache.Count, Is.EqualTo(0));
+        Assert.That(releasedContent.Disposed, Is.True);
+        Assert.That(heldContent.Disposed, Is.False);
+
+        AcquireAndRelease(cache, 1);
+        AcquireAndRelease(cache, 2);
+
+        Assert.That(loader.LoadCount(Key(1)), Is.EqualTo(2));
+        Assert.That(loader.LoadCount(Key(2)), Is.EqualTo(2));
+        Assert.That(heldContent.Disposed, Is.False);
+
+        held.Dispose();
+
+        Assert.That(heldContent.Disposed, Is.True);
+        Assert.That(cache.Count, Is.EqualTo(2));
+    }
 }

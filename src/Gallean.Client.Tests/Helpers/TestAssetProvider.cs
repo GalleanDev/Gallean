@@ -143,6 +143,10 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
         return resolveSound(key);
     }
 
+    public void SetMaxPixelScale(int maxPixelScale)
+    {
+    }
+
     public void Dispose()
     {
         spriteCache.Dispose();

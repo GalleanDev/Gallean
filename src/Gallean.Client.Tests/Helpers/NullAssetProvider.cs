@@ -17,4 +17,8 @@ internal sealed class NullAssetProvider : IAssetProvider, IStaticInstance<NullAs
     public AssetSoundMetadata? GetOptionalSoundMetadata(AssetSoundKey key) => null;
 
     public AssetStream? GetOptionalStream(AssetKey key) => null;
+
+    public void SetMaxPixelScale(int maxPixelScale)
+    {
+    }
 }

@@ -5,7 +5,7 @@ public sealed partial class AssetCache<TContent>
     public sealed partial class Lease : IDisposable
     {
         private readonly AssetCache<TContent> cache;
-        private Entry? entry;
+        private LinkedListNode<Entry>? node;
 
         private Lease(AssetCache<TContent> cache)
         {
@@ -16,7 +16,7 @@ public sealed partial class AssetCache<TContent>
 
         public void Dispose()
         {
-            Entry? released = Interlocked.Exchange(ref entry, null);
+            LinkedListNode<Entry>? released = Interlocked.Exchange(ref node, null);
 
             if (released is not null)
             {

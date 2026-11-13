@@ -9,14 +9,14 @@ public sealed class AssetPackTests
 {
     private sealed class NullDecoder : IAssetDecoder<ReadOnlyMemory<byte>>, IStaticInstance<NullDecoder>
     {
-        public ReadOnlyMemory<byte> DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data)
+        public AssetSprite DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data)
         {
-            return data;
+            return new AssetSprite(metadata, data);
         }
 
-        public ReadOnlyMemory<byte> DecodeLayer(int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data)
+        public AssetSpriteLayer DecodeLayer(AssetSpriteMetadata frame, int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data)
         {
-            return data;
+            return new AssetSpriteLayer(pixelWidth, pixelHeight, data);
         }
     }
 

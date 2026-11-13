@@ -8,7 +8,7 @@ public sealed partial class AssetCache<TContent>
         {
             private readonly Stack<Lease> items = new();
 
-            public Lease Rent(AssetCache<TContent> cache, Entry entry, TContent value)
+            public Lease Rent(AssetCache<TContent> cache, LinkedListNode<Entry> node, TContent value)
             {
                 Lease lease;
 
@@ -21,7 +21,7 @@ public sealed partial class AssetCache<TContent>
                     lease = new Lease(cache);
                 }
 
-                lease.entry = entry;
+                lease.node = node;
                 lease.Value = value;
 
                 return lease;

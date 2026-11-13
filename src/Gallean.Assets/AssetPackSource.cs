@@ -59,7 +59,7 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
     {
         if (sprites.TryGetValue(key.CanonicalId, out (AssetPack Pack, AssetManifestSprite Sprite) found))
         {
-            return Decode(found.Pack, found.Sprite);
+            return decoder.DecodeFrame(found.Sprite.Metadata, found.Pack.ReadSprite(found.Sprite));
         }
         else
         {
@@ -93,7 +93,7 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
             return null;
         }
 
-        return Decode(found.Pack, layer);
+        return decoder.DecodeLayer(found.Sprite.Metadata, layer.PixelWidth, layer.PixelHeight, found.Pack.ReadSpriteLayer(layer));
     }
 
     public IReadOnlyList<AssetSpriteLayer<TPixels>>? TryGetAnimationLayer(AssetAnimationKey key, AssetSpriteLayerType type)
@@ -114,7 +114,7 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
                 return null;
             }
 
-            frames.Add(Decode(found.Pack, layer));
+            frames.Add(decoder.DecodeLayer(frame.Metadata, layer.PixelWidth, layer.PixelHeight, found.Pack.ReadSpriteLayer(layer)));
         }
 
         return frames;
@@ -128,7 +128,7 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
 
             foreach (AssetManifestAnimationFrame frame in found.Animation.Frames)
             {
-                frames.Add(Decode(found.Pack, frame));
+                frames.Add(decoder.DecodeFrame(frame.Metadata, found.Pack.ReadAnimationFrame(frame)));
             }
 
             return new AssetAnimation<TPixels>(found.Animation.Metadata, frames);
@@ -196,23 +196,6 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
         {
             pack.Dispose();
         }
-    }
-
-    private AssetSprite<TPixels> Decode(AssetPack pack, AssetManifestSprite sprite)
-    {
-        return new AssetSprite<TPixels>(sprite.Metadata, decoder.DecodeFrame(sprite.Metadata, pack.ReadSprite(sprite)));
-    }
-
-    private AssetSprite<TPixels> Decode(AssetPack pack, AssetManifestAnimationFrame frame)
-    {
-        return new AssetSprite<TPixels>(frame.Metadata, decoder.DecodeFrame(frame.Metadata, pack.ReadAnimationFrame(frame)));
-    }
-
-    private AssetSpriteLayer<TPixels> Decode(AssetPack pack, AssetManifestSpriteLayer layer)
-    {
-        TPixels pixels = decoder.DecodeLayer(layer.PixelWidth, layer.PixelHeight, pack.ReadSpriteLayer(layer));
-
-        return new AssetSpriteLayer<TPixels>(layer.PixelWidth, layer.PixelHeight, pixels);
     }
 
     private static AssetManifestSpriteLayer? FindSpriteLayer(IReadOnlyList<AssetManifestSpriteLayer> layers, AssetSpriteLayerType type)

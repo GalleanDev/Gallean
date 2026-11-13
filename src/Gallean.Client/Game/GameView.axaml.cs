@@ -22,6 +22,8 @@ internal sealed partial class GameView : Window
     public static readonly StyledProperty<Language> LanguageProperty =
         AvaloniaProperty.Register<GameView, Language>(nameof(Language));
 
+    private const double SceneHeight = 600.0;
+
     private readonly Size minSize;
     private Task? exitSaveTask;
 
@@ -279,6 +281,20 @@ internal sealed partial class GameView : Window
                     Math.Max(area.X, Math.Min(Position.X, area.Right - pixelSize.Width)),
                     Math.Max(area.Y, Math.Min(Position.Y, area.Bottom - pixelSize.Height)));
             }
+        }
+
+        UpdateAssetPixelScale(screen);
+    }
+
+    private void UpdateAssetPixelScale(Screen screen)
+    {
+        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+
+        if (assets is not null)
+        {
+            int maxPixelScale = (int)Math.Ceiling(screen.Bounds.Height / SceneHeight);
+
+            assets.SetMaxPixelScale(maxPixelScale);
         }
     }
 

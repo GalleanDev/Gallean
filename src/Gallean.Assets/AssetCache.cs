@@ -49,12 +49,10 @@ public sealed partial class AssetCache<TContent>(
         }
     }
 
-    public void Dispose()
+    public void Clear()
     {
         lock (locker)
         {
-            disposed = true;
-
             foreach (Entry entry in recent)
             {
                 if (entry.ReferenceCount == 0)
@@ -67,6 +65,16 @@ public sealed partial class AssetCache<TContent>(
             recent.Clear();
             evictableSize = 0;
         }
+    }
+
+    public void Dispose()
+    {
+        lock (locker)
+        {
+            disposed = true;
+        }
+
+        Clear();
     }
 
     public Lease? Acquire(AssetKey key)
@@ -82,7 +90,7 @@ public sealed partial class AssetCache<TContent>(
             {
                 MoveToFront(hit);
 
-                return Pin(hit.Value);
+                return Pin(hit);
             }
         }
 
@@ -109,7 +117,7 @@ public sealed partial class AssetCache<TContent>(
 
                 MoveToFront(raced);
 
-                return Pin(raced.Value);
+                return Pin(raced);
             }
 
             long entrySize = 0;
@@ -120,50 +128,52 @@ public sealed partial class AssetCache<TContent>(
             }
 
             Entry entry = new() { Key = key, Content = content, Size = entrySize };
-            entries[key] = recent.AddFirst(entry);
+            LinkedListNode<Entry> node = recent.AddFirst(entry);
+            entries[key] = node;
             evictableSize += entrySize;
 
-            Lease? pinned = Pin(entry);
+            Lease? pinned = Pin(node);
             Evict();
 
             return pinned;
         }
     }
 
-    private void Release(Entry entry, Lease lease)
+    private void Release(LinkedListNode<Entry> node, Lease lease)
     {
         lock (locker)
         {
+            Entry entry = node.Value;
+
             entry.ReferenceCount--;
 
             Debug.Assert(entry.ReferenceCount >= 0);
 
-            if (disposed)
+            if (entry.ReferenceCount == 0)
             {
-                if (entry.ReferenceCount == 0)
+                if (node.List == recent)
+                {
+                    evictableSize += entry.Size;
+                }
+                else
                 {
                     DisposeContent(entry);
                 }
             }
-            else
-            {
-                if (entry.ReferenceCount == 0)
-                {
-                    evictableSize += entry.Size;
-                }
 
-                if (evictableSize > sizeLimit)
-                {
-                    Evict();
-                }
+            if (evictableSize > sizeLimit)
+            {
+                Evict();
             }
 
             leasePool.Return(lease);
         }
     }
 
-    private Lease? Pin(Entry entry)
+    private Lease? Pin(LinkedListNode<Entry> node)
     {
+        Entry entry = node.Value;
+
         if (entry.Content is null)
         {
             return null;
@@ -176,7 +186,7 @@ public sealed partial class AssetCache<TContent>(
 
         entry.ReferenceCount++;
 
-        return leasePool.Rent(this, entry, entry.Content);
+        return leasePool.Rent(this, node, entry.Content);
     }
 
     private void Evict()

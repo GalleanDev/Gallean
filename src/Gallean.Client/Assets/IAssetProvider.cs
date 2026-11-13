@@ -45,4 +45,6 @@ internal interface IAssetProvider : IAssetMetadataProvider
     AssetCache<Sound>.Lease? GetOptionalSound(AssetSoundKey key);
 
     AssetStream? GetOptionalStream(AssetKey key);
+
+    void SetMaxPixelScale(int maxPixelScale);
 }

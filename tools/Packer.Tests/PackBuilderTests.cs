@@ -13,27 +13,27 @@ public sealed class PackBuilderTests
 {
     private sealed class NullDecoder : IAssetDecoder<ReadOnlyMemory<byte>>, IStaticInstance<NullDecoder>
     {
-        public ReadOnlyMemory<byte> DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data)
+        public AssetSprite DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data)
         {
-            return data;
+            return new AssetSprite(metadata, data);
         }
 
-        public ReadOnlyMemory<byte> DecodeLayer(int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data)
+        public AssetSpriteLayer DecodeLayer(AssetSpriteMetadata frame, int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data)
         {
-            return data;
+            return new AssetSpriteLayer(pixelWidth, pixelHeight, data);
         }
     }
 
     private sealed class MagickDecoder : IAssetDecoder<ReadOnlyMemory<byte>>, IStaticInstance<MagickDecoder>
     {
-        public ReadOnlyMemory<byte> DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data)
+        public AssetSprite DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data)
         {
-            return DecodePixels(data);
+            return new AssetSprite(metadata, DecodePixels(data));
         }
 
-        public ReadOnlyMemory<byte> DecodeLayer(int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data)
+        public AssetSpriteLayer DecodeLayer(AssetSpriteMetadata frame, int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data)
         {
-            return DecodePixels(data);
+            return new AssetSpriteLayer(pixelWidth, pixelHeight, DecodePixels(data));
         }
     }
 

@@ -1,8 +1,8 @@
 namespace Gallean.Assets;
 
-public interface IAssetDecoder<out TPixels>
+public interface IAssetDecoder<TPixels>
 {
-    TPixels DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data);
+    AssetSprite<TPixels> DecodeFrame(AssetSpriteMetadata metadata, ReadOnlyMemory<byte> data);
 
-    TPixels DecodeLayer(int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data);
+    AssetSpriteLayer<TPixels> DecodeLayer(AssetSpriteMetadata frame, int pixelWidth, int pixelHeight, ReadOnlyMemory<byte> data);
 }
