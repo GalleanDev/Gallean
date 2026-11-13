@@ -873,4 +873,31 @@ public sealed class UnitStatsCalculatorTests
 
         Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 40, Heal: 0, DrainPercent: 0)));
     }
+
+    [Test]
+    public void NoDamageDynamicLevelTest()
+    {
+        UnitDefinition definition = BaseUnit() with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("unit"), initiative: 40, damage: 0, accuracy: 0, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.TransformSelf
+            }
+        };
+
+        UnitDynamicUpgradeDefinition dynamicUpgrade = new(
+            definition.Id,
+            UpgradeChangeLevel: 10,
+            LowLevelUpgrade: UnitDynamicUpgrade.Empty with { Damage = 4, Accuracy = 1 },
+            HighLevelUpgrade: UnitDynamicUpgrade.Empty);
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(definition)
+            .AddUnitDynamicUpgrade(dynamicUpgrade)
+            .Build();
+
+        UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, definition.Level + 2, [], definitions, new GlobalVariables());
+
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, Damage: 0, Heal: 0, DrainPercent: 0)));
+    }
 }

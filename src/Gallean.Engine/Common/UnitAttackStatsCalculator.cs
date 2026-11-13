@@ -14,8 +14,8 @@ internal static class UnitAttackStatsCalculator
     {
         UnitDynamicUpgrade upgrade = UnitDynamicUpgradeCalculator.Calculate(definition, level, definitions);
 
-        int accuracy = attack.Accuracy + upgrade.Accuracy;
-        int damage = attack.Damage + upgrade.Damage;
+        int accuracy = attack.Accuracy > 0 ? attack.Accuracy + upgrade.Accuracy : attack.Accuracy;
+        int damage = attack.Damage > 0 ? attack.Damage + upgrade.Damage : attack.Damage;
         int heal = attack.Heal > 0 ? attack.Heal + upgrade.Heal : 0;
         int drainPercent = 0;
 
