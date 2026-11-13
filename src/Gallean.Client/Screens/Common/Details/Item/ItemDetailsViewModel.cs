@@ -68,7 +68,7 @@ internal sealed record ItemDetailsViewModel(
             ItemFormatter.FormatCategory(definition.Category),
             ItemFormatter.FormatDescription(definitions, texts, definitionId),
             CreateAttack(attack),
-            CreateSummons(attack, definitions, texts),
+            CreateSummons(definition, attack, definitions, texts),
             stats,
             GetSpellEffect(definition, definitions, texts),
             castingCostViewModel,
@@ -154,18 +154,14 @@ internal sealed record ItemDetailsViewModel(
     }
 
     private static IReadOnlyList<ItemSummonViewModel> CreateSummons(
+        ItemDefinition definition,
         UnitAttackDefinition? attack,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts)
     {
-        if (attack is null)
-        {
-            return [];
-        }
-
         List<ItemSummonViewModel> summons = [];
 
-        foreach (UnitDefinitionId unitId in attack.SummonUnitIds)
+        foreach (UnitDefinitionId unitId in GetSummonUnitIds(definition, attack, definitions))
         {
             UnitDefinition unit = definitions.GetUnit(unitId);
 
@@ -173,5 +169,33 @@ internal sealed record ItemDetailsViewModel(
         }
 
         return summons;
+    }
+
+    private static IReadOnlyList<UnitDefinitionId> GetSummonUnitIds(
+        ItemDefinition definition,
+        UnitAttackDefinition? attack,
+        IGameDefinitionProvider definitions)
+    {
+        if (attack is not null)
+        {
+            return attack.SummonUnitIds;
+        }
+        else if (definition.Effect is SpellItemEffect effect)
+        {
+            WorldSpellDefinition spell = definitions.GetSpell(effect.SpellId);
+
+            if (spell.Effect is WorldSummonStackSpellEffect summon)
+            {
+                return [summon.Unit];
+            }
+            else
+            {
+                return [];
+            }
+        }
+        else
+        {
+            return [];
+        }
     }
 }

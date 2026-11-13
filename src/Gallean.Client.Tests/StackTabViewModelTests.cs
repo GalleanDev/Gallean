@@ -2929,6 +2929,101 @@ public sealed class StackTabViewModelTests
     }
 
     [Test]
+    public void InspectScrollSummonTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                LeaderAbilities = LeaderAbility.WandScrollUse
+            };
+
+        UnitDefinition houndDefinition = TestHelpers.SimpleUnitDefinition("hound", maxHitpoints: 100, initiative: 50, damage: 25) with
+        {
+            NameTextId = new GlobalTextId("Hound")
+        };
+
+        WorldSpellDefinition spell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("SummonHound"), new WorldSummonStackSpellEffect(houndDefinition.Id));
+
+        ItemDefinition scroll = new(
+            new ItemDefinitionId("scroll1"),
+            new GlobalTextId("Hound Scroll"),
+            new GlobalTextId("desc"),
+            ItemCategory.Scroll,
+            WorldResourceSet.Empty with { Gold = 200 },
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: new SpellItemEffect(spell.Id, WorldResourceSet.Empty),
+            AnimationUnitId: null);
+
+        WorldItem scrollItem = new(new WorldItemId("Scroll"), scroll.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([scrollItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(houndDefinition)
+            .WithDefinition(spell)
+            .WithDefinition(scroll)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        ItemDetailsViewModel details = screen.Inventory.Items[0].Details;
+
+        Assert.That(details, Is.EqualTo(new ItemDetailsViewModel(
+            new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Scroll(WorldRace.Human)),
+            "Hound Scroll",
+            "Scroll",
+            "desc",
+            Attack: null,
+            [
+                new ItemSummonViewModel(
+                    new AssetSpriteKey.UnitPortrait(houndDefinition.Id),
+                    "Hound",
+                    1,
+                    new ItemAttackViewModel("25", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor))),
+                    [
+                        new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100"), 0), null),
+                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                        new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                        new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+                    ])
+            ],
+            [],
+            "effect",
+            CastingCost: null,
+            new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 200 }, ResourceSetProjection.All))));
+    }
+
+    [Test]
     public void InspectScenarioModifiedUnitTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
