@@ -3,8 +3,6 @@
   <PropertyGroup>
     <CreatePackage Condition="'$(CreatePackage)' == ''">$(IsPublishable)</CreatePackage>
     <PackageProductName Condition="'$(PackageProductName)' == ''">Gallean</PackageProductName>
-    <PackageAfterTargets>Publish</PackageAfterTargets>
-    <PackageAfterTargets Condition="'$(PublishAot)' == 'true'">_CopyAotSymbols</PackageAfterTargets>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(_IsPublishing)' == 'true' And '$(RuntimeIdentifier)' == ''">
@@ -41,7 +39,7 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="CreatePackage" AfterTargets="$(PackageAfterTargets)" DependsOnTargets="ResolveBuildVersion" Condition="'$(CreatePackage)' == 'true'">
+  <Target Name="CreatePackage" AfterTargets="Publish" DependsOnTargets="ResolveBuildVersion" Condition="'$(CreatePackage)' == 'true'">
     <PropertyGroup>
       <PackageStageDir>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)dist\</PackageStageDir>
       <SymbolsPackageBaseName>$(PackageBaseName)-symbols</SymbolsPackageBaseName>
