@@ -37,10 +37,10 @@ public sealed class LanguageDatabaseLoaderTests
     [TestCase("cs", 2292, 251, 70)]
     [TestCase("de", 2292, 251, 63)]
     [TestCase("es", 2292, 251, 58)]
-    [TestCase("fr", 2292, 251, 63)]
+    [TestCase("fr", 2292, 251, 51)]
     [TestCase("it", 2292, 251, 58)]
     [TestCase("pl", 2292, 251, 86)]
-    [TestCase("ru", 2292, 251, 108)]
+    [TestCase("ru", 2293, 251, 111)]
     public void LanguagesTest(string code, int textGlobals, int textLeaders, int scenarioInfos)
     {
         GlobalDatabaseIndex globalDb = GlobalDatabaseLoader.LoadIndex(RiseOfTheElves.GlobalDatabasePath);

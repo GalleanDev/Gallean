@@ -51,6 +51,7 @@ public static class ScenarioLoader
                 nameTextId,
                 new ScenarioRace(MapRace(playRace.RaceType), new GlobalTextId(playRace.NameText)),
                 campaign.Skirmish,
+                campaign.CanImport,
                 scenarios));
         }
 

@@ -154,7 +154,10 @@ public sealed class GameAssetInputsTests
             new ScenarioId("S256SC0000"),
             new ScenarioId("S257SC0000"),
             new ScenarioId("S258SC0000"),
-            new ScenarioId("S259SC0000")
+            new ScenarioId("S259SC0000"),
+            new ScenarioId("S260SC0000"),
+            new ScenarioId("S261SC0000"),
+            new ScenarioId("S262SC0000")
         ]));
     }
 }

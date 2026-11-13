@@ -7,6 +7,7 @@ internal class ExtractScenarioCommand : Command
 {
     private const string ScenariosDirectoryName = "Scens";
     private const string CampaignDirectoryName = "Campaign";
+    private const string GlobalsDirectoryName = "Globals";
 
     public ExtractScenarioCommand(Option<string> outputOption)
         : base("extract-scenario", "Extracts scenario tables from binary scenario (.sg) and campaign (.csg) files.")
@@ -71,13 +72,14 @@ internal class ExtractScenarioCommand : Command
     {
         string scenarioDirectory = Path.Combine(output, ScenariosDirectoryName);
         string campaignDirectory = Path.Combine(output, CampaignDirectoryName);
+        string globalDirectory = Path.Combine(output, GlobalsDirectoryName);
 
         Directory.CreateDirectory(scenarioDirectory);
         Directory.CreateDirectory(campaignDirectory);
 
         Console.WriteLine($"Extracting scenarios from '{input}'...");
 
-        ScenarioLibraryBuilder builder = new(scenarioDirectory, campaignDirectory, encoding);
+        ScenarioLibraryBuilder builder = new(scenarioDirectory, campaignDirectory, globalDirectory, encoding);
         IReadOnlyList<ScenarioLibraryEntry> entries = builder.Add(input);
 
         foreach (ScenarioLibraryEntry entry in entries)

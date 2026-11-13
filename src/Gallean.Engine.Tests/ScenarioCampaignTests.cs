@@ -163,7 +163,27 @@ public sealed class ScenarioCampaignTests
             "  S139SC0000 [lvl 1, 72x72, 8 cities, Average, Julien Fullum] [Dwarf/Mountain Clans, Heretic/Legions of the Damned, Undead/Undead Hordes, Elf/Elven Alliance] The Betrayal",
             "  S140SC0000 [lvl 1, 48x48, 3 cities, Average, Julien Fullum] [Human/Empire, Elf/Elven Alliance] The Trader War",
             "  S141SC0000 [lvl 1, 96x96, 12 cities, Average, Ethan Petty] [Human/Empire, Heretic/Legions of the Damned, Undead/Undead Hordes, Elf/Elven Alliance] Dividing Line",
-            "  S142SC0000 [lvl 1, 120x120, 12 cities, Average, Ethan Petty] [Human/Empire, Dwarf/Mountain Clans, Undead/Undead Hordes, Elf/Elven Alliance] Gallean's Promise"
+            "  S142SC0000 [lvl 1, 120x120, 12 cities, Average, Ethan Petty] [Human/Empire, Dwarf/Mountain Clans, Undead/Undead Hordes, Elf/Elven Alliance] Gallean's Promise",
+            "C000CC0012 [Human/Empire] Disciples II - Guardians of the Light campaign",
+            "  S123SC0000 [lvl 12, 72x72, 10 cities, Average, E Petty/ E Bunodiere] [Human/Empire, Undead/Undead Hordes] A Light in the Forest",
+            "  S124SC0000 [lvl 13, 72x72, 8 cities, Average, E Petty/E Bunodiere] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned] The Mark of Heresy",
+            "  S125SC0000 [lvl 14, 96x96, 9 cities, Average, E Petty/E Bunodiere] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned, Undead/Undead Hordes] Firewalk",
+            "C000CC0013 [Dwarf/Mountain Clans] Disciples II - Guardians of the Light campaign",
+            "  S129SC0000 [lvl 12, 72x72, 13 cities, Average, Erin Martel] [Dwarf/Mountain Clans, Heretic/Legions of the Damned, Undead/Undead Hordes] After Ragnarok",
+            "  S130SC0000 [lvl 13, 72x72, 12 cities, Average, Erin Martel] [Human/Empire, Dwarf/Mountain Clans, Undead/Undead Hordes] The Call of Wotan",
+            "  S131SC0000 [lvl 14, 96x96, 23 cities, Average, Erin Martel] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned, Undead/Undead Hordes] To Unearth a Goddess",
+            "C000CC0014 [Heretic/Legions of the Damned] Disciples II - Servants of the Dark campaign",
+            "  S126SC0000 [lvl 12, 72x72, 11 cities, Average, Eva Bunodiere] [Human/Empire, Heretic/Legions of the Damned, Undead/Undead Hordes] Beggar's Banquet",
+            "  S127SC0000 [lvl 13, 72x72, 11 cities, Average, Eva Bunodiere] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned] Deals and Devils",
+            "  S128SC0000 [lvl 14, 96x96, 10 cities, Average, Eva Bunodiere] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned, Undead/Undead Hordes] Breaking of the Three",
+            "C000CC0015 [Undead/Undead Hordes] Disciples II - Servants of the Dark campaign",
+            "  S132SC0000 [lvl 12, 72x72, 11 cities, Average, Ethan Petty] [Dwarf/Mountain Clans, Undead/Undead Hordes] Boons on Black Tongues",
+            "  S133SC0000 [lvl 13, 72x72, 11 cities, Average, Ethan Petty] [Human/Empire, Heretic/Legions of the Damned, Undead/Undead Hordes] A Voice Silenced",
+            "  S134SC0000 [lvl 14, 96x96, 12 cities, Average, Ethan Petty] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned, Undead/Undead Hordes] The Fulcrum",
+            "C000CC0200 [Elf/Elven Alliance] The Alliance Crusade",
+            "  S260SC0000 [lvl 8, 96x96, 13 cities, Average, Emanuel Wall] [Human/Empire, Dwarf/Mountain Clans, Elf/Elven Alliance] Clash",
+            "  S261SC0000 [lvl 10, 120x120, 21 cities, Average, Emanuel Wall] [Human/Empire, Dwarf/Mountain Clans, Heretic/Legions of the Damned, Elf/Elven Alliance] A Pact With The Devil",
+            "  S262SC0000 [lvl 12, 144x144, 15 cities, Average, Emanuel Wall] [Undead/Undead Hordes, Elf/Elven Alliance] Darkness Within"
         ]));
     }
 
@@ -192,6 +212,7 @@ public sealed class ScenarioCampaignTests
             Assert.That(campaign.NameTextId, Is.EqualTo(new GlobalTextId("X000TAE001")));
             Assert.That(campaign.PlayRace, Is.EqualTo(new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))));
             Assert.That(campaign.IsSkirmish, Is.False);
+            Assert.That(campaign.CanImportLeader, Is.False);
             Assert.That(campaign.Scenarios.Select(scenario => scenario with { PlayableRaces = [] }), Is.EqualTo([
                 new ScenarioMetadata(
                     new ScenarioId("S107SC0000"),

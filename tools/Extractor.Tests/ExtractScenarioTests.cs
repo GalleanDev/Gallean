@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Gallean.Engine;
 using Gallean.Entities.GameData;
 using Gallean.Tests.Common;
@@ -9,6 +10,36 @@ public sealed class ExtractScenarioTests
     private static IReadOnlyList<string> FormatEntries(IReadOnlyList<ScenarioLibraryEntry> entries)
     {
         return [.. entries.Select(entry => $"{entry.Source} -> {entry.ScenarioId} ({entry.Name})")];
+    }
+
+    private static IReadOnlyList<string> FormatTextGlobals(string path)
+    {
+        List<string> rows = [];
+
+        foreach (JsonElement row in DbFileReader.Read(path))
+        {
+            JsonElement id = row.GetProperty("TXT_ID");
+            JsonElement text = row.GetProperty("TEXT");
+
+            rows.Add($"{id.GetString()} {text.GetString()}");
+        }
+
+        return rows;
+    }
+
+    private static IReadOnlyList<string> FormatScenarioCampaigns(string path)
+    {
+        List<string> rows = [];
+
+        foreach (JsonElement row in DbFileReader.Read(path))
+        {
+            JsonElement scenarioId = row.GetProperty("NO_SCEN");
+            JsonElement campaignId = row.GetProperty("CAMPAIGN");
+
+            rows.Add($"{scenarioId.GetString()} {campaignId.GetString()}");
+        }
+
+        return rows;
     }
 
     private static IReadOnlyList<string> FormatPlayers(WorldState state)
@@ -324,6 +355,9 @@ public sealed class ExtractScenarioTests
 
         string input = sb.CreateDirectory("Input");
         string output = sb.CreateDirectory("Output");
+        string globals = sb.CreateDirectory("Output/Globals");
+
+        File.Copy(Path.Combine(RiseOfTheElves.GlobalDatabasePath, "Grace.json"), Path.Combine(globals, "Grace.json"));
 
         File.WriteAllBytes(
             Path.Combine(input, "The Elven Crusade.csg"),
@@ -338,6 +372,23 @@ public sealed class ExtractScenarioTests
             "The Elven Crusade.csg!TUTORIAL.SG -> S200SC0000 (Tutorial)",
             "The Elven Crusade.csg!DORAGONREALM.SG -> S201SC0000 (Doragon's Realm)"
         ]));
+
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(Path.Combine(output, "Campaign"));
+
+        Assert.That(campaignDb.Campaigns.Values, Is.EqualTo([
+            new Db.Campaign(new Db.Id("C000CC0200"), Db.RaceType.Elf, "X000TAE200", Skirmish: false, CanImport: true)
+        ]));
+        Assert.That(campaignDb.CampaignScenarios, Is.EqualTo([
+            new Db.CampaignScenario(new Db.Id("C000CC0200"), 1, new Db.ScenarioId("S200SC0000"), "DEFAULT", "DEFWIN", "DEFLOSE", "GENBRIEF"),
+            new Db.CampaignScenario(new Db.Id("C000CC0200"), 2, new Db.ScenarioId("S201SC0000"), "DEFAULT", "DEFWIN", "DEFLOSE", "GENBRIEF")
+        ]));
+        Assert.That(FormatTextGlobals(Path.Combine(globals, "Tglobal.json")), Is.EqualTo([
+            "X000TAE200 The Elven Crusade"
+        ]));
+        Assert.That(FormatScenarioCampaigns(Path.Combine(output, "Scens", "Sinfo.json")), Is.EqualTo([
+            "S200SC0000 C000CC0200",
+            "S201SC0000 C000CC0200"
+        ]));
     }
 
     [Test]
@@ -347,6 +398,9 @@ public sealed class ExtractScenarioTests
 
         string input = sb.CreateDirectory("Input");
         string output = sb.CreateDirectory("Output");
+        string globals = sb.CreateDirectory("Output/Globals");
+
+        File.Copy(Path.Combine(RiseOfTheElves.GlobalDatabasePath, "Grace.json"), Path.Combine(globals, "Grace.json"));
 
         File.WriteAllBytes(
             Path.Combine(input, "The Elven Crusade.csg"),
@@ -358,7 +412,7 @@ public sealed class ExtractScenarioTests
         ExtractScenarioCommand.Execute(input, output, TestScenarios.Encoding);
 
         GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
-        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(Path.Combine(output, "Campaign"));
         ScenarioDatabase scenarioDb = ScenarioDatabaseLoader.Load(Path.Combine(output, "Scens"), new Db.ScenarioId("S201SC0000"));
         IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
         WorldState state = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S201SC0000"), definitions, new GlobalVariables()).State;

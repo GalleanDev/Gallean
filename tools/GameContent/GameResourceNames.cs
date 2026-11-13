@@ -9,6 +9,18 @@ internal static class GameResourceNames
         public static readonly IReadOnlyList<string> MenuMusic = ["MENUTRCK.WAV"];
         public static readonly IReadOnlyList<string> BriefingMusic = ["GENBRIEF.WAV"];
 
+        public static readonly IReadOnlyDictionary<ScenarioId, string> ElfBriefingVoices = new Dictionary<ScenarioId, string>
+        {
+            [new ScenarioId("S135SC0000")] = "BRIEFEL1.WAV",
+            [new ScenarioId("S136SC0000")] = "BRIEFEL2.WAV",
+            [new ScenarioId("S137SC0000")] = "BRIEFEL3.WAV",
+            [new ScenarioId("S138SC0000")] = "BRIEFEL4.WAV",
+            [new ScenarioId("S139SC0000")] = "BRIEFEL5.WAV",
+            [new ScenarioId("S140SC0000")] = "BRIEFEL6.WAV",
+            [new ScenarioId("S141SC0000")] = "BRIEFEL7.WAV",
+            [new ScenarioId("S142SC0000")] = "BRIEFEL8.WAV"
+        };
+
         public static readonly IReadOnlyList<string> BattleMusic = ["BATTLE01.WAV", "BATTLE02.WAV", "BATTLE03.WAV", "BATTLE04.WAV"];
 
         public static readonly IReadOnlyList<string> WorldMusic =
@@ -72,11 +84,6 @@ internal static class GameResourceNames
         public static IReadOnlyList<string> VictoryMusic(string name)
         {
             return [$"{name}.WAV"];
-        }
-
-        public static string BriefingVoice(int number)
-        {
-            return $"BRIEFEL{number}.WAV";
         }
 
         public static string BriefingVideo(string name)

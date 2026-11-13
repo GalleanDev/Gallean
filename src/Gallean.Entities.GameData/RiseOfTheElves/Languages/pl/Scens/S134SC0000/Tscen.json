@@ -3,28 +3,420 @@
   "rows": [
     {
       "NO_SCEN": "S134SC0000",
-      "ID_OBJECT": "S134UN0000",
-      "ID_STRING": "NAME_TXT",
+      "ID_OBJECT": "S134RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Diolvorg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0000",
+      "ID_STRING": "DESC",
       "TEXT": null,
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S134SC0000",
-      "ID_OBJECT": "S134UN0001",
-      "ID_STRING": "NAME_TXT",
-      "TEXT": "Godefroy",
+      "ID_OBJECT": "S134RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Westspen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0001",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Colmly",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0002",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Croshweyn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0003",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Wie\u017Ca Jennris",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0004",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": "Rennelwym",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0005",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "Komnaty Drusen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0006",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0007",
+      "ID_STRING": "TITLE",
+      "TEXT": "Frillocks",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0007",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0008",
+      "ID_STRING": "TITLE",
+      "TEXT": "Kremelos",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0008",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0009",
+      "ID_STRING": "TITLE",
+      "TEXT": "Agrumver",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU0009",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000a",
+      "ID_STRING": "TITLE",
+      "TEXT": "Moldsend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000a",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000b",
+      "ID_STRING": "TITLE",
+      "TEXT": "Dorbuss",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000b",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000c",
+      "ID_STRING": "TITLE",
+      "TEXT": "Inderdusk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000c",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000d",
+      "ID_STRING": "TITLE",
+      "TEXT": "Werminor",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134RU000d",
+      "ID_STRING": "DESC",
+      "TEXT": null,
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S134SC0000",
       "ID_OBJECT": "S134FT0000",
       "ID_STRING": "NAME_TXT",
-      "TEXT": "Primera",
+      "TEXT": "Augrums",
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S134SC0000",
       "ID_OBJECT": "S134FT0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lume",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fourgutt",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ghel Hrak",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serelli",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Brollinbrooks",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Porchester",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hulcae",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Felltrot",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arieny",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dolina Helling",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elgrimmis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wrenhollow",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peelshire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Iolle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT000f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Reskelm",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134FT0010",
       "ID_STRING": "DESC_TXT",
       "TEXT": null,
       "SEQ_NUM": 0
@@ -101,6 +493,454 @@
     },
     {
       "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SR000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SR000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SR000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SR000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "M\u0119drcy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bestia Galleana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eledrene",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orwymner",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Miir",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zaorish",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Renard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134TM0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cloderic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Priamor",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jegger",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Belzeneth",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Huun\u0027reh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cloverhorn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "wysoka studnia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Greenflint",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skymine",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hillrust",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Grimpeak",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bru",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gwone",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gnee",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sevendusk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Greyhelm",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wiosenny mr\u00F3z",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Flinthide",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fogfell",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0035",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0037",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0039",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN003b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN003c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN003e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0040",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0054",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0056",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Syrena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0058",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Syrena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0060",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0061",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0062",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Syrena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0067",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0076",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0077",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
       "ID_OBJECT": "S134PL0000",
       "ID_STRING": "NAME_TXT",
       "TEXT": "Neutralni",
@@ -115,16 +955,6421 @@
     },
     {
       "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0078",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
       "ID_OBJECT": "S134PL0001",
       "ID_STRING": "NAME_TXT",
-      "TEXT": "Alix",
+      "TEXT": "Silosford",
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S134SC0000",
       "ID_OBJECT": "S134PL0001",
       "ID_STRING": "DESC_TXT",
-      "TEXT": "W czasach m\u0142odo\u015Bci ta wielka w\u0142adczyni stan\u0119\u0142a samotnie przeciw wojsku piekie\u0142 i pokona\u0142a je zapiecz\u0119towuj\u0105c bramy, przez kt\u00F3re si\u0119 wydostawa\u0142y. Nast\u0119pnie obj\u0119\u0142a suwerenn\u0105 w\u0142adz\u0119 nad swoim kr\u00F3lestwem.",
+      "TEXT": "W czasach m\u0142odo\u015Bci ten wielki w\u0142adca stan\u0105\u0142 samotnie przeciw wojsku piekie\u0142 i pokona\u0142 je zapiecz\u0119towuj\u0105c bramy, kt\u00F3re je wypluwa\u0142y. Nast\u0119pnie obj\u0105\u0142 suwerenn\u0105 w\u0142adz\u0119 nad swoim kr\u00F3lestwem.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0079",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Finnerswyk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Najwy\u017Cszy z w\u0142adc\u00F3w krasnolud\u00F3w, znany jest ze swej zaci\u0119to\u015Bci w bitwie i odwagi w obliczu niesprzyjaj\u0105cych okoliczno\u015Bci. Kiedy\u015B przez siedem dni i nocy walczy\u0142 z wielkim smokiem ARFURUZONEM, by wreszcie go pokona\u0107.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN007a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Insae",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jej imieniem straszy si\u0119 dzieci. Ta pani piekie\u0142 s\u0142ynie ze swej krwio\u017Cerczo\u015Bci. M\u00F3wi si\u0119, \u017Ce kiedy\u015B, w czasie bankietu wdanego przez Bethrezena z okazji zwyci\u0119stwa nad kr\u00F3lestwem \u015Bwiat\u0142o\u015Bci, po\u017Car\u0142a tysi\u0105c niewolnik\u00F3w.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN007b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134PL0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gangren",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134PL0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "W swoich czasach znany jako najpot\u0119\u017Cniejszy mistrz mrocznej sztuki, w\u0142adca ten zabity zosta\u0142 przez inkwizytora Vorgela, kt\u00F3ry po\u0142o\u017Cy\u0142 kres jego bezece\u0144stwom. Teraz jest wskrzeszony jako nieumar\u0142y i pragnie nagi\u0105\u0107 do swej woli wszystkich \u015Bmiertelnik\u00F3w.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN007c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0082",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN008a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN008b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN008e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN008f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0090",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0091",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0093",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0094",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0098",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0099",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN009a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN009b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN009d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ab",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ad",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf dow\u00F3dca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zwiadowca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zwiadowca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00bf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ca",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00cb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00cc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00cd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00cf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00d2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00d3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00dc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00de",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00e4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00e7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00f9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00fc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "W\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN00ff",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0100",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0102",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0107",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "W\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0108",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN010b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN010d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN010e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0110",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0111",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0113",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0119",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "W\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN011b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN011e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperialny zab\u00F3jca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN011f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0120",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0121",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ch\u0142op",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0122",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0123",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0124",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ch\u0142op",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0125",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0126",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0127",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0129",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "W\u00F3dz zbir\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN012a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN012b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN012d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "W\u00F3dz zbir\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0130",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0131",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0133",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0134",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0135",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zbir",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0137",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0138",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0139",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Syrena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN013a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN013b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN013c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN013d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Syrena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN013e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN013f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0140",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0142",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bia\u0142y czarodziej",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0143",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0144",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0145",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0146",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Bia\u0142y czarodziej",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0148",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN014a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN014b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN014c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN014e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Czarodziej",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN014f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0150",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0151",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0154",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nied\u017Awied\u017A polarny",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0156",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nied\u017Awied\u017A polarny",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0158",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nied\u017Awied\u017A polarny",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN015a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nied\u017Awied\u017A polarny",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN015d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN015e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN015f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0160",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0161",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0162",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0163",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0164",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0165",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0166",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0167",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0168",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0169",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN016b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN016c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN016d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN016e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN016f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0171",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0172",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0173",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0174",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0175",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0176",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0177",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0178",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0179",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN017a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN017b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN017c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN017d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN017f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wata\u017Cka barbarzy\u0144c\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0180",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0181",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0182",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0183",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0185",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wata\u017Cka barbarzy\u0144c\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0186",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0187",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0188",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0189",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN018b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wilk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN018c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN018d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN018e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN018f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0190",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wilk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0191",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0192",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0193",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0194",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0195",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wata\u017Cka barbarzy\u0144c\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0196",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0197",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0199",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN019a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wilk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN019b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN019c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN019d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN019e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN019f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wata\u017Cka barbarzy\u0144c\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dzie\u0144 pierwszy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w\n\u0022Przybyli\u015Bmy tu po szcz\u0105tki Lachla\u0027ana! Zwr\u00F3\u0107cie je nam natychmiast!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022Bez obaw, dzieci. Ju\u017C zosta\u0142y zwr\u00F3cone.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w\n\u0022Mistrzu? Ty \u017Cyjesz?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022\u017Byj\u0119? Nie... ale przecie\u017C ty te\u017C nie.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0001",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w\n\u0022Nie... nie rozumiem...\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Piecz\u0119\u0107 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Gotowe. Ten pier\u015Bcie\u0144 jessst zapiecz\u0119towany.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wata\u017Cka barbarzy\u0144c\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Piecz\u0119\u0107 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Dossskonale. Pier\u015Bcie\u0144 zosssta\u0142 zniszczony. Wkr\u00F3tce b\u0119dziemy w ssstanie ukra\u015B\u0107 czary krasssnolud\u00F3w.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Piecz\u0119\u0107 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Ten pier\u015Bcie\u0144 nie ochroni ju\u017C krasnoludzkiej cssseremonii.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Piecz\u0119cie zerwane",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Wszyssstkie piecz\u0119cie ochronne zosssta\u0142y zdj\u0119te. Mo\u017Cemy wysss\u0142a\u0107 Lachla\u0027ana do u\u015Bwi\u0119conej doliny. Tym razem Mortisss si\u0119 zem\u015Bci.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0005",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Dostarcz mrocznego elfa Lachla\u0027ana do ostatniego kr\u0119gu druid\u00F3w.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ostrze\u017Cenie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Czekajcie! Nie wchod\u017Acie jeszcze do tej u\u015Bwi\u0119csssonej doliny. Najpierw musimy zniszczy\u0107 chroni\u0105cssse j\u0105 kr\u0119gi.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przegrana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pustelnik\n\u0022St\u00F3jcie! To zasadzka! Ratujmy si\u0119!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lachla\u0027an umiera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022I znowu \u015Bmier\u0107...? Tak pr\u0119dko? Matko... nie pojmuj\u0119...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lachla\u0027an to Corruption",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022Ojcze, powr\u00F3ci\u0142em! Nie jeste\u015B dumny, widz\u0105c, kim si\u0119 sta\u0142em? A tak, prawda, matce poszcz\u0119\u015Bci\u0142o si\u0119 tam, gdzie ty zawiod\u0142e\u015B! Ale przecie\u017C to nie pierwszy raz zawiod\u0142e\u015B, czy\u017C nie?",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022Daj spok\u00F3j, ojcze. Tylko na tyle ci\u0119 sta\u0107? Gdzie podzia\u0142 si\u0119 tamten pot\u0119\u017Cny Gallean? Ciekawe, co sta\u0142o si\u0119 z jego moc\u0105? Matka mia\u0142a racj\u0119, naprawd\u0119 jeste\u015B s\u0142aby! B\u0105d\u017A przekl\u0119ty, ty i twoja s\u0142abo\u015B\u0107!\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Tak, atakuje w\u0142asssnego Awatara! Posssmakowa\u0142 gniewu Mortisss! Zniszcz go, poka\u017C mu, \u017Ce jest sss\u0142abym, zapomnianym bogiem!\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0009",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Zniszcz Spaczenie natury Galleana.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf przypieczony",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022Teraz na pewno.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Zwiadowca elf\u00F3w\n\u0022Nie! Nasz mesjasz! Jak mog\u0142o do tego doj\u015B\u0107?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Musimy dostarczy\u0107 Lachla\u0027ana na krasssnoludzk\u0105 cssseremoni\u0119. Porozmawia tam ze ssswym ojcsssem. Rezultaty powinny by\u0107... zadowalaj\u0105cssse.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Tak, krasssnoludzki rytua\u0142 pozwoli Klanom komunikowa\u0107 si\u0119 z Wotanem. Nie mo\u017Cna do tego dopu\u015Bci\u0107 - musimy przechwyci\u0107 t\u0119 mocsss i ssskierowa\u0107 j\u0105 na Galleana.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022M\u0119drcsssy krasssnolud\u00F3w rozpocz\u0119li obrz\u0119dy ochronne z dala od rytualnych ziem. Znajd\u017A pier\u015Bcienie druid\u00F3w i zabij M\u0119drcsss\u00F3w.\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000c",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Odszukaj trzy pier\u015Bcienie druid\u00F3w i zabij ka\u017Cdego z otaczaj\u0105cych je M\u0119drc\u00F3w i Pustelnik\u00F3w.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dzie\u0144 drugi",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Eledrene, Greypaw... powsssta\u0144cie. B\u0119dziemy wasss potrzebowa\u0107...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eledrene\n\u0022Chod\u017A, m\u00F3j mi\u0142y. Musimy rozszerza\u0107 w\u0142adz\u0119 Mortis.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Greypaw\n\u0022Tak... Mortisss... sss\u0142u\u017Cymy Ci...\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "MantykoraOTA",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wata\u017Cka barbarzy\u0144c\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Brollinbroken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Demonolog\n\u0022Male\u0144stwa moje! Ratujcie! Nie...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV000f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Ten cz\u0142owiek by\u0142 geniuszem. Potrafi\u0142 wzywa\u0107 niezwyk\u0142e bessstie i czyni\u0107 je posss\u0142usznymi. Mo\u017Ce przessstudiujmy jego zapissski...\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ostrze\u017Cenie mantykory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Pomi\u0119dzy naszymi si\u0142ami a miejssscem krasssnoludzkiej cssseremonii jessst si\u0119 zamek pot\u0119\u017Cnego czarownika. Powiadaj\u0105, \u017Ce nieco oszala\u0142 i ju\u017C nie ma w\u0142adzy nad ssswymi zakl\u0119ciami. Jego siedziby pilnuj\u0105 legendarne ssstwory, kt\u00F3re sssam przyzwa\u0142.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Mo\u017Ce on powa\u017Cnie zagrozi\u0107 naszym planom. Musimy by\u0107 bardzo ossstro\u017Cni, wkraczaj\u0105csss na jego ziemie.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekros",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0011",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nekromanta\n\u0022A wi\u0119c s\u0142udzy Mortis odnale\u017Ali nas po tych wielu latach. Tak... Musi was bole\u0107 to, \u017Ce nie wszyscy czcimy wasze marne b\u00F3stwo, czy\u017C nie? Nawet w\u0142asny m\u0105\u017C nie m\u00F3g\u0142 jej zaakceptowa\u0107, a co dopiero my... Nie widzicie, \u017Ce jeste\u015Bcie tylko pionkami?\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zwyci\u0119stwo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Pozw\u00F3lmy Galleanowi cierpie\u0107 wiedz\u0105csss, \u017Ce przez chwil\u0119 jego ssserce by\u0142o tak mroczne jak ssserce jego ukochanej! Elfy z pewno\u015Bci\u0105 zw\u0105tpi\u0105 w ssswojego boga i powr\u00F3csss\u0105 do lasssu. Mortisss zwyci\u0119\u017Cy!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Felltrot",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Centaur\n\u0022Czy ty naprawd\u0119 uwa\u017Casz, \u017Ce odbieraj\u0105c nam \u017Cycie, uchronisz si\u0119 przed sprawiedliwo\u015Bci\u0105 Galleana? Rozw\u015Bcieczysz go jeszcze bardziej!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0013",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022Nie lekcewa\u017C pot\u0119gi mej matki, bydlaku. Wkr\u00F3tce wszyscy zoba... och, umarli\u015Bcie. C\u00F3\u017C za strata.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Smoczy Znak",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Ssstrze\u017Ccie si\u0119... Cssso\u015B olbrzymiego kr\u0105\u017Cy wewn\u0105trz tych ruin. Nie ryzsssykujcie wojsssk Mortisss, by szuka\u0107 ssskarb\u00F3w, sss\u0105 pilniejsze rzeczy do zsssrobienia.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dzie\u0144 \u00F3smy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an\n\u0022Zn\u00F3w miewam wizje. S\u0105 tak zniekszta\u0142cone... niesp\u00F3jne... widz\u0119 poruszaj\u0105ce si\u0119 lasy. Widz\u0119 si\u0142y \u017Cycia i \u015Bmierci \u0142\u0105cz\u0105ce si\u0119 w jedno narz\u0119dzie zniszczenia.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pos\u0142aniec",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Posi\u0142ki",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Silt \n\u0022Doniesiono mi, \u017Ce Imperium wys\u0142a\u0142o na p\u00F3\u0142noc pos\u0142a\u0144ca z pro\u015Bb\u0105 o posi\u0142ki. Nied\u0142ugo powinien t\u0119dy przechodzi\u0107 - zabijcie go, a b\u0119dziemy mieli o jedno zmartwienie mniej.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zaopatrzenie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Silt \n\u0022Widz\u0119, \u017Ce nie uda\u0142o si\u0119 wam zatrzyma\u0107 pos\u0142a\u0144ca Imperium. P\u00F3\u0142nocne miasta bez w\u0105tpienia przy\u015Bl\u0105 liczne posi\u0142ki.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Miir zabity",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Miir\n\u0022Modl\u0119 si\u0119 za wasze dusze, trupy. Wiem, \u017Ce\u015Bcie jedynie bezwolnymi narz\u0119dziami w r\u0119kach waszej plugawej bogini. Modl\u0119 si\u0119 te\u017C za mych ludzi... by do was nie do\u0142\u0105czyli...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orwymner zg\u0142adzony",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Silt \n\u0022\u015Awietnie. Po zabiciu tego pos\u0142a\u0144ca \u017Cadne posi\u0142ki nie przyb\u0119d\u0105 do Imperium.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Solare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Zbli\u017Camy si\u0119 do imperialnych komnat Sssolare - biblioteki zawieraj\u0105csssej pot\u0119\u017Cn\u0105 magi\u0119. Je\u017Celi tylko pokonamy jej obro\u0144csss\u00F3w, b\u0119dziemy mogli naby\u0107 tam zakl\u0119cia.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01be",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Moldsend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Troll\n\u0022My tylko szuka\u0107 jedzenie. Jedzenie nas zaatakowa\u0107...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Drusen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Ciekawe, jak Hordy znalaz\u0142y cssso\u015B tak niezwyk\u0142ego...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Croshweyn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV001f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Niebieski smok\n\u0022Masz czelno\u015B\u0107 atakowa\u0107 bosk\u0105 ras\u0119? Nasza \u015Bmier\u0107 tylko przypiecz\u0119tuje kres twego ludu!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Frillocks",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0020",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pierwotny olbrzym\n\u0022Malutcy... k\u0142uj\u0105!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Werminor",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Meduza\n\u0022Possstawi\u0142e\u015B na ssswoim, tak... podejd\u017A... besss ssstrachu... chc\u0119 ci cssso\u015B powiedzie\u0107.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Sheggrah\n\u0022Nie patrzcie na ni\u0105, to podssst\u0119p. Zabijcie j\u0105.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Odwied\u017A Solare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0022",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Bia\u0142y Czarodziej\n\u0022Jak to zrobi...? Niewa\u017Cne, mamy swoje zasady, ale skoro dotar\u0142e\u015B tak daleko, powiedz, jakiej wiedzy poszukujesz?\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mnygrael",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0023",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Mortisss wynagrodzi\u0142a nasz\u0105 lojalno\u015B\u0107. Potw\u00F3r Nith znaleziony w wirze zwa\u0142 si\u0119 kiedy\u015B Mnygrael. Je\u017Celi kiedykolwiek pot\u0119ga Hordy b\u0119dzie zagro\u017Cona, ten csssmentarny golem powssstanie, aby nasss chroni\u0107.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Empire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Legions",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ostrze\u017Cenie wodza",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0027",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Musimy by\u0107 ossstro\u017Cni. Sssprowadzimy na siebie gniew sssyna elficssskiego boga. Musimy by\u0107 przygotowani na odparcie tak zatrwa\u017Caj\u0105csssej si\u0142y.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134EV0027",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Upi\u00F3r Prusheen\n\u0022Kupcsssy z tych ziem mog\u0105 dostarcza\u0107 nam wiedz\u0119 tajemn\u0105 i pot\u0119\u017Cne eliksiry. Ta magia pomo\u017Ce nam zmierzy\u0107 si\u0119 z jego gniewem. Nasza czarna magia r\u00F3wnie\u017C wspomo\u017Ce nasss w bitwie.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ca",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01cb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01d8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01d9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01da",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01dc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Czempion ork\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01de",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ork",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ork",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01e9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Czempion ork\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ee",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01f9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01fa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi czarny paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN01fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi czarny paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0200",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi czarny paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0201",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi czarny paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0202",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0203",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0204",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0205",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0206",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0207",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN020a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN020b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN020c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN020d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN020e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN020f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0210",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0211",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0212",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0213",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0214",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0217",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0218",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0219",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN021a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN021b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN021c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN021d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN021e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN021f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0220",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0221",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0222",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zehura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0223",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0224",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0226",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0227",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0228",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN022b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN022e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN022f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0230",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0231",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0233",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0234",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0235",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0236",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0237",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0238",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN023a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN023b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN023c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN023e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN023f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0241",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0242",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0243",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0244",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0245",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0246",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0247",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0248",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0249",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN024a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN024c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN024d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN024e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN024f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0250",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0252",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0253",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0255",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0256",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0258",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0259",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN025a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN025b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN025c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN025d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN025e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN025f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0260",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0261",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0262",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0263",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0264",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0265",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0266",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0267",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0268",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0269",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN026a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN026b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN026c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN026e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN026f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0270",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0271",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0272",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0273",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0274",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0275",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0276",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0277",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0278",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN027c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi czarny paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN027e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN027f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi czarny paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0280",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0285",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0286",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0287",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0288",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0289",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN028a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "L\u00F3d",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "L\u00F3d",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "L\u00F3d",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "O\u0142tarz Taldera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0299",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN029a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN029b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN029c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN029d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN029e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM000f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz Legion\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN029f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0012",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0013",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0015",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0017",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0018",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Obelisk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0019",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jama z law\u0105",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM001a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jama z law\u0105",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02aa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM001b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jama z law\u0105",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ab",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM001c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jama z law\u0105",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM001d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jama z law\u0105",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ad",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM001e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Siedziba Klan\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0022",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0023",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0024",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0025",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0026",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0027",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0028",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0029",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM002a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM002b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM002e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02be",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM002f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02bf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0031",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0032",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0033",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0034",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0035",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0036",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0037",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0038",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0039",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM003a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ca",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM003b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02cb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM003c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02cc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02cd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM003e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM003f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02cf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0040",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0041",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0042",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0043",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "W\u00F3dz zbir\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0045",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0046",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zbir",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0047",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0048",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0049",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02d9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM004a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM004b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM004c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM004d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM004e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02de",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0050",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Pos\u0105g Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0051",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fontanna",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0052",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0053",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0054",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mantykora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0055",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0056",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0057",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "\u015Aciana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0058",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0059",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wie\u017Ca",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02e9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM005a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Studnia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM005b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM005c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM005d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM005e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ee",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM005f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0060",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0061",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0062",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0063",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0064",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0065",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0069",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Osada Imperium",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM006a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02fa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM006b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02fb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM006c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM006d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN02fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0070",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0300",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0071",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0072",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0303",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0304",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0305",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0306",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0307",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0308",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0309",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN030a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN030b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN030c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN030d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0084",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0317",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0318",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0319",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN031a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN031b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM008c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN031c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM008d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN031d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM008e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN031e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN031f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0320",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0091",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0321",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0322",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0093",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0323",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0094",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0324",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0095",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0325",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0096",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0326",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0097",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0327",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0098",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0328",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM0099",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0329",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN032a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN032b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN032c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM009d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN032d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN032e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Jaszczolud",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM009f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Domena nieumar\u0142ych",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN032f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0330",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wilk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0331",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0332",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0333",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wilk",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0334",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0335",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0336",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0337",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0338",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00a9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0339",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00aa",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN033a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ab",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN033b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ac",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ad",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ae",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN033e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00af",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN033f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0340",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0341",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0342",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0343",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0344",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0345",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0346",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00b9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ba",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN034a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00bb",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN034b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Le\u015Bny elf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00bc",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN034c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN034d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00be",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN034e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Centaur w\u0142\u00F3cznik",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00bf",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN034f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0350",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przyw\u00F3dca elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0351",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0352",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodorosty",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0353",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0354",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0355",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0356",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0357",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0358",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00c9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0359",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN035a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekromanta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00cb",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "G\u00F3ra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN035b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00cc",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "G\u00F3ra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN035c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00cd",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "G\u00F3ra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN035d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ce",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wodospad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN035e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00cf",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN035f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0360",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0361",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0362",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0363",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutralny krajobraz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0364",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0365",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Olbrzymi paj\u0105k",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cmentarz",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0366",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krzy\u017C",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0367",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Krzy\u017C",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0368",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00d9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fontanna",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0369",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00da",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN036a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00db",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "R\u00F3wnina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN036b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00dc",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legowisko paj\u0105ka",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00dd",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Legowisko paj\u0105ka",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN036d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN036e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00de",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN036f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00df",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0370",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e0",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0371",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e1",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e2",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0372",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0373",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mroczny elf Lachla\u0027an",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e3",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e4",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet na palu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e5",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet na palu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134UN0375",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cloverhorn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e6",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Szkielet na palu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e7",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fontanna",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e8",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00e9",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ea",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00eb",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ec",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ed",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ee",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dom elf\u00F3w",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134MM00ef",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Jama",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Pod Plecionym Bluszczem",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Wygl\u0105dasz na zm\u0119czonego, w\u0119drowcze. Mo\u017Ce m\u00F3g\u0142bym ci pom\u00F3c?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Sklep Urfetta",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Tylko spr\u00F3bujcie wyrugowa\u0107 mnie z mojego sklepu.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Ob\u00F3z cyga\u0144ski",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Nie ufamy obcym. Kupcie, co potrzebujecie, i odjed\u017Acie przed zmrokiem.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Fort Ruinwera",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Kiedy\u015B by\u0142o tu schronienie dla \u017Co\u0142nierzy, ale teraz sprzedamy je za odpowiedni\u0105 cen\u0119.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0004",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Gniazdo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0004",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Jeste\u015Bmy czym\u015B wi\u0119cej ni\u017C tylko tawern\u0105.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0005",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Rynek Dubbin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0005",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Je\u015Bli tylko da si\u0119 to wykona\u0107, to ch\u0119tnie si\u0119 podejmiemy.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0006",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Biczowanie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0006",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Czy aby na pewno jeste\u015B gotowy na katusze, jakim ci\u0119 poddamy?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0007",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "R\u0119kawica Morwena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0007",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Twoje wojska wygl\u0105daj\u0105 obiecuj\u0105co... My\u015Bl\u0119, \u017Ce nie b\u0119dzie problem\u00F3w, je\u015Bli tylko macie zamiar zap\u0142aci\u0107.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0008",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Ig\u0142a Enskeriosa",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0008",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Widz\u0119, \u017Ce interesuje ci\u0119 czarowanie! To dobrze, gdy\u017C mog\u0119 nauczy\u0107 ci\u0119 przywo\u0142a\u0107, cokolwiek zapragniesz.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0009",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Komnaty Solare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI0009",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Na tej magicznej wyspie mo\u017Cesz znale\u017A\u0107 bardzo pot\u0119\u017Cne zakl\u0119cia.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI000a",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Wi\u0119zienie Gormeira",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134SI000a",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Zmusi\u0142em te zielone niezdary, by by\u0142y mi pos\u0142uszne. Ty te\u017C mo\u017Cesz spr\u00F3bowa\u0107...",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kr\u0105g 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kr\u0105g 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kr\u0105g 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ostrze\u017Cenie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Przegrana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Corruption",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arissa",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cower1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cower2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "PrzypieczenieElfa",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "MantykoraOTA",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nekros",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GallBlast1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "gallblast2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Smoczy Znak",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orwymner",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Posi\u0142ki",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "SolOstrze\u017Cenie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wizguard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Clans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Empire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S134SC0000",
+      "ID_OBJECT": "S134LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spawn Legions",
       "SEQ_NUM": 0
     }
   ]

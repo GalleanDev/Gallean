@@ -9,6 +9,7 @@ public static partial class Db
         [property: DataKey, JsonPropertyName("CAMP_ID")] Id CampaignId,
         [property: JsonPropertyName("PLAY_RACE")] RaceType PlayRace,
         [property: JsonPropertyName("NAME_ID")] string NameId,
-        [property: JsonPropertyName("SKIRMISH")] bool Skirmish
+        [property: JsonPropertyName("SKIRMISH")] bool Skirmish,
+        [property: JsonPropertyName("CANIMPORT")] bool CanImport
     );
 }

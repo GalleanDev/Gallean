@@ -55,7 +55,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
         Background = MenuBackgroundViewModel.TryCreateRaceSelection(race);
         PlayerCaption = FormatPlayerCaption(raceName.Text, playerIndex, humanRaces.Length);
         IsLastPlayer = playerIndex == humanRaces.Length - 1;
-        CanImportLeader = scenario.IsSkirmish && humanRaces.Length == 1;
+        CanImportLeader = scenario.CanImportLeader && humanRaces.Length == 1;
         Leaders = BuildLeaders(texts, definitions, race, scenario.SuggestedLevel);
         SelectedLordCategory = player.LordCategory;
         SelectedLeader = Leaders.Count > 0 ? Leaders[0] : null;

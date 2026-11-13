@@ -33,6 +33,7 @@ public sealed class CampaignSelectScreenViewModelTests
             4,
             "Strategy First",
             IsSkirmish: false,
+            CanImportLeader: false,
             []);
         GameScenario secondScenario = new(
             "scenario-2",
@@ -44,6 +45,7 @@ public sealed class CampaignSelectScreenViewModelTests
             8,
             null,
             IsSkirmish: false,
+            CanImportLeader: false,
             []);
         GameScenario elvenScenario = new(
             "elven-scenario",
@@ -55,6 +57,7 @@ public sealed class CampaignSelectScreenViewModelTests
             13,
             "Erin Martel",
             IsSkirmish: false,
+            CanImportLeader: false,
             []);
         GameCampaign campaign = new(
             "campaign",
@@ -68,6 +71,12 @@ public sealed class CampaignSelectScreenViewModelTests
             new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
             IsSkirmish: false,
             [elvenScenario]);
+        GameCampaign expansionCampaign = new(
+            "expansion-campaign",
+            "Expansion campaign",
+            new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000")),
+            IsSkirmish: false,
+            [secondScenario]);
         GameCampaign skirmish = new(
             "skirmish",
             "Skirmish",
@@ -76,13 +85,14 @@ public sealed class CampaignSelectScreenViewModelTests
             [firstScenario]);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        CampaignSelectScreenViewModel viewModel = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, [elvenCampaign, skirmish, campaign]);
+        CampaignSelectScreenViewModel viewModel = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, [expansionCampaign, elvenCampaign, skirmish, campaign]);
 
         Assert.That(viewModel.Campaigns, Is.EqualTo([
-            new CampaignSelectItemViewModel(campaign, "Empire"),
-            new CampaignSelectItemViewModel(elvenCampaign, "Elven Alliance")
+            new CampaignSelectItemViewModel(campaign, new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU0019")), "Empire", "Campaign", IsExpansion: false, SectionTitle: null),
+            new CampaignSelectItemViewModel(elvenCampaign, new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU8009")), "Elven Alliance", "Elven campaign", IsExpansion: false, SectionTitle: null),
+            new CampaignSelectItemViewModel(expansionCampaign, new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU0021")), "Empire", "Expansion campaign (Level 2+)", IsExpansion: true, "Expansions")
         ]));
-        Assert.That(viewModel.SelectedCampaign, Is.EqualTo(new CampaignSelectItemViewModel(campaign, "Empire")));
+        Assert.That(viewModel.SelectedCampaign, Is.EqualTo(new CampaignSelectItemViewModel(campaign, new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU0019")), "Empire", "Campaign", IsExpansion: false, SectionTitle: null)));
         Assert.That(viewModel.FirstScenario, Is.EqualTo(firstScenario));
         Assert.That(viewModel.MainMenuBackground, Is.EqualTo(new MainMenuBackgroundViewModel(new AssetSpriteKey.MainMenuBackgroundV2(), new AssetAnimationKey.MainMenuBackgroundOverlay(1))));
         Assert.That(viewModel.Background, Is.Null);
@@ -98,7 +108,7 @@ public sealed class CampaignSelectScreenViewModelTests
 
         viewModel.SelectedCampaign = viewModel.Campaigns[1];
 
-        Assert.That(viewModel.SelectedCampaign, Is.EqualTo(new CampaignSelectItemViewModel(elvenCampaign, "Elven Alliance")));
+        Assert.That(viewModel.SelectedCampaign, Is.EqualTo(new CampaignSelectItemViewModel(elvenCampaign, new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU8009")), "Elven Alliance", "Elven campaign", IsExpansion: false, SectionTitle: null)));
         Assert.That(viewModel.FirstScenario, Is.EqualTo(elvenScenario));
         MenuBackgroundViewModel elvenBackground = Assert.NotNull(viewModel.Background);
         Assert.That(elvenBackground.SpriteKey, Is.EqualTo(new AssetSpriteKey.RaceSelectionBackground(WorldRace.Elf)));
@@ -113,12 +123,17 @@ public sealed class CampaignSelectScreenViewModelTests
 
         CampaignSelectScreenViewModel viewModel = Assert.IsOfType<CampaignSelectScreenViewModel>(gameViewModel.RootScreen);
 
-        Assert.That(viewModel.Campaigns.Select(item => $"{item.Campaign.Id} {item.RaceName}"), Is.EqualTo([
-            "C000CC0005 Undead Hordes",
-            "C000CC0002 Empire",
-            "C000CC0004 Legions of the Damned",
-            "C000CC0003 Mountain Clans",
-            "C000CC0006 Elven Alliance"
+        Assert.That(viewModel.Campaigns.Select(item => $"{item.Campaign.Id} {item.RaceName} | {item.Subtitle}"), Is.EqualTo([
+            "C000CC0005 Undead Hordes | Dark Prophecy",
+            "C000CC0002 Empire | Dark Prophecy",
+            "C000CC0004 Legions of the Damned | Dark Prophecy",
+            "C000CC0003 Mountain Clans | Dark Prophecy",
+            "C000CC0006 Elven Alliance | Rise of the Elves",
+            "C000CC0015 Undead Hordes | Servants of the Dark (Level 12+)",
+            "C000CC0012 Empire | Guardians of the Light (Level 12+)",
+            "C000CC0014 Legions of the Damned | Servants of the Dark (Level 12+)",
+            "C000CC0013 Mountain Clans | Guardians of the Light (Level 12+)",
+            "C000CC0200 Elven Alliance | The Alliance Crusade (Level 8+)"
         ]));
     }
 

@@ -255,6 +255,7 @@ internal static class Theme
     public static class ScenarioSelect
     {
         public static Color BackdropColor { get; } = Color.FromRgb(0, 0, 0);
+        public static Color SmokeColor { get; } = Color.FromArgb(160, 200, 196, 206);
     }
 
     public static class HotseatTurn

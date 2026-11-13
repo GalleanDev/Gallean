@@ -2,7 +2,11 @@ using System.Text.Json;
 
 namespace Extractor;
 
-internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string campaignDirectory, ScenarioTextEncoding encoding)
+internal sealed class ScenarioLibraryBuilder(
+    string scenarioDirectory,
+    string campaignDirectory,
+    string globalDirectory,
+    ScenarioTextEncoding encoding)
 {
     private const int FirstSlot = 200;
     private const int LastSlot = 999;
@@ -16,47 +20,23 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
 
     private static readonly Db.Id SkirmishCampaignId = new("C000CC0001");
 
-    private readonly List<Db.CampaignScenario> campaignScenarios = [];
-    private readonly List<Db.ScenarioInfo> infos = [];
-    private HashSet<string> usedScenarioIds = new(StringComparer.OrdinalIgnoreCase);
-    private int nextSlot = FirstSlot;
-    private int nextScenarioNumber = 1;
-
     public IReadOnlyList<ScenarioLibraryEntry> Add(string inputDirectory)
     {
-        usedScenarioIds = new HashSet<string>(ReadUsedScenarioIds().Select(id => id.Value), StringComparer.OrdinalIgnoreCase);
-        nextSlot = FirstSlot;
-        nextScenarioNumber = ReadNextScenarioNumber();
-
         List<ScenarioLibraryEntry> entries = [];
 
         foreach (string path in EnumerateInputFiles(inputDirectory, ScenarioExtension))
         {
             using FileStream stream = File.OpenRead(path);
 
-            entries.Add(AddScenario(
-                Path.GetFileName(path),
-                ScenarioFileLoader.Load(stream, encoding, AllocateScenarioId())));
+            ScenarioFile file = ScenarioFileLoader.Load(stream, encoding, AllocateScenarioId());
+
+            entries.Add(AddScenario(Path.GetFileName(path), file, SkirmishCampaignId));
         }
 
         foreach (string path in EnumerateInputFiles(inputDirectory, CampaignExtension))
         {
-            CampaignFileContent campaign = CampaignFileLoader.Read(path, encoding);
-
-            foreach (CampaignFileEntry entry in campaign.Scenarios)
-            {
-                using MemoryStream stream = new(entry.Data, writable: false);
-
-                ScenarioFile file = ScenarioFileLoader.Load(stream, encoding, AllocateScenarioId());
-
-                entries.Add(AddScenario(
-                    $"{Path.GetFileName(path)}!{entry.FileName}",
-                    SetHumanPlayers(file, campaign.Header.PlayRaceId)));
-            }
+            entries.AddRange(AddCampaign(path));
         }
-
-        ScenarioTableWriter.AppendScenarioInfos(scenarioDirectory, infos);
-        ScenarioTableWriter.AppendCampaignScenarios(campaignDirectory, campaignScenarios);
 
         return entries;
     }
@@ -88,34 +68,51 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
         };
     }
 
-    private IReadOnlyList<Db.ScenarioId> ReadUsedScenarioIds()
+    private static List<JsonElement> ReadRows(string path)
     {
-        IEnumerable<string> directories = Directory.EnumerateDirectories(scenarioDirectory);
-
-        return [.. directories.Select(directory => new Db.ScenarioId(Path.GetFileName(directory)))];
+        if (File.Exists(path))
+        {
+            return DbFileReader.Read(path);
+        }
+        else
+        {
+            return [];
+        }
     }
 
-    private int ReadNextScenarioNumber()
+    private static bool HasId(JsonElement row, string column, Db.Id id)
     {
-        string path = Path.Combine(campaignDirectory, "CScen.json");
+        JsonElement value = row.GetProperty(column);
 
-        if (!File.Exists(path))
+        return string.Equals(value.GetString(), id.Value, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private Db.RaceType ReadRaceType(Db.Id raceId)
+    {
+        string path = Path.Combine(globalDirectory, "Grace.json");
+
+        foreach (JsonElement row in ReadRows(path))
         {
-            return 1;
+            if (HasId(row, "RACE_ID", raceId))
+            {
+                JsonElement raceType = row.GetProperty("RACE_TYPE");
+
+                return (Db.RaceType)raceType.GetInt32();
+            }
         }
 
-        List<JsonElement> rows = DbFileReader.Read(path);
+        throw new InvalidDataException($"Cannot find race '{raceId.Value}' in '{path}'.");
+    }
+
+    private int ReadNextScenarioNumber(Db.Id campaignId)
+    {
         int result = 1;
 
-        foreach (JsonElement row in rows)
+        foreach (JsonElement row in ReadRows(Path.Combine(campaignDirectory, "CScen.json")))
         {
-            if (!row.TryGetProperty("CAMP_ID", out JsonElement campaign) ||
-                !string.Equals(campaign.GetString(), SkirmishCampaignId.Value, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
+            JsonElement number = row.GetProperty("SCEN_NO");
 
-            if (row.TryGetProperty("SCEN_NO", out JsonElement number) && number.ValueKind == JsonValueKind.Number)
+            if (HasId(row, "CAMP_ID", campaignId) && number.ValueKind == JsonValueKind.Number)
             {
                 result = Math.Max(result, number.GetInt32() + 1);
             }
@@ -126,38 +123,77 @@ internal sealed class ScenarioLibraryBuilder(string scenarioDirectory, string ca
 
     private Db.ScenarioId AllocateScenarioId()
     {
-        while (nextSlot <= LastSlot)
+        for (int slot = FirstSlot; slot <= LastSlot; slot++)
         {
-            Db.ScenarioId candidate = new($"S{nextSlot:D3}SC0000");
-            nextSlot++;
+            Db.ScenarioId scenarioId = new($"S{slot:D3}SC0000");
 
-            if (usedScenarioIds.Add(candidate.Value))
+            if (!Directory.Exists(Path.Combine(scenarioDirectory, scenarioId.Value)))
             {
-                return candidate;
+                return scenarioId;
             }
         }
 
         throw new InvalidOperationException("Cannot find scenario slot.");
     }
 
-    private ScenarioLibraryEntry AddScenario(string source, ScenarioFile file)
+    private Db.Id AllocateCampaignId()
     {
-        Db.ScenarioInfo info = file.Tables.ScenarioInfos.Single();
+        List<JsonElement> rows = ReadRows(Path.Combine(campaignDirectory, "CCamp.json"));
 
-        ScenarioTableWriter.WriteScenario(Path.Combine(scenarioDirectory, file.ScenarioId.Value), file.Tables);
+        for (int slot = FirstSlot; slot <= LastSlot; slot++)
+        {
+            Db.Id campaignId = new($"C000CC{slot:D4}");
 
-        infos.Add(info);
+            if (!rows.Exists(row => HasId(row, "CAMP_ID", campaignId)))
+            {
+                return campaignId;
+            }
+        }
 
-        campaignScenarios.Add(new Db.CampaignScenario(
-            SkirmishCampaignId,
-            nextScenarioNumber,
+        throw new InvalidOperationException("Cannot find campaign slot.");
+    }
+
+    private List<ScenarioLibraryEntry> AddCampaign(string path)
+    {
+        CampaignFileContent campaign = CampaignFileLoader.Read(path, encoding);
+        Db.Id campaignId = AllocateCampaignId();
+        Db.Id nameId = new($"X000TAE{campaignId.TypeIndex:X3}");
+        Db.RaceType playRace = ReadRaceType(campaign.Header.PlayRaceId);
+
+        ScenarioTableWriter.AppendCampaigns(campaignDirectory, [new Db.Campaign(campaignId, playRace, nameId.Value, Skirmish: false, CanImport: true)]);
+        ScenarioTableWriter.AppendTextGlobals(globalDirectory, [new Db.TextGlobal(nameId, campaign.Header.Name, Verified: false, Context: null)]);
+
+        List<ScenarioLibraryEntry> entries = [];
+
+        foreach (CampaignFileEntry entry in campaign.Scenarios)
+        {
+            using MemoryStream stream = new(entry.Data, writable: false);
+
+            ScenarioFile file = ScenarioFileLoader.Load(stream, encoding, AllocateScenarioId());
+            string source = $"{Path.GetFileName(path)}!{entry.FileName}";
+
+            entries.Add(AddScenario(source, SetHumanPlayers(file, campaign.Header.PlayRaceId), campaignId));
+        }
+
+        return entries;
+    }
+
+    private ScenarioLibraryEntry AddScenario(string source, ScenarioFile file, Db.Id campaignId)
+    {
+        Db.ScenarioInfo fileInfo = file.Tables.ScenarioInfos.Single();
+        Db.ScenarioInfo info = fileInfo with { CampaignId = campaignId };
+        Db.CampaignScenario campaignScenario = new(
+            campaignId,
+            ReadNextScenarioNumber(campaignId),
             file.ScenarioId,
             DefaultBriefingVideo,
             DefaultWinVideo,
             DefaultLoseVideo,
-            DefaultWinAudio));
+            DefaultWinAudio);
 
-        nextScenarioNumber++;
+        ScenarioTableWriter.WriteScenario(Path.Combine(scenarioDirectory, file.ScenarioId.Value), file.Tables);
+        ScenarioTableWriter.AppendScenarioInfos(scenarioDirectory, [info]);
+        ScenarioTableWriter.AppendCampaignScenarios(campaignDirectory, [campaignScenario]);
 
         return new ScenarioLibraryEntry(source, file.ScenarioId, info.Name);
     }

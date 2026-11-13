@@ -237,6 +237,7 @@
   <SolidColorBrush x:Key="LogoShadowBrush" Color="{x:Static local:Theme+Logo.ShadowColor}" />
 
   <SolidColorBrush x:Key="ScenarioSelectBackdropBrush" Color="{x:Static local:Theme+ScenarioSelect.BackdropColor}" />
+  <SolidColorBrush x:Key="ScenarioSelectSmokeBrush" Color="{x:Static local:Theme+ScenarioSelect.SmokeColor}" />
   <SolidColorBrush x:Key="ScenarioSelectDividerBrush" Color="{DynamicResource AccentColor}" Opacity="0.37" />
   <SolidColorBrush x:Key="ScenarioSelectRowHoverBrush" Color="{DynamicResource AccentColor}" Opacity="0.11" />
   <SolidColorBrush x:Key="ScenarioSelectRowSelectedBrush" Color="{DynamicResource AccentColor}" Opacity="0.22" />

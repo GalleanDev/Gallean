@@ -3,34 +3,6 @@
   "rows": [
     {
       "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130UN0000",
-      "ID_STRING": "NAME_TXT",
-      "TEXT": null,
-      "SEQ_NUM": 0
-    },
-    {
-      "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130UN0001",
-      "ID_STRING": "NAME_TXT",
-      "TEXT": "Edwin",
-      "SEQ_NUM": 0
-    },
-    {
-      "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130FT0000",
-      "ID_STRING": "NAME_TXT",
-      "TEXT": "Satoria",
-      "SEQ_NUM": 0
-    },
-    {
-      "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130FT0000",
-      "ID_STRING": "DESC_TXT",
-      "TEXT": null,
-      "SEQ_NUM": 0
-    },
-    {
-      "NO_SCEN": "S130SC0000",
       "ID_OBJECT": "S130SR0000",
       "ID_STRING": "NAME_TXT",
       "TEXT": null,
@@ -101,30 +73,5133 @@
     },
     {
       "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130PL0000",
+      "ID_OBJECT": "S130SR000a",
       "ID_STRING": "NAME_TXT",
-      "TEXT": "Neutrals",
+      "TEXT": null,
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130PL0000",
-      "ID_STRING": "DESC_TXT",
-      "TEXT": "Nessuna descrizione della razza",
+      "ID_OBJECT": "S130SR000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S130SC0000",
-      "ID_OBJECT": "S130PL0001",
+      "ID_OBJECT": "S130SR000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiani del sapere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Piccoscuro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Minieraoscura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Verdeselce",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lachla\u0027an oscuro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Principessa Yataa\u0027 Halli",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Salvanuvole",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Elmogrigio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Cuoiotenero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Pozzo roccioso",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Primabrina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Minieraceleste",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Settecrepuscolo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Nubecrudele",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Maestro Fogliainvernale",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Tifhas",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aurangzeb",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Huun\u0027reh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elfo dei boschi",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0014",
       "ID_STRING": "NAME_TXT",
       "TEXT": "Clovis",
       "SEQ_NUM": 0
     },
     {
       "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130TM0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Efrahel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Tuedon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Alderic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zythaar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrali",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Nessuna descrizione di razza",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Isuel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
       "ID_OBJECT": "S130PL0001",
       "ID_STRING": "DESC_TXT",
-      "TEXT": "In giovent\u00F9, questo potente signore della guerra sconfisse un esercito di dannati e riusc\u00EC a sigillare il portale infernale dal quale provenivano. Poco dopo, giunse al potere nella sua zona.",
+      "TEXT": "In giovent\u00F9, questo potente signore respinse tenacemente l\u0027esercito dell\u0027inferno e senza l\u0027aiuto di nessuno riusc\u00EC a sconfiggerlo sigillando il portale che lo scacci\u00F2. Fu allora che divenne sovrano di questo regno.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Leif",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Supremo signore dei Clan dei nani, \u00E8 noto per il suo valore in battaglia ed il suo coraggio nell\u0027affrontare nemici pi\u00F9 forti. Si narra che abbia combattuto per sette giorni contro il possente drago Arfuruzon, riuscendo in fine a sconfiggerlo.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aurangzeb",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Nota ai suoi tempi per essere l\u0027adepta pi\u00F9 potente della magia nera, mor\u00EC per mano dell\u0027inquisitore Vorgel, che mise fine al suo regno di terrore. Adesso \u00E8 tornata in vita in qualit\u00E0 di non morto per soggiogare alla sua volont\u00E0 qualsiasi mortale.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0040",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0044",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0046",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0047",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0048",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN004a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN004b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN004d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN004e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN004f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0054",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0058",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN005b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0060",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0061",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN006c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0075",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0076",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0077",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0078",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0079",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN007a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0081",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0082",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0083",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sirena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0084",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0086",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0088",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN008a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN008c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN008d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN008f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0091",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0092",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0097",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0099",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sirena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00bf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00c1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00e4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00e9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00f5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00f6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN00fa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0101",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0102",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0103",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0104",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goblin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0105",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0106",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0107",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN010b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN010d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN010e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN010f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0116",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0138",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0139",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN013a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN013d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN013e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN013f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0141",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0143",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Difensore della fede",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN014c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN014d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN014e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN014f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0150",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0151",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0152",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0153",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0154",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0155",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0156",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN015a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN015f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0169",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN016c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN016d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0171",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0175",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo barbaro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0177",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo barbaro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0179",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN017a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN017b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN017c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN017d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN017e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN017f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0180",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0186",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lanciere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0187",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lanciere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0188",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Contadino",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0189",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN018a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN018b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Contadino",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN018f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lanciere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0190",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0192",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0193",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0194",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0195",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0196",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0197",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0198",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN019c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Difensore della fede",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN019e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN019f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Difensore della fede",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ad",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Difensore della fede",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lanciere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01c1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01cc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01d2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01e0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01e4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01e5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ee",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01f8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01f9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01fa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01fb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01fc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN01ff",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0205",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0208",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0209",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN020a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN020b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN020d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN020e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN020f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0212",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0214",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0215",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0219",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orso polare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN021a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN021b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN021c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN021d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN021e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN021f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0220",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0227",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo barbaro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0228",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0229",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN022b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN022c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN022d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN022e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN022f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0230",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0232",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0233",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0234",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0235",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0236",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0237",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0238",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0239",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN023a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN023b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orso polare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN023c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN023d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orso polare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN023e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN023f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0240",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orso polare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0241",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0243",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0245",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0246",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0247",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0248",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0249",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN024a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN024b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN024c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0251",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0252",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0253",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0255",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0256",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0257",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0258",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lanciere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0259",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN025a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN025b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN025c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN025d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0265",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0266",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN026b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN026c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN026d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN026e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN026f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0270",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0271",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0272",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0273",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0274",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Day 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Cuoiotenero\n\u0022C\u0027\u00E8 ancora qualcuno in grado di celebrare il rituale di Wotan.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Nubecrudele\n\u0022Si, ma non parla con i nostri maestri delle prime Grandi Guerre. Ha abbandonato l\u0027ordine in segno di protesta.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Cuoiotenero\n\u0022Sono sicuro che sar\u00E0 disposto ad aiutarci. \u00C8 passato molto tempo ormai, sono cambiate molte cose. Chi pu\u00F2 ignorare la chiamata di Wotan?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidessa\n\u0022Io sono stata alunna di Verdeselce fin quando non abbandon\u00F2 l\u0027ordine. Vive a Nord della citt\u00E0. Lasciatemi cercarlo. Non si fida dell\u0027Alto Consiglio, ma mi ascolter\u00E0.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Mia cara ragazza! Che piacere vederti! Quando \u00E8 stata l\u0027ultima volta che ci siamo visti?\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidessa\n\u0022Molti anni, maestro... Vengo in nome di Wotan. Abbiamo un dilemma e solo la sua sapienza potrebbe risolverlo.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Perch\u00E9 i maestri avrebbero bisogno del sapere che un tempo rifiutarono?\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidessa\n\u0022Maestro, da dove comincio? Sono successe cose terribili. Ti sei perso cos\u00EC tante cose... Accompagnami e ti racconter\u00F2 tutto.\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Ti seguir\u00F2 per saziare la mia curiosit\u00E0, ma non credere che vi aiuter\u00F2!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit Green to Capital",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Cuoiotenero\n\u0022Benvenuto a casa, maestro Verdeselce!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022A casa? \u00C8 vero che mi fa piacere vedere di nuovo le colline... Ma non sento che questa sia la mia casa.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro del sapere\n\u0022S\u00EC, c\u0027\u00E8 qualcosa di cui vogliamo parlarti. Sei l\u0027unico a cui possiamo rivolgerci.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Ho saputo. Ne parleremo se mi offrite da mangiare.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0279",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit accepts mission",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Devo studiare questo testo. Dite che i lupi sostengono di essere agenti di Wotan? Che interessante!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Si, avremo bisogno di altri due maestri per celebrare la cerimonia. Mi addolora sapere che tre dei miei vecchi amici sono morti. Sono molti i segreti che hanno portato con s\u00E9 nella tomba.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Ho bisogno di due fratelli per realizzare questa missione. Cercate l\u0027eremita Miniera cupa a Sud. Sar\u00E0 pi\u00F9 difficile trovare l\u0027eremita Piccoscuro. L\u0027ultima volta che ho avuto sue notizie stava studiando i campi gelati del Sud.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0005",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Trova gli eremiti Piccoscuro e Miniera cupa.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN027a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0006",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Miniera cupa\n\u0022Dunque Verdeselce mi sta cercando... E perch\u00E9 manda te come messaggero? Mi sembra strano; avevo capito che non parlava con quelli del tuo ordine. Comunque, non posso ignorare i saggi. Presto sar\u00F2 pronto per partire.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN027b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Piccoscuro\n\u0022Verdeselce! Si, lo ammiro e lo rispetto. Mi ha insegnato tutto ci\u00F2 che so sulla vita. Per lui, torner\u00F2 nella capitale.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN027c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit 2 premature",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Miniera cupa\n\u0022Salve, gente dei clan. L\u0027eremita Verdeselce? Per quanto ne so io non \u00E8 andato troppo lontano da casa. \u00C8 abituato al clima del Nord!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN027d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit 3 premature",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Piccoscuro\n\u0022L\u0027eremita Verdeselce? \u00C8 molto che non sento questo nome. Ti assicuro che questi blocchi di ghiaccio sono l\u0027unica cosa che mi mantiene occupato.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardia Reale\n\u0022Puoi aiutarci a trovarlo? Abbiamo bisogno di un maestro del sapere esperto per celebrare un rituale. Wotan ha chiesto udienza con i maestri, e dobbiamo eseguire i suoi ordini!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Piccoscuro\n\u0022Ho l\u0027impressione che i maestri non siano cambiati affatto. Continuano ad essere arroganti... Ad ogni modo, Verdeselce \u00E8 in grado di decidere da solo. \u00C8 quello che fa sempre!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardia Reale\n\u0022Dunque sai dove si trova?\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0009",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Piccoscuro\n\u0022Io? Macch\u00E9! Ma vi auguro buona fortuna.\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN027f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "LOSE Verdeselce Dies",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Elmo Grigio\n\u0022Senza maestri esperti non possiamo celebrare la cerimonia.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Piccoscuro\n\u0022Dobbiamo formare un nuovo maestro, e ci metteremo degli anni!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "LOSE Miniera cupa Dies",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Elmo Grigio\n\u0022Senza maestri esperti non possiamo celebrare la cerimonia.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Piccoscuro\n\u0022Dobbiamo formare un nuovo maestro, e ci metteremo degli anni!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "LOSE Piccoscuro Dies",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Elmo Grigio\n\u0022Senza maestri esperti non possiamo celebrare la cerimonia.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Piccoscuro\n\u0022Dobbiamo formare un nuovo maestro, e ci metteremo degli anni!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0284",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Loremasters 3 Found",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Cuoiotenero\n\u0022Siamo gi\u00E0 dodici maestri! Finalmente possiamo chiudere il cerchio sacro.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Regina Yataa\u0027Halli\n\u0022Al campo cerimoniale, presto!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0010",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Porta i maestri Piccoscuro, Miniera cupa e Verdeselce al campo cerimoniale.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0285",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Ceremony Ambushed 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022Oggi ci riuniremo per compiere la volont\u00E0 di Wotan. Abbiamo superato la perdita dei nostri fratelli... Oggi \u00E8 un giorno glorioso!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lachla\u0027an oscuro\n\u0022Sparite, nani! Il vostro lavoro \u00E8 terminato!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Piccoscuro\n\u0022Fuggite! Portate le rune in un luogo sicuro!\u0022",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lachla\u0027an oscuro\n\u0022Gallean, tuo figlio attende un segno di approvazione!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Verdeselce\n\u0022\u00C8 troppo tardi! Il cerchio si \u00E8 completato e non possiamo controllarlo...\u0022",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lachla\u0027an oscuro\n\u0022Vedi! La tua perfetta creazione, padre! Mia madre mi ha ridato la vita! Insieme mostreremo agli elfi il sentiero. Non \u00E8 meraviglioso?\u0022",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guerriero venerabile\n\u0022Gallean? Ci hanno ingannati! Il messaggio non \u00E8 stato mai inviato da Wotan! Nani, alle armi!\u0022",
+      "SEQ_NUM": 8
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0012",
+      "ID_STRING": "OBJECT_TXT",
+      "TEXT": "Sconfiggi l\u0027elfo oscuro Lachla\u0027an.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Win",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nano\n\u0022Quella creatura sembrava un elfo, ma aveva l\u0027odore della morte! Come pu\u00F2 essere figlio di un dio?\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro del sapere\n\u0022I non morti conoscevano la natura della nostra cerimonia e sapevano che avremmo chiamato gli dei... Hanno usato il nostro cerchio sacro per profanare Gallean usando suo figlio!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nano\n\u0022E cosa ne trarremmo provocando l\u0027ira di Gallean?\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro del sapere\n\u0022Non voglio neanche provare a capire quella malvagia regina. Ho visto qualcosa poco dopo che quella creatura parlasse con Gallean. Era enorme e si dirigeva verso il bosco.\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0289",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Miniera cupa to Capital",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Regina Yataa\u0027Halli\n\u0022Benvenuto, Miniera cupa!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Miniera cupa\n\u0022Ho sentito parlare molto di te, maest\u00E0.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Miniera cupa\n\u0022\u00C8 un piacere conoscerti... E mi dispiace la perdita del maestro Salvanuvole. Spero che la sua anima trovi finalmente la pace.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN028a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit Grim to Capital",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0016",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Piccoscuro\n\u0022I nani mi hanno interrotto...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0016",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Regina Yataa\u0027Halli\n\u0022Si, ma solo perch\u00E9 Wotan ci ha affidato un compito sacro. Il maestro Verdeselce ci ha parlato di te.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0016",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro Piccoscuro\n\u0022Si, sar\u00F2 alla cerimonia. Ma servo a Wotan, non alla corona. Non ti aspettare che mi unisca di nuovo all\u0027ordine.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN028b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Griggnarth",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Alchimista\n\u0022Non pu\u00F2 essere... Gallean \u00E8 tornato?\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0017",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Alchimista\n\u0022Fu ucciso da Wotan anni fa. Io pensavo che gli dei non potessero morire, ma lui per\u00EC bruciato!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN028c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Noordargg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Novizio\n\u0022Io ricordo il maestro Verdeselce. Un gran testone!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0018",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Novizio\n\u0022Non ero d\u0027accordo con i maestri in molti punti. Mi chiedo come faranno a lavorare insieme adesso.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN028d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Allyntyr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0019",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidessa\n\u0022Il maestro Verdeselce sent\u00EC sempre la chiamata di Wotan... \u00C8 un peccato che non abbia mai simpatizzato con l\u0027ordine.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN028e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Suldon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Piedemorbido\n\u0022Vorrei proprio sapere come mai Wotan e Gallean litigarono...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arcidruidessa\n\u0022Gallean esigette a Wotan delle altre terre e questi non accett\u00F2. Gli elfi non si accontentavano dei boschi e senza dubbio avrebbero invaso le nostre terre. Wotan cercava solo di proteggere i suoi figli.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN028f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Furstadia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Contadino\n\u0022Il conte Crowley ci aveva sottomesso. Molti sono andati via, anche se altri hanno deciso di rimanere nonostante tutto. Speriamo che siate pi\u00F9 giusti.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardia Reale\n\u0022Questo \u00E8 argomento che dovrai trattare con la regina.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0290",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Taura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Veterano\n\u0022Mi chiedo perch\u00E9 i barbari hanno lasciato questa biblioteca intatta. Non hanno alcun rispetto per il sapere?\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Alchimista\n\u0022Forse li abbiamo sottovalutati. Pare capiscano il potere racchiuso dalle parole. Questo tomo parla del controllo degli elementi! Cerchiamo degli altri tesori...\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0291",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Margylla",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lanciafiamme\n\u0022Ho visto lo stendardo del conte Crowley! \u00C8 un peccato non averlo incontrato. Ha molto da spiegarci.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Nano\n\u0022Ho sentito che il suo esercito, capeggiato da inquisitori, punisce tutti quelli che non lo appoggiano, tacciandoli come eretici.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0292",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Rhian\u0027s Keep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guerriero venerabile\n\u0022\u00C8 un peccato vedere gli umani in una situazione del genere. Crowley ha sottomesso i poveri contadini! Gli abbiamo fatto un favore facendo fuori il suo esercito.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0293",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own Aragor",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV001f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arcidruidessa\n\u0022Questo talismano ci permetter\u00E0 di sconfiggere il nemico...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0294",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Torre del Mago",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Ho dei nuovi incantesimi che potrebbero interessarti.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0295",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mercante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Dai un\u0027occhiata, magari trovi qualcosa di interessante.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0296",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Loremasters spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Loot Abandoned Mine",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0023",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guerriero\n\u0022Una volta, questa miniera era il mezzo di sostentamento di tutta la popolazione.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mercante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Tutto ci\u00F2 che possiedo \u00E8 in vendita.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0298",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hermit Verdeselce Phil",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0024",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Eremita Verdeselce\n\u0022Non avrei mai pensato che sarebbe tornato... E adesso sono coinvolto nello stesso rituale che caus\u00F2 la mia partenza. Credo che l\u0027et\u00E0 cominci a farsi sentire...\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0024",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidessa\n\u0022Maestro, la prego! Dimentica il passato. I nani hanno imparato dagli errori commessi... E avrebbero potuto farlo prima con il tuo aiuto.\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0299",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Loot Gargol",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0025",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro delle rune\n\u0022In questo tempio si veneravano Gallean e Solonielle. Ma un giorno, Wotan strapp\u00F2 il cuore a Gallean e lo scagli\u00F2 nel Sole. Solonielle scomparve... E fece ritorno trasformata in Mortis, dea dei non morti.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0025",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro delle rune\n\u0022Solonielle non voleva pi\u00F9 essere la dea degli elfi... Le interessava solo recuperare il suo amato consorte...\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0025",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro delle rune\n\u0022E fu cos\u00EC che gli elfi trascorsero l\u0027ultimo secolo: senza un dio a proteggerli. La loro razza si \u00E8 dispersa... Adesso sono molto pi\u00F9 deboli.\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0025",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Druidessa\n\u0022Grazie per la storia. Avresti dovuto essere un maestro del sapere!\u0022",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0025",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Maestro delle rune\n\u0022Grazie\u0022.",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0005",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Accampamento mercenario",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0005",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Il tuo esercito sar\u00E0 invincibile con questi guerrieri.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN029a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Loot Furstadia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN029b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Own Taura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0007",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Accampamento mercenario",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0007",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Ho qualsiasi tipo di temibile creatura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Own Margylla",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0008",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mercante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI0008",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Dai un\u0027occhiata... Di sicuro ho qualcosa di interessante per te.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN029d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Own Rhian\u0027s Keep",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN029e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Disable Own Aragor",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI000a",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mercante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI000a",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Ho di tutto e a prezzi stracciati.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN029f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Spawn Stack Empire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI000b",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Torre del Mago",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130SI000b",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Nella mia biblioteca di magia troverai dei libri preziosi.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altare di Talder",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Spawn Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fontana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Enable Hint Miniera cupa",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Enable Hint Piccoscuro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hint Miniera cupa",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV002f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Regina Yatta\u0027Halli\n\u0022Sappiamo dove si trova l\u0027eremita Miniera cupa. Vive vicino l\u0027insediamento elfico del Sud.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Hint Piccoscuro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0030",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Regina Yatta\u0027Halli\n\u0022Sappiamo dove si trova l\u0027eremita Piccoscuro... Cercatelo vicino i campi gelidi del Sud.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cascata",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130EV0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "E Loremasters ownership",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02a9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02aa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ab",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ad",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ae",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02af",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02bb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02bc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02be",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02c1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02c2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0024",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02c5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0026",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0027",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02c7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM002a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ca",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM002b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02cc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM002d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02cd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM002e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM002f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02cf",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campione orco",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0033",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0035",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Cascata",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sirena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02d9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02da",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02dc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02dd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Serpente di mare",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM003e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02de",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM003f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02df",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0040",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0041",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0043",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Savary",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0049",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM004a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ea",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM004b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02eb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM004c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM004d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ed",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM004e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ee",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM004f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ef",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0051",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0052",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Casa dei clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0053",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orco selvaggio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0054",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0055",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0057",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Muro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM005a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Muro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02fa",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02fb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02fc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM005d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo furfante",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM005e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN02ff",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0300",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0301",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0302",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0303",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sirena",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0064",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0304",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0305",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0306",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0066",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0307",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo barbaro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0308",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0068",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Montagna",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0309",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0069",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ghiaccio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN030a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM006a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ghiaccio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN030b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM006b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ghiaccio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN030c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM006c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ghiaccio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN030d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo barbaro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM006d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Ghiaccio",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM006e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM006f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0310",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0070",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0071",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Statua dei clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0312",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capo barbaro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0072",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0073",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0314",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0074",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0315",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0075",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0316",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lupo",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0076",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0317",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0077",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0318",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0078",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN0319",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0079",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN031a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM007a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN031b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM007b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN031c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM007c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dei non morti",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130UN031d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM007d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM007e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Casa elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM007f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Casa elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0080",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Casa elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0087",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Scheletro",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0088",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0089",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM008a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM008b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM008c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM008d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Torre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM008f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Dimora dell\u0027Impero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0091",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Alga marina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0092",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Alga marina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0093",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Alga marina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0094",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Alga marina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0095",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Alga marina",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0096",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Citt\u00E0 elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0097",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Citt\u00E0 elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0098",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Casa elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM0099",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Citt\u00E0 elfica",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM009a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM009b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM009c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130MM009d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Altopiano",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Campo cerimoniale",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eremita 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eremita 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eremita 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Capitale dei clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 4",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 5",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 6",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 7",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 8",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Guardiano del sapere 9",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "elf avatar appears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "nosferat appears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "banshee appears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "specter appears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "elf appears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ceremony enemies",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Abandoned Mine",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0000",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "spawn undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Tana d\u0027orso",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0001",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Meregrynn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0002",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Torre di Pru\u0027ushiq",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0003",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Plinarg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0004",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": "Vecchio mulino",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0005",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "Vecchia postazione di sorveglianza",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0006",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0007",
+      "ID_STRING": "TITLE",
+      "TEXT": "Torre Trafer",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0007",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0008",
+      "ID_STRING": "TITLE",
+      "TEXT": "Torre di Tarin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0008",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0009",
+      "ID_STRING": "TITLE",
+      "TEXT": "Gargol",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU0009",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU000a",
+      "ID_STRING": "TITLE",
+      "TEXT": "Exerelle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU000a",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU000b",
+      "ID_STRING": "TITLE",
+      "TEXT": "Torre di Trinda",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU000b",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU000c",
+      "ID_STRING": "TITLE",
+      "TEXT": "Insediamento elfico",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130RU000c",
+      "ID_STRING": "DESC",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vinusi",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Otzwall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Castello di pietra",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Griggnarth",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Furstadia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0004",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Noordargg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0005",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Allantyr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0006",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kenoshann",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0007",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Suldon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0008",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Taura",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT0009",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Runia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Margylla",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rocca di Rhian",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Aragor",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Protogg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S130SC0000",
+      "ID_OBJECT": "S130FT000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": null,
       "SEQ_NUM": 0
     }
   ]

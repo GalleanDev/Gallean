@@ -4,6 +4,29 @@ namespace Extractor;
 
 internal static class ScenarioRowWriter
 {
+    public static void Write(Utf8JsonWriter writer, Db.Campaign row)
+    {
+        writer.WriteStartObject();
+        writer.WriteString("CAMP_ID", row.CampaignId.Value);
+        writer.WriteNumber("PLAY_RACE", (int)row.PlayRace);
+        writer.WriteNull("CONCLUSION");
+        writer.WriteString("NAME_ID", row.NameId);
+        writer.WriteNull("DESC_ID");
+        writer.WriteBoolean("SKIRMISH", row.Skirmish);
+        writer.WriteBoolean("CANIMPORT", row.CanImport);
+        writer.WriteEndObject();
+    }
+
+    public static void Write(Utf8JsonWriter writer, Db.TextGlobal row)
+    {
+        writer.WriteStartObject();
+        writer.WriteString("TXT_ID", row.TextId.Value);
+        writer.WriteString("TEXT", row.Text);
+        WriteBoolean(writer, "VERIFIED", row.Verified);
+        writer.WriteString("CONTEXT", row.Context);
+        writer.WriteEndObject();
+    }
+
     public static void Write(Utf8JsonWriter writer, Db.CampaignScenario row)
     {
         writer.WriteStartObject();

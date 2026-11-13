@@ -308,9 +308,9 @@ internal sealed partial class GameAudioSource(
             return null;
         }
 
-        if (database.BriefingVoices.TryGetValue(scenarioId, out int number))
+        if (Audio.ElfBriefingVoices.TryGetValue(scenarioId, out string? name))
         {
-            return GetBriefingRecording(briefingVoices, number);
+            return GetBriefingRecording(briefingVoices, name);
         }
         else if (database.BriefingVideos.TryGetValue(scenarioId, out string? video))
         {
@@ -322,9 +322,8 @@ internal sealed partial class GameAudioSource(
         }
     }
 
-    private static AssetSound? GetBriefingRecording(GameMusicSource briefingVoices, int number)
+    private static AssetSound? GetBriefingRecording(GameMusicSource briefingVoices, string name)
     {
-        string name = Audio.BriefingVoice(number);
         AssetSound? voice = PickVariant(briefingVoices.GetMusic([name]), variant: 0);
 
         if (voice is null)

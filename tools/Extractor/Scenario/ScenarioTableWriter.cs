@@ -51,6 +51,16 @@ internal static class ScenarioTableWriter
         Append(directory, "Sinfo.json", infos, ScenarioRowWriter.Write);
     }
 
+    public static void AppendCampaigns(string directory, IReadOnlyList<Db.Campaign> campaigns)
+    {
+        Append(directory, "CCamp.json", campaigns, ScenarioRowWriter.Write);
+    }
+
+    public static void AppendTextGlobals(string directory, IReadOnlyList<Db.TextGlobal> texts)
+    {
+        Append(directory, "Tglobal.json", texts, ScenarioRowWriter.Write);
+    }
+
     public static void AppendCampaignScenarios(string directory, IReadOnlyList<Db.CampaignScenario> scenarios)
     {
         Append(directory, "CScen.json", scenarios, ScenarioRowWriter.Write);

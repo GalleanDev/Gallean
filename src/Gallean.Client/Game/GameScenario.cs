@@ -12,4 +12,5 @@ internal sealed record GameScenario(
     int CityCount,
     string? Creator,
     bool IsSkirmish,
+    bool CanImportLeader,
     IReadOnlyList<ScenarioRace> PlayableRaces);

@@ -1,0 +1,4611 @@
+{
+  "formatVersion": 1,
+  "rows": [
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0000",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Herbert\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0000",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "You\u0027ll be cutting a swathe through the land in no time.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0001",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Furren\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0001",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I sell everything...for a price.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0002",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mathemor\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0002",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I think my magical library can be of some help to you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0003",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Thurania\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0003",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "My spells can help you in your quest.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0004",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Sallat\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0004",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I sell everything...for a price.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0005",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Zoltars\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0005",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I will train your units for a price.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0006",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Herbert\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0006",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Crrraaack! Oh my! Was it your neck that just snapped?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0007",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Furren\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0007",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "How may I help you stranger?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0008",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Vidal\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0008",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I possess many magical spells.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0009",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Luther\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI0009",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I will train your units for a price.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000a",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Turion\u0027s Camp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000a",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Are you in need of recruits?",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000b",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Lergem\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000b",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Everything I possess is for sale.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000c",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Ebhon\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000c",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "My wares can help you in your quest.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000e",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Sallat\u0027s Shop",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000e",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "Everything I possess is for sale.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000f",
+      "ID_STRING": "TXT_TITLE",
+      "TEXT": "Mathemor\u0027s Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SI000f",
+      "ID_STRING": "TXT_DESC",
+      "TEXT": "I have some powerful new spells that might interest you.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "mountains_remove",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountains_remove2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel Falls Healing1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Envoy Arrives",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_clans_warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "clans_loremaster",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mortis_Mocks",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_rockgiants",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bears ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dragons Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_attack",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_envy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_no_elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Greenskins_Defense",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "spawn_spiders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Imperial",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gorgon Castle ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Spawn 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperail spawn 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions Quest",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel_Healing_2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Defense 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Highfathers Assassin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_HighFathersKey ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Knights",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcs_Rise",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel Falls 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Terrain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Unead Lich",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hermit_Gold",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Shamaness",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_vs_Orcs",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "orcs_skylark",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Gaint ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Hordes_Taunting",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arch_Angels Falls 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "WinterDragonTower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Onyx Gargoyle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blue Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Spawn ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_Ruin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_ellamend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_arise",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcs",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Palace Hero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "southernElves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_ClansGuard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_clansguard2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Envoy\u002BGFC",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0033",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Imperial_war",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0034",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "elves_empire_war",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0035",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GalleansWrath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arch-Angel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0037",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO0039",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Betrayal and heros",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260LO003b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "prisoners",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0000",
+      "ID_STRING": "TITLE",
+      "TEXT": "Temple Of The Undead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0001",
+      "ID_STRING": "TITLE",
+      "TEXT": "Forgotten Lair ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0002",
+      "ID_STRING": "TITLE",
+      "TEXT": "Dragons Prison ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0003",
+      "ID_STRING": "TITLE",
+      "TEXT": "Ice Marsh ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0004",
+      "ID_STRING": "TITLE",
+      "TEXT": "Occultist Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0005",
+      "ID_STRING": "TITLE",
+      "TEXT": "Marble Gargoyle ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0006",
+      "ID_STRING": "TITLE",
+      "TEXT": "Lost Mastaba",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0007",
+      "ID_STRING": "TITLE",
+      "TEXT": "Winter Dragon Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0008",
+      "ID_STRING": "TITLE",
+      "TEXT": "Infernal Halls",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0009",
+      "ID_STRING": "TITLE",
+      "TEXT": "Perthin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU000a",
+      "ID_STRING": "TITLE",
+      "TEXT": "Goblin Reck",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU000b",
+      "ID_STRING": "TITLE",
+      "TEXT": "High Father\u0027s Stable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU000c",
+      "ID_STRING": "TITLE",
+      "TEXT": "Haunted Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU000d",
+      "ID_STRING": "TITLE",
+      "TEXT": "Giant Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU000e",
+      "ID_STRING": "TITLE",
+      "TEXT": "Death Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU000f",
+      "ID_STRING": "TITLE",
+      "TEXT": "Gallean Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0010",
+      "ID_STRING": "TITLE",
+      "TEXT": "Barbarian Prison Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0011",
+      "ID_STRING": "TITLE",
+      "TEXT": "Forest Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0012",
+      "ID_STRING": "TITLE",
+      "TEXT": "Modeus Fire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0013",
+      "ID_STRING": "TITLE",
+      "TEXT": "Old House",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0014",
+      "ID_STRING": "TITLE",
+      "TEXT": "Den",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0015",
+      "ID_STRING": "TITLE",
+      "TEXT": "Doom Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0016",
+      "ID_STRING": "TITLE",
+      "TEXT": "Mortis Dark Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0017",
+      "ID_STRING": "TITLE",
+      "TEXT": "Brisburg Ruin ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0018",
+      "ID_STRING": "TITLE",
+      "TEXT": "Lost Mastaba",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU0019",
+      "ID_STRING": "TITLE",
+      "TEXT": "Rigel Ruin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU001a",
+      "ID_STRING": "TITLE",
+      "TEXT": "North Steppes Tribe",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU001b",
+      "ID_STRING": "TITLE",
+      "TEXT": "South Seas Beast ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260RU001c",
+      "ID_STRING": "TITLE",
+      "TEXT": "Galleans Column Of Virtue",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pegasus Glory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fergal City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Perchon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gryffin City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sky Lark City ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Vinusi",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Silveria",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Alba",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Brisburg",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Runia",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Palace",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Morganna City ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rivers Of Fire ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "High Father\u0027s River",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City Of Arch-Angels",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260FT000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gorgon Castle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC Elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Southern Elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountain Clan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "The Undead Hordes ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bears ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spiders",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Black Spiders ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Empire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Legions Of The Damned ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "The Undead Hordes",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giants ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mountain Clans Guards",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260SR0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire Arch-Angel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Loremaster Lantfrid ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Theodemis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lich Queen Berulam ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rock Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "White Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "King\u0027s Guard Marileif",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elder One",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Engineer Lantfrid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM000a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cyclops",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Archmage Renard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Ranger Hatton",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Assassin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Defender of Faith",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Ranger Rainon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Guilbert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ekrezem",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Assassin ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elite Imperial Assassin ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Death Knight Vaasth",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pegasus Knight Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lich Queen Shandhu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Shamaness",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Enraged Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Deathdragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0020",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blue Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Death Knight Nehru",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion Of The South",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Forest Liege Savary",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ellamend ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dryadriana",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0028",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arch-Angel Isuel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Archmage Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Peasant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260TM002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gindelwys",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Gerbert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Drogon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Envoy Angus ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arcillen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Argothorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0040",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0046",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0048",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN004a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN004c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rollon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Goar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baalhu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN006b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN006f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thug",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0073",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mermaid",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0077",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sea Serpent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Neutrals",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "No race description",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lothaire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "In his youth, this mighty lord once stood fast against an army from hell and single-handedly defeated them by sealing the gateway that spew them. He then became sovereign of his realm.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Adruhic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Highest lord of the dwarf lords, she is known for her intensity in battle and her courage in the face of overwhelming odds. She once fought seven days and nights against the mighty red dragon ARFURUZON to finally defeat him.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN007a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Nigel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lemvere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260PL0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "A veteran in the struggle to reclaim Elven glory, nobody enters the forest without his knowledge.",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN008d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Baldaric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0093",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Calderic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0099",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Eraric",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN009c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00a2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00b0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00b2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spirit Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spirit Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00c1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00c6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cyclops",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00cd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00ce",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00d1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00d7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Theodemis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00e0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hermit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00e3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00e6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00e8",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00f3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00f6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN00fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Alderic",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN010c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN010e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN010f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0110",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0112",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0116",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skeleton Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0118",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Deathdragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0120",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doomdrake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0121",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0123",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0128",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN012b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN012c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN012e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doomdrake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0130",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0132",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Deathdragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0134",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0139",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doomdrake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN013b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0142",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kahath",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0146",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Onyx Gargoyle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0148",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Begrezen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN014d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thotgel\u0027yr",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0151",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "White Wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0157",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0159",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN015b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0160",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0163",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Squire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0171",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Konrad",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0175",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clovis",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0179",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Angel",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0180",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Pegasus Knight Gerbert",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN018a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Geldwin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0193",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Doomdrake",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0197",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Skeleton Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN019e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0000",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_allied",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0001",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Healing 1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0002",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Healing 1 Explanation ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022I must tell you the story of the Angel Falls. Sometime ago an Arch-Angel was traveling when a minion of Mortis attacked her. The vile creature viciously assaulted the Arch-Angel. Before taking her final breathes she made one last effort.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0002",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumiele \n\u0022The Arch-Angel\u0027s last will and testament was to bless the waterfalls. So that anyone traveling the road that she took could hopefully avoid the same fate. These waters will heal the weak and the injured. Use these waters wisely.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0003",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angus_Day2_DarkElves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0003",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I must remind you that we have to free the Dark Elves. I know that Mortis has twisted them into her own image. We cannot turn our backs on them. Gallean wants us to liberate them and that is all I need to know.  Nothing else matters.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01a5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Blue Dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0004",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_clans_warning ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022We must proceed with caution. We are going further into the Mountain Clans territory. Despite our treaty both sides have caused enough misery for the other. Proceed with caution, there will always be one angry group who does not like the treaty.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022As tempting as it is to just take everything we must respect the treaty. Finding the Dark Elves and returning them to the light is our mission. Only by saving our fellow Elves will we be able to build a stronger Alliance!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0004",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Loremaster Lantfrid \n\u0022How dare you! I do not care what a piece of paper states! The Elven Alliance are a disgrace. I shall avenge all those who have fallen!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0005",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angus_justified",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0005",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy  Angus \n\u0022The Loremaster\u0027s words have a ring of truth. The Mountain Clans will never fully trust us, nor I them! I will not allow the Mountain Clans to stop our mission to free Gallean\u0027s Elves. I hope that we can have peace if not so be it.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0006",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_spawn_Loremaster",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0007",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Mortis Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0007",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Oh the mighty Elves stand before this dark tower. Mortis knows of your plans and it shall not be easy to win over the Dark Elves. Oh no, they shall belong to Mortis ever more. Leave this place! Now or suffer!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0008",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Loot_Dark_Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0008",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022How I love Mortis! You have already destroyed some Elves. You wish to save the Dark Elves and then you are forced to defeat them. Now in the name of Mortis I shall defeat all those who defy her!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0009",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_rockgiants ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV000b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bears",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV000c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bears Disabled",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV000d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "DragonTower_white_dragon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV000e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dragon_Tower_elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV000e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022This tower before us is said to have plenty of gold. There is a curse upon the tower! That whoever goes into the tower will unleash a dragon upon the land!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV000f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dragon Tower Enabled ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0010",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_Lich Queen ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0010",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Lich Queen \n\u0022Death follows you everywhere! Mortis shall claim all of your souls! The Elven Alliance shall become Mortis\u0027s Alliance!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0011",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Mortis_Tower_disabled",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0012",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Day20_Mclans",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0012",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022The Mountain Clans are sending for more reinforcements. I do not know what will transpire. We must keep an eye on them at all times. They are not to be trusted, whether we have a treaty with them or not!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0013",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_KingsGuard ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0014",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_attack_elves ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0014",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Elder One \n\u0022We have declared that the Elven Alliance have a hidden agenda. This land belongs to the Mountain Clans. All those who set foot on this ground are declared enemies! Death will be swift and you can join Mortis in the afterlife!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0015",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Envy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0015",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Look at the land and wealth around us! Everything off of our island belongs to the Mountain Clans. All the resources and wealth can never be ours. Still I suppose in order to have peace we need to make sacrifices.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01b7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0016",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Clans_No Elves allowed",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0016",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Engineer \n\u0022Halt! The Elves are not allowed to pass through. Aside from the fact that your presence personally disgusts me, I do not believe that the Mountain Clans are comfortable with your presence here. This is a special place to celebrate Wotan!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0017",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Greenskins1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0018",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_greenskins_rage ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01ba",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Titan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0019",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spiders\u002BBlack",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spiders\u002BGiant ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead_spiders ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Imperial Empire ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The Empire are having trouble within their own ranks. An Imperial Priest has declared that the Empire has lost its way. In response the Priest has formed a rebellion and his own Imperial Empire. Are treaty is not recognized by these militants!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Imperial Archmage Renard \n\u0022Right you are! The Imperial Empire sees you as an enemy. All those who side with the Empire are our foes. However do not feel too badly, we don\u0027t care for Elves either!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_Gorgon Castle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Pegasus Knight Goar \n\u0022The Elves are not welcomed here. We know of your dealings with the Empire. Sadly we cannot afford to extend an act of non-aggression. I will find your defeat amusing.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Imperial Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV001f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_Gorgon Castle_walls",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0021",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Legion Quest",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke  \n\u0022Little Elves, we find ourselves in a position to aid one another. I cannot get free from my city, while you on the other hand cannot get to the Empire. I am willing to make a deal with you.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022Over by the Imperial City known simply as the High Father\u0027s River is a key. Bring this iron key to me and in return I will allow the gates that block your way to the Empire to vanish.\u0022  \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0021",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Before you think that you can defeat me. I would not advise a confrontation, for only I can make those gates vanish. So it is in your best interest to bring me the key. For if I shall fall so does all hope in opening the gate. Now go!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01c3",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0022",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Legion Key ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0022",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Foul creature! I have done what you have asked me to do. I bring to you the iron key. Now live up to your end of the bargain swine!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0022",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022Very well, I shall live up to my end of the bargain. Behold the gateway will vanish. Little Elf, I fear that you have received more than you have bargained for!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0023",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf Legion Assault ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0023",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Devil \n\u0022Behold the Legions Of The Damned! Should you fall before my might, thousands from the fiery pits shall emerge upon this realm!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01c5",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0024",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Legion_Baalu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0025",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel_falls 2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0026",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel_Falls_text",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0026",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022These water falls seem to have mystical powers. We can heal our weak and wounded underneath these waterfalls.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0027",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Imperial Assassin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01c9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lemvere",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0029",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_highfathersriverligh",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0029",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Imperial Ranger Rollon \n\u0022Don\u0027t be such a fool. You have worked long and hard to get to this point. Do not dare enter here. This city is protected by the Imperial Mages. Lightning shall strike you down. Even someone as mighty will fail! Now leave!\u0022 \n \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Highfathers_lightning ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01cc",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thistle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Legion Baalhu",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Foul creature! They dare to attack the Elven Alliance! We will send them all back to the fiery depths from which they came!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Duke \n\u0022The Legions Of The Damned have underestimated your power! We will not do that again. Next time we meet we shall burn your cities to the ground and defeat your guardian!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_Spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire_enable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Hordes_DeathKnight",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01d0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Porryn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV002f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Spawn ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0030",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Disabled",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0031",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Empire spawn 20",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0032",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_Gryffin_Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0033",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_Gryffin_Elves",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0033",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Foul creatures! They dare stand in our way and spoil this great city! Gallean will not be pleased to know that Orcs and Ogres have occupied his great city! Knowing these creatures as I do, there must be more on their way!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0034",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel Falls 3",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0034",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022There is great magic in these water falls. The Arch-Angels that have died in these falls have left their magic behind. I fear though that the magic will not after the fifteenth day! Use it wisely while you can.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0035",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angel Falls 3 Healing ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0036",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Angels Falls Day 15 ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0038",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Undead Mortis Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0039",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Temple of the undead_lich",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Allamend ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hermit Gold ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Hermit \n\u0022A treaty is a treaty! As much as I personally do not like the Elves, I will follow the orders of Wotan. My Elven friend, I must warn you. Do not think about stealing our gold. This belongs to the Mountain Clans as does most of this land!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hermit_disabled ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Shamaness ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "North Steppes ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_city_occupied",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The word of Gallean has declared that the twin cities must not be occupied by anyone other than Elves. The Orcs and have others have invaded these cities too often. To gain Gallean\u0027s good graces we must liberate the cities, Skylark and Gryffin.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city_gryffin\u002Bskylark",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV003f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The cities are once again ours! We must never lose these cities to outside forces. If so I fear that Gallean will punish us most severely!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0041",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Enraged Ogre ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0042",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_skylark",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0043",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Primitive Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0043",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022We must proceed with caution. This tower is the home of a group of Primitive Giants. Rarely have these Giants been seen. For good reason they enrage easily. We do not need to be drawn into a battle. We must free the Dark Elves from Mortis.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0044",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Primitive Giants_Rage",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0045",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_DeathDragon ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0045",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The signs of the Undead Hordes are everywhere. There may be a way yet to find a new path that will lead us to Mortis and her Undead realm!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0045",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Stay clear from there! I have sensed that a great evil will be unleashed upon you should you stay any longer. Leave now while you still can!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0046",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Arch-Angels Falls Healing",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0047",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Winter Dragon Tower ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0047",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The Winter Dragon Tower is legendary! There are stories that the three white dragons residing within are unstoppable. The tower is home to a large amount of gold. A King\u0027s ransom in gold awaits us. We can use this gold and put it towards are campaign.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0047",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Brave warrior, Gallean smiles upon those who endure great battles in his name. With your victory our Lord will reward you. Go and defeat these dragons. For the glory of the Mountain Clans defeat these vile beasts!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0048",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Winter Dragon Tower Ruin ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0049",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Onyx Gargoyle",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0049",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022I have heard that the demonic creature can give us the power to topple Mortis and free the Dark Elves from the grasp of the Undead. By dealing with this creature we risk further slipping into the madness that surrounds Mortis!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0049",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Onyx Gargoyle \n\u0022Foolish Elf! Do not waste your time contemplating moral choices. In this realm right and wrong do not exist! Power exists, power and nothing more! Join me, and I will tell you the secrets of infinite power!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0049",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022What are you doing! Do not listen to that demonic creature! I know of him. He is bound to that island for an eternity. I have heard that he made a deal with Bethrezen. He gave the secrets to acquiring infinite power. At a cost!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0049",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Though he claims to know the secret! Bethrezen made sure that he can never share that secret. He shall forever remain on the island. The moment that he leaves his prison all knowledge given to him will be lost. He will forget everything!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0049",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Onyx Gargoyle \n\u0022Aaaaarrrrrrrgggghhhhhh! Curse you! I am bound to this island for I do not wish to forget the path to infinite power! On this island I am supreme, I am not like any ordinary Onyx Gargoyle. Face me and suffer at the hands of my might!\u0022 \n \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV004a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_onyxgargoyledisable",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01ec",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Berzerker",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV004b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_bluedragon ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV004b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022We are in dangerous waters in an evil realm! Only caution can prepare us for the horrors that we are bound to confront!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV004d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_BlueDragonSpawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV004e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Godfrey",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01f0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Defender of Faith",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV004f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Spawn disabled ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0050",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_ruin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0050",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022This Tower was built dedicated to the power of Gallean. Those who dwell within are more powerful than they otherwise would appear. Their presence is a danger to the Alliance. We are Galleans favorite and it should remain that way!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0051",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_Ellamend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0051",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Forest Liege  \n\u0022This land will be ours! We will make a tribute to Gallean and we will free the Dark Elves from Mortis! You have failed, the Alliance cannot defeat Mortis, we can. We are ruthless as you are about to find out!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0052",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_Dead",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0053",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC_Ruin ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0054",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_RiverofFire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0054",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The evil creature has been vanguished by our might! Now we must make our way to the Empire. Only they have what we will need to find and defeat the Undead Hordes! For Gallean we will find the Dark Elves and bring them back to his light!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0055",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Death Knight Nehru",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0055",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Death Knight \n\u0022The Elvesssss, will fail for Gallean searches not for the Dark Elves. He yearns for Mortissss! Join the Undead Hordes leave the Alliance behind! Death stalks you as we speak! I shall send you to Mortis myself!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01f7",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wizard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0056",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc_champion_south ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0057",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orcchampiondisabled",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0058",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hermit Death ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0058",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022This is not good. The Hermit\u0027s passing will not go unnoticed by the Mountain Clans. Our hand was forced! The peace must last, if we are going to save the Dark Elves! This is not good!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0058",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022This is unsettling! However he was alone and I do not believe the Mountain Clans will know anytime soon. I do not plan on telling them, anyone else?\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0058",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022I have been placed in a difficult situation! The treaty must stand at all cost. The Mountain Clans are powerful and they own much of the resources. If anyone should ask about this hermit\u0027s passing. We will not volunteer any information!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0058",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022What of his family, they will surely seek out the truth. If we come across anyone from the Mountain Clans must we lie? We are noble creatures and we live up to a higher code of ethics than most.\u0022 \n \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0058",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022My friend, there is not a person who shares your grief more so that I. For I hear Gallean\u0027s call. With a heavy heart I must tell you that this is for a greater purpose that exceeds this poor unfortunate soul.\u0022 \n \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0059",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Hermit",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01fb",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_Imperial Palace",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Forest Liege Savary \n\u0022Thank Gallean! I thought that I was going to rot in that dungeon. My abductors tortured me! There isn\u0027t a soul that likes or truly trusts Gallean. Since his return the other powers have been nervous about Gallean\u0027s presence!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005a",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Forest Liege Savary \n\u0022While in the dungeon, I thought I was going mad! I heard a Demon saying that everything is going according to plan. I overheard the creature say that a war to eradicate the Elves is on its way. I will serve you until I die!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Imperial Hero",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "The Imperial Palace, once home to the most powerful Mage Lords in the Empire. The city is a shadow of its former self. A great warrior of the Elves has been captured and tortured by the current owners! Free him and he shall loyally aid us in our Quest!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01fd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "story_Elf_day1_EnvoyAngus",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I salute you Queen Illumielle! I bring you greetings from our God Gallean. I have been chosen to speak for him. Our Lord is displeased. There have been great wrongs done to him and he wishes to be avenged!\u0022",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022What great wrong has been acted upon our powerful Lord. Why should the Elves unite and march to war? I assure you that I am peaceful Queen and war is not a path taken to easily. Only when all else fails do we somberly march to war.\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I too share your views. However I am nothing more than the voice of the spirit that binds us. Gallean is angry over the Dark Elves. The desecration of the soul of our ancient heroes warped into these abominations must be amended!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022How can you be so sure that this is Gallean\u0027s will? The visions that I have are not clear. The only thing that is certain is that the wrath of Gallean increases with each passing day.\u0022 \n",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I have been chosed by Gallean to help the Elves and bring them on the right path. Our Lord has made me his voice and I speak for him. Tomorrow you will learn more as others arrive.\u0022 \n",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I have not come alone others fight by my side. They shall aid me wherever I go. As I pledge to lead Gallean\u0027s call they too shall fight along our side. Agothorne and Arcillen join us and tomorrow others will come.\u0022 \n",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01fe",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN01ff",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "story_Elf_day2_southrises",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Centaur \n\u0022My Queen, Elves from the Southern forests have arrived.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022I have heard his call. Gallean calls out to us. We will serve the Alliance to answer Gallean\u0027s calling!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022It would appear that Envoy Angus\u0027s words ring true. Others have heard the calling. So Envoy, will you then tell us exactly what it is that Gallean expects from us?\u0022 \n",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022We must assist Gallean in freeing the Dark Elves from the clutches of Mortis and put an end to this travesty. We first shall travel south where we can find sufficient resources and set up a camp to attack from.  \n",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022This implies going through the Mountain Clans territory! Elves and Clans have had a peaceful relationship. Despite this peace, I don\u0027t think they will allow a group bent on war through their homeland.\u0022 \n",
+      "SEQ_NUM": 7
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle \n\u0022I know that we have worked hard for this peace with the Mountain Clans. I am sure it shall be worked out. I am more concerned over Gallean\u0027s growing anger. He is not fond of our hesitations and we should follow Envoy Angus. \u0022 \n",
+      "SEQ_NUM": 8
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022So it has been declared. We shall follow the word of Gallean. Let nothing stop us from freeing the Dark Elves from the tyranny of the Undead Hordes.\u0022 \n",
+      "SEQ_NUM": 9
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0200",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_story2b",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV005f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022More arrive! They shall pledge their allegiance to this great cause!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_ClansGuard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Clans Guard \n\u0022Who wishes to pass?\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022We are the elite from the Elven Alliance! We request to passage through your lands as we have business beyond your lands. I, Gallean\u0027s envoy who represents our Lord would like a word with your leader.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dwarf King \n\u0022What have we here forest dweller. What would you be doing at my doorstep with arms and spells ready?\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022We seek passage through your land. For we are sent on a holy mission by Gallean!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dwarf King \n\u0022Despite our treaty I cannot let war ready combatants into my back yard. A war ready party sharing our borders creates enough unease. I will not allow it, turn around and leave peacefully.\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I only asked you out of formality. I listen and obey Gallean! My I knew that  you would show the reason of a hibernating bear. Sleeping while the world still turns. Elves to arms! War to the Clans and death to any who get in our way!\u0022",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022Have you gone mad! The Dwarf King was just being careful. He would have let us pass with more diplomacy! This is not the way!\u0022 \n",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Time is a commodity that we are losing with each passing moment! Be at peace with your troubled spirit. This is the word of Gallean and his word is greater than all of our spirits.\u0022 \n",
+      "SEQ_NUM": 8
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0060",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022How dare you declare war! Do you realize that you have destroyed a treaty that many have died to make possible? How can you do this without consulting me first!\u0022 \n",
+      "SEQ_NUM": 9
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0203",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0062",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_ClansGuard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0063",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Guard2",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0063",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I wish to pass through your lands! I am the voice of Gallean he speaks to me. As I stand before you he whispers into my ear. My party and I have business to attend to and we wish to ask you for safe passage.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0063",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Rock Giant Votan \n\u0022Little Elf, I have heard your request and I cannot allow you passage. Despite our recent agreement to a cease fire. Many dwarves are uneasy about the Elven Alliance. I cannot let a war bent party pass through our borders.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0063",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Do you not hear me! I said that Gallean speaks to me, I can hear him screaming for me to walk right by you. Your ill placed fool\u0027s pride will not stop our holy war! So speaks Gallean!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0063",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Elves! I command that you prepare yourselves for battle. The Mountain Clans wish for us to defy Gallean. I say to you foolish Mountain Fools that you have brought this upon yourselves. In the name of Gallean I declare war!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0063",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Dwarf King \n\u0022The Elven Alliance must be destroyed. We will not allow some forest dwelling rats dictate us!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0064",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_clans war",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0065",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elvesclansguard",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0066",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "ElfWar_Day1",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0066",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \nThese cities must be conquered. We must secure the region and gather as much resources as possible!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0066",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022What madness is this? Are we to attack the Empire colonies as well? Surely Gallean has no plan for us to kill innocent people?\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0066",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022I hear him calling to me. I can hear the voice can\u0027t you? This is Gallean\u0027s will! We will need the resources for the tasks ahead. This battle with the Mountain Clans will be costly. We do not have a choice! We will do what is necessary!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0066",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022He speaks the truth! I can sense that Gallean is angry. He wants the Dark Elves to be freed from the evil that shapes them. We must do this or we shall displease our Lord! Take the Empire\u0027s capital!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0067",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "GFC Envoy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0067",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Galleans Fifth Column are here! This self styled secret society claim to be the Gallean\u0027s hand of vengeance! Our paths differ at the moment, our only goal is the save the Dark Elves. Though I hesitate to do this, if they get in our way slaughter them!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0067",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Have you lost your sense? We are becoming nothing more than a band of murdering barbarians. Attack only in self defense. Galleans Fifth Column are still fellow Elves.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0068",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Imperials War ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0068",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022I can feel this impulse in me growing. This must be Gallean\u0027s will acting upon us. That city to the south. We must conquer it and destroy everyone that resides within. Only this way we can destroy the gates that stop us from our goal!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0068",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022This change has become unsettling! I do not approve! Despite the love that I have for our Lord Gallean. This cannot go on. You will not attack that city. Despite our differences with the Imperials or anyone else.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0068",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022My Queen, I know that the Empire and the Alliance have agreed to a treaty based on the Alliance not intervening in the Empire-Imperial war. Our needs are greater than a treaty. This is Gallean\u0027s will and he angers!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0068",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022See my Queen, Gallean is displeased with our hesitation. If we do not do as he says who knows what wrath shall befall us!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0068",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Very well! Gorgon Castle must falll in the name of Gallean. Despite my displeasure we are nothing more than subjects of Gallean.\u0022 \n",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN020a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Empire_War ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022We must take all of the cities in the region including the capital. The Empire must fall to our hand! Nothing call stop us now! Gallean\u0027s calling must be answered with a path of blood. We will go through the Empire to get to the Undead Hordes!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022This is not the way! Gallean can want blood all he wants this cannot happen! Our people will not become a group of murdering bandits! I order you to stop! This blood lust has spread through the Alliance and it cannot go on!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022My Queen you must watch what you say. Gallean\u0027s anger grows and he is not pleased with what he has heard. We have little choice. For the Elven Alliance to survive this Empire settlement must die! I wish there was another way!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Then we do not have a choice. If our Lord wishes it to be done then we have little choice. Let those that perish on this day be in the name of Gallean and not the Elven Alliance. With a heavy heart I ask you to follow Gallean\u0027s wishes!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006c",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022Gallean is not all about vengeance! The Elven Alliance will be rewarded by him if all we do is listen and do as we are told. We shall be spared his anger!\u0022 \n",
+      "SEQ_NUM": 6
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Slaughter_request",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Forest Liege \n\u0022Gallean wishes for us to destory everyone in this realm! I can hear him calling to me. We are to defeat the Imperials that we encounter and we shall be rewarded. We will toss them into the river and be on our way.\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022This cannot be right! How can we have become so low! I cannot support such blood thirsty passion. What have the Elves become?\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022What has happened I do regret! However, we have defeated many Imperials and we must make our way to the Empire capital to salvage what peace treaty we have left.\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006d",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022Then to the Empire we must go and make sure that we have a lasting peace. We do not want to be drawn into a war while fighting the Mountain Clans!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf\u002BEmpire War Day 1 ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022Envoy Angus! You and I shall have words should we survive this assault upon the Empire. You have caused much misery and death. I will see to it that you answer for your crimes!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Spare me your threats! The Elves of the Southern Forest have angered Gallean for ages. I have been picked to answer his calling and I do not fear you or anyone. I am the voice of reason, I am the voice of Gallean. You will do as I say!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022I will not have the two of you at each other\u0027s throats. With war declared upon the Empire we have little choice but to defeat them. Should we fail the Empire will burn our houses down and imprison our people!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Silence false Queen. You do not reign over me! I have heard the voice of the all mighty Gallean and we shall do as we are told! Gallean rewards the loyal and punishes those who hesitate! Now let us burn the Empire! Death to the Empire!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022The precious Queen of the Alliance will be punished. Gallean is not pleased with her questions and her defiance. Your punishment my dear is forthcoming. Gallean will erode your power until you are too weak to defend yourself!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Your presence on the Elven Alliance disgusts me. I cannot wait until Gallean strikes down upon you! I refuse to fight alongside the Alliance any longer! If Gallean does not strike you down then I shall sacrifice you myself!\u0022 \n",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006e",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Your rule Illumielle will come to its end by my blade! You are not worthy to serve Gallean. Only I am and those who follow me! Gallean\u0027s word is law and I am his sword!\u0022 \n",
+      "SEQ_NUM": 8
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0210",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ime\u0027el",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV006f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Death of Angus ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0071",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Death Of Ellamend",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0074",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Death Of Stack disabled ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0216",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0218",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Sea Serpent",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0077",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_Arch-Angel_Empire war",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0077",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Arch-Angel \n\u0022I come with a message from my King. He declares that your actions will bring a monumental war that can lost for ages if you do not return to your forest at once.\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0077",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Those are big words from such a feeble King. I take orders from one being and it is not your foolish King. Gallean commands that your capital is to fall. So it shall come to pass! I declare war on the Empire!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0077",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend  \n\u0022How dare you! How could we have stooped so low so quickly? I will not have any of this!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0219",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN021a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0079",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_victory",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN021b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007a",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city_arch-angels",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "City_archangel_spawn",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007b",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Archmage \n\u0022The Empire shall defend itself!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city_archangel_spawn_okay",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city_imperial palace",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN021f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "city_imperial palace okay",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0220",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Peasants ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Peasant \n\u0022They Elves are here, the Elves are here!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Let\u0027s have some fun and sacrifice the peasants to Gallean! I am sure that our Lord will reward us for their eradication!\u0022 \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Guardian Ellamend \n\u0022How dare you suggest such a thing. That is nothing to make light of. These are innocent peasants trying to provide for themselves.\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV007f",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Suggest, that was not a suggestion. That is an order from the all mighty Gallean. I can hear the calling. I hear him at night and when I am awake I can hear his voice. He screams that we must sacrifice the peasants! Do it now!\u0022 \n",
+      "SEQ_NUM": 5
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0080",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves_Destroy Peasants ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0080",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Let Gallean feast upon the souls that we have sacrificed to him. Gallean I call out to you! Are you not pleased for what we have done! Show these nay sayers a sign. Show them that I speak for you!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0080",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Ha! Ha! Gallean is pleased for what we have done on this day! The humble little peasants are just a sample of what is to come. The Empire must fall in this realm so that we may continue our holy war! The Dark Elves shall be freed!\u0022 \n",
+      "SEQ_NUM": 4
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0222",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dagar",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0081",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "spiders\u002Bdisabled",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0082",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own_2cities_gryffin_sky",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0082",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022We have been rewarded by our great spirit. Gallean will preserve us! I can almost feel as though he has given me this himself! I cannot wait for the day that we break Mortis\u0027s grasp upon our fellow Elves!\u0022",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0083",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "own_silveria ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0083",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022The people are terrified! As they should be we will rule them with an iron fist. I have never liked the Mountain Clans!\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0083",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Do not waste time! I care not for this war, however Gallean commands us! Nearby there is a waterfall. Look to see  if these waterfalls are enchanted. If so, use it wisely!\u0022 \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0084",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Own_Imperial palace_priso",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0084",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "\u0022Look through the prisons! Let us see who we have freed from this castle.\u0022",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0084",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Gindelwys \n\u0022Finally someone has come to end my torment. I sat in the dungeon and I can hear and sense Gallean. He is angry with each passing day his anger grows. I can hear him  whispering in my ear. I dare not disobey. I shall fight with you!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0085",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elf_angusthreatensempire",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0085",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022We must kill everyone that stands in our way!\u0022 I can hear Gallean reaching out to us. I can hear his frustrations! We must defeat the Empire so that many of Galleans\u0027 children may live!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0227",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dreadwyrm",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0086",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Prisoner warning",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0086",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Oracle Elf \n\u0022Gallean  is angry! I am in great pain! I am being punished by Gallean! I must instruct you that a great servant will aid us! She is held captive in one of the three cities near the Empire\u0027s capital. Release her, and she will be loyal!\u0022 \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0228",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0087",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fergal City Falls ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0088",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elves Day 3 ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0088",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022I have a message for all of those who have recently joined us. With the exception of Angus, none of you shall be following us after we meet the Empire.\u0022 \n \n",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0088",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022My dearest apologies Illumielle, I question the wisdom of your decision. Gallean will require that all the Elves fight and die in his name!\u0022  \n",
+      "SEQ_NUM": 1
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0088",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Illumielle \n\u0022Envoy Angus, I thank you for your input. However if you are to serve the Alliance you will understand that my word is law! I have my reasons and I will not be questioned by you or anyone!\u0022 \n",
+      "SEQ_NUM": 2
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260EV0088",
+      "ID_STRING": "POPUP_TXT",
+      "TEXT": "Envoy Angus \n\u0022Again, I have to point out that you are not making any sense. I am Envoy Angus privileged to hear the words of Gallean. I accept your decision though I do not care for it myself.\u0022 \n \n",
+      "SEQ_NUM": 3
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN022b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN022e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0231",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0237",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN023d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Specter",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0243",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0244",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc Champion",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0245",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0248",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Primitive Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN024d",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fat Imp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0251",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Demon",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0255",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Dreadwyrm",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0257",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Troll",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0259",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Thorne",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN025e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Esnillen",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0265",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rock Giant",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0268",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN026b",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN026e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0271",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0274",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Fat Imp",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN027c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN027f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0282",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Zombie",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0286",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Kraken",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0289",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Orc",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN028c",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ogre",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN028e",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Polar Bear",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0000",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0290",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lizard Man",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0001",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0002",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0292",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Ela\u0027ach",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0003",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN0298",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM000a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM000b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM000c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM000d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM000e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM000f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN029f",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Barbarian Chieftain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0010",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0011",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02a1",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Trapper",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0012",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0013",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0014",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Arch-Angel Falls",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02a4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Shamaness",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0015",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0016",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0017",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0018",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Mountain",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0019",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "City in Flames",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM001a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM001b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Fall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM001c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02ac",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Cyclops",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM001d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM001e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Plateau",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM001f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0020",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0021",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0022",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Undead Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02b2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0023",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0024",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02b4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0025",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0026",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Tower",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02b6",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Giant Black Spider",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0027",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02b9",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Imperial Assassin",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02bd",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Spirit Wolf",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02c0",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Elder One Woodan ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0034",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Earth Rift",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02c4",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Rock Giant Votan ",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0035",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0038",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0039",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Neutral Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM003a",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Empire Habitation",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM003b",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM003c",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM003d",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM003e",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM003f",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Wall",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0040",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Clans Statue To Honor Wotan",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0041",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0042",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260MM0043",
+      "ID_STRING": "DESC_TXT",
+      "TEXT": "Elf City",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02db",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Godefroy",
+      "SEQ_NUM": 0
+    },
+    {
+      "NO_SCEN": "S260SC0000",
+      "ID_OBJECT": "S260UN02e2",
+      "ID_STRING": "NAME_TXT",
+      "TEXT": "Lothaire",
+      "SEQ_NUM": 0
+    }
+  ]
+}

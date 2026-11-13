@@ -50,6 +50,7 @@ internal sealed class GameLoader(IRandomProvider random)
                     scenario.CityCount,
                     GetOptionalText(texts, scenario.InfoTexts.Creator),
                     campaign.IsSkirmish,
+                    campaign.CanImportLeader,
                     scenario.PlayableRaces));
             }
 

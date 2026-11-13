@@ -32,6 +32,7 @@ public sealed class RaceSelectScreenViewModelTests
             4,
             "Strategy First",
             IsSkirmish: true,
+            CanImportLeader: true,
             [
                 new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
                 new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))
@@ -68,6 +69,7 @@ public sealed class RaceSelectScreenViewModelTests
             4,
             "Strategy First",
             IsSkirmish: true,
+            CanImportLeader: true,
             [
                 new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
                 new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))

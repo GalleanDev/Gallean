@@ -31,19 +31,36 @@ internal sealed partial class CampaignSelectScreenViewModel : AbstractScreenView
         IOrderedEnumerable<GameCampaign> orderedCampaigns = campaigns
             .Where(campaign => !campaign.IsSkirmish)
             .OrderBy(campaign => GetCampaignOrder(campaign.PlayRace.Race))
-            .ThenBy(campaign => campaign.Name, StringComparer.OrdinalIgnoreCase)
             .ThenBy(campaign => campaign.Id, StringComparer.OrdinalIgnoreCase);
 
-        List<CampaignSelectItemViewModel> items = [];
+        List<CampaignSelectItemViewModel> baseItems = [];
+        List<CampaignSelectItemViewModel> expansionItems = [];
+        HashSet<WorldRace> races = [];
 
         foreach (GameCampaign campaign in orderedCampaigns)
         {
             GlobalText raceName = texts.GetGlobalText(campaign.PlayRace.NameTextId);
+            WorldRaceDefinition race = definitions.GetRace(campaign.PlayRace.Race);
+            string name = CampaignFormatter.FormatName(campaign);
 
-            items.Add(new CampaignSelectItemViewModel(campaign, raceName.Text));
+            if (races.Add(campaign.PlayRace.Race))
+            {
+                AssetSpriteKey.UnitPortrait portraitKey = new(GetLeader(definitions, race, UnitLeaderCategory.Fighter));
+
+                baseItems.Add(new CampaignSelectItemViewModel(campaign, portraitKey, raceName.Text, name, IsExpansion: false, SectionTitle: null));
+            }
+            else
+            {
+                AssetSpriteKey.UnitPortrait portraitKey = new(GetLeader(definitions, race, UnitLeaderCategory.Mage));
+                string level = Tr("Level {0}+", campaign.Scenarios[0].SuggestedLevel);
+                string subtitle = $"{name} ({level})";
+                string? sectionTitle = expansionItems.Count == 0 ? Tr("Expansions") : null;
+
+                expansionItems.Add(new CampaignSelectItemViewModel(campaign, portraitKey, raceName.Text, subtitle, IsExpansion: true, sectionTitle));
+            }
         }
 
-        Campaigns = items;
+        Campaigns = [.. baseItems, .. expansionItems];
         SelectedCampaign = Campaigns.Count > 0 ? Campaigns[0] : null;
     }
 
@@ -77,6 +94,21 @@ internal sealed partial class CampaignSelectScreenViewModel : AbstractScreenView
     public override ScreenMusic Music => ScreenMusic.Tracks(musicQueue);
     public override AssetSoundKey OpenSound => new AssetSoundKey.InterfaceOpen();
 
+    private static UnitDefinitionId GetLeader(IGameDefinitionProvider definitions, WorldRaceDefinition race, UnitLeaderCategory category)
+    {
+        foreach (UnitDefinitionId leaderId in race.Leaders)
+        {
+            UnitDefinition leader = definitions.GetUnit(leaderId);
+
+            if (leader.LeaderCategory == category)
+            {
+                return leaderId;
+            }
+        }
+
+        throw new InvalidOperationException($"Race {race.Race} has no {category} leader.");
+    }
+
     private static int GetCampaignOrder(WorldRace race)
     {
         return race switch
@@ -100,13 +132,13 @@ internal sealed partial class CampaignSelectScreenViewModel : AbstractScreenView
         PreloadBackgroundsAsync().FileAndForget();
     }
 
-    private static List<AssetPreloadItem> GetBackgroundPreloadItems(IEnumerable<CampaignSelectItemViewModel> campaigns)
+    private static List<AssetPreloadItem> GetBackgroundPreloadItems(IEnumerable<WorldRace> races)
     {
         List<AssetPreloadItem> items = [];
 
-        foreach (CampaignSelectItemViewModel item in campaigns)
+        foreach (WorldRace race in races)
         {
-            MenuBackgroundViewModel? viewModel = MenuBackgroundViewModel.TryCreateRaceSelection(item.Campaign.PlayRace.Race);
+            MenuBackgroundViewModel? viewModel = MenuBackgroundViewModel.TryCreateRaceSelection(race);
 
             if (viewModel is not null)
             {
@@ -119,7 +151,7 @@ internal sealed partial class CampaignSelectScreenViewModel : AbstractScreenView
 
     private async Task PreloadBackgroundsAsync()
     {
-        assetLeases.Add(await assetPreloader.PreloadAsync(GetBackgroundPreloadItems(Campaigns)));
+        assetLeases.Add(await assetPreloader.PreloadAsync(GetBackgroundPreloadItems(Campaigns.Select(item => item.Campaign.PlayRace.Race).Distinct())));
     }
 
     [RelayCommand]
@@ -127,7 +159,7 @@ internal sealed partial class CampaignSelectScreenViewModel : AbstractScreenView
     {
         if (SelectedCampaign is not null)
         {
-            assetLeases.Add(await assetPreloader.PreloadAsync(GetBackgroundPreloadItems([SelectedCampaign])));
+            assetLeases.Add(await assetPreloader.PreloadAsync(GetBackgroundPreloadItems([SelectedCampaign.Campaign.PlayRace.Race])));
         }
 
         isBackgroundRevealed = true;

@@ -5,4 +5,5 @@ public sealed record ScenarioCampaign(
     GlobalTextId NameTextId,
     ScenarioRace PlayRace,
     bool IsSkirmish,
+    bool CanImportLeader,
     IReadOnlyList<ScenarioMetadata> Scenarios);

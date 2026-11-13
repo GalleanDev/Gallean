@@ -79,6 +79,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
             5,
             "Strategy First",
             IsSkirmish: false,
+            CanImportLeader: false,
             []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
@@ -287,7 +288,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         await store.SaveAsync(Dwarf, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
         await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);
+        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -377,7 +378,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         await store.SaveAsync(Uther with { Unit = Uther.Unit with { Name = new LiteralUnitName("Veteran") }, BattlesWon = 60 }, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
         await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);
+        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -403,7 +404,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     [Test]
     public void HotseatImportLeaderTest()
     {
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);
+        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -423,7 +424,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     [Test]
     public void SagaImportLeaderTest()
     {
-        GameScenario scenario = new("S107SC0000", "Saga", null, null, 1, 48, 5, null, IsSkirmish: false, []);
+        GameScenario scenario = new("S107SC0000", "Saga", null, null, 1, 48, 5, null, IsSkirmish: false, CanImportLeader: false, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -438,6 +439,23 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     }
 
     [Test]
+    public void MiniCampaignImportLeaderTest()
+    {
+        GameScenario scenario = new("S123SC0000", "A Light in the Forest", null, null, 12, 72, 10, null, IsSkirmish: false, CanImportLeader: true, []);
+        (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ScenarioConfigurationScreenViewModel viewModel = new(
+            gameViewModel,
+            texts,
+            definitions,
+            scenario,
+            [new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000"))]);
+
+        Assert.That(viewModel.CanImportLeader, Is.True);
+        Assert.That(viewModel.ImportLeaderCommand.CanExecute(null), Is.True);
+    }
+
+    [Test]
     public async Task DeleteLeaderTest()
     {
         using Sandbox sb = Sandbox.Create();
@@ -446,7 +464,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
 
         await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, []);
+        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
