@@ -5,7 +5,7 @@ internal sealed partial class BattleAiPlanner
     private sealed record RetreatAction(IEngineContext Context, int Priority) : AbstractAction(Context, Priority)
     {
         private static readonly UtilityScore.ResponseCurve PowerRatioCurve =
-            new UtilityScore.ResponseCurve.Polynomial(Slope: -7 * MaxScore, Exponent: 1, XShift: 375, YShift: 0);
+            new UtilityScore.ResponseCurve.Polynomial(Slope: -7 * MaxScore, Exponent: 1, XShift: 333, YShift: 0);
 
         private WorldAiEstimator Estimator { get; } = new(Context);
 
