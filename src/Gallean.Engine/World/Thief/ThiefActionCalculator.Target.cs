@@ -55,7 +55,14 @@ internal static partial class ThiefCalculator
 
         if (fortification is WorldRuin ruin)
         {
-            return new ThiefRuinTarget(ruin);
+            if (ruin.LooterId is null)
+            {
+                return new ThiefRuinTarget(ruin);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         WorldSite? site = plan.GetSiteAt(position);

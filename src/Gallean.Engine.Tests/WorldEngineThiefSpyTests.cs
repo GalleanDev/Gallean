@@ -346,6 +346,58 @@ public sealed class WorldEngineThiefSpyTests
     }
 
     [Test]
+    public void RuinLootedTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
+        UnitDefinition guard = TestHelpers.SimpleUnitDefinition("guard", maxHitpoints: 100, initiative: 40, damage: 5);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            SpiedPlayers = [],
+            SpiedRuins = []
+        };
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player1.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
+            movementPoints: 20);
+
+        WorldRuin ruin = new(
+            new WorldFortificationId("ruin"),
+            new ScenarioTextId("Ruin"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            new WorldObjectVariant(0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), guard),
+            WorldResourceSet.Empty,
+            Item: null,
+            LooterId: new WorldPlayerId(1),
+            AiPriority: 3);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(thief)
+            .WithDefinition(guard)
+            .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.SpyRuin, 90))
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithStack(thiefStack)
+            .WithRuin(ruin)
+            .Build();
+
+        WorldState before = engine.State;
+
+        engine.CheckCommandError(
+            new WorldThiefActionCommand(thiefStack.Id, new WorldThiefSpyRuinAction(new WorldPosition(4, 4))),
+            WorldCommandError.ThiefTargetInvalid);
+
+        Assert.That(engine.State, Is.EqualTo(before));
+    }
+
+    [Test]
     public void RuinActionAgainstStackTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);

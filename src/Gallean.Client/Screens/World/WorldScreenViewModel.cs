@@ -1671,13 +1671,13 @@ internal sealed partial class WorldScreenViewModel :
             {
                 if (selectedStack is not null)
                 {
-                    if (IsThief(selectedStack))
-                    {
-                        return AssetAnimationKey.CursorType.Negotiate;
-                    }
-                    else if (fortification is WorldRuin { LooterId: not null })
+                    if (fortification is WorldRuin { LooterId: not null })
                     {
                         return AssetAnimationKey.CursorType.Move;
+                    }
+                    else if (IsThief(selectedStack))
+                    {
+                        return AssetAnimationKey.CursorType.Negotiate;
                     }
                     else
                     {
