@@ -8,7 +8,6 @@ namespace Gallean.Client;
 internal sealed partial class TrainerTabViewModel
     : ManagementTabViewModel, IUnitGridSelectionProvider, IDragDropProvider, IDragDropHost
 {
-    private readonly ManagementScreenViewModel screen;
     private readonly WorldStackId stackId;
     private readonly UnitGridSelectionViewModel unitSelection;
     private WorldStack? currentStack;
@@ -20,7 +19,7 @@ internal sealed partial class TrainerTabViewModel
         WorldStackId stackId)
         : base(gameModel, gameViewModel)
     {
-        this.screen = screen;
+        Screen = screen;
         this.stackId = stackId;
 
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
@@ -32,6 +31,7 @@ internal sealed partial class TrainerTabViewModel
         RegisterSnapshotGatedCommands(TrainCommand);
     }
 
+    public ManagementScreenViewModel Screen { get; }
     public override string TabHeader => Tr("Trainer");
     public override AssetSpriteKey.SiteImage SiteImageKey { get; } = new(AssetAnimationKey.SiteType.Trainer);
 
@@ -146,7 +146,7 @@ internal sealed partial class TrainerTabViewModel
             stack.OwnerId != ViewPlayerId ||
             plan.GetSiteAt(stack.Position) is not WorldTrainerSite site)
         {
-            screen.Close();
+            Screen.Close();
 
             return;
         }

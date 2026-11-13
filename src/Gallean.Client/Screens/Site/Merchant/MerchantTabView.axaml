@@ -65,7 +65,7 @@
     </DataTemplate>
   </UserControl.Resources>
 
-  <Grid Background="Transparent">
+  <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
     <Grid ColumnDefinitions="*,24,*" MaxWidth="960" MaxHeight="720" Margin="18">
 
       <ContentControl Grid.Column="0" Classes="ornament-panel" Classes.highlighted="{Binding BuyZone.IsVisible}">

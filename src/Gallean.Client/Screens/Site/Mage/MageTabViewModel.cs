@@ -7,7 +7,6 @@ namespace Gallean.Client;
 internal sealed partial class MageTabViewModel
     : ManagementTabViewModel, IUnitGridSelectionProvider, IDragDropProvider, IDragDropHost
 {
-    private readonly ManagementScreenViewModel screen;
     private readonly WorldSiteId siteId;
     private readonly WorldStackId stackId;
     private readonly UnitGridSelectionViewModel unitSelection;
@@ -16,7 +15,7 @@ internal sealed partial class MageTabViewModel
     public MageTabViewModel(GameModel gameModel, GameViewModel gameViewModel, ManagementScreenViewModel screen, WorldSiteId siteId, WorldStackId stackId)
         : base(gameModel, gameViewModel)
     {
-        this.screen = screen;
+        Screen = screen;
         this.siteId = siteId;
         this.stackId = stackId;
 
@@ -29,6 +28,7 @@ internal sealed partial class MageTabViewModel
         RegisterSnapshotGatedCommands(LearnCommand);
     }
 
+    public ManagementScreenViewModel Screen { get; }
     public override string TabHeader => Tr("Mage tower");
     public override AssetSpriteKey.SiteImage SiteImageKey { get; } = new(AssetAnimationKey.SiteType.Mage);
 
@@ -146,7 +146,7 @@ internal sealed partial class MageTabViewModel
     {
         if (WorldState.Sites.GetValueOrDefault(siteId) is not WorldMageSite site)
         {
-            screen.Close();
+            Screen.Close();
             return;
         }
 
@@ -154,7 +154,7 @@ internal sealed partial class MageTabViewModel
             stack.OwnerId != ViewPlayerId ||
             stack.Position != site.Entrance)
         {
-            screen.Close();
+            Screen.Close();
             return;
         }
 

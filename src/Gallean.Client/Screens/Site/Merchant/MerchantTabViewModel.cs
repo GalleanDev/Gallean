@@ -6,7 +6,6 @@ namespace Gallean.Client;
 
 internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDragDropProvider, IDragDropHost
 {
-    private readonly ManagementScreenViewModel screen;
     private readonly WorldSiteId siteId;
     private readonly WorldStackId stackId;
     private ItemDefinitionId? selectedPurchaseItemId;
@@ -20,7 +19,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         WorldStackId stackId)
         : base(gameModel, gameViewModel)
     {
-        this.screen = screen;
+        Screen = screen;
         this.siteId = siteId;
         this.stackId = stackId;
 
@@ -31,6 +30,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         RegisterSnapshotGatedCommands(TradeCommand);
     }
 
+    public ManagementScreenViewModel Screen { get; }
     public override string TabHeader => Tr("Merchant");
     public override AssetSpriteKey.SiteImage SiteImageKey { get; } = new(AssetAnimationKey.SiteType.Merchant);
 
@@ -166,7 +166,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
     {
         if (WorldState.Sites.GetValueOrDefault(siteId) is not WorldMerchantSite site)
         {
-            screen.Close();
+            Screen.Close();
             return;
         }
 
@@ -174,7 +174,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
             stack.OwnerId != ViewPlayerId ||
             stack.Position != site.Entrance)
         {
-            screen.Close();
+            Screen.Close();
             return;
         }
 

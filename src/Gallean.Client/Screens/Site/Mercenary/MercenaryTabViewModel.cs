@@ -8,7 +8,6 @@ namespace Gallean.Client;
 internal sealed partial class MercenaryTabViewModel
     : ManagementTabViewModel, IUnitGridSelectionProvider, IDragDropProvider, IDragDropHost
 {
-    private readonly ManagementScreenViewModel screen;
     private readonly WorldSiteId siteId;
     private readonly WorldStackId stackId;
     private readonly UnitGridSelectionViewModel unitSelection;
@@ -17,7 +16,7 @@ internal sealed partial class MercenaryTabViewModel
     public MercenaryTabViewModel(GameModel gameModel, GameViewModel gameViewModel, ManagementScreenViewModel screen, WorldSiteId siteId, WorldStackId stackId)
         : base(gameModel, gameViewModel)
     {
-        this.screen = screen;
+        Screen = screen;
         this.siteId = siteId;
         this.stackId = stackId;
 
@@ -30,6 +29,7 @@ internal sealed partial class MercenaryTabViewModel
         RegisterSnapshotGatedCommands(HireCommand);
     }
 
+    public ManagementScreenViewModel Screen { get; }
     public override string TabHeader => Tr("Mercenaries");
     public override AssetSpriteKey.SiteImage SiteImageKey { get; } = new(AssetAnimationKey.SiteType.Mercenary);
 
@@ -154,7 +154,7 @@ internal sealed partial class MercenaryTabViewModel
     {
         if (WorldState.Sites.GetValueOrDefault(siteId) is not WorldMercenarySite site)
         {
-            screen.Close();
+            Screen.Close();
             return;
         }
 
@@ -162,7 +162,7 @@ internal sealed partial class MercenaryTabViewModel
             stack.OwnerId != ViewPlayerId ||
             stack.Position != site.Entrance)
         {
-            screen.Close();
+            Screen.Close();
             return;
         }
 
