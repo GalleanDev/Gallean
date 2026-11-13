@@ -16,26 +16,27 @@ internal sealed partial class CityTabView : UserControl
         AddHandler(PointerPressedEvent, OnTargetingPointerPressed, RoutingStrategies.Bubble);
     }
 
+    private CityTabViewModel ViewModel => (CityTabViewModel)DataContext!;
+
     private void OnTargetingPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (DataContext is CityTabViewModel { TargetedAction: not null } viewModel)
+        if (ViewModel.TargetedAction is not null)
         {
             e.Handled = true;
 
-            viewModel.CancelTargetingCommand.Execute(null);
+            ViewModel.CancelTargetingCommand.Execute(null);
         }
     }
 
     private void OnItemPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (DataContext is CityTabViewModel viewModel &&
-            e.InitialPressMouseButton == MouseButton.Left &&
+        if (e.InitialPressMouseButton == MouseButton.Left &&
             e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
             e.Source is StyledElement { DataContext: InventoryItemViewModel item })
         {
             e.Handled = true;
 
-            viewModel.InventoryTransfer.TransferItemAsync(item.GroupReference).FileAndForget();
+            ViewModel.InventoryTransfer.TransferItemAsync(item.GroupReference).FileAndForget();
         }
     }
 }

@@ -15,16 +15,17 @@ internal sealed partial class ExchangeTabView : UserControl
         AddHandler(PointerReleasedEvent, OnItemPointerReleased, RoutingStrategies.Bubble, true);
     }
 
+    private ExchangeTabViewModel ViewModel => (ExchangeTabViewModel)DataContext!;
+
     private void OnItemPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (DataContext is ExchangeTabViewModel viewModel &&
-            e.InitialPressMouseButton == MouseButton.Left &&
+        if (e.InitialPressMouseButton == MouseButton.Left &&
             e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
             e.Source is StyledElement { DataContext: InventoryItemViewModel item })
         {
             e.Handled = true;
 
-            viewModel.InventoryTransfer.TransferItemAsync(item.GroupReference).FileAndForget();
+            ViewModel.InventoryTransfer.TransferItemAsync(item.GroupReference).FileAndForget();
         }
     }
 }

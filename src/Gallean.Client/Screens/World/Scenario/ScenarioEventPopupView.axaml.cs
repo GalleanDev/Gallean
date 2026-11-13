@@ -13,13 +13,15 @@ internal sealed partial class ScenarioEventPopupView : UserControl
         MessagesScroll.AddHandler(PointerWheelChangedEvent, OnMessagesPointerWheelChanged, RoutingStrategies.Bubble, true);
     }
 
+    private ScenarioEventPopupViewModel ViewModel => (ScenarioEventPopupViewModel)DataContext!;
+
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         PointerPoint point = e.GetCurrentPoint(this);
 
-        if (point.Properties.IsLeftButtonPressed && DataContext is ScenarioEventPopupViewModel viewModel)
+        if (point.Properties.IsLeftButtonPressed)
         {
-            viewModel.CloseCommand.Execute(null);
+            ViewModel.CloseCommand.Execute(null);
             e.Handled = true;
         }
     }
