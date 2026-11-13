@@ -53,6 +53,7 @@
   <Window.KeyBindings>
     <KeyBinding Gesture="Escape" Command="{Binding EscapeCommand}" />
     <KeyBinding Gesture="Space" Command="{Binding ContinueCommand}" />
+    <KeyBinding Gesture="Enter" Command="{Binding ContinueCommand}" />
     <KeyBinding Gesture="F5" Command="{Binding QuickSaveCommand}" />
     <KeyBinding Gesture="F9" Command="{Binding QuickLoadCommand}" />
     <KeyBinding Gesture="F11" Command="{Binding ToggleWindowedCommand}" />
