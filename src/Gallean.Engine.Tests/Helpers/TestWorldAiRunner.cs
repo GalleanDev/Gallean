@@ -4,7 +4,9 @@ namespace Gallean.Engine.Tests;
 
 internal sealed class TestWorldAiRunner(GameSession session, IEngineContext context)
 {
-    public sealed record Trace(WorldAiActionPlan Plan, BattleOutcome? Battle, WorldStackOrder? StackOrder);
+    public sealed record Trace(WorldAiActionPlan Plan, BattleTrace? Battle, WorldStackOrder? StackOrder);
+
+    public sealed record BattleTrace(WorldStackId AttackerStackId, BattleOutcome Outcome);
 
     private readonly WorldAiController controller = new(context);
     private WorldAiMemory memory = WorldAiMemory.Empty;
@@ -56,7 +58,36 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
         }
     }
 
-    private BattleOutcome? ResolveBattle()
+    private static WorldStackId? FindAttackerStackId(WorldState state, BattleState battle)
+    {
+        foreach (WorldStack stack in state.Stacks.Values)
+        {
+            if (HasStackUnit(battle.AttackerGrid, stack))
+            {
+                return stack.Id;
+            }
+        }
+
+        return null;
+
+        static bool HasStackUnit(UnitGrid<BattleUnit> grid, WorldStack stack)
+        {
+            foreach ((BattleUnit battleUnit, GridPosition _) in grid.GetUnits())
+            {
+                foreach ((WorldUnit worldUnit, GridPosition _) in stack.Units.GetUnits())
+                {
+                    if (battleUnit.WorldUnitId == worldUnit.Id)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
+
+    private BattleTrace? ResolveBattle()
     {
         BattleSession? battle = session.Battle;
 
@@ -65,9 +96,13 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
             return null;
         }
 
+        WorldStackId attackerStackId = Assert.NotNull(FindAttackerStackId(session.World.State, battle.State));
+
         BattleCommandResult result = battle.DispatchCommand(new BattleAutoResolveCommand());
         Assert.That(result.Error, Is.Null);
 
-        return Assert.NotNull(battle.State.Outcome);
+        BattleOutcome outcome = Assert.NotNull(battle.State.Outcome);
+
+        return new BattleTrace(attackerStackId, outcome);
     }
 }

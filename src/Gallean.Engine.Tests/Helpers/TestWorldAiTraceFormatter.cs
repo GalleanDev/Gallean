@@ -45,9 +45,9 @@ internal static class TestWorldAiTraceFormatter
             _ => throw new InvalidOperationException($"Unexpected AI command '{trace.Plan.Command}'.")
         };
 
-        if (trace.Battle is { } outcome)
+        if (trace.Battle is not null)
         {
-            return $"[{trace.Plan.Score}] {command} ({outcome.WinningSide} wins)";
+            return $"[{trace.Plan.Score}] {command} ({trace.Battle.Outcome.WinningSide} wins)";
         }
         else
         {
