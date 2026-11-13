@@ -53,7 +53,6 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         this.log = log;
         this.random = random;
         this.scheduler = scheduler;
-
         this.gameSettingsSource = gameSettingsSource;
 
         AssetPreloader = assetPreloader;
