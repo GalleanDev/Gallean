@@ -2309,7 +2309,7 @@ public sealed class VisualTests
 
         Button card = window.GetVisualDescendants().OfType<Button>().First(button => button.Classes.Contains("selected"));
         Panel item = Assert.IsOfType<Panel>(card.Parent);
-        Button done = item.GetVisualDescendants().OfType<Button>().Where(button => button.Classes.Contains("card")).Skip(1).First();
+        Button done = item.GetVisualDescendants().OfType<Button>().First(button => button.Name == "FinishButton");
         window.MouseMove(Assert.NotNull(done.TranslatePoint(new Point(19, 19), window)));
 
         Panel doneSlot = Assert.IsOfType<Panel>(done.Parent);
