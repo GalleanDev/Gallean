@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -53,9 +54,12 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
         TextCatalog textCatalog = TextCatalogLoader.Load(gameSettings.EffectiveLanguage);
         textCatalog.MakeCurrent();
 
+        string? processPath = Environment.ProcessPath;
         ClientVersion clientVersion = ClientVersion.Get();
-        UpdateClient updateClient = cleanupList.Add(new UpdateClient(clientVersion, log));
-        Task<UpdateInfo?> latestUpdateTask = Task.Run(updateClient.TryGetLatestAsync);
+        UpdateClient updateClient = cleanupList.Add(new UpdateClient(clientVersion, AppDirectories.Downloads, log));
+        Task<UpdateInfo?> updateGetLatestTask = Task.Run(updateClient.TryGetLatestAsync);
+        UpdateInstaller updateInstaller = new(AppContext.BaseDirectory);
+        Task updateCleanupTask = Task.Run(updateInstaller.Cleanup);
 
         Task<AudioOutput> audioOutputTask = Task.Run(() => AudioOutput.CreateAsync(log));
         GameSettingsSource gameSettingsSource = new(gameSettings);
@@ -64,6 +68,15 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
         AssetProvider assetProvider = cleanupList.Add(await assetProviderTask);
 
         CheckAssetPack(assetProvider);
+
+        try
+        {
+            await updateCleanupTask;
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to clean up updates.", ex);
+        }
 
         FreeThreadedRandomProvider random = new();
         GameLoader gameLoader = new(random);
@@ -100,15 +113,31 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
         currentGame = gameViewModel;
         await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
 
-        UpdateInfo? latestUpdate = await latestUpdateTask;
+        UpdateInfo? latestUpdate = await updateGetLatestTask;
 
         if (latestUpdate is not null && latestUpdate.Version > clientVersion)
         {
             if (gameViewModel.TopScreen is MainMenuScreenViewModel)
             {
-                gameViewModel.OpenScreen(new UpdatePromptViewModel(latestUpdate, clientVersion));
+                gameViewModel.OpenScreen(new UpdatePromptViewModel(
+                    latestUpdate,
+                    clientVersion,
+                    updateClient,
+                    updateInstaller,
+                    () => Restart(desktop, processPath),
+                    log));
             }
         }
+    }
+
+    private static void Restart(IClassicDesktopStyleApplicationLifetime desktop, string? processPath)
+    {
+        if (processPath is not null)
+        {
+            using Process process = Process.Start(processPath, desktop.Args ?? []);
+        }
+
+        desktop.Shutdown();
     }
 
     private static void CheckAssetPack(IAssetMetadataProvider assets)

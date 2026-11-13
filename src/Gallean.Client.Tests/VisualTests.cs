@@ -7212,9 +7212,19 @@ public sealed class VisualTests
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
         gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
+        ClientVersion clientVersion = new("0.13.0", "2d40300");
+        using UpdateClient updateClient = new(clientVersion, sb.GetPath("downloads"), NullLog.Instance);
+
         gameViewModel.OpenScreen(new UpdatePromptViewModel(
-            new UpdateInfo(new ClientVersion("0.14.0", null), new Uri("https://github.com/GalleanDev/Gallean/releases/tag/v0.14.0")),
-            new ClientVersion("0.13.0", "2d40300")));
+            new UpdateInfo(
+                new ClientVersion("0.14.0", null),
+                new Uri("https://github.com/GalleanDev/Gallean/releases/tag/v0.14.0"),
+                new Uri("https://gallean.org/go/4/0.14.0/linux-x64")),
+            clientVersion,
+            updateClient,
+            new UpdateInstaller(sb.RootPath),
+            () => { },
+            NullLog.Instance));
 
         await CaptureAsync(window);
     }
