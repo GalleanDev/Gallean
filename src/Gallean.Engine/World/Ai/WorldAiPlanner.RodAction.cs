@@ -6,11 +6,11 @@ internal sealed partial class WorldAiPlanner
 {
     private sealed partial record RodAction(WorldAiContext Context, int Priority) : AbstractStackAction(Context, Priority)
     {
-        private const int MoveTurnLimit = 10;
-
         private readonly record struct Target(WorldPosition Position, int Range, int Interest, IWorldCommand<Empty> Command);
 
         private readonly record struct Candidate(Target Target, WorldPosition Position, int Cost, int Score);
+
+        private const int MoveTurnLimit = 10;
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {

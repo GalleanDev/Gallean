@@ -26,6 +26,8 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
     public IconMoniker ActionIcon { get; }
     public AssetSpriteKey.ThiefActionImage ImageKey { get; }
 
+    public override bool CanContinue => true;
+
     public static ThiefActionResultScreenViewModel CreateMineResult(
         WorldThiefActionType type,
         string actionName,
@@ -49,8 +51,6 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
 
         return new ThiefActionResultScreenViewModel(title, text, type, actionName, isSuccess);
     }
-
-    public override bool CanContinue => true;
 
     protected override bool TryClose()
     {

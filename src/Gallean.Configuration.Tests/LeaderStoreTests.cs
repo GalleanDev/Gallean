@@ -1,4 +1,3 @@
-using Gallean.Engine;
 using Gallean.Engine.Contracts;
 using Gallean.Tests.Common;
 

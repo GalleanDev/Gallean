@@ -495,11 +495,11 @@ public sealed class WorldEngineAiThiefTests
 
         UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
-            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 30, initiative: 10, damage: 5),
-            movementPoints: 6, leadership: 6) with
-        {
-            ExperienceKilled = 100
-        };
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 30, initiative: 10, damage: 5),
+                movementPoints: 6, leadership: 6) with
+            {
+                ExperienceKilled = 100
+            };
 
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
@@ -564,11 +564,11 @@ public sealed class WorldEngineAiThiefTests
 
         UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
-            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 300, initiative: 60, damage: 50),
-            movementPoints: 6, leadership: 6) with
-        {
-            ExperienceKilled = 100
-        };
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 300, initiative: 60, damage: 50),
+                movementPoints: 6, leadership: 6) with
+            {
+                ExperienceKilled = 100
+            };
 
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with

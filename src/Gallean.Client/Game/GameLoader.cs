@@ -1,5 +1,4 @@
 using Gallean.Common;
-using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Entities;
 using Gallean.Entities.GameData;

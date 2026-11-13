@@ -1483,7 +1483,7 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
             Assert.That(screen.TargetPrices, Is.EqualTo(new Dictionary<WorldUnitId, ResourceSetViewModel>
             {
-                [new WorldUnitId("woundedSoldier")] = new ResourceSetViewModel(new WorldResourceSet(30, 0, 0, 0, 0, 0), ResourceSetProjection.All)
+                [new WorldUnitId("woundedSoldier")] = new(new WorldResourceSet(30, 0, 0, 0, 0, 0), ResourceSetProjection.All)
             }));
         }
 
@@ -1508,7 +1508,7 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
             Assert.That(screen.TargetPrices, Is.EqualTo(new Dictionary<WorldUnitId, ResourceSetViewModel>
             {
-                [new WorldUnitId("deadSoldier")] = new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All)
+                [new WorldUnitId("deadSoldier")] = new(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All)
             }));
         }
 

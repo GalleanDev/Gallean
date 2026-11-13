@@ -14,6 +14,8 @@ namespace Gallean.Client;
 
 internal sealed partial class GameView : Window
 {
+    private const double SceneHeight = 600.0;
+
     public static readonly StyledProperty<bool> IsWindowedProperty =
         AvaloniaProperty.Register<GameView, bool>(nameof(IsWindowed), defaultValue: true, defaultBindingMode: BindingMode.TwoWay);
 
@@ -22,8 +24,6 @@ internal sealed partial class GameView : Window
 
     public static readonly StyledProperty<Language> LanguageProperty =
         AvaloniaProperty.Register<GameView, Language>(nameof(Language));
-
-    private const double SceneHeight = 600.0;
 
     private readonly Size minSize;
     private Task? exitSaveTask;

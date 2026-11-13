@@ -6,9 +6,9 @@ namespace Gallean.Client;
 
 internal sealed class UpdateClient : IDisposable
 {
+    private const int DefaultDownloadBufferSize = 64 * 1024;
     private static readonly Uri LatestReleaseUri = new("https://gallean.org/go/3");
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(10);
-    private const int DefaultDownloadBufferSize = 64 * 1024;
 
     private readonly HttpClient httpClient;
     private readonly string downloadDirectory;

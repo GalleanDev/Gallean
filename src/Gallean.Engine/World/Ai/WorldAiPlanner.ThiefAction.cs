@@ -6,11 +6,11 @@ internal sealed partial class WorldAiPlanner
 {
     private sealed partial record ThiefAction(WorldAiContext Context, int Priority) : AbstractStackAction(Context, Priority)
     {
-        private const int MoveTurnLimit = 10;
-
         private sealed record Approach(WorldState State, WorldStack Thief, ThiefTarget Target, WorldPosition Position);
 
         private sealed record Candidate(WorldAiPathfinding.TargetPath TargetPath, WorldThiefAction Action, int Score);
+
+        private const int MoveTurnLimit = 10;
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {

@@ -35,7 +35,6 @@ public sealed record WorldMercenarySite(
                AiPriority == other.AiPriority;
     }
 
-
     public override int GetHashCode()
     {
         HashCode hash = new();

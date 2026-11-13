@@ -5,6 +5,23 @@ namespace Gallean.Client;
 
 internal static class UnitPermanentModifierBuilder
 {
+    private sealed record Stat(
+        Func<UnitModifierDefinition, UnitStatModifier> Get,
+        Func<UnitModifierDefinition, UnitStatModifier, UnitModifierDefinition> Set)
+    {
+        public static ImmutableArray<Stat> All { get; } =
+        [
+            new(modifier => modifier.Hitpoints, (modifier, value) => modifier with { Hitpoints = value }),
+            new(modifier => modifier.Armor, (modifier, value) => modifier with { Armor = value }),
+            new(modifier => modifier.Damage, (modifier, value) => modifier with { Damage = value }),
+            new(modifier => modifier.Accuracy, (modifier, value) => modifier with { Accuracy = value }),
+            new(modifier => modifier.Initiative, (modifier, value) => modifier with { Initiative = value }),
+            new(modifier => modifier.Leadership, (modifier, value) => modifier with { Leadership = value }),
+            new(modifier => modifier.MaxMovement, (modifier, value) => modifier with { MaxMovement = value }),
+            new(modifier => modifier.VisionRadius, (modifier, value) => modifier with { VisionRadius = value })
+        ];
+    }
+
     public static IReadOnlyList<UnitPermanentModifierViewModel> Build(
         LeaderAbility baseAbilities,
         UnitMoveAbility baseMoveAbility,
@@ -284,22 +301,5 @@ internal static class UnitPermanentModifierBuilder
             UnitModifierSource.Scenario => Tr("Permanent"),
             UnitModifierSource.Fortification => Tr("From city")
         };
-    }
-
-    private sealed record Stat(
-        Func<UnitModifierDefinition, UnitStatModifier> Get,
-        Func<UnitModifierDefinition, UnitStatModifier, UnitModifierDefinition> Set)
-    {
-        public static ImmutableArray<Stat> All { get; } =
-        [
-            new Stat(modifier => modifier.Hitpoints, (modifier, value) => modifier with { Hitpoints = value }),
-            new Stat(modifier => modifier.Armor, (modifier, value) => modifier with { Armor = value }),
-            new Stat(modifier => modifier.Damage, (modifier, value) => modifier with { Damage = value }),
-            new Stat(modifier => modifier.Accuracy, (modifier, value) => modifier with { Accuracy = value }),
-            new Stat(modifier => modifier.Initiative, (modifier, value) => modifier with { Initiative = value }),
-            new Stat(modifier => modifier.Leadership, (modifier, value) => modifier with { Leadership = value }),
-            new Stat(modifier => modifier.MaxMovement, (modifier, value) => modifier with { MaxMovement = value }),
-            new Stat(modifier => modifier.VisionRadius, (modifier, value) => modifier with { VisionRadius = value })
-        ];
     }
 }

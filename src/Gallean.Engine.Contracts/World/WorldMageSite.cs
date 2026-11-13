@@ -35,7 +35,6 @@ public sealed record WorldMageSite(
                AiPriority == other.AiPriority;
     }
 
-
     public override int GetHashCode()
     {
         HashCode hash = new();

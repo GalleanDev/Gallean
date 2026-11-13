@@ -1,5 +1,3 @@
-using Gallean.Configuration;
-
 namespace Gallean.Client.Tests;
 
 public sealed class TextCatalogLoaderTests

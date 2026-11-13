@@ -1,5 +1,4 @@
 using System.Globalization;
-using Gallean.Configuration;
 
 namespace Gallean.Client.Tests;
 

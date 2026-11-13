@@ -7,27 +7,6 @@ namespace Gallean.Assets;
 
 public closed record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
 {
-    private const char LanguageSeparator = '@';
-
-    public Language? Language { get; init; }
-
-    public sealed override string CanonicalId
-    {
-        get
-        {
-            if (Language is not null)
-            {
-                return $"{NeutralId}{LanguageSeparator}{Language.Value.Code}";
-            }
-            else
-            {
-                return NeutralId;
-            }
-        }
-    }
-
-    protected abstract string NeutralId { get; }
-
     public sealed record MenuMusic : AssetSoundKey
     {
         internal const string Category = "menu-music";
@@ -665,6 +644,8 @@ public closed record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
         Windmill
     }
 
+    private const char LanguageSeparator = '@';
+
     private static readonly FrozenDictionary<string, Func<IReadOnlyList<string>, AssetSoundKey?>> Parsers =
         new Dictionary<string, Func<IReadOnlyList<string>, AssetSoundKey?>>(StringComparer.Ordinal)
         {
@@ -719,6 +700,25 @@ public closed record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
             [AmbientCapital.Category] = AmbientCapital.Parse,
             [AmbientRuin.Category] = AmbientRuin.Parse
         }.ToFrozenDictionary(StringComparer.Ordinal);
+
+    public Language? Language { get; init; }
+
+    public sealed override string CanonicalId
+    {
+        get
+        {
+            if (Language is not null)
+            {
+                return $"{NeutralId}{LanguageSeparator}{Language.Value.Code}";
+            }
+            else
+            {
+                return NeutralId;
+            }
+        }
+    }
+
+    protected abstract string NeutralId { get; }
 
     internal static IReadOnlyCollection<string> Categories => Parsers.Keys;
 

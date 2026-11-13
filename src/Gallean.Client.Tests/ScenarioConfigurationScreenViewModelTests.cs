@@ -66,6 +66,20 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         return rows;
     }
 
+    private static IReadOnlyList<string> FormatImportLeaders(IReadOnlyList<LeaderImportLeaderViewModel> leaders)
+    {
+        List<string> rows = [];
+
+        foreach (LeaderImportLeaderViewModel leader in leaders)
+        {
+            string availability = leader.IsAvailable ? "available" : "unavailable";
+
+            rows.Add($"{leader.Entry.Id} {leader.Name} {leader.LevelText} | {leader.BattlesWonText} | items={leader.ItemIcons.Count} | {availability}");
+        }
+
+        return rows;
+    }
+
     [Test]
     public void SelectionTest()
     {
@@ -261,20 +275,6 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(raceSelect.IsOpen, Is.False);
         Assert.That(firstPlayer.IsOpen, Is.False);
         Assert.That(secondPlayer.IsOpen, Is.False);
-    }
-
-    private static IReadOnlyList<string> FormatImportLeaders(IReadOnlyList<LeaderImportLeaderViewModel> leaders)
-    {
-        List<string> rows = [];
-
-        foreach (LeaderImportLeaderViewModel leader in leaders)
-        {
-            string availability = leader.IsAvailable ? "available" : "unavailable";
-
-            rows.Add($"{leader.Entry.Id} {leader.Name} {leader.LevelText} | {leader.BattlesWonText} | items={leader.ItemIcons.Count} | {availability}");
-        }
-
-        return rows;
     }
 
     [Test]

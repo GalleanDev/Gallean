@@ -33,7 +33,6 @@ public sealed record WorldTrainerSite(
                AiPriority == other.AiPriority;
     }
 
-
     public override int GetHashCode()
     {
         HashCode hash = new();
