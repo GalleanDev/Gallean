@@ -32,6 +32,7 @@ internal abstract partial class StackTabViewModel
     public ManagementScreenViewModel Screen { get; }
 
     public override string TabHeader => Tr("Party");
+    public override ResourceSetProjection ResourceProjection => ResourceSetProjection.All;
 
     public UnitGridViewModel UnitGrid { get; }
     public LeaderEquipmentViewModel Equipment { get; }
