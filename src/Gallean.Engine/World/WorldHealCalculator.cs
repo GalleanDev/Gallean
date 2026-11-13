@@ -127,10 +127,10 @@ internal static partial class WorldHealCalculator
         IEngineContext context)
     {
         WorldPlayer owner = state.Players[capital.OwnerId];
-        WorldRaceDefinition ownerRace = context.Definitions.GetRace(owner.Race);
         int lordRegeneration = GetLordRegeneration(state, owner, context);
+        int capitalRegeneration = FortificationCalculator.GetRegeneration(capital, state, context);
 
-        return RegenerateUnits(units, lordRegeneration + ownerRace.CapitalRegeneration, context);
+        return RegenerateUnits(units, lordRegeneration + capitalRegeneration, context);
     }
 
     private static UnitGrid<WorldUnit> RegenerateCityUnits(
@@ -140,10 +140,10 @@ internal static partial class WorldHealCalculator
         IEngineContext context)
     {
         WorldPlayer owner = state.Players[city.OwnerId];
-        WorldCityDefinition definition = context.Definitions.GetCity(city.DefinitionId);
         int lordRegeneration = GetLordRegeneration(state, owner, context);
+        int cityRegeneration = FortificationCalculator.GetRegeneration(city, state, context);
 
-        return RegenerateUnits(units, lordRegeneration + definition.Regeneration, context);
+        return RegenerateUnits(units, lordRegeneration + cityRegeneration, context);
     }
 
     private static UnitGrid<WorldUnit> RegenerateRuinUnits(UnitGrid<WorldUnit> units, IEngineContext context)

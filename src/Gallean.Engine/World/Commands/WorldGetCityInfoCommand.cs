@@ -6,16 +6,23 @@ public sealed record WorldGetCityInfoCommand(WorldFortificationId FortificationI
 {
     public sealed record Growth(WorldResourceSet Cost, WorldCommandError? Error);
 
-    public sealed record Result(Growth? Growth, WorldCommandError? HealError);
+    public sealed record Result(
+        Growth? Growth,
+        WorldCommandError? HealError,
+        int ArmorBonus,
+        int Regeneration);
 
     public CommandResult Execute(WorldState state, IEngineContext context)
     {
         WorldPlayer player = state.CurrentPlayer;
 
-        if (!state.Fortifications.ContainsKey(FortificationId))
+        if (!state.Fortifications.TryGetValue(FortificationId, out WorldFortification? target))
         {
             return CommandResult.Fail(WorldCommandError.FortificationNotFound);
         }
+
+        int armorBonus = FortificationCalculator.GetArmorBonus(target, state, context.Definitions);
+        int regeneration = FortificationCalculator.GetRegeneration(target, state, context);
 
         WorldUnitGroup group = new WorldUnitGroup.Fortification(FortificationId);
         WorldCommandError? healError;
@@ -40,11 +47,11 @@ public sealed record WorldGetCityInfoCommand(WorldFortificationId FortificationI
             WorldResourceSet growthCost = CityCalculator.GetGrowthCost(definition, player, context);
             WorldCommandResult upgradeResult = new WorldUpgradeCityCommand(FortificationId).Execute(state, context);
 
-            return CommandResult.Success(new Result(new Growth(growthCost, upgradeResult.Error), healError), []);
+            return CommandResult.Success(new Result(new Growth(growthCost, upgradeResult.Error), healError, armorBonus, regeneration), []);
         }
         else
         {
-            return CommandResult.Success(new Result(Growth: null, healError), []);
+            return CommandResult.Success(new Result(Growth: null, healError, armorBonus, regeneration), []);
         }
     }
 }

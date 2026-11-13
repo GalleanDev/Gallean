@@ -444,7 +444,9 @@ public sealed class WorldEngineUpgradeCityTests
         Assert.That(result, Is.EqualTo(
             new WorldGetCityInfoCommand.Result(
                 new WorldGetCityInfoCommand.Growth(new WorldResourceSet(75, 0, 0, 0, 0, 0), Error: null),
-                WorldCommandError.HealBuildingRequired)));
+                WorldCommandError.HealBuildingRequired,
+                ArmorBonus: 0,
+                Regeneration: 10)));
     }
 
     [Test]
@@ -491,7 +493,9 @@ public sealed class WorldEngineUpgradeCityTests
             new WorldGetCityInfoCommand.Growth(
                 new WorldResourceSet(150, 0, 0, 0, 0, 0),
                 WorldCommandError.InsufficientResources),
-            WorldCommandError.HealBuildingRequired)));
+            WorldCommandError.HealBuildingRequired,
+            ArmorBonus: 0,
+            Regeneration: 10)));
     }
 
     [Test]
@@ -520,7 +524,11 @@ public sealed class WorldEngineUpgradeCityTests
             new WorldGetCityInfoCommand(capital.Id),
             []);
 
-        Assert.That(result, Is.EqualTo(new WorldGetCityInfoCommand.Result(Growth: null, WorldCommandError.HealBuildingRequired)));
+        Assert.That(result, Is.EqualTo(new WorldGetCityInfoCommand.Result(
+            Growth: null,
+            WorldCommandError.HealBuildingRequired,
+            ArmorBonus: 0,
+            Regeneration: 35)));
     }
 
     [Test]
@@ -567,7 +575,11 @@ public sealed class WorldEngineUpgradeCityTests
             new WorldGetCityInfoCommand(city.Id),
             []);
 
-        Assert.That(result, Is.EqualTo(new WorldGetCityInfoCommand.Result(Growth: null, WorldCommandError.GarrisonNotFound)));
+        Assert.That(result, Is.EqualTo(new WorldGetCityInfoCommand.Result(
+            Growth: null,
+            WorldCommandError.GarrisonNotFound,
+            ArmorBonus: 0,
+            Regeneration: 10)));
     }
 
     [Test]

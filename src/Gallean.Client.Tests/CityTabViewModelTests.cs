@@ -685,6 +685,11 @@ public sealed class CityTabViewModelTests
         {
             Assert.That(screen.CityTitle, Is.EqualTo("Name"));
             Assert.That(screen.CitySummary, Is.EqualTo(new TextSpans([new TextSpan("City level: ", TextStyle.None), new TextSpan("3", TextStyle.Highlight)])));
+            Assert.That(screen.CityStats, Is.EqualTo(new StatRowViewModel[]
+            {
+                new(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new(IconMoniker.Heal, "Regeneration", new StatValueViewModel(TextSpans.FromText("20%"), 0), null)
+            }));
             Assert.That(screen.CityImageKey, Is.EqualTo(new AssetSpriteKey.CityImage(3)));
             Assert.That(screen.CapitalScene, Is.Null);
         }
@@ -1169,6 +1174,11 @@ public sealed class CityTabViewModelTests
             Assert.That(management.PlayerResources, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(100, 0, 0, 0, 0, 0), ResourceSetProjection.Gold)));
             Assert.That(screen.CityTitle, Is.EqualTo("Name"));
             Assert.That(screen.CitySummary, Is.EqualTo(TextSpans.FromText("Capital")));
+            Assert.That(screen.CityStats, Is.EqualTo(new StatRowViewModel[]
+            {
+                new(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new(IconMoniker.Heal, "Regeneration", new StatValueViewModel(TextSpans.FromText("35%"), 0), null)
+            }));
             Assert.That(screen.InventoryTransfer.Inventory.Items, Is.Empty);
             Assert.That(screen.CityImageKey, Is.EqualTo(new AssetSpriteKey.CapitalImage(WorldRace.Human)));
             Assert.That(screen.CapitalScene.Layers, Is.EqualTo(expectedLayers));

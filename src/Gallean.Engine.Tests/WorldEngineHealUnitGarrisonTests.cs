@@ -182,6 +182,10 @@ public sealed class WorldEngineHealUnitGarrisonTests
             new WorldGetCityInfoCommand(capital.Id),
             []);
 
-        Assert.That(result, Is.EqualTo(new WorldGetCityInfoCommand.Result(Growth: null, HealError: null)));
+        Assert.That(result, Is.EqualTo(new WorldGetCityInfoCommand.Result(
+            Growth: null,
+            HealError: null,
+            ArmorBonus: 0,
+            Regeneration: 35)));
     }
 }

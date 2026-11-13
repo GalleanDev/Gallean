@@ -123,6 +123,16 @@ internal static partial class FortificationCalculator
         };
     }
 
+    public static int GetRegeneration(WorldFortification fortification, WorldState state, IEngineContext context)
+    {
+        return fortification switch
+        {
+            WorldCapital capital => GetCapitalRegeneration(capital, state, context.Definitions),
+            WorldCity city => GetCityRegeneration(city, context.Definitions),
+            WorldRuin => context.Globals.RuinRegeneration
+        };
+    }
+
     public static int GetTerrainGrowth(WorldFortification fortification, GlobalVariables globals)
     {
         return fortification switch
@@ -274,6 +284,21 @@ internal static partial class FortificationCalculator
         {
             return null;
         }
+    }
+
+    private static int GetCapitalRegeneration(WorldCapital capital, WorldState state, IGameDefinitionProvider definitions)
+    {
+        WorldPlayer owner = state.Players[capital.OwnerId];
+        WorldRaceDefinition race = definitions.GetRace(owner.Race);
+
+        return race.CapitalRegeneration;
+    }
+
+    private static int GetCityRegeneration(WorldCity city, IGameDefinitionProvider definitions)
+    {
+        WorldCityDefinition definition = definitions.GetCity(city.DefinitionId);
+
+        return definition.Regeneration;
     }
 
     private static int GetCityVisionRadius(WorldCity city, IGameDefinitionProvider definitions)

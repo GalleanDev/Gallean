@@ -20,7 +20,7 @@ internal sealed partial class CityTabViewModel
     private readonly UnitGridSelectionViewModel unitSelection;
     private WorldFortification? fortification;
     private WorldStack? visitingStack;
-    private WorldGetCityInfoCommand.Result cityInfo = new(Growth: null, HealError: null);
+    private WorldGetCityInfoCommand.Result cityInfo = new(Growth: null, HealError: null, ArmorBonus: 0, Regeneration: 0);
     private WorldGetStackInfoCommand.Result stackInfo = new([], OccupiedLeadership: 0, TotalLeadership: 0);
     private WorldGetGarrisonInfoCommand.Result garrisonInfo = new([], OccupiedCapacity: 0, TotalCapacity: 0);
 
@@ -85,6 +85,9 @@ internal sealed partial class CityTabViewModel
 
     [ObservableProperty]
     public partial TextSpans GarrisonSummary { get; private set; } = TextSpans.Empty;
+
+    [ObservableProperty]
+    public partial IReadOnlyList<StatRowViewModel> CityStats { get; private set; } = [];
 
     [ObservableProperty]
     public partial AssetSpriteKey? CityImageKey { get; private set; }
@@ -946,6 +949,7 @@ internal sealed partial class CityTabViewModel
         CityTitle = GameModel.Texts.GetScenarioText(fortification.NameTextId);
         CitySummary = FormatCitySummary(fortification);
         GarrisonSummary = FormatGarrisonSummary(garrison);
+        CityStats = BuildCityStats(cityInfo);
         CityImageKey = ResolveCityImageKey(fortification);
         CapitalScene = BuildCapitalScene(fortification);
         UpgradeLabel = FormatUpgradeLabel(cityInfo.Growth);
@@ -1053,6 +1057,15 @@ internal sealed partial class CityTabViewModel
         return TrSpans("Units in city: {0:*}", garrison.GetUnits().Count());
     }
 
+    private static IReadOnlyList<StatRowViewModel> BuildCityStats(WorldGetCityInfoCommand.Result info)
+    {
+        return
+        [
+            new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(TextSpans.FromText($"{info.ArmorBonus:+0;-0;0}"), 0), null),
+            new(IconMoniker.Heal, Tr("Regeneration"), new StatValueViewModel(TextSpans.FromText(Tr("{0}%", info.Regeneration)), 0), null)
+        ];
+    }
+
     private WorldGetCityInfoCommand.Result ResolveCityInfo()
     {
         ICommandResult<WorldCommandError, WorldEvent, WorldGetCityInfoCommand.Result> result =
@@ -1060,7 +1073,7 @@ internal sealed partial class CityTabViewModel
 
         if (result.Failed)
         {
-            return new WorldGetCityInfoCommand.Result(Growth: null, HealError: null);
+            return new WorldGetCityInfoCommand.Result(Growth: null, HealError: null, ArmorBonus: 0, Regeneration: 0);
         }
         else
         {
