@@ -69,9 +69,9 @@ internal sealed partial class GameModel : ObservableObject, IDisposable
         });
     }
 
-    public void DismissBattle()
+    public void DismissBattle(BattleModel battle)
     {
-        if (activeBattle is not null)
+        if (ReferenceEquals(activeBattle, battle))
         {
             activeBattle = null;
             PublishSnapshot();

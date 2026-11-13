@@ -160,13 +160,14 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     public async Task<BattleScreenViewModel?> ShowBattleAsync(WorldScreenViewModel worldScreen)
     {
         GameModel gameModel = worldScreen.GameModel;
+        BattleModel? battle = gameModel.ActiveBattle;
 
-        Debug.Assert(gameModel.ActiveBattle is not null);
+        Debug.Assert(battle is not null);
 
         BattleScreenViewModel? screen = null;
         try
         {
-            screen = new BattleScreenViewModel(gameModel, gameModel.ActiveBattle, this, assets, AssetPreloader, random);
+            screen = new BattleScreenViewModel(gameModel, battle, this, assets, AssetPreloader, random);
 
             await screen.LoadAsync();
 
@@ -192,7 +193,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 CloseScreen(screen);
             }
 
-            gameModel.DismissBattle();
+            gameModel.DismissBattle(battle);
             StopGame();
             ShowScreen(new ErrorScreenViewModel(Tr("Failed to load battle.\n{0}", ex.Message), Tr("Back"), ShowMainMenuAsync));
 

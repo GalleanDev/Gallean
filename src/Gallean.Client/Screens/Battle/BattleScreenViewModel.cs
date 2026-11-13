@@ -163,15 +163,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         private set => SetProperty(ref renderState, value);
     }
 
-    private BattleState State
-    {
-        get
-        {
-            BattleState? state = Snapshot.BattleState;
-            Debug.Assert(state is not null);
-            return state;
-        }
-    }
+    private BattleState State => battle.State;
 
     protected override bool IsBusy => base.IsBusy || isActing || TransitionState is not null;
 
@@ -186,7 +178,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     protected override void OnDispose()
     {
-        GameModel.DismissBattle();
+        GameModel.DismissBattle(battle);
         assetLeases.Dispose();
     }
 

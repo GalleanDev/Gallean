@@ -38,7 +38,7 @@ public sealed partial class GameSession
             throw new WorldCommandException(worldResult.Error.Value);
         }
 
-        if (Battle is not null && Battle.IsAttackerAi && Battle.IsDefenderAi)
+        while (Battle is not null && Battle.IsAttackerAi && Battle.IsDefenderAi)
         {
             BattleCommandResult battleResult = Battle.DispatchCommand(new BattleAutoResolveCommand());
             if (battleResult.Failed)

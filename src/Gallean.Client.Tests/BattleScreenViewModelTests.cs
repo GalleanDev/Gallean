@@ -5105,4 +5105,111 @@ public sealed class BattleScreenViewModelTests
             (TestHelpers.SimpleBattleUnit(enemyId, null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 20), GridPosition.FrontBottom)
         ]));
     }
+
+    [Test]
+    public async Task BattleAfterBattleTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 30, initiative: 30, damage: 5);
+        UnitDefinition ambusherDefinition = TestHelpers.SimpleUnitDefinition("ambusher", maxHitpoints: 80, initiative: 60, damage: 10);
+
+        GlobalVariables globals = new() { BattleInitiativeVariance = 0, BattleDamageVariance = 0 };
+        WorldMap map = TestHelpers.SimpleMap(2, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithGlobals(globals)
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithDefinition(ambusherDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+
+        BattleState battleState = new BattleStateBuilder(engine.Definitions)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100))
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 30))
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
+        BattleState followUpState = new BattleStateBuilder(engine.Definitions)
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, ambusherDefinition.Id, BattleSide.Attacker, hitpoints: 80))
+            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, attackerDefinition.Id, BattleSide.Defender, hitpoints: 100))
+            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
+
+        EngineContext battleEngine = new(new RandomProvider(0), engine.Definitions, engine.UnitStats, GameScenarioProvider.Empty, globals);
+        await gameModel.RunAsync(() =>
+        {
+            gameModel.Session.StartBattle(new BattleSession(
+                battleEngine,
+                battleState,
+                NullBattleUnitUpgradeResolver.Instance,
+                _ =>
+                {
+                    gameModel.Session.StartBattle(new BattleSession(
+                        battleEngine,
+                        followUpState,
+                        NullBattleUnitUpgradeResolver.Instance,
+                        _ =>
+                        {
+                        },
+                        isAttackerAi: true,
+                        isDefenderAi: false,
+                        canAutoResolve: true,
+                        new WorldPosition(1, 0)));
+                },
+                isAttackerAi: false,
+                isDefenderAi: true,
+                canAutoResolve: true,
+                new WorldPosition(0, 0)));
+        });
+        BattleModel battle = Assert.NotNull(gameModel.ActiveBattle);
+
+        TestAssetProviderBuilder assetBuilder = new();
+        Sprite sprite = assetBuilder.CreateSprite(SKColors.Transparent, 80, 120);
+        Animation animation = assetBuilder.CreateAnimation(new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null), [sprite]);
+        using TestAssetProvider assets = assetBuilder
+            .ResolveSprite(_ => sprite)
+            .ResolveAnimation(_ => animation)
+            .ResolveSound(_ => null)
+            .Build();
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAssets(assets).Build();
+        IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("enemy"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithSprite(new AssetSpriteKey.BattleCorpse(IsLarge: false, Variant: 0), new AssetSpriteMetadata(Width: 44, Height: 28, PixelWidth: 44, PixelHeight: 28, OffsetX: -22, OffsetY: -20, Additive: false))
+            .Build();
+        BattleScreenViewModel viewModel = new(gameModel, battle, gameViewModel, assetMetadata, NullAssetPreloader.Instance, new RandomProvider(0));
+        gameViewModel.OpenScreen(viewModel);
+        await viewModel.CompleteTransitionAsync();
+
+        viewModel.AutoResolveCommand.Execute(null);
+
+        ConfirmPromptViewModel autoResolvePrompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+        await autoResolvePrompt.ConfirmCommand.ExecuteAsync(null);
+
+        BattleModel followUpBattle = Assert.NotNull(gameModel.ActiveBattle);
+
+        Assert.That(followUpBattle, Is.Not.SameAs(battle));
+        Assert.That(followUpBattle.Position, Is.EqualTo(new WorldPosition(1, 0)));
+        Assert.That(battle.State.Outcome, Is.EqualTo(new BattleOutcome(BattleSide.Attacker)));
+        Assert.That(FormatGrid(viewModel.AttackerGrid, 15.0), Is.EqualTo([
+            "unit 1 unit-face/attacker at 2,1 span 1 hitpoints 100/100 Alive current False ",
+            "unit 1 feedback Heal +1 XP"
+        ]));
+        Assert.That(FormatGrid(viewModel.DefenderGrid, 15.0), Is.EqualTo([
+            "unit 2 unit-face/enemy at 2,0 span 1 hitpoints 0/30 Dead current False "
+        ]));
+        Assert.That(viewModel.IsBattleOver, Is.True);
+        Assert.That(viewModel.ExitBattleCommand.CanExecute(null), Is.True);
+
+        viewModel.ExitBattleCommand.Execute(null);
+        await viewModel.CompleteTransitionAsync();
+
+        Assert.That(gameViewModel.TopScreen, Is.Null);
+        Assert.That(gameModel.ActiveBattle, Is.SameAs(followUpBattle));
+        Assert.That(gameModel.Snapshot.BattleState, Is.SameAs(followUpBattle.State));
+    }
 }
