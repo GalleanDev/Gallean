@@ -30,12 +30,12 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
 
     private static long GetSpriteCacheSize(GCMemoryInfo memoryInfo)
     {
-        return Math.Min(768L * 1024 * 1024, memoryInfo.TotalAvailableMemoryBytes / 32);
+        return Math.Clamp(memoryInfo.TotalAvailableMemoryBytes / 32, 128L * 1024 * 1024, 768L * 1024 * 1024);
     }
 
     private static long GetAnimationCacheSize(GCMemoryInfo memoryInfo)
     {
-        return Math.Min(3L * 1024 * 1024 * 1024, memoryInfo.TotalAvailableMemoryBytes / 8);
+        return Math.Clamp(memoryInfo.TotalAvailableMemoryBytes / 8, 512L * 1024 * 1024, 3L * 1024 * 1024 * 1024);
     }
 
     private static long GetSoundCacheSize(GCMemoryInfo memoryInfo)

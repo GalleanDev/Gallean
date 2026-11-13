@@ -40,6 +40,6 @@ public static class ClientApp
 
     private static long GetMaxGpuResourceSizeBytes(GCMemoryInfo memoryInfo)
     {
-        return Math.Min(2L * 1024 * 1024 * 1024, memoryInfo.TotalAvailableMemoryBytes / 8);
+        return Math.Clamp(memoryInfo.TotalAvailableMemoryBytes / 8, 768L * 1024 * 1024, 2L * 1024 * 1024 * 1024);
     }
 }
