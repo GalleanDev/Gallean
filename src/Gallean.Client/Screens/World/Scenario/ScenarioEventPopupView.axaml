@@ -149,7 +149,7 @@
     </Style>
   </UserControl.Styles>
 
-  <Panel>
+  <Panel Background="Transparent" PointerPressed="OnPointerPressed">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" RowDefinitions="90,Auto" ColumnDefinitions="Auto,Auto,Auto">
 
       <Border Grid.Row="1" Grid.ColumnSpan="3" Background="{StaticResource ScenarioDialogBandGradientBrush}" />
