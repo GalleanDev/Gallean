@@ -80,7 +80,7 @@ dotnet test --filter TestCategory=Visual
 
 ## Publishing
 
-Each client publishes as a Native AOT build on its own platform, so you need the [Native AOT prerequisites](https://learn.microsoft.com/dotnet/core/deploying/native-aot/#prerequisites) installed. On macOS, install Xcode or its Command Line Tools (`xcode-select --install`).
+Each client publishes as a Native AOT build for its own platform, so you need the [Native AOT prerequisites](https://learn.microsoft.com/dotnet/core/deploying/native-aot/#prerequisites) installed. On macOS, install Xcode or its Command Line Tools (`xcode-select --install`).
 
 ```bash
 dotnet publish
