@@ -83,6 +83,10 @@
       <Setter Property="Foreground" Value="{StaticResource TabBarSelectedTextBrush}" />
     </Style>
 
+    <Style Selector="ContentControl.player-resources WrapPanel">
+      <Setter Property="ItemsAlignment" Value="End" />
+    </Style>
+
     <Style Selector="local|SpriteVisual.site-image">
       <Setter Property="Margin" Value="-120" />
       <Setter Property="Stretch" Value="UniformToFill" />
@@ -147,31 +151,36 @@
         </local:OrnamentRule.Effect>
       </local:OrnamentRule>
 
-      <StackPanel Orientation="Horizontal" Height="67" HorizontalAlignment="Center" VerticalAlignment="Top">
-        <Button Classes="hotkey" IsVisible="{Binding $self.IsEffectivelyEnabled}" Content="{local:Text 'Q'}" Margin="0,20,24,0" Command="{Binding SelectPreviousTabCommand}" />
-        <ItemsControl x:Name="TabStrip"
-                      Classes="focus-group"
-                      ClipToBounds="False"
-                      ItemsSource="{Binding Tabs}"
-                      ItemTemplate="{StaticResource ManagementTabTemplate}">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <StackPanel Orientation="Horizontal" />
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <Button Classes="hotkey" IsVisible="{Binding $self.IsEffectivelyEnabled}" Content="{local:Text 'E'}" Margin="24,20,0,0" Command="{Binding SelectNextTabCommand}" />
-      </StackPanel>
+      <Grid ColumnDefinitions="*,Auto,*" Height="67" VerticalAlignment="Top">
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <Button Classes="hotkey" IsVisible="{Binding $self.IsEffectivelyEnabled}" Content="{local:Text 'Q'}" Margin="0,20,24,0" Command="{Binding SelectPreviousTabCommand}" />
+          <ItemsControl x:Name="TabStrip"
+                        Classes="focus-group"
+                        ClipToBounds="False"
+                        ItemsSource="{Binding Tabs}"
+                        ItemTemplate="{StaticResource ManagementTabTemplate}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
+          <Button Classes="hotkey" IsVisible="{Binding $self.IsEffectivelyEnabled}" Content="{local:Text 'E'}" Margin="24,20,0,0" Command="{Binding SelectNextTabCommand}" />
+        </StackPanel>
 
-      <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,24,0">
-        <ContentControl Content="{Binding PlayerResources}"
-                        Classes="body"
-                        Height="28"
-                        Foreground="{StaticResource PrimaryTextBrush}" />
-        <Button Classes="hotkey" Command="{Binding CloseCommand}">
-          <local:IconVisual Moniker="Close" Width="12" Height="12" Foreground="{Binding $parent[Button].Foreground}" />
-        </Button>
-      </StackPanel>
+        <Grid Grid.Column="2" ColumnDefinitions="*,Auto" Margin="16,0,24,0">
+          <ContentControl Grid.Column="0"
+                          Content="{Binding PlayerResources}"
+                          Classes="body player-resources"
+                          Margin="0,0,16,4"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Center"
+                          Foreground="{StaticResource PrimaryTextBrush}" />
+          <Button Grid.Column="1" Classes="hotkey" Margin="0,20,0,0" VerticalAlignment="Top" Command="{Binding CloseCommand}">
+            <local:IconVisual Moniker="Close" Width="12" Height="12" Foreground="{Binding $parent[Button].Foreground}" />
+          </Button>
+        </Grid>
+      </Grid>
     </Grid>
   </Grid>
 

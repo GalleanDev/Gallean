@@ -8,7 +8,7 @@
   <ItemsControl ItemsSource="{Binding Items}" VerticalAlignment="Center">
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
-        <StackPanel Orientation="Horizontal" Spacing="12" />
+        <WrapPanel ItemSpacing="12" LineSpacing="2" />
       </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
     <ItemsControl.ItemTemplate>
