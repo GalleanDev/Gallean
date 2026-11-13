@@ -12,13 +12,17 @@ internal sealed partial class DiplomacyTabViewModel : ManagementTabViewModel
 
     private DiplomacyOfferViewModel? selectedOffer;
 
-    public DiplomacyTabViewModel(GameModel gameModel, GameViewModel gameViewModel)
+    public DiplomacyTabViewModel(GameModel gameModel, GameViewModel gameViewModel, ManagementScreenViewModel screen)
         : base(gameModel, gameViewModel)
     {
+        Screen = screen;
+
         RefreshView();
     }
 
     public override string TabHeader => Tr("Diplomacy");
+
+    public ManagementScreenViewModel Screen { get; }
 
     [ObservableProperty]
     public partial IReadOnlyList<DiplomacyPlayerViewModel> Players { get; private set; } = [];

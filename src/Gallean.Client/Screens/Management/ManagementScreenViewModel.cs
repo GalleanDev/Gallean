@@ -57,7 +57,7 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
             {
                 tabs.Add(new BuildingTabViewModel(gameModel, gameViewModel, screen));
                 tabs.Add(new SpellbookTabViewModel(gameModel, gameViewModel, screen));
-                tabs.Add(new DiplomacyTabViewModel(gameModel, gameViewModel));
+                tabs.Add(new DiplomacyTabViewModel(gameModel, gameViewModel, screen));
             }
 
             return tabs;
