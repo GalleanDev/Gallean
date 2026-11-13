@@ -900,10 +900,10 @@ public sealed class StackTabViewModelTests
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
                 [
-                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityWeaponArmorUse, "X000TGA001", "X000TGA101", "Innate", 1),
-                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityOrbUse, "X000TGA005", "X000TGA105", "Innate", 1),
-                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityBannerUse, "X000TGA003", "Permanent", null, 1),
-                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "Permanent", null, 1)
+                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityWeaponArmorUse, "X000TGA001", "X000TGA101", "Innate", 1, []),
+                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityOrbUse, "X000TGA005", "X000TGA105", "Innate", 1, []),
+                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityBannerUse, "X000TGA003", "Permanent", null, 1, []),
+                    new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "Permanent", null, 1, [])
                 ]))));
     }
 
@@ -2351,7 +2351,13 @@ public sealed class StackTabViewModelTests
             null,
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
             [],
-            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Hitpoint, "+20 hit points, +15 armor, +50% damage, -10 accuracy, +10% initiative", "Permanent", null, 1)])));
+            [
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Hitpoint, "+20 hit points", "Permanent", null, 1, []),
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+15 armor", "Permanent", null, 1, []),
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Damage, "+50% damage", "Permanent", null, 1, []),
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.LearnAbility, "-10 accuracy", "Permanent", null, 1, []),
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Initiative, "+10% initiative", "Permanent", null, 1, [])
+            ])));
     }
 
     [Test]
@@ -2429,7 +2435,7 @@ public sealed class StackTabViewModelTests
             null,
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
             [],
-            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.LearnAbility, "-10 accuracy", "Permanent", null, 1)])));
+            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.LearnAbility, "-10 accuracy", "Permanent", null, 1, [])])));
     }
 
     [Test]
@@ -2443,6 +2449,7 @@ public sealed class StackTabViewModelTests
         UnitModifierDefinition moreLeadership = TestHelpers.SimpleModifier("more-leadership") with { Leadership = new UnitStatModifier(1, 0) };
         UnitModifierDefinition pathfinding = TestHelpers.SimpleModifier("pathfinding") with { MaxMovement = new UnitStatModifier(0, 20) };
         UnitModifierDefinition armor = TestHelpers.SimpleModifier("armor") with { Armor = new UnitStatModifier(10, 0) };
+        UnitModifierDefinition plate = TestHelpers.SimpleModifier("plate") with { Armor = new UnitStatModifier(15, 0) };
         UnitModifierDefinition swiftness = TestHelpers.SimpleModifier("swiftness") with { Initiative = new UnitStatModifier(0, 20) };
         UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
             TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
@@ -2458,6 +2465,7 @@ public sealed class StackTabViewModelTests
                 UnitModifier.Permanent(leadership.Id),
                 UnitModifier.Permanent(pathfinding.Id),
                 UnitModifier.Permanent(armor.Id),
+                UnitModifier.FromEquipment(plate.Id),
                 new UnitModifier(swiftness.Id, RemainingTurns: 2),
                 UnitModifier.Permanent(moreLeadership.Id)
             ],
@@ -2469,6 +2477,7 @@ public sealed class StackTabViewModelTests
             .AddUnitModifier(moreLeadership)
             .AddUnitModifier(pathfinding)
             .AddUnitModifier(armor)
+            .AddUnitModifier(plate)
             .AddUnitModifier(swiftness)
             .Build();
 
@@ -2488,6 +2497,7 @@ public sealed class StackTabViewModelTests
             .WithDefinition(moreLeadership)
             .WithDefinition(pathfinding)
             .WithDefinition(armor)
+            .WithDefinition(plate)
             .WithDefinition(swiftness)
             .WithLeaderUpgrade(new LeaderUpgradeDefinition(
                 player.LordId,
@@ -2542,7 +2552,7 @@ public sealed class StackTabViewModelTests
             null,
             [
                 new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 10), null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 25), null),
                 new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
                 new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 10), null)
             ],
@@ -2551,9 +2561,9 @@ public sealed class StackTabViewModelTests
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("5"), 0), null),
             [new UnitModifierStatusViewModel(UnitModifierType.Boost, [new UnitModifierViewModel("+20% initiative", TrSpans("Turns left: {0:*}", 1), UnitModifierType.Boost)])],
             [
-                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Leadership, IconMoniker.Leadership, "leadership-name", "leadership-description", "+1 leadership", 2),
-                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Movement, "pathfinding-name", "pathfinding-description", "+20% movement", 1),
-                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "Permanent", null, 1)
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Leadership, IconMoniker.Leadership, "leadership-name", "leadership-description", "+2 leadership", 2, []),
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Movement, "pathfinding-name", "pathfinding-description", "+20% movement", 1, []),
+                new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+25 armor", null, null, 1, [new UnitPermanentModifierSourceViewModel("Permanent", "+10"), new UnitPermanentModifierSourceViewModel("From equipment", "+15")])
             ])));
     }
 
@@ -3526,6 +3536,6 @@ public sealed class StackTabViewModelTests
                 null,
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
-                [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.MoveAbilityFlying, "Flight", "Allows the leader to Fly", "Innate", 1)]))));
+                [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.MoveAbilityFlying, "Flight", "Allows the leader to Fly", "Innate", 1, [])]))));
     }
 }

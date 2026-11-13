@@ -1,115 +1,51 @@
-using System.Collections.Immutable;
-using Gallean.Engine;
+using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal sealed record UnitPermanentModifierViewModel(UnitPermanentModifierType Type, IconMoniker Icon, string Name, string Description, string? Effects, int Count)
+internal sealed record UnitPermanentModifierViewModel(
+    UnitPermanentModifierType Type,
+    IconMoniker Icon,
+    string Name,
+    string? Description,
+    string? Effects,
+    int Count,
+    IReadOnlyList<UnitPermanentModifierSourceViewModel> Sources)
 {
     public string CountText => $"×{Count}";
 
-    public static IReadOnlyList<UnitPermanentModifierViewModel> CreateAll(
-        LeaderAbility baseAbilities,
-        UnitMoveAbility baseMoveAbility,
-        ImmutableArray<UnitModifier> modifiers,
-        ImmutableArray<LeaderUpgradeDefinition> leaderUpgrades,
-        IGameDefinitionProvider definitions,
-        IGameTextProvider texts)
+    public bool Equals(UnitPermanentModifierViewModel? other)
     {
-        return
-        [
-            .. Enum.GetValues<LeaderAbility>()
-                .Where(ability => ability != LeaderAbility.None && baseAbilities.HasFlag(ability))
-                .Select(ability => Create(ability, texts)),
-            .. AddMoveAbility(baseMoveAbility, texts),
-            .. modifiers
-                .Where(modifier => modifier.RemainingTurns is null && modifier.Source is not UnitModifierSource.Scenario)
-                .Select(modifier => Create(modifier, leaderUpgrades, definitions, texts))
-                .GroupBy(modifier => modifier)
-                .Select(group => group.Key with { Count = group.Count() })
-        ];
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Type == other.Type &&
+               Icon == other.Icon &&
+               Name == other.Name &&
+               Description == other.Description &&
+               Effects == other.Effects &&
+               Count == other.Count &&
+               Sources.SequenceEqual(other.Sources);
     }
 
-    private static UnitPermanentModifierViewModel Create(LeaderAbility ability, IGameTextProvider texts)
+    public override int GetHashCode()
     {
-        return new UnitPermanentModifierViewModel(
-            UnitPermanentModifierType.Skill,
-            LeaderAbilityIconResolver.Resolve(ability),
-            LeaderAbilityFormatter.FormatName(ability, texts),
-            LeaderAbilityFormatter.FormatDescription(ability, texts),
-            Tr("Innate"),
-            1);
-    }
+        HashCode hash = new();
 
-    private static IEnumerable<UnitPermanentModifierViewModel> AddMoveAbility(UnitMoveAbility ability, IGameTextProvider texts)
-    {
-        string? name = UnitMoveAbilityFormatter.Format(ability);
-        string? description = UnitMoveAbilityFormatter.FormatDescription(ability, texts);
+        hash.Add(Type);
+        hash.Add(Icon);
+        hash.Add(Name);
+        hash.Add(Description);
+        hash.Add(Effects);
+        hash.Add(Count);
+        hash.AddSequence(Sources);
 
-        if (name is not null && description is not null)
-        {
-            yield return new UnitPermanentModifierViewModel(
-                UnitPermanentModifierType.Skill,
-                UnitMoveAbilityIconResolver.Resolve(ability),
-                name,
-                description,
-                Tr("Innate"),
-                1);
-        }
-    }
-
-    private static UnitPermanentModifierViewModel Create(
-        UnitModifier modifier,
-        ImmutableArray<LeaderUpgradeDefinition> leaderUpgrades,
-        IGameDefinitionProvider definitions,
-        IGameTextProvider texts)
-    {
-        UnitModifierDefinition modifierDefinition = definitions.GetUnitModifier(modifier.DefinitionId);
-        UnitPermanentModifierType type = ResolveType(modifierDefinition);
-        IconMoniker icon = UnitModifierIconResolver.Resolve(modifierDefinition);
-        string effects = string.Join(", ", UnitModifierFormatter.FormatEffects(modifierDefinition, texts));
-        LeaderUpgradeDefinition? upgradeDefinition = leaderUpgrades.FirstOrDefault(upgrade => upgrade.ModifierId == modifier.DefinitionId);
-
-        if (modifier.Source is UnitModifierSource.Unit && upgradeDefinition is not null)
-        {
-            GlobalText name = texts.GetGlobalText(upgradeDefinition.NameTextId);
-            GlobalText description = texts.GetGlobalText(upgradeDefinition.DescriptionTextId);
-
-            return new UnitPermanentModifierViewModel(type, icon, name.Text, description.Text, effects, 1);
-        }
-        else
-        {
-            return new UnitPermanentModifierViewModel(type, icon, effects, FormatSource(modifier.Source), null, 1);
-        }
-    }
-
-    private static UnitPermanentModifierType ResolveType(UnitModifierDefinition modifier)
-    {
-        if (modifier.LeaderAbilities != LeaderAbility.None)
-        {
-            return UnitPermanentModifierType.Skill;
-        }
-        else if (modifier.Wards.Length > 0)
-        {
-            return UnitPermanentModifierType.Protection;
-        }
-        else if (modifier.Leadership.Flat > 0 || modifier.Leadership.Percent > 0)
-        {
-            return UnitPermanentModifierType.Leadership;
-        }
-        else
-        {
-            return UnitPermanentModifierType.Common;
-        }
-    }
-
-    private static string FormatSource(UnitModifierSource source)
-    {
-        return source switch
-        {
-            UnitModifierSource.Unit => Tr("Permanent"),
-            UnitModifierSource.Equipment => Tr("From equipment"),
-            UnitModifierSource.Scenario => Tr("Permanent"),
-            UnitModifierSource.Fortification => Tr("From city")
-        };
+        return hash.ToHashCode();
     }
 }

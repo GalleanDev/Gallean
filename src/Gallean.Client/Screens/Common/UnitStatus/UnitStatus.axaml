@@ -64,7 +64,29 @@
               <local:IconVisual Classes="status-tooltip-icon" Moniker="{Binding Icon}" Foreground="{StaticResource PermanentModifierIconBrush}" />
               <local:OutlinedTextBlock Text="{Binding Name}" Classes="h4" VerticalAlignment="Center" Foreground="{StaticResource PermanentModifierIconBrush}" />
             </StackPanel>
-            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Description}"
+                       TextWrapping="Wrap"
+                       IsVisible="{Binding Description, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            <ItemsControl ItemsSource="{Binding Sources}"
+                          Grid.IsSharedSizeScope="True"
+                          IsVisible="{Binding Sources.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="local:UnitPermanentModifierSourceViewModel">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" SharedSizeGroup="SourceValue" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Value}" />
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding Name}"
+                               Margin="16,0,0,0"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource SecondaryTextBrush}" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <TextBlock Text="{Binding Effects}"
                        TextWrapping="Wrap"
                        Foreground="{StaticResource BattleStatusEffectBoostModifierBrush}"

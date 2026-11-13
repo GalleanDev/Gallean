@@ -122,7 +122,7 @@ internal sealed record UnitDetailsViewModel(
             UnitModifierViewModel.CreateAll(unit, definitions, texts);
         IReadOnlyList<UnitStatusViewModel> statuses =
             UnitStatusViewModel.CreateAll(BattleUnitState.StatusEffect.CreateAll(unit.StatusEffects), modifiers);
-        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierViewModel.CreateAll(
+        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierBuilder.Build(
             stats.GetWorldUnitAbilities(baseUnit),
             definition.MoveAbility,
             unit.Modifiers,
@@ -184,7 +184,7 @@ internal sealed record UnitDetailsViewModel(
         UnitExperience experience = stats.GetWorldUnitExperience(unit);
         bool isUpgradeBlocked = CheckUpgradeBlocked(unit.DefinitionId, unit.IsTypeLocked, experience, owner, stats);
         IReadOnlyList<UnitStatusViewModel> statuses = UnitStatusViewModel.CreateAll([], modifiers);
-        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierViewModel.CreateAll(
+        IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierBuilder.Build(
             stats.GetWorldUnitAbilities(baseUnit),
             definition.MoveAbility,
             unit.Modifiers,
