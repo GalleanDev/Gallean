@@ -59,9 +59,9 @@ internal sealed class AudioOutput : IDisposable
         {
             return new AlsaOut();
         }
-        else if (OperatingSystem.IsMacOSVersionAtLeast(10, 5))
+        else if (OperatingSystem.IsMacOS())
         {
-            return new CoreAudioPlayer();
+            return new AudioQueuePlayer();
         }
         else
         {
