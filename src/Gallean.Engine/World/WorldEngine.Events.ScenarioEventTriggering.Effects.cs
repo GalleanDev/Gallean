@@ -119,6 +119,7 @@ internal partial class WorldEngine
         public WorldState Visit(ScenarioEventDiplomacyEffect effect, Context context)
         {
             WorldRelation relation = DiplomacyCalculator.GetRelation(context.State, effect.Player1, effect.Player2);
+
             int value = Math.Clamp(
                 effect.Relation,
                 DiplomacyCalculator.RelationMinimum,
