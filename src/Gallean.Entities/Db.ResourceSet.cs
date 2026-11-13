@@ -18,9 +18,15 @@ public static partial class Db
             return new ResourceSet(gold, deathMana, runeMana, lifeMana, infernalMana, groveMana);
         }
 
-        private static (int gold, int deathMana, int runeMana, int lifeMana, int infernalMana, int groveMana) ParseResourceString(string value)
+        private static (int Gold, int DeathMana, int RuneMana, int LifeMana, int InfernalMana, int GroveMana) ParseResourceString(string value)
         {
-            int gold = 0, deathMana = 0, runeMana = 0, lifeMana = 0, infernalMana = 0, groveMana = 0;
+            int gold = 0;
+            int deathMana = 0;
+            int runeMana = 0;
+            int lifeMana = 0;
+            int infernalMana = 0;
+            int groveMana = 0;
+
             ReadOnlySpan<char> span = value.AsSpan();
 
             while (!span.IsEmpty)
