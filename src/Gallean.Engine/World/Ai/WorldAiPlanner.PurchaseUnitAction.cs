@@ -26,6 +26,7 @@ internal sealed partial class WorldAiPlanner
                     List<UnitDefinitionId> composition = CollectComposition(plan, fortification);
                     int occupied = GarrisonCalculator.GetOccupiedCapacity(fortification.Garrison, Context.Engine.Definitions);
                     int capacity = GarrisonCalculator.GetTotalCapacity(fortification, Context.Engine.Globals);
+                    WorldStack? visitingStack = plan.GetStackAt(fortification.Entrance);
 
                     foreach (UnitDefinitionId unitId in race.Units)
                     {
@@ -39,7 +40,7 @@ internal sealed partial class WorldAiPlanner
 
                             if (!commandResult.Failed)
                             {
-                                int score = ScorePurchase(unit, player, composition, occupied, capacity);
+                                int score = ScorePurchase(unit, player, composition, occupied, capacity, visitingStack);
 
                                 if (score > bestScore)
                                 {
@@ -65,14 +66,16 @@ internal sealed partial class WorldAiPlanner
             WorldPlayer player,
             List<UnitDefinitionId> composition,
             int occupied,
-            int capacity)
+            int capacity,
+            WorldStack? visitingStack)
         {
             List<UtilityScore.Consideration> considerations =
             [
                 Considerations.Affordability(unit, player),
                 Considerations.ReachPreference(unit),
                 Considerations.Repetition(unit, composition),
-                Considerations.Occupancy(occupied, capacity)
+                Considerations.Occupancy(occupied, capacity),
+                Considerations.VisitingStack(player, visitingStack)
             ];
 
             return UtilityScore.Combine(considerations);

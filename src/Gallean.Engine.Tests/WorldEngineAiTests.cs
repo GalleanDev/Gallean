@@ -896,7 +896,7 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 750] Purchase melee -> capital (0, 0)"
+            "[P0 300] Purchase melee -> capital (0, 0)"
         ]));
     }
 
@@ -966,7 +966,7 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 400] Purchase soldier -> city (0, 0)"
+            "[P0 160] Purchase soldier -> city (0, 0)"
         ]));
     }
 
@@ -1031,7 +1031,7 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 550] Purchase ranged -> capital (0, 1)"
+            "[P0 220] Purchase ranged -> capital (0, 1)"
         ]));
     }
 
@@ -1179,7 +1179,7 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 500] Purchase large -> capital (0, 2)"
+            "[P0 200] Purchase large -> capital (0, 2)"
         ]));
     }
 
@@ -3451,7 +3451,7 @@ public sealed class WorldEngineAiTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P0 467] Purchase soldier -> capital (0, 0)"
+            "[P0 187] Purchase soldier -> capital (0, 0)"
         ]));
     }
 
@@ -4923,5 +4923,93 @@ public sealed class WorldEngineAiTests
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
         Assert.That(session.World.State.Rods.Values, Is.Empty);
+    }
+
+    [Test]
+    public void PurchaseVisitingStackTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^^^^^^^",
+            "^^^^^^^^^^^^",
+            "^^^^^^^^^^^^",
+            "^^^^^^^^^^^^",
+            "^^^^^^^^^..."
+        ]);
+
+        UnitDefinition fighterDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("fighter", maxHitpoints: 100, initiative: 50, damage: 50),
+            movementPoints: 2, leadership: 3);
+
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 60, initiative: 40, damage: 15) with
+        {
+            PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("guard"), soldierDefinition));
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack"),
+                player.Id,
+                capital.Entrance,
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("fighter"), fighterDefinition), GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 0) with
+            {
+                AiIgnore = true
+            };
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Neutral, 1), WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player.Id,
+            new WorldPosition(9, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldRaceDefinition race = new(
+            WorldRace.Undead,
+            new GlobalTextId("Undead"),
+            WorldResourceSet.Empty,
+            WorldMapTerrain.Undead,
+            true,
+            35,
+            null,
+            [],
+            [],
+            [soldierDefinition.Id],
+            0,
+            0);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(fighterDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCapital(capital)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithRace(race)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P0 229] Purchase soldier -> capital (0, 1)"
+        ]));
     }
 }

@@ -11,6 +11,7 @@ internal sealed partial class WorldAiPlanner
             private const int AffordabilityPenalty = MaxScore / 2;
             private const int RepetitionPenalty = MaxScore * 3 / 4;
             private const int OccupancyPenalty = MaxScore / 2;
+            private const int NoStackScore = MaxScore * 2 / 5;
 
             private static readonly UtilityScore.ResponseCurve AffordabilityCurve =
                 new UtilityScore.ResponseCurve.Polynomial(Slope: -AffordabilityPenalty, Exponent: 1, XShift: 0, YShift: MaxScore);
@@ -54,6 +55,18 @@ internal sealed partial class WorldAiPlanner
             public static UtilityScore.Consideration Occupancy(int occupied, int capacity)
             {
                 return UtilityScore.Ratio(occupied, capacity, OccupancyCurve);
+            }
+
+            public static UtilityScore.Consideration VisitingStack(WorldPlayer player, WorldStack? stack)
+            {
+                if (stack is not null && stack.OwnerId == player.Id)
+                {
+                    return UtilityScore.Full;
+                }
+                else
+                {
+                    return UtilityScore.Of(NoStackScore);
+                }
             }
         }
     }

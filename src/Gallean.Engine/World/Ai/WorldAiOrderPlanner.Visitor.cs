@@ -204,6 +204,13 @@ internal partial class WorldAiOrderPlanner
             }
         }
 
+        WorldFortification? stackFortification = plan.GetFortificationAt(stack.Position);
+
+        if (stackFortification is not null && FortificationCalculator.GetOwner(stackFortification) == stack.OwnerId)
+        {
+            return new WorldStackOrder.Reinforce(stackFortification.Id);
+        }
+
         return null;
     }
 
