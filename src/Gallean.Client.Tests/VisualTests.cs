@@ -2275,7 +2275,7 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
-    public async Task WorldStackBarCrowdedTest()
+    public async Task WorldStackBarMultipleTest()
     {
         using Sandbox sb = Sandbox.Create();
 
