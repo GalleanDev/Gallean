@@ -2,7 +2,7 @@ using CommandResult = Gallean.Engine.ICommandResult<Gallean.Engine.WorldCommandE
 
 namespace Gallean.Engine;
 
-public sealed record WorldGetResourceNodeInfoCommand(WorldPosition Position) : IWorldCommand<WorldGetResourceNodeInfoCommand.Result>
+public sealed record WorldGetResourceNodeInfoCommand(WorldPlayerId PlayerId, WorldPosition Position) : IWorldCommand<WorldGetResourceNodeInfoCommand.Result>
 {
     public sealed record Result(WorldResourceSet Income);
 
@@ -16,7 +16,8 @@ public sealed record WorldGetResourceNodeInfoCommand(WorldPosition Position) : I
             return CommandResult.Fail(WorldCommandError.ResourceNodeNotFound);
         }
 
-        WorldResourceSet income = ResourceNodeCalculator.GetIncome(node, context.Globals);
+        WorldPlayer player = state.Players[PlayerId];
+        WorldResourceSet income = PlayerIncomeCalculator.GetResourceNodeIncome(player, node, state, context);
 
         return CommandResult.Success(new Result(income), []);
     }

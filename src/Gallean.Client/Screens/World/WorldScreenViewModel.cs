@@ -555,7 +555,7 @@ internal sealed partial class WorldScreenViewModel :
         }
 
         ICommandResult<WorldCommandError, WorldEvent, WorldGetResourceNodeInfoCommand.Result> result =
-            GameModel.World.DryRunCommand(new WorldGetResourceNodeInfoCommand(position));
+            GameModel.World.DryRunCommand(new WorldGetResourceNodeInfoCommand(ViewPlayerId, position));
 
         if (result.Failed)
         {

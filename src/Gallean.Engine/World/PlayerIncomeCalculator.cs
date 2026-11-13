@@ -37,6 +37,13 @@ internal static class PlayerIncomeCalculator
         }
     }
 
+    public static WorldResourceSet GetResourceNodeIncome(WorldPlayer player, WorldResourceNode node, WorldState state, IEngineContext context)
+    {
+        WorldResourceSet income = ResourceNodeCalculator.GetIncome(node, context.Globals);
+
+        return Scale(income, player, state, context);
+    }
+
     private static WorldResourceSet Scale(WorldResourceSet income, WorldPlayer player, WorldState state, IEngineContext context)
     {
         WorldResourceSet result = ResourceSetCalculator.ScalePercent(income, PercentMax + GetDifficultyBonusPercent(state.Difficulty, context.Globals));
