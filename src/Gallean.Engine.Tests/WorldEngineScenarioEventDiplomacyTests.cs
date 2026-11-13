@@ -515,4 +515,178 @@ public sealed class WorldEngineScenarioEventDiplomacyTests
                 PermanentAlliance: false)
         ]));
     }
+
+    [Test]
+    public void DiplomacyEffectWarAllianceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 1);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer otherPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Dwarf, map);
+        WorldRelation relation = new(
+            new WorldRelationId(WorldRace.Human, WorldRace.Dwarf),
+            Current: 100,
+            Previous: 80,
+            Alliance: true,
+            AllianceTurn: 3,
+            PermanentWar: false,
+            PermanentAlliance: false);
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventDiplomacyEffect(player.Id, otherPlayer.Id, Relation: 0, PermanentWar: false)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(otherPlayer.LordId, otherPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(otherPlayer)
+            .WithRelation(relation)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        engine.CheckCommand(new WorldStartGameCommand(), [
+            new WorldTurnStartingEvent(player.Id),
+            new WorldTurnStartedEvent(player.Id),
+            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
+            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
+            new WorldAllianceEndedEvent(player.Id, otherPlayer.Id),
+            new WorldRelationChangedEvent(player.Id, otherPlayer.Id, 10),
+            new WorldRelationChangedEvent(player.Id, otherPlayer.Id, 0),
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
+        ]);
+
+        Assert.That(engine.State.Relations.Values, Is.EqualTo([
+            new WorldRelation(
+                new WorldRelationId(WorldRace.Human, WorldRace.Dwarf),
+                Current: 0,
+                Previous: 80,
+                Alliance: false,
+                AllianceTurn: 0,
+                PermanentWar: false,
+                PermanentAlliance: false)
+        ]));
+    }
+
+    [Test]
+    public void DiplomacyEffectNeutralAllianceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 1);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer otherPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Dwarf, map);
+        WorldRelation relation = new(
+            new WorldRelationId(WorldRace.Human, WorldRace.Dwarf),
+            Current: 100,
+            Previous: 80,
+            Alliance: true,
+            AllianceTurn: 3,
+            PermanentWar: false,
+            PermanentAlliance: false);
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventDiplomacyEffect(player.Id, otherPlayer.Id, Relation: 66, PermanentWar: false)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(otherPlayer.LordId, otherPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(otherPlayer)
+            .WithRelation(relation)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        engine.CheckCommand(new WorldStartGameCommand(), [
+            new WorldTurnStartingEvent(player.Id),
+            new WorldTurnStartedEvent(player.Id),
+            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
+            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
+            new WorldAllianceEndedEvent(player.Id, otherPlayer.Id),
+            new WorldRelationChangedEvent(player.Id, otherPlayer.Id, 10),
+            new WorldRelationChangedEvent(player.Id, otherPlayer.Id, 66),
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
+        ]);
+
+        Assert.That(engine.State.Relations.Values, Is.EqualTo([
+            new WorldRelation(
+                new WorldRelationId(WorldRace.Human, WorldRace.Dwarf),
+                Current: 66,
+                Previous: 80,
+                Alliance: false,
+                AllianceTurn: 0,
+                PermanentWar: false,
+                PermanentAlliance: false)
+        ]));
+    }
+
+    [Test]
+    public void DiplomacyEffectPeaceAllianceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 1);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer otherPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Dwarf, map);
+        WorldRelation relation = new(
+            new WorldRelationId(WorldRace.Human, WorldRace.Dwarf),
+            Current: 100,
+            Previous: 80,
+            Alliance: true,
+            AllianceTurn: 3,
+            PermanentWar: false,
+            PermanentAlliance: false);
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventDiplomacyEffect(player.Id, otherPlayer.Id, Relation: 67, PermanentWar: false)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(otherPlayer.LordId, otherPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(otherPlayer)
+            .WithRelation(relation)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        engine.CheckCommand(new WorldStartGameCommand(), [
+            new WorldTurnStartingEvent(player.Id),
+            new WorldTurnStartedEvent(player.Id),
+            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
+            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
+        ]);
+
+        Assert.That(engine.State.Relations.Values, Is.EqualTo([
+            new WorldRelation(
+                new WorldRelationId(WorldRace.Human, WorldRace.Dwarf),
+                Current: 67,
+                Previous: 80,
+                Alliance: true,
+                AllianceTurn: 3,
+                PermanentWar: false,
+                PermanentAlliance: false)
+        ]));
+    }
 }

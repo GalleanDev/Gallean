@@ -446,7 +446,28 @@ internal partial class WorldEngine
 
         public ScenarioEventEffectResult Visit(ScenarioEventDiplomacyEffect effect, ScenarioEventEffectContext context)
         {
-            return Empty(context.State);
+            WorldRelation relation = DiplomacyCalculator.GetRelation(context.State, effect.Player1, effect.Player2);
+
+            int value = Math.Clamp(
+                effect.Relation,
+                DiplomacyCalculator.RelationMinimum,
+                DiplomacyCalculator.RelationMaximum);
+
+            WorldRelationLevel level = DiplomacyCalculator.ResolveRelationLevel(value, Context.Globals);
+
+            if (relation.Alliance && level != WorldRelationLevel.Peace)
+            {
+                return new ScenarioEventEffectResult(
+                    context.State,
+                    [
+                        new WorldAllianceEndedEvent(effect.Player1, effect.Player2),
+                        new WorldRelationChangedEvent(effect.Player1, effect.Player2, value)
+                    ]);
+            }
+            else
+            {
+                return Empty(context.State);
+            }
         }
 
         public ScenarioEventEffectResult Visit(ScenarioEventUnfogEffect effect, ScenarioEventEffectContext context)
