@@ -319,7 +319,7 @@
                   </Grid>
                   <local:PriceButton Classes="pill"
                                      local:PlateChrome.TextureSeed="1"
-                                     Content="{Binding #Screen.((local:BuildingTabViewModel)DataContext).ConstructText}"
+                                     Content="{Binding $parent[local:BuildingTabView].((local:BuildingTabViewModel)DataContext).ConstructText}"
                                      Status="{Binding Offer}"
                                      Command="{Binding #Screen.((local:BuildingTabViewModel)DataContext).ConstructCommand}"
                                      IsVisible="{Binding !IsBuilt}" />
