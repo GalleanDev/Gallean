@@ -9,11 +9,5 @@ internal closed partial record WorldEventAction
         WorldPosition? FocusPosition,
         string LordName,
         string RaceName,
-        AssetSpriteKey.LordFace PortraitKey) : Screen(Sounds, FocusPosition)
-    {
-        public override TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor)
-        {
-            return visitor.Visit(this);
-        }
-    }
+        AssetSpriteKey.LordFace PortraitKey) : Screen(Sounds, FocusPosition);
 }

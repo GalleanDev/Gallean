@@ -1,5 +1,3 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 public static class BattleAttackTargetExtensions
@@ -8,12 +6,20 @@ public static class BattleAttackTargetExtensions
     {
         public BattleUnitId? GetUnitId()
         {
-            return target.Accept(BattleAttackTargetUnitIdVisitor.Instance, Empty.Value);
+            return target switch
+            {
+                BattleAttackUnitTarget unitTarget => unitTarget.UnitId,
+                BattleAttackTileTarget => null
+            };
         }
 
         public BattleAttackTileTarget? GetTileTarget()
         {
-            return target.Accept(BattleAttackTargetTileVisitor.Instance, Empty.Value);
+            return target switch
+            {
+                BattleAttackUnitTarget => null,
+                BattleAttackTileTarget tileTarget => tileTarget
+            };
         }
     }
 

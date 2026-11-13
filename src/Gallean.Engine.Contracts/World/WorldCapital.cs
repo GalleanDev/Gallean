@@ -8,10 +8,4 @@ public sealed record WorldCapital(
     UnitGrid<WorldUnit> Garrison,
     WorldInventory Inventory,
     int AiPriority,
-    WorldPlayerId? CapturedById) : WorldFortification(Id, NameTextId, Footprint, Garrison, Inventory, AiPriority)
-{
-    public override TResult Accept<TContext, TResult>(IWorldFortificationVisitor<TContext, TResult> visitor, TContext context)
-    {
-        return visitor.Visit(this, context);
-    }
-}
+    WorldPlayerId? CapturedById) : WorldFortification(Id, NameTextId, Footprint, Garrison, Inventory, AiPriority);

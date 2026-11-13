@@ -1,14 +1,21 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal static partial class BattleAttackCalculator
 {
-    private sealed class TargetResolver : IBattleAttackTargetVisitor<TargetResolver.Context, TargetInfo>, IStaticInstance<TargetResolver>
+    private static class TargetResolver
     {
         public sealed record Context(BattleState State, BattleUnit Attacker, UnitAttackDefinition Attack);
 
-        public TargetInfo Visit(BattleAttackUnitTarget target, Context context)
+        public static TargetInfo Resolve(BattleAttackTarget target, Context context)
+        {
+            return target switch
+            {
+                BattleAttackUnitTarget unitTarget => ResolveUnit(unitTarget, context),
+                BattleAttackTileTarget tileTarget => ResolveTile(tileTarget, context)
+            };
+        }
+
+        private static TargetInfo ResolveUnit(BattleAttackUnitTarget target, Context context)
         {
             BattleUnit targetUnit = context.State.GetUnit(target.UnitId);
 
@@ -44,7 +51,7 @@ internal static partial class BattleAttackCalculator
             }
         }
 
-        public TargetInfo Visit(BattleAttackTileTarget target, Context context)
+        private static TargetInfo ResolveTile(BattleAttackTileTarget target, Context context)
         {
             if (context.Attack.Reach != UnitAttackReach.All)
             {

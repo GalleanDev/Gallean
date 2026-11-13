@@ -16,10 +16,5 @@ internal closed partial record WorldCursorAction
         {
             return new WorldCreateRodCommand(StackId, position);
         }
-
-        public override TResult Accept<TContext, TResult>(IWorldCursorActionVisitor<TContext, TResult> visitor, TContext context)
-        {
-            return visitor.Visit(this, context);
-        }
     }
 }

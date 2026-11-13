@@ -24,7 +24,6 @@ internal sealed partial class WorldScreenViewModel :
     private static readonly TimeSpan StackIdleInterval = TimeSpan.FromMinutes(2);
     private static readonly TimeSpan StackStepThreshold = TimeSpan.FromMilliseconds(100);
 
-    private readonly CursorTypeVisitor cursorTypeVisitor;
     private readonly EventActionPlayer eventActionPlayer;
     private readonly WorldEventQueue eventQueue;
     private readonly WorldFinishedStacks finishedStacks;
@@ -45,7 +44,6 @@ internal sealed partial class WorldScreenViewModel :
     {
         this.random = random;
 
-        cursorTypeVisitor = new CursorTypeVisitor(gameModel);
         eventActionPlayer = new EventActionPlayer(this);
 
         eventQueue = new WorldEventQueue(gameModel.Scenario, gameModel.World.Events);
@@ -1585,11 +1583,34 @@ internal sealed partial class WorldScreenViewModel :
         }
         else if (cursor.Action is not null)
         {
-            CursorType = cursor.Action.Accept(cursorTypeVisitor, cursor.HoverTile.Value);
+            CursorType = ResolveActionCursor(cursor.Action, cursor.HoverTile.Value);
         }
         else
         {
             CursorType = ResolveHoverCursor(cursor.HoverTile.Value);
+        }
+    }
+
+    private AssetAnimationKey.CursorType ResolveActionCursor(WorldCursorAction action, WorldPosition position)
+    {
+        (AssetAnimationKey.CursorType valid, AssetAnimationKey.CursorType invalid) = action switch
+        {
+            WorldCursorAction.CastSpell => (AssetAnimationKey.CursorType.CastSpell, AssetAnimationKey.CursorType.CastSpellInvalid),
+            WorldCursorAction.UseItem => (AssetAnimationKey.CursorType.UseScroll, AssetAnimationKey.CursorType.UseScrollInvalid),
+            WorldCursorAction.DropItem => (AssetAnimationKey.CursorType.DropBag, AssetAnimationKey.CursorType.Default),
+            WorldCursorAction.CreateRod => (AssetAnimationKey.CursorType.CreateRod, AssetAnimationKey.CursorType.CreateRodInvalid),
+            WorldCursorAction.DestroyRod => (AssetAnimationKey.CursorType.DestroyRod, AssetAnimationKey.CursorType.Default)
+        };
+
+        WorldCommandResult commandResult = GameModel.World.DryRunCommand(action.CreateCommand(position));
+
+        if (commandResult.Error is null)
+        {
+            return valid;
+        }
+        else
+        {
+            return invalid;
         }
     }
 

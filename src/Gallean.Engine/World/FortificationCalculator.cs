@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using Gallean.Common;
 
 namespace Gallean.Engine;
 
@@ -29,7 +28,12 @@ internal static partial class FortificationCalculator
 
     public static WorldPlayerId? GetOwner(WorldFortification fortification)
     {
-        return fortification.Accept(OwnerVisitor.Instance, Empty.Value);
+        return fortification switch
+        {
+            WorldCapital capital => GetCapitalOwner(capital),
+            WorldCity city => city.OwnerId,
+            WorldRuin => null
+        };
     }
 
     public static WorldPosition? FindExit(
@@ -91,27 +95,52 @@ internal static partial class FortificationCalculator
 
     public static bool IsRioting(WorldFortification fortification)
     {
-        return fortification.Accept(RiotVisitor.Instance, Empty.Value);
+        return fortification switch
+        {
+            WorldCapital => false,
+            WorldCity city => city.RiotTurns > 0,
+            WorldRuin => false
+        };
     }
 
     public static int GetThiefProtection(WorldFortification fortification, GlobalVariables globals)
     {
-        return fortification.Accept(ThiefProtectionVisitor.Instance, globals);
+        return fortification switch
+        {
+            WorldCapital => GetCityThiefProtection(globals.CapitalCityLevel, globals),
+            WorldCity city => GetCityThiefProtection(city.DefinitionId.Level, globals),
+            WorldRuin => 0
+        };
     }
 
     public static int GetVisionRadius(WorldFortification fortification, IEngineContext context)
     {
-        return fortification.Accept(VisionRadiusVisitor.Instance, context);
+        return fortification switch
+        {
+            WorldCapital => context.Globals.CapitalVisionRadius,
+            WorldCity city => GetCityVisionRadius(city, context.Definitions),
+            WorldRuin => 0
+        };
     }
 
     public static int GetTerrainGrowth(WorldFortification fortification, GlobalVariables globals)
     {
-        return fortification.Accept(TerrainGrowthVisitor.Instance, globals);
+        return fortification switch
+        {
+            WorldCapital => globals.CapitalTerrainTilesPerTurn,
+            WorldCity city => GetCityTerrainGrowth(city.DefinitionId.Level, globals),
+            WorldRuin => 0
+        };
     }
 
     public static int GetCaptureTerrainGrowth(WorldFortification fortification, GlobalVariables globals)
     {
-        return fortification.Accept(CaptureTerrainGrowthVisitor.Instance, globals);
+        return fortification switch
+        {
+            WorldCapital => 0,
+            WorldCity city => GetCityCaptureTerrainGrowth(city, globals),
+            WorldRuin => 0
+        };
     }
 
     public static WorldState UpdateUnitModifiers(WorldState state, IGameDefinitionProvider definitions)
@@ -209,7 +238,56 @@ internal static partial class FortificationCalculator
         WorldState state,
         IGameDefinitionProvider definitions)
     {
-        return fortification.Accept(ProtectionModifierVisitor.Instance, new ProtectionContext(state, definitions));
+        return fortification switch
+        {
+            WorldCapital capital => GetCapitalProtectionModifierId(capital, state, definitions),
+            WorldCity city => GetCityProtectionModifierId(city, definitions),
+            WorldRuin => null
+        };
+    }
+
+    private static UnitModifierDefinitionId? GetCapitalProtectionModifierId(
+        WorldCapital capital,
+        WorldState state,
+        IGameDefinitionProvider definitions)
+    {
+        WorldPlayer owner = state.Players[capital.OwnerId];
+        WorldRaceDefinition race = definitions.GetRace(owner.Race);
+
+        return race.CapitalProtectionModifierId;
+    }
+
+    private static UnitModifierDefinitionId? GetCityProtectionModifierId(WorldCity city, IGameDefinitionProvider definitions)
+    {
+        WorldCityDefinition definition = definitions.GetCity(city.DefinitionId);
+
+        return definition.ProtectionModifierId;
+    }
+
+    private static WorldPlayerId? GetCapitalOwner(WorldCapital capital)
+    {
+        if (capital.CapturedById is null)
+        {
+            return capital.OwnerId;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static int GetCityVisionRadius(WorldCity city, IGameDefinitionProvider definitions)
+    {
+        WorldCityDefinition definition = definitions.GetCity(city.DefinitionId);
+
+        return definition.VisionRadius;
+    }
+
+    private static int GetCityCaptureTerrainGrowth(WorldCity city, GlobalVariables globals)
+    {
+        int growth = GetCityTerrainGrowth(city.DefinitionId.Level, globals);
+
+        return globals.CityCaptureTerrainPercent / 100 * growth;
     }
 
     private static int GetCityTerrainGrowth(int cityLevel, GlobalVariables globals)

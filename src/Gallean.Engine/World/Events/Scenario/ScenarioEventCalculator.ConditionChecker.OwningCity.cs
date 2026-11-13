@@ -1,5 +1,3 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal static partial class ScenarioEventCalculator
@@ -46,7 +44,12 @@ internal static partial class ScenarioEventCalculator
                     return false;
                 }
 
-                return fortification.Accept(CityOwnershipVisitor.Instance, context);
+                return fortification switch
+                {
+                    WorldCapital capital => capital.CapturedById is not null && IsAffectedRace(capital.CapturedById.Value, context),
+                    WorldCity city => IsAffectedRace(city.OwnerId, context),
+                    WorldRuin => false
+                };
             }
         }
     }

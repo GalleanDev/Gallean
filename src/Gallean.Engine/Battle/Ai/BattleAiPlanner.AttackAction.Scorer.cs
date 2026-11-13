@@ -1,12 +1,10 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal sealed partial class BattleAiPlanner
 {
     private sealed partial record AttackAction
     {
-        private sealed class Scorer : IBattleAttackTargetVisitor<Scorer.Context, int>, IStaticInstance<Scorer>
+        private static class Scorer
         {
             public sealed record Context(
                 IEngineContext EngineContext,
@@ -24,16 +22,20 @@ internal sealed partial class BattleAiPlanner
             private static readonly UtilityScore.ResponseCurve CountCurve =
                 new UtilityScore.ResponseCurve.Root(Slope: MaxScore, Exponent: 2, XShift: 0, YShift: 0);
 
-            public int Visit(BattleAttackUnitTarget target, Context context)
+            public static int Score(BattleAttackTarget target, Context context)
+            {
+                return target switch
+                {
+                    BattleAttackUnitTarget unitTarget => ScoreUnit(unitTarget, context),
+                    BattleAttackTileTarget tileTarget => UtilityScore.Combine([FreePosition(context, tileTarget.Position)])
+                };
+            }
+
+            private static int ScoreUnit(BattleAttackUnitTarget target, Context context)
             {
                 BattleUnit targetUnit = context.State.GetUnit(target.UnitId);
 
                 return UtilityScore.Combine(GetConsiderations(context, targetUnit));
-            }
-
-            public int Visit(BattleAttackTileTarget target, Context context)
-            {
-                return UtilityScore.Combine([FreePosition(context, target.Position)]);
             }
 
             private static IEnumerable<UtilityScore.Consideration> GetConsiderations(Context context, BattleUnit target)

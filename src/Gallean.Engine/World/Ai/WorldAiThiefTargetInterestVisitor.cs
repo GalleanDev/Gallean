@@ -1,8 +1,7 @@
 namespace Gallean.Engine;
 
 internal sealed class WorldAiThiefTargetInterestVisitor(WorldAiAttitudeDefinition attitude)
-    : IWorldAiTargetVisitor<WorldAiTargetInterestVisitor.Context, int>,
-      IWorldSiteVisitor<WorldAiTargetInterestVisitor.Context, int>
+    : IWorldAiTargetVisitor<WorldAiTargetInterestVisitor.Context, int>
 {
     private readonly WorldAiTargetInterestVisitor targetInterestVisitor = new(attitude);
 
@@ -39,26 +38,12 @@ internal sealed class WorldAiThiefTargetInterestVisitor(WorldAiAttitudeDefinitio
     {
         WorldSite site = context.State.Sites[target.SiteId];
 
-        return site.Accept(this, context);
-    }
-
-    public int Visit(WorldMerchantSite site, WorldAiTargetInterestVisitor.Context context)
-    {
-        return attitude.ThiefMerchantInterest;
-    }
-
-    public int Visit(WorldMageSite site, WorldAiTargetInterestVisitor.Context context)
-    {
-        return attitude.MageInterest;
-    }
-
-    public int Visit(WorldMercenarySite site, WorldAiTargetInterestVisitor.Context context)
-    {
-        return 0;
-    }
-
-    public int Visit(WorldTrainerSite site, WorldAiTargetInterestVisitor.Context context)
-    {
-        return 0;
+        return site switch
+        {
+            WorldMerchantSite => attitude.ThiefMerchantInterest,
+            WorldMageSite => attitude.MageInterest,
+            WorldMercenarySite => 0,
+            WorldTrainerSite => 0
+        };
     }
 }

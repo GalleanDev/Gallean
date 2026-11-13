@@ -170,7 +170,7 @@ internal static partial class BattleAttackCalculator
         BattleUnit attacker = state.GetUnit(attackerId);
         TargetResolver.Context resolverContext = new(state, attacker, attack);
 
-        return target.Accept(TargetResolver.Instance, resolverContext);
+        return TargetResolver.Resolve(target, resolverContext);
     }
 
     public static BattleAttackResult ResolveAttackStep(

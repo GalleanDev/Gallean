@@ -1,5 +1,3 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal sealed partial class BattleAiPlanner
@@ -17,7 +15,7 @@ internal sealed partial class BattleAiPlanner
             foreach ((BattleAttackTarget target, UnitAttackDefinition attack) in TargetProvider.GetAttackTargets(state, unit))
             {
                 Scorer.Context scorerContext = new(Context, Estimator, state, unit, attack);
-                int score = target.Accept(Scorer.Instance, scorerContext);
+                int score = Scorer.Score(target, scorerContext);
 
                 if (score > 0 && (bestTarget is null || score > bestScore))
                 {

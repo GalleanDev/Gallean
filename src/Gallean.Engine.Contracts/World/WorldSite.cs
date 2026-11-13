@@ -15,7 +15,4 @@ public closed record WorldSite(
     ScenarioTextId TitleTextId,
     ScenarioTextId GreetingTextId,
     ImmutableSortedSet<WorldPlayerId> VisitorIds,
-    int AiPriority)
-{
-    public abstract TResult Accept<TContext, TResult>(IWorldSiteVisitor<TContext, TResult> visitor, TContext context);
-}
+    int AiPriority);

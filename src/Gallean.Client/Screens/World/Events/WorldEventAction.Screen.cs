@@ -12,7 +12,5 @@ internal closed partial record WorldEventAction
         {
             return visitor.Visit(this);
         }
-
-        public abstract TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor);
     }
 }

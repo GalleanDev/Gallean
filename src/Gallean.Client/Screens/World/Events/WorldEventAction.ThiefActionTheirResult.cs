@@ -12,11 +12,5 @@ internal closed partial record WorldEventAction
         string ActionName,
         WorldUnitGroup Target,
         bool IsSuccess,
-        string TheirLordName) : Screen(Sounds, FocusPosition)
-    {
-        public override TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor)
-        {
-            return visitor.Visit(this);
-        }
-    }
+        string TheirLordName) : Screen(Sounds, FocusPosition);
 }

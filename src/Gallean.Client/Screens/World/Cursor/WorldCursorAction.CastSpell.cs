@@ -14,10 +14,5 @@ internal closed partial record WorldCursorAction
         {
             return new WorldCastSpellCommand(SpellId, new WorldSpellTarget(position, Radius: 0));
         }
-
-        public override TResult Accept<TContext, TResult>(IWorldCursorActionVisitor<TContext, TResult> visitor, TContext context)
-        {
-            return visitor.Visit(this, context);
-        }
     }
 }

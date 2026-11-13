@@ -1,29 +1,9 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal partial class WorldEngine
 {
     private sealed class BattleEndedDestroyStackRule(IEngineContext context) : WorldEventRule(context)
     {
-        private sealed class DestroyerVisitor : IWorldFortificationVisitor<Empty, WorldUnitGroup?>, IStaticInstance<DestroyerVisitor>
-        {
-            public WorldUnitGroup? Visit(WorldCapital capital, Empty context)
-            {
-                return new WorldUnitGroup.Fortification(capital.Id);
-            }
-
-            public WorldUnitGroup? Visit(WorldCity city, Empty context)
-            {
-                return new WorldUnitGroup.Fortification(city.Id);
-            }
-
-            public WorldUnitGroup? Visit(WorldRuin ruin, Empty context)
-            {
-                return null;
-            }
-        }
-
         public override EventRuleResult<WorldEvent> Visit(WorldFortificationBattleEndedEvent ev, WorldState state)
         {
             if (ev.SurvivingAttackerUnits.HasAliveUnits())
@@ -33,7 +13,12 @@ internal partial class WorldEngine
             else
             {
                 WorldFortification fortification = state.Fortifications[ev.DefenderFortificationId];
-                WorldUnitGroup? destroyer = fortification.Accept(DestroyerVisitor.Instance, Empty.Value);
+                WorldUnitGroup? destroyer = fortification switch
+                {
+                    WorldCapital capital => new WorldUnitGroup.Fortification(capital.Id),
+                    WorldCity city => new WorldUnitGroup.Fortification(city.Id),
+                    WorldRuin => null
+                };
                 WorldPlayerId? ownerId = FortificationCalculator.GetOwner(fortification);
 
                 return EventRuleResult<WorldEvent>.Append(new WorldStackDestroyedEvent(ev.AttackerStackId, destroyer, ownerId));

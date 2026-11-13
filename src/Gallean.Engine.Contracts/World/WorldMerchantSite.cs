@@ -35,10 +35,6 @@ public sealed record WorldMerchantSite(
                AiPriority == other.AiPriority;
     }
 
-    public override TResult Accept<TContext, TResult>(IWorldSiteVisitor<TContext, TResult> visitor, TContext context)
-    {
-        return visitor.Visit(this, context);
-    }
 
     public override int GetHashCode()
     {

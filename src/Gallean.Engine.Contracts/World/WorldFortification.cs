@@ -12,7 +12,4 @@ public closed record WorldFortification(
     WorldFootprint Footprint,
     UnitGrid<WorldUnit> Garrison,
     WorldInventory Inventory,
-    int AiPriority)
-{
-    public abstract TResult Accept<TContext, TResult>(IWorldFortificationVisitor<TContext, TResult> visitor, TContext context);
-}
+    int AiPriority);

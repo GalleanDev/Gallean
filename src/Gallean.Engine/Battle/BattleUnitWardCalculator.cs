@@ -1,25 +1,9 @@
 using System.Collections.Immutable;
-using Gallean.Common;
 
 namespace Gallean.Engine;
 
 internal static class BattleUnitWardCalculator
 {
-    private sealed class BlocksAttackVisitor : IUnitWardVisitor<BlocksAttackVisitor.Context, bool>, IStaticInstance<BlocksAttackVisitor>
-    {
-        public sealed record Context(UnitAttackDefinition Attack, UnitWardCategory Category);
-
-        public bool Visit(UnitAttackClassWard ward, Context context)
-        {
-            return ward.Category == context.Category && ward.AttackType == context.Attack.Type;
-        }
-
-        public bool Visit(UnitAttackSourceWard ward, Context context)
-        {
-            return ward.Category == context.Category && ward.Source == context.Attack.Source;
-        }
-    }
-
     public static ImmutableArray<UnitWard> GetInitialWards(BattleUnit unit, IGameDefinitionProvider definitions)
     {
         ImmutableArray<UnitWard>.Builder wards = unit.Wards.ToBuilder();
@@ -80,16 +64,23 @@ internal static class BattleUnitWardCalculator
 
     private static UnitWard? FindWardByCategory(BattleUnit target, UnitAttackDefinition attack, UnitWardCategory category)
     {
-        BlocksAttackVisitor.Context context = new(attack, category);
-
         foreach (UnitWard ward in target.Wards)
         {
-            if (ward.Accept(BlocksAttackVisitor.Instance, context))
+            if (ward.Category == category && BlocksAttack(ward, attack))
             {
                 return ward;
             }
         }
 
         return null;
+    }
+
+    private static bool BlocksAttack(UnitWard ward, UnitAttackDefinition attack)
+    {
+        return ward switch
+        {
+            UnitAttackClassWard classWard => classWard.AttackType == attack.Type,
+            UnitAttackSourceWard sourceWard => sourceWard.Source == attack.Source
+        };
     }
 }

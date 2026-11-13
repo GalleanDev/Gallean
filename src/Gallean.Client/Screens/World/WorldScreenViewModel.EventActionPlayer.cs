@@ -5,9 +5,7 @@ namespace Gallean.Client;
 
 internal sealed partial class WorldScreenViewModel
 {
-    private sealed class EventActionPlayer(WorldScreenViewModel parent) :
-        IWorldEventActionVisitor<Empty>,
-        IWorldEventScreenVisitor<AbstractScreenViewModel>
+    private sealed class EventActionPlayer(WorldScreenViewModel parent) : IWorldEventActionVisitor<Empty>
     {
         public WorldAnimationState? ActiveAnimation { get; private set; }
         public AbstractScreenViewModel? ActiveScreen { get; private set; }
@@ -68,7 +66,7 @@ internal sealed partial class WorldScreenViewModel
 
         Empty IWorldEventActionVisitor<Empty>.Visit(WorldEventAction.Screen action)
         {
-            AbstractScreenViewModel screen = action.Accept(this);
+            AbstractScreenViewModel screen = CreateScreen(action);
 
             ActiveScreen = screen;
             parent.Game.OpenScreen(screen);
@@ -117,69 +115,24 @@ internal sealed partial class WorldScreenViewModel
             }
         }
 
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.Loading action)
+        private AbstractScreenViewModel CreateScreen(WorldEventAction.Screen action)
         {
-            return new LoadingScreenViewModel(Tr("Loading world…"), TimeSpan.Zero, TimeSpan.Zero);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.HotseatTurn action)
-        {
-            return new HotseatTurnScreenViewModel(action.LordName, action.RaceName, action.PortraitKey);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ScenarioPopup action)
-        {
-            return new ScenarioEventPopupViewModel(action.Messages);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.RuinLoot action)
-        {
-            return LootScreenViewModel.CreateForRuin(parent.GameModel, action.Resources, action.Item);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ItemsReceive action)
-        {
-            return LootScreenViewModel.CreateForItems(parent.GameModel, action.Items);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.SpellsReceive action)
-        {
-            return LootScreenViewModel.CreateForSpells(parent.GameModel, action.Spells);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ResourcesCapture action)
-        {
-            return LootScreenViewModel.CreateForCapturedResources(action.Resources);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.LeaderUpgrade action)
-        {
-            return new LeaderUpgradeViewModel(parent.GameModel, parent.Game, action.StackId);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.DiplomacyProposal action)
-        {
-            return new DiplomacyProposalViewModel(parent.GameModel, parent.Game, action.Proposal);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ThiefAction action)
-        {
-            return new ThiefActionScreenViewModel(parent.GameModel, parent.Game, action.StackId, action.TargetPosition);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ThiefActionMineResult action)
-        {
-            return ThiefActionResultScreenViewModel.CreateMineResult(action.Type, action.ActionName, action.IsSuccess);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.ThiefActionTheirResult action)
-        {
-            return ThiefActionResultScreenViewModel.CreateTheirResult(action.Type, action.ActionName, action.Target, action.IsSuccess, action.TheirLordName);
-        }
-
-        AbstractScreenViewModel IWorldEventScreenVisitor<AbstractScreenViewModel>.Visit(WorldEventAction.SiteEnter action)
-        {
-            return ManagementScreenViewModel.CreateForSite(parent.GameModel, parent.Game, action.StackId);
+            return action switch
+            {
+                WorldEventAction.Loading => new LoadingScreenViewModel(Tr("Loading world…"), TimeSpan.Zero, TimeSpan.Zero),
+                WorldEventAction.HotseatTurn hotseatTurn => new HotseatTurnScreenViewModel(hotseatTurn.LordName, hotseatTurn.RaceName, hotseatTurn.PortraitKey),
+                WorldEventAction.ScenarioPopup popup => new ScenarioEventPopupViewModel(popup.Messages),
+                WorldEventAction.RuinLoot loot => LootScreenViewModel.CreateForRuin(parent.GameModel, loot.Resources, loot.Item),
+                WorldEventAction.ItemsReceive items => LootScreenViewModel.CreateForItems(parent.GameModel, items.Items),
+                WorldEventAction.SpellsReceive spells => LootScreenViewModel.CreateForSpells(parent.GameModel, spells.Spells),
+                WorldEventAction.ResourcesCapture capture => LootScreenViewModel.CreateForCapturedResources(capture.Resources),
+                WorldEventAction.LeaderUpgrade upgrade => new LeaderUpgradeViewModel(parent.GameModel, parent.Game, upgrade.StackId),
+                WorldEventAction.DiplomacyProposal diplomacy => new DiplomacyProposalViewModel(parent.GameModel, parent.Game, diplomacy.Proposal),
+                WorldEventAction.ThiefAction thief => new ThiefActionScreenViewModel(parent.GameModel, parent.Game, thief.StackId, thief.TargetPosition),
+                WorldEventAction.ThiefActionMineResult mine => ThiefActionResultScreenViewModel.CreateMineResult(mine.Type, mine.ActionName, mine.IsSuccess),
+                WorldEventAction.ThiefActionTheirResult their => ThiefActionResultScreenViewModel.CreateTheirResult(their.Type, their.ActionName, their.Target, their.IsSuccess, their.TheirLordName),
+                WorldEventAction.SiteEnter site => ManagementScreenViewModel.CreateForSite(parent.GameModel, parent.Game, site.StackId)
+            };
         }
     }
 }

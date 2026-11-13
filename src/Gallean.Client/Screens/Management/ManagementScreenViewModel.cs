@@ -116,7 +116,13 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
 
             if (site is not null)
             {
-                tabs.Add(site.Accept(new CreateSiteTabVisitor(gameModel, gameViewModel, screen), stackId));
+                tabs.Add(site switch
+                {
+                    WorldMerchantSite => new MerchantTabViewModel(gameModel, gameViewModel, screen, site.Id, stackId),
+                    WorldMageSite => new MageTabViewModel(gameModel, gameViewModel, screen, site.Id, stackId),
+                    WorldMercenarySite => new MercenaryTabViewModel(gameModel, gameViewModel, screen, site.Id, stackId),
+                    WorldTrainerSite => new TrainerTabViewModel(gameModel, gameViewModel, screen, stackId)
+                });
             }
 
             tabs.Add(new MapStackTabViewModel(gameModel, gameViewModel, screen, stackId));

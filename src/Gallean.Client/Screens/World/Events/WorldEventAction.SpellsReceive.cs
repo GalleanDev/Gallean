@@ -25,10 +25,5 @@ internal closed partial record WorldEventAction
 
             return hash.ToHashCode();
         }
-
-        public override TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor)
-        {
-            return visitor.Visit(this);
-        }
     }
 }

@@ -9,11 +9,5 @@ internal closed partial record WorldEventAction
         WorldPosition? FocusPosition,
         WorldThiefActionType Type,
         string ActionName,
-        bool IsSuccess) : Screen(Sounds, FocusPosition)
-    {
-        public override TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor)
-        {
-            return visitor.Visit(this);
-        }
-    }
+        bool IsSuccess) : Screen(Sounds, FocusPosition);
 }

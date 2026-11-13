@@ -1,19 +1,15 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal static class GarrisonCalculator
 {
-    private sealed class CapacityVisitor : IWorldFortificationVisitor<GlobalVariables, int>, IStaticInstance<CapacityVisitor>
-    {
-        public int Visit(WorldCapital capital, GlobalVariables globals) => globals.CapitalCityLevel;
-        public int Visit(WorldCity city, GlobalVariables globals) => city.DefinitionId.Level;
-        public int Visit(WorldRuin ruin, GlobalVariables globals) => globals.RuinGarrisonSize;
-    }
-
     public static int GetTotalCapacity(WorldFortification fortification, GlobalVariables globals)
     {
-        return fortification.Accept(CapacityVisitor.Instance, globals);
+        return fortification switch
+        {
+            WorldCapital => globals.CapitalCityLevel,
+            WorldCity city => city.DefinitionId.Level,
+            WorldRuin => globals.RuinGarrisonSize
+        };
     }
 
     public static int GetOccupiedCapacity(UnitGrid<WorldUnit> units, IGameDefinitionProvider definitions)

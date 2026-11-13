@@ -11,10 +11,4 @@ public sealed record WorldCity(
     WorldInventory Inventory,
     int AiPriority,
     int RiotTurns,
-    int GrowthTurn) : WorldFortification(Id, NameTextId, Footprint, Garrison, Inventory, AiPriority)
-{
-    public override TResult Accept<TContext, TResult>(IWorldFortificationVisitor<TContext, TResult> visitor, TContext context)
-    {
-        return visitor.Visit(this, context);
-    }
-}
+    int GrowthTurn) : WorldFortification(Id, NameTextId, Footprint, Garrison, Inventory, AiPriority);

@@ -8,11 +8,5 @@ internal closed partial record WorldEventAction
         ImmutableArray<AssetSoundKey> Sounds,
         WorldPosition? FocusPosition,
         WorldResourceSet Resources,
-        WorldItem? Item) : Screen(Sounds, FocusPosition)
-    {
-        public override TResult Accept<TResult>(IWorldEventScreenVisitor<TResult> visitor)
-        {
-            return visitor.Visit(this);
-        }
-    }
+        WorldItem? Item) : Screen(Sounds, FocusPosition);
 }

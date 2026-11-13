@@ -4,20 +4,16 @@ namespace Gallean.Engine;
 
 internal static class WorldDiplomacyActionResolverFactory
 {
-    private sealed class ActionVisitor :
-        IWorldDiplomacyActionVisitor<Empty, IWorldDiplomacyActionResolver>,
-        IStaticInstance<ActionVisitor>
-    {
-        public IWorldDiplomacyActionResolver Visit(WorldDiplomacyTradeItemAction action, Empty context) => new ProposeDiplomacyActionResolver(action);
-        public IWorldDiplomacyActionResolver Visit(WorldDiplomacyTradeSpellAction action, Empty context) => new ProposeDiplomacyActionResolver(action);
-        public IWorldDiplomacyActionResolver Visit(WorldDiplomacyGiveGoldAction action, Empty context) => new GiveGoldDiplomacyActionResolver(action);
-        public IWorldDiplomacyActionResolver Visit(WorldDiplomacyProposeAllianceAction action, Empty context) => new ProposeDiplomacyActionResolver(action);
-        public IWorldDiplomacyActionResolver Visit(WorldDiplomacyBreakAllianceAction action, Empty context) => BreakAllianceDiplomacyActionResolver.Instance;
-        public IWorldDiplomacyActionResolver Visit(WorldDiplomacyExchangeMapAction action, Empty context) => new ProposeDiplomacyActionResolver(action);
-    }
-
     public static IWorldDiplomacyActionResolver Create(WorldDiplomacyAction action)
     {
-        return action.Accept(ActionVisitor.Instance, Empty.Value);
+        return action switch
+        {
+            WorldDiplomacyTradeItemAction tradeItem => new ProposeDiplomacyActionResolver(tradeItem),
+            WorldDiplomacyTradeSpellAction tradeSpell => new ProposeDiplomacyActionResolver(tradeSpell),
+            WorldDiplomacyGiveGoldAction giveGold => new GiveGoldDiplomacyActionResolver(giveGold),
+            WorldDiplomacyProposeAllianceAction proposeAlliance => new ProposeDiplomacyActionResolver(proposeAlliance),
+            WorldDiplomacyBreakAllianceAction => BreakAllianceDiplomacyActionResolver.Instance,
+            WorldDiplomacyExchangeMapAction exchangeMap => new ProposeDiplomacyActionResolver(exchangeMap)
+        };
     }
 }

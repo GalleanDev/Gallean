@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Gallean.Common;
 
 namespace Gallean.Engine;
 
@@ -88,7 +87,7 @@ internal static partial class WorldHealCalculator
 
         if (fortification is not null && FortificationCalculator.GetOwner(fortification) == stack.OwnerId)
         {
-            return fortification.Accept(RegenerationVisitor.Instance, new RegenerationVisitor.Context(state, stack.Units, context));
+            return RegenerateFortificationUnits(state, fortification, stack.Units, context);
         }
         else
         {
@@ -104,7 +103,62 @@ internal static partial class WorldHealCalculator
 
     public static UnitGrid<WorldUnit> RegenerateGarrison(WorldState state, WorldFortification fortification, IEngineContext context)
     {
-        return fortification.Accept(RegenerationVisitor.Instance, new RegenerationVisitor.Context(state, fortification.Garrison, context));
+        return RegenerateFortificationUnits(state, fortification, fortification.Garrison, context);
+    }
+
+    private static UnitGrid<WorldUnit> RegenerateFortificationUnits(
+        WorldState state,
+        WorldFortification fortification,
+        UnitGrid<WorldUnit> units,
+        IEngineContext context)
+    {
+        return fortification switch
+        {
+            WorldCapital capital => RegenerateCapitalUnits(state, capital, units, context),
+            WorldCity city => RegenerateCityUnits(state, city, units, context),
+            WorldRuin => RegenerateRuinUnits(units, context)
+        };
+    }
+
+    private static UnitGrid<WorldUnit> RegenerateCapitalUnits(
+        WorldState state,
+        WorldCapital capital,
+        UnitGrid<WorldUnit> units,
+        IEngineContext context)
+    {
+        WorldPlayer owner = state.Players[capital.OwnerId];
+        WorldRaceDefinition ownerRace = context.Definitions.GetRace(owner.Race);
+        int lordRegeneration = GetLordRegeneration(state, owner, context);
+
+        return RegenerateUnits(units, lordRegeneration + ownerRace.CapitalRegeneration, context);
+    }
+
+    private static UnitGrid<WorldUnit> RegenerateCityUnits(
+        WorldState state,
+        WorldCity city,
+        UnitGrid<WorldUnit> units,
+        IEngineContext context)
+    {
+        WorldPlayer owner = state.Players[city.OwnerId];
+        WorldCityDefinition definition = context.Definitions.GetCity(city.DefinitionId);
+        int lordRegeneration = GetLordRegeneration(state, owner, context);
+
+        return RegenerateUnits(units, lordRegeneration + definition.Regeneration, context);
+    }
+
+    private static UnitGrid<WorldUnit> RegenerateRuinUnits(UnitGrid<WorldUnit> units, IEngineContext context)
+    {
+        UnitGrid<WorldUnit>.Builder builder = new();
+
+        foreach ((WorldUnit unit, GridPosition position) in units.GetUnits())
+        {
+            UnitDefinition definition = context.Definitions.GetUnit(unit.DefinitionId);
+            UnitStats stats = context.UnitStats.GetWorldUnitStats(unit);
+            WorldUnit updatedUnit = RegenerateUnit(unit, stats, context.Globals.RuinRegeneration);
+            builder.Place(updatedUnit, position, definition.IsLarge);
+        }
+
+        return builder.Build();
     }
 
     private static UnitGrid<WorldUnit> RegenerateUnits(UnitGrid<WorldUnit> units, int bonusRegeneration, IEngineContext context)
