@@ -134,8 +134,64 @@
       </StackPanel>
 
       <StackPanel x:Name="TopCenter" Spacing="6" VerticalAlignment="Top" Margin="0,10,0,0">
-        <Border Classes="world-plate cached" HorizontalAlignment="Center">
-          <ContentControl Content="{Binding Status.Resources}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+        <Border Classes="world-plate cached"
+                HorizontalAlignment="Center"
+                ToolTip.Placement="Bottom"
+                ToolTip.VerticalOffset="4"
+                ToolTip.ShowDelay="0">
+          <ToolTip.Tip>
+            <ToolTip MaxWidth="480">
+              <StackPanel Spacing="8"
+                          Grid.IsSharedSizeScope="True"
+                          DataContext="{Binding Status.Income}"
+                          x:DataType="local:WorldIncomeViewModel">
+                <local:OutlinedTextBlock Text="{local:Text 'Income per turn'}" Classes="h4" />
+                <StackPanel Spacing="4">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeName" />
+                      <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeCapital" />
+                      <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeNodes" />
+                      <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeTotal" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Classes="income-cell caption" Text="{local:Text 'Capital'}" Foreground="{StaticResource SecondaryTextBrush}" />
+                    <TextBlock Grid.Column="2" Classes="income-cell caption" Text="{local:Text 'Sources'}" Foreground="{StaticResource SecondaryTextBrush}" />
+                    <TextBlock Grid.Column="3" Classes="income-cell caption" Text="{local:Text 'Total'}" Foreground="{StaticResource SecondaryTextBrush}" />
+                  </Grid>
+                  <ItemsControl ItemsSource="{Binding Rows}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel Spacing="4" />
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="local:WorldIncomeRowViewModel">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeName" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeCapital" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeNodes" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="IncomeTotal" />
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
+                            <local:IconVisual Moniker="{Binding Icon}" Width="18" Height="18" VerticalAlignment="Center" />
+                            <TextBlock Classes="body" Text="{Binding Name}" VerticalAlignment="Center" />
+                          </StackPanel>
+                          <TextBlock Grid.Column="1" Classes="income-cell body" Text="{Binding CapitalIncomeText}" Foreground="{StaticResource SecondaryTextBrush}" />
+                          <TextBlock Grid.Column="2" Classes="income-cell body" Text="{Binding ResourceNodesIncomeText}" Foreground="{StaticResource SecondaryTextBrush}" />
+                          <TextBlock Grid.Column="3" Classes="income-cell body" Text="{Binding IncomeText}" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </StackPanel>
+              </StackPanel>
+            </ToolTip>
+          </ToolTip.Tip>
+          <ContentControl Content="{Binding Status.Resources}"
+                          Classes="caption"
+                          Foreground="{StaticResource PrimaryTextBrush}"
+                          IsHitTestVisible="False" />
         </Border>
 
         <Border Classes="hud-prompt cached"

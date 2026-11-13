@@ -1414,8 +1414,8 @@ internal sealed partial class WorldScreenViewModel :
         UpdateSelection();
         UpdateReachable();
         UpdateSelectedPath();
-        UpdatePositionInfo();
         UpdateStatus();
+        UpdatePositionInfo();
         UpdateObjective();
         UpdateObjectiveProgress();
         UpdateCursorType();
@@ -1781,7 +1781,15 @@ internal sealed partial class WorldScreenViewModel :
 
     private void UpdateStatus()
     {
-        Status = WorldStatusViewModel.Create(WorldState, ViewPlayerId, Status);
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetPlayerInfoCommand.Result> commandResult =
+            GameModel.World.DryRunCommand(new WorldGetPlayerInfoCommand(ViewPlayerId));
+
+        if (commandResult.Failed)
+        {
+            throw new InvalidOperationException("Player info is not available.");
+        }
+
+        Status = WorldStatusViewModel.Create(WorldState, ViewPlayerId, commandResult.Data, Status);
     }
 
     private void UpdateObjective()

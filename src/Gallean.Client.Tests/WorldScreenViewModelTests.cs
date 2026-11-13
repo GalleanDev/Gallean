@@ -3407,7 +3407,11 @@ public sealed class WorldScreenViewModelTests
             human.Id,
             "Turn 1",
             new AssetSpriteKey.LordFace(WorldRace.Undead, 0, IsLarge: false),
-            new ResourceSetViewModel(new WorldResourceSet(350, 26, 2, 3, 4, 5), new WorldResourceSet(250, 1, 2, 3, 4, 5), ResourceSetProjection.All));
+            new ResourceSetViewModel(new WorldResourceSet(350, 26, 2, 3, 4, 5), new WorldResourceSet(250, 1, 2, 3, 4, 5), ResourceSetProjection.All),
+            new WorldIncomeViewModel(new WorldGetPlayerInfoCommand.Result(
+                TotalIncome: new WorldResourceSet(100, 25, 0, 0, 0, 0),
+                CapitalIncome: new WorldResourceSet(100, 25, 0, 0, 0, 0),
+                ResourceNodesIncome: WorldResourceSet.Empty)));
 
         Assert.That(world.Status, Is.EqualTo(expectedStatus));
     }

@@ -21,6 +21,12 @@
     <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
     <Setter Property="BoxShadow" Value="{x:Static local:Theme+Hud.PlateShadow}" />
   </Style>
+  <Style Selector="TextBlock.income-cell">
+    <Setter Property="Margin" Value="20,0,0,0" />
+    <Setter Property="TextAlignment" Value="Right" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
   <Style Selector="Border.world-plate.panel">
     <Setter Property="Background" Value="{StaticResource HudPanelBrush}" />
   </Style>

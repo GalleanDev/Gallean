@@ -1,12 +1,19 @@
+using Gallean.Engine;
+
 namespace Gallean.Client;
 
 internal sealed record WorldStatusViewModel(
     WorldPlayerId PlayerId,
     string TurnText,
     AssetSpriteKey.LordFace PortraitKey,
-    ResourceSetViewModel Resources)
+    ResourceSetViewModel Resources,
+    WorldIncomeViewModel Income)
 {
-    public static WorldStatusViewModel Create(WorldState state, WorldPlayerId playerId, WorldStatusViewModel? previous)
+    public static WorldStatusViewModel Create(
+        WorldState state,
+        WorldPlayerId playerId,
+        WorldGetPlayerInfoCommand.Result playerInfo,
+        WorldStatusViewModel? previous)
     {
         WorldPlayer player = state.Players[playerId];
 
@@ -14,7 +21,8 @@ internal sealed record WorldStatusViewModel(
             playerId,
             Tr("Turn {0}", state.TurnInfo.TurnNumber),
             new AssetSpriteKey.LordFace(player.Race, player.FaceVariant.Value, false),
-            CreateResources(player, previous));
+            CreateResources(player, previous),
+            new WorldIncomeViewModel(playerInfo));
     }
 
     private static ResourceSetViewModel CreateResources(WorldPlayer player, WorldStatusViewModel? previous)

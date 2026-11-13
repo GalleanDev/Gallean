@@ -33,13 +33,19 @@ public sealed class WorldStatusViewModelTests
             .Build()
             .State;
 
-        WorldStatusViewModel status = WorldStatusViewModel.Create(state, human.Id, null);
+        WorldGetPlayerInfoCommand.Result playerInfo = new(
+            TotalIncome: new WorldResourceSet(150, 0, 0, 50, 0, 0),
+            CapitalIncome: new WorldResourceSet(100, 0, 0, 50, 0, 0),
+            ResourceNodesIncome: new WorldResourceSet(50, 0, 0, 0, 0, 0));
+
+        WorldStatusViewModel status = WorldStatusViewModel.Create(state, human.Id, playerInfo, null);
 
         WorldStatusViewModel expected = new(
             human.Id,
             "Turn 7",
             new AssetSpriteKey.LordFace(WorldRace.Human, 0, IsLarge: false),
-            new ResourceSetViewModel(new WorldResourceSet(250, 1, 2, 3, 4, 5), ResourceSetProjection.All));
+            new ResourceSetViewModel(new WorldResourceSet(250, 1, 2, 3, 4, 5), ResourceSetProjection.All),
+            new WorldIncomeViewModel(playerInfo));
 
         Assert.That(status, Is.EqualTo(expected));
     }

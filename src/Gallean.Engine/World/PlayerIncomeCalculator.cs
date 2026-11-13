@@ -2,33 +2,53 @@ namespace Gallean.Engine;
 
 internal static class PlayerIncomeCalculator
 {
-    public static WorldResourceSet GetIncome(WorldPlayer player, WorldState state, IEngineContext context)
+    public sealed record IncomeInfo(
+        WorldResourceSet Total,
+        WorldResourceSet Capital,
+        WorldResourceSet ResourceNodes);
+
+    private const int PercentMax = 100;
+
+    public static IncomeInfo GetIncomeInfo(WorldPlayer player, WorldState state, IEngineContext context)
     {
-        if (!WorldHelpers.IsRacePlayable(player.Race))
+        if (WorldHelpers.IsRacePlayable(player.Race))
         {
-            return WorldResourceSet.Empty;
-        }
+            WorldResourceSet raceIncome = context.Definitions.GetRace(player.Race).Income;
+            WorldResourceSet nodesIncome = WorldResourceSet.Empty;
+            WorldPlan plan = WorldPlan.For(state);
 
-        WorldResourceSet income = context.Definitions.GetRace(player.Race).Income;
-        WorldPlan plan = WorldPlan.For(state);
-
-        foreach (WorldResourceNode node in state.ResourceNodes.Values)
-        {
-            if (plan.GetLandOwner(node.Position) == player.Id)
+            foreach (WorldResourceNode node in state.ResourceNodes.Values)
             {
-                income = ResourceSetCalculator.Add(income, ResourceNodeCalculator.GetIncome(node, context.Globals));
+                if (plan.GetLandOwner(node.Position) == player.Id)
+                {
+                    nodesIncome = ResourceSetCalculator.Add(nodesIncome, ResourceNodeCalculator.GetIncome(node, context.Globals));
+                }
             }
-        }
 
-        income = ResourceSetCalculator.ScalePercent(income, 100 + GetDifficultyBonusPercent(state.Difficulty, context.Globals));
+            WorldResourceSet income = Scale(ResourceSetCalculator.Add(raceIncome, nodesIncome), player, state, context);
+            WorldResourceSet paidRaceIncome = Scale(raceIncome, player, state, context);
+            WorldResourceSet paidNodesIncome = ResourceSetCalculator.Subtract(income, paidRaceIncome);
+
+            return new IncomeInfo(income, paidRaceIncome, paidNodesIncome);
+        }
+        else
+        {
+            return new IncomeInfo(WorldResourceSet.Empty, WorldResourceSet.Empty, WorldResourceSet.Empty);
+        }
+    }
+
+    private static WorldResourceSet Scale(WorldResourceSet income, WorldPlayer player, WorldState state, IEngineContext context)
+    {
+        WorldResourceSet result = ResourceSetCalculator.ScalePercent(income, PercentMax + GetDifficultyBonusPercent(state.Difficulty, context.Globals));
 
         if (player.IsAi)
         {
             WorldAiAttitudeDefinition attitude = context.Definitions.GetAiAttitude(player.AiAttitude);
-            income = ResourceSetCalculator.ScalePercent(income, GetAttitudePercent(attitude, state.Difficulty));
+
+            result = ResourceSetCalculator.ScalePercent(result, GetAttitudePercent(attitude, state.Difficulty));
         }
 
-        return income;
+        return result;
     }
 
     private static int GetDifficultyBonusPercent(WorldDifficulty difficulty, GlobalVariables globals)

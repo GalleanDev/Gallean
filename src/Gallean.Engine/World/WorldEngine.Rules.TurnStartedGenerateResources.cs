@@ -7,9 +7,9 @@ internal partial class WorldEngine
         public override EventRuleResult<WorldEvent> Visit(WorldTurnStartedEvent ev, WorldState state)
         {
             WorldPlayer player = state.Players[ev.PlayerId];
-            WorldResourceSet income = PlayerIncomeCalculator.GetIncome(player, state, Context);
+            PlayerIncomeCalculator.IncomeInfo info = PlayerIncomeCalculator.GetIncomeInfo(player, state, Context);
 
-            return EventRuleResult<WorldEvent>.Append(new WorldTurnResourcesGeneratedEvent(ev.PlayerId, income));
+            return EventRuleResult<WorldEvent>.Append(new WorldTurnResourcesGeneratedEvent(ev.PlayerId, info.Total));
         }
     }
 }
