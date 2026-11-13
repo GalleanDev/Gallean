@@ -438,7 +438,7 @@ internal abstract partial class StackTabViewModel
             GroundDropZone.Hide();
         }
 
-        if (definition.Effect is SpellItemEffect)
+        if (definition.Effect is SpellItemEffect && CanUseItem(stack, item))
         {
             SpellDropZone.Show(Tr("Use {0}", name));
         }
@@ -446,6 +446,14 @@ internal abstract partial class StackTabViewModel
         {
             SpellDropZone.Hide();
         }
+    }
+
+    private bool CanUseItem(WorldStack stack, WorldItem item)
+    {
+        WorldUseItemCommand command = new(stack.Id, item.Id, null);
+        WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
+
+        return commandResult.Error is not (WorldCommandError.MissingLeaderAbility or WorldCommandError.UnitDead);
     }
 
     protected void ShowNoStack()

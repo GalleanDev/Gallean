@@ -832,7 +832,7 @@ internal sealed partial class CityTabViewModel
 
         ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
 
-        if (definition.Effect is SpellItemEffect)
+        if (definition.Effect is SpellItemEffect && CanUseItem(visitingStack, item))
         {
             SpellDropZone.Show(Tr("Use {0}", GameModel.Texts.GetGlobalText(definition.NameTextId).Text));
         }
@@ -840,6 +840,14 @@ internal sealed partial class CityTabViewModel
         {
             SpellDropZone.Hide();
         }
+    }
+
+    private bool CanUseItem(WorldStack stack, WorldItem item)
+    {
+        WorldUseItemCommand command = new(stack.Id, item.Id, null);
+        WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
+
+        return commandResult.Error is not (WorldCommandError.MissingLeaderAbility or WorldCommandError.UnitDead);
     }
 
     private IWorldCommand<Empty>? BuildMoveCommand(UnitGridSlotReference source, UnitGridSlotReference target)
