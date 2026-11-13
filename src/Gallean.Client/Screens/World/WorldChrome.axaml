@@ -23,9 +23,9 @@
   </Style>
   <Style Selector="TextBlock.income-cell">
     <Setter Property="Margin" Value="20,0,0,0" />
-    <Setter Property="TextAlignment" Value="Right" />
     <Setter Property="HorizontalAlignment" Value="Right" />
     <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextAlignment" Value="Right" />
   </Style>
   <Style Selector="Border.world-plate.panel">
     <Setter Property="Background" Value="{StaticResource HudPanelBrush}" />
@@ -303,10 +303,10 @@
   <Style Selector="Button.world-medallion Border.current-player-portrait">
     <Setter Property="Width" Value="{x:Static local:MedallionTexture.FaceSize}" />
     <Setter Property="Height" Value="{x:Static local:MedallionTexture.FaceSize}" />
-    <Setter Property="CornerRadius" Value="{x:Static local:MedallionTexture.FaceCornerRadius}" />
-    <Setter Property="ClipToBounds" Value="True" />
     <Setter Property="IsHitTestVisible" Value="False" />
     <Setter Property="Opacity" Value="0" />
+    <Setter Property="CornerRadius" Value="{x:Static local:MedallionTexture.FaceCornerRadius}" />
+    <Setter Property="ClipToBounds" Value="True" />
     <Setter Property="Transitions">
       <Transitions>
         <DoubleTransition Property="Opacity" Delay="0:0:0.5" Duration="0:0:0.3" Easing="CubicEaseOut" />

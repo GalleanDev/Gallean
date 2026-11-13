@@ -165,16 +165,14 @@
                 local:PlateChrome.TextureSeed="4"
                 Content="{local:Text 'Next'}"
                 Command="{Binding NextCommand}"
-                IsVisible="{Binding !IsLastPlayer}"
-                />
+                IsVisible="{Binding !IsLastPlayer}" />
         <Button Grid.Column="1"
                 Classes="pill success"
                 local:PlateChrome.TextureSeed="4"
                 Content="{local:Text 'Start game'}"
                 Command="{Binding Game.StartGameCommand}"
                 CommandParameter="{Binding GameConfiguration}"
-                IsVisible="{Binding IsLastPlayer}"
-                />
+                IsVisible="{Binding IsLastPlayer}" />
       </Grid>
     </Grid>
   </Grid>
