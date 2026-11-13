@@ -38,6 +38,7 @@ internal sealed partial class WorldScreenViewModel :
     private TimeSpan stackIdleRemaining;
     private WorldRenderRequest? renderRequest;
     private ActiveMove? activeMove;
+    private WorldGetPlayerInfoCommand.Result playerInfo;
 
     public WorldScreenViewModel(GameModel gameModel, GameViewModel gameViewModel, IRandomProvider random)
         : base(gameModel, gameViewModel)
@@ -1409,8 +1410,11 @@ internal sealed partial class WorldScreenViewModel :
         ProcessEventQueue();
     }
 
+    [MemberNotNull(nameof(playerInfo))]
     private void UpdateWorld()
     {
+        playerInfo = ResolvePlayerInfo();
+
         UpdateSelection();
         UpdateReachable();
         UpdateSelectedPath();
@@ -1781,15 +1785,20 @@ internal sealed partial class WorldScreenViewModel :
 
     private void UpdateStatus()
     {
-        ICommandResult<WorldCommandError, WorldEvent, WorldGetPlayerInfoCommand.Result> commandResult =
+        Status = WorldStatusViewModel.Create(WorldState, ViewPlayerId, playerInfo, Status);
+    }
+
+    private WorldGetPlayerInfoCommand.Result ResolvePlayerInfo()
+    {
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetPlayerInfoCommand.Result> result =
             GameModel.World.DryRunCommand(new WorldGetPlayerInfoCommand(ViewPlayerId));
 
-        if (commandResult.Failed)
+        if (result.Failed)
         {
             throw new InvalidOperationException("Player info is not available.");
         }
 
-        Status = WorldStatusViewModel.Create(WorldState, ViewPlayerId, commandResult.Data, Status);
+        return result.Data;
     }
 
     private void UpdateObjective()
