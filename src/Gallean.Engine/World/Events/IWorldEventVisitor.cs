@@ -54,6 +54,7 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldScenarioEventTriggeringEvent ev, TContext context);
     TResult Visit(WorldScenarioEventTriggeredEvent ev, TContext context);
     TResult Visit(WorldScenarioCheckEvent ev, TContext context);
+    TResult Visit(WorldScenarioEffectEvent ev, TContext context);
     TResult Visit(WorldRuinLootedEvent ev, TContext context);
     TResult Visit(WorldRuinSpiedEvent ev, TContext context);
     TResult Visit(WorldSiteVisitedEvent ev, TContext context);

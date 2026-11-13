@@ -494,6 +494,11 @@ internal sealed partial class WorldEventQueue
         return Empty.Value;
     }
 
+    Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldScenarioEffectEvent ev, EngineStep<WorldState, WorldEvent> step)
+    {
+        return Empty.Value;
+    }
+
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldScenarioPopupEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
         if (ev.TriggererPosition is not null)

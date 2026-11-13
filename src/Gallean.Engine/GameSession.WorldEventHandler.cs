@@ -131,6 +131,7 @@ public sealed partial class GameSession
         public Empty Visit(WorldScenarioEventTriggeringEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldScenarioEventTriggeredEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldScenarioCheckEvent ev, Empty context) => Empty.Value;
+        public Empty Visit(WorldScenarioEffectEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldScenarioPopupEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldPlayerDefeatedEvent ev, Empty context) => Empty.Value;
         public Empty Visit(WorldScenarioEndedEvent ev, Empty context) => Empty.Value;

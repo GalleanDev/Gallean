@@ -556,20 +556,24 @@ internal partial class WorldEngine
         public override EventRuleResult<WorldEvent> Visit(WorldScenarioEventTriggeringEvent ev, WorldState state)
         {
             ScenarioEventDefinition definition = Context.Scenario.GetEvent(ev.EventId);
-            List<WorldEvent> events = [];
 
-            foreach (ScenarioEventEffect effect in definition.Effects)
+            if (definition.Effects.IsEmpty)
             {
-                ScenarioEventEffectContext effectContext = new(ev, state);
-                ScenarioEventEffectResult result = effect.Accept(this, effectContext);
-
-                state = result.State;
-                events.AddRange(result.Events);
+                return EventRuleResult<WorldEvent>.Empty;
             }
 
-            List<WorldEvent> checks = [];
+            return EventRuleResult<WorldEvent>.Append(new WorldScenarioEffectEvent(ev, EffectIndex: 0, Checks: []));
+        }
 
-            foreach (WorldEvent effectEvent in events)
+        public override EventRuleResult<WorldEvent> Visit(WorldScenarioEffectEvent ev, WorldState state)
+        {
+            ScenarioEventDefinition definition = Context.Scenario.GetEvent(ev.TriggeredEvent.EventId);
+            ScenarioEventEffect effect = definition.Effects[ev.EffectIndex];
+            ScenarioEventEffectContext effectContext = new(ev.TriggeredEvent, state);
+            ScenarioEventEffectResult result = effect.Accept(this, effectContext);
+            List<WorldScenarioCheckEvent> checks = [.. ev.Checks];
+
+            foreach (WorldEvent effectEvent in result.Events)
             {
                 switch (effectEvent)
                 {
@@ -582,7 +586,18 @@ internal partial class WorldEngine
                 }
             }
 
-            return new EventRuleResult<WorldEvent>(false, [.. events, .. checks]);
+            int nextEffectIndex = ev.EffectIndex + 1;
+
+            if (nextEffectIndex < definition.Effects.Length)
+            {
+                WorldScenarioEffectEvent nextEffectEvent = new(ev.TriggeredEvent, nextEffectIndex, [.. checks]);
+
+                return EventRuleResult<WorldEvent>.Consume([.. result.Events, nextEffectEvent]);
+            }
+            else
+            {
+                return EventRuleResult<WorldEvent>.Consume([.. result.Events, .. checks]);
+            }
         }
 
         private static ScenarioEventEffectResult Cast(

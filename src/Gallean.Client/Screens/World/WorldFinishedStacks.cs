@@ -97,6 +97,7 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldScenarioEventTriggeringEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldScenarioEventTriggeredEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldScenarioCheckEvent ev, WorldState state) => Empty.Value;
+    Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldScenarioEffectEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRuinLootedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldRuinSpiedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldSiteVisitedEvent ev, WorldState state) => Empty.Value;

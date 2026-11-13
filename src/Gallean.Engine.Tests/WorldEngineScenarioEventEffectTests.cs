@@ -6893,4 +6893,83 @@ public sealed class WorldEngineScenarioEventEffectTests
                 new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
             ]);
     }
+
+    [Test]
+    public void GiveItemEffectAfterCastSpellTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 2);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldSpellDefinition spell = TestHelpers.SimpleSpellDefinition(new WorldSpellDefinitionId("attack"), new WorldAttackSpellEffect(UnitAttackSource.Fire, Damage: 125));
+        ItemDefinition itemDefinition = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("Item"), ItemCategory.Valuable);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Zone"), new WorldPosition(0, 1), 0);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventEnteringZoneCondition(zone.Id)],
+            [
+                new ScenarioEventCastSpellEffect(spell.Id, CasterId: null),
+                new ScenarioEventGiveItemEffect(itemDefinition.Id, ScenarioEventGiveItemTarget.Triggerer)
+            ],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(spell)
+            .WithDefinition(itemDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithScenarioLocation(zone)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(stack.Id, new WorldPosition(0, 1)),
+            [
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
+                new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
+                new WorldSpellCastEvent(
+                    CasterId: null,
+                    spell.Id,
+                    new WorldSpellTarget(new WorldPosition(0, 1), Radius: 0),
+                    WorldResourceSet.Empty,
+                    WorldSpellCastSource.Scenario),
+                new WorldUnitDamagedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), 0, SourcePlayerId: null),
+                new WorldStackDestroyedEvent(stack.Id, Destroyer: null, DestroyerPlayerId: null),
+                new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = ImmutableSortedDictionary<WorldStackId, WorldStack>.Empty,
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
+                    DestroyedStacks = [new ScenarioDestroyedStack(stack.Id, DestroyerPlayerId: null, SourceTemplateId: null)]
+                }
+            }));
+    }
 }

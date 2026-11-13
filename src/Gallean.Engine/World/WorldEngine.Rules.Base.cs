@@ -63,6 +63,7 @@ internal partial class WorldEngine
         public virtual EventRuleResult<WorldEvent> Visit(WorldScenarioEventTriggeringEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldScenarioEventTriggeredEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldScenarioCheckEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldScenarioEffectEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldRuinLootedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldRuinSpiedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldSiteVisitedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
