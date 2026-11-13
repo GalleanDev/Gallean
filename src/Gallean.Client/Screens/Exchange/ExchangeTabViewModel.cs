@@ -85,6 +85,10 @@ internal sealed partial class ExchangeTabViewModel
                 await InventoryTransfer.DropItemAsync(sourceSlot, targetInventory);
                 break;
 
+            case (InventorySlotReference sourceSlot, UnitGridSlotReference targetSlot) when targetSlot.Grid == ResolveGrid(sourceSlot.Inventory):
+                await UseItemOnUnitAsync(sourceSlot, targetSlot);
+                break;
+
             case (UnitGridSlotReference sourceSlot, DropZoneReference zone) when zone.Zone == DismissDropZone:
                 ConfirmDisband(sourceSlot);
                 break;
@@ -153,6 +157,25 @@ internal sealed partial class ExchangeTabViewModel
         else
         {
             return false;
+        }
+    }
+
+    private async Task UseItemOnUnitAsync(InventorySlotReference sourceSlot, UnitGridSlotReference targetSlot)
+    {
+        WorldStack? itemStack = ResolveStack(targetSlot.Grid);
+        WorldItem? item = sourceSlot.Inventory.GetItem(sourceSlot.Index);
+        WorldUnit? unit = itemStack?.Units[targetSlot.Position];
+
+        if (itemStack is not null && item is not null && unit is not null)
+        {
+            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(itemStack.Id, item.Id, new WorldItemTarget.Unit(unit.Id))))
+            {
+                ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+                Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
+            }
+
+            RefreshView();
         }
     }
 
@@ -258,13 +281,18 @@ internal sealed partial class ExchangeTabViewModel
 
     private IReadOnlySet<GridPosition> BuildUnitHighlight(UnitGridViewModel grid, IDragSourceReference? dragged)
     {
-        HashSet<GridPosition> positions = [];
-
-        if (dragged is not UnitGridSlotReference source)
+        return dragged switch
         {
-            return positions;
-        }
+            UnitGridSlotReference source => BuildMoveHighlight(grid, source),
+            InventorySlotReference source when grid == ResolveGrid(source.Inventory) =>
+                BuildUseItemHighlight(ResolveStack(grid), source.Inventory.GetItem(source.Index)),
+            _ => new HashSet<GridPosition>()
+        };
+    }
 
+    private IReadOnlySet<GridPosition> BuildMoveHighlight(UnitGridViewModel grid, UnitGridSlotReference source)
+    {
+        HashSet<GridPosition> positions = [];
         WorldStack? sourceStack = ResolveStack(source.Grid);
         WorldUnit? unit = sourceStack?.Units[source.Position];
 
@@ -279,6 +307,29 @@ internal sealed partial class ExchangeTabViewModel
             WorldCommandResult result = GameModel.World.DryRunCommand(BuildMove(unit, source, target));
 
             if (target != source && !result.Failed)
+            {
+                positions.Add(position);
+            }
+        }
+
+        return positions;
+    }
+
+    private IReadOnlySet<GridPosition> BuildUseItemHighlight(WorldStack? itemStack, WorldItem? item)
+    {
+        HashSet<GridPosition> positions = [];
+
+        if (itemStack is null || item is null)
+        {
+            return positions;
+        }
+
+        foreach ((WorldUnit unit, GridPosition position) in itemStack.Units.GetUnits())
+        {
+            WorldUseItemCommand command = new(itemStack.Id, item.Id, new WorldItemTarget.Unit(unit.Id));
+            WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
+
+            if (!commandResult.Failed)
             {
                 positions.Add(position);
             }
@@ -379,6 +430,18 @@ internal sealed partial class ExchangeTabViewModel
         else
         {
             return otherStack;
+        }
+    }
+
+    private UnitGridViewModel ResolveGrid(InventoryViewModel inventory)
+    {
+        if (inventory == InventoryTransfer.Inventory)
+        {
+            return StackGrid;
+        }
+        else
+        {
+            return OtherStackGrid;
         }
     }
 

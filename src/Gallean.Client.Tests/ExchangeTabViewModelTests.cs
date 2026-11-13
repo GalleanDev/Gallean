@@ -834,4 +834,105 @@ public sealed class ExchangeTabViewModelTests
         Assert.That(session.World.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with { Inventory = WorldInventory.Empty }));
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
+
+    [Test]
+    public async Task ItemOnUnitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
+        ItemDefinition potionDefinition = new(
+            new ItemDefinitionId("potion"),
+            new GlobalTextId("Potion"),
+            new GlobalTextId("Potion description"),
+            ItemCategory.PotionHeal,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: new HealItemEffect(50),
+            AnimationUnitId: null);
+
+        WorldItem potionItem = new(new WorldItemId("Potion"), potionDefinition.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
+        WorldUnit otherLeader = new(new WorldUnitId("otherLeader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit otherSoldier = new(new WorldUnitId("otherSoldier"), soldierDefinition.Id, 30, 0, soldierDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        WorldStack otherStack = TestHelpers.SimpleStack(
+                new WorldStackId("Hugin"),
+                player.Id,
+                new WorldPosition(5, 4),
+                TestHelpers.StackUnitGrid(
+                    stackDefinitions,
+                    [
+                        (otherLeader, GridPosition.FrontBottom),
+                        (otherSoldier, GridPosition.FrontCenter)
+                    ]),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([potionItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Mage))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potionDefinition)
+            .WithStack(stack)
+            .WithStack(otherStack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
+        ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
+
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.OtherInventory.Items[0].Reference);
+
+        Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+        Assert.That(screen.OtherStackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
+
+        await screen.DragDrop.DropAsync(FindSlot(screen.OtherStackGrid, GridPosition.FrontCenter).Reference);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack));
+        Assert.That(session.World.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with
+        {
+            Inventory = WorldInventory.Empty,
+            Units = TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (otherLeader, GridPosition.FrontBottom),
+                    (otherSoldier with { Hitpoints = 35 }, GridPosition.FrontCenter)
+                ])
+        }));
+        Assert.That(screen.Game.Alert.Current, Is.Null);
+    }
 }
