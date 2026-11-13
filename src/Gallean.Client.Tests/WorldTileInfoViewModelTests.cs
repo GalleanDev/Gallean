@@ -38,6 +38,7 @@ public sealed class WorldTileInfoViewModelTests
             session.World.State.TurnInfo.CurrentPlayerId,
             position,
             visibility,
+            resourceNodeInfo: null,
             engine.Definitions,
             TestGameTextProvider.Instance,
             engine.UnitStats);
@@ -268,9 +269,48 @@ public sealed class WorldTileInfoViewModelTests
                 AiPriority: 1))
             .BuildSession();
 
-        Assert.That(FormatTileInfo(CreateInfo(session, engine, new WorldPosition(1, 1))), Is.EqualTo(["Gold mine", "Owner: Undead Hordes"]));
-        Assert.That(FormatTileInfo(CreateInfo(session, engine, new WorldPosition(2, 0))), Is.EqualTo(["Life mana crystal", "Owner: Elven Alliance"]));
-        Assert.That(FormatTileInfo(CreateInfo(session, engine, new WorldPosition(0, 0))), Is.EqualTo(["Death mana crystal"]));
+        WorldVisibility visibility = new(map.Width, map.Height, Fog: null);
+
+        WorldTileInfoViewModel info;
+
+        info = Assert.NotNull(WorldTileInfoViewModel.TryCreate(
+            session.World.State,
+            session.World.State.TurnInfo.CurrentPlayerId,
+            new WorldPosition(1, 1),
+            visibility,
+            new WorldGetResourceNodeInfoCommand.Result(new WorldResourceSet(50, 0, 0, 0, 0, 0)),
+            engine.Definitions,
+            TestGameTextProvider.Instance,
+            engine.UnitStats));
+
+        Assert.That(FormatTileInfo(info), Is.EqualTo(["Gold mine", "Owner: Undead Hordes"]));
+        Assert.That(info.Income, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
+
+        info = Assert.NotNull(WorldTileInfoViewModel.TryCreate(
+            session.World.State,
+            session.World.State.TurnInfo.CurrentPlayerId,
+            new WorldPosition(2, 0),
+            visibility,
+            new WorldGetResourceNodeInfoCommand.Result(new WorldResourceSet(0, 0, 0, 50, 0, 0)),
+            engine.Definitions,
+            TestGameTextProvider.Instance,
+            engine.UnitStats));
+
+        Assert.That(FormatTileInfo(info), Is.EqualTo(["Life mana crystal", "Owner: Elven Alliance"]));
+        Assert.That(info.Income, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(0, 0, 0, 50, 0, 0), ResourceSetProjection.All)));
+
+        info = Assert.NotNull(WorldTileInfoViewModel.TryCreate(
+            session.World.State,
+            session.World.State.TurnInfo.CurrentPlayerId,
+            new WorldPosition(0, 0),
+            visibility,
+            new WorldGetResourceNodeInfoCommand.Result(new WorldResourceSet(0, 50, 0, 0, 0, 0)),
+            engine.Definitions,
+            TestGameTextProvider.Instance,
+            engine.UnitStats));
+
+        Assert.That(FormatTileInfo(info), Is.EqualTo(["Death mana crystal"]));
+        Assert.That(info.Income, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(0, 50, 0, 0, 0, 0), ResourceSetProjection.All)));
     }
 
     [Test]
@@ -401,6 +441,7 @@ public sealed class WorldTileInfoViewModelTests
             session.World.State.TurnInfo.CurrentPlayerId,
             new WorldPosition(1, 1),
             visibility,
+            new WorldGetResourceNodeInfoCommand.Result(new WorldResourceSet(50, 0, 0, 0, 0, 0)),
             engine.Definitions,
             TestGameTextProvider.Instance,
             engine.UnitStats);

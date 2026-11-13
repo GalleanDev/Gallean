@@ -522,6 +522,19 @@
                                 IsVisible="{Binding Reward, Converter={x:Static ObjectConverters.IsNotNull}}"
                                 HorizontalAlignment="Center"
                                 Foreground="{StaticResource PrimaryTextBrush}" />
+                <StackPanel Orientation="Horizontal"
+                            Spacing="6"
+                            IsVisible="{Binding Income, Converter={x:Static ObjectConverters.IsNotNull}}"
+                            HorizontalAlignment="Center">
+                  <local:OutlinedTextBlock Text="{local:Text 'Income:'}"
+                                           Classes="body"
+                                           Foreground="{StaticResource SecondaryTextBrush}"
+                                           VerticalAlignment="Center" />
+                  <ContentControl Content="{Binding Income}"
+                                  Classes="body"
+                                  VerticalAlignment="Center"
+                                  Foreground="{StaticResource PrimaryTextBrush}" />
+                </StackPanel>
               </StackPanel>
             </local:ModalFrameDecorator>
           </DataTemplate>

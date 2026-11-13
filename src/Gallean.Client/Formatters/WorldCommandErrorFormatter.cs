@@ -62,6 +62,7 @@ internal static class WorldCommandErrorFormatter
             WorldCommandError.NotAiTurn => Tr("It is not the computer player's turn"),
             WorldCommandError.NotPlayerTurn => Tr("Not your turn"),
             WorldCommandError.PathNotFound => Tr("The party cannot reach that location"),
+            WorldCommandError.ResourceNodeNotFound => Tr("There is no mine or mana crystal at that location"),
             WorldCommandError.RodInvalidLocation => Tr("A rod cannot be planted there"),
             WorldCommandError.RodNotFound => Tr("There is no rod at that location"),
             WorldCommandError.RodLeaderDead => Tr("The party leader must be alive to plant a rod"),

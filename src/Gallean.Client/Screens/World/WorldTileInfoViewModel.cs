@@ -10,15 +10,23 @@ internal sealed record WorldTileInfoViewModel(
     public WorldUnitGroupInfoGridViewModel? Garrison { get; init; }
     public WorldTileInfoItemViewModel? Item { get; init; }
     public ResourceSetViewModel? Reward { get; init; }
+    public ResourceSetViewModel? Income { get; init; }
     public IReadOnlyList<TextSpans> Tombs { get; init; } = [];
 
-    public bool HasDetails => Lines.Count > 0 || Tombs.Count > 0 || Garrison is not null || Item is not null || Reward is not null;
+    public bool HasDetails =>
+        Lines.Count > 0 ||
+        Tombs.Count > 0 ||
+        Garrison is not null ||
+        Item is not null ||
+        Reward is not null ||
+        Income is not null;
 
     public static WorldTileInfoViewModel? TryCreate(
         WorldState world,
         WorldPlayerId viewPlayerId,
         WorldPosition position,
         WorldVisibility visibility,
+        WorldGetResourceNodeInfoCommand.Result? resourceNodeInfo,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts,
         IUnitStatsProvider stats)
@@ -76,9 +84,9 @@ internal sealed record WorldTileInfoViewModel(
 
         WorldResourceNode? resourceNode = plan.GetResourceNodeAt(position);
 
-        if (resourceNode is not null)
+        if (resourceNode is not null && resourceNodeInfo is not null)
         {
-            return CreateResourceNodeInfo(resourceNode, plan, world, definitions, texts);
+            return CreateResourceNodeInfo(resourceNode, resourceNodeInfo, plan, world, definitions, texts);
         }
 
         WorldRod? rod = plan.GetRodAt(position);
@@ -109,21 +117,23 @@ internal sealed record WorldTileInfoViewModel(
 
     private static WorldTileInfoViewModel CreateResourceNodeInfo(
         WorldResourceNode resourceNode,
+        WorldGetResourceNodeInfoCommand.Result resourceNodeInfo,
         WorldPlan plan,
         WorldState world,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts)
     {
         string title = FormatResourceNodeTitle(resourceNode.ResourceType);
+        ResourceSetViewModel income = new(resourceNodeInfo.Income, ResourceSetProjection.All);
         WorldPlayerId? ownerId = plan.GetLandOwner(resourceNode.Position);
 
         if (ownerId is not null)
         {
-            return new WorldTileInfoViewModel(title, [FormatOwnerLine(ownerId.Value, world, definitions, texts)]);
+            return new WorldTileInfoViewModel(title, [FormatOwnerLine(ownerId.Value, world, definitions, texts)]) { Income = income };
         }
         else
         {
-            return new WorldTileInfoViewModel(title, []);
+            return new WorldTileInfoViewModel(title, []) { Income = income };
         }
     }
 

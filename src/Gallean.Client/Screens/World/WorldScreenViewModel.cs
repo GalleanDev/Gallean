@@ -541,9 +541,30 @@ internal sealed partial class WorldScreenViewModel :
             ViewPlayerId,
             position,
             visibility,
+            GetResourceNodeInfo(position, plan),
             GameModel.Definitions,
             GameModel.Texts,
             GameModel.Stats);
+    }
+
+    private WorldGetResourceNodeInfoCommand.Result? GetResourceNodeInfo(WorldPosition position, WorldPlan plan)
+    {
+        if (plan.GetResourceNodeAt(position) is null)
+        {
+            return null;
+        }
+
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetResourceNodeInfoCommand.Result> result =
+            GameModel.World.DryRunCommand(new WorldGetResourceNodeInfoCommand(position));
+
+        if (result.Failed)
+        {
+            return null;
+        }
+        else
+        {
+            return result.Data;
+        }
     }
 
     public void UpdateHover(WorldPosition hoverTile, WorldPosition? objectPosition)
