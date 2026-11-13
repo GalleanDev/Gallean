@@ -112,7 +112,7 @@ internal static partial class ScenarioEventCalculator
     {
         foreach (ScenarioEventCondition condition in conditions)
         {
-            if (!condition.Accept(ConditionChecker.Instance, context))
+            if (!ConditionChecker.Check(condition, context))
             {
                 return false;
             }

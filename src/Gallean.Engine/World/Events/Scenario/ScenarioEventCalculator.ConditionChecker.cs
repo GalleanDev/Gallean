@@ -1,96 +1,31 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal static partial class ScenarioEventCalculator
 {
-    private sealed partial class ConditionChecker :
-        IScenarioEventConditionVisitor<ScenarioEventConditionContext, bool>,
-        IStaticInstance<ConditionChecker>
+    private static partial class ConditionChecker
     {
-        public bool Visit(ScenarioEventFrequencyCondition condition, ScenarioEventConditionContext context)
+        public static bool Check(ScenarioEventCondition condition, ScenarioEventConditionContext context)
         {
-            return context.Trigger.Accept(new Frequency(condition), context);
-        }
-
-        public bool Visit(ScenarioEventEnteringZoneCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new EnteringZone(condition), context);
-        }
-
-        public bool Visit(ScenarioEventEnteringCityCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new EnteringCity(condition), context);
-        }
-
-        public bool Visit(ScenarioEventOwningCityCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new OwningCity(condition), context);
-        }
-
-        public bool Visit(ScenarioEventStackToCityCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new StackToCity(condition), context);
-        }
-
-        public bool Visit(ScenarioEventStackExistenceCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new StackExistence(condition), context);
-        }
-
-        public bool Visit(ScenarioEventDestroyingStackCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new DestroyingStack(condition), context);
-        }
-
-        public bool Visit(ScenarioEventDiplomacyRelationsCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new DiplomacyRelations(condition), context);
-        }
-
-        public bool Visit(ScenarioEventAllianceCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new Alliance(condition), context);
-        }
-
-        public bool Visit(ScenarioEventLootingRuinCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new LootingRuin(condition), context);
-        }
-
-        public bool Visit(ScenarioEventOwningItemCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new OwningItem(condition), context);
-        }
-
-        public bool Visit(ScenarioEventLeaderOwningItemCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new LeaderOwningItem(condition), context);
-        }
-
-        public bool Visit(ScenarioEventTransformingLandCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new TransformingLand(condition), context);
-        }
-
-        public bool Visit(ScenarioEventVisitingSiteCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new VisitingSite(condition), context);
-        }
-
-        public bool Visit(ScenarioEventStackToLocationCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new StackToLocation(condition), context);
-        }
-
-        public bool Visit(ScenarioEventItemToLocationCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new ItemToLocation(condition), context);
-        }
-
-        public bool Visit(ScenarioEventVariableInRangeCondition condition, ScenarioEventConditionContext context)
-        {
-            return context.Trigger.Accept(new VariableInRange(condition), context);
+            return condition switch
+            {
+                ScenarioEventFrequencyCondition frequency => CheckFrequency(frequency, context),
+                ScenarioEventEnteringZoneCondition enteringZone => CheckEnteredZone(enteringZone, context),
+                ScenarioEventEnteringCityCondition enteringCity => CheckEnteredCity(enteringCity, context),
+                ScenarioEventOwningCityCondition owningCity => CheckFortificationOwned(owningCity, context),
+                ScenarioEventDestroyingStackCondition destroyingStack => ScenarioStackReferenceCalculator.IsDestroyed(destroyingStack.Stack, context.AffectedRaces, context.State),
+                ScenarioEventOwningItemCondition owningItem => CheckItemOwned(owningItem, context),
+                ScenarioEventLeaderOwningItemCondition leaderOwningItem => AnyReferencedStackWithItem(leaderOwningItem.Stack, leaderOwningItem.Item, context),
+                ScenarioEventDiplomacyRelationsCondition diplomacyRelations => CheckRelationLevel(diplomacyRelations, context),
+                ScenarioEventAllianceCondition alliance => CheckAlliance(alliance, context),
+                ScenarioEventLootingRuinCondition lootingRuin => CheckRuinLooted(lootingRuin, context),
+                ScenarioEventTransformingLandCondition transformingLand => CheckLandTransformed(transformingLand, context),
+                ScenarioEventVisitingSiteCondition visitingSite => CheckSiteVisited(visitingSite, context),
+                ScenarioEventStackToLocationCondition stackToLocation => CheckStackAtLocation(stackToLocation, context),
+                ScenarioEventStackToCityCondition stackToCity => AnyReferencedStackAt(stackToCity.Stack, stackToCity.Fortification, context),
+                ScenarioEventItemToLocationCondition itemToLocation => CheckItemAtLocation(itemToLocation, context),
+                ScenarioEventStackExistenceCondition stackExistence => ScenarioStackReferenceCalculator.CheckExistence(stackExistence.Stack, stackExistence.MustExist, context.State),
+                ScenarioEventVariableInRangeCondition variableInRange => ScenarioVariableCalculator.IsInRange(variableInRange, context.State, context.Scenario)
+            };
         }
 
         private static bool IsPlayerStack(WorldStackId stackId, WorldPlayerId playerId, ScenarioEventConditionContext context)

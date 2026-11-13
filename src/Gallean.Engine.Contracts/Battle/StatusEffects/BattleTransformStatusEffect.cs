@@ -10,11 +10,6 @@ public sealed record BattleTransformStatusEffect(
     ImmutableArray<UnitWard> RestoreWards,
     int? RemainingTurns) : BattleAbstractStatusEffect
 {
-    public override TResult Accept<TContext, TResult>(IBattleStatusEffectVisitor<TContext, TResult> visitor, TContext context)
-    {
-        return visitor.Visit(this, context);
-    }
-
     public bool Equals(BattleTransformStatusEffect? other)
     {
         if (other is null)

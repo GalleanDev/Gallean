@@ -1,5 +1,3 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal static class BattleStatusEffectExtensions
@@ -8,36 +6,35 @@ internal static class BattleStatusEffectExtensions
     {
         public bool IsCurable()
         {
-            return effect.Accept(IsCurableEffectVisitor.Instance, Empty.Value);
+            return effect switch
+            {
+                BattleDefendStatusEffect => false,
+                BattleParalyzeStatusEffect => true,
+                BattlePetrifyStatusEffect => true,
+                BattlePoisonStatusEffect => true,
+                BattleFrostbiteStatusEffect => true,
+                BattleBlisterStatusEffect => true,
+                BattleRetreatStatusEffect => false,
+                BattleRetreatedStatusEffect => false,
+                BattleFortificationStatusEffect => false,
+                BattleIncreaseDamageStatusEffect => false,
+                BattleReduceDamageStatusEffect => true,
+                BattleReduceInitiativeStatusEffect => true,
+                BattleShatterArmorStatusEffect => false,
+                BattleCureStatusEffect => false,
+                BattleTransformStatusEffect transform => IsCurableTransform(transform.Type)
+            };
         }
     }
 
-    private sealed class IsCurableEffectVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<IsCurableEffectVisitor>
+    private static bool IsCurableTransform(BattleTransformType type)
     {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => true;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => true;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-
-        public bool Visit(BattleTransformStatusEffect effect, Empty context)
+        return type switch
         {
-            return effect.Type switch
-            {
-                BattleTransformType.Transform => true,
-                BattleTransformType.TransformSelf => false,
-                BattleTransformType.Doppelganger => false,
-                BattleTransformType.LevelDrain => false
-            };
-        }
+            BattleTransformType.Transform => true,
+            BattleTransformType.TransformSelf => false,
+            BattleTransformType.Doppelganger => false,
+            BattleTransformType.LevelDrain => false
+        };
     }
 }

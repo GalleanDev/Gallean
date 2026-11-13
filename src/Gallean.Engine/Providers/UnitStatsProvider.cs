@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using Gallean.Common;
 
 namespace Gallean.Engine;
 
@@ -10,63 +9,6 @@ public sealed class UnitStatsProvider(
 {
     private sealed record BattleArmorEffects(int ShatteredArmor, int FortificationArmor, bool IsDefending);
 
-    private sealed class BattleArmorEffectVisitor : IBattleStatusEffectVisitor<BattleArmorEffects, BattleArmorEffects>, IStaticInstance<BattleArmorEffectVisitor>
-    {
-        public BattleArmorEffects Visit(BattleDefendStatusEffect effect, BattleArmorEffects effects) => effects with { IsDefending = true };
-        public BattleArmorEffects Visit(BattleParalyzeStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattlePetrifyStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattlePoisonStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleFrostbiteStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleBlisterStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleRetreatStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleRetreatedStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleFortificationStatusEffect effect, BattleArmorEffects effects) => effects with { FortificationArmor = Math.Max(effects.FortificationArmor, effect.Armor) };
-        public BattleArmorEffects Visit(BattleIncreaseDamageStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleReduceDamageStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleReduceInitiativeStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleShatterArmorStatusEffect effect, BattleArmorEffects effects) => effects with { ShatteredArmor = effects.ShatteredArmor + effect.Armor };
-        public BattleArmorEffects Visit(BattleCureStatusEffect effect, BattleArmorEffects effects) => effects;
-        public BattleArmorEffects Visit(BattleTransformStatusEffect effect, BattleArmorEffects effects) => effects;
-    }
-
-    private sealed class BattleInitiativeVisitor : IBattleStatusEffectVisitor<int, int>, IStaticInstance<BattleInitiativeVisitor>
-    {
-        public int Visit(BattleDefendStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleParalyzeStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattlePetrifyStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattlePoisonStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleFrostbiteStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleBlisterStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleRetreatStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleRetreatedStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleFortificationStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleIncreaseDamageStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleReduceDamageStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleReduceInitiativeStatusEffect effect, int initiative) => initiative - (initiative * effect.Percent / 100);
-        public int Visit(BattleShatterArmorStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleCureStatusEffect effect, int initiative) => initiative;
-        public int Visit(BattleTransformStatusEffect effect, int initiative) => initiative;
-    }
-
-    private sealed class BattleDamageChangeVisitor : IBattleStatusEffectVisitor<int, int>, IStaticInstance<BattleDamageChangeVisitor>
-    {
-        public int Visit(BattleDefendStatusEffect effect, int damage) => 0;
-        public int Visit(BattleParalyzeStatusEffect effect, int damage) => 0;
-        public int Visit(BattlePetrifyStatusEffect effect, int damage) => 0;
-        public int Visit(BattlePoisonStatusEffect effect, int damage) => 0;
-        public int Visit(BattleFrostbiteStatusEffect effect, int damage) => 0;
-        public int Visit(BattleBlisterStatusEffect effect, int damage) => 0;
-        public int Visit(BattleRetreatStatusEffect effect, int damage) => 0;
-        public int Visit(BattleRetreatedStatusEffect effect, int damage) => 0;
-        public int Visit(BattleFortificationStatusEffect effect, int damage) => 0;
-        public int Visit(BattleIncreaseDamageStatusEffect effect, int damage) => damage * effect.Percent / 100;
-        public int Visit(BattleReduceDamageStatusEffect effect, int damage) => -(damage * effect.Percent / 100);
-        public int Visit(BattleReduceInitiativeStatusEffect effect, int damage) => 0;
-        public int Visit(BattleShatterArmorStatusEffect effect, int damage) => 0;
-        public int Visit(BattleCureStatusEffect effect, int damage) => 0;
-        public int Visit(BattleTransformStatusEffect effect, int damage) => 0;
-    }
-
     public UnitStats GetBattleUnitStats(BattleState state, BattleUnitId unitId)
     {
         BattleUnit unit = state.GetUnit(unitId);
@@ -75,7 +17,7 @@ public sealed class UnitStatsProvider(
 
         foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
         {
-            armorEffects = effect.Accept(BattleArmorEffectVisitor.Instance, armorEffects);
+            armorEffects = ApplyArmorEffect(effect, armorEffects);
         }
 
         return stats with
@@ -128,10 +70,32 @@ public sealed class UnitStatsProvider(
 
         foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
         {
-            battleInitiative = effect.Accept(BattleInitiativeVisitor.Instance, battleInitiative);
+            battleInitiative = ApplyInitiativeEffect(effect, battleInitiative);
         }
 
         return battleInitiative;
+    }
+
+    private static int ApplyInitiativeEffect(BattleAbstractStatusEffect effect, int initiative)
+    {
+        return effect switch
+        {
+            BattleDefendStatusEffect => initiative,
+            BattleParalyzeStatusEffect => initiative,
+            BattlePetrifyStatusEffect => initiative,
+            BattlePoisonStatusEffect => initiative,
+            BattleFrostbiteStatusEffect => initiative,
+            BattleBlisterStatusEffect => initiative,
+            BattleRetreatStatusEffect => initiative,
+            BattleRetreatedStatusEffect => initiative,
+            BattleFortificationStatusEffect => initiative,
+            BattleIncreaseDamageStatusEffect => initiative,
+            BattleReduceDamageStatusEffect => initiative,
+            BattleReduceInitiativeStatusEffect reduceInitiative => initiative - (initiative * reduceInitiative.Percent / 100),
+            BattleShatterArmorStatusEffect => initiative,
+            BattleCureStatusEffect => initiative,
+            BattleTransformStatusEffect => initiative
+        };
     }
 
     private int GetBattleArmor(int armor, BattleArmorEffects effects)
@@ -147,6 +111,28 @@ public sealed class UnitStatsProvider(
         return battleArmor;
     }
 
+    private static BattleArmorEffects ApplyArmorEffect(BattleAbstractStatusEffect effect, BattleArmorEffects effects)
+    {
+        return effect switch
+        {
+            BattleDefendStatusEffect => effects with { IsDefending = true },
+            BattleParalyzeStatusEffect => effects,
+            BattlePetrifyStatusEffect => effects,
+            BattlePoisonStatusEffect => effects,
+            BattleFrostbiteStatusEffect => effects,
+            BattleBlisterStatusEffect => effects,
+            BattleRetreatStatusEffect => effects,
+            BattleRetreatedStatusEffect => effects,
+            BattleFortificationStatusEffect fortification => effects with { FortificationArmor = Math.Max(effects.FortificationArmor, fortification.Armor) },
+            BattleIncreaseDamageStatusEffect => effects,
+            BattleReduceDamageStatusEffect => effects,
+            BattleReduceInitiativeStatusEffect => effects,
+            BattleShatterArmorStatusEffect shatterArmor => effects with { ShatteredArmor = effects.ShatteredArmor + shatterArmor.Armor },
+            BattleCureStatusEffect => effects,
+            BattleTransformStatusEffect => effects
+        };
+    }
+
     public UnitAttackStats GetBattleAttackStats(BattleState state, BattleUnitId unitId, UnitAttackDefinition attack)
     {
         BattleUnit unit = state.GetUnit(unitId);
@@ -160,11 +146,33 @@ public sealed class UnitStatsProvider(
         {
             foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
             {
-                damageChange += effect.Accept(BattleDamageChangeVisitor.Instance, stats.Damage);
+                damageChange += GetDamageChange(effect, stats.Damage);
             }
         }
 
         return stats with { Damage = Math.Min(stats.Damage + damageChange, globals.MaxAttackDamage) };
+    }
+
+    private static int GetDamageChange(BattleAbstractStatusEffect effect, int damage)
+    {
+        return effect switch
+        {
+            BattleDefendStatusEffect => 0,
+            BattleParalyzeStatusEffect => 0,
+            BattlePetrifyStatusEffect => 0,
+            BattlePoisonStatusEffect => 0,
+            BattleFrostbiteStatusEffect => 0,
+            BattleBlisterStatusEffect => 0,
+            BattleRetreatStatusEffect => 0,
+            BattleRetreatedStatusEffect => 0,
+            BattleFortificationStatusEffect => 0,
+            BattleIncreaseDamageStatusEffect increaseDamage => damage * increaseDamage.Percent / 100,
+            BattleReduceDamageStatusEffect reduceDamage => -(damage * reduceDamage.Percent / 100),
+            BattleReduceInitiativeStatusEffect => 0,
+            BattleShatterArmorStatusEffect => 0,
+            BattleCureStatusEffect => 0,
+            BattleTransformStatusEffect => 0
+        };
     }
 
     private UnitAttackStats GetAttackStats(UnitDefinition definition, int level, ImmutableArray<UnitModifier> modifiers, UnitAttackDefinition attack)

@@ -1,55 +1,36 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal static class ScenarioEventTriggererCalculator
 {
-    private sealed class StackResolver :
-        IScenarioEventTriggerVisitor<WorldState, WorldStack?>,
-        IStaticInstance<StackResolver>
-    {
-        public WorldStack? Visit(ScenarioEventTurnStartedTrigger trigger, WorldState state)
-        {
-            return null;
-        }
-
-        public WorldStack? Visit(ScenarioEventStackMovedTrigger trigger, WorldState state)
-        {
-            return state.Stacks.GetValueOrDefault(trigger.StackId);
-        }
-
-        public WorldStack? Visit(ScenarioEventStackCreatedTrigger trigger, WorldState state)
-        {
-            return state.Stacks.GetValueOrDefault(trigger.StackId);
-        }
-
-        public WorldStack? Visit(ScenarioEventFortificationCapturedTrigger trigger, WorldState state)
-        {
-            return state.Stacks.GetValueOrDefault(trigger.CapturingStackId);
-        }
-
-        public WorldStack? Visit(ScenarioEventStackDestroyedTrigger trigger, WorldState state)
-        {
-            return trigger.Destroyer switch
-            {
-                WorldUnitGroup.Stack data => state.Stacks.GetValueOrDefault(data.StackId),
-                WorldUnitGroup.Fortification => null,
-                null => null
-            };
-        }
-
-        public WorldStack? Visit(ScenarioEventItemGainedTrigger trigger, WorldState state)
-        {
-            return trigger.Receiver switch
-            {
-                WorldUnitGroup.Stack data => state.Stacks.GetValueOrDefault(data.StackId),
-                WorldUnitGroup.Fortification => null
-            };
-        }
-    }
-
     public static WorldStack? FindStack(ScenarioEventTrigger trigger, WorldState state)
     {
-        return trigger.Accept(StackResolver.Instance, state);
+        return trigger switch
+        {
+            ScenarioEventTurnStartedTrigger => null,
+            ScenarioEventStackMovedTrigger stackMoved => state.Stacks.GetValueOrDefault(stackMoved.StackId),
+            ScenarioEventStackCreatedTrigger stackCreated => state.Stacks.GetValueOrDefault(stackCreated.StackId),
+            ScenarioEventStackDestroyedTrigger stackDestroyed => FindDestroyer(stackDestroyed, state),
+            ScenarioEventFortificationCapturedTrigger fortificationCaptured => state.Stacks.GetValueOrDefault(fortificationCaptured.CapturingStackId),
+            ScenarioEventItemGainedTrigger itemGained => FindReceiver(itemGained, state)
+        };
+    }
+
+    private static WorldStack? FindDestroyer(ScenarioEventStackDestroyedTrigger trigger, WorldState state)
+    {
+        return trigger.Destroyer switch
+        {
+            WorldUnitGroup.Stack data => state.Stacks.GetValueOrDefault(data.StackId),
+            WorldUnitGroup.Fortification => null,
+            null => null
+        };
+    }
+
+    private static WorldStack? FindReceiver(ScenarioEventItemGainedTrigger trigger, WorldState state)
+    {
+        return trigger.Receiver switch
+        {
+            WorldUnitGroup.Stack data => state.Stacks.GetValueOrDefault(data.StackId),
+            WorldUnitGroup.Fortification => null
+        };
     }
 }

@@ -1,5 +1,3 @@
-using Gallean.Common;
-
 namespace Gallean.Client;
 
 internal static class BattleUnitState
@@ -72,40 +70,28 @@ internal static class BattleUnitState
 
     public sealed record StatusEffect(StatusEffectType Type)
     {
-        private sealed class Visitor : IBattleStatusEffectVisitor<Empty, StatusEffect>, IStaticInstance<Visitor>
-        {
-            public StatusEffect Visit(BattleDefendStatusEffect effect, Empty context) => new(StatusEffectType.Defend);
-            public StatusEffect Visit(BattleParalyzeStatusEffect effect, Empty context) => new(StatusEffectType.Paralyze);
-            public StatusEffect Visit(BattlePetrifyStatusEffect effect, Empty context) => new(StatusEffectType.Petrify);
-            public StatusEffect Visit(BattlePoisonStatusEffect effect, Empty context) => new(StatusEffectType.Poison);
-            public StatusEffect Visit(BattleFrostbiteStatusEffect effect, Empty context) => new(StatusEffectType.Frostbite);
-            public StatusEffect Visit(BattleBlisterStatusEffect effect, Empty context) => new(StatusEffectType.Blister);
-            public StatusEffect Visit(BattleRetreatStatusEffect effect, Empty context) => new(StatusEffectType.Retreat);
-            public StatusEffect Visit(BattleRetreatedStatusEffect effect, Empty context) => new(StatusEffectType.Retreated);
-            public StatusEffect Visit(BattleFortificationStatusEffect effect, Empty context) => new(StatusEffectType.Fortification);
-            public StatusEffect Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => new(StatusEffectType.IncreaseDamage);
-            public StatusEffect Visit(BattleReduceDamageStatusEffect effect, Empty context) => new(StatusEffectType.ReduceDamage);
-            public StatusEffect Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => new(StatusEffectType.ReduceInitiative);
-            public StatusEffect Visit(BattleShatterArmorStatusEffect effect, Empty context) => new(StatusEffectType.ShatterArmor);
-            public StatusEffect Visit(BattleCureStatusEffect effect, Empty context) => new(StatusEffectType.Cure);
-
-            public StatusEffect Visit(BattleTransformStatusEffect effect, Empty context)
-            {
-                StatusEffectType type = effect.Type switch
-                {
-                    BattleTransformType.Transform => StatusEffectType.Transform,
-                    BattleTransformType.TransformSelf => StatusEffectType.TransformSelf,
-                    BattleTransformType.Doppelganger => StatusEffectType.Doppelganger,
-                    BattleTransformType.LevelDrain => StatusEffectType.LevelDrain
-                };
-
-                return new StatusEffect(type);
-            }
-        }
-
         public static StatusEffect Create(BattleAbstractStatusEffect effect)
         {
-            return effect.Accept(Visitor.Instance, Empty.Value);
+            StatusEffectType type = effect switch
+            {
+                BattleDefendStatusEffect => StatusEffectType.Defend,
+                BattleParalyzeStatusEffect => StatusEffectType.Paralyze,
+                BattlePetrifyStatusEffect => StatusEffectType.Petrify,
+                BattlePoisonStatusEffect => StatusEffectType.Poison,
+                BattleFrostbiteStatusEffect => StatusEffectType.Frostbite,
+                BattleBlisterStatusEffect => StatusEffectType.Blister,
+                BattleRetreatStatusEffect => StatusEffectType.Retreat,
+                BattleRetreatedStatusEffect => StatusEffectType.Retreated,
+                BattleFortificationStatusEffect => StatusEffectType.Fortification,
+                BattleIncreaseDamageStatusEffect => StatusEffectType.IncreaseDamage,
+                BattleReduceDamageStatusEffect => StatusEffectType.ReduceDamage,
+                BattleReduceInitiativeStatusEffect => StatusEffectType.ReduceInitiative,
+                BattleShatterArmorStatusEffect => StatusEffectType.ShatterArmor,
+                BattleCureStatusEffect => StatusEffectType.Cure,
+                BattleTransformStatusEffect transform => GetTransformType(transform.Type)
+            };
+
+            return new StatusEffect(type);
         }
 
         public static IEnumerable<StatusEffect> CreateAll(IEnumerable<BattleAbstractStatusEffect> effects)
@@ -114,6 +100,17 @@ internal static class BattleUnitState
             {
                 yield return Create(effect);
             }
+        }
+
+        private static StatusEffectType GetTransformType(BattleTransformType type)
+        {
+            return type switch
+            {
+                BattleTransformType.Transform => StatusEffectType.Transform,
+                BattleTransformType.TransformSelf => StatusEffectType.TransformSelf,
+                BattleTransformType.Doppelganger => StatusEffectType.Doppelganger,
+                BattleTransformType.LevelDrain => StatusEffectType.LevelDrain
+            };
         }
     }
 

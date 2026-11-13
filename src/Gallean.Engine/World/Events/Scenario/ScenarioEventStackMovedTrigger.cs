@@ -1,9 +1,3 @@
 namespace Gallean.Engine;
 
-public sealed record ScenarioEventStackMovedTrigger(WorldStackId StackId) : ScenarioEventTrigger
-{
-    public override TResult Accept<TContext, TResult>(IScenarioEventTriggerVisitor<TContext, TResult> visitor, TContext context)
-    {
-        return visitor.Visit(this, context);
-    }
-}
+public sealed record ScenarioEventStackMovedTrigger(WorldStackId StackId) : ScenarioEventTrigger;

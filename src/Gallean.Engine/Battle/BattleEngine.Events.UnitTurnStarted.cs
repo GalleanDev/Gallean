@@ -1,35 +1,14 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal partial class BattleEngine
 {
-    private sealed class EffectExpirationVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<EffectExpirationVisitor>
-    {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => false;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleTransformStatusEffect effect, Empty context) => false;
-    }
-
     BattleState IBattleEventVisitor<BattleState, BattleState>.Visit(BattleUnitTurnStartedEvent ev, BattleState state)
     {
         BattleUnit unit = state.GetUnit(ev.UnitId);
 
         BattleUnit updatedUnit = unit with
         {
-            StatusEffects = unit.StatusEffects.RemoveAll(effect => effect.Accept(EffectExpirationVisitor.Instance, Empty.Value))
+            StatusEffects = unit.StatusEffects.RemoveAll(effect => !IsRetained(effect))
         };
 
         return state.WithUnit(updatedUnit) with
@@ -37,5 +16,27 @@ internal partial class BattleEngine
             CurrentUnitTurn = ev.Turn,
             TurnQueue = state.TurnQueue.Remove(ev.Turn)
         };
+
+        static bool IsRetained(BattleAbstractStatusEffect effect)
+        {
+            return effect switch
+            {
+                BattleDefendStatusEffect => false,
+                BattleParalyzeStatusEffect => true,
+                BattlePetrifyStatusEffect => true,
+                BattlePoisonStatusEffect => true,
+                BattleFrostbiteStatusEffect => true,
+                BattleBlisterStatusEffect => true,
+                BattleRetreatStatusEffect => true,
+                BattleRetreatedStatusEffect => true,
+                BattleFortificationStatusEffect => true,
+                BattleIncreaseDamageStatusEffect => true,
+                BattleReduceDamageStatusEffect => true,
+                BattleReduceInitiativeStatusEffect => true,
+                BattleShatterArmorStatusEffect => true,
+                BattleCureStatusEffect => true,
+                BattleTransformStatusEffect => true
+            };
+        }
     }
 }

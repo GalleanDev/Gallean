@@ -1,47 +1,7 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal partial class BattleEngine
 {
-    private sealed class DamageOverTimeVisitor : IBattleStatusEffectVisitor<Empty, int>, IStaticInstance<DamageOverTimeVisitor>
-    {
-        public int Visit(BattleDefendStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleParalyzeStatusEffect effect, Empty context) => 0;
-        public int Visit(BattlePetrifyStatusEffect effect, Empty context) => 0;
-        public int Visit(BattlePoisonStatusEffect effect, Empty context) => effect.Damage;
-        public int Visit(BattleFrostbiteStatusEffect effect, Empty context) => effect.Damage;
-        public int Visit(BattleBlisterStatusEffect effect, Empty context) => effect.Damage;
-        public int Visit(BattleRetreatStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleRetreatedStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleFortificationStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleReduceDamageStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleShatterArmorStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleCureStatusEffect effect, Empty context) => 0;
-        public int Visit(BattleTransformStatusEffect effect, Empty context) => 0;
-    }
-
-    private sealed class TurnDurationVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<TurnDurationVisitor>
-    {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => true;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => true;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleTransformStatusEffect effect, Empty context) => effect.RemainingTurns is not null;
-    }
-
     private sealed class TurnStartRule(IEngineContext context) : BattleEventRule(context)
     {
         public override EventRuleResult<BattleEvent> Visit(BattleUnitTurnStartedEvent ev, BattleState state)
@@ -95,7 +55,7 @@ internal partial class BattleEngine
 
                 foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
                 {
-                    int damage = effect.Accept(DamageOverTimeVisitor.Instance, Empty.Value);
+                    int damage = GetDamageOverTime(effect);
 
                     if (damage > 0)
                     {
@@ -117,7 +77,7 @@ internal partial class BattleEngine
                     events.Add(BattleTransformationCalculator.GetRestoreEvent(state, Context, ev.UnitId, transformEffect));
                 }
 
-                if (unit.StatusEffects.Any(effect => effect.Accept(TurnDurationVisitor.Instance, Empty.Value)))
+                if (unit.StatusEffects.Any(HasTurnDuration))
                 {
                     events.Add(new BattleUnitEffectDurationDecreasedEvent(ev.UnitId));
                 }
@@ -164,6 +124,50 @@ internal partial class BattleEngine
             {
                 return EventRuleResult<BattleEvent>.Empty;
             }
+        }
+
+        private static int GetDamageOverTime(BattleAbstractStatusEffect effect)
+        {
+            return effect switch
+            {
+                BattleDefendStatusEffect => 0,
+                BattleParalyzeStatusEffect => 0,
+                BattlePetrifyStatusEffect => 0,
+                BattlePoisonStatusEffect poison => poison.Damage,
+                BattleFrostbiteStatusEffect frostbite => frostbite.Damage,
+                BattleBlisterStatusEffect blister => blister.Damage,
+                BattleRetreatStatusEffect => 0,
+                BattleRetreatedStatusEffect => 0,
+                BattleFortificationStatusEffect => 0,
+                BattleIncreaseDamageStatusEffect => 0,
+                BattleReduceDamageStatusEffect => 0,
+                BattleReduceInitiativeStatusEffect => 0,
+                BattleShatterArmorStatusEffect => 0,
+                BattleCureStatusEffect => 0,
+                BattleTransformStatusEffect => 0
+            };
+        }
+
+        private static bool HasTurnDuration(BattleAbstractStatusEffect effect)
+        {
+            return effect switch
+            {
+                BattleDefendStatusEffect => false,
+                BattleParalyzeStatusEffect => true,
+                BattlePetrifyStatusEffect => true,
+                BattlePoisonStatusEffect => true,
+                BattleFrostbiteStatusEffect => true,
+                BattleBlisterStatusEffect => true,
+                BattleRetreatStatusEffect => false,
+                BattleRetreatedStatusEffect => false,
+                BattleFortificationStatusEffect => false,
+                BattleIncreaseDamageStatusEffect => false,
+                BattleReduceDamageStatusEffect => false,
+                BattleReduceInitiativeStatusEffect => false,
+                BattleShatterArmorStatusEffect => false,
+                BattleCureStatusEffect => false,
+                BattleTransformStatusEffect transform => transform.RemainingTurns is not null
+            };
         }
     }
 }

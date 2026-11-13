@@ -1,28 +1,7 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 internal partial class BattleEngine
 {
-    private sealed class EffectExpiredVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<EffectExpiredVisitor>
-    {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => effect.RemainingTurns <= 0;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => effect.RemainingTurns <= 0;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => effect.RemainingTurns <= 0;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => effect.RemainingTurns <= 0;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => effect.RemainingTurns <= 0;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleTransformStatusEffect effect, Empty context) => false;
-    }
-
     private sealed class EffectExpirationRule(IEngineContext context) : BattleEventRule(context)
     {
         public override EventRuleResult<BattleEvent> Visit(BattleUnitEffectDurationDecreasedEvent ev, BattleState state)
@@ -32,7 +11,7 @@ internal partial class BattleEngine
 
             foreach (BattleAbstractStatusEffect effect in unit.StatusEffects)
             {
-                if (effect.Accept(EffectExpiredVisitor.Instance, Empty.Value))
+                if (IsExpired(effect))
                 {
                     events.Add(new BattleUnitEffectExpiredEvent(ev.UnitId, effect));
                 }
@@ -46,6 +25,28 @@ internal partial class BattleEngine
             {
                 return EventRuleResult<BattleEvent>.Empty;
             }
+        }
+
+        private static bool IsExpired(BattleAbstractStatusEffect effect)
+        {
+            return effect switch
+            {
+                BattleDefendStatusEffect => false,
+                BattleParalyzeStatusEffect paralyze => paralyze.RemainingTurns <= 0,
+                BattlePetrifyStatusEffect petrify => petrify.RemainingTurns <= 0,
+                BattlePoisonStatusEffect poison => poison.RemainingTurns <= 0,
+                BattleFrostbiteStatusEffect frostbite => frostbite.RemainingTurns <= 0,
+                BattleBlisterStatusEffect blister => blister.RemainingTurns <= 0,
+                BattleRetreatStatusEffect => false,
+                BattleRetreatedStatusEffect => false,
+                BattleFortificationStatusEffect => false,
+                BattleIncreaseDamageStatusEffect => false,
+                BattleReduceDamageStatusEffect => false,
+                BattleReduceInitiativeStatusEffect => false,
+                BattleShatterArmorStatusEffect => false,
+                BattleCureStatusEffect => false,
+                BattleTransformStatusEffect => false
+            };
         }
     }
 }

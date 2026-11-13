@@ -2,55 +2,21 @@ namespace Gallean.Engine;
 
 internal static partial class ScenarioEventCalculator
 {
-    private sealed partial class ConditionChecker
+    private static partial class ConditionChecker
     {
-        private sealed class OwningCity(ScenarioEventOwningCityCondition condition) :
-            IScenarioEventTriggerVisitor<ScenarioEventConditionContext, bool>
+        private static bool CheckFortificationOwned(ScenarioEventOwningCityCondition condition, ScenarioEventConditionContext context)
         {
-            public bool Visit(ScenarioEventTurnStartedTrigger trigger, ScenarioEventConditionContext context)
+            if (!context.State.Fortifications.TryGetValue(condition.Fortification, out WorldFortification? fortification))
             {
-                return CheckFortificationOwned(context);
+                return false;
             }
 
-            public bool Visit(ScenarioEventStackMovedTrigger trigger, ScenarioEventConditionContext context)
+            return fortification switch
             {
-                return CheckFortificationOwned(context);
-            }
-
-            public bool Visit(ScenarioEventStackCreatedTrigger trigger, ScenarioEventConditionContext context)
-            {
-                return CheckFortificationOwned(context);
-            }
-
-            public bool Visit(ScenarioEventStackDestroyedTrigger trigger, ScenarioEventConditionContext context)
-            {
-                return CheckFortificationOwned(context);
-            }
-
-            public bool Visit(ScenarioEventFortificationCapturedTrigger trigger, ScenarioEventConditionContext context)
-            {
-                return CheckFortificationOwned(context);
-            }
-
-            public bool Visit(ScenarioEventItemGainedTrigger trigger, ScenarioEventConditionContext context)
-            {
-                return CheckFortificationOwned(context);
-            }
-
-            private bool CheckFortificationOwned(ScenarioEventConditionContext context)
-            {
-                if (!context.State.Fortifications.TryGetValue(condition.Fortification, out WorldFortification? fortification))
-                {
-                    return false;
-                }
-
-                return fortification switch
-                {
-                    WorldCapital capital => capital.CapturedById is not null && IsAffectedRace(capital.CapturedById.Value, context),
-                    WorldCity city => IsAffectedRace(city.OwnerId, context),
-                    WorldRuin => false
-                };
-            }
+                WorldCapital capital => capital.CapturedById is not null && IsAffectedRace(capital.CapturedById.Value, context),
+                WorldCity city => IsAffectedRace(city.OwnerId, context),
+                WorldRuin => false
+            };
         }
     }
 }

@@ -1,5 +1,3 @@
-using Gallean.Common;
-
 namespace Gallean.Engine;
 
 public static class BattleUnitExtensions
@@ -24,7 +22,7 @@ public static class BattleUnitExtensions
             }
             else
             {
-                return unit.StatusEffects.Any(effect => effect.Accept(IsRetreatingVisitor.Instance, Empty.Value));
+                return unit.StatusEffects.Any(IsRetreatingEffect);
             }
         }
 
@@ -36,7 +34,7 @@ public static class BattleUnitExtensions
             }
             else
             {
-                return unit.StatusEffects.Any(effect => effect.Accept(IsDisabledVisitor.Instance, Empty.Value));
+                return unit.StatusEffects.Any(IsDisablingEffect);
             }
         }
 
@@ -46,7 +44,7 @@ public static class BattleUnitExtensions
             {
                 return false;
             }
-            else if (unit.StatusEffects.Any(effect => effect.Accept(IsRetreatedVisitor.Instance, Empty.Value)))
+            else if (unit.StatusEffects.Any(IsRetreatedEffect))
             {
                 return false;
             }
@@ -57,60 +55,69 @@ public static class BattleUnitExtensions
         }
     }
 
-    private sealed class IsRetreatedVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<IsRetreatedVisitor>
+    private static bool IsRetreatingEffect(BattleAbstractStatusEffect effect)
     {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => false;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleTransformStatusEffect effect, Empty context) => false;
+        return effect switch
+        {
+            BattleDefendStatusEffect => false,
+            BattleParalyzeStatusEffect => false,
+            BattlePetrifyStatusEffect => false,
+            BattlePoisonStatusEffect => false,
+            BattleFrostbiteStatusEffect => false,
+            BattleBlisterStatusEffect => false,
+            BattleRetreatStatusEffect => true,
+            BattleRetreatedStatusEffect => false,
+            BattleFortificationStatusEffect => false,
+            BattleIncreaseDamageStatusEffect => false,
+            BattleReduceDamageStatusEffect => false,
+            BattleReduceInitiativeStatusEffect => false,
+            BattleShatterArmorStatusEffect => false,
+            BattleCureStatusEffect => false,
+            BattleTransformStatusEffect => false
+        };
     }
 
-    private sealed class IsDisabledVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<IsDisabledVisitor>
+    private static bool IsDisablingEffect(BattleAbstractStatusEffect effect)
     {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => true;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => true;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleTransformStatusEffect effect, Empty context) => false;
+        return effect switch
+        {
+            BattleDefendStatusEffect => false,
+            BattleParalyzeStatusEffect => true,
+            BattlePetrifyStatusEffect => true,
+            BattlePoisonStatusEffect => false,
+            BattleFrostbiteStatusEffect => false,
+            BattleBlisterStatusEffect => false,
+            BattleRetreatStatusEffect => false,
+            BattleRetreatedStatusEffect => false,
+            BattleFortificationStatusEffect => false,
+            BattleIncreaseDamageStatusEffect => false,
+            BattleReduceDamageStatusEffect => false,
+            BattleReduceInitiativeStatusEffect => false,
+            BattleShatterArmorStatusEffect => false,
+            BattleCureStatusEffect => false,
+            BattleTransformStatusEffect => false
+        };
     }
 
-    private sealed class IsRetreatingVisitor : IBattleStatusEffectVisitor<Empty, bool>, IStaticInstance<IsRetreatingVisitor>
+    private static bool IsRetreatedEffect(BattleAbstractStatusEffect effect)
     {
-        public bool Visit(BattleDefendStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleParalyzeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattlePetrifyStatusEffect effect, Empty context) => false;
-        public bool Visit(BattlePoisonStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFrostbiteStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleBlisterStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleRetreatStatusEffect effect, Empty context) => true;
-        public bool Visit(BattleRetreatedStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleFortificationStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleIncreaseDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceDamageStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleReduceInitiativeStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleShatterArmorStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleCureStatusEffect effect, Empty context) => false;
-        public bool Visit(BattleTransformStatusEffect effect, Empty context) => false;
+        return effect switch
+        {
+            BattleDefendStatusEffect => false,
+            BattleParalyzeStatusEffect => false,
+            BattlePetrifyStatusEffect => false,
+            BattlePoisonStatusEffect => false,
+            BattleFrostbiteStatusEffect => false,
+            BattleBlisterStatusEffect => false,
+            BattleRetreatStatusEffect => false,
+            BattleRetreatedStatusEffect => true,
+            BattleFortificationStatusEffect => false,
+            BattleIncreaseDamageStatusEffect => false,
+            BattleReduceDamageStatusEffect => false,
+            BattleReduceInitiativeStatusEffect => false,
+            BattleShatterArmorStatusEffect => false,
+            BattleCureStatusEffect => false,
+            BattleTransformStatusEffect => false
+        };
     }
 }
