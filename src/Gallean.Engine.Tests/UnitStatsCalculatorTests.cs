@@ -900,4 +900,42 @@ public sealed class UnitStatsCalculatorTests
 
         Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, Damage: 0, Heal: 0, DrainPercent: 0)));
     }
+    [Test]
+    public void NoDamageModifiersTest()
+    {
+        UnitDefinition definition = BaseUnit() with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("unit"), initiative: 40, damage: 0, accuracy: 0, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.TransformSelf
+            }
+        };
+
+        UnitModifierDefinition hitpointsBonus = TestHelpers.SimpleModifier("hitpoints") with
+        {
+            Hitpoints = new UnitStatModifier(20, 0)
+        };
+
+        UnitModifierDefinition damageBonus = TestHelpers.SimpleModifier("damage") with
+        {
+            Damage = new UnitStatModifier(10, 25),
+            Accuracy = new UnitStatModifier(10, 0)
+        };
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(definition)
+            .AddUnitModifier(hitpointsBonus)
+            .AddUnitModifier(damageBonus)
+            .Build();
+
+        UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(
+            definition,
+            definition.Attack,
+            definition.Level,
+            [UnitModifier.Permanent(hitpointsBonus.Id), UnitModifier.Permanent(damageBonus.Id)],
+            definitions,
+            new GlobalVariables());
+
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, Damage: 0, Heal: 0, DrainPercent: 0)));
+    }
 }

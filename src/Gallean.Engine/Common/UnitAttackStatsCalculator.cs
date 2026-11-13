@@ -23,8 +23,16 @@ internal static class UnitAttackStatsCalculator
         {
             UnitModifierDefinition modifierDefinition = definitions.GetUnitModifier(modifier.DefinitionId);
 
-            accuracy = UnitStatsCalculator.ApplyStat(accuracy, modifierDefinition.Accuracy, globals.MinAttackAccuracy, globals.MaxAttackAccuracy);
-            damage = UnitStatsCalculator.ApplyStat(damage, modifierDefinition.Damage, globals.MinAttackDamage, globals.MaxModifiedAttackDamage);
+            if (attack.Accuracy > 0)
+            {
+                accuracy = UnitStatsCalculator.ApplyStat(accuracy, modifierDefinition.Accuracy, globals.MinAttackAccuracy, globals.MaxAttackAccuracy);
+            }
+
+            if (attack.Damage > 0)
+            {
+                damage = UnitStatsCalculator.ApplyStat(damage, modifierDefinition.Damage, globals.MinAttackDamage, globals.MaxModifiedAttackDamage);
+            }
+
             drainPercent += modifierDefinition.DrainPercent;
         }
 
