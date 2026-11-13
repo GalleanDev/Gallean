@@ -18,7 +18,8 @@
 
   <Window.Template>
     <ControlTemplate TargetType="local:GameView">
-      <Panel>
+      <!-- Black shows in the window padding, such as the strip beside the macOS camera housing. -->
+      <Panel Background="Black">
         <local:AnimatedTextSegmentShaderPrecompileVisual />
         <local:AnimatedTextSmokeShaderPrecompileVisual />
         <local:BattleBackgroundShaderPrecompileVisual />
@@ -32,15 +33,14 @@
         <local:WorldMountainCloudShaderPrecompileVisual />
         <local:WorldReachShaderPrecompileVisual />
 
-        <Panel Background="{TemplateBinding Background}" IsVisible="{Binding !PaintsOwnBackground}" />
+        <Panel Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" IsVisible="{Binding !PaintsOwnBackground}" />
         <VisualLayerManager x:Name="PART_VisualLayerManager">
-          <local:UiScaleDecorator MinContentWidth="{TemplateBinding MinWidth}" MinContentHeight="{TemplateBinding MinHeight}">
+          <local:UiScaleDecorator Margin="{TemplateBinding Padding}" MinContentWidth="{TemplateBinding MinWidth}" MinContentHeight="{TemplateBinding MinHeight}">
             <Panel>
               <local:CursorVisual CursorType="{Binding TopScreen.CursorType}" />
               <ContentPresenter x:Name="PART_ContentPresenter"
                                 Content="{TemplateBinding Content}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
             </Panel>

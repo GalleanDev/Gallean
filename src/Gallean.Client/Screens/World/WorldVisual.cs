@@ -368,7 +368,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 
     private void OnTopLevelPointerMoved(object? sender, PointerEventArgs e)
     {
-        Point position = e.GetPosition(this);
+        Point position = ClampToWindowPadding(e, sender as TopLevel);
         Rect interfaceRect = new Rect(Bounds.Size).Deflate(InterfaceScrollMargin);
 
         if (e.Source != this && interfaceRect.Contains(position))
@@ -379,6 +379,25 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
         {
             scrollHelper.HandlePointerMoved(position);
         }
+    }
+
+    /// <summary>
+    /// Treats the pointer over the window padding around the world, such as the strip beside the macOS camera
+    /// housing, as being at the nearest edge of the world.
+    /// </summary>
+    private Point ClampToWindowPadding(PointerEventArgs e, TopLevel? topLevel)
+    {
+        Point position = e.GetPosition(this);
+        Rect bounds = new(Bounds.Size);
+
+        if (topLevel is null || bounds.Contains(position) || !new Rect(topLevel.ClientSize).Contains(e.GetPosition(topLevel)))
+        {
+            return position;
+        }
+
+        return new Point(
+            Math.Clamp(position.X, 0, Math.Max(bounds.Width - 1, 0)),
+            Math.Clamp(position.Y, 0, Math.Max(bounds.Height - 1, 0)));
     }
 
     private void OnTopLevelPointerExited(object? sender, PointerEventArgs e)

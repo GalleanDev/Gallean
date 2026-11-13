@@ -101,7 +101,7 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
 
         GameView gameView = new()
         {
-            WindowState = gameSettings.Windowed ? WindowState.Normal : WindowState.FullScreen,
+            WindowState = gameSettings.Windowed || FullScreenPresenter.Current is not null ? WindowState.Normal : WindowState.FullScreen,
             DataContext = gameViewModel
         };
 
