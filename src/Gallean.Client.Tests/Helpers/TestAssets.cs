@@ -10,7 +10,7 @@ internal static class TestAssets
 
         try
         {
-            provider = AssetProvider.TryLoadDefault(new GameSettingsSource(GameSettings.Default));
+            provider = AssetProvider.TryLoadDefault(new GameSettingsSource(GameSettings.Default), GC.GetGCMemoryInfo());
         }
         catch (InstalledAssetPackIncompatibleException ex)
         {

@@ -8,7 +8,7 @@ using Gallean.Configuration;
 
 namespace Gallean.Client;
 
-internal sealed class App(ILog log) : Application
+internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
 {
     private readonly CleanupList cleanupList = new();
     private GameViewModel? currentGame;
@@ -59,7 +59,7 @@ internal sealed class App(ILog log) : Application
 
         Task<AudioOutput> audioOutputTask = Task.Run(() => AudioOutput.CreateAsync(log));
         GameSettingsSource gameSettingsSource = new(gameSettings);
-        Task<AssetProvider> assetProviderTask = Task.Run(() => AssetProvider.LoadDefault(gameSettingsSource));
+        Task<AssetProvider> assetProviderTask = Task.Run(() => AssetProvider.LoadDefault(gameSettingsSource, memoryInfo));
         AudioOutput audioOutput = cleanupList.Add(await audioOutputTask);
         AssetProvider assetProvider = cleanupList.Add(await assetProviderTask);
 

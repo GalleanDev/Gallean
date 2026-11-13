@@ -12,7 +12,7 @@ internal sealed class TestAppBuilder
     public static AppBuilder BuildAvaloniaApp()
     {
         return AppBuilder
-            .Configure(() => new App(NullLog.Instance))
+            .Configure(() => new App(NullLog.Instance, GC.GetGCMemoryInfo()))
             .UseSkia()
             .UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false });
     }

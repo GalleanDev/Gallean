@@ -6,10 +6,6 @@ namespace Gallean.Client;
 
 internal sealed partial class AssetProvider : IAssetProvider, IDisposable
 {
-    private const long SpriteCacheSize = 768L * 1024 * 1024;
-    private const long AnimationCacheSize = 3L * 1024 * 1024 * 1024;
-    private const long SoundCacheSize = 128L * 1024 * 1024;
-
     private readonly IAssetSource<SKImage> assetSource;
     private readonly AssetImageDecoder imageDecoder;
     private readonly GameSettingsSource gameSettingsSource;
@@ -17,15 +13,34 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
     private readonly AssetCache<Animation> animationCache;
     private readonly AssetCache<Sound> soundCache;
 
-    private AssetProvider(IAssetSource<SKImage> assetSource, AssetImageDecoder imageDecoder, GameSettingsSource gameSettingsSource)
+    private AssetProvider(
+        IAssetSource<SKImage> assetSource,
+        AssetImageDecoder imageDecoder,
+        GameSettingsSource gameSettingsSource,
+        GCMemoryInfo memoryInfo)
     {
         this.assetSource = assetSource;
         this.imageDecoder = imageDecoder;
         this.gameSettingsSource = gameSettingsSource;
 
-        spriteCache = new AssetCache<Sprite>(SpriteCacheSize, LoadSprite, MeasureSprite, DisposeSprite);
-        animationCache = new AssetCache<Animation>(AnimationCacheSize, LoadAnimation, MeasureAnimation, DisposeAnimation);
-        soundCache = new AssetCache<Sound>(SoundCacheSize, LoadSound, MeasureSound, DisposeSound);
+        spriteCache = new AssetCache<Sprite>(GetSpriteCacheSize(memoryInfo), LoadSprite, MeasureSprite, DisposeSprite);
+        animationCache = new AssetCache<Animation>(GetAnimationCacheSize(memoryInfo), LoadAnimation, MeasureAnimation, DisposeAnimation);
+        soundCache = new AssetCache<Sound>(GetSoundCacheSize(memoryInfo), LoadSound, MeasureSound, DisposeSound);
+    }
+
+    private static long GetSpriteCacheSize(GCMemoryInfo memoryInfo)
+    {
+        return Math.Min(768L * 1024 * 1024, memoryInfo.TotalAvailableMemoryBytes / 32);
+    }
+
+    private static long GetAnimationCacheSize(GCMemoryInfo memoryInfo)
+    {
+        return Math.Min(3L * 1024 * 1024 * 1024, memoryInfo.TotalAvailableMemoryBytes / 8);
+    }
+
+    private static long GetSoundCacheSize(GCMemoryInfo memoryInfo)
+    {
+        return 128L * 1024 * 1024;
     }
 
     public AssetSpriteMetadata? GetOptionalSpriteMetadata(AssetSpriteKey key)
@@ -94,9 +109,9 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         assetSource.Dispose();
     }
 
-    public static AssetProvider LoadDefault(GameSettingsSource settings)
+    public static AssetProvider LoadDefault(GameSettingsSource settings, GCMemoryInfo memoryInfo)
     {
-        AssetProvider? provider = TryLoadDefault(settings);
+        AssetProvider? provider = TryLoadDefault(settings, memoryInfo);
 
         if (provider is null)
         {
@@ -106,7 +121,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         return provider;
     }
 
-    public static AssetProvider? TryLoadDefault(GameSettingsSource settings)
+    public static AssetProvider? TryLoadDefault(GameSettingsSource settings, GCMemoryInfo memoryInfo)
     {
         AssetImageDecoder imageDecoder = new();
         AssetPackSource<SKImage>? source = LoadPackSource(imageDecoder);
@@ -116,7 +131,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
             return null;
         }
 
-        return new AssetProvider(source, imageDecoder, settings);
+        return new AssetProvider(source, imageDecoder, settings, memoryInfo);
     }
 
     private static AssetPackSource<SKImage>? LoadPackSource(AssetImageDecoder imageDecoder)
