@@ -87,6 +87,42 @@
           </StackPanel>
         </Grid>
 
+        <ItemsControl ItemsSource="{Binding Summons}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="local:ItemSummonViewModel">
+              <StackPanel>
+                <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,12">
+                  <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="84" Height="84" />
+                  <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+                    <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
+                    <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category" />
+                    <Grid ColumnDefinitions="Auto,*" Margin="0,4,0,0">
+                      <local:OutlinedTextBlock Grid.Column="0"
+                                               Classes="h2 primary-stat"
+                                               Margin="0,0,10,0"
+                                               Text="{Binding Attack.Amount}"
+                                               VerticalAlignment="Center"
+                                               IsVisible="{Binding Attack.Amount, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                      <StackPanel Grid.Column="1" Classes="attack-line" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Attack.Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
+                        <TextBlock Text="(" Classes="caption attack-source open" />
+                        <local:IconVisual Classes="attack-source"
+                                          Moniker="{Binding Attack.Attack.Source.Icon}"
+                                          Foreground="{Binding Attack.Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                        <TextBlock Text="{Binding Attack.Attack.Source.Text}"
+                                   Classes="caption attack-source"
+                                   Foreground="{Binding Attack.Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                        <TextBlock Text=")" Classes="caption attack-source close" />
+                      </StackPanel>
+                    </Grid>
+                  </StackPanel>
+                </Grid>
+                <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
+              </StackPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
         <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
 
         <Border Classes="stat-row"

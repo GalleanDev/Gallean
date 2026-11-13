@@ -4,7 +4,7 @@ namespace Gallean.Client;
 
 internal sealed record ItemAttackViewModel(string? Amount, UnitAttackViewModel Attack)
 {
-    public static ItemAttackViewModel Create(UnitAttackDefinition attack)
+    public static ItemAttackViewModel Create(UnitAttackDefinition attack, bool attacksTwice)
     {
         string? amount;
 
@@ -21,6 +21,6 @@ internal sealed record ItemAttackViewModel(string? Amount, UnitAttackViewModel A
             amount = null;
         }
 
-        return new ItemAttackViewModel(amount, UnitAttackViewModel.Create(attack, attacksTwice: false));
+        return new ItemAttackViewModel(amount, UnitAttackViewModel.Create(attack, attacksTwice));
     }
 }

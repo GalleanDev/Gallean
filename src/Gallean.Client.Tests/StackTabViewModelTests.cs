@@ -2711,6 +2711,7 @@ public sealed class StackTabViewModelTests
                 "Weapon",
                 "desc",
                 Attack: null,
+                Summons: [],
                 [new StatRowViewModel(IconMoniker.Damage, "Damage", new StatValueViewModel(TextSpans.FromText("+20"), 0), null)],
                 SpellEffect: null,
                 CastingCost: null,
@@ -2721,6 +2722,7 @@ public sealed class StackTabViewModelTests
                 "Talisman",
                 "desc",
                 new ItemAttackViewModel("25", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceFire, "Fire", Theme.AttackSource.FireColor))),
+                Summons: [],
                 [
                     new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("6", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(All)", TextStyle.Italic)]), 0), null),
                     new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("80%"), 0), null)
@@ -2807,12 +2809,113 @@ public sealed class StackTabViewModelTests
                 "Staff",
                 "desc",
                 Attack: null,
+                Summons: [],
                 [],
                 "effect",
                 new OfferPriceViewModel(WorldResourceSet.Empty with { LifeMana = 100, RuneMana = 50 }, WorldResourceSet.Empty with { LifeMana = 150, RuneMana = 20 }),
                 new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 600 }, ResourceSetProjection.All))));
             Assert.That(FormatPrice(Assert.NotNull(details.CastingCost)), Is.EqualTo("100 life mana, 50 rune mana (unaffordable)"));
         }
+    }
+
+    [Test]
+    public void InspectOrbSummonTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                LeaderAbilities = LeaderAbility.OrbUse
+            };
+
+        UnitDefinition squireDefinition = TestHelpers.SimpleUnitDefinition("squire", maxHitpoints: 100, initiative: 50, damage: 25) with
+        {
+            NameTextId = new GlobalTextId("Squire")
+        };
+
+        UnitAttackDefinition orbAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("orbAttack"), initiative: 50, damage: 0, accuracy: 100, UnitAttackReach.Any) with
+        {
+            Type = UnitAttackType.Summon,
+            Source = UnitAttackSource.Life,
+            SummonUnitIds = [squireDefinition.Id]
+        };
+
+        ItemDefinition orb = new(
+            new ItemDefinitionId("orb1"),
+            new GlobalTextId("Squire Orb"),
+            new GlobalTextId("desc"),
+            ItemCategory.Orb,
+            WorldResourceSet.Empty with { Gold = 200 },
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: new AttackItemEffect(orbAttack.Id),
+            AnimationUnitId: null);
+
+        WorldItem orbItem = new(new WorldItemId("Orb"), orb.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([orbItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(squireDefinition)
+            .WithDefinition(orbAttack)
+            .WithDefinition(orb)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        ItemDetailsViewModel details = screen.Inventory.Items[0].Details;
+
+        Assert.That(details, Is.EqualTo(new ItemDetailsViewModel(
+            new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(orb.Id)),
+            "Squire Orb",
+            "Orb",
+            "desc",
+            Attack: null,
+            [
+                new ItemSummonViewModel(
+                    new AssetSpriteKey.UnitPortrait(squireDefinition.Id),
+                    "Squire",
+                    1,
+                    new ItemAttackViewModel("25", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor))),
+                    [
+                        new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100"), 0), null),
+                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                        new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                        new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+                    ])
+            ],
+            [],
+            SpellEffect: null,
+            CastingCost: null,
+            new ResourceSetViewModel(WorldResourceSet.Empty with { Gold = 200 }, ResourceSetProjection.All))));
     }
 
     [Test]

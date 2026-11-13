@@ -50,15 +50,18 @@ internal static partial class ItemStatRowBuilder
 
     private static IEnumerable<StatRowViewModel> BuildAttackRows(UnitAttackDefinition attack)
     {
-        StatValueViewModel targets = attack.Reach switch
+        if (attack.SummonUnitIds.IsEmpty)
         {
-            UnitAttackReach.All => new StatValueViewModel(TrSpans("{0:b} {1:i}", GridPosition.Count, Tr("(All)")), 0),
-            UnitAttackReach.Any => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Ranged)")), 0),
-            UnitAttackReach.Adjacent => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Melee)")), 0)
-        };
+            StatValueViewModel targets = attack.Reach switch
+            {
+                UnitAttackReach.All => new StatValueViewModel(TrSpans("{0:b} {1:i}", GridPosition.Count, Tr("(All)")), 0),
+                UnitAttackReach.Any => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Ranged)")), 0),
+                UnitAttackReach.Adjacent => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Melee)")), 0)
+            };
 
-        yield return new StatRowViewModel(IconMoniker.Target, Tr("Targets"), targets, null);
-        yield return CreateRow(IconMoniker.Accuracy, Tr("Accuracy"), $"{attack.Accuracy}%");
+            yield return new StatRowViewModel(IconMoniker.Target, Tr("Targets"), targets, null);
+            yield return CreateRow(IconMoniker.Accuracy, Tr("Accuracy"), $"{attack.Accuracy}%");
+        }
     }
 
     private static IEnumerable<StatRowViewModel> BuildModifierRows(UnitModifierDefinition modifier, IGameTextProvider texts)

@@ -9,6 +9,7 @@ internal sealed record ItemDetailsViewModel(
     string CategoryText,
     string Description,
     ItemAttackViewModel? Attack,
+    IReadOnlyList<ItemSummonViewModel> Summons,
     IReadOnlyList<StatRowViewModel> Stats,
     string? SpellEffect,
     OfferPriceViewModel? CastingCost,
@@ -31,6 +32,7 @@ internal sealed record ItemDetailsViewModel(
                CategoryText == other.CategoryText &&
                Description == other.Description &&
                Attack == other.Attack &&
+               Summons.SequenceEqual(other.Summons) &&
                Stats.SequenceEqual(other.Stats) &&
                SpellEffect == other.SpellEffect &&
                CastingCost == other.CastingCost &&
@@ -45,6 +47,7 @@ internal sealed record ItemDetailsViewModel(
         IGameTextProvider texts)
     {
         ItemDefinition definition = definitions.GetItem(definitionId);
+        UnitAttackDefinition? attack = GetAttack(definition, definitions);
         IReadOnlyList<StatRowViewModel> stats = [.. ItemStatRowBuilder.Build(definition, definitions, texts)];
 
         WorldResourceSet? castingCost = GetCastingCost(definition);
@@ -64,7 +67,8 @@ internal sealed record ItemDetailsViewModel(
             ItemFormatter.FormatName(definitions, texts, definitionId, charges),
             ItemFormatter.FormatCategory(definition.Category),
             ItemFormatter.FormatDescription(definitions, texts, definitionId),
-            CreateAttack(definition, definitions),
+            CreateAttack(attack),
+            CreateSummons(attack, definitions, texts),
             stats,
             GetSpellEffect(definition, definitions, texts),
             castingCostViewModel,
@@ -80,6 +84,7 @@ internal sealed record ItemDetailsViewModel(
         hash.Add(CategoryText);
         hash.Add(Description);
         hash.Add(Attack);
+        hash.AddSequence(Summons);
         hash.AddSequence(Stats);
         hash.Add(SpellEffect);
         hash.Add(CastingCost);
@@ -88,7 +93,7 @@ internal sealed record ItemDetailsViewModel(
         return hash.ToHashCode();
     }
 
-    private static ItemAttackViewModel? CreateAttack(ItemDefinition definition, IGameDefinitionProvider definitions)
+    private static UnitAttackDefinition? GetAttack(ItemDefinition definition, IGameDefinitionProvider definitions)
     {
         UnitAttackDefinitionId? attackId;
 
@@ -106,9 +111,7 @@ internal sealed record ItemDetailsViewModel(
             return null;
         }
 
-        UnitAttackDefinition attack = definitions.GetAttack(attackId.Value);
-
-        return ItemAttackViewModel.Create(attack);
+        return definitions.GetAttack(attackId.Value);
     }
 
     private static string? GetSpellEffect(ItemDefinition definition, IGameDefinitionProvider definitions, IGameTextProvider texts)
@@ -136,5 +139,39 @@ internal sealed record ItemDetailsViewModel(
         {
             return null;
         }
+    }
+
+    private static ItemAttackViewModel? CreateAttack(UnitAttackDefinition? attack)
+    {
+        if (attack is not null && attack.SummonUnitIds.IsEmpty)
+        {
+            return ItemAttackViewModel.Create(attack, attacksTwice: false);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static IReadOnlyList<ItemSummonViewModel> CreateSummons(
+        UnitAttackDefinition? attack,
+        IGameDefinitionProvider definitions,
+        IGameTextProvider texts)
+    {
+        if (attack is null)
+        {
+            return [];
+        }
+
+        List<ItemSummonViewModel> summons = [];
+
+        foreach (UnitDefinitionId unitId in attack.SummonUnitIds)
+        {
+            UnitDefinition unit = definitions.GetUnit(unitId);
+
+            summons.Add(ItemSummonViewModel.Create(unit, texts));
+        }
+
+        return summons;
     }
 }
