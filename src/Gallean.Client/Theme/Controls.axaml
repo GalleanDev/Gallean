@@ -1525,6 +1525,11 @@
     <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
     <Setter Property="FontSize" Value="{StaticResource FontSizeSm}" />
   </Style>
+  <Style Selector="ListBox.select-list ListBoxItem TextBlock.row-author">
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
+  </Style>
   <Style Selector="ListBox.select-list ListBoxItem TextBlock.row-title">
     <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
   </Style>
