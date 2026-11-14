@@ -1787,8 +1787,16 @@ internal sealed partial class WorldScreenViewModel :
         WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
         WorldFortification? fortification = visibility.GetFortificationAt(plan, tile);
         WorldSite? site = visibility.GetSiteAt(plan, tile);
+        WorldStack? selectedStack = ResolveSelectedStack();
 
         if (fortification is not null && fortification.Owner != ViewPlayerId)
+        {
+            return fortification.Entrance;
+        }
+        else if (fortification is not null &&
+                 selectedStack is not null &&
+                 selectedStack.Position != fortification.Entrance &&
+                 IsNearEntrance(fortification, tile))
         {
             return fortification.Entrance;
         }
@@ -1799,6 +1807,13 @@ internal sealed partial class WorldScreenViewModel :
         else
         {
             return tile;
+        }
+
+        static bool IsNearEntrance(WorldFortification fortification, WorldPosition tile)
+        {
+            WorldPosition entrance = fortification.Entrance;
+
+            return entrance.X - tile.X <= 1 && entrance.Y - tile.Y <= 1;
         }
     }
 

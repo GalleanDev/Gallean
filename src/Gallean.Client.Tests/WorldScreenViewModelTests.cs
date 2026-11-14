@@ -4084,6 +4084,89 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
+    public async Task ClickNearCityEntranceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Human, 1),
+            WorldResourceSet.Empty);
+
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("City"),
+            cityDefinition,
+            player.Id,
+            new WorldPosition(5, 5),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack"),
+            player.Id,
+            new WorldPosition(5, 7),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCity(city)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(stack)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(new WorldPosition(5, 7), null, 1);
+        world.UpdateHover(new WorldPosition(4, 4), null);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+
+        WorldRenderState renderState = BuildWorldState(world);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.EnterCity));
+        Assert.That(renderState, Is.EqualTo(renderState with
+        {
+            Cursors = [new WorldRenderState.Cursor(new WorldPosition(5, 5), 5440, Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, 1.0)],
+            SelectedPath = new WorldRenderState.PathOverlay(new WorldPosition(5, 7),
+            [
+                new WorldRenderState.PathStep(new WorldPosition(4, 6), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+                new WorldRenderState.PathStep(new WorldPosition(5, 5), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2")
+            ])
+        }));
+
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(5, 5)));
+
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+
+        ManagementScreenViewModel screen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { world, screen }));
+    }
+
+    [Test]
     public async Task ClickOnEnemyCityBodyTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
