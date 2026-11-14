@@ -6,31 +6,32 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
 {
     public static ScenarioPopupText Parse(string text)
     {
-        string trimmed = text.Trim();
         StringBuilder nameData = new();
         StringBuilder lineData = new();
         int i = 0;
 
-        for (; i < trimmed.Length; i++)
+        text = text.Trim();
+
+        for (; i < text.Length; i++)
         {
-            if (trimmed[i] is '\r' or '\n')
+            if (text[i] is '\r' or '\n')
             {
                 break;
             }
 
-            if (trimmed[i] == '"' && i == 0)
+            if (text[i] == '"' && i == 0)
             {
                 break;
             }
 
-            nameData.Append(trimmed[i]);
+            nameData.Append(text[i]);
         }
 
-        bool hasName = i < trimmed.Length && trimmed[i] != '"';
+        bool hasName = i < text.Length && text[i] != '"';
 
-        for (; i < trimmed.Length; i++)
+        for (; i < text.Length; i++)
         {
-            lineData.Append(trimmed[i]);
+            lineData.Append(text[i]);
         }
 
         string name = nameData.ToString().Trim();
@@ -50,7 +51,7 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
 
             if (quote > 0)
             {
-                string quotedLine = trimmed[(quote + 1)..];
+                string quotedLine = text[(quote + 1)..];
                 string unquotedLine = RemoveFinalQuote(quotedLine);
 
                 if (unquotedLine.Length < quotedLine.Length)
@@ -61,12 +62,12 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
                 }
                 else
                 {
-                    return new ScenarioPopupText(Speaker: null, trimmed);
+                    return new ScenarioPopupText(Speaker: null, text);
                 }
             }
             else
             {
-                return new ScenarioPopupText(Speaker: null, trimmed);
+                return new ScenarioPopupText(Speaker: null, text);
             }
         }
     }
