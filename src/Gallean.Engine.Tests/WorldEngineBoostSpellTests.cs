@@ -54,6 +54,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithStack(stack)
@@ -102,6 +103,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithStack(stack)
@@ -136,6 +138,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
@@ -186,6 +189,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithStack(near)
@@ -239,6 +243,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithStack(stack)
@@ -314,6 +319,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithStack(stack)
@@ -403,6 +409,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithDefinition(TestHelpers.SimpleLord(ally.LordId, ally.Race, LordCategory.Warrior))
@@ -461,6 +468,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithDefinition(TestHelpers.SimpleLord(ally.LordId, ally.Race, LordCategory.Warrior))
@@ -502,6 +510,7 @@ public sealed class WorldEngineBoostSpellTests
             .WithMap(map)
             .WithDefinition(leader)
             .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier"))
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithCapital(TestHelpers.SimpleCapital(new WorldFortificationId("Capital"), player.Id, new WorldPosition(5, 5), UnitGrid<WorldUnit>.Empty))
@@ -511,5 +520,129 @@ public sealed class WorldEngineBoostSpellTests
         engine.CheckCommandError(
             new WorldCastSpellCommand(BoostSpellId, new WorldSpellTarget(new WorldPosition(5, 5), Radius: 0)),
             WorldCommandError.SpellTargetInCity);
+    }
+
+    [Test]
+    public void FlatHitpointsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 2);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        WorldSpellDefinition spell = BoostSpell(areaRadius: 0);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Spellbook = new WorldPlayerSpellbook([], [BoostSpellId])
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Hitpoints = 60 }, GridPosition.BackBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier") with { Hitpoints = new UnitStatModifier(Flat: 50, Percent: 0) })
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        engine.DispatchCommand(new WorldCastSpellCommand(BoostSpellId, new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0)));
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Players = engine.State.Players.SetItem(player.Id, player with
+                {
+                    TurnActions = new WorldPlayerTurnActions
+                    {
+                        SpellCasts = ImmutableSortedDictionary<WorldSpellDefinitionId, int>.Empty.Add(BoostSpellId, 1)
+                    }
+                }),
+                Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+                {
+                    Units = new UnitGrid<WorldUnit>.Builder()
+                        .Place(
+                            TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with
+                            {
+                                Hitpoints = 110,
+                                Modifiers = [new UnitModifier(ModifierId, RemainingTurns: 1)]
+                            },
+                            GridPosition.BackBottom,
+                            false)
+                        .Build()
+                })
+            }));
+    }
+
+    [Test]
+    public void PercentHitpointsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 2);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        WorldSpellDefinition spell = BoostSpell(areaRadius: 0);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Spellbook = new WorldPlayerSpellbook([], [BoostSpellId])
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Hitpoints = 60 }, GridPosition.BackBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleModifier("modifier") with { Hitpoints = new UnitStatModifier(Flat: 0, Percent: 50) })
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        engine.DispatchCommand(new WorldCastSpellCommand(BoostSpellId, new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0)));
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Players = engine.State.Players.SetItem(player.Id, player with
+                {
+                    TurnActions = new WorldPlayerTurnActions
+                    {
+                        SpellCasts = ImmutableSortedDictionary<WorldSpellDefinitionId, int>.Empty.Add(BoostSpellId, 1)
+                    }
+                }),
+                Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+                {
+                    Units = new UnitGrid<WorldUnit>.Builder()
+                        .Place(
+                            TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with
+                            {
+                                Hitpoints = 60,
+                                Modifiers = [new UnitModifier(ModifierId, RemainingTurns: 1)]
+                            },
+                            GridPosition.BackBottom,
+                            false)
+                        .Build()
+                })
+            }));
     }
 }
