@@ -283,7 +283,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 141] Move thief -> (5, 0)",
+            "[P2 141] Move thief -> (6, 0)",
             "[P2 149] Spy thief -> (6, 0)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
@@ -348,7 +348,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 99] Move thief -> (5, 0)",
+            "[P2 99] Move thief -> (6, 0)",
             "[P2 104] Assassinate thief -> (6, 0)"
         ]));
         Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([thiefStack.Id]));
@@ -1039,7 +1039,10 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 203] Move thief -> (5, 1)",
+            "[P2 203] Move thief -> (6, 2)",
+            "[P2 205] Move thief -> (6, 2)",
+            "[P2 207] Move thief -> (6, 2)",
+            "[P2 210] Move thief -> (6, 2)",
             "[P2 214] Steal dear thief -> (6, 2)"
         ]));
         Assert.That(session.World.State.Stacks[nearStack.Id], Is.EqualTo(nearStack));

@@ -37,6 +37,11 @@ internal sealed partial class WorldAiPlanner
                 return null;
             }
 
+            public Battle? Visit(PathTraversalCalculator.Encounter.Thief encounter, Context context)
+            {
+                return null;
+            }
+
             public Battle? Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
             {
                 BattleState state = WorldCommandHelpers.CreateStackBattleState(context.State, context.Stack, encounter.Stack, context.Engine);

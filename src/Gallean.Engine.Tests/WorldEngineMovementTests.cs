@@ -2801,21 +2801,25 @@ public sealed class WorldEngineMovementTests
 
         _ = engine.DispatchCommand(new WorldStartGameCommand());
 
-        BattleState expectedBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(thief).AddUnit(leader).Build())
-            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("thief"), thief.Id, BattleSide.Attacker, hitpoints: 100), GridPosition.FrontBottom)
-            .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("leader"), leader.Id, BattleSide.Defender, hitpoints: 100), GridPosition.FrontBottom)
-            .Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
-
         engine.CheckCommand(
             new WorldMoveStackCommand(thiefStack.Id, enemyStack.Position),
             [
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], new WorldPosition(3, 0)),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], new WorldPosition(3, 0)),
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], new WorldPosition(3, 0)),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], new WorldPosition(3, 0)),
-                new WorldStackMovementConsumedEvent(thiefStack.Id, 6),
-                new WorldStackBattleStartedEvent(thiefStack.Id, enemyStack.Id, enemyStack.Position, expectedBattleState, IsDuel: false)
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 0)], null),
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast, 16, [], null)
             ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.SetItem(thiefStack.Id, thiefStack with
+                {
+                    Position = new WorldPosition(2, 0),
+                    Direction = WorldStackDirection.SouthEast,
+                    MovementPoints = 16
+                })
+            }));
     }
 
     [Test]
@@ -2864,14 +2868,8 @@ public sealed class WorldEngineMovementTests
         engine.CheckCommand(
             new WorldMoveStackCommand(thiefStack.Id, new WorldPosition(4, 1)),
             [
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 1), new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(2, 1), new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 16, [new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 16, [new WorldPosition(3, 1), new WorldPosition(4, 1)], null),
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 14, [new WorldPosition(4, 1)], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 14, [new WorldPosition(4, 1)], null),
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(3, 1), new WorldPosition(4, 1), WorldStackDirection.SouthEast, 12, [], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(3, 1), new WorldPosition(4, 1), WorldStackDirection.SouthEast, 12, [], null)
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(0, 1), new WorldPosition(1, 1), WorldStackDirection.SouthEast, 18, [], null)
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -2879,9 +2877,9 @@ public sealed class WorldEngineMovementTests
             {
                 Stacks = before.Stacks.SetItem(thiefStack.Id, thiefStack with
                 {
-                    Position = new WorldPosition(4, 1),
+                    Position = new WorldPosition(1, 1),
                     Direction = WorldStackDirection.SouthEast,
-                    MovementPoints = 12
+                    MovementPoints = 18
                 })
             }));
     }
@@ -2932,10 +2930,8 @@ public sealed class WorldEngineMovementTests
         engine.CheckCommand(
             new WorldMoveStackCommand(thiefStack.Id, new WorldPosition(3, 1)),
             [
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(3, 1)], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [new WorldPosition(3, 1)], null),
-                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 16, [], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(2, 1), new WorldPosition(3, 1), WorldStackDirection.SouthEast, 16, [], null)
+                new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [], null),
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [], null)
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -2943,9 +2939,9 @@ public sealed class WorldEngineMovementTests
             {
                 Stacks = before.Stacks.SetItem(thiefStack.Id, thiefStack with
                 {
-                    Position = new WorldPosition(3, 1),
+                    Position = new WorldPosition(2, 1),
                     Direction = WorldStackDirection.SouthEast,
-                    MovementPoints = 16
+                    MovementPoints = 18
                 })
             }));
     }
@@ -3124,13 +3120,15 @@ public sealed class WorldEngineMovementTests
         Assert.That(result, Is.EqualTo(new WorldGetPathCommand.Result(
             new WorldPath(
             [
-                new WorldPathSegment(new WorldPosition(0, 1), new WorldPosition(1, 1), 2, Turn: 0),
+                new WorldPathSegment(new WorldPosition(0, 1), new WorldPosition(1, 1), 2, Turn: 0)
+            ]),
+            new WorldPath(
+            [
                 new WorldPathSegment(new WorldPosition(1, 1), new WorldPosition(2, 1), 2, Turn: 0),
                 new WorldPathSegment(new WorldPosition(2, 1), new WorldPosition(3, 1), 2, Turn: 0),
                 new WorldPathSegment(new WorldPosition(3, 1), new WorldPosition(4, 1), 2, Turn: 0)
             ]),
-            new WorldPath([]),
-            null)));
+            new WorldPathEncounter.Thief(new WorldPosition(2, 0)))));
     }
 
     [Test]

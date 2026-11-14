@@ -29,6 +29,11 @@ public closed partial record AbstractWorldMoveStackCommand
             }
         }
 
+        public WorldCommandResult Visit(PathTraversalCalculator.Encounter.Thief encounter, Context context)
+        {
+            return Approach(context, null);
+        }
+
         public WorldCommandResult Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
         {
             if (context.Profile.IsIllusion)

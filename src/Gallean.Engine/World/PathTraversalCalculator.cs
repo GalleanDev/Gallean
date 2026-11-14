@@ -42,17 +42,35 @@ internal static partial class PathTraversalCalculator
                 }
             }
 
-            WorldStack? interceptingStack = FindInterceptingStack(state, plan, stack, profile, position, definitions);
+            WorldStack? interceptingStack = FindInterceptingStack(state, plan, stack, profile, position);
             if (interceptingStack is not null)
             {
                 return new TraversalInfo(
                     path.Truncate(i + 1),
                     path.Skip(i + 1),
-                    new Encounter.StackBattle(interceptingStack, canBegin));
+                    GetInterceptingStackEncounter(interceptingStack, profile, canBegin, definitions));
             }
         }
 
         return new TraversalInfo(path, new WorldPath([]), null);
+    }
+
+    private static Encounter GetInterceptingStackEncounter(
+        WorldStack interceptingStack,
+        WorldMovementCalculator.MovementProfile profile,
+        bool canBegin,
+        IGameDefinitionProvider definitions)
+    {
+        (_, _, UnitDefinition leaderDefinition) = interceptingStack.GetLeader(definitions);
+
+        if (profile.IsThief && leaderDefinition.Category is not UnitCategory.Illusion)
+        {
+            return new Encounter.Thief(interceptingStack, canBegin);
+        }
+        else
+        {
+            return new Encounter.StackBattle(interceptingStack, canBegin);
+        }
     }
 
     private static WorldStack? FindInterceptingStack(
@@ -60,8 +78,7 @@ internal static partial class PathTraversalCalculator
         WorldPlan plan,
         WorldStack stack,
         WorldMovementCalculator.MovementProfile profile,
-        WorldPosition position,
-        IGameDefinitionProvider definitions)
+        WorldPosition position)
     {
         if (profile.IsIllusion)
         {
@@ -77,12 +94,7 @@ internal static partial class PathTraversalCalculator
                 DiplomacyCalculator.IsHostile(state, stack.OwnerId, adjacentStack.OwnerId) &&
                 !StackCalculator.IsSameSubrace(stack, adjacentStack, definitions))
             {
-                (_, _, UnitDefinition leaderDefinition) = adjacentStack.GetLeader(definitions);
-
-                if (!profile.IsThief || leaderDefinition.Category is UnitCategory.Illusion)
-                {
-                    return adjacentStack;
-                }
+                return adjacentStack;
             }
         }
 

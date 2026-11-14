@@ -24,6 +24,18 @@ public sealed partial record WorldGetPathCommand
             }
         }
 
+        public WorldPathEncounter? Visit(PathTraversalCalculator.Encounter.Thief encounter, Context context)
+        {
+            if (encounter.CanBegin)
+            {
+                return new WorldPathEncounter.Thief(encounter.Position);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public WorldPathEncounter? Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
         {
             return GetBattleEncounter(encounter, context);

@@ -12,6 +12,14 @@ internal static partial class PathTraversalCalculator
             }
         }
 
+        public sealed record Thief(WorldStack Stack, bool CanBegin) : Encounter(Stack.Position, CanBegin)
+        {
+            public override TResult Accept<TContext, TResult>(IEncounterVisitor<TContext, TResult> visitor, TContext context)
+            {
+                return visitor.Visit(this, context);
+            }
+        }
+
         public closed record Battle(WorldPosition Position, bool CanBegin) : Encounter(Position, CanBegin);
 
         public sealed record StackBattle(WorldStack Stack, bool CanBegin) : Battle(Stack.Position, CanBegin)
@@ -36,6 +44,7 @@ internal static partial class PathTraversalCalculator
     public interface IEncounterVisitor<in TContext, out TResult>
     {
         TResult Visit(Encounter.Bag encounter, TContext context);
+        TResult Visit(Encounter.Thief encounter, TContext context);
         TResult Visit(Encounter.StackBattle encounter, TContext context);
         TResult Visit(Encounter.FortificationBattle encounter, TContext context);
     }
