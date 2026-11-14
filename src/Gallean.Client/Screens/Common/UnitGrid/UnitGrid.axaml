@@ -7,6 +7,7 @@
       <Setter Property="Grid.Column" Value="{Binding Column}" />
       <Setter Property="Grid.ColumnSpan" Value="{Binding ColumnSpan}" />
       <Setter Property="IsVisible" Value="{Binding IsVisible}" />
+      <Setter Property="local:PortraitScope.IsFacingLeft" Value="{Binding Grid.IsFacingLeft}" />
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="HorizontalAlignment" Value="Stretch" />
       <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -15,8 +16,7 @@
     <DataTemplate x:Key="UnitGridSlotTemplate" x:DataType="local:UnitGridSlotViewModel">
       <Button Classes="slot"
               Classes.purchase="{Binding ShowsPurchaseHint}"
-              Command="{Binding SelectCommand}"
-              local:PortraitScope.IsFacingLeft="{Binding Grid.IsFacingLeft}">
+              Command="{Binding SelectCommand}">
         <local:UnitPortrait FaceKey="{Binding FaceKey}"
                             Hitpoints="{Binding Hitpoints}"
                             MaxHitpoints="{Binding MaxHitpoints}"

@@ -27,6 +27,7 @@ internal sealed class DragDropBehavior(Control view)
     private IDragSource? pressSource;
     private Point pressPosition;
     private double pressScale = 1;
+    private bool pressIsFacingLeft;
 
     public static void Attach(Control view)
     {
@@ -61,7 +62,7 @@ internal sealed class DragDropBehavior(Control view)
         }
     }
 
-    private static CursorDragImage RenderDragImage(DragPreview preview, Visual host, double scale, double renderScaling)
+    private static CursorDragImage RenderDragImage(DragPreview preview, Visual host, bool isFacingLeft, double scale, double renderScaling)
     {
         double pixelScale = scale * renderScaling;
         Size size = GetImageSize(preview.Type);
@@ -76,6 +77,7 @@ internal sealed class DragDropBehavior(Control view)
         };
 
         adorner.Classes.Add(DragImageClass);
+        PortraitScope.SetIsFacingLeft(adorner, isFacingLeft);
         AdornerLayer.SetAdorner(host, adorner);
         adorner.Measure(size);
         adorner.Arrange(new Rect(size));
@@ -154,11 +156,12 @@ internal sealed class DragDropBehavior(Control view)
             Visual? element = FindElementAt<IDragSource>(position);
             IDragSource? source = element?.DataContext as IDragSource;
 
-            if (source?.DragPreview is not null)
+            if (element is not null && source?.DragPreview is not null)
             {
                 pressSource = source;
                 pressPosition = position;
                 pressScale = ScaleAt(position);
+                pressIsFacingLeft = PortraitScope.GetIsFacingLeft(element);
             }
         }
     }
@@ -251,7 +254,7 @@ internal sealed class DragDropBehavior(Control view)
             double renderScaling = UiScaleDecorator.GetRenderScaling(view);
 
             dragDrop = host.DragDrop;
-            dragImage = RenderDragImage(preview, view, pressScale, renderScaling);
+            dragImage = RenderDragImage(preview, view, pressIsFacingLeft, pressScale, renderScaling);
             dragImageTopLevel = topLevel;
             CursorScope.SetDragImage(topLevel, dragImage);
             dragDrop.BeginDrag(GetDragReference(source, modifiers));
