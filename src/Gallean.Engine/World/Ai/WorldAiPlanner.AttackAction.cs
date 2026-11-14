@@ -165,27 +165,45 @@ internal sealed partial class WorldAiPlanner
                 return null;
             }
 
+            WorldAiActionPlan? best = null;
+
+            foreach (IGrouping<ScoringType, WorldAiTarget> group in targets.GroupBy(target => GetScoringType(context, target)))
+            {
+                WorldAiActionPlan? plan = PlanAttack(context, group, group.Key);
+
+                if (plan is not null && (best is null || plan.Value.Score > best.Value.Score))
+                {
+                    best = plan;
+                }
+            }
+
+            return best;
+        }
+
+        private ScoringType GetScoringType(ActionContext context, WorldAiTarget target)
+        {
             WorldPlayer owner = context.State.Players[context.Stack.OwnerId];
-            ScoringType scoring;
 
             if (IsSummon(context.Stack))
             {
-                scoring = ScoringType.Summon;
+                return ScoringType.Summon;
             }
             else if (!WorldHelpers.IsRacePlayable(owner.Race))
             {
-                scoring = ScoringType.Roaming;
+                return ScoringType.Roaming;
+            }
+            else if (IsNeutralTarget(context.State, target))
+            {
+                return ScoringType.Simulated;
             }
             else if (context.State.Difficulty is WorldDifficulty.Hard or WorldDifficulty.VeryHard)
             {
-                scoring = ScoringType.Simulated;
+                return ScoringType.Simulated;
             }
             else
             {
-                scoring = ScoringType.Prefiltered;
+                return ScoringType.Prefiltered;
             }
-
-            return PlanAttack(context, targets, scoring);
         }
 
         private WorldAiActionPlan? PlanAttack(ActionContext context, IEnumerable<WorldAiTarget> targets, ScoringType scoring)
@@ -372,6 +390,33 @@ internal sealed partial class WorldAiPlanner
         private static TargetArea BlockingArea(ActionContext context)
         {
             return new TargetArea(context.Stack.Position, BlockingRadius);
+        }
+
+        private static bool IsNeutralTarget(WorldState state, WorldAiTarget target)
+        {
+            return target switch
+            {
+                WorldAiTarget.Stack stack => IsNeutralStack(state, stack.StackId),
+                WorldAiTarget.Fortification fortification => IsNeutralFortification(state, fortification.FortificationId),
+                WorldAiTarget.Location or WorldAiTarget.Bag or WorldAiTarget.Site => false
+            };
+        }
+
+        private static bool IsNeutralStack(WorldState state, WorldStackId stackId)
+        {
+            WorldStack stack = state.Stacks[stackId];
+            BattleSideInfo info = WorldBattleSideInfoCalculator.GetInfo(state, stack.OwnerId);
+
+            return info.IsNeutral;
+        }
+
+        private static bool IsNeutralFortification(WorldState state, WorldFortificationId fortificationId)
+        {
+            WorldFortification fortification = state.Fortifications[fortificationId];
+            WorldPlayerId? ownerId = FortificationCalculator.GetOwner(fortification);
+            BattleSideInfo info = WorldBattleSideInfoCalculator.GetInfo(state, ownerId);
+
+            return info.IsNeutral;
         }
 
         private bool IsSummon(WorldStack stack)

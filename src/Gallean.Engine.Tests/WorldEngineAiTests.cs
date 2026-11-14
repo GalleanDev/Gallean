@@ -187,7 +187,7 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P2 910] Move Stack1 -> (2, 2) (Attacker wins)"
+            "[P2 205] Move Stack1 -> (2, 2) (Attacker wins)"
         ]));
         Assert.That(session.World.State.Fortifications[new WorldFortificationId("Ruin1")], Is.EqualTo(ruin with
         {
@@ -459,7 +459,7 @@ public sealed class WorldEngineAiTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> report3 = runner.PlayTurn();
         Assert.That(TestWorldAiTraceFormatter.Format(report3), Is.EqualTo([
-            "[P2 910] Move Scout -> (7, 0) (Attacker wins)"
+            "[P2 205] Move Scout -> (7, 0) (Attacker wins)"
         ]));
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
@@ -1868,7 +1868,7 @@ public sealed class WorldEngineAiTests
         WorldAiActionPlan plan = controller.DecideAction(session.World.State, WorldAiMemory.Empty);
 
         Assert.That(plan, Is.EqualTo(new WorldAiActionPlan(
-            new WorldAiActionScore(2, 910),
+            new WorldAiActionScore(2, 205),
             new WorldAiMoveStackCommand(stack.Id, new WorldPosition(2, 2)),
             new WorldAiMemory(
                 new WorldAiTurnMemory(1, player.Id, 1, 0, 0, []),
