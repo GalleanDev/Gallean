@@ -1552,13 +1552,23 @@ internal sealed partial class WorldScreenViewModel :
         }
         else
         {
-            SelectAction(new WorldCursorAction.CreateRod(action.StackId, result.Data.Cost, result.Data.Positions));
+            SelectAction(new WorldCursorAction.CreateRod(action.StackId, result.Data.Cost, result.Data.PlantPositions));
         }
     }
 
     async Task IWorldStackActionVisitor<Task>.Visit(WorldStackAction.DestroyRod action)
     {
-        SelectAction(new WorldCursorAction.DestroyRod(action.StackId));
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetRodInfoCommand.Result> result =
+            GameModel.World.DryRunCommand(new WorldGetRodInfoCommand(action.StackId));
+
+        if (result.Failed)
+        {
+            Game.ShowError(WorldCommandErrorFormatter.Format(result.Error.Value));
+        }
+        else
+        {
+            SelectAction(new WorldCursorAction.DestroyRod(action.StackId, result.Data.RemovePositions));
+        }
     }
 
     async Task IWorldStackActionVisitor<Task>.Visit(WorldStackAction.UseItem action)

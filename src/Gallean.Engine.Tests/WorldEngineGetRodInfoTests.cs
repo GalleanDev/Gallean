@@ -52,7 +52,8 @@ public sealed class WorldEngineGetRodInfoTests
                 new WorldPosition(1, 1),
                 new WorldPosition(0, 2),
                 new WorldPosition(1, 2)
-            ])));
+            ],
+            [])));
     }
 
     [Test]
@@ -85,6 +86,81 @@ public sealed class WorldEngineGetRodInfoTests
 
         WorldGetRodInfoCommand.Result result = engine.CheckCommand(new WorldGetRodInfoCommand(stack.Id), []);
 
-        Assert.That(result, Is.EqualTo(new WorldGetRodInfoCommand.Result(new WorldResourceSet(150, 0, 0, 0, 0, 0), [])));
+        Assert.That(result, Is.EqualTo(new WorldGetRodInfoCommand.Result(new WorldResourceSet(150, 0, 0, 0, 0, 0), [], [])));
+    }
+
+    [Test]
+    public void RemovePositionsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 3);
+
+        UnitDefinition rodLeaderDefinition = RodLeaderDefinition();
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("rod-leader"),
+            player1.Id,
+            new WorldPosition(0, 1),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("rodLeader"), rodLeaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 20);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(rodLeaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithRod(new WorldRod(new WorldRodId("Rod0001"), player2.Id, new WorldPosition(1, 0)))
+            .WithRod(new WorldRod(new WorldRodId("Rod0002"), player2.Id, new WorldPosition(3, 1)))
+            .Build();
+
+        WorldGetRodInfoCommand.Result result = engine.CheckCommand(new WorldGetRodInfoCommand(stack.Id), []);
+
+        Assert.That(result, Is.EqualTo(new WorldGetRodInfoCommand.Result(
+            new WorldResourceSet(150, 0, 0, 0, 0, 0),
+            [],
+            [new WorldPosition(1, 0)])));
+    }
+
+    [Test]
+    public void NoMovementTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 3);
+
+        UnitDefinition rodLeaderDefinition = RodLeaderDefinition();
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(150, 0, 0, 0, 0, 0)
+        };
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("rod-leader"),
+            player1.Id,
+            new WorldPosition(0, 1),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("rodLeader"), rodLeaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(rodLeaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(stack)
+            .WithRod(new WorldRod(new WorldRodId("Rod0001"), player2.Id, new WorldPosition(1, 0)))
+            .Build();
+
+        WorldGetRodInfoCommand.Result result = engine.CheckCommand(new WorldGetRodInfoCommand(stack.Id), []);
+
+        Assert.That(result, Is.EqualTo(new WorldGetRodInfoCommand.Result(new WorldResourceSet(150, 0, 0, 0, 0, 0), [], [])));
     }
 }

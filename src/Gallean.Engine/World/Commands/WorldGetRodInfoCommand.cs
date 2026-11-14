@@ -6,7 +6,10 @@ namespace Gallean.Engine;
 
 public sealed record WorldGetRodInfoCommand(WorldStackId StackId) : IWorldCommand<WorldGetRodInfoCommand.Result>
 {
-    public sealed record Result(WorldResourceSet Cost, ImmutableArray<WorldPosition> Positions)
+    public sealed record Result(
+        WorldResourceSet Cost,
+        ImmutableArray<WorldPosition> PlantPositions,
+        ImmutableArray<WorldPosition> RemovePositions)
     {
         public bool Equals(Result? other)
         {
@@ -21,7 +24,8 @@ public sealed record WorldGetRodInfoCommand(WorldStackId StackId) : IWorldComman
             }
 
             return Cost == other.Cost &&
-                   Positions.SequenceEqual(other.Positions);
+                   PlantPositions.SequenceEqual(other.PlantPositions) &&
+                   RemovePositions.SequenceEqual(other.RemovePositions);
         }
 
         public override int GetHashCode()
@@ -29,7 +33,8 @@ public sealed record WorldGetRodInfoCommand(WorldStackId StackId) : IWorldComman
             HashCode hash = new();
 
             hash.Add(Cost);
-            hash.AddSequence(Positions);
+            hash.AddSequence(PlantPositions);
+            hash.AddSequence(RemovePositions);
 
             return hash.ToHashCode();
         }
@@ -42,7 +47,7 @@ public sealed record WorldGetRodInfoCommand(WorldStackId StackId) : IWorldComman
             return CommandResult.Fail(WorldCommandError.StackNotFound);
         }
 
-        ImmutableArray<WorldPosition>.Builder positions = ImmutableArray.CreateBuilder<WorldPosition>();
+        ImmutableArray<WorldPosition>.Builder plantPositions = ImmutableArray.CreateBuilder<WorldPosition>();
         int range = context.Globals.RodPlantRange;
 
         for (int y = stack.Position.Y - range; y <= stack.Position.Y + range; y++)
@@ -50,16 +55,31 @@ public sealed record WorldGetRodInfoCommand(WorldStackId StackId) : IWorldComman
             for (int x = stack.Position.X - range; x <= stack.Position.X + range; x++)
             {
                 WorldPosition position = new(x, y);
-                WorldCreateRodCommand command = new(StackId, position);
-                WorldCommandResult commandResult = command.Execute(state, context);
+                WorldCreateRodCommand createCommand = new(StackId, position);
+                WorldCommandResult createResult = createCommand.Execute(state, context);
 
-                if (commandResult.Error is null)
+                if (createResult.Error is null)
                 {
-                    positions.Add(position);
+                    plantPositions.Add(position);
                 }
             }
         }
 
-        return CommandResult.Success(new Result(context.Globals.RodCost, positions.ToImmutable()), []);
+        ImmutableArray<WorldPosition>.Builder removePositions = ImmutableArray.CreateBuilder<WorldPosition>();
+
+        foreach (WorldRod rod in state.Rods.Values)
+        {
+            WorldRemoveRodCommand removeCommand = new(StackId, rod.Position);
+            WorldCommandResult removeResult = removeCommand.Execute(state, context);
+
+            if (removeResult.Error is null)
+            {
+                removePositions.Add(rod.Position);
+            }
+        }
+
+        return CommandResult.Success(
+            new Result(context.Globals.RodCost, plantPositions.ToImmutable(), removePositions.ToImmutable()),
+            []);
     }
 }
