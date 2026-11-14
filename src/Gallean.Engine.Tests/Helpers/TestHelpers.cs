@@ -27,7 +27,7 @@ internal static class TestHelpers
             Category: UnitCategory.Soldier,
             LeaderCategory: null,
             Race: WorldRace.Human,
-            Subrace: WorldSubraceType.Human,
+            Subrace: WorldSubraceType.Neutral,
             IsMale: true,
             DeathAnimation: UnitDeathAnimation.Human,
             IsLarge: false,

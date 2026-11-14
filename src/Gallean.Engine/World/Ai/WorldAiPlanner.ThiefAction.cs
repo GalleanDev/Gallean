@@ -115,7 +115,7 @@ internal sealed partial class WorldAiPlanner
             }
 
             WorldAiStackMemory stackMemory = context.Memory.GetStackMemory(stack);
-            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack.OwnerId, TargetType.Enemy | TargetType.Ruin | TargetType.Site, area: null);
+            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack, TargetType.Enemy | TargetType.Ruin | TargetType.Site, area: null, Context.Engine.Definitions);
             IReadOnlyList<WorldAiPathfinding.TargetPath> paths = Context.Pathfinding.GetTargetPaths(state, pathMap, targets);
             Candidate? best = FindBestCandidate(context, paths, stackMemory.Target);
 

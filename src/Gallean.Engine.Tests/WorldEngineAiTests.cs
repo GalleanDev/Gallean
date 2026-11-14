@@ -5093,4 +5093,45 @@ public sealed class WorldEngineAiTests
             "[P0 229] Purchase soldier -> capital (0, 1)"
         ]));
     }
+
+    [Test]
+    public void DefendStackSameSubraceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(7, 3);
+
+        UnitDefinition queen = Leader("queen", damage: 50, movementPoints: 0) with { Subrace = WorldSubraceType.NeutralWater };
+        UnitDefinition guard = Leader("guard", damage: 50, movementPoints: 6) with { Subrace = WorldSubraceType.NeutralWater };
+        UnitDefinition princess = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("princess", maxHitpoints: 10, initiative: 40, damage: 5),
+                movementPoints: 6, leadership: 6) with
+            {
+                ExperienceKilled = 50,
+                Subrace = WorldSubraceType.NeutralWater
+            };
+
+        WorldPlayer neutral = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Neutral, map) with { IsAi = true };
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map);
+
+        WorldStack queenStack = MyStack(new WorldUnitId("queenLeader"), "Queen", neutral.Id, new WorldPosition(3, 1), queen, 100, 0, WorldStackOrder.Stand.Instance);
+        WorldStack guardStack = MyStack(new WorldUnitId("guardLeader"), "Guard", neutral.Id, new WorldPosition(5, 1), guard, 100, 6, new WorldStackOrder.DefendStack(queenStack.Id));
+        WorldStack princessStack = EnemyStack(new WorldUnitId("princessLeader"), "Princess", player.Id, new WorldPosition(1, 1), princess, 10);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(queen)
+            .WithDefinition(guard)
+            .WithDefinition(princess)
+            .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
+            .WithPlayer(neutral)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(queenStack)
+            .WithStack(guardStack)
+            .WithStack(princessStack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P1 333] Move Guard -> (4, 1)"]));
+    }
 }

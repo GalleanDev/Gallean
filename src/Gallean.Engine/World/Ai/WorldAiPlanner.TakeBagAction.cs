@@ -122,7 +122,7 @@ internal sealed partial class WorldAiPlanner
 
             WorldPlayer player = state.Players[stack.OwnerId];
             WorldAiAttitudeDefinition attitude = Context.Engine.Definitions.GetAiAttitude(player.AiAttitude);
-            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack.OwnerId, TargetType.Bag, area);
+            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack, TargetType.Bag, area, Context.Engine.Definitions);
             (int Score, WorldPosition Position)? best = null;
 
             foreach (WorldAiPathfinding.TargetPath targetPath in Context.Pathfinding.GetTargetPaths(state, pathMap, targets))

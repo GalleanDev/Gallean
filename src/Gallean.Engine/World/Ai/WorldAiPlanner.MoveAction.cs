@@ -64,13 +64,13 @@ internal sealed partial class WorldAiPlanner
 
             if (fortification is not (WorldCity or WorldCapital { CapturedById: null }))
             {
-                IEnumerable<WorldAiTarget> targets = Enumerate(state, stack.OwnerId, TargetType.Enemy, area: null);
+                IEnumerable<WorldAiTarget> targets = Enumerate(state, stack, TargetType.Enemy, area: null, Context.Engine.Definitions);
 
                 if (CanPickUpBags(state, stack))
                 {
                     TargetArea bagArea = new(stack.Position, RoamBagDistance);
 
-                    targets = targets.Concat(Enumerate(state, stack.OwnerId, TargetType.Bag, bagArea));
+                    targets = targets.Concat(Enumerate(state, stack, TargetType.Bag, bagArea, Context.Engine.Definitions));
                 }
 
                 return PlanMove(context, targets, ScoringType.Default);
@@ -130,7 +130,7 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Berserk order, ActionContext context)
         {
-            return PlanMove(context, Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy, area: null), ScoringType.Committed);
+            return PlanMove(context, Enumerate(context.State, context.Stack, TargetType.Enemy, area: null, Context.Engine.Definitions), ScoringType.Committed);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Assist order, ActionContext context)
@@ -186,7 +186,7 @@ internal sealed partial class WorldAiPlanner
                 targetType |= TargetType.Bag;
             }
 
-            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack.OwnerId, targetType, area: null);
+            IEnumerable<WorldAiTarget> targets = Enumerate(state, stack, targetType, area: null, Context.Engine.Definitions);
 
             IReadOnlyList<WorldAiPathfinding.TargetPath> paths = ScoreTargets(context, pathMap, targets, ScoringType.Default);
 

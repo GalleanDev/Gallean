@@ -29,6 +29,14 @@ internal static class StackCalculator
         return result;
     }
 
+    public static bool IsSameSubrace(WorldStack stack, WorldStack other, IGameDefinitionProvider definitions)
+    {
+        (_, _, UnitDefinition leaderDefinition) = stack.GetLeader(definitions);
+        (_, _, UnitDefinition otherLeaderDefinition) = other.GetLeader(definitions);
+
+        return leaderDefinition.Subrace is not WorldSubraceType.Neutral && leaderDefinition.Subrace == otherLeaderDefinition.Subrace;
+    }
+
     private static int GetLeaderLeadership(WorldUnit leader, UnitDefinition definition, IGameDefinitionProvider definitions)
     {
         int leadership = UnitStatsCalculator.GetLeadership(definition, leader.Modifiers, definitions);

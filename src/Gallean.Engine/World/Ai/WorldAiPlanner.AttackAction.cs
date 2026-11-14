@@ -19,7 +19,7 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {
-            return PlanNormalAttack(context, Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, area: null));
+            return PlanNormalAttack(context, Enumerate(context.State, context.Stack, TargetType.Enemy | TargetType.Ruin, area: null, Context.Engine.Definitions));
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Stand order, ActionContext context)
@@ -33,7 +33,7 @@ internal sealed partial class WorldAiPlanner
             TargetArea area = new(context.Stack.Position, Context.Engine.Globals.AiStackGuardRange / 2);
             List<WorldAiTarget> targets = [];
 
-            foreach (WorldAiTarget target in Enumerate(state, context.Stack.OwnerId, TargetType.EnemyStack, area))
+            foreach (WorldAiTarget target in Enumerate(state, context.Stack, TargetType.EnemyStack, area, Context.Engine.Definitions))
             {
                 if (target is WorldAiTarget.Stack stackTarget &&
                     state.Stacks[stackTarget.StackId].Order is not WorldStackOrder.Stand)
@@ -65,7 +65,7 @@ internal sealed partial class WorldAiPlanner
             }
 
             TargetArea area = new(protectedStack.Position, Context.Engine.Globals.AiStackDefendRange / 2);
-            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, area);
+            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack, TargetType.Enemy | TargetType.Ruin, area, Context.Engine.Definitions);
             TargetArea adjacentArea = new(protectedStack.Position, 1);
             IEnumerable<WorldAiTarget> adjacentTiles = EnumerateFreeTiles(context.State, context.Stack, adjacentArea, Context.Engine.Definitions);
 
@@ -84,7 +84,7 @@ internal sealed partial class WorldAiPlanner
 
             if (fortification is not (WorldCity or WorldCapital { CapturedById: null }))
             {
-                return PlanAttack(context, Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy, area: null), ScoringType.Roaming);
+                return PlanAttack(context, Enumerate(context.State, context.Stack, TargetType.Enemy, area: null, Context.Engine.Definitions), ScoringType.Roaming);
             }
             else
             {
@@ -94,7 +94,7 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Explore order, ActionContext context)
         {
-            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, BlockingArea(context));
+            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack, TargetType.Enemy | TargetType.Ruin, BlockingArea(context), Context.Engine.Definitions);
 
             return PlanNormalAttack(context, targets);
         }
@@ -116,7 +116,7 @@ internal sealed partial class WorldAiPlanner
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendLocation order, ActionContext context)
         {
             TargetArea area = new(order.TargetPosition, order.Radius);
-            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.EnemyStack, area);
+            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack, TargetType.EnemyStack, area, Context.Engine.Definitions);
 
             if (context.Stack.Position.GetDistance(order.TargetPosition) > order.Radius)
             {
@@ -128,7 +128,7 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Berserk order, ActionContext context)
         {
-            return PlanAttack(context, Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy, area: null), ScoringType.Ordered);
+            return PlanAttack(context, Enumerate(context.State, context.Stack, TargetType.Enemy, area: null, Context.Engine.Definitions), ScoringType.Ordered);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Assist order, ActionContext context)
@@ -148,14 +148,14 @@ internal sealed partial class WorldAiPlanner
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Heal order, ActionContext context)
         {
-            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, BlockingArea(context));
+            IEnumerable<WorldAiTarget> targets = Enumerate(context.State, context.Stack, TargetType.Enemy | TargetType.Ruin, BlockingArea(context), Context.Engine.Definitions);
 
             return PlanNormalAttack(context, targets);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Reinforce order, ActionContext context)
         {
-            return PlanNormalAttack(context, Enumerate(context.State, context.Stack.OwnerId, TargetType.Enemy | TargetType.Ruin, area: null));
+            return PlanNormalAttack(context, Enumerate(context.State, context.Stack, TargetType.Enemy | TargetType.Ruin, area: null, Context.Engine.Definitions));
         }
 
         private WorldAiActionPlan? PlanNormalAttack(ActionContext context, IEnumerable<WorldAiTarget> targets)

@@ -16,13 +16,18 @@ internal static class WorldAiTargetEnumerator
 
     public readonly record struct TargetArea(WorldPosition Center, int Radius);
 
-    public static IEnumerable<WorldAiTarget> Enumerate(WorldState state, WorldPlayerId playerId, TargetType types, TargetArea? area)
+    public static IEnumerable<WorldAiTarget> Enumerate(
+        WorldState state,
+        WorldStack stack,
+        TargetType types,
+        TargetArea? area,
+        IGameDefinitionProvider definitions)
     {
-        WorldPlayer player = state.Players[playerId];
+        WorldPlayer player = state.Players[stack.OwnerId];
 
         if (types.HasFlag(TargetType.EnemyStack))
         {
-            foreach (WorldAiTarget target in EnumerateEnemyStacks(state, player, area))
+            foreach (WorldAiTarget target in EnumerateEnemyStacks(state, stack, player, area, definitions))
             {
                 yield return target;
             }
@@ -75,16 +80,22 @@ internal static class WorldAiTargetEnumerator
         }
     }
 
-    private static IEnumerable<WorldAiTarget> EnumerateEnemyStacks(WorldState state, WorldPlayer player, TargetArea? area)
+    private static IEnumerable<WorldAiTarget> EnumerateEnemyStacks(
+        WorldState state,
+        WorldStack stack,
+        WorldPlayer player,
+        TargetArea? area,
+        IGameDefinitionProvider definitions)
     {
-        foreach (WorldStack stack in state.Stacks.Values)
+        foreach (WorldStack other in state.Stacks.Values)
         {
-            if (stack is { Concealed: false, AiPriority: > 0 } &&
-                DiplomacyCalculator.IsHostile(state, player.Id, stack.OwnerId) &&
-                IsExplored(player, stack.Position) &&
-                IsWithinArea(stack.Position, area))
+            if (other is { Concealed: false, AiPriority: > 0 } &&
+                DiplomacyCalculator.IsHostile(state, player.Id, other.OwnerId) &&
+                IsExplored(player, other.Position) &&
+                IsWithinArea(other.Position, area) &&
+                !StackCalculator.IsSameSubrace(stack, other, definitions))
             {
-                yield return new WorldAiTarget.Stack(stack.Id);
+                yield return new WorldAiTarget.Stack(other.Id);
             }
         }
     }
