@@ -1194,7 +1194,8 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 600] Purchase ranged -> capital (0, 0)"
+            "[P0 600] Purchase ranged -> capital (0, 0)",
+            "[P3 1000] AutoFit Stack"
         ]));
     }
 
@@ -1310,7 +1311,9 @@ public sealed class WorldEngineAiTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
-        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.Empty);
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 934] Move Ignored -> (1, 0) (Attacker wins)"
+        ]));
         Assert.That(session.Battle, Is.Null);
     }
 
@@ -3692,7 +3695,8 @@ public sealed class WorldEngineAiTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P0 700] Purchase soldier -> capital (0, 0)"
+            "[P0 700] Purchase soldier -> capital (0, 0)",
+            "[P3 1000] AutoFit Blocking"
         ]));
         Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(150, 0, 0, 0, 0, 0)));
     }
@@ -4210,7 +4214,8 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 431] Purchase ranged -> capital (0, 0)"
+            "[P0 431] Purchase ranged -> capital (0, 0)",
+            "[P3 1000] AutoFit Stack"
         ]));
     }
 
@@ -5090,7 +5095,8 @@ public sealed class WorldEngineAiTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P0 229] Purchase soldier -> capital (0, 1)"
+            "[P0 229] Purchase soldier -> capital (0, 1)",
+            "[P3 1000] AutoFit Stack"
         ]));
     }
 

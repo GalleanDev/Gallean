@@ -37,11 +37,6 @@ internal sealed class WorldAiController(IEngineContext engine)
                     continue;
                 }
 
-                if (stack.AiIgnore)
-                {
-                    continue;
-                }
-
                 WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
 
                 if (fortification is not null && FortificationCalculator.IsRioting(fortification))
@@ -70,11 +65,6 @@ internal sealed class WorldAiController(IEngineContext engine)
         foreach (WorldStack stack in state.Stacks.Values)
         {
             if (stack.OwnerId != playerId)
-            {
-                continue;
-            }
-
-            if (stack.AiIgnore)
             {
                 continue;
             }
