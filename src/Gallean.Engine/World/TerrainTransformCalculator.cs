@@ -17,10 +17,11 @@ internal static class TerrainTransformCalculator
 
     public static WorldMap TransformArea(WorldState state, WorldPosition center, int areaSize, WorldMapTerrain terrain)
     {
-        int left = center.X - areaSize / 2;
-        int top = center.Y - areaSize / 2;
-        int right = left + areaSize;
-        int bottom = top + areaSize;
+        WorldMap map = state.Map;
+        int left = Math.Max(0, center.X - areaSize / 2);
+        int top = Math.Max(0, center.Y - areaSize / 2);
+        int right = Math.Min(map.Width, center.X - areaSize / 2 + areaSize);
+        int bottom = Math.Min(map.Height, center.Y - areaSize / 2 + areaSize);
         List<WorldPosition> positions = [];
 
         for (int y = top; y < bottom; y++)
@@ -31,7 +32,7 @@ internal static class TerrainTransformCalculator
             }
         }
 
-        return TransformCells(state.Map, state, positions, terrain);
+        return TransformCells(map, state, positions, terrain);
     }
 
     private static WorldMap TransformCells(

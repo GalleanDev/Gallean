@@ -2951,6 +2951,61 @@ public sealed class WorldEngineScenarioEventEffectTests
     }
 
     [Test]
+    public void ChangeTerrainEffectWholeMapTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            ".....",
+            ".....",
+            "..^..",
+            ".....",
+            "....."
+        ]);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        ScenarioLocationDefinition location = new(
+            new ScenarioLocationId("Grove"),
+            new ScenarioTextId("Grove"),
+            new WorldPosition(1, 3),
+            0);
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventChangeTerrainEffect(location.Id, WorldMapTerrain.Elf, int.MaxValue)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithScenarioLocation(location)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Map = TestHelpers.BuildMap([
+                    "EEEEE",
+                    "EEEEE",
+                    "EE^EE",
+                    "EEEEE",
+                    "EEEEE"
+                ]),
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                }
+            }));
+    }
+
+    [Test]
     public void ChangeOwnerEffectTest()
     {
         WorldMap map = TestHelpers.SimpleMap(3, 1);
