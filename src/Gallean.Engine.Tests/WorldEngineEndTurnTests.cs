@@ -66,6 +66,38 @@ public sealed class WorldEngineEndTurnTests
     }
 
     [Test]
+    public void ResourceLimitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 3);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map) with
+        {
+            Resources = new WorldResourceSet(9950, 0, 0, 0, 9990, 0)
+        };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .Build();
+
+        engine.CheckCommand(new WorldEndTurnCommand(), [
+            new WorldTurnEndedEvent(player1.Id),
+            new WorldTurnStartingEvent(player2.Id),
+            new WorldTurnStartedEvent(player2.Id),
+            new WorldTurnResourcesGeneratedEvent(player2.Id, new WorldResourceSet(100, 0, 0, 0, 25, 0))
+        ]);
+
+        Assert.That(engine.State.Players[player2.Id], Is.EqualTo(player2 with
+        {
+            Resources = new WorldResourceSet(9999, 0, 0, 0, 9999, 0)
+        }));
+    }
+
+    [Test]
     public void NotPlayerTurnTest()
     {
         WorldMap map = TestHelpers.SimpleMap(2, 1);

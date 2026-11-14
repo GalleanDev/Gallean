@@ -21,10 +21,11 @@ internal partial class WorldEngine
             updatedStacks = updatedStacks.SetItem(stack.Id, stack with { Inventory = stack.Inventory.Add(item) });
         }
 
-        WorldPlayer updatedLooter = looter with
-        {
-            Resources = ResourceSetCalculator.Add(looter.Resources, ev.Resources)
-        };
+        WorldResourceSet looterResources = looter.Resources;
+        looterResources = ResourceSetCalculator.Add(looterResources, ev.Resources);
+        looterResources = ResourceSetCalculator.Clamp(looterResources, Context.Globals.MaxResourceAmount);
+
+        WorldPlayer updatedLooter = looter with { Resources = looterResources };
 
         return state with
         {

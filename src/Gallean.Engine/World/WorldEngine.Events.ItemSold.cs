@@ -7,7 +7,9 @@ internal partial class WorldEngine
         WorldStack stack = state.Stacks[ev.StackId];
         WorldPlayer player = state.Players[stack.OwnerId];
 
-        WorldResourceSet updatedResources = ResourceSetCalculator.Add(player.Resources, ev.Value);
+        WorldResourceSet playerResources = player.Resources;
+        playerResources = ResourceSetCalculator.Add(playerResources, ev.Value);
+        playerResources = ResourceSetCalculator.Clamp(playerResources, Context.Globals.MaxResourceAmount);
 
         WorldInventory updatedInventory = stack.Inventory.Remove(ev.Item);
 
@@ -15,7 +17,7 @@ internal partial class WorldEngine
 
         return state with
         {
-            Players = state.Players.SetItem(player.Id, player with { Resources = updatedResources }),
+            Players = state.Players.SetItem(player.Id, player with { Resources = playerResources }),
             Stacks = state.Stacks.SetItem(updatedStack.Id, updatedStack)
         };
     }

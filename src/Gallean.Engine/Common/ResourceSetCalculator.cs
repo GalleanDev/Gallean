@@ -55,6 +55,18 @@ internal static class ResourceSetCalculator
         );
     }
 
+    public static WorldResourceSet Clamp(WorldResourceSet set, int max)
+    {
+        return new WorldResourceSet(
+            Math.Min(set.Gold, max),
+            Math.Min(set.DeathMana, max),
+            Math.Min(set.RuneMana, max),
+            Math.Min(set.LifeMana, max),
+            Math.Min(set.InfernalMana, max),
+            Math.Min(set.GroveMana, max)
+        );
+    }
+
     public static bool CanAfford(WorldResourceSet available, WorldResourceSet cost)
     {
         return available.Gold >= cost.Gold &&

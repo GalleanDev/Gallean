@@ -110,6 +110,7 @@ public sealed record GlobalVariables
     internal int MaxStackVisionRadius { get; init; } = 8;
     internal int MaxHitpoints { get; init; } = 9999;
     internal int MaxPurchaseDiscountPercent { get; init; } = 100;
+    internal int MaxResourceAmount { get; init; } = 9999;
     internal int MinArmor { get; init; } = 0;
     internal int MinAttackAccuracy { get; init; } = 0;
     internal int MinAttackDamage { get; init; } = 1;

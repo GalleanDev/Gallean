@@ -19,17 +19,24 @@ internal partial class WorldEngine
         return PayForTrade(state, ev.SellerId, ev.BuyerId, ev.Price);
     }
 
-    private static WorldState PayForTrade(WorldState state, WorldPlayerId sellerId, WorldPlayerId buyerId, int price)
+    private WorldState PayForTrade(WorldState state, WorldPlayerId sellerId, WorldPlayerId buyerId, int price)
     {
         WorldPlayer seller = state.Players[sellerId];
         WorldPlayer buyer = state.Players[buyerId];
         WorldResourceSet gold = new(price, 0, 0, 0, 0, 0);
 
+        WorldResourceSet sellerResources = seller.Resources;
+        sellerResources = ResourceSetCalculator.Add(sellerResources, gold);
+        sellerResources = ResourceSetCalculator.Clamp(sellerResources, Context.Globals.MaxResourceAmount);
+
+        WorldResourceSet buyerResources = buyer.Resources;
+        buyerResources = ResourceSetCalculator.Subtract(buyerResources, gold);
+
         return state with
         {
             Players = state.Players
-                .SetItem(sellerId, seller with { Resources = ResourceSetCalculator.Add(seller.Resources, gold) })
-                .SetItem(buyerId, buyer with { Resources = ResourceSetCalculator.Subtract(buyer.Resources, gold) })
+                .SetItem(sellerId, seller with { Resources = sellerResources })
+                .SetItem(buyerId, buyer with { Resources = buyerResources })
         };
     }
 }

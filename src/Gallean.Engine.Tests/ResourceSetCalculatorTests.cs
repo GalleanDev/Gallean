@@ -54,6 +54,16 @@ public sealed class ResourceSetCalculatorTests
     }
 
     [Test]
+    public void ClampTest()
+    {
+        WorldResourceSet set = new(10050, 9999, 9998, 0, 20000, 0);
+
+        WorldResourceSet result = ResourceSetCalculator.Clamp(set, 9999);
+
+        Assert.That(result, Is.EqualTo(new WorldResourceSet(9999, 9999, 9998, 0, 9999, 0)));
+    }
+
+    [Test]
     public void CanAffordTest()
     {
         WorldResourceSet a = new(100, 50, 10, 0, 0, 0);

@@ -1471,6 +1471,8 @@ public static class ScenarioLoader
                 resources = ResourceSetCalculator.ScalePercent(resources, startingPercent);
             }
 
+            resources = ResourceSetCalculator.Clamp(resources, globals.MaxResourceAmount);
+
             result.Add(playerId, new WorldPlayer(
                 playerId,
                 ScenarioTextId.MakeInternal(player.PlayerId, Db.TextScenario.NameTextId, TextSequenceZero),
