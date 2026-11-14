@@ -273,17 +273,26 @@ internal sealed partial class WorldScreenViewModel :
             {
                 return false;
             }
-
-            if (fortification is not null && fortification.Owner == ViewPlayerId)
+            else if (fortification is not null && fortification.Owner == ViewPlayerId)
             {
                 return false;
             }
-
-            if (selected.Position == tile || selected.Position == objectPosition)
+            else if (selected.Position == tile)
             {
                 InspectStack();
 
                 return true;
+            }
+            else if (selected.Position == objectPosition)
+            {
+                WorldPathSelection? path = BuildPathSelection(selected, ResolveClickTarget(tile));
+
+                if (path is null || path.Encounter is null)
+                {
+                    InspectStack();
+
+                    return true;
+                }
             }
         }
 
