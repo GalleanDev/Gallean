@@ -75,9 +75,9 @@ public sealed class WorldEngineBoostPotionTests
             .BuildEngineWithContext();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("soldier"),
@@ -148,9 +148,9 @@ public sealed class WorldEngineBoostPotionTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("soldier"),
@@ -209,8 +209,8 @@ public sealed class WorldEngineBoostPotionTests
             .WithStack(stack)
             .BuildEngineWithContext();
 
-        _ = engine.DispatchCommand(new WorldUseItemCommand(stack.Id, boostPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))));
-        _ = engine.DispatchCommand(new WorldUseItemCommand(stack.Id, permanentPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))));
+        _ = engine.DispatchCommand(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), boostPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))));
+        _ = engine.DispatchCommand(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), permanentPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))));
 
         engine.CheckCommand(new WorldEndTurnCommand(), [
             new WorldTurnEndedEvent(player.Id),
@@ -291,16 +291,16 @@ public sealed class WorldEngineBoostPotionTests
             .WithStack(stack)
             .Build();
 
-        _ = engine.DispatchCommand(new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))));
+        _ = engine.DispatchCommand(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))));
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, secondPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), secondPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.UnitModifierAlreadyApplied);
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, secondPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("leader"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), secondPotionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"))),
             [
-                new WorldItemUsedEvent(stack.Id, secondPotionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), secondPotionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("leader"),
@@ -342,7 +342,7 @@ public sealed class WorldEngineBoostPotionTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.UnitDead);
     }
 
@@ -393,9 +393,9 @@ public sealed class WorldEngineBoostPotionTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("soldier"),

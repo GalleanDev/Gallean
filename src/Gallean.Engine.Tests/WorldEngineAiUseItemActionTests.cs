@@ -75,12 +75,12 @@ public sealed class WorldEngineAiUseItemActionTests
             .WithStackMemory(stack.Id, new WorldAiStackMemory(WorldStackOrder.Heal.Instance, null));
         WorldAiActionPlan plan = new(
             new WorldAiActionScore(6, 800),
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             memory);
 
         engine.CheckCommand(new WorldAiActionCommand(), [
             new WorldAiActionStartedEvent(plan),
-            new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
             new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 70, WorldResourceSet.Empty),
             new WorldAiActionEndedEvent(aiPlayer.Id, memory)
         ]);
@@ -148,12 +148,12 @@ public sealed class WorldEngineAiUseItemActionTests
             .WithStackMemory(stack.Id, new WorldAiStackMemory(WorldStackOrder.Heal.Instance, null));
         WorldAiActionPlan plan = new(
             new WorldAiActionScore(6, 1000),
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             memory);
 
         engine.CheckCommand(new WorldAiActionCommand(), [
             new WorldAiActionStartedEvent(plan),
-            new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
             new WorldUnitResurrectedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 1, WorldResourceSet.Empty),
             new WorldAiActionEndedEvent(aiPlayer.Id, memory)
         ]);

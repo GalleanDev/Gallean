@@ -102,7 +102,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack1.Id, usedPotionItem, RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack1.Id), usedPotionItem, RemainingCharges: null, Consumed: true),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);
@@ -300,7 +300,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack1.Id, spentTalismanItem, RemainingCharges: 4, Consumed: false),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack1.Id), spentTalismanItem, RemainingCharges: 4, Consumed: false),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);
@@ -400,7 +400,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack1.Id, talismanItem, RemainingCharges: 0, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack1.Id), talismanItem, RemainingCharges: 0, Consumed: true),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);
@@ -623,7 +623,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack2.Id, new WorldItem(new WorldItemId("Potion"), potion.Id, Charges: null), RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack2.Id), new WorldItem(new WorldItemId("Potion"), potion.Id, Charges: null), RemainingCharges: null, Consumed: true),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);
@@ -723,7 +723,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveFortificationBattleCommand(stack1.Id, city.Id, finalBattleState), [
-            new WorldItemUsedEvent(stack1.Id, new WorldItem(new WorldItemId("Potion"), potion.Id, Charges: null), RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack1.Id), new WorldItem(new WorldItemId("Potion"), potion.Id, Charges: null), RemainingCharges: null, Consumed: true),
             new WorldFortificationBattleEndedEvent(stack1.Id, city.Id, BattleSide.Defender, destroyedAttackerGrid, expectedDefenderGrid),
             new WorldStackDestroyedEvent(stack1.Id, new WorldUnitGroup.Fortification(city.Id), player2.Id)
         ]);
@@ -817,7 +817,7 @@ public sealed class WorldEngineBattleItemTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack1.Id, orbItem, RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack1.Id), orbItem, RemainingCharges: null, Consumed: true),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);

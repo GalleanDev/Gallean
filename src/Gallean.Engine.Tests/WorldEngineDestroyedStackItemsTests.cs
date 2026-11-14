@@ -102,8 +102,8 @@ public sealed class WorldEngineDestroyedStackItemsTests
             .Build();
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
-            new WorldItemUsedEvent(stack2.Id, talismanItem, RemainingCharges: 4, Consumed: false),
-            new WorldItemUsedEvent(stack2.Id, potionItem, RemainingCharges: null, Consumed: true),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack2.Id), talismanItem, RemainingCharges: 4, Consumed: false),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack2.Id), potionItem, RemainingCharges: null, Consumed: true),
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
             new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
         ]);

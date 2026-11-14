@@ -335,9 +335,9 @@ public sealed class WorldEngineInvisibilitySpellTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("leader"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldStackRevealedEvent(stack.Id),
                 new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), 90, WorldResourceSet.Empty)
             ]);
@@ -395,11 +395,11 @@ public sealed class WorldEngineInvisibilitySpellTests
 
         engine.CheckCommand(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 scrollItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             [
-                new WorldItemUsedEvent(stack.Id, scrollItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), scrollItem, RemainingCharges: null, Consumed: true),
                 new WorldSpellCastEvent(
                     player.Id,
                     InvisibilitySpellId,

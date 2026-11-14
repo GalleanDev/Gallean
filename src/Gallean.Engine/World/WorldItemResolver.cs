@@ -7,7 +7,6 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
     internal sealed record Context(
         WorldState State,
         IEngineContext EngineContext,
-        WorldStack Stack,
         WorldItem Item,
         WorldItemTarget? Target);
 
@@ -18,7 +17,9 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
             return WorldCommandResult.Fail(WorldCommandError.ItemTargetInvalid);
         }
 
-        if (!context.Stack.Units.TryGetUnit(unitTarget.UnitId, out (WorldUnit Unit, GridPosition Position) entry))
+        UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(context.State, unitTarget.Group);
+
+        if (!units.TryGetUnit(unitTarget.UnitId, out (WorldUnit Unit, GridPosition Position) entry))
         {
             return WorldCommandResult.Fail(WorldCommandError.UnitNotFound);
         }
@@ -41,7 +42,7 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
 
         return WorldCommandResult.Success(
             Empty.Value,
-            [new WorldUnitHealedEvent(new WorldUnitGroup.Stack(context.Stack.Id), unitTarget.UnitId, hitpointsAfter, WorldResourceSet.Empty)]);
+            [new WorldUnitHealedEvent(unitTarget.Group, unitTarget.UnitId, hitpointsAfter, WorldResourceSet.Empty)]);
     }
 
     public WorldCommandResult Visit(AttackItemEffect effect, Context context)
@@ -56,7 +57,9 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
             return WorldCommandResult.Fail(WorldCommandError.ItemTargetInvalid);
         }
 
-        if (!context.Stack.Units.TryGetUnit(unitTarget.UnitId, out (WorldUnit Unit, GridPosition Position) entry))
+        UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(context.State, unitTarget.Group);
+
+        if (!units.TryGetUnit(unitTarget.UnitId, out (WorldUnit Unit, GridPosition Position) entry))
         {
             return WorldCommandResult.Fail(WorldCommandError.UnitNotFound);
         }
@@ -79,7 +82,7 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
 
         return WorldCommandResult.Success(
             Empty.Value,
-            [new WorldUnitResurrectedEvent(new WorldUnitGroup.Stack(context.Stack.Id), unitTarget.UnitId, hitpoints, WorldResourceSet.Empty)]);
+            [new WorldUnitResurrectedEvent(unitTarget.Group, unitTarget.UnitId, hitpoints, WorldResourceSet.Empty)]);
     }
 
     public WorldCommandResult Visit(TemporaryBoostItemEffect effect, Context context)
@@ -106,8 +109,8 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
         }
 
         WorldSpellDefinition spell = context.EngineContext.Definitions.GetSpell(effect.SpellId);
-        WorldPlayerId casterId = context.Stack.OwnerId;
-        WorldPlayer player = context.State.Players[casterId];
+        WorldPlayer player = context.State.CurrentPlayer;
+        WorldPlayerId casterId = player.Id;
 
         SpellCalculator.CastInfo castInfo = SpellCalculator.GetItemCastInfo(context.Item, player, context.EngineContext);
         if (castInfo.Error is not null)
@@ -143,7 +146,9 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
             return WorldCommandResult.Fail(WorldCommandError.ItemTargetInvalid);
         }
 
-        if (!context.Stack.Units.TryGetUnit(unitTarget.UnitId, out (WorldUnit Unit, GridPosition Position) entry))
+        UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(context.State, unitTarget.Group);
+
+        if (!units.TryGetUnit(unitTarget.UnitId, out (WorldUnit Unit, GridPosition Position) entry))
         {
             return WorldCommandResult.Fail(WorldCommandError.UnitNotFound);
         }
@@ -164,7 +169,7 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
             Empty.Value,
             [
                 new WorldUnitModifierAppliedEvent(
-                    new WorldUnitGroup.Stack(context.Stack.Id),
+                    unitTarget.Group,
                     unitTarget.UnitId,
                     new UnitModifier(modifierId, remainingTurns))
             ]);

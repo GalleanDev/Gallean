@@ -209,26 +209,19 @@ internal sealed partial class CityTabViewModel
 
     private async Task UseItemAsync(InventorySlotReference sourceSlot, UnitGridSlotReference targetSlot)
     {
-        WorldItem? item = GetStackItem(sourceSlot);
-        WorldUnit? unit = FindUnit(targetSlot);
+        WorldUseItemCommand? command = BuildUseItemCommand(sourceSlot, targetSlot);
+        WorldItem? item = sourceSlot.Inventory.GetItem(sourceSlot.Index);
 
-        if (visitingStack is not null && item is not null && unit is not null)
+        if (command is not null && item is not null)
         {
-            CityUnitGridType gridType = GetGridType(targetSlot.Grid);
-
-            if (gridType == CityUnitGridType.Stack)
+            if (await TryDispatchWorldActionAsync(command))
             {
-                WorldItemTarget.Unit target = new(unit.Id);
+                ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
 
-                if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(visitingStack.Id, item.Id, target)))
-                {
-                    ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
-
-                    Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
-                }
-
-                RefreshView();
+                Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
             }
+
+            RefreshView();
         }
     }
 
@@ -675,7 +668,7 @@ internal sealed partial class CityTabViewModel
         return reference switch
         {
             UnitGridSlotReference source => BuildMoveHighlight(source, grid),
-            InventorySlotReference source when grid == StackGrid => BuildUseItemHighlight(GetStackItem(source)),
+            InventorySlotReference source => BuildUseItemHighlight(source, grid, units),
             null when TargetedAction is not null => BuildTargetHighlight(TargetedAction.Value, grid, units),
             _ => new HashSet<GridPosition>()
         };
@@ -740,23 +733,23 @@ internal sealed partial class CityTabViewModel
         return positions;
     }
 
-    private IReadOnlySet<GridPosition> BuildUseItemHighlight(WorldItem? item)
+    private IReadOnlySet<GridPosition> BuildUseItemHighlight(InventorySlotReference source, UnitGridViewModel grid, UnitGrid<WorldUnit> units)
     {
         HashSet<GridPosition> positions = [];
 
-        if (visitingStack is null || item is null)
+        foreach ((WorldUnit _, GridPosition position) in units.GetUnits())
         {
-            return positions;
-        }
+            UnitGridSlotReference target = new(grid, position);
+            WorldUseItemCommand? command = BuildUseItemCommand(source, target);
 
-        foreach ((WorldUnit unit, GridPosition position) in visitingStack.Units.GetUnits())
-        {
-            WorldUseItemCommand command = new(visitingStack.Id, item.Id, new WorldItemTarget.Unit(unit.Id));
-            WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
-
-            if (!commandResult.Failed)
+            if (command is not null)
             {
-                positions.Add(position);
+                WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
+
+                if (!commandResult.Failed)
+                {
+                    positions.Add(position);
+                }
             }
         }
 
@@ -844,10 +837,27 @@ internal sealed partial class CityTabViewModel
 
     private bool CanUseItem(WorldStack stack, WorldItem item)
     {
-        WorldUseItemCommand command = new(stack.Id, item.Id, null);
+        WorldUseItemCommand command = new(new WorldUnitGroup.Stack(stack.Id), item.Id, null);
         WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
 
         return commandResult.Error is not (WorldCommandError.MissingLeaderAbility or WorldCommandError.UnitDead);
+    }
+
+    private WorldUseItemCommand? BuildUseItemCommand(InventorySlotReference source, UnitGridSlotReference target)
+    {
+        WorldUnitGroup? itemGroup = ResolveGroup(source.Inventory);
+        WorldUnitGroup? unitGroup = ResolveGroup(GetGridType(target.Grid));
+        WorldItem? item = source.Inventory.GetItem(source.Index);
+        WorldUnit? unit = FindUnit(target);
+
+        if (itemGroup is not null && unitGroup is not null && item is not null && unit is not null)
+        {
+            return new WorldUseItemCommand(itemGroup, item.Id, new WorldItemTarget.Unit(unitGroup, unit.Id));
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private IWorldCommand<Empty>? BuildMoveCommand(UnitGridSlotReference source, UnitGridSlotReference target)
@@ -990,7 +1000,7 @@ internal sealed partial class CityTabViewModel
 
         if (spell.AreaRadius is null)
         {
-            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(visitingStack.Id, item.Id, Target: null)))
+            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(visitingStack.Id), item.Id, Target: null)))
             {
                 Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
                 Screen.Close();
@@ -1203,6 +1213,18 @@ internal sealed partial class CityTabViewModel
         else
         {
             return new WorldUnitGroup.Fortification(fortificationId);
+        }
+    }
+
+    private WorldUnitGroup? ResolveGroup(InventoryViewModel inventory)
+    {
+        if (inventory == InventoryTransfer.Inventory)
+        {
+            return ResolveGroup(CityUnitGridType.Stack);
+        }
+        else
+        {
+            return ResolveGroup(CityUnitGridType.Garrison);
         }
     }
 

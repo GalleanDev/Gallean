@@ -1594,7 +1594,7 @@ internal sealed partial class WorldScreenViewModel :
 
             if (spell.AreaRadius is null)
             {
-                if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(action.StackId, action.ItemId, Target: null)))
+                if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(action.StackId), action.ItemId, Target: null)))
                 {
                     Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
                 }

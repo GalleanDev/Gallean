@@ -1,37 +1,65 @@
+using System.Diagnostics.CodeAnalysis;
 using Gallean.Common;
 
 namespace Gallean.Engine;
 
 public sealed record WorldUseItemCommand(
-    WorldStackId StackId,
+    WorldUnitGroup Group,
     WorldItemId ItemId,
     WorldItemTarget? Target) : IWorldCommand<Empty>
 {
     public WorldCommandResult Execute(WorldState state, IEngineContext context)
     {
-        if (!WorldCommandHelpers.TryGetCurrentPlayerStack(state, StackId, out WorldStack? stack))
+        if (Group is WorldUnitGroup.Stack stackGroup)
         {
-            return WorldCommandResult.Fail(WorldCommandError.StackNotFound);
-        }
-
-        WorldPlan plan = WorldPlan.For(state);
-        WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
-
-        if (fortification is not null && FortificationCalculator.IsRioting(fortification))
-        {
-            return WorldCommandResult.Fail(WorldCommandError.CityRioting);
-        }
-
-        if (!stack.Inventory.TryGetItem(ItemId, out WorldItem? worldItem))
-        {
-            LeaderEquipmentSlot? equipmentSlot = stack.GetEquipmentSlot(ItemId);
-
-            if (equipmentSlot is null)
+            if (!WorldCommandHelpers.TryGetCurrentPlayerStack(state, stackGroup.StackId, out WorldStack? stack))
             {
-                return WorldCommandResult.Fail(WorldCommandError.ItemNotFound);
+                return WorldCommandResult.Fail(WorldCommandError.StackNotFound);
             }
 
-            worldItem = stack.Equipment.Items[equipmentSlot.Value];
+            WorldPlan plan = WorldPlan.For(state);
+            WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
+
+            if (fortification is not null && FortificationCalculator.IsRioting(fortification))
+            {
+                return WorldCommandResult.Fail(WorldCommandError.CityRioting);
+            }
+        }
+        else if (Group is WorldUnitGroup.Fortification fortificationGroup)
+        {
+            WorldFortificationId id = fortificationGroup.FortificationId;
+
+            if (!WorldCommandHelpers.TryGetCurrentPlayerFortification(state, id, out WorldFortification? fortification))
+            {
+                return WorldCommandResult.Fail(WorldCommandError.GarrisonNotFound);
+            }
+
+            if (fortification is not (WorldCity or WorldCapital))
+            {
+                return WorldCommandResult.Fail(WorldCommandError.GarrisonNotFound);
+            }
+
+            if (FortificationCalculator.IsRioting(fortification))
+            {
+                return WorldCommandResult.Fail(WorldCommandError.CityRioting);
+            }
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException(nameof(Group));
+        }
+
+        if (Target is WorldItemTarget.Unit unitTarget && unitTarget.Group != Group)
+        {
+            if (!InventoryTransferCalculator.TryTransferItem(state, Group, unitTarget.Group, ItemId, out _, out WorldCommandError? transferError))
+            {
+                return WorldCommandResult.Fail(transferError.Value);
+            }
+        }
+
+        if (!TryGetItem(state, Group, ItemId, out WorldItem? worldItem))
+        {
+            return WorldCommandResult.Fail(WorldCommandError.ItemNotFound);
         }
 
         ItemDefinition item = context.Definitions.GetItem(worldItem.DefinitionId);
@@ -43,7 +71,12 @@ public sealed record WorldUseItemCommand(
 
         if (LeaderEquipmentCalculator.GetRequiredAbility(item.Category) is { } requiredAbility)
         {
-            (WorldUnit leader, _, _) = stack.GetLeader(context.Definitions);
+            WorldUnit? leader = FindLeader(state, Group, context.Definitions);
+
+            if (leader is null)
+            {
+                return WorldCommandResult.Fail(WorldCommandError.MissingLeaderAbility);
+            }
 
             if (!leader.IsAlive)
             {
@@ -56,7 +89,7 @@ public sealed record WorldUseItemCommand(
             }
         }
 
-        WorldItemResolver.Context resolution = new(state, context, stack, worldItem, Target);
+        WorldItemResolver.Context resolution = new(state, context, worldItem, Target);
         WorldCommandResult effectResult = item.Effect.Accept(WorldItemResolver.Instance, resolution);
 
         if (effectResult.Error is not null)
@@ -68,11 +101,53 @@ public sealed record WorldUseItemCommand(
             Empty.Value,
             [
                 new WorldItemUsedEvent(
-                    StackId,
+                    Group,
                     worldItem,
                     RemainingCharges: null,
                     LeaderEquipmentCalculator.IsConsumable(item.Category)),
                 .. effectResult.Events
             ]);
+    }
+
+    private static bool TryGetItem(WorldState state, WorldUnitGroup group, WorldItemId itemId, [NotNullWhen(true)] out WorldItem? item)
+    {
+        WorldInventory inventory = WorldUnitGroupCalculator.GetInventory(state, group);
+        LeaderEquipment equipment = WorldUnitGroupCalculator.GetEquipment(state, group);
+
+        if (inventory.TryGetItem(itemId, out item))
+        {
+            return true;
+        }
+
+        foreach (WorldItem equippedItem in equipment.Items.Values)
+        {
+            if (equippedItem.Id == itemId)
+            {
+                item = equippedItem;
+
+                return true;
+            }
+        }
+
+        item = null;
+
+        return false;
+    }
+
+    private static WorldUnit? FindLeader(WorldState state, WorldUnitGroup group, IGameDefinitionProvider definitions)
+    {
+        UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(state, group);
+
+        foreach ((WorldUnit unit, GridPosition _) in units.GetUnits())
+        {
+            UnitDefinition definition = definitions.GetUnit(unit.DefinitionId);
+
+            if (definition.Leadership is > 0)
+            {
+                return unit;
+            }
+        }
+
+        return null;
     }
 }

@@ -1642,7 +1642,7 @@ public sealed class CityTabViewModelTests
         {
             Assert.That(FindSlot(screen.StackGrid, GridPosition.FrontBottom).IsHighlighted, Is.False);
             Assert.That(FindSlot(screen.StackGrid, GridPosition.FrontCenter).IsHighlighted, Is.True);
-            Assert.That(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).IsHighlighted, Is.False);
+            Assert.That(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).IsHighlighted, Is.True);
         }
 
         await screen.DragDrop.DropAsync(FindSlot(screen.StackGrid, GridPosition.FrontCenter).Reference);
@@ -2095,6 +2095,9 @@ public sealed class CityTabViewModelTests
 
         session.World.DispatchCommand(new WorldStartGameCommand());
         WorldState initialState = session.World.State;
+        WorldStack initialStack = initialState.Stacks[stack.Id];
+        WorldFortification initialCity = initialState.Fortifications[city.Id];
+        WorldUnit initialGarrisonSoldier = Assert.NotNull(initialCity.Garrison[GridPosition.FrontCenter]);
 
         GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
@@ -2104,7 +2107,16 @@ public sealed class CityTabViewModelTests
         screen.DragDrop.BeginDrag(screen.InventoryTransfer.Inventory.Items[0].Reference);
         await screen.DragDrop.DropAsync(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).Reference);
 
-        Assert.That(session.World.State, Is.EqualTo(initialState));
+        Assert.That(session.World.State, Is.EqualTo(initialState with
+        {
+            Stacks = initialState.Stacks.SetItem(stack.Id, initialStack with { Inventory = WorldInventory.Empty }),
+            Fortifications = initialState.Fortifications.SetItem(city.Id, initialCity with
+            {
+                Garrison = new UnitGrid<WorldUnit>.Builder()
+                    .Place(initialGarrisonSoldier with { Hitpoints = 35 }, GridPosition.FrontCenter, false)
+                    .Build()
+            })
+        }));
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
 
@@ -2705,5 +2717,202 @@ public sealed class CityTabViewModelTests
 
         Assert.That(screen.InventoryTransfer.Inventory.IsHighlighted, Is.False);
         Assert.That(screen.InventoryTransfer.OtherInventory.IsHighlighted, Is.False);
+    }
+
+    [Test]
+    public async Task DragCityItemToGarrisonUnitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
+        ItemDefinition potion = HealingPotion(50);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 10, 0, soldierDefinition.Level, [], null, false);
+        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, 20, 0, soldierDefinition.Level, [], null, false);
+
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+                new WorldCityDefinitionId(WorldRace.Human, 3),
+                WorldResourceSet.Empty) with
+            {
+                VisionRadius = 5
+            };
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("Milonia"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(garrisonSoldier, GridPosition.FrontCenter, false)
+                    .Build()) with
+            {
+                Inventory = new WorldInventory([potionItem])
+            };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            city.Entrance,
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(cityDefinition)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+        WorldState initialState = session.World.State;
+        WorldFortification initialCity = initialState.Fortifications[city.Id];
+        WorldUnit initialGarrisonSoldier = Assert.NotNull(initialCity.Garrison[GridPosition.FrontCenter]);
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
+
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.OtherInventory.Items[0].Reference);
+
+        Assert.That(screen.StackGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
+        Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
+
+        await screen.DragDrop.DropAsync(FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).Reference);
+
+        Assert.That(session.World.State, Is.EqualTo(initialState with
+        {
+            Fortifications = initialState.Fortifications.SetItem(city.Id, initialCity with
+            {
+                Inventory = WorldInventory.Empty,
+                Garrison = new UnitGrid<WorldUnit>.Builder()
+                    .Place(initialGarrisonSoldier with { Hitpoints = 35 }, GridPosition.FrontCenter, false)
+                    .Build()
+            })
+        }));
+        Assert.That(screen.Game.Alert.Current, Is.Null);
+    }
+
+    [Test]
+    public async Task DragCityItemToStackUnitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
+        ItemDefinition potion = HealingPotion(50);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 10, 0, soldierDefinition.Level, [], null, false);
+        WorldUnit garrisonSoldier = new(new WorldUnitId("garrisonSoldier"), soldierDefinition.Id, 20, 0, soldierDefinition.Level, [], null, false);
+
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+                new WorldCityDefinitionId(WorldRace.Human, 3),
+                WorldResourceSet.Empty) with
+            {
+                VisionRadius = 5
+            };
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("Milonia"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(garrisonSoldier, GridPosition.FrontCenter, false)
+                    .Build()) with
+            {
+                Inventory = new WorldInventory([potionItem])
+            };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            city.Entrance,
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(cityDefinition)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+        WorldState initialState = session.World.State;
+        WorldStack initialStack = initialState.Stacks[stack.Id];
+        WorldFortification initialCity = initialState.Fortifications[city.Id];
+        WorldUnit initialLeader = Assert.NotNull(initialStack.Units[GridPosition.FrontBottom]);
+        WorldUnit initialSoldier = Assert.NotNull(initialStack.Units[GridPosition.FrontCenter]);
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
+        CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
+
+        screen.DragDrop.BeginDrag(screen.InventoryTransfer.OtherInventory.Items[0].Reference);
+        await screen.DragDrop.DropAsync(FindSlot(screen.StackGrid, GridPosition.FrontCenter).Reference);
+
+        Assert.That(session.World.State, Is.EqualTo(initialState with
+        {
+            Stacks = initialState.Stacks.SetItem(stack.Id, initialStack with
+            {
+                Units = TestHelpers.StackUnitGrid(
+                    stackDefinitions,
+                    [
+                        (initialLeader, GridPosition.FrontBottom),
+                        (initialSoldier with { Hitpoints = 35 }, GridPosition.FrontCenter)
+                    ])
+            }),
+            Fortifications = initialState.Fortifications.SetItem(city.Id, initialCity with { Inventory = WorldInventory.Empty })
+        }));
+        Assert.That(screen.Game.Alert.Current, Is.Null);
     }
 }

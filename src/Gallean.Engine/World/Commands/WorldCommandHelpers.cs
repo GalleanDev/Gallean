@@ -624,7 +624,7 @@ internal static class WorldCommandHelpers
             consumed = LeaderEquipmentCalculator.IsConsumable(definition.Category);
         }
 
-        return new WorldItemUsedEvent(stack.Id, equippedItem, remainingCharges, consumed);
+        return new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), equippedItem, remainingCharges, consumed);
     }
 
     public static UnitGrid<WorldUnit> BuildSurvivingGrid(

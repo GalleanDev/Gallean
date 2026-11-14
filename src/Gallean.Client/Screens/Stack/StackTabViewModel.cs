@@ -125,13 +125,13 @@ internal abstract partial class StackTabViewModel
 
         if (unit is not null)
         {
-            await UseItemAsync(stack.Id, item, new WorldItemTarget.Unit(unit.Id));
+            await UseItemAsync(stack.Id, item, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), unit.Id));
         }
     }
 
     private async Task UseItemAsync(WorldStackId stackId, WorldItem item, WorldItemTarget target)
     {
-        if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(stackId, item.Id, target)))
+        if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(stackId), item.Id, target)))
         {
             ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
 
@@ -177,7 +177,7 @@ internal abstract partial class StackTabViewModel
 
         if (spell.AreaRadius is null)
         {
-            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(stack.Id, item.Id, Target: null)))
+            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), item.Id, Target: null)))
             {
                 Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
                 Screen.Close();
@@ -334,7 +334,7 @@ internal abstract partial class StackTabViewModel
 
         foreach ((WorldUnit unit, GridPosition position) in stack.Units.GetUnits())
         {
-            WorldUseItemCommand command = new(stack.Id, item.Id, new WorldItemTarget.Unit(unit.Id));
+            WorldUseItemCommand command = new(new WorldUnitGroup.Stack(stack.Id), item.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), unit.Id));
             WorldCommandResult result = GameModel.World.DryRunCommand(command);
 
             if (!result.Failed)
@@ -451,7 +451,7 @@ internal abstract partial class StackTabViewModel
 
     private bool CanUseItem(WorldStack stack, WorldItem item)
     {
-        WorldUseItemCommand command = new(stack.Id, item.Id, null);
+        WorldUseItemCommand command = new(new WorldUnitGroup.Stack(stack.Id), item.Id, null);
         WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
 
         return commandResult.Error is not (WorldCommandError.MissingLeaderAbility or WorldCommandError.UnitDead);

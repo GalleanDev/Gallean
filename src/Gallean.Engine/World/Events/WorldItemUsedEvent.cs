@@ -1,7 +1,7 @@
 namespace Gallean.Engine;
 
 public sealed record WorldItemUsedEvent(
-    WorldStackId StackId,
+    WorldUnitGroup Group,
     WorldItem Item,
     int? RemainingCharges,
     bool Consumed) : WorldEvent

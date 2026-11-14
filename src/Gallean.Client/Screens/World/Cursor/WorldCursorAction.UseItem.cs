@@ -12,7 +12,7 @@ internal closed partial record WorldCursorAction
 
         public override IWorldCommand<Empty> CreateCommand(WorldPosition position)
         {
-            return new WorldUseItemCommand(StackId, ItemId, new WorldItemTarget.Map(new WorldSpellTarget(position, Radius: 0)));
+            return new WorldUseItemCommand(new WorldUnitGroup.Stack(StackId), ItemId, new WorldItemTarget.Map(new WorldSpellTarget(position, Radius: 0)));
         }
     }
 }

@@ -4,58 +4,96 @@ internal partial class WorldEngine
 {
     WorldState IWorldEventVisitor<WorldState, WorldState>.Visit(WorldItemUsedEvent ev, WorldState state)
     {
-        WorldStack stack = state.Stacks[ev.StackId];
-
         if (ev.Consumed)
         {
-            return state with { Stacks = state.Stacks.SetItem(stack.Id, RemoveItem(stack, ev.Item)) };
+            return RemoveItem(state, ev.Group, ev.Item);
         }
         else if (ev.RemainingCharges is { } remainingCharges)
         {
-            return state with { Stacks = state.Stacks.SetItem(stack.Id, UpdateItem(stack, ev.Item, ev.Item with { Charges = remainingCharges })) };
+            return UpdateItem(state, ev.Group, ev.Item, ev.Item with { Charges = remainingCharges });
         }
         else
         {
-            WorldPlayer player = state.Players[stack.OwnerId];
+            WorldPlayerId ownerId = WorldUnitGroupCalculator.GetOwner(state, ev.Group)!.Value;
+            WorldPlayer player = state.Players[ownerId];
             WorldPlayerTurnActions actions = player.TurnActions;
             int uses = actions.ItemUses.GetValueOrDefault(ev.Item.Id);
             WorldPlayerTurnActions updatedActions = actions with { ItemUses = actions.ItemUses.SetItem(ev.Item.Id, uses + 1) };
 
-            return state with { Players = state.Players.SetItem(stack.OwnerId, player with { TurnActions = updatedActions }) };
+            return state with { Players = state.Players.SetItem(ownerId, player with { TurnActions = updatedActions }) };
         }
     }
 
-    private WorldStack RemoveItem(WorldStack stack, WorldItem item)
+    private WorldState RemoveItem(WorldState state, WorldUnitGroup group, WorldItem item)
+    {
+        return group switch
+        {
+            WorldUnitGroup.Stack data => RemoveStackItem(state, state.Stacks[data.StackId], item),
+            WorldUnitGroup.Fortification data => RemoveFortificationItem(state, state.Fortifications[data.FortificationId], item)
+        };
+    }
+
+    private static WorldState UpdateItem(WorldState state, WorldUnitGroup group, WorldItem item, WorldItem newItem)
+    {
+        return group switch
+        {
+            WorldUnitGroup.Stack data => UpdateStackItem(state, state.Stacks[data.StackId], item, newItem),
+            WorldUnitGroup.Fortification data => UpdateFortificationItem(state, state.Fortifications[data.FortificationId], item, newItem)
+        };
+    }
+
+    private WorldState RemoveStackItem(WorldState state, WorldStack stack, WorldItem item)
     {
         LeaderEquipmentSlot? equipmentSlot = stack.GetEquipmentSlot(item.Id);
+        WorldStack updatedStack;
 
         if (equipmentSlot is null)
         {
-            return stack with { Inventory = stack.Inventory.Remove(item) };
+            updatedStack = stack with { Inventory = stack.Inventory.Remove(item) };
         }
         else
         {
             LeaderEquipment updatedEquipment = stack.Equipment.Without(equipmentSlot.Value);
 
-            return stack with
+            updatedStack = stack with
             {
                 Units = LeaderEquipmentCalculator.UpdateUnitModifiers(stack.Units, updatedEquipment, Context.Definitions),
                 Equipment = updatedEquipment
             };
         }
+
+        return state with { Stacks = state.Stacks.SetItem(stack.Id, updatedStack) };
     }
 
-    private static WorldStack UpdateItem(WorldStack stack, WorldItem item, WorldItem newItem)
+    private static WorldState RemoveFortificationItem(WorldState state, WorldFortification fortification, WorldItem item)
+    {
+        WorldFortification updatedFortification = fortification with { Inventory = fortification.Inventory.Remove(item) };
+
+        return state with { Fortifications = state.Fortifications.SetItem(fortification.Id, updatedFortification) };
+    }
+
+    private static WorldState UpdateStackItem(WorldState state, WorldStack stack, WorldItem item, WorldItem newItem)
     {
         LeaderEquipmentSlot? equipmentSlot = stack.GetEquipmentSlot(item.Id);
+        WorldStack updatedStack;
 
         if (equipmentSlot is null)
         {
-            return stack with { Inventory = new WorldInventory(stack.Inventory.Items.Replace(item, newItem)) };
+            updatedStack = stack with { Inventory = new WorldInventory(stack.Inventory.Items.Replace(item, newItem)) };
         }
         else
         {
-            return stack with { Equipment = stack.Equipment.With(equipmentSlot.Value, newItem) };
+            updatedStack = stack with { Equipment = stack.Equipment.With(equipmentSlot.Value, newItem) };
         }
+
+        return state with { Stacks = state.Stacks.SetItem(stack.Id, updatedStack) };
+    }
+
+    private static WorldState UpdateFortificationItem(WorldState state, WorldFortification fortification, WorldItem item, WorldItem newItem)
+    {
+        WorldInventory updatedInventory = new(fortification.Inventory.Items.Replace(item, newItem));
+        WorldFortification updatedFortification = fortification with { Inventory = updatedInventory };
+
+        return state with { Fortifications = state.Fortifications.SetItem(fortification.Id, updatedFortification) };
     }
 }

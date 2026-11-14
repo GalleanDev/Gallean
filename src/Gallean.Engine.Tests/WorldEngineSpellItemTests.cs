@@ -89,11 +89,11 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommand(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 scrollItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             [
-                new WorldItemUsedEvent(stack.Id, scrollItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), scrollItem, RemainingCharges: null, Consumed: true),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -156,11 +156,11 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommand(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 wandItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             [
-                new WorldItemUsedEvent(stack.Id, wandItem, RemainingCharges: null, Consumed: false),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), wandItem, RemainingCharges: null, Consumed: false),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -226,9 +226,9 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, scrollItem.Id, Target: null),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), scrollItem.Id, Target: null),
             [
-                new WorldItemUsedEvent(stack.Id, scrollItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), scrollItem, RemainingCharges: null, Consumed: true),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -289,11 +289,11 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommand(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 scrollItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             [
-                new WorldItemUsedEvent(stack.Id, scrollItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), scrollItem, RemainingCharges: null, Consumed: true),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -309,11 +309,11 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommand(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 secondScrollItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             [
-                new WorldItemUsedEvent(stack.Id, secondScrollItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), secondScrollItem, RemainingCharges: null, Consumed: true),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -375,7 +375,7 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommandError(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 scrollItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             WorldCommandError.MissingLeaderAbility);
@@ -420,7 +420,7 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommandError(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 scrollItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             WorldCommandError.UnitDead);
@@ -462,7 +462,7 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommandError(
             new WorldUseItemCommand(
-                stack.Id,
+                new WorldUnitGroup.Stack(stack.Id),
                 wandItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))),
             WorldCommandError.InsufficientResources);
@@ -500,7 +500,7 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, scrollItem.Id, new WorldItemTarget.Unit(new WorldUnitId("stack1Leader"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), scrollItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("stack1Leader"))),
             WorldCommandError.ItemTargetInvalid);
     }
 
@@ -536,7 +536,7 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, scrollItem.Id, Target: null),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), scrollItem.Id, Target: null),
             WorldCommandError.SpellTargetInvalid);
     }
 
@@ -575,14 +575,14 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         WorldUseItemCommand command = new(
-            stack.Id,
+            new WorldUnitGroup.Stack(stack.Id),
             wandItem.Id,
             new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0)));
 
         engine.CheckCommand(
             command,
             [
-                new WorldItemUsedEvent(stack.Id, wandItem, RemainingCharges: null, Consumed: false),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), wandItem, RemainingCharges: null, Consumed: false),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -634,14 +634,14 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         WorldUseItemCommand command = new(
-            stack.Id,
+            new WorldUnitGroup.Stack(stack.Id),
             wandItem.Id,
             new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0)));
 
         engine.CheckCommand(
             command,
             [
-                new WorldItemUsedEvent(stack.Id, wandItem, RemainingCharges: null, Consumed: false),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), wandItem, RemainingCharges: null, Consumed: false),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -658,7 +658,7 @@ public sealed class WorldEngineSpellItemTests
         engine.CheckCommand(
             command,
             [
-                new WorldItemUsedEvent(stack.Id, wandItem, RemainingCharges: null, Consumed: false),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), wandItem, RemainingCharges: null, Consumed: false),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -721,14 +721,14 @@ public sealed class WorldEngineSpellItemTests
 
         WorldItemTarget.Map target = new(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0));
 
-        _ = engine.DispatchCommand(new WorldUseItemCommand(stack.Id, wandItem.Id, target));
+        _ = engine.DispatchCommand(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), wandItem.Id, target));
 
-        engine.CheckCommandError(new WorldUseItemCommand(stack.Id, wandItem.Id, target), WorldCommandError.ItemAlreadyUsedThisTurn);
+        engine.CheckCommandError(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), wandItem.Id, target), WorldCommandError.ItemAlreadyUsedThisTurn);
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, secondWandItem.Id, target),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), secondWandItem.Id, target),
             [
-                new WorldItemUsedEvent(stack.Id, secondWandItem, RemainingCharges: null, Consumed: false),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), secondWandItem, RemainingCharges: null, Consumed: false),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,
@@ -795,7 +795,7 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         _ = engine.DispatchCommand(new WorldUseItemCommand(
-            stack.Id,
+            new WorldUnitGroup.Stack(stack.Id),
             wandItem.Id,
             new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0))));
         _ = engine.DispatchCommand(new WorldTransferInventoryItemCommand(
@@ -805,7 +805,7 @@ public sealed class WorldEngineSpellItemTests
 
         engine.CheckCommandError(
             new WorldUseItemCommand(
-                otherStack.Id,
+                new WorldUnitGroup.Stack(otherStack.Id),
                 wandItem.Id,
                 new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(1, 0), Radius: 0))),
             WorldCommandError.ItemAlreadyUsedThisTurn);
@@ -846,7 +846,7 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         WorldUseItemCommand command = new(
-            stack.Id,
+            new WorldUnitGroup.Stack(stack.Id),
             wandItem.Id,
             new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0)));
 
@@ -918,7 +918,7 @@ public sealed class WorldEngineSpellItemTests
 
         _ = engine.DispatchCommand(new WorldStartGameCommand());
         _ = engine.DispatchCommand(new WorldUseItemCommand(
-            stack.Id,
+            new WorldUnitGroup.Stack(stack.Id),
             wandItem.Id,
             new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(4, 4), Radius: 0))));
         _ = engine.DispatchCommand(new WorldSellItemCommand(stack.Id, site.Id, wandItem.Id));
@@ -966,14 +966,14 @@ public sealed class WorldEngineSpellItemTests
             .Build();
 
         WorldUseItemCommand command = new(
-            stack.Id,
+            new WorldUnitGroup.Stack(stack.Id),
             wandItem.Id,
             new WorldItemTarget.Map(new WorldSpellTarget(new WorldPosition(0, 0), Radius: 0)));
 
         engine.CheckCommand(
             command,
             [
-                new WorldItemUsedEvent(stack.Id, wandItem, RemainingCharges: null, Consumed: false),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), wandItem, RemainingCharges: null, Consumed: false),
                 new WorldSpellCastEvent(
                     player.Id,
                     HealSpellId,

@@ -66,9 +66,9 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 80, WorldResourceSet.Empty)
             ]);
 
@@ -118,9 +118,9 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 100, WorldResourceSet.Empty)
             ]);
 
@@ -170,7 +170,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.UnitNotWounded);
     }
 
@@ -206,7 +206,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.UnitDead);
     }
 
@@ -242,7 +242,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("missing"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("missing"))),
             WorldCommandError.UnitNotFound);
     }
 
@@ -278,7 +278,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.ItemNotFound);
     }
 
@@ -315,7 +315,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, weaponItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), weaponItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.ItemNotUsable);
     }
 
@@ -354,9 +354,9 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitResurrectedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 1, WorldResourceSet.Empty)
             ]);
 
@@ -409,7 +409,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.UnitNotDead);
     }
 
@@ -448,7 +448,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.UnitResurrectForbidden);
     }
 
@@ -492,7 +492,7 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommandError(
-            new WorldUseItemCommand(stack.Id, orbItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), orbItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             WorldCommandError.ItemNotUsable);
     }
 
@@ -531,9 +531,9 @@ public sealed class WorldEngineUseItemTests
             .Build();
 
         engine.CheckCommand(
-            new WorldUseItemCommand(stack.Id, potionItem.Id, new WorldItemTarget.Unit(new WorldUnitId("soldier"))),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
             [
-                new WorldItemUsedEvent(stack.Id, potionItem, RemainingCharges: null, Consumed: true),
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
                 new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 80, WorldResourceSet.Empty)
             ]);
 
@@ -549,5 +549,278 @@ public sealed class WorldEngineUseItemTests
                         .Build()
                 })
             }));
+    }
+
+    [Test]
+    public void GarrisonHealTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+        ItemDefinition potion = HealingPotion(50);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("city1"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(3, 3),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 30 }, GridPosition.FrontBottom, false)
+                    .Build()) with
+            {
+                Inventory = new WorldInventory([potionItem])
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCity(city)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldUseItemCommand(new WorldUnitGroup.Fortification(city.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Fortification(city.Id), new WorldUnitId("soldier"))),
+            [
+                new WorldItemUsedEvent(new WorldUnitGroup.Fortification(city.Id), potionItem, RemainingCharges: null, Consumed: true),
+                new WorldUnitHealedEvent(new WorldUnitGroup.Fortification(city.Id), new WorldUnitId("soldier"), 80, WorldResourceSet.Empty)
+            ]);
+
+        Assert.That(engine.State.Fortifications[city.Id], Is.EqualTo(city with
+        {
+            Inventory = WorldInventory.Empty,
+            Garrison = new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 80 }, GridPosition.FrontBottom, false)
+                .Build()
+        }));
+    }
+
+    [Test]
+    public void GarrisonScrollTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+        ItemDefinition scroll = TestHelpers.SimpleItemDefinition(new ItemDefinitionId("scroll1"), ItemCategory.Scroll) with
+        {
+            Effect = new SpellItemEffect(new WorldSpellDefinitionId("spell1"), WorldResourceSet.Empty)
+        };
+        WorldItem scrollItem = new(new WorldItemId("Scroll"), scroll.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("city1"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(3, 3),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition), GridPosition.FrontBottom, false)
+                    .Build()) with
+            {
+                Inventory = new WorldInventory([scrollItem])
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(scroll)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCity(city)
+            .Build();
+
+        engine.CheckCommandError(
+            new WorldUseItemCommand(new WorldUnitGroup.Fortification(city.Id), scrollItem.Id, Target: null),
+            WorldCommandError.MissingLeaderAbility);
+    }
+
+    [Test]
+    public void VisitingStackHealTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+        ItemDefinition potion = HealingPotion(50);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+
+        WorldCity city = TestHelpers.SimpleCity(
+                new WorldFortificationId("city1"),
+                cityDefinition,
+                player.Id,
+                new WorldPosition(3, 3),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                Inventory = new WorldInventory([potionItem])
+            };
+
+        WorldStack stack = Stack(
+            new WorldUnitId("leader2"),
+            leaderDefinition,
+            TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 30 },
+            player.Id,
+            []) with
+        {
+            Position = city.Entrance
+        };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCity(city)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldUseItemCommand(new WorldUnitGroup.Fortification(city.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"))),
+            [
+                new WorldItemUsedEvent(new WorldUnitGroup.Fortification(city.Id), potionItem, RemainingCharges: null, Consumed: true),
+                new WorldUnitHealedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 80, WorldResourceSet.Empty)
+            ]);
+
+        Assert.That(engine.State.Fortifications[city.Id], Is.EqualTo(city with { Inventory = WorldInventory.Empty }));
+        Assert.That(engine.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader2"), leaderDefinition), GridPosition.BackBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 80 }, GridPosition.FrontBottom, false)
+                .Build()
+        }));
+    }
+
+    [Test]
+    public void AdjacentStackHealTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+        ItemDefinition potion = HealingPotion(50);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldStack stack = Stack(
+            new WorldUnitId("leader2"),
+            leaderDefinition,
+            TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition),
+            player.Id,
+            [potionItem]);
+
+        WorldStack otherStack = Stack(
+            new WorldUnitId("otherLeader"),
+            leaderDefinition,
+            TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 30 },
+            player.Id,
+            []) with
+        {
+            Id = new WorldStackId("Stack2"),
+            Position = new WorldPosition(1, 0)
+        };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithStack(otherStack)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(otherStack.Id), new WorldUnitId("otherSoldier"))),
+            [
+                new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
+                new WorldUnitHealedEvent(new WorldUnitGroup.Stack(otherStack.Id), new WorldUnitId("otherSoldier"), 80, WorldResourceSet.Empty)
+            ]);
+
+        Assert.That(engine.State.Stacks[stack.Id], Is.EqualTo(stack with { Inventory = WorldInventory.Empty }));
+        Assert.That(engine.State.Stacks[otherStack.Id], Is.EqualTo(otherStack with
+        {
+            Units = new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("otherLeader"), leaderDefinition), GridPosition.BackBottom, false)
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 80 }, GridPosition.FrontBottom, false)
+                .Build()
+        }));
+    }
+
+    [Test]
+    public void DistantStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+        ItemDefinition potion = HealingPotion(50);
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        WorldStack stack = Stack(
+            new WorldUnitId("leader2"),
+            leaderDefinition,
+            TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition),
+            player.Id,
+            [potionItem]);
+
+        WorldStack otherStack = Stack(
+            new WorldUnitId("otherLeader"),
+            leaderDefinition,
+            TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 30 },
+            player.Id,
+            []) with
+        {
+            Id = new WorldStackId("Stack2"),
+            Position = new WorldPosition(4, 0)
+        };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithStack(otherStack)
+            .Build();
+
+        engine.CheckCommandError(
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(otherStack.Id), new WorldUnitId("otherSoldier"))),
+            WorldCommandError.StackNotAdjacent);
     }
 }

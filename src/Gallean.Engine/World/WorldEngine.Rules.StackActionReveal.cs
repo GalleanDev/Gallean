@@ -21,7 +21,11 @@ internal partial class WorldEngine
 
         public override EventRuleResult<WorldEvent> Visit(WorldItemUsedEvent ev, WorldState state)
         {
-            return Reveal(state, ev.StackId);
+            return ev.Group switch
+            {
+                WorldUnitGroup.Stack data => Reveal(state, data.StackId),
+                WorldUnitGroup.Fortification => EventRuleResult<WorldEvent>.Empty
+            };
         }
 
         public override EventRuleResult<WorldEvent> Visit(WorldThiefActionSucceededEvent ev, WorldState state)
