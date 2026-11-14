@@ -4645,7 +4645,7 @@ public sealed class WorldEngineAiTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 494] Move Planter -> (3, 0)",
+            "[P2 483] Move Planter -> (4, 0)",
             "[P2 525] Remove rod Planter -> (5, 1)"
         ]));
         Assert.That(session.World.State.Rods.Values, Is.Empty);

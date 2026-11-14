@@ -136,7 +136,7 @@ public sealed record GlobalVariables
     internal int RuinGarrisonSize { get; init; } = 6;
     internal int RuinRegeneration { get; init; } = 20;
     internal int RodPlantRange { get; init; } = 1;
-    internal int RodRemoveRange { get; init; } = 2;
+    internal int RodRemoveRange { get; init; } = 1;
     internal int RodSpacingRange { get; init; } = 2;
     internal int RodTerrainTilesPerTurn { get; init; } = 2;
     internal ImmutableArray<ScenarioStackReference> ScenarioKeyStacks { get; init; } =
