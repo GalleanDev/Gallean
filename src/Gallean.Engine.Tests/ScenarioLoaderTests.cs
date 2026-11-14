@@ -851,7 +851,7 @@ public sealed class ScenarioLoaderTests
                     IsPortraitTriggerer: false),
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(new WorldStackId("S095KC0022")),
-                    new WorldSubraceId("S095SR0009"),
+                    new ScenarioEventStackOwner.Subrace(new WorldSubraceId("S095SR0009")),
                     FirstOnly: false,
                     PlayAnimation: false)
             ],
@@ -909,7 +909,7 @@ public sealed class ScenarioLoaderTests
                 new ScenarioEventCreateStackEffect(new ScenarioStackTemplateId("S095TM0004"), new ScenarioLocationId("S095LO0007")),
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(new WorldStackId("S095KC0029")),
-                    new WorldSubraceId("S095SR0009"),
+                    new ScenarioEventStackOwner.Subrace(new WorldSubraceId("S095SR0009")),
                     FirstOnly: false,
                     PlayAnimation: true),
                 new ScenarioEventEnableEventEffect(new ScenarioEventId("S095EV0009"), false),
@@ -979,7 +979,7 @@ public sealed class ScenarioLoaderTests
                 new ScenarioEventCreateStackEffect(new ScenarioStackTemplateId("S095TM0004"), new ScenarioLocationId("S095LO0007")),
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(new WorldStackId("S095KC0029")),
-                    new WorldSubraceId("S095SR0009"),
+                    new ScenarioEventStackOwner.Subrace(new WorldSubraceId("S095SR0009")),
                     FirstOnly: false,
                     PlayAnimation: true),
                 new ScenarioEventPopupEffect(
@@ -1208,12 +1208,12 @@ public sealed class ScenarioLoaderTests
                 new ScenarioEventEnableEventEffect(new ScenarioEventId("S139EV0010"), true),
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Template(new ScenarioStackTemplateId("S139TM0000")),
-                    new WorldSubraceId("S139SR0000"),
+                    new ScenarioEventStackOwner.Subrace(new WorldSubraceId("S139SR0000")),
                     FirstOnly: true,
                     PlayAnimation: true),
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(new WorldStackId("S139KC004c")),
-                    new WorldSubraceId("S139SR0000"),
+                    new ScenarioEventStackOwner.Subrace(new WorldSubraceId("S139SR0000")),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -1247,6 +1247,21 @@ public sealed class ScenarioLoaderTests
                     new ScenarioEventPortraitId("G000UU6117"),
                     IsPortraitLeft: true,
                     IsPortraitTriggerer: false),
+                new ScenarioEventChangeOwnerEffect(
+                    new ScenarioStackReference.Stack(new WorldStackId("S114KC0053")),
+                    ScenarioEventStackOwner.Triggerer.Instance,
+                    FirstOnly: true,
+                    PlayAnimation: false),
+                new ScenarioEventChangeOwnerEffect(
+                    new ScenarioStackReference.Stack(new WorldStackId("S114KC0049")),
+                    ScenarioEventStackOwner.Triggerer.Instance,
+                    FirstOnly: true,
+                    PlayAnimation: false),
+                new ScenarioEventChangeOwnerEffect(
+                    new ScenarioStackReference.Stack(new WorldStackId("S114KC004d")),
+                    ScenarioEventStackOwner.Triggerer.Instance,
+                    FirstOnly: true,
+                    PlayAnimation: false),
                 new ScenarioEventPopupEffect(
                     new ScenarioTextId("S114EV0016:POPUP_TXT:4"),
                     ScenarioEventPopupAudience.Triggerer,
@@ -4141,5 +4156,37 @@ public sealed class ScenarioLoaderTests
             PendingLeaderUpgrades: 9,
             BattlesWon: 0,
             SourceTemplateId: null)));
+    }
+
+    [Test]
+    public void ChangeOwnerTriggererEventTest()
+    {
+        ScenarioId scenarioId = new("S236SC0000");
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
+
+        ScenarioEventDefinition scenarioEvent = scenario.Provider.GetEvent(new ScenarioEventId("S236EV001b"));
+
+        Assert.That(scenarioEvent, Is.EqualTo(new ScenarioEventDefinition(
+            new ScenarioEventId("S236EV001b"),
+            [WorldRace.Human, WorldRace.Dwarf, WorldRace.Undead, WorldRace.Heretic],
+            [WorldRace.Human, WorldRace.Dwarf, WorldRace.Undead, WorldRace.Heretic],
+            [new ScenarioEventEnteringZoneCondition(new ScenarioLocationId("S236LO000e"))],
+            [
+                new ScenarioEventPopupEffect(
+                    new ScenarioTextId("S236EV001b:POPUP_TXT:0"),
+                    ScenarioEventPopupAudience.Triggerer,
+                    new ScenarioEventPortraitId("G000UU0156"),
+                    IsPortraitLeft: true,
+                    IsPortraitTriggerer: false),
+                new ScenarioEventChangeOwnerEffect(
+                    new ScenarioStackReference.Stack(new WorldStackId("S236KC0048")),
+                    ScenarioEventStackOwner.Triggerer.Instance,
+                    FirstOnly: false,
+                    PlayAnimation: false)
+            ],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0)));
     }
 }

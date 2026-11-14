@@ -2,7 +2,7 @@ namespace Gallean.Engine;
 
 public sealed record ScenarioEventChangeOwnerEffect(
     ScenarioStackReference Stack,
-    WorldSubraceId Subrace,
+    ScenarioEventStackOwner Owner,
     bool FirstOnly,
     bool PlayAnimation) : ScenarioEventEffect
 {

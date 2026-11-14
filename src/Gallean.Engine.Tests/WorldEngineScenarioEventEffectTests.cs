@@ -3033,7 +3033,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [WorldRace.Human],
             [WorldRace.Human],
             [new ScenarioEventFrequencyCondition(1)],
-            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), newSubrace.Id, FirstOnly: true, PlayAnimation: true)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: true)],
             Enabled: true,
             OccurOnce: true,
             Chance: 100,
@@ -3105,7 +3105,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [WorldRace.Human],
             [WorldRace.Human],
             [new ScenarioEventFrequencyCondition(1)],
-            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), newSubrace.Id, FirstOnly: true, PlayAnimation: false)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: false)],
             Enabled: true,
             OccurOnce: true,
             Chance: 100,
@@ -3174,7 +3174,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(stack.Id),
-                    TestHelpers.NeutralSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(TestHelpers.NeutralSubrace.Id),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -3256,7 +3256,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Template(templateId),
-                    newSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(newSubrace.Id),
                     FirstOnly: false,
                     PlayAnimation: true)
             ],
@@ -3346,7 +3346,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Template(templateId),
-                    newSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(newSubrace.Id),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -3419,7 +3419,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [WorldRace.Human],
             [WorldRace.Human],
             [new ScenarioEventFrequencyCondition(1)],
-            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), newSubrace.Id, FirstOnly: true, PlayAnimation: true)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: true)],
             Enabled: true,
             OccurOnce: true,
             Chance: 100,
@@ -3509,7 +3509,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [WorldRace.Human],
             [WorldRace.Human],
             [new ScenarioEventFrequencyCondition(1)],
-            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), newSubrace.Id, FirstOnly: true, PlayAnimation: true)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: true)],
             Enabled: true,
             OccurOnce: true,
             Chance: 100,
@@ -3596,7 +3596,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [WorldRace.Human],
             [WorldRace.Human],
             [new ScenarioEventFrequencyCondition(1)],
-            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), newSubrace.Id, FirstOnly: true, PlayAnimation: true)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: true)],
             Enabled: true,
             OccurOnce: true,
             Chance: 100,
@@ -3681,7 +3681,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [WorldRace.Human],
             [WorldRace.Human],
             [new ScenarioEventFrequencyCondition(1)],
-            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), newSubrace.Id, FirstOnly: true, PlayAnimation: true)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: true)],
             Enabled: true,
             OccurOnce: true,
             Chance: 100,
@@ -3762,7 +3762,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(stack.Id),
-                    TestHelpers.NeutralSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(TestHelpers.NeutralSubrace.Id),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -5676,7 +5676,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(stack.Id),
-                    newSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(newSubrace.Id),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -5763,7 +5763,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(stack.Id),
-                    newSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(newSubrace.Id),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -5852,7 +5852,7 @@ public sealed class WorldEngineScenarioEventEffectTests
             [
                 new ScenarioEventChangeOwnerEffect(
                     new ScenarioStackReference.Stack(stack.Id),
-                    newSubrace.Id,
+                    new ScenarioEventStackOwner.Subrace(newSubrace.Id),
                     FirstOnly: true,
                     PlayAnimation: true)
             ],
@@ -7024,6 +7024,170 @@ public sealed class WorldEngineScenarioEventEffectTests
                 {
                     EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false),
                     DestroyedStacks = [new ScenarioDestroyedStack(stack.Id, DestroyerPlayerId: null, SourceTemplateId: null)]
+                }
+            }));
+    }
+
+    [Test]
+    public void ChangeOwnerEffectTriggererTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(5, 3);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map);
+        WorldSubrace playerSubrace = new(
+            new WorldSubraceId("human"),
+            player.Id,
+            WorldSubraceType.Human,
+            new WorldObjectVariant(1));
+        WorldSubrace enemySubrace = new(
+            new WorldSubraceId("undead"),
+            enemy.Id,
+            WorldSubraceType.Undead,
+            new WorldObjectVariant(5));
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6) with
+        {
+            SubraceId = playerSubrace.Id
+        };
+
+        WorldStack ally = TestHelpers.SimpleStack(
+            new WorldStackId("Ally"),
+            enemy.Id,
+            new WorldPosition(4, 2),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader2"), leader),
+            movementPoints: 6) with
+        {
+            SubraceId = enemySubrace.Id
+        };
+
+        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Camp"), new WorldPosition(0, 1), 0);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventEnteringZoneCondition(zone.Id)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(ally.Id), ScenarioEventStackOwner.Triggerer.Instance, FirstOnly: true, PlayAnimation: true)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithSubrace(playerSubrace)
+            .WithSubrace(enemySubrace)
+            .WithStack(stack)
+            .WithStack(ally)
+            .WithScenarioLocation(zone)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(stack.Id, new WorldPosition(0, 1)),
+            [
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(0, 1), WorldStackDirection.SouthWest, 4, [], null),
+                new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
+                new WorldStackOwnerChangedEvent(ally.Id, player.Id, playerSubrace.Id, PlayAnimation: true),
+                new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks
+                    .SetItem(stack.Id, stack with
+                    {
+                        Position = new WorldPosition(0, 1),
+                        Direction = WorldStackDirection.SouthWest,
+                        MovementPoints = 4
+                    })
+                    .SetItem(ally.Id, ally with
+                    {
+                        OwnerId = player.Id,
+                        SubraceId = playerSubrace.Id
+                    }),
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                }
+            }));
+    }
+
+    [Test]
+    public void ChangeOwnerEffectTriggererNoneTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+
+        WorldStack ally = TestHelpers.SimpleStack(
+            new WorldStackId("Ally"),
+            enemy.Id,
+            new WorldPosition(2, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(ally.Id), ScenarioEventStackOwner.Triggerer.Instance, FirstOnly: true, PlayAnimation: true)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(ally)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        engine.CheckCommand(new WorldStartGameCommand(), [
+            new WorldTurnStartingEvent(player.Id),
+            new WorldTurnStartedEvent(player.Id),
+            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
+            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.SetItem(ally.Id, ally),
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
                 }
             }));
     }

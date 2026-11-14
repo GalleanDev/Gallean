@@ -297,12 +297,24 @@ internal partial class WorldEngine
                 return Empty(context.State);
             }
 
+            WorldStack? triggerer = ScenarioEventTriggererCalculator.FindStack(context.TriggeredEvent.Trigger, context.State);
+            WorldSubraceId? subraceId = effect.Owner switch
+            {
+                ScenarioEventStackOwner.Subrace owner => owner.Id,
+                ScenarioEventStackOwner.Triggerer => triggerer?.SubraceId
+            };
+
+            if (subraceId is null)
+            {
+                return Empty(context.State);
+            }
+
             if (effect.FirstOnly)
             {
                 instances = [instances[0]];
             }
 
-            WorldSubrace subrace = context.State.Subraces[effect.Subrace];
+            WorldSubrace subrace = context.State.Subraces[subraceId.Value];
             WorldState state = context.State;
             List<WorldEvent> events = [];
 

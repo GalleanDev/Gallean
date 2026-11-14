@@ -958,17 +958,35 @@ public static class ScenarioLoader
         ScenarioEventChangeOwnerEffect? MapChangeOwner()
         {
             Db.Id? stackId = effect.IdStack ?? effect.IdStackTemplate;
+            ScenarioEventStackOwner? owner = MapStackOwner();
 
             if (stackId is not null &&
-                effect.IdPlayer1 is { } ownerId &&
-                stackReferences.TryGetValue(stackId.Value, out ScenarioStackReference? stack) &&
-                subraces.ContainsKey(new WorldSubraceId(ownerId)))
+                owner is not null &&
+                stackReferences.TryGetValue(stackId.Value, out ScenarioStackReference? stack))
             {
                 return new ScenarioEventChangeOwnerEffect(
                     stack,
-                    new WorldSubraceId(ownerId),
+                    owner,
                     RequireBool(effect.FirstOnly, effect),
                     RequireBool(effect.PlayAnim, effect));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        ScenarioEventStackOwner? MapStackOwner()
+        {
+            Db.Id? ownerId = effect.IdPlayer1;
+
+            if (ownerId is null)
+            {
+                return ScenarioEventStackOwner.Triggerer.Instance;
+            }
+            else if (subraces.ContainsKey(new WorldSubraceId(ownerId.Value)))
+            {
+                return new ScenarioEventStackOwner.Subrace(new WorldSubraceId(ownerId.Value));
             }
             else
             {
