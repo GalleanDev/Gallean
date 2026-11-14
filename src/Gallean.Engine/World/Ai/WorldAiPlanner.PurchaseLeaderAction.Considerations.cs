@@ -8,7 +8,7 @@ internal sealed partial class WorldAiPlanner
         {
             private const int AffordabilityFloor = MaxScore / 10;
             private const int RepetitionCostMultiplier = 3;
-            private const int ThiefReserveMultiplier = 3;
+            private const int ReserveMultiplier = 3;
 
             private static readonly UtilityScore.ResponseCurve AffordabilityCurve =
                 new UtilityScore.ResponseCurve.Polynomial(Slope: MaxScore - AffordabilityFloor, Exponent: 1, XShift: 0, YShift: AffordabilityFloor);
@@ -20,9 +20,9 @@ internal sealed partial class WorldAiPlanner
 
             public static UtilityScore.Consideration Reserve(UnitDefinition leader, WorldPlayer player)
             {
-                if (leader.LeaderCategory == UnitLeaderCategory.Thief)
+                if (leader.LeaderCategory is UnitLeaderCategory.Thief or UnitLeaderCategory.Rod)
                 {
-                    return UtilityScore.Flag(player.Resources.Gold >= leader.PurchaseCost.Gold * ThiefReserveMultiplier);
+                    return UtilityScore.Flag(player.Resources.Gold >= leader.PurchaseCost.Gold * ReserveMultiplier);
                 }
                 else
                 {
