@@ -41,4 +41,36 @@ public sealed class ScenarioPopupTextTests
 
         Assert.That(actual, Is.EqualTo(new ScenarioPopupText(Speaker: null, "The Emperor was found in the rubble.")));
     }
+
+    [Test]
+    public void QuotedSpeakerNameTest()
+    {
+        ScenarioPopupText actual = ScenarioPopupText.Parse("Разбойник из \"Призрачных волков\" \n\"Нежить! Каким бы оно ни было...\"");
+
+        Assert.That(actual, Is.EqualTo(new ScenarioPopupText("Разбойник из \"Призрачных волков\"", "Нежить! Каким бы оно ни было...")));
+    }
+
+    [Test]
+    public void SpeakerOnSpeechLineTest()
+    {
+        ScenarioPopupText actual = ScenarioPopupText.Parse("Ratgeber    \"Schenkt den Drohungen der Elfen keine Beachtung.\"");
+
+        Assert.That(actual, Is.EqualTo(new ScenarioPopupText("Ratgeber", "Schenkt den Drohungen der Elfen keine Beachtung.")));
+    }
+
+    [Test]
+    public void SpeakerWithColonTest()
+    {
+        ScenarioPopupText actual = ScenarioPopupText.Parse("Nain : \"Enfin !\"");
+
+        Assert.That(actual, Is.EqualTo(new ScenarioPopupText("Nain", "Enfin !")));
+    }
+
+    [Test]
+    public void NarrationWithQuoteTest()
+    {
+        ScenarioPopupText actual = ScenarioPopupText.Parse("As Erhog vanished, she shouted: \"We will meet again!\" The Emperor was found in the rubble.");
+
+        Assert.That(actual, Is.EqualTo(new ScenarioPopupText(Speaker: null, "As Erhog vanished, she shouted: \"We will meet again!\" The Emperor was found in the rubble.")));
+    }
 }

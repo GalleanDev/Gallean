@@ -6,25 +6,31 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
 {
     public static ScenarioPopupText Parse(string text)
     {
+        string trimmed = text.Trim();
         StringBuilder nameData = new();
         StringBuilder lineData = new();
         int i = 0;
 
-        for (; i < text.Length; i++)
+        for (; i < trimmed.Length; i++)
         {
-            if (text[i] is '"' or '\r' or '\n')
+            if (trimmed[i] is '\r' or '\n')
             {
                 break;
             }
 
-            nameData.Append(text[i]);
+            if (trimmed[i] == '"' && i == 0)
+            {
+                break;
+            }
+
+            nameData.Append(trimmed[i]);
         }
 
-        bool hasName = i < text.Length && text[i] != '"';
+        bool hasName = i < trimmed.Length && trimmed[i] != '"';
 
-        for (; i < text.Length; i++)
+        for (; i < trimmed.Length; i++)
         {
-            lineData.Append(text[i]);
+            lineData.Append(trimmed[i]);
         }
 
         string name = nameData.ToString().Trim();
@@ -40,7 +46,28 @@ public sealed record ScenarioPopupText(string? Speaker, string Speech)
         }
         else
         {
-            return new ScenarioPopupText(Speaker: null, text.Trim());
+            int quote = name.IndexOf('"');
+
+            if (quote > 0)
+            {
+                string quotedLine = trimmed[(quote + 1)..];
+                string unquotedLine = RemoveFinalQuote(quotedLine);
+
+                if (unquotedLine.Length < quotedLine.Length)
+                {
+                    string speaker = name[..quote].TrimEnd(' ', '\t', ':');
+
+                    return new ScenarioPopupText(speaker, unquotedLine.Trim());
+                }
+                else
+                {
+                    return new ScenarioPopupText(Speaker: null, trimmed);
+                }
+            }
+            else
+            {
+                return new ScenarioPopupText(Speaker: null, trimmed);
+            }
         }
     }
 
