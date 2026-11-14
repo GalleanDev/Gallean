@@ -42,7 +42,7 @@ internal static partial class PathTraversalCalculator
                 }
             }
 
-            WorldStack? interceptingStack = FindInterceptingStack(state, plan, stack, profile, position);
+            WorldStack? interceptingStack = FindInterceptingStack(state, plan, stack, profile, position, definitions);
             if (interceptingStack is not null)
             {
                 return new TraversalInfo(
@@ -78,7 +78,8 @@ internal static partial class PathTraversalCalculator
         WorldPlan plan,
         WorldStack stack,
         WorldMovementCalculator.MovementProfile profile,
-        WorldPosition position)
+        WorldPosition position,
+        IGameDefinitionProvider definitions)
     {
         if (profile.IsIllusion)
         {
