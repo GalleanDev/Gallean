@@ -2439,6 +2439,79 @@ public sealed class StackTabViewModelTests
     }
 
     [Test]
+    public void InspectSecondaryHealTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitAttackDefinition attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("ward"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with { Type = UnitAttackType.GiveProtection, Source = UnitAttackSource.Life };
+        UnitAttackDefinition secondaryAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("heal"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with { Type = UnitAttackType.Heal, Source = UnitAttackSource.Life, Heal = 50 };
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 0) with { Attack = attack, SecondaryAttack = secondaryAttack },
+            movementPoints: 20, leadership: 3);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        UnitDetailsViewModel leaderDetails = Assert.NotNull(FindSlot(screen.UnitGrid, GridPosition.FrontBottom).Details);
+
+        Assert.That(leaderDetails, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
+            "name",
+            "description",
+            1,
+            100,
+            100,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            new UnitAttackViewModel("Grant protection", new UnitAttackSourceViewModel(IconMoniker.AttackSourceLife, "Life", Theme.AttackSource.LifeColor)),
+            new StatValueViewModel(TextSpans.FromText("50"), 0),
+            null,
+            new UnitAttackViewModel("Heal", new UnitAttackSourceViewModel(IconMoniker.AttackSourceLife, "Life", Theme.AttackSource.LifeColor)),
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), new StatValueViewModel(TextSpans.FromText("100%"), 0)),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+            ],
+            null,
+            null,
+            new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
+            [],
+            [])));
+    }
+
+    [Test]
     public void InspectUpgradedLeaderTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
