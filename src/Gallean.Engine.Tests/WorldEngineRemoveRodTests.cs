@@ -508,4 +508,50 @@ public sealed class WorldEngineRemoveRodTests
                 Rods = ImmutableSortedDictionary<WorldRodId, WorldRod>.Empty
             }));
     }
+
+    [Test]
+    public void AlliedRodTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 6);
+
+        UnitDefinition rodLeaderDefinition = RodLeaderDefinition();
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldRelation alliance = new(
+            new WorldRelationId(WorldRace.Undead, WorldRace.Human),
+            Current: 100,
+            Previous: 100,
+            Alliance: true,
+            AllianceTurn: 1,
+            PermanentWar: false,
+            PermanentAlliance: false);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("rod-leader"),
+            player1.Id,
+            new WorldPosition(2, 2),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("rodLeader"), rodLeaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 20);
+
+        WorldRod rod = new(new WorldRodId("Rod0001"), player2.Id, new WorldPosition(3, 2));
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(rodLeaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithRelation(alliance)
+            .WithStack(stack)
+            .WithRod(rod)
+            .Build();
+
+        engine.CheckCommandError(
+            new WorldRemoveRodCommand(stack.Id, new WorldPosition(3, 2)),
+            WorldCommandError.RodAllied);
+    }
 }

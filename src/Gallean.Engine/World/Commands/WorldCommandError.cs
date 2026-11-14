@@ -57,6 +57,7 @@ public enum WorldCommandError
     NotPlayerTurn,
     PathNotFound,
     ResourceNodeNotFound,
+    RodAllied,
     RodInvalidLocation,
     RodNotFound,
     RodLeaderDead,

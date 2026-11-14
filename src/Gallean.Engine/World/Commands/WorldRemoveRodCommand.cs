@@ -50,6 +50,16 @@ public sealed record WorldRemoveRodCommand(
             return WorldCommandResult.Fail(WorldCommandError.RodNotFound);
         }
 
+        if (rod.OwnerId != currentPlayer)
+        {
+            WorldRelation relation = DiplomacyCalculator.GetRelation(state, currentPlayer, rod.OwnerId);
+
+            if (relation.Alliance)
+            {
+                return WorldCommandResult.Fail(WorldCommandError.RodAllied);
+            }
+        }
+
         return WorldCommandResult.Success(
             Empty.Value,
             [new WorldRodDestroyedEvent(rod.Id, currentPlayer, rod.OwnerId, rod.Position), new WorldStackMovementConsumedEvent(StackId, 0)]);
