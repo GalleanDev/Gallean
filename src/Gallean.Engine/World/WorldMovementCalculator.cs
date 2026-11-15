@@ -76,7 +76,7 @@ internal static class WorldMovementCalculator
             WorldMapFeature.None => 2,
             WorldMapFeature.Forest => (profile.MoveAbility & UnitMoveAbility.Forest) != 0 ? 2 : 4,
             WorldMapFeature.Mountain => int.MaxValue,
-            WorldMapFeature.Road => 1
+            WorldMapFeature.Road => (profile.MoveAbility & UnitMoveAbility.Plain) != 0 ? 2 : 1
         };
     }
 

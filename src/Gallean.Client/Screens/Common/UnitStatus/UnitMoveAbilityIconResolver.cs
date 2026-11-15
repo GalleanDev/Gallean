@@ -6,12 +6,21 @@ internal static class UnitMoveAbilityIconResolver
 {
     public static IconMoniker Resolve(UnitMoveAbility ability)
     {
-        return ability switch
+        if (ability.HasFlag(UnitMoveAbility.Flying))
         {
-            UnitMoveAbility.None => IconMoniker.Boot,
-            UnitMoveAbility.Forest => IconMoniker.MoveAbilityForest,
-            UnitMoveAbility.Water => IconMoniker.MoveAbilityWater,
-            UnitMoveAbility.Flying => IconMoniker.MoveAbilityFlying
-        };
+            return IconMoniker.MoveAbilityFlying;
+        }
+        else if (ability.HasFlag(UnitMoveAbility.Forest))
+        {
+            return IconMoniker.MoveAbilityForest;
+        }
+        else if (ability.HasFlag(UnitMoveAbility.Water))
+        {
+            return IconMoniker.MoveAbilityWater;
+        }
+        else
+        {
+            return IconMoniker.Boot;
+        }
     }
 }

@@ -919,7 +919,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
         {
             Db.GroundType.Forest => UnitMoveAbility.Forest,
             Db.GroundType.Water => UnitMoveAbility.Water,
-            Db.GroundType.Plain => UnitMoveAbility.None,
+            Db.GroundType.Plain => UnitMoveAbility.Plain,
             Db.GroundType.Mountain => UnitMoveAbility.None
         };
     }
