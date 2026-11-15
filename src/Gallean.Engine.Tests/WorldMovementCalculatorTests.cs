@@ -450,7 +450,23 @@ public sealed class WorldMovementCalculatorTests
         Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(1, 0), profile), Is.EqualTo(8));
         Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(2, 0), profile), Is.EqualTo(int.MaxValue));
         Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(3, 0), profile), Is.EqualTo(12));
-        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(4, 0), profile), Is.EqualTo(2));
+        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(4, 0), profile), Is.EqualTo(4));
+    }
+
+    [Test]
+    public void DeadLeaderFlyingCostTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            ".+^~="
+        ]);
+
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Flying, IsWaterOnly: false, IsLeaderDead: true, IsThief: false, IsIllusion: false);
+
+        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(0, 0), profile), Is.EqualTo(4));
+        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(1, 0), profile), Is.EqualTo(8));
+        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(2, 0), profile), Is.EqualTo(int.MaxValue));
+        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(3, 0), profile), Is.EqualTo(12));
+        Assert.That(WorldMovementCalculator.GetMovementCost(map, new WorldPosition(4, 0), profile), Is.EqualTo(4));
     }
 
     [Test]

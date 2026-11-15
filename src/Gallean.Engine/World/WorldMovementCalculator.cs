@@ -32,42 +32,46 @@ internal static class WorldMovementCalculator
 
     public static int GetMovementCost(WorldMap map, WorldPosition position, MovementProfile profile)
     {
-        int cost = GetBaseMovementCost(map, position, profile);
-
-        if (cost == int.MaxValue)
-        {
-            return int.MaxValue;
-        }
-
-        if (profile.IsLeaderDead)
-        {
-            return cost * 2;
-        }
-
-        return cost;
-    }
-
-    private static int GetBaseMovementCost(WorldMap map, WorldPosition position, MovementProfile profile)
-    {
         WorldMapCell cell = map.GetCellAt(position);
 
         if (profile.IsWaterOnly)
         {
             return IsDeepWater(map, position) ? 2 : int.MaxValue;
         }
-
-        if (cell.Terrain == WorldMapTerrain.Water)
+        else if (profile.IsLeaderDead)
         {
-            return (profile.MoveAbility & UnitMoveAbility.Water) != 0 ? 2 : 6;
+            if (cell.Terrain == WorldMapTerrain.Water)
+            {
+                return 12;
+            }
+            else
+            {
+                return cell.Feature switch
+                {
+                    WorldMapFeature.None => 4,
+                    WorldMapFeature.Forest => 8,
+                    WorldMapFeature.Mountain => int.MaxValue,
+                    WorldMapFeature.Road => 4
+                };
+            }
         }
-
-        return cell.Feature switch
+        else
         {
-            WorldMapFeature.None => 2,
-            WorldMapFeature.Forest => (profile.MoveAbility & UnitMoveAbility.Forest) != 0 ? 2 : 4,
-            WorldMapFeature.Mountain => int.MaxValue,
-            WorldMapFeature.Road => (profile.MoveAbility & UnitMoveAbility.Plain) != 0 ? 2 : 1
-        };
+            if (cell.Terrain == WorldMapTerrain.Water)
+            {
+                return (profile.MoveAbility & UnitMoveAbility.Water) != 0 ? 2 : 6;
+            }
+            else
+            {
+                return cell.Feature switch
+                {
+                    WorldMapFeature.None => 2,
+                    WorldMapFeature.Forest => (profile.MoveAbility & UnitMoveAbility.Forest) != 0 ? 2 : 4,
+                    WorldMapFeature.Mountain => int.MaxValue,
+                    WorldMapFeature.Road => (profile.MoveAbility & UnitMoveAbility.Plain) != 0 ? 2 : 1
+                };
+            }
+        }
     }
 
     public static bool IsPassable(WorldMap map, WorldPosition position, MovementProfile profile)
