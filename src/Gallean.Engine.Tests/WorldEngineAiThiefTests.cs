@@ -1041,12 +1041,16 @@ public sealed class WorldEngineAiThiefTests
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
             "[P2 203] Move thief -> (6, 2)",
             "[P2 205] Move thief -> (6, 2)",
-            "[P2 207] Move thief -> (6, 2)",
-            "[P2 210] Move thief -> (6, 2)",
-            "[P2 214] Steal dear thief -> (6, 2)"
+            "[P2 207] Move thief -> (5, 1)"
         ]));
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P2 210] Move thief -> (6, 2)",
+            "[P2 214] Steal dear thief -> (6, 2)",
+            "[P2 104] Assassinate thief -> (6, 2)"
+        ]));
+        Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([nearStack.Id, thiefStack.Id]));
         Assert.That(session.World.State.Stacks[nearStack.Id], Is.EqualTo(nearStack));
-        Assert.That(session.World.State.Stacks[farStack.Id], Is.EqualTo(farStack with { Inventory = WorldInventory.Empty }));
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
         {
             Position = new WorldPosition(5, 1),

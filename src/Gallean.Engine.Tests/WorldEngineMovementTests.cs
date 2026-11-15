@@ -2931,7 +2931,8 @@ public sealed class WorldEngineMovementTests
             new WorldMoveStackCommand(thiefStack.Id, new WorldPosition(3, 1)),
             [
                 new WorldStackMovingEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [], null),
-                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [], null)
+                new WorldStackMovedEvent(thiefStack.Id, new WorldPosition(1, 1), new WorldPosition(2, 1), WorldStackDirection.SouthEast, 18, [], null),
+                new WorldStackMovementConsumedEvent(thiefStack.Id, 8)
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -2941,7 +2942,7 @@ public sealed class WorldEngineMovementTests
                 {
                     Position = new WorldPosition(2, 1),
                     Direction = WorldStackDirection.SouthEast,
-                    MovementPoints = 18
+                    MovementPoints = 8
                 })
             }));
     }

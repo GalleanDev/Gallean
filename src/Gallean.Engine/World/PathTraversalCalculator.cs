@@ -55,25 +55,7 @@ internal static partial class PathTraversalCalculator
         return new TraversalInfo(path, new WorldPath([]), null);
     }
 
-    private static Encounter GetInterceptingStackEncounter(
-        WorldStack interceptingStack,
-        WorldMovementCalculator.MovementProfile profile,
-        bool canBegin,
-        IGameDefinitionProvider definitions)
-    {
-        (_, _, UnitDefinition leaderDefinition) = interceptingStack.GetLeader(definitions);
-
-        if (profile.IsThief && leaderDefinition.Category is not UnitCategory.Illusion)
-        {
-            return new Encounter.Thief(interceptingStack, canBegin);
-        }
-        else
-        {
-            return new Encounter.StackBattle(interceptingStack, canBegin);
-        }
-    }
-
-    private static WorldStack? FindInterceptingStack(
+    public static WorldStack? FindInterceptingStack(
         WorldState state,
         WorldPlan plan,
         WorldStack stack,
@@ -100,5 +82,23 @@ internal static partial class PathTraversalCalculator
         }
 
         return null;
+    }
+
+    private static Encounter GetInterceptingStackEncounter(
+        WorldStack interceptingStack,
+        WorldMovementCalculator.MovementProfile profile,
+        bool canBegin,
+        IGameDefinitionProvider definitions)
+    {
+        (_, _, UnitDefinition leaderDefinition) = interceptingStack.GetLeader(definitions);
+
+        if (profile.IsThief && leaderDefinition.Category is not UnitCategory.Illusion)
+        {
+            return new Encounter.Thief(interceptingStack, canBegin);
+        }
+        else
+        {
+            return new Encounter.StackBattle(interceptingStack, canBegin);
+        }
     }
 }

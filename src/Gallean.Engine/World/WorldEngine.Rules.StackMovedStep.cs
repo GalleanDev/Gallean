@@ -29,12 +29,17 @@ internal partial class WorldEngine
             }
 
             WorldPlan plan = WorldPlan.For(state);
+            WorldMovementCalculator.MovementProfile profile = WorldMovementCalculator.GetMovementProfile(stack, Context.Definitions);
 
             if (ev.RemainingPath.IsEmpty)
             {
                 if (ev.EncounterPosition is not null)
                 {
                     return TryResolveEncounter(state, stack, plan, ev.EncounterPosition.Value) ?? EventRuleResult<WorldEvent>.Empty;
+                }
+                else if (profile.IsThief)
+                {
+                    return VisitThief(ev, state, stack, plan, profile);
                 }
                 else
                 {
@@ -56,7 +61,6 @@ internal partial class WorldEngine
                 return encounter.Value;
             }
 
-            WorldMovementCalculator.MovementProfile profile = WorldMovementCalculator.GetMovementProfile(stack, Context.Definitions);
             WorldStackMovingEvent nextStep = WorldCommandHelpers.CreateMoveStepEvent(stack, plan, profile, ev.RemainingPath, ev.EncounterPosition);
 
             return EventRuleResult<WorldEvent>.Append(nextStep);
@@ -65,10 +69,18 @@ internal partial class WorldEngine
         private EventRuleResult<WorldEvent> VisitSite(WorldStack stack, WorldPlan plan)
         {
             WorldSite? site = plan.GetSiteAt(stack.Position);
+            (WorldUnit leader, _, _) = stack.GetLeader(Context.Definitions);
 
-            if (site is not null && CanVisit(stack))
+            if (site is not null)
             {
-                return EventRuleResult<WorldEvent>.Append(new WorldSiteVisitedEvent(stack.Id, site.Id));
+                if (leader.IsAlive && !ThiefCalculator.IsThief(stack, Context.Definitions))
+                {
+                    return EventRuleResult<WorldEvent>.Append(new WorldSiteVisitedEvent(stack.Id, site.Id));
+                }
+                else
+                {
+                    return EventRuleResult<WorldEvent>.Empty;
+                }
             }
             else
             {
@@ -76,11 +88,28 @@ internal partial class WorldEngine
             }
         }
 
-        private bool CanVisit(WorldStack stack)
+        private EventRuleResult<WorldEvent> VisitThief(
+            WorldStackMovedEvent ev,
+            WorldState state,
+            WorldStack stack,
+            WorldPlan plan,
+            WorldMovementCalculator.MovementProfile profile)
         {
-            (WorldUnit leader, _, _) = stack.GetLeader(Context.Definitions);
+            WorldStack? sourceStack = PathTraversalCalculator.FindInterceptingStack(state, plan, stack, profile, ev.SourcePosition, Context.Definitions);
+            WorldStack? targetStack = PathTraversalCalculator.FindInterceptingStack(state, plan, stack, profile, ev.TargetPosition, Context.Definitions);
 
-            return leader.IsAlive && !ThiefCalculator.IsThief(stack, Context.Definitions);
+            if (sourceStack is not null && targetStack is not null)
+            {
+                StackStats stackStats = Context.UnitStats.GetWorldStackStats(stack);
+                int actionCost = WorldMovementCalculator.GetActionCost(stackStats, Context.Globals);
+                int movementPoints = Math.Max(0, stack.MovementPoints - actionCost);
+
+                return EventRuleResult<WorldEvent>.Append(new WorldStackMovementConsumedEvent(stack.Id, movementPoints));
+            }
+            else
+            {
+                return EventRuleResult<WorldEvent>.Empty;
+            }
         }
 
         private EventRuleResult<WorldEvent>? TryResolveEncounter(WorldState state, WorldStack stack, WorldPlan plan, WorldPosition position)
