@@ -56,16 +56,6 @@ internal static class WorldMovementCalculator
             return IsDeepWater(map, position) ? 2 : int.MaxValue;
         }
 
-        if ((profile.MoveAbility & UnitMoveAbility.Flying) == UnitMoveAbility.Flying)
-        {
-            if (cell.Feature == WorldMapFeature.Mountain)
-            {
-                return int.MaxValue;
-            }
-
-            return 2;
-        }
-
         if (cell.Terrain == WorldMapTerrain.Water)
         {
             return (profile.MoveAbility & UnitMoveAbility.Water) != 0 ? 2 : 6;

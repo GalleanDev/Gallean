@@ -332,6 +332,33 @@ public sealed class WorldMovementCalculatorTests
     }
 
     [Test]
+    public void ForestAndWaterBonusCostTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            ".+^~="
+        ]);
+
+        WorldMovementCalculator.MovementProfile profile = new(MoveAbility: UnitMoveAbility.Forest | UnitMoveAbility.Water, IsWaterOnly: false, IsLeaderDead: false, IsThief: false, IsIllusion: false);
+
+        int[] costs =
+        [
+            WorldMovementCalculator.GetMovementCost(map, new WorldPosition(0, 0), profile),
+            WorldMovementCalculator.GetMovementCost(map, new WorldPosition(1, 0), profile),
+            WorldMovementCalculator.GetMovementCost(map, new WorldPosition(2, 0), profile),
+            WorldMovementCalculator.GetMovementCost(map, new WorldPosition(3, 0), profile),
+            WorldMovementCalculator.GetMovementCost(map, new WorldPosition(4, 0), profile)
+        ];
+
+        Assert.That(costs, Is.EqualTo([
+            2,
+            2,
+            int.MaxValue,
+            2,
+            1
+        ]));
+    }
+
+    [Test]
     public void PlainBonusCostTest()
     {
         WorldMap map = TestHelpers.BuildMap([

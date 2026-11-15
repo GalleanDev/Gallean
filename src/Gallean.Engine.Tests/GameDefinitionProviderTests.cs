@@ -1072,8 +1072,8 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.That(provider.GetUnit(new UnitDefinitionId("g000uu0096")).MoveAbility, Is.EqualTo(UnitMoveAbility.Plain | UnitMoveAbility.Flying));
-        Assert.That(provider.GetUnit(new UnitDefinitionId("g000uu0019")).MoveAbility, Is.EqualTo(UnitMoveAbility.Plain | UnitMoveAbility.Flying));
+        Assert.That(provider.GetUnit(new UnitDefinitionId("g000uu0096")).MoveAbility, Is.EqualTo(UnitMoveAbility.Flying));
+        Assert.That(provider.GetUnit(new UnitDefinitionId("g000uu0019")).MoveAbility, Is.EqualTo(UnitMoveAbility.Flying));
         Assert.That(provider.GetUnit(new UnitDefinitionId("g000uu8009")).MoveAbility, Is.EqualTo(UnitMoveAbility.Plain | UnitMoveAbility.Forest));
         Assert.That(provider.GetUnit(new UnitDefinitionId("g000uu0044")).MoveAbility, Is.EqualTo(UnitMoveAbility.None));
         Assert.That(provider.GetUnit(new UnitDefinitionId("G000UU0001")).MoveAbility, Is.EqualTo(UnitMoveAbility.None));

@@ -6,6 +6,6 @@ public enum UnitMoveAbility
     None = 0,
     Forest = 1 << 0,
     Water = 1 << 1,
-    Flying = Forest | Water,
-    Plain = 1 << 2
+    Plain = 1 << 2,
+    Flying = Plain | Forest | Water
 }
