@@ -3,7 +3,7 @@ using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal sealed record ItemSummonViewModel(
+internal sealed record SummonViewModel(
     AssetSpriteKey.UnitPortrait PortraitKey,
     string Name,
     int Level,
@@ -12,7 +12,7 @@ internal sealed record ItemSummonViewModel(
 {
     public string LevelText => Tr("Level {0}", Level);
 
-    public bool Equals(ItemSummonViewModel? other)
+    public bool Equals(SummonViewModel? other)
     {
         if (other is null)
         {
@@ -31,12 +31,12 @@ internal sealed record ItemSummonViewModel(
                Stats.SequenceEqual(other.Stats);
     }
 
-    public static ItemSummonViewModel Create(UnitDefinition definition, IGameTextProvider texts)
+    public static SummonViewModel Create(UnitDefinition definition, IGameTextProvider texts)
     {
         GlobalText name = texts.GetGlobalText(definition.NameTextId);
         UnitAttackDefinition attack = definition.Attack;
 
-        return new ItemSummonViewModel(
+        return new SummonViewModel(
             new AssetSpriteKey.UnitPortrait(definition.Id),
             name.Text,
             definition.Level,

@@ -9,7 +9,7 @@ internal sealed record ItemDetailsViewModel(
     string CategoryText,
     string Description,
     ItemAttackViewModel? Attack,
-    IReadOnlyList<ItemSummonViewModel> Summons,
+    IReadOnlyList<SummonViewModel> Summons,
     IReadOnlyList<StatRowViewModel> Stats,
     string? SpellEffect,
     OfferPriceViewModel? CastingCost,
@@ -153,19 +153,19 @@ internal sealed record ItemDetailsViewModel(
         }
     }
 
-    private static IReadOnlyList<ItemSummonViewModel> CreateSummons(
+    private static IReadOnlyList<SummonViewModel> CreateSummons(
         ItemDefinition definition,
         UnitAttackDefinition? attack,
         IGameDefinitionProvider definitions,
         IGameTextProvider texts)
     {
-        List<ItemSummonViewModel> summons = [];
+        List<SummonViewModel> summons = [];
 
         foreach (UnitDefinitionId unitId in GetSummonUnitIds(definition, attack, definitions))
         {
             UnitDefinition unit = definitions.GetUnit(unitId);
 
-            summons.Add(ItemSummonViewModel.Create(unit, texts));
+            summons.Add(SummonViewModel.Create(unit, texts));
         }
 
         return summons;

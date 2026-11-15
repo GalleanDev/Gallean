@@ -7,6 +7,7 @@ internal sealed record SpellDetailsViewModel(
     string Name,
     string LevelText,
     string Description,
+    SummonViewModel? Summon,
     string EffectText,
     OfferPriceViewModel CastingCost)
 {
@@ -19,7 +20,22 @@ internal sealed record SpellDetailsViewModel(
             texts.GetGlobalText(definition.NameTextId).Text,
             Tr("Level {0}", definition.Level),
             texts.GetGlobalText(definition.DescriptionTextId).Text,
+            CreateSummon(definition, definitions, texts),
             texts.GetGlobalText(definition.EffectDescriptionTextId).Text,
             new OfferPriceViewModel(definition.CastingCost));
+    }
+
+    private static SummonViewModel? CreateSummon(WorldSpellDefinition definition, IGameDefinitionProvider definitions, IGameTextProvider texts)
+    {
+        if (definition.Effect is WorldSummonStackSpellEffect effect)
+        {
+            UnitDefinition unit = definitions.GetUnit(effect.Unit);
+
+            return SummonViewModel.Create(unit, texts);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

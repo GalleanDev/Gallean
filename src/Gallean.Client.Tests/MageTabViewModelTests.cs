@@ -342,6 +342,69 @@ public sealed class MageTabViewModelTests
             "name",
             "Level 2",
             "desc",
+            Summon: null,
+            "effect",
+            new OfferPriceViewModel(new WorldResourceSet(0, 0, 0, 10, 0, 0)))));
+    }
+
+    [Test]
+    public void SummonDetailsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 4);
+
+        UnitDefinition houndDefinition = TestHelpers.SimpleUnitDefinition("hound", maxHitpoints: 100, initiative: 50, damage: 25) with
+        {
+            NameTextId = new GlobalTextId("Hound")
+        };
+
+        WorldSpellDefinition spellDefinition = Spell("spell", level: 2, new WorldResourceSet(200, 0, 0, 0, 0, 0)) with
+        {
+            Effect = new WorldSummonStackSpellEffect(houndDefinition.Id)
+        };
+
+        WorldStack stack = Stack(new WorldUnitId("leader"), player.Id, new WorldPosition(4, 4), leaderDefinition);
+        WorldMageSite site = Site([spellDefinition.Id]);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithRace(TestHelpers.SimpleRace(WorldRace.Human, new GlobalTextId("Empire"), WorldMapTerrain.Human))
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(houndDefinition)
+            .WithDefinition(spellDefinition)
+            .WithStack(stack)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        MageTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
+
+        Assert.That(screen.Spells[0].Details, Is.EqualTo(new SpellDetailsViewModel(
+            new IconViewModel.Spell(new AssetSpriteKey.SpellIcon(spellDefinition.Id), IconViewModel.Spell.BackgroundType.Light),
+            "name",
+            "Level 2",
+            "desc",
+            new SummonViewModel(
+                new AssetSpriteKey.UnitPortrait(houndDefinition.Id),
+                "Hound",
+                1,
+                new ItemAttackViewModel("25", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor))),
+                [
+                    new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100"), 0), null),
+                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                    new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                    new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+                ]),
             "effect",
             new OfferPriceViewModel(new WorldResourceSet(0, 0, 0, 10, 0, 0)))));
     }

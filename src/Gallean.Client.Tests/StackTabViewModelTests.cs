@@ -2982,7 +2982,7 @@ public sealed class StackTabViewModelTests
             "desc",
             Attack: null,
             [
-                new ItemSummonViewModel(
+                new SummonViewModel(
                     new AssetSpriteKey.UnitPortrait(squireDefinition.Id),
                     "Squire",
                     1,
@@ -3077,7 +3077,7 @@ public sealed class StackTabViewModelTests
             "desc",
             Attack: null,
             [
-                new ItemSummonViewModel(
+                new SummonViewModel(
                     new AssetSpriteKey.UnitPortrait(houndDefinition.Id),
                     "Hound",
                     1,

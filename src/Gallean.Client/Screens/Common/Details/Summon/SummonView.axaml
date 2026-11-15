@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Gallean.Client"
+             x:Class="Gallean.Client.SummonView"
+             x:DataType="local:SummonViewModel">
+
+  <UserControl.Styles>
+    <Style Selector=":is(TextBlock).primary-stat">
+      <Setter Property="Foreground" Value="{StaticResource UnitDetailsPrimaryStatBrush}" />
+    </Style>
+    <Style Selector="StackPanel.attack-line">
+      <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source.open">
+      <Setter Property="Margin" Value="5,0,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > local|IconVisual.attack-source">
+      <Setter Property="Width" Value="13" />
+      <Setter Property="Height" Value="13" />
+      <Setter Property="Margin" Value="1,2,2,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-source.close">
+      <Setter Property="Margin" Value="3,0,0,0" />
+    </Style>
+    <Style Selector="StackPanel.attack-line > TextBlock.attack-type">
+      <Setter Property="Margin" Value="0,3,0,0" />
+    </Style>
+
+    <Style Selector="Border.stat-row ContentControl.stat-icon">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+    <Style Selector="Border.stat-row TextBlock.stat-label">
+      <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <StackPanel>
+    <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,12">
+      <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="84" Height="84" />
+      <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+        <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
+        <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category" />
+        <Grid ColumnDefinitions="Auto,*" Margin="0,4,0,0">
+          <local:OutlinedTextBlock Grid.Column="0"
+                                   Classes="h2 primary-stat"
+                                   Margin="0,0,10,0"
+                                   Text="{Binding Attack.Amount}"
+                                   VerticalAlignment="Center"
+                                   IsVisible="{Binding Attack.Amount, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          <StackPanel Grid.Column="1" Classes="attack-line" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Attack.Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
+            <TextBlock Text="(" Classes="caption attack-source open" />
+            <local:IconVisual Classes="attack-source"
+                              Moniker="{Binding Attack.Attack.Source.Icon}"
+                              Foreground="{Binding Attack.Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+            <TextBlock Text="{Binding Attack.Attack.Source.Text}"
+                       Classes="caption attack-source"
+                       Foreground="{Binding Attack.Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+            <TextBlock Text=")" Classes="caption attack-source close" />
+          </StackPanel>
+        </Grid>
+      </StackPanel>
+    </Grid>
+    <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
+  </StackPanel>
+
+</UserControl>
