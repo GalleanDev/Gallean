@@ -275,12 +275,12 @@ public sealed class BuildingTabViewModelTests
                 "hub 1.70x1.90 size 0.00 projection 0.80 | extent 9.50x7.72",
                 "legend Fighter: Fighters Damage",
                 "legend Mage: Mages Spellbook",
-                "ring Level 1 2.65",
-                "ring Level 2 3.90",
-                "ring Level 3 5.15",
-                "ring Level 4 6.40",
-                "ring Level 5 7.65",
-                "ring Level 6 8.90",
+                "ring Tier 1 2.65",
+                "ring Tier 2 3.90",
+                "ring Tier 3 5.15",
+                "ring Tier 4 6.40",
+                "ring Tier 5 7.65",
+                "ring Tier 6 8.90",
                 "Common (0.00, 0.00): Temple | constructible |  | 100 gold",
                 "Fighter root (-1.77, -1.58): Squire | built | Squire | 0 gold",
                 "Fighter (-3.05, -1.94): Stable | built | Knight | 100 gold",
@@ -318,7 +318,7 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Shrine | constructible | Paladin | Level 4 | 100 gold | affordable | unit-face/paladin",
+                "Shrine | constructible | Paladin | Tier 4 | 100 gold | affordable | unit-face/paladin",
                 "Permanently locks out Fountain of Life",
                 "selection-locked: Fountain of Life",
                 "details: Paladin",
@@ -339,7 +339,7 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Library | constructible | Mage | Level 2 | 100 gold | affordable | unit-face/mage",
+                "Library | constructible | Mage | Tier 2 | 100 gold | affordable | unit-face/mage",
                 "details: Mage",
                 "Build Library"
             ]));
@@ -352,7 +352,7 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Ruined Temple | missing: Requires Library | Titan | Level 3 | 100 gold | reason: Requires Library | unit-face/titan",
+                "Ruined Temple | missing: Requires Library | Titan | Tier 3 | 100 gold | reason: Requires Library | unit-face/titan",
                 "details: Titan",
                 "Build Ruined Temple"
             ]));
@@ -364,7 +364,7 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Torture Chamber | branch-locked: Branch closed |  | Level 3 | 100 gold | reason: Branch closed | building-icon/bb08",
+                "Torture Chamber | branch-locked: Branch closed |  | Tier 3 | 100 gold | reason: Branch closed | building-icon/bb08",
                 "details: Torture Chamber | building-icon/bb08 | description",
                 "Build Torture Chamber"
             ]));
@@ -374,7 +374,7 @@ public sealed class BuildingTabViewModelTests
         Assert.That(
             FormatDetails(screen),
             Is.EqualTo([
-                "Citadel | scenario-locked: Not available in this quest |  | Level 6 | 100 gold | reason: Not available in this quest | building-icon/bb30",
+                "Citadel | scenario-locked: Not available in this quest |  | Tier 6 | 100 gold | reason: Not available in this quest | building-icon/bb30",
                 "details: Citadel | building-icon/bb30 | description",
                 "Build Citadel"
             ]));
@@ -443,9 +443,9 @@ public sealed class BuildingTabViewModelTests
             Is.EqualTo([
                 "hub 1.70x1.90 size 0.00 projection 0.80 | extent 5.75x4.72",
                 "legend Fighter: Fighters Damage",
-                "ring Level 1 2.65",
-                "ring Level 2 3.90",
-                "ring Level 3 5.15",
+                "ring Tier 1 2.65",
+                "ring Tier 2 3.90",
+                "ring Tier 3 5.15",
                 "Common (0.00, 0.00): Mage guild | constructible |  | 100 gold",
                 "Fighter root (-1.77, -1.58): Fighter | built | Fighter | 0 gold",
                 "Fighter (-2.61, -2.32): Barracks | constructible | Zombie | 100 gold",
@@ -467,9 +467,9 @@ public sealed class BuildingTabViewModelTests
             Is.EqualTo([
                 "hub 1.70x1.90 size 0.00 projection 0.80 | extent 5.75x4.72",
                 "legend Fighter: Fighters Damage",
-                "ring Level 1 2.65",
-                "ring Level 2 3.90",
-                "ring Level 3 5.15",
+                "ring Tier 1 2.65",
+                "ring Tier 2 3.90",
+                "ring Tier 3 5.15",
                 "Common (0.00, 0.00): Mage guild | unavailable: You have already constructed a building this turn |  | 100 gold",
                 "Fighter root (-1.77, -1.58): Fighter | built | Fighter | 0 gold",
                 "Fighter (-2.61, -2.32): Barracks | built | Zombie | 100 gold",

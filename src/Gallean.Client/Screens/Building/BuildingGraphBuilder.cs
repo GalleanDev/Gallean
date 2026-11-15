@@ -76,7 +76,7 @@ internal sealed class BuildingGraphBuilder(
         {
             double radius = GetRingRadius(index);
 
-            rings.Add(new BuildingRingViewModel(radius, Tr("Level {0}", levels[index])));
+            rings.Add(new BuildingRingViewModel(radius, Tr("Tier {0}", levels[index])));
         }
 
         double outerRadius = levels.Count == 0 ? 0.0 : GetRingRadius(levels.Count - 1);
@@ -435,7 +435,7 @@ internal sealed class BuildingGraphBuilder(
             building.Id,
             name,
             texts.GetGlobalText(building.DescriptionTextId).Text,
-            branch is null ? Tr("Building") : Tr("Level {0}", building.Level),
+            branch is null ? Tr("Building") : Tr("Tier {0}", building.Level),
             building.Cost,
             resources,
             status,
