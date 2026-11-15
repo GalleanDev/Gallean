@@ -1207,4 +1207,99 @@ public sealed class SpellbookTabViewModelTests
 
         Assert.That(spellbook.SelectedSpell, Is.Null);
     }
+
+    [Test]
+    public void SpellOrderTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(1, 1);
+        WorldSpellDefinitionId zealId = new("spell1");
+        WorldSpellDefinitionId armorId = new("spell2");
+        WorldSpellDefinitionId hasteId = new("spell3");
+
+        WorldSpellDefinition zeal = new(
+            zealId,
+            new GlobalTextId("Zeal"),
+            new GlobalTextId("Inspires the stack"),
+            new GlobalTextId("+ 100% Move points"),
+            WorldRace.Undead,
+            Level: 1,
+            WorldResourceSet.Empty,
+            PurchaseCost: WorldResourceSet.Empty,
+            AreaRadius: 0,
+            Effect: new WorldRestoreMovementSpellEffect(Percent: 50),
+            AiType: WorldAiSpellType.All);
+
+        WorldSpellDefinition armor = new(
+            armorId,
+            new GlobalTextId("Armor"),
+            new GlobalTextId("Protects the stack"),
+            new GlobalTextId("+ 100% Move points"),
+            WorldRace.Undead,
+            Level: 1,
+            WorldResourceSet.Empty,
+            PurchaseCost: WorldResourceSet.Empty,
+            AreaRadius: 0,
+            Effect: new WorldRestoreMovementSpellEffect(Percent: 50),
+            AiType: WorldAiSpellType.All);
+
+        WorldSpellDefinition haste = new(
+            hasteId,
+            new GlobalTextId("Haste"),
+            new GlobalTextId("Hastens the stack"),
+            new GlobalTextId("+ 100% Move points"),
+            WorldRace.Undead,
+            Level: 1,
+            WorldResourceSet.Empty,
+            PurchaseCost: WorldResourceSet.Empty,
+            AreaRadius: 0,
+            Effect: new WorldRestoreMovementSpellEffect(Percent: 50),
+            AiType: WorldAiSpellType.All);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 10, leadership: 3);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Buildings = new WorldPlayerBuildings([], []),
+            Spellbook = new WorldPlayerSpellbook([], [hasteId, zealId, armorId])
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 2);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(zeal)
+            .WithDefinition(armor)
+            .WithDefinition(haste)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel screen = ManagementScreenViewModel.CreateForSpellbook(gameModel, gameViewModel);
+        SpellbookTabViewModel spellbook = Assert.IsOfType<SpellbookTabViewModel>(screen.Tabs[0]);
+
+        Assert.That(
+            FormatSpellbook(spellbook.Levels),
+            Is.EqualTo(
+            [
+                "Level 1 | spell1 | Zeal | Inspires the stack | Known — 0 gold | available",
+                "Level 1 | spell2 | Armor | Protects the stack | Known — 0 gold | available",
+                "Level 1 | spell3 | Haste | Hastens the stack | Known — 0 gold | available"
+            ]));
+    }
 }

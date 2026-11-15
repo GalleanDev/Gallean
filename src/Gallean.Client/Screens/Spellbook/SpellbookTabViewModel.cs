@@ -253,7 +253,7 @@ internal sealed partial class SpellbookTabViewModel : ManagementTabViewModel
 
     private static int CompareItems(SpellbookItemViewModel first, SpellbookItemViewModel second)
     {
-        return StringComparer.CurrentCulture.Compare(first.Details.Name, second.Details.Name);
+        return first.SpellId.CompareTo(second.SpellId);
     }
 
     private SpellbookBuildingViewModel? BuildRequiredBuilding(WorldGetSpellbookInfoCommand.Result info)
