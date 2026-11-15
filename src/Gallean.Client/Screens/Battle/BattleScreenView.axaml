@@ -367,7 +367,7 @@
                     Classes.selected="{Binding IsAutoBattle}"
                     local:PlateChrome.TextureSeed="1"
                     Command="{Binding ToggleAutoBattleCommand}"
-                    ToolTip.Tip="{local:Text 'Let the computer fight the battle for you'}">
+                    ToolTip.Tip="{local:Text 'Let the computer take your turns'}">
               <local:HotkeyLabel Text="{local:Text 'Auto-play'}" Hotkey="A" />
             </Button>
             <Button Classes="pill"
