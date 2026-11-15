@@ -14,29 +14,18 @@ internal sealed class PackerOutput(TextWriter output, TextWriter error) : IProgr
 
     public void ReportProgress(PackBuilderProgress progress)
     {
-        WriteProgress(progress.Processed, progress.Total);
+        output.WriteLine(FormatProgress(progress.Processed, progress.Total));
     }
 
     public void ReportProgress(PackEnhancerProgress progress)
     {
-        switch (progress)
+        string message = progress switch
         {
-            case PackEnhancerProgress.Selected data:
-                WriteLine(
-                    $"Selected {data.EntryCount} entries: " +
-                    $"{data.UpscaleCount} upscale, " +
-                    $"{data.RefineCount} refine, " +
-                    $"{data.AlphaCount} alpha, " +
-                    $"{data.SurfaceCount} surface.");
-                break;
+            PackEnhancerProgress.Selected selected => FormatSelected(selected),
+            PackEnhancerProgress.Written written => FormatProgress(written.Processed, written.Total)
+        };
 
-            case PackEnhancerProgress.Written data:
-                WriteProgress(data.Processed, data.Total);
-                break;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(progress), progress, null);
-        }
+        output.WriteLine(message);
     }
 
     public void Report(DownloadProgress progress)
@@ -71,8 +60,17 @@ internal sealed class PackerOutput(TextWriter output, TextWriter error) : IProgr
         return $"{bytes / (1024.0 * 1024.0):F1} MB";
     }
 
-    private void WriteProgress(int processed, int total)
+    private static string FormatSelected(PackEnhancerProgress.Selected progress)
     {
-        output.WriteLine($"  {processed}/{total} keys processed...");
+        return $"Selected {progress.EntryCount} entries: " +
+               $"{progress.UpscaleCount} upscale, " +
+               $"{progress.RefineCount} refine, " +
+               $"{progress.AlphaCount} alpha, " +
+               $"{progress.SurfaceCount} surface.";
+    }
+
+    private static string FormatProgress(int processed, int total)
+    {
+        return $"  {processed}/{total} keys processed...";
     }
 }

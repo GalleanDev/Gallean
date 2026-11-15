@@ -13,27 +13,33 @@ internal sealed class GameContentFilterSource(IReadOnlyList<PackBuilderEntry> en
             return null;
         }
 
-        switch (descriptor)
+        return descriptor switch
         {
-            case GameAssetDescriptor.Sprite spriteDescriptor:
-                AssetSprite? sprite = reader.Read(spriteDescriptor);
+            GameAssetDescriptor.Sprite sprite => ReadSpriteFrames(sprite),
+            GameAssetDescriptor.Animation animation => ReadAnimationFrames(animation),
+            GameAssetDescriptor.Sound => null
+        };
+    }
 
-                if (sprite is not null)
-                {
-                    return [sprite];
-                }
-                else
-                {
-                    return null;
-                }
+    private IReadOnlyList<AssetSprite>? ReadSpriteFrames(GameAssetDescriptor.Sprite descriptor)
+    {
+        AssetSprite? sprite = reader.Read(descriptor);
 
-            case GameAssetDescriptor.Animation animationDescriptor:
-                AssetAnimation? animation = reader.Read(animationDescriptor);
-                return animation?.Frames;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(key), key, null);
+        if (sprite is not null)
+        {
+            return [sprite];
         }
+        else
+        {
+            return null;
+        }
+    }
+
+    private IReadOnlyList<AssetSprite>? ReadAnimationFrames(GameAssetDescriptor.Animation descriptor)
+    {
+        AssetAnimation? animation = reader.Read(descriptor);
+
+        return animation?.Frames;
     }
 
     private static IReadOnlyDictionary<AssetKey, GameAssetDescriptor> GetDescriptors(IReadOnlyList<PackBuilderEntry> entries)

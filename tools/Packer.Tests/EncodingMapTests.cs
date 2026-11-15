@@ -48,7 +48,7 @@ public sealed class EncodingMapTests
 
         foreach (Type type in GetKeyTypes(baseType))
         {
-            AssetKey key = (AssetKey)RuntimeHelpers.GetUninitializedObject(type);
+            AssetImageKey key = (AssetImageKey)RuntimeHelpers.GetUninitializedObject(type);
 
             rows.Add($"{GetName(type, baseType)}: {EncodingMap.GetEncoding(key)}");
         }

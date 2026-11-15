@@ -21,21 +21,23 @@ internal sealed class WorldBattleUnitUpgradeResolver(
         WorldPlayerBuildings buildings = unit.Side == BattleSide.Attacker ? attackerBuildings : defenderBuildings;
         UnitUpgrade upgrade = UnitUpgradeCalculator.GetUpgrade(unit.DefinitionId, unit.IsTypeLocked, buildings, context.Definitions);
 
-        switch (upgrade)
+        return upgrade switch
         {
-            case UnitUpgrade.TypeUpgrade typeUpgrade:
-                UnitDefinition target = context.Definitions.GetUnit(typeUpgrade.ToUnitId);
-                return CreateUpgrade(target, target.Level, unit.Modifiers);
-            case UnitUpgrade.DynamicUpgrade:
-                return CreateUpgrade(definition, unit.Level + 1, unit.Modifiers);
-            case UnitUpgrade.Blocked:
-                return null;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(unit), unit, null);
-        }
+            UnitUpgrade.TypeUpgrade typeUpgrade => CreateTypeUpgrade(typeUpgrade.ToUnitId, unit.Modifiers),
+            UnitUpgrade.DynamicUpgrade => CreateDynamicUpgrade(definition, unit.Level + 1, unit.Modifiers),
+            UnitUpgrade.Blocked => null
+        };
     }
 
-    private BattleUnitUpgrade CreateUpgrade(UnitDefinition definition, int level, ImmutableArray<UnitModifier> modifiers)
+    private BattleUnitUpgrade CreateTypeUpgrade(UnitDefinitionId targetId, ImmutableArray<UnitModifier> modifiers)
+    {
+        UnitDefinition target = context.Definitions.GetUnit(targetId);
+        UnitStats stats = UnitStatsCalculator.GetStats(target, target.Level, modifiers, context.Definitions, context.Globals);
+
+        return new BattleUnitUpgrade(target.Id, target.Level, stats.MaxHitpoints, stats.MaxHitpoints);
+    }
+
+    private BattleUnitUpgrade CreateDynamicUpgrade(UnitDefinition definition, int level, ImmutableArray<UnitModifier> modifiers)
     {
         UnitStats stats = UnitStatsCalculator.GetStats(definition, level, modifiers, context.Definitions, context.Globals);
 

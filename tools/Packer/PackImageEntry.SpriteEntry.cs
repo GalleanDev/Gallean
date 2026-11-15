@@ -7,7 +7,7 @@ internal closed partial record PackImageEntry
     private sealed record SpriteEntry(AssetManifestSprite Manifest)
         : PackImageEntry(Manifest.Id, Manifest.Transforms)
     {
-        public override AssetKey Key { get; } = AssetSpriteKey.Parse(Manifest.Id, null);
+        public override AssetImageKey Key { get; } = AssetSpriteKey.Parse(Manifest.Id, null);
 
         public override IReadOnlyList<AssetSpriteMetadata> FrameMetadata => [Manifest.Metadata];
         public override IReadOnlyList<IReadOnlyList<AssetManifestSpriteLayer>> FrameLayers => [Manifest.Layers];

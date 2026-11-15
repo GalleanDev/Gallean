@@ -31,18 +31,24 @@ internal sealed class PackCommandHandler(PackerOutput output, NativeLibraryLoade
         PackBuilder builder = new(catalog, source, output.ReportProgress);
         PackBuilderResult result = builder.Build(builderOptions);
 
-        switch (result)
+        return result switch
         {
-            case PackBuilderResult.Packed data:
-                output.WriteLine($"Packed {data.OutputPath}.");
-                return 0;
+            PackBuilderResult.Packed packed => ReportPacked(packed),
+            PackBuilderResult.MissingRequired missingRequired => ReportMissingRequired(missingRequired)
+        };
+    }
 
-            case PackBuilderResult.MissingRequired data:
-                output.ReportMissing(data);
-                return 1;
+    private int ReportPacked(PackBuilderResult.Packed result)
+    {
+        output.WriteLine($"Packed {result.OutputPath}.");
 
-            default:
-                throw new ArgumentOutOfRangeException(nameof(result), result, null);
-        }
+        return 0;
+    }
+
+    private int ReportMissingRequired(PackBuilderResult.MissingRequired result)
+    {
+        output.ReportMissing(result);
+
+        return 1;
     }
 }

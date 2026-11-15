@@ -40,25 +40,33 @@ public sealed class GameAssetCatalogTests
 
     private static bool Roundtrips(GameAssetDescriptor descriptor)
     {
-        string id = descriptor.Key.CanonicalId;
-
-        switch (descriptor)
+        return descriptor switch
         {
-            case GameAssetDescriptor.Sprite:
-                AssetSpriteKey.TryParse(id, null, out AssetSpriteKey? sprite);
+            GameAssetDescriptor.Sprite => SpriteRoundtrips(descriptor.Key),
+            GameAssetDescriptor.Animation => AnimationRoundtrips(descriptor.Key),
+            GameAssetDescriptor.Sound => SoundRoundtrips(descriptor.Key)
+        };
+    }
 
-                return descriptor.Key.Equals(sprite);
-            case GameAssetDescriptor.Animation:
-                AssetAnimationKey.TryParse(id, null, out AssetAnimationKey? animation);
+    private static bool SpriteRoundtrips(AssetKey key)
+    {
+        AssetSpriteKey.TryParse(key.CanonicalId, null, out AssetSpriteKey? sprite);
 
-                return descriptor.Key.Equals(animation);
-            case GameAssetDescriptor.Sound:
-                AssetSoundKey.TryParse(id, null, out AssetSoundKey? sound);
+        return key.Equals(sprite);
+    }
 
-                return descriptor.Key.Equals(sound);
-            default:
-                throw new ArgumentOutOfRangeException(nameof(descriptor), descriptor, null);
-        }
+    private static bool AnimationRoundtrips(AssetKey key)
+    {
+        AssetAnimationKey.TryParse(key.CanonicalId, null, out AssetAnimationKey? animation);
+
+        return key.Equals(animation);
+    }
+
+    private static bool SoundRoundtrips(AssetKey key)
+    {
+        AssetSoundKey.TryParse(key.CanonicalId, null, out AssetSoundKey? sound);
+
+        return key.Equals(sound);
     }
 
     private static IReadOnlyList<string> FindUnparsedKeys(IReadOnlyList<GameAssetDescriptor> descriptors)

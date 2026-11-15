@@ -14,7 +14,7 @@ public sealed class UpscaleMapTests
             {
                 if (type.IsSealed && baseType.IsAssignableFrom(type))
                 {
-                    AssetKey key = (AssetKey)RuntimeHelpers.GetUninitializedObject(type);
+                    AssetImageKey key = (AssetImageKey)RuntimeHelpers.GetUninitializedObject(type);
 
                     if (UpscaleMap.GetUpscaler(key) == upscaler)
                     {

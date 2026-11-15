@@ -6,7 +6,7 @@ using Gallean.Engine.Contracts;
 
 namespace Gallean.Assets;
 
-public closed record AssetAnimationKey : AssetKey, IParsable<AssetAnimationKey>
+public closed record AssetAnimationKey : AssetImageKey, IParsable<AssetAnimationKey>
 {
     public sealed record Water : AssetAnimationKey
     {

@@ -156,61 +156,65 @@ internal sealed class GameTerrainSource(
 
     internal static int GetBorderImageIndex(AssetSpriteKey.GroundBorderShape shape)
     {
-        switch (shape)
+        return shape switch
         {
-            case AssetSpriteKey.GroundBorderShape.Edges edges:
-                int edgeIndex = 0;
+            AssetSpriteKey.GroundBorderShape.Edges edges => GetEdgesImageIndex(edges.Value),
+            AssetSpriteKey.GroundBorderShape.Corners corners => GetCornersImageIndex(corners.Value)
+        };
+    }
 
-                if (edges.Value.HasFlag(AssetSpriteKey.GroundBorderEdges.West))
-                {
-                    edgeIndex += 1;
-                }
+    private static int GetEdgesImageIndex(AssetSpriteKey.GroundBorderEdges edges)
+    {
+        int index = 0;
 
-                if (edges.Value.HasFlag(AssetSpriteKey.GroundBorderEdges.North))
-                {
-                    edgeIndex += 2;
-                }
-
-                if (edges.Value.HasFlag(AssetSpriteKey.GroundBorderEdges.East))
-                {
-                    edgeIndex += 4;
-                }
-
-                if (edges.Value.HasFlag(AssetSpriteKey.GroundBorderEdges.South))
-                {
-                    edgeIndex += 8;
-                }
-
-                return edgeIndex;
-
-            case AssetSpriteKey.GroundBorderShape.Corners corners:
-                int cornerIndex = 16;
-
-                if (corners.Value.HasFlag(AssetSpriteKey.GroundBorderCorners.NorthWest))
-                {
-                    cornerIndex += 1;
-                }
-
-                if (corners.Value.HasFlag(AssetSpriteKey.GroundBorderCorners.NorthEast))
-                {
-                    cornerIndex += 2;
-                }
-
-                if (corners.Value.HasFlag(AssetSpriteKey.GroundBorderCorners.SouthEast))
-                {
-                    cornerIndex += 4;
-                }
-
-                if (corners.Value.HasFlag(AssetSpriteKey.GroundBorderCorners.SouthWest))
-                {
-                    cornerIndex += 8;
-                }
-
-                return cornerIndex;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(shape), shape, null);
+        if (edges.HasFlag(AssetSpriteKey.GroundBorderEdges.West))
+        {
+            index += 1;
         }
+
+        if (edges.HasFlag(AssetSpriteKey.GroundBorderEdges.North))
+        {
+            index += 2;
+        }
+
+        if (edges.HasFlag(AssetSpriteKey.GroundBorderEdges.East))
+        {
+            index += 4;
+        }
+
+        if (edges.HasFlag(AssetSpriteKey.GroundBorderEdges.South))
+        {
+            index += 8;
+        }
+
+        return index;
+    }
+
+    private static int GetCornersImageIndex(AssetSpriteKey.GroundBorderCorners corners)
+    {
+        int index = 16;
+
+        if (corners.HasFlag(AssetSpriteKey.GroundBorderCorners.NorthWest))
+        {
+            index += 1;
+        }
+
+        if (corners.HasFlag(AssetSpriteKey.GroundBorderCorners.NorthEast))
+        {
+            index += 2;
+        }
+
+        if (corners.HasFlag(AssetSpriteKey.GroundBorderCorners.SouthEast))
+        {
+            index += 4;
+        }
+
+        if (corners.HasFlag(AssetSpriteKey.GroundBorderCorners.SouthWest))
+        {
+            index += 8;
+        }
+
+        return index;
     }
 
     private AssetSprite? GetTree(WorldMapTerrain terrainType, int variant)

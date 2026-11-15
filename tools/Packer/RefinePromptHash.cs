@@ -4,7 +4,7 @@ internal static class RefinePromptHash
 {
     private const string EmptyPromptId = "empty";
 
-    public static UmbraPromptHash Get(AssetKey key)
+    public static UmbraPromptHash Get(AssetImageKey key)
     {
         RefinePrompt? prompt = RefinePromptMap.GetPrompt(key);
         string id = prompt?.Id.Value ?? EmptyPromptId;

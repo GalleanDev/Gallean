@@ -23,7 +23,7 @@ internal static class RefinePromptMap
         new(new WorldPlayerBuildingDefinitionId("g000bb0120"))
     ];
 
-    public static RefinePrompt? GetPrompt(AssetKey key)
+    public static RefinePrompt? GetPrompt(AssetImageKey key)
     {
         return key switch
         {
@@ -96,8 +96,7 @@ internal static class RefinePromptMap
             AssetSpriteKey.CityShield => null,
             AssetSpriteKey.RuinBanner => null,
             AssetSpriteKey.Rod => null,
-            AssetSpriteKey.Road => null,
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey.Road => null
         };
     }
 

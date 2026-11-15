@@ -874,13 +874,12 @@ internal static class RefineMap
         new(new UnitDefinitionId("g000uu8150"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender)
     ];
 
-    public static bool CanRefine(AssetKey key)
+    public static bool CanRefine(AssetImageKey key)
     {
         return key switch
         {
             AssetAnimationKey animation => CanRefineAnimation(animation),
-            AssetSpriteKey sprite => CanRefineSprite(sprite),
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey sprite => CanRefineSprite(sprite)
         };
     }
 

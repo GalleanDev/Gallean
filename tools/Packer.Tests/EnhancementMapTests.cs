@@ -60,7 +60,7 @@ public sealed class EnhancementMapTests
                 continue;
             }
 
-            AssetKey key = (AssetKey)RuntimeHelpers.GetUninitializedObject(type);
+            AssetImageKey key = (AssetImageKey)RuntimeHelpers.GetUninitializedObject(type);
             IReadOnlyList<EnhancementType> enhancements = EnhancementMap.GetEnhancements(key);
 
             rows.Add($"{GetName(type, baseType)}: {FormatEnhancements(enhancements)}");
@@ -77,8 +77,9 @@ public sealed class EnhancementMapTests
 
         foreach (string id in ids)
         {
-            AssetKey key = AssetKey.Parse(id, CultureInfo.InvariantCulture);
-            IReadOnlyList<EnhancementType> enhancements = EnhancementMap.GetEnhancements(key);
+            AssetKey assetKey = AssetKey.Parse(id, CultureInfo.InvariantCulture);
+            AssetImageKey assetImageKey = Assert.IsOfType<AssetImageKey>(assetKey);
+            IReadOnlyList<EnhancementType> enhancements = EnhancementMap.GetEnhancements(assetImageKey);
 
             rows.Add($"{id}: {FormatEnhancements(enhancements)}");
         }

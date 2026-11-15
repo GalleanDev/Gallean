@@ -96,29 +96,39 @@ internal sealed class EnhanceCommandHandler(
 
     private int Report(EnhanceCommandOptions commandOptions, PackEnhancerResult result)
     {
-        switch (result)
+        return result switch
         {
-            case PackEnhancerResult.Enhanced data:
-                if (commandOptions.CacheOnly)
-                {
-                    output.WriteLine($"Enhanced {data.EntryCount} entries, wrote {data.CacheEntryCount} cache entries.");
-                }
-                else
-                {
-                    output.WriteLine($"Enhanced {data.EntryCount} entries: {data.OutputPath}.");
-                }
-                return 0;
+            PackEnhancerResult.Enhanced enhanced => ReportEnhanced(commandOptions, enhanced),
+            PackEnhancerResult.NoSelection => ReportNoSelection(),
+            PackEnhancerResult.UnmatchedCategories unmatchedCategories => ReportUnmatchedCategories(unmatchedCategories)
+        };
+    }
 
-            case PackEnhancerResult.NoSelection:
-                output.WriteError("Nothing in this pack can be enhanced.");
-                return 1;
-
-            case PackEnhancerResult.UnmatchedCategories data:
-                output.WriteError($"No assets match: {string.Join(", ", data.Patterns)}.");
-                return 1;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(result), result, null);
+    private int ReportEnhanced(EnhanceCommandOptions commandOptions, PackEnhancerResult.Enhanced result)
+    {
+        if (commandOptions.CacheOnly)
+        {
+            output.WriteLine($"Enhanced {result.EntryCount} entries, wrote {result.CacheEntryCount} cache entries.");
         }
+        else
+        {
+            output.WriteLine($"Enhanced {result.EntryCount} entries: {result.OutputPath}.");
+        }
+
+        return 0;
+    }
+
+    private int ReportNoSelection()
+    {
+        output.WriteError("Nothing in this pack can be enhanced.");
+
+        return 1;
+    }
+
+    private int ReportUnmatchedCategories(PackEnhancerResult.UnmatchedCategories result)
+    {
+        output.WriteError($"No assets match: {string.Join(", ", result.Patterns)}.");
+
+        return 1;
     }
 }

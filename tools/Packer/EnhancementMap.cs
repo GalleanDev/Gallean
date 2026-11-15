@@ -5,13 +5,12 @@ internal static class EnhancementMap
     public static readonly Guid Refine = new("2ed23ad3-f09c-477f-b3e3-0ce3bb53bbe6");
     public static readonly Guid Alpha = new("9425579e-408f-470d-a0e3-ba4a0375cff7");
 
-    public static IReadOnlyList<EnhancementType> GetEnhancements(AssetKey key)
+    public static IReadOnlyList<EnhancementType> GetEnhancements(AssetImageKey key)
     {
         return key switch
         {
             AssetAnimationKey animation => GetAnimationEnhancements(animation),
-            AssetSpriteKey sprite => GetSpriteEnhancements(sprite),
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey sprite => GetSpriteEnhancements(sprite)
         };
     }
 

@@ -134,62 +134,11 @@ internal static class WorldUnitGroupCalculator
         [NotNullWhen(true)] out WorldFortification? city,
         [NotNullWhen(false)] out WorldCommandError? error)
     {
-        city = null;
-
-        WorldFortification? fortification;
-
-        if (group is WorldUnitGroup.Stack stackGroup)
+        return group switch
         {
-            if (!WorldCommandHelpers.TryGetCurrentPlayerStack(state, stackGroup.StackId, out WorldStack? stack))
-            {
-                error = WorldCommandError.StackNotFound;
-                return false;
-            }
-
-            WorldPlan plan = WorldPlan.For(state);
-            fortification = plan.GetFortificationAt(stack.Position);
-
-            if (fortification is not (WorldCity or WorldCapital))
-            {
-                error = WorldCommandError.StackNotInCity;
-                return false;
-            }
-
-            if (FortificationCalculator.GetOwner(fortification) != stack.OwnerId)
-            {
-                error = WorldCommandError.StackNotInCity;
-                return false;
-            }
-        }
-        else if (group is WorldUnitGroup.Fortification fortificationGroup)
-        {
-            if (!WorldCommandHelpers.TryGetCurrentPlayerFortification(state, fortificationGroup.FortificationId, out fortification))
-            {
-                error = WorldCommandError.GarrisonNotFound;
-                return false;
-            }
-
-            if (fortification is not (WorldCity or WorldCapital))
-            {
-                error = WorldCommandError.GarrisonNotFound;
-                return false;
-            }
-        }
-        else
-        {
-            throw new ArgumentOutOfRangeException(nameof(group), group, null);
-        }
-
-        if (FortificationCalculator.IsRioting(fortification))
-        {
-            error = WorldCommandError.CityRioting;
-            return false;
-        }
-
-        city = fortification;
-        error = null;
-
-        return true;
+            WorldUnitGroup.Stack stack => TryGetStackCity(state, stack.StackId, out city, out error),
+            WorldUnitGroup.Fortification fortification => TryGetGarrisonCity(state, fortification.FortificationId, out city, out error)
+        };
     }
 
     public static UnitGrid<WorldUnit> GetUnits(WorldState state, WorldUnitGroup group)
@@ -230,36 +179,121 @@ internal static class WorldUnitGroupCalculator
 
     public static WorldState WithUnits(WorldState state, WorldUnitGroup group, UnitGrid<WorldUnit> units)
     {
-        switch (group)
+        return group switch
         {
-            case WorldUnitGroup.Stack stackGroup:
-                WorldStack stack = state.Stacks[stackGroup.StackId];
-                return state with { Stacks = state.Stacks.SetItem(stack.Id, stack with { Units = units }) };
-
-            case WorldUnitGroup.Fortification fortificationGroup:
-                WorldFortification fortification = state.Fortifications[fortificationGroup.FortificationId];
-                return state with { Fortifications = state.Fortifications.SetItem(fortification.Id, fortification with { Garrison = units }) };
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(group), group, null);
-        }
+            WorldUnitGroup.Stack stack => WithStackUnits(state, stack.StackId, units),
+            WorldUnitGroup.Fortification fortification => WithGarrison(state, fortification.FortificationId, units)
+        };
     }
 
     public static WorldState WithInventory(WorldState state, WorldUnitGroup group, WorldInventory inventory)
     {
-        switch (group)
+        return group switch
         {
-            case WorldUnitGroup.Stack stackGroup:
-                WorldStack stack = state.Stacks[stackGroup.StackId];
-                return state with { Stacks = state.Stacks.SetItem(stack.Id, stack with { Inventory = inventory }) };
+            WorldUnitGroup.Stack stack => WithStackInventory(state, stack.StackId, inventory),
+            WorldUnitGroup.Fortification fortification => WithFortificationInventory(state, fortification.FortificationId, inventory)
+        };
+    }
 
-            case WorldUnitGroup.Fortification fortificationGroup:
-                WorldFortification fortification = state.Fortifications[fortificationGroup.FortificationId];
-                return state with { Fortifications = state.Fortifications.SetItem(fortification.Id, fortification with { Inventory = inventory }) };
+    private static bool TryGetStackCity(
+        WorldState state,
+        WorldStackId stackId,
+        [NotNullWhen(true)] out WorldFortification? city,
+        [NotNullWhen(false)] out WorldCommandError? error)
+    {
+        city = null;
 
-            default:
-                throw new ArgumentOutOfRangeException(nameof(group), group, null);
+        if (!WorldCommandHelpers.TryGetCurrentPlayerStack(state, stackId, out WorldStack? stack))
+        {
+            error = WorldCommandError.StackNotFound;
+            return false;
         }
+
+        WorldPlan plan = WorldPlan.For(state);
+        WorldFortification? fortification = plan.GetFortificationAt(stack.Position);
+
+        if (fortification is not (WorldCity or WorldCapital))
+        {
+            error = WorldCommandError.StackNotInCity;
+            return false;
+        }
+
+        if (FortificationCalculator.GetOwner(fortification) != stack.OwnerId)
+        {
+            error = WorldCommandError.StackNotInCity;
+            return false;
+        }
+
+        if (FortificationCalculator.IsRioting(fortification))
+        {
+            error = WorldCommandError.CityRioting;
+            return false;
+        }
+
+        city = fortification;
+        error = null;
+
+        return true;
+    }
+
+    private static bool TryGetGarrisonCity(
+        WorldState state,
+        WorldFortificationId fortificationId,
+        [NotNullWhen(true)] out WorldFortification? city,
+        [NotNullWhen(false)] out WorldCommandError? error)
+    {
+        city = null;
+
+        if (!WorldCommandHelpers.TryGetCurrentPlayerFortification(state, fortificationId, out WorldFortification? fortification))
+        {
+            error = WorldCommandError.GarrisonNotFound;
+            return false;
+        }
+
+        if (fortification is not (WorldCity or WorldCapital))
+        {
+            error = WorldCommandError.GarrisonNotFound;
+            return false;
+        }
+
+        if (FortificationCalculator.IsRioting(fortification))
+        {
+            error = WorldCommandError.CityRioting;
+            return false;
+        }
+
+        city = fortification;
+        error = null;
+
+        return true;
+    }
+
+    private static WorldState WithStackUnits(WorldState state, WorldStackId stackId, UnitGrid<WorldUnit> units)
+    {
+        WorldStack stack = state.Stacks[stackId];
+
+        return state with { Stacks = state.Stacks.SetItem(stack.Id, stack with { Units = units }) };
+    }
+
+    private static WorldState WithGarrison(WorldState state, WorldFortificationId fortificationId, UnitGrid<WorldUnit> units)
+    {
+        WorldFortification fortification = state.Fortifications[fortificationId];
+
+        return state with { Fortifications = state.Fortifications.SetItem(fortification.Id, fortification with { Garrison = units }) };
+    }
+
+    private static WorldState WithStackInventory(WorldState state, WorldStackId stackId, WorldInventory inventory)
+    {
+        WorldStack stack = state.Stacks[stackId];
+
+        return state with { Stacks = state.Stacks.SetItem(stack.Id, stack with { Inventory = inventory }) };
+    }
+
+    private static WorldState WithFortificationInventory(WorldState state, WorldFortificationId fortificationId, WorldInventory inventory)
+    {
+        WorldFortification fortification = state.Fortifications[fortificationId];
+
+        return state with { Fortifications = state.Fortifications.SetItem(fortification.Id, fortification with { Inventory = inventory }) };
     }
 
     private static ImmutableArray<UnitPlacement> PlanSwap(

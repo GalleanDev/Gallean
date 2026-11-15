@@ -13,13 +13,12 @@ internal static class RefineRepaintMap
         new(130, 548, 532, 45)
     ];
 
-    public static IReadOnlyList<RefineRegion> GetRegions(AssetKey key)
+    public static IReadOnlyList<RefineRegion> GetRegions(AssetImageKey key)
     {
         return key switch
         {
             AssetAnimationKey => [],
-            AssetSpriteKey sprite => GetSpriteRegions(sprite),
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey sprite => GetSpriteRegions(sprite)
         };
     }
 

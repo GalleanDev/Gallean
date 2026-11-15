@@ -38,29 +38,14 @@ internal sealed partial class WorldRenderComposer
                 }
 
                 WorldFortification? fortification = FindFortificationAt(input.Fortifications, stack.Position);
-
-                if (fortification is WorldCity or WorldCapital { CapturedById: null })
+                MapObject item = fortification switch
                 {
-                    objects.Add(new CityShield(
-                        stack.Position,
-                        GetDepth(stack.Position, Layer.Shields),
-                        fortification.Footprint,
-                        GetShieldKey(input.PlayerRaces, fortification)));
-                }
-                else
-                {
-                    StackSprite sprite = StackSpriteBuilder.Build(
-                        input.Map, stack, stack.Position, AssetAnimationKey.StackUnitPose.Stop, stack.Direction, definitions, assets);
+                    WorldCity city => CreateCityShield(stack, city, input.PlayerRaces[city.OwnerId], false),
+                    WorldCapital { CapturedById: null } capital => CreateCityShield(stack, capital, input.PlayerRaces[capital.OwnerId], true),
+                    WorldCapital or WorldRuin or null => CreateStack(input, stack, definitions, assets)
+                };
 
-                    objects.Add(new Stack(
-                        stack.Position,
-                        GetDepth(stack.Position, Layer.Stacks),
-                        sprite.SpriteKey,
-                        sprite.ShadowKey,
-                        sprite.AuraKey,
-                        new AssetSpriteKey.StackBanner(input.Subraces[stack.SubraceId].BannerVariant.Value),
-                        StackSpriteBuilder.GetOpacity(stack)));
-                }
+                objects.Add(item);
             }
 
             return [.. objects.OrderBy(item => item.Depth)];
@@ -81,14 +66,32 @@ internal sealed partial class WorldRenderComposer
             return null;
         }
 
-        private static AssetSpriteKey.CityShield GetShieldKey(PlayerRaces playerRaces, WorldFortification fortification)
+        private static CityShield CreateCityShield(WorldStack stack, WorldFortification fortification, WorldRace race, bool isCapital)
         {
-            return fortification switch
-            {
-                WorldCity city => new AssetSpriteKey.CityShield(playerRaces[city.OwnerId], IsCapital: false),
-                WorldCapital capital => new AssetSpriteKey.CityShield(playerRaces[capital.OwnerId], IsCapital: true),
-                _ => throw new ArgumentOutOfRangeException(nameof(fortification), fortification, null)
-            };
+            return new CityShield(
+                stack.Position,
+                GetDepth(stack.Position, Layer.Shields),
+                fortification.Footprint,
+                new AssetSpriteKey.CityShield(race, isCapital));
+        }
+
+        private static Stack CreateStack(
+            Input input,
+            WorldStack stack,
+            IGameDefinitionProvider definitions,
+            IAssetMetadataProvider assets)
+        {
+            StackSprite sprite = StackSpriteBuilder.Build(
+                input.Map, stack, stack.Position, AssetAnimationKey.StackUnitPose.Stop, stack.Direction, definitions, assets);
+
+            return new Stack(
+                stack.Position,
+                GetDepth(stack.Position, Layer.Stacks),
+                sprite.SpriteKey,
+                sprite.ShadowKey,
+                sprite.AuraKey,
+                new AssetSpriteKey.StackBanner(input.Subraces[stack.SubraceId].BannerVariant.Value),
+                StackSpriteBuilder.GetOpacity(stack));
         }
     }
 }

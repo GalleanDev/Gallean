@@ -2,13 +2,12 @@ namespace Packer;
 
 internal static class EncodingMap
 {
-    public static EncodingType GetEncoding(AssetKey key)
+    public static EncodingType GetEncoding(AssetImageKey key)
     {
         return key switch
         {
             AssetAnimationKey animation => GetAnimationEncoding(animation),
-            AssetSpriteKey sprite => GetSpriteEncoding(sprite),
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey sprite => GetSpriteEncoding(sprite)
         };
     }
 

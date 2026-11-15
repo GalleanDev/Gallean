@@ -14,13 +14,12 @@ internal static class UpscaleMap
         };
     }
 
-    public static UpscalerType GetUpscaler(AssetKey key)
+    public static UpscalerType GetUpscaler(AssetImageKey key)
     {
         return key switch
         {
             AssetAnimationKey animation => GetAnimationUpscaler(animation),
-            AssetSpriteKey sprite => GetSpriteUpscaler(sprite),
-            _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            AssetSpriteKey sprite => GetSpriteUpscaler(sprite)
         };
     }
 

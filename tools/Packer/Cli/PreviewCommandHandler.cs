@@ -61,35 +61,53 @@ internal sealed class PreviewCommandHandler(PackerOutput output, NativeLibraryLo
 
     private int Report(PreviewBuilderResult result)
     {
-        switch (result)
+        return result switch
         {
-            case PreviewBuilderResult.Written data:
-                foreach (string outputPath in data.OutputPaths)
-                {
-                    output.WriteLine($"Wrote {outputPath}.");
-                }
-                return 0;
+            PreviewBuilderResult.Written written => ReportWritten(written),
+            PreviewBuilderResult.NoSelection => ReportNoSelection(),
+            PreviewBuilderResult.UnmatchedCategories unmatchedCategories => ReportUnmatchedCategories(unmatchedCategories),
+            PreviewBuilderResult.MissingFrames missingFrames => ReportMissingFrames(missingFrames),
+            PreviewBuilderResult.AmbiguousOutput ambiguousOutput => ReportAmbiguousOutput(ambiguousOutput)
+        };
+    }
 
-            case PreviewBuilderResult.NoSelection:
-                output.WriteError("Nothing in this pack can be previewed.");
-                return 1;
-
-            case PreviewBuilderResult.UnmatchedCategories data:
-                output.WriteError($"No assets match: {string.Join(", ", data.Patterns)}.");
-                return 1;
-
-            case PreviewBuilderResult.MissingFrames data:
-                output.ReportMissing(data);
-                return 1;
-
-            case PreviewBuilderResult.AmbiguousOutput data:
-                output.WriteError(
-                    $"The output '{data.OutputPath}' names a single file, " +
-                    $"but {data.Ids.Count} entries were selected. Pass a directory instead.");
-                return 1;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(result), result, null);
+    private int ReportWritten(PreviewBuilderResult.Written result)
+    {
+        foreach (string outputPath in result.OutputPaths)
+        {
+            output.WriteLine($"Wrote {outputPath}.");
         }
+
+        return 0;
+    }
+
+    private int ReportNoSelection()
+    {
+        output.WriteError("Nothing in this pack can be previewed.");
+
+        return 1;
+    }
+
+    private int ReportUnmatchedCategories(PreviewBuilderResult.UnmatchedCategories result)
+    {
+        output.WriteError($"No assets match: {string.Join(", ", result.Patterns)}.");
+
+        return 1;
+    }
+
+    private int ReportMissingFrames(PreviewBuilderResult.MissingFrames result)
+    {
+        output.ReportMissing(result);
+
+        return 1;
+    }
+
+    private int ReportAmbiguousOutput(PreviewBuilderResult.AmbiguousOutput result)
+    {
+        output.WriteError(
+            $"The output '{result.OutputPath}' names a single file, " +
+            $"but {result.Ids.Count} entries were selected. Pass a directory instead.");
+
+        return 1;
     }
 }

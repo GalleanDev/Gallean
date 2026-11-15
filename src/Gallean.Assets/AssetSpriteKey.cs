@@ -6,7 +6,7 @@ using Gallean.Engine.Contracts;
 
 namespace Gallean.Assets;
 
-public closed record AssetSpriteKey : AssetKey, IParsable<AssetSpriteKey>
+public closed record AssetSpriteKey : AssetImageKey, IParsable<AssetSpriteKey>
 {
     public sealed record Ground(WorldMapTerrain Terrain) : AssetSpriteKey
     {
