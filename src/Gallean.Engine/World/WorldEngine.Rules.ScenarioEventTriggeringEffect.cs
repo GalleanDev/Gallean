@@ -792,18 +792,20 @@ internal partial class WorldEngine
                 profile,
                 stack.Position);
 
-            if (destination is null)
+            if (destination is not null)
+            {
+                WorldStackDirection direction = StackStepCalculator.GetDirection(destination.Position, triggerer.Position);
+
+                result = Relocate(stack, destination.Path, destination.Position, direction, state);
+
+                return true;
+            }
+            else
             {
                 result = Empty(state);
 
                 return false;
             }
-
-            WorldStackDirection direction = StackStepCalculator.GetDirection(destination.Position, triggerer.Position);
-
-            result = Relocate(stack, destination.Path, destination.Position, direction, state);
-
-            return true;
         }
 
         private static ScenarioStackDestination? FindNearestDestination(
