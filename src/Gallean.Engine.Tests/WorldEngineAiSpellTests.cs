@@ -1184,4 +1184,60 @@ public sealed class WorldEngineAiSpellTests
             }
         }));
     }
+
+    [Test]
+    public void WeakenCastLimitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 1000, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        UnitModifierDefinition modifier = TestHelpers.SimpleModifier("modifier");
+        WorldSpellDefinition attack = Spell("attack", level: 2, new WorldAttackSpellEffect(UnitAttackSource.Fire, 15));
+        WorldSpellDefinition weaken = Spell("weaken", level: 1, new WorldWeakenSpellEffect(modifier.Id));
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(0, 1000, 0, 0, 0, 0),
+            Spellbook = new WorldPlayerSpellbook([attack.Id, weaken.Id], [attack.Id, weaken.Id])
+        };
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack attacker = UnitStack(new WorldUnitId("attackerLeader"), "Attacker", player.Id, new WorldPosition(12, 9), leader, hitpoints: 100) with { MovementPoints = 6 };
+        WorldStack threat = UnitStack(new WorldUnitId("threatLeader"), "Threat", enemy.Id, new WorldPosition(12, 5), leader, hitpoints: 1000);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(modifier)
+            .WithDefinition(attack)
+            .WithDefinition(weaken)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithCapital(TestHelpers.SimpleCapital(new WorldFortificationId("Capital"), player.Id, new WorldPosition(5, 5), UnitGrid<WorldUnit>.Empty))
+            .WithStack(attacker)
+            .WithStack(threat)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P4 1000] Cast attack -> (12, 5)",
+            "[P1 1000] Move Attacker -> (9, 6)"
+        ]));
+        Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player with
+        {
+            Resources = new WorldResourceSet(0, 950, 0, 0, 0, 0),
+            TurnActions = new WorldPlayerTurnActions
+            {
+                SpellCasts = ImmutableSortedDictionary<WorldSpellDefinitionId, int>.Empty.Add(attack.Id, 1)
+            }
+        }));
+    }
 }

@@ -80,23 +80,13 @@ internal sealed partial class WorldAiPlanner
 
             WorldCastSpellCommand? command = null;
 
-            if (IsAttackCastAllowed(player, attackSpells))
+            if (!CanCast(player, attackSpells) && !CanCast(player, weakenSpells))
             {
-                command = FindCast(state, attackSpells, EnumerateCityThreats(state, playerId));
+                command = FindEnemyCast(state, playerId, attackSpells, EnumerateCityThreats(state, playerId));
 
-                if (command is null && Context.Engine.Random.Next(100) < Context.Engine.Globals.AiRandomCastChance)
+                if (command is null)
                 {
-                    command = FindCast(state, attackSpells, EnumerateEnemyStacks(state, playerId));
-                }
-            }
-
-            if (command is null && weakenSpells.Count > 0)
-            {
-                command = FindCast(state, weakenSpells, EnumerateNearEnemies(state, playerId));
-
-                if (command is null && Context.Engine.Random.Next(100) < Context.Engine.Globals.AiRandomCastChance)
-                {
-                    command = FindCast(state, weakenSpells, EnumerateEnemyStacks(state, playerId));
+                    command = FindEnemyCast(state, playerId, weakenSpells, EnumerateNearEnemies(state, playerId));
                 }
             }
 
@@ -111,6 +101,25 @@ internal sealed partial class WorldAiPlanner
             }
 
             return command;
+        }
+
+        private WorldCastSpellCommand? FindEnemyCast(WorldState state, WorldPlayerId playerId, List<WorldSpellDefinition> spells, IEnumerable<WorldStack> targets)
+        {
+            if (spells.Count > 0)
+            {
+                WorldCastSpellCommand? command = FindCast(state, spells, targets);
+
+                if (command is null && Context.Engine.Random.Next(100) < Context.Engine.Globals.AiRandomCastChance)
+                {
+                    command = FindCast(state, spells, EnumerateEnemyStacks(state, playerId));
+                }
+
+                return command;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private WorldCastSpellCommand? FindCast(WorldState state, List<WorldSpellDefinition> spells, IEnumerable<WorldStack> targets)
@@ -132,17 +141,9 @@ internal sealed partial class WorldAiPlanner
             return null;
         }
 
-        private static bool IsAttackCastAllowed(WorldPlayer player, List<WorldSpellDefinition> enemySpells)
+        private static bool CanCast(WorldPlayer player, List<WorldSpellDefinition> spells)
         {
-            foreach (WorldSpellDefinition spell in enemySpells)
-            {
-                if (player.TurnActions.SpellCasts.ContainsKey(spell.Id))
-                {
-                    return false;
-                }
-            }
-
-            return enemySpells.Count > 0;
+            return spells.Any(spell => player.TurnActions.SpellCasts.ContainsKey(spell.Id));
         }
 
         private bool IsGlobalCastAllowed(WorldPlayer player, List<WorldSpellDefinition> globalSpells)
@@ -155,7 +156,7 @@ internal sealed partial class WorldAiPlanner
                    resources.LifeMana > globals.AiGlobalSpellMinMana &&
                    resources.DeathMana > globals.AiGlobalSpellMinMana &&
                    resources.RuneMana > globals.AiGlobalSpellMinMana &&
-                   !globalSpells.Any(spell => player.TurnActions.SpellCasts.ContainsKey(spell.Id));
+                   !CanCast(player, globalSpells);
         }
 
         private WorldCastSpellCommand? FindGlobalCast(WorldState state, WorldPlayerId playerId, List<WorldSpellDefinition> spells)
@@ -242,9 +243,9 @@ internal sealed partial class WorldAiPlanner
 
         private static IEnumerable<WorldStack> EnumerateNearEnemies(WorldState state, WorldPlayerId playerId)
         {
-            foreach (WorldStack stack in state.Stacks.Values)
+            foreach (WorldStack stack in EnumerateOutsideStacks(state, playerId))
             {
-                if (stack.OwnerId == playerId && stack.MovementPoints > 0)
+                if (stack.MovementPoints > 0)
                 {
                     foreach (WorldStack enemy in state.Stacks.Values)
                     {
