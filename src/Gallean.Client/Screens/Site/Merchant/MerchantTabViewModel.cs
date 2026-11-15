@@ -152,6 +152,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         if (await TryDispatchWorldActionAsync(new WorldSellItemCommand(stackId, siteId, itemId)))
         {
             selectedSellItemId = null;
+            Game.PlaySound(new AssetSoundKey.SitePurchase());
         }
 
         RefreshView();
