@@ -75,10 +75,18 @@
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="{StaticResource TabBarHoverTextBrush}" />
     </Style>
+    <Style Selector="Button.tab:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource TabBarHoverTextBrush}" />
+    </Style>
     <Style Selector="Button.tab.selected">
       <Setter Property="Foreground" Value="{StaticResource TabBarSelectedTextBrush}" />
     </Style>
     <Style Selector="Button.tab.selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource TabBarSelectedTextBrush}" />
+    </Style>
+    <Style Selector="Button.tab.selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="{StaticResource TabBarSelectedTextBrush}" />
     </Style>
