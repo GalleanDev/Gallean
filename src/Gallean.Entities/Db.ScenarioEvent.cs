@@ -4,7 +4,7 @@ namespace Gallean.Entities;
 
 public static partial class Db
 {
-    [ScenarioDataFile("SEvent.json", PerScenario = true, Index = true)]
+    [ScenarioDataFile("SEvent.json", PerScenario = true)]
     public record ScenarioEvent(
         [property: ScenarioKey, JsonPropertyName("NO_SCEN")] ScenarioId ScenarioId,
         [property: DataKey, JsonPropertyName("ID")] string Id,

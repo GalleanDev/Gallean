@@ -191,22 +191,7 @@ public sealed class DatabaseTests
         ScenarioDatabase db = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath);
         ScenarioDatabaseIndex index = ScenarioDatabaseLoader.LoadIndex(RiseOfTheElves.ScenarioDatabasePath);
 
-        using (Assert.EnterMultipleScope())
-        {
-            Assert.That(index.ScenarioInfos, Is.EquivalentTo(db.ScenarioInfos));
-            Assert.That(index.ScenariosWithEvents, Is.Not.Empty);
-            Assert.That(index.ScenariosWithEvents, Is.EquivalentTo(db.ScenariosWithEvents));
-        }
-    }
-
-    [Test]
-    public void SingleScenarioIndexPresenceTest()
-    {
-        Db.ScenarioId scenarioId = new("S095SC0000");
-
-        ScenarioDatabase single = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, scenarioId);
-
-        Assert.That(single.ScenariosWithEvents, Is.EquivalentTo([scenarioId]));
+        Assert.That(index.ScenarioInfos, Is.EquivalentTo(db.ScenarioInfos));
     }
 
     [Test]

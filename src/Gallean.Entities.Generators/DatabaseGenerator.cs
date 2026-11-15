@@ -25,7 +25,6 @@ public class DatabaseGenerator : IIncrementalGenerator
         IReadOnlyList<DiagnosticInfo> Diagnostics)
     {
         public bool HasIndexRows => IsIndex && !IsPerScenario;
-        public bool HasIndexPresence => IsIndex && IsPerScenario;
     }
 
     private static readonly DiagnosticDescriptor MultipleKeyPropertiesDescriptor = new(
@@ -199,9 +198,8 @@ public class DatabaseGenerator : IIncrementalGenerator
         string contextName = "DbJsonSerializerContext";
 
         List<EntityMetadata> indexEntities = [.. entities.Where(entity => entity.HasIndexRows)];
-        List<EntityMetadata> presenceEntities = [.. entities.Where(entity => entity.HasIndexPresence)];
         List<EntityMetadata> ownEntities = [.. entities.Where(entity => !entity.HasIndexRows)];
-        bool hasIndex = indexEntities.Count > 0 || presenceEntities.Count > 0;
+        bool hasIndex = indexEntities.Count > 0;
         bool hasPerScenarioFiles = entities.Any(entity => entity.IsPerScenario);
         bool hasKeys = entities.Any(entity => entity.KeyProperty is not null);
         bool hasScenarioAndKey = entities.Any(entity => entity.ScenarioKeyProperty is not null && entity.KeyProperty is not null);
@@ -214,7 +212,6 @@ public class DatabaseGenerator : IIncrementalGenerator
             using (cw.Block($"public interface {indexInterfaceName}"))
             {
                 EmitInterfaceMembers(cw, indexEntities, databaseType, isIndex: true);
-                EmitPresenceInterfaceMembers(cw, presenceEntities, databaseType);
             }
             cw.AppendLine();
 
@@ -227,8 +224,7 @@ public class DatabaseGenerator : IIncrementalGenerator
             using (cw.Block($"public sealed record {indexClassName} : {indexInterfaceName}"))
             {
                 EmitRecordMembers(cw, indexEntities, databaseType, isIndex: true);
-                EmitPresenceRecordMembers(cw, presenceEntities, databaseType);
-            }
+                }
             cw.AppendLine();
         }
         else
@@ -243,7 +239,6 @@ public class DatabaseGenerator : IIncrementalGenerator
         using (cw.Block($"public sealed record {className} : {interfaceName}"))
         {
             EmitRecordMembers(cw, entities, databaseType, isIndex: false);
-            EmitPresenceRecordMembers(cw, presenceEntities, databaseType);
         }
         cw.AppendLine();
 
@@ -358,26 +353,6 @@ public class DatabaseGenerator : IIncrementalGenerator
                 }
                 cw.AppendLine();
 
-                if (presenceEntities.Count > 0)
-                {
-                    using (cw.Block("private static IReadOnlySet<Db.ScenarioId> GetScenariosWithTable(string directory, string fileName)"))
-                    {
-                        cw.AppendLine("HashSet<Db.ScenarioId> scenarios = [];");
-                        cw.AppendLine();
-
-                        using (cw.Block("foreach (string scenarioDirectory in GetScenarioDirectories(directory))"))
-                        {
-                            using (cw.Block("if (File.Exists(Path.Combine(scenarioDirectory, fileName)))"))
-                            {
-                                cw.AppendLine("scenarios.Add(new Db.ScenarioId(Path.GetFileName(scenarioDirectory)));");
-                            }
-                        }
-                        cw.AppendLine();
-                        cw.AppendLine("return scenarios;");
-                    }
-                    cw.AppendLine();
-                }
-
                 using (cw.Block($"public static {className} Load(string directory)"))
                 {
                     cw.AppendLine("return Load(directory, GetScenarioDirectories(directory));");
@@ -392,14 +367,14 @@ public class DatabaseGenerator : IIncrementalGenerator
 
                 using (cw.Block($"private static {className} Load(string directory, IReadOnlyList<string> scenarioDirectories)"))
                 {
-                    EmitLoadBody(cw, entities, presenceEntities, databaseType, className, isIndex: false);
+                    EmitLoadBody(cw, entities, databaseType, className, isIndex: false);
                 }
             }
             else
             {
                 using (cw.Block($"public static {className} Load(string directory)"))
                 {
-                    EmitLoadBody(cw, entities, presenceEntities, databaseType, className, isIndex: false);
+                    EmitLoadBody(cw, entities, databaseType, className, isIndex: false);
                 }
             }
 
@@ -409,7 +384,7 @@ public class DatabaseGenerator : IIncrementalGenerator
 
                 using (cw.Block($"public static {indexClassName} LoadIndex(string directory)"))
                 {
-                    EmitLoadBody(cw, indexEntities, presenceEntities, databaseType, indexClassName, isIndex: true);
+                    EmitLoadBody(cw, indexEntities, databaseType, indexClassName, isIndex: true);
                 }
             }
         }
@@ -527,7 +502,7 @@ public class DatabaseGenerator : IIncrementalGenerator
         }
     }
 
-    private static void EmitLoadBody(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, IReadOnlyList<EntityMetadata> presenceEntities, string databaseType, string className, bool isIndex)
+    private static void EmitLoadBody(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, string databaseType, string className, bool isIndex)
     {
         if (databaseType == "Global" && !isIndex)
         {
@@ -593,25 +568,6 @@ public class DatabaseGenerator : IIncrementalGenerator
             }
         }
 
-        foreach (EntityMetadata entity in presenceEntities)
-        {
-            string propName = GetPresenceName(entity, databaseType);
-            string varName = char.ToLower(propName[0]) + propName.Substring(1);
-
-            if (isIndex)
-            {
-                string fileName = entity.FileName.Split('/').Last();
-
-                cw.AppendLine($"IReadOnlySet<Db.ScenarioId> {varName} = GetScenariosWithTable(directory, \"{fileName}\");");
-            }
-            else
-            {
-                string rowsVarName = char.ToLower(GetPlural(entity.ClassName)[0]) + GetPlural(entity.ClassName).Substring(1);
-
-                cw.AppendLine($"IReadOnlySet<Db.ScenarioId> {varName} = new HashSet<Db.ScenarioId>({rowsVarName}ByScenario.Select(x => x.Key));");
-            }
-        }
-
         cw.AppendLine();
 
         using (cw.Block($"return new {className}", "};"))
@@ -652,44 +608,6 @@ public class DatabaseGenerator : IIncrementalGenerator
                     cw.AppendLine($"{propName}By{entity.LookupKeyProperty} = {varName}By{entity.LookupKeyProperty},");
                 }
             }
-
-            foreach (EntityMetadata entity in presenceEntities)
-            {
-                string propName = GetPresenceName(entity, databaseType);
-                string varName = char.ToLower(propName[0]) + propName.Substring(1);
-
-                cw.AppendLine($"{propName} = {varName},");
-            }
-        }
-    }
-
-    private static void EmitPresenceInterfaceMembers(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, string databaseType)
-    {
-        foreach (EntityMetadata entity in entities)
-        {
-            cw.AppendLine($"IReadOnlySet<Db.ScenarioId> {GetPresenceName(entity, databaseType)} {{ get; }}");
-        }
-    }
-
-    private static void EmitPresenceRecordMembers(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, string databaseType)
-    {
-        foreach (EntityMetadata entity in entities)
-        {
-            cw.AppendLine($"public IReadOnlySet<Db.ScenarioId> {GetPresenceName(entity, databaseType)} {{ get; init; }} = null!;");
-        }
-    }
-
-    private static string GetPresenceName(EntityMetadata entity, string databaseType)
-    {
-        string plural = GetPlural(entity.ClassName);
-
-        if (plural.StartsWith(databaseType, StringComparison.Ordinal))
-        {
-            return $"ScenariosWith{plural.Substring(databaseType.Length)}";
-        }
-        else
-        {
-            return $"ScenariosWith{plural}";
         }
     }
 

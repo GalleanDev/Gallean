@@ -16,12 +16,9 @@ public static class ScenarioLoader
         IScenarioDatabaseIndex scenarioDb,
         CampaignDatabase campaignDb)
     {
-        IEnumerable<Db.ScenarioInfo> playableScenarios = scenarioDb.ScenarioInfos
-            .Where(info => scenarioDb.ScenariosWithEvents.Contains(info.ScenarioId));
-
         List<ScenarioCampaign> result = [];
 
-        foreach (IGrouping<Db.Id, Db.ScenarioInfo> group in playableScenarios
+        foreach (IGrouping<Db.Id, Db.ScenarioInfo> group in scenarioDb.ScenarioInfos
             .GroupBy(info => info.CampaignId)
             .OrderBy(group => group.Key.Value, StringComparer.OrdinalIgnoreCase))
         {
