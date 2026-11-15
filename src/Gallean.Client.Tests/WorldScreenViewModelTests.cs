@@ -9225,4 +9225,113 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
     }
+
+    [Test]
+    public async Task CityExitSoundFogTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 5);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            FogOfWar = TestHelpers.BuildFogOfWar(
+            [
+                "????????",
+                "????????",
+                "????????",
+                "????????",
+                "????????"
+            ])
+        };
+        WorldPlayer other = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer newOwner = TestHelpers.SimplePlayer(new WorldPlayerId(3), WorldRace.Heretic, map) with { IsAi = true };
+        WorldSubrace newSubrace = new(
+            new WorldSubraceId("heretic"),
+            newOwner.Id,
+            WorldSubraceType.Heretic,
+            new WorldObjectVariant(5));
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 6, leadership: 6) with
+            {
+                VisionRadius = 1
+            };
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Undead, 1), WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("City1"),
+            cityDefinition,
+            other.Id,
+            new WorldPosition(3, 3),
+            UnitGrid<WorldUnit>.Empty);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(7, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+        WorldStack otherStack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack2"),
+            other.Id,
+            city.Entrance,
+            TestHelpers.SingleUnitGrid(new WorldUnitId("other-leader"), leader),
+            movementPoints: 6);
+        ScenarioLocationDefinition gate = new(
+            new ScenarioLocationId("Gate"),
+            new ScenarioTextId("Gate"),
+            city.Entrance,
+            0);
+        ScenarioEventDefinition scenarioEvent = new(
+            Id: new ScenarioEventId("Event1"),
+            AffectedRaces: [WorldRace.Human],
+            VerifiedRaces: [WorldRace.Human],
+            Conditions: [new ScenarioEventFrequencyCondition(1)],
+            Effects:
+            [
+                new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(otherStack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: false),
+                new ScenarioEventUnfogEffect(gate.Id, Reveal: true, Radius: null, [player.Id])
+            ],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(other.LordId, other.Race, LordCategory.Warrior))
+            .WithPlayer(other)
+            .WithDefinition(TestHelpers.SimpleLord(newOwner.LordId, newOwner.Race, LordCategory.Warrior))
+            .WithPlayer(newOwner)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithSubrace(newSubrace)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithStack(otherStack)
+            .WithScenarioLocation(gate)
+            .WithScenarioEvent(scenarioEvent)
+            .BuildSession();
+
+        TestAudioPlayer audioPlayer = new();
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAudioPlayer(audioPlayer).Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+        audioPlayer.Actions.Clear();
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        world.CompleteAnimation();
+
+        Assert.That(world.EndTurnCommand.CanExecute(null), Is.True);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[otherStack.Id], Is.EqualTo(otherStack with
+        {
+            OwnerId = newOwner.Id,
+            SubraceId = newSubrace.Id,
+            Position = new WorldPosition(4, 4),
+            Direction = WorldStackDirection.South
+        }));
+        Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:turn-start"]));
+    }
 }
