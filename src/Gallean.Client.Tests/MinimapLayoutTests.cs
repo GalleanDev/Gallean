@@ -5,7 +5,7 @@ namespace Gallean.Client.Tests;
 public sealed class MinimapLayoutTests
 {
     [Test]
-    public void ProjectionTest()
+    public void SimpleProjectionTest()
     {
         MinimapLayout layout = MinimapLayout.Create(4, 4, new Rect(0, 0, 200, 100));
 
@@ -13,6 +13,17 @@ public sealed class MinimapLayoutTests
         Assert.That(layout.CellToScreen(3, 0), Is.EqualTo(new Point(160, 50)));
         Assert.That(layout.CellToScreen(0, 3), Is.EqualTo(new Point(40, 50)));
         Assert.That(layout.CellToScreen(3, 3), Is.EqualTo(new Point(100, 80)));
+    }
+
+    [Test]
+    public void LargeMapProjectionTest()
+    {
+        MinimapLayout layout = MinimapLayout.Create(144, 144, new Rect(0, 0, 145, 72.5));
+
+        Assert.That(layout.CellToScreen(0, 0), Is.EqualTo(new Point(72.5, 0.5)));
+        Assert.That(layout.CellToScreen(143, 0), Is.EqualTo(new Point(144.0, 36.25)));
+        Assert.That(layout.CellToScreen(0, 143), Is.EqualTo(new Point(1.0, 36.25)));
+        Assert.That(layout.CellToScreen(143, 143), Is.EqualTo(new Point(72.5, 72.0)));
     }
 
     [Test]
