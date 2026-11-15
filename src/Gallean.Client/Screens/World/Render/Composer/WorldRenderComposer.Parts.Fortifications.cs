@@ -42,13 +42,13 @@ internal sealed partial class WorldRenderComposer
                                 shadowKey));
                         }
                     }
-                    else if (fortification is WorldRuin ruin)
+                    else if (fortification is WorldRuin ruin && ruin.LooterId is null)
                     {
                         objects.Add(new RuinBanner(
                             ruin.Entrance,
                             GetDepth(ruin.Entrance, Layer.Banners),
                             ruin.Footprint,
-                            new AssetSpriteKey.RuinBanner(ruin.LooterId is not null)));
+                            new AssetSpriteKey.RuinBanner(IsLooted: false)));
                     }
                 }
             }

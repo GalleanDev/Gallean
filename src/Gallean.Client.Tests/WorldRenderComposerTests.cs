@@ -558,12 +558,7 @@ public sealed class WorldRenderComposerTests
                 Position: new WorldPosition(2, 2),
                 Depth: 1423,
                 Footprint: ruin.Footprint,
-                AssetKey: new AssetAnimationKey.Ruin(IsLooted: true, 2)),
-            new RuinBanner(
-                Position: new WorldPosition(2, 2),
-                Depth: 133990,
-                Footprint: ruin.Footprint,
-                AssetKey: new AssetSpriteKey.RuinBanner(IsLooted: true))
+                AssetKey: new AssetAnimationKey.Ruin(IsLooted: true, 2))
         }));
     }
 
