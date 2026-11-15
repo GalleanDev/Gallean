@@ -41,6 +41,30 @@ public sealed class ThiefActionScreenViewModelTests
         return rows;
     }
 
+    private static IReadOnlyList<string> FormatStealSpellTargets(IReadOnlyList<ThiefStealItemViewModel> targets)
+    {
+        List<string> rows = [];
+
+        foreach (ThiefStealItemViewModel target in targets)
+        {
+            rows.Add($"{FormatIcon(target.Icon)} | {target.Name} | {target.Description} | Casting cost: {FormatPrice(Assert.NotNull(target.CastingCost))} | {FormatAvailability(target.Status.UnavailableReason)}");
+        }
+
+        return rows;
+    }
+
+    private static string FormatPrice(OfferPriceViewModel price)
+    {
+        List<string> items = [];
+
+        foreach (OfferPriceItemViewModel item in price.Items)
+        {
+            items.Add($"{item.Resource.Value} {item.Resource.Name.ToLowerInvariant()}");
+        }
+
+        return string.Join(", ", items);
+    }
+
     private static string FormatAvailability(string? unavailableReason)
     {
         if (unavailableReason is null)
@@ -404,7 +428,7 @@ public sealed class ThiefActionScreenViewModelTests
             new GlobalTextId("fog-effect"),
             WorldRace.Human,
             Level: 1,
-            CastingCost: new WorldResourceSet(10, 0, 0, 0, 0, 0),
+            CastingCost: new WorldResourceSet(0, 0, 0, 10, 0, 0),
             PurchaseCost: new WorldResourceSet(200, 0, 0, 0, 0, 0),
             AreaRadius: 0,
             Effect: new WorldFogSpellEffect(),
@@ -417,7 +441,7 @@ public sealed class ThiefActionScreenViewModelTests
             new GlobalTextId("storm-effect"),
             WorldRace.Human,
             Level: 1,
-            CastingCost: new WorldResourceSet(10, 0, 0, 0, 0, 0),
+            CastingCost: new WorldResourceSet(0, 0, 0, 25, 0, 0),
             PurchaseCost: new WorldResourceSet(200, 0, 0, 0, 0, 0),
             AreaRadius: 0,
             Effect: new WorldFogSpellEffect(),
@@ -472,9 +496,9 @@ public sealed class ThiefActionScreenViewModelTests
 
         ThiefStealScreenViewModel picker = Assert.IsOfType<ThiefStealScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(FormatStealTargets(picker.Targets), Is.EqualTo([
-            "spell-icon/fog Light | fog-name | fog-description | available",
-            "spell-icon/storm Light | storm-name | storm-description | unavailable: This spell is already known"
+        Assert.That(FormatStealSpellTargets(picker.Targets), Is.EqualTo([
+            "spell-icon/fog Light | fog-name | fog-description | Casting cost: 10 life mana | available",
+            "spell-icon/storm Light | storm-name | storm-description | Casting cost: 25 life mana | unavailable: This spell is already known"
         ]));
 
         WorldState before = session.World.State;

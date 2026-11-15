@@ -4655,6 +4655,87 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
+    public async Task ThiefStealSpellTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameModel scenarioModel = LoadScenario(null);
+        WorldMageSite textSource = scenarioModel.Snapshot.WorldState.Sites.Values.OfType<WorldMageSite>().First();
+        WorldRaceDefinition humans = scenarioModel.Definitions.GetRace(WorldRace.Human);
+        UnitDefinition thiefDefinition = humans.Leaders
+            .Select(scenarioModel.Definitions.GetUnit)
+            .First(definition => definition.LeaderCategory == UnitLeaderCategory.Thief);
+
+        List<KeyValuePair<WorldSpellDefinitionId, WorldResourceSet>> siteSpells =
+        [
+            .. scenarioModel.Definitions.GetSpellResearchCosts(WorldRace.Human)
+                .OrderBy(pair => pair.Key.Value)
+                .Take(3)
+        ];
+
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        WorldUnit thief = new(new WorldUnitId("thief"), thiefDefinition.Id, thiefDefinition.MaxHitpoints, 0, thiefDefinition.Level, [], null, false);
+
+        WorldMageSite site = new(
+            new WorldSiteId("tower"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: textSource.TitleTextId,
+            GreetingTextId: textSource.GreetingTextId,
+            [.. siteSpells.Select(pair => pair.Key)],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        WorldStack thiefStack = TestHelpers.SimpleStack(
+            new WorldStackId("thief"),
+            player.Id,
+            new WorldPosition(5, 4),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(thief, GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 20);
+
+        TestWorldEngineBuilder builder = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(thiefDefinition)
+            .WithStack(thiefStack)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace);
+
+        foreach ((WorldSpellDefinitionId spellId, WorldResourceSet cost) in siteSpells)
+        {
+            builder.WithDefinition(scenarioModel.Definitions.GetSpell(spellId));
+            builder.WithResearchableSpell(new WorldSpellResearchCost(WorldRace.Human, spellId, cost));
+        }
+
+        foreach (WorldThiefActionType type in Enum.GetValues<WorldThiefActionType>())
+        {
+            builder.WithDefinition(scenarioModel.Definitions.GetThiefAction(type));
+        }
+
+        (GameSession session, _) = builder.BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, scenarioModel.Texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
+
+        ThiefActionScreenViewModel actions = new(gameModel, gameViewModel, thiefStack.Id, site.Entrance);
+        gameViewModel.OpenScreen(actions);
+
+        await actions.SelectActionAsync(actions.Actions[0]);
+
+        Assert.That(gameViewModel.TopScreen, Is.InstanceOf<ThiefStealScreenViewModel>());
+
+        await CaptureAsync(window);
+    }
+
+    [AvaloniaTest]
     public async Task UnitPurchaseTest()
     {
         using Sandbox sb = Sandbox.Create();
