@@ -15,9 +15,9 @@
     </Style>
 
     <Style Selector="Button.spell-tile">
-      <Setter Property="Width" Value="104" />
+      <Setter Property="Width" Value="120" />
       <Setter Property="Padding" Value="4,8,4,6" />
-      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderThickness" Value="0" />
       <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
@@ -187,8 +187,8 @@
                 Command="{Binding #Screen.((local:SpellbookTabViewModel)DataContext).SelectSpellCommand}"
                 CommandParameter="{Binding}"
                 DoubleTapped="OnSpellDoubleTapped">
-          <StackPanel Spacing="6">
-            <Panel Classes="spell-thumbnail">
+          <Grid RowDefinitions="Auto,*,Auto" RowSpacing="6">
+            <Panel Grid.Row="0" Classes="spell-thumbnail">
               <Border Classes="spell-icon" Classes.dark-background="{Binding Details.Icon.Background, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:IconViewModel+Spell+BackgroundType.Dark}}">
                 <Panel>
                   <local:SpriteVisual SpriteKey="{Binding Details.Icon.Key}" Stretch="UniformToFill" />
@@ -201,18 +201,18 @@
               <local:IconVisual Classes="spell-lock" Moniker="Locked" />
               <local:IconVisual Classes="spell-research" Classes.ready="{Binding Status.IsAvailable}" Moniker="Research" />
             </Panel>
-            <TextBlock Classes="caption spell-name"
+            <TextBlock Grid.Row="1"
+                       Classes="caption spell-name"
                        Text="{Binding Details.Name}"
                        Foreground="{StaticResource PrimaryTextBrush}"
                        TextAlignment="Center"
-                       TextWrapping="Wrap"
-                       MaxLines="2"
-                       TextTrimming="CharacterEllipsis" />
-            <ContentControl Content="{Binding Status.Price}"
+                       TextWrapping="Wrap" />
+            <ContentControl Grid.Row="2"
+                            Content="{Binding Status.Price}"
                             Classes="caption spell-price"
                             HorizontalAlignment="Center"
                             Foreground="{StaticResource SecondaryTextBrush}" />
-          </StackPanel>
+          </Grid>
         </Button>
         <Popup Placement="RightEdgeAlignedTop"
                PlacementConstraintAdjustment="FlipX,SlideY"
