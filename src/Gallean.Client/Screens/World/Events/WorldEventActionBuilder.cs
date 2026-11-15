@@ -348,8 +348,9 @@ internal sealed class WorldEventActionBuilder(
 
     private WorldEventAction BuildFortificationExit(Entry.FortificationExit exit)
     {
-        WorldPlan plan = WorldPlan.For(snapshot.WorldState);
-        WorldVisibility visibility = WorldVisibility.Create(snapshot.WorldState, ViewPlayerId, fogEnabled);
+        WorldState state = snapshot.WorldState;
+        WorldPlan plan = WorldPlan.For(state);
+        WorldVisibility visibility = WorldVisibility.Create(state, ViewPlayerId, fogEnabled);
         WorldFortification? fortification = visibility.GetFortificationAt(plan, exit.Position);
 
         if (fortification is not (WorldCity or WorldCapital))
@@ -357,7 +358,7 @@ internal sealed class WorldEventActionBuilder(
             return WorldEventAction.None;
         }
 
-        if (exit.State.Stacks.TryGetValue(exit.StackId, out WorldStack? stack) && stack.OwnerId == ViewPlayerId)
+        if (state.Stacks.TryGetValue(exit.StackId, out WorldStack? stack) && stack.OwnerId == ViewPlayerId)
         {
             return new WorldEventAction.FortificationExit([new AssetSoundKey.CityExit()], stack.Id);
         }

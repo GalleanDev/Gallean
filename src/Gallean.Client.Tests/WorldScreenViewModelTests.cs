@@ -9145,4 +9145,84 @@ public sealed class WorldScreenViewModelTests
         Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
         Assert.That(world.ContinuePathCommand.CanExecute(null), Is.False);
     }
+
+    [Test]
+    public async Task InspectStackChangeOwnerLeaveCityTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(5, 5);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        WorldPlayer newOwner = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map) with { IsAi = true };
+        WorldSubrace newSubrace = new(
+            new WorldSubraceId("undead"),
+            newOwner.Id,
+            WorldSubraceType.Undead,
+            new WorldObjectVariant(5));
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player.Id,
+            new WorldPosition(3, 3),
+            UnitGrid<WorldUnit>.Empty);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            city.Entrance,
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventChangeOwnerEffect(new ScenarioStackReference.Stack(stack.Id), new ScenarioEventStackOwner.Subrace(newSubrace.Id), FirstOnly: true, PlayAnimation: true)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(newOwner.LordId, newOwner.Race, LordCategory.Warrior))
+            .WithPlayer(newOwner)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithSubrace(newSubrace)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithScenarioEvent(scenarioEvent)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
+
+        world.CompleteAnimation();
+        world.CompleteAnimation();
+
+        Assert.That(world.EndTurnCommand.CanExecute(null), Is.True);
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            OwnerId = newOwner.Id,
+            SubraceId = newSubrace.Id,
+            Position = new WorldPosition(4, 4),
+            Direction = WorldStackDirection.South
+        }));
+        Assert.That(world.InspectStackCommand.CanExecute(null), Is.False);
+
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 2);
+
+        Assert.That(gameViewModel.TopScreen, Is.SameAs(world));
+    }
 }
