@@ -718,6 +718,74 @@ public sealed class WorldEngineScenarioEventEffectTests
     }
 
     [Test]
+    public void MoveStackEffectNoPathTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "...^"
+        ]);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 10, leadership: 6);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 10);
+
+        ScenarioLocationDefinition destination = new(new ScenarioLocationId("Dest"), new ScenarioTextId("Destination"), new WorldPosition(3, 0), 0);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventMoveStackEffect(new ScenarioStackReference.Stack(stack.Id), destination.Id)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithScenarioLocation(destination)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        engine.CheckCommand(new WorldStartGameCommand(), [
+            new WorldTurnStartingEvent(player.Id),
+            new WorldStackMovementRestoredEvent(stack.Id, 10),
+            new WorldTurnStartedEvent(player.Id),
+            new WorldTurnResourcesGeneratedEvent(player.Id, new WorldResourceSet(100, 0, 0, 25, 0, 0)),
+            new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id)),
+            new WorldStackRelocatedEvent(stack.Id, new WorldPosition(0, 0), new WorldPosition(1, 0), WorldStackDirection.SouthEast),
+            new WorldStackRelocatedEvent(stack.Id, new WorldPosition(1, 0), new WorldPosition(2, 0), WorldStackDirection.SouthEast),
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventTurnStartedTrigger(player.Id))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+                {
+                    Position = new WorldPosition(2, 0),
+                    Direction = WorldStackDirection.SouthEast
+                }),
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                }
+            }));
+    }
+
+    [Test]
     public void MoveStackEffectTriggererTest()
     {
         WorldMap map = TestHelpers.SimpleMap(6, 3);

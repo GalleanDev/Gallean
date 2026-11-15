@@ -131,7 +131,20 @@ internal partial class WorldEngine
                 }
             }
 
-            return Empty(context.State);
+            ScenarioStackDestination? destination = FindNearestDestination(
+                location.Position.GetAdjacentPositions(),
+                plan,
+                profile,
+                stack.Position);
+
+            if (destination is not null)
+            {
+                return Relocate(stack, destination.Path, destination.Position, finalDirection: null, context.State);
+            }
+            else
+            {
+                return Empty(context.State);
+            }
         }
 
         public ScenarioEventEffectResult Visit(ScenarioEventMoveBesideEffect effect, ScenarioEventEffectContext context)
