@@ -1249,7 +1249,7 @@ internal sealed partial class CityTabViewModel
         {
             WorldCapital capital => new AssetSpriteKey.CapitalImage(WorldState.Players[capital.OwnerId].Race),
             WorldCity city => new AssetSpriteKey.CityImage(city.DefinitionId.Level),
-            _ => null
+            WorldRuin => null
         };
     }
 
