@@ -9,6 +9,9 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
     public static readonly StyledProperty<double> MapScaleProperty =
         AvaloniaProperty.Register<MinimapVisual, double>(nameof(MapScale), 1.0);
 
+    public static readonly StyledProperty<double> MapAspectRatioProperty =
+        AvaloniaProperty.Register<MinimapVisual, double>(nameof(MapAspectRatio), 2.0);
+
     private readonly MinimapRenderer renderer = new();
     private WorldCamera? camera;
     private bool dragging;
@@ -26,13 +29,19 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
 
     static MinimapVisual()
     {
-        AffectsRender<MinimapVisual>(MapScaleProperty);
+        AffectsRender<MinimapVisual>(MapScaleProperty, MapAspectRatioProperty);
     }
 
     public double MapScale
     {
         get => GetValue(MapScaleProperty);
         set => SetValue(MapScaleProperty, value);
+    }
+
+    public double MapAspectRatio
+    {
+        get => GetValue(MapAspectRatioProperty);
+        set => SetValue(MapAspectRatioProperty, value);
     }
 
     public void Attach(WorldCamera worldCamera, WorldScreenSnapshotWorker worker)
@@ -141,8 +150,8 @@ internal sealed class MinimapVisual : AbstractAnimatedVisual
 
     private MinimapLayout? ComputeLayout(WorldMap map)
     {
-        double width = Math.Min(Bounds.Width, Bounds.Height * 2) * MapScale;
-        double height = width / 2.0;
+        double width = Math.Min(Bounds.Width, Bounds.Height * MapAspectRatio) * MapScale;
+        double height = width / MapAspectRatio;
 
         if (width > 0 && height > 0)
         {

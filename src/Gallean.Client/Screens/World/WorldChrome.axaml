@@ -484,6 +484,7 @@
     <Setter Property="Width" Value="164" />
     <Setter Property="Height" Value="164" />
     <Setter Property="MapScale" Value="1.25" />
+    <Setter Property="MapAspectRatio" Value="1.25" />
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
