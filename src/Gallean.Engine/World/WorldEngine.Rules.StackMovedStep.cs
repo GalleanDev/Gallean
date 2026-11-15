@@ -71,16 +71,9 @@ internal partial class WorldEngine
             WorldSite? site = plan.GetSiteAt(stack.Position);
             (WorldUnit leader, _, _) = stack.GetLeader(Context.Definitions);
 
-            if (site is not null)
+            if (site is not null && leader.IsAlive)
             {
-                if (leader.IsAlive && !ThiefCalculator.IsThief(stack, Context.Definitions))
-                {
-                    return EventRuleResult<WorldEvent>.Append(new WorldSiteVisitedEvent(stack.Id, site.Id));
-                }
-                else
-                {
-                    return EventRuleResult<WorldEvent>.Empty;
-                }
+                return EventRuleResult<WorldEvent>.Append(new WorldSiteVisitedEvent(stack.Id, site.Id));
             }
             else
             {
