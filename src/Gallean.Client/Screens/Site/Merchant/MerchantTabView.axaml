@@ -52,15 +52,22 @@
 
     <DataTemplate x:Key="MerchantSellItemTemplate" x:DataType="local:MerchantSellItemViewModel">
       <Button Classes="socket inventory-slot" Classes.selected="{Binding IsSelected}" Command="{Binding SelectCommand}">
-        <local:SpriteVisual SpriteKey="{Binding IconKey}" Stretch="Uniform">
-          <ToolTip.Tip>
-            <StackPanel Spacing="4">
-              <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
-              <TextBlock Text="{Binding Description}" />
-              <ContentControl Content="{Binding Value}" />
-            </StackPanel>
-          </ToolTip.Tip>
-        </local:SpriteVisual>
+        <Panel>
+          <local:SpriteVisual SpriteKey="{Binding IconKey}" Stretch="Uniform">
+            <ToolTip.Tip>
+              <StackPanel Spacing="4">
+                <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
+                <TextBlock Text="{Binding Description}" />
+                <ContentControl Content="{Binding Value}" />
+              </StackPanel>
+            </ToolTip.Tip>
+          </local:SpriteVisual>
+          <Panel Classes="item-count"
+                 IsVisible="{Binding Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=1}">
+            <local:PlateChrome Classes="socket counter" />
+            <local:OutlinedTextBlock Classes="object-name compact" Text="{Binding Count}" />
+          </Panel>
+        </Panel>
       </Button>
     </DataTemplate>
   </UserControl.Resources>

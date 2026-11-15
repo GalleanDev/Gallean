@@ -7,7 +7,9 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
 {
     public MerchantSellItemViewModel(
         MerchantTabViewModel owner,
-        WorldItemId itemId,
+        ItemDefinitionId itemId,
+        int? charges,
+        int count,
         AssetSpriteKey.ItemIcon iconKey,
         string name,
         string description,
@@ -16,6 +18,8 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
         ItemDetailsViewModel details)
     {
         ItemId = itemId;
+        Charges = charges;
+        Count = count;
         IconKey = iconKey;
         Name = name;
         Description = description;
@@ -25,7 +29,9 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
         SelectCommand = new RelayCommand(() => owner.SelectSellItem(this));
     }
 
-    public WorldItemId ItemId { get; }
+    public ItemDefinitionId ItemId { get; }
+    public int? Charges { get; }
+    public int Count { get; }
     public AssetSpriteKey.ItemIcon IconKey { get; }
     public string Name { get; }
     public string Description { get; }
@@ -40,7 +46,7 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
 
     public DragPreview? DragPreview => new(IconKey, DragPreviewType.Item);
 
-    public MerchantSellItemReference Reference => new(ItemId);
+    public MerchantSellItemReference Reference => new(ItemId, Charges);
 
     IDragSourceReference IDragSource.DragReference => Reference;
 

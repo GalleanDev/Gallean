@@ -9,7 +9,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
     private readonly WorldSiteId siteId;
     private readonly WorldStackId stackId;
     private ItemDefinitionId? selectedPurchaseItemId;
-    private WorldItemId? selectedSellItemId;
+    private MerchantSellItemReference? selectedSellItem;
 
     public MerchantTabViewModel(
         GameModel gameModel,
@@ -69,7 +69,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         else
         {
             selectedPurchaseItemId = item.ItemId;
-            selectedSellItemId = null;
+            selectedSellItem = null;
         }
 
         RefreshView();
@@ -82,13 +82,13 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
             return;
         }
 
-        if (selectedSellItemId == item.ItemId)
+        if (selectedSellItem == item.Reference)
         {
-            selectedSellItemId = null;
+            selectedSellItem = null;
         }
         else
         {
-            selectedSellItemId = item.ItemId;
+            selectedSellItem = item.Reference;
             selectedPurchaseItemId = null;
         }
 
@@ -102,9 +102,9 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         {
             await BuyAsync(purchaseItemId);
         }
-        else if (selectedSellItemId is { } sellItemId)
+        else if (selectedSellItem is { } sellItem)
         {
-            await SellAsync(sellItemId);
+            await SellAsync(sellItem);
         }
     }
 
@@ -127,7 +127,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
                 break;
 
             case (MerchantSellItemReference sellItem, DropZoneReference zone) when zone.Zone == SellZone:
-                await SellAsync(sellItem.ItemId);
+                await SellAsync(sellItem);
                 break;
         }
     }
@@ -147,11 +147,12 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         RefreshView();
     }
 
-    private async Task SellAsync(WorldItemId itemId)
+    private async Task SellAsync(MerchantSellItemReference reference)
     {
-        if (await TryDispatchWorldActionAsync(new WorldSellItemCommand(stackId, siteId, itemId)))
+        WorldGetMerchantInfoCommand.SellItem? sellItem = FindSellItem(ResolveMerchantInfo(), reference);
+
+        if (sellItem is not null && await TryDispatchWorldActionAsync(new WorldSellItemCommand(stackId, siteId, sellItem.Item.Id)))
         {
-            selectedSellItemId = null;
             Game.PlaySound(new AssetSoundKey.SitePurchase());
         }
 
@@ -181,14 +182,14 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
 
         WorldGetMerchantInfoCommand.Result info = ResolveMerchantInfo();
 
-        if (selectedPurchaseItemId is { } purchaseItemId && FindPurchaseItem(info, purchaseItemId) is null)
+        if (FindPurchaseItem(info, selectedPurchaseItemId) is null)
         {
             selectedPurchaseItemId = null;
         }
 
-        if (selectedSellItemId is { } sellItemId && FindSellItem(info, sellItemId) is null)
+        if (FindSellItem(info, selectedSellItem) is null)
         {
-            selectedSellItemId = null;
+            selectedSellItem = null;
         }
 
         SiteTitle = GameModel.Texts.GetScenarioText(site.TitleTextId);
@@ -221,7 +222,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
 
     private static WorldGetMerchantInfoCommand.PurchaseItem? FindPurchaseItem(
         WorldGetMerchantInfoCommand.Result info,
-        ItemDefinitionId itemId)
+        ItemDefinitionId? itemId)
     {
         foreach (WorldGetMerchantInfoCommand.PurchaseItem purchaseItem in info.PurchaseItems)
         {
@@ -236,17 +237,19 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
 
     private static WorldGetMerchantInfoCommand.SellItem? FindSellItem(
         WorldGetMerchantInfoCommand.Result info,
-        WorldItemId itemId)
+        MerchantSellItemReference? reference)
     {
+        WorldGetMerchantInfoCommand.SellItem? result = null;
+
         foreach (WorldGetMerchantInfoCommand.SellItem sellItem in info.SellItems)
         {
-            if (sellItem.Item.Id == itemId)
+            if (new MerchantSellItemReference(sellItem.Item.DefinitionId, sellItem.Item.Charges) == reference)
             {
-                return sellItem;
+                result = sellItem;
             }
         }
 
-        return null;
+        return result;
     }
 
     private string? FormatSellUnavailability(WorldItem item)
@@ -328,34 +331,42 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<MerchantSellItemViewModel> result = [];
 
-        foreach (WorldGetMerchantInfoCommand.SellItem sellItem in info.SellItems)
+        foreach (ItemGroup group in ItemGroup.Build([.. info.SellItems.Select(sellItem => sellItem.Item)]))
         {
-            WorldItem worldItem = sellItem.Item;
-            string name = ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId, worldItem.Charges);
-            string description = ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId);
-            AssetSpriteKey.ItemIcon icon = ItemIconResolver.Resolve(GameModel.Definitions, worldItem.DefinitionId);
+            MerchantSellItemReference reference = new(group.DefinitionId, group.Charges);
+            WorldGetMerchantInfoCommand.SellItem? sellItem = FindSellItem(info, reference);
 
-            ItemDetailsViewModel details = ItemDetailsViewModel.Create(
-                worldItem.DefinitionId,
-                worldItem.Charges,
-                resources,
-                GameModel.Definitions,
-                GameModel.Texts);
-
-            MerchantSellItemViewModel item = new(
-                this,
-                worldItem.Id,
-                icon,
-                name,
-                description,
-                sellItem.Value,
-                FormatSellUnavailability(worldItem),
-                details)
+            if (sellItem is not null)
             {
-                IsSelected = selectedSellItemId == worldItem.Id
-            };
+                WorldItem worldItem = sellItem.Item;
+                string name = ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId, worldItem.Charges);
+                string description = ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId);
+                AssetSpriteKey.ItemIcon icon = ItemIconResolver.Resolve(GameModel.Definitions, worldItem.DefinitionId);
 
-            result.Add(item);
+                ItemDetailsViewModel details = ItemDetailsViewModel.Create(
+                    worldItem.DefinitionId,
+                    worldItem.Charges,
+                    resources,
+                    GameModel.Definitions,
+                    GameModel.Texts);
+
+                MerchantSellItemViewModel item = new(
+                    this,
+                    reference.ItemId,
+                    reference.Charges,
+                    group.Items.Length,
+                    icon,
+                    name,
+                    description,
+                    sellItem.Value,
+                    FormatSellUnavailability(worldItem),
+                    details)
+                {
+                    IsSelected = selectedSellItem == reference
+                };
+
+                result.Add(item);
+            }
         }
 
         return result;
@@ -364,27 +375,29 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
     private SiteOfferViewModel? BuildOffer(WorldGetMerchantInfoCommand.Result info)
     {
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
+        WorldGetMerchantInfoCommand.PurchaseItem? purchaseItem = FindPurchaseItem(info, selectedPurchaseItemId);
+        WorldGetMerchantInfoCommand.SellItem? sellItem = FindSellItem(info, selectedSellItem);
 
-        if (selectedPurchaseItemId is { } purchaseItemId && FindPurchaseItem(info, purchaseItemId) is { } purchaseItem)
+        if (purchaseItem is not null)
         {
             ItemDetailsViewModel details = ItemDetailsViewModel.Create(
-                purchaseItemId,
+                purchaseItem.ItemId,
                 charges: null,
                 resources,
                 GameModel.Definitions,
                 GameModel.Texts);
 
             return new SiteOfferViewModel(
-                new IconViewModel.Item(ItemIconResolver.Resolve(GameModel.Definitions, purchaseItemId)),
+                new IconViewModel.Item(ItemIconResolver.Resolve(GameModel.Definitions, purchaseItem.ItemId)),
                 details,
-                ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, purchaseItemId, charges: null),
+                ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, purchaseItem.ItemId, charges: null),
                 TrSpans("In stock: {0:*}", purchaseItem.Count),
-                ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, purchaseItemId),
+                ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, purchaseItem.ItemId),
                 Tr("Buy"),
                 new OfferStatusViewModel(new OfferPriceViewModel(purchaseItem.Cost, resources), FormatPurchaseUnavailability(purchaseItem)),
                 TradeCommand);
         }
-        else if (selectedSellItemId is { } sellItemId && FindSellItem(info, sellItemId) is { } sellItem)
+        else if (sellItem is not null)
         {
             WorldItem worldItem = sellItem.Item;
 
@@ -438,7 +451,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
 
         if (dragged is MerchantSellItemReference reference)
         {
-            sellItem = FindSellItem(info, reference.ItemId);
+            sellItem = FindSellItem(info, reference);
         }
 
         if (sellItem is not null)

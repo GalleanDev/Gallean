@@ -104,7 +104,7 @@ public sealed class MerchantTabViewModelTests
 
         foreach (MerchantSellItemViewModel item in items)
         {
-            rows.Add($"{item.Name} | {item.Description} | Sell for: {WorldResourceFormatter.Format(item.Value.Resources)} | {FormatSellAvailability(item.UnavailableReason)} | {FormatSelection(item.IsSelected)}");
+            rows.Add($"{item.ItemId.Value} | {item.Name} | {item.Description} | Count: {item.Count} | Sell for: {WorldResourceFormatter.Format(item.Value.Resources)} | {FormatSellAvailability(item.UnavailableReason)} | {FormatSelection(item.IsSelected)}");
         }
 
         return rows;
@@ -251,7 +251,7 @@ public sealed class MerchantTabViewModelTests
             "potion | name | desc | In stock: 1 | Cost: 50 gold | available | selected"
         ]));
         Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "name | desc | Sell for: 10 gold | available | not selected"
+            "potion | name | desc | Count: 1 | Sell for: 10 gold | available | not selected"
         ]));
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
@@ -379,8 +379,7 @@ public sealed class MerchantTabViewModelTests
 
         Assert.That(screen.PurchaseItems, Is.Empty);
         Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "name | desc | Sell for: 10 gold | available | not selected",
-            "name | desc | Sell for: 10 gold | available | not selected"
+            "potion | name | desc | Count: 2 | Sell for: 10 gold | available | not selected"
         ]));
 
         screen.SellItems[0].SelectCommand.Execute(null);
@@ -389,12 +388,19 @@ public sealed class MerchantTabViewModelTests
 
         await Assert.NotNull(screen.Offer).ActCommand.ExecuteAsync(null);
 
-        Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([secondPotionItem])));
+        Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([potionItem])));
         Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(110, 0, 0, 0, 0, 0)));
-        Assert.That(screen.Offer, Is.Null);
+        Assert.That(FormatOffer(Assert.NotNull(screen.Offer)), Is.EqualTo("name | From your inventory | desc | 10 gold | Sell | available | enabled"));
         Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "name | desc | Sell for: 10 gold | available | not selected"
+            "potion | name | desc | Count: 1 | Sell for: 10 gold | available | selected"
         ]));
+
+        await Assert.NotNull(screen.Offer).ActCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([])));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(120, 0, 0, 0, 0, 0)));
+        Assert.That(screen.Offer, Is.Null);
+        Assert.That(screen.SellItems, Is.Empty);
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
 
@@ -442,7 +448,7 @@ public sealed class MerchantTabViewModelTests
             "scroll | name | desc | In stock: 2 | Cost: 30 gold | available | selected"
         ]));
         Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "name | desc | Sell for: 10 gold | available | not selected"
+            "potion | name | desc | Count: 1 | Sell for: 10 gold | available | not selected"
         ]));
 
         screen.SellItems[0].SelectCommand.Execute(null);
@@ -452,7 +458,7 @@ public sealed class MerchantTabViewModelTests
             "scroll | name | desc | In stock: 2 | Cost: 30 gold | available | not selected"
         ]));
         Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "name | desc | Sell for: 10 gold | available | selected"
+            "potion | name | desc | Count: 1 | Sell for: 10 gold | available | selected"
         ]));
     }
 
@@ -675,5 +681,57 @@ public sealed class MerchantTabViewModelTests
             SpellEffect: null,
             CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(80, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
+    }
+
+    [Test]
+    public void GroupTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 4);
+        ItemDefinition potion = Item("potion", new WorldResourceSet(50, 0, 0, 0, 0, 0));
+        ItemDefinition scroll = Item("scroll", new WorldResourceSet(30, 0, 0, 0, 0, 0));
+        WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+        WorldItem scrollItem = new(new WorldItemId("Scroll"), scroll.Id, Charges: null);
+        WorldItem secondPotionItem = new(new WorldItemId("SecondPotion"), potion.Id, Charges: null);
+
+        WorldStack stack = Stack(new WorldUnitId("leader"), player.Id, new WorldPosition(4, 4), leaderDefinition, [potionItem, scrollItem, secondPotionItem]);
+        WorldMerchantSite site = Site([]);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithRace(TestHelpers.SimpleRace(WorldRace.Human, new GlobalTextId("Empire"), WorldMapTerrain.Human))
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(potion)
+            .WithDefinition(scroll)
+            .WithStack(stack)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        MerchantTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
+
+        Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
+            "potion | name | desc | Count: 2 | Sell for: 10 gold | available | not selected",
+            "scroll | name | desc | Count: 1 | Sell for: 6 gold | available | not selected"
+        ]));
+
+        screen.SellItems[1].SelectCommand.Execute(null);
+
+        Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
+            "potion | name | desc | Count: 2 | Sell for: 10 gold | available | not selected",
+            "scroll | name | desc | Count: 1 | Sell for: 6 gold | available | selected"
+        ]));
     }
 }
