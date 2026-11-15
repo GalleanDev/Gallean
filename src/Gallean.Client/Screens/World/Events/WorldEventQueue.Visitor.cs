@@ -522,7 +522,7 @@ internal sealed partial class WorldEventQueue
     {
         if (ev.Target is not null)
         {
-            queue.Add(new Entry.SpellCast(step.NewState, ev.CasterId, ev.SpellId, ev.Target.Center, SummonedStackId: null));
+            queue.Add(new Entry.SpellCast(step.NewState, ev.CasterId, ev.SpellId, ev.Target.Center, ev.Target.Radius, SummonedStackId: null));
         }
         else if (ev.CasterId is not null)
         {

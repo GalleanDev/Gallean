@@ -137,12 +137,12 @@ public sealed class WorldEventQueueTests
         WorldState state,
         WorldPlayerId casterId,
         WorldSpellDefinitionId spellId,
-        WorldPosition position)
+        WorldSpellTarget target)
     {
         return new EngineStep<WorldState, WorldEvent>(
             state,
             state,
-            new WorldSpellCastEvent(casterId, spellId, new WorldSpellTarget(position, Radius: 0), WorldResourceSet.Empty, WorldSpellCastSource.Player));
+            new WorldSpellCastEvent(casterId, spellId, target, WorldResourceSet.Empty, WorldSpellCastSource.Player));
     }
 
     private static WorldScenarioMessage Message(WorldPlayerId triggererId)
@@ -1060,7 +1060,7 @@ public sealed class WorldEventQueueTests
         WorldPosition target = new(2, 0);
         WorldState state = BuildStateWithStack(new WorldUnitId("leader"), stackId, casterId, new WorldPlayerId(2));
         WorldStack summoned = state.Stacks[stackId] with { Id = new WorldStackId("Summoned"), Position = target };
-        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, target);
+        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, new WorldSpellTarget(target, Radius: 0));
         EngineStep<WorldState, WorldEvent> created = StackSummoned(state, summoned);
 
         Subject<EngineStep<WorldState, WorldEvent>> events = new();
@@ -1070,7 +1070,7 @@ public sealed class WorldEventQueueTests
         events.OnNext(created);
 
         Entry? entry = queue.PlayNext();
-        Assert.That(entry, Is.EqualTo(new Entry.SpellCast(created.NewState, casterId, spellId, target, summoned.Id)));
+        Assert.That(entry, Is.EqualTo(new Entry.SpellCast(created.NewState, casterId, spellId, target, Radius: 0, summoned.Id)));
 
         queue.Stop();
 
@@ -1084,7 +1084,7 @@ public sealed class WorldEventQueueTests
         WorldSpellDefinitionId spellId = new("G000SS0002");
         WorldPosition target = new(1, 0);
         WorldState state = BuildState();
-        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, target);
+        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, new WorldSpellTarget(target, Radius: 0));
 
         Subject<EngineStep<WorldState, WorldEvent>> events = new();
         WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
@@ -1092,7 +1092,7 @@ public sealed class WorldEventQueueTests
         events.OnNext(cast);
 
         Entry? entry = queue.PlayNext();
-        Assert.That(entry, Is.EqualTo(new Entry.SpellCast(cast.NewState, casterId, spellId, target, SummonedStackId: null)));
+        Assert.That(entry, Is.EqualTo(new Entry.SpellCast(cast.NewState, casterId, spellId, target, Radius: 0, SummonedStackId: null)));
 
         queue.Stop();
 
@@ -1108,7 +1108,7 @@ public sealed class WorldEventQueueTests
         WorldPosition target = new(2, 0);
         WorldState state = BuildStateWithStack(new WorldUnitId("leader"), stackId, casterId, new WorldPlayerId(2));
         WorldStack summoned = state.Stacks[stackId] with { Id = new WorldStackId("Summoned"), Position = new WorldPosition(1, 1) };
-        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, target);
+        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, new WorldSpellTarget(target, Radius: 0));
         EngineStep<WorldState, WorldEvent> created = StackSummoned(state, summoned);
 
         Subject<EngineStep<WorldState, WorldEvent>> events = new();
@@ -1118,7 +1118,7 @@ public sealed class WorldEventQueueTests
         events.OnNext(created);
 
         Entry? first = queue.PlayNext();
-        Assert.That(first, Is.EqualTo(new Entry.SpellCast(cast.NewState, casterId, spellId, target, SummonedStackId: null)));
+        Assert.That(first, Is.EqualTo(new Entry.SpellCast(cast.NewState, casterId, spellId, target, Radius: 0, SummonedStackId: null)));
 
         queue.Stop();
 
@@ -1127,12 +1127,37 @@ public sealed class WorldEventQueueTests
     }
 
     [Test]
+    public void SummonInTargetAreaTest()
+    {
+        WorldStackId stackId = new("Stack1");
+        WorldPlayerId casterId = new(1);
+        WorldSpellDefinitionId spellId = new("G000SS0008");
+        WorldState state = BuildStateWithStack(new WorldUnitId("leader"), stackId, casterId, new WorldPlayerId(2));
+        WorldStack summoned = state.Stacks[stackId] with { Id = new WorldStackId("Summoned"), Position = new WorldPosition(1, 1) };
+        EngineStep<WorldState, WorldEvent> cast = SpellCast(state, casterId, spellId, new WorldSpellTarget(new WorldPosition(2, 0), Radius: 1));
+        EngineStep<WorldState, WorldEvent> created = StackSummoned(state, summoned);
+
+        Subject<EngineStep<WorldState, WorldEvent>> events = new();
+        WorldEventQueue queue = new(GameScenarioProvider.Empty, events);
+
+        events.OnNext(cast);
+        events.OnNext(created);
+
+        Entry? entry = queue.PlayNext();
+        Assert.That(entry, Is.EqualTo(new Entry.SpellCast(created.NewState, casterId, spellId, new WorldPosition(1, 1), Radius: 1, summoned.Id)));
+
+        queue.Stop();
+
+        Assert.That(queue.IsIdle, Is.True);
+    }
+
+    [Test]
     public void SpellFocusTest()
     {
         WorldPlayerId casterId = new(1);
         WorldPosition target = new(2, 0);
         WorldState state = BuildState();
-        Entry.SpellCast entry = new(state, casterId, new WorldSpellDefinitionId("G000SS0008"), target, SummonedStackId: null);
+        Entry.SpellCast entry = new(state, casterId, new WorldSpellDefinitionId("G000SS0008"), target, Radius: 0, SummonedStackId: null);
 
         Assert.That(entry.GetFocusPosition(casterId), Is.Null);
         Assert.That(entry.GetFocusPosition(new WorldPlayerId(2)), Is.EqualTo(target));

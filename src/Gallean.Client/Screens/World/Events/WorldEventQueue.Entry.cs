@@ -268,6 +268,7 @@ internal sealed partial class WorldEventQueue
             WorldPlayerId? CasterId,
             WorldSpellDefinitionId SpellId,
             WorldPosition Position,
+            int Radius,
             WorldStackId? SummonedStackId) : Animated(State)
         {
             public override Entry? TryExtend(EngineStep<WorldState, WorldEvent> step)
@@ -279,9 +280,10 @@ internal sealed partial class WorldEventQueue
 
                 return step.Event switch
                 {
-                    WorldStackCreatedEvent data when data.Stack.Position == Position => this with
+                    WorldStackCreatedEvent data when data.Stack.Position.GetDistance(Position) <= Radius => this with
                     {
                         State = step.NewState,
+                        Position = data.Stack.Position,
                         SummonedStackId = data.Stack.Id
                     },
                     _ => null
