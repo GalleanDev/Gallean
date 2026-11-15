@@ -342,7 +342,8 @@ internal sealed class WorldEventActionBuilder(
         {
             WorldCapital => Sound(new AssetSoundKey.CityEnter()),
             WorldCity => Sound(new AssetSoundKey.CityEnter()),
-            _ => WorldEventAction.None
+            WorldRuin => WorldEventAction.None,
+            null => WorldEventAction.None
         };
     }
 
