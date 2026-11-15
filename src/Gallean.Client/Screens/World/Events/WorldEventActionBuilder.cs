@@ -172,6 +172,7 @@ internal sealed class WorldEventActionBuilder(
     private WorldEventAction BuildGlobalSpellCast(Entry.GlobalSpellCast spellCast)
     {
         WorldVisibility visibility = WorldVisibility.Create(spellCast.State, ViewPlayerId, fogEnabled);
+        WorldPlan plan = WorldPlan.For(spellCast.State);
 
         if (visibility.IsRevealed(spellCast.Position))
         {
@@ -179,7 +180,6 @@ internal sealed class WorldEventActionBuilder(
         }
         else
         {
-            WorldPlan plan = WorldPlan.For(spellCast.State);
             WorldCapital? capital = plan.GetCapital(ViewPlayerId);
 
             if (capital is not null)
