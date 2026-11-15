@@ -1178,11 +1178,11 @@ public sealed class BattleEngineAiActionTests
     {
         UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
         UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 10);
-        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 300, initiative: 30, damage: 50);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 600, initiative: 30, damage: 100);
 
         BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
         BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
-        BattleUnit enemy = Unit(2, enemyDefinition.Id, BattleSide.Defender, hitpoints: 300);
+        BattleUnit enemy = Unit(2, enemyDefinition.Id, BattleSide.Defender, hitpoints: 600);
 
         BattleEngine engine = new TestBattleEngineBuilder()
             .WithDefinition(leaderDefinition)
