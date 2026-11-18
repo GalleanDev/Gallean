@@ -368,14 +368,20 @@
                     local:PlateChrome.TextureSeed="1"
                     Command="{Binding ToggleAutoBattleCommand}"
                     ToolTip.Tip="{local:Text 'Let the computer take your turns'}">
-              <local:HotkeyLabel Text="{local:Text 'Auto-play'}" Hotkey="A" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <local:IconVisual Moniker="Computer" Foreground="{Binding $parent[Button].Foreground}" />
+                <local:HotkeyLabel Text="{local:Text 'Auto-play'}" Hotkey="A" />
+              </StackPanel>
             </Button>
             <Button Classes="pill"
                     local:PlateChrome.TextureSeed="2"
                     Command="{Binding AutoResolveCommand}"
                     ToolTip.Tip="{Binding AutoResolveTip}"
                     ToolTip.ShowOnDisabled="True">
-              <local:HotkeyLabel Text="{local:Text 'Instant resolve'}" Hotkey="I" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <local:IconVisual Moniker="ChevronsRight" Foreground="{Binding $parent[Button].Foreground}" />
+                <local:HotkeyLabel Text="{local:Text 'Instant resolve'}" Hotkey="I" />
+              </StackPanel>
             </Button>
             <Button Classes="icon-button"
                     local:PlateChrome.TextureSeed="3"
