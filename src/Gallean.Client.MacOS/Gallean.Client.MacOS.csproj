@@ -9,6 +9,7 @@
     <IsPublishable>$([MSBuild]::IsOSPlatform('OSX'))</IsPublishable>
     <PublishTrimmed>$(IsPublishable)</PublishTrimmed>
     <PublishAot>$(IsPublishable)</PublishAot>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <_PublishAllRuntimeIdentifiers Condition="'$(IsPublishable)' == 'true' And '$(RuntimeIdentifier)' == '' And '$(PublishDir)' == ''">true</_PublishAllRuntimeIdentifiers>
   </PropertyGroup>
 
