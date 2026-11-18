@@ -10,14 +10,12 @@ internal sealed class LtxLora(Dictionary<string, LtxLoraEntry> entries, double s
         {
             foreach ((string name, torch.Tensor weight) in weights)
             {
-                if (!entries.TryGetValue(prefix + name, out LtxLoraEntry? entry))
+                if (entries.TryGetValue(prefix + name, out LtxLoraEntry? entry))
                 {
-                    continue;
+                    using torch.Tensor delta = Delta(weight, entry.Down, entry.Up, strength);
+
+                    weight.add_(delta);
                 }
-
-                using torch.Tensor delta = Delta(weight, entry.Down, entry.Up, strength);
-
-                weight.add_(delta);
             }
         }
     }
