@@ -16,7 +16,7 @@ internal sealed record BattleRenderState(
 {
     public sealed record HitTarget(BattleGridTile Tile, Rect Bounds);
 
-    public sealed record Placeholder(BattleGridTile Tile, Color? Marker);
+    public sealed record Placeholder(BattleGridFootprint Footprint, Color? Marker);
 
     public sealed record Unit(
         BattleUnitId Id,

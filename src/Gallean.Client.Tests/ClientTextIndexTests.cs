@@ -13,6 +13,7 @@ public sealed class ClientTextIndexTests
         Assert.That(settings, Is.EquivalentTo([
             "Autosave limit",
             "Autosave interval",
+            "Battle position",
             "Battle speed",
             "Close",
             "Display",
@@ -26,6 +27,7 @@ public sealed class ClientTextIndexTests
             "Render resolution",
             "Settings",
             "Sound and music",
+            "The side of the battlefield your units stand on.",
             "Windowed mode (F11)"
         ]));
     }

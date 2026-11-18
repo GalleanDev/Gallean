@@ -14,11 +14,13 @@ internal sealed class BattleRenderOperation(
     BattleRenderContent content,
     BattleAnimationState? animation,
     BattleWorldTransitionState? transition,
+    BattleSideSwitchState? sideSwitch,
     IAssetProvider assets,
     BattleRenderer renderer,
     TimeSpan loopTime,
     TimeSpan sequenceTime,
     TimeSpan transitionTime,
+    TimeSpan sideSwitchTime,
     float renderResolution,
     bool lightOverlay,
     bool hitboxOverlay,
@@ -54,7 +56,7 @@ internal sealed class BattleRenderOperation(
         bool measure = diagnostics.IsEnabled;
         long renderStartTimestamp = measure ? Stopwatch.GetTimestamp() : 0;
 
-        renderer.Render(canvas, content, state, animation, transition, assets, loopTime, sequenceTime, transitionTime, renderResolution, lightOverlay, hitboxOverlay);
+        renderer.Render(canvas, content, state, animation, transition, sideSwitch, assets, loopTime, sequenceTime, transitionTime, sideSwitchTime, renderResolution, lightOverlay, hitboxOverlay);
 
         canvas.Restore();
 

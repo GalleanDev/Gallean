@@ -1,4 +1,5 @@
 using Avalonia;
+using Gallean.Configuration;
 using SkiaSharp;
 
 namespace Gallean.Client;
@@ -51,11 +52,11 @@ internal sealed partial class BattleRenderContentProvider
         {
             List<Point> points = [];
 
-            foreach (BattleSide side in Enum.GetValues<BattleSide>())
+            foreach (BattlePosition battlePosition in Enum.GetValues<BattlePosition>())
             {
                 foreach (GridPosition position in GridPosition.All)
                 {
-                    points.Add(BattleRenderLayout.GetFootPoint(new BattleGridFootprint(side, position, false)));
+                    points.Add(BattleRenderLayout.GetFootPoint(new BattleGridFootprint(battlePosition, position, false)));
                 }
             }
 

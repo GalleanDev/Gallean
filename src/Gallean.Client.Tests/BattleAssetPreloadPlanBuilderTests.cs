@@ -1,3 +1,4 @@
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Engine.Tests;
 
@@ -39,15 +40,15 @@ public sealed class BattleAssetPreloadPlanBuilderTests
         }
     }
 
-    private static BattleRenderState.Unit RenderUnit(UnitDefinition definition, int id, BattleSide side, BattleUnitState.Auras auras)
+    private static BattleRenderState.Unit RenderUnit(UnitDefinition definition, int id, BattlePosition battlePosition, BattleSide facing, BattleUnitState.Auras auras)
     {
         return new BattleRenderState.Unit(
             Id: new BattleUnitId(id),
             DefinitionId: definition.Id,
             Race: definition.Race,
             DeathAnimation: definition.DeathAnimation,
-            Footprint: new BattleGridFootprint(side, GridPosition.FrontCenter, definition.IsLarge),
-            Facing: side,
+            Footprint: new BattleGridFootprint(battlePosition, GridPosition.FrontCenter, definition.IsLarge),
+            Facing: facing,
             IdleOffset: TimeSpan.Zero,
             CorpseVariant: 0,
             Hitpoints: definition.MaxHitpoints,
@@ -128,8 +129,8 @@ public sealed class BattleAssetPreloadPlanBuilderTests
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             [
-                RenderUnit(attackerDefinition, 1, BattleSide.Attacker, new BattleUnitState.Auras(attackerAura, Attack: null, Hit: null)),
-                RenderUnit(defenderDefinition, 2, BattleSide.Defender, BattleUnitState.Auras.None)
+                RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, new BattleUnitState.Auras(attackerAura, Attack: null, Hit: null)),
+                RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
             ],
             Placeholders: [],
             HitTargets: [],
@@ -261,8 +262,8 @@ public sealed class BattleAssetPreloadPlanBuilderTests
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             [
-                RenderUnit(attackerDefinition, 1, BattleSide.Attacker, BattleUnitState.Auras.None),
-                RenderUnit(defenderDefinition, 2, BattleSide.Defender, BattleUnitState.Auras.None)
+                RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
+                RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
             ],
             Placeholders: [],
             HitTargets: [],
@@ -409,8 +410,8 @@ public sealed class BattleAssetPreloadPlanBuilderTests
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             [
-                RenderUnit(attackerDefinition, 1, BattleSide.Attacker, BattleUnitState.Auras.None),
-                RenderUnit(defenderDefinition, 2, BattleSide.Defender, BattleUnitState.Auras.None)
+                RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
+                RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
             ],
             Placeholders: [],
             HitTargets: [],
@@ -525,8 +526,8 @@ public sealed class BattleAssetPreloadPlanBuilderTests
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             [
-                RenderUnit(attackerDefinition, 1, BattleSide.Attacker, BattleUnitState.Auras.None),
-                RenderUnit(defenderDefinition, 2, BattleSide.Defender, BattleUnitState.Auras.None)
+                RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
+                RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
             ],
             Placeholders: [],
             HitTargets: [],
@@ -695,8 +696,8 @@ public sealed class BattleAssetPreloadPlanBuilderTests
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             [
-                RenderUnit(attackerDefinition, 1, BattleSide.Attacker, BattleUnitState.Auras.None),
-                RenderUnit(defenderDefinition, 2, BattleSide.Defender, BattleUnitState.Auras.None)
+                RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
+                RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
             ],
             Placeholders: [],
             HitTargets: [],

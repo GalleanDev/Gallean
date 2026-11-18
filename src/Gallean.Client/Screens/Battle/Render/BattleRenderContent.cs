@@ -8,4 +8,5 @@ internal sealed record BattleRenderContent(
     BattleRainShaderProgram RainShaderProgram,
     BattleShadowShaderProgram ShadowShaderProgram,
     BattleWorldTransitionShaderProgram TransitionShaderProgram,
+    BattleSideSwitchShaderProgram SideSwitchShaderProgram,
     double ShadowStrength);

@@ -14,6 +14,7 @@ public sealed class ShaderLibraryTests
             new ShaderKey("BattleFluid", "BattleFluid.sksl"),
             new ShaderKey("BattleRain", "BattleRain.sksl"),
             new ShaderKey("BattleShadow", "BattleShadow.sksl"),
+            new ShaderKey("BattleSideSwitch", "BattleSideSwitch.sksl"),
             new ShaderKey("BattleUnit", "BattleUnit.sksl"),
             new ShaderKey("BattleWorldTransition", "BattleWorldTransition.sksl"),
             new ShaderKey("GalleanLogo", "GalleanLogo.sksl"),

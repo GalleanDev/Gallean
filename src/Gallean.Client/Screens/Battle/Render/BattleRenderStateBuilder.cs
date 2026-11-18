@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Media;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using static Gallean.Client.BattleRenderState;
 using static Gallean.Client.BattleUnitState;
@@ -16,6 +17,7 @@ internal sealed class BattleRenderStateBuilder(
     IAssetMetadataProvider assets,
     AssetSpriteKey.BattleBackground background,
     BattleEnvironment environment,
+    BattlePositions positions,
     bool isAiTurn,
     BattleActionTarget? selectedTarget,
     IReadOnlyDictionary<BattleGridTile, BattleActionTarget> actionTargets,
@@ -95,7 +97,8 @@ internal sealed class BattleRenderStateBuilder(
             (int row, int column) = GetPanelCell(position, isLarge, isFacingRight);
             int columnSpan = isLarge ? 2 : 1;
             BattleGridTile tile = new(side, position);
-            BattleSide facing = GetFacing(unit, side);
+            BattlePosition battlePosition = positions.GetPosition(side);
+            BattleSide facing = GetFacing(unit, battlePosition);
             HighlightType highlightType = ResolveUnitHighlightType(tile);
             Color? marker = ResolveGridMarker(highlightType);
             Presence presence = ResolvePresence(unit);
@@ -227,8 +230,10 @@ internal sealed class BattleRenderStateBuilder(
         foreach (BattleGridTile tile in GetSummonTiles())
         {
             HighlightType highlightType = ResolvePlaceholderHighlightType(tile);
+            BattlePosition battlePosition = positions.GetPosition(tile.Side);
+            BattleGridFootprint footprint = new(battlePosition, tile.Position, IsLarge: false);
 
-            result.Add(new Placeholder(tile, ResolveGroundMarker(highlightType)));
+            result.Add(new Placeholder(footprint, ResolveGroundMarker(highlightType)));
         }
 
         return result;
@@ -280,7 +285,9 @@ internal sealed class BattleRenderStateBuilder(
         {
             if (unit.Presence != Presence.Absent)
             {
-                BattleGridTile tile = new(unit.Footprint.Side, unit.Footprint.Position);
+                BattleGridFootprint footprint = unit.Footprint;
+                BattleSide side = positions.GetSide(footprint.BattlePosition);
+                BattleGridTile tile = new(side, footprint.Position);
 
                 targets.Add(new HitTarget(tile, ResolveHitBounds(unit)));
             }
@@ -288,9 +295,11 @@ internal sealed class BattleRenderStateBuilder(
 
         foreach (Placeholder placeholder in placeholders)
         {
-            BattleGridFootprint footprint = new(placeholder.Tile.Side, placeholder.Tile.Position, IsLarge: false);
+            BattleGridFootprint footprint = placeholder.Footprint;
+            BattleSide side = positions.GetSide(footprint.BattlePosition);
+            BattleGridTile tile = new(side, footprint.Position);
 
-            targets.Add(new HitTarget(placeholder.Tile, BattleRenderLayout.GetPlaceholderBounds(footprint)));
+            targets.Add(new HitTarget(tile, BattleRenderLayout.GetPlaceholderBounds(footprint)));
         }
 
         return targets;
@@ -342,12 +351,13 @@ internal sealed class BattleRenderStateBuilder(
 
         foreach ((BattleUnit unit, GridPosition position) in grid.GetUnits())
         {
-            BattleGridFootprint footprint = new(side, position, grid.IsLargeAt(position));
+            BattleGridTile tile = new(side, position);
+            BattlePosition battlePosition = positions.GetPosition(side);
+            BattleGridFootprint footprint = new(battlePosition, position, grid.IsLargeAt(position));
             UnitDefinitionId definitionId = unit.DefinitionId;
             UnitDefinition definition = definitions.GetUnit(definitionId);
 
-            BattleGridTile tile = new(side, position);
-            BattleSide facing = GetFacing(unit, side);
+            BattleSide facing = GetFacing(unit, footprint.BattlePosition);
             Presence presence = ResolvePresence(unit);
             HighlightType highlightType = ResolveUnitHighlightType(tile);
             Color? marker = ResolveGroundMarker(highlightType);
@@ -391,7 +401,7 @@ internal sealed class BattleRenderStateBuilder(
             }
         }
 
-        return TimeSpan.FromTicks(StableHash.Combine((int)footprint.Side, footprint.Position.ToIndex()) % TimeSpan.TicksPerSecond);
+        return TimeSpan.FromTicks(StableHash.Combine((int)footprint.BattlePosition, footprint.Position.ToIndex()) % TimeSpan.TicksPerSecond);
     }
 
     private static Presence ResolvePresence(BattleUnit unit)
@@ -410,15 +420,17 @@ internal sealed class BattleRenderStateBuilder(
         }
     }
 
-    private static BattleSide GetFacing(BattleUnit unit, BattleSide side)
+    private static BattleSide GetFacing(BattleUnit unit, BattlePosition battlePosition)
     {
+        BattleSide facing = battlePosition.GetFacing();
+
         if (unit.HasAnyStatusEffect<BattleRetreatStatusEffect, BattleRetreatedStatusEffect>())
         {
-            return side.GetOpposite();
+            return facing.GetOpposite();
         }
         else
         {
-            return side;
+            return facing;
         }
     }
 

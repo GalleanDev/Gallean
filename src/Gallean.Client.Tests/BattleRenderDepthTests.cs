@@ -1,8 +1,10 @@
+using Gallean.Configuration;
+
 namespace Gallean.Client.Tests;
 
 public sealed class BattleRenderDepthTests
 {
-    private static string FormatFootprint(BattleSide side, GridPosition position)
+    private static string FormatFootprint(BattlePosition battlePosition, GridPosition position)
     {
         string line;
         if (position.IsFrontLine)
@@ -28,19 +30,19 @@ public sealed class BattleRenderDepthTests
                 break;
         }
 
-        return $"{side.ToString().ToLowerInvariant()} {line}-{flank}";
+        return $"{battlePosition.ToString().ToLowerInvariant()} {line}-{flank}";
     }
 
     private static IReadOnlyList<string> FormatDrawOrder()
     {
         List<(int Depth, string Part)> parts = [];
 
-        foreach (BattleSide side in Enum.GetValues<BattleSide>())
+        foreach (BattlePosition battlePosition in Enum.GetValues<BattlePosition>())
         {
             foreach (GridPosition position in GridPosition.All)
             {
-                BattleGridFootprint footprint = new(side, position, IsLarge: false);
-                string name = FormatFootprint(side, position);
+                BattleGridFootprint footprint = new(battlePosition, position, IsLarge: false);
+                string name = FormatFootprint(battlePosition, position);
 
                 parts.Add((BattleRenderDepth.GetUnitDepth(footprint), $"{name} unit"));
                 parts.Add((BattleRenderDepth.GetEffectDepth(footprint), $"{name} effect"));
@@ -54,30 +56,30 @@ public sealed class BattleRenderDepthTests
     public void DrawOrderTest()
     {
         Assert.That(FormatDrawOrder(), Is.EqualTo([
-            "attacker back-top unit",
-            "attacker back-top effect",
-            "attacker front-top unit",
-            "attacker front-top effect",
-            "attacker back-center unit",
-            "attacker back-center effect",
-            "attacker front-center unit",
-            "attacker front-center effect",
-            "attacker back-bottom unit",
-            "attacker back-bottom effect",
-            "attacker front-bottom unit",
-            "attacker front-bottom effect",
-            "defender front-top unit",
-            "defender front-top effect",
-            "defender back-top unit",
-            "defender back-top effect",
-            "defender front-center unit",
-            "defender front-center effect",
-            "defender back-center unit",
-            "defender back-center effect",
-            "defender front-bottom unit",
-            "defender front-bottom effect",
-            "defender back-bottom unit",
-            "defender back-bottom effect"
+            "left back-top unit",
+            "left back-top effect",
+            "left front-top unit",
+            "left front-top effect",
+            "left back-center unit",
+            "left back-center effect",
+            "left front-center unit",
+            "left front-center effect",
+            "left back-bottom unit",
+            "left back-bottom effect",
+            "left front-bottom unit",
+            "left front-bottom effect",
+            "right front-top unit",
+            "right front-top effect",
+            "right back-top unit",
+            "right back-top effect",
+            "right front-center unit",
+            "right front-center effect",
+            "right back-center unit",
+            "right back-center effect",
+            "right front-bottom unit",
+            "right front-bottom effect",
+            "right back-bottom unit",
+            "right back-bottom effect"
         ]));
     }
 }

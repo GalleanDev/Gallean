@@ -1,3 +1,5 @@
+using Gallean.Configuration;
+
 namespace Gallean.Client;
 
 internal static class BattleRenderDepth
@@ -18,23 +20,20 @@ internal static class BattleRenderDepth
 
     private static int GetTileDepth(BattleGridFootprint footprint)
     {
-        int side = GetSideOrder(footprint.Side);
+        int side = GetSideOrder(footprint.BattlePosition);
         int flank = GetFlankOrder(footprint.Position);
         int line = GetLineOrder(footprint);
 
         return ((side * GridPosition.FlankCount + flank) * GridPosition.LineCount + line) * LayerCount;
     }
 
-    private static int GetSideOrder(BattleSide side)
+    private static int GetSideOrder(BattlePosition position)
     {
-        if (side == BattleSide.Attacker)
+        return position switch
         {
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
+            BattlePosition.Left => 0,
+            BattlePosition.Right => 1
+        };
     }
 
     private static int GetFlankOrder(GridPosition position)
@@ -56,7 +55,7 @@ internal static class BattleRenderDepth
 
     private static bool IsNearViewer(BattleGridFootprint footprint)
     {
-        if (footprint.Side == BattleSide.Attacker)
+        if (footprint.BattlePosition == BattlePosition.Left)
         {
             return footprint.Position.IsFrontLine;
         }

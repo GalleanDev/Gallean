@@ -1,4 +1,5 @@
 using Avalonia;
+using Gallean.Configuration;
 
 namespace Gallean.Client;
 
@@ -30,8 +31,8 @@ internal static class BattleRenderLayout
     private static readonly Vector SmallAnimationOffset = new(-365, -410);
     private static readonly Vector LargeAnimationOffset = new(-365, -365);
 
-    private static readonly Vector LargeAttackerOffset = new(-30, -60);
-    private static readonly Vector LargeDefenderOffset = new(35, -20);
+    private static readonly Vector LargeLeftOffset = new(-30, -60);
+    private static readonly Vector LargeRightOffset = new(35, -20);
 
     private static readonly double SmallMarkerRadius = ScaleMarkerRadius(0.32);
     private static readonly double LargeMarkerRadius = ScaleMarkerRadius(0.6);
@@ -41,13 +42,13 @@ internal static class BattleRenderLayout
     private static readonly Vector GroundFlankStep = new(118.6, -57.0);
     private static readonly Vector GroundDepthStep = new(95.5, 68.3);
 
-    private static readonly (int X, int Y)[] AttackerPlaceholders =
+    private static readonly (int X, int Y)[] LeftPlaceholders =
     [
         (116, 253), (245, 195), (345, 145),
         (20, 180), (145, 126), (262, 93)
     ];
 
-    private static readonly (int X, int Y)[] DefenderPlaceholders =
+    private static readonly (int X, int Y)[] RightPlaceholders =
     [
         (202, 320), (332, 261), (442, 200),
         (304, 406), (446, 348), (542, 265)
@@ -70,10 +71,10 @@ internal static class BattleRenderLayout
         return GetScaledPlacement(GetAnimationAnchor(footprint), GetFoot(footprint));
     }
 
-    public static AnimationPlacement GetGridPlacement(BattleSide side)
+    public static AnimationPlacement GetGridPlacement(BattlePosition battlePosition)
     {
-        BattleGridFootprint front = new(side, GridPosition.FrontCenter, IsLarge: false);
-        BattleGridFootprint back = new(side, GridPosition.BackCenter, IsLarge: false);
+        BattleGridFootprint front = new(battlePosition, GridPosition.FrontCenter, IsLarge: false);
+        BattleGridFootprint back = new(battlePosition, GridPosition.BackCenter, IsLarge: false);
 
         return GetScaledPlacement(
             GetCenter(GetAnimationAnchor(front), GetAnimationAnchor(back)),
@@ -168,7 +169,7 @@ internal static class BattleRenderLayout
 
         if (footprint.IsLarge)
         {
-            return placeholder + GetLargeAnchorOffset(footprint.Side);
+            return placeholder + GetLargeAnchorOffset(footprint.BattlePosition);
         }
         else
         {
@@ -196,7 +197,7 @@ internal static class BattleRenderLayout
 
         if (footprint.IsLarge)
         {
-            return foot + GetLargeFootOffset(footprint.Side);
+            return foot + GetLargeFootOffset(footprint.BattlePosition);
         }
         else
         {
@@ -206,45 +207,36 @@ internal static class BattleRenderLayout
 
     private static Point GetPlaceholderAnchor(BattleGridFootprint footprint)
     {
-        (int x, int y) = GetPlaceholders(footprint.Side)[footprint.Position.ToIndex()];
+        (int x, int y) = GetPlaceholders(footprint.BattlePosition)[footprint.Position.ToIndex()];
 
         return new Point(BoardOriginX + x, y);
     }
 
-    private static (int X, int Y)[] GetPlaceholders(BattleSide side)
+    private static (int X, int Y)[] GetPlaceholders(BattlePosition battlePosition)
     {
-        if (side == BattleSide.Attacker)
+        return battlePosition switch
         {
-            return AttackerPlaceholders;
-        }
-        else
-        {
-            return DefenderPlaceholders;
-        }
+            BattlePosition.Left => LeftPlaceholders,
+            BattlePosition.Right => RightPlaceholders
+        };
     }
 
-    private static Vector GetLargeAnchorOffset(BattleSide side)
+    private static Vector GetLargeAnchorOffset(BattlePosition battlePosition)
     {
-        if (side == BattleSide.Attacker)
+        return battlePosition switch
         {
-            return LargeAttackerOffset;
-        }
-        else
-        {
-            return LargeDefenderOffset;
-        }
+            BattlePosition.Left => LargeLeftOffset,
+            BattlePosition.Right => LargeRightOffset
+        };
     }
 
-    private static Vector GetLargeFootOffset(BattleSide side)
+    private static Vector GetLargeFootOffset(BattlePosition battlePosition)
     {
-        if (side == BattleSide.Attacker)
+        return battlePosition switch
         {
-            return GroundDepthStep * -0.5;
-        }
-        else
-        {
-            return GroundDepthStep * 0.5;
-        }
+            BattlePosition.Left => GroundDepthStep * -0.5,
+            BattlePosition.Right => GroundDepthStep * 0.5
+        };
     }
 
     private static Point GetCenter(Point first, Point second)

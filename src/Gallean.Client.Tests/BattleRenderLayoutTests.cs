@@ -1,41 +1,42 @@
 using Avalonia;
+using Gallean.Configuration;
 
 namespace Gallean.Client.Tests;
 
 public sealed class BattleRenderLayoutTests
 {
-    private static Point GetFootPoint(BattleSide side, GridPosition position, bool isLarge)
+    private static Point GetFootPoint(BattlePosition battlePosition, GridPosition position, bool isLarge)
     {
-        return BattleRenderLayout.GetFootPoint(new BattleGridFootprint(side, position, isLarge));
+        return BattleRenderLayout.GetFootPoint(new BattleGridFootprint(battlePosition, position, isLarge));
     }
 
     [Test]
     public void AttackerFootPointsTest()
     {
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.FrontBottom, isLarge: false), Is.EqualTo(new Point(290.841, 372.666)));
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.FrontCenter, isLarge: false), Is.EqualTo(new Point(432.741, 308.866)));
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.FrontTop, isLarge: false), Is.EqualTo(new Point(542.741, 253.866)));
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.BackBottom, isLarge: false), Is.EqualTo(new Point(185.241, 292.366)));
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.BackCenter, isLarge: false), Is.EqualTo(new Point(322.741, 232.966)));
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.BackTop, isLarge: false), Is.EqualTo(new Point(451.441, 196.666)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.FrontBottom, isLarge: false), Is.EqualTo(new Point(290.841, 372.666)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.FrontCenter, isLarge: false), Is.EqualTo(new Point(432.741, 308.866)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.FrontTop, isLarge: false), Is.EqualTo(new Point(542.741, 253.866)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.BackBottom, isLarge: false), Is.EqualTo(new Point(185.241, 292.366)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.BackCenter, isLarge: false), Is.EqualTo(new Point(322.741, 232.966)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.BackTop, isLarge: false), Is.EqualTo(new Point(451.441, 196.666)));
     }
 
     [Test]
     public void DefenderFootPointsTest()
     {
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.FrontBottom, isLarge: false), Is.EqualTo(new Point(385.441, 446.366)));
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.FrontCenter, isLarge: false), Is.EqualTo(new Point(528.441, 381.466)));
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.FrontTop, isLarge: false), Is.EqualTo(new Point(649.441, 314.366)));
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.BackBottom, isLarge: false), Is.EqualTo(new Point(497.641, 540.966)));
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.BackCenter, isLarge: false), Is.EqualTo(new Point(653.841, 477.166)));
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.BackTop, isLarge: false), Is.EqualTo(new Point(759.441, 385.866)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.FrontBottom, isLarge: false), Is.EqualTo(new Point(385.441, 446.366)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.FrontCenter, isLarge: false), Is.EqualTo(new Point(528.441, 381.466)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.FrontTop, isLarge: false), Is.EqualTo(new Point(649.441, 314.366)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.BackBottom, isLarge: false), Is.EqualTo(new Point(497.641, 540.966)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.BackCenter, isLarge: false), Is.EqualTo(new Point(653.841, 477.166)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.BackTop, isLarge: false), Is.EqualTo(new Point(759.441, 385.866)));
     }
 
     [Test]
     public void LargeFootPointsTest()
     {
-        Assert.That(GetFootPoint(BattleSide.Attacker, GridPosition.FrontCenter, isLarge: true), Is.EqualTo(new Point(380.216, 271.301)));
-        Assert.That(GetFootPoint(BattleSide.Defender, GridPosition.FrontCenter, isLarge: true), Is.EqualTo(new Point(580.966, 419.031)));
+        Assert.That(GetFootPoint(BattlePosition.Left, GridPosition.FrontCenter, isLarge: true), Is.EqualTo(new Point(380.216, 271.301)));
+        Assert.That(GetFootPoint(BattlePosition.Right, GridPosition.FrontCenter, isLarge: true), Is.EqualTo(new Point(580.966, 419.031)));
     }
 
     [Test]
@@ -90,7 +91,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void SmallMarkerRadiusTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false);
 
         Assert.That(BattleRenderLayout.GetMarkerRadius(footprint), Is.EqualTo(0.3));
     }
@@ -98,7 +99,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void LargeMarkerRadiusTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: true);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: true);
 
         Assert.That(BattleRenderLayout.GetMarkerRadius(footprint), Is.EqualTo(0.556));
     }
@@ -106,7 +107,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void SmallUnitBoundsTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false);
 
         Assert.That(
             BattleRenderLayout.GetContentBounds(BattleRenderLayout.GetUnitPlacement(footprint), new Rect(365, 410, 100, 200)),
@@ -116,7 +117,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void LargeUnitBoundsTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: true);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: true);
 
         Assert.That(
             BattleRenderLayout.GetContentBounds(BattleRenderLayout.GetUnitPlacement(footprint), new Rect(365, 410, 100, 200)),
@@ -126,7 +127,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void CorpseBoundsTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false);
 
         Assert.That(
             BattleRenderLayout.GetContentBounds(BattleRenderLayout.GetCorpsePlacement(footprint), new Rect(-20, -10, 40, 20)),
@@ -136,7 +137,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void PlaceholderBoundsTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false);
 
         Assert.That(
             BattleRenderLayout.GetPlaceholderBounds(footprint),
@@ -146,7 +147,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void FrameBoundsTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false);
+        BattleGridFootprint footprint = new(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false);
 
         Assert.That(
             BattleRenderLayout.GetFrameBounds(BattleRenderLayout.GetUnitPlacement(footprint), new Rect(365, 410, 100, 200)),
@@ -156,7 +157,7 @@ public sealed class BattleRenderLayoutTests
     [Test]
     public void TopAnchoredFrameBoundsTest()
     {
-        BattleGridFootprint footprint = new(BattleSide.Defender, GridPosition.BackBottom, IsLarge: true);
+        BattleGridFootprint footprint = new(BattlePosition.Right, GridPosition.BackBottom, IsLarge: true);
 
         Assert.That(
             BattleRenderLayout.GetFrameBounds(BattleRenderLayout.GetUnitPlacement(footprint), new Rect(300, 0, 200, 500)),
@@ -167,7 +168,7 @@ public sealed class BattleRenderLayoutTests
     public void AttackerGridPlacementTest()
     {
         Assert.That(
-            BattleRenderLayout.GetGridPlacement(BattleSide.Attacker),
+            BattleRenderLayout.GetGridPlacement(BattlePosition.Left),
             Is.EqualTo(new AnimationPlacement(new Point(-27.259, -213.084), 1.02, new Point(377.741, 270.916))));
     }
 
@@ -175,7 +176,7 @@ public sealed class BattleRenderLayoutTests
     public void DefenderGridPlacementTest()
     {
         Assert.That(
-            BattleRenderLayout.GetGridPlacement(BattleSide.Defender),
+            BattleRenderLayout.GetGridPlacement(BattlePosition.Right),
             Is.EqualTo(new AnimationPlacement(new Point(186.141, -54.684), 1.07, new Point(591.141, 429.316))));
     }
 }

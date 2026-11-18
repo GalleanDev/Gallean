@@ -1,0 +1,92 @@
+uniform shader previous;
+uniform shader current;
+
+uniform float2 center;
+uniform float2 extent;
+uniform float blend;
+uniform float blur;
+uniform float vignette;
+uniform float direction;
+uniform float time;
+
+const int SampleCount = 16;
+const int Octaves = 4;
+const float Feather = 0.035;
+const float NoiseScale = 3.5;
+const float NoiseAmount = 0.16;
+const float NoiseDrift = 0.8;
+const float SeamWidth = 0.09;
+const float SeamShade = 0.6;
+const float VignetteStart = 0.2;
+const float VignetteEnd = 1.3;
+
+float hash(float2 point) {
+    float3 seed = fract(point.xyx * 0.1031);
+
+    seed += dot(seed, seed.yzx + 33.33);
+
+    return fract((seed.x + seed.y) * seed.z);
+}
+
+float noise(float2 point) {
+    float2 cell = floor(point);
+    float2 offset = fract(point);
+    float2 blend = offset * offset * (3.0 - 2.0 * offset);
+
+    float topLeft = hash(cell);
+    float topRight = hash(cell + float2(1.0, 0.0));
+    float bottomLeft = hash(cell + float2(0.0, 1.0));
+    float bottomRight = hash(cell + float2(1.0, 1.0));
+
+    return mix(mix(topLeft, topRight, blend.x), mix(bottomLeft, bottomRight, blend.x), blend.y);
+}
+
+float fractalNoise(float2 point) {
+    float sum = 0.0;
+    float amplitude = 0.5;
+    float total = 0.0;
+
+    for (int octave = 0; octave < Octaves; octave++) {
+        sum += noise(point) * amplitude;
+        total += amplitude;
+        point = point * 2.03 + float2(17.0, 31.0);
+        amplitude *= 0.5;
+    }
+
+    return sum / total;
+}
+
+float mirror(float position) {
+    return 1.0 - abs(1.0 - abs(position));
+}
+
+half4 main(float2 coord) {
+    float2 delta = coord - center;
+    float2 origin = center - extent;
+    float2 size = 2.0 * extent;
+    float2 point = delta / size + 0.5;
+    float seam = 0.5 - 0.5 * direction;
+    float grain = fractalNoise(float2(point.y * NoiseScale, time * NoiseDrift));
+    float jitter = hash(coord);
+    float4 sum = float4(0.0);
+    float shade = 0.0;
+
+    for (int index = 0; index < SampleCount; index++) {
+        float fraction = (float(index) + jitter) / float(SampleCount);
+        float position = point.x - direction * blend + blur * (fraction - 0.5);
+        float field = direction * (seam - position) + NoiseAmount * (grain - 0.5);
+        float coverage = smoothstep(-Feather, Feather, field);
+        float4 before = float4(previous.eval(origin + float2(mirror(position), point.y) * size));
+        float4 after = float4(current.eval(origin + float2(mirror(position + direction), point.y) * size));
+
+        sum += mix(before, after, coverage);
+        shade += 1.0 - smoothstep(0.0, SeamWidth, abs(field));
+    }
+
+    float4 color = sum / float(SampleCount);
+    float edge = smoothstep(VignetteStart, VignetteEnd, length(delta / extent));
+
+    color.rgb *= (1.0 - SeamShade * shade / float(SampleCount)) * (1.0 - vignette * edge);
+
+    return half4(color);
+}

@@ -16,6 +16,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private UiSize uiSize;
     private bool lockCursor;
     private Language? language;
+    private BattlePosition battlePosition;
 
     public SettingsScreenViewModel(GameViewModel gameViewModel)
     {
@@ -31,6 +32,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         uiSize = gameViewModel.Settings.UiSize;
         lockCursor = gameViewModel.Settings.LockCursor;
         language = gameViewModel.Settings.Language;
+        battlePosition = gameViewModel.Settings.BattlePosition;
 
         gameViewModel.PropertyChanged += OnGamePropertyChanged;
     }
@@ -45,6 +47,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     public IReadOnlyList<BattleSpeed> BattleSpeeds => Enum.GetValues<BattleSpeed>();
     public IReadOnlyList<MovementSpeed> MovementSpeeds => Enum.GetValues<MovementSpeed>();
     public IReadOnlyList<Language> Languages { get; } = Enum.GetValues<Language>();
+    public IReadOnlyList<BattlePosition> BattlePositions => Enum.GetValues<BattlePosition>();
 
     public int SoundVolume
     {
@@ -166,6 +169,18 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         }
     }
 
+    public BattlePosition BattlePosition
+    {
+        get => battlePosition;
+        set
+        {
+            if (SetProperty(ref battlePosition, value))
+            {
+                Apply();
+            }
+        }
+    }
+
     public bool Windowed
     {
         get => gameViewModel.IsWindowed;
@@ -188,7 +203,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
 
     private void Apply()
     {
-        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed, language));
+        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed, language, battlePosition));
     }
 
     private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)

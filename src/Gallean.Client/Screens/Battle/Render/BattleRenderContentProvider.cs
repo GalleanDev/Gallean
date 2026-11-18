@@ -12,6 +12,7 @@ internal sealed partial class BattleRenderContentProvider
     private readonly Part<BattleRenderState, AssetSpriteKey.BattleBackground, SKImage> fluidStillPart = new(static state => state.Background);
     private readonly Part<BattleRenderState, (AssetSpriteKey.BattleBackground, BattleLightConfiguration), BattleShadowShaderProgram> shadowShaderPart = new(static state => (state.Background, state.LightConfiguration));
     private readonly BattleWorldTransitionShaderProgram transitionShaderProgram = new();
+    private readonly BattleSideSwitchShaderProgram sideSwitchShaderProgram = new();
 
     public BattleRenderContent Get(BattleRenderState state, IAssetProvider assets)
     {
@@ -25,7 +26,7 @@ internal sealed partial class BattleRenderContentProvider
         BattleShadowShaderProgram shadowShaderProgram = shadowShaderPart.Resolve(state, current => Shadow.BuildShaderProgram(current.LightConfiguration, ground));
         double shadowStrength = Shadow.GetStrength(state.LightConfiguration, ground);
 
-        return new BattleRenderContent(ground, unitShaderProgram, backgroundShaderProgram, fluidShaderPrograms, rainShaderProgram, shadowShaderProgram, transitionShaderProgram, shadowStrength);
+        return new BattleRenderContent(ground, unitShaderProgram, backgroundShaderProgram, fluidShaderPrograms, rainShaderProgram, shadowShaderProgram, transitionShaderProgram, sideSwitchShaderProgram, shadowStrength);
     }
 
     private static SKShader BuildSceneShader(SKImage image, SKRect scene, SKShaderTileMode tileX, SKShaderTileMode tileY)

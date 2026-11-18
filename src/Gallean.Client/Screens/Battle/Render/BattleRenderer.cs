@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Media;
 using Avalonia.Skia;
 using Gallean.Common;
+using Gallean.Configuration;
 using SkiaSharp;
 using static Gallean.Client.BattleRenderState;
 using static Gallean.Client.BattleUnitState;
@@ -57,6 +58,8 @@ internal sealed partial class BattleRenderer
     private const double TransitionRadiusPower = 1.6;
     private const double TransitionBlur = 0.22;
     private const double TransitionOutPower = 1.5;
+    private const double SideSwitchBlur = 0.06;
+    private const double SideSwitchVignette = 0.6;
     private const double SunTint = 0.5;
     private const double SunExposure = 0.6;
     private const double SunExposurePivot = 1.77;
@@ -72,10 +75,12 @@ internal sealed partial class BattleRenderer
         BattleRenderState state,
         BattleAnimationState? animation,
         BattleWorldTransitionState? transition,
+        BattleSideSwitchState? sideSwitch,
         IAssetProvider assets,
         TimeSpan loopTime,
         TimeSpan sequenceTime,
         TimeSpan transitionTime,
+        TimeSpan sideSwitchTime,
         float renderResolution,
         bool lightOverlay,
         bool hitboxOverlay)
@@ -92,6 +97,22 @@ internal sealed partial class BattleRenderer
                 loopTime,
                 sequenceTime,
                 transitionTime,
+                renderResolution,
+                lightOverlay,
+                hitboxOverlay);
+        }
+        else if (sideSwitch is not null)
+        {
+            RenderSideSwitch(
+                canvas,
+                content,
+                state,
+                animation,
+                sideSwitch,
+                assets,
+                loopTime,
+                sequenceTime,
+                sideSwitchTime,
                 renderResolution,
                 lightOverlay,
                 hitboxOverlay);
@@ -158,6 +179,58 @@ internal sealed partial class BattleRenderer
         }
     }
 
+    private static void RenderSideSwitch(
+        SKCanvas canvas,
+        BattleRenderContent content,
+        BattleRenderState state,
+        BattleAnimationState? animation,
+        BattleSideSwitchState sideSwitch,
+        IAssetProvider assets,
+        TimeSpan loopTime,
+        TimeSpan sequenceTime,
+        TimeSpan sideSwitchTime,
+        float renderResolution,
+        bool lightOverlay,
+        bool hitboxOverlay)
+    {
+        SKRectI bounds = canvas.DeviceClipBounds;
+        double blend = AnimationEasing.Smooth.Ease(sideSwitchTime.ToAnimationProgress(TimeSpan.Zero, sideSwitch.Duration));
+        double intensity = 4 * blend * (1 - blend);
+        float direction = sideSwitch.Position switch
+        {
+            BattlePosition.Left => -1,
+            BattlePosition.Right => 1
+        };
+
+        using ScaledSurface previousSurface = ScaledSurface.Create(canvas, renderResolution, SKMatrix.Identity);
+        using ScaledSurface currentSurface = ScaledSurface.Create(canvas, renderResolution, SKMatrix.Identity);
+
+        RenderScene(previousSurface.Canvas, content, sideSwitch.Previous, null, assets, loopTime, sequenceTime, lightOverlay, hitboxOverlay);
+        RenderScene(currentSurface.Canvas, content, state, animation, assets, loopTime, sequenceTime, lightOverlay, hitboxOverlay);
+
+        using SKShader previous = previousSurface.ToShader();
+        using SKShader current = currentSurface.ToShader();
+        using BattleSideSwitchShaderProgram.Editor editor = content.SideSwitchShaderProgram.Edit();
+
+        editor.SetPrevious(previous);
+        editor.SetCurrent(current);
+        editor.SetCenter(new SKPoint(bounds.MidX, bounds.MidY));
+        editor.SetExtent(new SKPoint(bounds.Width / 2.0f, bounds.Height / 2.0f));
+        editor.SetBlend((float)blend);
+        editor.SetBlur((float)(SideSwitchBlur * intensity));
+        editor.SetVignette((float)(SideSwitchVignette * intensity));
+        editor.SetDirection(direction);
+        editor.SetTime((float)loopTime.TotalSeconds);
+
+        using SKShader shader = editor.Build();
+        using SKPaint paint = new() { Shader = shader };
+
+        canvas.Save();
+        canvas.ResetMatrix();
+        canvas.DrawRect(bounds, paint);
+        canvas.Restore();
+    }
+
     private static double ResolveTransitionBlend(BattleWorldTransitionState transition, TimeSpan transitionTime)
     {
         return transition.Type switch
@@ -210,11 +283,7 @@ internal sealed partial class BattleRenderer
         {
             foreach (Placeholder placeholder in state.Placeholders)
             {
-                DrawGroundMarker(
-                    canvas,
-                    new BattleGridFootprint(placeholder.Tile.Side, placeholder.Tile.Position, IsLarge: false),
-                    placeholder.Marker,
-                    loopTime);
+                DrawGroundMarker(canvas, placeholder.Footprint, placeholder.Marker, loopTime);
             }
 
             foreach (UnitFrame frame in frames)

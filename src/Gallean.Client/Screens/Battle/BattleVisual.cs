@@ -20,6 +20,7 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
     private readonly BattleRenderer renderer = new();
     private readonly AnimationPlayback<AnimationSequence> sequencePlayback = new();
     private readonly AnimationPlayback<BattleWorldTransitionState> transitionPlayback = new();
+    private readonly AnimationPlayback<BattleSideSwitchState> sideSwitchPlayback = new();
     private AnimationSoundCursor soundCursor = new([]);
     private BattleAnimationState? lastAnimationState;
     private BattleRenderState? lastRenderState;
@@ -173,11 +174,17 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
             if (IsContentBuilt)
             {
                 transitionPlayback.Register(ViewModel.TransitionState, now);
+                sideSwitchPlayback.Register(ViewModel.SideSwitchState, now);
             }
 
             if (transitionPlayback.TryComplete(now))
             {
                 ViewModel.CompleteTransitionAsync().FileAndForget();
+            }
+
+            if (sideSwitchPlayback.TryComplete(now))
+            {
+                ViewModel.CompleteSideSwitchAsync().FileAndForget();
             }
 
             bool redraw = false;
@@ -190,6 +197,11 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
             }
 
             if (transitionPlayback.IsPlaying)
+            {
+                redraw = true;
+            }
+
+            if (sideSwitchPlayback.IsPlaying)
             {
                 redraw = true;
             }
@@ -239,11 +251,13 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
             BattleAnimationState? animation = ViewModel.AnimationState;
             TimeSpan loopTime = animationClock.Now;
             BattleWorldTransitionState? transition = ViewModel.TransitionState;
+            BattleSideSwitchState? sideSwitch = ViewModel.SideSwitchState;
 
             RegisterSequence(animation?.Sequence, loopTime);
 
             TimeSpan sequenceTime = GetSequenceTime(animation, loopTime);
             TimeSpan transitionTime = transitionPlayback.GetElapsed(loopTime);
+            TimeSpan sideSwitchTime = sideSwitchPlayback.GetElapsed(loopTime);
             Matrix view = BattleRenderLayout.GetViewMatrix(Bounds.Width, Bounds.Height);
 
             IAssetProvider assets = Assets;
@@ -269,11 +283,13 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
                 content,
                 animation,
                 transition,
+                sideSwitch,
                 assets,
                 renderer,
                 loopTime,
                 sequenceTime,
                 transitionTime,
+                sideSwitchTime,
                 settings.RenderResolutionRatio,
                 IsLightOverlayVisible,
                 IsHitboxOverlayVisible,

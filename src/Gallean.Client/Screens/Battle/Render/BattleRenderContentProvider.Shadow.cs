@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Media;
+using Gallean.Configuration;
 using SkiaSharp;
 
 namespace Gallean.Client;
@@ -42,9 +43,9 @@ internal sealed partial class BattleRenderContentProvider
 
         private static double GetRigLight(BattleLightConfiguration configuration, BattleGround ground)
         {
-            AnimationPlacement attackers = BattleRenderLayout.GetGridPlacement(BattleSide.Attacker);
-            AnimationPlacement defenders = BattleRenderLayout.GetGridPlacement(BattleSide.Defender);
-            Point center = attackers.ScaleOrigin + (defenders.ScaleOrigin - attackers.ScaleOrigin) * 0.5;
+            AnimationPlacement left = BattleRenderLayout.GetGridPlacement(BattlePosition.Left);
+            AnimationPlacement right = BattleRenderLayout.GetGridPlacement(BattlePosition.Right);
+            Point center = left.ScaleOrigin + (right.ScaleOrigin - left.ScaleOrigin) * 0.5;
             Vector3D position = new(center.X, center.Y, -ground.GetDistance(center));
             double result = 0;
 

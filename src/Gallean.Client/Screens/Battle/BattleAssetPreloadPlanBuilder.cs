@@ -298,7 +298,8 @@ internal sealed partial class BattleAssetPreloadPlanBuilder(
 
         foreach (BattleRenderState.Unit unit in state.Units)
         {
-            UnitForm form = new(unit.DefinitionId, unit.Footprint.Side);
+            BattleSide facing = unit.Footprint.BattlePosition.GetFacing();
+            UnitForm form = new(unit.DefinitionId, facing);
 
             if (!forms.Contains(form))
             {

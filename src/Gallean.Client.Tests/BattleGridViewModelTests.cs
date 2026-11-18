@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Engine.Tests;
 
@@ -51,6 +52,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(2)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -151,6 +153,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -234,6 +237,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -345,6 +349,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -436,6 +441,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -690,6 +696,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: true,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -777,6 +784,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -908,6 +916,7 @@ public sealed class BattleGridViewModelTests
             NullAssetProvider.Instance,
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
             new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),

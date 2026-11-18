@@ -1,3 +1,5 @@
+using Gallean.Configuration;
+
 namespace Gallean.Client.Tests;
 
 public sealed class BattleRenderStateExtensionsTests
@@ -9,7 +11,7 @@ public sealed class BattleRenderStateExtensionsTests
             DefinitionId: new UnitDefinitionId("DEF"),
             Race: WorldRace.Human,
             DeathAnimation: UnitDeathAnimation.Human,
-            Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+            Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
             Facing: BattleSide.Defender,
             IdleOffset: idleOffset,
             CorpseVariant: 0,

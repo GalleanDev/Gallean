@@ -132,7 +132,7 @@
           <local:OutlinedTextBlock Text="{local:Text 'Game'}" Classes="label" />
         </Border>
 
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="12">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
             <ColumnDefinition Width="*" />
@@ -245,6 +245,26 @@
             <ComboBox.ItemTemplate>
               <DataTemplate x:DataType="configuration:MovementSpeed">
                 <TextBlock Text="{Binding Converter={x:Static local:MovementSpeedConverter.Instance}}" Classes="body" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="5"
+                     Grid.Column="0"
+                     Text="{local:Text 'Battle position'}"
+                     Classes="body"
+                     Foreground="{StaticResource PrimaryTextBrush}"
+                     VerticalAlignment="Center" />
+          <ComboBox Grid.Row="5"
+                    Grid.Column="1"
+                    ItemsSource="{Binding BattlePositions}"
+                    SelectedItem="{Binding BattlePosition}"
+                    ToolTip.Tip="{local:Text 'The side of the battlefield your units stand on.'}"
+                    MinWidth="120"
+                    VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="configuration:BattlePosition">
+                <TextBlock Text="{Binding Converter={x:Static local:BattlePositionConverter.Instance}}" Classes="body" />
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>

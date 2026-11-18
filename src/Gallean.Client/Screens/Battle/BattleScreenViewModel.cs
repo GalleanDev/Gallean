@@ -1,8 +1,10 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client;
@@ -10,6 +12,9 @@ namespace Gallean.Client;
 internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewModel
 {
     private sealed record TileAction(IBattleCommand<Empty> Command, BattleActionTarget Target);
+
+    private static readonly TimeSpan LoadingRevealDelay = TimeSpan.FromMilliseconds(150);
+    private static readonly TimeSpan LoadingRevealDuration = TimeSpan.FromMilliseconds(125);
 
     private readonly IAssetMetadataProvider assets;
     private readonly IAssetPreloader assetPreloader;
@@ -54,9 +59,10 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
         AssetSpriteKey.BattleLocation location = ResolveBattleLocation(gameModel, battle.State, battle.Position);
         fortificationName = ResolveFortificationName(gameModel, battle.Position);
+        Positions = ResolvePositions(gameViewModel.Settings.BattlePosition);
 
-        AttackerGrid = new BattleGridViewModel();
-        DefenderGrid = new BattleGridViewModel();
+        LeftGrid = new BattleGridViewModel();
+        RightGrid = new BattleGridViewModel();
 
         List<AssetSoundKey> musicTracks = [];
 
@@ -84,13 +90,15 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
             ToggleAutoBattleCommand,
             AutoResolveCommand,
             ExitBattleCommand);
+
+        gameViewModel.PropertyChanged += OnGamePropertyChanged;
     }
 
     [ObservableProperty]
-    public partial BattleGridViewModel AttackerGrid { get; private set; }
+    public partial BattleGridViewModel LeftGrid { get; private set; }
 
     [ObservableProperty]
-    public partial BattleGridViewModel DefenderGrid { get; private set; }
+    public partial BattleGridViewModel RightGrid { get; private set; }
 
     public ObservableCollection<BattleItemViewModel> Items { get; } = [];
 
@@ -103,12 +111,12 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     public string AutoResolveTip => battle.CanAutoResolve ? Tr("Resolve the battle automatically") : Tr("This battle cannot be resolved automatically");
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(AttackerUnit), nameof(DefenderUnit))]
+    [NotifyPropertyChangedFor(nameof(LeftUnit), nameof(RightUnit))]
     public partial BattleUnitCardViewModel? CurrentUnit { get; private set; }
 
-    public BattleUnitCardViewModel? AttackerUnit => SelectSideUnit(BattleSide.Attacker);
+    public BattleUnitCardViewModel? LeftUnit => SelectSideUnit(LeftSide);
 
-    public BattleUnitCardViewModel? DefenderUnit => SelectSideUnit(BattleSide.Defender);
+    public BattleUnitCardViewModel? RightUnit => SelectSideUnit(RightSide);
 
     [ObservableProperty]
     public partial BattleUnitCardViewModel? TargetUnit { get; private set; }
@@ -147,6 +155,9 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     [NotifyPropertyChangedFor(nameof(PaintsOwnBackground))]
     public partial BattleWorldTransitionState? TransitionState { get; private set; } = new(BattleTransitionType.In);
 
+    [ObservableProperty]
+    public partial BattleSideSwitchState? SideSwitchState { get; private set; }
+
     public override bool PaintsOwnBackground => TransitionState is null;
 
     public override ScreenMusic Music => ScreenMusic.Tracks(musicQueue);
@@ -165,11 +176,13 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private BattleState State => battle.State;
 
-    protected override bool IsBusy => base.IsBusy || isActing || TransitionState is not null;
-
+    protected override bool IsBusy => base.IsBusy || isActing || TransitionState is not null || SideSwitchState is not null;
     private bool IsFinished => State.Outcome is not null;
-
     private bool IsAiTurn => battle.IsAiTurn || IsAutoBattle;
+
+    private BattlePositions Positions { get; set; }
+    private BattleSide LeftSide => Positions.GetSide(BattlePosition.Left);
+    private BattleSide RightSide => Positions.GetSide(BattlePosition.Right);
 
     public async Task LoadAsync()
     {
@@ -178,6 +191,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     protected override void OnDispose()
     {
+        Game.PropertyChanged -= OnGamePropertyChanged;
         GameModel.DismissBattle(battle);
         assetLeases.Dispose();
     }
@@ -342,12 +356,22 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         }
     }
 
+    public async Task CompleteSideSwitchAsync()
+    {
+        SideSwitchState = null;
+        RefreshView();
+
+        await PlayAiTurnAsync();
+    }
+
     private async Task PlayAiTurnAsync()
     {
         try
         {
             while (true)
             {
+                await UpdateSidesAsync();
+
                 if (IsBusy || IsFinished || !IsAiTurn)
                 {
                     break;
@@ -453,6 +477,15 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         Game.OpenScreen(new BattleLogPopupViewModel(logFormatter.Format(battle.History.Steps)));
     }
 
+    [RelayCommand]
+    private void SwitchSides()
+    {
+        GameSettings settings = Game.Settings;
+        BattlePosition position = settings.BattlePosition.GetOpposite();
+
+        Game.UpdateSettings(settings with { BattlePosition = position });
+    }
+
     [RelayCommand(CanExecute = nameof(CanExitBattle))]
     private void ExitBattle()
     {
@@ -519,6 +552,91 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         UpdateState();
     }
 
+    private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(GameViewModel.Settings))
+        {
+            UpdateSidesAsync().FileAndForget();
+        }
+    }
+
+    private BattlePositions ResolvePositions(BattlePosition position)
+    {
+        BattlePosition opposite = position.GetOpposite();
+
+        return battle.ViewerSide switch
+        {
+            BattleViewerSide.Attacker => new BattlePositions(Attacker: position, Defender: opposite),
+            BattleViewerSide.Defender => new BattlePositions(Attacker: opposite, Defender: position),
+            BattleViewerSide.None => new BattlePositions(Attacker: position, Defender: opposite)
+        };
+    }
+
+    private async Task UpdateSidesAsync()
+    {
+        if (IsBusy)
+        {
+            return;
+        }
+
+        BattlePosition position = Game.Settings.BattlePosition;
+        BattlePositions positions = ResolvePositions(position);
+
+        if (positions == Positions)
+        {
+            return;
+        }
+
+        LoadingScreenViewModel loadingScreen = new(Tr("Loading battle…"), LoadingRevealDelay, LoadingRevealDuration);
+
+        Game.OpenScreen(loadingScreen);
+
+        isActing = true;
+        try
+        {
+            BattleRenderStateBuilder renderBuilder = CreateRenderBuilder(State, positions);
+            BattleAssetPreloadPlanBuilder preloadPlanBuilder = new(renderBuilder.BuildState(), State, GameModel.Definitions, assets);
+            AssetPreloadPlan preloadPlan = preloadPlanBuilder.Build();
+
+            await PreloadAssetsAsync([.. preloadPlan.InitialRequired, .. preloadPlan.InitialOptional]);
+            PreloadAssetsAsync(preloadPlan.Remaining).FileAndForget();
+        }
+        finally
+        {
+            isActing = false;
+        }
+
+        Game.CloseScreen(loadingScreen);
+        Game.PlaySound(new AssetSoundKey.InterfaceOpen());
+
+        SideSwitchState = new BattleSideSwitchState(RenderState, position);
+        Positions = positions;
+        RefreshView();
+        OnPropertyChanged(nameof(LeftUnit));
+        OnPropertyChanged(nameof(RightUnit));
+    }
+
+    private BattleRenderStateBuilder CreateRenderBuilder(BattleState baseState, BattlePositions positions)
+    {
+        BattleActionTarget? selectedTarget = ResolveSelectedTarget();
+        Dictionary<BattleGridTile, BattleActionTarget> actionTargets = tileActions.ToDictionary(entry => entry.Key, entry => entry.Value.Target);
+
+        return new BattleRenderStateBuilder(
+            baseState,
+            State,
+            GameModel.Stats,
+            GameModel.Definitions,
+            GameModel.Texts,
+            assets,
+            backgroundKey,
+            environment,
+            positions,
+            IsAiTurn,
+            selectedTarget,
+            actionTargets,
+            renderState);
+    }
+
     private async Task TakeTurnAsync(IBattleCommand<Empty> command, bool animate)
     {
         await DispatchBattleActionAsync(command, animate);
@@ -560,25 +678,14 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private async Task PlayAnimationAsync(BattleState baseState, IReadOnlyList<BattleEvent> events)
     {
-        BattleRenderStateBuilder renderBuilder = new(
-            baseState,
-            State,
-            GameModel.Stats,
-            GameModel.Definitions,
-            GameModel.Texts,
-            assets,
-            backgroundKey,
-            environment,
-            IsAiTurn,
-            ResolveSelectedTarget(),
-            tileActions.ToDictionary(entry => entry.Key, entry => entry.Value.Target),
-            renderState);
+        BattleRenderStateBuilder renderBuilder = CreateRenderBuilder(baseState, Positions);
 
         BattleAnimationStateBuilder animationBuilder = new(
             assets,
             GameModel.Definitions,
             random,
             battle.ViewerSide,
+            Positions,
             Game.Settings.BattleSpeedFactor);
 
         BattleRenderState render = renderBuilder.BuildState();
@@ -608,11 +715,11 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
             ILookup<AnimationTarget, AnimationProperty> properties = animation.Sequence.Properties.ToLookup(property => property.Target);
 
-            IReadOnlyList<BattleGridUnitViewModel> attackerUnits = renderBuilder.BuildUnits(BattleSide.Attacker, true);
-            AttackerGrid.UpdateUnits(attackerUnits.Select(unit => SetupUnitAnimation(unit, animation, properties)));
+            IReadOnlyList<BattleGridUnitViewModel> leftUnits = renderBuilder.BuildUnits(LeftSide, true);
+            LeftGrid.UpdateUnits(leftUnits.Select(unit => SetupUnitAnimation(unit, animation, properties)));
 
-            IReadOnlyList<BattleGridUnitViewModel> defenderUnits = renderBuilder.BuildUnits(BattleSide.Defender, false);
-            DefenderGrid.UpdateUnits(defenderUnits.Select(unit => SetupUnitAnimation(unit, animation, properties)));
+            IReadOnlyList<BattleGridUnitViewModel> rightUnits = renderBuilder.BuildUnits(RightSide, false);
+            RightGrid.UpdateUnits(rightUnits.Select(unit => SetupUnitAnimation(unit, animation, properties)));
 
             CurrentUnit = SetupCardAnimation(CurrentUnit, properties);
             TargetUnit = SetupCardAnimation(TargetUnit, properties);
@@ -979,26 +1086,14 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
 
     private void RefreshView()
     {
-        BattleRenderStateBuilder builder = new(
-            State,
-            State,
-            GameModel.Stats,
-            GameModel.Definitions,
-            GameModel.Texts,
-            assets,
-            backgroundKey,
-            environment,
-            IsAiTurn,
-            ResolveSelectedTarget(),
-            tileActions.ToDictionary(entry => entry.Key, entry => entry.Value.Target),
-            renderState);
+        BattleRenderStateBuilder builder = CreateRenderBuilder(State, Positions);
 
         RenderState = builder.BuildState();
         ItemPromptText = activeItemSlot is not null ? Tr("Select a target for the item.") : null;
-        AttackerGrid.UpdateUnits(builder.BuildUnits(BattleSide.Attacker, isFacingRight: true));
-        AttackerGrid.UpdateTiles(builder.BuildTiles(BattleSide.Attacker, isFacingRight: true));
-        DefenderGrid.UpdateUnits(builder.BuildUnits(BattleSide.Defender, isFacingRight: false));
-        DefenderGrid.UpdateTiles(builder.BuildTiles(BattleSide.Defender, isFacingRight: false));
+        LeftGrid.UpdateUnits(builder.BuildUnits(LeftSide, isFacingRight: true));
+        LeftGrid.UpdateTiles(builder.BuildTiles(LeftSide, isFacingRight: true));
+        RightGrid.UpdateUnits(builder.BuildUnits(RightSide, isFacingRight: false));
+        RightGrid.UpdateTiles(builder.BuildTiles(RightSide, isFacingRight: false));
         UpdateItems(BuildItems());
         UpdateInspectedUnit();
         UpdateInspectedItem();

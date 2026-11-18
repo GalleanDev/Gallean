@@ -217,21 +217,21 @@
     <Panel Classes="hud" Classes.shown="{Binding TransitionState, Converter={x:Static ObjectConverters.IsNull}}">
       <Panel HorizontalAlignment="Left"
              VerticalAlignment="Bottom"
-             IsVisible="{Binding AttackerUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
+             IsVisible="{Binding LeftUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
         <local:PointerTiltDecorator Classes="event-portrait"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Bottom"
                                     Margin="12,0,0,-50">
-          <local:BattlePortraitRevealDecorator UnitId="{Binding AttackerUnit.UnitId}">
+          <local:BattlePortraitRevealDecorator UnitId="{Binding LeftUnit.UnitId}">
             <Panel>
-              <local:SpriteVisual Classes="portrait" SpriteKey="{Binding AttackerUnit.PortraitKey}" Stretch="Uniform" />
-              <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding AttackerUnit.Name}" />
+              <local:SpriteVisual Classes="portrait" SpriteKey="{Binding LeftUnit.PortraitKey}" Stretch="Uniform" />
+              <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding LeftUnit.Name}" />
             </Panel>
           </local:BattlePortraitRevealDecorator>
         </local:PointerTiltDecorator>
         <StackPanel Classes="cached" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="244,0,0,12">
           <ItemsControl Classes="status-badges status-large"
-                        ItemsSource="{Binding AttackerUnit.Statuses}"
+                        ItemsSource="{Binding LeftUnit.Statuses}"
                         ItemTemplate="{StaticResource UnitStatusBadgeTemplate}"
                         HorizontalAlignment="Left"
                         Margin="14,0">
@@ -251,21 +251,21 @@
       <Panel local:PortraitScope.IsFacingLeft="True"
              HorizontalAlignment="Right"
              VerticalAlignment="Bottom"
-             IsVisible="{Binding DefenderUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
+             IsVisible="{Binding RightUnit, Converter={x:Static ObjectConverters.IsNotNull}}">
         <local:PointerTiltDecorator Classes="event-portrait target"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
                                     Margin="0,0,12,-50">
-          <local:BattlePortraitRevealDecorator UnitId="{Binding DefenderUnit.UnitId}">
+          <local:BattlePortraitRevealDecorator UnitId="{Binding RightUnit.UnitId}">
             <Panel>
-              <local:SpriteVisual Classes="portrait" SpriteKey="{Binding DefenderUnit.PortraitKey}" Stretch="Uniform" />
-              <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding DefenderUnit.Name}" />
+              <local:SpriteVisual Classes="portrait" SpriteKey="{Binding RightUnit.PortraitKey}" Stretch="Uniform" />
+              <local:OutlinedTextBlock Classes="object-name event-portrait-name" Text="{Binding RightUnit.Name}" />
             </Panel>
           </local:BattlePortraitRevealDecorator>
         </local:PointerTiltDecorator>
         <StackPanel Classes="cached" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,244,12">
           <ItemsControl Classes="status-badges status-large"
-                        ItemsSource="{Binding DefenderUnit.Statuses}"
+                        ItemsSource="{Binding RightUnit.Statuses}"
                         ItemTemplate="{StaticResource UnitStatusBadgeTemplate}"
                         HorizontalAlignment="Right"
                         Margin="14,0">
@@ -294,7 +294,7 @@
                 <local:UnitPortrait Grid.Row="2" Grid.Column="0" />
                 <local:UnitPortrait Grid.Row="2" Grid.Column="1" />
               </Grid>
-              <ItemsControl ItemsSource="{Binding AttackerGrid.Units}"
+              <ItemsControl ItemsSource="{Binding LeftGrid.Units}"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridUnitTemplate}"
                             ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
@@ -304,7 +304,7 @@
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
-              <ItemsControl ItemsSource="{Binding AttackerGrid.Tiles}"
+              <ItemsControl ItemsSource="{Binding LeftGrid.Tiles}"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridTileTemplate}"
                             ItemContainerTheme="{StaticResource GridTileContainerTheme}">
@@ -331,7 +331,7 @@
                 <local:UnitPortrait Grid.Row="2" Grid.Column="0" />
                 <local:UnitPortrait Grid.Row="2" Grid.Column="1" />
               </Grid>
-              <ItemsControl ItemsSource="{Binding DefenderGrid.Units}"
+              <ItemsControl ItemsSource="{Binding RightGrid.Units}"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridUnitTemplate}"
                             ItemContainerTheme="{StaticResource GridUnitContainerTheme}">
@@ -341,7 +341,7 @@
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
-              <ItemsControl ItemsSource="{Binding DefenderGrid.Tiles}"
+              <ItemsControl ItemsSource="{Binding RightGrid.Tiles}"
                             ClipToBounds="False"
                             ItemTemplate="{StaticResource GridTileTemplate}"
                             ItemContainerTheme="{StaticResource GridTileContainerTheme}">
@@ -390,6 +390,14 @@
                     Command="{Binding OpenLogCommand}"
                     ToolTip.Tip="{local:Text 'Show the battle log'}">
               <local:IconVisual Moniker="Quest" />
+            </Button>
+            <Button Classes="icon-button"
+                    local:PlateChrome.TextureSeed="4"
+                    Width="36"
+                    Height="36"
+                    Command="{Binding SwitchSidesCommand}"
+                    ToolTip.Tip="{local:Text 'Switch sides'}">
+              <local:IconVisual Moniker="Exchange" />
             </Button>
           </StackPanel>
         </StackPanel>

@@ -1,5 +1,6 @@
 using Avalonia;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Engine.Tests;
 
@@ -61,6 +62,7 @@ public sealed class BattleRenderStateBuilderTests
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
             .Build();
         BattleRenderState renderState = new BattleRenderStateBuilder(state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background: background, environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(2)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -77,7 +79,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -93,7 +95,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -165,6 +167,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -178,7 +181,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -194,7 +197,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -270,6 +273,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -282,6 +286,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([ally.Id]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -296,7 +301,7 @@ public sealed class BattleRenderStateBuilderTests
                 DefinitionId: attackerDefinition.Id,
                 Race: WorldRace.Human,
                 DeathAnimation: UnitDeathAnimation.Human,
-                Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.BackCenter, IsLarge: false),
+                Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.BackCenter, IsLarge: false),
                 Facing: BattleSide.Attacker,
                 IdleOffset: TimeSpan.FromTicks(6524244),
                 CorpseVariant: 0,
@@ -312,7 +317,7 @@ public sealed class BattleRenderStateBuilderTests
                 DefinitionId: attackerDefinition.Id,
                 Race: WorldRace.Human,
                 DeathAnimation: UnitDeathAnimation.Human,
-                Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                 Facing: BattleSide.Attacker,
                 IdleOffset: TimeSpan.FromTicks(7676067),
                 CorpseVariant: 1,
@@ -328,7 +333,7 @@ public sealed class BattleRenderStateBuilderTests
                 DefinitionId: defenderDefinition.Id,
                 Race: WorldRace.Human,
                 DeathAnimation: UnitDeathAnimation.Human,
-                Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                 Facing: BattleSide.Defender,
                 IdleOffset: TimeSpan.FromTicks(666057),
                 CorpseVariant: 1,
@@ -346,7 +351,7 @@ public sealed class BattleRenderStateBuilderTests
                 DefinitionId: attackerDefinition.Id,
                 Race: WorldRace.Human,
                 DeathAnimation: UnitDeathAnimation.Human,
-                Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.BackCenter, IsLarge: false),
+                Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.BackCenter, IsLarge: false),
                 Facing: BattleSide.Attacker,
                 IdleOffset: TimeSpan.FromTicks(6524244),
                 CorpseVariant: 0,
@@ -362,7 +367,7 @@ public sealed class BattleRenderStateBuilderTests
                 DefinitionId: attackerDefinition.Id,
                 Race: WorldRace.Human,
                 DeathAnimation: UnitDeathAnimation.Human,
-                Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                 Facing: BattleSide.Attacker,
                 IdleOffset: TimeSpan.FromTicks(7676067),
                 CorpseVariant: 1,
@@ -378,7 +383,7 @@ public sealed class BattleRenderStateBuilderTests
                 DefinitionId: defenderDefinition.Id,
                 Race: WorldRace.Human,
                 DeathAnimation: UnitDeathAnimation.Human,
-                Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                 Facing: BattleSide.Defender,
                 IdleOffset: TimeSpan.FromTicks(666057),
                 CorpseVariant: 1,
@@ -451,6 +456,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -464,7 +470,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -480,7 +486,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -565,6 +571,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -578,7 +585,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -594,7 +601,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -679,6 +686,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -692,7 +700,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -708,7 +716,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -792,6 +800,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -805,7 +814,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -821,7 +830,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -888,6 +897,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -943,6 +953,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(2)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -959,7 +970,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -975,7 +986,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -1049,6 +1060,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -1062,7 +1074,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: true),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: true),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1078,7 +1090,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -1149,6 +1161,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -1162,7 +1175,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontBottom, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontBottom, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7529470),
                     CorpseVariant: 1,
@@ -1178,7 +1191,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontTop, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontTop, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(949347),
                     CorpseVariant: 0,
@@ -1249,6 +1262,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -1262,7 +1276,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1278,7 +1292,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -1352,6 +1366,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(2), new BattleUnitId(3)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -1369,7 +1384,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1385,7 +1400,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontTop, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontTop, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(949347),
                     CorpseVariant: 0,
@@ -1401,7 +1416,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 1,
@@ -1472,6 +1487,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(1), new BattleUnitId(3)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -1488,7 +1504,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: healerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1504,7 +1520,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: allyDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontBottom, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontBottom, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7529470),
                     CorpseVariant: 1,
@@ -1584,6 +1600,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Unit([new BattleUnitId(3)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -1601,7 +1618,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1617,7 +1634,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: allyDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.BackBottom, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.BackBottom, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(8987715),
                     CorpseVariant: 0,
@@ -1633,7 +1650,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: allyDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontBottom, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontBottom, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7529470),
                     CorpseVariant: 1,
@@ -1649,7 +1666,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -1727,6 +1744,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: new BattleActionTarget.Summon([new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter)]),
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -1744,7 +1762,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontTop, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontTop, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(798133),
                     CorpseVariant: 1,
@@ -1760,7 +1778,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: attackerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1776,7 +1794,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -1790,8 +1808,8 @@ public sealed class BattleRenderStateBuilderTests
             ],
             Placeholders:
             [
-                new BattleRenderState.Placeholder(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontTop), Theme.Battle.GroundMarker.SummonReachableColor),
-                new BattleRenderState.Placeholder(new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter), Theme.Battle.GroundMarker.SummonTargetColor)
+                new BattleRenderState.Placeholder(new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontTop, IsLarge: false), Theme.Battle.GroundMarker.SummonReachableColor),
+                new BattleRenderState.Placeholder(new BattleGridFootprint(BattlePosition.Left, GridPosition.BackCenter, IsLarge: false), Theme.Battle.GroundMarker.SummonTargetColor)
             ],
             HitTargets:
             [
@@ -1871,6 +1889,7 @@ public sealed class BattleRenderStateBuilderTests
             .Build();
 
         BattleRenderState renderState = new BattleRenderStateBuilder(baseState, currentState, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background: background, environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -1884,7 +1903,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: summonDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontTop, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontTop, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(798133),
                     CorpseVariant: 1,
@@ -1900,7 +1919,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: summonerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -1916,7 +1935,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: enemyDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 0,
@@ -1988,6 +2007,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2028,6 +2048,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2071,6 +2092,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: true, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2111,6 +2133,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2157,6 +2180,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2203,6 +2227,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Dusk, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2247,6 +2272,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2287,6 +2313,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Midday, Rain: true, Storm: true),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2327,6 +2354,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState renderState = new BattleRenderStateBuilder(
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata, background, new BattleEnvironment(BattleTimeOfDay.Dusk, Rain: true, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
@@ -2405,6 +2433,7 @@ public sealed class BattleRenderStateBuilderTests
             state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
             background: background,
             environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
             isAiTurn: false,
             selectedTarget: null,
             actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
@@ -2422,7 +2451,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: doppelgangerDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7676067),
                     CorpseVariant: 1,
@@ -2438,7 +2467,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: allyDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontBottom, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontBottom, IsLarge: false),
                     Facing: BattleSide.Attacker,
                     IdleOffset: TimeSpan.FromTicks(7529470),
                     CorpseVariant: 0,
@@ -2454,7 +2483,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontCenter, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(666057),
                     CorpseVariant: 1,
@@ -2470,7 +2499,7 @@ public sealed class BattleRenderStateBuilderTests
                     DefinitionId: defenderDefinition.Id,
                     Race: WorldRace.Human,
                     DeathAnimation: UnitDeathAnimation.Human,
-                    Footprint: new BattleGridFootprint(BattleSide.Defender, GridPosition.FrontBottom, IsLarge: false),
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontBottom, IsLarge: false),
                     Facing: BattleSide.Defender,
                     IdleOffset: TimeSpan.FromTicks(9504349),
                     CorpseVariant: 0,
@@ -2489,6 +2518,114 @@ public sealed class BattleRenderStateBuilderTests
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontBottom), new Rect(259.281, 305.338, 84.16, 126.24)),
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Defender, GridPosition.FrontCenter), new Rect(496.791, 313.946, 84.4, 126.6)),
                 new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Defender, GridPosition.FrontBottom), new Rect(353.191, 377.566, 86.0, 129.0))
+            ],
+            BattleLightConfiguration.MakeMidday([]),
+            FluidConfigurations: [],
+            RainConfiguration: null,
+            new AnimationRate(60.0));
+
+        Assert.That(renderState, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void FlippedTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("ATK", maxHitpoints: 60, initiative: 50, damage: 10);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("DEF", maxHitpoints: 40, initiative: 50, damage: 10);
+
+        BattleUnit attacker = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 30);
+
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 40);
+
+        UnitGrid<BattleUnit> attackerGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(attacker, GridPosition.FrontCenter, isLarge: false)
+            .Build();
+
+        UnitGrid<BattleUnit> defenderGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(defender, GridPosition.FrontCenter, isLarge: false)
+            .Build();
+
+        BattleState state = new(
+            attackerGrid,
+            defenderGrid,
+            new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [],
+            CurrentRound: BattleRound.Normal(1),
+            Outcome: null,
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(attackerDefinition)
+            .AddUnit(defenderDefinition)
+            .Build();
+        IUnitStatsProvider stats = new UnitStatsProvider(definitions, new GlobalVariables(), GameScenarioProvider.Empty.Definition);
+
+        AssetSpriteKey.BattleBackground background = new(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0);
+        IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("ATK"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("DEF"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
+            .Build();
+        BattleRenderState renderState = new BattleRenderStateBuilder(
+            state, state, stats, definitions, TestGameTextProvider.Instance, assetMetadata,
+            background: background,
+            environment: new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Right, Defender: BattlePosition.Left),
+            isAiTurn: false,
+            selectedTarget: null,
+            actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>
+            {
+                [new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter)] = new BattleActionTarget.Summon([new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter)])
+            },
+            previousState: null).BuildState();
+
+        BattleRenderState expected = new(
+            background,
+            [
+                new BattleRenderState.Unit(
+                    Id: new BattleUnitId(2),
+                    DefinitionId: defenderDefinition.Id,
+                    Race: WorldRace.Human,
+                    DeathAnimation: UnitDeathAnimation.Human,
+                    Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
+                    Facing: BattleSide.Attacker,
+                    IdleOffset: TimeSpan.FromTicks(7676067),
+                    CorpseVariant: 0,
+                    Hitpoints: 40,
+                    MaxHitpoints: 40,
+                    Presence: BattleUnitState.Presence.Alive,
+                    Marker: null,
+                    Highlight: null,
+                    Auras: BattleUnitState.Auras.None,
+                    Frozen: false),
+                new BattleRenderState.Unit(
+                    Id: new BattleUnitId(1),
+                    DefinitionId: attackerDefinition.Id,
+                    Race: WorldRace.Human,
+                    DeathAnimation: UnitDeathAnimation.Human,
+                    Footprint: new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontCenter, IsLarge: false),
+                    Facing: BattleSide.Defender,
+                    IdleOffset: TimeSpan.FromTicks(666057),
+                    CorpseVariant: 1,
+                    Hitpoints: 30,
+                    MaxHitpoints: 60,
+                    Presence: BattleUnitState.Presence.Alive,
+                    Marker: Theme.Battle.GroundMarker.CurrentColor,
+                    Highlight: Theme.Battle.Highlight.CurrentColor,
+                    Auras: BattleUnitState.Auras.None,
+                    Frozen: false)
+            ],
+            Placeholders:
+            [
+                new BattleRenderState.Placeholder(new BattleGridFootprint(BattlePosition.Right, GridPosition.BackCenter, IsLarge: false), Theme.Battle.GroundMarker.SummonReachableColor)
+            ],
+            HitTargets:
+            [
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Defender, GridPosition.FrontCenter), new Rect(401.781, 242.818, 82.56, 123.84)),
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter), new Rect(496.791, 313.946, 84.4, 126.6)),
+                new BattleRenderState.HitTarget(new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter), new Rect(610.441, 396.876, 86.8, 86.8))
             ],
             BattleLightConfiguration.MakeMidday([]),
             FluidConfigurations: [],
