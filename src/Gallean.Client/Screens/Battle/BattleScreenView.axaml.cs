@@ -184,7 +184,7 @@ internal sealed partial class BattleScreenView : UserControl
 
     private static void PlaceUnitDetails(CustomPopupPlacement placement)
     {
-        placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideY;
+        placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideX | PopupPositionerConstraintAdjustment.SlideY;
 
         Visual target = placement.Target;
         TopLevel? topLevel = TopLevel.GetTopLevel(target);

@@ -26,7 +26,8 @@ internal sealed record UnitDetailsViewModel(
     UnitWardGridViewModel? Wards,
     StatRowViewModel? Leadership,
     IReadOnlyList<UnitStatusViewModel> Statuses,
-    IReadOnlyList<UnitPermanentModifierViewModel> PermanentModifiers)
+    IReadOnlyList<UnitPermanentModifierViewModel> PermanentModifiers,
+    UnitSummonsViewModel? Summons)
 {
     private sealed record AttackDetails(UnitAttackDefinition Attack, UnitAttackStats BaseStats, UnitAttackStats Stats);
 
@@ -81,7 +82,8 @@ internal sealed record UnitDetailsViewModel(
                Wards == other.Wards &&
                Leadership == other.Leadership &&
                Statuses.SequenceEqual(other.Statuses) &&
-               PermanentModifiers.SequenceEqual(other.PermanentModifiers);
+               PermanentModifiers.SequenceEqual(other.PermanentModifiers) &&
+               Summons == other.Summons;
     }
 
     public static UnitDetailsViewModel CreateFromBattle(
@@ -157,6 +159,7 @@ internal sealed record UnitDetailsViewModel(
             experience,
             isUpgradeBlocked,
             unit.IsTypeLocked,
+            definitions,
             texts,
             unit.Wards,
             stats.GetBattleUnitLeadership(state, unitId),
@@ -218,6 +221,7 @@ internal sealed record UnitDetailsViewModel(
             experience,
             isUpgradeBlocked,
             unit.IsTypeLocked,
+            definitions,
             texts,
             stats.GetWorldUnitWards(unit),
             stats.GetWorldUnitLeadership(unit),
@@ -255,6 +259,7 @@ internal sealed record UnitDetailsViewModel(
         UnitExperience experience,
         bool isUpgradeBlocked,
         bool isTypeLocked,
+        IGameDefinitionProvider definitions,
         IGameTextProvider texts,
         ImmutableArray<UnitWard> wards,
         int leadership,
@@ -347,7 +352,8 @@ internal sealed record UnitDetailsViewModel(
             CreateWardGrid(wards, UnitWardCategory.Once),
             leadershipRow,
             statuses,
-            permanentModifiers);
+            permanentModifiers,
+            UnitSummonsViewModel.Create(attackDetails.Attack, definitions, texts));
     }
 
     private static UnitWardGridViewModel? CreateWardGrid(ImmutableArray<UnitWard> wards, UnitWardCategory category)
@@ -445,6 +451,7 @@ internal sealed record UnitDetailsViewModel(
         hash.Add(Leadership);
         hash.AddSequence(Statuses);
         hash.AddSequence(PermanentModifiers);
+        hash.Add(Summons);
 
         return hash.ToHashCode();
     }

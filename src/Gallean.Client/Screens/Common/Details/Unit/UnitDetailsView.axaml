@@ -164,201 +164,212 @@
     </Style>
   </UserControl.Styles>
 
-  <local:ModalFrameDecorator Width="680" Margin="60,76,0,0">
-    <Grid ColumnDefinitions="Auto,*">
+  <StackPanel Orientation="Horizontal" Spacing="16" Margin="60,76,0,0">
+    <local:ModalFrameDecorator Width="680" VerticalAlignment="Top">
+      <Grid ColumnDefinitions="Auto,*">
 
-      <StackPanel Grid.Column="0" Width="236" Margin="0,0,0,22">
-        <Decorator Classes="details-portrait" Margin="-98,-168,-5,-81" HorizontalAlignment="Left">
-          <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Height="565" Stretch="Uniform" />
-        </Decorator>
+        <StackPanel Grid.Column="0" Width="236" Margin="0,0,0,22">
+          <Decorator Classes="details-portrait" Margin="-98,-168,-5,-81" HorizontalAlignment="Left">
+            <local:SpriteVisual SpriteKey="{Binding PortraitKey}" Height="565" Stretch="Uniform" />
+          </Decorator>
 
-        <StackPanel Margin="18,0,0,0" Spacing="12">
-          <StackPanel>
-            <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Hit points'}" />
-            <local:BarVisual Classes="details-bar hitpoints" Current="{Binding Hitpoints}" Maximum="{Binding MaxHitpoints}" />
-          </StackPanel>
-          <StackPanel>
-            <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Experience'}" />
-            <local:BarVisual Classes="details-bar experience"
-                             Classes.maximum="{Binding IsMaximumLevel}"
-                             Classes.pending="{Binding IsPendingUpgrade}"
-                             Current="{Binding Experience}"
-                             Maximum="{Binding NextLevelExperience}" />
-          </StackPanel>
-          <TextBlock Text="{local:Text 'Upgrades after its next battle'}"
-                     Classes="caption"
-                     TextWrapping="Wrap"
-                     Foreground="{StaticResource AccentBrush}"
-                     IsVisible="{Binding IsPendingUpgrade}" />
-          <TextBlock Text="{local:Text 'Unit type locked'}"
-                     Classes="caption"
-                     TextWrapping="Wrap"
-                     Foreground="{StaticResource SecondaryTextBrush}"
-                     IsVisible="{Binding IsTypeLocked}" />
-          <Grid ColumnDefinitions="Auto,*" Classes="caption" IsVisible="{Binding IsUpgradeBlocked}">
-            <local:IconVisual Grid.Column="0"
-                              Moniker="Warning"
-                              Width="14"
-                              Height="14"
-                              Margin="0,1,6,0"
-                              VerticalAlignment="Top"
-                              Foreground="{StaticResource UnitDetailsWarningBrush}" />
-            <TextBlock Grid.Column="1"
-                       Text="{local:Text 'Needs a building in the capital to upgrade'}"
+          <StackPanel Margin="18,0,0,0" Spacing="12">
+            <StackPanel>
+              <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Hit points'}" />
+              <local:BarVisual Classes="details-bar hitpoints" Current="{Binding Hitpoints}" Maximum="{Binding MaxHitpoints}" />
+            </StackPanel>
+            <StackPanel>
+              <local:OutlinedTextBlock Classes="label bar-label" Text="{local:Text 'Experience'}" />
+              <local:BarVisual Classes="details-bar experience"
+                               Classes.maximum="{Binding IsMaximumLevel}"
+                               Classes.pending="{Binding IsPendingUpgrade}"
+                               Current="{Binding Experience}"
+                               Maximum="{Binding NextLevelExperience}" />
+            </StackPanel>
+            <TextBlock Text="{local:Text 'Upgrades after its next battle'}"
+                       Classes="caption"
                        TextWrapping="Wrap"
-                       Foreground="{StaticResource UnitDetailsWarningBrush}" />
+                       Foreground="{StaticResource AccentBrush}"
+                       IsVisible="{Binding IsPendingUpgrade}" />
+            <TextBlock Text="{local:Text 'Unit type locked'}"
+                       Classes="caption"
+                       TextWrapping="Wrap"
+                       Foreground="{StaticResource SecondaryTextBrush}"
+                       IsVisible="{Binding IsTypeLocked}" />
+            <Grid ColumnDefinitions="Auto,*" Classes="caption" IsVisible="{Binding IsUpgradeBlocked}">
+              <local:IconVisual Grid.Column="0"
+                                Moniker="Warning"
+                                Width="14"
+                                Height="14"
+                                Margin="0,1,6,0"
+                                VerticalAlignment="Top"
+                                Foreground="{StaticResource UnitDetailsWarningBrush}" />
+              <TextBlock Grid.Column="1"
+                         Text="{local:Text 'Needs a building in the capital to upgrade'}"
+                         TextWrapping="Wrap"
+                         Foreground="{StaticResource UnitDetailsWarningBrush}" />
+            </Grid>
+          </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="22,20,24,22" Spacing="14">
+          <StackPanel Classes="details-header">
+            <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
+            <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category" />
+          </StackPanel>
+
+          <Grid ColumnDefinitions="Auto,*">
+            <local:IconVisual Grid.Column="0" Classes="details-ornament" Moniker="OrnamentFinialSmall" />
+            <TextBlock Grid.Column="1" Text="{Binding Description}" Classes="body details-flavor" />
           </Grid>
-        </StackPanel>
-      </StackPanel>
 
-      <StackPanel Grid.Column="1" Margin="22,20,24,22" Spacing="14">
-        <StackPanel Classes="details-header">
-          <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
-          <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category" />
-        </StackPanel>
+          <Rectangle Classes="details-rule" />
 
-        <Grid ColumnDefinitions="Auto,*">
-          <local:IconVisual Grid.Column="0" Classes="details-ornament" Moniker="OrnamentFinialSmall" />
-          <TextBlock Grid.Column="1" Text="{Binding Description}" Classes="body details-flavor" />
-        </Grid>
+          <Grid ColumnDefinitions="Auto,Auto,Auto,*">
+            <local:OutlinedTextBlock Grid.Column="0"
+                                     Classes="h1 primary-stat"
+                                     Text="{Binding Damage.Text.Text}"
+                                     VerticalAlignment="Center" />
+            <local:OutlinedTextBlock Grid.Column="1"
+                                     Classes="h4 primary-stat-change"
+                                     Classes.decrease="{Binding Damage.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}"
+                                     Text="{Binding Damage.ChangeText}"
+                                     VerticalAlignment="Center" />
+            <StackPanel Grid.Column="2"
+                        Classes="damage-over-time"
+                        ToolTip.Tip="{Binding DamageOverTime.Text}"
+                        IsVisible="{Binding DamageOverTime, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <local:OutlinedTextBlock Classes="h3 separator" Text="/" />
+              <local:OutlinedTextBlock Classes="h3"
+                                       Text="{Binding DamageOverTime.Damage}"
+                                       Foreground="{Binding DamageOverTime.Status.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+            </StackPanel>
+            <StackPanel Grid.Column="3" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
+              <StackPanel Classes="attack-line">
+                <TextBlock Text="{Binding Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
+                <TextBlock Text="(" Classes="caption attack-source open" />
+                <local:IconVisual Classes="attack-source"
+                                  Moniker="{Binding Attack.Source.Icon}"
+                                  Foreground="{Binding Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                <TextBlock Text="{Binding Attack.Source.Text}"
+                           Classes="caption attack-source"
+                           Foreground="{Binding Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                <TextBlock Text=")" Classes="caption attack-source close" />
+              </StackPanel>
+              <StackPanel Classes="attack-line secondary" IsVisible="{Binding SecondaryAttack, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <TextBlock Text="{Binding SecondaryAttack.Text}" Classes="caption attack-type" Foreground="{StaticResource SecondaryTextBrush}" />
+                <TextBlock Text="(" Classes="caption attack-source open" />
+                <local:IconVisual Classes="attack-source"
+                                  Moniker="{Binding SecondaryAttack.Source.Icon}"
+                                  Foreground="{Binding SecondaryAttack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                <TextBlock Text="{Binding SecondaryAttack.Source.Text}"
+                           Classes="caption attack-source"
+                           Foreground="{Binding SecondaryAttack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+                <TextBlock Text=")" Classes="caption attack-source close" />
+              </StackPanel>
+            </StackPanel>
+          </Grid>
 
-        <Rectangle Classes="details-rule" />
+          <StackPanel>
+            <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
 
-        <Grid ColumnDefinitions="Auto,Auto,Auto,*">
-          <local:OutlinedTextBlock Grid.Column="0"
-                                   Classes="h1 primary-stat"
-                                   Text="{Binding Damage.Text.Text}"
-                                   VerticalAlignment="Center" />
-          <local:OutlinedTextBlock Grid.Column="1"
-                                   Classes="h4 primary-stat-change"
-                                   Classes.decrease="{Binding Damage.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}"
-                                   Text="{Binding Damage.ChangeText}"
-                                   VerticalAlignment="Center" />
-          <StackPanel Grid.Column="2"
-                      Classes="damage-over-time"
-                      ToolTip.Tip="{Binding DamageOverTime.Text}"
-                      IsVisible="{Binding DamageOverTime, Converter={x:Static ObjectConverters.IsNotNull}}">
-            <local:OutlinedTextBlock Classes="h3 separator" Text="/" />
-            <local:OutlinedTextBlock Classes="h3"
-                                     Text="{Binding DamageOverTime.Damage}"
-                                     Foreground="{Binding DamageOverTime.Status.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
+            <Border Classes="stat-row ward-none striped" IsVisible="{Binding Immunities, Converter={x:Static ObjectConverters.IsNull}}">
+              <Grid ColumnDefinitions="Auto,Auto,*">
+                <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Immunity" />
+                <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Immunities'}" />
+                <StackPanel Grid.Column="2" Classes="stat-value">
+                  <TextBlock Classes="body" Text="{local:Text 'None'}" />
+                </StackPanel>
+              </Grid>
+            </Border>
+
+            <Border Classes="stat-row ward-block striped" IsVisible="{Binding Immunities, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <StackPanel>
+                <StackPanel Classes="block-header">
+                  <local:IconVisual Moniker="Immunity" />
+                  <TextBlock Classes="body" Text="{local:Text 'Immunities'}" />
+                </StackPanel>
+                <ItemsControl Classes="ward-grid" ItemsSource="{Binding Immunities.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <UniformGrid Columns="5" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                </ItemsControl>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="stat-row ward-none" IsVisible="{Binding Wards, Converter={x:Static ObjectConverters.IsNull}}">
+              <Grid ColumnDefinitions="Auto,Auto,*">
+                <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Ward" />
+                <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Wards'}" />
+                <StackPanel Grid.Column="2" Classes="stat-value">
+                  <TextBlock Classes="body" Text="{local:Text 'None'}" />
+                </StackPanel>
+              </Grid>
+            </Border>
+
+            <Border Classes="stat-row ward-block" IsVisible="{Binding Wards, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <StackPanel>
+                <StackPanel Classes="block-header">
+                  <local:IconVisual Moniker="Ward" />
+                  <TextBlock Classes="body" Text="{local:Text 'Wards'}" />
+                </StackPanel>
+                <ItemsControl Classes="ward-grid" ItemsSource="{Binding Wards.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <UniformGrid Columns="5" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                </ItemsControl>
+              </StackPanel>
+            </Border>
+
+            <ContentControl Classes="leadership-row"
+                            Content="{Binding Leadership}"
+                            ContentTemplate="{StaticResource StatRowTemplate}"
+                            IsVisible="{Binding Leadership, Converter={x:Static ObjectConverters.IsNotNull}}" />
           </StackPanel>
-          <StackPanel Grid.Column="3" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
-            <StackPanel Classes="attack-line">
-              <TextBlock Text="{Binding Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
-              <TextBlock Text="(" Classes="caption attack-source open" />
-              <local:IconVisual Classes="attack-source"
-                                Moniker="{Binding Attack.Source.Icon}"
-                                Foreground="{Binding Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
-              <TextBlock Text="{Binding Attack.Source.Text}"
-                         Classes="caption attack-source"
-                         Foreground="{Binding Attack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
-              <TextBlock Text=")" Classes="caption attack-source close" />
-            </StackPanel>
-            <StackPanel Classes="attack-line secondary" IsVisible="{Binding SecondaryAttack, Converter={x:Static ObjectConverters.IsNotNull}}">
-              <TextBlock Text="{Binding SecondaryAttack.Text}" Classes="caption attack-type" Foreground="{StaticResource SecondaryTextBrush}" />
-              <TextBlock Text="(" Classes="caption attack-source open" />
-              <local:IconVisual Classes="attack-source"
-                                Moniker="{Binding SecondaryAttack.Source.Icon}"
-                                Foreground="{Binding SecondaryAttack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
-              <TextBlock Text="{Binding SecondaryAttack.Source.Text}"
-                         Classes="caption attack-source"
-                         Foreground="{Binding SecondaryAttack.Source.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
-              <TextBlock Text=")" Classes="caption attack-source close" />
-            </StackPanel>
-          </StackPanel>
-        </Grid>
 
-        <StackPanel>
-          <ItemsControl Classes="stat-table" ItemsSource="{Binding Stats}" />
+          <Rectangle Classes="details-rule">
+            <Rectangle.IsVisible>
+              <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                <Binding Path="Statuses.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+                <Binding Path="PermanentModifiers.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+              </MultiBinding>
+            </Rectangle.IsVisible>
+          </Rectangle>
 
-          <Border Classes="stat-row ward-none striped" IsVisible="{Binding Immunities, Converter={x:Static ObjectConverters.IsNull}}">
-            <Grid ColumnDefinitions="Auto,Auto,*">
-              <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Immunity" />
-              <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Immunities'}" />
-              <StackPanel Grid.Column="2" Classes="stat-value">
-                <TextBlock Classes="body" Text="{local:Text 'None'}" />
-              </StackPanel>
-            </Grid>
-          </Border>
+          <ItemsControl Classes="status-badges"
+                        ItemsSource="{Binding Statuses}"
+                        ItemTemplate="{StaticResource UnitStatusRowTemplate}"
+                        IsVisible="{Binding Statuses.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
 
-          <Border Classes="stat-row ward-block striped" IsVisible="{Binding Immunities, Converter={x:Static ObjectConverters.IsNotNull}}">
-            <StackPanel>
-              <StackPanel Classes="block-header">
-                <local:IconVisual Moniker="Immunity" />
-                <TextBlock Classes="body" Text="{local:Text 'Immunities'}" />
-              </StackPanel>
-              <ItemsControl Classes="ward-grid" ItemsSource="{Binding Immunities.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <UniformGrid Columns="5" />
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-              </ItemsControl>
-            </StackPanel>
-          </Border>
+          <Line Classes="status-divider">
+            <Line.IsVisible>
+              <MultiBinding Converter="{x:Static BoolConverters.And}">
+                <Binding Path="Statuses.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+                <Binding Path="PermanentModifiers.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
+              </MultiBinding>
+            </Line.IsVisible>
+          </Line>
 
-          <Border Classes="stat-row ward-none" IsVisible="{Binding Wards, Converter={x:Static ObjectConverters.IsNull}}">
-            <Grid ColumnDefinitions="Auto,Auto,*">
-              <local:IconVisual Grid.Column="0" Classes="stat-icon" Moniker="Ward" />
-              <TextBlock Grid.Column="1" Classes="body stat-label" Text="{local:Text 'Wards'}" />
-              <StackPanel Grid.Column="2" Classes="stat-value">
-                <TextBlock Classes="body" Text="{local:Text 'None'}" />
-              </StackPanel>
-            </Grid>
-          </Border>
-
-          <Border Classes="stat-row ward-block" IsVisible="{Binding Wards, Converter={x:Static ObjectConverters.IsNotNull}}">
-            <StackPanel>
-              <StackPanel Classes="block-header">
-                <local:IconVisual Moniker="Ward" />
-                <TextBlock Classes="body" Text="{local:Text 'Wards'}" />
-              </StackPanel>
-              <ItemsControl Classes="ward-grid" ItemsSource="{Binding Wards.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <UniformGrid Columns="5" />
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-              </ItemsControl>
-            </StackPanel>
-          </Border>
-
-          <ContentControl Classes="leadership-row"
-                          Content="{Binding Leadership}"
-                          ContentTemplate="{StaticResource StatRowTemplate}"
-                          IsVisible="{Binding Leadership, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          <ItemsControl Classes="permanent-modifiers"
+                        ItemsSource="{Binding PermanentModifiers}"
+                        IsVisible="{Binding PermanentModifiers.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
         </StackPanel>
 
-        <Rectangle Classes="details-rule">
-          <Rectangle.IsVisible>
-            <MultiBinding Converter="{x:Static BoolConverters.Or}">
-              <Binding Path="Statuses.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
-              <Binding Path="PermanentModifiers.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
-            </MultiBinding>
-          </Rectangle.IsVisible>
-        </Rectangle>
+      </Grid>
+    </local:ModalFrameDecorator>
 
-        <ItemsControl Classes="status-badges"
-                      ItemsSource="{Binding Statuses}"
-                      ItemTemplate="{StaticResource UnitStatusRowTemplate}"
-                      IsVisible="{Binding Statuses.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
-
-        <Line Classes="status-divider">
-          <Line.IsVisible>
-            <MultiBinding Converter="{x:Static BoolConverters.And}">
-              <Binding Path="Statuses.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
-              <Binding Path="PermanentModifiers.Count" Converter="{x:Static local:GreaterThanConverter.Instance}" ConverterParameter="0" />
-            </MultiBinding>
-          </Line.IsVisible>
-        </Line>
-
-        <ItemsControl Classes="permanent-modifiers"
-                      ItemsSource="{Binding PermanentModifiers}"
-                      IsVisible="{Binding PermanentModifiers.Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=0}" />
+    <local:ModalFrameDecorator Width="400"
+                               VerticalAlignment="Top"
+                               IsVisible="{Binding Summons, Converter={x:Static ObjectConverters.IsNotNull}}">
+      <StackPanel Margin="22,20,22,10" Spacing="14">
+        <local:OutlinedTextBlock Text="{Binding Summons.Title}" Classes="label details-category" />
+        <ItemsControl Classes.compact="{Binding Summons.IsCompact}" ItemsSource="{Binding Summons.Items}" />
       </StackPanel>
-
-    </Grid>
-  </local:ModalFrameDecorator>
+    </local:ModalFrameDecorator>
+  </StackPanel>
 
 </UserControl>

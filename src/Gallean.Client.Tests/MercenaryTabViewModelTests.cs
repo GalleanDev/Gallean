@@ -581,6 +581,7 @@ public sealed class MercenaryTabViewModelTests
             null,
             null,
             [],
-            [])));
+            [],
+            Summons: null)));
     }
 }

@@ -904,7 +904,8 @@ public sealed class CityTabViewModelTests
                     null,
                     new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                     [],
-                    [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])]))));
+                    [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])],
+                    Summons: null))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
             Assert.That(screen.StackLeadership, Is.EqualTo("2 / 3"));
             Assert.That(screen.GarrisonCapacity, Is.EqualTo("0 / 3"));
@@ -940,7 +941,8 @@ public sealed class CityTabViewModelTests
             null,
             null,
             [],
-            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])])));
+            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])],
+            Summons: null)));
 
         await soldierSlot.SelectCommand.ExecuteAsync(null);
 
@@ -980,7 +982,8 @@ public sealed class CityTabViewModelTests
                 null,
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
-                [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])]))));
+                [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])],
+                Summons: null))));
     }
 
     [Test]

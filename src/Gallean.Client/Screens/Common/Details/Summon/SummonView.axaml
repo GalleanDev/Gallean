@@ -39,14 +39,29 @@
     <Style Selector="Border.stat-row TextBlock.stat-label">
       <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
     </Style>
+
+    <Style Selector="local|UnitIcon.summon-portrait">
+      <Setter Property="Width" Value="84" />
+      <Setter Property="Height" Value="84" />
+    </Style>
+    <Style Selector="ItemsControl.compact local|UnitIcon.summon-portrait">
+      <Setter Property="Width" Value="56" />
+      <Setter Property="Height" Value="56" />
+    </Style>
+    <Style Selector="ItemsControl.compact :is(TextBlock).summon-level">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="ItemsControl.compact ItemsControl.stat-table">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
   </UserControl.Styles>
 
   <StackPanel>
     <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,12">
-      <local:UnitIcon Grid.Column="0" SpriteKey="{Binding PortraitKey}" Width="84" Height="84" />
+      <local:UnitIcon Grid.Column="0" Classes="summon-portrait" SpriteKey="{Binding PortraitKey}" />
       <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
         <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
-        <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category" />
+        <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category summon-level" />
         <Grid ColumnDefinitions="Auto,*" Margin="0,4,0,0">
           <local:OutlinedTextBlock Grid.Column="0"
                                    Classes="h2 primary-stat"

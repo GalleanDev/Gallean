@@ -679,7 +679,8 @@ public sealed class BattleScreenViewModelTests
             [
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Poison))
             ],
-            [])));
+            [],
+            Summons: null)));
 
         viewModel.HideUnitDetails();
 
@@ -783,7 +784,8 @@ public sealed class BattleScreenViewModelTests
             [
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.IncreaseDamage))
             ],
-            [])));
+            [],
+            Summons: null)));
     }
 
     [Test]
@@ -897,7 +899,8 @@ public sealed class BattleScreenViewModelTests
             null,
             null,
             [],
-            [])));
+            [],
+            Summons: null)));
     }
 
     [Test]
@@ -4018,7 +4021,8 @@ public sealed class BattleScreenViewModelTests
                     new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
                 ])
             ],
-            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "From equipment", null, 1, [])])));
+            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "From equipment", null, 1, [])],
+            Summons: null)));
     }
 
     [Test]
@@ -4634,7 +4638,8 @@ public sealed class BattleScreenViewModelTests
             [
                 new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-10% accuracy", null, UnitModifierType.Weaken)])
             ],
-            [])));
+            [],
+            Summons: null)));
     }
 
     [Test]
