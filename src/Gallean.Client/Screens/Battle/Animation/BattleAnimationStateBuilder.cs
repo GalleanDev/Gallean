@@ -1272,7 +1272,13 @@ internal sealed partial class BattleAnimationStateBuilder(
 
     private void AddSound(TimeSpan at, AssetSoundKey key)
     {
-        sounds.Add(new AnimationSound(at, key));
+        AnimationSound sound = new(at, key);
+
+        if (!sounds.Contains(sound))
+        {
+            sounds.Add(sound);
+        }
+
         RequireStep().ExtendTo(at);
     }
 

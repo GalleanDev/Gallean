@@ -7215,7 +7215,6 @@ public sealed class BattleAnimationStateBuilderTests
             "@16 unit 3 body Idle Alive",
             "@26 unit 2 feedback +15 Effect Poisoned",
             "@26 unit 3 feedback +15 Effect Poisoned",
-            "@26 sound battle-effect-sound-status/poison",
             "@26 sound battle-effect-sound-status/poison"
         ]));
     }
@@ -7721,6 +7720,103 @@ public sealed class BattleAnimationStateBuilderTests
             "@10 unit 1 form KNIGHT facing Attacker",
             "@10 unit 1 hitpoints 60 -> 150 over 12 frames Decelerate",
             "@10 unit 1 max hitpoints 90 -> 150 over 12 frames Decelerate"
+        ]));
+    }
+
+    [Test]
+    public void MassHealTest()
+    {
+        BattleRenderState.Unit healer = new(
+            Id: new BattleUnitId(1),
+            DefinitionId: new UnitDefinitionId("ATK"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontCenter, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 1,
+            Hitpoints: 60,
+            MaxHitpoints: 60,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState.Unit ally = new(
+            Id: new BattleUnitId(2),
+            DefinitionId: new UnitDefinitionId("ALLY"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontTop, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 0,
+            Hitpoints: 20,
+            MaxHitpoints: 20,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState.Unit secondAlly = new(
+            Id: new BattleUnitId(3),
+            DefinitionId: new UnitDefinitionId("ALLY"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattleSide.Attacker, GridPosition.FrontBottom, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 0,
+            Hitpoints: 30,
+            MaxHitpoints: 30,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState baseState = new(
+            new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            [healer, ally, secondAlly],
+            Placeholders: [],
+            HitTargets: [],
+            BattleLightConfiguration.MakeMidday([]),
+            FluidConfigurations: [],
+            RainConfiguration: null,
+            AnimationRate.Sprites);
+
+        IAssetMetadataProvider assets = new TestMetadataProviderBuilder()
+            .WithAnimation(
+                new AssetAnimationKey.BattleUnit(new UnitDefinitionId("ATK"), AssetAnimationKey.BattleUnitPose.Attack, BattleSide.Attacker),
+                new AssetAnimationMetadata(FrameCount: 16, Width: 4, Height: 4, OffsetX: 0, OffsetY: 0, TriggerFrame: 7, SecondTriggerFrame: 0))
+            .Build();
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddAttack(Attack("HEAL", UnitAttackType.Heal, UnitAttackReach.All))
+            .Build();
+
+        BattleAnimationStateBuilder builder = new(assets, definitions, new RandomProvider(0), BattleViewerSide.Defender, 1);
+        BattleAnimationState? animation = builder.Build(
+            baseState,
+            [
+                new BattleUnitAttackEvent(new BattleUnitId(1), new BattleAttackUnitTarget(new BattleUnitId(2)), [new UnitAttackDefinitionId("HEAL")]),
+                new BattleUnitHealedEvent(new BattleUnitId(2), HitpointsAfter: 40),
+                new BattleUnitHealedEvent(new BattleUnitId(3), HitpointsAfter: 50),
+                new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(2), BattleUnitTurnType.Normal))
+            ]);
+        Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
+            "sequence 26 frames",
+            "@0 unit 1 body Attack Alive for 16 frames",
+            "@0 sound battle-unit-attack/atk/4",
+            "@7 unit 2 feedback +15 Heal Healed",
+            "@7 unit 3 feedback +15 Heal Healed",
+            "@7 unit 2 hitpoints 20 -> 40 over 12 frames Decelerate",
+            "@7 unit 3 hitpoints 30 -> 50 over 12 frames Decelerate",
+            "@7 sound battle-unit-touch/atk/4",
+            "@7 sound battle-effect-sound-heal",
+            "@16 unit 1 body Idle Alive"
         ]));
     }
 }
