@@ -16,7 +16,7 @@ internal sealed partial class WorldAiPlanner
             private const int UnfavorableTradeScore = MaxScore / 4;
             private const int UnitRecoveryPenalty = MaxScore * 3 / 10;
             private const int ScenarioObjectivePenalty = MaxScore / 2;
-            private const int UnitsLostDivisor = 4;
+            private const int UnitsLostDivisor = 2;
             private const int ProximityDistancePenalty = 3;
             private const int ProximityCloseDistance = 7;
             private const int ProximityCloseMultiplier = 2;
@@ -139,9 +139,7 @@ internal sealed partial class WorldAiPlanner
 
             public static UtilityScore.Consideration TradeUnits(WorldAiEstimator.BattleEstimate estimate)
             {
-                bool isFavorable = estimate.ExperienceLost <= 0 || estimate.UnitsLost * UnitsLostDivisor <= estimate.UnitCountBefore;
-
-                return UtilityScore.Flag(isFavorable, UnfavorableTradeScore);
+                return UtilityScore.Flag(estimate.UnitsLost * UnitsLostDivisor < estimate.UnitCountBefore);
             }
 
             public static UtilityScore.Consideration LeaderRetained(WorldAiEstimator.BattleEstimate estimate)

@@ -3261,18 +3261,9 @@ public sealed class WorldEngineAiTests
 
         TestWorldAiRunner runner = new(session, engine);
 
-        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P2 173] Move Main -> (2, 0) (Attacker wins)"]));
-        Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([mainStack.Id]));
-        Assert.That(session.World.State.Stacks[mainStack.Id], Is.EqualTo(mainStack with
-        {
-            Direction = WorldStackDirection.SouthEast,
-            Units = new UnitGrid<WorldUnit>.Builder()
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("main"), main) with { Experience = 50 }, GridPosition.FrontBottom, false)
-                .Place(TestHelpers.SimpleUnit(new WorldUnitId("support"), support) with { Hitpoints = 0 }, GridPosition.FrontCenter, false)
-                .Build(),
-            MovementPoints = 3,
-            BattlesWon = 1
-        }));
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
+        Assert.That(session.World.State.Stacks[mainStack.Id], Is.EqualTo(mainStack));
+        Assert.That(session.World.State.Stacks[enemyStack.Id], Is.EqualTo(enemyStack with { MovementPoints = 6 }));
         Assert.That(session.Battle, Is.Null);
     }
 
@@ -3389,7 +3380,7 @@ public sealed class WorldEngineAiTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 124] Move Main -> (3, 3) (Attacker wins)",
+            "[P2 494] Move Main -> (3, 3) (Attacker wins)",
             "[P3 1000] AutoFit Main"
         ]));
         Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([mainStack.Id]));
