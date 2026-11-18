@@ -1063,6 +1063,7 @@ public sealed class WorldEngineDestroyedStackItemsTests
 
         engine.CheckCommand(new WorldResolveFortificationBattleCommand(stack.Id, ruin.Id, finalBattleState), [
             new WorldFortificationBattleEndedEvent(stack.Id, ruin.Id, BattleSide.Defender, UnitGrid<WorldUnit>.Empty, expectedDefenderUnits),
+            new WorldRuinSpiedEvent(new WorldPlayerId(1), ruin.Id),
             new WorldStackDestroyedEvent(stack.Id, Destroyer: null, DestroyerPlayerId: null)
         ]);
 

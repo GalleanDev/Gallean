@@ -874,6 +874,7 @@ public sealed class WorldEngineBattleRetreatTests
 
         engine.CheckCommand(new WorldResolveFortificationBattleCommand(stack1.Id, ruin.Id, finalBattleState), [
             new WorldFortificationBattleEndedEvent(stack1.Id, ruin.Id, BattleSide.Defender, expectedAttackerUnits, expectedGarrison),
+            new WorldRuinSpiedEvent(new WorldPlayerId(1), ruin.Id),
             new WorldStackRelocatedEvent(stack1.Id, new WorldPosition(2, 3), new WorldPosition(3, 4), WorldStackDirection.South)
         ]);
 

@@ -82,7 +82,8 @@ public sealed class WorldEngineScenarioEventRuinTests
             new WorldRuinLootedEvent(ruin.Id, stack.Id, new WorldResourceSet(200, 0, 0, 0, 0, 0), null),
             new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
             new WorldScenarioPopupEvent(scenarioEvent.Id, new ScenarioTextId("The ruin gives up its treasure."), ScenarioEventPortraitId.Unit(leader.Id), PortraitName: null, IsPortraitLeft: true, player.Id, TriggererPosition: new WorldPosition(5, 5), [player.Id]),
-            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
+            new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
+            new WorldRuinSpiedEvent(new WorldPlayerId(1), ruin.Id)
         ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -481,7 +482,8 @@ public sealed class WorldEngineScenarioEventRuinTests
                 BattleSide.Attacker,
                 TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
                 UnitGrid<WorldUnit>.Empty),
-            new WorldRuinLootedEvent(ruin.Id, allyStack.Id, new WorldResourceSet(200, 0, 0, 0, 0, 0), null)
+            new WorldRuinLootedEvent(ruin.Id, allyStack.Id, new WorldResourceSet(200, 0, 0, 0, 0, 0), null),
+            new WorldRuinSpiedEvent(new WorldPlayerId(2), ruin.Id)
         ]);
 
         engine.CheckCommand(new WorldEndTurnCommand(), [

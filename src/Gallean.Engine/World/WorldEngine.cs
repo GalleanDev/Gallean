@@ -9,6 +9,7 @@ internal sealed partial class WorldEngine(IEngineContext context, WorldState ini
         return
         [
             new BattleEndedLootRuinRule(context),
+            new BattleEndedRevealRuinRule(context),
             new BattleEndedDestroyStackRule(context),
             new BattleEndedRetreatStackRule(context),
             new UnitDamagedDestroyStackRule(context),

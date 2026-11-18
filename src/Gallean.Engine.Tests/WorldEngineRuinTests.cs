@@ -155,13 +155,15 @@ public sealed class WorldEngineRuinTests
                     BattleSide.Attacker,
                     expectedAttackerUnits,
                     UnitGrid<WorldUnit>.Empty),
-                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), null)
+                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), null),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1"))
             ]
         );
 
         WorldPlayer expectedPlayer = player with
         {
-            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0),
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
         };
         WorldStack expectedStack = stack with
         {
@@ -250,10 +252,16 @@ public sealed class WorldEngineRuinTests
                     BattleSide.Defender,
                     UnitGrid<WorldUnit>.Empty,
                     expectedDefenderUnits),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1")),
                 new WorldStackDestroyedEvent(new WorldStackId("Stack1"), Destroyer: null, DestroyerPlayerId: null)
             ]
         );
 
+        WorldPlayer expectedPlayer = player with
+        {
+            Resources = new WorldResourceSet(100, 25, 0, 0, 0, 0),
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
+        };
         WorldRuin expectedRuin = ruin with
         {
             Garrison = expectedDefenderUnits
@@ -262,6 +270,7 @@ public sealed class WorldEngineRuinTests
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
             {
+                Players = engine.State.Players.SetItem(expectedPlayer.Id, expectedPlayer),
                 Stacks = engine.State.Stacks.Remove(new WorldStackId("Stack1")),
                 Fortifications = engine.State.Fortifications.SetItem(expectedRuin.Id, expectedRuin)
             }));
@@ -346,13 +355,15 @@ public sealed class WorldEngineRuinTests
                     BattleSide.Attacker,
                     expectedAttackerUnits,
                     UnitGrid<WorldUnit>.Empty),
-                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), new WorldItem(new WorldItemId("Item0001"), new ItemDefinitionId("Item1"), Charges: null))
+                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), new WorldItem(new WorldItemId("Item0001"), new ItemDefinitionId("Item1"), Charges: null)),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1"))
             ]
         );
 
         WorldPlayer expectedPlayer = player with
         {
-            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0),
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
         };
         WorldStack expectedStack = stack with
         {
@@ -447,13 +458,15 @@ public sealed class WorldEngineRuinTests
                     BattleSide.Attacker,
                     expectedAttackerUnits,
                     deadDefenderUnits),
-                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), null)
+                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), null),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1"))
             ]
         );
 
         WorldPlayer expectedPlayer = player with
         {
-            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0),
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
         };
         WorldStack expectedStack = stack with
         {
@@ -544,6 +557,7 @@ public sealed class WorldEngineRuinTests
                     BattleSide.Defender,
                     UnitGrid<WorldUnit>.Empty,
                     expectedDefenderUnits),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1")),
                 new WorldStackDestroyedEvent(new WorldStackId("Stack1"), Destroyer: null, DestroyerPlayerId: null)
             ]
         );
@@ -700,13 +714,15 @@ public sealed class WorldEngineRuinTests
                     BattleSide.Attacker,
                     expectedAttackerUnits,
                     UnitGrid<WorldUnit>.Empty),
-                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), WorldResourceSet.Empty, null)
+                new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), WorldResourceSet.Empty, null),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1"))
             ]
         );
 
         WorldPlayer expectedPlayer = player with
         {
-            Resources = new WorldResourceSet(100, 25, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(100, 25, 0, 0, 0, 0),
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
         };
         WorldStack expectedStack = stack with
         {
@@ -796,18 +812,112 @@ public sealed class WorldEngineRuinTests
                     deadAttackerUnits,
                     UnitGrid<WorldUnit>.Empty),
                 new WorldRuinLootedEvent(new WorldFortificationId("Ruin1"), new WorldStackId("Stack1"), new WorldResourceSet(200, 0, 0, 0, 0, 0), null),
+                new WorldRuinSpiedEvent(new WorldPlayerId(1), new WorldFortificationId("Ruin1")),
                 new WorldStackDestroyedEvent(new WorldStackId("Stack1"), Destroyer: null, DestroyerPlayerId: null)
             ]
         );
 
         WorldPlayer expectedPlayer = player with
         {
-            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(300, 25, 0, 0, 0, 0),
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
         };
         WorldRuin expectedRuin = ruin with
         {
             Garrison = UnitGrid<WorldUnit>.Empty,
             LooterId = new WorldPlayerId(1)
+        };
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Players = engine.State.Players.SetItem(expectedPlayer.Id, expectedPlayer),
+                Stacks = engine.State.Stacks.Remove(new WorldStackId("Stack1")),
+                Fortifications = engine.State.Fortifications.SetItem(expectedRuin.Id, expectedRuin)
+            }));
+    }
+
+    [Test]
+    public void ResolveKnownRuinBattleLossTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 6);
+
+        UnitDefinition unitDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("dummy", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 10, leadership: 6) with
+            {
+                MaxHitpoints = 10
+            };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            SpiedRuins = [new WorldFortificationId("Ruin1")]
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            new WorldPlayerId(1),
+            new WorldPosition(5, 5),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("unit"), unitDefinition),
+            movementPoints: 10);
+
+        WorldRuin ruin = new(
+            Id: new WorldFortificationId("Ruin1"),
+            NameTextId: new ScenarioTextId("Ruin"),
+            Footprint: FortificationCalculator.CreateFootprint(new WorldPosition(2, 2), FortificationCalculator.RuinFootprint),
+            Variant: new WorldObjectVariant(0),
+            Garrison: TestHelpers.SingleUnitGrid(new WorldUnitId("unit2"), unitDefinition),
+            Resources: new WorldResourceSet(200, 0, 0, 0, 0, 0),
+            Item: new ItemDefinitionId("Item1"),
+            LooterId: null,
+            AiPriority: 3
+        );
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(unitDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .WithRuin(ruin)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        BattleState finalBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(unitDefinition).Build())
+                .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("unit"), unitDefinition.Id, BattleSide.Defender, hitpoints: 10) with { Experience = 3, ExperienceGained = 4 }, new GridPosition(0, 0))
+                .Build(new BattleModifiers(
+                        Attacker: BattleSideModifiers.None,
+                        Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
+            {
+                Outcome = new BattleOutcome(BattleSide.Defender)
+            };
+
+        UnitGrid<WorldUnit> expectedDefenderUnits = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("unit"), unitDefinition) with { Experience = 7 }, new GridPosition(0, 0), unitDefinition.IsLarge)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldResolveFortificationBattleCommand(new WorldStackId("Stack1"), new WorldFortificationId("Ruin1"), finalBattleState),
+            [
+                new WorldFortificationBattleEndedEvent(
+                    new WorldStackId("Stack1"),
+                    new WorldFortificationId("Ruin1"),
+                    BattleSide.Defender,
+                    UnitGrid<WorldUnit>.Empty,
+                    expectedDefenderUnits),
+                new WorldStackDestroyedEvent(new WorldStackId("Stack1"), Destroyer: null, DestroyerPlayerId: null)
+            ]
+        );
+
+        WorldPlayer expectedPlayer = player with
+        {
+            Resources = new WorldResourceSet(100, 25, 0, 0, 0, 0)
+        };
+        WorldRuin expectedRuin = ruin with
+        {
+            Garrison = expectedDefenderUnits
         };
 
         Assert.That(engine.State, Is.EqualTo(

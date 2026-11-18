@@ -350,6 +350,7 @@ public sealed class WorldEngineTombTests
 
         engine.CheckCommand(new WorldResolveFortificationBattleCommand(stack.Id, ruin.Id, finalBattleState), [
             new WorldFortificationBattleEndedEvent(stack.Id, ruin.Id, BattleSide.Defender, destroyedAttackerGrid, expectedGuardGrid),
+            new WorldRuinSpiedEvent(new WorldPlayerId(1), ruin.Id),
             new WorldStackDestroyedEvent(stack.Id, Destroyer: null, DestroyerPlayerId: null)
         ]);
 
