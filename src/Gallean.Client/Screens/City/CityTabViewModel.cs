@@ -7,7 +7,7 @@ using Gallean.Engine;
 namespace Gallean.Client;
 
 internal sealed partial class CityTabViewModel
-    : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryTransferProvider, IDragDropProvider, IDragDropHost
+    : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryTransferProvider, IInventoryProvider, IDragDropProvider, IDragDropHost
 {
     public enum UnitActionType
     {
@@ -33,7 +33,7 @@ internal sealed partial class CityTabViewModel
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
         StackGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: false);
         GarrisonGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: true);
-        InventoryTransfer = new InventoryTransferViewModel(gameModel, this);
+        InventoryTransfer = new InventoryTransferViewModel(gameModel, this, this);
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [SpellDropZone, DismissDropZone];
         LeaderBlankslate = new LeaderBlankslateViewModel(gameModel, gameViewModel, fortificationId);
@@ -128,6 +128,14 @@ internal sealed partial class CityTabViewModel
         }
 
         return await TryDispatchWorldActionAsync(command);
+    }
+
+    async Task IInventoryProvider.InvokeItemAsync(InventorySlotReference source)
+    {
+        if (visitingStack is not null)
+        {
+            await InvokeItemAsync(visitingStack, source);
+        }
     }
 
     async Task IDragDropProvider.DropAsync(IDragSourceReference source, IDragTargetReference target)
@@ -978,6 +986,21 @@ internal sealed partial class CityTabViewModel
 
         UpdateSpellDropZone(dragged);
         UpdateDismissDropZone(dragged);
+    }
+
+    private async Task InvokeItemAsync(WorldStack stack, InventorySlotReference sourceSlot)
+    {
+        WorldItem? item = GetStackItem(sourceSlot);
+
+        if (item is not null)
+        {
+            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+            if (definition.Effect is SpellItemEffect && CanUseItem(stack, item))
+            {
+                await UseSpellItemAsync(sourceSlot);
+            }
+        }
     }
 
     private async Task UseSpellItemAsync(InventorySlotReference sourceSlot)

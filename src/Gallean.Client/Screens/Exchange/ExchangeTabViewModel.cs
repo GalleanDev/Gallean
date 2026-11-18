@@ -6,7 +6,7 @@ using Gallean.Engine;
 namespace Gallean.Client;
 
 internal sealed partial class ExchangeTabViewModel
-    : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryTransferProvider, IDragDropProvider, IDragDropHost
+    : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryTransferProvider, IInventoryProvider, IDragDropProvider, IDragDropHost
 {
     private readonly ManagementScreenViewModel screen;
     private readonly WorldStackId stackId;
@@ -27,7 +27,7 @@ internal sealed partial class ExchangeTabViewModel
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
         StackGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: false);
         OtherStackGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: true);
-        InventoryTransfer = new InventoryTransferViewModel(gameModel, this);
+        InventoryTransfer = new InventoryTransferViewModel(gameModel, this, this);
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [DismissDropZone];
 

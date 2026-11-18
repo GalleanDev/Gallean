@@ -3972,4 +3972,125 @@ public sealed class StackTabViewModelTests
             (Index: 14, Name: "Key", Type: InventoryItemType.Special, Count: 1)
         ]));
     }
+
+    [Test]
+    public async Task DoubleClickSpellItemTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                LeaderAbilities = LeaderAbility.WandScrollUse
+            };
+
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
+        WorldSpellDefinition spell = new(
+            new WorldSpellDefinitionId("heal"),
+            new GlobalTextId("name"),
+            new GlobalTextId("description"),
+            new GlobalTextId("effect"),
+            WorldRace.Elf,
+            Level: 1,
+            CastingCost: WorldResourceSet.Empty,
+            PurchaseCost: WorldResourceSet.Empty,
+            AreaRadius: null,
+            new WorldHealSpellEffect(5),
+            AiType: WorldAiSpellType.All);
+
+        ItemDefinition scroll = new(
+            new ItemDefinitionId("scroll1"),
+            new GlobalTextId("name"),
+            new GlobalTextId("desc"),
+            ItemCategory.Scroll,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: new SpellItemEffect(spell.Id, WorldResourceSet.Empty),
+            AnimationUnitId: null);
+
+        ItemDefinition valuable = new(
+            new ItemDefinitionId("valuable1"),
+            new GlobalTextId("name"),
+            new GlobalTextId("desc"),
+            ItemCategory.Valuable,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
+        WorldItem valuableItem = new(new WorldItemId("Valuable"), valuable.Id, Charges: null);
+        WorldItem scrollItem = new(new WorldItemId("Scroll"), scroll.Id, Charges: null);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 30, 0, soldierDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                TestHelpers.StackUnitGrid(
+                    stackDefinitions,
+                    [
+                        (leader, GridPosition.FrontBottom),
+                        (soldier, GridPosition.FrontCenter)
+                    ]),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([valuableItem, scrollItem])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Mage))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(spell)
+            .WithDefinition(scroll)
+            .WithDefinition(valuable)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        await screen.Inventory.Items[0].InvokeAsync();
+
+        WorldStack unchangedStack = session.World.State.Stacks[stack.Id];
+
+        Assert.That(unchangedStack.Inventory.Items, Is.EqualTo([valuableItem, scrollItem]));
+        Assert.That(unchangedStack.Units, Is.EqualTo(TestHelpers.StackUnitGrid(
+            stackDefinitions,
+            [
+                (leader, GridPosition.FrontBottom),
+                (soldier with { Hitpoints = 31 }, GridPosition.FrontCenter)
+            ])));
+
+        await screen.Inventory.Items[1].InvokeAsync();
+
+        WorldStack updatedStack = session.World.State.Stacks[stack.Id];
+
+        Assert.That(updatedStack.Inventory.Items, Is.EqualTo([valuableItem]));
+        Assert.That(updatedStack.Units, Is.EqualTo(TestHelpers.StackUnitGrid(
+            stackDefinitions,
+            [
+                (leader, GridPosition.FrontBottom),
+                (soldier with { Hitpoints = 35 }, GridPosition.FrontCenter)
+            ])));
+    }
 }

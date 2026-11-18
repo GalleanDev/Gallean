@@ -60,6 +60,11 @@ internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
 
     object? IDetailsSource.DetailsContent => Details;
 
+    public async Task InvokeAsync()
+    {
+        await Inventory.InvokeItemAsync(Reference);
+    }
+
     public bool Equals(InventoryItemViewModel? other)
     {
         if (other is null)

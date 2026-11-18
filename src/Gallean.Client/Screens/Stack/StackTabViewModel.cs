@@ -5,7 +5,7 @@ using Gallean.Engine;
 namespace Gallean.Client;
 
 internal abstract partial class StackTabViewModel
-    : ManagementTabViewModel, IUnitGridSelectionProvider, IDragDropProvider, IDragDropHost
+    : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryProvider, IDragDropProvider, IDragDropHost
 {
     private readonly UnitGridSelectionViewModel unitSelection;
     private WorldStack? currentStack;
@@ -24,7 +24,7 @@ internal abstract partial class StackTabViewModel
         unitSelection = new UnitGridSelectionViewModel(gameModel, this);
         UnitGrid = new UnitGridViewModel(gameModel, unitSelection, isFacingLeft: false);
         Equipment = new LeaderEquipmentViewModel(gameModel);
-        Inventory = new InventoryViewModel(gameModel);
+        Inventory = new InventoryViewModel(gameModel, this);
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [SpellDropZone, GroundDropZone, DismissDropZone];
     }
@@ -56,6 +56,14 @@ internal abstract partial class StackTabViewModel
     [ObservableProperty]
     public partial string StackLeadership { get; private set; } = string.Empty;
 
+    async Task IInventoryProvider.InvokeItemAsync(InventorySlotReference source)
+    {
+        if (currentStack is not null)
+        {
+            await InvokeItemAsync(currentStack, source);
+        }
+    }
+
     async Task IDragDropProvider.DropAsync(IDragSourceReference source, IDragTargetReference target)
     {
         if (currentStack is null)
@@ -82,6 +90,23 @@ internal abstract partial class StackTabViewModel
     void IDragDropProvider.OnDragChanged()
     {
         RefreshView();
+    }
+
+    private async Task InvokeItemAsync(WorldStack stack, InventorySlotReference sourceSlot)
+    {
+        WorldItem? item = sourceSlot.Inventory.GetItem(sourceSlot.Index);
+
+        if (item is not null)
+        {
+            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+            if (definition.Effect is SpellItemEffect && CanUseItem(stack, item))
+            {
+                await UseSpellItemAsync(stack, item);
+
+                RefreshView();
+            }
+        }
     }
 
     private async Task DropItemAsync(WorldStack stack, IItemDragSourceReference source, IDragTargetReference target)

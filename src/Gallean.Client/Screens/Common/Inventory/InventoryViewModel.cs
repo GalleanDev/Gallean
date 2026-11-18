@@ -6,7 +6,7 @@ using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal sealed partial class InventoryViewModel(GameModel gameModel) : ObservableObject, IDropTarget
+internal sealed partial class InventoryViewModel(GameModel gameModel, IInventoryProvider provider) : ObservableObject, IDropTarget
 {
     private ImmutableArray<ItemGroup> slots = [];
 
@@ -41,6 +41,11 @@ internal sealed partial class InventoryViewModel(GameModel gameModel) : Observab
         {
             return [];
         }
+    }
+
+    public async Task InvokeItemAsync(InventorySlotReference source)
+    {
+        await provider.InvokeItemAsync(source);
     }
 
     public void Update(WorldInventory newInventory, WorldResourceSet resources, bool isHighlighted)

@@ -234,7 +234,8 @@
                                      Margin="0,8,0,0"
                                      ItemsSource="{Binding Items}"
                                      Classes="inventory"
-                                     ItemTemplate="{StaticResource InventoryItemTemplate}" />
+                                     ItemTemplate="{StaticResource InventoryItemTemplate}"
+                                     DoubleTapped="OnInventoryDoubleTapped" />
           </Grid>
         </ContentControl>
       </Grid>

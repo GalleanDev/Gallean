@@ -28,6 +28,16 @@ internal sealed partial class CityTabView : UserControl
         }
     }
 
+    private void OnInventoryDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        if (e.Source is StyledElement { DataContext: InventoryItemViewModel item })
+        {
+            e.Handled = true;
+
+            item.InvokeAsync().FileAndForget();
+        }
+    }
+
     private void OnItemPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         if (e.InitialPressMouseButton == MouseButton.Left &&

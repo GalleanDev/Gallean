@@ -2,10 +2,13 @@ using System.Collections.Immutable;
 
 namespace Gallean.Client;
 
-internal sealed class InventoryTransferViewModel(GameModel gameModel, IInventoryTransferProvider provider)
+internal sealed class InventoryTransferViewModel(
+    GameModel gameModel,
+    IInventoryTransferProvider provider,
+    IInventoryProvider inventoryProvider)
 {
-    public InventoryViewModel Inventory { get; } = new(gameModel);
-    public InventoryViewModel OtherInventory { get; } = new(gameModel);
+    public InventoryViewModel Inventory { get; } = new(gameModel, inventoryProvider);
+    public InventoryViewModel OtherInventory { get; } = new(gameModel, inventoryProvider);
 
     public InventoryTransferDirection? GetTransferDirection(InventorySlotReference source)
     {
