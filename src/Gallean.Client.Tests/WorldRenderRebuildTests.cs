@@ -235,7 +235,7 @@ public sealed class WorldRenderRebuildTests
             Fog: false,
             Objects: false,
             Stacks: false,
-            World: false,
+            World: true,
             Minimap: false)));
     }
 
@@ -293,7 +293,7 @@ public sealed class WorldRenderRebuildTests
             Fog: false,
             Objects: false,
             Stacks: false,
-            World: false,
+            World: true,
             Minimap: false)));
     }
 
@@ -493,7 +493,7 @@ public sealed class WorldRenderRebuildTests
                 Fog: false,
                 Objects: false,
                 Stacks: false,
-                World: false,
+                World: true,
                 Minimap: false)),
             ("Hover same tile again", new RebuildState(
                 NewRequest: false,
@@ -509,7 +509,7 @@ public sealed class WorldRenderRebuildTests
                 Fog: false,
                 Objects: false,
                 Stacks: false,
-                World: false,
+                World: true,
                 Minimap: false)),
             ("Click reachable tile (build path)", new RebuildState(
                 NewRequest: true,

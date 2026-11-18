@@ -583,17 +583,17 @@ internal sealed partial class WorldScreenViewModel :
 
         if (WorldState.Map.IsValidPosition(tile))
         {
-            SetCursor(cursor with { HoverTile = tile, HoverObject = objectPosition });
+            SetCursor(cursor with { HoverTile = tile, HoverTarget = ResolveHoverTarget(tile), HoverObject = objectPosition });
         }
         else
         {
-            SetCursor(cursor with { HoverTile = null, HoverObject = objectPosition });
+            SetCursor(cursor with { HoverTile = null, HoverTarget = null, HoverObject = objectPosition });
         }
     }
 
     public void ClearHover()
     {
-        SetCursor(cursor with { HoverTile = null, HoverObject = null });
+        SetCursor(cursor with { HoverTile = null, HoverTarget = null, HoverObject = null });
     }
 
     [RelayCommand(CanExecute = nameof(CanDispatchCommand))]
@@ -1302,6 +1302,7 @@ internal sealed partial class WorldScreenViewModel :
         }
 
         RefreshRenderRequest();
+        UpdateHoverTarget();
         UpdateCursorType();
         UpdateEndTurnHighlighted();
         UpdateActionWheelVisible();
@@ -1765,6 +1766,37 @@ internal sealed partial class WorldScreenViewModel :
             (WorldUnit _, GridPosition _, UnitDefinition leaderDefinition) = targetStack.GetLeader(GameModel.Definitions);
 
             return leaderDefinition.LeaderCategory == UnitLeaderCategory.Thief;
+        }
+    }
+
+    private void UpdateHoverTarget()
+    {
+        if (cursor.HoverTile is not null)
+        {
+            SetCursor(cursor with { HoverTarget = ResolveHoverTarget(cursor.HoverTile.Value) });
+        }
+        else
+        {
+            SetCursor(cursor with { HoverTarget = null });
+        }
+    }
+
+    private WorldPosition? ResolveHoverTarget(WorldPosition tile)
+    {
+        WorldPosition position = ResolveClickTarget(tile);
+
+        if (IsBusy)
+        {
+            return null;
+        }
+
+        if (ResolveFortificationBodyAt(position) is null)
+        {
+            return position;
+        }
+        else
+        {
+            return null;
         }
     }
 

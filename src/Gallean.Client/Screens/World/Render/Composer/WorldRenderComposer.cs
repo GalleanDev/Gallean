@@ -321,6 +321,27 @@ internal sealed partial class WorldRenderComposer(
                 GetCursorScale(hoverStack, definitions)));
         }
 
+        if (selected is not null &&
+            selected.OwnerId == request.ViewPlayerId &&
+            request.Cursor.HoverTarget is { } hoverTarget &&
+            request.State.Map.IsValidPosition(hoverTarget) &&
+            visibility.IsRevealed(hoverTarget) &&
+            !plan.IsObstacleAt(hoverTarget) &&
+            hoverTarget != selected.Position &&
+            hoverTarget != destination?.Position &&
+            hoverTarget != request.Cursor.HoverObject)
+        {
+            WorldStack? targetStack = plan.GetStackAt(hoverTarget);
+            Layer layer = targetStack is null ? Layer.TileHighlight : Layer.SymbolStackHighlight;
+
+            cursors.Add(new Cursor(
+                hoverTarget,
+                GetDepth(hoverTarget, layer),
+                Theme.World.HoverCursorInnerColor,
+                Theme.World.HoverCursorOuterColor,
+                GetCursorScale(targetStack, definitions)));
+        }
+
         if (destination is not null && visibility.IsRevealed(destination.Position))
         {
             WorldStack? stack = plan.GetStackAt(destination.Position);

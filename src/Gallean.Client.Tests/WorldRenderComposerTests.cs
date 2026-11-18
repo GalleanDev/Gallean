@@ -3493,6 +3493,47 @@ public sealed class WorldRenderComposerTests
     }
 
     [Test]
+    public void HoverCursorTest()
+    {
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 5, leadership: 5);
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(leader).Build();
+
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("s1"),
+            human.Id,
+            new WorldPosition(0, 0),
+            TestHelpers.StackUnitGrid(
+                definitions,
+                [(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader), GridPosition.FrontBottom)]),
+            movementPoints: 5);
+
+        WorldState state = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(stack)
+            .Build()
+            .State;
+
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0), HoverTarget = new WorldPosition(2, 0) };
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
+
+        Assert.That(renderState.Cursors, Is.EqualTo(new Cursor[]
+        {
+            new(new WorldPosition(2, 0), 1344, Theme.World.HoverCursorInnerColor, Theme.World.HoverCursorOuterColor, 1.0)
+        }));
+    }
+
+    [Test]
     public void ImpassableHoverCursorTest()
     {
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
@@ -3523,7 +3564,7 @@ public sealed class WorldRenderComposerTests
             .Build()
             .State;
 
-        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0) };
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0), HoverTarget = new WorldPosition(2, 0) };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: false, cursor: cursor);
 
@@ -3566,7 +3607,7 @@ public sealed class WorldRenderComposerTests
             .Build()
             .State;
 
-        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0) };
+        WorldCursor cursor = WorldCursor.Empty.SelectStack(stack.Id) with { HoverTile = new WorldPosition(2, 0), HoverTarget = new WorldPosition(2, 0) };
 
         WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: cursor);
 

@@ -7,10 +7,11 @@ internal sealed record WorldCursor(
     IReadOnlyList<WorldPosition> ReachablePositions,
     WorldPathSelection? Path,
     WorldPosition? HoverTile,
+    WorldPosition? HoverTarget,
     WorldPosition? HoverObject,
     WorldCursorAction? Action)
 {
-    public static readonly WorldCursor Empty = new(null, [], null, null, null, null);
+    public static readonly WorldCursor Empty = new(null, [], null, null, null, null, null);
 
     public bool Equals(WorldCursor? other)
     {
@@ -28,6 +29,7 @@ internal sealed record WorldCursor(
                ReachablePositions.SequenceEqual(other.ReachablePositions) &&
                Path == other.Path &&
                HoverTile == other.HoverTile &&
+               HoverTarget == other.HoverTarget &&
                HoverObject == other.HoverObject &&
                Action == other.Action;
     }
@@ -55,6 +57,7 @@ internal sealed record WorldCursor(
         hash.AddSequence(ReachablePositions);
         hash.Add(Path);
         hash.Add(HoverTile);
+        hash.Add(HoverTarget);
         hash.Add(HoverObject);
         hash.Add(Action);
 
