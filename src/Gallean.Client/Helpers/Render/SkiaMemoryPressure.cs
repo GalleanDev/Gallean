@@ -25,7 +25,7 @@ internal static class SkiaMemoryPressure
 
     public static void TrackImage(SKImage image)
     {
-        TrackObject(image, (long)image.Width * image.Height * 4);
+        TrackObject(image, image.Info.BytesSize64);
     }
 
     private static void TrackObject(SKObject obj, long bytes)
