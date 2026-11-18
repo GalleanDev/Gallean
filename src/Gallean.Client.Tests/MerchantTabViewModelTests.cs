@@ -734,4 +734,99 @@ public sealed class MerchantTabViewModelTests
             "scroll | name | desc | Count: 1 | Sell for: 6 gold | available | selected"
         ]));
     }
+
+    [Test]
+    public async Task SellAllTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 4);
+        ItemDefinition potionDefinition = Item("potion", new WorldResourceSet(50, 0, 0, 0, 0, 0));
+        ItemDefinition gemDefinition = Item("gem", new WorldResourceSet(100, 0, 0, 0, 0, 0)) with { Category = ItemCategory.Valuable };
+        WorldItem potionItem = new(new WorldItemId("Potion"), potionDefinition.Id, Charges: null);
+        WorldItem secondPotionItem = new(new WorldItemId("SecondPotion"), potionDefinition.Id, Charges: null);
+        ItemDefinition ringDefinition = Item("ring", new WorldResourceSet(500, 0, 0, 0, 0, 0)) with { Category = ItemCategory.Special };
+        WorldItem gemItem = new(new WorldItemId("Gem"), gemDefinition.Id, Charges: null);
+        WorldItem ringItem = new(new WorldItemId("Ring"), ringDefinition.Id, Charges: null);
+
+        WorldStack stack = Stack(new WorldUnitId("leader"), player.Id, new WorldPosition(4, 4), leaderDefinition, [potionItem, gemItem, ringItem, secondPotionItem]);
+        WorldMerchantSite site = Site([]);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithRace(TestHelpers.SimpleRace(WorldRace.Human, new GlobalTextId("Empire"), WorldMapTerrain.Human))
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(potionDefinition)
+            .WithDefinition(gemDefinition)
+            .WithDefinition(ringDefinition)
+            .WithStack(stack)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        MerchantTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
+
+        Assert.That(screen.SellAllCommand.CanExecute(null), Is.True);
+        Assert.That(screen.SellValuablesCommand.CanExecute(null), Is.True);
+
+        screen.SellValuablesCommand.Execute(null);
+
+        ConfirmPromptViewModel valuablesPrompt = Assert.IsOfType<ConfirmPromptViewModel>(screen.Game.TopScreen);
+
+        Assert.That(valuablesPrompt.Title, Is.EqualTo("Sell all valuables"));
+        Assert.That(valuablesPrompt.Message.Text, Is.EqualTo("The merchant offers 20 gold for all your valuables."));
+        Assert.That(valuablesPrompt.ConfirmLabel, Is.EqualTo("Sell"));
+
+        await valuablesPrompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(screen.Game.TopScreen, Is.Null);
+        Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([potionItem, ringItem, secondPotionItem])));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(120, 0, 0, 0, 0, 0)));
+        Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
+            "potion | name | desc | Count: 2 | Sell for: 10 gold | available | not selected",
+            "ring | name | desc | Count: 1 | Sell for: 100 gold | unavailable: The merchant will not buy this item | not selected"
+        ]));
+        Assert.That(screen.SellAllCommand.CanExecute(null), Is.True);
+        Assert.That(screen.SellValuablesCommand.CanExecute(null), Is.False);
+
+        screen.SellAllCommand.Execute(null);
+
+        ConfirmPromptViewModel cancelledPrompt = Assert.IsOfType<ConfirmPromptViewModel>(screen.Game.TopScreen);
+
+        Assert.That(cancelledPrompt.Title, Is.EqualTo("Sell all items"));
+        Assert.That(cancelledPrompt.Message.Text, Is.EqualTo("The merchant offers 20 gold for all your items."));
+
+        cancelledPrompt.CloseCommand.Execute(null);
+
+        Assert.That(screen.Game.TopScreen, Is.Null);
+        Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([potionItem, ringItem, secondPotionItem])));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(120, 0, 0, 0, 0, 0)));
+
+        screen.SellAllCommand.Execute(null);
+
+        ConfirmPromptViewModel allPrompt = Assert.IsOfType<ConfirmPromptViewModel>(screen.Game.TopScreen);
+
+        await allPrompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(screen.Game.TopScreen, Is.Null);
+        Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([ringItem])));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(140, 0, 0, 0, 0, 0)));
+        Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
+            "ring | name | desc | Count: 1 | Sell for: 100 gold | unavailable: The merchant will not buy this item | not selected"
+        ]));
+        Assert.That(screen.SellAllCommand.CanExecute(null), Is.False);
+        Assert.That(screen.SellValuablesCommand.CanExecute(null), Is.False);
+        Assert.That(screen.Game.Alert.Current, Is.Null);
+    }
 }

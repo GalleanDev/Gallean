@@ -16,6 +16,7 @@
                              Classes="pill"
                              Classes.primary="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Primary}}"
                              Classes.danger="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Danger}}"
+                             Classes.success="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Success}}"
                              local:PlateChrome.TextureSeed="1"
                              Command="{Binding ConfirmCommand}"
                              MinWidth="150" />

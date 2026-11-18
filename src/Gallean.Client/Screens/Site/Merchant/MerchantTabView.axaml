@@ -76,7 +76,7 @@
     <Grid ColumnDefinitions="*,24,*" MaxWidth="960" MaxHeight="720" Margin="18">
 
       <ContentControl Grid.Column="0" Classes="ornament-panel" Classes.highlighted="{Binding BuyZone.IsVisible}">
-        <Grid RowDefinitions="40,*" Margin="6,2">
+        <Grid RowDefinitions="40,*,Auto" Margin="6,2">
           <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Your goods'}" Classes="panel-title" />
           <ScrollViewer Grid.Row="1" Classes="list" VerticalScrollBarVisibility="Auto">
             <ItemsControl Classes="focus-group" ItemsSource="{Binding SellItems}" ItemTemplate="{StaticResource MerchantSellItemTemplate}">
@@ -94,6 +94,23 @@
               </local:Blankslate.Content>
             </ItemsControl>
           </ScrollViewer>
+          <StackPanel Grid.Row="2"
+                      Classes="focus-group"
+                      Orientation="Horizontal"
+                      HorizontalAlignment="Center"
+                      Spacing="12"
+                      Margin="0,12,0,8">
+            <Button Classes="pill"
+                    Content="{local:Text 'Sell all'}"
+                    Command="{Binding SellAllCommand}"
+                    local:PlateChrome.TextureSeed="1"
+                    MinWidth="140" />
+            <Button Classes="pill"
+                    Content="{local:Text 'Sell valuables'}"
+                    Command="{Binding SellValuablesCommand}"
+                    local:PlateChrome.TextureSeed="2"
+                    MinWidth="140" />
+          </StackPanel>
         </Grid>
       </ContentControl>
 
