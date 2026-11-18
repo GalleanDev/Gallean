@@ -3,7 +3,7 @@
         xmlns:local="clr-namespace:Gallean.Client">
   <Styles.Resources>
     <DataTemplate x:Key="SiteOfferTemplate" x:DataType="local:SiteOfferViewModel">
-      <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" Background="Transparent">
+      <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" RowSpacing="8" Background="Transparent">
         <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding Icon}" VerticalAlignment="Top">
           <ContentControl.DataTemplates>
             <DataTemplate x:DataType="local:IconViewModel+Item">
