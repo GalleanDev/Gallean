@@ -9334,4 +9334,35 @@ public sealed class WorldScreenViewModelTests
         }));
         Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:turn-start"]));
     }
+
+    [Test]
+    public async Task SpellInvalidTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 1);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        world.SelectAction(new WorldCursorAction.CastSpell(new WorldSpellDefinitionId("restore")));
+
+        await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(world.ActionPromptText, Is.EqualTo("Select a target for the spell on the map."));
+            Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "You do not know this spell", Details: null)));
+        }
+    }
 }

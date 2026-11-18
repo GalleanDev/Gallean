@@ -888,7 +888,10 @@ internal sealed partial class WorldScreenViewModel :
     {
         ClearSelectedAction();
 
-        await TryDispatchWorldActionAsync(action.CreateCommand(position));
+        if (!await TryDispatchWorldActionAsync(action.CreateCommand(position)))
+        {
+            SelectAction(action);
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanDispatchCommand))]
