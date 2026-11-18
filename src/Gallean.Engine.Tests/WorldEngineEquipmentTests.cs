@@ -738,4 +738,58 @@ public sealed class WorldEngineEquipmentTests
             new WorldEquipItemCommand(stack.Id, weaponItem.Id, LeaderEquipmentSlot.Battle1),
             WorldCommandError.ItemSlotMismatch);
     }
+
+    [Test]
+    public void EquipScrollTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(2, 2);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 10, leadership: 6) with
+            {
+                LeaderAbilities = LeaderAbility.WandScrollUse
+            };
+
+        ItemDefinition scroll = new(
+            new ItemDefinitionId("scroll1"),
+            new GlobalTextId("name"),
+            new GlobalTextId("desc"),
+            ItemCategory.Scroll,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
+        WorldItem scrollItem = new(new WorldItemId("Scroll"), scroll.Id, Charges: null);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                player.Id,
+                new WorldPosition(0, 0),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 10) with
+            {
+                Inventory = new WorldInventory([scrollItem])
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(scroll)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithStack(stack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommandError(
+            new WorldEquipItemCommand(stack.Id, scrollItem.Id, LeaderEquipmentSlot.Battle1),
+            WorldCommandError.ItemSlotMismatch);
+    }
 }

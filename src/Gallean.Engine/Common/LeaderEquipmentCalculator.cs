@@ -98,7 +98,7 @@ internal static class LeaderEquipmentCalculator
             ItemCategory.Jewel => slot == LeaderEquipmentSlot.Tome,
             ItemCategory.Orb => IsBattleSlot(slot),
             ItemCategory.Talisman => IsBattleSlot(slot),
-            ItemCategory.Scroll => IsBattleSlot(slot),
+            ItemCategory.Scroll => false,
             ItemCategory.Wand => IsBattleSlot(slot),
             ItemCategory.PotionTemporaryBoost => IsBattleSlot(slot),
             ItemCategory.PotionHeal => IsBattleSlot(slot),
