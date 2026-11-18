@@ -52,6 +52,8 @@ internal static class WorldCommandErrorFormatter
             WorldCommandError.ItemSlotMismatch => Tr("The item cannot go in that slot"),
             WorldCommandError.ItemTargetInvalid => Tr("This item cannot be used on that target"),
             WorldCommandError.LeaderDisbandForbidden => Tr("The party leader cannot be disbanded"),
+            WorldCommandError.LeaderNameEmpty => Tr("The hero name cannot be empty"),
+            WorldCommandError.LeaderNameTooLong => Tr("The hero name is too long"),
             WorldCommandError.LeadershipExceeded => Tr("The party does not have enough leadership"),
             WorldCommandError.LeaderTransferForbidden => Tr("The leader cannot be transferred"),
             WorldCommandError.LeaderUpgradeNotAvailable => Tr("The leader cannot learn this ability"),

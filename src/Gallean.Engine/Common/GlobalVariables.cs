@@ -105,6 +105,7 @@ public sealed record GlobalVariables
     internal int MaxAttackDamage { get; init; } = 300;
     internal int MaxAttackInitiative { get; init; } = 150;
     internal int MaxLeaderAbilities { get; init; } = 15;
+    internal int MaxLeaderNameLength { get; init; } = 20;
     internal int MaxModifiedAttackDamage { get; init; } = 400;
     internal int MaxStackMovement { get; init; } = 100;
     internal int MaxStackVisionRadius { get; init; } = 8;

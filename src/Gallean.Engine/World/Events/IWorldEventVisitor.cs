@@ -33,6 +33,7 @@ public interface IWorldEventVisitor<in TContext, out TResult>
     TResult Visit(WorldItemSoldEvent ev, TContext context);
     TResult Visit(WorldItemUnequippedEvent ev, TContext context);
     TResult Visit(WorldItemUsedEvent ev, TContext context);
+    TResult Visit(WorldLeaderRenamedEvent ev, TContext context);
     TResult Visit(WorldLeaderUpgradeGrantedEvent ev, TContext context);
     TResult Visit(WorldLeaderUpgradeSelectedEvent ev, TContext context);
     TResult Visit(WorldLeaderUpgradePostponedEvent ev, TContext context);

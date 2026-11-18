@@ -5,4 +5,4 @@ public sealed record ScenarioPlayerConfiguration(
     LordCategory LordCategory,
     WorldObjectVariant LordFaceVariant,
     UnitDefinitionId? StartingLeaderId,
-    UnitName? LeaderName);
+    string LeaderName);

@@ -46,7 +46,7 @@ public sealed class LeaderExportScreenViewModelTests
     public async Task ExportTest()
     {
         GameLoader gameLoader = new(new RandomProvider(0));
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
         (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
@@ -149,7 +149,7 @@ public sealed class LeaderExportScreenViewModelTests
     public async Task ExportAllItemsTest()
     {
         GameLoader gameLoader = new(new RandomProvider(0));
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
         (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();

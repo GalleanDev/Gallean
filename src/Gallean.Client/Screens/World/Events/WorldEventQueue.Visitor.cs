@@ -343,6 +343,11 @@ internal sealed partial class WorldEventQueue
         return Empty.Value;
     }
 
+    Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldLeaderRenamedEvent ev, EngineStep<WorldState, WorldEvent> step)
+    {
+        return Empty.Value;
+    }
+
     Empty IWorldEventVisitor<EngineStep<WorldState, WorldEvent>, Empty>.Visit(WorldLeaderUpgradeGrantedEvent ev, EngineStep<WorldState, WorldEvent> step)
     {
         WorldState state = step.NewState;

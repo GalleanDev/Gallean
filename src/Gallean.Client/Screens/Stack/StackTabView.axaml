@@ -90,6 +90,19 @@
       <Setter Property="Opacity" Value="0.55" />
     </Style>
 
+    <Style Selector="Button.leader-name">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="FocusAdorner" Value="{x:Null}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Background="Transparent" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="Button.leader-name:pointerover local|OutlinedTextBlock">
+      <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+    </Style>
+
     <Style Selector="Line.party-divider">
       <Setter Property="Margin" Value="40,24,40,0" />
       <Setter Property="Stretch" Value="Fill" />
@@ -149,10 +162,9 @@
           </Viewbox>
 
           <StackPanel Grid.Row="1" Spacing="4" Margin="0,-16,0,0" HorizontalAlignment="Center">
-            <local:OutlinedTextBlock Text="{Binding Leader.Title}"
-                                     Classes="object-name title"
-                                     HorizontalAlignment="Center"
-                                     TextTrimming="CharacterEllipsis" />
+            <Button Classes="leader-name" Command="{Binding RenameLeaderCommand}" HorizontalAlignment="Center">
+              <local:OutlinedTextBlock Text="{Binding Leader.Title}" Classes="object-name title" TextTrimming="CharacterEllipsis" />
+            </Button>
             <ItemsControl Width="300" Margin="0,6,0,0" Classes="stat-table" ItemsSource="{Binding Leader.Stats}" />
             <ItemsControl Width="300"
                           Margin="0,10,0,0"

@@ -7,6 +7,8 @@ namespace Gallean.Client;
 internal abstract partial class StackTabViewModel
     : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryProvider, IDragDropProvider, IDragDropHost
 {
+    private const int MaxLeaderNameLength = 20;
+
     private readonly UnitGridSelectionViewModel unitSelection;
     private WorldStack? currentStack;
     private WorldGetStackInfoCommand.Result stackInfo = new([], OccupiedLeadership: 0, TotalLeadership: 0);
@@ -533,6 +535,28 @@ internal abstract partial class StackTabViewModel
         }
 
         RefreshView();
+    }
+
+    [RelayCommand]
+    private void RenameLeader()
+    {
+        if (currentStack is not null && Leader is not null)
+        {
+            WorldStackId stackId = currentStack.Id;
+
+            Game.OpenScreen(new TextPromptViewModel(
+                Tr("Hero name"),
+                Tr("Enter a new name for your hero."),
+                Leader.Title,
+                Tr("Hero name"),
+                MaxLeaderNameLength,
+                name => RenameLeaderConfirmedAsync(stackId, name)));
+        }
+    }
+
+    private async Task RenameLeaderConfirmedAsync(WorldStackId stackId, string name)
+    {
+        await TryDispatchWorldActionAsync(new WorldRenameLeaderCommand(stackId, name));
     }
 
     [RelayCommand]

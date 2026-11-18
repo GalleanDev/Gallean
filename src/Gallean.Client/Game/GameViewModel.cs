@@ -482,7 +482,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         WorldPlayer player = snapshot.WorldState.Players[snapshot.ViewPlayerId];
         LordDefinition lord = gameModel.Definitions.GetLord(player.LordId);
         ScenarioConfiguration configuration = new(
-            [new ScenarioPlayerConfiguration(player.Race, lord.Category, player.FaceVariant, null, LeaderName: null)],
+            [new ScenarioPlayerConfiguration(player.Race, lord.Category, player.FaceVariant, null, LeaderName: "")],
             snapshot.WorldState.Difficulty,
             scenarioLeader);
 

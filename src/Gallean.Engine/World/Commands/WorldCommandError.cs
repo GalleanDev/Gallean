@@ -46,6 +46,8 @@ public enum WorldCommandError
     ItemSlotMismatch,
     ItemTargetInvalid,
     LeaderDisbandForbidden,
+    LeaderNameEmpty,
+    LeaderNameTooLong,
     LeadershipExceeded,
     LeaderTransferForbidden,
     LeaderUpgradeNotAvailable,

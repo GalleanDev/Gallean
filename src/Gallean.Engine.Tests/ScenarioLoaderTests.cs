@@ -364,7 +364,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S137SC0000_ConfigurationTest()
     {
         ScenarioId scenarioId = new("S137SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
 
         WorldPlayer expectedNeutral = new(
@@ -3217,7 +3217,7 @@ public sealed class ScenarioLoaderTests
             new WorldInventory([gem]),
             PendingLeaderUpgrades: 1,
             BattlesWon: 7);
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)], WorldDifficulty.Average, scenarioLeader);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: "")], WorldDifficulty.Average, scenarioLeader);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
@@ -3402,7 +3402,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S217SC0000_ConfiguredRaceTest()
     {
         ScenarioId scenarioId = new("S217SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(3), null, LeaderName: null)], WorldDifficulty.Hard, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(3), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
 
         Assert.That(FormatPlayers(scenarioId, scenario.State), Is.EqualTo([
@@ -3416,7 +3416,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S217SC0000_NeutralRaceTest()
     {
         ScenarioId scenarioId = new("S217SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Neutral, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Neutral, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: "")], WorldDifficulty.Average, Leader: null);
 
         InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration));
 
@@ -3427,7 +3427,7 @@ public sealed class ScenarioLoaderTests
     public void Load_S217SC0000_MissingRaceTest()
     {
         ScenarioId scenarioId = new("S217SC0000");
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Undead, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null)], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Undead, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: "")], WorldDifficulty.Average, Leader: null);
 
         InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration));
 
@@ -3440,8 +3440,8 @@ public sealed class ScenarioLoaderTests
         ScenarioId scenarioId = new("S217SC0000");
         ScenarioConfiguration configuration = new(
             [
-                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: null),
-                new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Guildmaster, new WorldObjectVariant(1), null, LeaderName: null)
+                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: ""),
+                new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Guildmaster, new WorldObjectVariant(1), null, LeaderName: "")
             ],
             WorldDifficulty.Easy,
             Leader: null);
@@ -3464,8 +3464,8 @@ public sealed class ScenarioLoaderTests
         ScenarioId scenarioId = new("S217SC0000");
         ScenarioConfiguration configuration = new(
             [
-                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null),
-                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(1), null, LeaderName: null)
+                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: ""),
+                new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(1), null, LeaderName: "")
             ],
             WorldDifficulty.Average,
             Leader: null);
@@ -4079,7 +4079,7 @@ public sealed class ScenarioLoaderTests
     [Test]
     public void StartingLeaderTest()
     {
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: null)], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: "")], WorldDifficulty.Average, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S201SC0000"), definitions, globals, configuration);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
@@ -4120,7 +4120,7 @@ public sealed class ScenarioLoaderTests
     [Test]
     public void LeaderNameTest()
     {
-        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), new LiteralUnitName("Aldric"))], WorldDifficulty.Average, Leader: null);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), "  Aldric ")], WorldDifficulty.Average, Leader: null);
         Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S201SC0000"), definitions, globals, configuration);
 
         UnitGrid<WorldUnit> expectedUnits = new UnitGrid<WorldUnit>.Builder()
@@ -4156,6 +4156,16 @@ public sealed class ScenarioLoaderTests
             PendingLeaderUpgrades: 9,
             BattlesWon: 0,
             SourceTemplateId: null)));
+    }
+
+    [Test]
+    public void LeaderNameTooLongTest()
+    {
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), "Aldric the Unyielding")], WorldDifficulty.Average, Leader: null);
+
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S201SC0000"), definitions, globals, configuration));
+
+        Assert.That(ex.Message, Is.EqualTo("Leader name 'Aldric the Unyielding' is too long."));
     }
 
     [Test]

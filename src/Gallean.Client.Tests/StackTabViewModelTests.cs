@@ -4093,4 +4093,174 @@ public sealed class StackTabViewModelTests
                 (soldier with { Hitpoints = 35 }, GridPosition.FrontCenter)
             ])));
     }
+
+    [Test]
+    public async Task RenameLeaderTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        screen.RenameLeaderCommand.Execute(null);
+
+        TextPromptViewModel prompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(prompt.Title, Is.EqualTo("Hero name"));
+            Assert.That(prompt.Message, Is.EqualTo("Enter a new name for your hero."));
+            Assert.That(prompt.Text, Is.EqualTo("name"));
+            Assert.That(prompt.MaxLength, Is.EqualTo(20));
+        }
+
+        prompt.Text = " Ardobert ";
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader with { Name = new LiteralUnitName("Ardobert") }, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ])
+        }));
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(gameViewModel.TopScreen, Is.Null);
+            Assert.That(screen.Game.Alert.Current, Is.Null);
+            Assert.That(screen.StackGridTitle, Is.EqualTo("Ardobert's party"));
+        }
+
+        screen.RenameLeaderCommand.Execute(null);
+
+        TextPromptViewModel emptyPrompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(emptyPrompt.Text, Is.EqualTo("Ardobert"));
+
+        emptyPrompt.Text = "  ";
+
+        await emptyPrompt.ConfirmCommand.ExecuteAsync(null);
+
+        Alert alert = Assert.NotNull(screen.Game.Alert.Current);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(alert, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "The hero name cannot be empty", null)));
+            Assert.That(screen.StackGridTitle, Is.EqualTo("Ardobert's party"));
+        }
+    }
+
+    [Test]
+    public async Task RenameLongNamedLeaderTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], Name: new LiteralUnitName("Guardian of the Lost Knowledge"), IsTypeLocked: false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        screen.RenameLeaderCommand.Execute(null);
+
+        TextPromptViewModel prompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(prompt.Text, Is.EqualTo("Guardian of the Lost Knowledge"));
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Alert alert = Assert.NotNull(screen.Game.Alert.Current);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(alert, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "The hero name is too long", null)));
+            Assert.That(screen.StackGridTitle, Is.EqualTo("Guardian of the Lost Knowledge's party"));
+        }
+
+        screen.RenameLeaderCommand.Execute(null);
+
+        TextPromptViewModel shortPrompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
+
+        shortPrompt.Text = "Calderic";
+
+        await shortPrompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = TestHelpers.StackUnitGrid(stackDefinitions, [(leader with { Name = new LiteralUnitName("Calderic") }, GridPosition.FrontBottom)])
+        }));
+        Assert.That(screen.StackGridTitle, Is.EqualTo("Calderic's party"));
+    }
 }

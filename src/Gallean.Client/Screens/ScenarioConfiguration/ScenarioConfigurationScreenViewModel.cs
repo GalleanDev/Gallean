@@ -132,7 +132,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
 
         foreach (ScenarioRace race in humanRaces)
         {
-            ScenarioPlayerConfiguration playerConfiguration = new(race.Race, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: null);
+            ScenarioPlayerConfiguration playerConfiguration = new(race.Race, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: "");
 
             humanPlayers.Add(playerConfiguration);
         }
@@ -216,7 +216,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
             importedLeader = configuration.Leader;
         }
 
-        ScenarioPlayerConfiguration player = new(race, SelectedLordCategory, new WorldObjectVariant(LordFaceVariant), startingLeaderId, BuildLeaderName());
+        ScenarioPlayerConfiguration player = new(race, SelectedLordCategory, new WorldObjectVariant(LordFaceVariant), startingLeaderId, LeaderName);
 
         return configuration with
         {
@@ -224,20 +224,6 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
             Difficulty = SelectedDifficulty,
             Leader = importedLeader
         };
-    }
-
-    private UnitName? BuildLeaderName()
-    {
-        string name = LeaderName.Trim();
-
-        if (name.Length > 0)
-        {
-            return new LiteralUnitName(name);
-        }
-        else
-        {
-            return null;
-        }
     }
 
     [RelayCommand]
@@ -249,7 +235,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
             LeaderName,
             Tr("Default name"),
             MaxLeaderNameLength,
-            name => LeaderName = name.Trim()));
+            async name => LeaderName = name));
     }
 
     [RelayCommand]

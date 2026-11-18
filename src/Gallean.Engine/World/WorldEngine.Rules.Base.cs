@@ -42,6 +42,7 @@ internal partial class WorldEngine
         public virtual EventRuleResult<WorldEvent> Visit(WorldItemSoldEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldItemUnequippedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldItemUsedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
+        public virtual EventRuleResult<WorldEvent> Visit(WorldLeaderRenamedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldLeaderUpgradeGrantedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldLeaderUpgradeSelectedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;
         public virtual EventRuleResult<WorldEvent> Visit(WorldLeaderUpgradePostponedEvent ev, WorldState state) => EventRuleResult<WorldEvent>.Empty;

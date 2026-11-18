@@ -177,12 +177,19 @@ public static class ScenarioLoader
                     stacks = ImportLeader(stacks, capitalStack, leader, definitions, globals);
                 }
 
-                if (player.LeaderName is not null)
+                string leaderName = player.LeaderName.Trim();
+
+                if (leaderName.Length > globals.MaxLeaderNameLength)
+                {
+                    throw new InvalidOperationException($"Leader name '{leaderName}' is too long.");
+                }
+
+                if (leaderName.Length > 0)
                 {
                     WorldPlayer owner = FindPlayer(players, player.Race);
                     WorldStack capitalStack = FindCapitalStack(stacks, fortifications, owner.Id);
 
-                    stacks = SetLeaderName(stacks, capitalStack, player.LeaderName, definitions);
+                    stacks = SetLeaderName(stacks, capitalStack, new LiteralUnitName(leaderName), definitions);
                 }
             }
         }

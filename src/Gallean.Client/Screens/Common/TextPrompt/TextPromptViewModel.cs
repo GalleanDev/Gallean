@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed partial class TextPromptViewModel : AbstractScreenViewModel
 {
-    private readonly Action<string> confirmAction;
+    private readonly Func<string, Task> confirmAction;
 
     public TextPromptViewModel(
         string title,
@@ -13,7 +13,7 @@ internal sealed partial class TextPromptViewModel : AbstractScreenViewModel
         string text,
         string placeholder,
         int maxLength,
-        Action<string> confirmAction)
+        Func<string, Task> confirmAction)
     {
         this.confirmAction = confirmAction;
 
@@ -40,10 +40,10 @@ internal sealed partial class TextPromptViewModel : AbstractScreenViewModel
     }
 
     [RelayCommand]
-    private void Confirm()
+    private async Task ConfirmAsync()
     {
         CloseSelf();
 
-        confirmAction(Text);
+        await confirmAction(Text);
     }
 }
