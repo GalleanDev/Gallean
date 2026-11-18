@@ -421,8 +421,9 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
     {
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<MerchantPurchaseItemViewModel> result = [];
+        IEnumerable<WorldGetMerchantInfoCommand.PurchaseItem> purchaseItems = info.PurchaseItems.OrderBy(purchaseItem => purchaseItem.Cost, OfferPriceComparer.Descending);
 
-        foreach (WorldGetMerchantInfoCommand.PurchaseItem purchaseItem in info.PurchaseItems)
+        foreach (WorldGetMerchantInfoCommand.PurchaseItem purchaseItem in purchaseItems)
         {
             string name = ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, purchaseItem.ItemId, charges: null);
             string description = ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, purchaseItem.ItemId);
@@ -469,8 +470,9 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
     {
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<MerchantSellItemViewModel> result = [];
+        IEnumerable<WorldGetMerchantInfoCommand.SellItem> sellItems = info.SellItems.OrderBy(sellItem => sellItem.Value, OfferPriceComparer.Descending);
 
-        foreach (ItemGroup group in ItemGroup.Build([.. info.SellItems.Select(sellItem => sellItem.Item)]))
+        foreach (ItemGroup group in ItemGroup.Build([.. sellItems.Select(sellItem => sellItem.Item)]))
         {
             MerchantSellItemReference reference = new(group.DefinitionId, group.Charges);
             WorldGetMerchantInfoCommand.SellItem? sellItem = FindSellItem(info, reference);

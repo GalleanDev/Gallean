@@ -282,8 +282,9 @@ internal sealed partial class MercenaryTabViewModel
     {
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<MercenaryItemViewModel> result = [];
+        IEnumerable<WorldGetMercenaryInfoCommand.Mercenary> mercenaries = info.Mercenaries.OrderBy(mercenary => mercenary.Cost, OfferPriceComparer.Descending);
 
-        foreach (WorldGetMercenaryInfoCommand.Mercenary mercenary in info.Mercenaries)
+        foreach (WorldGetMercenaryInfoCommand.Mercenary mercenary in mercenaries)
         {
             UnitDefinition definition = GameModel.Definitions.GetUnit(mercenary.DefinitionId);
 

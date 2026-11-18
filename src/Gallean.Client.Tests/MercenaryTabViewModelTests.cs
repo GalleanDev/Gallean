@@ -430,8 +430,8 @@ public sealed class MercenaryTabViewModelTests
         MercenaryTabViewModel screen = Assert.IsOfType<MercenaryTabViewModel>(management.Tabs[0]);
 
         Assert.That(FormatMercenaries(screen.Mercenaries), Is.EqualTo([
-            "scout | name | description | Level 1 | Cost: 45 gold | available | not selected",
-            "knight | name | description | Level 1 | Cost: 450 gold (unaffordable) | unavailable | not selected"
+            "knight | name | description | Level 1 | Cost: 450 gold (unaffordable) | unavailable | not selected",
+            "scout | name | description | Level 1 | Cost: 45 gold | available | not selected"
         ]));
     }
 

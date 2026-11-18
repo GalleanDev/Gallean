@@ -249,8 +249,9 @@ internal sealed partial class MageTabViewModel
     {
         WorldResourceSet resources = WorldState.Players[ViewPlayerId].Resources;
         List<MageSpellItemViewModel> result = [];
+        IEnumerable<WorldGetMageInfoCommand.Spell> spells = info.Spells.OrderBy(spell => spell.Cost, OfferPriceComparer.Descending);
 
-        foreach (WorldGetMageInfoCommand.Spell spell in info.Spells)
+        foreach (WorldGetMageInfoCommand.Spell spell in spells)
         {
             if (spell.Error == WorldCommandError.SpellAlreadyKnown)
             {

@@ -408,4 +408,48 @@ public sealed class MageTabViewModelTests
             "effect",
             new OfferPriceViewModel(new WorldResourceSet(0, 0, 0, 10, 0, 0)))));
     }
+    [Test]
+    public void PriceOrderTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            Resources = new WorldResourceSet(1000, 0, 0, 0, 0, 0)
+        };
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 4);
+        WorldSpellDefinition cheapSpellDefinition = Spell("cheap", level: 1, new WorldResourceSet(100, 0, 0, 0, 0, 0));
+        WorldSpellDefinition expensiveSpellDefinition = Spell("expensive", level: 2, new WorldResourceSet(300, 0, 0, 0, 0, 0));
+        WorldSpellDefinition middleSpellDefinition = Spell("middle", level: 1, new WorldResourceSet(200, 0, 0, 0, 0, 0));
+
+        WorldStack stack = Stack(new WorldUnitId("leader"), player.Id, new WorldPosition(4, 4), leaderDefinition);
+        WorldMageSite site = Site([cheapSpellDefinition.Id, expensiveSpellDefinition.Id, middleSpellDefinition.Id]);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithRace(TestHelpers.SimpleRace(WorldRace.Human, new GlobalTextId("Empire"), WorldMapTerrain.Human))
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(cheapSpellDefinition)
+            .WithDefinition(expensiveSpellDefinition)
+            .WithDefinition(middleSpellDefinition)
+            .WithStack(stack)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        MageTabViewModel screen = BuildScreen(session, engine, site.Id, stack.Id);
+
+        Assert.That(FormatSpells(screen.Spells), Is.EqualTo([
+            "expensive | name | desc | Level 2 | Casting cost: 10 life mana | Cost: 300 gold | available | not selected",
+            "middle | name | desc | Level 1 | Casting cost: 10 life mana | Cost: 200 gold | available | not selected",
+            "cheap | name | desc | Level 1 | Casting cost: 10 life mana | Cost: 100 gold | available | not selected"
+        ]));
+    }
 }
