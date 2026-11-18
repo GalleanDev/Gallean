@@ -13,7 +13,7 @@ internal sealed record ItemDetailsViewModel(
     IReadOnlyList<StatRowViewModel> Stats,
     string? SpellEffect,
     OfferPriceViewModel? CastingCost,
-    ResourceSetViewModel Value)
+    ResourceSetViewModel? Value)
 {
     public bool Equals(ItemDetailsViewModel? other)
     {
@@ -62,6 +62,17 @@ internal sealed record ItemDetailsViewModel(
             castingCostViewModel = null;
         }
 
+        ResourceSetViewModel? valueViewModel;
+
+        if (definition.Value != WorldResourceSet.Empty)
+        {
+            valueViewModel = new ResourceSetViewModel(definition.Value, ResourceSetProjection.All);
+        }
+        else
+        {
+            valueViewModel = null;
+        }
+
         return new ItemDetailsViewModel(
             ItemIconResolver.Resolve(definitions, definitionId),
             ItemFormatter.FormatName(definitions, texts, definitionId, charges),
@@ -72,7 +83,7 @@ internal sealed record ItemDetailsViewModel(
             stats,
             GetSpellEffect(definition, definitions, texts),
             castingCostViewModel,
-            new ResourceSetViewModel(definition.Value, ResourceSetProjection.All));
+            valueViewModel);
     }
 
     public override int GetHashCode()

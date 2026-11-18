@@ -43,7 +43,7 @@
   </UserControl.Styles>
 
   <local:ModalFrameDecorator Width="400" Margin="0,60,52,0">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto" Margin="0,0,0,16">
 
       <StackPanel Grid.Row="0" Classes="details-header" Margin="22,20,124,0">
         <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name title" />
@@ -116,7 +116,8 @@
       <ContentControl Grid.Row="3"
                       Classes="body details-value"
                       Content="{Binding Value}"
-                      Margin="22,18,22,16"
+                      IsVisible="{Binding Value, Converter={x:Static ObjectConverters.IsNotNull}}"
+                      Margin="22,18,22,0"
                       HorizontalAlignment="Right" />
 
     </Grid>

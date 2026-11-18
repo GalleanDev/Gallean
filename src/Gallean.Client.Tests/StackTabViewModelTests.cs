@@ -2835,7 +2835,7 @@ public sealed class StackTabViewModelTests
                 ],
                 SpellEffect: null,
                 CastingCost: null,
-                new ResourceSetViewModel(WorldResourceSet.Empty, ResourceSetProjection.All))));
+                Value: null)));
             Assert.That(details.Content, Is.EqualTo(weaponDetails));
             Assert.That(gameViewModel.TopScreen, Is.Null);
         }
