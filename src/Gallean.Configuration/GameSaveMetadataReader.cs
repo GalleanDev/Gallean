@@ -32,13 +32,6 @@ internal static class GameSaveMetadataReader
 
         ReadToken(ref reader, JsonTokenType.StartObject);
 
-        Utf8JsonReader lookahead = reader;
-
-        if (!lookahead.TrySkip())
-        {
-            throw new JsonException("The save is invalid.");
-        }
-
         return GameSaveJsonSerializerContext.Default.GameSaveMetadata.DeserializeRequired(ref reader);
     }
 

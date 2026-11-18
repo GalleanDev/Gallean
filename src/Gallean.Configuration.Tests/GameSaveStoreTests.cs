@@ -294,7 +294,7 @@ public sealed class GameSaveStoreTests
 
         Assert.That(
             FormatEntries(await store.EnumerateAsync()),
-            Is.EqualTo([$"1 | GameSaveInvalidException | Unable to load the saved game from '{savePath}': The save is invalid."]));
+            Is.EqualTo([$"1 | GameSaveInvalidException | Unable to load the saved game from '{savePath}': There is not enough data to read through the entire JSON array or object. Path: $ | LineNumber: 0 | BytePositionInLine: 32."]));
     }
 
     [Test]
