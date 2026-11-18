@@ -24,7 +24,7 @@ public sealed record GlobalVariables
     internal int AiObjectiveTurnAverage { get; init; } = 50;
     internal int AiObjectiveTurnHard { get; init; } = 40;
     internal int AiObjectiveTurnVeryHard { get; init; } = 30;
-    internal int AiRandomCastChance { get; init; } = 2;
+    internal int AiRandomCastChance { get; init; } = 1;
     internal int AiStackDefendRange { get; init; } = 5;
     internal int AiStackGuardRange { get; init; } = 5;
     internal int AiThiefExtendedActionPercentEasy { get; init; } = 10;

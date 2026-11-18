@@ -916,7 +916,7 @@ public sealed class WorldEngineAiSpellTests
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
-            .WithRandom(new TestSeedRandomProvider(35))
+            .WithRandom(new TestSeedRandomProvider(146))
             .WithDefinition(leader)
             .WithDefinition(attack)
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
@@ -961,7 +961,7 @@ public sealed class WorldEngineAiSpellTests
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
-            .WithRandom(new TestSeedRandomProvider(35))
+            .WithRandom(new TestSeedRandomProvider(146))
             .WithDefinition(leader)
             .WithDefinition(attack)
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
@@ -1156,7 +1156,7 @@ public sealed class WorldEngineAiSpellTests
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
-            .WithRandom(new TestSeedRandomProvider(35))
+            .WithRandom(new TestSeedRandomProvider(146))
             .WithDefinition(leader)
             .WithDefinition(modifier)
             .WithDefinition(weaken)
