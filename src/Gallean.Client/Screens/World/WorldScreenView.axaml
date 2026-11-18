@@ -560,24 +560,6 @@
                                 IsVisible="{Binding Garrison, Converter={x:Static ObjectConverters.IsNotNull}}"
                                 HorizontalAlignment="Center"
                                 ClipToBounds="False" />
-                <Grid ColumnDefinitions="Auto,*"
-                      ColumnSpacing="12"
-                      IsVisible="{Binding Item, Converter={x:Static ObjectConverters.IsNotNull}}">
-                  <Panel Grid.Column="0" Classes="inventory-slot">
-                    <local:PlateChrome Classes="socket" />
-                    <local:SpriteVisual SpriteKey="{Binding Item.SpriteKey, FallbackValue={x:Null}}" Stretch="Uniform" />
-                  </Panel>
-                  <local:OutlinedTextBlock Grid.Column="1"
-                                           Text="{Binding Item.Name, FallbackValue=''}"
-                                           Classes="object-name row"
-                                           VerticalAlignment="Center"
-                                           TextWrapping="Wrap" />
-                </Grid>
-                <ContentControl Content="{Binding Reward}"
-                                Classes="body"
-                                IsVisible="{Binding Reward, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                HorizontalAlignment="Center"
-                                Foreground="{StaticResource PrimaryTextBrush}" />
                 <StackPanel Orientation="Horizontal"
                             Spacing="6"
                             IsVisible="{Binding Income, Converter={x:Static ObjectConverters.IsNotNull}}"

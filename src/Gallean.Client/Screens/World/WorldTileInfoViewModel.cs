@@ -8,8 +8,6 @@ internal sealed record WorldTileInfoViewModel(
     IReadOnlyList<TextSpans> Lines) : WorldPositionInfoViewModel
 {
     public WorldUnitGroupInfoGridViewModel? Garrison { get; init; }
-    public WorldTileInfoItemViewModel? Item { get; init; }
-    public ResourceSetViewModel? Reward { get; init; }
     public ResourceSetViewModel? Income { get; init; }
     public IReadOnlyList<TextSpans> Tombs { get; init; } = [];
 
@@ -17,8 +15,6 @@ internal sealed record WorldTileInfoViewModel(
         Lines.Count > 0 ||
         Tombs.Count > 0 ||
         Garrison is not null ||
-        Item is not null ||
-        Reward is not null ||
         Income is not null;
 
     public static WorldTileInfoViewModel? TryCreate(
@@ -159,39 +155,8 @@ internal sealed record WorldTileInfoViewModel(
         {
             return new WorldTileInfoViewModel(name, [])
             {
-                Garrison = WorldUnitGroupInfoGridViewModel.Create(ruin.Garrison, isFacingLeft: false, definitions, texts, stats),
-                Item = CreateItem(ruin.Item, definitions, texts),
-                Reward = CreateReward(ruin.Resources)
+                Garrison = WorldUnitGroupInfoGridViewModel.Create(ruin.Garrison, isFacingLeft: false, definitions, texts, stats)
             };
-        }
-    }
-
-    private static WorldTileInfoItemViewModel? CreateItem(
-        ItemDefinitionId? itemId,
-        IGameDefinitionProvider definitions,
-        IGameTextProvider texts)
-    {
-        if (itemId is not null)
-        {
-            string name = ItemFormatter.FormatName(definitions, texts, itemId.Value, charges: null);
-
-            return new WorldTileInfoItemViewModel(name, ItemIconResolver.Resolve(definitions, itemId.Value));
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    private static ResourceSetViewModel? CreateReward(WorldResourceSet resources)
-    {
-        if (resources != WorldResourceSet.Empty)
-        {
-            return new ResourceSetViewModel(resources, ResourceSetProjection.All);
-        }
-        else
-        {
-            return null;
         }
     }
 

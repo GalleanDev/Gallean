@@ -500,8 +500,6 @@ public sealed class WorldTileInfoViewModelTests
 
         Assert.That(FormatTileInfo(info), Is.EqualTo(["Abandoned Farm"]));
         Assert.That(Assert.NotNull(info.Garrison).Units, Is.EqualTo(expectedGarrison));
-        Assert.That(info.Item, Is.EqualTo(new WorldTileInfoItemViewModel("Ancient Relic", new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(new ItemDefinitionId("item1"))))));
-        Assert.That(info.Reward, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(300, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
     }
 
     [Test]
