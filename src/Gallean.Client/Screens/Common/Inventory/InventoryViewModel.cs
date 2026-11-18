@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Gallean.Common;
+using Gallean.Engine;
 
 namespace Gallean.Client;
 
@@ -54,6 +55,7 @@ internal sealed partial class InventoryViewModel(GameModel gameModel) : Observab
         {
             ItemGroup slot = slots[slotIndex];
             WorldItem item = slot.Items[^1];
+            ItemDefinition definition = gameModel.Definitions.GetItem(item.DefinitionId);
 
             ItemDetailsViewModel details = ItemDetailsViewModel.Create(
                 item.DefinitionId,
@@ -66,6 +68,7 @@ internal sealed partial class InventoryViewModel(GameModel gameModel) : Observab
                 slotIndex,
                 item.Id,
                 slot.Items.Length,
+                ResolveType(definition.Category),
                 ItemIconResolver.Resolve(gameModel.Definitions, item.DefinitionId),
                 ItemFormatter.FormatName(gameModel.Definitions, gameModel.Texts, item.DefinitionId, item.Charges),
                 ItemFormatter.FormatDescription(gameModel.Definitions, gameModel.Texts, item.DefinitionId),
@@ -103,5 +106,27 @@ internal sealed partial class InventoryViewModel(GameModel gameModel) : Observab
         slots = [];
         IsHighlighted = false;
         Items.Clear();
+    }
+
+    private static InventoryItemType ResolveType(ItemCategory category)
+    {
+        return category switch
+        {
+            ItemCategory.Armor => InventoryItemType.Equipment,
+            ItemCategory.Jewel => InventoryItemType.Equipment,
+            ItemCategory.Weapon => InventoryItemType.Equipment,
+            ItemCategory.Banner => InventoryItemType.Equipment,
+            ItemCategory.PotionTemporaryBoost => InventoryItemType.Consumable,
+            ItemCategory.PotionHeal => InventoryItemType.Consumable,
+            ItemCategory.PotionRevive => InventoryItemType.Consumable,
+            ItemCategory.PotionPermanentBoost => InventoryItemType.Consumable,
+            ItemCategory.Scroll => InventoryItemType.Consumable,
+            ItemCategory.Wand => InventoryItemType.Equipment,
+            ItemCategory.Valuable => InventoryItemType.Valuable,
+            ItemCategory.Orb => InventoryItemType.Consumable,
+            ItemCategory.Talisman => InventoryItemType.Equipment,
+            ItemCategory.TravelItem => InventoryItemType.Equipment,
+            ItemCategory.Special => InventoryItemType.Special
+        };
     }
 }

@@ -562,6 +562,42 @@ internal static class Theme
         public static Color PointerLightColor { get; } = Color.FromRgb(255, 230, 190);
     }
 
+    public static class InventorySlot
+    {
+        public static class Equipment
+        {
+            public static Color BorderLightColor { get; } = Color.FromRgb(255, 186, 120);
+            public static Color BorderColor { get; } = Color.FromRgb(232, 120, 40);
+            public static Color BorderDarkColor { get; } = Color.FromRgb(130, 58, 16);
+            public static Color FaceTopColor { get; } = Color.FromArgb(0, 220, 110, 40);
+            public static Color FaceBottomColor { get; } = Color.FromArgb(120, 220, 110, 40);
+            public static Color HoverFaceTopColor { get; } = Color.FromArgb(24, 220, 110, 40);
+            public static Color HoverFaceBottomColor { get; } = Color.FromArgb(170, 220, 110, 40);
+        }
+
+        public static class Valuable
+        {
+            public static Color BorderLightColor { get; } = Color.FromRgb(255, 232, 150);
+            public static Color BorderColor { get; } = Color.FromRgb(222, 182, 70);
+            public static Color BorderDarkColor { get; } = Color.FromRgb(120, 92, 28);
+            public static Color FaceTopColor { get; } = Color.FromArgb(0, 210, 170, 60);
+            public static Color FaceBottomColor { get; } = Color.FromArgb(120, 210, 170, 60);
+            public static Color HoverFaceTopColor { get; } = Color.FromArgb(24, 210, 170, 60);
+            public static Color HoverFaceBottomColor { get; } = Color.FromArgb(170, 210, 170, 60);
+        }
+
+        public static class Special
+        {
+            public static Color BorderLightColor { get; } = Color.FromRgb(154, 187, 165);
+            public static Color BorderColor { get; } = Color.FromRgb(103, 116, 101);
+            public static Color BorderDarkColor { get; } = Color.FromRgb(68, 74, 66);
+            public static Color FaceTopColor { get; } = Color.FromArgb(0, 38, 89, 91);
+            public static Color FaceBottomColor { get; } = Color.FromArgb(160, 38, 89, 91);
+            public static Color HoverFaceTopColor { get; } = Color.FromArgb(24, 38, 89, 91);
+            public static Color HoverFaceBottomColor { get; } = Color.FromArgb(230, 38, 89, 91);
+        }
+    }
+
     public static class Slider
     {
         public static Color TrackTopColor { get; } = Color.FromRgb(12, 9, 7);

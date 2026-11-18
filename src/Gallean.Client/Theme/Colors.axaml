@@ -702,6 +702,66 @@
     <GradientStop Offset="0.5" Color="{DynamicResource AccentSecondaryColor}" />
     <GradientStop Offset="1" Color="{DynamicResource AccentSecondaryDarkColor}" />
   </LinearGradientBrush>
+  <SolidColorBrush x:Key="InventorySlotEquipmentBorderLightBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.BorderLightColor}" />
+  <SolidColorBrush x:Key="InventorySlotEquipmentBorderBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.BorderColor}" />
+  <SolidColorBrush x:Key="InventorySlotEquipmentBorderDarkBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.BorderDarkColor}" />
+  <SolidColorBrush x:Key="InventorySlotEquipmentFaceTopBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.FaceTopColor}" />
+  <SolidColorBrush x:Key="InventorySlotEquipmentFaceBottomBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.FaceBottomColor}" />
+  <SolidColorBrush x:Key="InventorySlotEquipmentHoverFaceTopBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.HoverFaceTopColor}" />
+  <SolidColorBrush x:Key="InventorySlotEquipmentHoverFaceBottomBrush" Color="{x:Static local:Theme+InventorySlot+Equipment.HoverFaceBottomColor}" />
+  <LinearGradientBrush x:Key="InventorySlotEquipmentBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Equipment.BorderLightColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+InventorySlot+Equipment.BorderColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Equipment.BorderDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="InventorySlotEquipmentFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Equipment.FaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Equipment.FaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="InventorySlotEquipmentHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Equipment.HoverFaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Equipment.HoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="InventorySlotValuableBorderLightBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.BorderLightColor}" />
+  <SolidColorBrush x:Key="InventorySlotValuableBorderBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.BorderColor}" />
+  <SolidColorBrush x:Key="InventorySlotValuableBorderDarkBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.BorderDarkColor}" />
+  <SolidColorBrush x:Key="InventorySlotValuableFaceTopBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.FaceTopColor}" />
+  <SolidColorBrush x:Key="InventorySlotValuableFaceBottomBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.FaceBottomColor}" />
+  <SolidColorBrush x:Key="InventorySlotValuableHoverFaceTopBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.HoverFaceTopColor}" />
+  <SolidColorBrush x:Key="InventorySlotValuableHoverFaceBottomBrush" Color="{x:Static local:Theme+InventorySlot+Valuable.HoverFaceBottomColor}" />
+  <LinearGradientBrush x:Key="InventorySlotValuableBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Valuable.BorderLightColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+InventorySlot+Valuable.BorderColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Valuable.BorderDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="InventorySlotValuableFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Valuable.FaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Valuable.FaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="InventorySlotValuableHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Valuable.HoverFaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Valuable.HoverFaceBottomColor}" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="InventorySlotSpecialBorderLightBrush" Color="{x:Static local:Theme+InventorySlot+Special.BorderLightColor}" />
+  <SolidColorBrush x:Key="InventorySlotSpecialBorderBrush" Color="{x:Static local:Theme+InventorySlot+Special.BorderColor}" />
+  <SolidColorBrush x:Key="InventorySlotSpecialBorderDarkBrush" Color="{x:Static local:Theme+InventorySlot+Special.BorderDarkColor}" />
+  <SolidColorBrush x:Key="InventorySlotSpecialFaceTopBrush" Color="{x:Static local:Theme+InventorySlot+Special.FaceTopColor}" />
+  <SolidColorBrush x:Key="InventorySlotSpecialFaceBottomBrush" Color="{x:Static local:Theme+InventorySlot+Special.FaceBottomColor}" />
+  <SolidColorBrush x:Key="InventorySlotSpecialHoverFaceTopBrush" Color="{x:Static local:Theme+InventorySlot+Special.HoverFaceTopColor}" />
+  <SolidColorBrush x:Key="InventorySlotSpecialHoverFaceBottomBrush" Color="{x:Static local:Theme+InventorySlot+Special.HoverFaceBottomColor}" />
+  <LinearGradientBrush x:Key="InventorySlotSpecialBorderGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Special.BorderLightColor}" />
+    <GradientStop Offset="0.5" Color="{x:Static local:Theme+InventorySlot+Special.BorderColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Special.BorderDarkColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="InventorySlotSpecialFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Special.FaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Special.FaceBottomColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="InventorySlotSpecialHoverFaceGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+    <GradientStop Offset="0" Color="{x:Static local:Theme+InventorySlot+Special.HoverFaceTopColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+InventorySlot+Special.HoverFaceBottomColor}" />
+  </LinearGradientBrush>
   <LinearGradientBrush x:Key="PlateGlossGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
     <GradientStop Offset="0" Color="{x:Static local:Theme+Plate.GlossFadeColor}" />
     <GradientStop Offset="1" Color="{x:Static local:Theme+Plate.GlossColor}" />

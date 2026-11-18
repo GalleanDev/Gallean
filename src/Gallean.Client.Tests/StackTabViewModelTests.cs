@@ -86,6 +86,20 @@ public sealed class StackTabViewModelTests
             AnimationUnitId: null);
     }
 
+    private static ItemDefinition Item(string name, ItemCategory category)
+    {
+        return new ItemDefinition(
+            new ItemDefinitionId(name),
+            new GlobalTextId(name),
+            new GlobalTextId("desc"),
+            category,
+            WorldResourceSet.Empty,
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+    }
+
     [Test]
     public async Task RepositionsUnitTest()
     {
@@ -3850,5 +3864,112 @@ public sealed class StackTabViewModelTests
                 [],
                 [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.MoveAbilityFlying, "Flight", "Allows the leader to Fly", "Innate", 1, [])],
                 Summons: null))));
+    }
+
+    [Test]
+    public void InventoryItemTypeTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+
+        ItemDefinition shield = Item("Shield", ItemCategory.Armor);
+        ItemDefinition tome = Item("Tome", ItemCategory.Jewel);
+        ItemDefinition sword = Item("Sword", ItemCategory.Weapon);
+        ItemDefinition banner = Item("Banner", ItemCategory.Banner);
+        ItemDefinition strengthPotion = Item("Strength potion", ItemCategory.PotionTemporaryBoost);
+        ItemDefinition healingPotion = Item("Healing potion", ItemCategory.PotionHeal);
+        ItemDefinition revivalPotion = Item("Revival potion", ItemCategory.PotionRevive);
+        ItemDefinition elixir = Item("Elixir", ItemCategory.PotionPermanentBoost);
+        ItemDefinition scroll = Item("Scroll", ItemCategory.Scroll);
+        ItemDefinition staff = Item("Staff", ItemCategory.Wand);
+        ItemDefinition ruby = Item("Ruby", ItemCategory.Valuable);
+        ItemDefinition orb = Item("Orb", ItemCategory.Orb);
+        ItemDefinition talisman = Item("Talisman", ItemCategory.Talisman);
+        ItemDefinition boots = Item("Boots", ItemCategory.TravelItem);
+        ItemDefinition key = Item("Key", ItemCategory.Special);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Virgile"),
+                player.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 20) with
+            {
+                Inventory = new WorldInventory([
+                    new WorldItem(new WorldItemId("Shield"), shield.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Tome"), tome.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Sword"), sword.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Banner"), banner.Id, Charges: null),
+                    new WorldItem(new WorldItemId("StrengthPotion"), strengthPotion.Id, Charges: null),
+                    new WorldItem(new WorldItemId("HealingPotion"), healingPotion.Id, Charges: null),
+                    new WorldItem(new WorldItemId("RevivalPotion"), revivalPotion.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Elixir"), elixir.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Scroll"), scroll.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Staff"), staff.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Ruby"), ruby.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Orb"), orb.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Talisman"), talisman.Id, Charges: 5),
+                    new WorldItem(new WorldItemId("Boots"), boots.Id, Charges: null),
+                    new WorldItem(new WorldItemId("Key"), key.Id, Charges: null)
+                ])
+            };
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(shield)
+            .WithDefinition(tome)
+            .WithDefinition(sword)
+            .WithDefinition(banner)
+            .WithDefinition(strengthPotion)
+            .WithDefinition(healingPotion)
+            .WithDefinition(revivalPotion)
+            .WithDefinition(elixir)
+            .WithDefinition(scroll)
+            .WithDefinition(staff)
+            .WithDefinition(ruby)
+            .WithDefinition(orb)
+            .WithDefinition(talisman)
+            .WithDefinition(boots)
+            .WithDefinition(key)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        Assert.That(screen.Inventory.Items.Select(item => (item.Index, item.Name, item.Type, item.Count)), Is.EqualTo([
+            (Index: 0, Name: "Shield", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 1, Name: "Tome", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 2, Name: "Sword", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 3, Name: "Banner", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 4, Name: "Strength potion", Type: InventoryItemType.Consumable, Count: 1),
+            (Index: 5, Name: "Healing potion", Type: InventoryItemType.Consumable, Count: 1),
+            (Index: 6, Name: "Revival potion", Type: InventoryItemType.Consumable, Count: 1),
+            (Index: 7, Name: "Elixir", Type: InventoryItemType.Consumable, Count: 1),
+            (Index: 8, Name: "Scroll", Type: InventoryItemType.Consumable, Count: 1),
+            (Index: 9, Name: "Staff", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 10, Name: "Ruby", Type: InventoryItemType.Valuable, Count: 1),
+            (Index: 11, Name: "Orb", Type: InventoryItemType.Consumable, Count: 1),
+            (Index: 12, Name: "Talisman (5)", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 13, Name: "Boots", Type: InventoryItemType.Equipment, Count: 1),
+            (Index: 14, Name: "Key", Type: InventoryItemType.Special, Count: 1)
+        ]));
     }
 }

@@ -6,6 +6,7 @@ internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
         int index,
         WorldItemId itemId,
         int count,
+        InventoryItemType type,
         AssetSpriteKey.ItemIcon? spriteKey,
         string name,
         string description,
@@ -17,6 +18,7 @@ internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
         Index = index;
         ItemId = itemId;
         Count = count;
+        Type = type;
         SpriteKey = spriteKey;
         Name = name;
         Description = description;
@@ -27,6 +29,7 @@ internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
     public int Index { get; }
     public WorldItemId ItemId { get; }
     public int Count { get; }
+    public InventoryItemType Type { get; }
 
     public InventorySlotReference Reference => new(Inventory, Index, 1);
     public InventorySlotReference GroupReference => new(Inventory, Index, Count);
@@ -73,6 +76,7 @@ internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
                Index == other.Index &&
                ItemId == other.ItemId &&
                Count == other.Count &&
+               Type == other.Type &&
                SpriteKey == other.SpriteKey &&
                Name == other.Name &&
                Description == other.Description &&
@@ -87,6 +91,7 @@ internal sealed record InventoryItemViewModel : IGroupDragSource, IDetailsSource
         hash.Add(Index);
         hash.Add(ItemId);
         hash.Add(Count);
+        hash.Add(Type);
         hash.Add(SpriteKey);
         hash.Add(Name);
         hash.Add(Description);

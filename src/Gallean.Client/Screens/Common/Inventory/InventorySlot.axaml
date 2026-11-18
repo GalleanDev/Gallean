@@ -3,7 +3,10 @@
         xmlns:local="clr-namespace:Gallean.Client">
   <Styles.Resources>
     <DataTemplate x:Key="InventoryItemTemplate" x:DataType="local:InventoryItemViewModel">
-      <Button Classes="socket inventory-slot">
+      <Button Classes="socket inventory-slot"
+              Classes.equipment="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Equipment}}"
+              Classes.valuable="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Valuable}}"
+              Classes.special="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Special}}">
         <Panel>
           <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform">
             <ToolTip.Tip>
@@ -23,7 +26,10 @@
     </DataTemplate>
 
     <DataTemplate x:Key="InventoryDisplayItemTemplate" x:DataType="local:InventoryItemViewModel">
-      <Panel Classes="inventory-slot">
+      <Panel Classes="inventory-slot"
+             Classes.equipment="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Equipment}}"
+             Classes.valuable="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Valuable}}"
+             Classes.special="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Special}}">
         <local:PlateChrome Classes="socket" />
         <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform">
           <ToolTip.Tip>
@@ -46,6 +52,27 @@
     <Setter Property="Width" Value="72" />
     <Setter Property="Height" Value="72" />
     <Setter Property="Margin" Value="6" />
+  </Style>
+  <Style Selector="Button.inventory-slot.equipment /template/ local|PlateChrome#PlateChrome, Panel.inventory-slot.equipment > local|PlateChrome.socket">
+    <Setter Property="Stroke" Value="{StaticResource InventorySlotEquipmentBorderGradientBrush}" />
+    <Setter Property="Fill" Value="{StaticResource InventorySlotEquipmentFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.inventory-slot.equipment:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource InventorySlotEquipmentHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.inventory-slot.valuable /template/ local|PlateChrome#PlateChrome, Panel.inventory-slot.valuable > local|PlateChrome.socket">
+    <Setter Property="Stroke" Value="{StaticResource InventorySlotValuableBorderGradientBrush}" />
+    <Setter Property="Fill" Value="{StaticResource InventorySlotValuableFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.inventory-slot.valuable:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource InventorySlotValuableHoverFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.inventory-slot.special /template/ local|PlateChrome#PlateChrome, Panel.inventory-slot.special > local|PlateChrome.socket">
+    <Setter Property="Stroke" Value="{StaticResource InventorySlotSpecialBorderGradientBrush}" />
+    <Setter Property="Fill" Value="{StaticResource InventorySlotSpecialFaceGradientBrush}" />
+  </Style>
+  <Style Selector="Button.inventory-slot.special:pointerover /template/ local|PlateChrome#PlateChrome">
+    <Setter Property="Fill" Value="{StaticResource InventorySlotSpecialHoverFaceGradientBrush}" />
   </Style>
   <Style Selector="local|PagedItemsControl.inventory">
     <Setter Property="MinWidth" Value="376" />
