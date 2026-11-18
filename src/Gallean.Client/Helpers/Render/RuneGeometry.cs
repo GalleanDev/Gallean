@@ -14,7 +14,7 @@ internal static class RuneGeometry
         double outerRadius,
         double strokeWidth)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.Winding;
 
         double bandCenter = (innerRadius + outerRadius) / 2.0;
@@ -68,7 +68,7 @@ internal static class RuneGeometry
 
     private static SKPath BuildOutline(Rune rune, double halfWidth, double halfHeight, SKPaint strokePaint)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
 
         foreach (IReadOnlyList<SKPoint> stroke in rune.Strokes)
         {
@@ -92,7 +92,7 @@ internal static class RuneGeometry
 
     private static SKPath BuildBand(double innerRadius, double outerRadius)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.EvenOdd;
 
         builder.AddCircle(0, 0, (float)outerRadius);

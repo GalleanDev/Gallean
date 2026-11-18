@@ -40,7 +40,7 @@ internal static class WorldObjectiveMarkerGeometry
 
     private static SKPath BuildRing(double outerRadius, double innerRadius)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.EvenOdd;
 
         builder.AddCircle(0, 0, (float)outerRadius);

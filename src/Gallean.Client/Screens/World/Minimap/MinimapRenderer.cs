@@ -92,7 +92,7 @@ internal sealed class MinimapRenderer
         float y = (float)center.Y;
         float width = (float)halfWidth;
         float height = (float)(halfWidth * 0.75);
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
 
         builder.MoveTo(x, y - height);
         builder.LineTo(x + width, y);

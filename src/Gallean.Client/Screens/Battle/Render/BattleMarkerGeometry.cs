@@ -49,7 +49,7 @@ internal static class BattleMarkerGeometry
 
     private static SKPath BuildPlate()
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
 
         for (int spike = 0; spike < SpikeCount; spike++)
         {
@@ -79,7 +79,7 @@ internal static class BattleMarkerGeometry
 
     private static SKPath BuildRing()
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.AddCircle(0, 0, (float)RingRadius);
 
         using SKPath core = builder.Detach();
@@ -89,7 +89,7 @@ internal static class BattleMarkerGeometry
 
     private static SKPath BuildBands()
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.EvenOdd;
 
         builder.AddCircle(0, 0, (float)RingRadius);

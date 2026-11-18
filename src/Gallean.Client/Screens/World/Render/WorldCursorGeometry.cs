@@ -70,7 +70,7 @@ internal sealed class WorldCursorGeometry
 
     private static SKPath BuildRing(double outerRadius, double innerRadius)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.EvenOdd;
 
         builder.AddCircle(0, 0, (float)outerRadius);
@@ -81,7 +81,7 @@ internal sealed class WorldCursorGeometry
 
     private static SKPath BuildSpikes(Dimensions dimensions)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.Winding;
 
         for (int spike = 0; spike < SpikeCount; spike++)

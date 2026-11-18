@@ -34,7 +34,7 @@ internal sealed partial class WorldRenderContentProvider
 
     private static SKPath BuildTerrainExpansionClip(IReadOnlyList<TerrainExpansionTile> tiles)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
 
         foreach (TerrainExpansionTile tile in tiles)
         {

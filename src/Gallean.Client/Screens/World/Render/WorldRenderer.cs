@@ -573,7 +573,7 @@ internal sealed partial class WorldRenderer
 
     private static SKPath BuildBackdropPath(SKPath mapClip, Rect visible)
     {
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
         builder.FillType = SKPathFillType.EvenOdd;
         builder.AddRect(visible.ToSKRect());
         builder.AddPath(mapClip);

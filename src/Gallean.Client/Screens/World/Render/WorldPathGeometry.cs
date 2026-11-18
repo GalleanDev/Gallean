@@ -88,7 +88,7 @@ internal sealed class WorldPathGeometry
         float halfWidth = (float)(dimensions.WaypointHalfWidth * scale);
         float halfHeight = (float)(dimensions.WaypointHalfHeight * scale);
 
-        SKPathBuilder builder = new();
+        using SKPathBuilder builder = new();
 
         builder.MoveTo(0, -halfHeight);
         builder.LineTo(halfWidth, 0);
