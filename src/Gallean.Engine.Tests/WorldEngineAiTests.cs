@@ -5131,4 +5131,92 @@ public sealed class WorldEngineAiTests
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(["[P1 333] Move Guard -> (4, 1)"]));
     }
+
+    [Test]
+    public void PurchaseLeaderOccupiedEntranceTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^^",
+            "^^^^^^^",
+            "^^^^^^^",
+            "^^^^^^^",
+            "^^^^..."
+        ]);
+
+        UnitDefinition fighterDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("fighter", maxHitpoints: 100, initiative: 50, damage: 50),
+                movementPoints: 2, leadership: 6) with
+            {
+                PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+            };
+
+        UnitDefinition explorerDefinition = TestHelpers.SimpleUnitDefinition("explorer", maxHitpoints: 80, initiative: 50, damage: 20) with
+        {
+            Category = UnitCategory.Leader,
+            LeaderCategory = UnitLeaderCategory.Explorer,
+            Leadership = 6,
+            MovementPoints = 2,
+            PurchaseCost = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 60, initiative: 40, damage: 15) with
+        {
+            PurchaseCost = new WorldResourceSet(50, 0, 0, 0, 0, 0)
+        };
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(60, 0, 0, 0, 0, 0)
+        };
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("capital"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack waitingStack = TestHelpers.SimpleStack(
+            new WorldStackId("Waiting"),
+            player.Id,
+            capital.Entrance,
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("fighter"), fighterDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 2);
+
+        WorldRaceDefinition race = new(
+            WorldRace.Undead,
+            new GlobalTextId("Undead"),
+            WorldResourceSet.Empty,
+            WorldMapTerrain.Undead,
+            true,
+            35,
+            null,
+            [],
+            [fighterDefinition.Id, explorerDefinition.Id],
+            [soldierDefinition.Id],
+            0,
+            0);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(fighterDefinition)
+            .WithDefinition(explorerDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithCapital(capital)
+            .WithStack(waitingStack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithRace(race)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
+            "[P0 467] Purchase soldier -> capital (0, 0)",
+            "[P3 1000] AutoFit Waiting"
+        ]));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(10, 0, 0, 0, 0, 0)));
+    }
 }

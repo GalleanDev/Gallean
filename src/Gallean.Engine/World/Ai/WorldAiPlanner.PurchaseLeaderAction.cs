@@ -24,6 +24,11 @@ internal sealed partial class WorldAiPlanner
                 return null;
             }
 
+            if (plan.GetStackAt(capital.Entrance) is not null)
+            {
+                return null;
+            }
+
             WorldPlayer player = state.Players[playerId];
             IReadOnlyList<(UnitDefinition Leader, int OwnedStacks)> wanted = [.. EnumerateWantedLeaders(state, playerId)];
 
