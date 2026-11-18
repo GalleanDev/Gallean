@@ -132,9 +132,16 @@ internal sealed partial class CityTabViewModel
 
     async Task IInventoryProvider.InvokeItemAsync(InventorySlotReference source)
     {
-        if (visitingStack is not null)
+        WorldItem? item = GetStackItem(source);
+
+        if (item is not null)
         {
-            await InvokeItemAsync(visitingStack, source);
+            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+            if (definition.Effect is SpellItemEffect)
+            {
+                await UseSpellItemAsync(source);
+            }
         }
     }
 
@@ -988,21 +995,6 @@ internal sealed partial class CityTabViewModel
         UpdateDismissDropZone(dragged);
     }
 
-    private async Task InvokeItemAsync(WorldStack stack, InventorySlotReference sourceSlot)
-    {
-        WorldItem? item = GetStackItem(sourceSlot);
-
-        if (item is not null)
-        {
-            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
-
-            if (definition.Effect is SpellItemEffect && CanUseItem(stack, item))
-            {
-                await UseSpellItemAsync(sourceSlot);
-            }
-        }
-    }
-
     private async Task UseSpellItemAsync(InventorySlotReference sourceSlot)
     {
         WorldItem? item = GetStackItem(sourceSlot);
@@ -1012,31 +1004,27 @@ internal sealed partial class CityTabViewModel
             return;
         }
 
-        ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+        WorldUseItemCommand command = new(new WorldUnitGroup.Stack(visitingStack.Id), item.Id, Target: null);
+        WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
 
-        if (definition.Effect is not SpellItemEffect effect)
+        if (commandResult.Error is WorldCommandError.SpellTargetInvalid)
         {
-            return;
-        }
-
-        WorldSpellDefinition spell = GameModel.Definitions.GetSpell(effect.SpellId);
-
-        if (spell.AreaRadius is null)
-        {
-            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(visitingStack.Id), item.Id, Target: null)))
+            if (Game.RootScreen is WorldScreenViewModel world)
             {
-                Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
                 Screen.Close();
-            }
-            else
-            {
-                RefreshView();
+                world.SelectAction(new WorldCursorAction.UseItem(visitingStack.Id, item.Id));
             }
         }
-        else if (Game.RootScreen is WorldScreenViewModel world)
+        else if (await TryDispatchWorldActionAsync(command))
         {
+            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+            Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
             Screen.Close();
-            world.SelectAction(new WorldCursorAction.UseItem(visitingStack.Id, item.Id));
+        }
+        else
+        {
+            RefreshView();
         }
     }
 

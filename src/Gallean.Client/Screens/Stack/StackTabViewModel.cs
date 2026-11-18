@@ -102,7 +102,7 @@ internal abstract partial class StackTabViewModel
         {
             ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
 
-            if (definition.Effect is SpellItemEffect && CanUseItem(stack, item))
+            if (definition.Effect is SpellItemEffect)
             {
                 await UseSpellItemAsync(stack, item);
 
@@ -193,27 +193,23 @@ internal abstract partial class StackTabViewModel
 
     private async Task UseSpellItemAsync(WorldStack stack, WorldItem item)
     {
-        ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+        WorldUseItemCommand command = new(new WorldUnitGroup.Stack(stack.Id), item.Id, Target: null);
+        WorldCommandResult commandResult = GameModel.World.DryRunCommand(command);
 
-        if (definition.Effect is not SpellItemEffect effect)
+        if (commandResult.Error is WorldCommandError.SpellTargetInvalid)
         {
-            return;
-        }
-
-        WorldSpellDefinition spell = GameModel.Definitions.GetSpell(effect.SpellId);
-
-        if (spell.AreaRadius is null)
-        {
-            if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), item.Id, Target: null)))
+            if (Game.RootScreen is WorldScreenViewModel world)
             {
-                Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
                 Screen.Close();
+                world.SelectAction(new WorldCursorAction.UseItem(stack.Id, item.Id));
             }
         }
-        else if (Game.RootScreen is WorldScreenViewModel world)
+        else if (await TryDispatchWorldActionAsync(command))
         {
+            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+            Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
             Screen.Close();
-            world.SelectAction(new WorldCursorAction.UseItem(stack.Id, item.Id));
         }
     }
 
