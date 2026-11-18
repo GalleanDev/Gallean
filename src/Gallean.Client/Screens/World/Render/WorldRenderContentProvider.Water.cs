@@ -218,7 +218,7 @@ internal sealed partial class WorldRenderContentProvider
                 Sprite frame = water[frameIndex];
                 int scale = frame.Metadata.PixelScale;
                 SKMatrix transform = SKMatrix.CreateScale(1.0f / scale, 1.0f / scale);
-                SKImage image = BuildAlbedoImage(frame);
+                using SKImage image = BuildAlbedoImage(frame);
 
                 result.Add(image.ToShader(
                     SKShaderTileMode.Repeat,

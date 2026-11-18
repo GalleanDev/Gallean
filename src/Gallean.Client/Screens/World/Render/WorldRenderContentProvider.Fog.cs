@@ -106,7 +106,7 @@ internal sealed partial class WorldRenderContentProvider
 
         private static SKShader BuildShader(IReadOnlyList<FogTile> fogTiles, WorldMap map)
         {
-            SKImage mask = BuildMask(fogTiles, map);
+            using SKImage mask = BuildMask(fogTiles, map);
 
             float halfWidth = (float)WorldTransform.TileHalfWidth / SamplesPerTile;
             float halfHeight = (float)WorldTransform.TileHalfHeight / SamplesPerTile;
