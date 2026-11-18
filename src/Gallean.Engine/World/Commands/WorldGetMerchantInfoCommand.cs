@@ -99,13 +99,16 @@ public sealed record WorldGetMerchantInfoCommand(
 
     private static ImmutableArray<SellItem> GetSellItems(WorldStack stack, IEngineContext context)
     {
-        ImmutableArray<SellItem>.Builder items = ImmutableArray.CreateBuilder<SellItem>(stack.Inventory.Items.Length);
+        ImmutableArray<SellItem>.Builder items = ImmutableArray.CreateBuilder<SellItem>();
 
         foreach (WorldItem item in stack.Inventory.Items)
         {
             MerchantSiteCalculator.SellInfo sell = MerchantSiteCalculator.GetSellInfo(item, context);
 
-            items.Add(new SellItem(item, sell.Value));
+            if (sell.Error is null)
+            {
+                items.Add(new SellItem(item, sell.Value));
+            }
         }
 
         return items.ToImmutable();

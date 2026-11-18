@@ -794,7 +794,6 @@ public sealed class MerchantTabViewModelTests
         Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([potionItem, ringItem, secondPotionItem])));
         Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(120, 0, 0, 0, 0, 0)));
         Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "ring | name | desc | Count: 1 | Sell for: 100 gold | unavailable: The merchant will not buy this item | not selected",
             "potion | name | desc | Count: 2 | Sell for: 10 gold | available | not selected"
         ]));
         Assert.That(screen.SellAllCommand.CanExecute(null), Is.True);
@@ -822,9 +821,7 @@ public sealed class MerchantTabViewModelTests
         Assert.That(screen.Game.TopScreen, Is.Null);
         Assert.That(session.World.State.Stacks[stack.Id].Inventory, Is.EqualTo(new WorldInventory([ringItem])));
         Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(140, 0, 0, 0, 0, 0)));
-        Assert.That(FormatSellItems(screen.SellItems), Is.EqualTo([
-            "ring | name | desc | Count: 1 | Sell for: 100 gold | unavailable: The merchant will not buy this item | not selected"
-        ]));
+        Assert.That(FormatSellItems(screen.SellItems), Is.Empty);
         Assert.That(screen.SellAllCommand.CanExecute(null), Is.False);
         Assert.That(screen.SellValuablesCommand.CanExecute(null), Is.False);
         Assert.That(screen.Game.Alert.Current, Is.Null);
