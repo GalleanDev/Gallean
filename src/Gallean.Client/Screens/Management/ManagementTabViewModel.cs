@@ -12,6 +12,9 @@ internal abstract partial class ManagementTabViewModel(GameModel gameModel, Game
     [ObservableProperty]
     public partial bool IsSelected { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsHighlighted { get; set; }
+
     public virtual bool TryCancel()
     {
         return false;

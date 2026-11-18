@@ -295,7 +295,7 @@ public sealed class ManagementScreenViewModelTests
 
         Assert.That(FormatTabs(screen.Tabs), Is.EqualTo([
             "Party | selected",
-            "Exchange | not selected"
+            "Exchange: name | not selected"
         ]));
     }
 

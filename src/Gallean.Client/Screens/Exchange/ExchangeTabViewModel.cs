@@ -36,7 +36,20 @@ internal sealed partial class ExchangeTabViewModel
         RegisterSnapshotGatedCommands(TransferAllCommand);
     }
 
-    public override string TabHeader => Tr("Exchange");
+    public override string TabHeader
+    {
+        get
+        {
+            if (OtherLeader is not null)
+            {
+                return Tr("Exchange: {0}", OtherLeader.Title);
+            }
+            else
+            {
+                return Tr("Exchange");
+            }
+        }
+    }
 
     public UnitGridViewModel StackGrid { get; }
     public UnitGridViewModel OtherStackGrid { get; }
@@ -49,6 +62,7 @@ internal sealed partial class ExchangeTabViewModel
     public partial StackLeaderViewModel? Leader { get; private set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(TabHeader))]
     public partial StackLeaderViewModel? OtherLeader { get; private set; }
 
     [ObservableProperty]

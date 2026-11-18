@@ -409,7 +409,7 @@ public sealed class ExchangeTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new ExchangeTabViewModel(gameModel, gameViewModel, owner, stack.Id, otherStack.Id)]);
         ExchangeTabViewModel screen = Assert.IsOfType<ExchangeTabViewModel>(management.Tabs[0]);
 
-        Assert.That(screen.TabHeader, Is.EqualTo("Exchange"));
+        Assert.That(screen.TabHeader, Is.EqualTo("Exchange: name"));
         Assert.That(screen.Leader, Is.EqualTo(new StackLeaderViewModel(
             new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
             "name",
