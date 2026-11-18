@@ -2,7 +2,8 @@ namespace Gallean.Configuration;
 
 public static class AppDirectories
 {
-    private static string LocalApplicationData { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+    private static string LocalApplicationData { get; } =
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create);
 
     public static string Root { get; } = Path.Combine(LocalApplicationData, "Gallean");
     public static string Assets { get; } = Path.Combine(Root, "Assets");
