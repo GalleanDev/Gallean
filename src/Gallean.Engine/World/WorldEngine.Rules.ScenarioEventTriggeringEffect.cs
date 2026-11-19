@@ -405,7 +405,7 @@ internal partial class WorldEngine
         {
             WorldUnitGroup? target = effect.Target switch
             {
-                ScenarioEventGiveItemTarget.Triggerer => GetTriggererStack(),
+                ScenarioEventGiveItemTarget.Triggerer => GetTriggererStack() ?? GetTriggererCapital(),
                 ScenarioEventGiveItemTarget.TriggererCapital => GetTriggererCapital()
             };
 
