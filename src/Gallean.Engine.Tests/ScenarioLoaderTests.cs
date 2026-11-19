@@ -2486,6 +2486,8 @@ public sealed class ScenarioLoaderTests
             .Place(new ScenarioStackTemplateUnit(u5003, 140, 1, []), GridPosition.FrontBottom, false)
             .Place(new ScenarioStackTemplateUnit(u0006, 45, 1, []), GridPosition.BackBottom, false)
             .Place(new ScenarioStackTemplateUnit(u5354, 135, 1, []), GridPosition.BackCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u5003, 140, 1, []), GridPosition.FrontTop, false)
+            .Place(new ScenarioStackTemplateUnit(u0006, 45, 1, []), GridPosition.BackTop, false)
             .Build();
 
         Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S095TM0001")), Is.EqualTo(
@@ -4198,5 +4200,60 @@ public sealed class ScenarioLoaderTests
             OccurOnce: true,
             Chance: 100,
             Order: 0)));
+    }
+
+    [Test]
+    public void Load_S132SC0000_StackTemplate_S132TM0000_Test()
+    {
+        ScenarioId scenarioId = new("S132SC0000");
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
+
+        UnitDefinitionId u0080 = new("G000UU0080");
+        UnitDefinitionId u0087 = new("G000UU0087");
+        UnitDefinitionId u5283 = new("G000UU5283");
+
+        UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+            .Place(new ScenarioStackTemplateUnit(u0087, 170, 2, []), GridPosition.FrontBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u0080, 45, 1, []), GridPosition.BackBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u5283, 325, 8, []), GridPosition.BackCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u0087, 170, 2, []), GridPosition.FrontTop, false)
+            .Place(new ScenarioStackTemplateUnit(u0080, 45, 1, []), GridPosition.BackTop, false)
+            .Build();
+
+        Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S132TM0000")), Is.EqualTo(
+            new ScenarioStackTemplateDefinition(
+                new ScenarioStackTemplateId("S132TM0000"),
+                new WorldPlayerId(1),
+                new WorldSubraceId("S132SR0000"),
+                expectedUnits,
+                WorldStackOrder.Stand.Instance,
+                Direction: null,
+                AiPriority: 3)));
+    }
+
+    [Test]
+    public void Load_S132SC0000_StackTemplate_S132TM0002_Test()
+    {
+        ScenarioId scenarioId = new("S132SC0000");
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
+
+        UnitDefinitionId u8005 = new("G000UU8005");
+        UnitDefinitionId u8105 = new("G000UU8105");
+
+        UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+            .Place(new ScenarioStackTemplateUnit(u8005, 200, 1, []), GridPosition.FrontBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u8105, 200, 1, []), GridPosition.FrontCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u8005, 200, 1, []), GridPosition.FrontTop, false)
+            .Build();
+
+        Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S132TM0002")), Is.EqualTo(
+            new ScenarioStackTemplateDefinition(
+                new ScenarioStackTemplateId("S132TM0002"),
+                new WorldPlayerId(3),
+                new WorldSubraceId("S132SR0002"),
+                expectedUnits,
+                WorldStackOrder.Normal.Instance,
+                Direction: null,
+                AiPriority: 3)));
     }
 }

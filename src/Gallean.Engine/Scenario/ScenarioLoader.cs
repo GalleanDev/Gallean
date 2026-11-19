@@ -2007,32 +2007,31 @@ public static class ScenarioLoader
         ILookup<int, Db.ScenarioStackTemplateModifier> modifiersByPosition = templateModifiers.ToLookup(modifier => modifier.UnitPos);
 
         UnitGrid<ScenarioStackTemplateUnit>.Builder builder = new();
-        HashSet<int> placedUnits = [];
 
         for (int position = 0; position < GridPosition.Count; position++)
         {
             int unitIndex = positions[position];
 
-            if (unitIndex < 0 || unitIndex >= GridPosition.Count || !placedUnits.Add(unitIndex))
+            if (unitIndex is >= 0 and < GridPosition.Count && unitIds[unitIndex] is { } unitId)
             {
-                continue;
+                UnitDefinitionId definitionId = new(unitId);
+                UnitDefinition definition = definitions.GetUnit(definitionId);
+                GridPosition gridPosition = new(position % 2, position / 2);
+
+                if (definition.IsLarge && gridPosition.IsBackLine)
+                {
+                    continue;
+                }
+                else
+                {
+                    ImmutableArray<UnitModifier> modifiers = LoadStackTemplateUnitModifiers(modifiersByPosition[position], definitions);
+                    int level = unitLevels[unitIndex];
+                    int hitpoints = UnitStatsCalculator.GetStats(definition, level, modifiers, definitions, globals).MaxHitpoints;
+                    ScenarioStackTemplateUnit templateUnit = new(definitionId, hitpoints, level, modifiers);
+
+                    builder.Place(templateUnit, gridPosition, definition.IsLarge);
+                }
             }
-
-            if (unitIds[unitIndex] is not { } unitId)
-            {
-                continue;
-            }
-
-            UnitDefinitionId definitionId = new(unitId);
-            UnitDefinition definition = definitions.GetUnit(definitionId);
-            ImmutableArray<UnitModifier> modifiers = LoadStackTemplateUnitModifiers(modifiersByPosition[position], definitions);
-            int level = unitLevels[unitIndex];
-            int hitpoints = UnitStatsCalculator.GetStats(definition, level, modifiers, definitions, globals).MaxHitpoints;
-
-            builder.Place(
-                new ScenarioStackTemplateUnit(definitionId, hitpoints, level, modifiers),
-                new GridPosition(position % 2, position / 2),
-                definition.IsLarge);
         }
 
         return builder.Build();
