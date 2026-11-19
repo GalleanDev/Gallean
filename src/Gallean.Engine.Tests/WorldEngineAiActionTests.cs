@@ -530,4 +530,94 @@ public sealed class WorldEngineAiActionTests
             new WorldAiActionEndedEvent(ai.Id, memory)
         ]);
     }
+
+    [Test]
+    public void DefeatedAiTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(10, 5);
+
+        UnitDefinition unitDefinition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 10);
+
+        WorldRaceDefinition raceDefinition = new(
+            Race: WorldRace.Undead,
+            NameTextId: new GlobalTextId("Undead"),
+            Income: WorldResourceSet.Empty,
+            NativeTerrain: WorldMapTerrain.Undead,
+            IsPlayable: true,
+            CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
+            Cities: [],
+            Leaders: [],
+            Units: [unitDefinition.Id],
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
+
+        WorldRaceDefinition humanRaceDefinition = new(
+            Race: WorldRace.Heretic,
+            NameTextId: new GlobalTextId("Heretic"),
+            Income: WorldResourceSet.Empty,
+            NativeTerrain: WorldMapTerrain.Heretic,
+            IsPlayable: true,
+            CapitalRegeneration: 35,
+            CapitalProtectionModifierId: null,
+            Cities: [],
+            Leaders: [],
+            Units: [],
+            MaleLeaderNameCount: 0,
+            FemaleLeaderNameCount: 0);
+
+        WorldPlayer ai = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldCapital capturedCapital = TestHelpers.SimpleCapital(
+                new WorldFortificationId("capital"),
+                ai.Id,
+                new WorldPosition(4, 4),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                CapturedById = human.Id
+            };
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 2),
+            new WorldResourceSet(150, 0, 0, 0, 0, 0));
+
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            ai.Id,
+            new WorldPosition(9, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(unitDefinition)
+            .WithDefinition(cityDefinition)
+            .WithRace(raceDefinition)
+            .WithRace(humanRaceDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(ai.LordId, ai.Race, LordCategory.Warrior))
+            .WithPlayer(ai)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithCapital(capturedCapital)
+            .WithCity(city)
+            .Build();
+
+        WorldAiMemory memory = new(new WorldAiTurnMemory(1, ai.Id));
+
+        engine.CheckCommand(new WorldAiActionCommand(), [
+            new WorldAiActionStartedEvent(WorldAiActionPlan.EndTurn(memory)),
+            new WorldTurnEndedEvent(ai.Id),
+            new WorldRoundEndedEvent(),
+            new WorldRoundStartedEvent(),
+            new WorldTurnStartingEvent(human.Id),
+            new WorldTurnStartedEvent(human.Id),
+            new WorldTurnResourcesGeneratedEvent(human.Id, WorldResourceSet.Empty),
+            new WorldAiActionEndedEvent(ai.Id, memory)
+        ]);
+    }
 }

@@ -6,17 +6,17 @@ public sealed record WorldEndTurnCommand : IWorldCommand<Empty>
 {
     public WorldCommandResult Execute(WorldState state, IEngineContext context)
     {
-        WorldPlayerId currentPlayer = state.TurnInfo.CurrentPlayerId;
+        WorldPlan plan = WorldPlan.For(state);
 
+        WorldPlayerId currentPlayer = state.TurnInfo.CurrentPlayerId;
         List<WorldEvent> events = [new WorldTurnEndedEvent(currentPlayer)];
         WorldPlayerId nextPlayerId = currentPlayer;
-        WorldPlan plan = WorldPlan.For(state);
 
         while (true)
         {
             nextPlayerId = state.GetNextPlayerId(nextPlayerId);
 
-            if (!plan.IsPlayerDefeated(nextPlayerId))
+            if (state.Players[nextPlayerId].IsAi || !plan.IsPlayerDefeated(nextPlayerId))
             {
                 break;
             }
