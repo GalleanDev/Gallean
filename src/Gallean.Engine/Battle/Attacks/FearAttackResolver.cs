@@ -33,7 +33,7 @@ internal sealed class FearAttackResolver : BattleAbstractAttackResolver, IStatic
 
         if (targetModifiers.CanRetreat)
         {
-            return [new BattleUnitRetreatingEvent(targetId)];
+            return [new BattleUnitRetreatingEvent(targetId, context.Globals.RetreatDurationTurns)];
         }
         else
         {

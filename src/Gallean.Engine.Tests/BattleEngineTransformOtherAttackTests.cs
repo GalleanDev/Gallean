@@ -678,7 +678,7 @@ public sealed class BattleEngineTransformOtherAttackTests
             new BattleUnitAttackEvent(banshee.Id, new BattleAttackUnitTarget(summoner.Id), [new UnitAttackDefinitionId("banshee")]),
             new BattleUnitAttackedEvent(banshee.Id, summoner.Id, new UnitAttackDefinitionId("banshee")),
             new BattleUnitAttackHitEvent(banshee.Id, summoner.Id, new UnitAttackDefinitionId("banshee"), 0),
-            new BattleUnitRetreatingEvent(summoner.Id),
+            new BattleUnitRetreatingEvent(summoner.Id, 1),
             new BattleUnitTurnEndingEvent(banshee.Id),
             new BattleUnitTurnEndedEvent(banshee.Id),
             new BattleRoundEndedEvent(),

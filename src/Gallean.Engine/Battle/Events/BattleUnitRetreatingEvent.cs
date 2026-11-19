@@ -1,6 +1,6 @@
 namespace Gallean.Engine;
 
-public sealed record BattleUnitRetreatingEvent(BattleUnitId UnitId) : BattleEvent
+public sealed record BattleUnitRetreatingEvent(BattleUnitId UnitId, int RemainingTurns) : BattleEvent
 {
     public override TResult Accept<TContext, TResult>(IBattleEventVisitor<TContext, TResult> visitor, TContext context)
     {

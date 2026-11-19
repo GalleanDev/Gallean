@@ -42,9 +42,16 @@ public sealed record BattleRetreatCommand(BattleUnitId UnitId) : IBattleCommand<
         }
         else
         {
+            int remainingTurns = context.Globals.RetreatDurationTurns;
+
+            if (state.WaitingQueue.Any(turn => turn.UnitId == UnitId))
+            {
+                remainingTurns += 1;
+            }
+
             return BattleCommandResult.Success(
                 Empty.Value,
-                [new BattleUnitRetreatingEvent(UnitId), new BattleUnitTurnEndingEvent(UnitId)]);
+                [new BattleUnitRetreatingEvent(UnitId, remainingTurns), new BattleUnitTurnEndingEvent(UnitId)]);
         }
     }
 

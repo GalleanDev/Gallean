@@ -1166,7 +1166,7 @@ public sealed class BattleEngineAiActionTests
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
-            new BattleUnitRetreatingEvent(leader.Id),
+            new BattleUnitRetreatingEvent(leader.Id, 1),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
@@ -1194,7 +1194,7 @@ public sealed class BattleEngineAiActionTests
             .Build();
 
         engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
-            new BattleUnitRetreatingEvent(leader.Id),
+            new BattleUnitRetreatingEvent(leader.Id, 1),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))

@@ -6520,7 +6520,7 @@ public sealed class VisualTests
         });
         builder.Add(MakeBattleUnit(2, attackers.Units[1], BattleSide.Attacker, gameModel) with
         {
-            StatusEffects = [new BattleRetreatStatusEffect()]
+            StatusEffects = [new BattleRetreatStatusEffect(1)]
         });
 
         builder.Add(MakeBattleUnit(3, defenders.Leaders[0], BattleSide.Defender, gameModel) with

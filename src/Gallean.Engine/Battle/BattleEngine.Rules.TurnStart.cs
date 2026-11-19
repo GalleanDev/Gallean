@@ -102,7 +102,11 @@ internal partial class BattleEngine
 
             if (resolvesRetreat && unit.IsRetreating())
             {
-                if (unit.SummonerId is not null)
+                if (unit.StatusEffects.Any(effect => effect is BattleRetreatStatusEffect { RemainingTurns: > 1 }))
+                {
+                    events.Add(new BattleUnitTurnSkippedEvent(ev.UnitId));
+                }
+                else if (unit.SummonerId is not null)
                 {
                     events.Add(new BattleUnitUnsummonedEvent(ev.UnitId));
                 }
@@ -158,7 +162,7 @@ internal partial class BattleEngine
                 BattlePoisonStatusEffect => true,
                 BattleFrostbiteStatusEffect => true,
                 BattleBlisterStatusEffect => true,
-                BattleRetreatStatusEffect => false,
+                BattleRetreatStatusEffect retreat => retreat.RemainingTurns > 1,
                 BattleRetreatedStatusEffect => false,
                 BattleFortificationStatusEffect => false,
                 BattleIncreaseDamageStatusEffect => false,

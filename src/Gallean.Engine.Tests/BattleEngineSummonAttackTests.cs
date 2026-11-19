@@ -1258,7 +1258,7 @@ public sealed class BattleEngineSummonAttackTests
         ]);
 
         engine.CheckCommand(new BattleRetreatCommand(summoner.Id), [
-            new BattleUnitRetreatingEvent(summoner.Id),
+            new BattleUnitRetreatingEvent(summoner.Id, 1),
             new BattleUnitTurnEndingEvent(summoner.Id),
             new BattleUnitTurnEndedEvent(summoner.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))

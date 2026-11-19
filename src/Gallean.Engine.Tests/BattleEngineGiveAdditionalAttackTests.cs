@@ -98,7 +98,7 @@ public sealed class BattleEngineGiveAdditionalAttackTests
         UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 100, initiative: 40, damage: 5);
 
         BattleUnit alchemist = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, alchemistDefinition.Id, BattleSide.Attacker, hitpoints: 100);
-        BattleUnit ally = new(new BattleUnitId(1), null, allyDefinition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleRetreatStatusEffect()], null, [], null, false);
+        BattleUnit ally = new(new BattleUnitId(1), null, allyDefinition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleRetreatStatusEffect(1)], null, [], null, false);
         BattleUnit enemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 100);
 
         BattleEngine engine = new TestBattleEngineBuilder()

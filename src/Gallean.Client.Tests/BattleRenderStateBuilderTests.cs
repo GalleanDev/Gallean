@@ -413,7 +413,7 @@ public sealed class BattleRenderStateBuilderTests
             ExperienceGained: 0,
             Level: 1,
             Modifiers: [],
-            StatusEffects: [new BattleRetreatStatusEffect()],
+            StatusEffects: [new BattleRetreatStatusEffect(1)],
             SummonerId: null,
             EquipmentAttackIds: [],
             Name: null,

@@ -6,6 +6,6 @@ internal partial class BattleEngine
     {
         BattleUnit unit = state.GetUnit(ev.UnitId);
 
-        return state.WithUnit(unit with { StatusEffects = unit.StatusEffects.Add(new BattleRetreatStatusEffect()) });
+        return state.WithUnit(unit with { StatusEffects = unit.StatusEffects.Add(new BattleRetreatStatusEffect(ev.RemainingTurns)) });
     }
 }

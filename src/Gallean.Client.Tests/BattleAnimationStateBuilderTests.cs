@@ -3770,7 +3770,7 @@ public sealed class BattleAnimationStateBuilderTests
         BattleAnimationState? animation = builder.Build(
             baseState,
             [
-                new BattleUnitRetreatingEvent(new BattleUnitId(1)),
+                new BattleUnitRetreatingEvent(new BattleUnitId(1), 1),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
@@ -3891,7 +3891,7 @@ public sealed class BattleAnimationStateBuilderTests
             baseState,
             [
                 new BattleUnitAttackEvent(new BattleUnitId(2), new BattleAttackUnitTarget(new BattleUnitId(1)), [new UnitAttackDefinitionId("FEAR")]),
-                new BattleUnitRetreatingEvent(new BattleUnitId(1)),
+                new BattleUnitRetreatingEvent(new BattleUnitId(1), 1),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal))
             ]);
         Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([

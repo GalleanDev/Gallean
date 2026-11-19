@@ -28,7 +28,7 @@ internal partial class BattleEngine
             BattlePoisonStatusEffect poison => DecreaseTurns(poison),
             BattleFrostbiteStatusEffect frostbite => DecreaseTurns(frostbite),
             BattleBlisterStatusEffect blister => DecreaseTurns(blister),
-            BattleRetreatStatusEffect => effect,
+            BattleRetreatStatusEffect retreat => DecreaseTurns(retreat),
             BattleRetreatedStatusEffect => effect,
             BattleFortificationStatusEffect => effect,
             BattleIncreaseDamageStatusEffect => effect,
@@ -48,6 +48,18 @@ internal partial class BattleEngine
     private static BattleAbstractStatusEffect DecreaseTurns(BattleAbstractDamageOverTimeEffect effect)
     {
         return effect with { RemainingTurns = effect.RemainingTurns - 1 };
+    }
+
+    private static BattleAbstractStatusEffect DecreaseTurns(BattleRetreatStatusEffect effect)
+    {
+        if (effect.RemainingTurns > 1)
+        {
+            return effect with { RemainingTurns = effect.RemainingTurns - 1 };
+        }
+        else
+        {
+            return effect;
+        }
     }
 
     private static BattleAbstractStatusEffect DecreaseTurns(BattleTransformStatusEffect effect)

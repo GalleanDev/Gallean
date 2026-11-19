@@ -19,14 +19,14 @@ public sealed class BattleEngineRetreatTests
             .Build();
 
         engine.CheckCommand(new BattleRetreatCommand(retreating.Id), [
-            new BattleUnitRetreatingEvent(retreating.Id),
+            new BattleUnitRetreatingEvent(retreating.Id, 1),
             new BattleUnitTurnEndingEvent(retreating.Id),
             new BattleUnitTurnEndedEvent(retreating.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal))
         ]);
 
         BattleState expected = engine.State
-                .WithUnit(retreating with { StatusEffects = [new BattleRetreatStatusEffect()] })
+                .WithUnit(retreating with { StatusEffects = [new BattleRetreatStatusEffect(1)] })
             with
             {
                 CurrentUnitTurn = new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal),
@@ -138,7 +138,7 @@ public sealed class BattleEngineRetreatTests
         UnitDefinition retreatingDefinition = TestHelpers.SimpleUnitDefinition("retreating", maxHitpoints: 100, initiative: 30, damage: 5);
         UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 100, initiative: 50, damage: 20);
 
-        BattleUnit retreating = new(new BattleUnitId(0), null, retreatingDefinition.Id, BattleSide.Attacker, 2, 0, 0, 1, [], [new BattleRetreatStatusEffect(), new BattlePoisonStatusEffect(3, 2)], null, [], null, false);
+        BattleUnit retreating = new(new BattleUnitId(0), null, retreatingDefinition.Id, BattleSide.Attacker, 2, 0, 0, 1, [], [new BattleRetreatStatusEffect(1), new BattlePoisonStatusEffect(3, 2)], null, [], null, false);
         BattleUnit enemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 100);
 
         BattleEngine engine = new TestBattleEngineBuilder()
@@ -181,7 +181,7 @@ public sealed class BattleEngineRetreatTests
         UnitDefinition retreatingDefinition = TestHelpers.SimpleUnitDefinition("retreating", maxHitpoints: 100, initiative: 30, damage: 5);
         UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 100, initiative: 50, damage: 20);
 
-        BattleUnit retreating = new(new BattleUnitId(0), null, retreatingDefinition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleRetreatStatusEffect(), new BattleParalyzeStatusEffect(2)], null, [], null, false);
+        BattleUnit retreating = new(new BattleUnitId(0), null, retreatingDefinition.Id, BattleSide.Attacker, 100, 0, 0, 1, [], [new BattleRetreatStatusEffect(1), new BattleParalyzeStatusEffect(2)], null, [], null, false);
         BattleUnit enemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 100);
 
         BattleEngine engine = new TestBattleEngineBuilder()
@@ -208,7 +208,7 @@ public sealed class BattleEngineRetreatTests
         ]);
 
         BattleState expected = engine.State
-                .WithUnit(retreating with { StatusEffects = [new BattleRetreatStatusEffect(), new BattleParalyzeStatusEffect(1)] })
+                .WithUnit(retreating with { StatusEffects = [new BattleRetreatStatusEffect(1), new BattleParalyzeStatusEffect(1)] })
                 .WithUnit(enemy)
             with
             {
@@ -382,14 +382,14 @@ public sealed class BattleEngineRetreatTests
             .Build();
 
         engine.CheckCommand(new BattleRetreatCommand(defender.Id), [
-            new BattleUnitRetreatingEvent(defender.Id),
+            new BattleUnitRetreatingEvent(defender.Id, 1),
             new BattleUnitTurnEndingEvent(defender.Id),
             new BattleUnitTurnEndedEvent(defender.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal))
         ]);
 
         BattleState expected = engine.State
-                .WithUnit(defender with { StatusEffects = [new BattleRetreatStatusEffect()] })
+                .WithUnit(defender with { StatusEffects = [new BattleRetreatStatusEffect(1)] })
             with
             {
                 CurrentUnitTurn = new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal),
@@ -462,5 +462,65 @@ public sealed class BattleEngineRetreatTests
             };
 
         Assert.That(engine.State, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void WaitedRetreatTest()
+    {
+        UnitDefinition retreatingDefinition = TestHelpers.SimpleUnitDefinition("retreating", maxHitpoints: 100, initiative: 50, damage: 5);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 100, initiative: 30, damage: 20);
+
+        BattleUnit retreating = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, retreatingDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit enemy = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, enemyDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(retreatingDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithAttacker(retreating, GridPosition.FrontBottom)
+            .WithDefender(enemy, GridPosition.FrontBottom)
+            .Build();
+
+        _ = engine.DispatchCommand(new BattleWaitCommand(retreating.Id));
+        _ = engine.DispatchCommand(new BattleSkipCommand(enemy.Id));
+
+        engine.CheckCommand(new BattleRetreatCommand(retreating.Id), [
+            new BattleUnitRetreatingEvent(retreating.Id, 2),
+            new BattleUnitTurnEndingEvent(retreating.Id),
+            new BattleUnitTurnEndedEvent(retreating.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Normal(2), [new BattleUnitTurn(retreating.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(retreating.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitEffectDurationDecreasedEvent(retreating.Id),
+            new BattleUnitTurnSkippedEvent(retreating.Id),
+            new BattleUnitTurnEndingEvent(retreating.Id),
+            new BattleUnitTurnEndedEvent(retreating.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        BattleState expected = engine.State
+                .WithUnit(retreating with { StatusEffects = [new BattleRetreatStatusEffect(1)] })
+            with
+            {
+                CurrentUnitTurn = new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal),
+                TurnQueue = [],
+                WaitingQueue = [],
+                CurrentRound = BattleRound.Normal(2)
+            };
+
+        Assert.That(engine.State, Is.EqualTo(expected));
+
+        engine.CheckCommand(new BattleSkipCommand(enemy.Id), [
+            new BattleUnitTurnSkippedEvent(enemy.Id),
+            new BattleUnitTurnEndingEvent(enemy.Id),
+            new BattleUnitTurnEndedEvent(enemy.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Normal(3), [new BattleUnitTurn(retreating.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(retreating.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitRetreatedEvent(retreating.Id),
+            new BattleUnitTurnEndingEvent(retreating.Id),
+            new BattleRoundEndedEvent(),
+            new BattleEndedEvent(BattleSide.Defender),
+            new BattleUnitExperienceGainedEvent(enemy.Id, 1)
+        ]);
     }
 }
