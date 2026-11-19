@@ -303,6 +303,7 @@ internal sealed partial class WorldEventQueue
 
         public sealed record GlobalSpellCast(
             WorldState State,
+            WorldPlayerId CasterId,
             WorldSpellDefinitionId SpellId,
             WorldPosition Position) : Animated(State)
         {

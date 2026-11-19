@@ -806,11 +806,28 @@ internal sealed partial class WorldScreenViewModel :
         Game.OpenScreen(ManagementScreenViewModel.CreateForFortification(GameModel, Game, fortification.Id));
     }
 
-    [RelayCommand(CanExecute = nameof(CanDispatchCommand))]
+    [RelayCommand(CanExecute = nameof(CanOpenSpellbook))]
     private void OpenSpellbook()
     {
         ClearSelectedAction();
         Game.OpenScreen(ManagementScreenViewModel.CreateForSpellbook(GameModel, Game));
+    }
+
+    private bool CanOpenSpellbook()
+    {
+        if (IsBusy)
+        {
+            return eventQueue.PlayingEntry switch
+            {
+                Entry.SpellCast cast => cast.CasterId == ViewPlayerId,
+                Entry.GlobalSpellCast cast => cast.CasterId == ViewPlayerId,
+                _ => false
+            };
+        }
+        else
+        {
+            return true;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanDispatchCommand))]
@@ -1306,6 +1323,7 @@ internal sealed partial class WorldScreenViewModel :
         UpdateCursorType();
         UpdateEndTurnHighlighted();
         UpdateActionWheelVisible();
+        OpenSpellbookCommand.NotifyCanExecuteChanged();
 
         if (eventQueue.IsIdle)
         {

@@ -536,7 +536,7 @@ internal sealed partial class WorldEventQueue
 
             if (capital is not null)
             {
-                queue.Add(new Entry.GlobalSpellCast(step.NewState, ev.SpellId, capital.Entrance));
+                queue.Add(new Entry.GlobalSpellCast(step.NewState, ev.CasterId.Value, ev.SpellId, capital.Entrance));
             }
         }
 

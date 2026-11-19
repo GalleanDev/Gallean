@@ -1912,7 +1912,7 @@ public sealed class WorldEventQueueTests
         events.OnNext(new EngineStep<WorldState, WorldEvent>(state, state, cast));
 
         Entry entry = Assert.NotNull(queue.PlayNext());
-        Assert.That(entry, Is.EqualTo(new Entry.GlobalSpellCast(state, spellId, new WorldPosition(4, 4))));
+        Assert.That(entry, Is.EqualTo(new Entry.GlobalSpellCast(state, player.Id, spellId, new WorldPosition(4, 4))));
         Assert.That(entry.GetFocusPosition(player.Id), Is.EqualTo(new WorldPosition(4, 4)));
     }
 
