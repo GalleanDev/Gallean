@@ -36,21 +36,46 @@ internal static class UnitAttackStatsCalculator
             drainPercent += modifierDefinition.DrainPercent;
         }
 
-        return WithGlobalLimits(accuracy, damage, heal, drainPercent, globals);
+        return WithGlobalLimits(attack, accuracy, damage, heal, drainPercent, globals);
     }
 
     public static UnitAttackStats CalculateForItem(UnitAttackDefinition attack, GlobalVariables globals)
     {
-        return WithGlobalLimits(attack.Accuracy, attack.Damage, attack.Heal, drainPercent: 0, globals);
+        return WithGlobalLimits(attack, attack.Accuracy, attack.Damage, attack.Heal, drainPercent: 0, globals);
     }
 
     private static UnitAttackStats WithGlobalLimits(
+        UnitAttackDefinition attack,
         int accuracy,
         int damage,
         int heal,
         int drainPercent,
         GlobalVariables globals)
     {
-        return new UnitAttackStats(Math.Min(accuracy, globals.MaxAttackAccuracy), Math.Min(damage, globals.MaxAttackDamage), heal, drainPercent);
+        return new UnitAttackStats(
+            Math.Min(accuracy, globals.MaxAttackAccuracy),
+            Math.Min(damage, globals.MaxAttackDamage),
+            heal,
+            drainPercent,
+            GetIncreaseDamagePercent(attack, globals));
+    }
+
+    private static int GetIncreaseDamagePercent(UnitAttackDefinition attack, GlobalVariables globals)
+    {
+        if (attack.Type is UnitAttackType.IncreaseDamage)
+        {
+            return attack.Level switch
+            {
+                1 => globals.IncreaseDamagePercentLevel1,
+                2 => globals.IncreaseDamagePercentLevel2,
+                3 => globals.IncreaseDamagePercentLevel3,
+                4 => globals.IncreaseDamagePercentLevel4,
+                _ => throw new ArgumentOutOfRangeException(nameof(attack), attack, null)
+            };
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

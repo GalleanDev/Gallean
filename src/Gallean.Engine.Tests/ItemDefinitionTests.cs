@@ -37,8 +37,8 @@ public sealed class ItemDefinitionTests
 
         Assert.That(statsProvider.GetWorldUnitStats(bareLeader), Is.EqualTo(expectedBare));
         Assert.That(statsProvider.GetWorldUnitStats(equippedLeader), Is.EqualTo(expectedEquipped));
-        Assert.That(statsProvider.GetWorldAttackStats(bareLeader, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 50, Heal: 0, DrainPercent: 0)));
-        Assert.That(statsProvider.GetWorldAttackStats(equippedLeader, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 70, Heal: 0, DrainPercent: 0)));
+        Assert.That(statsProvider.GetWorldAttackStats(bareLeader, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 50, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(statsProvider.GetWorldAttackStats(equippedLeader, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 70, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
 
         BattleUnit battleLeader = new(
             new BattleUnitId(0),
@@ -58,7 +58,7 @@ public sealed class ItemDefinitionTests
         BattleState battleState = new BattleStateBuilder(definitions).Add(battleLeader).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
         Assert.That(statsProvider.GetBattleUnitStats(battleState, battleLeader.Id), Is.EqualTo(expectedEquipped));
-        Assert.That(statsProvider.GetBattleAttackStats(battleState, battleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 70, Heal: 0, DrainPercent: 0)));
+        Assert.That(statsProvider.GetBattleAttackStats(battleState, battleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 70, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -103,8 +103,8 @@ public sealed class ItemDefinitionTests
         BattleUnit equippedBattleLeader = bareBattleLeader with { Id = new BattleUnitId(1), Modifiers = [UnitModifier.Permanent(itemModifier)] };
         BattleState battleState = new BattleStateBuilder(definitions).Add(bareBattleLeader).Add(equippedBattleLeader).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
 
-        Assert.That(statsProvider.GetBattleAttackStats(battleState, bareBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0, 0)));
-        Assert.That(statsProvider.GetBattleAttackStats(battleState, equippedBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0, 25)));
+        Assert.That(statsProvider.GetBattleAttackStats(battleState, bareBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0, 0, 0)));
+        Assert.That(statsProvider.GetBattleAttackStats(battleState, equippedBattleLeader.Id, leaderDefinition.Attack), Is.EqualTo(new UnitAttackStats(80, 50, 0, 25, 0)));
     }
 
     [Test]

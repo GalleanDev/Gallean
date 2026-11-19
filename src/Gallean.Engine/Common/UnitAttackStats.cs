@@ -4,4 +4,5 @@ public sealed record UnitAttackStats(
     int Accuracy,
     int Damage,
     int Heal,
-    int DrainPercent);
+    int DrainPercent,
+    int IncreaseDamagePercent);

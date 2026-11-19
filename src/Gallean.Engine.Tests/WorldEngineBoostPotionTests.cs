@@ -111,7 +111,8 @@ public sealed class WorldEngineBoostPotionTests
             Accuracy: 100,
             Damage: 13,
             Heal: 0,
-            DrainPercent: 0)));
+            DrainPercent: 0,
+            IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -254,7 +255,8 @@ public sealed class WorldEngineBoostPotionTests
             Accuracy: 100,
             Damage: 11,
             Heal: 0,
-            DrainPercent: 0)));
+            DrainPercent: 0,
+            IncreaseDamagePercent: 0)));
     }
 
     [Test]

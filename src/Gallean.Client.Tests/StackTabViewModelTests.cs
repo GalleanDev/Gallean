@@ -4263,4 +4263,93 @@ public sealed class StackTabViewModelTests
         }));
         Assert.That(screen.StackGridTitle, Is.EqualTo("Calderic's party"));
     }
+
+    [Test]
+    public void InspectIncreaseDamageUnitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition boosterDefinition = TestHelpers.SimpleUnitDefinition("booster", maxHitpoints: 50, initiative: 50, damage: 0) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("booster"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.IncreaseDamage,
+                Source = UnitAttackSource.Mind,
+                Level = 2
+            }
+        };
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit booster = new(new WorldUnitId("booster"), boosterDefinition.Id, 50, 0, boosterDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(boosterDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (booster, GridPosition.BackBottom)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(boosterDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        UnitDetailsViewModel boosterDetails = Assert.NotNull(FindSlot(screen.UnitGrid, GridPosition.BackBottom).Details);
+
+        Assert.That(boosterDetails, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(boosterDefinition.Id)),
+            "name",
+            "description",
+            1,
+            50,
+            50,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            new UnitAttackViewModel("Increase damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceMind, "Mind", Theme.AttackSource.MindColor)),
+            new StatValueViewModel(TextSpans.FromText("+50%"), 0),
+            null,
+            null,
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+            ],
+            null,
+            null,
+            null,
+            [],
+            [],
+            Summons: null)));
+    }
 }

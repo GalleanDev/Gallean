@@ -275,6 +275,10 @@ internal sealed record UnitDetailsViewModel(
         {
             damage = new StatValueViewModel(TextSpans.FromText(attackDetails.BaseStats.Damage.ToString()), attackDetails.Stats.Damage - attackDetails.BaseStats.Damage);
         }
+        else if (attackDetails.BaseStats.IncreaseDamagePercent > 0)
+        {
+            damage = new StatValueViewModel(TextSpans.FromText($"+{attackDetails.BaseStats.IncreaseDamagePercent}%"), attackDetails.Stats.IncreaseDamagePercent - attackDetails.BaseStats.IncreaseDamagePercent);
+        }
         else if (secondaryAttackDetails is not null && secondaryAttackDetails.BaseStats.Heal > 0)
         {
             damage = new StatValueViewModel(TextSpans.FromText(secondaryAttackDetails.BaseStats.Heal.ToString()), secondaryAttackDetails.Stats.Heal - secondaryAttackDetails.BaseStats.Heal);

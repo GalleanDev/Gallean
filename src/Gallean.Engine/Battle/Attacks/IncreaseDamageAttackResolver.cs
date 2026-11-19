@@ -12,7 +12,7 @@ internal sealed class IncreaseDamageAttackResolver : BattleAbstractAttackResolve
         UnitAttackDefinition attack,
         UnitAttackStats attackStats)
     {
-        if (CanIncreaseDamage(context, target, GetPercent(context, attack)))
+        if (CanIncreaseDamage(context, target, attackStats.IncreaseDamagePercent))
         {
             return null;
         }
@@ -30,9 +30,9 @@ internal sealed class IncreaseDamageAttackResolver : BattleAbstractAttackResolve
         UnitAttackDefinition attack,
         UnitAttackStats attackStats)
     {
-        int percent = GetPercent(context, attack);
-
-        return [new BattleUnitEffectAppliedEvent(attackerId, targetId, new BattleIncreaseDamageStatusEffect(percent, attack.IsInfinite))];
+        BattleIncreaseDamageStatusEffect statusEffect = new(attackStats.IncreaseDamagePercent, attack.IsInfinite);
+        
+        return [new BattleUnitEffectAppliedEvent(attackerId, targetId, statusEffect)];
     }
 
     private static bool CanIncreaseDamage(IEngineContext context, BattleUnit target, int percent)
@@ -55,17 +55,5 @@ internal sealed class IncreaseDamageAttackResolver : BattleAbstractAttackResolve
     private static bool IsDamageIncreased(BattleUnit target, int percent)
     {
         return target.StatusEffects.OfType<BattleIncreaseDamageStatusEffect>().Any(effect => effect.Percent >= percent);
-    }
-
-    private static int GetPercent(IEngineContext context, UnitAttackDefinition attack)
-    {
-        return attack.Level switch
-        {
-            1 => context.Globals.IncreaseDamagePercentLevel1,
-            2 => context.Globals.IncreaseDamagePercentLevel2,
-            3 => context.Globals.IncreaseDamagePercentLevel3,
-            4 => context.Globals.IncreaseDamagePercentLevel4,
-            _ => throw new ArgumentOutOfRangeException(nameof(attack), attack, null)
-        };
     }
 }
