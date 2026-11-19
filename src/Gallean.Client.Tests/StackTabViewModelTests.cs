@@ -4676,6 +4676,7 @@ public sealed class StackTabViewModelTests
             null,
             [],
             [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityCriticalHit, "X160TGC253", "X160TGC261", "Innate", 1, [])],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 }
