@@ -696,7 +696,7 @@ public sealed class WorldEngineAiTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
-            Resources = new WorldResourceSet(300, 0, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(200, 0, 0, 0, 0, 0)
         };
 
         WorldCapital capital = TestHelpers.SimpleCapital(
@@ -759,7 +759,7 @@ public sealed class WorldEngineAiTests
             new WorldPosition(4, 4),
             expectedUnits,
             movementPoints: 6)));
-        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(200, 0, 0, 0, 0, 0)));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(100, 0, 0, 0, 0, 0)));
     }
 
     [Test]
@@ -793,7 +793,7 @@ public sealed class WorldEngineAiTests
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
-            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+            Resources = new WorldResourceSet(199, 0, 0, 0, 0, 0)
         };
 
         WorldCapital capital = TestHelpers.SimpleCapital(
@@ -840,7 +840,7 @@ public sealed class WorldEngineAiTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.Empty);
-        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(100, 0, 0, 0, 0, 0)));
+        Assert.That(session.World.State.Players[player.Id].Resources, Is.EqualTo(new WorldResourceSet(199, 0, 0, 0, 0, 0)));
     }
 
     [Test]

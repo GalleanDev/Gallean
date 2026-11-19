@@ -8,7 +8,8 @@ internal sealed partial class WorldAiPlanner
         {
             private const int AffordabilityFloor = MaxScore / 10;
             private const int RepetitionCostMultiplier = 3;
-            private const int ReserveMultiplier = 3;
+            private const int RodReserveMultiplier = 2;
+            private const int ThiefReserveMultiplier = 3;
 
             private static readonly UtilityScore.ResponseCurve AffordabilityCurve =
                 new UtilityScore.ResponseCurve.Polynomial(Slope: MaxScore - AffordabilityFloor, Exponent: 1, XShift: 0, YShift: AffordabilityFloor);
@@ -20,14 +21,12 @@ internal sealed partial class WorldAiPlanner
 
             public static UtilityScore.Consideration Reserve(UnitDefinition leader, WorldPlayer player)
             {
-                if (leader.LeaderCategory is UnitLeaderCategory.Thief or UnitLeaderCategory.Rod)
+                return leader.LeaderCategory switch
                 {
-                    return UtilityScore.Flag(player.Resources.Gold >= leader.PurchaseCost.Gold * ReserveMultiplier);
-                }
-                else
-                {
-                    return UtilityScore.Full;
-                }
+                    UnitLeaderCategory.Rod => UtilityScore.Flag(player.Resources.Gold >= leader.PurchaseCost.Gold * RodReserveMultiplier),
+                    UnitLeaderCategory.Thief => UtilityScore.Flag(player.Resources.Gold >= leader.PurchaseCost.Gold * ThiefReserveMultiplier),
+                    UnitLeaderCategory.Fighter or UnitLeaderCategory.Explorer or UnitLeaderCategory.Mage or null => UtilityScore.Full
+                };
             }
 
             public static UtilityScore.Consideration Repetition(UnitDefinition leader, WorldPlayer player, int ownedStacks)
