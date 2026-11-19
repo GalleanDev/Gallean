@@ -31,7 +31,7 @@ internal sealed class IncreaseDamageAttackResolver : BattleAbstractAttackResolve
         UnitAttackStats attackStats)
     {
         BattleIncreaseDamageStatusEffect statusEffect = new(attackStats.IncreaseDamagePercent, attack.IsInfinite);
-        
+
         return [new BattleUnitEffectAppliedEvent(attackerId, targetId, statusEffect)];
     }
 
