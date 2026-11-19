@@ -582,6 +582,7 @@ public sealed class MercenaryTabViewModelTests
             null,
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 }

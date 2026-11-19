@@ -27,7 +27,8 @@ internal sealed record UnitDetailsViewModel(
     StatRowViewModel? Leadership,
     IReadOnlyList<UnitStatusViewModel> Statuses,
     IReadOnlyList<UnitPermanentModifierViewModel> PermanentModifiers,
-    UnitSummonsViewModel? Summons)
+    UnitSummonsViewModel? Summons,
+    UnitWardGridViewModel? GrantedWards)
 {
     private sealed record AttackDetails(UnitAttackDefinition Attack, UnitAttackStats BaseStats, UnitAttackStats Stats);
 
@@ -83,7 +84,8 @@ internal sealed record UnitDetailsViewModel(
                Leadership == other.Leadership &&
                Statuses.SequenceEqual(other.Statuses) &&
                PermanentModifiers.SequenceEqual(other.PermanentModifiers) &&
-               Summons == other.Summons;
+               Summons == other.Summons &&
+               GrantedWards == other.GrantedWards;
     }
 
     public static UnitDetailsViewModel CreateFromBattle(
@@ -359,7 +361,22 @@ internal sealed record UnitDetailsViewModel(
             leadershipRow,
             statuses,
             permanentModifiers,
-            UnitSummonsViewModel.Create(attackDetails.Attack, definitions, texts));
+            UnitSummonsViewModel.Create(attackDetails.Attack, definitions, texts),
+            CreateWardGrid(GetGrantedWards(attackDetails.Attack, definitions), UnitWardCategory.Once));
+    }
+
+    private static ImmutableArray<UnitWard> GetGrantedWards(UnitAttackDefinition attack, IGameDefinitionProvider definitions)
+    {
+        ImmutableArray<UnitWard>.Builder wards = ImmutableArray.CreateBuilder<UnitWard>();
+
+        foreach (UnitModifierDefinitionId modifierId in attack.WardModifierIds)
+        {
+            UnitModifierDefinition modifier = definitions.GetUnitModifier(modifierId);
+
+            wards.AddRange(modifier.Wards);
+        }
+
+        return wards.ToImmutable();
     }
 
     private static UnitWardGridViewModel? CreateWardGrid(ImmutableArray<UnitWard> wards, UnitWardCategory category)
@@ -458,6 +475,7 @@ internal sealed record UnitDetailsViewModel(
         hash.AddSequence(Statuses);
         hash.AddSequence(PermanentModifiers);
         hash.Add(Summons);
+        hash.Add(GrantedWards);
 
         return hash.ToHashCode();
     }

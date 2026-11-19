@@ -807,7 +807,8 @@ public sealed class StackTabViewModelTests
                     new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                     [],
                     [],
-                    Summons: null))));
+                    Summons: null,
+                    GrantedWards: null))));
             Assert.That(screen.StackGridTitle, Is.EqualTo("name's party"));
             Assert.That(screen.StackLeadership, Is.EqualTo("2 / 3"));
         }
@@ -920,7 +921,8 @@ public sealed class StackTabViewModelTests
                     new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityBannerUse, "X000TGA003", "Permanent", null, 1, []),
                     new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "Permanent", null, 1, [])
                 ],
-                Summons: null))));
+                Summons: null,
+                GrantedWards: null))));
     }
 
     [Test]
@@ -1195,7 +1197,8 @@ public sealed class StackTabViewModelTests
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
                 [],
-                Summons: null)));
+                Summons: null,
+                GrantedWards: null)));
             Assert.That(soldierDetails, Is.EqualTo(new UnitDetailsViewModel(
                 new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(soldierDefinition.Id)),
                 "name",
@@ -1224,7 +1227,8 @@ public sealed class StackTabViewModelTests
                 null,
                 [],
                 [],
-                Summons: null)));
+                Summons: null,
+                GrantedWards: null)));
             Assert.That(details.Content, Is.EqualTo(leaderDetails));
             Assert.That(gameViewModel.TopScreen, Is.Null);
         }
@@ -2197,7 +2201,8 @@ public sealed class StackTabViewModelTests
             null,
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -2377,7 +2382,8 @@ public sealed class StackTabViewModelTests
                 new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.LearnAbility, "-10 accuracy", "Permanent", null, 1, []),
                 new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Initiative, "+10% initiative", "Permanent", null, 1, [])
             ],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -2456,7 +2462,8 @@ public sealed class StackTabViewModelTests
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
             [],
             [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.LearnAbility, "-10 accuracy", "Permanent", null, 1, [])],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -2530,7 +2537,8 @@ public sealed class StackTabViewModelTests
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -2660,7 +2668,8 @@ public sealed class StackTabViewModelTests
                 new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Movement, "pathfinding-name", "pathfinding-description", "+20% movement", 1, []),
                 new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+25 armor", null, null, 1, [new UnitPermanentModifierSourceViewModel("Permanent", "+10"), new UnitPermanentModifierSourceViewModel("From equipment", "+15")])
             ],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -3198,7 +3207,8 @@ public sealed class StackTabViewModelTests
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -3308,7 +3318,8 @@ public sealed class StackTabViewModelTests
                             new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
                             new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
                         ])
-                ]))));
+                ]),
+            GrantedWards: null)));
     }
 
     [Test]
@@ -3418,7 +3429,8 @@ public sealed class StackTabViewModelTests
                             new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
                             new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("60"), 0), null)
                         ])
-                ]))));
+                ]),
+            GrantedWards: null)));
     }
 
     [Test]
@@ -3546,7 +3558,8 @@ public sealed class StackTabViewModelTests
                             new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
                             new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("20"), 0), null)
                         ])
-                ]))));
+                ]),
+            GrantedWards: null)));
     }
 
     [Test]
@@ -3650,7 +3663,8 @@ public sealed class StackTabViewModelTests
                 null,
                 [],
                 [],
-                Summons: null)));
+                Summons: null,
+                GrantedWards: null)));
             Assert.That(squireSlot.IsPendingUpgrade, Is.True);
         }
     }
@@ -3836,7 +3850,8 @@ public sealed class StackTabViewModelTests
             null,
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -3991,7 +4006,8 @@ public sealed class StackTabViewModelTests
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
                 [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.MoveAbilityFlying, "Flight", "Allows the leader to Fly", "Innate", 1, [])],
-                Summons: null))));
+                Summons: null,
+                GrantedWards: null))));
     }
 
     [Test]
@@ -4478,7 +4494,103 @@ public sealed class StackTabViewModelTests
             null,
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
+    }
+
+    [Test]
+    public void InspectProtectorTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitModifierDefinition fireWard = TestHelpers.SimpleModifier("fireward") with { Wards = [new UnitAttackSourceWard(UnitAttackSource.Fire, UnitWardCategory.Once)] };
+        UnitModifierDefinition airWard = TestHelpers.SimpleModifier("airward") with { Wards = [new UnitAttackSourceWard(UnitAttackSource.Air, UnitWardCategory.Once)] };
+        UnitAttackDefinition attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("ward"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Adjacent) with
+        {
+            Type = UnitAttackType.GiveProtection,
+            Source = UnitAttackSource.Life,
+            WardModifierIds = [fireWard.Id, airWard.Id]
+        };
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 0) with { Attack = attack },
+            movementPoints: 20, leadership: 3);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(fireWard)
+            .WithDefinition(airWard)
+            .WithDefinition(leaderDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        UnitDetailsViewModel leaderDetails = Assert.NotNull(FindSlot(screen.UnitGrid, GridPosition.FrontBottom).Details);
+
+        Assert.That(leaderDetails, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
+            "name",
+            "description",
+            1,
+            100,
+            100,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            new UnitAttackViewModel("Grant protection", new UnitAttackSourceViewModel(IconMoniker.AttackSourceLife, "Life", Theme.AttackSource.LifeColor)),
+            new StatValueViewModel(TextSpans.FromText("—"), 0),
+            null,
+            null,
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Melee)", TextStyle.Italic)]), 0), null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+            ],
+            null,
+            null,
+            new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
+            [],
+            [],
+            Summons: null,
+            GrantedWards: new UnitWardGridViewModel(
+            [
+                new UnitWardItemViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor, false),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceMind, "Mind", Theme.AttackSource.MindColor, false),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceLife, "Life", Theme.AttackSource.LifeColor, false),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceDeath, "Death", Theme.AttackSource.DeathColor, false),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceFire, "Fire", Theme.AttackSource.FireColor, true),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceWater, "Water", Theme.AttackSource.WaterColor, false),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceEarth, "Earth", Theme.AttackSource.EarthColor, false),
+                new UnitWardItemViewModel(IconMoniker.AttackSourceAir, "Air", Theme.AttackSource.AirColor, true),
+                new UnitWardItemViewModel(IconMoniker.Poison, "Poison", Theme.Battle.StatusEffect.PoisonColor, false),
+                new UnitWardItemViewModel(IconMoniker.ShatterArmor, "Shatter", Theme.Battle.StatusEffect.ShatterArmorColor, false)
+            ]))));
     }
 
     [Test]

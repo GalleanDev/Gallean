@@ -681,7 +681,8 @@ public sealed class BattleScreenViewModelTests
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Poison))
             ],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
 
         viewModel.HideUnitDetails();
 
@@ -786,7 +787,8 @@ public sealed class BattleScreenViewModelTests
                 new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.IncreaseDamage))
             ],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -901,7 +903,8 @@ public sealed class BattleScreenViewModelTests
             null,
             [],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -4026,7 +4029,8 @@ public sealed class BattleScreenViewModelTests
                 ])
             ],
             [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "From equipment", null, 1, [])],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]
@@ -4646,7 +4650,8 @@ public sealed class BattleScreenViewModelTests
                 new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-10% accuracy", null, UnitModifierType.Weaken)])
             ],
             [],
-            Summons: null)));
+            Summons: null,
+            GrantedWards: null)));
     }
 
     [Test]

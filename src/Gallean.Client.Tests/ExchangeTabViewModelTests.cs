@@ -447,7 +447,8 @@ public sealed class ExchangeTabViewModelTests
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
                 [],
-                Summons: null))));
+                Summons: null,
+                GrantedWards: null))));
         Assert.That(screen.OtherLeader, Is.EqualTo(new StackLeaderViewModel(
             new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
             "name",
@@ -485,7 +486,8 @@ public sealed class ExchangeTabViewModelTests
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
                 [],
-                Summons: null))));
+                Summons: null,
+                GrantedWards: null))));
         Assert.That(FindSlot(screen.StackGrid, GridPosition.FrontBottom).HasUnit, Is.True);
         Assert.That(FindSlot(screen.StackGrid, GridPosition.FrontCenter).HasUnit, Is.True);
         Assert.That(FindSlot(screen.OtherStackGrid, GridPosition.FrontBottom).HasUnit, Is.True);

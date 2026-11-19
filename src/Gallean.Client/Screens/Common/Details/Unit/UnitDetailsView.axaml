@@ -370,6 +370,21 @@
         <ItemsControl Classes.compact="{Binding Summons.IsCompact}" ItemsSource="{Binding Summons.Items}" />
       </StackPanel>
     </local:ModalFrameDecorator>
+
+    <local:ModalFrameDecorator Width="400"
+                               VerticalAlignment="Top"
+                               IsVisible="{Binding GrantedWards, Converter={x:Static ObjectConverters.IsNotNull}}">
+      <StackPanel Margin="22,20,22,22" Spacing="14">
+        <local:OutlinedTextBlock Text="{local:Text 'Grants wards'}" Classes="label details-category" />
+        <ItemsControl ItemsSource="{Binding GrantedWards.Items}" ItemTemplate="{StaticResource UnitWardItemTemplate}" ClipToBounds="False">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Columns="5" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </StackPanel>
+    </local:ModalFrameDecorator>
   </StackPanel>
 
 </UserControl>
