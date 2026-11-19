@@ -287,7 +287,7 @@ internal sealed partial class WorldScreenViewModel :
             {
                 WorldPathSelection? path = BuildPathSelection(selected, ResolveClickTarget(tile));
 
-                if (path is null || path.Encounter is null)
+                if (path is null)
                 {
                     InspectStack();
 
