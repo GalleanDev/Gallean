@@ -8,6 +8,10 @@ internal sealed class MinimapRenderer
 {
     private const double CapitalHalfWidth = 8.0;
     private const double CityHalfWidth = 5.5;
+    private const double RuinHalfWidth = 3.25;
+    private const double SiteHalfWidth = 2.5;
+    private const double ResourceHalfWidth = 2.5;
+    private const double ResourceHalfHeight = 3.75;
     private const double StackRadius = 2.5;
     private const double OutlineWidth = 1.5;
     private const double InsetWidth = 1.0;
@@ -53,6 +57,18 @@ internal sealed class MinimapRenderer
                     DrawFortification(canvas, center, CityHalfWidth, fill, outline, null);
                     break;
 
+                case MinimapState.MarkerType.Ruin:
+                    DrawRuin(canvas, center, fill, outline);
+                    break;
+
+                case MinimapState.MarkerType.Site:
+                    DrawSite(canvas, center, fill, outline);
+                    break;
+
+                case MinimapState.MarkerType.Resource:
+                    DrawResource(canvas, center, fill, outline);
+                    break;
+
                 case MinimapState.MarkerType.Stack:
                     DrawStack(canvas, center, fill, outline);
                     break;
@@ -68,16 +84,41 @@ internal sealed class MinimapRenderer
         SKPaint outline,
         SKPaint? inset)
     {
-        using SKPath diamond = MakeDiamond(center, halfWidth);
+        using SKPath diamond = MakeRhombus(center, halfWidth, halfWidth * 0.75);
 
         canvas.DrawPath(diamond, outline);
         canvas.DrawPath(diamond, fill);
 
         if (inset is not null)
         {
-            using SKPath inner = MakeDiamond(center, halfWidth - OutlineWidth - InsetWidth / 2.0);
+            double innerHalfWidth = halfWidth - OutlineWidth - InsetWidth / 2.0;
+            using SKPath inner = MakeRhombus(center, innerHalfWidth, innerHalfWidth * 0.75);
             canvas.DrawPath(inner, inset);
         }
+    }
+
+    private static void DrawRuin(SKCanvas canvas, Point center, SKPaint fill, SKPaint outline)
+    {
+        using SKPath triangle = MakeTriangle(center, RuinHalfWidth);
+
+        canvas.DrawPath(triangle, outline);
+        canvas.DrawPath(triangle, fill);
+    }
+
+    private static void DrawSite(SKCanvas canvas, Point center, SKPaint fill, SKPaint outline)
+    {
+        using SKPath square = MakeSquare(center, SiteHalfWidth);
+
+        canvas.DrawPath(square, outline);
+        canvas.DrawPath(square, fill);
+    }
+
+    private static void DrawResource(SKCanvas canvas, Point center, SKPaint fill, SKPaint outline)
+    {
+        using SKPath gem = MakeRhombus(center, ResourceHalfWidth, ResourceHalfHeight);
+
+        canvas.DrawPath(gem, outline);
+        canvas.DrawPath(gem, fill);
     }
 
     private static void DrawStack(SKCanvas canvas, Point center, SKPaint fill, SKPaint outline)
@@ -86,18 +127,50 @@ internal sealed class MinimapRenderer
         canvas.DrawCircle((float)center.X, (float)center.Y, (float)StackRadius, fill);
     }
 
-    private static SKPath MakeDiamond(Point center, double halfWidth)
+    private static SKPath MakeRhombus(Point center, double halfWidth, double halfHeight)
     {
         float x = (float)center.X;
         float y = (float)center.Y;
         float width = (float)halfWidth;
-        float height = (float)(halfWidth * 0.75);
+        float height = (float)halfHeight;
         using SKPathBuilder builder = new();
 
         builder.MoveTo(x, y - height);
         builder.LineTo(x + width, y);
         builder.LineTo(x, y + height);
         builder.LineTo(x - width, y);
+        builder.Close();
+
+        return builder.Detach();
+    }
+
+    private static SKPath MakeSquare(Point center, double halfWidth)
+    {
+        float x = (float)center.X;
+        float y = (float)center.Y;
+        float width = (float)halfWidth;
+        using SKPathBuilder builder = new();
+
+        builder.MoveTo(x - width, y - width);
+        builder.LineTo(x + width, y - width);
+        builder.LineTo(x + width, y + width);
+        builder.LineTo(x - width, y + width);
+        builder.Close();
+
+        return builder.Detach();
+    }
+
+    private static SKPath MakeTriangle(Point center, double halfWidth)
+    {
+        float x = (float)center.X;
+        float y = (float)center.Y;
+        float width = (float)halfWidth;
+        float height = (float)(halfWidth * 0.85);
+        using SKPathBuilder builder = new();
+
+        builder.MoveTo(x, y - height);
+        builder.LineTo(x + width, y + height);
+        builder.LineTo(x - width, y + height);
         builder.Close();
 
         return builder.Detach();

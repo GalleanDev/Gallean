@@ -13,6 +13,9 @@ internal sealed record MinimapState(
     {
         Capital,
         City,
+        Ruin,
+        Site,
+        Resource,
         Stack
     }
 

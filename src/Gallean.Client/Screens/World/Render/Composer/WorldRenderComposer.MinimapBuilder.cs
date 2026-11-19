@@ -11,6 +11,8 @@ internal sealed partial class WorldRenderComposer
         public static MinimapState Build(
             WorldMap map,
             ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications,
+            ImmutableSortedDictionary<WorldSiteId, WorldSite> sites,
+            ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode> resourceNodes,
             ImmutableSortedDictionary<WorldStackId, WorldStack> stacks,
             PlayerRaces playerRaces,
             WorldVisibility visibility,
@@ -35,15 +37,61 @@ internal sealed partial class WorldRenderComposer
                 }
             }
 
-            return new MinimapState(map.Width, map.Height, hiddenPositions, [.. EnumerateMarkers(fortifications, stacks, playerRaces, visibility, viewPlayerId)]);
+            List<MinimapState.Marker> markers =
+            [
+                .. EnumerateSiteMarkers(sites, visibility),
+                .. EnumerateRuinMarkers(fortifications, visibility),
+                .. EnumerateResourceMarkers(resourceNodes, visibility),
+                .. EnumerateCityMarkers(fortifications, playerRaces, visibility),
+                .. EnumerateStackMarkers(stacks, playerRaces, visibility, viewPlayerId)
+            ];
+
+            return new MinimapState(map.Width, map.Height, hiddenPositions, markers);
         }
 
-        private static IEnumerable<MinimapState.Marker> EnumerateMarkers(
+        private static IEnumerable<MinimapState.Marker> EnumerateSiteMarkers(
+            ImmutableSortedDictionary<WorldSiteId, WorldSite> sites,
+            WorldVisibility visibility)
+        {
+            foreach (WorldSite site in sites.Values)
+            {
+                if (visibility.IsRevealed(site.Entrance))
+                {
+                    yield return new MinimapState.Marker(site.Entrance, Theme.Minimap.SiteColor, MinimapState.MarkerType.Site);
+                }
+            }
+        }
+
+        private static IEnumerable<MinimapState.Marker> EnumerateRuinMarkers(
             ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications,
-            ImmutableSortedDictionary<WorldStackId, WorldStack> stacks,
+            WorldVisibility visibility)
+        {
+            foreach (WorldFortification fortification in fortifications.Values)
+            {
+                if (fortification is WorldRuin ruin && visibility.IsRevealed(ruin.Entrance))
+                {
+                    yield return new MinimapState.Marker(ruin.Entrance, GetRuinColor(ruin), MinimapState.MarkerType.Ruin);
+                }
+            }
+        }
+
+        private static IEnumerable<MinimapState.Marker> EnumerateResourceMarkers(
+            ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode> resourceNodes,
+            WorldVisibility visibility)
+        {
+            foreach (WorldResourceNode node in resourceNodes.Values)
+            {
+                if (visibility.IsRevealed(node.Position))
+                {
+                    yield return new MinimapState.Marker(node.Position, GetResourceColor(node.ResourceType), MinimapState.MarkerType.Resource);
+                }
+            }
+        }
+
+        private static IEnumerable<MinimapState.Marker> EnumerateCityMarkers(
+            ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications,
             PlayerRaces playerRaces,
-            WorldVisibility visibility,
-            WorldPlayerId viewPlayerId)
+            WorldVisibility visibility)
         {
             foreach (WorldFortification fortification in fortifications.Values)
             {
@@ -63,7 +111,14 @@ internal sealed partial class WorldRenderComposer
                     }
                 }
             }
+        }
 
+        private static IEnumerable<MinimapState.Marker> EnumerateStackMarkers(
+            ImmutableSortedDictionary<WorldStackId, WorldStack> stacks,
+            PlayerRaces playerRaces,
+            WorldVisibility visibility,
+            WorldPlayerId viewPlayerId)
+        {
             foreach (WorldStack stack in stacks.Values)
             {
                 if (visibility.IsStackVisible(stack, viewPlayerId))
@@ -71,6 +126,31 @@ internal sealed partial class WorldRenderComposer
                     yield return new MinimapState.Marker(stack.Position, GetOwnerColor(playerRaces[stack.OwnerId]), MinimapState.MarkerType.Stack);
                 }
             }
+        }
+
+        private static Color GetRuinColor(WorldRuin ruin)
+        {
+            if (ruin.LooterId is null)
+            {
+                return Theme.Minimap.RuinColor;
+            }
+            else
+            {
+                return Theme.Minimap.LootedRuinColor;
+            }
+        }
+
+        private static Color GetResourceColor(WorldResourceType type)
+        {
+            return type switch
+            {
+                WorldResourceType.Gold => Theme.Minimap.GoldColor,
+                WorldResourceType.DeathMana => Theme.Minimap.DeathManaColor,
+                WorldResourceType.RuneMana => Theme.Minimap.RuneManaColor,
+                WorldResourceType.LifeMana => Theme.Minimap.LifeManaColor,
+                WorldResourceType.InfernalMana => Theme.Minimap.InfernalManaColor,
+                WorldResourceType.GroveMana => Theme.Minimap.GroveManaColor
+            };
         }
 
         private static Color GetOwnerColor(WorldRace race)

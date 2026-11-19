@@ -1084,6 +1084,15 @@
   <SolidColorBrush x:Key="MinimapViewportBrush" Color="{x:Static local:Theme+Minimap.ViewportColor}" />
   <SolidColorBrush x:Key="MinimapMarkerOutlineBrush" Color="{x:Static local:Theme+Minimap.MarkerOutlineColor}" />
   <SolidColorBrush x:Key="MinimapCapitalInsetBrush" Color="{x:Static local:Theme+Minimap.CapitalInsetColor}" />
+  <SolidColorBrush x:Key="MinimapSiteBrush" Color="{x:Static local:Theme+Minimap.SiteColor}" />
+  <SolidColorBrush x:Key="MinimapRuinBrush" Color="{x:Static local:Theme+Minimap.RuinColor}" />
+  <SolidColorBrush x:Key="MinimapLootedRuinBrush" Color="{x:Static local:Theme+Minimap.LootedRuinColor}" />
+  <SolidColorBrush x:Key="MinimapGoldBrush" Color="{x:Static local:Theme+Minimap.GoldColor}" />
+  <SolidColorBrush x:Key="MinimapDeathManaBrush" Color="{x:Static local:Theme+Minimap.DeathManaColor}" />
+  <SolidColorBrush x:Key="MinimapRuneManaBrush" Color="{x:Static local:Theme+Minimap.RuneManaColor}" />
+  <SolidColorBrush x:Key="MinimapLifeManaBrush" Color="{x:Static local:Theme+Minimap.LifeManaColor}" />
+  <SolidColorBrush x:Key="MinimapInfernalManaBrush" Color="{x:Static local:Theme+Minimap.InfernalManaColor}" />
+  <SolidColorBrush x:Key="MinimapGroveManaBrush" Color="{x:Static local:Theme+Minimap.GroveManaColor}" />
   <SolidColorBrush x:Key="MinimapPortraitHoverOverlayBrush" Color="{x:Static local:Theme+Minimap.PortraitHoverOverlayColor}" />
   <SolidColorBrush x:Key="MinimapDirectionTextBrush" Color="{x:Static local:Theme+Minimap.DirectionTextColor}" />
 </ResourceDictionary>

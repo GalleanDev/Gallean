@@ -930,6 +930,15 @@ internal static class Theme
         public static Color ViewportColor { get; } = Color.FromRgb(243, 217, 147);
         public static Color MarkerOutlineColor { get; } = Color.FromArgb(230, 12, 10, 8);
         public static Color CapitalInsetColor { get; } = Color.FromRgb(240, 214, 150);
+        public static Color SiteColor { get; } = Color.FromRgb(238, 226, 190);
+        public static Color RuinColor { get; } = Color.FromRgb(204, 188, 160);
+        public static Color LootedRuinColor { get; } = Color.FromRgb(112, 102, 90);
+        public static Color GoldColor { get; } = Color.FromRgb(255, 206, 52);
+        public static Color DeathManaColor { get; } = Color.FromRgb(196, 186, 236);
+        public static Color RuneManaColor { get; } = Color.FromRgb(240, 242, 250);
+        public static Color LifeManaColor { get; } = Color.FromRgb(112, 228, 244);
+        public static Color InfernalManaColor { get; } = Color.FromRgb(255, 76, 28);
+        public static Color GroveManaColor { get; } = Color.FromRgb(96, 210, 64);
         public static Color PortraitHoverOverlayColor { get; } = Color.FromArgb(48, 255, 236, 200);
         public static Color DirectionTextColor { get; } = Color.FromRgb(34, 20, 8);
     }

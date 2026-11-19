@@ -9,6 +9,8 @@ internal sealed partial class WorldRenderComposer
         public readonly record struct Input(
             WorldMap Map,
             ImmutableSortedDictionary<WorldFortificationId, WorldFortification> Fortifications,
+            ImmutableSortedDictionary<WorldSiteId, WorldSite> Sites,
+            ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode> ResourceNodes,
             ImmutableSortedDictionary<WorldStackId, WorldStack> Stacks,
             PlayerRaces PlayerRaces,
             WorldVisibility Visibility,
@@ -20,6 +22,8 @@ internal sealed partial class WorldRenderComposer
             return MinimapBuilder.Build(
                 input.Map,
                 input.Fortifications,
+                input.Sites,
+                input.ResourceNodes,
                 input.Stacks,
                 input.PlayerRaces,
                 input.Visibility,

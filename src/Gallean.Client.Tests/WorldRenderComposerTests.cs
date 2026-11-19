@@ -4836,4 +4836,100 @@ public sealed class WorldRenderComposerTests
             new PathStep(new WorldPosition(4, 1), Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, "8")
         ])));
     }
+
+    [Test]
+    public void MinimapMapObjectsTest()
+    {
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().Build();
+
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
+        {
+            FogOfWar = TestHelpers.BuildFogOfWar([
+                "........",
+                "........",
+                "........",
+                "........",
+                "........",
+                "........",
+                "........",
+                "......?."
+            ])
+        };
+
+        WorldMageSite site = new(
+            Id: new WorldSiteId("s1"),
+            Footprint: new WorldFootprint(new WorldPosition(0, 0), 3, 3),
+            Variant: new WorldObjectVariant(2),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            Spells: [],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        WorldRuin ruin = new(
+            Id: new WorldFortificationId("ru1"),
+            NameTextId: new ScenarioTextId("Ruin"),
+            Footprint: new WorldFootprint(new WorldPosition(5, 0), 3, 3),
+            Variant: new WorldObjectVariant(4),
+            Garrison: UnitGrid<WorldUnit>.Empty,
+            Resources: WorldResourceSet.Empty,
+            Item: null,
+            LooterId: null,
+            AiPriority: 3);
+
+        WorldRuin lootedRuin = new(
+            Id: new WorldFortificationId("ru2"),
+            NameTextId: new ScenarioTextId("Ruin"),
+            Footprint: new WorldFootprint(new WorldPosition(0, 5), 3, 3),
+            Variant: new WorldObjectVariant(4),
+            Garrison: UnitGrid<WorldUnit>.Empty,
+            Resources: WorldResourceSet.Empty,
+            Item: null,
+            LooterId: human.Id,
+            AiPriority: 3);
+
+        WorldResourceNode goldNode = new(
+            Id: new WorldResourceNodeId("r1"),
+            Position: new WorldPosition(4, 4),
+            ResourceType: WorldResourceType.Gold,
+            AiPriority: 3);
+
+        WorldResourceNode infernalNode = new(
+            Id: new WorldResourceNodeId("r2"),
+            Position: new WorldPosition(5, 5),
+            ResourceType: WorldResourceType.InfernalMana,
+            AiPriority: 3);
+
+        WorldResourceNode foggedNode = new(
+            Id: new WorldResourceNodeId("r3"),
+            Position: new WorldPosition(6, 7),
+            ResourceType: WorldResourceType.GroveMana,
+            AiPriority: 3);
+
+        WorldState state = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithSite(site)
+            .WithRuin(ruin)
+            .WithRuin(lootedRuin)
+            .WithResourceNode(goldNode)
+            .WithResourceNode(infernalNode)
+            .WithResourceNode(foggedNode)
+            .Build()
+            .State;
+
+        WorldRenderState renderState = Compose(state, definitions, fogEnabled: true, cursor: WorldCursor.Empty);
+
+        Assert.That(renderState.Minimap.Markers, Is.EqualTo(new MinimapState.Marker[]
+        {
+            new(new WorldPosition(2, 2), Theme.Minimap.SiteColor, MinimapState.MarkerType.Site),
+            new(new WorldPosition(7, 2), Theme.Minimap.RuinColor, MinimapState.MarkerType.Ruin),
+            new(new WorldPosition(2, 7), Theme.Minimap.LootedRuinColor, MinimapState.MarkerType.Ruin),
+            new(new WorldPosition(4, 4), Theme.Minimap.GoldColor, MinimapState.MarkerType.Resource),
+            new(new WorldPosition(5, 5), Theme.Minimap.InfernalManaColor, MinimapState.MarkerType.Resource)
+        }));
+    }
 }

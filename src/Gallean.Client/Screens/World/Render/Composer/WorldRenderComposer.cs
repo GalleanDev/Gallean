@@ -64,7 +64,7 @@ internal sealed partial class WorldRenderComposer(
         IReadOnlyList<MapObject> mapObjects = mapObjectsPart.Resolve(new MapObjects.Input(landmarks, mountains, sites, mapFeatures, resourceNodes, rods, tombs, bags, fortifications));
         IReadOnlyList<ObjectiveMarker> objectiveMarkers = objectivesPart.Resolve(new Objectives.Input(objectives, visibility, animatedStackId));
         IReadOnlyList<AmbientSound> ambientSounds = ambientSoundsPart.Resolve(new AmbientSounds.Input(state.Fortifications, state.Landmarks, state.Sites, state.ResourceNodes, playerRaces, visibility));
-        MinimapState minimap = minimapPart.Resolve(new Minimap.Input(state.Map, state.Fortifications, state.Stacks, playerRaces, visibility, request.ViewPlayerId, request.FogEnabled));
+        MinimapState minimap = minimapPart.Resolve(new Minimap.Input(state.Map, state.Fortifications, state.Sites, state.ResourceNodes, state.Stacks, playerRaces, visibility, request.ViewPlayerId, request.FogEnabled));
 
         ReachOverlay? reach = null;
         List<Highlight> highlights = [];
