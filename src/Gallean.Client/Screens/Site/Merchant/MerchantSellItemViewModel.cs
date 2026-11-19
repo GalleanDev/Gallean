@@ -10,6 +10,7 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
         ItemDefinitionId itemId,
         int? charges,
         int count,
+        InventoryItemType type,
         AssetSpriteKey.ItemIcon iconKey,
         string name,
         string description,
@@ -20,6 +21,7 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
         ItemId = itemId;
         Charges = charges;
         Count = count;
+        Type = type;
         IconKey = iconKey;
         Name = name;
         Description = description;
@@ -32,6 +34,7 @@ internal sealed partial class MerchantSellItemViewModel : ObservableObject, IDra
     public ItemDefinitionId ItemId { get; }
     public int? Charges { get; }
     public int Count { get; }
+    public InventoryItemType Type { get; }
     public AssetSpriteKey.ItemIcon IconKey { get; }
     public string Name { get; }
     public string Description { get; }

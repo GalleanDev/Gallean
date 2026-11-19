@@ -483,6 +483,8 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
                 string name = ItemFormatter.FormatName(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId, worldItem.Charges);
                 string description = ItemFormatter.FormatDescription(GameModel.Definitions, GameModel.Texts, worldItem.DefinitionId);
                 AssetSpriteKey.ItemIcon icon = ItemIconResolver.Resolve(GameModel.Definitions, worldItem.DefinitionId);
+                ItemDefinition definition = GameModel.Definitions.GetItem(worldItem.DefinitionId);
+                InventoryItemType itemType = InventoryItemTypeResolver.Resolve(definition.Category);
 
                 ItemDetailsViewModel details = ItemDetailsViewModel.Create(
                     worldItem.DefinitionId,
@@ -496,6 +498,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
                     reference.ItemId,
                     reference.Charges,
                     group.Items.Length,
+                    itemType,
                     icon,
                     name,
                     description,

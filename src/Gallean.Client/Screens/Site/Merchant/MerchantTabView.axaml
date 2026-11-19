@@ -51,7 +51,12 @@
     </DataTemplate>
 
     <DataTemplate x:Key="MerchantSellItemTemplate" x:DataType="local:MerchantSellItemViewModel">
-      <Button Classes="socket inventory-slot" Classes.selected="{Binding IsSelected}" Command="{Binding SelectCommand}">
+      <Button Classes="socket inventory-slot"
+              Classes.selected="{Binding IsSelected}"
+              Classes.equipment="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Equipment}}"
+              Classes.valuable="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Valuable}}"
+              Classes.special="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Special}}"
+              Command="{Binding SelectCommand}">
         <Panel>
           <local:SpriteVisual SpriteKey="{Binding IconKey}" Stretch="Uniform">
             <ToolTip.Tip>

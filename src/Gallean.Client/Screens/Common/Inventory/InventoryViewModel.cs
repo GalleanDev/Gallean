@@ -73,7 +73,7 @@ internal sealed partial class InventoryViewModel(GameModel gameModel, IInventory
                 slotIndex,
                 item.Id,
                 slot.Items.Length,
-                ResolveType(definition.Category),
+                InventoryItemTypeResolver.Resolve(definition.Category),
                 ItemIconResolver.Resolve(gameModel.Definitions, item.DefinitionId),
                 ItemFormatter.FormatName(gameModel.Definitions, gameModel.Texts, item.DefinitionId, item.Charges),
                 ItemFormatter.FormatDescription(gameModel.Definitions, gameModel.Texts, item.DefinitionId),
@@ -111,27 +111,5 @@ internal sealed partial class InventoryViewModel(GameModel gameModel, IInventory
         slots = [];
         IsHighlighted = false;
         Items.Clear();
-    }
-
-    private static InventoryItemType ResolveType(ItemCategory category)
-    {
-        return category switch
-        {
-            ItemCategory.Armor => InventoryItemType.Equipment,
-            ItemCategory.Jewel => InventoryItemType.Equipment,
-            ItemCategory.Weapon => InventoryItemType.Equipment,
-            ItemCategory.Banner => InventoryItemType.Equipment,
-            ItemCategory.PotionTemporaryBoost => InventoryItemType.Consumable,
-            ItemCategory.PotionHeal => InventoryItemType.Consumable,
-            ItemCategory.PotionRevive => InventoryItemType.Consumable,
-            ItemCategory.PotionPermanentBoost => InventoryItemType.Consumable,
-            ItemCategory.Scroll => InventoryItemType.Consumable,
-            ItemCategory.Wand => InventoryItemType.Equipment,
-            ItemCategory.Valuable => InventoryItemType.Valuable,
-            ItemCategory.Orb => InventoryItemType.Consumable,
-            ItemCategory.Talisman => InventoryItemType.Equipment,
-            ItemCategory.TravelItem => InventoryItemType.Equipment,
-            ItemCategory.Special => InventoryItemType.Special
-        };
     }
 }
