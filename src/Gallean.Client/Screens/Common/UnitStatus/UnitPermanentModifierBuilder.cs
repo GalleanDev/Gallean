@@ -25,6 +25,7 @@ internal static class UnitPermanentModifierBuilder
     public static IReadOnlyList<UnitPermanentModifierViewModel> Build(
         LeaderAbility baseAbilities,
         UnitMoveAbility baseMoveAbility,
+        UnitAttackDefinition attack,
         ImmutableArray<UnitModifier> modifiers,
         ImmutableArray<LeaderUpgradeDefinition> leaderUpgrades,
         IGameDefinitionProvider definitions,
@@ -52,13 +53,25 @@ internal static class UnitPermanentModifierBuilder
 
         List<UnitPermanentModifierViewModel> result = [];
 
-        result.AddRange(BuildAbilities(baseAbilities, texts));
+        result.AddRange(BuildAbilities(baseAbilities | GetAttackAbilities(attack), texts));
         result.AddRange(BuildMoveAbility(baseMoveAbility, texts));
         result.AddRange(BuildLeaderUpgrades(upgradeModifiers, definitions, texts));
         result.AddRange(BuildEffects(otherModifiers, definitions, texts));
         result.AddRange(BuildStats(otherModifiers, definitions, texts));
 
         return result;
+    }
+
+    private static LeaderAbility GetAttackAbilities(UnitAttackDefinition attack)
+    {
+        if (attack.HasCriticalHit)
+        {
+            return LeaderAbility.CriticalHit;
+        }
+        else
+        {
+            return LeaderAbility.None;
+        }
     }
 
     private static IEnumerable<UnitPermanentModifierViewModel> BuildAbilities(LeaderAbility abilities, IGameTextProvider texts)

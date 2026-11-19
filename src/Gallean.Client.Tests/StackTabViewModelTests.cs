@@ -4480,4 +4480,90 @@ public sealed class StackTabViewModelTests
             [],
             Summons: null)));
     }
+
+    [Test]
+    public void InspectCriticalHitUnitTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition savageDefinition = TestHelpers.SimpleUnitDefinition("savage", maxHitpoints: 210, initiative: 35, damage: 100) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("savage"), initiative: 35, damage: 100, accuracy: 80, reach: UnitAttackReach.Adjacent) with
+            {
+                HasCriticalHit = true
+            }
+        };
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit savage = new(new WorldUnitId("savage"), savageDefinition.Id, 210, 0, savageDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(savageDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (savage, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(savageDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+        UnitDetailsViewModel savageDetails = Assert.NotNull(FindSlot(screen.UnitGrid, GridPosition.FrontCenter).Details);
+
+        Assert.That(savageDetails, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(savageDefinition.Id)),
+            "name",
+            "description",
+            1,
+            210,
+            210,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor)),
+            new StatValueViewModel(TextSpans.FromText("100"), 0),
+            null,
+            null,
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Melee)", TextStyle.Italic)]), 0), null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("80%"), 0), null),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("35"), 0), null)
+            ],
+            null,
+            null,
+            null,
+            [],
+            [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.AbilityCriticalHit, "X160TGC253", "X160TGC261", "Innate", 1, [])],
+            Summons: null)));
+    }
 }

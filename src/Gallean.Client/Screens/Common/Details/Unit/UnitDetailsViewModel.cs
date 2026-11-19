@@ -127,6 +127,7 @@ internal sealed record UnitDetailsViewModel(
         IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierBuilder.Build(
             stats.GetWorldUnitAbilities(baseUnit),
             definition.MoveAbility,
+            definition.Attack,
             unit.Modifiers,
             GetLeaderUpgrades(owner, definitions),
             definitions,
@@ -190,6 +191,7 @@ internal sealed record UnitDetailsViewModel(
         IReadOnlyList<UnitPermanentModifierViewModel> permanentModifiers = UnitPermanentModifierBuilder.Build(
             stats.GetWorldUnitAbilities(baseUnit),
             definition.MoveAbility,
+            definition.Attack,
             unit.Modifiers,
             GetLeaderUpgrades(owner, definitions),
             definitions,
