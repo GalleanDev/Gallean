@@ -631,10 +631,32 @@ internal sealed partial class WorldRenderer
             double right = left + sprite.Metadata.Width;
             double bottom = top + sprite.Metadata.Height;
 
-            if (visible.Intersects(new Rect(new Point(left, top), new Point(right, bottom))))
+            Rect bounds;
+
+            if (cloud.LeftToRight)
+            {
+                bounds = new Rect(new Point(left, top), new Point(right, bottom));
+            }
+            else
+            {
+                bounds = new Rect(new Point((2 * centerX) - right, top), new Point((2 * centerX) - left, bottom));
+            }
+
+            if (visible.Intersects(bounds))
             {
                 SKRect destination = new((float)left, (float)top, (float)right, (float)bottom);
-                canvas.DrawImage(sprite.Image, destination, RenderSamplingOptions.Linear, paint);
+
+                if (cloud.LeftToRight)
+                {
+                    canvas.DrawImage(sprite.Image, destination, RenderSamplingOptions.Linear, paint);
+                }
+                else
+                {
+                    canvas.Save();
+                    canvas.Scale(-1, 1, (float)centerX, 0);
+                    canvas.DrawImage(sprite.Image, destination, RenderSamplingOptions.Linear, paint);
+                    canvas.Restore();
+                }
             }
         }
 
