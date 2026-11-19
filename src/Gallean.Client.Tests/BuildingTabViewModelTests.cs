@@ -615,7 +615,7 @@ public sealed class BuildingTabViewModelTests
 
         Assert.That(management.SelectedTab, Is.SameAs(screen));
         Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Capital, "Building constructed", "Tower")));
-        Assert.That(screen.PanelsVisible, Is.False);
+        Assert.That(screen.IsUiVisible, Is.False);
 
         CapitalSceneViewModel scene = Assert.NotNull(screen.CapitalScene);
 
@@ -683,9 +683,9 @@ public sealed class BuildingTabViewModelTests
                 IsConstructed: false)
         ]));
 
-        screen.ShowPanelsCommand.Execute(null);
+        screen.ShowUiCommand.Execute(null);
 
-        Assert.That(screen.PanelsVisible, Is.True);
+        Assert.That(screen.IsUiVisible, Is.True);
 
         management.SelectTabCommand.Execute(city);
 

@@ -219,6 +219,12 @@
       <Setter Property="IsHitTestVisible" Value="False" />
       <Setter Property="Opacity" Value="0" />
     </Style>
+
+    <Style Selector="Panel.ui-toggle">
+      <Setter Property="Margin" Value="16,0,0,12" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
   </UserControl.Styles>
 
   <UserControl.Resources>
@@ -291,7 +297,7 @@
           <Popup.IsOpen>
             <MultiBinding Converter="{x:Static BoolConverters.And}">
               <Binding Path="IsSelected" />
-              <Binding ElementName="Screen" Path="((local:BuildingTabViewModel)DataContext).PanelsVisible" />
+              <Binding ElementName="Screen" Path="((local:BuildingTabViewModel)DataContext).IsUiVisible" />
               <Binding ElementName="Screen" Path="((local:BuildingTabViewModel)DataContext).IsInForeground" />
             </MultiBinding>
           </Popup.IsOpen>
@@ -412,7 +418,7 @@
   <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
     <ContentControl Content="{Binding CapitalScene}" />
 
-    <Panel Classes="building-panels" Classes.hidden="{Binding !PanelsVisible}">
+    <Panel Classes="building-panels" Classes.hidden="{Binding !IsUiVisible}">
       <Border Background="{StaticResource BuildingGraphSceneOverlayBrush}" IsHitTestVisible="False" />
       <Border Background="{StaticResource CapitalSceneFootOverlayGradientBrush}" IsHitTestVisible="False" />
 
@@ -502,8 +508,17 @@
     <Button Theme="{StaticResource BackgroundButtonTheme}"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Command="{Binding ShowPanelsCommand}"
-            IsVisible="{Binding !PanelsVisible}" />
+            Command="{Binding ShowUiCommand}"
+            IsVisible="{Binding !IsUiVisible}" />
+
+    <Panel Classes="ui-toggle" IsVisible="{Binding CapitalScene, Converter={x:Static ObjectConverters.IsNotNull}}">
+      <Button Classes="icon-button" Command="{Binding ToggleUiCommand}" IsVisible="{Binding IsUiVisible}" ToolTip.Tip="{local:Text 'Hide interface'}">
+        <local:IconVisual Moniker="Vision" />
+      </Button>
+      <Button Classes="icon-button" Command="{Binding ToggleUiCommand}" IsVisible="{Binding !IsUiVisible}" ToolTip.Tip="{local:Text 'Show interface'}">
+        <local:IconVisual Moniker="Vision" />
+      </Button>
+    </Panel>
   </Grid>
 
 </UserControl>

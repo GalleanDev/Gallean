@@ -8,7 +8,7 @@ namespace Gallean.Client;
 
 internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
 {
-    private static readonly TimeSpan RestorePanelsDelay = TimeSpan.FromSeconds(4.0);
+    private static readonly TimeSpan RestoreUiDelay = TimeSpan.FromSeconds(4.0);
 
     private WorldPlayerBuildingDefinitionId? selectedBuildingId;
     private WorldPlayerBuildingDefinitionId? constructedBuildingId;
@@ -43,7 +43,7 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
     public partial CapitalSceneViewModel? CapitalScene { get; private set; }
 
     [ObservableProperty]
-    public partial bool PanelsVisible { get; private set; } = true;
+    public partial bool IsUiVisible { get; private set; } = true;
 
     public string ConstructText => Tr("Build {0}", SelectedBuilding?.Name);
 
@@ -57,7 +57,7 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
         if (!isSelected && constructedBuildingId is not null)
         {
             constructedBuildingId = null;
-            PanelsVisible = true;
+            IsUiVisible = true;
             RefreshView();
         }
     }
@@ -119,17 +119,23 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
             Game.PlaySound(new AssetSoundKey.BuildingConstruct());
             Game.ShowInfo(IconMoniker.Capital, Tr("Building constructed"), building.Name);
             selectedBuildingId = null;
-            PanelsVisible = false;
-            RestorePanelsAsync(buildingId).FileAndForget();
+            IsUiVisible = false;
+            RestoreUiAsync(buildingId).FileAndForget();
         }
 
         RefreshView();
     }
 
     [RelayCommand]
-    private void ShowPanels()
+    private void ShowUi()
     {
-        PanelsVisible = true;
+        IsUiVisible = true;
+    }
+
+    [RelayCommand]
+    private void ToggleUi()
+    {
+        IsUiVisible = !IsUiVisible;
     }
 
     private async Task PreloadAssetsAsync()
@@ -137,13 +143,13 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
         assetLeases.Add(await Game.AssetPreloader.PreloadAsync(Graph.GetPreloadItems()));
     }
 
-    private async Task RestorePanelsAsync(WorldPlayerBuildingDefinitionId buildingId)
+    private async Task RestoreUiAsync(WorldPlayerBuildingDefinitionId buildingId)
     {
-        await Task.Delay(RestorePanelsDelay);
+        await Task.Delay(RestoreUiDelay);
 
         if (constructedBuildingId == buildingId)
         {
-            PanelsVisible = true;
+            IsUiVisible = true;
         }
     }
 
