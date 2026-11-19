@@ -29,6 +29,7 @@ internal sealed record UnitSummonsViewModel(string Title, IReadOnlyList<SummonVi
         {
             UnitAttackType.Summon => new UnitSummonsViewModel(Tr("Summons"), CreateItems(attack.SummonUnitIds, definitions, texts)),
             UnitAttackType.TransformSelf => new UnitSummonsViewModel(Tr("Transforms into"), CreateItems(GetTransformUnitIds(attack), definitions, texts)),
+            UnitAttackType.TransformEnemy => new UnitSummonsViewModel(Tr("Transforms enemies into"), CreateItems(GetTransformUnitIds(attack), definitions, texts)),
             UnitAttackType.Damage => null,
             UnitAttackType.DrainLife => null,
             UnitAttackType.Paralyze => null,
@@ -46,7 +47,6 @@ internal sealed record UnitSummonsViewModel(string Title, IReadOnlyList<SummonVi
             UnitAttackType.ReduceLevel => null,
             UnitAttackType.GiveAdditionalAttack => null,
             UnitAttackType.Doppelganger => null,
-            UnitAttackType.TransformEnemy => null,
             UnitAttackType.Blister => null,
             UnitAttackType.GiveProtection => null,
             UnitAttackType.ReduceArmor => null

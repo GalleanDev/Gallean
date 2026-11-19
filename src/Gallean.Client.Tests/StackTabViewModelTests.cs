@@ -3422,6 +3422,134 @@ public sealed class StackTabViewModelTests
     }
 
     [Test]
+    public void InspectEnemyTransformerTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition frogDefinition = TestHelpers.SimpleUnitDefinition("frog", maxHitpoints: 20, initiative: 30, damage: 5) with
+        {
+            NameTextId = new GlobalTextId("Frog")
+        };
+        UnitDefinition toadDefinition = TestHelpers.SimpleUnitDefinition("toad", maxHitpoints: 60, initiative: 20, damage: 15) with
+        {
+            NameTextId = new GlobalTextId("Toad")
+        };
+        UnitDefinition transformerTemplate = TestHelpers.SimpleUnitDefinition("transformer", maxHitpoints: 80, initiative: 40, damage: 0);
+        UnitDefinition transformerDefinition = transformerTemplate with
+        {
+            Attack = transformerTemplate.Attack with
+            {
+                Type = UnitAttackType.TransformEnemy,
+                Source = UnitAttackSource.Water,
+                SmallTransformUnitId = frogDefinition.Id,
+                LargeTransformUnitId = toadDefinition.Id
+            }
+        };
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit transformer = new(new WorldUnitId("transformer"), transformerDefinition.Id, 80, 0, transformerDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(transformerDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (transformer, GridPosition.BackCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(transformerDefinition)
+            .WithDefinition(frogDefinition)
+            .WithDefinition(toadDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        UnitDetailsViewModel transformerDetails = Assert.NotNull(FindSlot(screen.UnitGrid, GridPosition.BackCenter).Details);
+
+        Assert.That(transformerDetails, Is.EqualTo(new UnitDetailsViewModel(
+            new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(transformerDefinition.Id)),
+            "name",
+            "description",
+            1,
+            80,
+            80,
+            0,
+            1000,
+            false,
+            false,
+            false,
+            false,
+            new UnitAttackViewModel("Transform enemy", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWater, "Water", Theme.AttackSource.WaterColor)),
+            new StatValueViewModel(TextSpans.FromText("—"), 0),
+            null,
+            null,
+            [
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("40"), 0), null)
+            ],
+            null,
+            null,
+            null,
+            [],
+            [],
+            new UnitSummonsViewModel(
+                "Transforms enemies into",
+                [
+                    new SummonViewModel(
+                        new AssetSpriteKey.UnitPortrait(frogDefinition.Id),
+                        "Frog",
+                        1,
+                        new ItemAttackViewModel("5", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor))),
+                        [
+                            new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("20"), 0), null),
+                            new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                            new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                            new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                            new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("30"), 0), null)
+                        ]),
+                    new SummonViewModel(
+                        new AssetSpriteKey.UnitPortrait(toadDefinition.Id),
+                        "Toad",
+                        1,
+                        new ItemAttackViewModel("15", new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor))),
+                        [
+                            new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("60"), 0), null),
+                            new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
+                            new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
+                            new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
+                            new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("20"), 0), null)
+                        ])
+                ]))));
+    }
+
+    [Test]
     public void InspectBlockedUpgradeTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
