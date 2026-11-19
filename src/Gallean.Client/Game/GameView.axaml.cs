@@ -104,6 +104,15 @@ internal sealed partial class GameView : Window
         Close();
     }
 
+    protected override void OnClosed(EventArgs e)
+    {
+        ScalingChanged -= OnScalingChanged;
+        PositionChanged -= OnPositionChanged;
+        Resized -= OnResized;
+
+        base.OnClosed(e);
+    }
+
     protected override void OnGotFocus(FocusChangedEventArgs e)
     {
         base.OnGotFocus(e);
