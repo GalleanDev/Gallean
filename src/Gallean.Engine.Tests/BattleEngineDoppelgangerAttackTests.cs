@@ -359,7 +359,7 @@ public sealed class BattleEngineDoppelgangerAttackTests
                     .Place(archer with { ExperienceGained = 20 }, GridPosition.BackBottom, false)
                     .Build(),
                 CurrentUnitTurn = new BattleUnitTurn(archer.Id, BattleUnitTurnType.Normal),
-                TurnQueue = [new BattleUnitTurn(doppelganger.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(knight.Id, BattleUnitTurnType.Normal)],
+                TurnQueue = [new BattleUnitTurn(knight.Id, BattleUnitTurnType.Normal)],
                 CurrentRound = BattleRound.Normal(1),
                 Outcome = new BattleOutcome(BattleSide.Defender)
             }));

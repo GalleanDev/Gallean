@@ -1560,7 +1560,7 @@ public sealed class BattleEngineSummonAttackTests
                 .Place(victim with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(summonId, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(summoner.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(victim.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(summoner.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(2),

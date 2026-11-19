@@ -148,7 +148,7 @@ public sealed class BattleEngineRecoveryRoundTests
                 .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),
@@ -198,7 +198,7 @@ public sealed class BattleEngineRecoveryRoundTests
                 .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),
@@ -588,7 +588,7 @@ public sealed class BattleEngineRecoveryRoundTests
                 .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(curer.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(curer.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),
@@ -638,7 +638,7 @@ public sealed class BattleEngineRecoveryRoundTests
                 .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(reviver.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(reviver.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),
@@ -688,7 +688,7 @@ public sealed class BattleEngineRecoveryRoundTests
                 .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),

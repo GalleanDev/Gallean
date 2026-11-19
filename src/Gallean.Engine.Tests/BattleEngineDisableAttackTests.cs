@@ -358,7 +358,7 @@ public sealed class BattleEngineDisableAttackTests
                 .Place(victim with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(victim.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(2),
@@ -414,7 +414,7 @@ public sealed class BattleEngineDisableAttackTests
                 .Place(victim with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(warrior.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(paralyzed.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(petrified.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(victim.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(paralyzed.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(petrified.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),

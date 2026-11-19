@@ -308,7 +308,7 @@ public sealed class BattleEngineAutoResolveTests
                 .Place(defender with { Hitpoints = 0 }, new GridPosition(0, 0), false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(attacker.Id, BattleUnitTurnType.SecondAttack),
-            TurnQueue: [new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(2),
@@ -410,7 +410,7 @@ public sealed class BattleEngineAutoResolveTests
                 .Place(enemy with { Hitpoints = 0 }, new GridPosition(0, 0), false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(ally.Id, BattleUnitTurnType.GrantedAttack),
-            TurnQueue: [new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal)],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(2),
@@ -605,7 +605,7 @@ public sealed class BattleEngineAutoResolveTests
                 .Place(defender with { Hitpoints = 0 }, new GridPosition(0, 0), false)
                 .Build(),
             CurrentUnitTurn: new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal),
-            TurnQueue: [new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)],
+            TurnQueue: [],
             WaitingQueue: [],
             Items: [],
             CurrentRound: BattleRound.Normal(1),
