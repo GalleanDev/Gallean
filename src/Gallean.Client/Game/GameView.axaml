@@ -35,7 +35,7 @@
 
         <Panel Background="{TemplateBinding Background}" IsVisible="{Binding !PaintsOwnBackground}" />
         <VisualLayerManager x:Name="PART_VisualLayerManager">
-          <local:UiScaleDecorator MinContentWidth="{TemplateBinding MinWidth}" MinContentHeight="{TemplateBinding MinHeight}">
+          <local:UiScaleDecorator MinContentWidth="1280" MinContentHeight="720">
             <Panel>
               <local:CursorVisual CursorType="{Binding TopScreen.CursorType}" />
               <ContentPresenter x:Name="PART_ContentPresenter"
