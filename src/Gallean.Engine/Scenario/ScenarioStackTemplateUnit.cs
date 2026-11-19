@@ -7,7 +7,8 @@ public sealed record ScenarioStackTemplateUnit(
     UnitDefinitionId DefinitionId,
     int Hitpoints,
     int Level,
-    ImmutableArray<UnitModifier> Modifiers)
+    ImmutableArray<UnitModifier> Modifiers,
+    UnitName? Name)
 {
     public bool Equals(ScenarioStackTemplateUnit? other)
     {
@@ -24,7 +25,8 @@ public sealed record ScenarioStackTemplateUnit(
         return DefinitionId == other.DefinitionId &&
                Hitpoints == other.Hitpoints &&
                Level == other.Level &&
-               Modifiers.SequenceEqual(other.Modifiers);
+               Modifiers.SequenceEqual(other.Modifiers) &&
+               Name == other.Name;
     }
 
     public override int GetHashCode()
@@ -35,6 +37,7 @@ public sealed record ScenarioStackTemplateUnit(
         hash.Add(Hitpoints);
         hash.Add(Level);
         hash.AddSequence(Modifiers);
+        hash.Add(Name);
 
         return hash.ToHashCode();
     }

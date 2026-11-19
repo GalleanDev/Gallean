@@ -705,7 +705,7 @@ internal partial class WorldEngine
             foreach (((ScenarioStackTemplateUnit unit, GridPosition position), WorldUnitId id) in templateUnits.GetUnits().Zip(ids))
             {
                 UnitDefinition definition = context.Definitions.GetUnit(unit.DefinitionId);
-                UnitName? name = LeaderNameCalculator.TryGetName(definition, context.Definitions, context.Random);
+                UnitName? name = unit.Name ?? LeaderNameCalculator.TryGetName(definition, context.Definitions, context.Random);
 
                 builder.PlaceUnit(new WorldUnit(id, unit.DefinitionId, unit.Hitpoints, Experience: 0, unit.Level, unit.Modifiers, name, IsTypeLocked: false), position);
             }

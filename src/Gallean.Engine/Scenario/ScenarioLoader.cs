@@ -1971,10 +1971,13 @@ public static class ScenarioLoader
 
         ILookup<Db.Id, Db.ScenarioStackTemplateModifier> templateModifiers =
             GetScenarioObjectsLookup(scenarioDb.ScenarioStackTemplateModifiersByScenarioAndTemplateId, scenarioId);
+        ILookup<Db.Id, Db.TextScenario> templateNames =
+            GetScenarioTextsLookup(scenarioDb, scenarioId, Db.TextScenario.NameTextId);
 
         foreach (Db.ScenarioStackTemplate template in scenarioDb.ScenarioStackTemplatesByScenario[scenarioId])
         {
-            UnitGrid<ScenarioStackTemplateUnit> units = LoadStackTemplateUnits(template, templateModifiers[template.Id], definitions, globals);
+            UnitName? leaderName = LoadUnitName(templateNames, template.Id);
+            UnitGrid<ScenarioStackTemplateUnit> units = LoadStackTemplateUnits(template, templateModifiers[template.Id], leaderName, definitions, globals);
 
             WorldStackDirection? direction = null;
             if (template.UseFacing)
@@ -1998,6 +2001,7 @@ public static class ScenarioLoader
     private static UnitGrid<ScenarioStackTemplateUnit> LoadStackTemplateUnits(
         Db.ScenarioStackTemplate template,
         IEnumerable<Db.ScenarioStackTemplateModifier> templateModifiers,
+        UnitName? leaderName,
         IGameDefinitionProvider definitions,
         GlobalVariables globals)
     {
@@ -2005,6 +2009,7 @@ public static class ScenarioLoader
         int[] unitLevels = [template.Unit0Level, template.Unit1Level, template.Unit2Level, template.Unit3Level, template.Unit4Level, template.Unit5Level];
         int[] positions = [template.Position0, template.Position1, template.Position2, template.Position3, template.Position4, template.Position5];
         ILookup<int, Db.ScenarioStackTemplateModifier> modifiersByPosition = templateModifiers.ToLookup(modifier => modifier.UnitPos);
+        int leaderIndex = Array.IndexOf(unitIds, template.Leader);
 
         UnitGrid<ScenarioStackTemplateUnit>.Builder builder = new();
 
@@ -2027,7 +2032,8 @@ public static class ScenarioLoader
                     ImmutableArray<UnitModifier> modifiers = LoadStackTemplateUnitModifiers(modifiersByPosition[position], definitions);
                     int level = unitLevels[unitIndex];
                     int hitpoints = UnitStatsCalculator.GetStats(definition, level, modifiers, definitions, globals).MaxHitpoints;
-                    ScenarioStackTemplateUnit templateUnit = new(definitionId, hitpoints, level, modifiers);
+                    UnitName? name = unitIndex == leaderIndex ? leaderName : null;
+                    ScenarioStackTemplateUnit templateUnit = new(definitionId, hitpoints, level, modifiers, name);
 
                     builder.Place(templateUnit, gridPosition, definition.IsLarge);
                 }

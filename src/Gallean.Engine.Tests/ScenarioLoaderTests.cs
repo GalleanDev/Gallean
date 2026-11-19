@@ -2483,11 +2483,11 @@ public sealed class ScenarioLoaderTests
         UnitDefinitionId u5354 = new("G000UU5354");
 
         UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
-            .Place(new ScenarioStackTemplateUnit(u5003, 140, 1, []), GridPosition.FrontBottom, false)
-            .Place(new ScenarioStackTemplateUnit(u0006, 45, 1, []), GridPosition.BackBottom, false)
-            .Place(new ScenarioStackTemplateUnit(u5354, 135, 1, []), GridPosition.BackCenter, false)
-            .Place(new ScenarioStackTemplateUnit(u5003, 140, 1, []), GridPosition.FrontTop, false)
-            .Place(new ScenarioStackTemplateUnit(u0006, 45, 1, []), GridPosition.BackTop, false)
+            .Place(new ScenarioStackTemplateUnit(u5003, 140, 1, [], null), GridPosition.FrontBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u0006, 45, 1, [], null), GridPosition.BackBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u5354, 135, 1, [], new ScenarioUnitName(new ScenarioTextId("S095TM0001:NAME_TXT:0"))), GridPosition.BackCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u5003, 140, 1, [], null), GridPosition.FrontTop, false)
+            .Place(new ScenarioStackTemplateUnit(u0006, 45, 1, [], null), GridPosition.BackTop, false)
             .Build();
 
         Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S095TM0001")), Is.EqualTo(
@@ -2514,13 +2514,13 @@ public sealed class ScenarioLoaderTests
         UnitModifierDefinitionId leadershipModifier = new("G000UM9031");
 
         UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
-            .Place(new ScenarioStackTemplateUnit(u0159, 500, 4, []), GridPosition.FrontBottom, true)
-            .Place(new ScenarioStackTemplateUnit(u0040, 275, 4, []), GridPosition.FrontCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u0159, 500, 4, [], null), GridPosition.FrontBottom, true)
+            .Place(new ScenarioStackTemplateUnit(u0040, 275, 4, [], null), GridPosition.FrontCenter, false)
             .Place(
-                new ScenarioStackTemplateUnit(u0046, 215, 16, [UnitModifier.FromScenario(leadershipModifier), UnitModifier.FromScenario(leadershipModifier)]),
+                new ScenarioStackTemplateUnit(u0046, 215, 16, [UnitModifier.FromScenario(leadershipModifier), UnitModifier.FromScenario(leadershipModifier)], new ScenarioUnitName(new ScenarioTextId("S142TM000d:NAME_TXT:0"))),
                 GridPosition.BackCenter,
                 false)
-            .Place(new ScenarioStackTemplateUnit(u0158, 400, 4, []), GridPosition.FrontTop, true)
+            .Place(new ScenarioStackTemplateUnit(u0158, 400, 4, [], null), GridPosition.FrontTop, true)
             .Build();
 
         Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S142TM000d")), Is.EqualTo(
@@ -4213,11 +4213,11 @@ public sealed class ScenarioLoaderTests
         UnitDefinitionId u5283 = new("G000UU5283");
 
         UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
-            .Place(new ScenarioStackTemplateUnit(u0087, 170, 2, []), GridPosition.FrontBottom, false)
-            .Place(new ScenarioStackTemplateUnit(u0080, 45, 1, []), GridPosition.BackBottom, false)
-            .Place(new ScenarioStackTemplateUnit(u5283, 325, 8, []), GridPosition.BackCenter, false)
-            .Place(new ScenarioStackTemplateUnit(u0087, 170, 2, []), GridPosition.FrontTop, false)
-            .Place(new ScenarioStackTemplateUnit(u0080, 45, 1, []), GridPosition.BackTop, false)
+            .Place(new ScenarioStackTemplateUnit(u0087, 170, 2, [], null), GridPosition.FrontBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u0080, 45, 1, [], null), GridPosition.BackBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u5283, 325, 8, [], new ScenarioUnitName(new ScenarioTextId("S132TM0000:NAME_TXT:0"))), GridPosition.BackCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u0087, 170, 2, [], null), GridPosition.FrontTop, false)
+            .Place(new ScenarioStackTemplateUnit(u0080, 45, 1, [], null), GridPosition.BackTop, false)
             .Build();
 
         Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S132TM0000")), Is.EqualTo(
@@ -4241,9 +4241,9 @@ public sealed class ScenarioLoaderTests
         UnitDefinitionId u8105 = new("G000UU8105");
 
         UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
-            .Place(new ScenarioStackTemplateUnit(u8005, 200, 1, []), GridPosition.FrontBottom, false)
-            .Place(new ScenarioStackTemplateUnit(u8105, 200, 1, []), GridPosition.FrontCenter, false)
-            .Place(new ScenarioStackTemplateUnit(u8005, 200, 1, []), GridPosition.FrontTop, false)
+            .Place(new ScenarioStackTemplateUnit(u8005, 200, 1, [], null), GridPosition.FrontBottom, false)
+            .Place(new ScenarioStackTemplateUnit(u8105, 200, 1, [], new ScenarioUnitName(new ScenarioTextId("S132TM0002:NAME_TXT:0"))), GridPosition.FrontCenter, false)
+            .Place(new ScenarioStackTemplateUnit(u8005, 200, 1, [], null), GridPosition.FrontTop, false)
             .Build();
 
         Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S132TM0002")), Is.EqualTo(
@@ -4251,6 +4251,29 @@ public sealed class ScenarioLoaderTests
                 new ScenarioStackTemplateId("S132TM0002"),
                 new WorldPlayerId(3),
                 new WorldSubraceId("S132SR0002"),
+                expectedUnits,
+                WorldStackOrder.Normal.Instance,
+                Direction: null,
+                AiPriority: 3)));
+    }
+
+    [Test]
+    public void Load_S107SC0000_StackTemplate_S107TM0001_Test()
+    {
+        ScenarioId scenarioId = new("S107SC0000");
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals);
+
+        UnitDefinitionId u0020 = new("G000UU0020");
+
+        UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+            .Place(new ScenarioStackTemplateUnit(u0020, 90, 1, [], new ScenarioUnitName(new ScenarioTextId("S107TM0001:NAME_TXT:0"))), GridPosition.BackCenter, false)
+            .Build();
+
+        Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S107TM0001")), Is.EqualTo(
+            new ScenarioStackTemplateDefinition(
+                new ScenarioStackTemplateId("S107TM0001"),
+                new WorldPlayerId(1),
+                new WorldSubraceId("S107SR0000"),
                 expectedUnits,
                 WorldStackOrder.Normal.Instance,
                 Direction: null,

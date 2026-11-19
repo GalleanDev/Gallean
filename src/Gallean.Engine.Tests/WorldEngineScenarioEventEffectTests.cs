@@ -7373,4 +7373,75 @@ public sealed class WorldEngineScenarioEventEffectTests
                 }
             }));
     }
+
+    [Test]
+    public void CreateStackEffectTemplateLeaderNameTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(1, 1);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        ScenarioStackTemplateId templateId = new("Template1");
+        ScenarioUnitName leaderName = new(new ScenarioTextId("Wolfgar"));
+
+        ScenarioStackTemplateDefinition template = new(
+            templateId,
+            player.Id,
+            TestHelpers.NeutralSubrace.Id,
+            new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+                .Place(new ScenarioStackTemplateUnit(leader.Id, 100, 1, [], leaderName), GridPosition.FrontBottom, leader.IsLarge)
+                .Build(),
+            WorldStackOrder.Normal.Instance,
+            Direction: null,
+            AiPriority: 3);
+
+        ScenarioLocationDefinition location = new(new ScenarioLocationId("Camp"), new ScenarioTextId("Camp"), new WorldPosition(0, 0), 0);
+
+        ScenarioEventDefinition scenarioEvent = new(
+            new ScenarioEventId("Event1"),
+            [WorldRace.Human],
+            [WorldRace.Human],
+            [new ScenarioEventFrequencyCondition(1)],
+            [new ScenarioEventCreateStackEffect(templateId, location.Id)],
+            Enabled: true,
+            OccurOnce: true,
+            Chance: 100,
+            Order: 0);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithScenarioLocation(location)
+            .WithScenarioStackTemplate(template)
+            .WithScenarioEvent(scenarioEvent)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldStack created = TestHelpers.SimpleStack(
+                new WorldStackId("Stack0001"),
+                player.Id,
+                new WorldPosition(0, 0),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("Unit0001"), leader) with { Name = new ScenarioUnitName(new ScenarioTextId("Wolfgar")) }, GridPosition.FrontBottom, leader.IsLarge)
+                    .Build(),
+                movementPoints: 6) with
+            {
+                SourceTemplateId = templateId
+            };
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.SetItem(created.Id, created),
+                ScenarioState = WorldScenarioState.Empty with
+                {
+                    EventStates = ImmutableSortedDictionary<ScenarioEventId, bool>.Empty.Add(scenarioEvent.Id, false)
+                }
+            }));
+    }
 }

@@ -153,7 +153,7 @@ internal static class TestHelpers
     {
         return new UnitGrid<ScenarioStackTemplateUnit>.Builder()
             .Place(
-                new ScenarioStackTemplateUnit(definition.Id, definition.MaxHitpoints, definition.Level, []),
+                new ScenarioStackTemplateUnit(definition.Id, definition.MaxHitpoints, definition.Level, [], null),
                 GridPosition.FrontBottom,
                 definition.IsLarge)
             .Build();
