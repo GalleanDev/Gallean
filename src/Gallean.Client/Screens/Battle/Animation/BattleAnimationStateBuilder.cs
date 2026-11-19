@@ -706,7 +706,7 @@ internal sealed partial class BattleAnimationStateBuilder(
             AssetAnimationKey.BattleEffect effectKey = new AssetAnimationKey.BattleEffect.LevelUp(timeline.Unit.Race, timeline.Unit.Footprint.IsLarge);
             AssetAnimationMetadata effectMetadata = assets.GetRequiredAnimationMetadata(effectKey);
             TimeSpan duration = rate.GetDuration(effectMetadata.FrameCount);
-            Step step = OpenStep(duration);
+            Step step = EnsureStep(duration);
             TimeSpan start = step.Start;
             TimeSpan swap = start + ResolveRevealOffset(effectKey);
 

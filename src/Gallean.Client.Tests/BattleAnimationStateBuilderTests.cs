@@ -7732,6 +7732,101 @@ public sealed class BattleAnimationStateBuilderTests
     }
 
     [Test]
+    public void UnitUpgradeMultipleTest()
+    {
+        BattleRenderState.Unit squire = new(
+            Id: new BattleUnitId(1),
+            DefinitionId: new UnitDefinitionId("SQUIRE"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 1,
+            Hitpoints: 60,
+            MaxHitpoints: 90,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState.Unit archer = new(
+            Id: new BattleUnitId(2),
+            DefinitionId: new UnitDefinitionId("ARCHER"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.BackCenter, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 1,
+            Hitpoints: 30,
+            MaxHitpoints: 45,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState.Unit acolyte = new(
+            Id: new BattleUnitId(3),
+            DefinitionId: new UnitDefinitionId("ACOLYTE"),
+            Race: WorldRace.Human,
+            DeathAnimation: UnitDeathAnimation.Human,
+            Footprint: new BattleGridFootprint(BattlePosition.Left, GridPosition.BackTop, IsLarge: false),
+            Facing: BattleSide.Attacker,
+            IdleOffset: TimeSpan.Zero,
+            CorpseVariant: 1,
+            Hitpoints: 20,
+            MaxHitpoints: 50,
+            Presence: BattleUnitState.Presence.Alive,
+            Marker: null,
+            Highlight: null,
+            Auras: BattleUnitState.Auras.None,
+            Frozen: false);
+
+        BattleRenderState baseState = new(
+            new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            [squire, archer, acolyte],
+            Placeholders: [],
+            HitTargets: [],
+            BattleLightConfiguration.MakeMidday([]),
+            FluidConfigurations: [],
+            RainConfiguration: null,
+            AnimationRate.Sprites);
+
+        IAssetMetadataProvider assets = new TestMetadataProviderBuilder()
+            .WithAnimation(
+                new AssetAnimationKey.BattleEffect.LevelUp(WorldRace.Human, IsLarge: false),
+                new AssetAnimationMetadata(FrameCount: 20, Width: 4, Height: 4, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null))
+            .Build();
+
+        BattleAnimationStateBuilder builder = new(assets, TestGameDefinitionProvider.Empty, new RandomProvider(0), BattleViewerSide.Attacker, new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right), 1);
+        BattleAnimationState? animation = builder.Build(
+            baseState,
+            [
+                new BattleEndedEvent(BattleSide.Attacker),
+                new BattleUnitUpgradedEvent(new BattleUnitId(1), new UnitDefinitionId("SQUIRE"), new UnitDefinitionId("KNIGHT"), Level: 1, Hitpoints: 150, MaxHitpoints: 150),
+                new BattleUnitExperienceGainedEvent(new BattleUnitId(3), ExperienceGained: 30),
+                new BattleUnitUpgradedEvent(new BattleUnitId(2), new UnitDefinitionId("ARCHER"), new UnitDefinitionId("MARKSMAN"), Level: 1, Hitpoints: 65, MaxHitpoints: 65)
+            ]);
+        Assert.That(FormatAnimation(Assert.NotNull(animation)), Is.EqualTo([
+            "sequence 22 frames",
+            "@0 unit 1 feedback +15 Heal Level up!",
+            "@0 unit 2 feedback +15 Heal Level up!",
+            "@0 unit 3 feedback +15 Heal +30 XP",
+            "@0 clip battle-effect-level-up/human/small for 20 frames at left back-center small",
+            "@0 clip battle-effect-level-up/human/small for 20 frames at left front-center small",
+            "@10 unit 1 form KNIGHT facing Attacker",
+            "@10 unit 2 form MARKSMAN facing Attacker",
+            "@10 unit 1 hitpoints 60 -> 150 over 12 frames Decelerate",
+            "@10 unit 1 max hitpoints 90 -> 150 over 12 frames Decelerate",
+            "@10 unit 2 hitpoints 30 -> 65 over 12 frames Decelerate",
+            "@10 unit 2 max hitpoints 45 -> 65 over 12 frames Decelerate"
+        ]));
+    }
+
+    [Test]
     public void MassHealTest()
     {
         BattleRenderState.Unit healer = new(
