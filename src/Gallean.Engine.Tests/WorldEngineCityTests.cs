@@ -1157,4 +1157,101 @@ public sealed class WorldEngineCityTests
                 new WorldStackBattleStartedEvent(attacker.Id, visitor.Id, new WorldPosition(3, 3), expectedBattleState, IsDuel: false)
             ]);
     }
+
+    [Test]
+    public void CaptureNoGarrisonTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 10, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack attacker = TestHelpers.SimpleStack(
+            new WorldStackId("attacker"),
+            player1.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("attacker-leader"), leader),
+            movementPoints: 10);
+
+        WorldStack visitor = TestHelpers.SimpleStack(
+            new WorldStackId("visitor"),
+            player2.Id,
+            new WorldPosition(3, 3),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("visitor-leader"), leader),
+            movementPoints: 10);
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player2.Id,
+            new WorldPosition(3, 3),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(attacker)
+            .WithStack(visitor)
+            .WithCity(city)
+            .Build();
+
+        BattleState finalBattleState = new BattleStateBuilder(new TestGameDefinitionProviderBuilder().AddUnit(leader).Build())
+                .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(0), new WorldUnitId("attacker-leader"), leader.Id, BattleSide.Attacker, hitpoints: 40), GridPosition.FrontBottom)
+                .Add(TestHelpers.SimpleBattleUnit(new BattleUnitId(1), new WorldUnitId("visitor-leader"), leader.Id, BattleSide.Defender, hitpoints: 0), GridPosition.FrontBottom)
+                .Build(new BattleModifiers(
+                        Attacker: BattleSideModifiers.None,
+                        Defender: new BattleSideModifiers(ExperiencePercent: 0, AccuracyBonus: 0, RandomDamageBonus: 0, CanRetreat: false)),
+                    TestHelpers.SimpleBattleInfo()) with
+            {
+                Outcome = new BattleOutcome(BattleSide.Attacker)
+            };
+
+        UnitGrid<WorldUnit> expectedAttackerUnits = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker-leader"), leader) with { Hitpoints = 40 }, GridPosition.FrontBottom, false)
+            .Build();
+        UnitGrid<WorldUnit> expectedVisitorUnits = new UnitGrid<WorldUnit>.Builder()
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("visitor-leader"), leader) with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldResolveStackBattleCommand(attacker.Id, visitor.Id, finalBattleState, IsDuel: false),
+            [
+                new WorldStackBattleEndedEvent(attacker.Id, visitor.Id, BattleSide.Attacker, expectedAttackerUnits, expectedVisitorUnits),
+                new WorldStackDestroyedEvent(visitor.Id, new WorldUnitGroup.Stack(attacker.Id), player1.Id),
+                new WorldStackMovingEvent(attacker.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 10, [], null),
+                new WorldFortificationEnteredEvent(attacker.Id, city.Id),
+                new WorldFortificationCapturingEvent(city.Id, player2.Id, player1.Id, attacker.Id),
+                new WorldFortificationCapturedEvent(city.Id, player2.Id, player1.Id, attacker.Id),
+                new WorldStackMovedEvent(attacker.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 10, [], null)
+            ]);
+
+        WorldStack expectedAttacker = attacker with
+        {
+            Units = expectedAttackerUnits,
+            Position = new WorldPosition(3, 3),
+            Direction = WorldStackDirection.North,
+            BattlesWon = 1
+        };
+        WorldCity expectedCity = city with
+        {
+            OwnerId = player1.Id
+        };
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.Remove(visitor.Id).SetItem(expectedAttacker.Id, expectedAttacker),
+                Fortifications = engine.State.Fortifications.SetItem(expectedCity.Id, expectedCity)
+            }));
+    }
 }

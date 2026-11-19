@@ -886,7 +886,12 @@ public sealed class WorldEngineDestroyedStackItemsTests
 
         engine.CheckCommand(new WorldResolveStackBattleCommand(stack1.Id, stack2.Id, finalBattleState, IsDuel: false), [
             new WorldStackBattleEndedEvent(stack1.Id, stack2.Id, BattleSide.Attacker, expectedAttackerGrid, destroyedDefenderGrid),
-            new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId)
+            new WorldStackDestroyedEvent(stack2.Id, new WorldUnitGroup.Stack(stack1.Id), stack1.OwnerId),
+            new WorldStackMovingEvent(stack1.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 6, [], null),
+            new WorldFortificationEnteredEvent(stack1.Id, city.Id),
+            new WorldFortificationCapturingEvent(city.Id, player2.Id, player1.Id, stack1.Id),
+            new WorldFortificationCapturedEvent(city.Id, player2.Id, player1.Id, stack1.Id),
+            new WorldStackMovedEvent(stack1.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 6, [], null)
         ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -897,9 +902,15 @@ public sealed class WorldEngineDestroyedStackItemsTests
                     {
                         Units = expectedAttackerGrid,
                         Inventory = new WorldInventory([valuableItem, bannerItem]),
+                        Position = new WorldPosition(3, 3),
+                        Direction = WorldStackDirection.North,
                         BattlesWon = 1
                     })
                     .Remove(stack2.Id),
+                Fortifications = engine.State.Fortifications.SetItem(city.Id, city with
+                {
+                    OwnerId = player1.Id
+                }),
                 Bags = ImmutableSortedDictionary<WorldBagId, WorldBag>.Empty
             }));
     }
