@@ -7,6 +7,8 @@ namespace Gallean.Client;
 
 internal sealed class Backdrop : AvaloniaObject
 {
+    private const double HitMargin = 16;
+
     public static readonly AttachedProperty<ICommand?> CloseCommandProperty =
         AvaloniaProperty.RegisterAttached<Backdrop, Control, ICommand?>("CloseCommand");
 
@@ -39,7 +41,8 @@ internal sealed class Backdrop : AvaloniaObject
     {
         if (sender is Control control &&
             e.Source == control &&
-            e.GetCurrentPoint(control).Properties.IsLeftButtonPressed)
+            e.GetCurrentPoint(control).Properties.IsLeftButtonPressed &&
+            !HasNearContent(control, e.GetPosition(control)))
         {
             ICommand? command = GetCloseCommand(control);
 
@@ -49,5 +52,24 @@ internal sealed class Backdrop : AvaloniaObject
                 e.Handled = true;
             }
         }
+    }
+
+    private static bool HasNearContent(Control control, Point point)
+    {
+        for (int row = -1; row <= 1; row++)
+        {
+            for (int column = -1; column <= 1; column++)
+            {
+                Point hitPoint = point + new Vector(column * HitMargin, row * HitMargin);
+                IInputElement? hitElement = control.InputHitTest(hitPoint);
+
+                if (hitElement is not null && hitElement != control)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
