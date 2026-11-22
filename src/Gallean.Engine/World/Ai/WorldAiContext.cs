@@ -7,4 +7,5 @@ internal sealed class WorldAiContext(IEngineContext engine, IWorldAiTrace trace)
     public WorldAiEstimator Estimator { get; } = new(engine);
     public WorldAiPathfinding Pathfinding { get; } = new(engine);
     public WorldAiScenario Scenario { get; } = new(engine);
+    public WorldAiSpellcasting Spellcasting { get; } = new(engine);
 }

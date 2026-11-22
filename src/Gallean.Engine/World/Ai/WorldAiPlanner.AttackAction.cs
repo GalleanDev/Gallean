@@ -233,10 +233,26 @@ internal sealed partial class WorldAiPlanner
 
         private WorldAiActionPlan MakeAttackPlan(ActionContext context, BattleInfo battle, int score)
         {
-            WorldAiStackMemory stackMemory = context.Memory.GetStackMemory(context.Stack);
-            WorldAiMemory memory = context.Memory.WithStackMemory(context.Stack.Id, stackMemory with { Target = battle.Target });
+            WorldCastSpellCommand? cast = null;
 
-            return MakePlan(score, new WorldAiMoveStackCommand(context.Stack.Id, battle.TargetPosition), memory);
+            if (battle.Target is WorldAiTarget.Stack target)
+            {
+                WorldStack targetStack = context.State.Stacks[target.StackId];
+
+                cast = Context.Spellcasting.FindWeakenCast(context.State, context.Stack.OwnerId, targetStack);
+            }
+
+            if (cast is not null)
+            {
+                return MakePlan(score, cast, context.Memory);
+            }
+            else
+            {
+                WorldAiStackMemory stackMemory = context.Memory.GetStackMemory(context.Stack);
+                WorldAiMemory memory = context.Memory.WithStackMemory(context.Stack.Id, stackMemory with { Target = battle.Target });
+
+                return MakePlan(score, new WorldAiMoveStackCommand(context.Stack.Id, battle.TargetPosition), memory);
+            }
         }
 
         private int ScoreBattle(ActionContext context, BattleInfo battle, ScoringType scoring)

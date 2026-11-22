@@ -1022,7 +1022,7 @@ public sealed class WorldEngineAiSpellTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P4 1000] Cast weaken -> (6, 6)",
+            "[P2 500] Cast weaken -> (6, 6)",
             "[P2 500] Move Attacker -> (6, 6) (Attacker wins)"
         ]));
         Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player with
@@ -1239,5 +1239,65 @@ public sealed class WorldEngineAiSpellTests
                 SpellCasts = ImmutableSortedDictionary<WorldSpellDefinitionId, int>.Empty.Add(attack.Id, 1)
             }
         }));
+    }
+
+    [Test]
+    public void WeakenNoAttackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        UnitModifierDefinition paralysis = TestHelpers.SimpleModifier("paralysis") with
+        {
+            MaxMovement = new UnitStatModifier(0, -100)
+        };
+        WorldSpellDefinition weaken = Spell("weaken", level: 1, new WorldWeakenSpellEffect(paralysis.Id));
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(0, 1000, 0, 0, 0, 0),
+            Spellbook = new WorldPlayerSpellbook([weaken.Id], [weaken.Id])
+        };
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack guard = UnitStack(new WorldUnitId("guardLeader"), "Guard", player.Id, new WorldPosition(2, 2), leader, hitpoints: 100) with
+        {
+            MovementPoints = 6,
+            Order = WorldStackOrder.Stand.Instance
+        };
+        WorldStack target = UnitStack(new WorldUnitId("targetLeader"), "Target", enemy.Id, new WorldPosition(6, 6), leader, hitpoints: 100) with { MovementPoints = 6 };
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(paralysis)
+            .WithDefinition(weaken)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithStack(guard)
+            .WithStack(target)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(Array.Empty<string>()));
+
+        WorldCommandResult endTurnResult = session.World.DispatchCommand(new WorldEndTurnCommand());
+        Assert.That(endTurnResult.Error, Is.Null);
+
+        Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo(Array.Empty<string>()));
+        Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player with
+        {
+            Resources = new WorldResourceSet(100, 1025, 0, 0, 0, 0)
+        }));
+        Assert.That(session.World.State.Stacks, Is.EqualTo(ImmutableSortedDictionary.CreateRange([
+            new KeyValuePair<WorldStackId, WorldStack>(guard.Id, guard),
+            new KeyValuePair<WorldStackId, WorldStack>(target.Id, target)
+        ])));
     }
 }

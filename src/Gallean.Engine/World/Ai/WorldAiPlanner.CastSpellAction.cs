@@ -7,7 +7,6 @@ internal sealed partial class WorldAiPlanner
     private sealed record CastSpellAction(WorldAiContext Context, int Priority) : AbstractEconomyAction(Context, Priority)
     {
         private const int CityThreatRange = 7;
-        private const int NearRange = 7;
 
         public override WorldAiActionPlan? Plan(WorldState state, WorldPlayerId playerId, WorldAiMemory memory)
         {
@@ -80,24 +79,24 @@ internal sealed partial class WorldAiPlanner
 
             WorldCastSpellCommand? command = null;
 
-            if (!CanCast(player, attackSpells) && !CanCast(player, weakenSpells))
+            if (Context.Spellcasting.IsEnemyCastAllowed(player))
             {
                 command = FindEnemyCast(state, playerId, attackSpells, EnumerateCityThreats(state, playerId));
 
                 if (command is null)
                 {
-                    command = FindEnemyCast(state, playerId, weakenSpells, EnumerateNearEnemies(state, playerId));
+                    command = FindEnemyCast(state, playerId, weakenSpells, []);
                 }
             }
 
             if (command is null)
             {
-                command = FindCast(state, healSpells, EnumerateWoundedStacks(state, playerId));
+                command = Context.Spellcasting.FindCast(state, healSpells, EnumerateWoundedStacks(state, playerId));
             }
 
             if (command is null)
             {
-                command = FindCast(state, restoreMovementSpells, EnumerateStacksOutOfMovement(state, playerId));
+                command = Context.Spellcasting.FindCast(state, restoreMovementSpells, EnumerateStacksOutOfMovement(state, playerId));
             }
 
             return command;
@@ -107,11 +106,11 @@ internal sealed partial class WorldAiPlanner
         {
             if (spells.Count > 0)
             {
-                WorldCastSpellCommand? command = FindCast(state, spells, targets);
+                WorldCastSpellCommand? command = Context.Spellcasting.FindCast(state, spells, targets);
 
                 if (command is null && Context.Engine.Random.Next(100) < Context.Engine.Globals.AiRandomCastChance)
                 {
-                    command = FindCast(state, spells, EnumerateEnemyStacks(state, playerId));
+                    command = Context.Spellcasting.FindCast(state, spells, EnumerateEnemyStacks(state, playerId));
                 }
 
                 return command;
@@ -120,25 +119,6 @@ internal sealed partial class WorldAiPlanner
             {
                 return null;
             }
-        }
-
-        private WorldCastSpellCommand? FindCast(WorldState state, List<WorldSpellDefinition> spells, IEnumerable<WorldStack> targets)
-        {
-            foreach (WorldSpellDefinition spell in spells)
-            {
-                foreach (WorldStack target in targets)
-                {
-                    WorldCastSpellCommand command = new(spell.Id, new WorldSpellTarget(target.Position, 1));
-                    WorldCommandResult result = command.Execute(state, Context.Engine);
-
-                    if (!result.Failed)
-                    {
-                        return command;
-                    }
-                }
-            }
-
-            return null;
         }
 
         private static bool CanCast(WorldPlayer player, List<WorldSpellDefinition> spells)
@@ -237,24 +217,6 @@ internal sealed partial class WorldAiPlanner
                 if (DiplomacyCalculator.IsHostile(state, playerId, stack.OwnerId) && WorldHelpers.IsRacePlayable(owner.Race))
                 {
                     yield return stack;
-                }
-            }
-        }
-
-        private static IEnumerable<WorldStack> EnumerateNearEnemies(WorldState state, WorldPlayerId playerId)
-        {
-            foreach (WorldStack stack in EnumerateOutsideStacks(state, playerId))
-            {
-                if (stack.MovementPoints > 0)
-                {
-                    foreach (WorldStack enemy in state.Stacks.Values)
-                    {
-                        if (DiplomacyCalculator.IsHostile(state, playerId, enemy.OwnerId) &&
-                            stack.Position.GetDistance(enemy.Position) <= NearRange)
-                        {
-                            yield return enemy;
-                        }
-                    }
                 }
             }
         }
