@@ -100,10 +100,9 @@
             </ItemsControl>
           </ScrollViewer>
           <StackPanel Grid.Row="2"
-                      Classes="focus-group"
+                      Classes="focus-group pill-group"
                       Orientation="Horizontal"
                       HorizontalAlignment="Center"
-                      Spacing="12"
                       Margin="0,12,0,8">
             <Button Classes="pill"
                     Content="{local:Text 'Sell all'}"
