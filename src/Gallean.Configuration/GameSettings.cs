@@ -5,8 +5,6 @@ namespace Gallean.Configuration;
 
 public sealed record GameSettings(
     [property: JsonPropertyOrder(-1)] int FormatVersion,
-    int SoundVolume,
-    int MusicVolume,
     bool Windowed,
     int RenderResolution,
     int AutoSaveInterval = GameSettings.DefaultAutoSaveInterval,
@@ -16,7 +14,9 @@ public sealed record GameSettings(
     bool LockCursor = true,
     MovementSpeed MovementSpeed = GameSettings.DefaultMovementSpeed,
     Language? Language = null,
-    BattlePosition BattlePosition = GameSettings.DefaultBattlePosition)
+    BattlePosition BattlePosition = GameSettings.DefaultBattlePosition,
+    int SoundVolume = GameSettings.DefaultSoundVolume,
+    int MusicVolume = GameSettings.DefaultMusicVolume)
 {
     public const int CurrentFormatVersion = 6;
     public const int MinVolume = 0;
@@ -47,8 +47,12 @@ public sealed record GameSettings(
         null,
         DefaultBattlePosition);
 
+    [JsonPropertyName("soundVolume2")]
     public int SoundVolume { get; } = Math.Clamp(SoundVolume, MinVolume, MaxVolume);
+
+    [JsonPropertyName("musicVolume2")]
     public int MusicVolume { get; } = Math.Clamp(MusicVolume, MinVolume, MaxVolume);
+
     public int RenderResolution { get; } = Math.Clamp(RenderResolution, MinRenderResolution, MaxRenderResolution);
     public int AutoSaveInterval { get; } = Math.Max(AutoSaveInterval, 0);
     public int AutoSaveLimit { get; } = Math.Max(AutoSaveLimit, MinAutoSaveLimit);
@@ -69,8 +73,6 @@ public sealed record GameSettings(
     {
         return new GameSettings(
             CurrentFormatVersion,
-            soundVolume,
-            musicVolume,
             windowed,
             renderResolution,
             autoSaveInterval,
@@ -80,6 +82,8 @@ public sealed record GameSettings(
             lockCursor,
             movementSpeed,
             language,
-            battlePosition);
+            battlePosition,
+            soundVolume,
+            musicVolume);
     }
 }

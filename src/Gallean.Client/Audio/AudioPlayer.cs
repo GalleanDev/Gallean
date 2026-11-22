@@ -11,8 +11,8 @@ internal sealed class AudioPlayer : IAudioPlayer
     private readonly ILog log;
     private readonly MixingSampleProvider sounds = CreateMixer();
     private readonly MixingSampleProvider music = CreateMixer();
-    private readonly VolumeSampleProvider soundsVolume;
-    private readonly VolumeSampleProvider musicVolume;
+    private readonly MixVolumeSampleProvider soundsVolume;
+    private readonly MixVolumeSampleProvider musicVolume;
     private readonly AudioOutput output;
 
     public AudioPlayer(IAssetProvider assets, AudioOutput output, ILog log, float initialSoundVolume, float initialMusicVolume)
@@ -21,14 +21,8 @@ internal sealed class AudioPlayer : IAudioPlayer
         this.output = output;
         this.log = log;
 
-        soundsVolume = new VolumeSampleProvider(sounds)
-        {
-            Volume = initialSoundVolume
-        };
-        musicVolume = new VolumeSampleProvider(new VolumeSampleProvider(music) { Volume = MusicMixLevel })
-        {
-            Volume = initialMusicVolume
-        };
+        soundsVolume = new MixVolumeSampleProvider(sounds, initialSoundVolume);
+        musicVolume = new MixVolumeSampleProvider(new VolumeSampleProvider(music) { Volume = MusicMixLevel }, initialMusicVolume);
 
         output.AddInput(soundsVolume);
         output.AddInput(musicVolume);
