@@ -1311,4 +1311,291 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
         ]);
     }
+
+    [Test]
+    public void WaitSimpleTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 20, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitWaitedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitDefendedEvent(healer.Id),
+            new BattleUnitTurnEndingEvent(healer.Id),
+            new BattleUnitTurnEndedEvent(healer.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(defender.Id, new BattleAttackUnitTarget(attacker.Id), [defenderDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(defender.Id, attacker.Id, defenderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(defender.Id, attacker.Id, defenderDefinition.Attack.Id, 5),
+            new BattleUnitTurnEndingEvent(defender.Id),
+            new BattleUnitTurnEndedEvent(defender.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Resumed))
+        ]);
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Normal(2), [new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(attacker.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitDiedEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitLethalAttackTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 10, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 15);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitDiedEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitStrongTargetTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 10);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 10, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 50, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 50);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(healer.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, healer.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, healer.Id, attackerDefinition.Attack.Id, 10),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitSmallHealTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 10, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitWoundedTargetTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 20, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 40, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 25);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitAttacksTwiceTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15) with { AttacksTwice = true };
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 20, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(attacker.Id, BattleUnitTurnType.SecondAttack))
+        ]);
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitDiedEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitWoundedAttackerTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 20, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 5);
+        BattleUnit healer = Unit(1, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(2, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(defender.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, defender.Id, attackerDefinition.Attack.Id, 15),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void WaitUnreachableAttackerTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 60, damage: 15);
+        UnitDefinition guardDefinition = TestHelpers.SimpleUnitDefinition("guard", maxHitpoints: 100, initiative: 10, damage: 5);
+        UnitDefinition healerDefinition = SupportDefinition("healer", UnitAttackType.Heal, heal: 20, summonUnitId: null);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 20, initiative: 40, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("defender"), initiative: 40, damage: 5, accuracy: 100, reach: UnitAttackReach.Adjacent)
+        };
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 5);
+        BattleUnit guard = Unit(1, guardDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit healer = Unit(2, healerDefinition.Id, BattleSide.Defender, hitpoints: 30);
+        BattleUnit defender = Unit(3, defenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(guardDefinition)
+            .WithDefinition(healerDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(attacker, new GridPosition(1, 0))
+            .WithAttacker(guard, new GridPosition(0, 0))
+            .WithDefender(healer, new GridPosition(1, 0))
+            .WithDefender(defender, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitWaitedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
 }
