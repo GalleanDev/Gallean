@@ -4737,6 +4737,19 @@ public sealed class StackTabViewModelTests
             Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
         }
 
+        await FindSlot(screen.UnitGrid, GridPosition.FrontBottom).SelectCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack));
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(gameViewModel.TopScreen, Is.Null);
+            Assert.That(screen.TargetedAction, Is.EqualTo(StackTabViewModel.UnitActionType.Dismiss));
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "The party leader cannot be disbanded", Details: null)));
+        }
+
+        screen.Game.Alert.Dismiss();
+
         await FindSlot(screen.UnitGrid, GridPosition.FrontCenter).SelectCommand.ExecuteAsync(null);
 
         ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
@@ -4840,6 +4853,19 @@ public sealed class StackTabViewModelTests
             Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to lock its type."));
             Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
         }
+
+        await FindSlot(screen.UnitGrid, GridPosition.FrontBottom).SelectCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack));
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(gameViewModel.TopScreen, Is.Null);
+            Assert.That(screen.TargetedAction, Is.EqualTo(StackTabViewModel.UnitActionType.LockType));
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "The type of this unit cannot be locked", Details: null)));
+        }
+
+        screen.Game.Alert.Dismiss();
 
         await FindSlot(screen.UnitGrid, GridPosition.FrontCenter).SelectCommand.ExecuteAsync(null);
 

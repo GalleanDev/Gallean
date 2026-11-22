@@ -94,7 +94,7 @@ internal abstract partial class StackTabViewModel
                 break;
 
             case (UnitGridSlotReference sourceSlot, DropZoneReference zone) when zone.Zone == DismissDropZone:
-                await ConfirmDisbandAsync(currentStack, sourceSlot.Position);
+                await DisbandAsync(currentStack, sourceSlot.Position);
                 break;
 
             case (IItemDragSourceReference itemSource, _):
@@ -399,9 +399,7 @@ internal abstract partial class StackTabViewModel
 
         foreach ((WorldUnit unit, GridPosition position) in stack.Units.GetUnits())
         {
-            WorldUnitActionInfo? unitInfo = FindStackUnit(stackInfo, unit.Id);
-
-            if (unitInfo is not null && GetActionError(type, unitInfo) is null)
+            if (IsActionTarget(type, unit))
             {
                 positions.Add(position);
             }
@@ -487,7 +485,7 @@ internal abstract partial class StackTabViewModel
             unit = stack.Units[source.Position];
         }
 
-        if (unit is not null && CanDisband(unit))
+        if (unit is not null && IsActionTarget(UnitActionType.Dismiss, unit))
         {
             DismissDropZone.Show(Tr("Dismiss {0}", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)));
         }
@@ -677,14 +675,21 @@ internal abstract partial class StackTabViewModel
     {
         Task action = type switch
         {
-            UnitActionType.Dismiss => ConfirmDisbandAsync(stack, position),
-            UnitActionType.LockType => ConfirmLockTypeAsync(stack, position)
+            UnitActionType.Dismiss => DisbandAsync(stack, position),
+            UnitActionType.LockType => LockTypeAsync(stack, position)
         };
 
         await action;
     }
 
-    private async Task ConfirmLockTypeAsync(WorldStack stack, GridPosition position)
+    private bool IsActionTarget(UnitActionType type, WorldUnit unit)
+    {
+        WorldUnitActionInfo? unitInfo = FindStackUnit(stackInfo, unit.Id);
+
+        return unitInfo is not null && GetActionError(type, unitInfo) is null;
+    }
+
+    private async Task LockTypeAsync(WorldStack stack, GridPosition position)
     {
         WorldUnit? unit = stack.Units[position];
 
@@ -692,46 +697,55 @@ internal abstract partial class StackTabViewModel
         {
             WorldLockUnitTypeCommand command = new(new WorldUnitGroup.Stack(stack.Id), unit.Id);
 
-            Game.OpenScreen(new ConfirmPromptViewModel(
-                TrSpans("Lock unit type"),
-                TrSpans("Lock the type of {0:*}? It will never upgrade to another type and will gain levels instead. This cannot be undone.", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
-                Tr("Lock"),
-                ConfirmPromptType.Danger,
-                async () =>
-                {
-                    await TryDispatchWorldActionAsync(command);
-                    RefreshView();
-                }));
+            if (IsActionTarget(UnitActionType.LockType, unit))
+            {
+                Game.OpenScreen(new ConfirmPromptViewModel(
+                    TrSpans("Lock unit type"),
+                    TrSpans("Lock the type of {0:*}? It will never upgrade to another type and will gain levels instead. This cannot be undone.", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
+                    Tr("Lock"),
+                    ConfirmPromptType.Danger,
+                    () => DispatchLockTypeAsync(command)));
+            }
+            else
+            {
+                await DispatchLockTypeAsync(command);
+            }
         }
     }
 
-    private async Task ConfirmDisbandAsync(WorldStack stack, GridPosition position)
+    private async Task DispatchLockTypeAsync(WorldLockUnitTypeCommand command)
+    {
+        await TryDispatchWorldActionAsync(command);
+        RefreshView();
+    }
+
+    private async Task DisbandAsync(WorldStack stack, GridPosition position)
     {
         WorldUnit? unit = stack.Units[position];
 
         if (unit is not null)
         {
-            WorldStackId disbandStackId = stack.Id;
+            WorldDisbandUnitCommand command = new(new WorldUnitGroup.Stack(stack.Id), unit.Id);
 
-            Game.OpenScreen(new ConfirmPromptViewModel(
-                TrSpans("Dismiss unit"),
-                TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
-                Tr("Dismiss"),
-                ConfirmPromptType.Danger,
-                () => DisbandConfirmedAsync(disbandStackId, unit.Id)));
+            if (IsActionTarget(UnitActionType.Dismiss, unit))
+            {
+                Game.OpenScreen(new ConfirmPromptViewModel(
+                    TrSpans("Dismiss unit"),
+                    TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
+                    Tr("Dismiss"),
+                    ConfirmPromptType.Danger,
+                    () => DispatchDisbandAsync(command)));
+            }
+            else
+            {
+                await DispatchDisbandAsync(command);
+            }
         }
     }
 
-    private bool CanDisband(WorldUnit unit)
+    private async Task DispatchDisbandAsync(WorldDisbandUnitCommand command)
     {
-        WorldUnitActionInfo? unitInfo = FindStackUnit(stackInfo, unit.Id);
-
-        return unitInfo is not null && unitInfo.DisbandError is null;
-    }
-
-    private async Task DisbandConfirmedAsync(WorldStackId disbandStackId, WorldUnitId unitId)
-    {
-        if (await TryDispatchWorldActionAsync(new WorldDisbandUnitCommand(new WorldUnitGroup.Stack(disbandStackId), unitId)))
+        if (await TryDispatchWorldActionAsync(command))
         {
             unitSelection.ClearSelection();
         }

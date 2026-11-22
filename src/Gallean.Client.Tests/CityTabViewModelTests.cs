@@ -2371,6 +2371,19 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([true, false, false, false, false, false]));
         }
 
+        await FindSlot(screen.GarrisonGrid, GridPosition.FrontCenter).SelectCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State, Is.EqualTo(initialState));
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(gameViewModel.TopScreen, Is.Null);
+            Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.Dismiss));
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "The guardian cannot be dismissed", Details: null)));
+        }
+
+        screen.Game.Alert.Dismiss();
+
         UnitGridSlotViewModel slot = FindSlot(screen.GarrisonGrid, GridPosition.FrontBottom);
         await slot.SelectCommand.ExecuteAsync(null);
 

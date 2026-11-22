@@ -166,7 +166,7 @@ internal sealed partial class CityTabViewModel
                 break;
 
             case (UnitGridSlotReference sourceSlot, DropZoneReference zone) when zone.Zone == DismissDropZone:
-                await ConfirmDisbandAsync(sourceSlot);
+                await DisbandAsync(sourceSlot);
                 break;
         }
     }
@@ -538,7 +538,8 @@ internal sealed partial class CityTabViewModel
 
     private async Task ApplyTargetedActionAsync(UnitActionType type, UnitGridSlotReference target)
     {
-        WorldUnitGroup? group = ResolveGroup(GetGridType(target.Grid));
+        CityUnitGridType gridType = GetGridType(target.Grid);
+        WorldUnitGroup? group = ResolveGroup(gridType);
         WorldUnit? unit = FindUnit(target);
 
         if (group is not null && unit is not null)
@@ -547,7 +548,7 @@ internal sealed partial class CityTabViewModel
             {
                 UnitActionType.Heal => HealUnitAsync(group, unit),
                 UnitActionType.Resurrect => ResurrectUnitAsync(group, unit),
-                UnitActionType.Dismiss => ConfirmDisbandAsync(group, unit)
+                UnitActionType.Dismiss => DisbandAsync(gridType, group, unit)
             };
 
             await action;
@@ -574,35 +575,45 @@ internal sealed partial class CityTabViewModel
         }
     }
 
-    private async Task ConfirmDisbandAsync(UnitGridSlotReference slot)
+    private async Task DisbandAsync(UnitGridSlotReference slot)
     {
-        WorldUnitGroup? group = ResolveGroup(GetGridType(slot.Grid));
+        CityUnitGridType gridType = GetGridType(slot.Grid);
+        WorldUnitGroup? group = ResolveGroup(gridType);
         WorldUnit? unit = FindUnit(slot);
 
         if (group is not null && unit is not null)
         {
-            await ConfirmDisbandAsync(group, unit);
+            await DisbandAsync(gridType, group, unit);
         }
     }
 
-    private async Task ConfirmDisbandAsync(WorldUnitGroup group, WorldUnit unit)
+    private async Task DisbandAsync(CityUnitGridType gridType, WorldUnitGroup group, WorldUnit unit)
     {
         WorldDisbandUnitCommand command = new(group, unit.Id);
 
-        Game.OpenScreen(new ConfirmPromptViewModel(
-            TrSpans("Dismiss unit"),
-            TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
-            Tr("Dismiss"),
-            ConfirmPromptType.Danger,
-            async () =>
-            {
-                if (await TryDispatchWorldActionAsync(command))
-                {
-                    unitSelection.ClearSelection();
-                }
+        if (IsActionTarget(UnitActionType.Dismiss, gridType, unit.Id))
+        {
+            Game.OpenScreen(new ConfirmPromptViewModel(
+                TrSpans("Dismiss unit"),
+                TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
+                Tr("Dismiss"),
+                ConfirmPromptType.Danger,
+                () => DispatchDisbandAsync(command)));
+        }
+        else
+        {
+            await DispatchDisbandAsync(command);
+        }
+    }
 
-                RefreshView();
-            }));
+    private async Task DispatchDisbandAsync(WorldDisbandUnitCommand command)
+    {
+        if (await TryDispatchWorldActionAsync(command))
+        {
+            unitSelection.ClearSelection();
+        }
+
+        RefreshView();
     }
 
     private bool CanDisband(UnitGridSlotReference slot)
@@ -611,9 +622,7 @@ internal sealed partial class CityTabViewModel
 
         if (unit is not null)
         {
-            WorldUnitActionInfo? unitInfo = FindUnitInfo(GetGridType(slot.Grid), unit.Id);
-
-            return unitInfo is not null && unitInfo.DisbandError is null;
+            return IsActionTarget(UnitActionType.Dismiss, GetGridType(slot.Grid), unit.Id);
         }
         else
         {
