@@ -43,6 +43,11 @@ internal sealed class WorldAiScenario(IEngineContext engine)
             }
         }
 
+        foreach (ScenarioStackReference stack in GetBlockedStacks(state, player))
+        {
+            targets.UnionWith(ForStacks(stack, state));
+        }
+
         return targets.ToImmutable();
     }
 
@@ -133,6 +138,28 @@ internal sealed class WorldAiScenario(IEngineContext engine)
         }
 
         return zones.ToImmutable();
+    }
+
+    private ImmutableArray<ScenarioStackReference> GetBlockedStacks(WorldState state, WorldPlayer player)
+    {
+        ImmutableArray<ScenarioStackReference>.Builder stacks = ImmutableArray.CreateBuilder<ScenarioStackReference>();
+
+        foreach (ScenarioEventDefinition definition in engine.Scenario.Events)
+        {
+            if (ScenarioEventCalculator.IsEnabled(state.ScenarioState, definition) &&
+                !definition.AffectedRaces.Contains(player.Race))
+            {
+                foreach (ScenarioEventCondition condition in definition.Conditions)
+                {
+                    if (condition is ScenarioEventDestroyingStackCondition destroyingStack)
+                    {
+                        stacks.Add(destroyingStack.Stack);
+                    }
+                }
+            }
+        }
+
+        return stacks.ToImmutable();
     }
 
     private static ScenarioEventWinEffect? CheckWinScenarioEffect(ScenarioEventDefinition definition, WorldState state, WorldPlayer player)

@@ -99,6 +99,11 @@ internal sealed partial class WorldAiPlanner
                 return UtilityScore.Flag(isObjective, ScenarioObjectivePenalty);
             }
 
+            public static UtilityScore.Consideration ScenarioBlockedTarget(ActionContext context, WorldAiTarget target)
+            {
+                return UtilityScore.Flag(!context.BlockedTargets.Contains(target));
+            }
+
             public static UtilityScore.Consideration Survival(WorldAiEstimator estimator, ActionContext context, BattleInfo battle)
             {
                 if (context.IsStackVital)

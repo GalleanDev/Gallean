@@ -263,6 +263,7 @@ internal sealed partial class WorldAiPlanner
                 [
                     Considerations.PowerRatio(battle.Power),
                     Considerations.ScenarioObjective(context, battle.Target),
+                    Considerations.ScenarioBlockedTarget(context, battle.Target),
                     Considerations.Survival(Context.Estimator, context, battle)
                 ]),
                 ScoringType.Roaming => ScoreRoamingBattle(context, battle),
@@ -282,6 +283,7 @@ internal sealed partial class WorldAiPlanner
                 Considerations.PlayableDefender(context, battle),
                 Considerations.PowerRatio(battle.Power),
                 Considerations.ScenarioObjective(context, battle.Target),
+                Considerations.ScenarioBlockedTarget(context, battle.Target),
                 Considerations.Survival(Context.Estimator, context, battle)
             ]);
         }
@@ -301,6 +303,7 @@ internal sealed partial class WorldAiPlanner
                 Considerations.PowerRatio(battle.Power),
                 Considerations.Proximity(interest, distance),
                 Considerations.ScenarioObjective(context, battle.Target),
+                Considerations.ScenarioBlockedTarget(context, battle.Target),
                 Considerations.Survival(Context.Estimator, context, battle)
             ]);
         }
@@ -315,6 +318,7 @@ internal sealed partial class WorldAiPlanner
                 [
                     Considerations.PowerRatio(battle.Power),
                     Considerations.ScenarioObjective(context, battle.Target),
+                    Considerations.ScenarioBlockedTarget(context, battle.Target),
                     Considerations.Survival(Context.Estimator, context, battle)
                 ]);
             }
@@ -347,6 +351,7 @@ internal sealed partial class WorldAiPlanner
                     Considerations.HitpointsRecoverability(estimate),
                     Considerations.UnitsRecoverability(estimate),
                     Considerations.ScenarioObjective(context, battle.Target),
+                    Considerations.ScenarioBlockedTarget(context, battle.Target),
                     Considerations.Survival(Context.Estimator, context, battle)
                 ]);
 
