@@ -182,6 +182,29 @@ public sealed class BriefingScreenViewModelTests
     }
 
     [Test]
+    public async Task ToggleTextTest()
+    {
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+
+        BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(briefing.IsTextVisible, Is.True);
+        Assert.That(briefing.ToggleTextLabel, Is.EqualTo("Hide text"));
+
+        briefing.ToggleTextCommand.Execute(null);
+
+        Assert.That(briefing.IsTextVisible, Is.False);
+        Assert.That(briefing.ToggleTextLabel, Is.EqualTo("Show text"));
+
+        briefing.ToggleTextCommand.Execute(null);
+
+        Assert.That(briefing.IsTextVisible, Is.True);
+        Assert.That(briefing.ToggleTextLabel, Is.EqualTo("Hide text"));
+    }
+
+    [Test]
     public async Task LeaveTest()
     {
         TestAssetProviderBuilder assetsBuilder = new();

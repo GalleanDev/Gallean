@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Gallean.Client;
@@ -18,6 +19,10 @@ internal sealed partial class BriefingScreenViewModel(
     private readonly MusicQueue musicQueue = MusicQueue.Create([new AssetSoundKey.BriefingMusic()], isLooping: true);
     private IAudioPlayback? voicePlayback;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ToggleTextLabel))]
+    public partial bool IsTextVisible { get; private set; } = true;
+
     public string Title { get; } = title;
     public ImmutableArray<ScenarioTextSpan> Briefing { get; } = formatter.Format(ScenarioFormatter.FormatBriefing(briefing));
     public string Objective { get; } = ScenarioFormatter.FormatObjective(objective);
@@ -27,6 +32,7 @@ internal sealed partial class BriefingScreenViewModel(
     public TimeSpan VideoStartTime { get; } = videoStartTime;
     public TimeSpan VideoFirstFrameTime { get; } = TimeSpan.FromSeconds(10);
     public bool HasVoice { get; } = voice is not null;
+    public string ToggleTextLabel => IsTextVisible ? Tr("Hide text") : Tr("Show text");
     public override ScreenMusic Music => HasVoice ? ScreenMusic.None : ScreenMusic.Tracks(musicQueue);
 
     public override void Dispose()
@@ -56,5 +62,11 @@ internal sealed partial class BriefingScreenViewModel(
     private async Task ContinueAsync()
     {
         await continueAction();
+    }
+
+    [RelayCommand]
+    private void ToggleText()
+    {
+        IsTextVisible = !IsTextVisible;
     }
 }
