@@ -524,14 +524,14 @@ internal sealed partial class BattleAnimationStateBuilder(
 
             if (currentAttack is { } attack)
             {
-                if (attack.Definition?.Type is UnitAttackType.DrainLife or UnitAttackType.DrainLifeOverflow)
-                {
-                    AddEffectClip(timeline.Unit.Footprint, attack.Strike, new AssetAnimationKey.BattleEffect.Heal());
-                }
-                else
+                if (attack.Definition is null || attack.Definition.Type is UnitAttackType.Heal)
                 {
                     AddStrike(timeline);
                     AddSound(attack.Strike, new AssetSoundKey.BattleEffect.Heal());
+                }
+                else
+                {
+                    AddEffectClip(timeline.Unit.Footprint, attack.Strike, new AssetAnimationKey.BattleEffect.Heal());
                 }
             }
             else
