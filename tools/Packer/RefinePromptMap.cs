@@ -77,6 +77,7 @@ internal static class RefinePromptMap
             AssetSpriteKey.Bag => null,
             AssetSpriteKey.Tombstone => null,
             AssetSpriteKey.CapitalBackground => null,
+            AssetSpriteKey.CapitalBackgroundV2 => null,
             AssetSpriteKey.MainMenuBackground background => new RefinePrompt(new RefinePromptId(background.CanonicalId), []),
             AssetSpriteKey.MainMenuBackgroundV2 => null,
             AssetSpriteKey.RaceSelectionBackground background => GetRaceSelectionPrompt(background),

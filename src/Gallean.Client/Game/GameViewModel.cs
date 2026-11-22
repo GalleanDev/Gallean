@@ -67,6 +67,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     }
 
     public IAssetPreloader AssetPreloader { get; }
+    public IAssetMetadataProvider AssetMetadata => assets;
     public IReadOnlyList<AbstractScreenViewModel> Screens => screens.Screens;
     public AbstractScreenViewModel? RootScreen => screens.Root;
     public AbstractScreenViewModel? TopScreen => screens.Top;
@@ -877,6 +878,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 WorldRenderState renderState = renderComposer.Compose(renderRequest);
                 WorldPlayer viewPlayer = snapshot.WorldState.Players[snapshot.ViewPlayerId];
                 CapitalSceneViewModel? capitalScene = CapitalSceneViewModel.Create(
+                    assets,
                     viewPlayer.Race,
                     viewPlayer.Buildings.Acquired,
                     constructedBuildingId: null,

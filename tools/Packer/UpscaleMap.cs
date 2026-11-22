@@ -32,6 +32,7 @@ internal static class UpscaleMap
             AssetSpriteKey.BattleCorpse => UpscalerType.Mosr,
             AssetSpriteKey.BuildingIcon => UpscalerType.Mosr,
             AssetSpriteKey.CapitalBackground => UpscalerType.Mosr,
+            AssetSpriteKey.CapitalBackgroundV2 => UpscalerType.Mosr,
             AssetSpriteKey.CityShield => UpscalerType.Mosr,
             AssetSpriteKey.Ground => UpscalerType.Mosr,
             AssetSpriteKey.GroundBorder => UpscalerType.Mosr,

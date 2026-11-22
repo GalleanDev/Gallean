@@ -371,6 +371,26 @@ public closed record AssetSpriteKey : AssetImageKey, IParsable<AssetSpriteKey>
         }
     }
 
+    public sealed record CapitalBackgroundV2(WorldRace Race, int Variant) : AssetSpriteKey
+    {
+        internal const string Category = "capital-background-v2";
+
+        public int Variant { get; } = Variant.Mod(CapitalBackground.VariantCount);
+
+        public override string CanonicalId => $"{Category}/{Token(Race)}/{Variant}";
+
+        internal static CapitalBackgroundV2? Parse(IReadOnlyList<string> tokens)
+        {
+            return tokens switch
+            {
+                [string race, string variant] => new CapitalBackgroundV2(
+                    ParseEnum<WorldRace>(race),
+                    ParseInt(variant)),
+                _ => null
+            };
+        }
+    }
+
     public sealed record MainMenuBackground : AssetSpriteKey
     {
         internal const string Category = "main-menu-background";
@@ -900,6 +920,7 @@ public closed record AssetSpriteKey : AssetImageKey, IParsable<AssetSpriteKey>
             [Bag.Category] = Bag.Parse,
             [Tombstone.Category] = Tombstone.Parse,
             [CapitalBackground.Category] = CapitalBackground.Parse,
+            [CapitalBackgroundV2.Category] = CapitalBackgroundV2.Parse,
             [MainMenuBackground.Category] = _ => new MainMenuBackground(),
             [MainMenuBackgroundV2.Category] = _ => new MainMenuBackgroundV2(),
             [RaceSelectionBackground.Category] = RaceSelectionBackground.Parse,

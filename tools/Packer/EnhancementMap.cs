@@ -57,6 +57,8 @@ internal static class EnhancementMap
             AssetSpriteKey.BuildingIcon => [EnhancementType.Upscale],
             AssetSpriteKey.CapitalBackground background when RefineMap.CanRefine(background) => [EnhancementType.Upscale, EnhancementType.Refine, EnhancementType.Alpha],
             AssetSpriteKey.CapitalBackground => [EnhancementType.Upscale],
+            AssetSpriteKey.CapitalBackgroundV2 background when RefineMap.CanRefine(background) => [EnhancementType.Upscale, EnhancementType.Refine, EnhancementType.Alpha],
+            AssetSpriteKey.CapitalBackgroundV2 => [EnhancementType.Upscale],
             AssetSpriteKey.CityShield => [EnhancementType.Upscale],
             AssetSpriteKey.Ground => [EnhancementType.Upscale],
             AssetSpriteKey.GroundBorder border => border.Set switch

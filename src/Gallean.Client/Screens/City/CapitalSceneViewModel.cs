@@ -4,10 +4,11 @@ using Gallean.Engine;
 namespace Gallean.Client;
 
 internal sealed record CapitalSceneViewModel(
-    AssetSpriteKey.CapitalBackground BackdropKey,
+    AssetSpriteKey BackdropKey,
     IReadOnlyList<CapitalSceneLayerViewModel> Layers)
 {
     public static CapitalSceneViewModel? Create(
+        IAssetMetadataProvider assets,
         WorldRace race,
         IReadOnlySet<WorldPlayerBuildingDefinitionId> acquiredBuildings,
         WorldPlayerBuildingDefinitionId? constructedBuildingId,
@@ -26,7 +27,7 @@ internal sealed record CapitalSceneViewModel(
                 {
                     case CapitalSceneLayerDefinition.Background background:
                         layers.Add(new CapitalSceneLayerViewModel(
-                            new AssetSpriteKey.CapitalBackground(race, background.Index),
+                            GetBackgroundKey(assets, race, background.Index),
                             AnimationKey: null,
                             Building: null,
                             IsConstructed: false));
@@ -50,12 +51,24 @@ internal sealed record CapitalSceneViewModel(
                 }
             }
 
-            return new CapitalSceneViewModel(new AssetSpriteKey.CapitalBackground(race, 0), layers);
+            return new CapitalSceneViewModel(GetBackgroundKey(assets, race, 0), layers);
         }
         else
         {
             return null;
         }
+    }
+
+    private static AssetSpriteKey GetBackgroundKey(IAssetMetadataProvider assets, WorldRace race, int variant)
+    {
+        AssetSpriteKey.CapitalBackgroundV2 key = new(race, variant);
+
+        if (assets.GetOptionalSpriteMetadata(key) is not null)
+        {
+            return key;
+        }
+        
+        return new AssetSpriteKey.CapitalBackground(race, variant);
     }
 
     public bool Equals(CapitalSceneViewModel? other)

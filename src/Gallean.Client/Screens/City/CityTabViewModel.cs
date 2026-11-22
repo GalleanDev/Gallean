@@ -1256,6 +1256,7 @@ internal sealed partial class CityTabViewModel
             WorldPlayerBuildings buildings = WorldState.Players[capital.OwnerId].Buildings;
 
             return CapitalSceneViewModel.Create(
+                Game.AssetMetadata,
                 race,
                 buildings.Acquired,
                 constructedBuildingId: null,

@@ -892,6 +892,7 @@ internal static class RefineMap
             AssetSpriteKey.BattleCorpse => true,
             AssetSpriteKey.BuildingIcon => true,
             AssetSpriteKey.CapitalBackground => true,
+            AssetSpriteKey.CapitalBackgroundV2 => true,
             AssetSpriteKey.CityShield => true,
             AssetSpriteKey.Ground => true,
             AssetSpriteKey.GroundBorder => true,

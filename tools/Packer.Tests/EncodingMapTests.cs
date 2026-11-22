@@ -67,6 +67,7 @@ public sealed class EncodingMapTests
             "BattleCorpse: Palette",
             "BuildingIcon: Palette",
             "CapitalBackground: None",
+            "CapitalBackgroundV2: None",
             "CapitalImage: None",
             "CityImage: None",
             "CityShield: Palette",

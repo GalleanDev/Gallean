@@ -175,6 +175,7 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
 
         Graph = graphBuilder.Build();
         CapitalScene = CapitalSceneViewModel.Create(
+            Game.AssetMetadata,
             player.Race,
             player.Buildings.Acquired,
             constructedBuildingId,

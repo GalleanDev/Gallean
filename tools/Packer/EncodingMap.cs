@@ -20,6 +20,7 @@ internal static class EncodingMap
             AssetSpriteKey.BattleCorpse => EncodingType.Palette,
             AssetSpriteKey.BuildingIcon => EncodingType.Palette,
             AssetSpriteKey.CapitalBackground => EncodingType.None,
+            AssetSpriteKey.CapitalBackgroundV2 => EncodingType.None,
             AssetSpriteKey.CityShield => EncodingType.Palette,
             AssetSpriteKey.Ground => EncodingType.Palette,
             AssetSpriteKey.GroundBorder => EncodingType.Palette,

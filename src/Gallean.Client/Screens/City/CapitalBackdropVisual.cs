@@ -9,8 +9,8 @@ internal sealed class CapitalBackdropVisual : Control
     private const double BlurStrength = 30;
     private const double EdgeFadeWidth = 0.015;
 
-    public static readonly StyledProperty<AssetSpriteKey.CapitalBackground?> SpriteKeyProperty =
-        AvaloniaProperty.Register<CapitalBackdropVisual, AssetSpriteKey.CapitalBackground?>(nameof(SpriteKey));
+    public static readonly StyledProperty<AssetSpriteKey?> SpriteKeyProperty =
+        AvaloniaProperty.Register<CapitalBackdropVisual, AssetSpriteKey?>(nameof(SpriteKey));
 
     public static readonly StyledProperty<Size> CanvasSizeProperty =
         AvaloniaProperty.Register<CapitalBackdropVisual, Size>(nameof(CanvasSize));
@@ -28,7 +28,7 @@ internal sealed class CapitalBackdropVisual : Control
         ClipToBounds = true;
     }
 
-    public AssetSpriteKey.CapitalBackground? SpriteKey
+    public AssetSpriteKey? SpriteKey
     {
         get => GetValue(SpriteKeyProperty);
         set => SetValue(SpriteKeyProperty, value);

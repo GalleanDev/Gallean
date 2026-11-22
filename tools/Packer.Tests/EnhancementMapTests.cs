@@ -96,6 +96,7 @@ public sealed class EnhancementMapTests
             "BattleCorpse: [Upscale, Refine, Alpha, Surface]",
             "BuildingIcon: [Upscale]",
             "CapitalBackground: [Upscale, Refine, Alpha]",
+            "CapitalBackgroundV2: [Upscale, Refine, Alpha]",
             "CapitalImage: [Upscale]",
             "CityImage: [Upscale]",
             "CityShield: [Upscale]",

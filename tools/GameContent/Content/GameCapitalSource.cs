@@ -18,14 +18,18 @@ internal sealed class GameCapitalSource(GameImages images, CapitalSceneExtractor
             if (race != WorldRace.Neutral)
             {
                 AssetSpriteKey.CapitalBackground background = new(race, 0);
+                AssetSpriteKey.CapitalBackgroundV2 backgroundV2 = new(race, 0);
 
                 yield return RequiredSprite(background, source => source.Capitals.GetBackground(background.Race, background.Variant));
+                yield return RequiredSprite(backgroundV2, source => source.Capitals.GetBackground(backgroundV2.Race, backgroundV2.Variant));
 
                 for (int variant = 1; variant < AssetSpriteKey.CapitalBackground.VariantCount; variant++)
                 {
                     AssetSpriteKey.CapitalBackground key = new(race, variant);
+                    AssetSpriteKey.CapitalBackgroundV2 keyV2 = new(race, variant);
 
                     yield return OptionalSprite(key, source => source.Capitals.GetBackground(key.Race, key.Variant));
+                    yield return OptionalSprite(keyV2, source => source.Capitals.GetBackground(keyV2.Race, keyV2.Variant));
                 }
 
                 for (int variant = 0; variant < AssetAnimationKey.CapitalBackgroundOverlay.VariantCount; variant++)

@@ -31,6 +31,7 @@ internal static class RefineRepaintMap
             AssetSpriteKey.BattleCorpse => [],
             AssetSpriteKey.BuildingIcon => [],
             AssetSpriteKey.CapitalBackground => [],
+            AssetSpriteKey.CapitalBackgroundV2 => [],
             AssetSpriteKey.CityShield => [],
             AssetSpriteKey.Ground => [],
             AssetSpriteKey.GroundBorder => [],
