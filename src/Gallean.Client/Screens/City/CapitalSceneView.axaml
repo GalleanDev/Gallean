@@ -6,6 +6,8 @@
              IsHitTestVisible="False">
 
   <UserControl.Resources>
+    <Size x:Key="CapitalSceneCanvasSize">640,600</Size>
+
     <ControlTheme x:Key="CapitalSceneLayerContainerTheme" TargetType="ContentPresenter" x:DataType="local:CapitalSceneLayerViewModel">
       <Setter Property="HorizontalAlignment" Value="Stretch" />
       <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -13,7 +15,7 @@
 
     <DataTemplate x:Key="CapitalSceneLayerTemplate" x:DataType="local:CapitalSceneLayerViewModel">
       <Grid Classes.constructed="{Binding IsConstructed}">
-        <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform" />
+        <local:SpriteVisual SpriteKey="{Binding SpriteKey}" Stretch="Uniform" CanvasSize="{StaticResource CapitalSceneCanvasSize}" ClipToBounds="False" />
         <local:AnimationVisual AnimationKey="{Binding AnimationKey}" Stretch="Uniform" />
       </Grid>
     </DataTemplate>
@@ -59,7 +61,7 @@
   <Panel>
     <Panel ClipToBounds="True">
       <ItemsControl Classes="capital-scene-frame cached"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     ItemsSource="{Binding Layers}"
                     ItemTemplate="{StaticResource CapitalSceneLayerTemplate}"
@@ -73,7 +75,7 @@
     </Panel>
 
     <Panel Classes="cached" ClipToBounds="True">
-      <local:CapitalBackdropVisual Classes="capital-scene-frame" SpriteKey="{Binding BackdropKey}" />
+      <local:CapitalBackdropVisual Classes="capital-scene-frame" SpriteKey="{Binding BackdropKey}" CanvasSize="{StaticResource CapitalSceneCanvasSize}" />
     </Panel>
   </Panel>
 

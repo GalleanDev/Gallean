@@ -15,13 +15,16 @@ internal sealed class SpriteVisual : Control
     public static readonly StyledProperty<StretchDirection> StretchDirectionProperty =
         AvaloniaProperty.Register<SpriteVisual, StretchDirection>(nameof(StretchDirection), StretchDirection.Both);
 
+    public static readonly StyledProperty<Size?> CanvasSizeProperty =
+        AvaloniaProperty.Register<SpriteVisual, Size?>(nameof(CanvasSize));
+
     private AssetCache<Sprite>.Lease? lease;
     private Sprite? sprite;
 
     static SpriteVisual()
     {
-        AffectsRender<SpriteVisual>(SpriteKeyProperty, StretchProperty, StretchDirectionProperty);
-        AffectsMeasure<SpriteVisual>(SpriteKeyProperty, StretchProperty, StretchDirectionProperty);
+        AffectsRender<SpriteVisual>(SpriteKeyProperty, StretchProperty, StretchDirectionProperty, CanvasSizeProperty);
+        AffectsMeasure<SpriteVisual>(SpriteKeyProperty, StretchProperty, StretchDirectionProperty, CanvasSizeProperty);
     }
 
     public SpriteVisual()
@@ -45,6 +48,12 @@ internal sealed class SpriteVisual : Control
     {
         get => GetValue(StretchDirectionProperty);
         set => SetValue(StretchDirectionProperty, value);
+    }
+
+    public Size? CanvasSize
+    {
+        get => GetValue(CanvasSizeProperty);
+        set => SetValue(CanvasSizeProperty, value);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
@@ -98,7 +107,7 @@ internal sealed class SpriteVisual : Control
             return default;
         }
 
-        return Stretch.CalculateSize(availableSize, SpriteSize(sprite), StretchDirection);
+        return Stretch.CalculateSize(availableSize, CanvasSize ?? SpriteSize(sprite), StretchDirection);
     }
 
     protected override Size ArrangeOverride(Size finalSize)
@@ -108,7 +117,7 @@ internal sealed class SpriteVisual : Control
             return default;
         }
 
-        return Stretch.CalculateSize(finalSize, SpriteSize(sprite));
+        return Stretch.CalculateSize(finalSize, CanvasSize ?? SpriteSize(sprite));
     }
 
     public override void Render(DrawingContext context)
@@ -117,16 +126,35 @@ internal sealed class SpriteVisual : Control
 
         if (sprite is not null && Bounds is { Width: > 0, Height: > 0 })
         {
-            Size sourceSize = SpriteSize(sprite);
-            Rect viewPort = new(Bounds.Size);
-            Vector scale = Stretch.CalculateScaling(Bounds.Size, sourceSize, StretchDirection);
-            Size scaledSize = sourceSize * scale;
-            Rect centered = viewPort.CenterRect(new Rect(scaledSize));
-            Rect destination = centered.Intersect(viewPort);
-            Rect logicalSource = new Rect(sourceSize).CenterRect(new Rect(destination.Size / scale));
-            Rect source = ToPixelSpace(logicalSource, sprite);
+            if (CanvasSize is not null)
+            {
+                Rect viewport = new(Bounds.Size);
+                Vector scale = Stretch.CalculateScaling(Bounds.Size, CanvasSize.Value, StretchDirection);
+                Rect canvas = viewport.CenterRect(new Rect(CanvasSize.Value * scale));
 
-            context.Custom(new SpriteRenderOperation(destination, source, sprite));
+                Rect destination = new(
+                    canvas.X + (sprite.Metadata.OffsetX * scale.X),
+                    canvas.Y + (sprite.Metadata.OffsetY * scale.Y),
+                    sprite.Metadata.Width * scale.X,
+                    sprite.Metadata.Height * scale.Y);
+
+                Rect source = new(0, 0, sprite.Image.Width, sprite.Image.Height);
+
+                context.Custom(new SpriteRenderOperation(destination, source, sprite));
+            }
+            else
+            {
+                Size sourceSize = SpriteSize(sprite);
+                Rect viewport = new(Bounds.Size);
+                Vector scale = Stretch.CalculateScaling(Bounds.Size, sourceSize, StretchDirection);
+                Size scaledSize = sourceSize * scale;
+                Rect centered = viewport.CenterRect(new Rect(scaledSize));
+                Rect destination = centered.Intersect(viewport);
+                Rect logicalSource = new Rect(sourceSize).CenterRect(new Rect(destination.Size / scale));
+                Rect source = ToPixelSpace(logicalSource, sprite);
+
+                context.Custom(new SpriteRenderOperation(destination, source, sprite));
+            }
         }
     }
 
