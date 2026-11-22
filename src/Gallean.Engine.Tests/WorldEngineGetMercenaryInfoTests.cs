@@ -229,4 +229,59 @@ public sealed class WorldEngineGetMercenaryInfoTests
                 WorldCommandError.TargetOccupied)
         ])));
     }
+
+    [Test]
+    public void FullPartyTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 1);
+        UnitDefinition scoutDefinition = TestHelpers.SimpleUnitDefinition("scout", maxHitpoints: 80, initiative: 40, damage: 15);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(10, 0, 0, 0, 0, 0)
+        };
+
+        WorldStack stack = StackWithModifiers(new WorldUnitId("leaderUnit"), player.Id, new WorldPosition(4, 4), leaderDefinition, []);
+
+        WorldMercenarySite site = new(
+            new WorldSiteId("site"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            [new WorldMercenaryUnit(scoutDefinition.Id, 1, false)],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(scoutDefinition)
+            .WithRace(TestHelpers.SimpleRace(WorldRace.Undead, new GlobalTextId("Undead Hordes"), WorldMapTerrain.Undead))
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(stack)
+            .WithSite(site)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        WorldGetMercenaryInfoCommand.Result result = engine.CheckCommand(
+            new WorldGetMercenaryInfoCommand(stack.Id, site.Id),
+            []);
+
+        Assert.That(result, Is.EqualTo(new WorldGetMercenaryInfoCommand.Result(
+        [
+            new WorldGetMercenaryInfoCommand.Mercenary(
+                scoutDefinition.Id,
+                1,
+                new WorldResourceSet(50, 0, 0, 0, 0, 0),
+                WorldCommandError.LeadershipExceeded)
+        ])));
+    }
 }

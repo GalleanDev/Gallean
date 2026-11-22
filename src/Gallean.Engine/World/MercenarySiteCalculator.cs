@@ -21,11 +21,6 @@ internal static class MercenarySiteCalculator
         UnitCosts costs = context.UnitStats.GetUnitCosts(unitDefinitionId, level);
         WorldResourceSet cost = PurchaseCalculator.GetPurchaseCost(costs.PurchaseCost, stack, context);
 
-        if (!ResourceSetCalculator.CanAfford(player.Resources, cost))
-        {
-            return new PurchaseInfo(cost, WorldCommandError.InsufficientResources);
-        }
-
         UnitDefinition definition = context.Definitions.GetUnit(unitDefinitionId);
         UnitStats stats = UnitStatsCalculator.GetStats(definition, level, [], context.Definitions, context.Globals);
         WorldUnit unit = new(WorldCommandHelpers.GenerateUnitIds(state).First(), unitDefinitionId, stats.MaxHitpoints, 0, level, [], null, false);
@@ -45,8 +40,14 @@ internal static class MercenarySiteCalculator
                 {
                     return new PurchaseInfo(cost, error);
                 }
-
-                return new PurchaseInfo(cost, Error: null);
+                else if (!ResourceSetCalculator.CanAfford(player.Resources, cost))
+                {
+                    return new PurchaseInfo(cost, WorldCommandError.InsufficientResources);
+                }
+                else
+                {
+                    return new PurchaseInfo(cost, Error: null);
+                }
             }
         }
 

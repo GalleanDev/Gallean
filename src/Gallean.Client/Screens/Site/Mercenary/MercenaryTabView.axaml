@@ -19,7 +19,8 @@
                        Foreground="{StaticResource PrimaryTextBrush}"
                        TextWrapping="Wrap" />
             <TextBlock Text="{Binding LevelText}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />
-            <ContentControl Content="{Binding Status}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+            <ContentControl Content="{Binding Status.Price}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+            <ContentControl Content="{Binding Status}" Classes="caption" IsVisible="{Binding Status.IsReasonVisible}" />
           </StackPanel>
         </Grid>
       </Button>
