@@ -4,6 +4,10 @@
              x:Class="Gallean.Client.BriefingScreenView"
              x:DataType="local:BriefingScreenViewModel">
 
+  <UserControl.KeyBindings>
+    <KeyBinding Gesture="Enter" Command="{Binding ContinueCommand}" />
+  </UserControl.KeyBindings>
+
   <UserControl.Styles>
     <Style Selector="Grid.briefing-column">
       <Setter Property="MaxWidth" Value="760" />
