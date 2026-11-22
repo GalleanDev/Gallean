@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.TextFormatting;
+using Avalonia.VisualTree;
 
 namespace Gallean.Client;
 
@@ -416,11 +417,19 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
 
     private void OnTopLevelPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (IsSkippable && !IsAnimationComplete())
+        if (IsSkippable && !IsAnimationComplete() && !IsButtonPress(e))
         {
             e.Handled = true;
             CompleteAnimation();
         }
+    }
+
+    private static bool IsButtonPress(PointerPressedEventArgs e)
+    {
+        Visual? source = e.Source as Visual;
+        Button? button = source?.FindAncestorOfType<Button>(includeSelf: true);
+
+        return button is not null;
     }
 
     private void OnTopLevelKeyDown(object? sender, KeyEventArgs e)
