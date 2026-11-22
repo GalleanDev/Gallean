@@ -157,7 +157,7 @@ internal sealed partial class LeaderImportScreenViewModel : AbstractScreenViewMo
         LeaderId id = SelectedLeader.Entry.Id;
 
         Game.OpenScreen(new ConfirmPromptViewModel(
-            Tr("Delete leader"),
+            TrSpans("Delete leader"),
             TrSpans("Delete leader \"{0}\" permanently?", SelectedLeader.Name),
             Tr("Delete"),
             ConfirmPromptType.Danger,

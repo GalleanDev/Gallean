@@ -8,8 +8,8 @@ namespace Gallean.Client;
 
 internal sealed class ModalPanel : ContentControl
 {
-    public static readonly StyledProperty<string?> TitleProperty =
-        AvaloniaProperty.Register<ModalPanel, string?>(nameof(Title));
+    public static readonly StyledProperty<TextSpans?> TitleProperty =
+        AvaloniaProperty.Register<ModalPanel, TextSpans?>(nameof(Title));
 
     public static readonly StyledProperty<string?> SubtitleProperty =
         AvaloniaProperty.Register<ModalPanel, string?>(nameof(Subtitle));
@@ -23,7 +23,7 @@ internal sealed class ModalPanel : ContentControl
     public static readonly StyledProperty<IInputElement?> InitialFocusProperty =
         AvaloniaProperty.Register<ModalPanel, IInputElement?>(nameof(InitialFocus));
 
-    public string? Title
+    public TextSpans? Title
     {
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);

@@ -8,7 +8,7 @@ internal sealed partial class TextPromptViewModel : AbstractScreenViewModel
     private readonly Func<string, Task> confirmAction;
 
     public TextPromptViewModel(
-        string title,
+        TextSpans title,
         string message,
         string text,
         string placeholder,
@@ -27,7 +27,7 @@ internal sealed partial class TextPromptViewModel : AbstractScreenViewModel
     [ObservableProperty]
     public partial string Text { get; set; }
 
-    public string Title { get; }
+    public TextSpans Title { get; }
     public string Message { get; }
     public string Placeholder { get; }
     public int MaxLength { get; }

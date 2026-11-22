@@ -1363,7 +1363,7 @@
               <DockPanel Grid.Row="0"
                          HorizontalAlignment="Center"
                          Margin="20,20,20,0"
-                         IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                         IsVisible="{TemplateBinding Title, Converter={x:Static ObjectConverters.IsNotNull}}">
                 <StackPanel DockPanel.Dock="Right"
                             Orientation="Horizontal"
                             VerticalAlignment="Center"
@@ -1380,7 +1380,7 @@
                   <local:OutlinedTextBlock Text="{TemplateBinding Subtitle}" Classes="h4" Foreground="{StaticResource SecondaryTextBrush}" VerticalAlignment="Center" />
                   <local:OutlinedTextBlock Text=")" Classes="h4" Foreground="{StaticResource SecondaryTextBrush}" VerticalAlignment="Center" />
                 </StackPanel>
-                <local:OutlinedTextBlock Text="{TemplateBinding Title}"
+                <local:OutlinedTextBlock local:TextRuns.Spans="{TemplateBinding Title}"
                                          Classes="h3"
                                          Foreground="{StaticResource ModalTitleBrush}"
                                          TextTrimming="CharacterEllipsis" />

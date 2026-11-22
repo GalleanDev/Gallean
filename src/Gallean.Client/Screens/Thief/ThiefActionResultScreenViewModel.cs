@@ -5,7 +5,7 @@ namespace Gallean.Client;
 internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
 {
     private ThiefActionResultScreenViewModel(
-        string title,
+        TextSpans title,
         string text,
         WorldThiefActionType type,
         string actionName,
@@ -20,7 +20,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
     }
 
     public bool IsSuccess { get; }
-    public string Title { get; }
+    public TextSpans Title { get; }
     public string Text { get; }
     public string ActionName { get; }
     public IconMoniker ActionIcon { get; }
@@ -33,7 +33,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         string actionName,
         bool isSuccess)
     {
-        string title = FormatMineTitle(isSuccess);
+        TextSpans title = FormatMineTitle(isSuccess);
         string text = FormatMineText(type, isSuccess);
 
         return new ThiefActionResultScreenViewModel(title, text, type, actionName, isSuccess);
@@ -46,7 +46,7 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         bool isSuccess,
         string theirLordName)
     {
-        string title = Tr("Thief actions");
+        TextSpans title = TrSpans("Thief actions");
         string text = FormatTheirText(type, target, isSuccess, theirLordName);
 
         return new ThiefActionResultScreenViewModel(title, text, type, actionName, isSuccess);
@@ -59,15 +59,15 @@ internal sealed class ThiefActionResultScreenViewModel : AbstractScreenViewModel
         return true;
     }
 
-    private static string FormatMineTitle(bool isSuccess)
+    private static TextSpans FormatMineTitle(bool isSuccess)
     {
         if (isSuccess)
         {
-            return Tr("Success!");
+            return TrSpans("Success!");
         }
         else
         {
-            return Tr("Failure!");
+            return TrSpans("Failure!");
         }
     }
 

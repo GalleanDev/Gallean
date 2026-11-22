@@ -784,7 +784,7 @@ public sealed class MerchantTabViewModelTests
 
         ConfirmPromptViewModel valuablesPrompt = Assert.IsOfType<ConfirmPromptViewModel>(screen.Game.TopScreen);
 
-        Assert.That(valuablesPrompt.Title, Is.EqualTo("Sell all valuables"));
+        Assert.That(valuablesPrompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Sell all valuables", TextStyle.None)])));
         Assert.That(valuablesPrompt.Message.Text, Is.EqualTo("The merchant offers 20 gold for all your valuables."));
         Assert.That(valuablesPrompt.ConfirmLabel, Is.EqualTo("Sell"));
 
@@ -803,7 +803,7 @@ public sealed class MerchantTabViewModelTests
 
         ConfirmPromptViewModel cancelledPrompt = Assert.IsOfType<ConfirmPromptViewModel>(screen.Game.TopScreen);
 
-        Assert.That(cancelledPrompt.Title, Is.EqualTo("Sell all items"));
+        Assert.That(cancelledPrompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Sell all items", TextStyle.None)])));
         Assert.That(cancelledPrompt.Message.Text, Is.EqualTo("The merchant offers 20 gold for all your items."));
 
         cancelledPrompt.CloseCommand.Execute(null);

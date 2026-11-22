@@ -5,7 +5,7 @@ namespace Gallean.Client;
 
 internal sealed class LootScreenViewModel : AbstractScreenViewModel
 {
-    private LootScreenViewModel(string title, string text, ResourceSetViewModel? resources, ImmutableArray<LootItem> items)
+    private LootScreenViewModel(TextSpans title, string text, ResourceSetViewModel? resources, ImmutableArray<LootItem> items)
     {
         Title = title;
         Text = text;
@@ -13,7 +13,7 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
         Items = items;
     }
 
-    public string Title { get; }
+    public TextSpans Title { get; }
     public string Text { get; }
     public ResourceSetViewModel? Resources { get; }
     public ImmutableArray<LootItem> Items { get; }
@@ -48,7 +48,7 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
             foundResources = null;
         }
 
-        return new LootScreenViewModel(Tr("You are victorious!"), text, foundResources, CreateItems(gameModel, items));
+        return new LootScreenViewModel(TrSpans("You are victorious!"), text, foundResources, CreateItems(gameModel, items));
     }
 
     public static LootScreenViewModel CreateForItems(GameModel gameModel, WorldInventory inventory)
@@ -64,7 +64,7 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
             text = Tr("You received {0} items.", inventory.Items.Length);
         }
 
-        return new LootScreenViewModel(Tr("Treasure"), text, null, CreateItems(gameModel, inventory.Items));
+        return new LootScreenViewModel(TrSpans("Treasure"), text, null, CreateItems(gameModel, inventory.Items));
     }
 
     public static LootScreenViewModel CreateForSpells(GameModel gameModel, ImmutableArray<WorldSpellDefinitionId> spells)
@@ -80,13 +80,13 @@ internal sealed class LootScreenViewModel : AbstractScreenViewModel
             text = Tr("You received {0} spells.", spells.Length);
         }
 
-        return new LootScreenViewModel(Tr("New spells"), text, null, [.. spells.Select(spellId => CreateSpell(gameModel, spellId))]);
+        return new LootScreenViewModel(TrSpans("New spells"), text, null, [.. spells.Select(spellId => CreateSpell(gameModel, spellId))]);
     }
 
     public static LootScreenViewModel CreateForCapturedResources(WorldResourceSet resources)
     {
         return new LootScreenViewModel(
-            Tr("Treasure"),
+            TrSpans("Treasure"),
             Tr("You have captured resources."),
             new ResourceSetViewModel(resources, ResourceSetProjection.All),
             []);

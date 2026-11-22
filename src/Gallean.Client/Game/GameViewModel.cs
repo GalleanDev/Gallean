@@ -554,7 +554,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         if (activeGame is not null && activeGame.Snapshot.WorldState != savedState)
         {
             OpenScreen(new ConfirmPromptViewModel(
-                Tr("Load game"),
+                TrSpans("Load game"),
                 TrSpans("Do you want to load \"{0}\"? Unsaved progress will be lost.", entry.Metadata.Value.Name),
                 Tr("Load"),
                 ConfirmPromptType.Primary,

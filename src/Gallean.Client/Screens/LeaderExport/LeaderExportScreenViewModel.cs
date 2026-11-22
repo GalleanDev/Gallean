@@ -101,7 +101,7 @@ internal sealed partial class LeaderExportScreenViewModel : AbstractGameScreenVi
         if (selectedItems.Count < scenarioExporter.ItemLimit && HasUnselectedItems())
         {
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Export leader"),
+                TrSpans("Export leader"),
                 FormatUnderLimitPrompt(selectedItems.Count),
                 Tr("Continue"),
                 ConfirmPromptType.Primary,

@@ -590,7 +590,7 @@ internal sealed partial class CityTabViewModel
         WorldDisbandUnitCommand command = new(group, unit.Id);
 
         Game.OpenScreen(new ConfirmPromptViewModel(
-            Tr("Dismiss unit"),
+            TrSpans("Dismiss unit"),
             TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
             Tr("Dismiss"),
             ConfirmPromptType.Danger,
@@ -629,7 +629,7 @@ internal sealed partial class CityTabViewModel
             WorldCityDefinition definition = GameModel.Definitions.GetCity(city.DefinitionId);
 
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Upgrade city"),
+                TrSpans("Upgrade city"),
                 TrSpans("Upgrade the city to {0:*}? This will increase garrison capacity, regeneration and armor bonus.", Tr("level {0}", definition.Level + 1)),
                 Tr("Upgrade"),
                 UpgradeCost,

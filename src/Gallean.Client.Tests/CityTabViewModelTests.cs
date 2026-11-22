@@ -2221,7 +2221,7 @@ public sealed class CityTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Title, Is.EqualTo("Dismiss unit"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Dismiss unit", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Are you sure you want to dismiss ", TextStyle.None), new TextSpan("name", TextStyle.Highlight), new TextSpan("?", TextStyle.None)])));
             Assert.That(prompt.ConfirmLabel, Is.EqualTo("Dismiss"));
         }
@@ -2376,7 +2376,7 @@ public sealed class CityTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Title, Is.EqualTo("Dismiss unit"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Dismiss unit", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Are you sure you want to dismiss ", TextStyle.None), new TextSpan("name", TextStyle.Highlight), new TextSpan("?", TextStyle.None)])));
             Assert.That(prompt.ConfirmLabel, Is.EqualTo("Dismiss"));
         }

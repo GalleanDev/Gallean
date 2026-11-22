@@ -49,7 +49,7 @@ internal sealed partial class SaveGameScreenViewModel : AbstractGameScreenViewMo
         if (SaveList.SelectedSave is { } selected)
         {
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Overwrite saved game"),
+                TrSpans("Overwrite saved game"),
                 TrSpans("Replace \"{0}\" with the current game?", selected.Name),
                 Tr("Overwrite"),
                 ConfirmPromptType.Primary,

@@ -149,7 +149,7 @@ internal sealed partial class ExchangeTabViewModel
             WorldDisbandUnitCommand command = new(new WorldUnitGroup.Stack(slotStack.Id), unit.Id);
 
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Dismiss unit"),
+                TrSpans("Dismiss unit"),
                 TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
                 Tr("Dismiss"),
                 ConfirmPromptType.Danger,

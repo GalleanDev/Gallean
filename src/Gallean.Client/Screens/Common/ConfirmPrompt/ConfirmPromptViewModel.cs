@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 namespace Gallean.Client;
 
 internal sealed partial class ConfirmPromptViewModel(
-    string title,
+    TextSpans title,
     TextSpans message,
     string confirmLabel,
     ResourceSetViewModel? confirmPrice,
@@ -11,7 +11,7 @@ internal sealed partial class ConfirmPromptViewModel(
     Func<Task> confirmAction) : AbstractScreenViewModel
 {
     public ConfirmPromptViewModel(
-        string title,
+        TextSpans title,
         TextSpans message,
         string confirmLabel,
         ConfirmPromptType type,
@@ -20,7 +20,7 @@ internal sealed partial class ConfirmPromptViewModel(
     {
     }
 
-    public string Title { get; } = title;
+    public TextSpans Title { get; } = title;
     public TextSpans Message { get; } = message;
     public string ConfirmLabel { get; } = confirmLabel;
     public ResourceSetViewModel? ConfirmPrice { get; } = confirmPrice;

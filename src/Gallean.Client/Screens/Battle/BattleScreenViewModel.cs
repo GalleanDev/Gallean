@@ -452,7 +452,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
     private void AutoResolve()
     {
         Game.OpenScreen(new ConfirmPromptViewModel(
-            Tr("Instant resolve"),
+            TrSpans("Instant resolve"),
             TrSpans("Would you like to resolve the rest of the battle automatically?"),
             Tr("Resolve"),
             ConfirmPromptType.Primary,

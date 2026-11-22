@@ -654,7 +654,7 @@ public sealed class GameViewModelTests
         using (Assert.EnterMultipleScope())
         {
             Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { firstWorld, menu, loadScreen, prompt }));
-            Assert.That(prompt.Title, Is.EqualTo("Load game"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Load game", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo(TextSpans.FromText("Do you want to load \"Second save\"? Unsaved progress will be lost.")));
             Assert.That(prompt.ConfirmLabel, Is.EqualTo("Load"));
         }

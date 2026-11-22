@@ -154,7 +154,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
 
         TextPromptViewModel prompt = Assert.IsOfType<TextPromptViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(prompt.Title, Is.EqualTo("Hero name"));
+        Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Hero name", TextStyle.None)])));
         Assert.That(prompt.Message, Is.EqualTo("Enter a name for your starting hero."));
         Assert.That(prompt.Text, Is.EqualTo(""));
         Assert.That(prompt.Placeholder, Is.EqualTo("Default name"));

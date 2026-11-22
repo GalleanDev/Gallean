@@ -5,7 +5,7 @@ internal sealed class HotseatTurnScreenViewModel(
     string raceName,
     AssetSpriteKey.LordFace portraitKey) : AbstractScreenViewModel
 {
-    public string LordName { get; } = lordName;
+    public TextSpans Title { get; } = TextSpans.FromText(lordName);
     public string RaceTitle { get; } = Tr("Lord of the {0}", raceName);
     public AssetSpriteKey.LordFace PortraitKey { get; } = portraitKey;
 

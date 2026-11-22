@@ -693,7 +693,7 @@ internal abstract partial class StackTabViewModel
             WorldLockUnitTypeCommand command = new(new WorldUnitGroup.Stack(stack.Id), unit.Id);
 
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Lock unit type"),
+                TrSpans("Lock unit type"),
                 TrSpans("Lock the type of {0:*}? It will never upgrade to another type and will gain levels instead. This cannot be undone.", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
                 Tr("Lock"),
                 ConfirmPromptType.Danger,
@@ -714,7 +714,7 @@ internal abstract partial class StackTabViewModel
             WorldStackId disbandStackId = stack.Id;
 
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Dismiss unit"),
+                TrSpans("Dismiss unit"),
                 TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
                 Tr("Dismiss"),
                 ConfirmPromptType.Danger,
@@ -747,7 +747,7 @@ internal abstract partial class StackTabViewModel
             WorldStackId stackId = currentStack.Id;
 
             Game.OpenScreen(new TextPromptViewModel(
-                Tr("Hero name"),
+                TrSpans("Hero name"),
                 Tr("Enter a new name for your hero."),
                 Leader.Title,
                 Tr("Hero name"),

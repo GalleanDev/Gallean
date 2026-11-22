@@ -30,7 +30,7 @@ internal sealed partial class LoadGameScreenViewModel : AbstractScreenViewModel
         if (SaveList.SelectedSave is { } selected)
         {
             Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Delete saved game"),
+                TrSpans("Delete saved game"),
                 TrSpans("Delete \"{0}\" permanently?", selected.Name),
                 Tr("Delete"),
                 ConfirmPromptType.Danger,

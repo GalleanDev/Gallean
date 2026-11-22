@@ -230,7 +230,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
     private void EditLeaderName()
     {
         Game.OpenScreen(new TextPromptViewModel(
-            Tr("Hero name"),
+            TrSpans("Hero name"),
             Tr("Enter a name for your starting hero."),
             LeaderName,
             Tr("Default name"),

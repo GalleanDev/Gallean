@@ -4917,7 +4917,7 @@ public sealed class WorldScreenViewModelTests
 
         LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(loot.Title, Is.EqualTo("Treasure"));
+        Assert.That(loot.Title, Is.EqualTo(new TextSpans([new TextSpan("Treasure", TextStyle.None)])));
         Assert.That(loot.Text, Is.EqualTo("You received 3 items."));
         Assert.That(
             loot.Items,
@@ -5062,7 +5062,7 @@ public sealed class WorldScreenViewModelTests
 
         LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(loot.Title, Is.EqualTo("Treasure"));
+        Assert.That(loot.Title, Is.EqualTo(new TextSpans([new TextSpan("Treasure", TextStyle.None)])));
         Assert.That(loot.Text, Is.EqualTo("You received an item."));
         Assert.That(
             loot.Items,
@@ -6143,7 +6143,7 @@ public sealed class WorldScreenViewModelTests
 
         LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(loot.Title, Is.EqualTo("You are victorious!"));
+        Assert.That(loot.Title, Is.EqualTo(new TextSpans([new TextSpan("You are victorious!", TextStyle.None)])));
         Assert.That(loot.Text, Is.EqualTo("You found treasure."));
         Assert.That(loot.Resources, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(200, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
         Assert.That(
@@ -6464,7 +6464,7 @@ public sealed class WorldScreenViewModelTests
 
         ThiefActionResultScreenViewModel result = Assert.IsOfType<ThiefActionResultScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(result.Title, Is.EqualTo("Success!"));
+        Assert.That(result.Title, Is.EqualTo(new TextSpans([new TextSpan("Success!", TextStyle.None)])));
         Assert.That(result.Text, Is.EqualTo("Your spy has infiltrated the enemy ranks. Right-click enemy parties and cities to reveal information about them!"));
         Assert.That(result.ActionName, Is.EqualTo("Spy-name"));
         Assert.That(result.ActionIcon, Is.EqualTo(IconMoniker.ThiefSpy));
@@ -6540,7 +6540,7 @@ public sealed class WorldScreenViewModelTests
 
         ThiefActionResultScreenViewModel result = Assert.IsOfType<ThiefActionResultScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(result.Title, Is.EqualTo("Failure!"));
+        Assert.That(result.Title, Is.EqualTo(new TextSpans([new TextSpan("Failure!", TextStyle.None)])));
         Assert.That(result.Text, Is.EqualTo("Your thief has been captured and executed!"));
         Assert.That(result.ActionName, Is.EqualTo("PoisonStack-name"));
         Assert.That(result.ActionIcon, Is.EqualTo(IconMoniker.ThiefPoisonStack));
@@ -6606,7 +6606,7 @@ public sealed class WorldScreenViewModelTests
 
         ThiefActionResultScreenViewModel result = Assert.IsOfType<ThiefActionResultScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(result.Title, Is.EqualTo("Thief actions"));
+        Assert.That(result.Title, Is.EqualTo(new TextSpans([new TextSpan("Thief actions", TextStyle.None)])));
         Assert.That(result.Text, Is.EqualTo("Player2 has poisoned your party."));
         Assert.That(result.ActionName, Is.EqualTo("PoisonStack-name"));
         Assert.That(result.ActionIcon, Is.EqualTo(IconMoniker.ThiefPoisonStack));
@@ -8099,7 +8099,7 @@ public sealed class WorldScreenViewModelTests
 
         HotseatTurnScreenViewModel firstTurn = Assert.IsOfType<HotseatTurnScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(firstTurn.LordName, Is.EqualTo("Player1"));
+        Assert.That(firstTurn.Title, Is.EqualTo(new TextSpans([new TextSpan("Player1", TextStyle.None)])));
         Assert.That(firstTurn.RaceTitle, Is.EqualTo("Lord of the Empire"));
         Assert.That(firstTurn.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Human, 0, IsLarge: true)));
 
@@ -8111,7 +8111,7 @@ public sealed class WorldScreenViewModelTests
 
         HotseatTurnScreenViewModel secondTurn = Assert.IsOfType<HotseatTurnScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(secondTurn.LordName, Is.EqualTo("Player2"));
+        Assert.That(secondTurn.Title, Is.EqualTo(new TextSpans([new TextSpan("Player2", TextStyle.None)])));
         Assert.That(secondTurn.RaceTitle, Is.EqualTo("Lord of the Undead Hordes"));
         Assert.That(secondTurn.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Undead, 0, IsLarge: true)));
 
@@ -8381,7 +8381,7 @@ public sealed class WorldScreenViewModelTests
 
         LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(loot.Title, Is.EqualTo("Treasure"));
+        Assert.That(loot.Title, Is.EqualTo(new TextSpans([new TextSpan("Treasure", TextStyle.None)])));
         Assert.That(loot.Text, Is.EqualTo("You received an item."));
         Assert.That(loot.Resources, Is.Null);
         Assert.That(
@@ -8437,7 +8437,7 @@ public sealed class WorldScreenViewModelTests
 
         LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(loot.Title, Is.EqualTo("New spells"));
+        Assert.That(loot.Title, Is.EqualTo(new TextSpans([new TextSpan("New spells", TextStyle.None)])));
         Assert.That(loot.Text, Is.EqualTo("You received a spell."));
         Assert.That(loot.Resources, Is.Null);
         Assert.That(
@@ -8724,7 +8724,7 @@ public sealed class WorldScreenViewModelTests
 
         LootScreenViewModel loot = Assert.IsOfType<LootScreenViewModel>(gameViewModel.TopScreen);
 
-        Assert.That(loot.Title, Is.EqualTo("Treasure"));
+        Assert.That(loot.Title, Is.EqualTo(new TextSpans([new TextSpan("Treasure", TextStyle.None)])));
         Assert.That(loot.Text, Is.EqualTo("You have captured resources."));
         Assert.That(loot.Resources, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(300, 0, 0, 0, 50, 0), ResourceSetProjection.All)));
         Assert.That(loot.Items, Is.Empty);

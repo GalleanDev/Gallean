@@ -1424,7 +1424,7 @@ public sealed class StackTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Title, Is.EqualTo("Dismiss unit"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Dismiss unit", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Are you sure you want to dismiss ", TextStyle.None), new TextSpan("name", TextStyle.Highlight), new TextSpan("?", TextStyle.None)])));
             Assert.That(prompt.ConfirmLabel, Is.EqualTo("Dismiss"));
         }
@@ -4292,7 +4292,7 @@ public sealed class StackTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Title, Is.EqualTo("Hero name"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Hero name", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo("Enter a new name for your hero."));
             Assert.That(prompt.Text, Is.EqualTo("name"));
             Assert.That(prompt.MaxLength, Is.EqualTo(20));
@@ -4743,7 +4743,7 @@ public sealed class StackTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Title, Is.EqualTo("Dismiss unit"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Dismiss unit", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Are you sure you want to dismiss ", TextStyle.None), new TextSpan("name", TextStyle.Highlight), new TextSpan("?", TextStyle.None)])));
             Assert.That(prompt.ConfirmLabel, Is.EqualTo("Dismiss"));
         }
@@ -4847,7 +4847,7 @@ public sealed class StackTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Title, Is.EqualTo("Lock unit type"));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Lock unit type", TextStyle.None)])));
             Assert.That(prompt.Message, Is.EqualTo(new TextSpans([
                 new TextSpan("Lock the type of ", TextStyle.None),
                 new TextSpan("name", TextStyle.Highlight),

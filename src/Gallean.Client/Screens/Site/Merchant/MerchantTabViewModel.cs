@@ -124,7 +124,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         WorldResourceSet value = GetValue(EnumerateSellableItems());
 
         Game.OpenScreen(new ConfirmPromptViewModel(
-            Tr("Sell all items"),
+            TrSpans("Sell all items"),
             TrSpans("The merchant offers {0:*} for {1:b}.", WorldResourceFormatter.Format(value), Tr("all your items")),
             Tr("Sell all"),
             ConfirmPromptType.Danger,
@@ -149,7 +149,7 @@ internal sealed partial class MerchantTabViewModel : ManagementTabViewModel, IDr
         WorldResourceSet value = GetValue(EnumerateSellableValuables());
 
         Game.OpenScreen(new ConfirmPromptViewModel(
-            Tr("Sell all valuables"),
+            TrSpans("Sell all valuables"),
             TrSpans("The merchant offers {0:*} for {1:b}.", WorldResourceFormatter.Format(value), Tr("all your valuables")),
             Tr("Sell"),
             ConfirmPromptType.Success,

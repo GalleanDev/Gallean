@@ -79,7 +79,7 @@ internal sealed partial class DiplomacyTabViewModel : ManagementTabViewModel
                 break;
             case DiplomacyActionType.ProposeAlliance:
                 Game.OpenScreen(new ConfirmPromptViewModel(
-                    Tr("Offer alliance"),
+                    TrSpans("Offer alliance"),
                     TrSpans("Do you want to ask the {0} for an alliance?", player.RaceName),
                     Tr("Offer"),
                     ConfirmPromptType.Primary,
@@ -87,7 +87,7 @@ internal sealed partial class DiplomacyTabViewModel : ManagementTabViewModel
                 break;
             case DiplomacyActionType.BreakAlliance:
                 Game.OpenScreen(new ConfirmPromptViewModel(
-                    Tr("Break alliance"),
+                    TrSpans("Break alliance"),
                     TrSpans("Breaking the alliance will greatly offend the {0}. Do you want to end the alliance and go to war?", player.RaceName),
                     Tr("Break"),
                     ConfirmPromptType.Primary,
@@ -95,7 +95,7 @@ internal sealed partial class DiplomacyTabViewModel : ManagementTabViewModel
                 break;
             case DiplomacyActionType.ExchangeMap:
                 Game.OpenScreen(new ConfirmPromptViewModel(
-                    Tr("Exchange map information"),
+                    TrSpans("Exchange map information"),
                     TrSpans("Do you want to ask the {0} to exchange maps?", player.RaceName),
                     Tr("Exchange"),
                     ConfirmPromptType.Primary,
