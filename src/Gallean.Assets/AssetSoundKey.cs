@@ -58,7 +58,7 @@ public closed record AssetSoundKey : AssetKey, IParsable<AssetSoundKey>
     {
         internal const string Category = "capital-music";
 
-        public const int VariantCount = 3;
+        public const int VariantCount = 6;
 
         public int Variant { get; } = Variant.Mod(VariantCount);
 

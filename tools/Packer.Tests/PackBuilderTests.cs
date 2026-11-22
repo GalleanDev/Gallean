@@ -566,7 +566,7 @@ public sealed class PackBuilderTests
         Assert.That(rows, Is.EqualTo([
             "Background required 32",
             "BackgroundOverlay optional 36",
-            "GameAsset optional 447",
+            "GameAsset optional 465",
             "GameAsset required 858"
         ]));
     }

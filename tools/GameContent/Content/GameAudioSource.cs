@@ -160,7 +160,7 @@ internal sealed partial class GameAudioSource(
             {
                 AssetSoundKey.CapitalMusic key = new(race, variant);
 
-                yield return OptionalSound(key, source => source.Audio.GetMusic(Audio.CapitalMusic(key.Race), key.Variant));
+                yield return OptionalSound(key, source => source.Audio.GetCapitalMusic(key));
             }
         }
 
@@ -367,6 +367,20 @@ internal sealed partial class GameAudioSource(
         if (music is not null)
         {
             return PickVariant(music.GetMusic(names), variant);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private AssetSound? GetCapitalMusic(AssetSoundKey.CapitalMusic key)
+    {
+        IReadOnlyList<string> names = Audio.CapitalMusic(key.Race);
+
+        if (key.Variant < names.Count)
+        {
+            return GetMusic([names[key.Variant]], variant: 0);
         }
         else
         {

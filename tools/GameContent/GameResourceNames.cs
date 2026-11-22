@@ -123,10 +123,10 @@ internal static class GameResourceNames
         {
             return race switch
             {
-                WorldRace.Human => ["HUMNTRK1.WAV", "HUMNTRK2.WAV", "HUMNTRK3.WAV"],
-                WorldRace.Undead => ["UNDETRK1.WAV", "UNDETRK2.WAV", "UNDETRK3.WAV"],
-                WorldRace.Heretic => ["HERETRK1.WAV", "HERETRK2.WAV", "HERETRK3.WAV"],
-                WorldRace.Dwarf => ["DWRFTRK1.WAV", "DWRFTRK2.WAV", "DWRFTRK3.WAV"],
+                WorldRace.Human => ["HUMNTRK1.WAV", "HUMNTRK2.WAV", "HUMNTRK3.WAV", "HUMNTRK4.WAV", "HUMNTRK5.WAV", "HUMNTRK6.WAV"],
+                WorldRace.Undead => ["UNDETRK1.WAV", "UNDETRK2.WAV", "UNDETRK3.WAV", "UNDETRK4.WAV", "UNDETRK5.WAV", "UNDETRK6.WAV"],
+                WorldRace.Heretic => ["HERETRK1.WAV", "HERETRK2.WAV", "HERETRK3.WAV", "HERETRK4.WAV", "HERETRK5.WAV", "HERETRK6.WAV"],
+                WorldRace.Dwarf => ["DWRFTRK1.WAV", "DWRFTRK2.WAV", "DWRFTRK3.WAV", "DWRFTRK4.WAV", "DWRFTRK5.WAV", "DWRFTRK6.WAV"],
                 WorldRace.Neutral => [],
                 WorldRace.Elf => ["ELFTRK1.WAV", "ELFTRK2.WAV", "ELFTRK3.WAV"]
             };

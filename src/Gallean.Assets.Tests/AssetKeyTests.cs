@@ -203,7 +203,7 @@ public sealed class AssetKeyTests
             Assert.That(new WorldMusic(10).CanonicalId, Is.EqualTo("world-music/10"));
             Assert.That(new WorldMusic(11).CanonicalId, Is.EqualTo("world-music/0"));
             Assert.That(new AmbientMusic(10).CanonicalId, Is.EqualTo("ambient-music/10"));
-            Assert.That(new CapitalMusic(WorldRace.Human, 10).CanonicalId, Is.EqualTo("capital-music/human/1"));
+            Assert.That(new CapitalMusic(WorldRace.Human, 10).CanonicalId, Is.EqualTo("capital-music/human/4"));
             Assert.That(new BattleUnitAttack(new UnitDefinitionId("G000UU0001"), 6).CanonicalId, Is.EqualTo("battle-unit-attack/g000uu0001/0"));
             Assert.That(new BattleUnitHit(new UnitDefinitionId("G000UU0001"), 2).CanonicalId, Is.EqualTo("battle-unit-hit/g000uu0001/2"));
             Assert.That(new BattleUnitTouch(new UnitDefinitionId("G000UU0001"), 7).CanonicalId, Is.EqualTo("battle-unit-touch/g000uu0001/2"));
