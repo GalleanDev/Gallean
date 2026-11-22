@@ -2,7 +2,7 @@ using NAudio.Wave;
 
 namespace Gallean.Client.Tests;
 
-public sealed class MixVolumeSampleProviderTests
+public sealed class CubicVolumeSampleProviderTests
 {
     private sealed class TestSampleProvider(float sample) : ISampleProvider
     {
@@ -19,7 +19,7 @@ public sealed class MixVolumeSampleProviderTests
     [Test]
     public void HalfVolumeTest()
     {
-        MixVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 0.5f);
+        CubicVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 0.5f);
         float[] samples = new float[4];
 
         int read = provider.Read(samples);
@@ -31,7 +31,7 @@ public sealed class MixVolumeSampleProviderTests
     [Test]
     public void FullVolumeTest()
     {
-        MixVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 1.0f);
+        CubicVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 1.0f);
         float[] samples = new float[4];
 
         int read = provider.Read(samples);
@@ -43,7 +43,7 @@ public sealed class MixVolumeSampleProviderTests
     [Test]
     public void ZeroVolumeTest()
     {
-        MixVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 0.0f);
+        CubicVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 0.0f);
         float[] samples = new float[4];
 
         int read = provider.Read(samples);
@@ -55,7 +55,7 @@ public sealed class MixVolumeSampleProviderTests
     [Test]
     public void ChangeVolumeTest()
     {
-        MixVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 1.0f);
+        CubicVolumeSampleProvider provider = new(new TestSampleProvider(0.8f), 1.0f);
         float[] samples = new float[4];
 
         provider.Volume = 0.5f;

@@ -2,7 +2,7 @@ using NAudio.Wave;
 
 namespace Gallean.Client;
 
-internal sealed class MixVolumeSampleProvider(ISampleProvider source, float volume) : ISampleProvider
+internal sealed class CubicVolumeSampleProvider(ISampleProvider source, float volume) : ISampleProvider
 {
     private volatile float volume = volume;
 
