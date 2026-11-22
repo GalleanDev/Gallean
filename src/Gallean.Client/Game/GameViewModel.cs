@@ -876,7 +876,12 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 WorldRenderComposer renderComposer = new(gameModel.Definitions, gameModel.Scenario, assets);
                 WorldRenderState renderState = renderComposer.Compose(renderRequest);
                 WorldPlayer viewPlayer = snapshot.WorldState.Players[snapshot.ViewPlayerId];
-                CapitalSceneViewModel? capitalScene = CapitalSceneViewModel.Create(viewPlayer.Race, viewPlayer.Buildings.Acquired, constructedBuildingId: null);
+                CapitalSceneViewModel? capitalScene = CapitalSceneViewModel.Create(
+                    viewPlayer.Race,
+                    viewPlayer.Buildings.Acquired,
+                    constructedBuildingId: null,
+                    gameModel.Definitions,
+                    gameModel.Texts);
 
                 return WorldAssetPreloadPlan.BuildWorld(renderState, capitalScene);
             });

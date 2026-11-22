@@ -416,7 +416,13 @@
   </UserControl.Resources>
 
   <Grid Background="Transparent" local:Backdrop.CloseCommand="{Binding Screen.CloseCommand}">
-    <ContentControl Content="{Binding CapitalScene}" />
+    <Button Theme="{StaticResource BackgroundButtonTheme}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Command="{Binding ShowUiCommand}"
+            IsVisible="{Binding !IsUiVisible}" />
+
+    <ContentControl Content="{Binding CapitalScene}" IsHitTestVisible="{Binding !IsUiVisible}" Tapped="OnSceneTapped" />
 
     <Panel Classes="building-panels" Classes.hidden="{Binding !IsUiVisible}">
       <Border Background="{StaticResource BuildingGraphSceneOverlayBrush}" IsHitTestVisible="False" />
@@ -504,12 +510,6 @@
                  VerticalAlignment="Center"
                  Foreground="{StaticResource SecondaryTextBrush}" />
     </Panel>
-
-    <Button Theme="{StaticResource BackgroundButtonTheme}"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Command="{Binding ShowUiCommand}"
-            IsVisible="{Binding !IsUiVisible}" />
 
     <Panel Classes="ui-toggle" IsVisible="{Binding CapitalScene, Converter={x:Static ObjectConverters.IsNotNull}}">
       <Button Classes="icon-button" Command="{Binding ToggleUiCommand}" IsVisible="{Binding IsUiVisible}" ToolTip.Tip="{local:Text 'Hide interface'}">

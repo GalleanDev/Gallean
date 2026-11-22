@@ -230,6 +230,10 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         {
             return AnimationHitMaskBuilder.Build(metadata, frames);
         }
+        else if (key is AssetAnimationKey.CapitalBuilding)
+        {
+            return AnimationHitMaskBuilder.Build(metadata, [frames[0]]);
+        }
         else
         {
             return null;

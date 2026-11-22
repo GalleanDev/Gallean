@@ -174,7 +174,12 @@ internal sealed partial class BuildingTabViewModel : ManagementTabViewModel
             info);
 
         Graph = graphBuilder.Build();
-        CapitalScene = CapitalSceneViewModel.Create(player.Race, player.Buildings.Acquired, constructedBuildingId);
+        CapitalScene = CapitalSceneViewModel.Create(
+            player.Race,
+            player.Buildings.Acquired,
+            constructedBuildingId,
+            GameModel.Definitions,
+            GameModel.Texts);
 
         ApplySelection();
     }

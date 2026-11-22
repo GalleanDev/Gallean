@@ -1255,7 +1255,12 @@ internal sealed partial class CityTabViewModel
             WorldRace race = WorldState.Players[capital.OwnerId].Race;
             WorldPlayerBuildings buildings = WorldState.Players[capital.OwnerId].Buildings;
 
-            return CapitalSceneViewModel.Create(race, buildings.Acquired, constructedBuildingId: null);
+            return CapitalSceneViewModel.Create(
+                race,
+                buildings.Acquired,
+                constructedBuildingId: null,
+                GameModel.Definitions,
+                GameModel.Texts);
         }
         else
         {

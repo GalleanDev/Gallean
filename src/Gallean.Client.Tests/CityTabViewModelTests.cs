@@ -1062,6 +1062,11 @@ public sealed class CityTabViewModelTests
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
 
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
         WorldPlayerBuildingDefinition tower = new(
             Id: new WorldPlayerBuildingDefinitionId("G000BB0012"),
             NameTextId: new GlobalTextId("Tower"),
@@ -1081,18 +1086,13 @@ public sealed class CityTabViewModelTests
             UnitBranch: null,
             Level: 1,
             Cost: WorldResourceSet.Empty,
-            UnitIds: []);
+            UnitIds: [soldierDefinition.Id]);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map) with
         {
             Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0),
             Buildings = new WorldPlayerBuildings([], [tower.Id, hall.Id])
         };
-
-        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
-            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
-            movementPoints: 20, leadership: 3);
-        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
 
         WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
 
@@ -1145,30 +1145,41 @@ public sealed class CityTabViewModelTests
             new(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 0),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 1),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 0),
+                Building: null,
                 IsConstructed: false),
             new(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(new WorldPlayerBuildingDefinitionId("G000BB0012")),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(new WorldPlayerBuildingDefinitionId("G000BB0012")), "Tower", "Tower description", []),
                 IsConstructed: false),
             new(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 2),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 1),
+                Building: null,
                 IsConstructed: false),
             new(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(new WorldPlayerBuildingDefinitionId("G000BB0023")),
+                Building: new CapitalBuildingViewModel(
+                    new AssetSpriteKey.BuildingIcon(new WorldPlayerBuildingDefinitionId("G000BB0023")),
+                    "Hall",
+                    "Hall description",
+                    [new CapitalBuildingUnitViewModel(new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("soldier")), "name")]),
                 IsConstructed: false)
         ];
 

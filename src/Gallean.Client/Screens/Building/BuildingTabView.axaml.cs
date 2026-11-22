@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives.PopupPositioning;
+using Avalonia.Input;
 
 namespace Gallean.Client;
 
@@ -12,6 +13,15 @@ internal sealed partial class BuildingTabView : UserControl
     public BuildingTabView()
     {
         InitializeComponent();
+    }
+
+    private BuildingTabViewModel ViewModel => (BuildingTabViewModel)DataContext!;
+
+    private void OnSceneTapped(object? sender, TappedEventArgs e)
+    {
+        e.Handled = true;
+
+        ViewModel.ShowUiCommand.Execute(null);
     }
 
     private static void PlaceDetails(CustomPopupPlacement placement)

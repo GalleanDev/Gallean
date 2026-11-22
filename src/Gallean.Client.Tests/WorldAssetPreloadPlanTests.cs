@@ -72,9 +72,9 @@ public sealed class WorldAssetPreloadPlanTests
         CapitalSceneViewModel capitalScene = new(
             capitalBackground,
             [
-                new CapitalSceneLayerViewModel(capitalBackground, AnimationKey: null, IsConstructed: false),
-                new CapitalSceneLayerViewModel(SpriteKey: null, capitalOverlay, IsConstructed: false),
-                new CapitalSceneLayerViewModel(SpriteKey: null, capitalBuilding, IsConstructed: false)
+                new CapitalSceneLayerViewModel(capitalBackground, AnimationKey: null, Building: null, IsConstructed: false),
+                new CapitalSceneLayerViewModel(SpriteKey: null, capitalOverlay, Building: null, IsConstructed: false),
+                new CapitalSceneLayerViewModel(SpriteKey: null, capitalBuilding, Building: null, IsConstructed: false)
             ]);
 
         AssetPreloadPlan plan = WorldAssetPreloadPlan.BuildWorld(state, capitalScene);

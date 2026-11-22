@@ -1,9 +1,11 @@
 using Avalonia;
 using Avalonia.Media;
+using Avalonia.Rendering;
+using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal sealed class AnimationVisual : AbstractAnimatedVisual
+internal sealed class AnimationVisual : AbstractAnimatedVisual, ICustomHitTest
 {
     public static readonly StyledProperty<AssetAnimationKey?> AnimationKeyProperty =
         AvaloniaProperty.Register<AnimationVisual, AssetAnimationKey?>(nameof(AnimationKey));
@@ -153,6 +155,27 @@ internal sealed class AnimationVisual : AbstractAnimatedVisual
                 context.Custom(new SpriteRenderOperation(destination, ToPixelSpace(logicalSource, frame), frame));
             }
         }
+    }
+
+    public bool HitTest(Point point)
+    {
+        if (animation?.HitMask is not null && Bounds is { Width: > 0, Height: > 0 })
+        {
+            ImmutableBitmap mask = animation.HitMask;
+            Size boxSize = AnimationSize(animation);
+            Rect viewport = new(Bounds.Size);
+            Vector scale = Stretch.CalculateScaling(Bounds.Size, boxSize, StretchDirection);
+            Rect box = viewport.CenterRect(new Rect(boxSize * scale));
+            int column = (int)Math.Floor((point.X - box.X) / scale.X);
+            int row = (int)Math.Floor((point.Y - box.Y) / scale.Y);
+
+            if (column >= 0 && row >= 0 && column < mask.Width && row < mask.Height)
+            {
+                return mask.Get(column, row);
+            }
+        }
+
+        return false;
     }
 
     private static Size AnimationSize(Animation animation)

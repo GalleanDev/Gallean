@@ -623,30 +623,37 @@ public sealed class BuildingTabViewModelTests
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 0),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 1),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 0),
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(towerId),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(towerId), "Tower", "description", []),
                 IsConstructed: true),
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 2),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 1),
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(hallId),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(hallId), "Hall", "description", []),
                 IsConstructed: false)
         ]));
 
@@ -656,30 +663,37 @@ public sealed class BuildingTabViewModelTests
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 0),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 1),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 0),
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(towerId),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(towerId), "Tower", "description", []),
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 2),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 1),
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(hallId),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(hallId), "Hall", "description", []),
                 IsConstructed: false)
         ]));
 
@@ -695,30 +709,37 @@ public sealed class BuildingTabViewModelTests
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 0),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 1),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 0),
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(towerId),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(towerId), "Tower", "description", []),
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 new AssetSpriteKey.CapitalBackground(WorldRace.Human, 2),
                 AnimationKey: null,
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBackgroundOverlay(WorldRace.Human, 1),
+                Building: null,
                 IsConstructed: false),
             new CapitalSceneLayerViewModel(
                 SpriteKey: null,
                 AnimationKey: new AssetAnimationKey.CapitalBuilding(hallId),
+                Building: new CapitalBuildingViewModel(new AssetSpriteKey.BuildingIcon(hallId), "Hall", "description", []),
                 IsConstructed: false)
         ]));
     }
