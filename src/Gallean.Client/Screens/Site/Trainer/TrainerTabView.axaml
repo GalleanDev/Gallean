@@ -67,7 +67,7 @@
                                TextWrapping="Wrap"
                                TextAlignment="Center"
                                HorizontalAlignment="Center"
-                               IsVisible="{Binding GainText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                               local:TextLines.MinLines="1" />
                     <local:BarVisual Classes="trainer-experience experience"
                                      Classes.maximum="{Binding IsMaximumLevel}"
                                      Classes.pending="{Binding IsPendingUpgrade}"
