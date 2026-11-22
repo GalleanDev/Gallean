@@ -129,9 +129,11 @@ internal static partial class BattleAttackCalculator
             ImmutableArray<UnitAttackDefinitionId> attackIds = [.. attacks.Select(definition => definition.Id)];
             List<BattleUnitId> targetIds = [.. targets.Targets.GetUnitIds()];
 
+            BattleUnitAttackStepEvent step = new(attackerId, attackIds, [.. targetIds], 0, [], 0);
+
             if (attack.Reach != UnitAttackReach.All)
             {
-                BattleAttackResult stepResult = ResolveAttackStep(state, context, attackerId, targetIds[0], attackIds, 0);
+                BattleAttackResult stepResult = ResolveAttackStep(state, context, step);
 
                 if (stepResult.Failed)
                 {
@@ -140,14 +142,10 @@ internal static partial class BattleAttackCalculator
             }
 
             List<BattleEvent> events = [];
-            int accuracyReductionPerTarget = GetAccuracyReductionPerTarget(state, context, attackerId);
-            int accuracyReduction = 0;
 
-            foreach (BattleUnitId targetId in targetIds)
+            if (targetIds.Count > 0)
             {
-                events.Add(new BattleUnitAttackStepEvent(attackerId, targetId, attackIds, accuracyReduction));
-
-                accuracyReduction += accuracyReductionPerTarget;
+                events.Add(step);
             }
 
             return new AttackInfo(attacks, targets.Targets, events, null);
@@ -173,39 +171,72 @@ internal static partial class BattleAttackCalculator
         return TargetResolver.Resolve(target, resolverContext);
     }
 
-    public static BattleAttackResult ResolveAttackStep(
-        BattleState state,
-        IEngineContext context,
-        BattleUnitId attackerId,
-        BattleUnitId targetId,
-        ImmutableArray<UnitAttackDefinitionId> attackIds,
-        int accuracyReduction)
+    public static BattleAttackResult ResolveAttackStep(BattleState state, IEngineContext context, BattleUnitAttackStepEvent step)
     {
-        List<BattleAttackResult> failed = [];
+        BattleUnitId targetId = step.TargetIds[step.TargetIndex];
+        ImmutableArray<BattleUnitId> nextTargetIds = step.NextTargetIds;
+        BattleAttackResult attackResult;
 
-        for (int i = 0; i < attackIds.Length; i++)
+        if (state.TryGetUnit(targetId) is null)
         {
-            BattleAttackResult attackResult = ResolveAttack(state, context, attackerId, targetId, attackIds[i], accuracyReduction);
+            attackResult = BattleAttackResult.Fail(BattleCommandError.TargetNotInBattle);
+        }
+        else
+        {
+            attackResult = ResolveAttack(
+                state,
+                context,
+                step.AttackerId,
+                targetId,
+                step.AttackIds[0],
+                step.AccuracyReduction,
+                step.TargetIds.Length);
 
-            ImmutableArray<UnitAttackDefinitionId> remaining = attackIds[(i + 1)..];
-
-            if (attackResult.Failed)
+            if (attackResult.Failed || attackResult.DidHit)
             {
-                failed.Add(attackResult);
-            }
-            else if (attackResult.DidHit && !remaining.IsEmpty)
-            {
-                BattleUnitAttackStepEvent stepEvent = new(attackerId, targetId, remaining, 0);
-
-                return attackResult with { Events = [.. attackResult.Events, stepEvent] };
-            }
-            else
-            {
-                return attackResult;
+                nextTargetIds = nextTargetIds.Add(targetId);
             }
         }
 
-        return failed[0];
+        int accuracyReduction = step.AccuracyReduction + GetAccuracyReductionPerTarget(state, context, step.AttackerId);
+        int nextTargetIndex = step.TargetIndex + 1;
+        ImmutableArray<UnitAttackDefinitionId> nextAttackIds = step.AttackIds[1..];
+        BattleUnitAttackStepEvent? nextStep;
+
+        if (nextTargetIndex < step.TargetIds.Length)
+        {
+            nextStep = step with { TargetIndex = nextTargetIndex, NextTargetIds = nextTargetIds, AccuracyReduction = accuracyReduction };
+        }
+        else if (!nextAttackIds.IsEmpty && !nextTargetIds.IsEmpty)
+        {
+            nextStep = new BattleUnitAttackStepEvent(step.AttackerId, nextAttackIds, nextTargetIds, 0, [], accuracyReduction);
+        }
+        else
+        {
+            nextStep = null;
+        }
+
+        if (nextStep is null)
+        {
+            return attackResult;
+        }
+        else if (attackResult.Failed)
+        {
+            BattleAttackResult nextResult = ResolveAttackStep(state, context, nextStep);
+
+            if (nextResult.Failed)
+            {
+                return attackResult;
+            }
+            else
+            {
+                return nextResult;
+            }
+        }
+        else
+        {
+            return attackResult with { Events = [.. attackResult.Events, nextStep] };
+        }
     }
 
     private static BattleAttackResult ResolveAttack(
@@ -214,17 +245,25 @@ internal static partial class BattleAttackCalculator
         BattleUnitId attackerId,
         BattleUnitId targetId,
         UnitAttackDefinitionId attackId,
-        int accuracyReduction)
+        int accuracyReduction,
+        int targetCount)
     {
         UnitAttackDefinition attack = context.Definitions.GetAttack(attackId);
         IBattleAttackResolver resolver = BattleAttackResolverFactory.Create(attack.Type);
 
         BattleUnit attacker = state.GetUnit(attackerId);
         BattleSideModifiers sideModifiers = state.Modifiers.GetModifiers(attacker.Side);
-
         UnitAttackStats attackStats = context.UnitStats.GetBattleAttackStats(state, attackerId, attack);
+
         int accuracy = Math.Clamp(attackStats.Accuracy + sideModifiers.AccuracyBonus, 0, context.Globals.MaxAttackAccuracy);
-        attackStats = attackStats with { Accuracy = Math.Max(0, accuracy - accuracyReduction) };
+        accuracy = Math.Max(0, accuracy - accuracyReduction);
+
+        if (attacker.EquipmentAttackIds.Contains(attackId))
+        {
+            accuracy /= targetCount;
+        }
+
+        attackStats = attackStats with { Accuracy = accuracy };
 
         return resolver.Resolve(state, context, attackerId, new BattleAttackUnitTarget(targetId), attack, attackStats);
     }

@@ -5,8 +5,10 @@ namespace Gallean.Engine;
 
 public sealed record BattleUnitAttackStepEvent(
     BattleUnitId AttackerId,
-    BattleUnitId TargetId,
     ImmutableArray<UnitAttackDefinitionId> AttackIds,
+    ImmutableArray<BattleUnitId> TargetIds,
+    int TargetIndex,
+    ImmutableArray<BattleUnitId> NextTargetIds,
     int AccuracyReduction) : BattleEvent
 {
     public bool Equals(BattleUnitAttackStepEvent? other)
@@ -22,8 +24,10 @@ public sealed record BattleUnitAttackStepEvent(
         }
 
         return AttackerId == other.AttackerId &&
-               TargetId == other.TargetId &&
                AttackIds.SequenceEqual(other.AttackIds) &&
+               TargetIds.SequenceEqual(other.TargetIds) &&
+               TargetIndex == other.TargetIndex &&
+               NextTargetIds.SequenceEqual(other.NextTargetIds) &&
                AccuracyReduction == other.AccuracyReduction;
     }
 
@@ -37,8 +41,10 @@ public sealed record BattleUnitAttackStepEvent(
         HashCode hash = new();
 
         hash.Add(AttackerId);
-        hash.Add(TargetId);
         hash.AddSequence(AttackIds);
+        hash.AddSequence(TargetIds);
+        hash.Add(TargetIndex);
+        hash.AddSequence(NextTargetIds);
         hash.Add(AccuracyReduction);
 
         return hash.ToHashCode();

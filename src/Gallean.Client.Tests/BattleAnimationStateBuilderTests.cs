@@ -3617,7 +3617,7 @@ public sealed class BattleAnimationStateBuilderTests
                     new ItemDefinitionId("SPHERE"),
                     new BattleUnitId(1),
                     new BattleAttackUnitTarget(new BattleUnitId(2))),
-                new BattleUnitAttackStepEvent(new BattleUnitId(1), new BattleUnitId(2), [new UnitAttackDefinitionId("ORB")], AccuracyReduction: 0),
+                new BattleUnitAttackStepEvent(new BattleUnitId(1), [new UnitAttackDefinitionId("ORB")], [new BattleUnitId(2)], TargetIndex: 0, [], AccuracyReduction: 0),
                 new BattleUnitAttackHitEvent(new BattleUnitId(1), new BattleUnitId(2), new UnitAttackDefinitionId("ORB"), 20),
                 new BattleUnitTurnEndingEvent(new BattleUnitId(1)),
                 new BattleUnitTurnStartedEvent(new BattleUnitTurn(new BattleUnitId(2), BattleUnitTurnType.Normal))

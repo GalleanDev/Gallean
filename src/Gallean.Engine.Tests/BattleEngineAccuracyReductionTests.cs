@@ -182,4 +182,64 @@ public sealed class BattleEngineAccuracyReductionTests
                 CurrentRound = BattleRound.Normal(1)
             }));
     }
+
+    [Test]
+    public void EquipmentAttackTest()
+    {
+        UnitDefinition archmageDefinition = TestHelpers.SimpleUnitDefinition("archmage", maxHitpoints: 30, initiative: 50, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("archmage"), 50, 5, accuracy: 100, reach: UnitAttackReach.All),
+            Category = UnitCategory.Leader,
+            LeaderCategory = UnitLeaderCategory.Mage
+        };
+        UnitAttackDefinition ringAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("ring"), 30, 3, accuracy: 100, reach: UnitAttackReach.Any);
+        UnitDefinition firstDefenderDefinition = TestHelpers.SimpleUnitDefinition("first", maxHitpoints: 20, initiative: 40, damage: 5);
+        UnitDefinition secondDefenderDefinition = TestHelpers.SimpleUnitDefinition("second", maxHitpoints: 20, initiative: 30, damage: 5);
+
+        BattleUnit archmage = new(new BattleUnitId(0), null, archmageDefinition.Id, BattleSide.Attacker, 30, 0, 0, 1, [], [], null, [ringAttack.Id], null, false);
+        BattleUnit firstDefender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, firstDefenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+        BattleUnit secondDefender = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, secondDefenderDefinition.Id, BattleSide.Defender, hitpoints: 20);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(archmageDefinition)
+            .WithDefinition(ringAttack)
+            .WithDefinition(firstDefenderDefinition)
+            .WithDefinition(secondDefenderDefinition)
+            .WithDefinition(HumanRace(archmageDefinition.Id))
+            .WithAttacker(archmage, GridPosition.FrontBottom)
+            .WithDefender(firstDefender, GridPosition.FrontBottom)
+            .WithDefender(secondDefender, GridPosition.FrontCenter)
+            .WithRandom(new TestSequenceRandomProvider(50, 50, 50, 50, 40, 40, 40, 40, 50, 50, 50, 50))
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(archmage.Id, new BattleAttackUnitTarget(firstDefender.Id)), [
+            new BattleUnitAttackEvent(archmage.Id, new BattleAttackUnitTarget(firstDefender.Id), [archmageDefinition.Attack.Id, ringAttack.Id]),
+            new BattleUnitAttackedEvent(archmage.Id, firstDefender.Id, archmageDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(archmage.Id, firstDefender.Id, archmageDefinition.Attack.Id, 5),
+            new BattleUnitAttackedEvent(archmage.Id, secondDefender.Id, archmageDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(archmage.Id, secondDefender.Id, archmageDefinition.Attack.Id, 5),
+            new BattleUnitAttackedEvent(archmage.Id, firstDefender.Id, ringAttack.Id),
+            new BattleUnitAttackHitEvent(archmage.Id, firstDefender.Id, ringAttack.Id, 3),
+            new BattleUnitAttackedEvent(archmage.Id, secondDefender.Id, ringAttack.Id),
+            new BattleUnitAttackMissedEvent(archmage.Id, secondDefender.Id, ringAttack.Id),
+            new BattleUnitTurnEndingEvent(archmage.Id),
+            new BattleUnitTurnEndedEvent(archmage.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(firstDefender.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(archmage, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(firstDefender with { Hitpoints = 12 }, GridPosition.FrontBottom, false)
+                    .Place(secondDefender with { Hitpoints = 15 }, GridPosition.FrontCenter, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(firstDefender.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(1)
+            }));
+    }
+    }
 }

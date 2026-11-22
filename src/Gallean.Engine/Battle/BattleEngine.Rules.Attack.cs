@@ -11,18 +11,12 @@ internal partial class BattleEngine
                 return EventRuleResult<BattleEvent>.Consume();
             }
 
-            if (state.TryGetUnit(ev.AttackerId) is null || state.TryGetUnit(ev.TargetId) is null)
+            if (state.TryGetUnit(ev.AttackerId) is null)
             {
                 return EventRuleResult<BattleEvent>.Consume();
             }
 
-            BattleAttackResult attackResult = BattleAttackCalculator.ResolveAttackStep(
-                state,
-                Context,
-                ev.AttackerId,
-                ev.TargetId,
-                ev.AttackIds,
-                ev.AccuracyReduction);
+            BattleAttackResult attackResult = BattleAttackCalculator.ResolveAttackStep(state, Context, ev);
 
             if (attackResult.Failed)
             {
