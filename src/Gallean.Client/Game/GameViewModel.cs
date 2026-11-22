@@ -716,7 +716,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     [RelayCommand]
     private async Task QuickLoadAsync()
     {
-        if (TopScreen is LoadingScreenViewModel)
+        if (TopScreen is LoadingScreenViewModel or ConfirmPromptViewModel)
         {
             return;
         }
