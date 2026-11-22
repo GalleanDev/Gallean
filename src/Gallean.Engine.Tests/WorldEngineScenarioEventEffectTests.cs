@@ -7232,24 +7232,24 @@ public sealed class WorldEngineScenarioEventEffectTests
             movementPoints: 6, leadership: 6);
 
         WorldStack stack = TestHelpers.SimpleStack(
-            new WorldStackId("Stack1"),
-            player.Id,
-            new WorldPosition(0, 0),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
-            movementPoints: 6) with
-        {
-            SubraceId = playerSubrace.Id
-        };
+                new WorldStackId("Stack1"),
+                player.Id,
+                new WorldPosition(0, 0),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+                movementPoints: 6) with
+            {
+                SubraceId = playerSubrace.Id
+            };
 
         WorldStack ally = TestHelpers.SimpleStack(
-            new WorldStackId("Ally"),
-            enemy.Id,
-            new WorldPosition(4, 2),
-            TestHelpers.SingleUnitGrid(new WorldUnitId("leader2"), leader),
-            movementPoints: 6) with
-        {
-            SubraceId = enemySubrace.Id
-        };
+                new WorldStackId("Ally"),
+                enemy.Id,
+                new WorldPosition(4, 2),
+                TestHelpers.SingleUnitGrid(new WorldUnitId("leader2"), leader),
+                movementPoints: 6) with
+            {
+                SubraceId = enemySubrace.Id
+            };
 
         ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Camp"), new WorldPosition(0, 1), 0);
 

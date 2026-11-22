@@ -826,6 +826,7 @@ public sealed class MerchantTabViewModelTests
         Assert.That(screen.SellValuablesCommand.CanExecute(null), Is.False);
         Assert.That(screen.Game.Alert.Current, Is.Null);
     }
+
     [Test]
     public void PriceOrderTest()
     {

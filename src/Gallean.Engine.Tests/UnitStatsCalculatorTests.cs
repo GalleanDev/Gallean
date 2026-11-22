@@ -900,6 +900,7 @@ public sealed class UnitStatsCalculatorTests
 
         Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
+
     [Test]
     public void NoDamageModifiersTest()
     {

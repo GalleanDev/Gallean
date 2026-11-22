@@ -224,7 +224,7 @@ public class DatabaseGenerator : IIncrementalGenerator
             using (cw.Block($"public sealed record {indexClassName} : {indexInterfaceName}"))
             {
                 EmitRecordMembers(cw, indexEntities, databaseType, isIndex: true);
-                }
+            }
             cw.AppendLine();
         }
         else

@@ -7,13 +7,13 @@ internal partial class BattleEngine
         BattleUnit unit = state.GetUnit(ev.UnitId);
 
         return state.WithUnit(unit with
-        {
-            StatusEffects = unit.StatusEffects.RemoveAll(effect => !IsRetained(effect))
-        }) with
-        {
-            TurnQueue = state.TurnQueue.RemoveAll(turn => turn.UnitId == ev.UnitId),
-            WaitingQueue = state.WaitingQueue.RemoveAll(turn => turn.UnitId == ev.UnitId)
-        };
+            {
+                StatusEffects = unit.StatusEffects.RemoveAll(effect => !IsRetained(effect))
+            }) with
+            {
+                TurnQueue = state.TurnQueue.RemoveAll(turn => turn.UnitId == ev.UnitId),
+                WaitingQueue = state.WaitingQueue.RemoveAll(turn => turn.UnitId == ev.UnitId)
+            };
 
         static bool IsRetained(BattleAbstractStatusEffect effect)
         {

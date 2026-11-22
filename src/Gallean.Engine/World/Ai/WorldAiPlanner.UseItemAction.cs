@@ -147,6 +147,7 @@ internal sealed partial class WorldAiPlanner
                     {
                         return null;
                     }
+
                 case TemporaryBoostItemEffect:
                     if (IsLeader(context, unit) && CanAttackPlayer(context))
                     {
@@ -156,6 +157,7 @@ internal sealed partial class WorldAiPlanner
                     {
                         return null;
                     }
+
                 default:
                     return null;
             }

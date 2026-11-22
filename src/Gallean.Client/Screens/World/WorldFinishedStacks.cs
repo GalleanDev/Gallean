@@ -75,6 +75,7 @@ internal sealed class WorldFinishedStacks : IWorldEventVisitor<WorldState, Empty
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemPurchasedEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemSoldEvent ev, WorldState state) => Empty.Value;
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemUnequippedEvent ev, WorldState state) => Empty.Value;
+
     Empty IWorldEventVisitor<WorldState, Empty>.Visit(WorldItemUsedEvent ev, WorldState state)
     {
         return ev.Group switch

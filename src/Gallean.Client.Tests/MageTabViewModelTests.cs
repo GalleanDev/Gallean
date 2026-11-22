@@ -408,6 +408,7 @@ public sealed class MageTabViewModelTests
             "effect",
             new OfferPriceViewModel(new WorldResourceSet(0, 0, 0, 10, 0, 0)))));
     }
+
     [Test]
     public void PriceOrderTest()
     {

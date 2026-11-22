@@ -2850,18 +2850,18 @@ public sealed class VisualTests
 
         ItemDefinitionId[] itemIds =
         [
-            new ItemDefinitionId("G000IG0001"),
-            new ItemDefinitionId("G000IG0002"),
-            new ItemDefinitionId("G000IG0004"),
-            new ItemDefinitionId("G000IG0005"),
-            new ItemDefinitionId("G000IG1001"),
-            new ItemDefinitionId("G000IG2001"),
-            new ItemDefinitionId("G000IG3001"),
-            new ItemDefinitionId("G000IG4001"),
-            new ItemDefinitionId("G000IG7101"),
-            new ItemDefinitionId("G000IG6001"),
-            new ItemDefinitionId("G000IG7001"),
-            new ItemDefinitionId("G000IG9001")
+            new("G000IG0001"),
+            new("G000IG0002"),
+            new("G000IG0004"),
+            new("G000IG0005"),
+            new("G000IG1001"),
+            new("G000IG2001"),
+            new("G000IG3001"),
+            new("G000IG4001"),
+            new("G000IG7101"),
+            new("G000IG6001"),
+            new("G000IG7001"),
+            new("G000IG9001")
         ];
 
         List<WorldItem> partyItems = [];
@@ -3668,30 +3668,30 @@ public sealed class VisualTests
 
         ItemDefinitionId[] itemIds =
         [
-            new ItemDefinitionId("G000IG0001"),
-            new ItemDefinitionId("G000IG0002"),
-            new ItemDefinitionId("G000IG0004"),
-            new ItemDefinitionId("G000IG0005"),
-            new ItemDefinitionId("G000IG1001"),
-            new ItemDefinitionId("G000IG2001"),
-            new ItemDefinitionId("G000IG3001"),
-            new ItemDefinitionId("G000IG4001"),
-            new ItemDefinitionId("G000IG7101"),
-            new ItemDefinitionId("G000IG6001"),
-            new ItemDefinitionId("G000IG7001"),
-            new ItemDefinitionId("G000IG9001"),
-            new ItemDefinitionId("G000IG0003"),
-            new ItemDefinitionId("G000IG0006"),
-            new ItemDefinitionId("G000IG0007"),
-            new ItemDefinitionId("G000IG0008"),
-            new ItemDefinitionId("G000IG1002"),
-            new ItemDefinitionId("G000IG1003"),
-            new ItemDefinitionId("G000IG1004"),
-            new ItemDefinitionId("G000IG2002"),
-            new ItemDefinitionId("G000IG2003"),
-            new ItemDefinitionId("G000IG3002"),
-            new ItemDefinitionId("G000IG3003"),
-            new ItemDefinitionId("G000IG4002")
+            new("G000IG0001"),
+            new("G000IG0002"),
+            new("G000IG0004"),
+            new("G000IG0005"),
+            new("G000IG1001"),
+            new("G000IG2001"),
+            new("G000IG3001"),
+            new("G000IG4001"),
+            new("G000IG7101"),
+            new("G000IG6001"),
+            new("G000IG7001"),
+            new("G000IG9001"),
+            new("G000IG0003"),
+            new("G000IG0006"),
+            new("G000IG0007"),
+            new("G000IG0008"),
+            new("G000IG1002"),
+            new("G000IG1003"),
+            new("G000IG1004"),
+            new("G000IG2002"),
+            new("G000IG2003"),
+            new("G000IG3002"),
+            new("G000IG3003"),
+            new("G000IG4002")
         ];
 
         List<WorldItem> items = [];
@@ -3934,18 +3934,18 @@ public sealed class VisualTests
 
         ItemDefinitionId[] itemIds =
         [
-            new ItemDefinitionId("G000IG0001"),
-            new ItemDefinitionId("G000IG0002"),
-            new ItemDefinitionId("G000IG0004"),
-            new ItemDefinitionId("G000IG0005"),
-            new ItemDefinitionId("G000IG1001"),
-            new ItemDefinitionId("G000IG2001"),
-            new ItemDefinitionId("G000IG3001"),
-            new ItemDefinitionId("G000IG4001"),
-            new ItemDefinitionId("G000IG7101"),
-            new ItemDefinitionId("G000IG6001"),
-            new ItemDefinitionId("G000IG7001"),
-            new ItemDefinitionId("G000IG9001")
+            new("G000IG0001"),
+            new("G000IG0002"),
+            new("G000IG0004"),
+            new("G000IG0005"),
+            new("G000IG1001"),
+            new("G000IG2001"),
+            new("G000IG3001"),
+            new("G000IG4001"),
+            new("G000IG7101"),
+            new("G000IG6001"),
+            new("G000IG7001"),
+            new("G000IG9001")
         ];
 
         List<WorldItem> items = [];

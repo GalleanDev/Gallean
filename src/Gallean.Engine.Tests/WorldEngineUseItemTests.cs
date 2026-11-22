@@ -678,14 +678,14 @@ public sealed class WorldEngineUseItemTests
             };
 
         WorldStack stack = Stack(
-            new WorldUnitId("leader2"),
-            leaderDefinition,
-            TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 30 },
-            player.Id,
-            []) with
-        {
-            Position = city.Entrance
-        };
+                new WorldUnitId("leader2"),
+                leaderDefinition,
+                TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 30 },
+                player.Id,
+                []) with
+            {
+                Position = city.Entrance
+            };
 
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -738,15 +738,15 @@ public sealed class WorldEngineUseItemTests
             [potionItem]);
 
         WorldStack otherStack = Stack(
-            new WorldUnitId("otherLeader"),
-            leaderDefinition,
-            TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 30 },
-            player.Id,
-            []) with
-        {
-            Id = new WorldStackId("Stack2"),
-            Position = new WorldPosition(1, 0)
-        };
+                new WorldUnitId("otherLeader"),
+                leaderDefinition,
+                TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 30 },
+                player.Id,
+                []) with
+            {
+                Id = new WorldStackId("Stack2"),
+                Position = new WorldPosition(1, 0)
+            };
 
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -798,15 +798,15 @@ public sealed class WorldEngineUseItemTests
             [potionItem]);
 
         WorldStack otherStack = Stack(
-            new WorldUnitId("otherLeader"),
-            leaderDefinition,
-            TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 30 },
-            player.Id,
-            []) with
-        {
-            Id = new WorldStackId("Stack2"),
-            Position = new WorldPosition(4, 0)
-        };
+                new WorldUnitId("otherLeader"),
+                leaderDefinition,
+                TestHelpers.SimpleUnit(new WorldUnitId("otherSoldier"), soldierDefinition) with { Hitpoints = 30 },
+                player.Id,
+                []) with
+            {
+                Id = new WorldStackId("Stack2"),
+                Position = new WorldPosition(4, 0)
+            };
 
         WorldEngine engine = new TestWorldEngineBuilder()
             .WithMap(map)
