@@ -290,6 +290,6 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(50, 50, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(60, 60, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 }
