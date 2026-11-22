@@ -7,7 +7,7 @@ namespace Gallean.Client;
 
 internal sealed class Backdrop : AvaloniaObject
 {
-    private const double HitMargin = 16;
+    private const double HitMargin = 24;
 
     public static readonly AttachedProperty<ICommand?> CloseCommandProperty =
         AvaloniaProperty.RegisterAttached<Backdrop, Control, ICommand?>("CloseCommand");
