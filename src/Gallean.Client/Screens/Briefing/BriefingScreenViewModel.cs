@@ -25,7 +25,7 @@ internal sealed partial class BriefingScreenViewModel(
     public AssetAnimationKey? Video { get; } = video;
     public bool HasVideo { get; } = video is not null;
     public TimeSpan VideoStartTime { get; } = videoStartTime;
-    public TimeSpan VideoFirstFrameTime { get; } = TimeSpan.FromSeconds(14.0);
+    public TimeSpan VideoFirstFrameTime { get; } = TimeSpan.FromSeconds(10.0);
     public bool HasVoice { get; } = voice is not null;
     public override ScreenMusic Music => HasVoice ? ScreenMusic.None : ScreenMusic.Tracks(musicQueue);
 
