@@ -353,4 +353,58 @@ public sealed class WorldEngineExitStackTests
             new WorldExitStackCommand(new WorldStackId("missing")),
             WorldCommandError.StackNotFound);
     }
+
+    [Test]
+    public void HostileStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer enemyPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player.Id,
+            new WorldPosition(3, 3),
+            UnitGrid<WorldUnit>.Empty);
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            player.Id,
+            city.Entrance,
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 6);
+        WorldStack enemy = TestHelpers.SimpleStack(
+            new WorldStackId("enemy"),
+            enemyPlayer.Id,
+            new WorldPosition(4, 5),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("enemy"), leader),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithDefinition(TestHelpers.SimpleLord(enemyPlayer.LordId, enemyPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithPlayer(enemyPlayer)
+            .WithCity(city)
+            .WithStack(stack)
+            .WithStack(enemy)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommand(
+            new WorldExitStackCommand(stack.Id),
+            [
+                new WorldStackRelocatedEvent(stack.Id, new WorldPosition(3, 3), new WorldPosition(4, 3), WorldStackDirection.SouthEast),
+                new WorldFortificationExitedEvent(stack.Id, city.Id)
+            ]);
+    }
 }

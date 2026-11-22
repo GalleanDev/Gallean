@@ -52,7 +52,13 @@ internal static partial class FortificationCalculator
 
             if (plan.CanPlaceStackAt(position, profile))
             {
-                return position;
+                WorldStack? interceptingStack =
+                    PathTraversalCalculator.FindInterceptingStack(state, plan, stack, profile, position, definitions);
+
+                if (interceptingStack is null)
+                {
+                    return position;
+                }
             }
         }
 
