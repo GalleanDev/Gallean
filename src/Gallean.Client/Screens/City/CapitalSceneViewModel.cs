@@ -67,7 +67,7 @@ internal sealed record CapitalSceneViewModel(
         {
             return key;
         }
-        
+
         return new AssetSpriteKey.CapitalBackground(race, variant);
     }
 
