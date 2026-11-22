@@ -9,6 +9,12 @@ namespace Gallean.Client.Tests;
 [NonParallelizable]
 public sealed class TextExtensionTests
 {
+    [SetUp]
+    public void SetUp()
+    {
+        new TextCatalog([]).MakeCurrent();
+    }
+
     [TearDown]
     public void TearDown()
     {
