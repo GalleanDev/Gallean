@@ -224,12 +224,11 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 149] Spy thief -> (3, 0)",
             "[P2 104] Assassinate thief -> (3, 0)"
         ]));
-        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
+        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.Empty);
         Assert.That(session.World.State.Stacks.Keys, Is.EqualTo([thiefStack.Id]));
-        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 10 }));
     }
 
     [Test]
@@ -283,10 +282,10 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 141] Move thief -> (6, 0)",
-            "[P2 149] Spy thief -> (6, 0)"
+            "[P2 39] Move thief -> (6, 0)",
+            "[P2 42] Assassinate thief -> (6, 0)"
         ]));
-        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
+        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.Empty);
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
         {
             Position = new WorldPosition(5, 0),
@@ -416,12 +415,11 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 125] Spy thief -> (3, 3)",
             "[P2 125] Riot thief -> (3, 3)"
         ]));
-        Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 3 }));
-        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.EqualTo([player2.Id]));
-        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));
+        Assert.That(session.World.State.Fortifications[city.Id], Is.EqualTo(city with { RiotTurns = 1 }));
+        Assert.That(session.World.State.Players[player1.Id].SpiedPlayers, Is.Empty);
+        Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 10 }));
     }
 
     [Test]
@@ -1243,7 +1241,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 23] Spy ruin thief -> (4, 4)"
+            "[P2 3] Spy ruin thief -> (4, 4)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].SpiedRuins, Is.EqualTo([ruin.Id]));
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));

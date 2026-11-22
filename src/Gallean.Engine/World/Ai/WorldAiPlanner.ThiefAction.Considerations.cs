@@ -10,12 +10,12 @@ internal sealed partial class WorldAiPlanner
             private const int MaxPriority = 6;
             private const int ChanceMax = 100;
             private const int MinimumSuccessChance = 50;
-            private const int SpyValue = MaxScore / 2;
+            private const int SpyValue = MaxScore / 100;
             private const int AssassinateValue = MaxScore / 2;
             private const int RiotValue = MaxScore / 2;
             private const int NeutralRiotValue = MaxScore / 10;
             private const int CounterfeitOrdersValue = MaxScore / 10;
-            private const int SpyRuinValue = MaxScore / 10;
+            private const int SpyRuinValue = MaxScore / 100;
             private const int PoisonValue = MaxScore / 20;
             private const int GoldMaxValue = 1000;
             private const int DuelExperienceMaxValue = 200;
