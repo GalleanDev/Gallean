@@ -1178,7 +1178,7 @@ public sealed class BattleEngineAiActionTests
     {
         UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
         UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 10);
-        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 600, initiative: 30, damage: 100);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 600, initiative: 30, damage: 90);
 
         BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
         BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
@@ -1195,6 +1195,36 @@ public sealed class BattleEngineAiActionTests
 
         engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
             new BattleUnitRetreatingEvent(leader.Id, 1),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
+
+    [Test]
+    public void RetreatLethalEnemyTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition("leader", damage: 10);
+        UnitDefinition allyDefinition = TestHelpers.SimpleUnitDefinition("ally", maxHitpoints: 50, initiative: 40, damage: 10);
+        UnitDefinition enemyDefinition = TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 600, initiative: 30, damage: 100);
+
+        BattleUnit leader = Unit(0, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit ally = Unit(1, allyDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit enemy = Unit(2, enemyDefinition.Id, BattleSide.Defender, hitpoints: 600);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(allyDefinition)
+            .WithDefinition(enemyDefinition)
+            .WithAttacker(leader, new GridPosition(0, 0))
+            .WithAttacker(ally, new GridPosition(0, 1))
+            .WithDefender(enemy, new GridPosition(0, 0))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(enemy.Id), [leaderDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, enemy.Id, leaderDefinition.Attack.Id, 10),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(ally.Id, BattleUnitTurnType.Normal))

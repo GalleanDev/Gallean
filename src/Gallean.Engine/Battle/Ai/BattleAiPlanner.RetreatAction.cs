@@ -13,6 +13,7 @@ internal sealed partial class BattleAiPlanner
             new UtilityScore.ResponseCurve.Polynomial(Slope: MaxScore - UtilityScore.MinScore, Exponent: 1, XShift: 0, YShift: UtilityScore.MinScore);
 
         private WorldAiEstimator Estimator { get; } = new(Context);
+        private BattleAiTargetProvider TargetProvider { get; } = new(Context);
 
         public override BattleAiActionPlan? Plan(BattleState state, BattleUnit unit)
         {
@@ -29,6 +30,7 @@ internal sealed partial class BattleAiPlanner
                 NotNeutral(state, unit.Side),
                 Leader(unit),
                 AliveAllies(state, unit),
+                Safe(state, unit),
                 MaxHitpoints(state, unit),
                 PowerRatio(state, unit.Side)
             ]);
@@ -74,6 +76,16 @@ internal sealed partial class BattleAiPlanner
             return UtilityScore.None;
         }
 
+        private UtilityScore.Consideration Safe(BattleState state, BattleUnit unit)
+        {
+            bool hasFastRetreat = HasFastRetreat(unit);
+            int damage = EstimateDamage(state, unit);
+            int hitpoints = BattleAiStatCalculator.GetEffectiveHitpoints(Context, state, unit);
+            bool isSafe = hasFastRetreat || damage < hitpoints;
+
+            return UtilityScore.Flag(isSafe);
+        }
+
         private UtilityScore.Consideration MaxHitpoints(BattleState state, BattleUnit unit)
         {
             UnitStats stats = Context.UnitStats.GetBattleUnitStats(state, unit.Id);
@@ -88,6 +100,77 @@ internal sealed partial class BattleAiPlanner
             int enemyPower = estimate.GetPower(side.GetOpposite());
 
             return UtilityScore.Ratio(power, power + enemyPower, PowerRatioCurve);
+        }
+
+        private int EstimateDamage(BattleState state, BattleUnit target)
+        {
+            BattleSide enemySide = target.Side.GetOpposite();
+            UnitGrid<BattleUnit> enemies = state.GetGrid(enemySide);
+            int damage = 0;
+
+            foreach ((BattleUnit enemy, _) in enemies.GetUnits())
+            {
+                if (enemy.IsActive() &&
+                    !enemy.IsDisabled() &&
+                    !enemy.IsRetreating() &&
+                    CanAttack(state, enemy, target))
+                {
+                    damage += GetUnitDamage(state, enemy, target);
+                }
+            }
+
+            return damage;
+        }
+
+        private int GetUnitDamage(BattleState state, BattleUnit unit, BattleUnit target)
+        {
+            UnitDefinition definition = Context.Definitions.GetUnit(unit.DefinitionId);
+            UnitWard? ward = BattleUnitWardCalculator.FindBlockingWard(target, definition.Attack);
+
+            if (ward is null && definition.HasAnyAttackType(UnitAttackType.Damage, UnitAttackType.DrainLife, UnitAttackType.DrainLifeOverflow))
+            {
+                UnitAttackStats attackStats = Context.UnitStats.GetBattleAttackStats(state, unit.Id, definition.Attack);
+                int damage = attackStats.Damage;
+
+                if (definition.AttacksTwice)
+                {
+                    damage *= 2;
+                }
+
+                return damage;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private bool HasFastRetreat(BattleUnit unit)
+        {
+            foreach (UnitModifier modifier in unit.Modifiers)
+            {
+                UnitModifierDefinition modifierDefinition = Context.Definitions.GetUnitModifier(modifier.DefinitionId);
+
+                if (modifierDefinition.FastRetreat)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool CanAttack(BattleState state, BattleUnit unit, BattleUnit target)
+        {
+            foreach ((BattleAttackTarget attackTarget, _) in TargetProvider.GetAttackTargets(state, unit))
+            {
+                if (attackTarget is BattleAttackUnitTarget unitTarget && unitTarget.UnitId == target.Id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool CanDamage(BattleState state, BattleSide side)
