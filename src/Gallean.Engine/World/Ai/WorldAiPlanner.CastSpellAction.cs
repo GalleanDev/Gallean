@@ -6,7 +6,7 @@ internal sealed partial class WorldAiPlanner
 {
     private sealed record CastSpellAction(WorldAiContext Context, int Priority) : AbstractEconomyAction(Context, Priority)
     {
-        private const int CityThreatRange = 7;
+        private const int CityThreatRange = 6;
 
         public override WorldAiActionPlan? Plan(WorldState state, WorldPlayerId playerId, WorldAiMemory memory)
         {

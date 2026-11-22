@@ -861,7 +861,7 @@ public sealed class WorldEngineAiSpellTests
         };
         WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
 
-        WorldStack threat = UnitStack(new WorldUnitId("threatLeader"), "Threat", enemy.Id, new WorldPosition(12, 5), leader, hitpoints: 1000);
+        WorldStack threat = UnitStack(new WorldUnitId("threatLeader"), "Threat", enemy.Id, new WorldPosition(11, 5), leader, hitpoints: 1000);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -882,7 +882,7 @@ public sealed class WorldEngineAiSpellTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P4 1000] Cast death -> (12, 5)"
+            "[P4 1000] Cast death -> (11, 5)"
         ]));
         Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player with
         {
@@ -1206,7 +1206,7 @@ public sealed class WorldEngineAiSpellTests
         WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
 
         WorldStack attacker = UnitStack(new WorldUnitId("attackerLeader"), "Attacker", player.Id, new WorldPosition(12, 9), leader, hitpoints: 100) with { MovementPoints = 6 };
-        WorldStack threat = UnitStack(new WorldUnitId("threatLeader"), "Threat", enemy.Id, new WorldPosition(12, 5), leader, hitpoints: 1000);
+        WorldStack threat = UnitStack(new WorldUnitId("threatLeader"), "Threat", enemy.Id, new WorldPosition(11, 5), leader, hitpoints: 1000);
 
         (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
@@ -1228,7 +1228,7 @@ public sealed class WorldEngineAiSpellTests
         IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
 
         Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
-            "[P4 1000] Cast attack -> (12, 5)",
+            "[P4 1000] Cast attack -> (11, 5)",
             "[P1 1000] Move Attacker -> (9, 6)"
         ]));
         Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player with
