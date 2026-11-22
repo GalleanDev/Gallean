@@ -87,7 +87,7 @@ internal sealed class AudioPlayer : IAudioPlayer
 
         MusicQueueSampleProvider samples = new(assets, MusicQueue.Create([key], isLooping: false), MusicPosition.Start);
 
-        if (TryAddMixerInput(sounds, samples))
+        if (TryAddMixerInput(music, samples))
         {
             return samples;
         }
