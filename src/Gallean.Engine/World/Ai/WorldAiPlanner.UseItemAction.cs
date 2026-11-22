@@ -6,82 +6,82 @@ internal sealed partial class WorldAiPlanner
     {
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Stand order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Guard order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.AttackStack order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendStack order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.SecureCity order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Roam order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Explore order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.MoveToLocation order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendLocation order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Berserk order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Assist order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Steal order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendCity order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Heal order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionHeal, ItemCategory.PotionRevive, ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionHeal, ItemCategory.PotionRevive, ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Reinforce order, ActionContext context)
         {
-            return PlanAction(context, [ItemCategory.PotionHeal, ItemCategory.PotionRevive, ItemCategory.PotionPermanentBoost]);
+            return PlanAction(context, [ItemCategory.PotionHeal, ItemCategory.PotionRevive, ItemCategory.PotionPermanentBoost, ItemCategory.PotionTemporaryBoost]);
         }
 
         private WorldAiActionPlan? PlanAction(ActionContext context, ReadOnlySpan<ItemCategory> categories)
@@ -147,8 +147,49 @@ internal sealed partial class WorldAiPlanner
                     {
                         return null;
                     }
+                case TemporaryBoostItemEffect:
+                    if (IsLeader(context, unit) && CanAttackPlayer(context))
+                    {
+                        return MaxScore;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 default:
                     return null;
+            }
+        }
+
+        private bool IsLeader(ActionContext context, WorldUnit unit)
+        {
+            (WorldUnit leader, GridPosition _, UnitDefinition _) = context.Stack.GetLeader(Context.Engine.Definitions);
+
+            return unit.Id == leader.Id;
+        }
+
+        private bool CanAttackPlayer(ActionContext context)
+        {
+            WorldState state = context.State;
+            WorldStack stack = context.Stack;
+            WorldAiStackMemory stackMemory = context.Memory.GetStackMemory(stack);
+
+            if (stackMemory.Target is WorldAiTarget.Stack target &&
+                state.Stacks.TryGetValue(target.StackId, out WorldStack? targetStack))
+            {
+                WorldPlayer owner = state.Players[stack.OwnerId];
+                WorldPlayer targetOwner = state.Players[targetStack.OwnerId];
+                WorldAiMoveStackCommand command = new(stack.Id, targetStack.Position);
+                WorldCommandResult commandResult = command.Execute(state, Context.Engine);
+
+                return WorldHelpers.IsRacePlayable(owner.Race) &&
+                       WorldHelpers.IsRacePlayable(targetOwner.Race) &&
+                       !ThiefCalculator.IsThief(stack, Context.Engine.Definitions) &&
+                       !commandResult.Failed;
+            }
+            else
+            {
+                return false;
             }
         }
     }
