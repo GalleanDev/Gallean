@@ -89,7 +89,7 @@ public sealed class WorldEngineLockUnitTypeTests
     }
 
     [Test]
-    public void StackOutsideCityTest()
+    public void StackTest()
     {
         WorldMap map = TestHelpers.SimpleMap(2, 1);
 
@@ -122,8 +122,26 @@ public sealed class WorldEngineLockUnitTypeTests
             .WithStack(stack)
             .Build();
 
+        engine.CheckCommand(
+            new WorldLockUnitTypeCommand(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("squire")),
+            [
+                new WorldUnitTypeLockedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("squire"))
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+                {
+                    Units = new UnitGrid<WorldUnit>.Builder()
+                        .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
+                        .Place(TestHelpers.SimpleUnit(new WorldUnitId("squire"), squireDefinition) with { IsTypeLocked = true }, GridPosition.FrontBottom, false)
+                        .Build()
+                })
+            }));
+
         engine.CheckCommandError(
             new WorldLockUnitTypeCommand(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("squire")),
-            WorldCommandError.StackNotInCity);
+            WorldCommandError.UnitTypeLockForbidden);
     }
 }

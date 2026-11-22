@@ -103,6 +103,20 @@
       <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
     </Style>
 
+    <Style Selector="Button.pill.action">
+      <Setter Property="Padding" Value="16,0,24,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="Button.pill.action TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector=":is(Control).inactive">
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Opacity" Value="0.3" />
+    </Style>
+
     <Style Selector="Line.party-divider">
       <Setter Property="Margin" Value="40,24,40,0" />
       <Setter Property="Stretch" Value="Fill" />
@@ -125,6 +139,8 @@
       </Viewbox>
     </ContentControl>
 
+    <Border Background="{StaticResource ModalBackdropBrush}" IsVisible="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
     <Grid Grid.IsSharedSizeScope="True" Margin="16,12" IsVisible="{Binding HasStack}">
       <Grid>
         <Grid.ColumnDefinitions>
@@ -146,7 +162,8 @@
               RowDefinitions="*,Auto"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              Margin="0,0,40,0">
+              Margin="0,0,40,0"
+              Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}">
           <Viewbox Grid.Row="0" StretchDirection="DownOnly" ClipToBounds="False">
             <Panel Width="300" Height="430" Background="Transparent" DataContext="{Binding Leader}">
               <Ellipse Width="420"
@@ -177,6 +194,7 @@
         <Grid Grid.Column="1"
               Grid.Row="2"
               Classes="cached"
+              Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}"
               ColumnDefinitions="Auto,Auto"
               RowDefinitions="Auto,Auto,Auto,Auto"
               HorizontalAlignment="Right"
@@ -239,7 +257,36 @@
                         ItemContainerTheme="{StaticResource UnitGridSlotContainerTheme}" />
         </Viewbox>
 
-        <ContentControl Grid.Column="4" Grid.RowSpan="4" Classes="ornament-panel" Background="Transparent" HorizontalAlignment="Center" Margin="40,0,0,0" DataContext="{Binding Inventory}" Classes.highlighted="{Binding IsHighlighted}">
+        <StackPanel Grid.Column="3"
+                    Grid.Row="3"
+                    Classes="focus-group"
+                    Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}"
+                    Spacing="12"
+                    VerticalAlignment="Bottom"
+                    Margin="0,16,0,0">
+          <Button Classes="pill action" local:PlateChrome.TextureSeed="3" Command="{Binding DismissCommand}">
+            <Grid ColumnDefinitions="Auto,*">
+              <local:IconVisual Grid.Column="0" Moniker="Delete" Foreground="{Binding $parent[Button].Foreground}" />
+              <TextBlock Grid.Column="1" Text="{local:Text 'Dismiss unit'}" />
+            </Grid>
+          </Button>
+          <Button Classes="pill action" local:PlateChrome.TextureSeed="5" Command="{Binding LockTypeCommand}">
+            <Grid ColumnDefinitions="Auto,*">
+              <local:IconVisual Grid.Column="0" Moniker="Locked" Foreground="{Binding $parent[Button].Foreground}" />
+              <TextBlock Grid.Column="1" Text="{local:Text 'Lock unit type'}" />
+            </Grid>
+          </Button>
+        </StackPanel>
+
+        <ContentControl Grid.Column="4"
+                        Grid.RowSpan="4"
+                        Classes="ornament-panel"
+                        Background="Transparent"
+                        HorizontalAlignment="Center"
+                        Margin="40,0,0,0"
+                        DataContext="{Binding Inventory}"
+                        Classes.highlighted="{Binding IsHighlighted}"
+                        Classes.inactive="{Binding $parent[local:StackTabView].((local:StackTabViewModel)DataContext).TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}">
           <Grid RowDefinitions="Auto,*" Margin="6,2" x:DataType="local:InventoryViewModel">
             <local:OutlinedTextBlock Grid.Row="0" Text="{local:Text 'Party inventory'}" Classes="panel-title" Height="40" />
             <local:PagedItemsControl Grid.Row="1"
@@ -254,6 +301,29 @@
     </Grid>
 
     <ItemsControl Classes="drop-zones" ItemsSource="{Binding DropZones}" Margin="0,12,0,0" />
+
+    <Border Classes="hud-prompt"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0,12,0,0"
+            IsVisible="{Binding TargetingPromptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+      <DockPanel>
+        <Button DockPanel.Dock="Right"
+                Classes="dismiss"
+                Margin="12,0,0,0"
+                VerticalAlignment="Center"
+                Command="{Binding CancelTargetingCommand}"
+                ToolTip.Tip="{local:Text 'Cancel'}">
+          <local:IconVisual Moniker="Close" />
+        </Button>
+        <local:OutlinedTextBlock Text="{Binding TargetingPromptText}"
+                                 Classes="body"
+                                 Foreground="{StaticResource AccentBrush}"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Center"
+                                 VerticalAlignment="Center" />
+      </DockPanel>
+    </Border>
   </Grid>
 
 </UserControl>

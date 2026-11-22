@@ -2502,7 +2502,7 @@ public sealed class VisualTests
     }
 
     [AvaloniaTest]
-    public async Task CityLockTypeTargetTest()
+    public async Task CityDismissTargetTest()
     {
         using Sandbox sb = Sandbox.Create();
 
@@ -2516,7 +2516,7 @@ public sealed class VisualTests
         gameViewModel.OpenScreen(management);
 
         CityTabViewModel tab = Assert.IsOfType<CityTabViewModel>(management.SelectedTab);
-        tab.LockTypeCommand.Execute(null);
+        tab.DismissCommand.Execute(null);
 
         await CaptureAsync(window);
     }

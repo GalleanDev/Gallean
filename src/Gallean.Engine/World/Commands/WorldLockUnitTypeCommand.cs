@@ -8,11 +8,35 @@ public sealed record WorldLockUnitTypeCommand(
 {
     public WorldCommandResult Execute(WorldState state, IEngineContext context)
     {
-        if (!WorldUnitGroupCalculator.TryGetCity(state, Group, out _, out WorldCommandError? cityError))
+        return Group switch
         {
-            return WorldCommandResult.Fail(cityError.Value);
+            WorldUnitGroup.Stack stackGroup => ExecuteForStack(state, context, stackGroup),
+            WorldUnitGroup.Fortification fortificationGroup => ExecuteForFortification(state, context, fortificationGroup)
+        };
+    }
+
+    private WorldCommandResult ExecuteForStack(WorldState state, IEngineContext context, WorldUnitGroup.Stack stackGroup)
+    {
+        if (!WorldCommandHelpers.TryGetCurrentPlayerStack(state, stackGroup.StackId, out _))
+        {
+            return WorldCommandResult.Fail(WorldCommandError.StackNotFound);
         }
 
+        return Lock(state, context);
+    }
+
+    private WorldCommandResult ExecuteForFortification(WorldState state, IEngineContext context, WorldUnitGroup.Fortification fortificationGroup)
+    {
+        if (!WorldCommandHelpers.TryGetCurrentPlayerFortification(state, fortificationGroup.FortificationId, out _))
+        {
+            return WorldCommandResult.Fail(WorldCommandError.GarrisonNotFound);
+        }
+
+        return Lock(state, context);
+    }
+
+    private WorldCommandResult Lock(WorldState state, IEngineContext context)
+    {
         UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(state, Group);
 
         if (!units.TryGetUnit(UnitId, out (WorldUnit Unit, GridPosition Position) entry))

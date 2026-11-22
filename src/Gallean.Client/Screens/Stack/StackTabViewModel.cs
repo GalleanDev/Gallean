@@ -7,6 +7,12 @@ namespace Gallean.Client;
 internal abstract partial class StackTabViewModel
     : ManagementTabViewModel, IUnitGridSelectionProvider, IInventoryProvider, IDragDropProvider, IDragDropHost
 {
+    public enum UnitActionType
+    {
+        Dismiss,
+        LockType
+    }
+
     private const int MaxLeaderNameLength = 20;
 
     private readonly UnitGridSelectionViewModel unitSelection;
@@ -29,6 +35,8 @@ internal abstract partial class StackTabViewModel
         Inventory = new InventoryViewModel(gameModel, this);
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [SpellDropZone, GroundDropZone, DismissDropZone];
+
+        RegisterSnapshotGatedCommands(DismissCommand, LockTypeCommand);
     }
 
     public ManagementScreenViewModel Screen { get; }
@@ -58,6 +66,12 @@ internal abstract partial class StackTabViewModel
     [ObservableProperty]
     public partial string StackLeadership { get; private set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial UnitActionType? TargetedAction { get; private set; }
+
+    [ObservableProperty]
+    public partial string? TargetingPromptText { get; private set; }
+
     async Task IInventoryProvider.InvokeItemAsync(InventorySlotReference source)
     {
         if (currentStack is not null)
@@ -80,7 +94,7 @@ internal abstract partial class StackTabViewModel
                 break;
 
             case (UnitGridSlotReference sourceSlot, DropZoneReference zone) when zone.Zone == DismissDropZone:
-                ConfirmDisband(currentStack, sourceSlot.Position);
+                await ConfirmDisbandAsync(currentStack, sourceSlot.Position);
                 break;
 
             case (IItemDragSourceReference itemSource, _):
@@ -243,6 +257,28 @@ internal abstract partial class StackTabViewModel
         return await TryDispatchWorldActionAsync(command);
     }
 
+    async Task<bool> IUnitGridSelectionProvider.TryInvokeUnitSlotAsync(UnitGridSlotReference target)
+    {
+        if (TargetedAction is not null && currentStack is not null)
+        {
+            await ApplyTargetedActionAsync(TargetedAction.Value, currentStack, target.Position);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    async Task IUnitGridSelectionProvider.InvokeEmptySlotAsync(UnitGridSlotReference target)
+    {
+        if (TargetedAction is not null)
+        {
+            CancelTargeting();
+        }
+    }
+
     void IUnitGridSelectionProvider.OnUnitSelectionChanged()
     {
         RefreshView();
@@ -264,6 +300,16 @@ internal abstract partial class StackTabViewModel
         IDragSourceReference? dragged = DragDrop.Dragged;
 
         UnitGrid.Update(stack.Units, showsPurchaseHints: false, highlight: BuildUnitHighlight(stack, dragged));
+
+        if (TargetedAction is not null)
+        {
+            TargetingPromptText = FormatTargetingPrompt(TargetedAction.Value);
+        }
+        else
+        {
+            TargetingPromptText = null;
+        }
+
         Inventory.Update(stack.Inventory, WorldState.Players[ViewPlayerId].Resources, IsInventoryDropTarget(stack, dragged));
 
         StackLeaderViewModel leader = StackLeaderViewModel.Create(
@@ -318,6 +364,7 @@ internal abstract partial class StackTabViewModel
         {
             UnitGridSlotReference source => BuildMoveHighlight(stack, source),
             IItemDragSourceReference source => BuildUseItemHighlight(stack, GetItemAt(stack, source)),
+            null when TargetedAction is not null => BuildTargetHighlight(stack, TargetedAction.Value),
             _ => new HashSet<GridPosition>()
         };
     }
@@ -338,6 +385,23 @@ internal abstract partial class StackTabViewModel
             WorldCommandResult result = GameModel.World.DryRunCommand(command);
 
             if (position != source.Position && !result.Failed)
+            {
+                positions.Add(position);
+            }
+        }
+
+        return positions;
+    }
+
+    private IReadOnlySet<GridPosition> BuildTargetHighlight(WorldStack stack, UnitActionType type)
+    {
+        HashSet<GridPosition> positions = [];
+
+        foreach ((WorldUnit unit, GridPosition position) in stack.Units.GetUnits())
+        {
+            WorldUnitActionInfo? unitInfo = FindStackUnit(stackInfo, unit.Id);
+
+            if (unitInfo is not null && GetActionError(type, unitInfo) is null)
             {
                 positions.Add(position);
             }
@@ -485,6 +549,8 @@ internal abstract partial class StackTabViewModel
         currentStack = null;
         stackInfo = new WorldGetStackInfoCommand.Result([], OccupiedLeadership: 0, TotalLeadership: 0);
         HasStack = false;
+        TargetedAction = null;
+        TargetingPromptText = null;
 
         unitSelection.ClearSelection();
         UnitGrid.Update(UnitGrid<WorldUnit>.Empty, showsPurchaseHints: false);
@@ -499,7 +565,147 @@ internal abstract partial class StackTabViewModel
         StackLeadership = string.Empty;
     }
 
-    private void ConfirmDisband(WorldStack stack, GridPosition position)
+    [RelayCommand(CanExecute = nameof(CanTargetUnitAction))]
+    private void Dismiss()
+    {
+        BeginTargeting(UnitActionType.Dismiss);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanTargetUnitAction))]
+    private void LockType()
+    {
+        BeginTargeting(UnitActionType.LockType);
+    }
+
+    private bool CanTargetUnitAction()
+    {
+        if (IsBusy)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void BeginTargeting(UnitActionType type)
+    {
+        if (HasActionTarget(type))
+        {
+            TargetedAction = type;
+            RefreshView();
+        }
+        else
+        {
+            IconMoniker icon = type switch
+            {
+                UnitActionType.Dismiss => IconMoniker.Delete,
+                UnitActionType.LockType => IconMoniker.Locked
+            };
+
+            string caption = type switch
+            {
+                UnitActionType.Dismiss => Tr("No units can be dismissed"),
+                UnitActionType.LockType => Tr("No units can have their type locked")
+            };
+
+            Game.ShowInfo(icon, caption, null);
+        }
+    }
+
+    public override bool TryCancel()
+    {
+        if (TargetedAction is not null)
+        {
+            CancelTargeting();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    [RelayCommand]
+    private void CancelTargeting()
+    {
+        TargetedAction = null;
+        RefreshView();
+    }
+
+    protected override void OnSelectionChanged(bool isSelected)
+    {
+        if (!isSelected && TargetedAction is not null)
+        {
+            TargetedAction = null;
+            RefreshView();
+        }
+    }
+
+    private static string FormatTargetingPrompt(UnitActionType type)
+    {
+        return type switch
+        {
+            UnitActionType.Dismiss => Tr("Select a unit to dismiss it."),
+            UnitActionType.LockType => Tr("Select a unit to lock its type.")
+        };
+    }
+
+    private bool HasActionTarget(UnitActionType type)
+    {
+        foreach (WorldUnitActionInfo unit in stackInfo.Units)
+        {
+            if (GetActionError(type, unit) is null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static WorldCommandError? GetActionError(UnitActionType type, WorldUnitActionInfo unit)
+    {
+        return type switch
+        {
+            UnitActionType.Dismiss => unit.DisbandError,
+            UnitActionType.LockType => unit.LockTypeError
+        };
+    }
+
+    private async Task ApplyTargetedActionAsync(UnitActionType type, WorldStack stack, GridPosition position)
+    {
+        Task action = type switch
+        {
+            UnitActionType.Dismiss => ConfirmDisbandAsync(stack, position),
+            UnitActionType.LockType => ConfirmLockTypeAsync(stack, position)
+        };
+
+        await action;
+    }
+
+    private async Task ConfirmLockTypeAsync(WorldStack stack, GridPosition position)
+    {
+        WorldUnit? unit = stack.Units[position];
+
+        if (unit is not null)
+        {
+            WorldLockUnitTypeCommand command = new(new WorldUnitGroup.Stack(stack.Id), unit.Id);
+
+            Game.OpenScreen(new ConfirmPromptViewModel(
+                Tr("Lock unit type"),
+                TrSpans("Lock the type of {0:*}? It will never upgrade to another type and will gain levels instead. This cannot be undone.", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
+                Tr("Lock"),
+                ConfirmPromptType.Danger,
+                async () =>
+                {
+                    await TryDispatchWorldActionAsync(command);
+                    RefreshView();
+                }));
+        }
+    }
+
+    private async Task ConfirmDisbandAsync(WorldStack stack, GridPosition position)
     {
         WorldUnit? unit = stack.Units[position];
 

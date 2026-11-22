@@ -4679,4 +4679,218 @@ public sealed class StackTabViewModelTests
             Summons: null,
             GrantedWards: null)));
     }
+
+    [Test]
+    public async Task DismissTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, soldierDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        screen.DismissCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.EqualTo(StackTabViewModel.UnitActionType.Dismiss));
+            Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to dismiss it."));
+            Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
+        }
+
+        await FindSlot(screen.UnitGrid, GridPosition.FrontCenter).SelectCommand.ExecuteAsync(null);
+
+        ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(prompt.Title, Is.EqualTo("Dismiss unit"));
+            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Are you sure you want to dismiss ", TextStyle.None), new TextSpan("name", TextStyle.Highlight), new TextSpan("?", TextStyle.None)])));
+            Assert.That(prompt.ConfirmLabel, Is.EqualTo("Dismiss"));
+        }
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = TestHelpers.StackUnitGrid(stackDefinitions, [(leader, GridPosition.FrontBottom)])
+        }));
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(gameViewModel.TopScreen, Is.Null);
+            Assert.That(screen.TargetedAction, Is.EqualTo(StackTabViewModel.UnitActionType.Dismiss));
+            Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+        }
+
+        screen.CancelTargetingCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.Null);
+            Assert.That(screen.TargetingPromptText, Is.Null);
+            Assert.That(screen.Game.Alert.Current, Is.Null);
+        }
+
+        screen.DismissCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.Null);
+            Assert.That(screen.TargetingPromptText, Is.Null);
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Delete, "No units can be dismissed", Details: null)));
+        }
+    }
+
+    [Test]
+    public async Task LockTypeTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+        UnitDefinition squireDefinition = TestHelpers.SimpleUnitDefinition("squire", maxHitpoints: 100, initiative: 40, damage: 10);
+        UnitDefinition knightDefinition = TestHelpers.SimpleUnitDefinition("knight", maxHitpoints: 200, initiative: 50, damage: 20);
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, leaderDefinition.Level, [], null, false);
+        WorldUnit squire = new(new WorldUnitId("squire"), squireDefinition.Id, 100, 0, squireDefinition.Level, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(squireDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (squire, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(squireDefinition)
+            .WithDefinition(knightDefinition)
+            .WithUnitUpgrade(new UnitUpgradeDefinition(squireDefinition.Id, knightDefinition.Id, RequiredBuildingId: null))
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        screen.LockTypeCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.EqualTo(StackTabViewModel.UnitActionType.LockType));
+            Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to lock its type."));
+            Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, true, false, false, false, false]));
+        }
+
+        await FindSlot(screen.UnitGrid, GridPosition.FrontCenter).SelectCommand.ExecuteAsync(null);
+
+        ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(prompt.Title, Is.EqualTo("Lock unit type"));
+            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([
+                new TextSpan("Lock the type of ", TextStyle.None),
+                new TextSpan("name", TextStyle.Highlight),
+                new TextSpan("? It will never upgrade to another type and will gain levels instead. This cannot be undone.", TextStyle.None)
+            ])));
+            Assert.That(prompt.ConfirmLabel, Is.EqualTo("Lock"));
+        }
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(session.World.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (squire with { IsTypeLocked = true }, GridPosition.FrontCenter)
+                ])
+        }));
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(gameViewModel.TopScreen, Is.Null);
+            Assert.That(screen.TargetedAction, Is.EqualTo(StackTabViewModel.UnitActionType.LockType));
+            Assert.That(screen.UnitGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
+        }
+
+        screen.CancelTargetingCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.Null);
+            Assert.That(screen.TargetingPromptText, Is.Null);
+            Assert.That(screen.Game.Alert.Current, Is.Null);
+        }
+
+        screen.LockTypeCommand.Execute(null);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(screen.TargetedAction, Is.Null);
+            Assert.That(screen.TargetingPromptText, Is.Null);
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Locked, "No units can have their type locked", Details: null)));
+        }
+    }
 }

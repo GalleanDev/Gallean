@@ -2314,17 +2314,20 @@ public sealed class CityTabViewModelTests
     }
 
     [Test]
-    public async Task LockTypeTargetTest()
+    public async Task DismissTargetTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
 
         UnitDefinition squireDefinition = TestHelpers.SimpleUnitDefinition("squire", maxHitpoints: 100, initiative: 40, damage: 10);
-        UnitDefinition knightDefinition = TestHelpers.SimpleUnitDefinition("knight", maxHitpoints: 200, initiative: 50, damage: 20);
+        UnitDefinition guardianDefinition = TestHelpers.SimpleUnitDefinition("guardian", maxHitpoints: 200, initiative: 50, damage: 20) with
+        {
+            Category = UnitCategory.Guardian
+        };
 
         WorldUnit squire = TestHelpers.SimpleUnit(new WorldUnitId("squire"), squireDefinition);
-        WorldUnit knight = TestHelpers.SimpleUnit(new WorldUnitId("knight"), knightDefinition);
+        WorldUnit guardian = TestHelpers.SimpleUnit(new WorldUnitId("guardian"), guardianDefinition);
 
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(new WorldCityDefinitionId(WorldRace.Human, 1), WorldResourceSet.Empty);
 
@@ -2335,7 +2338,7 @@ public sealed class CityTabViewModelTests
             new WorldPosition(4, 4),
             new UnitGrid<WorldUnit>.Builder()
                 .Place(squire, GridPosition.FrontBottom, false)
-                .Place(knight, GridPosition.FrontCenter, false)
+                .Place(guardian, GridPosition.FrontCenter, false)
                 .Build());
 
         (GameSession session, _) = new TestWorldEngineBuilder()
@@ -2343,8 +2346,7 @@ public sealed class CityTabViewModelTests
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
             .WithDefinition(squireDefinition)
-            .WithDefinition(knightDefinition)
-            .WithUnitUpgrade(new UnitUpgradeDefinition(squireDefinition.Id, knightDefinition.Id, RequiredBuildingId: null))
+            .WithDefinition(guardianDefinition)
             .WithDefinition(cityDefinition)
             .WithCity(city)
             .WithSubrace(TestHelpers.NeutralSubrace)
@@ -2358,12 +2360,12 @@ public sealed class CityTabViewModelTests
         ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new CityTabViewModel(gameModel, gameViewModel, owner, city.Id)]);
         CityTabViewModel screen = Assert.IsOfType<CityTabViewModel>(management.Tabs[0]);
 
-        screen.LockTypeCommand.Execute(null);
+        screen.DismissCommand.Execute(null);
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.LockType));
-            Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to lock its type."));
+            Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.Dismiss));
+            Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to dismiss it."));
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([true, false, false, false, false, false]));
         }
 
@@ -2371,6 +2373,14 @@ public sealed class CityTabViewModelTests
         await slot.SelectCommand.ExecuteAsync(null);
 
         ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(prompt.Title, Is.EqualTo("Dismiss unit"));
+            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Are you sure you want to dismiss ", TextStyle.None), new TextSpan("name", TextStyle.Highlight), new TextSpan("?", TextStyle.None)])));
+            Assert.That(prompt.ConfirmLabel, Is.EqualTo("Dismiss"));
+        }
+
         await prompt.ConfirmCommand.ExecuteAsync(null);
 
         Assert.That(session.World.State, Is.EqualTo(initialState with
@@ -2378,16 +2388,15 @@ public sealed class CityTabViewModelTests
             Fortifications = initialState.Fortifications.SetItem(city.Id, initialState.Fortifications[city.Id] with
             {
                 Garrison = new UnitGrid<WorldUnit>.Builder()
-                    .Place(squire with { IsTypeLocked = true }, GridPosition.FrontBottom, false)
-                    .Place(knight, GridPosition.FrontCenter, false)
+                    .Place(guardian, GridPosition.FrontCenter, false)
                     .Build()
             })
         }));
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.LockType));
-            Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to lock its type."));
+            Assert.That(screen.TargetedAction, Is.EqualTo(CityTabViewModel.UnitActionType.Dismiss));
+            Assert.That(screen.TargetingPromptText, Is.EqualTo("Select a unit to dismiss it."));
             Assert.That(screen.GarrisonGrid.Slots.Select(slot => slot.IsHighlighted), Is.EqualTo([false, false, false, false, false, false]));
         }
 
@@ -2400,13 +2409,13 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.Game.Alert.Current, Is.Null);
         }
 
-        screen.LockTypeCommand.Execute(null);
+        screen.DismissCommand.Execute(null);
 
         using (Assert.EnterMultipleScope())
         {
             Assert.That(screen.TargetedAction, Is.Null);
             Assert.That(screen.TargetingPromptText, Is.Null);
-            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Locked, "No units can have their type locked", Details: null)));
+            Assert.That(screen.Game.Alert.Current, Is.EqualTo(new Alert(AlertType.Info, IconMoniker.Delete, "No units can be dismissed", Details: null)));
         }
     }
 

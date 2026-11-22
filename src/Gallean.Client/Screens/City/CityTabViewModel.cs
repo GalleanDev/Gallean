@@ -13,7 +13,7 @@ internal sealed partial class CityTabViewModel
     {
         Heal,
         Resurrect,
-        LockType
+        Dismiss
     }
 
     private readonly WorldFortificationId fortificationId;
@@ -43,7 +43,7 @@ internal sealed partial class CityTabViewModel
         RegisterSnapshotGatedCommands(
             HealCommand,
             ResurrectCommand,
-            LockTypeCommand,
+            DismissCommand,
             AutoFitCommand,
             ExitStackCommand,
             UpgradeCommand,
@@ -166,7 +166,7 @@ internal sealed partial class CityTabViewModel
                 break;
 
             case (UnitGridSlotReference sourceSlot, DropZoneReference zone) when zone.Zone == DismissDropZone:
-                ConfirmDisband(sourceSlot);
+                await ConfirmDisbandAsync(sourceSlot);
                 break;
         }
     }
@@ -384,9 +384,9 @@ internal sealed partial class CityTabViewModel
     }
 
     [RelayCommand(CanExecute = nameof(CanTargetUnitAction))]
-    private void LockType()
+    private void Dismiss()
     {
-        BeginTargeting(UnitActionType.LockType);
+        BeginTargeting(UnitActionType.Dismiss);
     }
 
     private bool CanTargetUnitAction()
@@ -413,14 +413,14 @@ internal sealed partial class CityTabViewModel
             {
                 UnitActionType.Heal => IconMoniker.Heal,
                 UnitActionType.Resurrect => IconMoniker.Resurrect,
-                UnitActionType.LockType => IconMoniker.Locked
+                UnitActionType.Dismiss => IconMoniker.Delete
             };
 
             string caption = type switch
             {
                 UnitActionType.Heal => Tr("No units can be healed"),
                 UnitActionType.Resurrect => Tr("No units can be resurrected"),
-                UnitActionType.LockType => Tr("No units can have their type locked")
+                UnitActionType.Dismiss => Tr("No units can be dismissed")
             };
 
             Game.ShowInfo(icon, caption, null);
@@ -468,7 +468,7 @@ internal sealed partial class CityTabViewModel
         {
             UnitActionType.Heal => Tr("Select a unit to heal it."),
             UnitActionType.Resurrect => Tr("Select a unit to resurrect it."),
-            UnitActionType.LockType => Tr("Select a unit to lock its type.")
+            UnitActionType.Dismiss => Tr("Select a unit to dismiss it.")
         };
     }
 
@@ -498,7 +498,7 @@ internal sealed partial class CityTabViewModel
         {
             UnitActionType.Heal => city.HealError,
             UnitActionType.Resurrect => city.HealError,
-            UnitActionType.LockType => null
+            UnitActionType.Dismiss => null
         };
     }
 
@@ -508,7 +508,7 @@ internal sealed partial class CityTabViewModel
         {
             UnitActionType.Heal => unit.HealError,
             UnitActionType.Resurrect => unit.ResurrectError,
-            UnitActionType.LockType => unit.LockTypeError
+            UnitActionType.Dismiss => unit.DisbandError
         };
     }
 
@@ -518,7 +518,7 @@ internal sealed partial class CityTabViewModel
         {
             UnitActionType.Heal => unit.HealCost,
             UnitActionType.Resurrect => unit.ResurrectCost,
-            UnitActionType.LockType => null
+            UnitActionType.Dismiss => null
         };
     }
 
@@ -547,7 +547,7 @@ internal sealed partial class CityTabViewModel
             {
                 UnitActionType.Heal => HealUnitAsync(group, unit),
                 UnitActionType.Resurrect => ResurrectUnitAsync(group, unit),
-                UnitActionType.LockType => ConfirmLockTypeAsync(group, unit)
+                UnitActionType.Dismiss => ConfirmDisbandAsync(group, unit)
             };
 
             await action;
@@ -574,45 +574,35 @@ internal sealed partial class CityTabViewModel
         }
     }
 
-    private async Task ConfirmLockTypeAsync(WorldUnitGroup group, WorldUnit unit)
+    private async Task ConfirmDisbandAsync(UnitGridSlotReference slot)
     {
-        string unitName = UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts);
-        WorldLockUnitTypeCommand command = new(group, unit.Id);
+        WorldUnitGroup? group = ResolveGroup(GetGridType(slot.Grid));
+        WorldUnit? unit = FindUnit(slot);
+
+        if (group is not null && unit is not null)
+        {
+            await ConfirmDisbandAsync(group, unit);
+        }
+    }
+
+    private async Task ConfirmDisbandAsync(WorldUnitGroup group, WorldUnit unit)
+    {
+        WorldDisbandUnitCommand command = new(group, unit.Id);
 
         Game.OpenScreen(new ConfirmPromptViewModel(
-            Tr("Lock unit type"),
-            TrSpans("Lock the type of {0:*}? It will never upgrade to another type and will gain levels instead. This cannot be undone.", unitName),
-            Tr("Lock"),
+            Tr("Dismiss unit"),
+            TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
+            Tr("Dismiss"),
             ConfirmPromptType.Danger,
             async () =>
             {
-                await TryDispatchWorldActionAsync(command);
+                if (await TryDispatchWorldActionAsync(command))
+                {
+                    unitSelection.ClearSelection();
+                }
+
                 RefreshView();
             }));
-    }
-
-    private void ConfirmDisband(UnitGridSlotReference slot)
-    {
-        WorldUnit? unit = FindUnit(slot);
-        WorldDisbandUnitCommand? command = BuildDisbandCommand(slot);
-
-        if (unit is not null && command is not null)
-        {
-            Game.OpenScreen(new ConfirmPromptViewModel(
-                Tr("Dismiss unit"),
-                TrSpans("Are you sure you want to dismiss {0:*}?", UnitNameResolver.Resolve(unit, GameModel.Definitions, GameModel.Texts)),
-                Tr("Dismiss"),
-                ConfirmPromptType.Danger,
-                async () =>
-                {
-                    if (await TryDispatchWorldActionAsync(command))
-                    {
-                        unitSelection.ClearSelection();
-                    }
-
-                    RefreshView();
-                }));
-        }
     }
 
     private bool CanDisband(UnitGridSlotReference slot)
@@ -1236,21 +1226,6 @@ internal sealed partial class CityTabViewModel
         else
         {
             return ResolveGroup(CityUnitGridType.Garrison);
-        }
-    }
-
-    private WorldDisbandUnitCommand? BuildDisbandCommand(UnitGridSlotReference slot)
-    {
-        WorldUnitGroup? group = ResolveGroup(GetGridType(slot.Grid));
-        WorldUnit? unit = FindUnit(slot);
-
-        if (group is not null && unit is not null)
-        {
-            return new WorldDisbandUnitCommand(group, unit.Id);
-        }
-        else
-        {
-            return null;
         }
     }
 

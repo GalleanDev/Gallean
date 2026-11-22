@@ -263,10 +263,10 @@
                 <TextBlock Grid.Column="1" Text="{local:Text 'Resurrect unit'}" />
               </Grid>
             </Button>
-            <Button Classes="pill action" local:PlateChrome.TextureSeed="5" Command="{Binding LockTypeCommand}">
+            <Button Classes="pill action" local:PlateChrome.TextureSeed="5" Command="{Binding DismissCommand}">
               <Grid ColumnDefinitions="Auto,*">
-                <local:IconVisual Grid.Column="0" Moniker="Locked" Foreground="{Binding $parent[Button].Foreground}" />
-                <TextBlock Grid.Column="1" Text="{local:Text 'Lock unit type'}" />
+                <local:IconVisual Grid.Column="0" Moniker="Delete" Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Grid.Column="1" Text="{local:Text 'Dismiss unit'}" />
               </Grid>
             </Button>
 
