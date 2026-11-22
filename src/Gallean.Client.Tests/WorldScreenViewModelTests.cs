@@ -5820,7 +5820,7 @@ public sealed class WorldScreenViewModelTests
     }
 
     [Test]
-    public async Task EnterSiteTest()
+    public async Task EnterSiteAdjacentTileTest()
     {
         WorldMap map = TestHelpers.SimpleMap(8, 8);
 
