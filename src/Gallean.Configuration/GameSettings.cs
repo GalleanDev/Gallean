@@ -21,6 +21,8 @@ public sealed record GameSettings(
     public const int CurrentFormatVersion = 6;
     public const int MinVolume = 0;
     public const int MaxVolume = 100;
+    public const int DefaultSoundVolume = 50;
+    public const int DefaultMusicVolume = 50;
     public const int MinRenderResolution = 50;
     public const int MaxRenderResolution = 100;
     public const int DefaultAutoSaveInterval = 5;
@@ -32,8 +34,8 @@ public sealed record GameSettings(
     public const BattlePosition DefaultBattlePosition = BattlePosition.Left;
 
     public static GameSettings Default { get; } = Create(
-        MaxVolume,
-        MaxVolume,
+        DefaultSoundVolume,
+        DefaultMusicVolume,
         false,
         MaxRenderResolution,
         DefaultAutoSaveInterval,

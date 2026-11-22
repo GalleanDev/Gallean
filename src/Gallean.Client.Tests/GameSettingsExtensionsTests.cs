@@ -16,8 +16,10 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void FullVolumeRatioTest()
     {
-        Assert.That(GameSettings.Default.SoundVolumeRatio, Is.EqualTo(1.0f));
-        Assert.That(GameSettings.Default.MusicVolumeRatio, Is.EqualTo(1.0f));
+        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
+
+        Assert.That(settings.SoundVolumeRatio, Is.EqualTo(1.0f));
+        Assert.That(settings.MusicVolumeRatio, Is.EqualTo(1.0f));
     }
 
     [Test]
