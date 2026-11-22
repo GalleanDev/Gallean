@@ -100,7 +100,8 @@ public sealed class WorldScreenViewModelTests
         {
             string selection = item.IsSelected ? "selected" : "-";
             string finished = item.IsFinished ? "finished" : "-";
-            rows.Add($"{item.StackId.Value} | {item.PortraitKey} | {item.LeaderName} | level {item.Level} | {item.MovementPoints} / {item.MaxMovementPoints} | {selection} | {finished}");
+            string fortification = item.IsInFortification ? "fortification" : "-";
+            rows.Add($"{item.StackId.Value} | {item.PortraitKey} | {item.LeaderName} | level {item.Level} | {item.MovementPoints} / {item.MaxMovementPoints} | {selection} | {finished} | {fortification}");
         }
 
         return rows;
@@ -1399,9 +1400,9 @@ public sealed class WorldScreenViewModelTests
         world.CompleteGameStart();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Second | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | -",
-            "First | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | -",
-            "Third | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | -"
+            "Second | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | - | -",
+            "First | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | - | -",
+            "Third | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | - | -"
         ]));
 
         world.SelectStackItemCommand.Execute(third.Id);
@@ -1410,9 +1411,9 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(renderState, Is.EqualTo(renderState with { Cursors = [] }));
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Second | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | -",
-            "First | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | -",
-            "Third | unit-event-portrait/leader | name | level 2 | 6 / 6 | selected | -"
+            "Second | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | - | -",
+            "First | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | - | -",
+            "Third | unit-event-portrait/leader | name | level 2 | 6 / 6 | selected | - | -"
         ]));
     }
 
@@ -1708,8 +1709,8 @@ public sealed class WorldScreenViewModelTests
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Beta | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | -",
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Beta | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | - | -",
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
         Assert.That(world.CameraFocus, Is.EqualTo(new WorldPosition(7, 2)));
     }
@@ -1780,8 +1781,8 @@ public sealed class WorldScreenViewModelTests
         await gameModel.World.DispatchCommandAsync(new WorldStartGameCommand());
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Beta | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | -",
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "Beta | unit-event-portrait/leader | name | level 3 | 6 / 6 | - | - | -",
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
         Assert.That(world.CameraFocus, Is.EqualTo(new WorldPosition(2, 7)));
     }
@@ -6971,8 +6972,8 @@ public sealed class WorldScreenViewModelTests
         world.CompleteGameStart();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Exhausted | unit-event-portrait/leader | name | level 1 | 0 / 2 | - | -",
-            "Ready | unit-event-portrait/leader | name | level 1 | 2 / 2 | - | -"
+            "Exhausted | unit-event-portrait/leader | name | level 1 | 0 / 2 | - | - | -",
+            "Ready | unit-event-portrait/leader | name | level 1 | 2 / 2 | - | - | -"
         ]));
         Assert.That(world.IsViewPlayerTurn, Is.True);
         Assert.That(world.IsEndTurnHighlighted, Is.False);
@@ -6987,8 +6988,8 @@ public sealed class WorldScreenViewModelTests
         await world.HandleMapClickAsync(new WorldPosition(1, 0), null, 1);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Exhausted | unit-event-portrait/leader | name | level 1 | 0 / 2 | - | -",
-            "Ready | unit-event-portrait/leader | name | level 1 | 0 / 2 | selected | -"
+            "Exhausted | unit-event-portrait/leader | name | level 1 | 0 / 2 | - | - | -",
+            "Ready | unit-event-portrait/leader | name | level 1 | 0 / 2 | selected | - | -"
         ]));
         Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
             new WorldPosition(1, 0),
@@ -7336,7 +7337,7 @@ public sealed class WorldScreenViewModelTests
         world.UpdateHover(new WorldPosition(1, 0), null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
         Assert.That(world.CursorType, Is.EqualTo(AssetAnimationKey.CursorType.Default));
 
@@ -7344,7 +7345,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
 
         world.InspectStackCommand.Execute(null);
@@ -7456,8 +7457,8 @@ public sealed class WorldScreenViewModelTests
         await world.HandleMapClickAsync(new WorldPosition(1, 0), new WorldPosition(2, 0), 1);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "First | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Second | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "First | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Second | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
 
         world.UpdateHover(new WorldPosition(1, 0), new WorldPosition(0, 0));
@@ -7471,8 +7472,8 @@ public sealed class WorldScreenViewModelTests
         await world.HandleMapClickAsync(new WorldPosition(1, 0), new WorldPosition(0, 0), 1);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "First | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -",
-            "Second | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "First | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -",
+            "Second | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[second.Id].Position, Is.EqualTo(new WorldPosition(2, 0)));
     }
@@ -7805,7 +7806,7 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
 
         gameViewModel.EscapeCommand.Execute(null);
@@ -7821,7 +7822,7 @@ public sealed class WorldScreenViewModelTests
         Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
         Assert.That(world.ActionPromptText, Is.Null);
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Stack | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
     }
 
@@ -7875,34 +7876,34 @@ public sealed class WorldScreenViewModelTests
         world.SelectNextStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
 
         world.SelectNextStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
 
         world.SelectPreviousStackCommand.Execute(null);
         world.SelectPreviousStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
 
         world.SelectNextStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
         Assert.That(cameraFocusRequests, Is.EqualTo([
             new WorldPosition(0, 0),
@@ -7969,9 +7970,9 @@ public sealed class WorldScreenViewModelTests
         world.FinishStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
         Assert.That(cameraFocusRequests, Is.EqualTo([new WorldPosition(4, 0)]));
         Assert.That(world.IsEndTurnHighlighted, Is.False);
@@ -7979,9 +7980,9 @@ public sealed class WorldScreenViewModelTests
         world.FinishStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished | -"
         ]));
         Assert.That(cameraFocusRequests, Is.EqualTo([new WorldPosition(4, 0)]));
         Assert.That(world.IsEndTurnHighlighted, Is.True);
@@ -7996,9 +7997,9 @@ public sealed class WorldScreenViewModelTests
         world.CompleteAnimation();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 4 / 6 | selected | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 4 / 6 | selected | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | finished | -"
         ]));
         Assert.That(world.IsEndTurnHighlighted, Is.False);
         Assert.That(world.FinishStackCommand.CanExecute(null), Is.True);
@@ -8006,9 +8007,9 @@ public sealed class WorldScreenViewModelTests
         await world.EndTurnCommand.ExecuteAsync(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -",
-            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -",
+            "Charlie | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
     }
 
@@ -8058,8 +8059,8 @@ public sealed class WorldScreenViewModelTests
         world.CompleteAnimation();
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | selected | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | selected | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
         ]));
         Assert.That(cameraFocusRequests, Is.EqualTo([new WorldPosition(1, 0)]));
         Assert.That(world.FinishStackCommand.CanExecute(null), Is.False);
@@ -8067,8 +8068,8 @@ public sealed class WorldScreenViewModelTests
         world.SelectNextStackCommand.Execute(null);
 
         Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
-            "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | -",
-            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | -"
+            "Alpha | unit-event-portrait/leader | name | level 1 | 0 / 6 | - | - | -",
+            "Bravo | unit-event-portrait/leader | name | level 1 | 6 / 6 | selected | - | -"
         ]));
         Assert.That(cameraFocusRequests, Is.EqualTo([new WorldPosition(1, 0), new WorldPosition(4, 0)]));
     }
@@ -9364,5 +9365,71 @@ public sealed class WorldScreenViewModelTests
             Assert.That(world.ActionPromptText, Is.EqualTo("Select a target for the spell on the map."));
             Assert.That(gameViewModel.Alert.Current, Is.EqualTo(new Alert(AlertType.Error, IconMoniker.Warning, "You do not know this spell", Details: null)));
         }
+    }
+
+    [Test]
+    public void StackItemInFortificationTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(10, 10);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("Leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leader)
+            .Build();
+
+        WorldCapital capital = TestHelpers.SimpleCapital(
+            new WorldFortificationId("Capital"),
+            player.Id,
+            new WorldPosition(4, 4),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack resting = TestHelpers.SimpleStack(
+            new WorldStackId("Resting"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(new WorldUnit(new WorldUnitId("leader"), leader.Id, 100, 0, 2, [], null, false), GridPosition.FrontBottom)]),
+            movementPoints: 6);
+
+        WorldStack roaming = TestHelpers.SimpleStack(
+            new WorldStackId("Roaming"),
+            player.Id,
+            new WorldPosition(7, 7),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [(new WorldUnit(new WorldUnitId("leader2"), leader.Id, 100, 0, 1, [], null, false), GridPosition.FrontBottom)]),
+            movementPoints: 6);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(
+                leader.Id,
+                UpgradeChangeLevel: 10,
+                UnitDynamicUpgrade.Empty,
+                UnitDynamicUpgrade.Empty))
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(resting)
+            .WithStack(roaming)
+            .WithCapital(capital)
+            .BuildSession();
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        Assert.That(FormatStackItems(world.StackItems), Is.EqualTo([
+            "Resting | unit-event-portrait/leader | name | level 2 | 6 / 6 | - | - | fortification",
+            "Roaming | unit-event-portrait/leader | name | level 1 | 6 / 6 | - | - | -"
+        ]));
     }
 }

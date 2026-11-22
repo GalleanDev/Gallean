@@ -339,6 +339,9 @@
                       </local:OutlinedTextBlock.Text>
                     </local:OutlinedTextBlock>
                     <local:OutlinedTextBlock Classes="object-name compact name" Text="{Binding LeaderName}" />
+                    <Border Classes="world-stack-card-badge" IsVisible="{Binding IsInFortification}">
+                      <local:IconVisual Moniker="Fortification" />
+                    </Border>
                   </Panel>
                 </Button>
                 <StackPanel Classes="world-stack-card-actions" IsVisible="{Binding IsSelected}">

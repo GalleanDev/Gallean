@@ -1514,12 +1514,22 @@ internal sealed partial class WorldScreenViewModel :
 
     private void UpdateStackItems(List<WorldStack> stacks)
     {
+        WorldPlan plan = WorldPlan.For(WorldState);
         List<WorldStackItemViewModel> newItems = [];
 
         foreach (WorldStack stack in stacks)
         {
             WorldStackItemViewModel newItem = new(stack.Id);
-            newItem.Update(stack, stack.Id == cursor.StackId, IsFinished(stack), GameModel.Definitions, GameModel.Texts, GameModel.Stats);
+
+            newItem.Update(
+                stack,
+                plan,
+                stack.Id == cursor.StackId,
+                IsFinished(stack),
+                GameModel.Definitions,
+                GameModel.Texts,
+                GameModel.Stats);
+
             newItems.Add(newItem);
         }
 
@@ -1539,7 +1549,16 @@ internal sealed partial class WorldScreenViewModel :
             else
             {
                 WorldStack stack = WorldState.Stacks[item.Left.StackId];
-                item.Left.Update(stack, stack.Id == cursor.StackId, IsFinished(stack), GameModel.Definitions, GameModel.Texts, GameModel.Stats);
+
+                item.Left.Update(
+                    stack,
+                    plan,
+                    stack.Id == cursor.StackId,
+                    IsFinished(stack),
+                    GameModel.Definitions,
+                    GameModel.Texts,
+                    GameModel.Stats);
+
                 index++;
             }
         }

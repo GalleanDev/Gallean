@@ -199,6 +199,28 @@
   <Style Selector="Button.world-stack-card.selected local|OutlinedTextBlock.name">
     <Setter Property="Opacity" Value="1" />
   </Style>
+  <Style Selector="Button.world-stack-card Border.world-stack-card-badge">
+    <Setter Property="Width" Value="18" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="Margin" Value="0,40,30,0" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background" Value="{StaticResource BadgeBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource BadgeBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="9" />
+  </Style>
+  <Style Selector="Button.world-stack-card.selected Border.world-stack-card-badge">
+    <Setter Property="Margin" Value="0,48,38,0" />
+  </Style>
+  <Style Selector="Button.world-stack-card Border.world-stack-card-badge > local|IconVisual">
+    <Setter Property="Width" Value="11" />
+    <Setter Property="Height" Value="11" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource BadgeTextBrush}" />
+  </Style>
 
   <Style Selector="ItemsControl.world-stack-bar">
     <Setter Property="Margin" Value="0,0,0,-64" />
@@ -228,6 +250,12 @@
     </Style>
     <Style Selector="^ Button.world-stack-card local|OutlinedTextBlock.name">
       <Setter Property="Margin" Value="4,0,4,96" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card Border.world-stack-card-badge">
+      <Setter Property="Margin" Value="0,49,38,0" />
+    </Style>
+    <Style Selector="^ Button.world-stack-card.selected Border.world-stack-card-badge">
+      <Setter Property="Margin" Value="0,59,47,0" />
     </Style>
     <Style Selector="^ StackPanel.world-stack-card-actions">
       <Setter Property="Margin" Value="0,-15,0,0" />
