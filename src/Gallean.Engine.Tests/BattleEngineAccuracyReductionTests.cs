@@ -241,5 +241,4 @@ public sealed class BattleEngineAccuracyReductionTests
                 CurrentRound = BattleRound.Normal(1)
             }));
     }
-    }
 }
