@@ -8,15 +8,14 @@
     <local:ModalPanel Classes="accent" Width="620" Padding="28,24" Title="{local:Text 'Save game'}" InitialFocus="{Binding #SaveButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="*,Auto,Auto,*">
+        <Grid Classes="pill-group" ColumnDefinitions="*,Auto,Auto,*">
           <Button x:Name="SaveButton"
                   Grid.Column="1"
                   Content="{Binding SaveLabel}"
                   Classes="pill primary"
                   local:PlateChrome.TextureSeed="1"
                   Command="{Binding SaveCommand}"
-                  MinWidth="150"
-                  Margin="0,0,16,0" />
+                  MinWidth="150" />
           <Button Grid.Column="2"
                   Content="{local:Text 'Close'}"
                   Classes="pill"

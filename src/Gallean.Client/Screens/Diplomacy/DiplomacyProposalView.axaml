@@ -8,15 +8,14 @@
     <local:ModalPanel MinWidth="440" MaxWidth="620" Padding="28,24" Title="{local:Text 'Diplomatic offer'}" InitialFocus="{Binding #AcceptButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="*,Auto,Auto,*">
+        <Grid Classes="pill-group" ColumnDefinitions="*,Auto,Auto,*">
           <Button x:Name="AcceptButton"
                   Grid.Column="1"
                   Content="{local:Text 'Accept'}"
                   Classes="pill success"
                   local:PlateChrome.TextureSeed="1"
                   Command="{Binding AcceptCommand}"
-                  MinWidth="150"
-                  Margin="0,0,16,0" />
+                  MinWidth="150" />
           <Button Grid.Column="2"
                   Content="{local:Text 'Decline'}"
                   Classes="pill"

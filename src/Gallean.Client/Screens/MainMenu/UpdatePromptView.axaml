@@ -8,8 +8,8 @@
     <local:ModalPanel Classes="accent" MinWidth="440" MaxWidth="620" Padding="28,24" Title="{local:Text 'Update available'}" InitialFocus="{Binding #InstallButton}">
 
       <local:ModalPanel.Footer>
-        <Grid ColumnDefinitions="*,Auto,Auto,*">
-          <Panel Grid.Column="1" Margin="0,0,16,0">
+        <Grid Classes="pill-group" ColumnDefinitions="*,Auto,Auto,*">
+          <Panel Grid.Column="1">
             <Button x:Name="InstallButton"
                     Content="{local:Text 'Update'}"
                     Classes="pill success"
