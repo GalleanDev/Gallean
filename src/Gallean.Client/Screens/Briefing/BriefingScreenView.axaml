@@ -163,7 +163,7 @@
                 Command="{Binding ToggleTextCommand}"
                 IsVisible="{Binding HasVideo}"
                 Width="200" />
-        <Button Classes="pill primary"
+        <Button Classes="pill success"
                 local:PlateChrome.TextureSeed="2"
                 Content="{local:Text 'Continue'}"
                 Command="{Binding ContinueCommand}"
