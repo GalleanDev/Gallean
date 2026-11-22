@@ -567,7 +567,7 @@ public sealed class MercenaryTabViewModelTests
             false,
             false,
             false,
-            new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor)),
+            new UnitAttackViewModel("Damage", new UnitAttackSourceViewModel(IconMoniker.AttackSourceWeapon, "Weapon", Theme.AttackSource.WeaponColor), false),
             new StatValueViewModel(TextSpans.FromText("21"), 0),
             null,
             null,

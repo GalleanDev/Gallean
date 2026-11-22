@@ -8,6 +8,9 @@
     <Style Selector=":is(TextBlock).primary-stat">
       <Setter Property="Foreground" Value="{StaticResource UnitDetailsPrimaryStatBrush}" />
     </Style>
+    <Style Selector=":is(TextBlock).attack-count">
+      <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+    </Style>
     <Style Selector="StackPanel.attack-line">
       <Setter Property="Orientation" Value="Horizontal" />
     </Style>
@@ -63,12 +66,18 @@
         <local:OutlinedTextBlock Text="{Binding Name}" Classes="object-name row" />
         <local:OutlinedTextBlock Text="{Binding LevelText}" Classes="label details-category summon-level" />
         <Grid ColumnDefinitions="Auto,*" Margin="0,4,0,0">
-          <local:OutlinedTextBlock Grid.Column="0"
-                                   Classes="h2 primary-stat"
-                                   Margin="0,0,10,0"
-                                   Text="{Binding Attack.Amount}"
-                                   VerticalAlignment="Center"
-                                   IsVisible="{Binding Attack.Amount, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          <StackPanel Grid.Column="0"
+                      Orientation="Horizontal"
+                      Spacing="4"
+                      Margin="0,0,10,0"
+                      VerticalAlignment="Center"
+                      IsVisible="{Binding Attack.Amount, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <local:OutlinedTextBlock Classes="h2 primary-stat" Text="{Binding Attack.Amount}" />
+            <local:OutlinedTextBlock Classes="h4 attack-count"
+                                     VerticalAlignment="Center"
+                                     Text="×2"
+                                     IsVisible="{Binding Attack.Attack.AttacksTwice}" />
+          </StackPanel>
           <StackPanel Grid.Column="1" Classes="attack-line" VerticalAlignment="Center">
             <TextBlock Text="{Binding Attack.Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
             <TextBlock Text="(" Classes="caption attack-source open" />

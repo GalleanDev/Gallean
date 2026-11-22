@@ -23,6 +23,10 @@
     <Style Selector=":is(TextBlock).primary-stat">
       <Setter Property="Foreground" Value="{StaticResource UnitDetailsPrimaryStatBrush}" />
     </Style>
+    <Style Selector=":is(TextBlock).attack-count">
+      <Setter Property="Margin" Value="4,0,0,0" />
+      <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+    </Style>
     <Style Selector=":is(TextBlock).primary-stat-change">
       <Setter Property="Foreground" Value="{StaticResource StatRowIncreaseBrush}" />
     </Style>
@@ -225,7 +229,7 @@
 
           <Rectangle Classes="details-rule" />
 
-          <Grid ColumnDefinitions="Auto,Auto,Auto,*">
+          <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,*">
             <local:OutlinedTextBlock Grid.Column="0"
                                      Classes="h1 primary-stat"
                                      Text="{Binding Damage.Text.Text}"
@@ -235,7 +239,12 @@
                                      Classes.decrease="{Binding Damage.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}"
                                      Text="{Binding Damage.ChangeText}"
                                      VerticalAlignment="Center" />
-            <StackPanel Grid.Column="2"
+            <local:OutlinedTextBlock Grid.Column="2"
+                                     Classes="h4 attack-count"
+                                     Text="×2"
+                                     VerticalAlignment="Center"
+                                     IsVisible="{Binding Attack.AttacksTwice}" />
+            <StackPanel Grid.Column="3"
                         Classes="damage-over-time"
                         ToolTip.Tip="{Binding DamageOverTime.Text}"
                         IsVisible="{Binding DamageOverTime, Converter={x:Static ObjectConverters.IsNotNull}}">
@@ -244,7 +253,7 @@
                                        Text="{Binding DamageOverTime.Damage}"
                                        Foreground="{Binding DamageOverTime.Status.Color, Converter={x:Static local:ColorToBrushConverter.Instance}}" />
             </StackPanel>
-            <StackPanel Grid.Column="3" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
+            <StackPanel Grid.Column="4" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
               <StackPanel Classes="attack-line">
                 <TextBlock Text="{Binding Attack.Text}" Classes="body attack-type" Foreground="{StaticResource PrimaryTextBrush}" />
                 <TextBlock Text="(" Classes="caption attack-source open" />
