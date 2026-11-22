@@ -629,8 +629,8 @@ internal sealed partial class CityTabViewModel
             WorldCityDefinition definition = GameModel.Definitions.GetCity(city.DefinitionId);
 
             Game.OpenScreen(new ConfirmPromptViewModel(
-                TrSpans("Upgrade city"),
-                TrSpans("Upgrade the city to {0:*}? This will increase garrison capacity, regeneration and armor bonus.", Tr("level {0}", definition.Level + 1)),
+                TrSpans("Upgrade city to {0:*}", Tr("level {0}", definition.Level + 1)),
+                TrSpans("This will increase garrison capacity, regeneration and armor bonus."),
                 Tr("Upgrade"),
                 UpgradeCost,
                 ConfirmPromptType.Primary,

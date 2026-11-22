@@ -1837,7 +1837,8 @@ public sealed class CityTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Upgrade the city to ", TextStyle.None), new TextSpan("level 2", TextStyle.Highlight), new TextSpan("? This will increase garrison capacity, regeneration and armor bonus.", TextStyle.None)])));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Upgrade city to ", TextStyle.None), new TextSpan("level 2", TextStyle.Highlight)])));
+            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("This will increase garrison capacity, regeneration and armor bonus.", TextStyle.None)])));
             Assert.That(prompt.ConfirmPrice, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(150, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
         }
 
@@ -1922,7 +1923,8 @@ public sealed class CityTabViewModelTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("Upgrade the city to ", TextStyle.None), new TextSpan("level 2", TextStyle.Highlight), new TextSpan("? This will increase garrison capacity, regeneration and armor bonus.", TextStyle.None)])));
+            Assert.That(prompt.Title, Is.EqualTo(new TextSpans([new TextSpan("Upgrade city to ", TextStyle.None), new TextSpan("level 2", TextStyle.Highlight)])));
+            Assert.That(prompt.Message, Is.EqualTo(new TextSpans([new TextSpan("This will increase garrison capacity, regeneration and armor bonus.", TextStyle.None)])));
             Assert.That(prompt.ConfirmPrice, Is.EqualTo(new ResourceSetViewModel(new WorldResourceSet(75, 0, 0, 0, 0, 0), ResourceSetProjection.All)));
         }
 
