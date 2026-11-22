@@ -30,8 +30,12 @@
                                Classes="caption"
                                Foreground="{StaticResource PrimaryTextBrush}"
                                TextWrapping="Wrap" />
-                    <ContentControl Content="{Binding Status.Price}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
-                    <ContentControl Content="{Binding Status}" Classes="caption" IsVisible="{Binding Status.IsReasonVisible}" />
+                    <ContentControl Content="{Binding Status.Price}"
+                                    Classes="caption"
+                                    Foreground="{StaticResource PrimaryTextBrush}" />
+                    <ContentControl Content="{Binding Status}"
+                                    Classes="caption"
+                                    IsVisible="{Binding Status.IsReasonVisible}" />
                   </StackPanel>
                 </Grid>
               </Button>

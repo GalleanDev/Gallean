@@ -54,22 +54,22 @@
     <Setter Property="Margin" Value="6" />
   </Style>
   <Style Selector="Button.inventory-slot.equipment /template/ local|PlateChrome#PlateChrome, Panel.inventory-slot.equipment > local|PlateChrome.socket">
-    <Setter Property="Stroke" Value="{StaticResource InventorySlotEquipmentBorderGradientBrush}" />
     <Setter Property="Fill" Value="{StaticResource InventorySlotEquipmentFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource InventorySlotEquipmentBorderGradientBrush}" />
   </Style>
   <Style Selector="Button.inventory-slot.equipment:pointerover /template/ local|PlateChrome#PlateChrome">
     <Setter Property="Fill" Value="{StaticResource InventorySlotEquipmentHoverFaceGradientBrush}" />
   </Style>
   <Style Selector="Button.inventory-slot.valuable /template/ local|PlateChrome#PlateChrome, Panel.inventory-slot.valuable > local|PlateChrome.socket">
-    <Setter Property="Stroke" Value="{StaticResource InventorySlotValuableBorderGradientBrush}" />
     <Setter Property="Fill" Value="{StaticResource InventorySlotValuableFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource InventorySlotValuableBorderGradientBrush}" />
   </Style>
   <Style Selector="Button.inventory-slot.valuable:pointerover /template/ local|PlateChrome#PlateChrome">
     <Setter Property="Fill" Value="{StaticResource InventorySlotValuableHoverFaceGradientBrush}" />
   </Style>
   <Style Selector="Button.inventory-slot.special /template/ local|PlateChrome#PlateChrome, Panel.inventory-slot.special > local|PlateChrome.socket">
-    <Setter Property="Stroke" Value="{StaticResource InventorySlotSpecialBorderGradientBrush}" />
     <Setter Property="Fill" Value="{StaticResource InventorySlotSpecialFaceGradientBrush}" />
+    <Setter Property="Stroke" Value="{StaticResource InventorySlotSpecialBorderGradientBrush}" />
   </Style>
   <Style Selector="Button.inventory-slot.special:pointerover /template/ local|PlateChrome#PlateChrome">
     <Setter Property="Fill" Value="{StaticResource InventorySlotSpecialHoverFaceGradientBrush}" />

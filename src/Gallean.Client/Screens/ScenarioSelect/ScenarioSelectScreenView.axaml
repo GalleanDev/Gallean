@@ -80,8 +80,16 @@
           <DataTemplate x:DataType="local:GameScenario">
             <Border Classes="row">
               <Grid ColumnDefinitions="*,Auto">
-                <TextBlock Grid.Column="0" Text="{Binding Name}" Classes="row-title" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="1" Text="{Binding Creator}" Classes="row-author" Margin="16,0,16,0" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="0"
+                           Text="{Binding Name}"
+                           Classes="row-title"
+                           TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Creator}"
+                           Classes="row-author"
+                           Margin="16,0,16,0"
+                           VerticalAlignment="Center" />
               </Grid>
             </Border>
           </DataTemplate>
