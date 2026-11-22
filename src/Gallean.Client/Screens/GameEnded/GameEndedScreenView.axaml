@@ -84,6 +84,12 @@
                 Command="{Binding Game.ExportLeaderCommand}"
                 Width="280"
                 IsVisible="{Binding IsVictory}" />
+        <Button Content="{local:Text 'Load game'}"
+                Classes="pill"
+                local:PlateChrome.TextureSeed="4"
+                Command="{Binding Game.ShowLoadGameCommand}"
+                Width="280"
+                IsVisible="{Binding !IsVictory}" />
         <Button Content="{local:Text 'Return to main menu'}"
                 Classes="pill"
                 local:PlateChrome.TextureSeed="1"

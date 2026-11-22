@@ -551,7 +551,9 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
             return;
         }
 
-        if (activeGame is not null && activeGame.Snapshot.WorldState != savedState)
+        if (activeGame is not null &&
+            activeGame.Snapshot.WorldState != savedState &&
+            !activeGame.Snapshot.IsGameEnded)
         {
             OpenScreen(new ConfirmPromptViewModel(
                 TrSpans("Load game"),
