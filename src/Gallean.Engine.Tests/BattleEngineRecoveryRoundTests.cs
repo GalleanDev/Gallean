@@ -1146,4 +1146,78 @@ public sealed class BattleEngineRecoveryRoundTests
             Modifiers: BattleModifiers.None,
             Info: TestHelpers.SimpleBattleInfo())));
     }
+
+    [Test]
+    public void NoCureTargetTest()
+    {
+        UnitDefinition warriorDefinition = TestHelpers.SimpleUnitDefinition("warrior", maxHitpoints: 100, initiative: 60, damage: 10);
+        UnitDefinition clericDefinition = HealerDefinition("cleric", maxHitpoints: 100, initiative: 40, heal: 30, UnitAttackReach.Any);
+        UnitDefinition elderDefinition = SupportDefinition("elder", maxHitpoints: 100, initiative: 50, UnitAttackType.IncreaseDamage, heal: 0) with
+        {
+            SecondaryAttack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("elder-cure"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Cure
+            }
+        };
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 10, initiative: 20, damage: 5);
+
+        BattleUnit warrior = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, warriorDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit cleric = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, clericDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit elder = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, elderDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(3), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 10);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(warriorDefinition)
+            .WithDefinition(clericDefinition)
+            .WithDefinition(elderDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithAttacker(warrior, GridPosition.FrontBottom)
+            .WithAttacker(cleric, GridPosition.BackBottom)
+            .WithAttacker(elder, GridPosition.BackTop)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(warrior.Id, new BattleAttackUnitTarget(defender.Id)), [
+            new BattleUnitAttackEvent(warrior.Id, new BattleAttackUnitTarget(defender.Id), [new UnitAttackDefinitionId("warrior")]),
+            new BattleUnitAttackedEvent(warrior.Id, defender.Id, new UnitAttackDefinitionId("warrior")),
+            new BattleUnitAttackHitEvent(warrior.Id, defender.Id, new UnitAttackDefinitionId("warrior"), 10),
+            new BattleUnitDiedEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(warrior.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Recovery(1), [new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnEndedEvent(warrior.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        engine.CheckCommand(new BattleAttackCommand(cleric.Id, new BattleAttackUnitTarget(warrior.Id)), [
+            new BattleUnitAttackEvent(cleric.Id, new BattleAttackUnitTarget(warrior.Id), [new UnitAttackDefinitionId("cleric")]),
+            new BattleUnitAttackedEvent(cleric.Id, warrior.Id, new UnitAttackDefinitionId("cleric")),
+            new BattleUnitAttackHitEvent(cleric.Id, warrior.Id, new UnitAttackDefinitionId("cleric"), 0),
+            new BattleUnitHealedEvent(warrior.Id, 80),
+            new BattleUnitTurnEndingEvent(cleric.Id),
+            new BattleRoundEndedEvent(),
+            new BattleEndedEvent(BattleSide.Attacker),
+            new BattleUnitExperienceGainedEvent(warrior.Id, 1),
+            new BattleUnitExperienceGainedEvent(cleric.Id, 1),
+            new BattleUnitExperienceGainedEvent(elder.Id, 1)
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(new BattleState(
+            AttackerGrid: new UnitGrid<BattleUnit>.Builder()
+                .Place(warrior with { Hitpoints = 80, ExperienceGained = 1 }, GridPosition.FrontBottom, false)
+                .Place(cleric with { ExperienceGained = 1 }, GridPosition.BackBottom, false)
+                .Place(elder with { ExperienceGained = 1 }, GridPosition.BackTop, false)
+                .Build(),
+            DefenderGrid: new UnitGrid<BattleUnit>.Builder()
+                .Place(defender with { Hitpoints = 0 }, GridPosition.FrontBottom, false)
+                .Build(),
+            CurrentUnitTurn: new BattleUnitTurn(cleric.Id, BattleUnitTurnType.Normal),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [],
+            CurrentRound: BattleRound.Recovery(1),
+            Outcome: new BattleOutcome(BattleSide.Attacker),
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo())));
+    }
 }

@@ -71,7 +71,7 @@ internal partial class BattleEngine
             {
                 ImmutableArray<BattleUnitTurn> order = BattleTurnOrderCalculator.GetRecoveryRoundOrder(state, Context, outcome.WinningSide);
 
-                if (!order.IsEmpty && HasRecoveryTarget(state, outcome.WinningSide))
+                if (!order.IsEmpty)
                 {
                     return EventRuleResult<BattleEvent>.Append(
                         new BattleRoundEndedEvent(),
@@ -95,69 +95,6 @@ internal partial class BattleEngine
                 BattleRoundType.Normal => false,
                 BattleRoundType.Recovery => BattleTurnOrderCalculator.FindNextTurn(state) is not null
             };
-        }
-
-        private bool HasRecoveryTarget(BattleState state, BattleSide side)
-        {
-            UnitGrid<BattleUnit> grid = state.GetGrid(side);
-
-            foreach ((BattleUnit unit, _) in grid.GetUnits())
-            {
-                if (unit.IsActive())
-                {
-                    UnitDefinition definition = Context.Definitions.GetUnit(unit.DefinitionId);
-
-                    foreach (UnitAttackDefinition attack in EnumerateRecoveryAttacks(definition))
-                    {
-                        if (WouldAct(state, unit.Id, attack, grid))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        private bool WouldAct(BattleState state, BattleUnitId attackerId, UnitAttackDefinition attack, UnitGrid<BattleUnit> grid)
-        {
-            IBattleAttackResolver resolver = BattleAttackResolverFactory.Create(attack.Type);
-            UnitAttackStats attackStats = Context.UnitStats.GetBattleAttackStats(state, attackerId, attack);
-
-            foreach ((BattleUnit ally, _) in grid.GetUnits())
-            {
-                BattleAttackUnitTarget attackTarget = new(ally.Id);
-
-                BattleAttackResult result = resolver.Resolve(state, Context, attackerId, attackTarget, attack, attackStats);
-
-                if (result is { Failed: false, Events.Count: > 0 })
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static IEnumerable<UnitAttackDefinition> EnumerateRecoveryAttacks(UnitDefinition definition)
-        {
-            UnitAttackTypeInfo attackInfo = definition.Attack.Type.GetInfo();
-
-            if (attackInfo.IsRecovery)
-            {
-                yield return definition.Attack;
-            }
-
-            if (definition.SecondaryAttack is not null)
-            {
-                UnitAttackTypeInfo secondaryAttackInfo = definition.SecondaryAttack.Type.GetInfo();
-
-                if (secondaryAttackInfo.IsRecovery)
-                {
-                    yield return definition.SecondaryAttack;
-                }
-            }
         }
     }
 }

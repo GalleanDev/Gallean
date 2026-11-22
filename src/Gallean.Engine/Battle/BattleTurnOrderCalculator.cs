@@ -40,7 +40,7 @@ internal static class BattleTurnOrderCalculator
 
         foreach (BattleUnit unit in OrderUnits(state))
         {
-            if (unit.Side == side && unit.IsActive() && IsRecoveryRoundUnit(context.Definitions.GetUnit(unit.DefinitionId)))
+            if (unit.Side == side && unit.IsActive() && IsRecoveryRoundUnit(state, context, unit))
             {
                 units.Add((unit.Id, context.UnitStats.GetBattleUnitStats(state, unit.Id).Initiative));
             }
@@ -125,11 +125,58 @@ internal static class BattleTurnOrderCalculator
         return false;
     }
 
-    private static bool IsRecoveryRoundUnit(UnitDefinition definition)
+    private static bool IsRecoveryRoundUnit(BattleState state, IEngineContext context, BattleUnit unit)
+    {
+        UnitDefinition definition = context.Definitions.GetUnit(unit.DefinitionId);
+
+        foreach (UnitAttackDefinition attack in EnumerateRecoveryAttacks(definition))
+        {
+            if (HasRecoveryTarget(state, context, unit, attack))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool HasRecoveryTarget(BattleState state, IEngineContext context, BattleUnit unit, UnitAttackDefinition attack)
+    {
+        IBattleAttackResolver resolver = BattleAttackResolverFactory.Create(attack.Type);
+        UnitAttackStats attackStats = context.UnitStats.GetBattleAttackStats(state, unit.Id, attack);
+        UnitGrid<BattleUnit> grid = state.GetGrid(unit.Side);
+
+        foreach ((BattleUnit ally, _) in grid.GetUnits())
+        {
+            BattleAttackUnitTarget target = new(ally.Id);
+            BattleAttackResult result = resolver.Resolve(state, context, unit.Id, target, attack, attackStats);
+
+            if (result is { Failed: false, Events.Count: > 0 })
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static IEnumerable<UnitAttackDefinition> EnumerateRecoveryAttacks(UnitDefinition definition)
     {
         UnitAttackTypeInfo attackInfo = definition.Attack.Type.GetInfo();
-        UnitAttackTypeInfo? secondaryAttackInfo = definition.SecondaryAttack?.Type.GetInfo();
 
-        return attackInfo.IsRecovery || secondaryAttackInfo is { IsRecovery: true };
+        if (attackInfo.IsRecovery)
+        {
+            yield return definition.Attack;
+        }
+
+        if (definition.SecondaryAttack is not null)
+        {
+            UnitAttackTypeInfo secondaryAttackInfo = definition.SecondaryAttack.Type.GetInfo();
+
+            if (secondaryAttackInfo.IsRecovery)
+            {
+                yield return definition.SecondaryAttack;
+            }
+        }
     }
 }
