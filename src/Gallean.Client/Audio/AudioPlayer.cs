@@ -5,6 +5,8 @@ namespace Gallean.Client;
 
 internal sealed class AudioPlayer : IAudioPlayer
 {
+    private const float MusicMixLevel = 0.8f;
+
     private readonly IAssetProvider assets;
     private readonly ILog log;
     private readonly MixingSampleProvider sounds = CreateMixer();
@@ -23,7 +25,7 @@ internal sealed class AudioPlayer : IAudioPlayer
         {
             Volume = initialSoundVolume
         };
-        musicVolume = new VolumeSampleProvider(music)
+        musicVolume = new VolumeSampleProvider(new VolumeSampleProvider(music) { Volume = MusicMixLevel })
         {
             Volume = initialMusicVolume
         };
