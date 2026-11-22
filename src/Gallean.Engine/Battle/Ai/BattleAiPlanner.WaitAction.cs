@@ -26,12 +26,7 @@ internal sealed partial class BattleAiPlanner
 
             BattleAiActionPlan? attackPlan = Attack.Plan(state, unit);
 
-            if (attackPlan is null)
-            {
-                return null;
-            }
-
-            if (attackPlan.Value.Command is BattleAttackCommand { Target: BattleAttackUnitTarget attackTarget })
+            if (attackPlan?.Command is BattleAttackCommand { Target: BattleAttackUnitTarget attackTarget })
             {
                 BattleUnit target = state.GetUnit(attackTarget.UnitId);
 
