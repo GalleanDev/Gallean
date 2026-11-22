@@ -4,6 +4,11 @@
              x:Class="Gallean.Client.CityTabView"
              x:DataType="local:CityTabViewModel">
 
+  <UserControl.KeyBindings>
+    <KeyBinding Gesture="H" Command="{Binding HealCommand}" />
+    <KeyBinding Gesture="R" Command="{Binding ResurrectCommand}" />
+  </UserControl.KeyBindings>
+
   <UserControl.Styles>
     <Style Selector="local|PagedItemsControl.inventory">
       <Setter Property="MinWidth" Value="292" />
@@ -254,13 +259,13 @@
             <Button Classes="pill action" local:PlateChrome.TextureSeed="3" Command="{Binding HealCommand}">
               <Grid ColumnDefinitions="Auto,*">
                 <local:IconVisual Grid.Column="0" Moniker="Heal" Foreground="{Binding $parent[Button].Foreground}" />
-                <TextBlock Grid.Column="1" Text="{local:Text 'Heal unit'}" />
+                <local:HotkeyLabel Grid.Column="1" Text="{local:Text 'Heal unit'}" Hotkey="H" />
               </Grid>
             </Button>
             <Button Classes="pill action" local:PlateChrome.TextureSeed="4" Command="{Binding ResurrectCommand}">
               <Grid ColumnDefinitions="Auto,*">
                 <local:IconVisual Grid.Column="0" Moniker="Resurrect" Foreground="{Binding $parent[Button].Foreground}" />
-                <TextBlock Grid.Column="1" Text="{local:Text 'Resurrect unit'}" />
+                <local:HotkeyLabel Grid.Column="1" Text="{local:Text 'Resurrect unit'}" Hotkey="R" />
               </Grid>
             </Button>
             <Button Classes="pill action" local:PlateChrome.TextureSeed="5" Command="{Binding DismissCommand}">

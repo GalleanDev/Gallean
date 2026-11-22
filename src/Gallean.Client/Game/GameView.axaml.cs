@@ -143,14 +143,20 @@ internal sealed partial class GameView : Window
 
             if (container is ContentPresenter { Child: not null } presenter)
             {
-                foreach (KeyBinding binding in presenter.Child.KeyBindings)
+                foreach (Visual visual in presenter.Child.GetSelfAndVisualDescendants())
                 {
-                    if (e.Handled)
+                    if (visual is InputElement { IsEffectivelyVisible: true } element)
                     {
-                        break;
-                    }
+                        foreach (KeyBinding binding in element.KeyBindings)
+                        {
+                            binding.TryHandle(e);
 
-                    binding.TryHandle(e);
+                            if (e.Handled)
+                            {
+                                return;
+                            }
+                        }
+                    }
                 }
             }
         }
