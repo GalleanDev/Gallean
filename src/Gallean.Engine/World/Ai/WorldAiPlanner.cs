@@ -32,7 +32,7 @@ internal sealed partial class WorldAiPlanner(WorldAiContext context)
             objectiveTargets = [];
         }
 
-        ImmutableHashSet<WorldAiTarget> blockedTargets = context.Scenario.GetBlockedTargets(state, stack.OwnerId);
+        ImmutableHashSet<WorldAiTarget> blockedTargets = context.Scenario.GetBlockedTargets(state, stack);
 
         bool isStackVital = context.Scenario.IsStackVital(state, stack);
 

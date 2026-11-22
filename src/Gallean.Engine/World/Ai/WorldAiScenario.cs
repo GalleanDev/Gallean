@@ -21,9 +21,9 @@ internal sealed class WorldAiScenario(IEngineContext engine)
         return targets.ToImmutable();
     }
 
-    public ImmutableHashSet<WorldAiTarget> GetBlockedTargets(WorldState state, WorldPlayerId playerId)
+    public ImmutableHashSet<WorldAiTarget> GetBlockedTargets(WorldState state, WorldStack stack)
     {
-        WorldPlayer player = state.Players[playerId];
+        WorldPlayer player = state.Players[stack.OwnerId];
         ImmutableHashSet<ItemDefinitionId> items = GetItems(state);
         ImmutableHashSet<WorldAiTarget>.Builder targets = ImmutableHashSet.CreateBuilder<WorldAiTarget>();
 
@@ -43,9 +43,11 @@ internal sealed class WorldAiScenario(IEngineContext engine)
             }
         }
 
-        foreach (ScenarioStackReference stack in GetBlockedStacks(state, player))
+        targets.UnionWith(GetBlockedStacks(state, player));
+
+        if (stack.Order is WorldStackOrder.AttackStack order)
         {
-            targets.UnionWith(ForStacks(stack, state));
+            targets.Remove(new WorldAiTarget.Stack(order.TargetId));
         }
 
         return targets.ToImmutable();
@@ -140,26 +142,37 @@ internal sealed class WorldAiScenario(IEngineContext engine)
         return zones.ToImmutable();
     }
 
-    private ImmutableArray<ScenarioStackReference> GetBlockedStacks(WorldState state, WorldPlayer player)
+    private ImmutableHashSet<WorldAiTarget> GetBlockedStacks(WorldState state, WorldPlayer player)
     {
-        ImmutableArray<ScenarioStackReference>.Builder stacks = ImmutableArray.CreateBuilder<ScenarioStackReference>();
+        ImmutableHashSet<WorldAiTarget>.Builder blockedStacks = ImmutableHashSet.CreateBuilder<WorldAiTarget>();
+        ImmutableHashSet<WorldAiTarget>.Builder allowedStacks = ImmutableHashSet.CreateBuilder<WorldAiTarget>();
 
         foreach (ScenarioEventDefinition definition in engine.Scenario.Events)
         {
-            if (ScenarioEventCalculator.IsEnabled(state.ScenarioState, definition) &&
-                !definition.AffectedRaces.Contains(player.Race))
+            if (ScenarioEventCalculator.IsEnabled(state.ScenarioState, definition))
             {
                 foreach (ScenarioEventCondition condition in definition.Conditions)
                 {
                     if (condition is ScenarioEventDestroyingStackCondition destroyingStack)
                     {
-                        stacks.Add(destroyingStack.Stack);
+                        ImmutableArray<WorldAiTarget> stacks = ForStacks(destroyingStack.Stack, state);
+
+                        if (definition.AffectedRaces.Contains(player.Race))
+                        {
+                            allowedStacks.UnionWith(stacks);
+                        }
+                        else
+                        {
+                            blockedStacks.UnionWith(stacks);
+                        }
                     }
                 }
             }
         }
 
-        return stacks.ToImmutable();
+        blockedStacks.ExceptWith(allowedStacks);
+
+        return blockedStacks.ToImmutable();
     }
 
     private static ScenarioEventWinEffect? CheckWinScenarioEffect(ScenarioEventDefinition definition, WorldState state, WorldPlayer player)

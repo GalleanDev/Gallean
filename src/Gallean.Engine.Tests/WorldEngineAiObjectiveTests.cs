@@ -1240,4 +1240,220 @@ public sealed class WorldEngineAiObjectiveTests
             "[P2 563] Move Attacker -> (6, 0) (Attacker wins)"
         ]));
     }
+
+    [Test]
+    public void InterceptingBlockedStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(9, 2);
+
+        UnitDefinition attacker = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50),
+            movementPoints: 12, leadership: 6);
+        UnitDefinition weakEnemy = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("weak", maxHitpoints: 10, initiative: 40, damage: 5),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack attackerStack = TestHelpers.SimpleStack(
+            new WorldStackId("Attacker"),
+            player1.Id,
+            new WorldPosition(6, 1),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 12);
+
+        WorldStack blockedTarget = TestHelpers.SimpleStack(
+            new WorldStackId("Alpha"),
+            player2.Id,
+            new WorldPosition(3, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("weakEnemy"), weakEnemy), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 0);
+
+        WorldStack farTarget = TestHelpers.SimpleStack(
+            new WorldStackId("Beta"),
+            player2.Id,
+            new WorldPosition(0, 1),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("weakEnemy2"), weakEnemy), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 0);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(attacker)
+            .WithDefinition(weakEnemy)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(attackerStack)
+            .WithStack(blockedTarget)
+            .WithStack(farTarget)
+            .WithScenarioEvent(new ScenarioEventDefinition(
+                new ScenarioEventId("Seal"),
+                [WorldRace.Human],
+                [WorldRace.Human],
+                [new ScenarioEventDestroyingStackCondition(new ScenarioStackReference.Stack(new WorldStackId("Alpha")))],
+                [],
+                Enabled: true,
+                OccurOnce: true,
+                Chance: 100,
+                Order: 0))
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P1 166] Move Attacker -> (5, 1)"
+        ]));
+        Assert.That(session.World.State.Stacks[blockedTarget.Id], Is.EqualTo(blockedTarget with { MovementPoints = 6 }));
+    }
+
+    [Test]
+    public void OrderedBlockedStackTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(9, 1);
+
+        UnitDefinition attacker = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition weakEnemy = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("weak", maxHitpoints: 10, initiative: 40, damage: 5),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack blockedTarget = TestHelpers.SimpleStack(
+            new WorldStackId("Alpha"),
+            player2.Id,
+            new WorldPosition(2, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("weakEnemy"), weakEnemy), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 0);
+
+        WorldStack attackerStack = TestHelpers.SimpleStack(
+                new WorldStackId("Attacker"),
+                player1.Id,
+                new WorldPosition(4, 0),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)
+                    .Build(),
+                movementPoints: 6) with
+            {
+                Order = new WorldStackOrder.AttackStack(blockedTarget.Id)
+            };
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(attacker)
+            .WithDefinition(weakEnemy)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(attackerStack)
+            .WithStack(blockedTarget)
+            .WithScenarioEvent(new ScenarioEventDefinition(
+                new ScenarioEventId("Seal"),
+                [WorldRace.Human],
+                [WorldRace.Human],
+                [new ScenarioEventDestroyingStackCondition(new ScenarioStackReference.Stack(new WorldStackId("Alpha")))],
+                [],
+                Enabled: true,
+                OccurOnce: true,
+                Chance: 100,
+                Order: 0))
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 910] Move Attacker -> (2, 0) (Attacker wins)"
+        ]));
+    }
+
+    [Test]
+    public void BlockedStackOwnEventTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(9, 1);
+
+        UnitDefinition attacker = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 50),
+            movementPoints: 6, leadership: 6);
+        UnitDefinition weakEnemy = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("weak", maxHitpoints: 10, initiative: 40, damage: 5),
+            movementPoints: 6, leadership: 6);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack attackerStack = TestHelpers.SimpleStack(
+            new WorldStackId("Attacker"),
+            player1.Id,
+            new WorldPosition(4, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("attacker"), attacker), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 6);
+
+        WorldStack target = TestHelpers.SimpleStack(
+            new WorldStackId("Alpha"),
+            player2.Id,
+            new WorldPosition(2, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("weakEnemy"), weakEnemy), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 0);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(attacker)
+            .WithDefinition(weakEnemy)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(player2.LordId, player2.Race, LordCategory.Warrior))
+            .WithPlayer(player2)
+            .WithStack(attackerStack)
+            .WithStack(target)
+            .WithScenarioEvent(new ScenarioEventDefinition(
+                new ScenarioEventId("HumanSeal"),
+                [WorldRace.Human],
+                [WorldRace.Human],
+                [new ScenarioEventDestroyingStackCondition(new ScenarioStackReference.Stack(new WorldStackId("Alpha")))],
+                [],
+                Enabled: true,
+                OccurOnce: true,
+                Chance: 100,
+                Order: 0))
+            .WithScenarioEvent(new ScenarioEventDefinition(
+                new ScenarioEventId("UndeadSeal"),
+                [WorldRace.Undead],
+                [WorldRace.Undead],
+                [new ScenarioEventDestroyingStackCondition(new ScenarioStackReference.Stack(new WorldStackId("Alpha")))],
+                [],
+                Enabled: true,
+                OccurOnce: true,
+                Chance: 100,
+                Order: 1))
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 910] Move Attacker -> (2, 0) (Attacker wins)"
+        ]));
+    }
 }
