@@ -43,7 +43,6 @@
     <local:VideoVisual AnimationKey="{Binding Video}"
                        Rate="{x:Static local:AnimationRate.BriefingVideo}"
                        StartTime="{Binding VideoStartTime}"
-                       FirstFrameTime="{Binding VideoFirstFrameTime}"
                        Stretch="UniformToFill"
                        Grain="0.05" />
 

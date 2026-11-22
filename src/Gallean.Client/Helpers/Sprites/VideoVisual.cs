@@ -14,9 +14,6 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
     public static readonly StyledProperty<TimeSpan> StartTimeProperty =
         AvaloniaProperty.Register<VideoVisual, TimeSpan>(nameof(StartTime));
 
-    public static readonly StyledProperty<TimeSpan> FirstFrameTimeProperty =
-        AvaloniaProperty.Register<VideoVisual, TimeSpan>(nameof(FirstFrameTime));
-
     public static readonly StyledProperty<Stretch> StretchProperty =
         AvaloniaProperty.Register<VideoVisual, Stretch>(nameof(Stretch), Stretch.Uniform);
 
@@ -55,12 +52,6 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
         set => SetValue(StartTimeProperty, value);
     }
 
-    public TimeSpan FirstFrameTime
-    {
-        get => GetValue(FirstFrameTimeProperty);
-        set => SetValue(FirstFrameTimeProperty, value);
-    }
-
     public Stretch Stretch
     {
         get => GetValue(StretchProperty);
@@ -79,7 +70,6 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
 
         if (e.Property == AnimationKeyProperty ||
             e.Property == StartTimeProperty ||
-            e.Property == FirstFrameTimeProperty ||
             e.Property == AssetScope.AssetsProperty)
         {
             Restart();
@@ -141,8 +131,7 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
         }
 
         int rateIndex = Rate.GetFrameIndex(StartTime + (frameTime - playback.ClockStart.Value));
-        int displayedIndex = Math.Max(rateIndex, Rate.GetFrameIndex(FirstFrameTime));
-        int index = Math.Min(displayedIndex, playback.Metadata.FrameCount - 1);
+        int index = Math.Min(rateIndex, playback.Metadata.FrameCount - 1);
 
         if (index != playback.FrameIndex && !playback.IsLoading)
         {

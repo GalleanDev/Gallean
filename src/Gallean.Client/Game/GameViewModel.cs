@@ -385,7 +385,6 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 gameModel.Texts.GetScenarioText(objectiveId),
                 background,
                 video,
-                GetSoundStartTime(voice),
                 voice,
                 audioPlayer,
                 () => BeginGameAsync(gameModel, worldScreen));
@@ -530,20 +529,6 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         else
         {
             return null;
-        }
-    }
-
-    private TimeSpan GetSoundStartTime(AssetSoundKey? key)
-    {
-        if (key is not null)
-        {
-            AssetSoundMetadata? metadata = assets.GetOptionalSoundMetadata(key);
-
-            return metadata?.StartTime ?? TimeSpan.Zero;
-        }
-        else
-        {
-            return TimeSpan.Zero;
         }
     }
 

@@ -176,8 +176,7 @@ public sealed class BriefingScreenViewModelTests
 
         Assert.That(briefing.Video, Is.EqualTo(new AssetAnimationKey.BriefingVideo(new ScenarioId("S108SC0000"))));
         Assert.That(briefing.HasVideo, Is.True);
-        Assert.That(briefing.VideoStartTime, Is.EqualTo(TimeSpan.FromSeconds(10)));
-        Assert.That(briefing.VideoFirstFrameTime, Is.EqualTo(TimeSpan.FromSeconds(10)));
+        Assert.That(briefing.VideoStartTime, Is.EqualTo(TimeSpan.FromSeconds(13.5)));
         Assert.That(briefing.Background, Is.Null);
     }
 
