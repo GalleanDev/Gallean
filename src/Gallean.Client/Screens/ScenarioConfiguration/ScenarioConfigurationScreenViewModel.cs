@@ -242,12 +242,14 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
     private void PreviousLordFace()
     {
         LordFaceVariant = (LordFaceVariant - 1).Mod(AssetSpriteKey.LordFace.GetVariantCount(race));
+        Game.PlaySound(new AssetSoundKey.BookOpen());
     }
 
     [RelayCommand]
     private void NextLordFace()
     {
         LordFaceVariant = (LordFaceVariant + 1).Mod(AssetSpriteKey.LordFace.GetVariantCount(race));
+        Game.PlaySound(new AssetSoundKey.BookOpen());
     }
 
     [RelayCommand]
