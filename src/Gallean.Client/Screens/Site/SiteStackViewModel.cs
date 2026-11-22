@@ -16,16 +16,24 @@ internal sealed partial class SiteStackViewModel(GameModel gameModel, UnitGridSe
     [ObservableProperty]
     public partial TextSpans Summary { get; private set; } = TextSpans.Empty;
 
-    public void Update(WorldStack stack, bool showsPurchaseHints, IReadOnlySet<GridPosition>? highlight)
+    public void Update(
+        WorldStack stack,
+        WorldGetStackInfoCommand.Result stackInfo,
+        bool showsPurchaseHints,
+        IReadOnlySet<GridPosition>? highlight)
     {
         UnitGrid.Update(stack.Units, showsPurchaseHints, highlight);
 
         (WorldUnit Leader, GridPosition Position, UnitDefinition Definition) leader = stack.GetLeader(gameModel.Definitions);
         StackStats stats = gameModel.Stats.GetWorldStackStats(stack);
-        int unitCount = stack.Units.GetUnits().Count();
 
         LeaderPortraitKey = new AssetSpriteKey.UnitPortrait(leader.Leader.DefinitionId);
         LeaderName = UnitNameResolver.Resolve(leader.Leader, gameModel.Definitions, gameModel.Texts);
-        Summary = TrSpans("Move: {0:*} / {1:*}\nUnits: {2:*} / {3:*}", stack.MovementPoints, stats.MaxMovementPoints, unitCount, GridPosition.Count);
+        Summary = TrSpans(
+            "Move: {0:*} / {1:*}\nLeadership: {2:*} / {3:*}",
+            stack.MovementPoints,
+            stats.MaxMovementPoints,
+            stackInfo.OccupiedLeadership,
+            stackInfo.TotalLeadership);
     }
 }

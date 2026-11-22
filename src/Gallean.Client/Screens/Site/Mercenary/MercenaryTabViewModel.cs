@@ -175,7 +175,7 @@ internal sealed partial class MercenaryTabViewModel
 
         SiteTitle = GameModel.Texts.GetScenarioText(site.TitleTextId);
         SiteGreeting = GameModel.Texts.GetScenarioText(site.GreetingTextId);
-        Stack.Update(stack, showsPurchaseHints: true, BuildUnitHighlight(stack));
+        Stack.Update(stack, ResolveStackInfo(), showsPurchaseHints: true, BuildUnitHighlight(stack));
 
         Mercenaries = BuildMercenaries(info);
         Offer = BuildOffer(info);
@@ -246,6 +246,21 @@ internal sealed partial class MercenaryTabViewModel
         }
 
         return null;
+    }
+
+    private WorldGetStackInfoCommand.Result ResolveStackInfo()
+    {
+        ICommandResult<WorldCommandError, WorldEvent, WorldGetStackInfoCommand.Result> result =
+            GameModel.World.DryRunCommand(new WorldGetStackInfoCommand(stackId));
+
+        if (result.Failed)
+        {
+            return new WorldGetStackInfoCommand.Result([], OccupiedLeadership: 0, TotalLeadership: 0);
+        }
+        else
+        {
+            return result.Data;
+        }
     }
 
     private WorldGetMercenaryInfoCommand.Result ResolveMercenaryInfo()
