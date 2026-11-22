@@ -130,9 +130,9 @@ internal sealed class AnimationVisual : AbstractAnimatedVisual
         {
             Sprite frame = animation.FrameByIndex(frameIndex, looping: true);
             Size boxSize = AnimationSize(animation);
-            Rect viewPort = new(Bounds.Size);
+            Rect viewport = new(Bounds.Size);
             Vector scale = Stretch.CalculateScaling(Bounds.Size, boxSize, StretchDirection);
-            Rect box = viewPort.CenterRect(new Rect(boxSize * scale));
+            Rect box = viewport.CenterRect(new Rect(boxSize * scale));
 
             Rect frameDestination = new(
                 box.X + ((frame.Metadata.OffsetX - animation.Metadata.OffsetX) * scale.X),
@@ -140,7 +140,7 @@ internal sealed class AnimationVisual : AbstractAnimatedVisual
                 frame.Metadata.Width * scale.X,
                 frame.Metadata.Height * scale.Y);
 
-            Rect destination = frameDestination.Intersect(viewPort);
+            Rect destination = frameDestination.Intersect(viewport);
 
             if (destination is { Width: > 0, Height: > 0 })
             {
