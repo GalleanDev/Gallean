@@ -49,7 +49,7 @@ public sealed class SettingsScreenViewModelTests
 
         using GameViewModel gameViewModel = await CreateGameAsync(new TestAudioPlayer(), sb);
 
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -112,10 +112,10 @@ public sealed class SettingsScreenViewModelTests
 
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -153,10 +153,10 @@ public sealed class SettingsScreenViewModelTests
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
         Assert.That(screen.AutoSaveIntervals, Is.EqualTo([1, 3, 5, 10, 0]));
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -173,10 +173,10 @@ public sealed class SettingsScreenViewModelTests
 
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, false, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, false, MovementSpeed.Normal, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, false, MovementSpeed.Normal, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, false, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -194,10 +194,10 @@ public sealed class SettingsScreenViewModelTests
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
         Assert.That(screen.BattlePositions, Is.EqualTo([BattlePosition.Left, BattlePosition.Right]));
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right)));
     }
 
     [Test]
@@ -215,10 +215,10 @@ public sealed class SettingsScreenViewModelTests
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
         Assert.That(screen.AutoSaveLimits, Is.EqualTo([1, 3, 5, 10, 20]));
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 3, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 3, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 3, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 3, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -236,10 +236,10 @@ public sealed class SettingsScreenViewModelTests
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
         Assert.That(screen.BattleSpeeds, Is.EqualTo([BattleSpeed.Normal, BattleSpeed.Fast, BattleSpeed.VeryFast]));
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -257,10 +257,10 @@ public sealed class SettingsScreenViewModelTests
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
         Assert.That(screen.MovementSpeeds, Is.EqualTo([MovementSpeed.Normal, MovementSpeed.Fast, MovementSpeed.VeryFast]));
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -278,10 +278,10 @@ public sealed class SettingsScreenViewModelTests
         gameViewModel.ToggleWindowedCommand.Execute(null);
 
         Assert.That(screen.UiSizes, Is.EqualTo([UiSize.Small, UiSize.Normal, UiSize.Large]));
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null, BattlePosition.Left)));
         Assert.That(
             await new GameSettingsStore(sb.GetPath("config")).TryLoadAsync(),
-            Is.EqualTo(GameSettings.Create(60, 60, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, true, 100, 5, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null, BattlePosition.Left)));
     }
 
     [Test]
