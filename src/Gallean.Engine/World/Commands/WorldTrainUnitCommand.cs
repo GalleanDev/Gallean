@@ -15,7 +15,7 @@ public sealed record WorldTrainUnitCommand(
 
         WorldPlan plan = WorldPlan.For(state);
 
-        if (plan.GetSiteAt(stack.Position) is not WorldTrainerSite)
+        if (plan.GetSiteEntranceAt(stack.Position) is not WorldTrainerSite)
         {
             return WorldCommandResult.Fail(WorldCommandError.StackNotAtTrainer);
         }

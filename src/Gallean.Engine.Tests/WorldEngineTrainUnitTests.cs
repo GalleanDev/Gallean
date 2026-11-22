@@ -160,12 +160,13 @@ public sealed class WorldEngineTrainUnitTests
     public void NotAtTrainerTest()
     {
         WorldMap map = TestHelpers.BuildMap([
-            "^^^^^^",
-            "^^^^^^",
-            "^^^^^^",
-            "^^^^^^",
-            "^^^^..",
-            "^^^^.."
+            "^^^^^^^",
+            "^^^^^^^",
+            "^^^^^^^",
+            "^^^^^^^",
+            "^^^^...",
+            "^^^^...",
+            "^^^^..."
         ]);
 
         UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
@@ -196,7 +197,7 @@ public sealed class WorldEngineTrainUnitTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             new UnitGrid<WorldUnit>.Builder()
                 .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
                 .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Experience = 900 }, GridPosition.FrontBottom, false)

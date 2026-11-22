@@ -7,7 +7,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteMoveTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
@@ -17,7 +17,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
             movementPoints: 6);
 
@@ -57,11 +57,11 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
                 new WorldSiteVisitedEvent(stack.Id, site.Id),
                 new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
-                new WorldScenarioPopupEvent(scenarioEvent.Id, new ScenarioTextId("Welcome, traveler!"), ScenarioEventPortraitId.Unit(leader.Id), PortraitName: null, IsPortraitLeft: true, player.Id, TriggererPosition: new WorldPosition(4, 4), [player.Id]),
+                new WorldScenarioPopupEvent(scenarioEvent.Id, new ScenarioTextId("Welcome, traveler!"), ScenarioEventPortraitId.Unit(leader.Id), PortraitName: null, IsPortraitLeft: true, player.Id, TriggererPosition: new WorldPosition(5, 5), [player.Id]),
                 new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
             ]);
 
@@ -214,7 +214,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteLeftTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
@@ -224,7 +224,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
             movementPoints: 6);
 
@@ -267,16 +267,16 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
                 new WorldSiteVisitedEvent(stack.Id, site.Id)
             ]);
 
         engine.CheckCommand(
-            new WorldMoveStackCommand(stack.Id, new WorldPosition(5, 5)),
+            new WorldMoveStackCommand(stack.Id, new WorldPosition(6, 6)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(5, 5), WorldStackDirection.South, 2, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(5, 5), WorldStackDirection.South, 2, [], null)
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(6, 6), WorldStackDirection.South, 2, [], null),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(6, 6), WorldStackDirection.South, 2, [], null)
             ]);
 
         engine.CheckCommand(new WorldEndTurnCommand(), [
@@ -379,7 +379,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteAffectedRaceTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         WorldPlayer ally = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Dwarf, map);
@@ -397,7 +397,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack allyStack = TestHelpers.SimpleStack(
             new WorldStackId("Stack2"),
             ally.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             TestHelpers.SingleUnitGrid(new WorldUnitId("leader2"), leader),
             movementPoints: 6);
 
@@ -441,8 +441,8 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(allyStack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(allyStack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
-                new WorldStackMovedEvent(allyStack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
+                new WorldStackMovingEvent(allyStack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(allyStack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
                 new WorldSiteVisitedEvent(allyStack.Id, site.Id)
             ]);
 
@@ -485,7 +485,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteRevisitTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
@@ -495,7 +495,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
             movementPoints: 6);
 
@@ -523,8 +523,8 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
                 new WorldSiteVisitedEvent(stack.Id, site.Id)
             ]);
 
@@ -539,7 +539,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteDeadLeaderTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
@@ -550,7 +550,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             new UnitGrid<WorldUnit>.Builder()
                 .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leader) with { Hitpoints = 0 }, GridPosition.FrontBottom, leader.IsLarge)
                 .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldier), GridPosition.FrontCenter, soldier.IsLarge)
@@ -594,8 +594,8 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 2, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 2, [], null)
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 2, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 2, [], new WorldPosition(4, 4))
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -609,7 +609,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteThiefTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         UnitDefinition thief = TestHelpers.SimpleThiefDefinition();
@@ -617,7 +617,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             TestHelpers.SingleUnitGrid(new WorldUnitId("thief"), thief),
             movementPoints: 20);
 
@@ -657,8 +657,8 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 18, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 18, [], null)
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 18, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 18, [], new WorldPosition(4, 4))
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -672,7 +672,7 @@ public sealed class WorldEngineScenarioEventSiteTests
     [Test]
     public void VisitingSiteTriggerEventTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(7, 7);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
         UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
@@ -682,7 +682,7 @@ public sealed class WorldEngineScenarioEventSiteTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack1"),
             player.Id,
-            new WorldPosition(5, 5),
+            new WorldPosition(6, 6),
             TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
             movementPoints: 6);
 
@@ -696,7 +696,7 @@ public sealed class WorldEngineScenarioEventSiteTests
             VisitorIds: [],
             AiPriority: 3);
 
-        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Ambush"), new WorldPosition(4, 4), 0);
+        ScenarioLocationDefinition zone = new(new ScenarioLocationId("Zone1"), new ScenarioTextId("Ambush"), new WorldPosition(5, 5), 0);
 
         ScenarioEventDefinition scenarioEvent = new(
             new ScenarioEventId("Event1"),
@@ -725,8 +725,8 @@ public sealed class WorldEngineScenarioEventSiteTests
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, new WorldPosition(4, 4)),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(5, 5), new WorldPosition(4, 4), WorldStackDirection.North, 4, [], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(6, 6), new WorldPosition(5, 5), WorldStackDirection.North, 4, [], new WorldPosition(4, 4)),
                 new WorldScenarioEventTriggeringEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id)),
                 new WorldScenarioEventTriggeredEvent(scenarioEvent.Id, player.Id, new ScenarioEventStackMovedTrigger(stack.Id))
             ]);

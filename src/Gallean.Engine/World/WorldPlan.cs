@@ -140,6 +140,11 @@ public sealed class WorldPlan
         return site;
     }
 
+    public WorldSite? GetSiteEntranceAt(WorldPosition position)
+    {
+        return state.Sites.Values.FirstOrDefault(site => site.IsEntranceAt(position));
+    }
+
     public WorldLandmark? GetLandmarkAt(WorldPosition position)
     {
         landmarks.Value.TryGetValue(position, out WorldLandmark? landmark);
@@ -351,6 +356,11 @@ public sealed class WorldPlan
             {
                 entrances.Set(fortification.Entrance.X, fortification.Entrance.Y);
             }
+        }
+
+        foreach (WorldSite site in state.Sites.Values)
+        {
+            entrances.Set(site.Entrance.X, site.Entrance.Y);
         }
 
         return entrances.ToImmutable();

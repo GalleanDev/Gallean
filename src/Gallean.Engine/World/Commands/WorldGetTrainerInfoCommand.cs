@@ -53,7 +53,7 @@ public sealed record WorldGetTrainerInfoCommand(WorldStackId StackId) : IWorldCo
 
         WorldPlan plan = WorldPlan.For(state);
 
-        if (plan.GetSiteAt(stack.Position) is not WorldTrainerSite)
+        if (plan.GetSiteEntranceAt(stack.Position) is not WorldTrainerSite)
         {
             return CommandResult.Fail(WorldCommandError.StackNotAtTrainer);
         }

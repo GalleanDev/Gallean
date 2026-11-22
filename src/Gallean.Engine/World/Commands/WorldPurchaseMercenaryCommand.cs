@@ -28,7 +28,7 @@ public sealed record WorldPurchaseMercenaryCommand(
             return WorldCommandResult.Fail(WorldCommandError.SiteNotFound);
         }
 
-        if (stack.Position != mercenarySite.Entrance)
+        if (!mercenarySite.IsEntranceAt(stack.Position))
         {
             return WorldCommandResult.Fail(WorldCommandError.StackNotAtSite);
         }

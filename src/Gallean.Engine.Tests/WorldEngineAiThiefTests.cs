@@ -1303,7 +1303,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 134] Steal dear thief -> (4, 4)"
+            "[P2 135] Steal dear thief -> (4, 4)"
         ]));
         Assert.That(session.World.State.Sites[site.Id], Is.EqualTo(site with { Items = [new WorldMerchantItem(cheapDefinition.Id, 1)] }));
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
@@ -1427,7 +1427,7 @@ public sealed class WorldEngineAiThiefTests
         TestWorldAiRunner runner = new(session, engine);
 
         Assert.That(TestWorldAiTraceFormatter.Format(runner.PlayTurn()), Is.EqualTo([
-            "[P2 134] Steal dear thief -> (4, 4)"
+            "[P2 135] Steal dear thief -> (4, 4)"
         ]));
         Assert.That(session.World.State.Players[player1.Id].Spellbook, Is.EqualTo(new WorldPlayerSpellbook([], [dearSpell.Id])));
         Assert.That(session.World.State.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with { MovementPoints = 0 }));

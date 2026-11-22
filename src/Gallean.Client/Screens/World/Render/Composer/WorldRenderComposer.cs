@@ -558,6 +558,10 @@ internal sealed partial class WorldRenderComposer(
             {
                 steps.Add(new PathStep(segment.End, Theme.World.Path.AttackInnerColor, Theme.World.Path.AttackOuterColor, FormatCost(totalCost)));
             }
+            else if (selection.Encounter is WorldPathEncounter.Site && segment.End == selection.Destination)
+            {
+                steps.Add(new PathStep(segment.End, Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, FormatCost(totalCost)));
+            }
             else
             {
                 steps.Add(new PathStep(segment.End, Theme.World.Path.UnreachedInnerColor, Theme.World.Path.UnreachedOuterColor, FormatCost(totalCost)));

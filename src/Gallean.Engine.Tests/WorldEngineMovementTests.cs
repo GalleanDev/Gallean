@@ -1249,7 +1249,70 @@ public sealed class WorldEngineMovementTests
     }
 
     [Test]
-    public void MoveOntoSiteEntranceTest()
+    public void MoveToSiteTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(5, 5);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 10, leadership: 6);
+
+        WorldTrainerSite site = new(
+            Id: new WorldSiteId("site"),
+            Footprint: FortificationCalculator.CreateFootprint(new WorldPosition(2, 2), FortificationCalculator.SiteFootprint),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            VisitorIds: [],
+            AiPriority: 3
+        );
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 10);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSite(site)
+            .WithStack(stack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
+
+        engine.CheckCommandError(
+            new WorldMoveStackCommand(stack.Id, new WorldPosition(1, 1)),
+            WorldCommandError.PathNotFound);
+
+        engine.CheckCommand(
+            new WorldMoveStackCommand(stack.Id, site.Entrance),
+            [
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 8, [], site.Entrance),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 8, [], site.Entrance),
+                new WorldSiteVisitedEvent(stack.Id, site.Id)
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
+                {
+                    Position = new WorldPosition(3, 3),
+                    Direction = WorldStackDirection.North,
+                    MovementPoints = 8
+                }),
+                Sites = ImmutableSortedDictionary<WorldSiteId, WorldSite>.Empty.Add(site.Id, site with { VisitorIds = [player.Id] })
+            }));
+    }
+
+    [Test]
+    public void VisitAdjacentSiteTest()
     {
         WorldMap map = TestHelpers.SimpleMap(5, 5);
 
@@ -1286,15 +1349,62 @@ public sealed class WorldEngineMovementTests
 
         _ = engine.DispatchCommand(new WorldStartGameCommand());
 
-        engine.CheckCommandError(
-            new WorldMoveStackCommand(stack.Id, new WorldPosition(1, 1)),
-            WorldCommandError.PathNotFound);
+        engine.CheckCommand(
+            new WorldMoveStackCommand(stack.Id, site.Entrance),
+            [
+                new WorldSiteVisitedEvent(stack.Id, site.Id)
+            ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                Sites = ImmutableSortedDictionary<WorldSiteId, WorldSite>.Empty.Add(site.Id, site with { VisitorIds = [player.Id] })
+            }));
+    }
+
+    [Test]
+    public void MoveToSiteWithLastMovementPointsTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(5, 5);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 2, leadership: 6);
+
+        WorldTrainerSite site = new(
+            Id: new WorldSiteId("site"),
+            Footprint: FortificationCalculator.CreateFootprint(new WorldPosition(2, 2), FortificationCalculator.SiteFootprint),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            VisitorIds: [],
+            AiPriority: 3
+        );
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("stack"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leader),
+            movementPoints: 2);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSite(site)
+            .WithStack(stack)
+            .Build();
+
+        _ = engine.DispatchCommand(new WorldStartGameCommand());
 
         engine.CheckCommand(
             new WorldMoveStackCommand(stack.Id, site.Entrance),
             [
-                new WorldStackMovingEvent(stack.Id, new WorldPosition(3, 1), site.Entrance, WorldStackDirection.West, 8, [], null),
-                new WorldStackMovedEvent(stack.Id, new WorldPosition(3, 1), site.Entrance, WorldStackDirection.West, 8, [], null),
+                new WorldStackMovingEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 0, [], site.Entrance),
+                new WorldStackMovedEvent(stack.Id, new WorldPosition(4, 4), new WorldPosition(3, 3), WorldStackDirection.North, 0, [], site.Entrance),
                 new WorldSiteVisitedEvent(stack.Id, site.Id)
             ]);
 
@@ -1303,9 +1413,9 @@ public sealed class WorldEngineMovementTests
             {
                 Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
                 {
-                    Position = site.Entrance,
-                    Direction = WorldStackDirection.West,
-                    MovementPoints = 8
+                    Position = new WorldPosition(3, 3),
+                    Direction = WorldStackDirection.North,
+                    MovementPoints = 0
                 }),
                 Sites = ImmutableSortedDictionary<WorldSiteId, WorldSite>.Empty.Add(site.Id, site with { VisitorIds = [player.Id] })
             }));
@@ -3269,10 +3379,12 @@ public sealed class WorldEngineMovementTests
         Assert.That(result, Is.EqualTo(new WorldGetPathCommand.Result(
             new WorldPath(
             [
-                new WorldPathSegment(new WorldPosition(6, 4), new WorldPosition(5, 4), 2, Turn: 0),
-                new WorldPathSegment(new WorldPosition(5, 4), new WorldPosition(4, 4), 2, Turn: 0)
+                new WorldPathSegment(new WorldPosition(6, 4), new WorldPosition(5, 3), 2, Turn: 0)
             ]),
-            new WorldPath([]),
+            new WorldPath(
+            [
+                new WorldPathSegment(new WorldPosition(5, 3), new WorldPosition(4, 4), 0, Turn: 0)
+            ]),
             new WorldPathEncounter.Site(site.Id))));
     }
 
@@ -3318,10 +3430,12 @@ public sealed class WorldEngineMovementTests
         Assert.That(result, Is.EqualTo(new WorldGetPathCommand.Result(
             new WorldPath(
             [
-                new WorldPathSegment(new WorldPosition(6, 4), new WorldPosition(5, 4), 2, Turn: 0),
-                new WorldPathSegment(new WorldPosition(5, 4), new WorldPosition(4, 4), 2, Turn: 0)
+                new WorldPathSegment(new WorldPosition(6, 4), new WorldPosition(5, 3), 2, Turn: 0)
             ]),
-            new WorldPath([]),
+            new WorldPath(
+            [
+                new WorldPathSegment(new WorldPosition(5, 3), new WorldPosition(4, 4), 0, Turn: 0)
+            ]),
             new WorldPathEncounter.Thief(new WorldPosition(4, 4)))));
     }
 

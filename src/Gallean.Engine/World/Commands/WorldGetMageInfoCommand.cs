@@ -59,7 +59,7 @@ public sealed record WorldGetMageInfoCommand(
             return CommandResult.Fail(WorldCommandError.SiteNotFound);
         }
 
-        if (stack.Position != mageSite.Entrance)
+        if (!mageSite.IsEntranceAt(stack.Position))
         {
             return CommandResult.Fail(WorldCommandError.StackNotAtSite);
         }

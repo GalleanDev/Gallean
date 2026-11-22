@@ -42,6 +42,12 @@ internal static partial class PathTraversalCalculator
                 }
             }
 
+            WorldSite? traverseSite = plan.GetSiteAt(position);
+            if (traverseSite is not null)
+            {
+                return new TraversalInfo(approachPath, path.Skip(i), new Encounter.Site(traverseSite, canBegin));
+            }
+
             WorldStack? interceptingStack = FindInterceptingStack(state, plan, stack, profile, position, definitions);
             if (interceptingStack is not null)
             {

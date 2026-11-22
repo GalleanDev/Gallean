@@ -287,6 +287,20 @@ internal static class WorldCommandHelpers
             encounterPosition);
     }
 
+    public static List<WorldEvent> CreateSiteVisitEvents(WorldStack stack, WorldSite site, IEngineContext context)
+    {
+        (WorldUnit leader, _, UnitDefinition leaderDefinition) = stack.GetLeader(context.Definitions);
+
+        if (leader.IsAlive && leaderDefinition.LeaderCategory != UnitLeaderCategory.Thief)
+        {
+            return [new WorldSiteVisitedEvent(stack.Id, site.Id)];
+        }
+        else
+        {
+            return [];
+        }
+    }
+
     public static List<WorldEvent> CreateDestroyIllusionEvents(WorldStack stack, WorldStack illusion, IEngineContext context)
     {
         StackStats stackStats = context.UnitStats.GetWorldStackStats(stack);

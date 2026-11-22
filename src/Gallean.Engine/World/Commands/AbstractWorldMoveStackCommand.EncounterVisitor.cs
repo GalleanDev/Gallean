@@ -34,6 +34,20 @@ public closed partial record AbstractWorldMoveStackCommand
             return Approach(context, null);
         }
 
+        public WorldCommandResult Visit(PathTraversalCalculator.Encounter.Site encounter, Context context)
+        {
+            if (context.Approach.IsEmpty)
+            {
+                return WorldCommandResult.Success(
+                    Empty.Value,
+                    WorldCommandHelpers.CreateSiteVisitEvents(context.Stack, encounter.Target, context.Engine));
+            }
+            else
+            {
+                return Approach(context, encounter.Position);
+            }
+        }
+
         public WorldCommandResult Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
         {
             if (context.Profile.IsIllusion)

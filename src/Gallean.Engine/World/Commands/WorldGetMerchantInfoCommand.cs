@@ -68,7 +68,7 @@ public sealed record WorldGetMerchantInfoCommand(
             return CommandResult.Fail(WorldCommandError.SiteNotFound);
         }
 
-        if (stack.Position != merchantSite.Entrance)
+        if (!merchantSite.IsEntranceAt(stack.Position))
         {
             return CommandResult.Fail(WorldCommandError.StackNotAtSite);
         }

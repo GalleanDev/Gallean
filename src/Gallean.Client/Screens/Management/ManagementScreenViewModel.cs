@@ -112,7 +112,7 @@ internal sealed partial class ManagementScreenViewModel : AbstractGameScreenView
             WorldState world = gameModel.Snapshot.WorldState;
             WorldStack stack = world.Stacks[stackId];
             WorldPlan plan = WorldPlan.For(world);
-            WorldSite? site = plan.GetSiteAt(stack.Position);
+            WorldSite? site = plan.GetSiteEntranceAt(stack.Position);
 
             if (site is not null)
             {

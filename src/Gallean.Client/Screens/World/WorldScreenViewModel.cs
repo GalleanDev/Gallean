@@ -267,7 +267,7 @@ internal sealed partial class WorldScreenViewModel :
             WorldPlan plan = WorldPlan.For(WorldState);
             WorldVisibility visibility = WorldVisibility.Create(WorldState, ViewPlayerId, FogEnabled);
             WorldFortification? fortification = visibility.GetFortificationAt(plan, selected.Position);
-            WorldSite? site = visibility.GetSiteAt(plan, selected.Position);
+            WorldSite? site = plan.GetSiteEntranceAt(selected.Position);
 
             if (site is not null)
             {
@@ -1172,14 +1172,12 @@ internal sealed partial class WorldScreenViewModel :
 
     async Task IWorldPathEncounterVisitor<SelectedMove, Task>.Visit(WorldPathEncounter.Site encounter, SelectedMove move)
     {
-        if (move.Stack.Position == move.Selection.Destination)
+        if (move.Stack.Position != move.Selection.Destination)
         {
-            EnqueueEntry(new Entry.SiteEnter(WorldState, move.Stack.Id, encounter.SiteId));
+            await MoveStackAsync(move.Stack.Id, move.Selection.Destination);
         }
-        else if (await MoveStackAsync(move.Stack.Id, move.Selection.Destination))
-        {
-            EnqueueEntry(new Entry.SiteEnter(WorldState, move.Stack.Id, encounter.SiteId));
-        }
+
+        EnqueueEntry(new Entry.SiteEnter(WorldState, move.Stack.Id, encounter.SiteId));
     }
 
     public void Update(TimeSpan delta, TimeSpan animationElapsed)

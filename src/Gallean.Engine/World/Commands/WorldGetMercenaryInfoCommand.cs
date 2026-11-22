@@ -60,7 +60,7 @@ public sealed record WorldGetMercenaryInfoCommand(
             return CommandResult.Fail(WorldCommandError.SiteNotFound);
         }
 
-        if (stack.Position != mercenarySite.Entrance)
+        if (!mercenarySite.IsEntranceAt(stack.Position))
         {
             return CommandResult.Fail(WorldCommandError.StackNotAtSite);
         }

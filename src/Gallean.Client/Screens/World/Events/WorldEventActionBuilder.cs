@@ -555,7 +555,7 @@ internal sealed class WorldEventActionBuilder(
 
         WorldSite site = snapshot.WorldState.Sites[entry.SiteId];
 
-        if (stack.OwnerId == ViewPlayerId && snapshot.IsViewPlayerTurn && stack.Position == site.Entrance)
+        if (stack.OwnerId == ViewPlayerId && snapshot.IsViewPlayerTurn && site.IsEntranceAt(stack.Position))
         {
             return new WorldEventAction.SiteEnter(
                 [new AssetSoundKey.SiteEnter()],

@@ -36,6 +36,21 @@ public sealed partial record WorldGetPathCommand
             }
         }
 
+        public WorldPathEncounter? Visit(PathTraversalCalculator.Encounter.Site encounter, Context context)
+        {
+            if (context.Profile.IsThief)
+            {
+                ThiefTarget? target = ThiefCalculator.ResolveTarget(context.State, context.Engine, context.Stack.OwnerId, encounter.Position);
+
+                if (target is not null)
+                {
+                    return new WorldPathEncounter.Thief(encounter.Position);
+                }
+            }
+
+            return new WorldPathEncounter.Site(encounter.Target.Id);
+        }
+
         public WorldPathEncounter? Visit(PathTraversalCalculator.Encounter.StackBattle encounter, Context context)
         {
             return GetBattleEncounter(encounter, context);

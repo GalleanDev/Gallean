@@ -24,7 +24,7 @@ public sealed record WorldSellItemCommand(
             return WorldCommandResult.Fail(WorldCommandError.SiteNotFound);
         }
 
-        if (stack.Position != merchantSite.Entrance)
+        if (!merchantSite.IsEntranceAt(stack.Position))
         {
             return WorldCommandResult.Fail(WorldCommandError.StackNotAtSite);
         }

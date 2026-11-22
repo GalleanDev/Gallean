@@ -4305,15 +4305,15 @@ public sealed class WorldScreenViewModelTests
             Cursors = [new WorldRenderState.Cursor(new WorldPosition(4, 4), 4416, Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, 1.0)],
             SelectedPath = new WorldRenderState.PathOverlay(new WorldPosition(4, 6),
             [
-                new WorldRenderState.PathStep(new WorldPosition(4, 5), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
-                new WorldRenderState.PathStep(new WorldPosition(4, 4), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "4")
+                new WorldRenderState.PathStep(new WorldPosition(3, 5), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+                new WorldRenderState.PathStep(new WorldPosition(4, 4), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2")
             ])
         }));
 
         await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
         world.CompleteAnimation();
 
-        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(4, 4)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(3, 5)));
     }
 
     [Test]
@@ -4376,15 +4376,15 @@ public sealed class WorldScreenViewModelTests
             Cursors = [new WorldRenderState.Cursor(new WorldPosition(4, 4), 4416, Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, 1.0)],
             SelectedPath = new WorldRenderState.PathOverlay(new WorldPosition(4, 6),
             [
-                new WorldRenderState.PathStep(new WorldPosition(4, 5), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
-                new WorldRenderState.PathStep(new WorldPosition(4, 4), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "4")
+                new WorldRenderState.PathStep(new WorldPosition(3, 5), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2"),
+                new WorldRenderState.PathStep(new WorldPosition(4, 4), Theme.World.Path.ValidInnerColor, Theme.World.Path.ValidOuterColor, "2")
             ])
         }));
 
         await world.HandleMapClickAsync(new WorldPosition(2, 2), null, 1);
         world.CompleteAnimation();
 
-        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(4, 4)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(3, 5)));
     }
 
     [Test]
@@ -5773,7 +5773,7 @@ public sealed class WorldScreenViewModelTests
         WorldStack stack = TestHelpers.SimpleStack(
             new WorldStackId("Stack"),
             player.Id,
-            new WorldPosition(6, 4),
+            new WorldPosition(7, 4),
             TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leaderDefinition),
             movementPoints: 20);
 
@@ -5810,7 +5810,71 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { world, siteScreen }));
         Assert.That(siteScreen.SelectedTab, Is.InstanceOf<MerchantTabViewModel>());
-        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(4, 4)));
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(5, 3)));
+        Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:site-enter"]));
+
+        gameViewModel.CloseScreen(siteScreen);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo([world]));
+        Assert.That(world.EndTurnCommand.CanExecute(null), Is.True);
+    }
+
+    [Test]
+    public async Task EnterSiteTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 3);
+
+        WorldMerchantSite site = new(
+            Id: new WorldSiteId("merchant"),
+            Footprint: new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            Variant: new WorldObjectVariant(0),
+            TitleTextId: new ScenarioTextId("Title"),
+            GreetingTextId: new ScenarioTextId("Greeting"),
+            Items: [],
+            VisitorIds: [],
+            AiPriority: 3);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack"),
+            player.Id,
+            new WorldPosition(5, 4),
+            TestHelpers.SingleUnitGrid(new WorldUnitId("leader"), leaderDefinition),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithSite(site)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(stack)
+            .BuildSession();
+
+        TestAudioPlayer audioPlayer = new();
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithAudioPlayer(audioPlayer).Build();
+
+        WorldScreenViewModel world = new(gameModel, gameViewModel, new RandomProvider(0));
+        gameViewModel.ShowScreen(world);
+        world.CompleteGameStart();
+
+        await world.HandleMapClickAsync(stack.Position, null, 1);
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+        audioPlayer.Actions.Clear();
+        await world.HandleMapClickAsync(new WorldPosition(4, 4), null, 1);
+
+        ManagementScreenViewModel siteScreen = Assert.IsOfType<ManagementScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { world, siteScreen }));
+        Assert.That(siteScreen.SelectedTab, Is.InstanceOf<MerchantTabViewModel>());
+        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id].Position, Is.EqualTo(new WorldPosition(5, 4)));
         Assert.That(audioPlayer.Actions, Is.EqualTo(["Sound:site-enter"]));
 
         gameViewModel.CloseScreen(siteScreen);
@@ -5947,8 +6011,8 @@ public sealed class WorldScreenViewModelTests
         Assert.That(FormatThiefActions(thiefScreen), Is.EqualTo([WorldThiefActionType.StealMerchant]));
         Assert.That(gameModel.Snapshot.WorldState.Stacks[thiefStack.Id], Is.EqualTo(thiefStack with
         {
-            Position = new WorldPosition(5, 4),
-            Direction = WorldStackDirection.NorthWest,
+            Position = new WorldPosition(5, 3),
+            Direction = WorldStackDirection.North,
             MovementPoints = 18
         }));
 

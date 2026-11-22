@@ -28,7 +28,7 @@ public sealed record WorldPurchaseSpellCommand(
             return WorldCommandResult.Fail(WorldCommandError.SiteNotFound);
         }
 
-        if (stack.Position != mageSite.Entrance)
+        if (!mageSite.IsEntranceAt(stack.Position))
         {
             return WorldCommandResult.Fail(WorldCommandError.StackNotAtSite);
         }

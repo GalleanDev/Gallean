@@ -160,7 +160,7 @@ internal sealed partial class MercenaryTabViewModel
 
         if (!WorldState.Stacks.TryGetValue(stackId, out WorldStack? stack) ||
             stack.OwnerId != ViewPlayerId ||
-            stack.Position != site.Entrance)
+            !site.IsEntranceAt(stack.Position))
         {
             Screen.Close();
             return;

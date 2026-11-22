@@ -144,7 +144,7 @@ internal sealed partial class TrainerTabViewModel
 
         if (!WorldState.Stacks.TryGetValue(stackId, out WorldStack? stack) ||
             stack.OwnerId != ViewPlayerId ||
-            plan.GetSiteAt(stack.Position) is not WorldTrainerSite site)
+            plan.GetSiteEntranceAt(stack.Position) is not WorldTrainerSite site)
         {
             Screen.Close();
 

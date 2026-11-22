@@ -43,7 +43,7 @@ internal partial class WorldEngine
                 }
                 else
                 {
-                    return VisitSite(stack, plan);
+                    return EventRuleResult<WorldEvent>.Empty;
                 }
             }
 
@@ -64,21 +64,6 @@ internal partial class WorldEngine
             WorldStackMovingEvent nextStep = WorldCommandHelpers.CreateMoveStepEvent(stack, plan, profile, ev.RemainingPath, ev.EncounterPosition);
 
             return EventRuleResult<WorldEvent>.Append(nextStep);
-        }
-
-        private EventRuleResult<WorldEvent> VisitSite(WorldStack stack, WorldPlan plan)
-        {
-            WorldSite? site = plan.GetSiteAt(stack.Position);
-            (WorldUnit leader, _, _) = stack.GetLeader(Context.Definitions);
-
-            if (site is not null && leader.IsAlive)
-            {
-                return EventRuleResult<WorldEvent>.Append(new WorldSiteVisitedEvent(stack.Id, site.Id));
-            }
-            else
-            {
-                return EventRuleResult<WorldEvent>.Empty;
-            }
         }
 
         private EventRuleResult<WorldEvent> VisitThief(
@@ -146,6 +131,13 @@ internal partial class WorldEngine
 
                     return new EventRuleResult<WorldEvent>(false, battleEvents);
                 }
+            }
+
+            WorldSite? site = plan.GetSiteAt(position);
+
+            if (site is not null)
+            {
+                return EventRuleResult<WorldEvent>.Append([.. WorldCommandHelpers.CreateSiteVisitEvents(stack, site, Context)]);
             }
 
             return null;
