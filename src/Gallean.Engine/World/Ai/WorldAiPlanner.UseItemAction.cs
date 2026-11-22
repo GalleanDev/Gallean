@@ -6,85 +6,85 @@ internal sealed partial class WorldAiPlanner
     {
         public override WorldAiActionPlan? Visit(WorldStackOrder.Normal order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Stand order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Guard order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.AttackStack order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendStack order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.SecureCity order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Roam order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Explore order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.MoveToLocation order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendLocation order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Berserk order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Assist order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Steal order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.DefendCity order, ActionContext context)
         {
-            return null;
+            return PlanAction(context, [ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Heal order, ActionContext context)
         {
-            return PlanAction(context);
+            return PlanAction(context, [ItemCategory.PotionHeal, ItemCategory.PotionRevive, ItemCategory.PotionPermanentBoost]);
         }
 
         public override WorldAiActionPlan? Visit(WorldStackOrder.Reinforce order, ActionContext context)
         {
-            return PlanAction(context);
+            return PlanAction(context, [ItemCategory.PotionHeal, ItemCategory.PotionRevive, ItemCategory.PotionPermanentBoost]);
         }
 
-        private WorldAiActionPlan? PlanAction(ActionContext context)
+        private WorldAiActionPlan? PlanAction(ActionContext context, ReadOnlySpan<ItemCategory> categories)
         {
             WorldStack stack = context.Stack;
             (int Score, WorldUseItemCommand Command)? best = null;
@@ -93,22 +93,25 @@ internal sealed partial class WorldAiPlanner
             {
                 ItemDefinition itemDefinition = Context.Engine.Definitions.GetItem(item.DefinitionId);
 
-                foreach ((WorldUnit unit, GridPosition _) in stack.Units.GetUnits())
+                if (categories.Contains(itemDefinition.Category))
                 {
-                    WorldUnitGroup.Stack stackGrouup = new(stack.Id);
-                    WorldItemTarget.Unit unitTarget = new(stackGrouup, unit.Id);
-                    WorldUseItemCommand command = new(stackGrouup, item.Id, unitTarget);
-                    WorldCommandResult commandResult = command.Execute(context.State, Context.Engine);
-
-                    if (!commandResult.Failed)
+                    foreach ((WorldUnit unit, GridPosition _) in stack.Units.GetUnits())
                     {
-                        int? score = ScoreUsage(itemDefinition.Effect, unit);
+                        WorldUnitGroup.Stack stackGrouup = new(stack.Id);
+                        WorldItemTarget.Unit unitTarget = new(stackGrouup, unit.Id);
+                        WorldUseItemCommand command = new(stackGrouup, item.Id, unitTarget);
+                        WorldCommandResult commandResult = command.Execute(context.State, Context.Engine);
 
-                        if (score is not null)
+                        if (!commandResult.Failed)
                         {
-                            if (best is null || score.Value > best.Value.Score)
+                            int? score = ScoreUsage(context, itemDefinition.Effect, unit);
+
+                            if (score is not null)
                             {
-                                best = (score.Value, command);
+                                if (best is null || score.Value > best.Value.Score)
+                                {
+                                    best = (score.Value, command);
+                                }
                             }
                         }
                     }
@@ -123,7 +126,7 @@ internal sealed partial class WorldAiPlanner
             return MakePlan(best.Value.Score, best.Value.Command, context.Memory);
         }
 
-        private int? ScoreUsage(ItemEffect? effect, WorldUnit unit)
+        private int? ScoreUsage(ActionContext context, ItemEffect? effect, WorldUnit unit)
         {
             switch (effect)
             {
@@ -132,6 +135,18 @@ internal sealed partial class WorldAiPlanner
                 case HealItemEffect:
                     UnitStats stats = Context.Engine.UnitStats.GetWorldUnitStats(unit);
                     return (stats.MaxHitpoints - unit.Hitpoints) * MaxScore / stats.MaxHitpoints;
+                case PermanentBoostItemEffect:
+                    WorldPlayer owner = context.State.Players[context.Stack.OwnerId];
+                    (WorldUnit leader, GridPosition _, UnitDefinition _) = context.Stack.GetLeader(Context.Engine.Definitions);
+
+                    if (WorldHelpers.IsRacePlayable(owner.Race) && unit.Id == leader.Id)
+                    {
+                        return MaxScore;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 default:
                     return null;
             }

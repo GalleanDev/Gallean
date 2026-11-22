@@ -17,6 +17,14 @@ public sealed class WorldEngineAiUseItemActionTests
         };
     }
 
+    private static ItemDefinition PermanentPotion(UnitModifierDefinitionId modifierId)
+    {
+        return TestHelpers.SimpleItemDefinition(new ItemDefinitionId("elixir"), ItemCategory.PotionPermanentBoost) with
+        {
+            Effect = new PermanentBoostItemEffect(modifierId)
+        };
+    }
+
     [Test]
     public void HealItemBeforeCityTest()
     {
@@ -155,6 +163,63 @@ public sealed class WorldEngineAiUseItemActionTests
             new WorldAiActionStartedEvent(plan),
             new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
             new WorldUnitResurrectedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("soldier"), 1, WorldResourceSet.Empty),
+            new WorldAiActionEndedEvent(aiPlayer.Id, memory)
+        ]);
+    }
+
+    [Test]
+    public void PermanentBoostTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(6, 6);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+        UnitModifierDefinition modifier = TestHelpers.SimpleModifier("boost") with { Damage = new UnitStatModifier(0, 20) };
+        ItemDefinition potion = PermanentPotion(modifier.Id);
+        WorldItem potionItem = new(new WorldItemId("Elixir"), potion.Id, Charges: null);
+
+        WorldPlayer aiPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer humanPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                aiPlayer.Id,
+                new WorldPosition(2, 2),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition), GridPosition.FrontBottom, false)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
+                    .Build(),
+                movementPoints: 6) with
+            {
+                Inventory = new WorldInventory([potionItem])
+            };
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(modifier)
+            .WithDefinition(potion)
+            .WithDefinition(TestHelpers.SimpleLord(aiPlayer.LordId, aiPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(aiPlayer)
+            .WithDefinition(TestHelpers.SimpleLord(humanPlayer.LordId, humanPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(humanPlayer)
+            .WithStack(stack)
+            .Build();
+
+        WorldAiMemory memory = new WorldAiMemory(new WorldAiTurnMemory(1, aiPlayer.Id, 1, 0, 0, []))
+            .WithStackMemory(stack.Id, new WorldAiStackMemory(WorldStackOrder.Normal.Instance, null));
+        WorldAiActionPlan plan = new(
+            new WorldAiActionScore(6, 1000),
+            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"))),
+            memory);
+
+        engine.CheckCommand(new WorldAiActionCommand(), [
+            new WorldAiActionStartedEvent(plan),
+            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
+            new WorldUnitModifierAppliedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), new UnitModifier(modifier.Id, null)),
             new WorldAiActionEndedEvent(aiPlayer.Id, memory)
         ]);
     }
