@@ -4005,7 +4005,7 @@ public sealed class StackTabViewModelTests
                 null,
                 new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
                 [],
-                [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.MoveAbilityFlying, "Flight", "Allows the leader to Fly", "Innate", 1, [])],
+                [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Skill, IconMoniker.MoveAbilityFlying, "Flight", "The leader will suffer no move penalty in forests or on water, but moves no faster on roads", "Innate", 1, [])],
                 Summons: null,
                 GrantedWards: null))));
     }

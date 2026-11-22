@@ -28,7 +28,7 @@ internal static class UnitMoveAbilityFormatter
     {
         if (ability.HasFlag(UnitMoveAbility.Flying))
         {
-            return Tr("Allows the leader to Fly");
+            return Tr("The leader will suffer no move penalty in forests or on water, but moves no faster on roads");
         }
         else if (ability.HasFlag(UnitMoveAbility.Forest))
         {
