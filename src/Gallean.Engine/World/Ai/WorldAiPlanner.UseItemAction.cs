@@ -97,9 +97,9 @@ internal sealed partial class WorldAiPlanner
                 {
                     foreach ((WorldUnit unit, GridPosition _) in stack.Units.GetUnits())
                     {
-                        WorldUnitGroup.Stack stackGrouup = new(stack.Id);
-                        WorldItemTarget.Unit unitTarget = new(stackGrouup, unit.Id);
-                        WorldUseItemCommand command = new(stackGrouup, item.Id, unitTarget);
+                        WorldUnitGroup.Stack stackGroup = new(stack.Id);
+                        WorldItemTarget.Unit unitTarget = new(stackGroup, unit.Id);
+                        WorldUseItemCommand command = new(stackGroup, item.Id, unitTarget);
                         WorldCommandResult commandResult = command.Execute(context.State, Context.Engine);
 
                         if (!commandResult.Failed)
