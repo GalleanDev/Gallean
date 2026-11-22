@@ -231,7 +231,7 @@ public sealed class WorldEngineGetMercenaryInfoTests
     }
 
     [Test]
-    public void FullPartyTest()
+    public void FullPartyInsufficientResourcesTest()
     {
         WorldMap map = TestHelpers.SimpleMap(7, 7);
 
