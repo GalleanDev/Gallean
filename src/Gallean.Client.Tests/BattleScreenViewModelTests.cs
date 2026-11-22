@@ -1671,10 +1671,7 @@ public sealed class BattleScreenViewModelTests
         ]));
         Assert.That(FormatGrid(viewModel.LeftGrid, framesPerSecond), Is.EqualTo([
             "unit 1 unit-face/leader at 2,1 span 1 hitpoints 60/100 Alive current True ",
-            "unit 1 feedback Action Item",
-            "unit 1 feedback 0 -> 1 at 0 for 3 frames Smooth",
-            "unit 1 feedback 1 -> 0 at 12 for 3 frames Smooth",
-            "unit 1 feedback Heal Healed",
+            "unit 1 feedback Action Item\nHealed",
             "unit 1 feedback 0 -> 1 at 0 for 3 frames Smooth",
             "unit 1 feedback 1 -> 0 at 12 for 3 frames Smooth",
             "unit 1 hitpoints 60 -> 90 at 0 for 12 frames Decelerate"

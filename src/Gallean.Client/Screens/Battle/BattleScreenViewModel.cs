@@ -795,9 +795,28 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
         {
             if (unit.Id == viewModel.UnitId)
             {
-                foreach (BattleAnimationState.FeedbackEntry entry in unit.Feedback)
+                int index = 0;
+
+                while (index < unit.Feedback.Count)
                 {
-                    feedback.Add(new BattleFeedbackViewModel(entry.Feedback.Type, entry.Feedback.Text, entry.Animation));
+                    BattleAnimationState.FeedbackEntry first = unit.Feedback[index];
+                    List<string> lines = [];
+
+                    while (index < unit.Feedback.Count && unit.Feedback[index].At == first.At)
+                    {
+                        BattleAnimationState.FeedbackEntry entry = unit.Feedback[index];
+
+                        if (!lines.Contains(entry.Feedback.Text))
+                        {
+                            lines.Add(entry.Feedback.Text);
+                        }
+
+                        index++;
+                    }
+
+                    BattleFeedbackViewModel item = new (first.Feedback.Type, string.Join('\n', lines), first.Animation);
+                    
+                    feedback.Add(item);
                 }
             }
         }
