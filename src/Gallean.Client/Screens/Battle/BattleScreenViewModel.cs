@@ -815,7 +815,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
                     }
 
                     BattleFeedbackViewModel item = new (first.Feedback.Type, string.Join('\n', lines), first.Animation);
-                    
+
                     feedback.Add(item);
                 }
             }
