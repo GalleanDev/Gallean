@@ -16,6 +16,8 @@ internal sealed partial class BriefingScreenViewModel(
     IAudioPlayer audioPlayer,
     Func<Task> continueAction) : AbstractScreenViewModel
 {
+    private static readonly TimeSpan FirstFrameTime = TimeSpan.FromSeconds(10);
+
     private readonly MusicQueue musicQueue = MusicQueue.Create([new AssetSoundKey.BriefingMusic()], isLooping: true);
     private IAudioPlayback? voicePlayback;
 
@@ -29,8 +31,8 @@ internal sealed partial class BriefingScreenViewModel(
     public MenuBackgroundViewModel? Background { get; } = background;
     public AssetAnimationKey? Video { get; } = video;
     public bool HasVideo { get; } = video is not null;
-    public TimeSpan VideoStartTime { get; } = videoStartTime;
-    public TimeSpan VideoFirstFrameTime { get; } = TimeSpan.FromSeconds(10);
+    public TimeSpan VideoStartTime { get; } = videoStartTime < FirstFrameTime ? videoStartTime : FirstFrameTime;
+    public TimeSpan VideoFirstFrameTime { get; } = FirstFrameTime;
     public bool HasVoice { get; } = voice is not null;
     public string ToggleTextLabel => IsTextVisible ? Tr("Hide text") : Tr("Show text");
     public override ScreenMusic Music => HasVoice ? ScreenMusic.None : ScreenMusic.Tracks(musicQueue);
