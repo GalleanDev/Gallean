@@ -2888,7 +2888,6 @@ public sealed class BattleAnimationStateBuilderTests
             "@7 unit 2 feedback +15 Heal Healed",
             "@7 unit 2 hitpoints 20 -> 40 over 12 frames Decelerate",
             "@7 sound battle-unit-touch/atk/4",
-            "@7 sound battle-effect-sound-heal",
             "@16 unit 1 body Idle Alive"
         ]));
     }
@@ -3451,8 +3450,7 @@ public sealed class BattleAnimationStateBuilderTests
             "@0 sound battle-unit-touch/priest/3",
             "@1 unit 1 feedback +15 Action Item",
             "@1 unit 2 feedback +15 Heal Healed",
-            "@1 unit 2 hitpoints 20 -> 70 over 12 frames Decelerate",
-            "@1 sound battle-effect-sound-heal"
+            "@1 unit 2 hitpoints 20 -> 70 over 12 frames Decelerate"
         ]));
     }
 
@@ -7918,7 +7916,6 @@ public sealed class BattleAnimationStateBuilderTests
             "@7 unit 2 hitpoints 20 -> 40 over 12 frames Decelerate",
             "@7 unit 3 hitpoints 30 -> 50 over 12 frames Decelerate",
             "@7 sound battle-unit-touch/atk/4",
-            "@7 sound battle-effect-sound-heal",
             "@16 unit 1 body Idle Alive"
         ]));
     }

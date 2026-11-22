@@ -527,7 +527,11 @@ internal sealed partial class BattleAnimationStateBuilder(
                 if (attack.Definition is null || attack.Definition.Type is UnitAttackType.Heal)
                 {
                     AddStrike(timeline);
-                    AddSound(attack.Strike, new AssetSoundKey.BattleEffect.Heal());
+
+                    if (attack.EffectUnitId is null)
+                    {
+                        AddSound(attack.Strike, new AssetSoundKey.BattleEffect.Heal());
+                    }
                 }
                 else
                 {
