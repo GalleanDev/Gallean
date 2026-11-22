@@ -1004,6 +1004,8 @@ public sealed class VisualTests
             ]),
             "Destroy Hubert de Lalye",
             MenuBackgroundViewModel.TryCreateRaceSelection(WorldRace.Human),
+            video: null,
+            videoStartTime: TimeSpan.Zero,
             new AssetSoundKey.BriefingVoice(new ScenarioId("S095SC0000")),
             new NullAudioPlayer(),
             async () => { }));

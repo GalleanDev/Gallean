@@ -4,6 +4,19 @@
              x:Class="Gallean.Client.BriefingScreenView"
              x:DataType="local:BriefingScreenViewModel">
 
+  <UserControl.Styles>
+    <Style Selector="Grid.briefing-column">
+      <Setter Property="MaxWidth" Value="760" />
+      <Setter Property="Margin" Value="48,36" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Grid.briefing-column.video">
+      <Setter Property="MaxWidth" Value="560" />
+      <Setter Property="Margin" Value="48,36,72,36" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+  </UserControl.Styles>
+
   <Grid Background="{StaticResource ScenarioSelectBackdropBrush}" ClipToBounds="True">
 
     <ContentControl Content="{Binding Background}">
@@ -16,9 +29,17 @@
       </ContentControl.ContentTemplate>
     </ContentControl>
 
-    <Border Background="{StaticResource ModalBackdropBrush}" IsHitTestVisible="False" />
+    <local:VideoVisual AnimationKey="{Binding Video}"
+                       Rate="{x:Static local:AnimationRate.BriefingVideo}"
+                       StartTime="{Binding VideoStartTime}"
+                       FirstFrameTime="{Binding VideoFirstFrameTime}"
+                       Stretch="UniformToFill" />
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" MaxWidth="760" Margin="48,36" HorizontalAlignment="Center">
+    <Border Background="{StaticResource ModalBackdropBrush}" IsVisible="{Binding !HasVideo}" IsHitTestVisible="False" />
+
+    <Border Background="{StaticResource BriefingVideoBorderGradientBrush}" IsVisible="{Binding HasVideo}" IsHitTestVisible="False" />
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" Classes="briefing-column" Classes.video="{Binding HasVideo}">
 
       <local:AnimatedTextBlock Grid.Row="0"
                                Text="{local:Text 'Briefing'}"

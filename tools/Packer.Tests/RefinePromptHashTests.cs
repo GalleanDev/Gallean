@@ -1,3 +1,5 @@
+using Gallean.Engine.Contracts;
+
 namespace Packer.Tests;
 
 public sealed class RefinePromptHashTests
@@ -20,5 +22,13 @@ public sealed class RefinePromptHashTests
         KeyNotFoundException ex = Assert.Throws<KeyNotFoundException>(() => RefinePromptHash.Get("battle-unit/nothing/attacker"));
 
         Assert.That(ex.Message, Is.EqualTo("No prompt found for key 'battle-unit/nothing/attacker'."));
+    }
+
+    [Test]
+    public void BriefingVideoTest()
+    {
+        AssetAnimationKey key = new AssetAnimationKey.BriefingVideo(new ScenarioId("S100SC0000"));
+
+        Assert.That(RefinePromptHash.Get(key).ToString(), Is.EqualTo("e3b0c44298fc1c149afbf4c8"));
     }
 }

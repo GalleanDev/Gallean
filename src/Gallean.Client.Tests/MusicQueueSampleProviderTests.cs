@@ -8,8 +8,8 @@ public sealed class MusicQueueSampleProviderTests
         AssetSoundKey first = new AssetSoundKey.MenuMusic();
         AssetSoundKey second = new AssetSoundKey.BattleMusic(0);
         TestAssetProviderBuilder builder = new();
-        AssetStream firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
-        AssetStream secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))
@@ -31,8 +31,8 @@ public sealed class MusicQueueSampleProviderTests
         AssetSoundKey first = new AssetSoundKey.MenuMusic();
         AssetSoundKey second = new AssetSoundKey.BattleMusic(0);
         TestAssetProviderBuilder builder = new();
-        AssetStream firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
-        AssetStream secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))
@@ -56,7 +56,7 @@ public sealed class MusicQueueSampleProviderTests
         AssetSoundKey missing = new AssetSoundKey.MenuMusic();
         AssetSoundKey available = new AssetSoundKey.BattleMusic(0);
         TestAssetProviderBuilder builder = new();
-        AssetStream sound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound sound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))
@@ -77,7 +77,7 @@ public sealed class MusicQueueSampleProviderTests
     {
         AssetSoundKey key = new AssetSoundKey.MenuMusic();
         TestAssetProviderBuilder builder = new();
-        AssetStream sound = builder.CreateSound(1, 2, 3);
+        AssetSound sound = builder.CreateSound(1, 2, 3);
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))
@@ -110,8 +110,8 @@ public sealed class MusicQueueSampleProviderTests
         AssetSoundKey first = new AssetSoundKey.MenuMusic();
         AssetSoundKey second = new AssetSoundKey.BattleMusic(0);
         TestAssetProviderBuilder builder = new();
-        AssetStream firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
-        AssetStream secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
+        AssetSound firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
+        AssetSound secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))
@@ -135,8 +135,8 @@ public sealed class MusicQueueSampleProviderTests
         AssetSoundKey first = new AssetSoundKey.MenuMusic();
         AssetSoundKey second = new AssetSoundKey.BattleMusic(0);
         TestAssetProviderBuilder builder = new();
-        AssetStream firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
-        AssetStream secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))
@@ -157,8 +157,8 @@ public sealed class MusicQueueSampleProviderTests
         AssetSoundKey first = new AssetSoundKey.MenuMusic();
         AssetSoundKey second = new AssetSoundKey.BattleMusic(0);
         TestAssetProviderBuilder builder = new();
-        AssetStream firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
-        AssetStream secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
+        AssetSound firstSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
+        AssetSound secondSound = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 4410));
 
         using TestAssetProvider assets = builder
             .ResolveSprite(_ => throw new InvalidOperationException("No sprite expected."))

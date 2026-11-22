@@ -118,6 +118,7 @@ internal static class EnhancementMap
             AssetAnimationKey.BattleUnitAura aura when RefineMap.CanRefine(aura) => [EnhancementType.Upscale, EnhancementType.Refine, EnhancementType.Alpha],
             AssetAnimationKey.BattleUnitAura => [EnhancementType.Upscale],
             AssetAnimationKey.BattleUnitShadow => [EnhancementType.Upscale],
+            AssetAnimationKey.BriefingVideo => [EnhancementType.Upscale],
             AssetAnimationKey.Capital => [EnhancementType.Upscale],
             AssetAnimationKey.BattleBackgroundOverlay => [],
             AssetAnimationKey.CapitalBackgroundOverlay overlay when RefineMap.CanRefine(overlay) => [EnhancementType.Upscale, EnhancementType.Refine, EnhancementType.Alpha],

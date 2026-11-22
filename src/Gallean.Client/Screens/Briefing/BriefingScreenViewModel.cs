@@ -9,6 +9,8 @@ internal sealed partial class BriefingScreenViewModel(
     ScenarioTextFormatter formatter,
     string objective,
     MenuBackgroundViewModel? background,
+    AssetAnimationKey? video,
+    TimeSpan videoStartTime,
     AssetSoundKey? voice,
     IAudioPlayer audioPlayer,
     Func<Task> continueAction) : AbstractScreenViewModel
@@ -20,6 +22,10 @@ internal sealed partial class BriefingScreenViewModel(
     public ImmutableArray<ScenarioTextSpan> Briefing { get; } = formatter.Format(ScenarioFormatter.FormatBriefing(briefing));
     public string Objective { get; } = ScenarioFormatter.FormatObjective(objective);
     public MenuBackgroundViewModel? Background { get; } = background;
+    public AssetAnimationKey? Video { get; } = video;
+    public bool HasVideo { get; } = video is not null;
+    public TimeSpan VideoStartTime { get; } = videoStartTime;
+    public TimeSpan VideoFirstFrameTime { get; } = TimeSpan.FromSeconds(14.0);
     public bool HasVoice { get; } = voice is not null;
     public override ScreenMusic Music => HasVoice ? ScreenMusic.None : ScreenMusic.Tracks(musicQueue);
 

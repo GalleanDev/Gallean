@@ -39,6 +39,7 @@ internal static class RefinePromptMap
             AssetAnimationKey.BattleUnitAura aura when BattleUnitAuras.Contains(aura) => new RefinePrompt(new RefinePromptId(aura.CanonicalId), []),
             AssetAnimationKey.BattleUnitAura => null,
             AssetAnimationKey.BattleUnitShadow => null,
+            AssetAnimationKey.BriefingVideo => null,
             AssetAnimationKey.Capital => null,
             AssetAnimationKey.CapitalBackgroundOverlay => null,
             AssetAnimationKey.CapitalBuilding building when CapitalBuildings.Contains(building) => new RefinePrompt(new RefinePromptId(building.CanonicalId), []),

@@ -1,4 +1,5 @@
 using Gallean.Tests.Common;
+using SkiaSharp;
 
 namespace Gallean.Client.Tests;
 
@@ -79,6 +80,8 @@ public sealed class BriefingScreenViewModelTests
             ]));
         Assert.That(briefing.Objective, Is.EqualTo("Find the Mountain Clans Diplomat Slookarijj"));
         Assert.That(briefing.Background?.SpriteKey, Is.EqualTo(new AssetSpriteKey.RaceSelectionBackground(WorldRace.Human)));
+        Assert.That(briefing.Video, Is.Null);
+        Assert.That(briefing.HasVideo, Is.False);
         Assert.That(briefing.HasVoice, Is.False);
         Assert.That(briefing.Music.Queue?.Tracks, Is.EqualTo([new AssetSoundKey.BriefingMusic()]));
         Assert.That(briefing.Music.Queue?.IsLooping, Is.True);
@@ -145,6 +148,37 @@ public sealed class BriefingScreenViewModelTests
 
         Assert.That(briefing.HasVoice, Is.True);
         Assert.That(audioPlayer.Actions, Is.EqualTo(["Voice:briefing-voice/s108sc0000"]));
+    }
+
+    [Test]
+    public async Task VideoTest()
+    {
+        TestAssetProviderBuilder assetsBuilder = new();
+        Animation video = assetsBuilder.CreateAnimation(
+            new AssetAnimationMetadata(FrameCount: 1, Width: 640, Height: 360, OffsetX: 0, OffsetY: 0, TriggerFrame: null, SecondTriggerFrame: null),
+            [assetsBuilder.CreateSprite(SKColors.Black, 640, 360)]);
+        AssetSound voice = assetsBuilder.CreateSound(1, 2, 3) with
+        {
+            Metadata = new AssetSoundMetadata(AnimationFrame: null, StartTime: TimeSpan.FromMilliseconds(12745.0))
+        };
+        using TestAssetProvider assets = assetsBuilder
+            .ResolveSprite(_ => null)
+            .ResolveAnimation(key => key.CanonicalId == "briefing-video/s108sc0000" ? video : null)
+            .ResolveSound(key => key.CanonicalId == "briefing-voice/s108sc0000" ? voice : null)
+            .Build();
+        GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithAssets(assets)
+            .Build();
+
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+
+        BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(briefing.Video, Is.EqualTo(new AssetAnimationKey.BriefingVideo(new ScenarioId("S108SC0000"))));
+        Assert.That(briefing.HasVideo, Is.True);
+        Assert.That(briefing.VideoStartTime, Is.EqualTo(TimeSpan.FromMilliseconds(12745.0)));
+        Assert.That(briefing.VideoFirstFrameTime, Is.EqualTo(TimeSpan.FromSeconds(14.0)));
+        Assert.That(briefing.Background, Is.Null);
     }
 
     [Test]

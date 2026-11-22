@@ -90,7 +90,7 @@ public sealed class AssetPreloaderTests
     {
         AssetSoundKey key = new AssetSoundKey.BattleEffect.Heal();
         TestAssetProviderBuilder builder = new();
-        AssetStream data = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
+        AssetSound data = builder.CreateSound(TestSounds.Create(SoundDecoder.MixerSampleRate, SoundDecoder.MixerChannels, 64));
         int resolvedCount = 0;
 
         using TestAssetProvider assets = builder

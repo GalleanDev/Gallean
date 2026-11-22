@@ -8,7 +8,7 @@ internal sealed class TestAssetProviderBuilder
     private readonly CleanupList cleanup = new();
     private Action<AssetKey>? onRequest;
     private Func<AssetKey, Animation?>? resolveAnimation;
-    private Func<AssetKey, AssetStream?>? resolveSound;
+    private Func<AssetKey, AssetSound?>? resolveSound;
     private Func<AssetKey, Sprite?>? resolveSprite;
 
     public TestAssetProviderBuilder ResolveSprite(Func<AssetKey, Sprite?> resolver)
@@ -23,7 +23,7 @@ internal sealed class TestAssetProviderBuilder
         return this;
     }
 
-    public TestAssetProviderBuilder ResolveSound(Func<AssetKey, AssetStream?> resolver)
+    public TestAssetProviderBuilder ResolveSound(Func<AssetKey, AssetSound?> resolver)
     {
         resolveSound = resolver;
         return this;
@@ -63,9 +63,9 @@ internal sealed class TestAssetProviderBuilder
         return sprite;
     }
 
-    public AssetStream CreateSound(params byte[] data)
+    public AssetSound CreateSound(params byte[] data)
     {
-        return AssetStream.FromBytes(data);
+        return new AssetSound(new AssetSoundMetadata(AnimationFrame: null, StartTime: null), AssetStream.FromBytes(data));
     }
 
     public Animation CreateAnimation(AssetAnimationMetadata metadata, IReadOnlyList<Sprite> frames)

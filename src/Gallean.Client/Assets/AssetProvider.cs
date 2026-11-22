@@ -63,6 +63,18 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         return animationCache.Acquire(key);
     }
 
+    public Sprite? GetAnimationFrame(AssetAnimationKey key, int index)
+    {
+        AssetSprite<SKImage>? frame = assetSource.TryGetAnimationFrame(key, index);
+
+        if (frame is null)
+        {
+            return null;
+        }
+
+        return CreateSprite(frame, normalLayer: null, depthLayer: null, albedoLayer: null, lights: []);
+    }
+
     public AssetSoundMetadata? GetOptionalSoundMetadata(AssetSoundKey key)
     {
         AssetSoundKey localizedKey = MakeLocalizedSoundKey(key);

@@ -108,6 +108,27 @@ public sealed class GameAssetSource : IAssetSource<ReadOnlyMemory<byte>>, IGameA
         return TryGetAnimation(key)?.Metadata;
     }
 
+    public AssetSprite? TryGetAnimationFrame(AssetAnimationKey key, int index)
+    {
+        AssetAnimation? animation = TryGetAnimation(key);
+
+        if (animation is not null)
+        {
+            if (index >= 0 && index < animation.Frames.Count)
+            {
+                return animation.Frames[index];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public IReadOnlyList<AssetSpriteLayer>? TryGetAnimationLayer(AssetAnimationKey key, AssetSpriteLayerType type)
     {
         return null;

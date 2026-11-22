@@ -72,6 +72,7 @@ internal static class UpscaleMap
             AssetAnimationKey.BattleUnit => UpscalerType.Vsr,
             AssetAnimationKey.BattleUnitAura => UpscalerType.Vsr,
             AssetAnimationKey.BattleUnitShadow => UpscalerType.Mosr,
+            AssetAnimationKey.BriefingVideo => UpscalerType.Vsr,
             AssetAnimationKey.Capital => UpscalerType.Mosr,
             AssetAnimationKey.BattleBackgroundOverlay => UpscalerType.Mosr,
             AssetAnimationKey.CapitalBackgroundOverlay => UpscalerType.Vsr,

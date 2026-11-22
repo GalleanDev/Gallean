@@ -364,13 +364,28 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         if (briefingId is not null)
         {
+            AssetAnimationKey? video = TryGetBriefingVideo(gameModel);
+            AssetSoundKey? voice = TryGetBriefingVoice(gameModel);
+            MenuBackgroundViewModel? background;
+
+            if (video is null)
+            {
+                background = MenuBackgroundViewModel.TryCreateRaceSelection(GetViewPlayerRace(gameModel));
+            }
+            else
+            {
+                background = null;
+            }
+
             BriefingScreenViewModel briefingViewModel = new(
                 gameModel.Texts.GetScenarioText(nameId),
                 gameModel.Texts.GetScenarioText(briefingId.Value),
                 new ScenarioTextFormatter(gameModel.Texts.Names),
                 gameModel.Texts.GetScenarioText(objectiveId),
-                MenuBackgroundViewModel.TryCreateRaceSelection(GetViewPlayerRace(gameModel)),
-                TryGetBriefingVoice(gameModel),
+                background,
+                video,
+                GetSoundStartTime(voice),
+                voice,
                 audioPlayer,
                 () => BeginGameAsync(gameModel, worldScreen));
 
@@ -489,6 +504,20 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         await StartGameCommand.ExecuteAsync(new GameConfiguration(scenarioId.Value, configuration));
     }
 
+    private AssetAnimationKey? TryGetBriefingVideo(GameModel gameModel)
+    {
+        AssetAnimationKey key = new AssetAnimationKey.BriefingVideo(new ScenarioId(gameModel.ScenarioId));
+
+        if (assets.GetOptionalAnimationMetadata(key) is not null)
+        {
+            return key;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     private AssetSoundKey? TryGetBriefingVoice(GameModel gameModel)
     {
         AssetSoundKey key = new AssetSoundKey.BriefingVoice(new ScenarioId(gameModel.ScenarioId));
@@ -500,6 +529,20 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         else
         {
             return null;
+        }
+    }
+
+    private TimeSpan GetSoundStartTime(AssetSoundKey? key)
+    {
+        if (key is not null)
+        {
+            AssetSoundMetadata? metadata = assets.GetOptionalSoundMetadata(key);
+
+            return metadata?.StartTime ?? TimeSpan.Zero;
+        }
+        else
+        {
+            return TimeSpan.Zero;
         }
     }
 

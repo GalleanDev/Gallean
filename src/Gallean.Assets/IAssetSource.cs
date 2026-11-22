@@ -8,6 +8,7 @@ public interface IAssetSource<TPixels> : IDisposable
 
     AssetAnimation<TPixels>? TryGetAnimation(AssetAnimationKey key);
     AssetAnimationMetadata? TryGetAnimationMetadata(AssetAnimationKey key);
+    AssetSprite<TPixels>? TryGetAnimationFrame(AssetAnimationKey key, int index);
     IReadOnlyList<AssetSpriteLayer<TPixels>>? TryGetAnimationLayer(AssetAnimationKey key, AssetSpriteLayerType type);
 
     AssetSound? TryGetSound(AssetSoundKey key);

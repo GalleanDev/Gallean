@@ -46,6 +46,7 @@ public sealed class UpscaleMapTests
             "BattleUnit",
             "BattleUnitAura",
             "Blister",
+            "BriefingVideo",
             "CapitalBackgroundOverlay",
             "CapitalBuilding",
             "Cursor",

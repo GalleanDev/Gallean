@@ -566,6 +566,22 @@ public closed record AssetAnimationKey : AssetImageKey, IParsable<AssetAnimation
         }
     }
 
+    public sealed record BriefingVideo(ScenarioId ScenarioId) : AssetAnimationKey
+    {
+        internal const string Category = "briefing-video";
+
+        public override string CanonicalId => $"{Category}/{Token(ScenarioId)}";
+
+        internal static BriefingVideo? Parse(IReadOnlyList<string> tokens)
+        {
+            return tokens switch
+            {
+                [string scenarioId] => new BriefingVideo(new ScenarioId(scenarioId)),
+                _ => null
+            };
+        }
+    }
+
     public sealed record CapitalBuilding(WorldPlayerBuildingDefinitionId BuildingId) : AssetAnimationKey
     {
         internal const string Category = "capital-building";
@@ -911,6 +927,7 @@ public closed record AssetAnimationKey : AssetImageKey, IParsable<AssetAnimation
             [CapitalBackgroundOverlay.Category] = CapitalBackgroundOverlay.Parse,
             [MainMenuBackgroundOverlay.Category] = MainMenuBackgroundOverlay.Parse,
             [RaceSelectionBackgroundOverlay.Category] = RaceSelectionBackgroundOverlay.Parse,
+            [BriefingVideo.Category] = BriefingVideo.Parse,
             [CapitalBuilding.Category] = CapitalBuilding.Parse,
             [Ruin.Category] = Ruin.Parse,
             [Landmark.Category] = Landmark.Parse,

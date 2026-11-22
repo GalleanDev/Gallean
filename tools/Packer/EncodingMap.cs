@@ -60,6 +60,7 @@ internal static class EncodingMap
             AssetAnimationKey.BattleUnit => EncodingType.Lossy,
             AssetAnimationKey.BattleUnitAura => EncodingType.Lossy,
             AssetAnimationKey.BattleUnitShadow => EncodingType.Palette,
+            AssetAnimationKey.BriefingVideo => EncodingType.Lossy,
             AssetAnimationKey.Capital => EncodingType.Palette,
             AssetAnimationKey.BattleBackgroundOverlay => EncodingType.None,
             AssetAnimationKey.CapitalBackgroundOverlay => EncodingType.None,

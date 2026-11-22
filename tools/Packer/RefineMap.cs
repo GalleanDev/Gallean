@@ -932,6 +932,7 @@ internal static class RefineMap
             AssetAnimationKey.BattleUnit => true,
             AssetAnimationKey.BattleUnitAura aura => BattleUnitAuras.Contains(aura),
             AssetAnimationKey.BattleUnitShadow => true,
+            AssetAnimationKey.BriefingVideo => false,
             AssetAnimationKey.Capital => true,
             AssetAnimationKey.BattleBackgroundOverlay => true,
             AssetAnimationKey.CapitalBackgroundOverlay => true,

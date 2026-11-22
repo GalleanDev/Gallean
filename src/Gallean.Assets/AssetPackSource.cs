@@ -151,6 +151,27 @@ public sealed class AssetPackSource<TPixels> : IAssetSource<TPixels>
         }
     }
 
+    public AssetSprite<TPixels>? TryGetAnimationFrame(AssetAnimationKey key, int index)
+    {
+        if (animations.TryGetValue(key.CanonicalId, out (AssetPack Pack, AssetManifestAnimation Animation) found))
+        {
+            if (index >= 0 && index < found.Animation.Frames.Count)
+            {
+                AssetManifestAnimationFrame frame = found.Animation.Frames[index];
+
+                return decoder.DecodeFrame(frame.Metadata, found.Pack.ReadAnimationFrame(frame));
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public AssetSound? TryGetSound(AssetSoundKey key)
     {
         if (sounds.TryGetValue(key.CanonicalId, out (AssetPack Pack, AssetManifestSound Sound) found))

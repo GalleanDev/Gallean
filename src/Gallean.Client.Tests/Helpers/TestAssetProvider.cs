@@ -6,7 +6,7 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
 {
     private readonly Func<AssetKey, Sprite?> resolveSprite;
     private readonly Func<AssetKey, Animation?> resolveAnimation;
-    private readonly Func<AssetKey, AssetStream?> resolveSound;
+    private readonly Func<AssetKey, AssetSound?> resolveSound;
     private readonly Action<AssetKey>? onRequest;
     private readonly CleanupList cleanup;
     private readonly AssetCache<Sprite> spriteCache;
@@ -17,7 +17,7 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
     internal TestAssetProvider(
         Func<AssetKey, Sprite?> resolveSprite,
         Func<AssetKey, Animation?> resolveAnimation,
-        Func<AssetKey, AssetStream?> resolveSound,
+        Func<AssetKey, AssetSound?> resolveSound,
         Action<AssetKey>? onRequest,
         CleanupList cleanup)
     {
@@ -79,6 +79,11 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
         return animationCache.Acquire(key);
     }
 
+    public Sprite? GetAnimationFrame(AssetAnimationKey key, int index)
+    {
+        return null;
+    }
+
     public AssetCache<Sound>.Lease GetRequiredSound(AssetSoundKey key)
     {
         Request(key, RequiredAssets);
@@ -119,14 +124,9 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
 
     public AssetSoundMetadata? GetOptionalSoundMetadata(AssetSoundKey key)
     {
-        AssetStream? sound = resolveSound(key);
+        AssetSound? sound = resolveSound(key);
 
-        if (sound is null)
-        {
-            return null;
-        }
-
-        return new AssetSoundMetadata();
+        return sound?.Metadata;
     }
 
     public AssetCache<Sound>.Lease? GetOptionalSound(AssetSoundKey key)
@@ -140,7 +140,9 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
     {
         Request(key, OptionalAssets);
 
-        return resolveSound(key);
+        AssetSound? sound = resolveSound(key);
+
+        return sound?.Data;
     }
 
     public void SetMaxPixelScale(int maxPixelScale)
@@ -167,14 +169,14 @@ internal sealed class TestAssetProvider : IAssetProvider, IDisposable
 
     private Sound? LoadSound(AssetKey key)
     {
-        AssetStream? data = resolveSound(key);
+        AssetSound? sound = resolveSound(key);
 
-        if (data is null)
+        if (sound is null)
         {
             return null;
         }
 
-        using Stream stream = data.Open();
+        using Stream stream = sound.Data.Open();
 
         return SoundDecoder.DecodeToMemory(stream);
     }

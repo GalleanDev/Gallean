@@ -3,6 +3,7 @@ namespace Gallean.Client;
 internal readonly record struct AnimationRate(double FramesPerSecond)
 {
     public static readonly AnimationRate Sprites = new(15);
+    public static readonly AnimationRate BriefingVideo = new(15);
 
     public int GetFrameIndex(TimeSpan time)
     {

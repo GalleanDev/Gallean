@@ -8,6 +8,8 @@ internal sealed class NullAssetProvider : IAssetProvider, IStaticInstance<NullAs
 
     public AssetCache<Animation>.Lease? GetOptionalAnimation(AssetAnimationKey key) => null;
 
+    public Sprite? GetAnimationFrame(AssetAnimationKey key, int index) => null;
+
     public AssetCache<Sound>.Lease? GetOptionalSound(AssetSoundKey key) => null;
 
     public AssetSpriteMetadata? GetOptionalSpriteMetadata(AssetSpriteKey key) => null;

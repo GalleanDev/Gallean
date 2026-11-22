@@ -108,6 +108,7 @@ public sealed class EncodingMapTests
             "BattleUnit: Lossy",
             "BattleUnitAura: Lossy",
             "BattleUnitShadow: Palette",
+            "BriefingVideo: Lossy",
             "Capital: Palette",
             "CapitalBackgroundOverlay: None",
             "CapitalBuilding: None",

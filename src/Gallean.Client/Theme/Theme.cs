@@ -275,6 +275,7 @@ internal static class Theme
         public static Color SmokeColor { get; } = Color.FromArgb(160, 200, 196, 206);
         public static Color BackdropColor { get; } = Color.FromArgb(150, 0, 0, 0);
         public static Color BackdropFadeColor { get; } = Color.FromArgb(0, 0, 0, 0);
+        public static Color VideoBorderColor { get; } = Color.FromArgb(210, 8, 7, 6);
         public static Color ObjectiveShadowColor { get; } = Color.FromArgb(150, 255, 176, 88);
     }
 

@@ -263,6 +263,7 @@
   <SolidColorBrush x:Key="BriefingBackdropBrush" Color="{x:Static local:Theme+Briefing.BackdropColor}" />
   <SolidColorBrush x:Key="BriefingBackdropFadeBrush" Color="{x:Static local:Theme+Briefing.BackdropFadeColor}" />
   <SolidColorBrush x:Key="BriefingObjectiveShadowBrush" Color="{x:Static local:Theme+Briefing.ObjectiveShadowColor}" />
+  <SolidColorBrush x:Key="BriefingVideoBorderBrush" Color="{x:Static local:Theme+Briefing.VideoBorderColor}" />
   <LinearGradientBrush x:Key="BriefingRuleLeadingGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.55">
     <GradientStop Offset="0" Color="{DynamicResource AccentFadeColor}" />
     <GradientStop Offset="1" Color="{DynamicResource AccentColor}" />
@@ -270,6 +271,11 @@
   <LinearGradientBrush x:Key="BriefingRuleTrailingGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%" Opacity="0.55">
     <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
     <GradientStop Offset="1" Color="{DynamicResource AccentFadeColor}" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="BriefingVideoBorderGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0.3" Color="{x:Static local:Theme+Briefing.BackdropFadeColor}" />
+    <GradientStop Offset="0.58" Color="{x:Static local:Theme+Briefing.VideoBorderColor}" />
+    <GradientStop Offset="1" Color="{x:Static local:Theme+Briefing.VideoBorderColor}" />
   </LinearGradientBrush>
   <RadialGradientBrush x:Key="BriefingBackdropGradientBrush" Center="50%,50%" GradientOrigin="50%,50%" RadiusX="50%" RadiusY="50%">
     <GradientStop Offset="0" Color="{x:Static local:Theme+Briefing.BackdropColor}" />

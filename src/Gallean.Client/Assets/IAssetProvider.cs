@@ -30,6 +30,8 @@ internal interface IAssetProvider : IAssetMetadataProvider
 
     AssetCache<Animation>.Lease? GetOptionalAnimation(AssetAnimationKey key);
 
+    Sprite? GetAnimationFrame(AssetAnimationKey key, int index);
+
     AssetCache<Sound>.Lease GetRequiredSound(AssetSoundKey key)
     {
         AssetCache<Sound>.Lease? sound = GetOptionalSound(key);

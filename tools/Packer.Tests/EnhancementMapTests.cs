@@ -141,6 +141,7 @@ public sealed class EnhancementMapTests
             "BattleBackgroundOverlay: []",
             "BattleUnit: [Upscale, Refine, Alpha, Surface]",
             "BattleUnitShadow: [Upscale]",
+            "BriefingVideo: [Upscale]",
             "Capital: [Upscale]",
             "CapitalBackgroundOverlay: [Upscale, Refine, Alpha]",
             "CapitalBuilding: [Upscale, Refine, Alpha]",

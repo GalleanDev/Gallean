@@ -357,6 +357,41 @@ public sealed class AssetPackTests
     }
 
     [Test]
+    public void AnimationFrameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        AssetAnimationKey key = new AssetAnimationKey.BriefingVideo(new ScenarioId("S108SC0000"));
+        AssetAnimationKey missingKey = new AssetAnimationKey.BriefingVideo(new ScenarioId("S109SC0000"));
+
+        using (AssetPack.Writer writer = AssetPack.Writer.Create(sb.GetPath("test.galleanpack"), sparse: false, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300"))
+        {
+            writer.AddAnimation(key.CanonicalId, new AssetAnimationMetadata(2, 8, 8, 0, 0, null, null), [
+                MakeFrame(
+                    new AssetSpriteMetadata(8, 8, PixelWidth: 0, PixelHeight: 0, 0, 0, Additive: false),
+                    MakeImage(8, 8, [4, 5])),
+                MakeFrame(
+                    new AssetSpriteMetadata(8, 8, PixelWidth: 0, PixelHeight: 0, 0, 0, Additive: false),
+                    MakeImage(16, 16, [6, 7, 8]))
+            ], []);
+
+            writer.Complete();
+        }
+
+        using AssetPack pack = AssetPack.Read(sb.GetPath("test.galleanpack"));
+        AssetPackSource<ReadOnlyMemory<byte>> source = new([pack], NullDecoder.Instance);
+
+        AssetSprite first = Assert.NotNull(source.TryGetAnimationFrame(key, 0));
+        AssetSprite second = Assert.NotNull(source.TryGetAnimationFrame(key, 1));
+
+        Assert.That(FormatSprite(first), Is.EqualTo("8x8 px 8x8 @0,0 - [4,5]"));
+        Assert.That(FormatSprite(second), Is.EqualTo("8x8 px 16x16 @0,0 - [6,7,8]"));
+        Assert.That(source.TryGetAnimationFrame(key, 2), Is.Null);
+        Assert.That(source.TryGetAnimationFrame(key, -1), Is.Null);
+        Assert.That(source.TryGetAnimationFrame(missingKey, 0), Is.Null);
+    }
+
+    [Test]
     public void DeduplicateFramesTest()
     {
         using Sandbox sb = Sandbox.Create();
