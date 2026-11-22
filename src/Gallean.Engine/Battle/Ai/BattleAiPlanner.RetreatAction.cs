@@ -4,8 +4,13 @@ internal sealed partial class BattleAiPlanner
 {
     private sealed record RetreatAction(IEngineContext Context, int Priority) : AbstractAction(Context, Priority)
     {
+        private const int MaxHitpointsLimit = 500;
+
         private static readonly UtilityScore.ResponseCurve PowerRatioCurve =
             new UtilityScore.ResponseCurve.Polynomial(Slope: -7 * MaxScore, Exponent: 1, XShift: 250, YShift: 0);
+
+        private static readonly UtilityScore.ResponseCurve MaxHitpointsCurve =
+            new UtilityScore.ResponseCurve.Polynomial(Slope: MaxScore - UtilityScore.MinScore, Exponent: 1, XShift: 0, YShift: UtilityScore.MinScore);
 
         private WorldAiEstimator Estimator { get; } = new(Context);
 
@@ -24,6 +29,7 @@ internal sealed partial class BattleAiPlanner
                 NotNeutral(state, unit.Side),
                 Leader(unit),
                 AliveAllies(state, unit),
+                MaxHitpoints(state, unit),
                 PowerRatio(state, unit.Side)
             ]);
 
@@ -66,6 +72,13 @@ internal sealed partial class BattleAiPlanner
             }
 
             return UtilityScore.None;
+        }
+
+        private UtilityScore.Consideration MaxHitpoints(BattleState state, BattleUnit unit)
+        {
+            UnitStats stats = Context.UnitStats.GetBattleUnitStats(state, unit.Id);
+
+            return UtilityScore.InverseRatio(Math.Min(stats.MaxHitpoints, MaxHitpointsLimit), MaxHitpointsLimit, MaxHitpointsCurve);
         }
 
         private UtilityScore.Consideration PowerRatio(BattleState state, BattleSide side)
