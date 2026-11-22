@@ -31,6 +31,7 @@
         <local:WorldBattleTransitionShaderPrecompileVisual />
         <local:WorldHighlightShaderPrecompileVisual />
         <local:WorldMountainCloudShaderPrecompileVisual />
+        <local:VideoGrainShaderPrecompileVisual />
         <local:WorldReachShaderPrecompileVisual />
 
         <Panel Background="{TemplateBinding Background}" IsVisible="{Binding !PaintsOwnBackground}" />

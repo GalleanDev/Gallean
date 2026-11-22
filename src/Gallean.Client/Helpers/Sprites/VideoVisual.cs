@@ -20,12 +20,15 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
     public static readonly StyledProperty<Stretch> StretchProperty =
         AvaloniaProperty.Register<VideoVisual, Stretch>(nameof(Stretch), Stretch.Uniform);
 
+    public static readonly StyledProperty<double> GrainProperty =
+        AvaloniaProperty.Register<VideoVisual, double>(nameof(Grain));
+
     private readonly FrameBuffer frameBuffer = new();
     private Playback? playback;
 
     static VideoVisual()
     {
-        AffectsRender<VideoVisual>(AnimationKeyProperty, StretchProperty);
+        AffectsRender<VideoVisual>(AnimationKeyProperty, StretchProperty, GrainProperty);
         AffectsMeasure<VideoVisual>(AnimationKeyProperty, StretchProperty);
     }
 
@@ -62,6 +65,12 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
     {
         get => GetValue(StretchProperty);
         set => SetValue(StretchProperty, value);
+    }
+
+    public double Grain
+    {
+        get => GetValue(GrainProperty);
+        set => SetValue(GrainProperty, value);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
@@ -228,7 +237,7 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
                     destination.Width * pixelScaleX,
                     destination.Height * pixelScaleY);
 
-                context.Custom(new RenderOperation(destination, source, frameBuffer));
+                context.Custom(new RenderOperation(destination, source, frameBuffer, playback.FrameIndex, Grain));
             }
         }
     }

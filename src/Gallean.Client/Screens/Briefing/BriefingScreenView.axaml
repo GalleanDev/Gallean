@@ -33,7 +33,8 @@
                        Rate="{x:Static local:AnimationRate.BriefingVideo}"
                        StartTime="{Binding VideoStartTime}"
                        FirstFrameTime="{Binding VideoFirstFrameTime}"
-                       Stretch="UniformToFill" />
+                       Stretch="UniformToFill"
+                       Grain="0.05" />
 
     <Border Background="{StaticResource ModalBackdropBrush}" IsVisible="{Binding !HasVideo}" IsHitTestVisible="False" />
 

@@ -20,6 +20,7 @@ public sealed class ShaderLibraryTests
             new ShaderKey("GalleanLogo", "GalleanLogo.sksl"),
             new ShaderKey("MainMenuBackground", "MainMenuBackground.sksl"),
             new ShaderKey("PlateLight", "PlateLight.sksl"),
+            new ShaderKey("VideoGrain", "VideoGrain.sksl"),
             new ShaderKey("Water", "Water.sksl"),
             new ShaderKey("WorldBattleTransition", "WorldBattleTransition.sksl"),
             new ShaderKey("WorldHighlight", "WorldHighlight.sksl"),

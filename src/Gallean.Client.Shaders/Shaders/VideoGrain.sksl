@@ -1,0 +1,29 @@
+uniform shader frame;
+
+uniform float seed;
+uniform float strength;
+uniform float2 density;
+
+const float3 LumaWeights = float3(0.299, 0.587, 0.114);
+const float ShadowResponse = 0.45;
+const float SeedPeriod = 251.0;
+
+float hash(float3 point) {
+    float3 cell = fract(point * float3(0.1031, 0.1030, 0.0973));
+
+    cell += dot(cell, cell.yxz + 33.33);
+
+    return fract((cell.x + cell.y) * cell.z);
+}
+
+half4 main(float2 coord) {
+    half4 color = frame.eval(coord);
+    float2 pixel = floor(coord * density);
+    float phase = mod(seed, SeedPeriod);
+    float grain = hash(float3(pixel, phase)) + hash(float3(pixel + 117.0, phase + 61.0)) - 1.0;
+    float luma = dot(float3(color.rgb), LumaWeights);
+    float response = mix(ShadowResponse, 1.0, 4.0 * luma * (1.0 - luma));
+    float3 grained = clamp(float3(color.rgb) + grain * strength * response * float(color.a), 0.0, float(color.a));
+
+    return half4(half3(grained), color.a);
+}
