@@ -57,7 +57,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         AssetPreloader = assetPreloader;
         Settings = gameSettingsSource.Current;
-        Language = Settings.EffectiveLanguage;
+        Language = Settings.EffectiveInterfaceLanguage;
 
         screens = new ScreenStack(audioPlayer);
         screens.Changed += OnScreensChanged;
@@ -101,7 +101,8 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                     Settings.UiSize,
                     Settings.LockCursor,
                     Settings.MovementSpeed,
-                    Settings.Language,
+                    Settings.InterfaceLanguage,
+                    Settings.AudioLanguage,
                     Settings.BattlePosition));
             }
         }
@@ -293,9 +294,9 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
     public void UpdateSettings(GameSettings settings)
     {
-        Language language = settings.EffectiveLanguage;
+        Language language = settings.EffectiveInterfaceLanguage;
 
-        if (language != Settings.EffectiveLanguage)
+        if (language != Settings.EffectiveInterfaceLanguage)
         {
             _ = SwitchLanguageAsync(language);
         }
@@ -401,11 +402,11 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     {
         if (configuration.Configuration is not null)
         {
-            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration, Settings.EffectiveLanguage);
+            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration, Settings.EffectiveInterfaceLanguage);
         }
         else
         {
-            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null, Settings.EffectiveLanguage);
+            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null, Settings.EffectiveInterfaceLanguage);
         }
     }
 
@@ -620,7 +621,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 return;
             }
 
-            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState, Settings.EffectiveLanguage));
+            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState, Settings.EffectiveInterfaceLanguage));
 
             gameModel = new GameModel(session, texts, log, scheduler);
         }
@@ -840,7 +841,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         try
         {
-            return await RunAsync(() => gameLoader.LoadCampaigns(Settings.EffectiveLanguage));
+            return await RunAsync(() => gameLoader.LoadCampaigns(Settings.EffectiveInterfaceLanguage));
         }
         catch (Exception ex)
         {

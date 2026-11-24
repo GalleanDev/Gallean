@@ -1344,7 +1344,7 @@ public sealed class BattleScreenViewModelTests
 
         GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithAssets(assets)
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Right))
             .Build();
         IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Attack, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: 1, SecondTriggerFrame: 0))
@@ -4508,7 +4508,7 @@ public sealed class BattleScreenViewModelTests
 
         GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithAssets(assets)
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Right))
             .Build();
         IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Attack, BattleSide.Attacker), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: 1, SecondTriggerFrame: 0))
@@ -5287,7 +5287,7 @@ public sealed class BattleScreenViewModelTests
 
         GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithAssets(assets)
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Right))
             .Build();
         IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
@@ -5401,7 +5401,7 @@ public sealed class BattleScreenViewModelTests
 
         GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithAssets(assets)
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left))
             .Build();
         IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))
@@ -5413,7 +5413,7 @@ public sealed class BattleScreenViewModelTests
         await viewModel.CompleteTransitionAsync();
         viewModel.SwitchSidesCommand.Execute(null);
 
-        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right)));
+        Assert.That(gameViewModel.Settings, Is.EqualTo(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Right)));
 
         Assert.That(viewModel.LeftGrid.Units, Is.EqualTo([
             new BattleGridUnitViewModel(
@@ -5528,7 +5528,7 @@ public sealed class BattleScreenViewModelTests
 
         GameViewModel gameViewModel = new TestGameViewModelBuilder()
             .WithAssets(assets)
-            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left))
+            .WithSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left))
             .Build();
         IAssetMetadataProvider assetMetadata = new TestMetadataProviderBuilder()
             .WithAnimation(new AssetAnimationKey.BattleUnit(new UnitDefinitionId("attacker"), AssetAnimationKey.BattleUnitPose.Idle, BattleSide.Defender), new AssetAnimationMetadata(FrameCount: 1, Width: 80, Height: 120, OffsetX: 375, OffsetY: 420, TriggerFrame: null, SecondTriggerFrame: null))

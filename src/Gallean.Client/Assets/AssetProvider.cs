@@ -164,7 +164,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
     {
         GameSettings settings = gameSettingsSource.Current;
 
-        return key with { Language = key.Language ?? settings.EffectiveLanguage };
+        return key with { Language = key.Language ?? settings.EffectiveAudioLanguage };
     }
 
     private Sprite? LoadSprite(AssetKey key)

@@ -51,7 +51,7 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
     {
         GameSettingsStore gameSettingsStore = new(AppDirectories.Root);
         GameSettings gameSettings = await LoadSettingsAsync(gameSettingsStore);
-        TextCatalog textCatalog = TextCatalogLoader.Load(gameSettings.EffectiveLanguage);
+        TextCatalog textCatalog = TextCatalogLoader.Load(gameSettings.EffectiveInterfaceLanguage);
         textCatalog.MakeCurrent();
 
         string? processPath = Environment.ProcessPath;

@@ -7,8 +7,30 @@
              x:Class="Gallean.Client.SettingsScreenView"
              x:DataType="local:SettingsScreenViewModel">
 
+  <UserControl.Resources>
+    <DataTemplate x:Key="LanguageTemplate" x:DataType="contracts:Language">
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <local:IconVisual Moniker="{Binding Converter={x:Static local:LanguageIconConverter.Instance}}"
+                          Width="18"
+                          Height="18"
+                          VerticalAlignment="Center">
+          <local:IconVisual.Effect>
+            <DropShadowEffect OffsetX="0"
+                              OffsetY="1"
+                              BlurRadius="1"
+                              Opacity="0.35"
+                              Color="{x:Static local:Theme+Field.TextShadowColor}" />
+          </local:IconVisual.Effect>
+        </local:IconVisual>
+        <TextBlock Classes="body"
+                   VerticalAlignment="Center"
+                   Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" />
+      </StackPanel>
+    </DataTemplate>
+  </UserControl.Resources>
+
   <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
-    <local:ModalPanel Classes="accent" Width="520" Padding="0,24" Title="{local:Text 'Settings'}" InitialFocus="{Binding #CloseButton}">
+    <local:ModalPanel Classes="accent" Width="580" Padding="0,24" Title="{local:Text 'Settings'}" InitialFocus="{Binding #CloseButton}">
 
       <local:ModalPanel.Footer>
         <Button x:Name="CloseButton" Margin="0,24,28,0" HorizontalAlignment="Right" Content="{local:Text 'Close'}" Classes="pill" Command="{Binding CloseCommand}" MinWidth="150" />
@@ -144,35 +166,40 @@
                        Text="{local:Text 'Language'}"
                        Classes="body"
                        Foreground="{StaticResource PrimaryTextBrush}"
-                       VerticalAlignment="Center" />
-            <ComboBox Grid.Row="0"
-                      Grid.Column="1"
-                      ItemsSource="{Binding Languages}"
-                      SelectedItem="{Binding Language}"
-                      MinWidth="120"
-                      VerticalAlignment="Center">
-              <ComboBox.ItemTemplate>
-                <DataTemplate x:DataType="contracts:Language">
-                  <StackPanel Orientation="Horizontal" Spacing="8">
-                    <local:IconVisual Moniker="{Binding Converter={x:Static local:LanguageIconConverter.Instance}}"
-                                      Width="18"
-                                      Height="18"
-                                      VerticalAlignment="Center">
-                      <local:IconVisual.Effect>
-                        <DropShadowEffect OffsetX="0"
-                                          OffsetY="1"
-                                          BlurRadius="1"
-                                          Opacity="0.35"
-                                          Color="{x:Static local:Theme+Field.TextShadowColor}" />
-                      </local:IconVisual.Effect>
-                    </local:IconVisual>
-                    <TextBlock Classes="body"
-                               VerticalAlignment="Center"
-                               Text="{Binding Converter={x:Static local:LanguageConverter.Instance}}" />
-                  </StackPanel>
-                </DataTemplate>
-              </ComboBox.ItemTemplate>
-            </ComboBox>
+                       VerticalAlignment="Bottom"
+                       Margin="0,0,0,9" />
+            <Grid Grid.Row="0"
+                  Grid.Column="1"
+                  ColumnDefinitions="Auto,Auto"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="12"
+                  RowSpacing="4"
+                  HorizontalAlignment="Left">
+              <TextBlock Grid.Row="0"
+                         Grid.Column="0"
+                         Text="{local:Text 'Interface'}"
+                         Classes="caption"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         Margin="4,0,0,0" />
+              <TextBlock Grid.Row="0"
+                         Grid.Column="1"
+                         Text="{local:Text 'Audio'}"
+                         Classes="caption"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         Margin="4,0,0,0" />
+              <ComboBox Grid.Row="1"
+                        Grid.Column="0"
+                        ItemsSource="{Binding Languages}"
+                        SelectedItem="{Binding InterfaceLanguage}"
+                        ItemTemplate="{StaticResource LanguageTemplate}"
+                        MinWidth="120" />
+              <ComboBox Grid.Row="1"
+                        Grid.Column="1"
+                        ItemsSource="{Binding Languages}"
+                        SelectedItem="{Binding AudioLanguage}"
+                        ItemTemplate="{StaticResource LanguageTemplate}"
+                        MinWidth="120" />
+            </Grid>
 
             <TextBlock Grid.Row="1"
                        Grid.Column="0"

@@ -11,7 +11,8 @@ internal static class GameSettingsExtensions
         public float MusicVolumeRatio => settings.MusicVolume / (float)GameSettings.MaxVolume;
         public float RenderResolutionRatio => settings.RenderResolution / (float)GameSettings.MaxRenderResolution;
 
-        public Language EffectiveLanguage => settings.Language ?? Language.FromCulture(CultureInfo.CurrentUICulture);
+        public Language EffectiveInterfaceLanguage => settings.InterfaceLanguage ?? Language.FromCulture(CultureInfo.CurrentUICulture);
+        public Language EffectiveAudioLanguage => settings.AudioLanguage ?? settings.EffectiveInterfaceLanguage;
 
         public double BattleSpeedFactor => settings.BattleSpeed switch
         {

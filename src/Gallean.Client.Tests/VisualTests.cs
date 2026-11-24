@@ -476,13 +476,13 @@ public sealed class VisualTests
         gameViewModel.ShowScreen(new MainMenuScreenViewModel(gameViewModel, saves: []));
 
         SettingsScreenViewModel settings = new(gameViewModel);
-        settings.Language = Language.Russian;
+        settings.InterfaceLanguage = Language.Russian;
 
         gameViewModel.OpenScreen(settings);
 
         await CaptureAsync(window);
 
-        settings.Language = Language.English;
+        settings.InterfaceLanguage = Language.English;
     }
 
     [AvaloniaTest]
@@ -827,12 +827,12 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian, BattlePosition.Left));
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian, null, BattlePosition.Left));
         gameViewModel.ShowScreen(new ScenarioSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
 
         await CaptureAsync(window);
 
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left));
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left));
     }
 
     [AvaloniaTest]
@@ -5925,7 +5925,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left));
+        gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left));
         gameViewModel.ShowScreen(new BattleScreenViewModel(gameModel, battle, gameViewModel, assets, NullAssetPreloader.Instance, new RandomProvider(0)));
 
         await WaitForBattleAsync(window);

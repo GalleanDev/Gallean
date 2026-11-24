@@ -7,7 +7,7 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void VolumeRatioTest()
     {
-        GameSettings settings = GameSettings.Create(0, 25, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
+        GameSettings settings = GameSettings.Create(0, 25, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
 
         Assert.That(settings.SoundVolumeRatio, Is.Zero);
         Assert.That(settings.MusicVolumeRatio, Is.EqualTo(0.25f));
@@ -16,7 +16,7 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void FullVolumeRatioTest()
     {
-        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
+        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
 
         Assert.That(settings.SoundVolumeRatio, Is.EqualTo(1.0f));
         Assert.That(settings.MusicVolumeRatio, Is.EqualTo(1.0f));
@@ -25,7 +25,7 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void RenderResolutionRatioTest()
     {
-        GameSettings settings = GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
+        GameSettings settings = GameSettings.Create(100, 100, false, 50, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
 
         Assert.That(settings.RenderResolutionRatio, Is.EqualTo(0.5f));
     }
@@ -39,9 +39,9 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void BattleSpeedFactorTest()
     {
-        GameSettings normal = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
-        GameSettings fast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
-        GameSettings veryFast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.VeryFast, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
+        GameSettings normal = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
+        GameSettings fast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
+        GameSettings veryFast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.VeryFast, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
 
         Assert.That(normal.BattleSpeedFactor, Is.EqualTo(1.2));
         Assert.That(fast.BattleSpeedFactor, Is.EqualTo(1.5));
@@ -51,9 +51,9 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void MovementSpeedFactorTest()
     {
-        GameSettings normal = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
-        GameSettings fast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, Language.English, BattlePosition.Left);
-        GameSettings veryFast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.VeryFast, Language.English, BattlePosition.Left);
+        GameSettings normal = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
+        GameSettings fast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, Language.English, null, BattlePosition.Left);
+        GameSettings veryFast = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.VeryFast, Language.English, null, BattlePosition.Left);
 
         Assert.That(normal.MovementSpeedFactor, Is.EqualTo(1.0));
         Assert.That(fast.MovementSpeedFactor, Is.EqualTo(1.3));
@@ -63,8 +63,26 @@ public sealed class GameSettingsExtensionsTests
     [Test]
     public void UiSizeFactorTest()
     {
-        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, Language.English, BattlePosition.Left);
+        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left);
 
         Assert.That(settings.UiSizeFactor, Is.EqualTo(1.2));
+    }
+
+    [Test]
+    public void AudioLanguageTest()
+    {
+        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, Language.Russian, BattlePosition.Left);
+
+        Assert.That(settings.EffectiveInterfaceLanguage, Is.EqualTo(Language.English));
+        Assert.That(settings.EffectiveAudioLanguage, Is.EqualTo(Language.Russian));
+    }
+
+    [Test]
+    public void DefaultAudioLanguageTest()
+    {
+        GameSettings settings = GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Polish, null, BattlePosition.Left);
+
+        Assert.That(settings.EffectiveInterfaceLanguage, Is.EqualTo(Language.Polish));
+        Assert.That(settings.EffectiveAudioLanguage, Is.EqualTo(Language.Polish));
     }
 }

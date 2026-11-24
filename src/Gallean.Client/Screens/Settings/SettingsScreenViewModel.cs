@@ -15,7 +15,8 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
     private MovementSpeed movementSpeed;
     private UiSize uiSize;
     private bool lockCursor;
-    private Language? language;
+    private Language? interfaceLanguage;
+    private Language? audioLanguage;
     private BattlePosition battlePosition;
 
     public SettingsScreenViewModel(GameViewModel gameViewModel)
@@ -31,7 +32,8 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         movementSpeed = gameViewModel.Settings.MovementSpeed;
         uiSize = gameViewModel.Settings.UiSize;
         lockCursor = gameViewModel.Settings.LockCursor;
-        language = gameViewModel.Settings.Language;
+        interfaceLanguage = gameViewModel.Settings.InterfaceLanguage;
+        audioLanguage = gameViewModel.Settings.AudioLanguage;
         battlePosition = gameViewModel.Settings.BattlePosition;
 
         gameViewModel.PropertyChanged += OnGamePropertyChanged;
@@ -157,12 +159,25 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
         }
     }
 
-    public Language Language
+    public Language InterfaceLanguage
     {
-        get => language ?? gameViewModel.Settings.EffectiveLanguage;
+        get => interfaceLanguage ?? gameViewModel.Settings.EffectiveInterfaceLanguage;
         set
         {
-            if (SetProperty(ref language, value))
+            if (SetProperty(ref interfaceLanguage, value))
+            {
+                OnPropertyChanged(nameof(AudioLanguage));
+                Apply();
+            }
+        }
+    }
+
+    public Language AudioLanguage
+    {
+        get => audioLanguage ?? InterfaceLanguage;
+        set
+        {
+            if (SetProperty(ref audioLanguage, value))
             {
                 Apply();
             }
@@ -203,7 +218,7 @@ internal sealed class SettingsScreenViewModel : AbstractScreenViewModel
 
     private void Apply()
     {
-        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed, language, battlePosition));
+        gameViewModel.UpdateSettings(GameSettings.Create(soundVolume, musicVolume, gameViewModel.IsWindowed, renderResolution, autoSaveInterval, autoSaveLimit, battleSpeed, uiSize, lockCursor, movementSpeed, interfaceLanguage, audioLanguage, battlePosition));
     }
 
     private void OnGamePropertyChanged(object? sender, PropertyChangedEventArgs e)

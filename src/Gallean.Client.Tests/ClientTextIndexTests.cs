@@ -11,6 +11,7 @@ public sealed class ClientTextIndexTests
             .ToList();
 
         Assert.That(settings, Is.EquivalentTo([
+            "Audio",
             "Autosave limit",
             "Autosave interval",
             "Battle position",
@@ -19,6 +20,7 @@ public sealed class ClientTextIndexTests
             "Display",
             "Sound effects",
             "Game",
+            "Interface",
             "Interface size",
             "Language",
             "Lock cursor to window",

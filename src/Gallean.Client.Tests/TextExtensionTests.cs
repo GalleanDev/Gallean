@@ -80,7 +80,7 @@ public sealed class TextExtensionTests
         Assert.That(GetTexts(window), Does.Contain("Windowed mode (F11)"));
         Assert.That(GetTexts(window), Does.Contain("Normal"));
 
-        settings.Language = Language.Russian;
+        settings.InterfaceLanguage = Language.Russian;
         window.UpdateLayout();
 
         Assert.That(GetTexts(window), Does.Contain("Оконный режим (F11)"));
@@ -90,7 +90,7 @@ public sealed class TextExtensionTests
         Assert.That(settings.UiSize, Is.EqualTo(UiSize.Normal));
         Assert.That(
             gameViewModel.Settings,
-            Is.EqualTo(GameSettings.Create(70, 70, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian, BattlePosition.Left)));
+            Is.EqualTo(GameSettings.Create(70, 70, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian, null, BattlePosition.Left)));
         Assert.That(await settingsStore.TryLoadAsync(), Is.EqualTo(gameViewModel.Settings));
 
         window.Close();

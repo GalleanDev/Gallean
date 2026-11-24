@@ -13,10 +13,11 @@ public sealed record GameSettings(
     UiSize UiSize = GameSettings.DefaultUiSize,
     bool LockCursor = true,
     MovementSpeed MovementSpeed = GameSettings.DefaultMovementSpeed,
-    Language? Language = null,
+    [property: JsonPropertyName("language")] Language? InterfaceLanguage = null,
     BattlePosition BattlePosition = GameSettings.DefaultBattlePosition,
     int SoundVolume = GameSettings.DefaultSoundVolume,
-    int MusicVolume = GameSettings.DefaultMusicVolume)
+    int MusicVolume = GameSettings.DefaultMusicVolume,
+    Language? AudioLanguage = null)
 {
     public const int CurrentFormatVersion = 6;
     public const int MinVolume = 0;
@@ -45,6 +46,7 @@ public sealed record GameSettings(
         true,
         DefaultMovementSpeed,
         null,
+        null,
         DefaultBattlePosition);
 
     [JsonPropertyName("soundVolume2")]
@@ -68,7 +70,8 @@ public sealed record GameSettings(
         UiSize uiSize,
         bool lockCursor,
         MovementSpeed movementSpeed,
-        Language? language,
+        Language? interfaceLanguage,
+        Language? audioLanguage,
         BattlePosition battlePosition)
     {
         return new GameSettings(
@@ -81,9 +84,10 @@ public sealed record GameSettings(
             uiSize,
             lockCursor,
             movementSpeed,
-            language,
+            interfaceLanguage,
             battlePosition,
             soundVolume,
-            musicVolume);
+            musicVolume,
+            audioLanguage);
     }
 }

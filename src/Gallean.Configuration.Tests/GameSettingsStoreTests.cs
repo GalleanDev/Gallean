@@ -12,10 +12,10 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.GetPath("config"));
 
-        store.Save(GameSettings.Create(40, 25, false, 100, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left));
-        store.Save(GameSettings.Create(70, 0, false, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left));
+        store.Save(GameSettings.Create(40, 25, false, 100, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left));
+        store.Save(GameSettings.Create(70, 0, false, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left));
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(70, 0, false, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(70, 0, false, 100, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, null, BattlePosition.Left)));
         Assert.That(sb.GetTree(), Is.EquivalentTo(["config/", "config/settings.json"]));
     }
 
@@ -26,12 +26,12 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        store.Save(GameSettings.Create(40, 25, false, 50, 10, 20, BattleSpeed.Fast, UiSize.Large, true, MovementSpeed.Fast, Language.English, BattlePosition.Left));
+        store.Save(GameSettings.Create(40, 25, false, 50, 10, 20, BattleSpeed.Fast, UiSize.Large, true, MovementSpeed.Fast, Language.English, Language.German, BattlePosition.Left));
 
         Assert.That(
             sb.ReadTextFile("settings.json").ReplaceLineEndings("\n"),
             Is.EqualTo(
-                "{\n  \"formatVersion\": 6,\n  \"windowed\": false,\n  \"battleSpeed\": \"Fast\",\n  \"uiSize\": \"Large\",\n  \"lockCursor\": true,\n  \"movementSpeed\": \"Fast\",\n  \"language\": \"English\",\n  \"battlePosition\": \"Left\",\n  \"soundVolume2\": 40,\n  \"musicVolume2\": 25,\n  \"renderResolution\": 50,\n  \"autoSaveInterval\": 10,\n  \"autoSaveLimit\": 20\n}"));
+                "{\n  \"formatVersion\": 6,\n  \"windowed\": false,\n  \"battleSpeed\": \"Fast\",\n  \"uiSize\": \"Large\",\n  \"lockCursor\": true,\n  \"movementSpeed\": \"Fast\",\n  \"language\": \"English\",\n  \"battlePosition\": \"Left\",\n  \"audioLanguage\": \"German\",\n  \"soundVolume2\": 40,\n  \"musicVolume2\": 25,\n  \"renderResolution\": 50,\n  \"autoSaveInterval\": 10,\n  \"autoSaveLimit\": 20\n}"));
     }
 
     [Test]
@@ -142,7 +142,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(100, 0, true, 50, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(100, 0, true, 50, 0, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -176,7 +176,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -190,7 +190,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -220,7 +220,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Fast, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -234,7 +234,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Fast, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -248,7 +248,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Large, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -262,7 +262,21 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Right)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Right)));
+    }
+
+    [Test]
+    public async Task LoadAudioLanguageTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        sb.WriteTextFile(
+            "settings.json",
+            "{\"formatVersion\": 6, \"soundVolume2\": 40, \"musicVolume2\": 25, \"windowed\": true, \"renderResolution\": 75, \"autoSaveInterval\": 3, \"language\": \"English\", \"audioLanguage\": \"Russian\"}");
+
+        GameSettingsStore store = new(sb.RootPath);
+
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.English, Language.Russian, BattlePosition.Left)));
     }
 
     [Test]
@@ -276,7 +290,7 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(40, 25, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 
     [Test]
@@ -290,6 +304,6 @@ public sealed class GameSettingsStoreTests
 
         GameSettingsStore store = new(sb.RootPath);
 
-        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(70, 70, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, BattlePosition.Left)));
+        Assert.That(await store.TryLoadAsync(), Is.EqualTo(GameSettings.Create(70, 70, true, 75, 3, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, null, null, BattlePosition.Left)));
     }
 }
