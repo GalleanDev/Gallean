@@ -6,6 +6,7 @@ namespace Gallean.Client;
 
 internal sealed record BattleRenderState(
     AssetSpriteKey.BattleBackground Background,
+    BattleMarkerConfiguration MarkerConfiguration,
     IReadOnlyList<BattleRenderState.Unit> Units,
     IReadOnlyList<BattleRenderState.Placeholder> Placeholders,
     IReadOnlyList<BattleRenderState.HitTarget> HitTargets,
@@ -101,6 +102,7 @@ internal sealed record BattleRenderState(
         }
 
         return Background == other.Background &&
+               MarkerConfiguration == other.MarkerConfiguration &&
                Units.SequenceEqual(other.Units) &&
                Placeholders.SequenceEqual(other.Placeholders) &&
                HitTargets.SequenceEqual(other.HitTargets) &&
@@ -115,6 +117,7 @@ internal sealed record BattleRenderState(
         HashCode hash = new();
 
         hash.Add(Background);
+        hash.Add(MarkerConfiguration);
         hash.AddSequence(Units);
         hash.AddSequence(Placeholders);
         hash.AddSequence(HitTargets);

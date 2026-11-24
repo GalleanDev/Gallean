@@ -128,6 +128,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [
                 RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, new BattleUnitState.Auras(attackerAura, Attack: null, Hit: null)),
                 RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
@@ -261,6 +262,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [
                 RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
                 RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
@@ -409,6 +411,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [
                 RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
                 RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
@@ -525,6 +528,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [
                 RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
                 RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)
@@ -695,6 +699,7 @@ public sealed class BattleAssetPreloadPlanBuilderTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [
                 RenderUnit(attackerDefinition, 1, BattlePosition.Left, BattleSide.Attacker, BattleUnitState.Auras.None),
                 RenderUnit(defenderDefinition, 2, BattlePosition.Right, BattleSide.Defender, BattleUnitState.Auras.None)

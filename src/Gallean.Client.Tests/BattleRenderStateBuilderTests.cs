@@ -73,6 +73,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -175,6 +176,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -464,6 +466,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -579,6 +582,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -694,6 +698,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -808,6 +813,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -964,6 +970,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1068,6 +1075,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1169,6 +1177,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1270,6 +1279,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1378,6 +1388,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1498,6 +1509,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1612,6 +1624,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -1756,6 +1769,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(3),
@@ -1897,6 +1911,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(3),
@@ -2100,6 +2115,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.45, 0.7),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2141,6 +2157,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.6),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2188,6 +2205,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.6),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2235,6 +2253,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2280,6 +2299,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.45, 0.7),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2321,6 +2341,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.45, 0.7),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2362,6 +2383,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.45, 0.7),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -2445,6 +2467,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(1),
@@ -2583,6 +2606,7 @@ public sealed class BattleRenderStateBuilderTests
 
         BattleRenderState expected = new(
             background,
+            new BattleMarkerConfiguration(0.4, 0.5),
             [
                 new BattleRenderState.Unit(
                     Id: new BattleUnitId(2),

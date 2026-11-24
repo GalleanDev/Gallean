@@ -43,6 +43,7 @@ public sealed class BattleRendererTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Capital(WorldRace.Undead), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             Units: [],
             Placeholders: [],
             HitTargets: [],
@@ -101,6 +102,7 @@ public sealed class BattleRendererTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Capital(WorldRace.Undead), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             Units: [],
             Placeholders: [],
             HitTargets: [],

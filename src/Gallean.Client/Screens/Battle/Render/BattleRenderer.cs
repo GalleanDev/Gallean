@@ -283,12 +283,12 @@ internal sealed partial class BattleRenderer
         {
             foreach (Placeholder placeholder in state.Placeholders)
             {
-                DrawGroundMarker(canvas, placeholder.Footprint, placeholder.Marker, loopTime);
+                DrawGroundMarker(canvas, state.MarkerConfiguration, placeholder.Footprint, placeholder.Marker, loopTime);
             }
 
             foreach (UnitFrame frame in frames)
             {
-                DrawGroundMarker(canvas, frame.Unit.Footprint, frame.Unit.Marker, loopTime);
+                DrawGroundMarker(canvas, state.MarkerConfiguration, frame.Unit.Footprint, frame.Unit.Marker, loopTime);
             }
         }
 
@@ -851,16 +851,20 @@ internal sealed partial class BattleRenderer
         }
     }
 
-    private static void DrawGroundMarker(SKCanvas canvas, BattleGridFootprint footprint, Color? marker, TimeSpan loopTime)
+    private static void DrawGroundMarker(
+        SKCanvas canvas,
+        BattleMarkerConfiguration configuration,
+        BattleGridFootprint footprint,
+        Color? marker,
+        TimeSpan loopTime)
     {
         if (marker is not null)
         {
             SKColor color = marker.Value.ToSKColor();
-            Point foot = BattleRenderLayout.GetFootPoint(footprint);
-            double radius = BattleRenderLayout.GetMarkerRadius(footprint);
+            Rect bounds = BattleRenderLayout.GetMarkerBounds(configuration, footprint);
 
             canvas.Save();
-            canvas.Concat(GetMarkerMatrix(foot, radius, loopTime));
+            canvas.Concat(GetMarkerMatrix(bounds, loopTime));
 
             DrawMarkerOverlay(canvas);
             DrawMarkerPath(canvas, BattleMarkerGeometry.Disc, WithOpacity(color, MarkerDiscOpacity));
@@ -1435,27 +1439,18 @@ internal sealed partial class BattleRenderer
             (float)(ConvertSrgbToLinear(color.B) * power));
     }
 
-    private static SKMatrix GetMarkerMatrix(Point foot, double radius, TimeSpan loopTime)
+    private static SKMatrix GetMarkerMatrix(Rect bounds, TimeSpan loopTime)
     {
-        Matrix transform = BattleRenderLayout.MarkerTransform;
-
-        SKMatrix result = new()
-        {
-            ScaleX = (float)transform.M11,
-            SkewX = (float)transform.M21,
-            SkewY = (float)transform.M12,
-            ScaleY = (float)transform.M22,
-            TransX = (float)foot.X,
-            TransY = (float)foot.Y,
-            Persp2 = 1
-        };
-
+        Point center = bounds.Center;
         float spin = (float)(-loopTime.TotalSeconds * BattleMarkerGeometry.RotationDegreesPerSecond % 360.0);
 
-        result = result.PreConcat(SKMatrix.CreateRotationDegrees(spin));
-        result = result.PreConcat(SKMatrix.CreateScale((float)radius, (float)radius));
+        SKMatrix result = SKMatrix.CreateScaleTranslation(
+            (float)(bounds.Width / 2.0),
+            (float)(bounds.Height / 2.0),
+            (float)center.X,
+            (float)center.Y);
 
-        return result;
+        return result.PreConcat(SKMatrix.CreateRotationDegrees(spin));
     }
 
     private static void DrawMarkerOverlay(SKCanvas canvas)

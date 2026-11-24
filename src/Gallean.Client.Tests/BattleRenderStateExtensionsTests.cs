@@ -62,6 +62,7 @@ public sealed class BattleRenderStateExtensionsTests
         BattleRenderState.Unit[] units = [Unit(1, TimeSpan.FromTicks(7676067)), Unit(2, TimeSpan.FromTicks(666057))];
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             units,
             Placeholders: [],
             HitTargets: [],
@@ -75,6 +76,7 @@ public sealed class BattleRenderStateExtensionsTests
         BattleRenderState.Unit[] units1 = [Unit(1, TimeSpan.FromTicks(7676067)), Unit(2, TimeSpan.FromTicks(-992000000))];
         Assert.That(complete, Is.EqualTo(new BattleRenderState(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             units1,
             Placeholders: [],
             HitTargets: [],
@@ -90,6 +92,7 @@ public sealed class BattleRenderStateExtensionsTests
         BattleRenderState.Unit[] units = [Unit(1, TimeSpan.FromTicks(7676067))];
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             units,
             Placeholders: [],
             HitTargets: [],
@@ -103,6 +106,7 @@ public sealed class BattleRenderStateExtensionsTests
         BattleRenderState.Unit[] units1 = [Unit(1, TimeSpan.FromTicks(7676067))];
         Assert.That(complete, Is.EqualTo(new BattleRenderState(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             units1,
             Placeholders: [],
             HitTargets: [],

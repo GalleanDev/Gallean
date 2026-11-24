@@ -20,13 +20,11 @@ internal static class BattleRenderLayout
 
     public const double PerspectiveScalePerPixel = 0.0003;
 
-    private const double MarkerElevationAdjust = 6.0;
-
     private const int RoundDecimals = 3;
 
     private static readonly Point GridCenter = new(473.417, 306.667);
-
     private static readonly Vector FootOffset = new(PlaceholderSize / 2.0, PlaceholderSize - 6);
+    private static readonly Point StandPoint = new(405, 498);
 
     private static readonly Vector SmallAnimationOffset = new(-365, -410);
     private static readonly Vector LargeAnimationOffset = new(-365, -365);
@@ -58,13 +56,13 @@ internal static class BattleRenderLayout
     public static Matrix SceneToGroundTransform { get; } = GroundToSceneTransform.Invert();
 
     private static double CameraElevation { get; } = ComputeCameraElevation();
+    private static double MarkerUnit { get; } = ComputeMarkerUnit();
     public static Rect BackgroundBounds { get; } = new((SceneWidth - BackgroundWidth) / 2.0, 0, BackgroundWidth, SceneHeight);
     public static Point BattlefieldCenter { get; } = new(475, 350.3);
     public static Vector3D GroundNormal { get; } = new(0, -Math.Cos(CameraElevation), Math.Sin(CameraElevation));
     public static double GroundDepthPerPixel { get; } = 1.0 / Math.Sin(CameraElevation);
     public static double SceneDepthPerPixel { get; } = 1.0 / Math.Tan(CameraElevation);
     public static double HeightPerPixel { get; } = 1.0 / Math.Cos(CameraElevation);
-    public static Matrix MarkerTransform { get; } = ComputeMarkerTransform();
 
     public static AnimationPlacement GetUnitPlacement(BattleGridFootprint footprint)
     {
@@ -135,6 +133,17 @@ internal static class BattleRenderLayout
         return new Vector(Round(direction.X), Round(direction.Y));
     }
 
+    public static Rect GetMarkerBounds(BattleMarkerConfiguration configuration, BattleGridFootprint footprint)
+    {
+        Point stand = GetStandPoint(footprint);
+        double depth = GetDepth(footprint);
+        double tilt = configuration.BackTilt + (configuration.FrontTilt - configuration.BackTilt) * depth;
+        double halfWidth = GetMarkerRadius(footprint) * MarkerUnit;
+        double halfHeight = halfWidth * tilt;
+
+        return new Rect(stand.X - halfWidth, stand.Y - halfHeight, halfWidth * 2, halfHeight * 2);
+    }
+
     public static double GetMarkerRadius(BattleGridFootprint footprint)
     {
         double scale = GetPerspectiveScale(GetFootPoint(footprint));
@@ -203,6 +212,22 @@ internal static class BattleRenderLayout
         {
             return foot;
         }
+    }
+
+    private static Point GetStandPoint(BattleGridFootprint footprint)
+    {
+        Rect stand = GetContentBounds(GetUnitPlacement(footprint), new Rect(StandPoint.X, StandPoint.Y, 0, 0));
+
+        return stand.Position;
+    }
+
+    private static double GetDepth(BattleGridFootprint footprint)
+    {
+        Point foot = GetFootPoint(footprint);
+        Point back = GetFootPoint(new BattleGridFootprint(BattlePosition.Left, GridPosition.BackTop, IsLarge: false));
+        Point front = GetFootPoint(new BattleGridFootprint(BattlePosition.Right, GridPosition.BackBottom, IsLarge: false));
+
+        return Math.Clamp((foot.Y - back.Y) / (front.Y - back.Y), 0, 1);
     }
 
     private static Point GetPlaceholderAnchor(BattleGridFootprint footprint)
@@ -300,6 +325,13 @@ internal static class BattleRenderLayout
         return transform;
     }
 
+    private static double ComputeMarkerUnit()
+    {
+        Matrix ground = GroundToSceneTransform;
+
+        return Math.Sqrt((ground.M11 * ground.M11) + (ground.M21 * ground.M21));
+    }
+
     private static double ComputeCameraElevation()
     {
         Matrix ground = GroundToSceneTransform;
@@ -308,15 +340,5 @@ internal static class BattleRenderLayout
         double groundArea = (ground.M11 * ground.M11) + (ground.M21 * ground.M21);
 
         return Math.Asin(screenArea / groundArea);
-    }
-
-    private static Matrix ComputeMarkerTransform()
-    {
-        Matrix ground = GroundToSceneTransform;
-
-        double width = Math.Sqrt((ground.M11 * ground.M11) + (ground.M21 * ground.M21));
-        double elevation = CameraElevation - (MarkerElevationAdjust * Math.PI / 180.0);
-
-        return Matrix.CreateScale(width, width * Math.Sin(elevation));
     }
 }

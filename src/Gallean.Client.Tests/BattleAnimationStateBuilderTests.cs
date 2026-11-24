@@ -386,6 +386,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -468,6 +469,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -550,6 +552,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -634,6 +637,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -717,6 +721,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -800,6 +805,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -882,6 +888,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -952,6 +959,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1022,6 +1030,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1103,6 +1112,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1192,6 +1202,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1281,6 +1292,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1357,6 +1369,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [summoner, summon],
             Placeholders: [],
             HitTargets: [],
@@ -1471,6 +1484,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [summoner, enemy, summon],
             Placeholders: [],
             HitTargets: [],
@@ -1587,6 +1601,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, veteran],
             Placeholders: [],
             HitTargets: [],
@@ -1687,6 +1702,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1790,6 +1806,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1880,6 +1897,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -1980,6 +1998,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, transformed],
             Placeholders: [],
             HitTargets: [],
@@ -2055,6 +2074,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [healer, transformed],
             Placeholders: [],
             HitTargets: [],
@@ -2132,6 +2152,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [reduced],
             Placeholders: [],
             HitTargets: [],
@@ -2187,6 +2208,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [doppelganger],
             Placeholders: [],
             HitTargets: [],
@@ -2259,6 +2281,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -2338,6 +2361,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [booster, ally],
             Placeholders: [],
             HitTargets: [],
@@ -2419,6 +2443,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [protector, ally],
             Placeholders: [],
             HitTargets: [],
@@ -2506,6 +2531,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [alchemist, ally],
             Placeholders: [],
             HitTargets: [],
@@ -2581,6 +2607,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -2675,6 +2702,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -2767,6 +2795,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -2855,6 +2884,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [healer, ally],
             Placeholders: [],
             HitTargets: [],
@@ -2931,6 +2961,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -3023,6 +3054,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [healer, ally],
             Placeholders: [],
             HitTargets: [],
@@ -3098,6 +3130,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [healer, ally],
             Placeholders: [],
             HitTargets: [],
@@ -3165,6 +3198,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader],
             Placeholders: [],
             HitTargets: [],
@@ -3246,6 +3280,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, ally],
             Placeholders: [],
             HitTargets: [],
@@ -3314,6 +3349,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader],
             Placeholders: [],
             HitTargets: [],
@@ -3403,6 +3439,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, ally],
             Placeholders: [],
             HitTargets: [],
@@ -3493,6 +3530,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, defender],
             Placeholders: [],
             HitTargets: [],
@@ -3569,6 +3607,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, defender],
             Placeholders: [],
             HitTargets: [],
@@ -3676,6 +3715,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, defender],
             Placeholders: [],
             HitTargets: [],
@@ -3750,6 +3790,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -3800,6 +3841,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -3866,6 +3908,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [target, caster],
             Placeholders: [],
             HitTargets: [],
@@ -3925,6 +3968,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -3986,6 +4030,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -4032,6 +4077,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -4081,6 +4127,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -4130,6 +4177,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -4179,6 +4227,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -4244,6 +4293,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -4334,6 +4384,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -4427,6 +4478,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -4511,6 +4563,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit],
             Placeholders: [],
             HitTargets: [],
@@ -4603,6 +4656,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -4698,6 +4752,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -4796,6 +4851,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, summon],
             Placeholders: [],
             HitTargets: [],
@@ -4873,6 +4929,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [unit, ally],
             Placeholders: [],
             HitTargets: [],
@@ -4949,6 +5006,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5035,6 +5093,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5145,6 +5204,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5270,6 +5330,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5362,6 +5423,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5469,6 +5531,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5552,6 +5615,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -5643,6 +5707,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, summon],
             Placeholders: [],
             HitTargets: [],
@@ -5717,6 +5782,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [summon],
             Placeholders: [],
             HitTargets: [],
@@ -5801,6 +5867,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, firstDefender, secondDefender],
             Placeholders: [],
             HitTargets: [],
@@ -5916,6 +5983,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, firstDefender, secondDefender],
             Placeholders: [],
             HitTargets: [],
@@ -6025,6 +6093,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6103,6 +6172,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6180,6 +6250,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6262,6 +6333,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6343,6 +6415,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6420,6 +6493,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6498,6 +6572,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6577,6 +6652,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6662,6 +6738,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6740,6 +6817,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6817,6 +6895,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6892,6 +6971,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -6970,6 +7050,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -7041,6 +7122,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -7157,6 +7239,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender, neighbor],
             Placeholders: [],
             HitTargets: [],
@@ -7264,6 +7347,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -7341,6 +7425,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -7416,6 +7501,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [leader, ally],
             Placeholders: [],
             HitTargets: [],
@@ -7504,6 +7590,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],
@@ -7615,6 +7702,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender, neighbor],
             Placeholders: [],
             HitTargets: [],
@@ -7699,6 +7787,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [squire],
             Placeholders: [],
             HitTargets: [],
@@ -7785,6 +7874,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [squire, archer, acolyte],
             Placeholders: [],
             HitTargets: [],
@@ -7880,6 +7970,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [healer, ally, secondAlly],
             Placeholders: [],
             HitTargets: [],
@@ -7959,6 +8050,7 @@ public sealed class BattleAnimationStateBuilderTests
 
         BattleRenderState baseState = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 0),
+            new BattleMarkerConfiguration(0.5, 0.5),
             [attacker, defender],
             Placeholders: [],
             HitTargets: [],

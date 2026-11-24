@@ -44,6 +44,7 @@ public sealed class BattleRenderContentProviderTests
 
         BattleRenderState state = new(
             new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Undead), 1),
+            new BattleMarkerConfiguration(0.5, 0.5),
             Units: [],
             Placeholders: [],
             HitTargets: [],

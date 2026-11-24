@@ -47,7 +47,25 @@ public sealed class BattleRenderLayoutTests
         Assert.That(BattleRenderLayout.SceneDepthPerPixel, Is.EqualTo(1.3895010982914644));
         Assert.That(BattleRenderLayout.HeightPerPixel, Is.EqualTo(1.2320484122477664));
         Assert.That(BattleRenderLayout.SceneToGroundTransform, Is.EqualTo(new Matrix(0.004584425518456239, 0.0038259480900732887, -0.006410141098280686, 0.007960656903205124, 0.0, -0.0)));
-        Assert.That(BattleRenderLayout.MarkerTransform, Is.EqualTo(new Matrix(167.49720624535803, 0.0, 0.0, 83.09435695041454, 0.0, 0.0)));
+    }
+
+    [Test]
+    public void MarkerBoundsTest()
+    {
+        BattleMarkerConfiguration configuration = new(0.4, 0.6);
+
+        Assert.That(BattleRenderLayout.GetMarkerBounds(configuration, new BattleGridFootprint(BattlePosition.Left, GridPosition.BackTop, IsLarge: false)), Is.EqualTo(new Rect(402.86681018884616, 191.19432407553847, 97.14837962230764, 38.85935184892306)));
+        Assert.That(BattleRenderLayout.GetMarkerBounds(configuration, new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontCenter, IsLarge: false)), Is.EqualTo(new Rect(382.49183812639257, 299.9393100038427, 100.49832374721481, 46.74937999231462)));
+        Assert.That(BattleRenderLayout.GetMarkerBounds(configuration, new BattleGridFootprint(BattlePosition.Right, GridPosition.BackBottom, IsLarge: false)), Is.EqualTo(new Rect(443.8743967952401, 524.1760380771441, 107.53320640951986, 64.51992384571192)));
+    }
+
+    [Test]
+    public void LargeMarkerBoundsTest()
+    {
+        BattleMarkerConfiguration configuration = new(0.4, 0.6);
+
+        Assert.That(BattleRenderLayout.GetMarkerBounds(configuration, new BattleGridFootprint(BattlePosition.Left, GridPosition.FrontTop, IsLarge: true)), Is.EqualTo(new Rect(416.39802818378917, 211.85660530104323, 183.2419436324217, 75.38678939791356)));
+        Assert.That(BattleRenderLayout.GetMarkerBounds(configuration, new BattleGridFootprint(BattlePosition.Right, GridPosition.FrontBottom, IsLarge: true)), Is.EqualTo(new Rect(324.7811566965027, 432.8982575803849, 198.65168660699462, 112.60948483923019)));
     }
 
     [Test]

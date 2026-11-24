@@ -55,6 +55,7 @@ internal sealed class BattleRenderStateBuilder(
 
     public BattleRenderState BuildState()
     {
+        BattleMarkerConfiguration markerConfiguration = ResolveMarkerConfiguration(background);
         BattleRainConfiguration? rainConfiguration = ResolveRainConfiguration(background, environment);
         BattleLightConfiguration lightConfiguration = ResolveLightConfiguration(background, environment, rainConfiguration);
         IReadOnlyList<BattleFluidConfiguration> fluids = ResolveFluidConfiguration(background);
@@ -75,6 +76,7 @@ internal sealed class BattleRenderStateBuilder(
 
         return new BattleRenderState(
             background,
+            markerConfiguration,
             units,
             placeholders,
             hitTargets,
@@ -614,6 +616,36 @@ internal sealed class BattleRenderStateBuilder(
         };
 
         return configuration with { Storm = ResolveStormConfiguration(environment, rainConfiguration) };
+    }
+
+    private static BattleMarkerConfiguration ResolveMarkerConfiguration(AssetSpriteKey.BattleBackground background)
+    {
+        return (background.Location, background.Variant) switch
+        {
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Dwarf }, 0) => new BattleMarkerConfiguration(0.45, 0.45),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Elf }, 0) => new BattleMarkerConfiguration(0.40, 0.55),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Elf }, 1) => new BattleMarkerConfiguration(0.40, 0.60),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Heretic }, 0) => new BattleMarkerConfiguration(0.40, 0.70),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Heretic }, 1) => new BattleMarkerConfiguration(0.40, 0.45),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Heretic }, 2) => new BattleMarkerConfiguration(0.40, 0.55),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Human }, 1) => new BattleMarkerConfiguration(0.40, 0.55),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Neutral }, 2) => new BattleMarkerConfiguration(0.40, 0.65),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Undead }, 0) => new BattleMarkerConfiguration(0.45, 0.70),
+            (AssetSpriteKey.BattleLocation.Terrain { Value: WorldMapTerrain.Undead }, 1) => new BattleMarkerConfiguration(0.40, 0.45),
+            (AssetSpriteKey.BattleLocation.Terrain, _) => new BattleMarkerConfiguration(0.40, 0.50),
+            (AssetSpriteKey.BattleLocation.City, 1 or 2) => new BattleMarkerConfiguration(0.40, 0.55),
+            (AssetSpriteKey.BattleLocation.City, 4) => new BattleMarkerConfiguration(0.50, 0.75),
+            (AssetSpriteKey.BattleLocation.City, _) => new BattleMarkerConfiguration(0.40, 0.60),
+            (AssetSpriteKey.BattleLocation.Ruin, 0) => new BattleMarkerConfiguration(0.45, 0.45),
+            (AssetSpriteKey.BattleLocation.Ruin, 1) => new BattleMarkerConfiguration(0.40, 0.45),
+            (AssetSpriteKey.BattleLocation.Ruin, _) => new BattleMarkerConfiguration(0.40, 0.50),
+            (AssetSpriteKey.BattleLocation.Capital { Race: WorldRace.Dwarf }, _) => new BattleMarkerConfiguration(0.45, 0.75),
+            (AssetSpriteKey.BattleLocation.Capital { Race: WorldRace.Elf or WorldRace.Heretic }, _) => new BattleMarkerConfiguration(0.40, 0.60),
+            (AssetSpriteKey.BattleLocation.Capital { Race: WorldRace.Undead }, _) => new BattleMarkerConfiguration(0.40, 0.55),
+            (AssetSpriteKey.BattleLocation.Capital, _) => new BattleMarkerConfiguration(0.40, 0.50),
+            (AssetSpriteKey.BattleLocation.Boat, 1) => new BattleMarkerConfiguration(0.40, 0.65),
+            (AssetSpriteKey.BattleLocation.Boat, _) => new BattleMarkerConfiguration(0.40, 0.60)
+        };
     }
 
     private static IReadOnlyList<BattleLight> ResolveBackgroundLights(AssetSpriteKey.BattleBackground background)
