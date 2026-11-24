@@ -73,7 +73,7 @@ internal sealed partial class ThiefStealScreenViewModel : AbstractGameScreenView
 
     private IReadOnlyList<ThiefStealItemViewModel> BuildTargets(WorldGetThiefStealInfoCommand.Result info)
     {
-        List<ThiefStealItemViewModel> result = [];
+        List<(WorldResourceSet Cost, int Index, ThiefStealItemViewModel Target)> targets = [];
 
         foreach (WorldGetThiefStealInfoCommand.Item item in info.Items)
         {
@@ -104,7 +104,7 @@ internal sealed partial class ThiefStealScreenViewModel : AbstractGameScreenView
                 unavailableReason = null;
             }
 
-            result.Add(new ThiefStealItemViewModel(this, item.Action, icon, name, description, cost, castingCost: null, unavailableReason));
+            targets.Add((definition.Value, targets.Count, new ThiefStealItemViewModel(this, item.Action, icon, name, description, cost, castingCost: null, unavailableReason)));
         }
 
         foreach (WorldGetThiefStealInfoCommand.Spell spell in info.Spells)
@@ -126,17 +126,45 @@ internal sealed partial class ThiefStealScreenViewModel : AbstractGameScreenView
                 unavailableReason = null;
             }
 
-            result.Add(new ThiefStealItemViewModel(this, spell.Action, icon, name, description, cost: null, castingCost, unavailableReason));
+            targets.Add((definition.CastingCost, targets.Count, new ThiefStealItemViewModel(this, spell.Action, icon, name, description, cost: null, castingCost, unavailableReason)));
         }
 
-        return [.. result.Order(Comparer<ThiefStealItemViewModel>.Create(CompareItems))];
+        targets.Sort(CompareTargets);
+
+        List<ThiefStealItemViewModel> result = [];
+
+        foreach ((WorldResourceSet _, int _, ThiefStealItemViewModel target) in targets)
+        {
+            result.Add(target);
+        }
+
+        return result;
     }
 
-    private static int CompareItems(ThiefStealItemViewModel left, ThiefStealItemViewModel right)
+    private static int CompareTargets(
+        (WorldResourceSet Cost, int Index, ThiefStealItemViewModel Target) left,
+        (WorldResourceSet Cost, int Index, ThiefStealItemViewModel Target) right)
     {
-        bool isLeftUnavailable = !left.Status.IsAvailable;
-        bool isRightUnavailable = !right.Status.IsAvailable;
+        int rv;
 
-        return isLeftUnavailable.CompareTo(isRightUnavailable);
+        rv = right.Target.Status.IsAvailable.CompareTo(left.Target.Status.IsAvailable);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
+        rv = OfferPriceComparer.Descending.Compare(left.Cost, right.Cost);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
+        rv = left.Index.CompareTo(right.Index);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
+        return 0;
     }
 }

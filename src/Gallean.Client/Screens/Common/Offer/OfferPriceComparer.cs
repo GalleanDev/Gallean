@@ -9,11 +9,16 @@ internal sealed class OfferPriceComparer(bool descending) : IComparer<WorldResou
     {
         if (descending)
         {
-            return right.Gold.CompareTo(left.Gold);
+            return GetTotal(right).CompareTo(GetTotal(left));
         }
         else
         {
-            return left.Gold.CompareTo(right.Gold);
+            return GetTotal(left).CompareTo(GetTotal(right));
         }
+    }
+
+    private static int GetTotal(WorldResourceSet set)
+    {
+        return set.Gold + set.DeathMana + set.RuneMana + set.LifeMana + set.InfernalMana + set.GroveMana;
     }
 }

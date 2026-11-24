@@ -344,7 +344,19 @@ public sealed class ThiefActionScreenViewModelTests
             Effect: new HealItemEffect(50),
             AnimationUnitId: null);
 
+        ItemDefinition ring = new(
+            new ItemDefinitionId("ring"),
+            new GlobalTextId("ring-name"),
+            new GlobalTextId("ring-description"),
+            ItemCategory.Valuable,
+            new WorldResourceSet(20, 0, 0, 0, 0, 0),
+            EquipmentModifierId: null,
+            EquipmentAttackId: null,
+            Effect: null,
+            AnimationUnitId: null);
+
         WorldItem potionItem = new(new WorldItemId("Potion"), potion.Id, Charges: null);
+        WorldItem ringItem = new(new WorldItemId("Ring"), ring.Id, Charges: null);
 
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
         WorldPlayer player2 = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
@@ -367,7 +379,7 @@ public sealed class ThiefActionScreenViewModelTests
                     .Build(),
                 movementPoints: 10) with
             {
-                Inventory = new WorldInventory([potionItem])
+                Inventory = new WorldInventory([ringItem, potionItem])
             };
 
         (GameSession session, _) = new TestWorldEngineBuilder()
@@ -376,6 +388,7 @@ public sealed class ThiefActionScreenViewModelTests
             .WithDefinition(thief)
             .WithDefinition(enemyLeader)
             .WithDefinition(potion)
+            .WithDefinition(ring)
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.PoisonStack, 90))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.Spy, 100))
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealItem, 80))
@@ -403,12 +416,14 @@ public sealed class ThiefActionScreenViewModelTests
         ThiefStealScreenViewModel picker = Assert.IsOfType<ThiefStealScreenViewModel>(gameViewModel.TopScreen);
 
         Assert.That(FormatStealTargets(picker.Targets), Is.EqualTo([
-            "item-icon/potion | potion-name | potion-description | Cost: 50 gold | available"
+            "item-icon/potion | potion-name | potion-description | Cost: 50 gold | available",
+            "item-icon/ring | ring-name | ring-description | Cost: 20 gold | available"
         ]));
 
         await picker.Targets[0].SelectCommand.ExecuteAsync(null);
 
-        Assert.That(session.World.State.Stacks[targetStack.Id].Inventory, Is.EqualTo(WorldInventory.Empty));
+        Assert.That(session.World.State.Stacks[targetStack.Id].Inventory, Is.EqualTo(
+            new WorldInventory([ringItem])));
         Assert.That(session.World.State.Stacks[thiefStack.Id].Inventory, Is.EqualTo(
             new WorldInventory([potionItem])));
         Assert.That(gameViewModel.TopScreen, Is.Null);
@@ -447,6 +462,19 @@ public sealed class ThiefActionScreenViewModelTests
             Effect: new WorldFogSpellEffect(),
             AiType: WorldAiSpellType.All);
 
+        WorldSpellDefinition rain = new(
+            new WorldSpellDefinitionId("rain"),
+            new GlobalTextId("rain-name"),
+            new GlobalTextId("rain-description"),
+            new GlobalTextId("rain-effect"),
+            WorldRace.Human,
+            Level: 1,
+            CastingCost: new WorldResourceSet(0, 0, 0, 5, 0, 0),
+            PurchaseCost: new WorldResourceSet(200, 0, 0, 0, 0, 0),
+            AreaRadius: 0,
+            Effect: new WorldFogSpellEffect(),
+            AiType: WorldAiSpellType.All);
+
         WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
         {
             Spellbook = new WorldPlayerSpellbook([], [storm.Id])
@@ -467,7 +495,7 @@ public sealed class ThiefActionScreenViewModelTests
             Variant: new WorldObjectVariant(0),
             TitleTextId: new ScenarioTextId("Title"),
             GreetingTextId: new ScenarioTextId("Greeting"),
-            [storm.Id, fog.Id],
+            [storm.Id, rain.Id, fog.Id],
             VisitorIds: [],
             AiPriority: 3);
 
@@ -477,6 +505,7 @@ public sealed class ThiefActionScreenViewModelTests
             .WithDefinition(thief)
             .WithDefinition(fog)
             .WithDefinition(storm)
+            .WithDefinition(rain)
             .WithDefinition(TestHelpers.SimpleThiefActionDefinition(WorldThiefActionType.StealMage, 60))
             .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
             .WithPlayer(player1)
@@ -498,12 +527,13 @@ public sealed class ThiefActionScreenViewModelTests
 
         Assert.That(FormatStealSpellTargets(picker.Targets), Is.EqualTo([
             "spell-icon/fog Light | fog-name | fog-description | Casting cost: 10 life mana | available",
+            "spell-icon/rain Light | rain-name | rain-description | Casting cost: 5 life mana | available",
             "spell-icon/storm Light | storm-name | storm-description | Casting cost: 25 life mana | unavailable: This spell is already known"
         ]));
 
         WorldState before = session.World.State;
 
-        await picker.Targets[1].SelectCommand.ExecuteAsync(null);
+        await picker.Targets[2].SelectCommand.ExecuteAsync(null);
 
         Assert.That(session.World.State, Is.SameAs(before));
         Assert.That(gameViewModel.TopScreen, Is.SameAs(picker));
