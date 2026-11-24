@@ -5,6 +5,10 @@
              x:Name="Screen"
              x:DataType="local:SpellbookTabViewModel">
 
+  <UserControl.KeyBindings>
+    <KeyBinding Gesture="B" Command="{Binding Screen.CloseCommand}" />
+  </UserControl.KeyBindings>
+
   <UserControl.Styles>
     <Style Selector="local|DesaturationOverlay.desaturate">
       <Setter Property="IsHitTestVisible" Value="False" />

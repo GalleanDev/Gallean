@@ -7,6 +7,7 @@
   <UserControl.KeyBindings>
     <KeyBinding Gesture="H" Command="{Binding HealCommand}" />
     <KeyBinding Gesture="R" Command="{Binding ResurrectCommand}" />
+    <KeyBinding Gesture="C" Command="{Binding Screen.CloseCommand}" />
   </UserControl.KeyBindings>
 
   <UserControl.Styles>

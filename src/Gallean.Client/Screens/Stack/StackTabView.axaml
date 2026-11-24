@@ -4,6 +4,11 @@
              x:Class="Gallean.Client.StackTabView"
              x:DataType="local:StackTabViewModel">
 
+  <UserControl.KeyBindings>
+    <KeyBinding Gesture="T" Command="{Binding Screen.CloseCommand}" />
+    <KeyBinding Gesture="P" Command="{Binding Screen.CloseCommand}" />
+  </UserControl.KeyBindings>
+
   <UserControl.Resources>
     <DataTemplate x:Key="EquipmentSlotTemplate" x:DataType="local:LeaderEquipmentSlotViewModel">
       <StackPanel Classes="equipment-cell">

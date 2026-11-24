@@ -4,6 +4,11 @@
              x:Class="Gallean.Client.QuestTabView"
              x:DataType="local:QuestTabViewModel">
 
+  <UserControl.KeyBindings>
+    <KeyBinding Gesture="U" Command="{Binding Screen.CloseCommand}" />
+    <KeyBinding Gesture="J" Command="{Binding Screen.CloseCommand}" />
+  </UserControl.KeyBindings>
+
   <UserControl.Styles>
     <Style Selector="Grid.history-header">
       <Setter Property="Margin" Value="0,0,0,2" />
