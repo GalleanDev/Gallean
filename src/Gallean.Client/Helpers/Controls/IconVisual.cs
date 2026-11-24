@@ -13,9 +13,15 @@ internal sealed class IconVisual : Control
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner<IconVisual>();
 
+    public static readonly StyledProperty<IBrush?> OutlineProperty =
+        AvaloniaProperty.Register<IconVisual, IBrush?>(nameof(Outline));
+
+    public static readonly StyledProperty<double> OutlineThicknessProperty =
+        AvaloniaProperty.Register<IconVisual, double>(nameof(OutlineThickness));
+
     static IconVisual()
     {
-        AffectsRender<IconVisual>(MonikerProperty, ForegroundProperty);
+        AffectsRender<IconVisual>(MonikerProperty, ForegroundProperty, OutlineProperty, OutlineThicknessProperty);
     }
 
     public IconMoniker Moniker
@@ -30,6 +36,18 @@ internal sealed class IconVisual : Control
         set => SetValue(ForegroundProperty, value);
     }
 
+    public IBrush? Outline
+    {
+        get => GetValue(OutlineProperty);
+        set => SetValue(OutlineProperty, value);
+    }
+
+    public double OutlineThickness
+    {
+        get => GetValue(OutlineThicknessProperty);
+        set => SetValue(OutlineThicknessProperty, value);
+    }
+
     public override void Render(DrawingContext context)
     {
         IconGeometry icon = Icons.Get(Moniker);
@@ -42,6 +60,16 @@ internal sealed class IconVisual : Control
 
             using (context.PushTransform(Matrix.CreateScale(scale, scale) * Matrix.CreateTranslation(offsetX, offsetY)))
             {
+                if (Outline is not null && OutlineThickness > 0)
+                {
+                    Pen pen = new(Outline, OutlineThickness * 2 / scale, lineJoin: PenLineJoin.Round);
+
+                    foreach (IconLayer layer in icon.Layers)
+                    {
+                        context.DrawGeometry(null, pen, layer.Geometry);
+                    }
+                }
+
                 foreach (IconLayer layer in icon.Layers)
                 {
                     IBrush? brush = layer.Brush ?? Foreground;

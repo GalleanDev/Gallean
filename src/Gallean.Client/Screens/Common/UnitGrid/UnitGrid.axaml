@@ -20,6 +20,7 @@
                             MaxHitpoints="{Binding MaxHitpoints}"
                             IsDead="{Binding !IsAlive}"
                             IsPendingUpgrade="{Binding IsPendingUpgrade}"
+                            HighLevelRank="{Binding HighLevelRank}"
                             IsSelected="{Binding IsSelected}"
                             IsHighlighted="{Binding IsHighlighted}"
                             Statuses="{Binding Details.Statuses}"

@@ -62,6 +62,7 @@ internal static partial class Icons
             IconMoniker.Frostbite => FrostbiteIcon,
             IconMoniker.Gold => GoldIcon,
             IconMoniker.Heal => HealIcon,
+            IconMoniker.HighLevel => HighLevelIcon,
             IconMoniker.Hitpoint => HitpointIcon,
             IconMoniker.Human => HumanIcon,
             IconMoniker.Immunity => DefendIcon,

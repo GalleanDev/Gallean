@@ -5080,4 +5080,76 @@ public sealed class StackTabViewModelTests
             CastingCost: null,
             Value: null)));
     }
+
+    [Test]
+    public void HighLevelRankTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 20, leadership: 6);
+        UnitDefinition squireDefinition = TestHelpers.SimpleUnitDefinition("squire", maxHitpoints: 100, initiative: 50, damage: 10);
+        UnitDefinition knightDefinition = TestHelpers.SimpleUnitDefinition("knight", maxHitpoints: 150, initiative: 50, damage: 20) with
+        {
+            Level = 3
+        };
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, 1, [], null, false);
+        WorldUnit veteranSquire = new(new WorldUnitId("veteranSquire"), squireDefinition.Id, 100, 0, 5, [], null, false);
+        WorldUnit veteranKnight = new(new WorldUnitId("veteranKnight"), knightDefinition.Id, 150, 0, 12, [], null, false);
+        WorldUnit eliteKnight = new(new WorldUnitId("eliteKnight"), knightDefinition.Id, 150, 0, 13, [], null, false);
+        WorldUnit championSquire = new(new WorldUnitId("championSquire"), squireDefinition.Id, 100, 0, 15, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(squireDefinition)
+            .AddUnit(knightDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Virgile"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (veteranSquire, GridPosition.FrontCenter),
+                    (veteranKnight, GridPosition.FrontTop),
+                    (eliteKnight, GridPosition.BackBottom),
+                    (championSquire, GridPosition.BackCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, _) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(squireDefinition)
+            .WithDefinition(knightDefinition)
+            .WithUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(squireDefinition.Id, UpgradeChangeLevel: 10, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .WithUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(knightDefinition.Id, UpgradeChangeLevel: 10, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        session.World.DispatchCommand(new WorldStartGameCommand());
+
+        GameModel gameModel = new(session, TestGameTextProvider.Instance, NullLog.Instance, SynchronousTaskScheduler.Instance);
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
+        ManagementScreenViewModel management = new(gameModel, gameViewModel, ScreenMusic.Keep, null, owner => [new MapStackTabViewModel(gameModel, gameViewModel, owner, stack.Id)]);
+        MapStackTabViewModel screen = Assert.IsOfType<MapStackTabViewModel>(management.Tabs[0]);
+
+        Assert.That(screen.UnitGrid.Slots.Select(slot => (slot.Position, slot.HighLevelRank)), Is.EqualTo([
+            (GridPosition.FrontBottom, HighLevelRank: 0),
+            (GridPosition.FrontCenter, HighLevelRank: 1),
+            (GridPosition.FrontTop, HighLevelRank: 1),
+            (GridPosition.BackBottom, HighLevelRank: 2),
+            (GridPosition.BackCenter, HighLevelRank: 3),
+            (GridPosition.BackTop, HighLevelRank: 0)
+        ]));
+    }
 }

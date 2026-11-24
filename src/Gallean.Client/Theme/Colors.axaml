@@ -423,6 +423,11 @@
   <SolidColorBrush x:Key="UnitPortraitHitpointsCriticalBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsCriticalColor}" />
   <SolidColorBrush x:Key="UnitPortraitHitpointsOutlineBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsOutlineColor}" />
   <SolidColorBrush x:Key="UnitPortraitHitpointsShadowBrush" Color="{x:Static local:Theme+UnitPortrait.HitpointsShadowColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHighLevel1Brush" Color="{x:Static local:Theme+UnitPortrait.HighLevel1Color}" />
+  <SolidColorBrush x:Key="UnitPortraitHighLevel2Brush" Color="{x:Static local:Theme+UnitPortrait.HighLevel2Color}" />
+  <SolidColorBrush x:Key="UnitPortraitHighLevel3Brush" Color="{x:Static local:Theme+UnitPortrait.HighLevel3Color}" />
+  <SolidColorBrush x:Key="UnitPortraitHighLevelShadowBrush" Color="{x:Static local:Theme+UnitPortrait.HighLevelShadowColor}" />
+  <SolidColorBrush x:Key="UnitPortraitHighLevelOutlineBrush" Color="{x:Static local:Theme+UnitPortrait.HighLevelOutlineColor}" />
   <SolidColorBrush x:Key="UnitNameShadowBrush" Color="{x:Static local:Theme+UnitName.ShadowColor}" />
   <LinearGradientBrush x:Key="UnitPortraitLostHitpointsGradientBrush" StartPoint="50%,0%" EndPoint="50%,100%">
     <GradientStop Offset="0" Color="{x:Static local:Theme+UnitPortrait.LostHitpointsEdgeColor}" />

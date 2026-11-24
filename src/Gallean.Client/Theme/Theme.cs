@@ -385,6 +385,11 @@ internal static class Theme
         public static Color HitpointsCriticalColor { get; } = Color.FromRgb(255, 96, 78);
         public static Color HitpointsOutlineColor { get; } = Color.FromArgb(200, 8, 6, 6);
         public static Color HitpointsShadowColor { get; } = Color.FromArgb(140, 0, 0, 0);
+        public static Color HighLevel1Color { get; } = Color.FromRgb(104, 168, 246);
+        public static Color HighLevel2Color { get; } = Color.FromRgb(246, 160, 64);
+        public static Color HighLevel3Color { get; } = Color.FromRgb(244, 84, 72);
+        public static Color HighLevelShadowColor { get; } = Color.FromArgb(230, 0, 0, 0);
+        public static Color HighLevelOutlineColor { get; } = Color.FromArgb(200, 88, 84, 78);
 
         public static BoxShadows Shadow { get; } = new(new BoxShadow
         {

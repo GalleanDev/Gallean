@@ -79,6 +79,7 @@
             <Border Classes="upgrade-badge" IsVisible="{TemplateBinding IsPendingUpgrade}">
               <local:IconVisual Moniker="Experience" />
             </Border>
+            <local:IconVisual x:Name="PART_HighLevel" Moniker="HighLevel" />
           </Panel>
         </ControlTemplate>
       </Setter>
@@ -201,6 +202,34 @@
         <Setter Property="Margin" Value="4,4,4,20" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
+      </Style>
+
+      <Style Selector="^ /template/ local|IconVisual#PART_HighLevel">
+        <Setter Property="Width" Value="19" />
+        <Setter Property="Height" Value="19" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="RenderTransform" Value="rotate(15deg)" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="IsVisible" Value="False" />
+        <Setter Property="Outline" Value="{StaticResource UnitPortraitHighLevelOutlineBrush}" />
+        <Setter Property="OutlineThickness" Value="0.75" />
+        <Setter Property="Effect">
+          <DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="1" Color="{x:Static local:Theme+UnitPortrait.HighLevelShadowColor}" />
+        </Setter>
+      </Style>
+      <Style Selector="^:high-level1:not(:dead) /template/ local|IconVisual#PART_HighLevel">
+        <Setter Property="IsVisible" Value="True" />
+        <Setter Property="Foreground" Value="{StaticResource UnitPortraitHighLevel1Brush}" />
+      </Style>
+      <Style Selector="^:high-level2:not(:dead) /template/ local|IconVisual#PART_HighLevel">
+        <Setter Property="IsVisible" Value="True" />
+        <Setter Property="Foreground" Value="{StaticResource UnitPortraitHighLevel2Brush}" />
+      </Style>
+      <Style Selector="^:high-level3:not(:dead) /template/ local|IconVisual#PART_HighLevel">
+        <Setter Property="IsVisible" Value="True" />
+        <Setter Property="Foreground" Value="{StaticResource UnitPortraitHighLevel3Brush}" />
       </Style>
 
       <Style Selector="^:free /template/ Border#PART_Frame, ^:dead /template/ Border#PART_Frame">

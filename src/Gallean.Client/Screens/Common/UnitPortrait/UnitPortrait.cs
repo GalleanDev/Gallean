@@ -7,11 +7,22 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-[PseudoClasses(DeadPseudoClass, FreePseudoClass, HighlightedPseudoClass, MarkedPseudoClass, SelectedPseudoClass)]
+[PseudoClasses(
+    DeadPseudoClass,
+    FreePseudoClass,
+    HighLevel1PseudoClass,
+    HighLevel2PseudoClass,
+    HighLevel3PseudoClass,
+    HighlightedPseudoClass,
+    MarkedPseudoClass,
+    SelectedPseudoClass)]
 internal sealed class UnitPortrait : ContentControl
 {
     private const string DeadPseudoClass = ":dead";
     private const string FreePseudoClass = ":free";
+    private const string HighLevel1PseudoClass = ":high-level1";
+    private const string HighLevel2PseudoClass = ":high-level2";
+    private const string HighLevel3PseudoClass = ":high-level3";
     private const string HighlightedPseudoClass = ":highlighted";
     private const string MarkedPseudoClass = ":marked";
     private const string SelectedPseudoClass = ":selected";
@@ -42,6 +53,9 @@ internal sealed class UnitPortrait : ContentControl
 
     public static readonly StyledProperty<bool> IsPendingUpgradeProperty =
         AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsPendingUpgrade));
+
+    public static readonly StyledProperty<int> HighLevelRankProperty =
+        AvaloniaProperty.Register<UnitPortrait, int>(nameof(HighLevelRank));
 
     public static readonly StyledProperty<IBrush?> MarkerProperty =
         AvaloniaProperty.Register<UnitPortrait, IBrush?>(nameof(Marker));
@@ -114,6 +128,12 @@ internal sealed class UnitPortrait : ContentControl
         set => SetValue(IsPendingUpgradeProperty, value);
     }
 
+    public int HighLevelRank
+    {
+        get => GetValue(HighLevelRankProperty);
+        set => SetValue(HighLevelRankProperty, value);
+    }
+
     public IBrush? Marker
     {
         get => GetValue(MarkerProperty);
@@ -146,6 +166,7 @@ internal sealed class UnitPortrait : ContentControl
             e.Property == IsSelectedProperty ||
             e.Property == IsHighlightedProperty ||
             e.Property == IsDeadProperty ||
+            e.Property == HighLevelRankProperty ||
             e.Property == MarkerProperty)
         {
             UpdatePseudoClasses();
@@ -156,6 +177,9 @@ internal sealed class UnitPortrait : ContentControl
     {
         PseudoClasses.Set(DeadPseudoClass, IsDead);
         PseudoClasses.Set(FreePseudoClass, FaceKey is null);
+        PseudoClasses.Set(HighLevel1PseudoClass, HighLevelRank == 1);
+        PseudoClasses.Set(HighLevel2PseudoClass, HighLevelRank == 2);
+        PseudoClasses.Set(HighLevel3PseudoClass, HighLevelRank == 3);
         PseudoClasses.Set(HighlightedPseudoClass, IsHighlighted);
         PseudoClasses.Set(MarkedPseudoClass, Marker is not null);
         PseudoClasses.Set(SelectedPseudoClass, IsSelected);

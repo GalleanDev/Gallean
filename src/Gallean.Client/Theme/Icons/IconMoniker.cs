@@ -53,6 +53,7 @@ internal enum IconMoniker
     Frostbite,
     Gold,
     Heal,
+    HighLevel,
     Hitpoint,
     Human,
     Immunity,

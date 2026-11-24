@@ -15,6 +15,7 @@ internal sealed partial class UnitGridSlotViewModel(
     int maxHitpoints,
     bool isAlive,
     bool isPendingUpgrade,
+    int highLevelRank,
     bool isVisible,
     bool isSelected,
     bool isHighlighted,
@@ -81,6 +82,9 @@ internal sealed partial class UnitGridSlotViewModel(
     [ObservableProperty]
     public partial bool IsPendingUpgrade { get; private set; } = isPendingUpgrade;
 
+    [ObservableProperty]
+    public partial int HighLevelRank { get; private set; } = highLevelRank;
+
     public bool HasUnit => FaceKey is not null;
 
     [ObservableProperty]
@@ -113,6 +117,7 @@ internal sealed partial class UnitGridSlotViewModel(
         MaxHitpoints = other.MaxHitpoints;
         IsAlive = other.IsAlive;
         IsPendingUpgrade = other.IsPendingUpgrade;
+        HighLevelRank = other.HighLevelRank;
         IsVisible = other.IsVisible;
         IsSelected = other.IsSelected;
         IsHighlighted = other.IsHighlighted;
@@ -149,6 +154,7 @@ internal sealed partial class UnitGridSlotViewModel(
                MaxHitpoints == other.MaxHitpoints &&
                IsAlive == other.IsAlive &&
                IsPendingUpgrade == other.IsPendingUpgrade &&
+               HighLevelRank == other.HighLevelRank &&
                IsVisible == other.IsVisible &&
                IsSelected == other.IsSelected &&
                IsHighlighted == other.IsHighlighted &&
@@ -176,6 +182,7 @@ internal sealed partial class UnitGridSlotViewModel(
         hash.Add(MaxHitpoints);
         hash.Add(IsAlive);
         hash.Add(IsPendingUpgrade);
+        hash.Add(HighLevelRank);
         hash.Add(IsVisible);
         hash.Add(IsSelected);
         hash.Add(IsHighlighted);

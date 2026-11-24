@@ -91,6 +91,7 @@ internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionVi
                 maxHitpoints: 0,
                 isAlive: true,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isVisible: !isLargeSlot,
                 isSelected: false,
                 isHighlighted: !isLargeSlot && (highlight?.Contains(position) ?? false),
@@ -104,6 +105,7 @@ internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionVi
         AssetSpriteKey.UnitFace faceKey = new(unit.DefinitionId);
         GameSnapshot snapshot = gameModel.Snapshot;
         WorldPlayer owner = snapshot.WorldState.Players[snapshot.ViewPlayerId];
+        int highLevelRank = GetHighLevelRank(unit);
 
         UnitDetailsViewModel details = UnitDetailsViewModel.CreateFromWorld(
             unit,
@@ -124,11 +126,31 @@ internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionVi
             stats.MaxHitpoints,
             unit.IsAlive,
             experience.IsPendingUpgrade,
+            highLevelRank,
             isVisible: true,
             isSelected: selection.IsSelected(this, position),
             isHighlighted: highlight?.Contains(position) ?? false,
             showsPurchaseHint: false,
             selection,
             details);
+    }
+
+    private int GetHighLevelRank(WorldUnit unit)
+    {
+        UnitDefinition definition = gameModel.Definitions.GetUnit(unit.DefinitionId);
+        int levels = unit.Level - definition.Level;
+
+        if (definition.Level == 1)
+        {
+            levels++;
+        }
+
+        return levels switch
+        {
+            >= 15 => 3,
+            >= 10 => 2,
+            >= 5 => 1,
+            _ => 0
+        };
     }
 }
