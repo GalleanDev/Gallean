@@ -87,12 +87,12 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
 
     public WorldCommandResult Visit(TemporaryBoostItemEffect effect, Context context)
     {
-        return ApplyModifier(context, effect.ModifierId, context.EngineContext.Globals.PotionBoostDurationTurns);
+        return ApplyModifier(context, UnitModifier.FromPotion(effect.ModifierId, context.EngineContext.Globals.PotionBoostDurationTurns));
     }
 
     public WorldCommandResult Visit(PermanentBoostItemEffect effect, Context context)
     {
-        return ApplyModifier(context, effect.ModifierId, remainingTurns: null);
+        return ApplyModifier(context, UnitModifier.Permanent(effect.ModifierId));
     }
 
     public WorldCommandResult Visit(SpellItemEffect effect, Context context)
@@ -139,7 +139,7 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
             [new WorldSpellCastEvent(casterId, effect.SpellId, target, effect.CastingCost, WorldSpellCastSource.Item)]);
     }
 
-    private static WorldCommandResult ApplyModifier(Context context, UnitModifierDefinitionId modifierId, int? remainingTurns)
+    private static WorldCommandResult ApplyModifier(Context context, UnitModifier modifier)
     {
         if (context.Target is not WorldItemTarget.Unit unitTarget)
         {
@@ -160,7 +160,7 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
             return WorldCommandResult.Fail(WorldCommandError.UnitDead);
         }
 
-        if (target.Modifiers.Any(modifier => modifier.DefinitionId == modifierId))
+        if (target.Modifiers.Any(existing => existing.DefinitionId == modifier.DefinitionId))
         {
             return WorldCommandResult.Fail(WorldCommandError.UnitModifierAlreadyApplied);
         }
@@ -171,7 +171,7 @@ internal sealed class WorldItemResolver : IItemEffectVisitor<WorldItemResolver.C
                 new WorldUnitModifierAppliedEvent(
                     unitTarget.Group,
                     unitTarget.UnitId,
-                    new UnitModifier(modifierId, remainingTurns))
+                    modifier)
             ]);
     }
 }

@@ -227,7 +227,7 @@ public sealed class WorldEngineAiUseItemActionTests
         engine.CheckCommand(new WorldAiActionCommand(), [
             new WorldAiActionStartedEvent(plan),
             new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
-            new WorldUnitModifierAppliedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), new UnitModifier(modifier.Id, null)),
+            new WorldUnitModifierAppliedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), UnitModifier.Permanent(modifier.Id)),
             new WorldAiActionEndedEvent(aiPlayer.Id, memory)
         ]);
     }
@@ -299,7 +299,7 @@ public sealed class WorldEngineAiUseItemActionTests
         engine.CheckCommand(new WorldAiActionCommand(), [
             new WorldAiActionStartedEvent(plan),
             new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
-            new WorldUnitModifierAppliedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), new UnitModifier(modifier.Id, 1)),
+            new WorldUnitModifierAppliedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), UnitModifier.FromPotion(modifier.Id, 1)),
             new WorldAiActionEndedEvent(aiPlayer.Id, memory)
         ]);
     }

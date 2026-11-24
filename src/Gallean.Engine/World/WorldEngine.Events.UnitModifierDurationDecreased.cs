@@ -7,11 +7,12 @@ internal partial class WorldEngine
         UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(state, ev.Group);
         WorldUnit target = units.GetUnit(ev.UnitId);
 
-        int index = target.Modifiers.IndexOf(target.Modifiers.First(modifier => modifier.DefinitionId == ev.ModifierId));
+        UnitModifier modifier = target.Modifiers.First(modifier => modifier.DefinitionId == ev.ModifierId);
+        int index = target.Modifiers.IndexOf(modifier);
 
         UnitGrid<WorldUnit> updatedUnits = units.Replace(target, target with
         {
-            Modifiers = target.Modifiers.SetItem(index, new UnitModifier(ev.ModifierId, ev.RemainingTurns))
+            Modifiers = target.Modifiers.SetItem(index, modifier with { RemainingTurns = ev.RemainingTurns })
         });
 
         return WorldUnitGroupCalculator.WithUnits(state, ev.Group, updatedUnits);

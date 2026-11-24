@@ -26,4 +26,9 @@ public sealed record UnitModifier(UnitModifierDefinitionId DefinitionId, int? Re
     {
         return new UnitModifier(definitionId, RemainingTurns: null) { Source = UnitModifierSource.Fortification };
     }
+
+    public static UnitModifier FromPotion(UnitModifierDefinitionId definitionId, int remainingTurns)
+    {
+        return new UnitModifier(definitionId, remainingTurns) { Source = UnitModifierSource.Potion };
+    }
 }

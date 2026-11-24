@@ -80,12 +80,12 @@ internal sealed class BattleItemResolver : IItemEffectVisitor<BattleItemResolver
 
     public BattleItemCalculator.ItemInfo Visit(TemporaryBoostItemEffect effect, Context context)
     {
-        return ApplyModifier(context, effect.ModifierId, context.EngineContext.Globals.PotionBoostDurationTurns);
+        return ApplyModifier(context, UnitModifier.FromPotion(effect.ModifierId, context.EngineContext.Globals.PotionBoostDurationTurns));
     }
 
     public BattleItemCalculator.ItemInfo Visit(PermanentBoostItemEffect effect, Context context)
     {
-        return ApplyModifier(context, effect.ModifierId, remainingTurns: null);
+        return ApplyModifier(context, UnitModifier.Permanent(effect.ModifierId));
     }
 
     public BattleItemCalculator.ItemInfo Visit(SpellItemEffect effect, Context context)
@@ -93,7 +93,7 @@ internal sealed class BattleItemResolver : IItemEffectVisitor<BattleItemResolver
         return BattleItemCalculator.ItemInfo.Fail(BattleCommandError.ItemNotUsable);
     }
 
-    private static BattleItemCalculator.ItemInfo ApplyModifier(Context context, UnitModifierDefinitionId modifierId, int? remainingTurns)
+    private static BattleItemCalculator.ItemInfo ApplyModifier(Context context, UnitModifier modifier)
     {
         BattleUnitId? targetId = context.Target.GetUnitId();
 
@@ -109,14 +109,14 @@ internal sealed class BattleItemResolver : IItemEffectVisitor<BattleItemResolver
             return BattleItemCalculator.ItemInfo.Fail(BattleCommandError.ItemTargetInvalid);
         }
 
-        if (target.Modifiers.Any(modifier => modifier.DefinitionId == modifierId))
+        if (target.Modifiers.Any(existing => existing.DefinitionId == modifier.DefinitionId))
         {
             return BattleItemCalculator.ItemInfo.Fail(BattleCommandError.UnitModifierAlreadyApplied);
         }
 
         return new BattleItemCalculator.ItemInfo(
             [new BattleAttackUnitTarget(target.Id)],
-            [new BattleUnitModifierAppliedEvent(target.Id, new UnitModifier(modifierId, remainingTurns))],
+            [new BattleUnitModifierAppliedEvent(target.Id, modifier)],
             null);
     }
 }

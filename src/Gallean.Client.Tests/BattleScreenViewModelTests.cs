@@ -3906,8 +3906,8 @@ public sealed class BattleScreenViewModelTests
             1,
             [
                 UnitModifier.FromEquipment(banner.Id),
-                new UnitModifier(potion.Id, RemainingTurns: 3),
-                new UnitModifier(elixir.Id, RemainingTurns: 1),
+                UnitModifier.FromPotion(potion.Id, 3),
+                UnitModifier.FromPotion(elixir.Id, 1),
                 new UnitModifier(curse.Id, RemainingTurns: 2)
             ],
             [],
@@ -3977,12 +3977,12 @@ public sealed class BattleScreenViewModelTests
                 feedback: [],
                 statuses:
                 [
-                    new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-20% initiative", null, UnitModifierType.Weaken)]),
-                    new UnitModifierStatusViewModel(UnitModifierType.Boost,
+                    new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Weaken, [new UnitModifierViewModel("-20% initiative", null, UnitModifierCategory.Magic, UnitModifierType.Weaken)]),
+                    new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Boost, [new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierCategory.Magic, UnitModifierType.Boost)]),
+                    new UnitModifierStatusViewModel(UnitModifierCategory.Potion, UnitModifierType.Boost,
                     [
-                        new UnitModifierViewModel("+30% damage", null, UnitModifierType.Boost),
-                        new UnitModifierViewModel("+10 hit points", null, UnitModifierType.Boost),
-                        new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
+                        new UnitModifierViewModel("+30% damage", null, UnitModifierCategory.Potion, UnitModifierType.Boost),
+                        new UnitModifierViewModel("+10 hit points", null, UnitModifierCategory.Potion, UnitModifierType.Boost)
                     ])
                 ],
                 hitpointsAnimation: AnimationRange.None)
@@ -4017,12 +4017,12 @@ public sealed class BattleScreenViewModelTests
             null,
             null,
             [
-                new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-20% initiative", null, UnitModifierType.Weaken)]),
-                new UnitModifierStatusViewModel(UnitModifierType.Boost,
+                new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Weaken, [new UnitModifierViewModel("-20% initiative", null, UnitModifierCategory.Magic, UnitModifierType.Weaken)]),
+                new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Boost, [new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierCategory.Magic, UnitModifierType.Boost)]),
+                new UnitModifierStatusViewModel(UnitModifierCategory.Potion, UnitModifierType.Boost,
                 [
-                    new UnitModifierViewModel("+30% damage", null, UnitModifierType.Boost),
-                    new UnitModifierViewModel("+10 hit points", null, UnitModifierType.Boost),
-                    new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
+                    new UnitModifierViewModel("+30% damage", null, UnitModifierCategory.Potion, UnitModifierType.Boost),
+                    new UnitModifierViewModel("+10 hit points", null, UnitModifierCategory.Potion, UnitModifierType.Boost)
                 ])
             ],
             [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+10 armor", "From equipment", null, 1, [])],
@@ -4644,7 +4644,7 @@ public sealed class BattleScreenViewModelTests
             null,
             null,
             [
-                new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-10% accuracy", null, UnitModifierType.Weaken)])
+                new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Weaken, [new UnitModifierViewModel("-10% accuracy", null, UnitModifierCategory.Magic, UnitModifierType.Weaken)])
             ],
             [],
             Summons: null,

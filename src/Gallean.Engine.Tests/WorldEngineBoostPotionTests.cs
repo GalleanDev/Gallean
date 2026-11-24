@@ -81,10 +81,10 @@ public sealed class WorldEngineBoostPotionTests
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("soldier"),
-                    new UnitModifier(modifier.Id, 1))
+                    UnitModifier.FromPotion(modifier.Id, 1))
             ]);
 
-        WorldUnit boosted = new(new WorldUnitId("soldier"), soldierDefinition.Id, 100, 0, 1, [new UnitModifier(modifier.Id, 1)], null, false);
+        WorldUnit boosted = new(new WorldUnitId("soldier"), soldierDefinition.Id, 100, 0, 1, [UnitModifier.FromPotion(modifier.Id, 1)], null, false);
 
         Assert.That(engine.State, Is.EqualTo(
             engine.State with
@@ -308,7 +308,7 @@ public sealed class WorldEngineBoostPotionTests
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("leader"),
-                    new UnitModifier(modifier.Id, 1))
+                    UnitModifier.FromPotion(modifier.Id, 1))
             ]);
     }
 
@@ -403,7 +403,7 @@ public sealed class WorldEngineBoostPotionTests
                 new WorldUnitModifierAppliedEvent(
                     new WorldUnitGroup.Stack(stack.Id),
                     new WorldUnitId("soldier"),
-                    new UnitModifier(modifier.Id, 1))
+                    UnitModifier.FromPotion(modifier.Id, 1))
             ]);
 
         Assert.That(engine.State, Is.EqualTo(
@@ -427,7 +427,7 @@ public sealed class WorldEngineBoostPotionTests
                                     UnitModifier.Permanent(new UnitModifierDefinitionId("carried6")),
                                     UnitModifier.Permanent(new UnitModifierDefinitionId("carried7")),
                                     UnitModifier.Permanent(new UnitModifierDefinitionId("carried8")),
-                                    new UnitModifier(modifier.Id, 1)
+                                    UnitModifier.FromPotion(modifier.Id, 1)
                                 ]
                             },
                             GridPosition.FrontBottom,

@@ -353,7 +353,7 @@ public sealed class WorldEngineUnitModifierTests
                         Modifiers =
                         [
                             new UnitModifier(expiringDefinition.Id, RemainingTurns: 1),
-                            new UnitModifier(lastingDefinition.Id, RemainingTurns: 3)
+                            UnitModifier.FromPotion(lastingDefinition.Id, 3)
                         ]
                     },
                     GridPosition.FrontBottom,
@@ -382,5 +382,18 @@ public sealed class WorldEngineUnitModifierTests
             new WorldTurnStartedEvent(neutral.Id),
             new WorldTurnResourcesGeneratedEvent(neutral.Id, WorldResourceSet.Empty)
         ]);
+
+        Assert.That(engine.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = new UnitGrid<WorldUnit>.Builder()
+                .Place(
+                    TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with
+                    {
+                        Modifiers = [UnitModifier.FromPotion(lastingDefinition.Id, 2)]
+                    },
+                    GridPosition.FrontBottom,
+                    false)
+                .Build()
+        }));
     }
 }

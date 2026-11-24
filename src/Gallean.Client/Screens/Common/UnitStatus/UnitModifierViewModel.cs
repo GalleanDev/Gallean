@@ -3,7 +3,7 @@ using Gallean.Engine;
 
 namespace Gallean.Client;
 
-internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration, UnitModifierType Type)
+internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration, UnitModifierCategory Category, UnitModifierType Type)
 {
     public Color Color => Type switch
     {
@@ -19,7 +19,11 @@ internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration
         {
             if (modifier.RemainingTurns is { } remainingTurns)
             {
-                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), TrSpans("Turns left: {0:*}", remainingTurns), texts));
+                result.Add(Create(
+                    definitions.GetUnitModifier(modifier.DefinitionId),
+                    TrSpans("Turns left: {0:*}", remainingTurns),
+                    ResolveCategory(modifier),
+                    texts));
             }
         }
 
@@ -34,24 +38,37 @@ internal sealed record UnitModifierViewModel(string Effects, TextSpans? Duration
         {
             if (modifier.RemainingTurns is not null)
             {
-                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), null, texts));
+                result.Add(Create(definitions.GetUnitModifier(modifier.DefinitionId), null, ResolveCategory(modifier), texts));
             }
         }
 
         foreach (BattleUnitWardModifier wardModifier in unit.WardModifiers)
         {
-            result.Add(Create(definitions.GetUnitModifier(wardModifier.ModifierId), TrSpans("Until the caster's next turn"), texts));
+            result.Add(Create(definitions.GetUnitModifier(wardModifier.ModifierId), TrSpans("Until the caster's next turn"), UnitModifierCategory.Magic, texts));
         }
 
         return result;
     }
 
-    private static UnitModifierViewModel Create(UnitModifierDefinition definition, TextSpans? duration, IGameTextProvider texts)
+    private static UnitModifierViewModel Create(UnitModifierDefinition definition, TextSpans? duration, UnitModifierCategory category, IGameTextProvider texts)
     {
         return new UnitModifierViewModel(
             string.Join(", ", UnitModifierFormatter.FormatEffects(definition, texts)),
             duration,
+            category,
             ResolveType(definition));
+    }
+
+    private static UnitModifierCategory ResolveCategory(UnitModifier modifier)
+    {
+        return modifier.Source switch
+        {
+            UnitModifierSource.Unit => UnitModifierCategory.Magic,
+            UnitModifierSource.Equipment => UnitModifierCategory.Magic,
+            UnitModifierSource.Scenario => UnitModifierCategory.Magic,
+            UnitModifierSource.Fortification => UnitModifierCategory.Magic,
+            UnitModifierSource.Potion => UnitModifierCategory.Potion
+        };
     }
 
     private static UnitModifierType ResolveType(UnitModifierDefinition definition)

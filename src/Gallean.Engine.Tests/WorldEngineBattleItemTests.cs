@@ -471,7 +471,7 @@ public sealed class WorldEngineBattleItemTests
             Experience: 0,
             ExperienceGained: 0,
             Level: 1,
-            Modifiers: [new UnitModifier(modifierDefinition.Id, RemainingTurns: 1)],
+            Modifiers: [UnitModifier.FromPotion(modifierDefinition.Id, 1)],
             StatusEffects: [],
             SummonerId: null,
             EquipmentAttackIds: [],
@@ -493,7 +493,7 @@ public sealed class WorldEngineBattleItemTests
             Info: TestHelpers.SimpleBattleInfo());
 
         UnitGrid<WorldUnit> modifiedGrid = new UnitGrid<WorldUnit>.Builder()
-            .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Modifiers = [new UnitModifier(modifierDefinition.Id, RemainingTurns: 1)] }, GridPosition.FrontBottom, false)
+            .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with { Modifiers = [UnitModifier.FromPotion(modifierDefinition.Id, 1)] }, GridPosition.FrontBottom, false)
             .Build();
 
         UnitGrid<WorldUnit> destroyedDefenderGrid = new UnitGrid<WorldUnit>.Builder()

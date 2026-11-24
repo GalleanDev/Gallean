@@ -2,7 +2,7 @@ namespace Gallean.Client;
 
 internal static partial class Icons
 {
-    private static readonly IconGeometry TemporaryModifierIcon = Create(
+    private static readonly IconGeometry PotionIcon = Create(
         viewBox: 100,
         offsetX: 0,
         offsetY: 0,

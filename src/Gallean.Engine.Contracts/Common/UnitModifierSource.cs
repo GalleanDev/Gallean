@@ -5,5 +5,6 @@ public enum UnitModifierSource
     Unit,
     Equipment,
     Scenario,
-    Fortification
+    Fortification,
+    Potion
 }

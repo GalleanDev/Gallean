@@ -3259,19 +3259,21 @@ public sealed class VisualTests
         WorldRaceDefinition humans = scenarioModel.Definitions.GetRace(WorldRace.Human);
         UnitDefinition leaderDefinition = scenarioModel.Definitions.GetUnit(humans.Leaders[0]);
         UnitDefinition soldierDefinition = scenarioModel.Definitions.GetUnit(humans.Units[0]);
-        UnitModifierDefinition boostDefinition = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um2015"));
-        UnitModifierDefinition weakenDefinition = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um9002"));
+        UnitModifierDefinition potionDefinition = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um2015"));
+        UnitModifierDefinition boostDefinition = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um0001"));
+        UnitModifierDefinition weakenDefinition = scenarioModel.Definitions.GetUnitModifier(new UnitModifierDefinitionId("g000um0045"));
 
         WorldMap map = TestHelpers.SimpleMap(8, 8);
 
         WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
 
-        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints, 0, leaderDefinition.Level, [new UnitModifier(boostDefinition.Id, RemainingTurns: 3)], null, false);
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, leaderDefinition.MaxHitpoints, 0, leaderDefinition.Level, [UnitModifier.FromPotion(potionDefinition.Id, 3), new UnitModifier(boostDefinition.Id, RemainingTurns: 2)], null, false);
         WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, soldierDefinition.MaxHitpoints, 0, soldierDefinition.Level, [new UnitModifier(weakenDefinition.Id, RemainingTurns: 2)], null, false);
 
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)
             .AddUnit(soldierDefinition)
+            .AddUnitModifier(potionDefinition)
             .AddUnitModifier(boostDefinition)
             .AddUnitModifier(weakenDefinition)
             .Build();
@@ -3294,6 +3296,7 @@ public sealed class VisualTests
             .WithPlayer(player)
             .WithDefinition(leaderDefinition)
             .WithDefinition(soldierDefinition)
+            .WithDefinition(potionDefinition)
             .WithDefinition(boostDefinition)
             .WithDefinition(weakenDefinition)
             .WithStack(stack)

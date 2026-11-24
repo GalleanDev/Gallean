@@ -4,12 +4,16 @@ using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal sealed record UnitModifierStatusViewModel(UnitModifierType Type, IReadOnlyList<UnitModifierViewModel> Modifiers) : UnitStatusViewModel
+internal sealed record UnitModifierStatusViewModel(
+    UnitModifierCategory ModifierCategory,
+    UnitModifierType ModifierType,
+    IReadOnlyList<UnitModifierViewModel> Modifiers) : UnitStatusViewModel
 {
-    public override string Name => Type switch
+    public override string Name => (ModifierCategory, ModifierType) switch
     {
-        UnitModifierType.Boost => Tr("Boosted"),
-        UnitModifierType.Weaken => Tr("Weakened")
+        (UnitModifierCategory.Magic, UnitModifierType.Boost) => Tr("Boosted"),
+        (UnitModifierCategory.Magic, UnitModifierType.Weaken) => Tr("Weakened"),
+        (UnitModifierCategory.Potion, _) => Tr("Potion")
     };
 
     public override TextSpans Description
@@ -38,15 +42,19 @@ internal sealed record UnitModifierStatusViewModel(UnitModifierType Type, IReadO
         }
     }
 
-    public override UnitStatusCategory Category => Type switch
+    public override UnitStatusCategory Category => ModifierType switch
     {
         UnitModifierType.Boost => UnitStatusCategory.Buff,
         UnitModifierType.Weaken => UnitStatusCategory.Debuff
     };
 
-    public override IconMoniker Icon => IconMoniker.TemporaryModifier;
+    public override IconMoniker Icon => ModifierCategory switch
+    {
+        UnitModifierCategory.Magic => IconMoniker.Magic,
+        UnitModifierCategory.Potion => IconMoniker.Potion
+    };
 
-    public override Color Color => Type switch
+    public override Color Color => ModifierType switch
     {
         UnitModifierType.Boost => Theme.Battle.StatusEffect.BoostModifierColor,
         UnitModifierType.Weaken => Theme.Battle.StatusEffect.WeakenModifierColor
@@ -56,19 +64,14 @@ internal sealed record UnitModifierStatusViewModel(UnitModifierType Type, IReadO
 
     public static IReadOnlyList<UnitModifierStatusViewModel> CreateAll(IReadOnlyList<UnitModifierViewModel> modifiers)
     {
-        List<UnitModifierStatusViewModel> result = [];
-
-        foreach (UnitModifierType type in Enum.GetValues<UnitModifierType>())
-        {
-            IReadOnlyList<UnitModifierViewModel> matchingModifiers = [.. modifiers.Where(modifier => modifier.Type == type)];
-
-            if (matchingModifiers.Count > 0)
-            {
-                result.Add(new UnitModifierStatusViewModel(type, matchingModifiers));
-            }
-        }
-
-        return result;
+        return
+        [
+            .. modifiers
+                .GroupBy(modifier => (modifier.Category, modifier.Type))
+                .OrderBy(group => group.Key.Category)
+                .ThenBy(group => group.Key.Type)
+                .Select(group => new UnitModifierStatusViewModel(group.Key.Category, group.Key.Type, [.. group]))
+        ];
     }
 
     public bool Equals(UnitModifierStatusViewModel? other)
@@ -83,7 +86,8 @@ internal sealed record UnitModifierStatusViewModel(UnitModifierType Type, IReadO
             return true;
         }
 
-        return Type == other.Type &&
+        return ModifierCategory == other.ModifierCategory &&
+               ModifierType == other.ModifierType &&
                Modifiers.SequenceEqual(other.Modifiers);
     }
 
@@ -91,7 +95,8 @@ internal sealed record UnitModifierStatusViewModel(UnitModifierType Type, IReadO
     {
         HashCode hash = new();
 
-        hash.Add(Type);
+        hash.Add(ModifierCategory);
+        hash.Add(ModifierType);
         hash.AddSequence(Modifiers);
 
         return hash.ToHashCode();

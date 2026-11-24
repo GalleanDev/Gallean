@@ -962,7 +962,7 @@ public sealed class BattleEngineUseItemTests
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
             new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
-            new BattleUnitModifierAppliedEvent(leader.Id, new UnitModifier(modifier.Id, 1)),
+            new BattleUnitModifierAppliedEvent(leader.Id, UnitModifier.FromPotion(modifier.Id, 1)),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -970,7 +970,7 @@ public sealed class BattleEngineUseItemTests
 
         Assert.That(engine.State, Is.EqualTo(new BattleState(
             AttackerGrid: new UnitGrid<BattleUnit>.Builder()
-                .Place(leader with { Modifiers = [new UnitModifier(modifier.Id, 1)] }, GridPosition.FrontBottom, false)
+                .Place(leader with { Modifiers = [UnitModifier.FromPotion(modifier.Id, 1)] }, GridPosition.FrontBottom, false)
                 .Build(),
             DefenderGrid: new UnitGrid<BattleUnit>.Builder().Place(defender, GridPosition.FrontBottom, false).Build(),
             CurrentUnitTurn: new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal),
@@ -1024,7 +1024,7 @@ public sealed class BattleEngineUseItemTests
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
             new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
-            new BattleUnitModifierAppliedEvent(leader.Id, new UnitModifier(modifier.Id, 1)),
+            new BattleUnitModifierAppliedEvent(leader.Id, UnitModifier.FromPotion(modifier.Id, 1)),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -1032,7 +1032,7 @@ public sealed class BattleEngineUseItemTests
 
         BattleUnit warded = leader with
         {
-            Modifiers = [new UnitModifier(modifier.Id, 1)],
+            Modifiers = [UnitModifier.FromPotion(modifier.Id, 1)],
             Wards = [ward]
         };
 
@@ -1083,7 +1083,7 @@ public sealed class BattleEngineUseItemTests
             0,
             0,
             1,
-            [new UnitModifier(modifier.Id, 1)],
+            [UnitModifier.FromPotion(modifier.Id, 1)],
             [],
             null,
             [],
@@ -1143,7 +1143,7 @@ public sealed class BattleEngineUseItemTests
 
         BattleUnit leader = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, leaderDefinition.Id, BattleSide.Attacker, hitpoints: 100) with
         {
-            Modifiers = [new UnitModifier(permanentModifier.Id, null)],
+            Modifiers = [UnitModifier.Permanent(permanentModifier.Id)],
             Wards = [fireWard],
             WardModifiers = [new BattleUnitWardModifier(new BattleUnitId(2), wardModifier.Id, fireWard)]
         };
@@ -1167,7 +1167,7 @@ public sealed class BattleEngineUseItemTests
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(leader.Id)), [
             new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, potion.Id, leader.Id, new BattleAttackUnitTarget(leader.Id)),
-            new BattleUnitModifierAppliedEvent(leader.Id, new UnitModifier(modifier.Id, 1)),
+            new BattleUnitModifierAppliedEvent(leader.Id, UnitModifier.FromPotion(modifier.Id, 1)),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))
@@ -1175,7 +1175,7 @@ public sealed class BattleEngineUseItemTests
 
         BattleUnit boosted = leader with
         {
-            Modifiers = [new UnitModifier(permanentModifier.Id, null), new UnitModifier(modifier.Id, 1)]
+            Modifiers = [UnitModifier.Permanent(permanentModifier.Id), UnitModifier.FromPotion(modifier.Id, 1)]
         };
 
         Assert.That(engine.State, Is.EqualTo(new BattleState(

@@ -253,7 +253,7 @@ public sealed class WorldStackInfoViewModelTests
             leaderDefinition.Level,
             [
                 UnitModifier.Permanent(armor.Id),
-                new UnitModifier(swiftness.Id, RemainingTurns: 2),
+                UnitModifier.FromPotion(swiftness.Id, 2),
                 new UnitModifier(curse.Id, RemainingTurns: 1)
             ],
             null,
@@ -305,10 +305,10 @@ public sealed class WorldStackInfoViewModelTests
                 ColumnSpan: 1,
                 Statuses:
                 [
-                    new UnitModifierStatusViewModel(UnitModifierType.Weaken,
-                        [new UnitModifierViewModel("-20% damage", TrSpans("Turns left: {0:*}", 1), UnitModifierType.Weaken)]),
-                    new UnitModifierStatusViewModel(UnitModifierType.Boost,
-                        [new UnitModifierViewModel("+20% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierType.Boost)])
+                    new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Weaken,
+                        [new UnitModifierViewModel("-20% damage", TrSpans("Turns left: {0:*}", 1), UnitModifierCategory.Magic, UnitModifierType.Weaken)]),
+                    new UnitModifierStatusViewModel(UnitModifierCategory.Potion, UnitModifierType.Boost,
+                        [new UnitModifierViewModel("+20% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierCategory.Potion, UnitModifierType.Boost)])
                 ])
         }));
     }

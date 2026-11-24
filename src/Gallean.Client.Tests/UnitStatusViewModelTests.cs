@@ -5,10 +5,10 @@ public sealed class UnitStatusViewModelTests
     [Test]
     public void CreateAllTest()
     {
-        UnitModifierViewModel strength = new("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierType.Boost);
-        UnitModifierViewModel swiftness = new("+15% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierType.Boost);
-        UnitModifierViewModel protection = new("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost);
-        UnitModifierViewModel curse = new("-20% hit points", TrSpans("Turns left: {0:*}", 1), UnitModifierType.Weaken);
+        UnitModifierViewModel strength = new("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierCategory.Potion, UnitModifierType.Boost);
+        UnitModifierViewModel swiftness = new("+15% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierCategory.Magic, UnitModifierType.Boost);
+        UnitModifierViewModel protection = new("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierCategory.Magic, UnitModifierType.Boost);
+        UnitModifierViewModel curse = new("-20% hit points", TrSpans("Turns left: {0:*}", 1), UnitModifierCategory.Magic, UnitModifierType.Weaken);
 
         IReadOnlyList<UnitStatusViewModel> statuses = UnitStatusViewModel.CreateAll(
             [
@@ -20,25 +20,25 @@ public sealed class UnitStatusViewModelTests
         Assert.That(statuses, Is.EqualTo(new UnitStatusViewModel[]
         {
             new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Poison)),
-            new UnitModifierStatusViewModel(UnitModifierType.Weaken, [new UnitModifierViewModel("-20% hit points", TrSpans("Turns left: {0:*}", 1), UnitModifierType.Weaken)]),
+            new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Weaken, [new UnitModifierViewModel("-20% hit points", TrSpans("Turns left: {0:*}", 1), UnitModifierCategory.Magic, UnitModifierType.Weaken)]),
             new BattleStatusEffectViewModel(new BattleUnitState.StatusEffect(BattleUnitState.StatusEffectType.Defend)),
-            new UnitModifierStatusViewModel(UnitModifierType.Boost,
+            new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Boost,
             [
-                new UnitModifierViewModel("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierType.Boost),
-                new UnitModifierViewModel("+15% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierType.Boost),
-                new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
-            ])
+                new UnitModifierViewModel("+15% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierCategory.Magic, UnitModifierType.Boost),
+                new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierCategory.Magic, UnitModifierType.Boost)
+            ]),
+            new UnitModifierStatusViewModel(UnitModifierCategory.Potion, UnitModifierType.Boost, [new UnitModifierViewModel("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierCategory.Potion, UnitModifierType.Boost)])
         }));
     }
 
     [Test]
     public void ModifierStatusTest()
     {
-        UnitModifierStatusViewModel status = new(UnitModifierType.Boost,
+        UnitModifierStatusViewModel status = new(UnitModifierCategory.Magic, UnitModifierType.Boost,
         [
-            new UnitModifierViewModel("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierType.Boost),
-            new UnitModifierViewModel("+15% initiative", null, UnitModifierType.Boost),
-            new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierType.Boost)
+            new UnitModifierViewModel("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierCategory.Magic, UnitModifierType.Boost),
+            new UnitModifierViewModel("+15% initiative", null, UnitModifierCategory.Magic, UnitModifierType.Boost),
+            new UnitModifierViewModel("Ward against Fire", TrSpans("Until the caster's next turn"), UnitModifierCategory.Magic, UnitModifierType.Boost)
         ]);
 
         Assert.That(status.Name, Is.EqualTo("Boosted"));
@@ -57,7 +57,31 @@ public sealed class UnitStatusViewModelTests
         ])));
         Assert.That(status.Count, Is.EqualTo(3));
         Assert.That(status.Category, Is.EqualTo(UnitStatusCategory.Buff));
-        Assert.That(status.Icon, Is.EqualTo(IconMoniker.TemporaryModifier));
+        Assert.That(status.Icon, Is.EqualTo(IconMoniker.Magic));
+        Assert.That(status.Color, Is.EqualTo(Theme.Battle.StatusEffect.BoostModifierColor));
+    }
+
+    [Test]
+    public void WeakenStatusTest()
+    {
+        UnitModifierStatusViewModel status = new(UnitModifierCategory.Magic, UnitModifierType.Weaken, [new UnitModifierViewModel("-20% hit points", TrSpans("Turns left: {0:*}", 1), UnitModifierCategory.Magic, UnitModifierType.Weaken)]);
+
+        Assert.That(status.Name, Is.EqualTo("Weakened"));
+        Assert.That(status.Count, Is.EqualTo(1));
+        Assert.That(status.Category, Is.EqualTo(UnitStatusCategory.Debuff));
+        Assert.That(status.Icon, Is.EqualTo(IconMoniker.Magic));
+        Assert.That(status.Color, Is.EqualTo(Theme.Battle.StatusEffect.WeakenModifierColor));
+    }
+
+    [Test]
+    public void PotionStatusTest()
+    {
+        UnitModifierStatusViewModel status = new(UnitModifierCategory.Potion, UnitModifierType.Boost, [new UnitModifierViewModel("+30% damage", TrSpans("Turns left: {0:*}", 3), UnitModifierCategory.Potion, UnitModifierType.Boost)]);
+
+        Assert.That(status.Name, Is.EqualTo("Potion"));
+        Assert.That(status.Count, Is.EqualTo(1));
+        Assert.That(status.Category, Is.EqualTo(UnitStatusCategory.Buff));
+        Assert.That(status.Icon, Is.EqualTo(IconMoniker.Potion));
         Assert.That(status.Color, Is.EqualTo(Theme.Battle.StatusEffect.BoostModifierColor));
     }
 }

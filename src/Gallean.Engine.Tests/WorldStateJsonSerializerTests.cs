@@ -45,7 +45,7 @@ public sealed class WorldStateJsonSerializerTests
             Hitpoints: 77,
             Experience: 88,
             Level: 3,
-            [new UnitModifier(new UnitModifierDefinitionId("modifier"), RemainingTurns: 6)],
+            [UnitModifier.FromPotion(new UnitModifierDefinitionId("modifier"), 6)],
             Name: new LiteralUnitName("Ardobert"),
             IsTypeLocked: false);
         UnitGrid<WorldUnit> garrison = new UnitGrid<WorldUnit>.Builder()

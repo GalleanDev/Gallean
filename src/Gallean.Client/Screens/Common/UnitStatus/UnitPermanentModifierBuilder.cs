@@ -312,7 +312,8 @@ internal static class UnitPermanentModifierBuilder
             UnitModifierSource.Unit => Tr("Permanent"),
             UnitModifierSource.Equipment => Tr("From equipment"),
             UnitModifierSource.Scenario => Tr("Permanent"),
-            UnitModifierSource.Fortification => Tr("From city")
+            UnitModifierSource.Fortification => Tr("From city"),
+            UnitModifierSource.Potion => Tr("Potion")
         };
     }
 }

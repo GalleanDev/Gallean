@@ -2662,7 +2662,7 @@ public sealed class StackTabViewModelTests
             null,
             null,
             new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("5"), 0), null, null),
-            [new UnitModifierStatusViewModel(UnitModifierType.Boost, [new UnitModifierViewModel("+20% initiative", TrSpans("Turns left: {0:*}", 1), UnitModifierType.Boost)])],
+            [new UnitModifierStatusViewModel(UnitModifierCategory.Magic, UnitModifierType.Boost, [new UnitModifierViewModel("+20% initiative", TrSpans("Turns left: {0:*}", 1), UnitModifierCategory.Magic, UnitModifierType.Boost)])],
             [
                 new UnitPermanentModifierViewModel(UnitPermanentModifierType.Leadership, IconMoniker.Leadership, "leadership-name", "leadership-description", "+2 leadership", 2, []),
                 new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Movement, "pathfinding-name", "pathfinding-description", "+20% movement", 1, []),
