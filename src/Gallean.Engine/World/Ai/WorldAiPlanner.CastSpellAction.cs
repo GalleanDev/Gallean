@@ -62,7 +62,7 @@ internal sealed partial class WorldAiPlanner
                 List<WorldSpellDefinition>? group = type switch
                 {
                     WorldAiSpellEffectType.Attack => attackSpells,
-                    WorldAiSpellEffectType.Summon => attackSpells,
+                    WorldAiSpellEffectType.Summon => null,
                     WorldAiSpellEffectType.Weaken => weakenSpells,
                     WorldAiSpellEffectType.Heal => healSpells,
                     WorldAiSpellEffectType.RestoreMovement => restoreMovementSpells,

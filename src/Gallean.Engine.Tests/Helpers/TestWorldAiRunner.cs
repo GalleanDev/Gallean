@@ -4,7 +4,7 @@ namespace Gallean.Engine.Tests;
 
 internal sealed class TestWorldAiRunner(GameSession session, IEngineContext context)
 {
-    public sealed record Trace(WorldAiActionPlan Plan, BattleTrace? Battle, WorldStackOrder? StackOrder);
+    public sealed record Trace(WorldAiActionPlan Plan, BattleTrace? Battle, WorldStackOrder? StackOrder, bool IsSummon);
 
     public sealed record BattleTrace(WorldStackId AttackerStackId, BattleOutcome Outcome);
 
@@ -20,6 +20,7 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
             WorldState state = session.World.State;
             WorldAiActionPlan plan = controller.DecideAction(state, memory);
             WorldStackOrder? stackOrder = GetStackOrder(state, plan);
+            bool isSummon = IsSummon(state, plan);
 
             memory = plan.Memory;
 
@@ -31,7 +32,7 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
                 break;
             }
 
-            traces.Add(new Trace(plan, ResolveBattle(), stackOrder));
+            traces.Add(new Trace(plan, ResolveBattle(), stackOrder, isSummon));
         }
 
         return traces;
@@ -55,6 +56,20 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
         else
         {
             return null;
+        }
+    }
+
+    private bool IsSummon(WorldState state, WorldAiActionPlan plan)
+    {
+        if (plan.Command is WorldAiMoveStackCommand command && state.Stacks.TryGetValue(command.StackId, out WorldStack? stack))
+        {
+            (_, _, UnitDefinition leaderDefinition) = stack.GetLeader(context.Definitions);
+
+            return leaderDefinition.Category is UnitCategory.Summon;
+        }
+        else
+        {
+            return false;
         }
     }
 

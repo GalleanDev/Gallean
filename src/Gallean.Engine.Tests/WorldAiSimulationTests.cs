@@ -286,6 +286,11 @@ public sealed class WorldAiSimulationTests
                     continue;
                 }
 
+                if (trace.IsSummon)
+                {
+                    continue;
+                }
+
                 AddIssue(issues, new SimulationIssue(
                     SimulationSeverity.Critical,
                     "Lost attack",
@@ -600,14 +605,14 @@ public sealed class WorldAiSimulationTests
     {
         WorldAiActionPlan plan = new(default, command, WorldAiMemory.Empty);
 
-        return new TestWorldAiRunner.Trace(plan, null, null);
+        return new TestWorldAiRunner.Trace(plan, null, null, false);
     }
 
     private static TestWorldAiRunner.Trace BuildBattleTrace(IWorldCommand<Empty> command, TestWorldAiRunner.BattleTrace battle)
     {
         WorldAiActionPlan plan = new(default, command, WorldAiMemory.Empty);
 
-        return new TestWorldAiRunner.Trace(plan, battle, null);
+        return new TestWorldAiRunner.Trace(plan, battle, null, false);
     }
 
     private static WorldState BuildAnalyzerState(WorldPlayerId playerId, WorldResourceSet resources, WorldStack stack)
@@ -737,7 +742,7 @@ public sealed class WorldAiSimulationTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> traces =
         [
-            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), new WorldStackOrder.AttackStack(new WorldStackId("Target")))
+            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), new WorldStackOrder.AttackStack(new WorldStackId("Target")), false)
         ];
 
         IEnumerable<SimulationIssue> issues = analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId), traces);
@@ -761,7 +766,31 @@ public sealed class WorldAiSimulationTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> traces =
         [
-            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), WorldStackOrder.Guard.Instance)
+            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), WorldStackOrder.Guard.Instance, false)
+        ];
+
+        IEnumerable<SimulationIssue> issues = analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId), traces);
+
+        Assert.That(GetIssues(new SimulationResult([.. issues])), Is.Empty);
+    }
+
+    [Test]
+    public void SummonLostAttackAnalyzerTest()
+    {
+        WorldPlayerId playerId = new(1);
+        WorldStackId stackId = new("Stack1");
+        WorldStack stack = TestHelpers.SimpleStack(stackId, playerId, new WorldPosition(0, 0), UnitGrid<WorldUnit>.Empty, movementPoints: 6);
+        WorldState state = BuildAnalyzerState(playerId, WorldResourceSet.Empty, stack);
+        SimulationAnalyzer analyzer = new(MediumCheckOptions);
+
+        WorldAiActionPlan plan = new(
+            new WorldAiActionScore(2, 0),
+            new WorldAiMoveStackCommand(stackId, new WorldPosition(1, 0)),
+            new WorldAiMemory(new WorldAiTurnMemory(1, playerId)));
+
+        IReadOnlyList<TestWorldAiRunner.Trace> traces =
+        [
+            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), null, true)
         ];
 
         IEnumerable<SimulationIssue> issues = analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId), traces);

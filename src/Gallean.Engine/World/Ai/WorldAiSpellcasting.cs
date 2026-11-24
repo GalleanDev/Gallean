@@ -4,32 +4,52 @@ namespace Gallean.Engine;
 
 internal sealed class WorldAiSpellcasting(IEngineContext engine)
 {
-    public WorldCastSpellCommand? FindWeakenCast(WorldState state, WorldPlayerId playerId, WorldStack target)
+    public WorldCastSpellCommand? FindAttackCast(WorldState state, WorldStack stack, WorldStack target, WorldAiEstimator.PowerEstimate power)
     {
-        WorldPlayer player = state.Players[playerId];
-        List<WorldSpellDefinition> spells = [];
+        WorldPlayer player = state.Players[stack.OwnerId];
+        List<WorldSpellDefinition> weakenSpells = [];
+        List<WorldSpellDefinition> summonSpells = [];
 
         foreach (WorldSpellDefinitionId spellId in player.Spellbook.Acquired)
         {
             WorldSpellDefinition spell = engine.Definitions.GetSpell(spellId);
 
-            if (spell.AreaRadius is 0 &&
-                GetEffectType(spell) is WorldAiSpellEffectType.Weaken)
+            if (spell.AreaRadius is 0)
             {
-                spells.Add(spell);
+                WorldAiSpellEffectType? type = GetEffectType(spell);
+
+                if (type is WorldAiSpellEffectType.Weaken)
+                {
+                    weakenSpells.Add(spell);
+                }
+                else if (type is WorldAiSpellEffectType.Summon)
+                {
+                    summonSpells.Add(spell);
+                }
             }
         }
 
-        spells.Sort(CompareLevel);
+        weakenSpells.Sort(CompareLevel);
+        summonSpells.Sort(CompareLevel);
 
-        if (IsEnemyCastAllowed(player))
+        WorldCastSpellCommand? command = null;
+
+        if (IsCastAllowed(player, WorldAiSpellEffectType.Weaken))
         {
-            return FindCast(state, spells, [target]);
+            command = FindCast(state, weakenSpells, [target]);
         }
-        else
+
+        WorldPlayer targetOwner = state.Players[target.OwnerId];
+
+        if (command is null &&
+            WorldHelpers.IsRacePlayable(targetOwner.Race) &&
+            !power.AtLeast(BattleSide.Attacker, engine.Globals.AiSummonMaxPowerPercent) &&
+            IsCastAllowed(player, WorldAiSpellEffectType.Summon))
         {
-            return null;
+            command = FindSummonCast(state, summonSpells, stack, target);
         }
+
+        return command;
     }
 
     public WorldCastSpellCommand? FindCast(WorldState state, List<WorldSpellDefinition> spells, IEnumerable<WorldStack> targets)
@@ -59,6 +79,54 @@ internal sealed class WorldAiSpellcasting(IEngineContext engine)
 
             if (spell.AreaRadius is 0 &&
                 GetEffectType(spell) is WorldAiSpellEffectType.Attack or WorldAiSpellEffectType.Summon or WorldAiSpellEffectType.Weaken)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private WorldCastSpellCommand? FindSummonCast(WorldState state, List<WorldSpellDefinition> spells, WorldStack stack, WorldStack target)
+    {
+        foreach (WorldSpellDefinition spell in spells)
+        {
+            WorldCastSpellCommand? best = null;
+            int bestDistance = 0;
+
+            foreach (WorldPosition position in target.Position.GetAdjacentPositions())
+            {
+                int distance = position.GetDistance(stack.Position);
+
+                if (distance > bestDistance)
+                {
+                    WorldCastSpellCommand command = new(spell.Id, new WorldSpellTarget(position, 0));
+                    WorldCommandResult commandResult = command.Execute(state, engine);
+
+                    if (!commandResult.Failed)
+                    {
+                        best = command;
+                        bestDistance = distance;
+                    }
+                }
+            }
+
+            if (best is not null)
+            {
+                return best;
+            }
+        }
+
+        return null;
+    }
+
+    private bool IsCastAllowed(WorldPlayer player, WorldAiSpellEffectType type)
+    {
+        foreach (WorldSpellDefinitionId spellId in player.TurnActions.SpellCasts.Keys)
+        {
+            WorldSpellDefinition spell = engine.Definitions.GetSpell(spellId);
+
+            if (spell.AreaRadius is 0 && GetEffectType(spell) == type)
             {
                 return false;
             }

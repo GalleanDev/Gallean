@@ -233,26 +233,54 @@ internal sealed partial class WorldAiPlanner
 
         private WorldAiActionPlan MakeAttackPlan(ActionContext context, BattleInfo battle, int score)
         {
-            WorldCastSpellCommand? cast = null;
+            WorldCastSpellCommand? attackCast = null;
+            WorldStack? attackSummon = null;
 
-            if (battle.Target is WorldAiTarget.Stack target)
+            if (battle.BattleTarget is WorldAiTarget.Stack target)
             {
                 WorldStack targetStack = context.State.Stacks[target.StackId];
 
-                cast = Context.Spellcasting.FindWeakenCast(context.State, context.Stack.OwnerId, targetStack);
+                attackCast = Context.Spellcasting.FindAttackCast(context.State, context.Stack, targetStack, battle.Power);
+                attackSummon = FindSummon(context, battle.BattleTarget);
             }
 
-            if (cast is not null)
+            if (attackCast is not null)
             {
-                return MakePlan(score, cast, context.Memory);
+                return MakePlan(score, attackCast, context.Memory);
+            }
+            else if (attackSummon is not null)
+            {
+                WorldAiMoveStackCommand moveCommand = new(attackSummon.Id, battle.BattlePosition);
+
+                return MakePlan(score, moveCommand, context.Memory);
             }
             else
             {
                 WorldAiStackMemory stackMemory = context.Memory.GetStackMemory(context.Stack);
                 WorldAiMemory memory = context.Memory.WithStackMemory(context.Stack.Id, stackMemory with { Target = battle.Target });
+                WorldAiMoveStackCommand moveCommand = new(context.Stack.Id, battle.TargetPosition);
 
-                return MakePlan(score, new WorldAiMoveStackCommand(context.Stack.Id, battle.TargetPosition), memory);
+                return MakePlan(score, moveCommand, memory);
             }
+        }
+
+        private WorldStack? FindSummon(ActionContext context, WorldAiTarget target)
+        {
+            foreach (WorldStack stack in context.State.Stacks.Values)
+            {
+                if (stack.OwnerId == context.Stack.OwnerId && IsSummon(stack))
+                {
+                    foreach (BattleInfo battle in EnumerateBattles(context with { Stack = stack }, [target]))
+                    {
+                        if (battle.BattleTarget == target)
+                        {
+                            return stack;
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
         private int ScoreBattle(ActionContext context, BattleInfo battle, ScoringType scoring)
