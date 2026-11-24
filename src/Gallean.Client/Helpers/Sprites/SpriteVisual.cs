@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using SkiaSharp;
 
 namespace Gallean.Client;
 
@@ -128,19 +129,42 @@ internal sealed class SpriteVisual : Control
         {
             if (CanvasSize is not null)
             {
+                Size canvasSize = CanvasSize.Value;
                 Rect viewport = new(Bounds.Size);
-                Vector scale = Stretch.CalculateScaling(Bounds.Size, CanvasSize.Value, StretchDirection);
-                Rect canvas = viewport.CenterRect(new Rect(CanvasSize.Value * scale));
+                Vector scale = Stretch.CalculateScaling(Bounds.Size, canvasSize, StretchDirection);
+                Rect canvas = viewport.CenterRect(new Rect(canvasSize * scale));
+                double left = sprite.Metadata.OffsetX;
+                double right = left + sprite.Metadata.Width;
+                double halfPixel = sprite.Metadata.Width / (sprite.Image.Width * 2.0);
 
-                Rect destination = new(
-                    canvas.X + (sprite.Metadata.OffsetX * scale.X),
-                    canvas.Y + (sprite.Metadata.OffsetY * scale.Y),
-                    sprite.Metadata.Width * scale.X,
-                    sprite.Metadata.Height * scale.Y);
+                List<(double Left, double Right, SKSamplingOptions Sampling)> spans = [];
 
-                Rect source = new(0, 0, sprite.Image.Width, sprite.Image.Height);
+                if (left < 0)
+                {
+                    spans.Add((left, -halfPixel, RenderSamplingOptions.Linear));
+                    spans.Add((-halfPixel, 0, RenderSamplingOptions.Nearest));
+                }
 
-                context.Custom(new SpriteRenderOperation(destination, source, sprite));
+                spans.Add((Math.Max(left, 0), Math.Min(right, canvasSize.Width), RenderSamplingOptions.Linear));
+
+                if (right > canvasSize.Width)
+                {
+                    spans.Add((canvasSize.Width, canvasSize.Width + halfPixel, RenderSamplingOptions.Nearest));
+                    spans.Add((canvasSize.Width + halfPixel, right, RenderSamplingOptions.Linear));
+                }
+
+                foreach ((double spanLeft, double spanRight, SKSamplingOptions sampling) in spans)
+                {
+                    Rect destination = new(
+                        canvas.X + (spanLeft * scale.X),
+                        canvas.Y + (sprite.Metadata.OffsetY * scale.Y),
+                        (spanRight - spanLeft) * scale.X,
+                        sprite.Metadata.Height * scale.Y);
+
+                    Rect source = new(spanLeft - sprite.Metadata.OffsetX, 0, spanRight - spanLeft, sprite.Metadata.Height);
+
+                    context.Custom(new SpriteRenderOperation(destination, ToPixelSpace(source, sprite), sprite, sampling));
+                }
             }
             else
             {
@@ -153,7 +177,7 @@ internal sealed class SpriteVisual : Control
                 Rect logicalSource = new Rect(sourceSize).CenterRect(new Rect(destination.Size / scale));
                 Rect source = ToPixelSpace(logicalSource, sprite);
 
-                context.Custom(new SpriteRenderOperation(destination, source, sprite));
+                context.Custom(new SpriteRenderOperation(destination, source, sprite, RenderSamplingOptions.Linear));
             }
         }
     }

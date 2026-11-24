@@ -100,7 +100,7 @@ internal sealed class MainMenuBackgroundVisual : AbstractAnimatedVisual
             }
             else
             {
-                context.Custom(new SpriteRenderOperation(destination, new Rect(0, 0, sprite.Image.Width, sprite.Image.Height), sprite));
+                context.Custom(new SpriteRenderOperation(destination, new Rect(0, 0, sprite.Image.Width, sprite.Image.Height), sprite, RenderSamplingOptions.Linear));
             }
         }
     }

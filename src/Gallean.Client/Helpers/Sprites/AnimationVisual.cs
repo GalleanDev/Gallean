@@ -152,7 +152,7 @@ internal sealed class AnimationVisual : AbstractAnimatedVisual, ICustomHitTest
                     destination.Width / scale.X,
                     destination.Height / scale.Y);
 
-                context.Custom(new SpriteRenderOperation(destination, ToPixelSpace(logicalSource, frame), frame));
+                context.Custom(new SpriteRenderOperation(destination, ToPixelSpace(logicalSource, frame), frame, RenderSamplingOptions.Linear));
             }
         }
     }

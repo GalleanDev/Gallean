@@ -6,7 +6,7 @@ using SkiaSharp;
 
 namespace Gallean.Client;
 
-internal sealed class SpriteRenderOperation(Rect destination, Rect source, Sprite sprite) : ICustomDrawOperation
+internal sealed class SpriteRenderOperation(Rect destination, Rect source, Sprite sprite, SKSamplingOptions sampling) : ICustomDrawOperation
 {
     public Rect Bounds => destination;
 
@@ -33,7 +33,7 @@ internal sealed class SpriteRenderOperation(Rect destination, Rect source, Sprit
 
         using SKPaint? paint = CreateOpacityPaint(lease.CurrentOpacity);
 
-        lease.SkCanvas.DrawImage(sprite.Image, sourceRect, destinationRect, RenderSamplingOptions.Linear, paint);
+        lease.SkCanvas.DrawImage(sprite.Image, sourceRect, destinationRect, sampling, paint);
     }
 
     private static SKPaint? CreateOpacityPaint(double opacity)
