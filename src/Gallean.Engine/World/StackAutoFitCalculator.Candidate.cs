@@ -5,6 +5,7 @@ internal static partial class StackAutoFitCalculator
     private sealed record Candidate(
         WorldUnit Unit,
         UnitDefinition Definition,
+        UnitCosts Costs,
         bool IsFromStack,
         int Size) : IComparable<Candidate>
     {

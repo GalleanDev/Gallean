@@ -1201,4 +1201,63 @@ public sealed class StackAutoFitCalculatorTests
             Equipment: LeaderEquipment.Empty
         )));
     }
+
+    [Test]
+    public void ExperiencedUnitTest()
+    {
+        UnitDefinition leaderDefinition = CreateUnitDefinition("leader", 100, false, UnitAttackReach.Adjacent) with
+        {
+            Category = UnitCategory.Leader,
+            LeaderCategory = UnitLeaderCategory.Fighter,
+            Leadership = 2
+        };
+        UnitDefinition soldierDefinition = CreateUnitDefinition("soldier", 50, false, UnitAttackReach.Adjacent) with
+        {
+            TrainingCost = new WorldResourceSet(4, 0, 0, 0, 0, 0)
+        };
+        UnitDefinition mageDefinition = CreateUnitDefinition("mage", 60, false, UnitAttackReach.All) with
+        {
+            TrainingCost = new WorldResourceSet(4, 0, 0, 0, 0, 0)
+        };
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .AddUnit(mageDefinition)
+            .Build();
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, 1, [], null, false);
+        WorldUnit veteran = new(new WorldUnitId("veteran"), soldierDefinition.Id, 100, 60, 1, [], null, false);
+        WorldUnit mage = new(new WorldUnitId("mage"), mageDefinition.Id, 100, 0, 1, [], null, false);
+
+        UnitGrid<WorldUnit> stack = new UnitGrid<WorldUnit>.Builder()
+            .Place(leader, GridPosition.FrontBottom, false)
+            .Place(veteran, GridPosition.FrontCenter, false)
+            .Build();
+
+        UnitGrid<WorldUnit> garrison = new UnitGrid<WorldUnit>.Builder()
+            .Place(mage, GridPosition.BackCenter, false)
+            .Build();
+
+        StackAutoFitCalculator.Result result = CheckCalculate(
+            stack,
+            garrison,
+            WorldInventory.Empty,
+            WorldInventory.Empty,
+            LeaderEquipment.Empty,
+            GridPosition.Count,
+            definitions);
+
+        Assert.That(result, Is.EqualTo(new StackAutoFitCalculator.Result(
+            StackUnits: new UnitGrid<WorldUnit>.Builder()
+                .Place(leader, GridPosition.FrontCenter, false)
+                .Place(veteran, GridPosition.FrontBottom, false)
+                .Build(),
+            GarrisonUnits: new UnitGrid<WorldUnit>.Builder()
+                .Place(mage, GridPosition.BackCenter, false)
+                .Build(),
+            StackInventory: WorldInventory.Empty,
+            GarrisonInventory: WorldInventory.Empty,
+            Equipment: LeaderEquipment.Empty
+        )));
+    }
 }

@@ -310,6 +310,7 @@ internal static partial class StackAutoFitCalculator
         return new Candidate(
             unit,
             definition,
+            UnitStatsCalculator.GetCosts(definition, unit.Level, definitions),
             isFromStack,
             definition.IsLarge ? GridPosition.LineCount : 1);
     }
@@ -333,7 +334,7 @@ internal static partial class StackAutoFitCalculator
                     selections.Add(new Selection(
                         newCandidates,
                         size,
-                        selection.Gold + candidate.Definition.PurchaseCost.Gold,
+                        selection.Gold + candidate.Costs.PurchaseCost.Gold + (candidate.Unit.Experience * candidate.Costs.TrainingCost.Gold),
                         selection.Experience + candidate.Unit.Experience,
                         selection.Hitpoints + candidate.Unit.Hitpoints,
                         selection.StackUnits + (candidate.IsFromStack ? 1 : 0)));
