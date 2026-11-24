@@ -106,6 +106,8 @@ internal sealed class BattleRenderStateBuilder(
             Presence presence = ResolvePresence(unit);
             bool isCurrent = IsUnitCurrent(unit, presence);
             UnitExperience experience = stats.GetBattleUnitExperience(baseState, unit.Id);
+            UnitDefinition definition = definitions.GetUnit(unit.DefinitionId);
+            int highLevelRank = UnitHighLevelRankResolver.Resolve(definition, unit.Level);
             IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions, texts);
 
             units.Add(new BattleGridUnitViewModel(
@@ -120,6 +122,7 @@ internal sealed class BattleRenderStateBuilder(
                 maxHitpoints,
                 presence,
                 experience.IsPendingUpgrade,
+                highLevelRank,
                 isCurrent,
                 marker,
                 BuildFeedback(unit, presence),

@@ -84,6 +84,7 @@ public sealed class WorldStackInfoViewModelTests
                 100,
                 100,
                 IsAlive: true,
+                HighLevelRank: 0,
                 Row: 2,
                 Column: 1,
                 ColumnSpan: 1,
@@ -94,6 +95,7 @@ public sealed class WorldStackInfoViewModelTests
                 30,
                 35,
                 IsAlive: true,
+                HighLevelRank: 0,
                 Row: 1,
                 Column: 1,
                 ColumnSpan: 1,
@@ -220,6 +222,7 @@ public sealed class WorldStackInfoViewModelTests
                     100,
                     100,
                     IsAlive: true,
+                    HighLevelRank: 0,
                     Row: 2,
                     Column: 1,
                     ColumnSpan: 1,
@@ -300,6 +303,7 @@ public sealed class WorldStackInfoViewModelTests
                 100,
                 100,
                 IsAlive: true,
+                HighLevelRank: 0,
                 Row: 2,
                 Column: 1,
                 ColumnSpan: 1,
@@ -310,6 +314,90 @@ public sealed class WorldStackInfoViewModelTests
                     new UnitModifierStatusViewModel(UnitModifierCategory.Potion, UnitModifierType.Boost,
                         [new UnitModifierViewModel("+20% initiative", TrSpans("Turns left: {0:*}", 2), UnitModifierCategory.Potion, UnitModifierType.Boost)])
                 ])
+        }));
+    }
+
+    [Test]
+    public void HighLevelRankTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Human, map);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+                TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+                movementPoints: 20, leadership: 3) with
+            {
+                NameTextId = new GlobalTextId("Knight")
+            };
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10) with
+        {
+            NameTextId = new GlobalTextId("Squire")
+        };
+
+        WorldUnit leader = new(new WorldUnitId("leader"), leaderDefinition.Id, 100, 0, 5, [], Name: null, IsTypeLocked: false);
+        WorldUnit soldier = new(new WorldUnitId("soldier"), soldierDefinition.Id, 35, 0, 15, [], null, false);
+        IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(leaderDefinition)
+            .AddUnit(soldierDefinition)
+            .Build();
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Stack1"),
+            player.Id,
+            new WorldPosition(4, 4),
+            TestHelpers.StackUnitGrid(
+                stackDefinitions,
+                [
+                    (leader, GridPosition.FrontBottom),
+                    (soldier, GridPosition.FrontCenter)
+                ]),
+            movementPoints: 20);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(leaderDefinition.Id, UpgradeChangeLevel: 10, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .WithUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(soldierDefinition.Id, UpgradeChangeLevel: 10, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .WithStack(stack)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .BuildSession();
+
+        WorldStackInfoViewModel info = WorldStackInfoViewModel.Create(
+            session.World.State,
+            session.World.State.TurnInfo.CurrentPlayerId,
+            stack,
+            engine.Definitions,
+            TestGameTextProvider.Instance,
+            engine.UnitStats);
+
+        Assert.That(info.Grid.Units, Is.EqualTo(new List<WorldUnitGroupInfoUnitViewModel>
+        {
+            new(
+                new AssetSpriteKey.UnitFace(leaderDefinition.Id),
+                "Knight",
+                100,
+                100,
+                IsAlive: true,
+                HighLevelRank: 1,
+                Row: 2,
+                Column: 1,
+                ColumnSpan: 1,
+                Statuses: []),
+            new(
+                new AssetSpriteKey.UnitFace(soldierDefinition.Id),
+                "Squire",
+                35,
+                35,
+                IsAlive: true,
+                HighLevelRank: 3,
+                Row: 1,
+                Column: 1,
+                ColumnSpan: 1,
+                Statuses: [])
         }));
     }
 }

@@ -105,7 +105,8 @@ internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionVi
         AssetSpriteKey.UnitFace faceKey = new(unit.DefinitionId);
         GameSnapshot snapshot = gameModel.Snapshot;
         WorldPlayer owner = snapshot.WorldState.Players[snapshot.ViewPlayerId];
-        int highLevelRank = GetHighLevelRank(unit);
+        UnitDefinition definition = gameModel.Definitions.GetUnit(unit.DefinitionId);
+        int highLevelRank = UnitHighLevelRankResolver.Resolve(definition, unit.Level);
 
         UnitDetailsViewModel details = UnitDetailsViewModel.CreateFromWorld(
             unit,
@@ -133,24 +134,5 @@ internal sealed class UnitGridViewModel(GameModel gameModel, UnitGridSelectionVi
             showsPurchaseHint: false,
             selection,
             details);
-    }
-
-    private int GetHighLevelRank(WorldUnit unit)
-    {
-        UnitDefinition definition = gameModel.Definitions.GetUnit(unit.DefinitionId);
-        int levels = unit.Level - definition.Level;
-
-        if (definition.Level == 1)
-        {
-            levels++;
-        }
-
-        return levels switch
-        {
-            >= 15 => 3,
-            >= 10 => 2,
-            >= 5 => 1,
-            _ => 0
-        };
     }
 }

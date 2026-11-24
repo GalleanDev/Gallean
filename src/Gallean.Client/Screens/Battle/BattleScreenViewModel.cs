@@ -756,6 +756,7 @@ internal sealed partial class BattleScreenViewModel : AbstractGameScreenViewMode
                 viewModel.MaxHitpoints,
                 viewModel.Presence,
                 viewModel.IsPendingUpgrade,
+                viewModel.HighLevelRank,
                 viewModel.IsCurrent,
                 viewModel.Marker,
                 feedback,

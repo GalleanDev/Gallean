@@ -77,6 +77,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: true,
                 marker: null,
                 feedback: [],
@@ -100,6 +101,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 40,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: Theme.Battle.GridMarker.EnemyTargetColor,
                 feedback: [],
@@ -178,6 +180,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 40,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: Theme.Battle.GridMarker.EnemyReachableColor,
                 feedback: [],
@@ -259,6 +262,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: true,
                 marker: null,
                 feedback: [],
@@ -282,6 +286,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 40,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [],
@@ -371,6 +376,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: true,
                 marker: null,
                 feedback: [],
@@ -463,6 +469,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Absent,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [],
@@ -483,6 +490,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 40,
                 presence: BattleUnitState.Presence.Dead,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [],
@@ -508,6 +516,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 40,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: null,
             feedback: [],
@@ -526,6 +535,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 40,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: null,
             feedback: [],
@@ -544,6 +554,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 40,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: null,
             feedback: [],
@@ -562,6 +573,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 40,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: Theme.Battle.GridMarker.EnemyTargetColor,
             feedback: [],
@@ -592,6 +604,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 40,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: null,
             feedback: [],
@@ -610,6 +623,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 40,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: null,
             feedback: [],
@@ -637,6 +651,7 @@ public sealed class BattleGridViewModelTests
             maxHitpoints: 60,
             presence: BattleUnitState.Presence.Alive,
             isPendingUpgrade: false,
+            highLevelRank: 0,
             isCurrent: false,
             marker: null,
             feedback: [],
@@ -718,6 +733,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: true,
                 marker: null,
                 feedback: [],
@@ -806,6 +822,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [new BattleFeedbackViewModel(BattleUnitState.FeedbackType.Heal, "+40 XP", Animation: [])],
@@ -823,6 +840,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [],
@@ -840,6 +858,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Dead,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [],
@@ -857,6 +876,7 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Absent,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: false,
                 marker: null,
                 feedback: [],
@@ -938,7 +958,116 @@ public sealed class BattleGridViewModelTests
                 maxHitpoints: 60,
                 presence: BattleUnitState.Presence.Alive,
                 isPendingUpgrade: false,
+                highLevelRank: 0,
                 isCurrent: true,
+                marker: null,
+                feedback: [],
+                statuses: [],
+                hitpointsAnimation: AnimationRange.None)
+        ]));
+    }
+
+    [Test]
+    public void HighLevelRankTest()
+    {
+        UnitDefinition squireDefinition = TestHelpers.SimpleUnitDefinition("SQR", maxHitpoints: 60, initiative: 50, damage: 10);
+        UnitDefinition knightDefinition = TestHelpers.SimpleUnitDefinition("KNT", maxHitpoints: 80, initiative: 50, damage: 10) with
+        {
+            Level = 3
+        };
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("DEF", maxHitpoints: 40, initiative: 50, damage: 10);
+
+        BattleUnit squire = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, squireDefinition.Id, BattleSide.Attacker, hitpoints: 60) with
+        {
+            Level = 10
+        };
+        BattleUnit knight = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, knightDefinition.Id, BattleSide.Attacker, hitpoints: 80) with
+        {
+            Level = 8
+        };
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(3), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 40);
+
+        UnitGrid<BattleUnit> attackerGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(squire, GridPosition.FrontCenter, isLarge: false)
+            .Place(knight, GridPosition.BackCenter, isLarge: false)
+            .Build();
+
+        UnitGrid<BattleUnit> defenderGrid = new UnitGrid<BattleUnit>.Builder()
+            .Place(defender, GridPosition.FrontCenter, isLarge: false)
+            .Build();
+
+        BattleState state = new(
+            attackerGrid,
+            defenderGrid,
+            new BattleUnitTurn(new BattleUnitId(1), BattleUnitTurnType.Normal),
+            TurnQueue: [],
+            WaitingQueue: [],
+            Items: [],
+            CurrentRound: BattleRound.Normal(1),
+            Outcome: null,
+            Modifiers: BattleModifiers.None,
+            Info: TestHelpers.SimpleBattleInfo());
+
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder()
+            .AddUnit(squireDefinition)
+            .AddUnit(knightDefinition)
+            .AddUnit(defenderDefinition)
+            .AddUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(squireDefinition.Id, UpgradeChangeLevel: 10, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .AddUnitDynamicUpgrade(new UnitDynamicUpgradeDefinition(knightDefinition.Id, UpgradeChangeLevel: 10, UnitDynamicUpgrade.Empty, UnitDynamicUpgrade.Empty))
+            .Build();
+        IUnitStatsProvider stats = new UnitStatsProvider(definitions, new GlobalVariables(), GameScenarioProvider.Empty.Definition);
+
+        BattleRenderStateBuilder builder = new(
+            state,
+            state,
+            stats,
+            definitions,
+            TestGameTextProvider.Instance,
+            NullAssetProvider.Instance,
+            new AssetSpriteKey.BattleBackground(new AssetSpriteKey.BattleLocation.Terrain(WorldMapTerrain.Human), 1),
+            new BattleEnvironment(BattleTimeOfDay.Midday, Rain: false, Storm: false),
+            positions: new BattlePositions(Attacker: BattlePosition.Left, Defender: BattlePosition.Right),
+            isAiTurn: false,
+            selectedTarget: null,
+            actionTargets: new Dictionary<BattleGridTile, BattleActionTarget>(),
+            previousState: null);
+
+        BattleGridViewModel attackerGridViewModel = new();
+        attackerGridViewModel.UpdateUnits(builder.BuildUnits(BattleSide.Attacker, isFacingRight: true));
+
+        Assert.That(attackerGridViewModel.Units, Is.EqualTo([
+            new BattleGridUnitViewModel(
+                new BattleUnitId(1),
+                new BattleGridTile(BattleSide.Attacker, GridPosition.FrontCenter),
+                new AssetSpriteKey.UnitFace(squireDefinition.Id),
+                facing: BattleSide.Attacker,
+                row: 1,
+                column: 1,
+                columnSpan: 1,
+                hitpoints: 60,
+                maxHitpoints: 60,
+                presence: BattleUnitState.Presence.Alive,
+                isPendingUpgrade: false,
+                highLevelRank: 2,
+                isCurrent: true,
+                marker: null,
+                feedback: [],
+                statuses: [],
+                hitpointsAnimation: AnimationRange.None),
+            new BattleGridUnitViewModel(
+                new BattleUnitId(2),
+                new BattleGridTile(BattleSide.Attacker, GridPosition.BackCenter),
+                new AssetSpriteKey.UnitFace(knightDefinition.Id),
+                facing: BattleSide.Attacker,
+                row: 1,
+                column: 0,
+                columnSpan: 1,
+                hitpoints: 80,
+                maxHitpoints: 80,
+                presence: BattleUnitState.Presence.Alive,
+                isPendingUpgrade: false,
+                highLevelRank: 1,
+                isCurrent: false,
                 marker: null,
                 feedback: [],
                 statuses: [],

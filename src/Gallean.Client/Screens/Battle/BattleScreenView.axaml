@@ -162,6 +162,7 @@
                             IsDead="{Binding Presence, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:BattleUnitState+Presence.Dead}}"
                             IsSelected="{Binding IsCurrent}"
                             IsPendingUpgrade="{Binding IsPendingUpgrade}"
+                            HighLevelRank="{Binding HighLevelRank}"
                             Marker="{Binding Marker, Converter={x:Static local:ColorToBrushConverter.Instance}}"
                             Overlay="{Binding Overlay, Converter={x:Static local:ColorToBrushConverter.Instance}}"
                             Statuses="{Binding Statuses}"

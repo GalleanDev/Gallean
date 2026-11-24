@@ -18,6 +18,7 @@
                           Hitpoints="{Binding Hitpoints}"
                           MaxHitpoints="{Binding MaxHitpoints}"
                           IsDead="{Binding !IsAlive}"
+                          HighLevelRank="{Binding HighLevelRank}"
                           Statuses="{Binding Statuses}"
                           StatusTemplate="{StaticResource UnitStatusBadgeTemplate}">
         <local:OutlinedTextBlock Classes="object-name compact unit-group-info-name" Text="{Binding Name}" />

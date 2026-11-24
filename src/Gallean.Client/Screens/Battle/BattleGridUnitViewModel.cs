@@ -16,6 +16,7 @@ internal sealed partial class BattleGridUnitViewModel(
     int maxHitpoints,
     BattleUnitState.Presence presence,
     bool isPendingUpgrade,
+    int highLevelRank,
     bool isCurrent,
     Color? marker,
     IReadOnlyList<BattleFeedbackViewModel> feedback,
@@ -55,6 +56,9 @@ internal sealed partial class BattleGridUnitViewModel(
     public partial bool IsPendingUpgrade { get; private set; } = isPendingUpgrade;
 
     [ObservableProperty]
+    public partial int HighLevelRank { get; private set; } = highLevelRank;
+
+    [ObservableProperty]
     public partial bool IsCurrent { get; private set; } = isCurrent;
 
     [ObservableProperty]
@@ -84,6 +88,7 @@ internal sealed partial class BattleGridUnitViewModel(
         MaxHitpoints = other.MaxHitpoints;
         Presence = other.Presence;
         IsPendingUpgrade = other.IsPendingUpgrade;
+        HighLevelRank = other.HighLevelRank;
         IsCurrent = other.IsCurrent;
         Marker = other.Marker;
         Feedback = other.Feedback;
@@ -114,6 +119,7 @@ internal sealed partial class BattleGridUnitViewModel(
                MaxHitpoints == other.MaxHitpoints &&
                Presence == other.Presence &&
                IsPendingUpgrade == other.IsPendingUpgrade &&
+               HighLevelRank == other.HighLevelRank &&
                IsCurrent == other.IsCurrent &&
                Marker == other.Marker &&
                Feedback.SequenceEqual(other.Feedback) &&
@@ -141,6 +147,7 @@ internal sealed partial class BattleGridUnitViewModel(
         hash.Add(MaxHitpoints);
         hash.Add(Presence);
         hash.Add(IsPendingUpgrade);
+        hash.Add(HighLevelRank);
         hash.Add(IsCurrent);
         hash.Add(Marker);
         hash.AddSequence(Feedback);

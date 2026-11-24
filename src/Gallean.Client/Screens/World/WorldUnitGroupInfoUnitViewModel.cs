@@ -9,6 +9,7 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
     int Hitpoints,
     int MaxHitpoints,
     bool IsAlive,
+    int HighLevelRank,
     int Row,
     int Column,
     int ColumnSpan,
@@ -41,6 +42,8 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
         }
 
         int columnSpan = isLarge ? 2 : 1;
+        UnitDefinition definition = definitions.GetUnit(unit.DefinitionId);
+        int highLevelRank = UnitHighLevelRankResolver.Resolve(definition, unit.Level);
         IReadOnlyList<UnitModifierViewModel> modifiers = UnitModifierViewModel.CreateAll(unit, definitions, texts);
         IReadOnlyList<UnitStatusViewModel> statuses = UnitStatusViewModel.CreateAll([], modifiers);
 
@@ -50,6 +53,7 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
             unit.Hitpoints,
             unitStats.MaxHitpoints,
             unit.IsAlive,
+            highLevelRank,
             row,
             column,
             columnSpan,
@@ -73,6 +77,7 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
                Hitpoints == other.Hitpoints &&
                MaxHitpoints == other.MaxHitpoints &&
                IsAlive == other.IsAlive &&
+               HighLevelRank == other.HighLevelRank &&
                Row == other.Row &&
                Column == other.Column &&
                ColumnSpan == other.ColumnSpan &&
@@ -88,6 +93,7 @@ internal sealed record WorldUnitGroupInfoUnitViewModel(
         hash.Add(Hitpoints);
         hash.Add(MaxHitpoints);
         hash.Add(IsAlive);
+        hash.Add(HighLevelRank);
         hash.Add(Row);
         hash.Add(Column);
         hash.Add(ColumnSpan);

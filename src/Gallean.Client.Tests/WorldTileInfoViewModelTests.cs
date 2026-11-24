@@ -492,6 +492,7 @@ public sealed class WorldTileInfoViewModelTests
                 100,
                 100,
                 IsAlive: true,
+                HighLevelRank: 0,
                 Row: 2,
                 Column: 1,
                 ColumnSpan: 1,
