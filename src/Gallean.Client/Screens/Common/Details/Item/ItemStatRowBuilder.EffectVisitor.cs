@@ -18,7 +18,7 @@ internal static partial class ItemStatRowBuilder
         {
             UnitAttackDefinition attack = context.Definitions.GetAttack(effect.AttackId);
 
-            return BuildAttackRows(attack);
+            return BuildAttackRows(attack, null);
         }
 
         public IEnumerable<StatRowViewModel> Visit(ReviveItemEffect effect, Context context)

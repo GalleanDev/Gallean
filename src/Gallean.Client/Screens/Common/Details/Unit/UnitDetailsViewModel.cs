@@ -318,18 +318,28 @@ internal sealed record UnitDetailsViewModel(
             currentExperience = experience.Current;
         }
 
+        string? accuracyNote;
+        if (attackDetails.Stats.AccuracyReductionPerTarget > 0)
+        {
+            accuracyNote = Tr("Reduced by {0}% with each target", attackDetails.Stats.AccuracyReductionPerTarget);
+        }
+        else
+        {
+            accuracyNote = null;
+        }
+
         List<StatRowViewModel> rows =
         [
-            new(IconMoniker.Target, Tr("Targets"), CreateTargets(attackDetails.Attack.Reach), null),
-            new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(TextSpans.FromText(baseStats.Armor.ToString()), unitStats.Armor - baseStats.Armor), null),
-            new(IconMoniker.Accuracy, Tr("Accuracy"), CreateAccuracy(attackDetails), secondaryAccuracy),
-            new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(TextSpans.FromText(baseStats.Initiative.ToString()), unitStats.Initiative - baseStats.Initiative), null)
+            new(IconMoniker.Target, Tr("Targets"), CreateTargets(attackDetails.Attack.Reach), null, null),
+            new(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(TextSpans.FromText(baseStats.Armor.ToString()), unitStats.Armor - baseStats.Armor), null, null),
+            new(IconMoniker.Accuracy, Tr("Accuracy"), CreateAccuracy(attackDetails), secondaryAccuracy, accuracyNote),
+            new(IconMoniker.Initiative, Tr("Initiative"), new StatValueViewModel(TextSpans.FromText(baseStats.Initiative.ToString()), unitStats.Initiative - baseStats.Initiative), null, null)
         ];
 
         StatRowViewModel? leadershipRow;
         if (definition.LeaderCategory is not null)
         {
-            leadershipRow = new StatRowViewModel(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(TextSpans.FromText(leadership.ToString()), 0), null);
+            leadershipRow = new StatRowViewModel(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(TextSpans.FromText(leadership.ToString()), 0), null, null);
         }
         else
         {

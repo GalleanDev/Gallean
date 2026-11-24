@@ -1,3 +1,8 @@
 namespace Gallean.Client;
 
-internal sealed record StatRowViewModel(IconMoniker? Icon, string Label, StatValueViewModel Value, StatValueViewModel? SecondaryValue);
+internal sealed record StatRowViewModel(
+    IconMoniker? Icon,
+    string Label,
+    StatValueViewModel Value,
+    StatValueViewModel? SecondaryValue,
+    string? Note);

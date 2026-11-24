@@ -666,7 +666,7 @@ public sealed class MerchantTabViewModelTests
             "desc",
             Attack: null,
             Summons: [],
-            [new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("+50"), 0), null)],
+            [new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("+50"), 0), null, null)],
             SpellEffect: null,
             CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(50, 0, 0, 0, 0, 0), ResourceSetProjection.All))));
@@ -677,7 +677,7 @@ public sealed class MerchantTabViewModelTests
             "desc",
             Attack: null,
             Summons: [],
-            [new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("+50"), 0), null)],
+            [new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("+50"), 0), null, null)],
             SpellEffect: null,
             CastingCost: null,
             new ResourceSetViewModel(new WorldResourceSet(80, 0, 0, 0, 0, 0), ResourceSetProjection.All))));

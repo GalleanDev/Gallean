@@ -187,7 +187,7 @@ public sealed class UnitStatsProvider(
         }
         else
         {
-            return UnitAttackStatsCalculator.CalculateForItem(attack, globals);
+            return UnitAttackStatsCalculator.CalculateForItem(definition, attack, definitions, globals);
         }
     }
 

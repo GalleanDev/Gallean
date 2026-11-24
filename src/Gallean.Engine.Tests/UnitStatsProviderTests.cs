@@ -227,7 +227,7 @@ public sealed class UnitStatsProviderTests
 
         UnitAttackStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleAttackStats(state, unit.Id, definition.Attack);
 
-        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 76, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 76, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -258,7 +258,7 @@ public sealed class UnitStatsProviderTests
 
         UnitAttackStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleAttackStats(state, unit.Id, weapon);
 
-        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 61, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 80, AccuracyReductionPerTarget: 0, Damage: 61, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -274,7 +274,7 @@ public sealed class UnitStatsProviderTests
 
         UnitAttackStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleAttackStats(state, unit.Id, weapon);
 
-        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 61, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 80, AccuracyReductionPerTarget: 0, Damage: 61, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -305,8 +305,8 @@ public sealed class UnitStatsProviderTests
         WorldUnit unit = TestHelpers.SimpleUnit(new WorldUnitId("unit"), definition) with { Modifiers = [UnitModifier.Permanent(might.Id)] };
         UnitStatsProvider provider = new(definitions, globals, GameScenarioProvider.Empty.Definition);
 
-        Assert.That(provider.GetWorldAttackStats(unit, definition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 50, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
-        Assert.That(provider.GetWorldAttackStats(unit, poison), Is.EqualTo(new UnitAttackStats(Accuracy: 80, Damage: 10, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(provider.GetWorldAttackStats(unit, definition.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 50, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(provider.GetWorldAttackStats(unit, poison), Is.EqualTo(new UnitAttackStats(Accuracy: 80, AccuracyReductionPerTarget: 0, Damage: 10, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -324,6 +324,45 @@ public sealed class UnitStatsProviderTests
         WorldUnit unit = TestHelpers.SimpleUnit(new WorldUnitId("booster"), definition);
         UnitStatsProvider provider = new(definitions, globals, GameScenarioProvider.Empty.Definition);
 
-        Assert.That(provider.GetWorldAttackStats(unit, boost), Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 75)));
+        Assert.That(provider.GetWorldAttackStats(unit, boost), Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 75)));
+    }
+
+    [Test]
+    public void AccuracyReductionPerTargetTest()
+    {
+        UnitDefinition archmage = TestHelpers.SimpleUnitDefinition("archmage", maxHitpoints: 30, initiative: 50, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("archmage"), 50, 5, accuracy: 90, reach: UnitAttackReach.All),
+            Category = UnitCategory.Leader,
+            LeaderCategory = UnitLeaderCategory.Mage
+        };
+        UnitDefinition mage = TestHelpers.SimpleUnitDefinition("mage", maxHitpoints: 30, initiative: 50, damage: 5) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("mage"), 50, 5, accuracy: 90, reach: UnitAttackReach.All)
+        };
+        UnitAttackDefinition crystal = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("crystal"), initiative: 50, damage: 0, accuracy: 80, reach: UnitAttackReach.Any) with { Type = UnitAttackType.Paralyze };
+        WorldRaceDefinition race = new(
+            WorldRace.Human,
+            new GlobalTextId("Empire"),
+            new WorldResourceSet(100, 0, 0, 25, 0, 0),
+            WorldMapTerrain.Human,
+            true,
+            35,
+            null,
+            [],
+            [archmage.Id],
+            [],
+            0,
+            0);
+        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(archmage).AddUnit(mage).AddRace(race).Build();
+        GlobalVariables globals = new();
+
+        WorldUnit archmageUnit = TestHelpers.SimpleUnit(new WorldUnitId("archmage"), archmage);
+        WorldUnit mageUnit = TestHelpers.SimpleUnit(new WorldUnitId("mage"), mage);
+        UnitStatsProvider provider = new(definitions, globals, GameScenarioProvider.Empty.Definition);
+
+        Assert.That(provider.GetWorldAttackStats(archmageUnit, archmage.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 90, AccuracyReductionPerTarget: 10, Damage: 5, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(provider.GetWorldAttackStats(archmageUnit, crystal), Is.EqualTo(new UnitAttackStats(Accuracy: 80, AccuracyReductionPerTarget: 10, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(provider.GetWorldAttackStats(mageUnit, mage.Attack), Is.EqualTo(new UnitAttackStats(Accuracy: 90, AccuracyReductionPerTarget: 0, Damage: 5, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 }

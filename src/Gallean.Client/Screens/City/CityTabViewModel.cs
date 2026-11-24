@@ -1089,8 +1089,8 @@ internal sealed partial class CityTabViewModel
     {
         return
         [
-            new StatRowViewModel(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(TextSpans.FromText($"{info.ArmorBonus:+0;-0;0}"), 0), null),
-            new StatRowViewModel(IconMoniker.Heal, Tr("Regeneration"), new StatValueViewModel(TextSpans.FromText(Tr("{0}%", info.Regeneration)), 0), null)
+            new StatRowViewModel(IconMoniker.Armor, Tr("Armor"), new StatValueViewModel(TextSpans.FromText($"{info.ArmorBonus:+0;-0;0}"), 0), null, null),
+            new StatRowViewModel(IconMoniker.Heal, Tr("Regeneration"), new StatValueViewModel(TextSpans.FromText(Tr("{0}%", info.Regeneration)), 0), null, null)
         ];
     }
 

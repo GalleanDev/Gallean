@@ -175,6 +175,8 @@ internal static partial class BattleAttackCalculator
     {
         BattleUnitId targetId = step.TargetIds[step.TargetIndex];
         ImmutableArray<BattleUnitId> nextTargetIds = step.NextTargetIds;
+        UnitAttackDefinition attack = context.Definitions.GetAttack(step.AttackIds[0]);
+        UnitAttackStats attackStats = context.UnitStats.GetBattleAttackStats(state, step.AttackerId, attack);
         BattleAttackResult attackResult;
 
         if (state.TryGetUnit(targetId) is null)
@@ -188,7 +190,8 @@ internal static partial class BattleAttackCalculator
                 context,
                 step.AttackerId,
                 targetId,
-                step.AttackIds[0],
+                attack,
+                attackStats,
                 step.AccuracyReduction,
                 step.TargetIds.Length);
 
@@ -198,7 +201,7 @@ internal static partial class BattleAttackCalculator
             }
         }
 
-        int accuracyReduction = step.AccuracyReduction + GetAccuracyReductionPerTarget(state, context, step.AttackerId);
+        int accuracyReduction = step.AccuracyReduction + attackStats.AccuracyReductionPerTarget;
         int nextTargetIndex = step.TargetIndex + 1;
         ImmutableArray<UnitAttackDefinitionId> nextAttackIds = step.AttackIds[1..];
         BattleUnitAttackStepEvent? nextStep;
@@ -244,28 +247,27 @@ internal static partial class BattleAttackCalculator
         IEngineContext context,
         BattleUnitId attackerId,
         BattleUnitId targetId,
-        UnitAttackDefinitionId attackId,
+        UnitAttackDefinition attack,
+        UnitAttackStats attackStats,
         int accuracyReduction,
         int targetCount)
     {
-        UnitAttackDefinition attack = context.Definitions.GetAttack(attackId);
         IBattleAttackResolver resolver = BattleAttackResolverFactory.Create(attack.Type);
 
         BattleUnit attacker = state.GetUnit(attackerId);
         BattleSideModifiers sideModifiers = state.Modifiers.GetModifiers(attacker.Side);
-        UnitAttackStats attackStats = context.UnitStats.GetBattleAttackStats(state, attackerId, attack);
 
         int accuracy = Math.Clamp(attackStats.Accuracy + sideModifiers.AccuracyBonus, 0, context.Globals.MaxAttackAccuracy);
         accuracy = Math.Max(0, accuracy - accuracyReduction);
 
-        if (attacker.EquipmentAttackIds.Contains(attackId))
+        if (attacker.EquipmentAttackIds.Contains(attack.Id))
         {
             accuracy /= targetCount;
         }
 
-        attackStats = attackStats with { Accuracy = accuracy };
+        UnitAttackStats rolledStats = attackStats with { Accuracy = accuracy };
 
-        return resolver.Resolve(state, context, attackerId, new BattleAttackUnitTarget(targetId), attack, attackStats);
+        return resolver.Resolve(state, context, attackerId, new BattleAttackUnitTarget(targetId), attack, rolledStats);
     }
 
     private static ImmutableArray<UnitAttackDefinition> GetAttacks(
@@ -296,30 +298,6 @@ internal static partial class BattleAttackCalculator
         }
 
         return attacks.ToImmutable();
-    }
-
-    private static int GetAccuracyReductionPerTarget(BattleState state, IEngineContext context, BattleUnitId attackerId)
-    {
-        BattleUnit attacker = state.GetUnit(attackerId);
-        UnitDefinition unit = context.Definitions.GetUnit(attacker.DefinitionId);
-
-        if (unit is { Category: UnitCategory.Leader, Attack.Reach: UnitAttackReach.All })
-        {
-            WorldRaceDefinition race = context.Definitions.GetRace(unit.Race);
-
-            if (race.Leaders.Contains(unit.Id))
-            {
-                return context.Globals.AccuracyReductionPerTarget;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        else
-        {
-            return 0;
-        }
     }
 
     private static bool CanUseAlternativeAttack(

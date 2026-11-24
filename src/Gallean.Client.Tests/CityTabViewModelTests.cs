@@ -687,8 +687,8 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.CitySummary, Is.EqualTo(new TextSpans([new TextSpan("City level: ", TextStyle.None), new TextSpan("3", TextStyle.Highlight)])));
             Assert.That(screen.CityStats, Is.EqualTo(new StatRowViewModel[]
             {
-                new(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
-                new(IconMoniker.Heal, "Regeneration", new StatValueViewModel(TextSpans.FromText("20%"), 0), null)
+                new(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null, null),
+                new(IconMoniker.Heal, "Regeneration", new StatValueViewModel(TextSpans.FromText("20%"), 0), null, null)
             }));
             Assert.That(screen.CityImageKey, Is.EqualTo(new AssetSpriteKey.CityImage(3)));
             Assert.That(screen.CapitalScene, Is.Null);
@@ -872,10 +872,10 @@ public sealed class CityTabViewModelTests
                 new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
                 "name",
                 [
-                    new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100 / 100"), 0), null),
-                    new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0), null),
-                    new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0), null),
-                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null)
+                    new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100 / 100"), 0), null, null),
+                    new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0), null, null),
+                    new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0), null, null),
+                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null, null)
                 ],
                 new UnitDetailsViewModel(
                     new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
@@ -895,14 +895,14 @@ public sealed class CityTabViewModelTests
                     null,
                     null,
                     [
-                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
-                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20), null),
-                        new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
-                        new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+                        new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null, null),
+                        new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20), null, null),
+                        new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null, null),
+                        new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null, null)
                     ],
                     null,
                     null,
-                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
+                    new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null, null),
                     [],
                     [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])],
                     Summons: null,
@@ -933,10 +933,10 @@ public sealed class CityTabViewModelTests
             null,
             null,
             [
-                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
-                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20), null),
-                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
-                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+                new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null, null),
+                new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20), null, null),
+                new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null, null),
+                new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null, null)
             ],
             null,
             null,
@@ -952,10 +952,10 @@ public sealed class CityTabViewModelTests
             new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
             "name",
             [
-                new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100 / 100"), 0), null),
-                new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0), null),
-                new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0), null),
-                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null)
+                new StatRowViewModel(IconMoniker.Hitpoint, "Hit points", new StatValueViewModel(TextSpans.FromText("100 / 100"), 0), null, null),
+                new StatRowViewModel(IconMoniker.Movement, "Movement", new StatValueViewModel(TextSpans.FromText("20 / 20"), 0), null, null),
+                new StatRowViewModel(IconMoniker.Stack, "Units", new StatValueViewModel(TextSpans.FromText("2 / 6"), 0), null, null),
+                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null, null)
             ],
             new UnitDetailsViewModel(
                 new AssetSpriteKey.UnitEventPortrait(ScenarioEventPortraitId.Unit(leaderDefinition.Id)),
@@ -975,14 +975,14 @@ public sealed class CityTabViewModelTests
                 null,
                 null,
                 [
-                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null),
-                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20), null),
-                    new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null),
-                    new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null)
+                    new StatRowViewModel(IconMoniker.Target, "Targets", new StatValueViewModel(new TextSpans([new TextSpan("1", TextStyle.Bold), new TextSpan(" ", TextStyle.None), new TextSpan("(Ranged)", TextStyle.Italic)]), 0), null, null),
+                    new StatRowViewModel(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 20), null, null),
+                    new StatRowViewModel(IconMoniker.Accuracy, "Accuracy", new StatValueViewModel(TextSpans.FromText("100%"), 0), null, null),
+                    new StatRowViewModel(IconMoniker.Initiative, "Initiative", new StatValueViewModel(TextSpans.FromText("50"), 0), null, null)
                 ],
                 null,
                 null,
-                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null),
+                new StatRowViewModel(IconMoniker.Leadership, "Leadership", new StatValueViewModel(TextSpans.FromText("3"), 0), null, null),
                 [],
                 [new UnitPermanentModifierViewModel(UnitPermanentModifierType.Common, IconMoniker.Armor, "+20 armor", "From city", null, 1, [])],
                 Summons: null,
@@ -1193,8 +1193,8 @@ public sealed class CityTabViewModelTests
             Assert.That(screen.CitySummary, Is.EqualTo(TextSpans.FromText("Capital")));
             Assert.That(screen.CityStats, Is.EqualTo(new StatRowViewModel[]
             {
-                new(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null),
-                new(IconMoniker.Heal, "Regeneration", new StatValueViewModel(TextSpans.FromText("35%"), 0), null)
+                new(IconMoniker.Armor, "Armor", new StatValueViewModel(TextSpans.FromText("0"), 0), null, null),
+                new(IconMoniker.Heal, "Regeneration", new StatValueViewModel(TextSpans.FromText("35%"), 0), null, null)
             }));
             Assert.That(screen.InventoryTransfer.Inventory.Items, Is.Empty);
             Assert.That(screen.CityImageKey, Is.EqualTo(new AssetSpriteKey.CapitalImage(WorldRace.Human)));

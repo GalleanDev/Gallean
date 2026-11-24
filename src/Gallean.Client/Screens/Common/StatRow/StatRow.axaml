@@ -4,23 +4,26 @@
   <Styles.Resources>
     <DataTemplate x:Key="StatRowTemplate" x:DataType="local:StatRowViewModel">
       <Border Classes="stat-row">
-        <Grid ColumnDefinitions="Auto,Auto,*">
-          <ContentControl Grid.Column="0" Classes="stat-icon" Content="{Binding Icon}">
-            <ContentControl.ContentTemplate>
-              <DataTemplate x:DataType="local:IconMoniker">
-                <local:IconVisual Moniker="{Binding}" />
-              </DataTemplate>
-            </ContentControl.ContentTemplate>
-          </ContentControl>
-          <TextBlock Grid.Column="1" Classes="body stat-label" Text="{Binding Label}" />
-          <StackPanel Grid.Column="2" Classes="stat-value">
-            <TextBlock Classes="body" local:TextRuns.Spans="{Binding Value.Text}" />
-            <TextBlock Classes="body change" Classes.decrease="{Binding Value.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding Value.ChangeText}" />
-            <TextBlock Classes="body separator" Text="/" IsVisible="{Binding SecondaryValue, Converter={x:Static ObjectConverters.IsNotNull}}" />
-            <TextBlock Classes="body" local:TextRuns.Spans="{Binding SecondaryValue.Text}" IsVisible="{Binding SecondaryValue, Converter={x:Static ObjectConverters.IsNotNull}}" />
-            <TextBlock Classes="body change" Classes.decrease="{Binding SecondaryValue.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding SecondaryValue.ChangeText}" IsVisible="{Binding SecondaryValue, Converter={x:Static ObjectConverters.IsNotNull}}" />
-          </StackPanel>
-        </Grid>
+        <StackPanel>
+          <Grid ColumnDefinitions="Auto,Auto,*">
+            <ContentControl Grid.Column="0" Classes="stat-icon" Content="{Binding Icon}">
+              <ContentControl.ContentTemplate>
+                <DataTemplate x:DataType="local:IconMoniker">
+                  <local:IconVisual Moniker="{Binding}" />
+                </DataTemplate>
+              </ContentControl.ContentTemplate>
+            </ContentControl>
+            <TextBlock Grid.Column="1" Classes="body stat-label" Text="{Binding Label}" />
+            <StackPanel Grid.Column="2" Classes="stat-value">
+              <TextBlock Classes="body" local:TextRuns.Spans="{Binding Value.Text}" />
+              <TextBlock Classes="body change" Classes.decrease="{Binding Value.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding Value.ChangeText}" />
+              <TextBlock Classes="body separator" Text="/" IsVisible="{Binding SecondaryValue, Converter={x:Static ObjectConverters.IsNotNull}}" />
+              <TextBlock Classes="body" local:TextRuns.Spans="{Binding SecondaryValue.Text}" IsVisible="{Binding SecondaryValue, Converter={x:Static ObjectConverters.IsNotNull}}" />
+              <TextBlock Classes="body change" Classes.decrease="{Binding SecondaryValue.Change, Converter={x:Static local:LessThanConverter.Instance}, ConverterParameter=0}" Text="{Binding SecondaryValue.ChangeText}" IsVisible="{Binding SecondaryValue, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            </StackPanel>
+          </Grid>
+          <TextBlock Classes="caption stat-note" Text="{Binding Note}" IsVisible="{Binding Note, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </StackPanel>
       </Border>
     </DataTemplate>
   </Styles.Resources>
@@ -66,5 +69,10 @@
   </Style>
   <Style Selector="Border.stat-row StackPanel.stat-value > TextBlock.change.decrease">
     <Setter Property="Foreground" Value="{StaticResource StatRowDecreaseBrush}" />
+  </Style>
+  <Style Selector="Border.stat-row TextBlock.stat-note">
+    <Setter Property="Margin" Value="24,2,0,0" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
   </Style>
 </Styles>

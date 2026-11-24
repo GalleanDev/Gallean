@@ -111,7 +111,7 @@ public sealed class UnitStatsCalculatorTests
 
         UnitAttackStats stats = statsProvider.GetWorldAttackStats(unit, definition.Attack);
 
-        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 60, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(stats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 60, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -183,7 +183,7 @@ public sealed class UnitStatsCalculatorTests
 
         UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, definition.Level, [UnitModifier.Permanent(damageBonus.Id)], definitions, new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 300, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 300, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -203,7 +203,7 @@ public sealed class UnitStatsCalculatorTests
 
         UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, definition.Level, [UnitModifier.Permanent(damageBonus.Id)], definitions, new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 299, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 299, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -379,7 +379,7 @@ public sealed class UnitStatsCalculatorTests
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 40, 0, 0, 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 0, 40, 0, 0, 0)));
     }
 
     [Test]
@@ -411,7 +411,7 @@ public sealed class UnitStatsCalculatorTests
             ExperienceKilled: 0,
             ExperienceNextLevel: 1000)));
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(99, 40, 0, 0, 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(99, 0, 40, 0, 0, 0)));
     }
 
     [Test]
@@ -443,7 +443,7 @@ public sealed class UnitStatsCalculatorTests
             definitions,
             new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 40, 0, 35, 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(100, 0, 40, 0, 35, 0)));
     }
 
     [Test]
@@ -850,7 +850,7 @@ public sealed class UnitStatsCalculatorTests
 
         UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, definition.Level + 3, [], definitions, new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 0, Heal: 42, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 0, Heal: 42, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -871,7 +871,7 @@ public sealed class UnitStatsCalculatorTests
 
         UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, definition.Level + 2, [], definitions, new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, Damage: 40, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 100, AccuracyReductionPerTarget: 0, Damage: 40, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -898,7 +898,7 @@ public sealed class UnitStatsCalculatorTests
 
         UnitAttackStats attackStats = UnitAttackStatsCalculator.CalculateForUnit(definition, definition.Attack, definition.Level + 2, [], definitions, new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, AccuracyReductionPerTarget: 0, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 
     [Test]
@@ -937,6 +937,6 @@ public sealed class UnitStatsCalculatorTests
             definitions,
             new GlobalVariables());
 
-        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
+        Assert.That(attackStats, Is.EqualTo(new UnitAttackStats(Accuracy: 0, AccuracyReductionPerTarget: 0, Damage: 0, Heal: 0, DrainPercent: 0, IncreaseDamagePercent: 0)));
     }
 }

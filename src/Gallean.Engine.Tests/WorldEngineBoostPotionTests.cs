@@ -109,6 +109,7 @@ public sealed class WorldEngineBoostPotionTests
 
         Assert.That(context.UnitStats.GetWorldAttackStats(boosted, soldierDefinition.Attack), Is.EqualTo(new UnitAttackStats(
             Accuracy: 100,
+            AccuracyReductionPerTarget: 0,
             Damage: 13,
             Heal: 0,
             DrainPercent: 0,
@@ -253,6 +254,7 @@ public sealed class WorldEngineBoostPotionTests
 
         Assert.That(context.UnitStats.GetWorldAttackStats(soldier, soldierDefinition.Attack), Is.EqualTo(new UnitAttackStats(
             Accuracy: 100,
+            AccuracyReductionPerTarget: 0,
             Damage: 11,
             Heal: 0,
             DrainPercent: 0,

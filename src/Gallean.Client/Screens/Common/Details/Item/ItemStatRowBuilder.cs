@@ -21,7 +21,7 @@ internal static partial class ItemStatRowBuilder
         {
             UnitAttackDefinition attack = definitions.GetAttack(attackId);
 
-            foreach (StatRowViewModel row in BuildAttackRows(attack))
+            foreach (StatRowViewModel row in BuildAttackRows(attack, Tr("Reduced based on the number of targets")))
             {
                 yield return row;
             }
@@ -40,15 +40,15 @@ internal static partial class ItemStatRowBuilder
 
     private static StatRowViewModel CreateRow(IconMoniker icon, string label)
     {
-        return new StatRowViewModel(icon, label, new StatValueViewModel(TextSpans.Empty, 0), null);
+        return new StatRowViewModel(icon, label, new StatValueViewModel(TextSpans.Empty, 0), null, null);
     }
 
     private static StatRowViewModel CreateRow(IconMoniker icon, string label, string value)
     {
-        return new StatRowViewModel(icon, label, new StatValueViewModel(TextSpans.FromText(value), 0), null);
+        return new StatRowViewModel(icon, label, new StatValueViewModel(TextSpans.FromText(value), 0), null, null);
     }
 
-    private static IEnumerable<StatRowViewModel> BuildAttackRows(UnitAttackDefinition attack)
+    private static IEnumerable<StatRowViewModel> BuildAttackRows(UnitAttackDefinition attack, string? accuracyNote)
     {
         if (attack.SummonUnitIds.IsEmpty)
         {
@@ -59,8 +59,8 @@ internal static partial class ItemStatRowBuilder
                 UnitAttackReach.Adjacent => new StatValueViewModel(TrSpans("{0:b} {1:i}", 1, Tr("(Melee)")), 0)
             };
 
-            yield return new StatRowViewModel(IconMoniker.Target, Tr("Targets"), targets, null);
-            yield return CreateRow(IconMoniker.Accuracy, Tr("Accuracy"), $"{attack.Accuracy}%");
+            yield return new StatRowViewModel(IconMoniker.Target, Tr("Targets"), targets, null, null);
+            yield return new StatRowViewModel(IconMoniker.Accuracy, Tr("Accuracy"), new StatValueViewModel(TextSpans.FromText($"{attack.Accuracy}%"), 0), null, accuracyNote);
         }
     }
 

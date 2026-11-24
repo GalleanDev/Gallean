@@ -36,24 +36,52 @@ internal static class UnitAttackStatsCalculator
             drainPercent += modifierDefinition.DrainPercent;
         }
 
-        return WithGlobalLimits(attack, accuracy, damage, heal, drainPercent, globals);
+        return WithGlobalLimits(definition, attack, accuracy, damage, heal, drainPercent, definitions, globals);
     }
 
-    public static UnitAttackStats CalculateForItem(UnitAttackDefinition attack, GlobalVariables globals)
+    public static UnitAttackStats CalculateForItem(
+        UnitDefinition definition,
+        UnitAttackDefinition attack,
+        IGameDefinitionProvider definitions,
+        GlobalVariables globals)
     {
-        return WithGlobalLimits(attack, attack.Accuracy, attack.Damage, attack.Heal, drainPercent: 0, globals);
+        return WithGlobalLimits(definition, attack, attack.Accuracy, attack.Damage, attack.Heal, drainPercent: 0, definitions, globals);
+    }
+
+    private static int GetAccuracyReductionPerTarget(UnitDefinition definition, IGameDefinitionProvider definitions, GlobalVariables globals)
+    {
+        if (definition is { Category: UnitCategory.Leader, Attack.Reach: UnitAttackReach.All })
+        {
+            WorldRaceDefinition race = definitions.GetRace(definition.Race);
+
+            if (race.Leaders.Contains(definition.Id))
+            {
+                return globals.AccuracyReductionPerTarget;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     private static UnitAttackStats WithGlobalLimits(
+        UnitDefinition definition,
         UnitAttackDefinition attack,
         int accuracy,
         int damage,
         int heal,
         int drainPercent,
+        IGameDefinitionProvider definitions,
         GlobalVariables globals)
     {
         return new UnitAttackStats(
             Math.Min(accuracy, globals.MaxAttackAccuracy),
+            GetAccuracyReductionPerTarget(definition, definitions, globals),
             Math.Min(damage, globals.MaxAttackDamage),
             heal,
             drainPercent,

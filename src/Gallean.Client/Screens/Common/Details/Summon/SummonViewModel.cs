@@ -42,11 +42,11 @@ internal sealed record SummonViewModel(
             definition.Level,
             ItemAttackViewModel.Create(attack, definition.AttacksTwice),
             [
-                new StatRowViewModel(IconMoniker.Hitpoint, Tr("Hit points"), CreateValue(definition.MaxHitpoints.ToString()), null),
-                new StatRowViewModel(IconMoniker.Armor, Tr("Armor"), CreateValue(definition.Armor.ToString()), null),
-                new StatRowViewModel(IconMoniker.Target, Tr("Targets"), CreateTargets(attack.Reach), null),
-                new StatRowViewModel(IconMoniker.Accuracy, Tr("Accuracy"), CreateValue($"{attack.Accuracy}%"), null),
-                new StatRowViewModel(IconMoniker.Initiative, Tr("Initiative"), CreateValue(attack.Initiative.ToString()), null)
+                new StatRowViewModel(IconMoniker.Hitpoint, Tr("Hit points"), CreateValue(definition.MaxHitpoints.ToString()), null, null),
+                new StatRowViewModel(IconMoniker.Armor, Tr("Armor"), CreateValue(definition.Armor.ToString()), null, null),
+                new StatRowViewModel(IconMoniker.Target, Tr("Targets"), CreateTargets(attack.Reach), null, null),
+                new StatRowViewModel(IconMoniker.Accuracy, Tr("Accuracy"), CreateValue($"{attack.Accuracy}%"), null, null),
+                new StatRowViewModel(IconMoniker.Initiative, Tr("Initiative"), CreateValue(attack.Initiative.ToString()), null, null)
             ]);
     }
 

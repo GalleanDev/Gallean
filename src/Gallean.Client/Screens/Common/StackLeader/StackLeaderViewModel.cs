@@ -42,10 +42,10 @@ internal sealed record StackLeaderViewModel(
 
         IReadOnlyList<StatRowViewModel> rows =
         [
-            new(IconMoniker.Hitpoint, Tr("Hit points"), new StatValueViewModel(TextSpans.FromText($"{leader.Leader.Hitpoints} / {leaderStats.MaxHitpoints}"), 0), null),
-            new(IconMoniker.Movement, Tr("Movement"), new StatValueViewModel(TextSpans.FromText($"{stack.MovementPoints} / {stackStats.MaxMovementPoints}"), 0), null),
-            new(IconMoniker.Stack, Tr("Units"), new StatValueViewModel(TextSpans.FromText($"{stack.Units.GetUnits().Count()} / {GridPosition.Count}"), 0), null),
-            new(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(TextSpans.FromText($"{stackStats.Leadership}"), 0), null)
+            new(IconMoniker.Hitpoint, Tr("Hit points"), new StatValueViewModel(TextSpans.FromText($"{leader.Leader.Hitpoints} / {leaderStats.MaxHitpoints}"), 0), null, null),
+            new(IconMoniker.Movement, Tr("Movement"), new StatValueViewModel(TextSpans.FromText($"{stack.MovementPoints} / {stackStats.MaxMovementPoints}"), 0), null, null),
+            new(IconMoniker.Stack, Tr("Units"), new StatValueViewModel(TextSpans.FromText($"{stack.Units.GetUnits().Count()} / {GridPosition.Count}"), 0), null, null),
+            new(IconMoniker.Leadership, Tr("Leadership"), new StatValueViewModel(TextSpans.FromText($"{stackStats.Leadership}"), 0), null, null)
         ];
 
         return new StackLeaderViewModel(
