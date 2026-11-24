@@ -429,4 +429,59 @@ public sealed class WorldEngineHealSpellTests
                 new WorldUnitHealedEvent(new WorldUnitGroup.Stack(inside.Id), new WorldUnitId("insideLeader"), 70, WorldResourceSet.Empty)
             ]);
     }
+
+    [Test]
+    public void StackOnRuinEntranceTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 8);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        WorldSpellDefinition spell = HealSpell(hitpoints: 30, areaRadius: 0);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Spellbook = new WorldPlayerSpellbook([], [HealSpellId])
+        };
+
+        WorldStack stack = WoundedStack(new WorldUnitId("stackLeader"), new WorldStackId("Stack"), player.Id, leader, new WorldPosition(4, 4), hitpoints: 40);
+
+        WorldRuin ruin = new(
+            new WorldFortificationId("ruin"),
+            new ScenarioTextId("Ruin"),
+            new WorldFootprint(new WorldPosition(2, 2), 3, 3),
+            new WorldObjectVariant(0),
+            UnitGrid<WorldUnit>.Empty,
+            WorldResourceSet.Empty,
+            Item: null,
+            LooterId: player.Id,
+            AiPriority: 3);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(spell)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithRuin(ruin)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommand(
+            new WorldCastSpellCommand(HealSpellId, new WorldSpellTarget(new WorldPosition(4, 4), Radius: 0)),
+            [
+                new WorldSpellCastEvent(
+                    player.Id,
+                    HealSpellId,
+                    new WorldSpellTarget(new WorldPosition(4, 4), Radius: 0),
+                    WorldResourceSet.Empty,
+                    WorldSpellCastSource.Player),
+                new WorldUnitHealedEvent(
+                    new WorldUnitGroup.Stack(stack.Id),
+                    new WorldUnitId("stackLeader"),
+                    70,
+                    WorldResourceSet.Empty)
+            ]);
+    }
 }

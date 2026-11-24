@@ -22,7 +22,7 @@ internal abstract class WorldAbstractUnitSpellResolver<TEffect> : IWorldSpellRes
 
         WorldPlan plan = WorldPlan.For(state);
 
-        if (position is not null && plan.GetFortificationAt(position.Value) is not null)
+        if (position is not null && plan.GetFortificationAt(position.Value) is WorldCity or WorldCapital)
         {
             return WorldCommandResult.Fail(WorldCommandError.SpellTargetInCity);
         }
@@ -33,7 +33,7 @@ internal abstract class WorldAbstractUnitSpellResolver<TEffect> : IWorldSpellRes
 
         foreach (WorldStack stack in EnumerateStacks(plan, state, position, spell.AreaRadius))
         {
-            if (spell.AreaRadius is not null && plan.GetFortificationAt(stack.Position) is not null)
+            if (spell.AreaRadius is not null && plan.GetFortificationAt(stack.Position) is WorldCity or WorldCapital)
             {
                 targetInCity = true;
             }
