@@ -82,6 +82,17 @@ internal sealed partial class ThiefStealScreenViewModel : AbstractGameScreenView
 
             string name = GameModel.Texts.GetGlobalText(definition.NameTextId).Text;
             string description = GameModel.Texts.GetGlobalText(definition.DescriptionTextId).Text;
+            OfferPriceViewModel? cost;
+
+            if (definition.Value != WorldResourceSet.Empty)
+            {
+                cost = new OfferPriceViewModel(definition.Value);
+            }
+            else
+            {
+                cost = null;
+            }
+
             string? unavailableReason;
 
             if (item.Error is { } error)
@@ -93,7 +104,7 @@ internal sealed partial class ThiefStealScreenViewModel : AbstractGameScreenView
                 unavailableReason = null;
             }
 
-            result.Add(new ThiefStealItemViewModel(this, item.Action, icon, name, description, castingCost: null, unavailableReason));
+            result.Add(new ThiefStealItemViewModel(this, item.Action, icon, name, description, cost, castingCost: null, unavailableReason));
         }
 
         foreach (WorldGetThiefStealInfoCommand.Spell spell in info.Spells)
@@ -115,7 +126,7 @@ internal sealed partial class ThiefStealScreenViewModel : AbstractGameScreenView
                 unavailableReason = null;
             }
 
-            result.Add(new ThiefStealItemViewModel(this, spell.Action, icon, name, description, castingCost, unavailableReason));
+            result.Add(new ThiefStealItemViewModel(this, spell.Action, icon, name, description, cost: null, castingCost, unavailableReason));
         }
 
         return [.. result.Order(Comparer<ThiefStealItemViewModel>.Create(CompareItems))];

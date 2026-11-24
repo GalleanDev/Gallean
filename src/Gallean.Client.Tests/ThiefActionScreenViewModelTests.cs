@@ -35,7 +35,7 @@ public sealed class ThiefActionScreenViewModelTests
 
         foreach (ThiefStealItemViewModel target in targets)
         {
-            rows.Add($"{FormatIcon(target.Icon)} | {target.Name} | {target.Description} | {FormatAvailability(target.Status.UnavailableReason)}");
+            rows.Add($"{FormatIcon(target.Icon)} | {target.Name} | {target.Description} | Cost: {FormatPrice(Assert.NotNull(target.Cost))} | {FormatAvailability(target.Status.UnavailableReason)}");
         }
 
         return rows;
@@ -403,7 +403,7 @@ public sealed class ThiefActionScreenViewModelTests
         ThiefStealScreenViewModel picker = Assert.IsOfType<ThiefStealScreenViewModel>(gameViewModel.TopScreen);
 
         Assert.That(FormatStealTargets(picker.Targets), Is.EqualTo([
-            "item-icon/potion | potion-name | potion-description | available"
+            "item-icon/potion | potion-name | potion-description | Cost: 50 gold | available"
         ]));
 
         await picker.Targets[0].SelectCommand.ExecuteAsync(null);
@@ -591,7 +591,7 @@ public sealed class ThiefActionScreenViewModelTests
         ThiefStealScreenViewModel picker = Assert.IsOfType<ThiefStealScreenViewModel>(gameViewModel.TopScreen);
 
         Assert.That(FormatStealTargets(picker.Targets), Is.EqualTo([
-            "item-icon/potion | potion-name | potion-description | available"
+            "item-icon/potion | potion-name | potion-description | Cost: 50 gold | available"
         ]));
 
         picker.CloseCommand.Execute(null);

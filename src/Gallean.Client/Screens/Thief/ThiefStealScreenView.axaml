@@ -29,6 +29,15 @@
                        Classes="caption"
                        Foreground="{StaticResource SecondaryTextBrush}"
                        TextWrapping="Wrap" />
+            <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding Cost, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <TextBlock Grid.Column="0"
+                         Text="{local:Text 'Cost:'}"
+                         Classes="caption"
+                         Foreground="{StaticResource SecondaryTextBrush}"
+                         Margin="0,0,6,0"
+                         VerticalAlignment="Top" />
+              <ContentControl Grid.Column="1" Content="{Binding Cost}" Classes="caption" Foreground="{StaticResource PrimaryTextBrush}" />
+            </Grid>
             <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding CastingCost, Converter={x:Static ObjectConverters.IsNotNull}}">
               <TextBlock Grid.Column="0"
                          Text="{local:Text 'Casting cost:'}"

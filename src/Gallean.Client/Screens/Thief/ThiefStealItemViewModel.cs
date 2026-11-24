@@ -11,6 +11,7 @@ internal sealed class ThiefStealItemViewModel
         IconViewModel icon,
         string name,
         string description,
+        OfferPriceViewModel? cost,
         OfferPriceViewModel? castingCost,
         string? unavailableReason)
     {
@@ -18,6 +19,7 @@ internal sealed class ThiefStealItemViewModel
         Icon = icon;
         Name = name;
         Description = description;
+        Cost = cost;
         CastingCost = castingCost;
         Status = new OfferStatusViewModel(unavailableReason);
         SelectCommand = new AsyncRelayCommand(() => owner.StealAsync(this));
@@ -27,6 +29,7 @@ internal sealed class ThiefStealItemViewModel
     public IconViewModel Icon { get; }
     public string Name { get; }
     public string Description { get; }
+    public OfferPriceViewModel? Cost { get; }
     public OfferPriceViewModel? CastingCost { get; }
     public OfferStatusViewModel Status { get; }
 
