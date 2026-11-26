@@ -1317,7 +1317,6 @@ public sealed class ScenarioFileLoaderTests
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417LO0004"), IdString: "NAME_TXT", Text: "North Shore", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0000"), IdString: "NAME_TXT", Text: "Ford sighted", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0000"), IdString: "POPUP_TXT", Text: "Scout \n\"The ford, Thane. Shallow enough for wagons, and nobody holds the far bank yet.\"", SeqNum: 0),
-            new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0000"), IdString: "OBJECT_TXT", Text: "Take Brinewatch before the dead do.", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0001"), IdString: "NAME_TXT", Text: "Brinewatch taken", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0002"), IdString: "NAME_TXT", Text: "Brinewatch lost", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0003"), IdString: "NAME_TXT", Text: "Chapel looted", SeqNum: 0),
@@ -1327,7 +1326,8 @@ public sealed class ScenarioFileLoaderTests
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0007"), IdString: "NAME_TXT", Text: "Wolves turn", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0008"), IdString: "NAME_TXT", Text: "Garrison relieved", SeqNum: 0),
             new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0009"), IdString: "NAME_TXT", Text: "Bells beneath the water", SeqNum: 0),
-            new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0009"), IdString: "POPUP_TXT", Text: "The chapel bells ring under the river, and for one night nobody draws steel.", SeqNum: 0)
+            new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0009"), IdString: "POPUP_TXT", Text: "The chapel bells ring under the river, and for one night nobody draws steel.", SeqNum: 0),
+            new Db.TextScenario(new Db.ScenarioId("S417SC0000"), new Db.Id("S417EV0000"), IdString: "OBJECT_TXT", Text: "Hold Brinewatch until the thaw.", SeqNum: 0)
         ]));
     }
 

@@ -19,6 +19,11 @@ internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFi
         int PositionY,
         int AiPriority);
 
+    private readonly record struct EventObjective(
+        Db.Id EventId,
+        int EffectNumber,
+        string Text);
+
     private const string ScenarioInfoObject = ".?AVCScenarioInfo@@";
     private const string PlayerObject = ".?AVCMidPlayer@@";
     private const string PlayerBuildingsObject = ".?AVCPlayerBuildings@@";
@@ -68,6 +73,7 @@ internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFi
     private readonly List<Db.ScenarioCrystal> crystals = [];
     private readonly List<Db.ScenarioEventCondition> eventConditions = [];
     private readonly List<Db.ScenarioEventEffect> eventEffects = [];
+    private readonly List<EventObjective> eventObjectives = [];
     private readonly List<Db.ScenarioEvent> events = [];
     private readonly List<Db.ScenarioEventUnfog> eventUnfogs = [];
     private readonly List<Db.ScenarioFog> fogs = [];
@@ -114,6 +120,13 @@ internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFi
             reader.ExpectName(EndObjectMarker);
 
             objectMap.Add(new Db.ScenarioObjectMap(scenarioId, objectId, what));
+        }
+
+        foreach (IGrouping<Db.Id, EventObjective> objectives in eventObjectives.GroupBy(entry => entry.EventId))
+        {
+            EventObjective objective = objectives.MaxBy(entry => entry.EffectNumber);
+
+            AddText(objective.EventId, Db.TextScenario.ObjectiveTextId, 0, objective.Text);
         }
 
         return new ScenarioFileTables
@@ -1466,7 +1479,7 @@ internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFi
                 };
                 break;
             case Db.ScenarioEventEffectType.ChangeObjective:
-                AddText(eventId, Db.TextScenario.ObjectiveTextId, 0, reader.ReadString("OBJECT_TXT"));
+                eventObjectives.Add(new EventObjective(eventId, number, reader.ReadString("OBJECT_TXT")));
                 break;
             case Db.ScenarioEventEffectType.Popup:
                 AddText(eventId, Db.TextScenario.PopupTextId, number, reader.ReadString("POPUP_TXT"));
