@@ -2431,7 +2431,7 @@ public sealed class GameViewModelTests
 
         Assert.That(
             $"{saved.Metadata.Name} | {saved.Metadata.ScenarioId} | {saved.Metadata.ScenarioName} | {saved.Metadata.CustomScenarioId}",
-            Is.EqualTo("My save | S900SC0000 | Greywater Crossing | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"));
+            Is.EqualTo("My save | S900SC0000 | Greywater Crossing | dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7"));
     }
 
     [Test]
@@ -2458,7 +2458,7 @@ public sealed class GameViewModelTests
             10,
             new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero),
             "0.1.0+2d40300",
-            "b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0");
+            "dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7");
 
         await customScenarioStore.SaveAsync(customScenario);
         await saveStore.SaveAsync(new GameSaveId(1), metadata, savedState);
@@ -2480,7 +2480,7 @@ public sealed class GameViewModelTests
         world.CompleteGameStart();
 
         Assert.That(world.GameModel.ScenarioId, Is.EqualTo("S900SC0000"));
-        Assert.That(world.GameModel.CustomScenarioId, Is.EqualTo(new CustomScenarioId("b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0")));
+        Assert.That(world.GameModel.CustomScenarioId, Is.EqualTo(new CustomScenarioId("dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7")));
         Assert.That(world.GameModel.Snapshot, Is.EqualTo(
             new GameSnapshot(savedState, BattleState: null, ActiveActions: 0, ViewPlayerId: new WorldPlayerId(2))));
     }
@@ -2504,7 +2504,7 @@ public sealed class GameViewModelTests
             1,
             new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero),
             "0.1.0+2d40300",
-            "b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0");
+            "dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7");
 
         await saveStore.SaveAsync(new GameSaveId(1), metadata, session.World.State);
 

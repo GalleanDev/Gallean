@@ -206,7 +206,7 @@ public sealed class ScenarioSelectScreenViewModelTests
         ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
 
         Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
-            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7"
         ]));
     }
 
@@ -231,16 +231,16 @@ public sealed class ScenarioSelectScreenViewModelTests
         GameScenario selected = Assert.NotNull(viewModel.SelectedScenario);
 
         Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
-            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7"
         ]));
         Assert.That(FormatCustomScenarios([selected]), Is.EqualTo([
-            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7"
         ]));
         Assert.That(viewModel.IsCustomScenarioSelected, Is.True);
         Assert.That(gameViewModel.Screens, Is.EqualTo([viewModel]));
         Assert.That(sb.GetTree(), Is.EquivalentTo([
             "scenarios/",
-            "scenarios/b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0.sg"
+            "scenarios/dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7.sg"
         ]));
     }
 
@@ -262,7 +262,7 @@ public sealed class ScenarioSelectScreenViewModelTests
         ]);
 
         Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
-            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | dee0b652a712113aaf70b7d58a97e6c864236f628c05a16014b9ec6d4ee4d9e7"
         ]));
     }
 
