@@ -528,6 +528,80 @@ public sealed class WorldEngineCreateRodTests
     }
 
     [Test]
+    public void OnForestTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "......",
+            "...+..",
+            "......"
+        ]);
+
+        UnitDefinition rodLeaderDefinition = RodLeaderDefinition();
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(150, 0, 0, 0, 0, 0)
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("rod-leader"),
+            player1.Id,
+            new WorldPosition(2, 1),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("rodLeader"), rodLeaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 20);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(rodLeaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommandError(
+            new WorldCreateRodCommand(stack.Id, new WorldPosition(3, 1)),
+            WorldCommandError.RodInvalidLocation);
+    }
+
+    [Test]
+    public void OnRoadTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "......",
+            "...=..",
+            "......"
+        ]);
+
+        UnitDefinition rodLeaderDefinition = RodLeaderDefinition();
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(150, 0, 0, 0, 0, 0)
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("rod-leader"),
+            player1.Id,
+            new WorldPosition(2, 1),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("rodLeader"), rodLeaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 20);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(rodLeaderDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommandError(
+            new WorldCreateRodCommand(stack.Id, new WorldPosition(3, 1)),
+            WorldCommandError.RodInvalidLocation);
+    }
+
+    [Test]
     public void InsufficientResourcesTest()
     {
         WorldMap map = TestHelpers.SimpleMap(6, 3);

@@ -72,6 +72,11 @@ public sealed record WorldCreateRodCommand(
             return WorldCommandResult.Fail(WorldCommandError.TargetUnpassable);
         }
 
+        if (cell.Feature is WorldMapFeature.Forest or WorldMapFeature.Road)
+        {
+            return WorldCommandResult.Fail(WorldCommandError.RodInvalidLocation);
+        }
+
         if (plan.HasStructureAt(TargetPosition) ||
             plan.GetStackAt(TargetPosition) is not null ||
             plan.GetBagAt(TargetPosition) is not null)
