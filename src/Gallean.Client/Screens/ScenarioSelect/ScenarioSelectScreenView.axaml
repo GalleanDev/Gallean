@@ -49,7 +49,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
           ColumnDefinitions="440,56,440"
-          RowDefinitions="Auto,Auto,Auto,*,Auto">
+          RowDefinitions="Auto,Auto,Auto,*,Auto,Auto">
 
       <local:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Text="{local:Text 'New quest'}" Classes="h1" Foreground="{StaticResource ScenarioSelectAccentBrush}" />
 
@@ -61,20 +61,7 @@
               Background="{StaticResource ScenarioSelectDividerBrush}"
               Margin="0,10,0,20" />
 
-      <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="16" Margin="14,0,16,8">
-        <local:OutlinedTextBlock Grid.Column="0" Text="{local:Text 'Quest'}" Classes="label" />
-        <Button Grid.Column="1"
-                Classes="link"
-                Content="{local:Text 'Delete'}"
-                Command="{Binding DeleteCommand}"
-                IsVisible="{Binding IsCustomScenarioSelected}"
-                VerticalAlignment="Bottom" />
-        <Button Grid.Column="2"
-                Classes="link"
-                Content="{local:Text 'Import'}"
-                Click="OnImportClick"
-                VerticalAlignment="Bottom" />
-      </Grid>
+      <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Text="{local:Text 'Quest'}" Classes="label" Margin="14,0,16,8" />
 
       <ListBox Grid.Row="3"
                Grid.Column="0"
@@ -92,7 +79,7 @@
         <ListBox.ItemTemplate>
           <DataTemplate x:DataType="local:GameScenario">
             <Border Classes="row">
-              <Grid ColumnDefinitions="*,Auto">
+              <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,16,0">
                 <TextBlock Grid.Column="0"
                            Text="{Binding Name}"
                            Classes="row-title"
@@ -101,15 +88,36 @@
                 <TextBlock Grid.Column="1"
                            Text="{Binding Creator}"
                            Classes="row-author"
-                           Margin="16,0,16,0"
+                           Margin="16,0,0,0"
                            VerticalAlignment="Center" />
+                <Border Grid.Column="2"
+                        Classes="row-badge"
+                        Margin="12,0,0,0"
+                        IsVisible="{Binding CustomScenarioId, Converter={x:Static ObjectConverters.IsNotNull}}">
+                  <TextBlock Text="{local:Text 'Custom'}" />
+                </Border>
               </Grid>
             </Border>
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
 
-      <Grid Grid.Row="4" Grid.Column="0" Classes="focus-group pill-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
+      <Grid Grid.Row="4" Grid.Column="0" Classes="focus-group pill-group" ColumnDefinitions="*,*" Margin="0,16,0,0">
+        <Button Grid.Column="0" Classes="pill" local:PlateChrome.TextureSeed="3" Click="OnImportClick">
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+            <local:IconVisual Moniker="Plus" Foreground="{Binding $parent[Button].Foreground}" />
+            <TextBlock Text="{local:Text 'Import'}" />
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Classes="pill danger" local:PlateChrome.TextureSeed="4" Command="{Binding DeleteCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+            <local:IconVisual Moniker="Delete" Foreground="{Binding $parent[Button].Foreground}" />
+            <TextBlock Text="{local:Text 'Delete'}" />
+          </StackPanel>
+        </Button>
+      </Grid>
+
+      <Grid Grid.Row="5" Grid.Column="0" Classes="focus-group pill-group" ColumnDefinitions="*,*" Margin="0,5,0,0">
         <Button Grid.Column="0"
                 Classes="pill"
                 local:PlateChrome.TextureSeed="1"
@@ -119,7 +127,7 @@
       </Grid>
 
       <StackPanel Grid.Row="2"
-                  Grid.RowSpan="3"
+                  Grid.RowSpan="4"
                   Grid.Column="2"
                   VerticalAlignment="Top"
                   IsVisible="{Binding SelectedScenario, Converter={x:Static ObjectConverters.IsNotNull}}">

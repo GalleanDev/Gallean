@@ -143,12 +143,18 @@
                                        Classes="label section-title"
                                        IsVisible="{Binding SectionTitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
               <Border Classes="row campaign" Classes.expansion="{Binding IsExpansion}">
-                <Grid ColumnDefinitions="Auto,*">
+                <Grid ColumnDefinitions="Auto,*,Auto">
                   <local:UnitIcon Grid.Column="0" Classes="campaign-leader" SpriteKey="{Binding PortraitKey}" />
                   <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="{Binding RaceName}" Classes="h4 campaign-name" TextTrimming="CharacterEllipsis" />
                     <TextBlock Text="{Binding Subtitle}" Classes="caption campaign-subtitle" TextTrimming="CharacterEllipsis" />
                   </StackPanel>
+                  <Border Grid.Column="2"
+                          Classes="row-badge"
+                          Margin="12,0,0,0"
+                          IsVisible="{Binding Campaign.CustomScenarioId, Converter={x:Static ObjectConverters.IsNotNull}}">
+                    <TextBlock Text="{local:Text 'Custom'}" />
+                  </Border>
                 </Grid>
               </Border>
             </StackPanel>
@@ -156,20 +162,22 @@
         </ListBox.ItemTemplate>
       </ListBox>
 
-      <StackPanel Grid.Row="3"
-                  Classes="entrance-late"
-                  Orientation="Horizontal"
-                  HorizontalAlignment="Right"
-                  Spacing="16"
-                  Margin="0,8,16,0">
-        <Button Classes="link"
-                Content="{local:Text 'Delete'}"
-                Command="{Binding DeleteCommand}"
-                IsVisible="{Binding IsCustomCampaignSelected}" />
-        <Button Classes="link" Content="{local:Text 'Import'}" Click="OnImportClick" />
-      </StackPanel>
+      <Grid Grid.Row="3" Classes="focus-group pill-group entrance-late" ColumnDefinitions="*,*" Margin="0,16,0,0">
+        <Button Grid.Column="0" Classes="pill" local:PlateChrome.TextureSeed="3" Click="OnImportClick">
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+            <local:IconVisual Moniker="Plus" Foreground="{Binding $parent[Button].Foreground}" />
+            <TextBlock Text="{local:Text 'Import'}" />
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Classes="pill danger" local:PlateChrome.TextureSeed="4" Command="{Binding DeleteCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+            <local:IconVisual Moniker="Delete" Foreground="{Binding $parent[Button].Foreground}" />
+            <TextBlock Text="{local:Text 'Delete'}" />
+          </StackPanel>
+        </Button>
+      </Grid>
 
-      <Grid Grid.Row="4" Classes="focus-group entrance-late pill-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
+      <Grid Grid.Row="4" Classes="focus-group entrance-late pill-group" ColumnDefinitions="*,*" Margin="0,5,0,0">
         <Button Grid.Column="0"
                 Classes="pill"
                 local:PlateChrome.TextureSeed="1"
