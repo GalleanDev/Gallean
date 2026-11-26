@@ -696,8 +696,8 @@ internal static class Theme
             public static Color EnemyReachableColor { get; } = Color.FromRgb(172, 44, 42);
             public static Color AllyTargetColor { get; } = Color.FromRgb(116, 176, 255);
             public static Color AllyReachableColor { get; } = Color.FromRgb(62, 116, 196);
-            public static Color SummonTargetColor { get; } = Color.FromRgb(140, 224, 150);
-            public static Color SummonReachableColor { get; } = Color.FromArgb(128, 140, 224, 150);
+            public static Color SummonTargetColor { get; } = Color.FromArgb(150, 110, 196, 122);
+            public static Color SummonReachableColor { get; } = Color.FromArgb(56, 110, 196, 122);
         }
 
         public static class Highlight
