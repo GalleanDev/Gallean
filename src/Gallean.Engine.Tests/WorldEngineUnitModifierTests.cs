@@ -396,4 +396,71 @@ public sealed class WorldEngineUnitModifierTests
                 .Build()
         }));
     }
+
+    [Test]
+    public void HitpointsExpireTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(3, 1);
+
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map);
+        WorldPlayer neutral = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Neutral, map) with { IsAi = true };
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+
+        UnitModifierDefinition boonDefinition = TestHelpers.SimpleModifier("boon") with
+        {
+            Hitpoints = new UnitStatModifier(50, 0)
+        };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("Neutral"),
+            neutral.Id,
+            new WorldPosition(2, 0),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(
+                    TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with
+                    {
+                        Hitpoints = 150,
+                        Modifiers = [new UnitModifier(boonDefinition.Id, RemainingTurns: 1)]
+                    },
+                    GridPosition.FrontBottom,
+                    false)
+                .Build(),
+            movementPoints: 6);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(boonDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithDefinition(TestHelpers.SimpleLord(neutral.LordId, neutral.Race, LordCategory.Warrior))
+            .WithPlayer(neutral)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommand(new WorldEndTurnCommand(), [
+            new WorldTurnEndedEvent(player1.Id),
+            new WorldTurnStartingEvent(neutral.Id),
+            new WorldStackMovementRestoredEvent(stack.Id, 6),
+            new WorldUnitModifierExpiredEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), boonDefinition.Id),
+            new WorldTurnStartedEvent(neutral.Id),
+            new WorldTurnResourcesGeneratedEvent(neutral.Id, WorldResourceSet.Empty)
+        ]);
+
+        Assert.That(engine.State.Stacks[stack.Id], Is.EqualTo(stack with
+        {
+            Units = new UnitGrid<WorldUnit>.Builder()
+                .Place(
+                    TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition) with
+                    {
+                        Hitpoints = 100
+                    },
+                    GridPosition.FrontBottom,
+                    false)
+                .Build()
+        }));
+    }
 }

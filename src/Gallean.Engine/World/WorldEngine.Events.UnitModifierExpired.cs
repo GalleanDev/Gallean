@@ -7,9 +7,16 @@ internal partial class WorldEngine
         UnitGrid<WorldUnit> units = WorldUnitGroupCalculator.GetUnits(state, ev.Group);
         WorldUnit target = units.GetUnit(ev.UnitId);
 
-        UnitGrid<WorldUnit> updatedUnits = units.Replace(target, target with
+        WorldUnit unmodified = target with
         {
             Modifiers = target.Modifiers.RemoveAll(modifier => modifier.DefinitionId == ev.ModifierId)
+        };
+
+        UnitStats stats = Context.UnitStats.GetWorldUnitStats(unmodified);
+
+        UnitGrid<WorldUnit> updatedUnits = units.Replace(target, unmodified with
+        {
+            Hitpoints = Math.Min(unmodified.Hitpoints, stats.MaxHitpoints)
         });
 
         return WorldUnitGroupCalculator.WithUnits(state, ev.Group, updatedUnits);
