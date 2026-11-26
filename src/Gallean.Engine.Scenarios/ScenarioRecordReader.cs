@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Buffers.Binary;
 
 namespace Gallean.Engine.Scenarios;
@@ -59,7 +60,19 @@ internal sealed class ScenarioRecordReader(Stream stream, ScenarioTextEncoding e
 
     public string ReadFixedString(int length)
     {
-        return encoding.MakeNullTerminatedString(ReadBytes(length));
+        byte[] buffer = ArrayPool<byte>.Shared.Rent(length);
+
+        try
+        {
+            Span<byte> bytes = buffer.AsSpan(0, length);
+            stream.ReadExactly(bytes);
+
+            return encoding.MakeNullTerminatedString(bytes);
+        }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(buffer);
+        }
     }
 
     private Db.Id Remap(Db.Id id)
