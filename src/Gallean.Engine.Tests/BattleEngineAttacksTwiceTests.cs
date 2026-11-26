@@ -140,10 +140,10 @@ public sealed class BattleEngineAttacksTwiceTests
 
         engine.CheckCommand(new BattleAttackCommand(wizard.Id, new BattleAttackUnitTarget(firstDefender.Id)), [
             new BattleUnitAttackEvent(wizard.Id, new BattleAttackUnitTarget(firstDefender.Id), [new UnitAttackDefinitionId("wizard")]),
-            new BattleUnitAttackedEvent(wizard.Id, firstDefender.Id, new UnitAttackDefinitionId("wizard")),
-            new BattleUnitAttackHitEvent(wizard.Id, firstDefender.Id, new UnitAttackDefinitionId("wizard"), 3),
             new BattleUnitAttackedEvent(wizard.Id, secondDefender.Id, new UnitAttackDefinitionId("wizard")),
             new BattleUnitAttackHitEvent(wizard.Id, secondDefender.Id, new UnitAttackDefinitionId("wizard"), 3),
+            new BattleUnitAttackedEvent(wizard.Id, firstDefender.Id, new UnitAttackDefinitionId("wizard")),
+            new BattleUnitAttackHitEvent(wizard.Id, firstDefender.Id, new UnitAttackDefinitionId("wizard"), 3),
             new BattleUnitTurnEndingEvent(wizard.Id),
             new BattleUnitTurnEndedEvent(wizard.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(wizard.Id, BattleUnitTurnType.SecondAttack))

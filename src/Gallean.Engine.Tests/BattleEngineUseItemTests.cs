@@ -1367,10 +1367,10 @@ public sealed class BattleEngineUseItemTests
 
         engine.CheckCommand(new BattleUseItemCommand(leader.Id, LeaderEquipmentSlot.Battle1, new BattleAttackUnitTarget(defender.Id)), [
             new BattleItemUsedEvent(BattleSide.Attacker, LeaderEquipmentSlot.Battle1, talisman.Id, leader.Id, new BattleAttackUnitTarget(defender.Id)),
-            new BattleUnitAttackedEvent(leader.Id, defender.Id, frostAttack.Id),
-            new BattleUnitAttackHitEvent(leader.Id, defender.Id, frostAttack.Id, 10),
             new BattleUnitAttackedEvent(leader.Id, secondDefender.Id, frostAttack.Id),
             new BattleUnitAttackHitEvent(leader.Id, secondDefender.Id, frostAttack.Id, 10),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, frostAttack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, frostAttack.Id, 10),
             new BattleUnitTurnEndingEvent(leader.Id),
             new BattleUnitTurnEndedEvent(leader.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))

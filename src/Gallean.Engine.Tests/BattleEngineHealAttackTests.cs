@@ -135,12 +135,12 @@ public sealed class BattleEngineHealAttackTests
 
         engine.CheckCommand(new BattleAttackCommand(cleric.Id, new BattleAttackUnitTarget(ally.Id)), [
             new BattleUnitAttackEvent(cleric.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("cleric")]),
-            new BattleUnitAttackedEvent(cleric.Id, cleric.Id, new UnitAttackDefinitionId("cleric")),
-            new BattleUnitAttackHitEvent(cleric.Id, cleric.Id, new UnitAttackDefinitionId("cleric"), 0),
-            new BattleUnitHealedEvent(cleric.Id, 100),
             new BattleUnitAttackedEvent(cleric.Id, ally.Id, new UnitAttackDefinitionId("cleric")),
             new BattleUnitAttackHitEvent(cleric.Id, ally.Id, new UnitAttackDefinitionId("cleric"), 0),
             new BattleUnitHealedEvent(ally.Id, 80),
+            new BattleUnitAttackedEvent(cleric.Id, cleric.Id, new UnitAttackDefinitionId("cleric")),
+            new BattleUnitAttackHitEvent(cleric.Id, cleric.Id, new UnitAttackDefinitionId("cleric"), 0),
+            new BattleUnitHealedEvent(cleric.Id, 100),
             new BattleUnitTurnEndingEvent(cleric.Id),
             new BattleUnitTurnEndedEvent(cleric.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))

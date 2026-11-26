@@ -127,7 +127,8 @@ internal static partial class BattleAttackCalculator
         else
         {
             ImmutableArray<UnitAttackDefinitionId> attackIds = [.. attacks.Select(definition => definition.Id)];
-            List<BattleUnitId> targetIds = [.. targets.Targets.GetUnitIds()];
+            BattleUnitId[] targetIds = [.. targets.Targets.GetUnitIds()];
+            context.Random.Shuffle(targetIds);
 
             BattleUnitAttackStepEvent step = new(attackerId, attackIds, [.. targetIds], 0, [], 0);
 
@@ -143,7 +144,7 @@ internal static partial class BattleAttackCalculator
 
             List<BattleEvent> events = [];
 
-            if (targetIds.Count > 0)
+            if (targetIds.Length > 0)
             {
                 events.Add(step);
             }

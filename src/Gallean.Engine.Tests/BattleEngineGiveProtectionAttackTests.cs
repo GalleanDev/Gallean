@@ -246,12 +246,12 @@ public sealed class BattleEngineGiveProtectionAttackTests
 
         engine.CheckCommand(new BattleAttackCommand(protector.Id, new BattleAttackUnitTarget(ally.Id)), [
             new BattleUnitAttackEvent(protector.Id, new BattleAttackUnitTarget(ally.Id), [new UnitAttackDefinitionId("protector")]),
-            new BattleUnitAttackedEvent(protector.Id, protector.Id, new UnitAttackDefinitionId("protector")),
-            new BattleUnitAttackHitEvent(protector.Id, protector.Id, new UnitAttackDefinitionId("protector"), 0),
-            new BattleUnitWardGrantedEvent(protector.Id, new BattleUnitWardModifier(protector.Id, fireWardModifier.Id, FireWard)),
             new BattleUnitAttackedEvent(protector.Id, ally.Id, new UnitAttackDefinitionId("protector")),
             new BattleUnitAttackHitEvent(protector.Id, ally.Id, new UnitAttackDefinitionId("protector"), 0),
             new BattleUnitWardGrantedEvent(ally.Id, new BattleUnitWardModifier(protector.Id, fireWardModifier.Id, FireWard)),
+            new BattleUnitAttackedEvent(protector.Id, protector.Id, new UnitAttackDefinitionId("protector")),
+            new BattleUnitAttackHitEvent(protector.Id, protector.Id, new UnitAttackDefinitionId("protector"), 0),
+            new BattleUnitWardGrantedEvent(protector.Id, new BattleUnitWardModifier(protector.Id, fireWardModifier.Id, FireWard)),
             new BattleUnitTurnEndingEvent(protector.Id),
             new BattleUnitTurnEndedEvent(protector.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(enemy.Id, BattleUnitTurnType.Normal))

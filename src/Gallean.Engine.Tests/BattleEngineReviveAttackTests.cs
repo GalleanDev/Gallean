@@ -85,12 +85,12 @@ public sealed class BattleEngineReviveAttackTests
 
         engine.CheckCommand(new BattleAttackCommand(priest.Id, new BattleAttackUnitTarget(allyA.Id)), [
             new BattleUnitAttackEvent(priest.Id, new BattleAttackUnitTarget(allyA.Id), [new UnitAttackDefinitionId("priest")]),
-            new BattleUnitAttackedEvent(priest.Id, allyA.Id, new UnitAttackDefinitionId("priest")),
-            new BattleUnitAttackHitEvent(priest.Id, allyA.Id, new UnitAttackDefinitionId("priest"), 0),
-            new BattleUnitRevivedEvent(allyA.Id, 50),
             new BattleUnitAttackedEvent(priest.Id, allyB.Id, new UnitAttackDefinitionId("priest")),
             new BattleUnitAttackHitEvent(priest.Id, allyB.Id, new UnitAttackDefinitionId("priest"), 0),
             new BattleUnitRevivedEvent(allyB.Id, 50),
+            new BattleUnitAttackedEvent(priest.Id, allyA.Id, new UnitAttackDefinitionId("priest")),
+            new BattleUnitAttackHitEvent(priest.Id, allyA.Id, new UnitAttackDefinitionId("priest"), 0),
+            new BattleUnitRevivedEvent(allyA.Id, 50),
             new BattleUnitTurnEndingEvent(priest.Id),
             new BattleUnitTurnEndedEvent(priest.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal))

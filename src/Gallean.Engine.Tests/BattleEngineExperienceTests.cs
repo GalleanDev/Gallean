@@ -183,13 +183,13 @@ public sealed class BattleEngineExperienceTests
 
         engine.CheckCommand(new BattleAttackCommand(attacker.Id, new BattleAttackUnitTarget(firstDefender.Id)), [
             new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(firstDefender.Id), [new UnitAttackDefinitionId("attacker")]),
-            new BattleUnitAttackedEvent(attacker.Id, firstDefender.Id, new UnitAttackDefinitionId("attacker")),
-            new BattleUnitAttackHitEvent(attacker.Id, firstDefender.Id, new UnitAttackDefinitionId("attacker"), 10),
-            new BattleUnitDiedEvent(firstDefender.Id),
-            new BattleUnitExperienceGainedEvent(attacker.Id, 2),
             new BattleUnitAttackedEvent(attacker.Id, secondDefender.Id, new UnitAttackDefinitionId("attacker")),
             new BattleUnitAttackHitEvent(attacker.Id, secondDefender.Id, new UnitAttackDefinitionId("attacker"), 10),
             new BattleUnitDiedEvent(secondDefender.Id),
+            new BattleUnitExperienceGainedEvent(attacker.Id, 3),
+            new BattleUnitAttackedEvent(attacker.Id, firstDefender.Id, new UnitAttackDefinitionId("attacker")),
+            new BattleUnitAttackHitEvent(attacker.Id, firstDefender.Id, new UnitAttackDefinitionId("attacker"), 10),
+            new BattleUnitDiedEvent(firstDefender.Id),
             new BattleUnitExperienceGainedEvent(attacker.Id, 5),
             new BattleUnitTurnEndingEvent(attacker.Id),
             new BattleRoundEndedEvent(),
