@@ -34,7 +34,7 @@ internal sealed class WorldAiSpellcasting(IEngineContext engine)
 
         WorldCastSpellCommand? command = null;
 
-        if (IsCastAllowed(player, WorldAiSpellEffectType.Weaken))
+        if (IsCastAllowed(player, WorldAiSpellEffectType.Weaken, GetWeakenCastLimit(state.Difficulty)))
         {
             command = FindCast(state, weakenSpells, [target]);
         }
@@ -44,7 +44,7 @@ internal sealed class WorldAiSpellcasting(IEngineContext engine)
         if (command is null &&
             WorldHelpers.IsRacePlayable(targetOwner.Race) &&
             !power.AtLeast(BattleSide.Attacker, engine.Globals.AiSummonMaxPowerPercent) &&
-            IsCastAllowed(player, WorldAiSpellEffectType.Summon))
+            IsCastAllowed(player, WorldAiSpellEffectType.Summon, engine.Globals.AiSummonCastLimit))
         {
             command = FindSummonCast(state, summonSpells, stack, target);
         }
@@ -120,19 +120,32 @@ internal sealed class WorldAiSpellcasting(IEngineContext engine)
         return null;
     }
 
-    private bool IsCastAllowed(WorldPlayer player, WorldAiSpellEffectType type)
+    private bool IsCastAllowed(WorldPlayer player, WorldAiSpellEffectType type, int castLimit)
     {
-        foreach (WorldSpellDefinitionId spellId in player.TurnActions.SpellCasts.Keys)
+        int casts = 0;
+
+        foreach ((WorldSpellDefinitionId spellId, int count) in player.TurnActions.SpellCasts)
         {
             WorldSpellDefinition spell = engine.Definitions.GetSpell(spellId);
 
             if (spell.AreaRadius is 0 && GetEffectType(spell) == type)
             {
-                return false;
+                casts += count;
             }
         }
 
-        return true;
+        return casts < castLimit;
+    }
+
+    private int GetWeakenCastLimit(WorldDifficulty difficulty)
+    {
+        return difficulty switch
+        {
+            WorldDifficulty.Easy => engine.Globals.AiWeakenCastLimitEasy,
+            WorldDifficulty.Average => engine.Globals.AiWeakenCastLimitAverage,
+            WorldDifficulty.Hard => engine.Globals.AiWeakenCastLimitHard,
+            WorldDifficulty.VeryHard => engine.Globals.AiWeakenCastLimitVeryHard
+        };
     }
 
     private static WorldAiSpellEffectType? GetEffectType(WorldSpellDefinition spell)
