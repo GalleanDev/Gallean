@@ -405,7 +405,7 @@ internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFi
             for (int i = 0; i < 3; i++)
             {
                 exchangeMapIds[i] = reader.ReadOptionalId($"EXMAPID{i + 1}");
-                exchangeMapTurns[i] = ParseInt(reader.ReadString($"EXMAPTURN{i + 1}"));
+                exchangeMapTurns[i] = reader.ReadInt($"EXMAPTURN{i + 1}");
             }
         }
 
@@ -1686,15 +1686,5 @@ internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFi
         {
             return bank;
         }
-    }
-
-    private static int ParseInt(string value)
-    {
-        if (int.TryParse(value, out int result))
-        {
-            return result;
-        }
-
-        return 0;
     }
 }
