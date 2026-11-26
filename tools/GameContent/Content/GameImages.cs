@@ -195,7 +195,7 @@ internal sealed class GameImages
             return [];
         }
 
-        List<AssetSprite> sprites = new(parts.Count);
+        List<AssetSprite> sprites = [with(parts.Count)];
 
         foreach (KeyValuePair<string, RawBitmap> part in parts.OrderBy(part => part.Key, StringComparer.Ordinal))
         {

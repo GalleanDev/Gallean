@@ -73,7 +73,7 @@ internal static class CampaignFileLoader
         int count = BinaryPrimitives.ReadInt32LittleEndian(order);
         int position = sizeof(int);
 
-        Dictionary<string, string> scenarioFiles = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, string> scenarioFiles = [with(StringComparer.OrdinalIgnoreCase)];
 
         foreach (string fileName in archive.FileNames)
         {

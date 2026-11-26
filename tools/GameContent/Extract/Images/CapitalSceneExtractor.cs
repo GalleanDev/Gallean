@@ -19,7 +19,7 @@ public sealed class CapitalSceneExtractor
     {
         using StreamReader stream = new(path);
 
-        Dictionary<string, List<CapitalSceneLayer>> layersByRace = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, List<CapitalSceneLayer>> layersByRace = [with(StringComparer.OrdinalIgnoreCase)];
         Dictionary<Db.Id, CapitalSceneLayer> buildings = [];
         List<CapitalSceneLayer>? currentLayers = null;
 
@@ -47,7 +47,7 @@ public sealed class CapitalSceneExtractor
             }
         }
 
-        Dictionary<string, CapitalScene> scenes = new(layersByRace.Count, StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, CapitalScene> scenes = [with(layersByRace.Count, StringComparer.OrdinalIgnoreCase)];
 
         foreach (KeyValuePair<string, List<CapitalSceneLayer>> pair in layersByRace)
         {

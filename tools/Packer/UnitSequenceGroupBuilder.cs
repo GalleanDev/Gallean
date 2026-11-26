@@ -40,7 +40,7 @@ internal static class UnitSequenceGroupBuilder
 
     private static List<List<string>> GetGroups(IEnumerable<string> ids, IEnumerable<string> candidateIds)
     {
-        SortedDictionary<string, List<string>> groups = new(StringComparer.Ordinal);
+        SortedDictionary<string, List<string>> groups = [with(StringComparer.Ordinal)];
         HashSet<string> candidates = [.. candidateIds];
 
         foreach (string id in ids)

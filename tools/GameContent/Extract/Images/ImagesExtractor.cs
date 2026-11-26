@@ -72,7 +72,7 @@ public sealed class ImagesExtractor
         IReadOnlyDictionary<string, MqImage> regularImages = allImages;
         if (animations.FrameNames.Count > 0)
         {
-            Dictionary<string, MqImage> imagesWithoutFrames = new(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, MqImage> imagesWithoutFrames = [with(StringComparer.OrdinalIgnoreCase)];
 
             foreach (MqImage image in allImages.Values)
             {
@@ -98,7 +98,7 @@ public sealed class ImagesExtractor
             fileImages.Add(image);
         }
 
-        Dictionary<int, IReadOnlyList<MqImage>> byFileId = new(imagesByFileId.Count);
+        Dictionary<int, IReadOnlyList<MqImage>> byFileId = [with(imagesByFileId.Count)];
 
         foreach (KeyValuePair<int, List<MqImage>> pair in imagesByFileId)
         {
@@ -159,7 +159,7 @@ public sealed class ImagesExtractor
         MqImageMetadata metadata = fileImages[0].Metadata;
         RawBitmap baseImage = PreparePalettizedImage(file, metadata);
 
-        Dictionary<string, RawBitmap> parts = new(fileImages.Count);
+        Dictionary<string, RawBitmap> parts = [with(fileImages.Count)];
 
         foreach (MqImage image in fileImages)
         {
@@ -224,7 +224,7 @@ public sealed class ImagesExtractor
         stream.Seek(indexFile.Offset, SeekOrigin.Begin);
 
         int framesCount = stream.ReadInt32LittleEndian();
-        List<MqIndex> indexes = new(framesCount);
+        List<MqIndex> indexes = [with(framesCount)];
 
         for (int frameIndex = 0; frameIndex < framesCount; ++frameIndex)
         {
@@ -246,7 +246,7 @@ public sealed class ImagesExtractor
             return null;
         }
 
-        Dictionary<string, List<int>> fileIdsByName = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, List<int>> fileIdsByName = [with(StringComparer.OrdinalIgnoreCase)];
 
         foreach (MqIndex index in indexes)
         {
@@ -262,7 +262,7 @@ public sealed class ImagesExtractor
             }
         }
 
-        Dictionary<string, MqImage> images = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, MqImage> images = [with(StringComparer.OrdinalIgnoreCase)];
         foreach (MqImageBlock block in ReadImageBlocks(stream, imagesFile))
         {
             int fileId = ResolveBlockFileId(archive, block, fileIdsByName);
@@ -295,7 +295,7 @@ public sealed class ImagesExtractor
             int sizeY = stream.ReadInt32LittleEndian();
 
             stream.ReadExactly(paletteBuffer);
-            List<Color> palette = new(paletteBuffer.Length / 4);
+            List<Color> palette = [with(paletteBuffer.Length / 4)];
             for (int i = 0; i < paletteBuffer.Length; i += 4)
             {
                 palette.Add(new Color(paletteBuffer[i + 3], paletteBuffer[i], paletteBuffer[i + 1], paletteBuffer[i + 2]));
@@ -304,7 +304,7 @@ public sealed class ImagesExtractor
             MqImageMetadata metadata = new(transparentColorIndex, opacityAlgorithm, sizeX, sizeY, palette);
 
             int framesCount = stream.ReadInt32LittleEndian();
-            List<MqImageFrame> frames = new(framesCount);
+            List<MqImageFrame> frames = [with(framesCount)];
             for (int frameIndex = 0; frameIndex < framesCount; ++frameIndex)
             {
                 string frameName = stream.ReadAsciiString();
@@ -312,7 +312,7 @@ public sealed class ImagesExtractor
                 int width = stream.ReadInt32LittleEndian();
                 int height = stream.ReadInt32LittleEndian();
 
-                List<MqImagePart> parts = new(partsCount);
+                List<MqImagePart> parts = [with(partsCount)];
                 for (int partIndex = 0; partIndex < partsCount; ++partIndex)
                 {
                     int sourceX = stream.ReadInt32LittleEndian();
@@ -393,7 +393,7 @@ public sealed class ImagesExtractor
             return new MqAnimationSet(NoAnimations, new HashSet<string>(StringComparer.OrdinalIgnoreCase));
         }
 
-        HashSet<string> frameNames = new(StringComparer.OrdinalIgnoreCase);
+        HashSet<string> frameNames = [with(StringComparer.OrdinalIgnoreCase)];
         List<IReadOnlyList<MqImage>> animationFrames = [];
         stream.Seek(animationsFile.Offset, SeekOrigin.Begin);
 
@@ -402,7 +402,7 @@ public sealed class ImagesExtractor
         while (stream.Position < endOfFile)
         {
             int framesCount = stream.ReadInt32LittleEndian();
-            List<MqImage> frames = new(framesCount);
+            List<MqImage> frames = [with(framesCount)];
             for (int frameIndex = 0; frameIndex < framesCount; ++frameIndex)
             {
                 string frameName = stream.ReadAsciiString();
@@ -428,7 +428,7 @@ public sealed class ImagesExtractor
             throw new ResourceException("Animation lengths do not match.");
         }
 
-        Dictionary<string, IReadOnlyList<MqImage>> animations = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, IReadOnlyList<MqImage>> animations = [with(StringComparer.OrdinalIgnoreCase)];
         for (int animationIndex = 0; animationIndex < animationFrames.Count; animationIndex++)
         {
             animations.Add(animationNames[animationIndex], animationFrames[animationIndex]);
@@ -439,7 +439,7 @@ public sealed class ImagesExtractor
 
     private IReadOnlyCollection<RawBitmap> BuildAnimationFrames(IReadOnlyList<MqImage> frames)
     {
-        List<RawBitmap> result = new(frames.Count);
+        List<RawBitmap> result = [with(frames.Count)];
 
         Dictionary<int, RawBitmap> baseImages = [];
         Rectangle animationBounds = GetAnimationBounds(frames);

@@ -222,7 +222,7 @@ public sealed class WorldPlan
 
     private Dictionary<WorldPosition, WorldStack> BuildStacks()
     {
-        Dictionary<WorldPosition, WorldStack> result = new(state.Stacks.Count);
+        Dictionary<WorldPosition, WorldStack> result = [with(state.Stacks.Count)];
 
         foreach (WorldStack stack in state.Stacks.Values)
         {
@@ -254,7 +254,7 @@ public sealed class WorldPlan
 
     private Dictionary<WorldPosition, WorldResourceNode> BuildResourceNodes()
     {
-        Dictionary<WorldPosition, WorldResourceNode> result = new(state.ResourceNodes.Count);
+        Dictionary<WorldPosition, WorldResourceNode> result = [with(state.ResourceNodes.Count)];
 
         foreach (WorldResourceNode resourceNode in state.ResourceNodes.Values)
         {
@@ -266,7 +266,7 @@ public sealed class WorldPlan
 
     private Dictionary<WorldPosition, WorldRod> BuildRods()
     {
-        Dictionary<WorldPosition, WorldRod> result = new(state.Rods.Count);
+        Dictionary<WorldPosition, WorldRod> result = [with(state.Rods.Count)];
 
         foreach (WorldRod rod in state.Rods.Values)
         {
@@ -395,7 +395,7 @@ public sealed class WorldPlan
 
     private Dictionary<WorldPosition, WorldBag> BuildBags()
     {
-        Dictionary<WorldPosition, WorldBag> result = new(state.Bags.Count);
+        Dictionary<WorldPosition, WorldBag> result = [with(state.Bags.Count)];
 
         foreach (WorldBag bag in state.Bags.Values)
         {
@@ -420,7 +420,7 @@ public sealed class WorldPlan
             builder.Add(tomb);
         }
 
-        Dictionary<WorldPosition, ImmutableArray<WorldTomb>> result = new(builders.Count);
+        Dictionary<WorldPosition, ImmutableArray<WorldTomb>> result = [with(builders.Count)];
 
         foreach ((WorldPosition position, ImmutableArray<WorldTomb>.Builder builder) in builders)
         {

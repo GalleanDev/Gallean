@@ -21,7 +21,7 @@ internal sealed partial class WorldRenderComposer
             int larger = Math.Max(input.MapWidth, input.MapHeight);
             int count = Math.Clamp((larger - MinSize) / SizePerCloud, 0, MaxCount);
 
-            List<Cloud> clouds = new(count);
+            List<Cloud> clouds = [with(count)];
 
             for (int index = 0; index < count; index++)
             {

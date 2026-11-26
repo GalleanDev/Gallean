@@ -95,7 +95,7 @@ public sealed class TextCatalogLoaderTests
     [Test]
     public void CompleteTest()
     {
-        HashSet<string> texts = new(StringComparer.Ordinal);
+        HashSet<string> texts = [with(StringComparer.Ordinal)];
 
         foreach (ClientTextEntry entry in ClientTextIndex.All)
         {

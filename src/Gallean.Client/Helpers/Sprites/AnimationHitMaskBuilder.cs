@@ -10,7 +10,7 @@ internal static class AnimationHitMaskBuilder
 
     public static ImmutableBitmap Build(AssetAnimationMetadata metadata, IReadOnlyList<Sprite> frames)
     {
-        List<ImmutableBitmap> frameMasks = new(frames.Count);
+        List<ImmutableBitmap> frameMasks = [with(frames.Count)];
 
         foreach (Sprite frame in frames)
         {

@@ -175,7 +175,7 @@ internal sealed partial class MinimapVisual : AbstractAnimatedVisual
             new(0, viewport.Height)
         ];
 
-        List<Point> cells = new(corners.Length);
+        List<Point> cells = [with(corners.Length)];
 
         foreach (Point corner in corners)
         {

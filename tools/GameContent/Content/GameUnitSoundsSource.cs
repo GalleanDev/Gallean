@@ -37,7 +37,7 @@ internal sealed class GameUnitSoundsSource
             banks.Add(SoundsExtractor.Load(path));
         }
 
-        Dictionary<string, UnitTypeSounds> unitSounds = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, UnitTypeSounds> unitSounds = [with(StringComparer.OrdinalIgnoreCase)];
 
         foreach (string path in Directory.EnumerateFiles(soundsRoot, "*.wdt", enumerationOptions))
         {

@@ -125,7 +125,7 @@ public sealed class PerformanceTests
 
         ImmutableSortedDictionary<WorldStackId, WorldStack>.Builder stacks =
             ImmutableSortedDictionary.CreateBuilder<WorldStackId, WorldStack>();
-        HashSet<WorldPosition> stackPositions = new(stackCount);
+        HashSet<WorldPosition> stackPositions = [with(stackCount)];
 
         for (int i = 0; i < stackCount; i++)
         {
@@ -140,7 +140,7 @@ public sealed class PerformanceTests
 
         ImmutableSortedDictionary<WorldResourceNodeId, WorldResourceNode>.Builder resourceNodes =
             ImmutableSortedDictionary.CreateBuilder<WorldResourceNodeId, WorldResourceNode>();
-        HashSet<WorldPosition> nodePositions = new(resourceNodeCount);
+        HashSet<WorldPosition> nodePositions = [with(resourceNodeCount)];
 
         for (int i = 0; i < resourceNodeCount; i++)
         {

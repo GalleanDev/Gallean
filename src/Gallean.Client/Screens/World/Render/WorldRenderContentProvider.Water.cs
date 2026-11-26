@@ -211,7 +211,7 @@ internal sealed partial class WorldRenderContentProvider
             AssetCache<Animation>.Lease lease = leases.Add(assets.GetRequiredAnimation(new AssetAnimationKey.Water()));
             Animation water = lease.Value;
             int frameCount = water.Metadata.FrameCount;
-            List<SKShader> result = new(frameCount);
+            List<SKShader> result = [with(frameCount)];
 
             for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
             {

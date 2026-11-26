@@ -40,7 +40,7 @@ internal sealed class GameMusicSource(string musicRoot)
 
     private static IReadOnlyDictionary<string, string> BuildFileNames(string musicRoot)
     {
-        Dictionary<string, string> pathsByName = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, string> pathsByName = [with(StringComparer.OrdinalIgnoreCase)];
 
         foreach (string path in Directory.EnumerateFiles(musicRoot))
         {

@@ -44,7 +44,7 @@ public sealed class BattleAssetPerformanceTests
     {
         PerformanceTimer timer = new();
 
-        List<AssetCache<Animation>.Lease> leases = new(keys.Count);
+        List<AssetCache<Animation>.Lease> leases = [with(keys.Count)];
         foreach (AssetAnimationKey key in keys)
         {
             if (provider.GetOptionalAnimation(key) is { } lease)

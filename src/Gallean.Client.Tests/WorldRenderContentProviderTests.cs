@@ -26,8 +26,8 @@ public sealed class WorldRenderContentProviderTests
     private static WorldRenderState BuildState()
     {
         const int side = 6;
-        List<MapTile> tiles = new(side * side);
-        List<FogTile> fogTiles = new(side * side);
+        List<MapTile> tiles = [with(side * side)];
+        List<FogTile> fogTiles = [with(side * side)];
         List<MapObject> objects = [];
         ImmutableArray<WorldMapCell>.Builder cells = ImmutableArray.CreateBuilder<WorldMapCell>(side * side);
 

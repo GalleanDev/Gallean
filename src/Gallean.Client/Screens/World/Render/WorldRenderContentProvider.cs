@@ -685,7 +685,7 @@ internal sealed partial class WorldRenderContentProvider
 
     private static IReadOnlyList<DirectSprite> MergeDirectSprites(DirectSpriteContent content)
     {
-        List<DirectSprite> merged = new(content.ObjectSprites.Count + content.ShieldSprites.Count);
+        List<DirectSprite> merged = [with(content.ObjectSprites.Count + content.ShieldSprites.Count)];
         int objectCursor = 0;
         int shieldCursor = 0;
 

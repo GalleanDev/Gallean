@@ -29,7 +29,7 @@ internal static class SpriteLightBuilder
             Point[] centers = Cluster(samples, SeedCenters(samples));
             int[] clusters = Assign(samples, centers);
             IReadOnlyList<IReadOnlyList<int>> groups = GroupClusters(BuildGroups(samples, centers, clusters));
-            List<IReadOnlyList<SpriteLight>> lights = new(frames.Count);
+            List<IReadOnlyList<SpriteLight>> lights = [with(frames.Count)];
 
             for (int index = 0; index < frames.Count; index++)
             {

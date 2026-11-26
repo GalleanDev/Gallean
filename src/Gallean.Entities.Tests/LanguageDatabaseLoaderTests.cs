@@ -45,8 +45,8 @@ public sealed class LanguageDatabaseLoaderTests
     {
         GlobalDatabaseIndex globalDb = GlobalDatabaseLoader.LoadIndex(RiseOfTheElves.GlobalDatabasePath);
         ScenarioDatabaseIndex scenarioDb = ScenarioDatabaseLoader.LoadIndex(RiseOfTheElves.ScenarioDatabasePath);
-        HashSet<string> globalTextIds = new(StringComparer.OrdinalIgnoreCase);
-        HashSet<string> scenarioInfoIds = new(StringComparer.OrdinalIgnoreCase);
+        HashSet<string> globalTextIds = [with(StringComparer.OrdinalIgnoreCase)];
+        HashSet<string> scenarioInfoIds = [with(StringComparer.OrdinalIgnoreCase)];
 
         foreach (Db.Id id in globalDb.TextGlobals.Keys)
         {

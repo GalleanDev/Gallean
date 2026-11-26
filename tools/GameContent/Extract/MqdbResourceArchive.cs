@@ -119,7 +119,7 @@ internal sealed class MqdbResourceArchive
         IReadOnlyDictionary<int, MqdbResourceRecord> records)
     {
         int filesCount = stream.ReadInt32LittleEndian();
-        List<MqdbResourceFile> files = new(filesCount);
+        List<MqdbResourceFile> files = [with(filesCount)];
 
         for (int i = 0; i < filesCount; i++)
         {
@@ -142,7 +142,7 @@ internal sealed class MqdbResourceArchive
 
         stream.Skip(8);
 
-        List<MqdbResourceFile> files = new(filesCount);
+        List<MqdbResourceFile> files = [with(filesCount)];
 
         for (int i = 0; i < filesCount; i++)
         {

@@ -133,7 +133,7 @@ public class BackgroundGenerator : IIncrementalGenerator
 
     private static List<string> GetExpectedLayers(List<ImageMetadata> images)
     {
-        HashSet<string> existing = new(StringComparer.Ordinal);
+        HashSet<string> existing = [with(StringComparer.Ordinal)];
 
         foreach (ImageMetadata image in images)
         {

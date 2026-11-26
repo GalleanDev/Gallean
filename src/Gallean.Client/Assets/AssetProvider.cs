@@ -207,7 +207,7 @@ internal sealed partial class AssetProvider : IAssetProvider, IDisposable
         IReadOnlyList<AssetSpriteLayer<SKImage>>? albedoLayers = assetSource.TryGetAnimationLayer(animationKey, AssetSpriteLayerType.Albedo);
         IReadOnlyList<IReadOnlyList<SpriteLight>> lights = SpriteLightBuilder.Build(animation.Frames);
 
-        List<Sprite> sprites = new(animation.Frames.Count);
+        List<Sprite> sprites = [with(animation.Frames.Count)];
 
         for (int index = 0; index < animation.Frames.Count; index++)
         {

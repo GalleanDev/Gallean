@@ -89,7 +89,7 @@ internal sealed class MqdbArchive
         Dictionary<int, Record> recordsById,
         ScenarioTextEncoding encoding)
     {
-        Dictionary<string, Record> result = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, Record> result = [with(StringComparer.OrdinalIgnoreCase)];
         int position = fileTable.Offset;
         int count = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position));
         position += sizeof(int);

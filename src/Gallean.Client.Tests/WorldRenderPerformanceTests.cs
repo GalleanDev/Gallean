@@ -152,8 +152,8 @@ public sealed class WorldRenderPerformanceTests
 
     private static WorldRenderState BuildRenderState(int mapSide, double waterFraction)
     {
-        List<MapTile> tiles = new(mapSide * mapSide);
-        List<FogTile> fogTiles = new(mapSide * mapSide);
+        List<MapTile> tiles = [with(mapSide * mapSide)];
+        List<FogTile> fogTiles = [with(mapSide * mapSide)];
         ImmutableArray<WorldMapCell>.Builder cells = ImmutableArray.CreateBuilder<WorldMapCell>(mapSide * mapSide);
 
         int waterStride;

@@ -16,7 +16,7 @@ public sealed class GameAssetCatalogTests
 
     private static IReadOnlyList<string> CountByCategory(IReadOnlyList<GameAssetDescriptor> descriptors)
     {
-        SortedDictionary<string, int> byCategory = new(StringComparer.Ordinal);
+        SortedDictionary<string, int> byCategory = [with(StringComparer.Ordinal)];
 
         foreach (GameAssetDescriptor descriptor in descriptors)
         {

@@ -20,7 +20,7 @@ public sealed class SceneInterfaceExtractor
     {
         using StreamReader stream = new(path);
 
-        Dictionary<string, SceneInterface> dialogs = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, SceneInterface> dialogs = [with(StringComparer.OrdinalIgnoreCase)];
 
         while (stream.ReadLine() is { } line)
         {

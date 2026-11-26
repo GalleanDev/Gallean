@@ -35,7 +35,7 @@ internal sealed class FluidSolver(
         }
 
         int captureCount = configuration.FrameCount * 2;
-        List<byte[]> captured = new(captureCount);
+        List<byte[]> captured = [with(captureCount)];
 
         for (int step = 0; step < captureCount; step++)
         {
@@ -222,7 +222,7 @@ internal sealed class FluidSolver(
 
     private IReadOnlyList<byte[]> CloseLoop(IReadOnlyList<byte[]> captured)
     {
-        List<byte[]> frames = new(configuration.FrameCount);
+        List<byte[]> frames = [with(configuration.FrameCount)];
 
         for (int index = 0; index < configuration.FrameCount; index++)
         {

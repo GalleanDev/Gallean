@@ -13,7 +13,7 @@ internal sealed partial class WorldRenderComposer
         public static MapTerrain Build(Input input)
         {
             WorldMap map = input.Map;
-            List<MapTile> mapTiles = new(map.Width * map.Height);
+            List<MapTile> mapTiles = [with(map.Width * map.Height)];
             List<MapTileBorder> borders = [];
             HashSet<WorldMapTerrain> groundTerrains = [];
 

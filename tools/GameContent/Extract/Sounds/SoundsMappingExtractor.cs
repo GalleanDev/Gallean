@@ -40,7 +40,7 @@ public sealed class SoundsMappingExtractor
         stream.Seek(file.Offset, SeekOrigin.Begin);
 
         int count = stream.ReadInt32LittleEndian();
-        List<SoundInfo> result = new(count);
+        List<SoundInfo> result = [with(count)];
 
         for (int i = 0; i < count; i++)
         {
@@ -85,7 +85,7 @@ public sealed class SoundsMappingExtractor
         Stream stream,
         IReadOnlyList<SoundInfo> soundInfoList)
     {
-        Dictionary<string, IReadOnlyList<string>> soundListsByName = new(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, IReadOnlyList<string>> soundListsByName = [with(StringComparer.OrdinalIgnoreCase)];
         Dictionary<string, UnitTypeSounds> unitTypeSounds = [];
 
         foreach (SoundInfo info in soundInfoList)
