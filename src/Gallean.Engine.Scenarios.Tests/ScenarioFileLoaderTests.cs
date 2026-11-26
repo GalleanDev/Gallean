@@ -2,8 +2,6 @@ namespace Gallean.Engine.Scenarios.Tests;
 
 public sealed class ScenarioFileLoaderTests
 {
-    private const int SaveVersionOffset = 16;
-
     [Test]
     public void LoadExportFormatTest()
     {
@@ -1953,7 +1951,7 @@ public sealed class ScenarioFileLoaderTests
     public void LoadSaveVersionTest(int version)
     {
         byte[] data = File.ReadAllBytes(TestScenarios.GreywaterSiegePath);
-        BitConverter.GetBytes(version).CopyTo(data, SaveVersionOffset);
+        BitConverter.GetBytes(version).CopyTo(data, 16);
 
         using MemoryStream stream = new(data, writable: false);
 
@@ -1969,7 +1967,7 @@ public sealed class ScenarioFileLoaderTests
     public void LoadUnsupportedSaveVersionTest(int version)
     {
         byte[] data = File.ReadAllBytes(TestScenarios.GreywaterSiegePath);
-        BitConverter.GetBytes(version).CopyTo(data, SaveVersionOffset);
+        BitConverter.GetBytes(version).CopyTo(data, 16);
 
         using MemoryStream stream = new(data, writable: false);
 
