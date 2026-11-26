@@ -14,7 +14,7 @@ public sealed class BattleAssetPerformanceTests
     public void SetUp()
     {
         GameLoader loader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState: null, Language.English);
+        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", customScenario: null, worldState: null, Language.English);
         using GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         IGameDefinitionProvider definitions = gameModel.Definitions;
 

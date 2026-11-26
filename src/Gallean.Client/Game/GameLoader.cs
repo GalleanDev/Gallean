@@ -1,35 +1,20 @@
+using System.Collections.Immutable;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
-using Gallean.Entities;
 using Gallean.Entities.GameData;
 
 namespace Gallean.Client;
 
 internal sealed class GameLoader(IRandomProvider random)
 {
-    private delegate Scenario ScenarioLoadFunc(
-        ScenarioDatabase scenarioDatabase,
-        IGameDefinitionProvider definitions,
-        GlobalVariables globals);
-
     public const string TutorialScenarioId = "S253SC0000";
 
-    private readonly Lazy<CampaignDatabase> campaignDatabase = new(() => CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath));
-    private readonly Lazy<GlobalDatabase> globalDatabase = new(() => GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath));
-    private readonly Lazy<GlobalDatabaseIndex> globalDatabaseIndex = new(() => GlobalDatabaseLoader.LoadIndex(RiseOfTheElves.GlobalDatabasePath));
-    private readonly Lazy<ScenarioDatabaseIndex> scenarioDatabaseIndex = new(() => ScenarioDatabaseLoader.LoadIndex(RiseOfTheElves.ScenarioDatabasePath));
+    private readonly ScenarioLibrary library = new(random, CreateLibraryConfiguration());
 
     public (IReadOnlyList<GameCampaign> Campaigns, IGameTextProvider Texts, IGameDefinitionProvider Definitions) LoadCampaigns(Language language)
     {
-        IReadOnlyList<ScenarioCampaign> campaigns = ScenarioLoader.EnumerateCampaigns(
-            globalDatabaseIndex.Value,
-            scenarioDatabaseIndex.Value,
-            campaignDatabase.Value);
-        LanguageDatabase languageDatabase = LanguageDatabaseLoader.LoadIndex(
-            RiseOfTheElves.GetLanguageGlobalDatabasePath(language.Code),
-            RiseOfTheElves.GetLanguageScenarioDatabasePath(language.Code));
-        IGameTextProvider texts = new GameTextProvider(globalDatabaseIndex.Value, scenarioDatabaseIndex.Value, [], languageDatabase);
-        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDatabase.Value);
+        (IReadOnlyList<ScenarioCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = library.LoadCampaigns(language);
 
         List<GameCampaign> result = [];
 
@@ -39,21 +24,11 @@ internal sealed class GameLoader(IRandomProvider random)
 
             foreach (ScenarioMetadata scenario in campaign.Scenarios)
             {
-                scenarios.Add(new GameScenario(
-                    scenario.Id.Value,
-                    texts.GetScenarioText(scenario.InfoTexts.Name),
-                    GetOptionalText(texts, scenario.InfoTexts.Description),
-                    texts.GetScenarioText(scenario.InfoTexts.Objective),
-                    scenario.SuggestedLevel,
-                    scenario.MapSize,
-                    scenario.CityCount,
-                    GetOptionalText(texts, scenario.InfoTexts.Creator),
-                    campaign.IsSkirmish,
-                    campaign.CanImportLeader,
-                    scenario.PlayableRaces));
+                scenarios.Add(CreateScenario(customScenarioId: null, campaign, scenario, texts));
             }
 
             result.Add(new GameCampaign(
+                CustomScenarioId: null,
                 campaign.Id.Value,
                 texts.GetGlobalText(campaign.NameTextId).Text,
                 campaign.PlayRace,
@@ -62,6 +37,69 @@ internal sealed class GameLoader(IRandomProvider random)
         }
 
         return (result, texts, definitions);
+    }
+
+    public GameScenario LoadCustomScenario(CustomScenarioFile customScenario, Language language)
+    {
+        ScenarioLibraryFile file = library.OpenScenarioFile(customScenario.Data, language);
+        (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, language);
+        ScenarioMetadata scenario = campaign.Scenarios.Single();
+
+        return CreateScenario(customScenario.Id, campaign, scenario, texts);
+    }
+
+    public GameCampaign LoadCustomCampaign(CustomScenarioFile customScenario, Language language)
+    {
+        ScenarioLibraryFile file = library.OpenCampaignFile(customScenario.Data, language);
+        (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, language);
+
+        List<GameScenario> scenarios = [];
+
+        foreach (ScenarioMetadata scenario in campaign.Scenarios)
+        {
+            scenarios.Add(CreateScenario(customScenario.Id, campaign, scenario, texts));
+        }
+
+        return new GameCampaign(customScenario.Id, campaign.Id.Value, file.Name, campaign.PlayRace, campaign.IsSkirmish, scenarios);
+    }
+
+    private static ScenarioLibraryConfiguration CreateLibraryConfiguration()
+    {
+        Dictionary<Language, ScenarioLibraryLanguageConfiguration> languages = [];
+
+        foreach (Language language in Enum.GetValues<Language>())
+        {
+            languages.Add(language, new ScenarioLibraryLanguageConfiguration(
+                RiseOfTheElves.GetLanguageGlobalDatabasePath(language.Code),
+                RiseOfTheElves.GetLanguageScenarioDatabasePath(language.Code)));
+        }
+
+        return new ScenarioLibraryConfiguration(
+            RiseOfTheElves.GlobalDatabasePath,
+            RiseOfTheElves.ScenarioDatabasePath,
+            RiseOfTheElves.CampaignDatabasePath,
+            languages.ToImmutableDictionary());
+    }
+
+    private static GameScenario CreateScenario(
+        CustomScenarioId? customScenarioId,
+        ScenarioCampaign campaign,
+        ScenarioMetadata scenario,
+        IGameTextProvider texts)
+    {
+        return new GameScenario(
+            customScenarioId,
+            scenario.Id.Value,
+            texts.GetScenarioText(scenario.InfoTexts.Name),
+            GetOptionalText(texts, scenario.InfoTexts.Description),
+            texts.GetScenarioText(scenario.InfoTexts.Objective),
+            scenario.SuggestedLevel,
+            scenario.MapSize,
+            scenario.CityCount,
+            GetOptionalText(texts, scenario.InfoTexts.Creator),
+            campaign.IsSkirmish,
+            campaign.CanImportLeader,
+            scenario.PlayableRaces);
     }
 
     private static string? GetOptionalText(IGameTextProvider texts, ScenarioTextId? id)
@@ -76,70 +114,48 @@ internal sealed class GameLoader(IRandomProvider random)
         }
     }
 
-    public (GameSession Session, IGameTextProvider Texts) LoadScenario(string scenarioId, WorldState? worldState, Language language)
-    {
-        return LoadInternal(
-            scenarioId,
-            (scenarioDatabase, definitions, globals) => ScenarioLoader.Load(
-                globalDatabase.Value,
-                scenarioDatabase,
-                campaignDatabase.Value,
-                new ScenarioId(scenarioId),
-                definitions,
-                globals),
-            worldState,
-            language);
-    }
-
-    public (GameSession Session, IGameTextProvider Texts) CreateScenario(string scenarioId, ScenarioConfiguration configuration, Language language)
-    {
-        return LoadInternal(
-            scenarioId,
-            (scenarioDatabase, definitions, globals) => ScenarioLoader.Create(
-                globalDatabase.Value,
-                scenarioDatabase,
-                campaignDatabase.Value,
-                new ScenarioId(scenarioId),
-                definitions,
-                globals,
-                configuration),
-            worldState: null,
-            language);
-    }
-
-    public IGameTextProvider LoadTexts(string scenarioId, Language language)
-    {
-        ScenarioDatabase scenarioDatabase = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, scenarioId);
-
-        return CreateTextProvider(scenarioDatabase, scenarioId, language);
-    }
-
-    private (GameSession Session, IGameTextProvider Texts) LoadInternal(
+    public (GameSession Session, IGameTextProvider Texts) LoadScenario(
         string scenarioId,
-        ScenarioLoadFunc loadFunc,
+        CustomScenarioFile? customScenario,
         WorldState? worldState,
         Language language)
     {
-        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDatabase.Value);
-        ScenarioDatabase scenarioDatabase = ScenarioDatabaseLoader.Load(RiseOfTheElves.ScenarioDatabasePath, scenarioId);
-        IGameTextProvider texts = CreateTextProvider(scenarioDatabase, scenarioId, language);
-        GlobalVariables globals = new();
-        Scenario scenario = loadFunc(scenarioDatabase, definitions, globals);
+        ScenarioLibraryFile? file = OpenFile(customScenario, language);
 
-        UnitStatsProvider unitStats = new(definitions, globals, scenario.Provider.Definition);
-        EngineContext engineContext = new(random, definitions, unitStats, scenario.Provider, globals);
-        GameSession session = new(engineContext, worldState ?? scenario.State);
-
-        return (session, texts);
+        return library.LoadScenario(new ScenarioId(scenarioId), file, worldState, language);
     }
 
-    private IGameTextProvider CreateTextProvider(ScenarioDatabase scenarioDatabase, string scenarioId, Language language)
+    public (GameSession Session, IGameTextProvider Texts) CreateScenario(
+        string scenarioId,
+        CustomScenarioFile? customScenario,
+        ScenarioConfiguration configuration,
+        Language language)
     {
-        LanguageDatabase languageDatabase = LanguageDatabaseLoader.Load(
-            RiseOfTheElves.GetLanguageGlobalDatabasePath(language.Code),
-            RiseOfTheElves.GetLanguageScenarioDatabasePath(language.Code),
-            scenarioId);
+        ScenarioLibraryFile? file = OpenFile(customScenario, language);
 
-        return new GameTextProvider(globalDatabase.Value, scenarioDatabase, scenarioDatabase.TextScenarios, languageDatabase);
+        return library.CreateScenario(new ScenarioId(scenarioId), file, configuration, language);
+    }
+
+    public IGameTextProvider LoadTexts(string scenarioId, CustomScenarioFile? customScenario, Language language)
+    {
+        ScenarioLibraryFile? file = OpenFile(customScenario, language);
+
+        return library.LoadTexts(new ScenarioId(scenarioId), file, language);
+    }
+
+    private ScenarioLibraryFile? OpenFile(CustomScenarioFile? customScenario, Language language)
+    {
+        if (customScenario is not null)
+        {
+            return customScenario.Type switch
+            {
+                CustomScenarioType.Scenario => library.OpenScenarioFile(customScenario.Data, language),
+                CustomScenarioType.Campaign => library.OpenCampaignFile(customScenario.Data, language)
+            };
+        }
+        else
+        {
+            return null;
+        }
     }
 }

@@ -1,8 +1,8 @@
 using System.Buffers.Binary;
 
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
-internal static class CampaignFileLoader
+public static class CampaignFileLoader
 {
     private const int HeaderLength = 340;
     private const int HeaderNameOffset = 4;
@@ -35,7 +35,12 @@ internal static class CampaignFileLoader
 
     public static CampaignFileContent Read(string path, ScenarioTextEncoding encoding)
     {
-        return Read(MqdbArchive.Load(File.ReadAllBytes(path), encoding), encoding);
+        return Read(File.ReadAllBytes(path), encoding);
+    }
+
+    public static CampaignFileContent Read(byte[] data, ScenarioTextEncoding encoding)
+    {
+        return Read(MqdbArchive.Load(data, encoding), encoding);
     }
 
     private static CampaignFileContent Read(MqdbArchive archive, ScenarioTextEncoding encoding)

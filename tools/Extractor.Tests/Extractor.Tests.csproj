@@ -11,6 +11,7 @@
   <ItemGroup>
     <Using Include="Gallean.Engine.Contracts" />
     <Using Include="Gallean.Entities" />
+    <Using Include="Gallean.Engine.Scenarios" />
     <Using Include="Extractor" />
   </ItemGroup>
 

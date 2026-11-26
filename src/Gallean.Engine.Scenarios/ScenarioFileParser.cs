@@ -1,4 +1,4 @@
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
 internal sealed class ScenarioFileParser(ScenarioRecordReader reader, ScenarioFileFormat format, Db.ScenarioId scenarioId)
 {

@@ -1,6 +1,6 @@
 using System.Buffers.Binary;
 
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
 internal sealed class MqdbArchive
 {
@@ -54,7 +54,7 @@ internal sealed class MqdbArchive
             throw new InvalidDataException($"Archive has no file named '{name}'.");
         }
 
-        return data.AsSpan(record.Offset, record.Size).ToArray();
+        return [.. data.AsSpan(record.Offset, record.Size)];
     }
 
     private static Dictionary<int, Record> ReadRecords(byte[] data, ScenarioTextEncoding encoding)
@@ -90,6 +90,7 @@ internal sealed class MqdbArchive
         ScenarioTextEncoding encoding)
     {
         Dictionary<string, Record> result = [with(StringComparer.OrdinalIgnoreCase)];
+
         int position = fileTable.Offset;
         int count = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position));
         position += sizeof(int);

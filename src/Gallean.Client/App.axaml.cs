@@ -82,6 +82,7 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
         GameLoader gameLoader = new(random);
         GameSaveStore gameSaveStore = new(AppDirectories.Saves, gameSettings.AutoSaveLimit);
         LeaderStore leaderStore = new(AppDirectories.Leaders);
+        CustomScenarioStore customScenarioStore = new(AppDirectories.Scenarios);
         AssetPreloader assetPreloader = new(assetProvider);
         AudioPlayer audioPlayer = new(assetProvider, audioOutput, log, gameSettings.SoundVolumeRatio, gameSettings.MusicVolumeRatio);
         GameViewModel gameViewModel = cleanupList.Add(new GameViewModel(
@@ -92,6 +93,7 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
             gameLoader,
             gameSaveStore,
             leaderStore,
+            customScenarioStore,
             gameSettingsStore,
             gameSettingsSource,
             clientVersion,

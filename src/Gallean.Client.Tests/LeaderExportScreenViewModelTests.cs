@@ -47,7 +47,7 @@ public sealed class LeaderExportScreenViewModelTests
     {
         GameLoader gameLoader = new(new RandomProvider(0));
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration, Language.English);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", customScenario: null, configuration, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
@@ -133,7 +133,7 @@ public sealed class LeaderExportScreenViewModelTests
     public void BackTest()
     {
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = gameLoader.LoadScenario("S107SC0000", worldState: null, Language.English);
+        (GameSession session, IGameTextProvider texts) = gameLoader.LoadScenario("S107SC0000", customScenario: null, worldState: null, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
@@ -150,7 +150,7 @@ public sealed class LeaderExportScreenViewModelTests
     {
         GameLoader gameLoader = new(new RandomProvider(0));
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", configuration, Language.English);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S107SC0000", customScenario: null, configuration, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 

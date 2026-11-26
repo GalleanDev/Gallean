@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Gallean.Configuration;
 
 public sealed record GameSaveMetadata(
@@ -7,7 +9,8 @@ public sealed record GameSaveMetadata(
     string ScenarioName,
     int TurnNumber,
     DateTimeOffset SavedAt,
-    string? SavedBy = null)
+    string? SavedBy = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CustomScenarioId = null)
 {
     public const int MaxNameLength = 256;
 }

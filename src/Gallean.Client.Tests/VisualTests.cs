@@ -100,7 +100,7 @@ public sealed class VisualTests
     private GameModel LoadScenario(WorldState? worldState)
     {
         GameLoader loader = new(new RandomProvider(0));
-        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", worldState, Language.English);
+        (GameSession session, IGameTextProvider texts) = loader.LoadScenario("S107SC0000", customScenario: null, worldState, Language.English);
 
         return cleanupList.Add(new GameModel(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance));
     }
@@ -739,7 +739,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customCampaigns: []));
 
         await CaptureAsync(window);
     }
@@ -753,7 +753,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1600, 900);
 
-        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customCampaigns: []));
 
         await CaptureAsync(window);
     }
@@ -767,7 +767,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1720, 720);
 
-        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customCampaigns: []));
 
         await CaptureAsync(window);
     }
@@ -781,7 +781,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, 1920, 1080);
 
-        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+        gameViewModel.ShowScreen(new CampaignSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customCampaigns: []));
 
         await CaptureAsync(window);
     }
@@ -795,7 +795,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        CampaignSelectScreenViewModel screen = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns);
+        CampaignSelectScreenViewModel screen = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customCampaigns: []);
         screen.SelectedCampaign = screen.Campaigns.First(item => item.Campaign.PlayRace.Race == WorldRace.Undead);
         gameViewModel.ShowScreen(screen);
 
@@ -811,7 +811,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        CampaignSelectScreenViewModel screen = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns);
+        CampaignSelectScreenViewModel screen = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customCampaigns: []);
         screen.SelectedCampaign = screen.Campaigns.First(item => item.Campaign.PlayRace.Race == WorldRace.Elf);
         gameViewModel.ShowScreen(screen);
 
@@ -828,7 +828,7 @@ public sealed class VisualTests
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
         gameViewModel.UpdateSettings(GameSettings.Create(100, 100, false, 100, 5, 10, BattleSpeed.Normal, UiSize.Normal, true, MovementSpeed.Normal, Language.Russian, null, BattlePosition.Left));
-        gameViewModel.ShowScreen(new ScenarioSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+        gameViewModel.ShowScreen(new ScenarioSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customScenarios: []));
 
         await CaptureAsync(window);
 
@@ -844,7 +844,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        gameViewModel.ShowScreen(new ScenarioSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns));
+        gameViewModel.ShowScreen(new ScenarioSelectScreenViewModel(gameViewModel, NullAssetPreloader.Instance, texts, definitions, campaigns, customScenarios: []));
 
         await CaptureAsync(window);
     }
@@ -1109,7 +1109,7 @@ public sealed class VisualTests
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S107SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S107SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -1315,7 +1315,7 @@ public sealed class VisualTests
     {
         using Sandbox sb = Sandbox.Create();
 
-        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, null, Language.English);
+        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, customScenario: null, null, Language.English);
         GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
 
         (GameViewModel gameViewModel, GameView window) = Initialize(sb, BaseWidth, BaseHeight);

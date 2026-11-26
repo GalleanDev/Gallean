@@ -1,4 +1,4 @@
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
 internal static class SixbitTextEncoder
 {

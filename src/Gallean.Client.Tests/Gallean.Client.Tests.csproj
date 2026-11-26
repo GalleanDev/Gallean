@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\..\tools\Extractor.Tests\TestScenarios\*.*" Link="TestScenarios\%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Gallean.Assets" />
     <Using Include="Gallean.Engine.Contracts" />
     <Using Include="Gallean.Client.Texts" />

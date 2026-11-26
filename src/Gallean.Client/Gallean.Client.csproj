@@ -37,7 +37,6 @@
     <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
     <ProjectReference Include="..\Gallean.Configuration\Gallean.Configuration.csproj" />
     <ProjectReference Include="..\Gallean.Engine\Gallean.Engine.csproj" />
-    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
     <ProjectReference Include="..\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
     <ProjectReference Include="..\Gallean.Client.Texts.Generators\Gallean.Client.Texts.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>

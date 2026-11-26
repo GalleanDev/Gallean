@@ -151,7 +151,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S095SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S095SC0000", customScenario: null, worldState: null, Language.English);
         GameSaveMetadata metadata = new("Saved game", GameSaveType.Manual, "S095SC0000", "Antagonists", 1, new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero), "0.1.0+2d40300");
         GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
 
@@ -354,7 +354,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState savedState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(10, new WorldPlayerId(2))
@@ -392,7 +392,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState savedState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2)),
@@ -432,7 +432,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         ImmutableSortedDictionary<WorldStackId, WorldStack>.Builder stacks = session.World.State.Stacks.ToBuilder();
 
         foreach (WorldStack stack in session.World.State.Stacks.Values)
@@ -494,7 +494,7 @@ public sealed class GameViewModelTests
 
         GameLoader gameLoader = new(new RandomProvider(0));
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Mage, new WorldObjectVariant(2), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, _) = gameLoader.CreateScenario("S137SC0000", configuration, Language.English);
+        (GameSession session, _) = gameLoader.CreateScenario("S137SC0000", customScenario: null, configuration, Language.English);
         WorldState savedState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -530,7 +530,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState savedState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(1))
@@ -560,7 +560,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState initialState = session.World.State;
         WorldStack stack = initialState.Stacks[new WorldStackId("S137KC0000")];
         WorldPlayer player = initialState.Players[new WorldPlayerId(2)];
@@ -605,7 +605,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState firstState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -675,7 +675,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState state = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -726,7 +726,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState state = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -779,7 +779,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState olderState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -824,7 +824,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState olderState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -886,7 +886,7 @@ public sealed class GameViewModelTests
         using GameViewModel gameViewModel = new TestGameViewModelBuilder().WithSaveStore(new GameSaveStore(sb.GetPath("saves"), 10)).Build();
         await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration(GameLoader.TutorialScenarioId, Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration(GameLoader.TutorialScenarioId, Configuration: null, CustomScenarioId: null));
 
         WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
 
@@ -2220,7 +2220,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState state = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -2279,7 +2279,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         WorldState firstState = session.World.State with
         {
             TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(2))
@@ -2332,7 +2332,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         TestAudioPlayer audioPlayer = new();
         GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
 
@@ -2358,7 +2358,7 @@ public sealed class GameViewModelTests
         using Sandbox sb = Sandbox.Create();
 
         GameLoader gameLoader = new(new RandomProvider(0));
-        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", worldState: null, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S137SC0000", customScenario: null, worldState: null, Language.English);
         GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
 
         await saveStore.SaveAsync(
@@ -2396,5 +2396,252 @@ public sealed class GameViewModelTests
 
         Assert.That(gameViewModel.Screens, Is.EqualTo<AbstractScreenViewModel>([world, secondPrompt]));
         Assert.That(sb.GetTree(), Is.EquivalentTo(["saves/", "saves/save-1.json.gz", "saves/save-2.json.gz"]));
+    }
+
+    [Test]
+    public async Task SaveCustomScenarioGameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")));
+
+        await customScenarioStore.SaveAsync(customScenario);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithSaveStore(saveStore)
+            .WithCustomScenarioStore(customScenarioStore)
+            .Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S900SC0000", Configuration: null, customScenario.Id));
+
+        BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
+
+        await briefing.ContinueCommand.ExecuteAsync(null);
+
+        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+
+        await gameViewModel.SaveGameAsync(world.GameModel, id: null, "My save");
+
+        GameSave saved = Assert.NotNull(await saveStore.TryLoadAsync(new GameSaveId(1)));
+
+        Assert.That(
+            $"{saved.Metadata.Name} | {saved.Metadata.ScenarioId} | {saved.Metadata.ScenarioName} | {saved.Metadata.CustomScenarioId}",
+            Is.EqualTo("My save | S900SC0000 | Greywater Crossing | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"));
+    }
+
+    [Test]
+    public async Task LoadCustomScenarioGameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")));
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S900SC0000", customScenario, worldState: null, Language.English);
+        WorldState savedState = session.World.State with
+        {
+            TurnInfo = new WorldTurnInfo(10, new WorldPlayerId(2))
+        };
+        GameSaveMetadata metadata = new(
+            "Saved game",
+            GameSaveType.Manual,
+            "S900SC0000",
+            "Greywater Crossing",
+            10,
+            new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            "0.1.0+2d40300",
+            "b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0");
+
+        await customScenarioStore.SaveAsync(customScenario);
+        await saveStore.SaveAsync(new GameSaveId(1), metadata, savedState);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithGameLoader(gameLoader)
+            .WithSaveStore(saveStore)
+            .WithCustomScenarioStore(customScenarioStore)
+            .Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.ShowLoadGameCommand.ExecuteAsync(null);
+
+        LoadGameScreenViewModel loadScreen = Assert.IsOfType<LoadGameScreenViewModel>(gameViewModel.TopScreen);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(loadScreen.SaveList.SelectedSave?.Entry);
+
+        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        world.CompleteGameStart();
+
+        Assert.That(world.GameModel.ScenarioId, Is.EqualTo("S900SC0000"));
+        Assert.That(world.GameModel.CustomScenarioId, Is.EqualTo(new CustomScenarioId("b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0")));
+        Assert.That(world.GameModel.Snapshot, Is.EqualTo(
+            new GameSnapshot(savedState, BattleState: null, ActiveActions: 0, ViewPlayerId: new WorldPlayerId(2))));
+    }
+
+    [Test]
+    public async Task LoadMissingCustomScenarioGameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")));
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S900SC0000", customScenario, worldState: null, Language.English);
+        GameSaveMetadata metadata = new(
+            "Saved game",
+            GameSaveType.Manual,
+            "S900SC0000",
+            "Greywater Crossing",
+            1,
+            new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            "0.1.0+2d40300",
+            "b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0");
+
+        await saveStore.SaveAsync(new GameSaveId(1), metadata, session.World.State);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithGameLoader(gameLoader)
+            .WithSaveStore(saveStore)
+            .WithCustomScenarioStore(new CustomScenarioStore(sb.GetPath("scenarios")))
+            .Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.ShowLoadGameCommand.ExecuteAsync(null);
+
+        LoadGameScreenViewModel loadScreen = Assert.IsOfType<LoadGameScreenViewModel>(gameViewModel.TopScreen);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(loadScreen.SaveList.SelectedSave?.Entry);
+
+        ErrorScreenViewModel error = Assert.IsOfType<ErrorScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(error.Message, Is.EqualTo("Failed to load saved game.\nThe custom quest is no longer available."));
+    }
+
+    [Test]
+    public async Task LoadInvalidCustomScenarioGameTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")));
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S900SC0000", customScenario, worldState: null, Language.English);
+        GameSaveMetadata metadata = new(
+            "Saved game",
+            GameSaveType.Manual,
+            "S900SC0000",
+            "Greywater Crossing",
+            1,
+            new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            "0.1.0+2d40300",
+            "../Greywater");
+
+        sb.CreateDirectory("scenarios");
+        File.WriteAllBytes(sb.GetPath("Greywater.sg"), customScenario.Data);
+        await saveStore.SaveAsync(new GameSaveId(1), metadata, session.World.State);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithGameLoader(gameLoader)
+            .WithSaveStore(saveStore)
+            .WithCustomScenarioStore(new CustomScenarioStore(sb.GetPath("scenarios")))
+            .Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.ShowLoadGameCommand.ExecuteAsync(null);
+
+        LoadGameScreenViewModel loadScreen = Assert.IsOfType<LoadGameScreenViewModel>(gameViewModel.TopScreen);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(loadScreen.SaveList.SelectedSave?.Entry);
+
+        ErrorScreenViewModel error = Assert.IsOfType<ErrorScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(error.Message, Is.EqualTo("Failed to load saved game.\nThe custom quest is no longer available."));
+    }
+
+    [Test]
+    public async Task ContinueCustomCampaignTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameSaveStore saveStore = new(sb.GetPath("saves"), 10);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Campaign,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg")));
+        GameLoader gameLoader = new(new RandomProvider(0));
+        (GameSession session, _) = gameLoader.LoadScenario("S900SC0000", customScenario, worldState: null, Language.English);
+        ImmutableSortedDictionary<WorldStackId, WorldStack>.Builder stacks = session.World.State.Stacks.ToBuilder();
+
+        foreach (WorldStack stack in session.World.State.Stacks.Values)
+        {
+            if (stack.OwnerId == new WorldPlayerId(3))
+            {
+                stacks[stack.Id] = stack with
+                {
+                    Units = new UnitGrid<WorldUnit>.Builder()
+                        .Place(new WorldUnit(new WorldUnitId("unit"), new UnitDefinitionId("G000UU0024"), 175, 0, 1, [], null, false), GridPosition.FrontCenter, true)
+                        .Build()
+                };
+            }
+        }
+
+        WorldState savedState = session.World.State with
+        {
+            Stacks = stacks.ToImmutable(),
+            TurnInfo = new WorldTurnInfo(9, new WorldPlayerId(3)),
+            ScenarioState = session.World.State.ScenarioState with { IsEnded = true, Winner = new WorldPlayerId(3) }
+        };
+        GameSaveMetadata metadata = new(
+            "Victory",
+            GameSaveType.Victory,
+            "S900SC0000",
+            "Greywater Crossing",
+            9,
+            new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            "0.1.0+2d40300",
+            "c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2");
+
+        await customScenarioStore.SaveAsync(customScenario);
+        await saveStore.SaveAsync(new GameSaveId(1), metadata, savedState);
+
+        using GameViewModel gameViewModel = new TestGameViewModelBuilder()
+            .WithGameLoader(gameLoader)
+            .WithSaveStore(saveStore)
+            .WithCustomScenarioStore(customScenarioStore)
+            .Build();
+        await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
+
+        await gameViewModel.LoadGameCommand.ExecuteAsync(new GameSaveEntry(new GameSaveId(1), Result<GameSaveMetadata>.FromValue(metadata)));
+
+        WorldScreenViewModel world = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        world.CompleteGameStart();
+
+        GameEndedScreenViewModel gameEnded = Assert.IsOfType<GameEndedScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(gameEnded.CanContinueCampaign, Is.True);
+
+        await gameViewModel.ContinueCampaignCommand.ExecuteAsync(null);
+
+        BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
+
+        await briefing.ContinueCommand.ExecuteAsync(null);
+
+        WorldScreenViewModel nextWorld = Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
+        GameSnapshot snapshot = nextWorld.GameModel.Snapshot;
+
+        Assert.That(nextWorld.GameModel.ScenarioId, Is.EqualTo("S901SC0000"));
+        Assert.That(nextWorld.GameModel.CustomScenarioId, Is.EqualTo(new CustomScenarioId("c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2")));
+        Assert.That(snapshot.ViewPlayerId, Is.EqualTo(new WorldPlayerId(3)));
     }
 }

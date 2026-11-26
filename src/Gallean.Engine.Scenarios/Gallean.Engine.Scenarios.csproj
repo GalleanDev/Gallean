@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Gallean.Entities" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Extractor.Tests" />
+  </ItemGroup>
+
+</Project>

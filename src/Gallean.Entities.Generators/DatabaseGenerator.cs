@@ -367,15 +367,23 @@ public class DatabaseGenerator : IIncrementalGenerator
 
                 using (cw.Block($"private static {className} Load(string directory, IReadOnlyList<string> scenarioDirectories)"))
                 {
-                    EmitLoadBody(cw, entities, databaseType, className, isIndex: false);
+                    EmitLoadBody(cw, entities, databaseType);
                 }
             }
             else
             {
                 using (cw.Block($"public static {className} Load(string directory)"))
                 {
-                    EmitLoadBody(cw, entities, databaseType, className, isIndex: false);
+                    EmitLoadBody(cw, entities, databaseType);
                 }
+            }
+
+            cw.AppendLine();
+            EmitCreateSignature(cw, entities, databaseType, className);
+
+            using (cw.Block())
+            {
+                EmitCreateBody(cw, entities, databaseType, className, isIndex: false, GetRowsParameterName);
             }
 
             if (hasIndex)
@@ -384,7 +392,7 @@ public class DatabaseGenerator : IIncrementalGenerator
 
                 using (cw.Block($"public static {indexClassName} LoadIndex(string directory)"))
                 {
-                    EmitLoadBody(cw, indexEntities, databaseType, indexClassName, isIndex: true);
+                    EmitCreateBody(cw, indexEntities, databaseType, indexClassName, isIndex: true, GetFileRowsExpression);
                 }
             }
         }
@@ -502,13 +510,97 @@ public class DatabaseGenerator : IIncrementalGenerator
         }
     }
 
-    private static void EmitLoadBody(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, string databaseType, string className, bool isIndex)
+    private static string GetRowsParameterName(EntityMetadata entity)
     {
-        if (databaseType == "Global" && !isIndex)
+        return char.ToLower(entity.ClassName[0]) + entity.ClassName.Substring(1) + "Rows";
+    }
+
+    private static string GetFileRowsExpression(EntityMetadata entity)
+    {
+        string fileName = entity.FileName.Split('/').Last();
+        string deserializeExpression;
+
+        if (entity.IsPerScenario)
         {
-            cw.AppendLine("Db.GlobalVariables globalVariables = DeserializeList<Db.GlobalVariables>(directory, \"GVars.json\", Context.GlobalVariablesListInfo).Single();");
+            deserializeExpression = $"DeserializeScenarioList<{entity.FullyQualifiedName}>(scenarioDirectories, \"{fileName}\", Context.{entity.ClassName}ListInfo)";
+        }
+        else
+        {
+            deserializeExpression = $"DeserializeList<{entity.FullyQualifiedName}>(directory, \"{fileName}\", Context.{entity.ClassName}ListInfo)";
         }
 
+        if (entity.KeyProperty is not null)
+        {
+            return deserializeExpression;
+        }
+        else
+        {
+            return $"{deserializeExpression}.AsReadOnly()";
+        }
+    }
+
+    private static void EmitLoadBody(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, string databaseType)
+    {
+        List<string> arguments = [];
+
+        if (databaseType == "Global")
+        {
+            arguments.Add("DeserializeList<Db.GlobalVariables>(directory, \"GVars.json\", Context.GlobalVariablesListInfo).Single()");
+        }
+
+        foreach (EntityMetadata entity in entities)
+        {
+            if (!IsGlobalVariables(entity, databaseType))
+            {
+                arguments.Add(GetFileRowsExpression(entity));
+            }
+        }
+
+        cw.AppendLine("return Create(");
+
+        for (int i = 0; i < arguments.Count; i++)
+        {
+            string separator = i < arguments.Count - 1 ? "," : ");";
+
+            cw.AppendLine($"    {arguments[i]}{separator}");
+        }
+    }
+
+    private static void EmitCreateSignature(CodeWriter cw, IReadOnlyList<EntityMetadata> entities, string databaseType, string className)
+    {
+        List<string> parameters = [];
+
+        if (databaseType == "Global")
+        {
+            parameters.Add("Db.GlobalVariables globalVariables");
+        }
+
+        foreach (EntityMetadata entity in entities)
+        {
+            if (!IsGlobalVariables(entity, databaseType))
+            {
+                parameters.Add($"IReadOnlyList<{entity.FullyQualifiedName}> {GetRowsParameterName(entity)}");
+            }
+        }
+
+        cw.AppendLine($"public static {className} Create(");
+
+        for (int i = 0; i < parameters.Count; i++)
+        {
+            string separator = i < parameters.Count - 1 ? "," : ")";
+
+            cw.AppendLine($"    {parameters[i]}{separator}");
+        }
+    }
+
+    private static void EmitCreateBody(
+        CodeWriter cw,
+        IReadOnlyList<EntityMetadata> entities,
+        string databaseType,
+        string className,
+        bool isIndex,
+        Func<EntityMetadata, string> getRowsExpression)
+    {
         foreach (EntityMetadata entity in entities)
         {
             if (IsGlobalVariables(entity, databaseType))
@@ -518,33 +610,22 @@ public class DatabaseGenerator : IIncrementalGenerator
 
             string propName = GetPlural(entity.ClassName);
             string varName = char.ToLower(propName[0]) + propName.Substring(1);
-            string fileName = entity.FileName.Split('/').Last();
-            string deserializeExpression;
-
-            if (entity.IsPerScenario)
-            {
-                deserializeExpression = $"DeserializeScenarioList<{entity.FullyQualifiedName}>(scenarioDirectories, \"{fileName}\", Context.{entity.ClassName}ListInfo)";
-            }
-            else
-            {
-                deserializeExpression = $"DeserializeList<{entity.FullyQualifiedName}>(directory, \"{fileName}\", Context.{entity.ClassName}ListInfo)";
-            }
-
+            string sourceExpression = getRowsExpression(entity);
             string rowsExpression;
 
             if (HasSingleKeyIndex(entity))
             {
-                cw.AppendLine($"IReadOnlyDictionary<{entity.KeyType}, {entity.FullyQualifiedName}> {varName} = ByKey({deserializeExpression}, x => x.{entity.KeyProperty});");
+                cw.AppendLine($"IReadOnlyDictionary<{entity.KeyType}, {entity.FullyQualifiedName}> {varName} = ByKey({sourceExpression}, x => x.{entity.KeyProperty});");
                 rowsExpression = $"{varName}.Values";
             }
             else if (entity.KeyProperty is not null)
             {
-                cw.AppendLine($"IReadOnlyList<{entity.FullyQualifiedName}> {varName} = [.. ByKey({deserializeExpression}, x => (x.{entity.ScenarioKeyProperty}, x.{entity.KeyProperty})).Values];");
+                cw.AppendLine($"IReadOnlyList<{entity.FullyQualifiedName}> {varName} = [.. ByKey({sourceExpression}, x => (x.{entity.ScenarioKeyProperty}, x.{entity.KeyProperty})).Values];");
                 rowsExpression = varName;
             }
             else
             {
-                cw.AppendLine($"IReadOnlyList<{entity.FullyQualifiedName}> {varName} = {deserializeExpression}.AsReadOnly();");
+                cw.AppendLine($"IReadOnlyList<{entity.FullyQualifiedName}> {varName} = {sourceExpression};");
                 rowsExpression = varName;
             }
 

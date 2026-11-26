@@ -108,7 +108,7 @@
           Margin="56,32,0,32"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
-          RowDefinitions="Auto,Auto,*,Auto">
+          RowDefinitions="Auto,Auto,*,Auto,Auto">
       <Grid.RenderTransform>
         <TranslateTransform />
       </Grid.RenderTransform>
@@ -156,7 +156,20 @@
         </ListBox.ItemTemplate>
       </ListBox>
 
-      <Grid Grid.Row="3" Classes="focus-group entrance-late pill-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
+      <StackPanel Grid.Row="3"
+                  Classes="entrance-late"
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                  Spacing="16"
+                  Margin="0,8,16,0">
+        <Button Classes="link"
+                Content="{local:Text 'Delete'}"
+                Command="{Binding DeleteCommand}"
+                IsVisible="{Binding IsCustomCampaignSelected}" />
+        <Button Classes="link" Content="{local:Text 'Import'}" Click="OnImportClick" />
+      </StackPanel>
+
+      <Grid Grid.Row="4" Classes="focus-group entrance-late pill-group" ColumnDefinitions="*,*" Margin="0,20,0,0">
         <Button Grid.Column="0"
                 Classes="pill"
                 local:PlateChrome.TextureSeed="1"

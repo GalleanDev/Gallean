@@ -1,3 +1,4 @@
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Tests.Common;
 
@@ -31,6 +32,21 @@ public sealed class ScenarioSelectScreenViewModelTests
         foreach (RaceSelectItemViewModel race in races)
         {
             rows.Add($"{race.Race} {race.Name} {race.PlayerType}");
+        }
+
+        return rows;
+    }
+
+    private static IReadOnlyList<string> FormatCustomScenarios(IReadOnlyList<GameScenario> scenarios)
+    {
+        List<string> rows = [];
+
+        foreach (GameScenario scenario in scenarios)
+        {
+            if (scenario.CustomScenarioId is not null)
+            {
+                rows.Add($"{scenario.Name} | {scenario.Id} | {scenario.Creator} | {scenario.CustomScenarioId}");
+            }
         }
 
         return rows;
@@ -169,5 +185,137 @@ public sealed class ScenarioSelectScreenViewModelTests
         Assert.That(scenarioSelect.IsOpen, Is.False);
         Assert.That(raceSelect.IsOpen, Is.False);
         Assert.That(scenarioConfiguration.IsOpen, Is.False);
+    }
+
+    [Test]
+    public async Task CustomScenariosTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"))));
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(CustomScenarioType.Scenario, "NOTASCENARIOFILE"u8.ToArray()));
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowScenarioSelectCommand.ExecuteAsync(null);
+
+        ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+        ]));
+    }
+
+    [Test]
+    public async Task ImportTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowScenarioSelectCommand.ExecuteAsync(null);
+
+        ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(viewModel.IsCustomScenarioSelected, Is.False);
+
+        await viewModel.ImportCommand.ExecuteAsync([
+            new("Greywater Crossing.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")))
+        ]);
+
+        GameScenario selected = Assert.NotNull(viewModel.SelectedScenario);
+
+        Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+        ]));
+        Assert.That(FormatCustomScenarios([selected]), Is.EqualTo([
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+        ]));
+        Assert.That(viewModel.IsCustomScenarioSelected, Is.True);
+        Assert.That(gameViewModel.Screens, Is.EqualTo([viewModel]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo([
+            "scenarios/",
+            "scenarios/b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0.sg"
+        ]));
+    }
+
+    [Test]
+    public async Task ImportTwiceTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowScenarioSelectCommand.ExecuteAsync(null);
+
+        ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        await viewModel.ImportCommand.ExecuteAsync([
+            new("Greywater Crossing.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"))),
+            new("Copy.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")))
+        ]);
+
+        Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
+            "Greywater Crossing | S900SC0000 | Gallean Contributors | b01af66ef2ee6574640ac3bc797e5dc2968832dc6a284a72e5eefb8c4f4362c0"
+        ]));
+    }
+
+    [Test]
+    public async Task ImportInvalidTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowScenarioSelectCommand.ExecuteAsync(null);
+
+        ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        await viewModel.ImportCommand.ExecuteAsync([new("Broken.sg", "NOTASCENARIOFILE"u8.ToArray())]);
+
+        ErrorScreenViewModel error = Assert.IsOfType<ErrorScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(error.Message, Is.EqualTo("Failed to import Broken.sg.\nUnknown scenario file signature 'NOTASCENAR'."));
+        Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.Empty);
+        Assert.That(sb.GetTree(), Is.Empty);
+    }
+
+    [Test]
+    public async Task DeleteTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"))));
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowScenarioSelectCommand.ExecuteAsync(null);
+
+        ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(viewModel.DeleteCommand.CanExecute(null), Is.False);
+
+        viewModel.SelectedScenario = viewModel.Scenarios.First(scenario => scenario.CustomScenarioId is not null);
+        viewModel.DeleteCommand.Execute(null);
+
+        ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.Empty);
+        Assert.That(viewModel.SelectedScenario, Is.SameAs(viewModel.Scenarios[0]));
+        Assert.That(gameViewModel.Screens, Is.EqualTo([viewModel]));
+        Assert.That(sb.GetTree(), Is.EqualTo(["scenarios/"]));
     }
 }

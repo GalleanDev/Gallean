@@ -11,7 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Gallean.Common\Gallean.Common.csproj" />
     <ProjectReference Include="..\Gallean.Engine.Contracts\Gallean.Engine.Contracts.csproj" />
-    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\Gallean.Engine.Scenarios\Gallean.Engine.Scenarios.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Gallean.Entities\Gallean.Entities.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Gallean.Engine.Generators\Gallean.Engine.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 

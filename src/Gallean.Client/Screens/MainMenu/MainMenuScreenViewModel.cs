@@ -12,7 +12,7 @@ internal sealed class MainMenuScreenViewModel : AbstractScreenViewModel
 
         Game = gameViewModel;
         LatestSave = saveList.Saves.FirstOrDefault();
-        TutorialConfiguration = new GameConfiguration(GameLoader.TutorialScenarioId, Configuration: null);
+        TutorialConfiguration = new GameConfiguration(GameLoader.TutorialScenarioId, Configuration: null, CustomScenarioId: null);
         Version = ClientVersionFormatter.Format(ClientVersion.Get());
         SupportDeveloperUri = new Uri("https://gallean.org/go/2");
         Background = MainMenuBackgroundViewModel.Create();

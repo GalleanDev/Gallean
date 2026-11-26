@@ -243,12 +243,12 @@ public sealed class GameSaveStore(string saveDirectory, int autoSaveLimit)
 
         readableEntries.Sort(CompareNewestFirst);
 
-        Dictionary<(GameSaveType Type, string? ScenarioId), int> keptCounts = [];
+        Dictionary<(GameSaveType Type, string? CustomScenarioId, string? ScenarioId), int> keptCounts = [];
 
         foreach (GameSaveEntry entry in readableEntries)
         {
             GameSaveMetadata metadata = entry.Metadata.Value;
-            (GameSaveType Type, string? ScenarioId) group = GetGroup(metadata);
+            (GameSaveType Type, string? CustomScenarioId, string? ScenarioId) group = GetGroup(metadata);
             int toKeep = keptCounts.GetValueOrDefault(group);
 
             if (toKeep < GetKeepCount(metadata.Type))
@@ -261,15 +261,15 @@ public sealed class GameSaveStore(string saveDirectory, int autoSaveLimit)
             }
         }
 
-        static (GameSaveType Type, string? ScenarioId) GetGroup(GameSaveMetadata metadata)
+        static (GameSaveType Type, string? CustomScenarioId, string? ScenarioId) GetGroup(GameSaveMetadata metadata)
         {
             return metadata.Type switch
             {
-                GameSaveType.Turn => (metadata.Type, null),
-                GameSaveType.Victory => (metadata.Type, metadata.ScenarioId),
-                GameSaveType.Exit => (metadata.Type, metadata.ScenarioId),
-                GameSaveType.Manual => (metadata.Type, metadata.ScenarioId),
-                GameSaveType.Quick => (metadata.Type, null)
+                GameSaveType.Turn => (metadata.Type, null, null),
+                GameSaveType.Victory => (metadata.Type, metadata.CustomScenarioId, metadata.ScenarioId),
+                GameSaveType.Exit => (metadata.Type, metadata.CustomScenarioId, metadata.ScenarioId),
+                GameSaveType.Manual => (metadata.Type, metadata.CustomScenarioId, metadata.ScenarioId),
+                GameSaveType.Quick => (metadata.Type, null, null)
             };
         }
     }

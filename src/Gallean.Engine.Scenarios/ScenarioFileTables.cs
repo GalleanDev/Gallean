@@ -1,6 +1,6 @@
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
-internal sealed record ScenarioFileTables
+public sealed record ScenarioFileTables
 {
     public IReadOnlyList<Db.ScenarioBag> ScenarioBags { get; init; } = [];
     public IReadOnlyList<Db.ScenarioCrystal> ScenarioCrystals { get; init; } = [];

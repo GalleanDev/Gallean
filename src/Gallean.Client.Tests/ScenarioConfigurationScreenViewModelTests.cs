@@ -84,6 +84,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     public void SelectionTest()
     {
         GameScenario scenario = new(
+            CustomScenarioId: null,
             "S107SC0000",
             "The Necromancer's Spirit",
             null,
@@ -133,7 +134,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.Background?.SpriteKey, Is.EqualTo(new AssetSpriteKey.RaceSelectionBackground(WorldRace.Human)));
         Assert.That(
             viewModel.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: "")], WorldDifficulty.Average, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: "")], WorldDifficulty.Average, Leader: null), CustomScenarioId: null)));
 
         viewModel.SelectedLordCategory = LordCategory.Mage;
         viewModel.SelectedLeader = viewModel.Leaders[2];
@@ -146,7 +147,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Human, 3, IsLarge: true)));
         Assert.That(
             viewModel.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(3), new UnitDefinitionId("G000UU0021"), LeaderName: "")], WorldDifficulty.Hard, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Mage, new WorldObjectVariant(3), new UnitDefinitionId("G000UU0021"), LeaderName: "")], WorldDifficulty.Hard, Leader: null), CustomScenarioId: null)));
 
         viewModel.SelectedLordCategory = LordCategory.Guildmaster;
         viewModel.SelectedLeader = viewModel.Leaders[1];
@@ -173,7 +174,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Human, 1, IsLarge: true)));
         Assert.That(
             viewModel.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(1), new UnitDefinitionId("G000UU0020"), "  Aldric ")], WorldDifficulty.Hard, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Guildmaster, new WorldObjectVariant(1), new UnitDefinitionId("G000UU0020"), "  Aldric ")], WorldDifficulty.Hard, Leader: null), CustomScenarioId: null)));
     }
 
     [Test]
@@ -194,7 +195,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(gameViewModel.RootScreen, Is.SameAs(campaignSelect));
         Assert.That(
             scenarioConfiguration.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: "")], WorldDifficulty.Average, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S107SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU0019"), LeaderName: "")], WorldDifficulty.Average, Leader: null), CustomScenarioId: null)));
 
         scenarioConfiguration.SelectedLordCategory = LordCategory.Mage;
         scenarioConfiguration.SelectedLeader = scenarioConfiguration.Leaders[1];
@@ -288,7 +289,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         await store.SaveAsync(Dwarf, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
         await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
+        GameScenario scenario = new(CustomScenarioId: null, "S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -334,7 +335,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.GameConfiguration, Is.EqualTo(new GameConfiguration("S202SC0000", new ScenarioConfiguration(
             [new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), null, LeaderName: "")],
             WorldDifficulty.Average,
-            Uther))));
+            Uther), CustomScenarioId: null)));
 
         await viewModel.ImportLeaderCommand.ExecuteAsync(null);
 
@@ -364,7 +365,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         Assert.That(viewModel.GameConfiguration, Is.EqualTo(new GameConfiguration("S202SC0000", new ScenarioConfiguration(
             [new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("g000uu0020"), LeaderName: "")],
             WorldDifficulty.Average,
-            Leader: null))));
+            Leader: null), CustomScenarioId: null)));
     }
 
     [Test]
@@ -378,7 +379,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
         await store.SaveAsync(Uther with { Unit = Uther.Unit with { Name = new LiteralUnitName("Veteran") }, BattlesWon = 60 }, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
         await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
+        GameScenario scenario = new(CustomScenarioId: null, "S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -404,7 +405,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     [Test]
     public void HotseatImportLeaderTest()
     {
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
+        GameScenario scenario = new(CustomScenarioId: null, "S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -424,7 +425,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     [Test]
     public void SagaImportLeaderTest()
     {
-        GameScenario scenario = new("S107SC0000", "Saga", null, null, 1, 48, 5, null, IsSkirmish: false, CanImportLeader: false, []);
+        GameScenario scenario = new(CustomScenarioId: null, "S107SC0000", "Saga", null, null, 1, 48, 5, null, IsSkirmish: false, CanImportLeader: false, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -441,7 +442,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
     [Test]
     public void MiniCampaignImportLeaderTest()
     {
-        GameScenario scenario = new("S123SC0000", "A Light in the Forest", null, null, 12, 72, 10, null, IsSkirmish: false, CanImportLeader: true, []);
+        GameScenario scenario = new(CustomScenarioId: null, "S123SC0000", "A Light in the Forest", null, null, 12, 72, 10, null, IsSkirmish: false, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
         ScenarioConfigurationScreenViewModel viewModel = new(
@@ -464,7 +465,7 @@ public sealed class ScenarioConfigurationScreenViewModelTests
 
         await store.SaveAsync(Uther, new DateTimeOffset(2001, 2, 3, 4, 5, 6, TimeSpan.Zero), null);
 
-        GameScenario scenario = new("S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
+        GameScenario scenario = new(CustomScenarioId: null, "S202SC0000", "Quest", null, null, 1, 48, 5, null, IsSkirmish: true, CanImportLeader: true, []);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().WithLeaderStore(store).Build();
         ScenarioConfigurationScreenViewModel viewModel = new(

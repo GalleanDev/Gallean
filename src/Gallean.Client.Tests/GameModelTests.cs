@@ -93,7 +93,7 @@ public sealed class GameModelTests
     [Test]
     public void SwitchTextsTest()
     {
-        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, worldState: null, Language.English);
+        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario(GameLoader.TutorialScenarioId, customScenario: null, worldState: null, Language.English);
         using GameModel gameModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         List<string?> changes = [];
         gameModel.PropertyChanged += (_, e) => changes.Add(e.PropertyName);

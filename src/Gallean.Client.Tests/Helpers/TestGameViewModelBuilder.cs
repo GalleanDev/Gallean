@@ -11,6 +11,7 @@ internal sealed class TestGameViewModelBuilder
     private GameLoader gameLoader = new(new RandomProvider(0));
     private GameSaveStore saveStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "saves"), GameSettings.DefaultAutoSaveLimit);
     private LeaderStore leaderStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "leaders"));
+    private CustomScenarioStore customScenarioStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "scenarios"));
     private GameSettingsStore settingsStore = new(Path.Combine(TestContext.CurrentContext.WorkDirectory, "settings"));
     private GameSettingsSource settingsSource = new(GameSettings.Default);
     private ClientVersion clientVersion = new("0.1.0", "2d40300");
@@ -54,6 +55,13 @@ internal sealed class TestGameViewModelBuilder
     public TestGameViewModelBuilder WithLeaderStore(LeaderStore newLeaderStore)
     {
         leaderStore = newLeaderStore;
+
+        return this;
+    }
+
+    public TestGameViewModelBuilder WithCustomScenarioStore(CustomScenarioStore newCustomScenarioStore)
+    {
+        customScenarioStore = newCustomScenarioStore;
 
         return this;
     }
@@ -103,6 +111,7 @@ internal sealed class TestGameViewModelBuilder
             gameLoader,
             saveStore,
             leaderStore,
+            customScenarioStore,
             settingsStore,
             settingsSource,
             clientVersion,

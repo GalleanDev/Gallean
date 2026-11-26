@@ -99,7 +99,7 @@ internal sealed partial class ScenarioConfigurationScreenViewModel : AbstractScr
     public string SelectedLordDescription => LordCategoryFormatter.FormatDescription(SelectedLordCategory);
     public AssetSpriteKey.LordFace PortraitKey => new(race, LordFaceVariant, IsLarge: true);
 
-    public GameConfiguration GameConfiguration => new(scenario.Id, BuildConfiguration());
+    public GameConfiguration GameConfiguration => new(scenario.Id, BuildConfiguration(), scenario.CustomScenarioId);
 
     public void ImportLeader(LeaderEntry entry)
     {

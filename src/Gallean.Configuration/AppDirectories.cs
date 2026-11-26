@@ -15,4 +15,5 @@ public static class AppDirectories
     public static string Logs { get; } = Path.Combine(Root, "Logs");
     public static string OriginalAssets { get; } = Path.Combine(Root, "OriginalAssets");
     public static string Saves { get; } = Path.Combine(Root, "Saves");
+    public static string Scenarios { get; } = Path.Combine(Root, "Scenarios");
 }

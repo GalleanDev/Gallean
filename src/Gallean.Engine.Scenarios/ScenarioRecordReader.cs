@@ -1,6 +1,6 @@
 using System.Buffers.Binary;
 
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
 internal sealed class ScenarioRecordReader(Stream stream, ScenarioTextEncoding encoding)
 {

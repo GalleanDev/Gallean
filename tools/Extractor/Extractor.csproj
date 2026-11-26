@@ -12,11 +12,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Gallean.Entities\Gallean.Entities.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Engine.Scenarios\Gallean.Engine.Scenarios.csproj" />
     <ProjectReference Include="..\GameContent\GameContent.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Gallean.Entities" />
+    <Using Include="Gallean.Engine.Scenarios" />
     <Using Include="GameContent" />
   </ItemGroup>
 

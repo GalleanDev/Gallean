@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 using Gallean.Tests.Common;
 
@@ -19,10 +20,26 @@ public sealed class CampaignSelectScreenViewModelTests
         }
     }
 
+    private static IReadOnlyList<string> FormatCustomItems(IReadOnlyList<CampaignSelectItemViewModel> items)
+    {
+        List<string> rows = [];
+
+        foreach (CampaignSelectItemViewModel item in items)
+        {
+            if (item.Campaign.CustomScenarioId is not null)
+            {
+                rows.Add($"{item.SectionTitle} | {item.RaceName} | {item.Subtitle} | {item.Campaign.CustomScenarioId}");
+            }
+        }
+
+        return rows;
+    }
+
     [Test]
     public async Task SelectionTest()
     {
         GameScenario firstScenario = new(
+            CustomScenarioId: null,
             "scenario-1",
             "First scenario",
             "A quiet barony falls to a death cult.",
@@ -35,6 +52,7 @@ public sealed class CampaignSelectScreenViewModelTests
             CanImportLeader: false,
             []);
         GameScenario secondScenario = new(
+            CustomScenarioId: null,
             "scenario-2",
             "Second scenario",
             null,
@@ -47,6 +65,7 @@ public sealed class CampaignSelectScreenViewModelTests
             CanImportLeader: false,
             []);
         GameScenario elvenScenario = new(
+            CustomScenarioId: null,
             "elven-scenario",
             "Elven scenario",
             null,
@@ -59,24 +78,28 @@ public sealed class CampaignSelectScreenViewModelTests
             CanImportLeader: false,
             []);
         GameCampaign campaign = new(
+            CustomScenarioId: null,
             "campaign",
             "Campaign",
             new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000")),
             IsSkirmish: false,
             [firstScenario, secondScenario]);
         GameCampaign elvenCampaign = new(
+            CustomScenarioId: null,
             "elven-campaign",
             "Elven campaign",
             new ScenarioRace(WorldRace.Elf, new GlobalTextId("X000TG0013")),
             IsSkirmish: false,
             [elvenScenario]);
         GameCampaign expansionCampaign = new(
+            CustomScenarioId: null,
             "expansion-campaign",
             "Expansion campaign",
             new ScenarioRace(WorldRace.Human, new GlobalTextId("X000TG0000")),
             IsSkirmish: false,
             [secondScenario]);
         GameCampaign skirmish = new(
+            CustomScenarioId: null,
             "skirmish",
             "Skirmish",
             new ScenarioRace(WorldRace.Neutral, new GlobalTextId("X000TG0004")),
@@ -84,7 +107,7 @@ public sealed class CampaignSelectScreenViewModelTests
             [firstScenario]);
         (_, IGameTextProvider texts, IGameDefinitionProvider definitions) = new GameLoader(new RandomProvider(0)).LoadCampaigns(Language.English);
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
-        CampaignSelectScreenViewModel viewModel = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, [expansionCampaign, elvenCampaign, skirmish, campaign]);
+        CampaignSelectScreenViewModel viewModel = new(gameViewModel, NullAssetPreloader.Instance, texts, definitions, [expansionCampaign, elvenCampaign, skirmish, campaign], customCampaigns: []);
 
         Assert.That(viewModel.Campaigns, Is.EqualTo([
             new CampaignSelectItemViewModel(campaign, new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU0019")), "Empire", "Campaign", IsExpansion: false, SectionTitle: null),
@@ -166,5 +189,123 @@ public sealed class CampaignSelectScreenViewModelTests
         gameViewModel.Dispose();
 
         Assert.That(preloader.IsReleased, Is.True);
+    }
+
+    [Test]
+    public async Task CustomCampaignsTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(
+            CustomScenarioType.Campaign,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg"))));
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(CustomScenarioType.Campaign, "NOTACAMPAIGNFILE"u8.ToArray()));
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"))));
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowCampaignSelectCommand.ExecuteAsync(null);
+
+        CampaignSelectScreenViewModel viewModel = Assert.IsOfType<CampaignSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(FormatCustomItems(viewModel.Campaigns), Is.EqualTo([
+            "Custom | Undead Hordes | The Greywater Chronicle | c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2"
+        ]));
+        Assert.That(viewModel.IsCustomCampaignSelected, Is.False);
+    }
+
+    [Test]
+    public async Task ImportTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowCampaignSelectCommand.ExecuteAsync(null);
+
+        CampaignSelectScreenViewModel viewModel = Assert.IsOfType<CampaignSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        await viewModel.ImportCommand.ExecuteAsync([
+            new("Greywater Chronicle.csg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg")))
+        ]);
+
+        CampaignSelectItemViewModel selected = Assert.NotNull(viewModel.SelectedCampaign);
+        GameScenario firstScenario = Assert.NotNull(viewModel.FirstScenario);
+
+        Assert.That(FormatCustomItems(viewModel.Campaigns), Is.EqualTo([
+            "Custom | Undead Hordes | The Greywater Chronicle | c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2"
+        ]));
+        Assert.That(FormatCustomItems([selected]), Is.EqualTo([
+            "Custom | Undead Hordes | The Greywater Chronicle | c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2"
+        ]));
+        Assert.That(selected.PortraitKey, Is.EqualTo(new AssetSpriteKey.UnitPortrait(new UnitDefinitionId("G000UU0097"))));
+        Assert.That(
+            $"{firstScenario.CustomScenarioId} | {firstScenario.Id} | {firstScenario.Name}",
+            Is.EqualTo("c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2 | S900SC0000 | Greywater Crossing"));
+        Assert.That(viewModel.IsCustomCampaignSelected, Is.True);
+        Assert.That(gameViewModel.Screens, Is.EqualTo([viewModel]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo([
+            "scenarios/",
+            "scenarios/c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2.csg"
+        ]));
+    }
+
+    [Test]
+    public async Task ImportInvalidTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowCampaignSelectCommand.ExecuteAsync(null);
+
+        CampaignSelectScreenViewModel viewModel = Assert.IsOfType<CampaignSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        await viewModel.ImportCommand.ExecuteAsync([
+            new("Greywater Crossing.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")))
+        ]);
+
+        ErrorScreenViewModel error = Assert.IsOfType<ErrorScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(error.Message, Is.EqualTo("Failed to import Greywater Crossing.sg.\nArchive does not start with 'MQDB'."));
+        Assert.That(sb.GetTree(), Is.Empty);
+    }
+
+    [Test]
+    public async Task DeleteTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+
+        await customScenarioStore.SaveAsync(CustomScenarioFile.Create(
+            CustomScenarioType.Campaign,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg"))));
+
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowCampaignSelectCommand.ExecuteAsync(null);
+
+        CampaignSelectScreenViewModel viewModel = Assert.IsOfType<CampaignSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        Assert.That(viewModel.DeleteCommand.CanExecute(null), Is.False);
+
+        viewModel.SelectedCampaign = viewModel.Campaigns.First(item => item.Campaign.CustomScenarioId is not null);
+        viewModel.DeleteCommand.Execute(null);
+
+        ConfirmPromptViewModel prompt = Assert.IsOfType<ConfirmPromptViewModel>(gameViewModel.TopScreen);
+
+        await prompt.ConfirmCommand.ExecuteAsync(null);
+
+        Assert.That(FormatCustomItems(viewModel.Campaigns), Is.Empty);
+        Assert.That(viewModel.SelectedCampaign, Is.SameAs(viewModel.Campaigns[0]));
+        Assert.That(gameViewModel.Screens, Is.EqualTo([viewModel]));
+        Assert.That(sb.GetTree(), Is.EqualTo(["scenarios/"]));
     }
 }

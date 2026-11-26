@@ -1,8 +1,8 @@
 using System.Text;
 
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
-internal sealed class ScenarioTextEncoding(Encoding encoding)
+public sealed class ScenarioTextEncoding(Encoding encoding)
 {
     public const int DefaultCodePage = 1252;
 

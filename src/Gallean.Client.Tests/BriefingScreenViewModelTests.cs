@@ -50,7 +50,7 @@ public sealed class BriefingScreenViewModelTests
     {
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -92,7 +92,7 @@ public sealed class BriefingScreenViewModelTests
     {
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -107,7 +107,7 @@ public sealed class BriefingScreenViewModelTests
     {
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -122,7 +122,7 @@ public sealed class BriefingScreenViewModelTests
     {
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration(GameLoader.TutorialScenarioId, Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration(GameLoader.TutorialScenarioId, Configuration: null, CustomScenarioId: null));
 
         Assert.IsOfType<WorldScreenViewModel>(gameViewModel.RootScreen);
     }
@@ -142,7 +142,7 @@ public sealed class BriefingScreenViewModelTests
             .WithAudioPlayer(audioPlayer)
             .Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -170,7 +170,7 @@ public sealed class BriefingScreenViewModelTests
             .WithAssets(assets)
             .Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -185,7 +185,7 @@ public sealed class BriefingScreenViewModelTests
     {
         GameViewModel gameViewModel = new TestGameViewModelBuilder().Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         BriefingScreenViewModel briefing = Assert.IsOfType<BriefingScreenViewModel>(gameViewModel.TopScreen);
 
@@ -218,7 +218,7 @@ public sealed class BriefingScreenViewModelTests
             .WithAudioPlayer(audioPlayer)
             .Build();
 
-        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null));
+        await gameViewModel.StartGameCommand.ExecuteAsync(new GameConfiguration("S108SC0000", Configuration: null, CustomScenarioId: null));
 
         await gameViewModel.ShowMainMenuCommand.ExecuteAsync(null);
 

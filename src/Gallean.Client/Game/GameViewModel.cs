@@ -17,6 +17,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     private readonly GameLoader gameLoader;
     private readonly GameSaveStore gameSaveStore;
     private readonly LeaderStore leaderStore;
+    private readonly CustomScenarioStore customScenarioStore;
     private readonly GameSettingsStore gameSettingsStore;
     private readonly GameSettingsSource gameSettingsSource;
     private readonly ClientVersion clientVersion;
@@ -35,6 +36,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         GameLoader gameLoader,
         GameSaveStore gameSaveStore,
         LeaderStore leaderStore,
+        CustomScenarioStore customScenarioStore,
         GameSettingsStore gameSettingsStore,
         GameSettingsSource gameSettingsSource,
         ClientVersion clientVersion,
@@ -48,6 +50,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         this.gameLoader = gameLoader;
         this.gameSaveStore = gameSaveStore;
         this.leaderStore = leaderStore;
+        this.customScenarioStore = customScenarioStore;
         this.gameSettingsStore = gameSettingsStore;
         this.clientVersion = clientVersion;
         this.log = log;
@@ -318,7 +321,9 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         {
             (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = data.Value;
 
-            ShowScreen(new CampaignSelectScreenViewModel(this, AssetPreloader, texts, definitions, campaigns));
+            IReadOnlyList<GameCampaign> customCampaigns = await LoadCustomCampaignsAsync();
+
+            ShowScreen(new CampaignSelectScreenViewModel(this, AssetPreloader, texts, definitions, campaigns, customCampaigns));
         }
     }
 
@@ -331,7 +336,9 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         {
             (IReadOnlyList<GameCampaign> campaigns, IGameTextProvider texts, IGameDefinitionProvider definitions) = data.Value;
 
-            ShowScreen(new ScenarioSelectScreenViewModel(this, AssetPreloader, texts, definitions, campaigns));
+            IReadOnlyList<GameScenario> customScenarios = await LoadCustomScenariosAsync();
+
+            ShowScreen(new ScenarioSelectScreenViewModel(this, AssetPreloader, texts, definitions, campaigns, customScenarios));
         }
     }
 
@@ -349,9 +356,17 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
         try
         {
-            (GameSession session, IGameTextProvider texts) = await RunAsync(() => StartScenario(configuration));
+            CustomScenarioFile? customScenario = await LoadCustomScenarioFileAsync(configuration.CustomScenarioId);
+            (GameSession session, IGameTextProvider texts) = await RunAsync(() => StartScenario(configuration, customScenario));
 
-            gameModel = new GameModel(session, texts, log, scheduler);
+            gameModel = new GameModel(session, texts, log, scheduler) { CustomScenarioId = configuration.CustomScenarioId };
+        }
+        catch (CustomScenarioNotFoundException ex)
+        {
+            log.Error("Failed to load scenario.", ex);
+            ShowScreen(new ErrorScreenViewModel(Tr("Failed to load quest.\n{0}", Tr("The custom quest is no longer available.")), Tr("Exit"), Exit));
+
+            return;
         }
         catch (Exception ex)
         {
@@ -398,15 +413,173 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         }
     }
 
-    private (GameSession Session, IGameTextProvider Texts) StartScenario(GameConfiguration configuration)
+    private static CustomScenarioId? GetCustomScenarioId(GameSaveMetadata metadata)
     {
-        if (configuration.Configuration is not null)
+        if (metadata.CustomScenarioId is not null)
         {
-            return gameLoader.CreateScenario(configuration.ScenarioId, configuration.Configuration, Settings.EffectiveInterfaceLanguage);
+            CustomScenarioId? id = CustomScenarioId.TryParse(metadata.CustomScenarioId);
+
+            if (id is null)
+            {
+                throw new CustomScenarioNotFoundException(metadata.CustomScenarioId);
+            }
+
+            return id;
         }
         else
         {
-            return gameLoader.LoadScenario(configuration.ScenarioId, worldState: null, Settings.EffectiveInterfaceLanguage);
+            return null;
+        }
+    }
+
+    private (GameSession Session, IGameTextProvider Texts) StartScenario(GameConfiguration configuration, CustomScenarioFile? customScenario)
+    {
+        if (configuration.Configuration is not null)
+        {
+            return gameLoader.CreateScenario(configuration.ScenarioId, customScenario, configuration.Configuration, Settings.EffectiveInterfaceLanguage);
+        }
+        else
+        {
+            return gameLoader.LoadScenario(configuration.ScenarioId, customScenario, worldState: null, Settings.EffectiveInterfaceLanguage);
+        }
+    }
+
+    public async Task<GameScenario?> TryImportCustomScenarioAsync(ScenarioImportFile file)
+    {
+        try
+        {
+            Language language = Settings.EffectiveInterfaceLanguage;
+            CustomScenarioFile customScenario = CustomScenarioFile.Create(CustomScenarioType.Scenario, file.Data);
+            GameScenario scenario = await RunAsync(() => gameLoader.LoadCustomScenario(customScenario, language));
+
+            await RunAsync(() => gameLoader.LoadScenario(scenario.Id, customScenario, worldState: null, language));
+            await customScenarioStore.SaveAsync(customScenario);
+
+            return scenario;
+        }
+        catch (Exception ex)
+        {
+            log.Error($"Failed to import '{file.Name}'.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, ex.Message), Tr("Close")));
+
+            return null;
+        }
+    }
+
+    public async Task<GameCampaign?> TryImportCustomCampaignAsync(ScenarioImportFile file)
+    {
+        try
+        {
+            Language language = Settings.EffectiveInterfaceLanguage;
+            CustomScenarioFile customScenario = CustomScenarioFile.Create(CustomScenarioType.Campaign, file.Data);
+            GameCampaign campaign = await RunAsync(() => gameLoader.LoadCustomCampaign(customScenario, language));
+
+            foreach (GameScenario scenario in campaign.Scenarios)
+            {
+                await RunAsync(() => gameLoader.LoadScenario(scenario.Id, customScenario, worldState: null, language));
+            }
+
+            await customScenarioStore.SaveAsync(customScenario);
+
+            return campaign;
+        }
+        catch (Exception ex)
+        {
+            log.Error($"Failed to import '{file.Name}'.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, ex.Message), Tr("Close")));
+
+            return null;
+        }
+    }
+
+    public async Task<bool> TryDeleteCustomScenarioAsync(CustomScenarioId id)
+    {
+        try
+        {
+            await customScenarioStore.DeleteAsync(id);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to delete the custom quest.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to delete the custom quest.\n{0}", ex.Message), Tr("Close")));
+
+            return false;
+        }
+    }
+
+    private async Task<IReadOnlyList<GameScenario>> LoadCustomScenariosAsync()
+    {
+        Language language = Settings.EffectiveInterfaceLanguage;
+        List<GameScenario> scenarios = [];
+
+        foreach (CustomScenarioFile file in await EnumerateCustomScenariosAsync(CustomScenarioType.Scenario))
+        {
+            try
+            {
+                scenarios.Add(await RunAsync(() => gameLoader.LoadCustomScenario(file, language)));
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Failed to load the custom quest '{file.Id}'.", ex);
+            }
+        }
+
+        return scenarios;
+    }
+
+    private async Task<IReadOnlyList<GameCampaign>> LoadCustomCampaignsAsync()
+    {
+        Language language = Settings.EffectiveInterfaceLanguage;
+        List<GameCampaign> campaigns = [];
+
+        foreach (CustomScenarioFile file in await EnumerateCustomScenariosAsync(CustomScenarioType.Campaign))
+        {
+            try
+            {
+                campaigns.Add(await RunAsync(() => gameLoader.LoadCustomCampaign(file, language)));
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Failed to load the custom saga '{file.Id}'.", ex);
+            }
+        }
+
+        return campaigns;
+    }
+
+    private async Task<IReadOnlyList<CustomScenarioFile>> EnumerateCustomScenariosAsync(CustomScenarioType type)
+    {
+        try
+        {
+            return await customScenarioStore.EnumerateAsync(type);
+        }
+        catch (Exception ex)
+        {
+            log.Error("Failed to list custom quests.", ex);
+
+            return [];
+        }
+    }
+
+    private async Task<CustomScenarioFile?> LoadCustomScenarioFileAsync(CustomScenarioId? id)
+    {
+        if (id is not null)
+        {
+            CustomScenarioId customScenarioId = id.Value;
+            CustomScenarioFile? file = await customScenarioStore.TryLoadAsync(customScenarioId);
+
+            if (file is null)
+            {
+                throw new CustomScenarioNotFoundException(customScenarioId.Value);
+            }
+
+            return file;
+        }
+        else
+        {
+            return null;
         }
     }
 
@@ -502,7 +675,7 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
             snapshot.WorldState.Difficulty,
             scenarioLeader);
 
-        await StartGameCommand.ExecuteAsync(new GameConfiguration(scenarioId.Value, configuration));
+        await StartGameCommand.ExecuteAsync(new GameConfiguration(scenarioId.Value, configuration, gameModel.CustomScenarioId));
     }
 
     private AssetAnimationKey? TryGetBriefingVideo(GameModel gameModel)
@@ -621,9 +794,18 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
                 return;
             }
 
-            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, save.WorldState, Settings.EffectiveInterfaceLanguage));
+            CustomScenarioId? customScenarioId = GetCustomScenarioId(save.Metadata);
+            CustomScenarioFile? customScenario = await LoadCustomScenarioFileAsync(customScenarioId);
+            (GameSession session, IGameTextProvider texts) = await RunAsync(() => gameLoader.LoadScenario(save.Metadata.ScenarioId, customScenario, save.WorldState, Settings.EffectiveInterfaceLanguage));
 
-            gameModel = new GameModel(session, texts, log, scheduler);
+            gameModel = new GameModel(session, texts, log, scheduler) { CustomScenarioId = customScenarioId };
+        }
+        catch (CustomScenarioNotFoundException ex)
+        {
+            log.Error("Failed to load saved game.", ex);
+            ShowScreen(new ErrorScreenViewModel(Tr("Failed to load saved game.\n{0}", Tr("The custom quest is no longer available.")), Tr("Back"), ShowMainMenuAsync));
+
+            return;
         }
         catch (Exception ex)
         {
@@ -699,7 +881,8 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
             gameModel.ScenarioName,
             state.TurnInfo.TurnNumber,
             DateTimeOffset.Now,
-            clientVersion.Serialize());
+            clientVersion.Serialize(),
+            gameModel.CustomScenarioId?.Value);
 
         try
         {
@@ -777,7 +960,8 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
             gameModel.ScenarioName,
             state.TurnInfo.TurnNumber,
             DateTimeOffset.Now,
-            clientVersion.Serialize());
+            clientVersion.Serialize(),
+            gameModel.CustomScenarioId?.Value);
 
         try
         {
@@ -938,7 +1122,8 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
     {
         try
         {
-            IGameTextProvider texts = await RunAsync(() => gameLoader.LoadTexts(gameModel.ScenarioId, language));
+            CustomScenarioFile? customScenario = await LoadCustomScenarioFileAsync(gameModel.CustomScenarioId);
+            IGameTextProvider texts = await RunAsync(() => gameLoader.LoadTexts(gameModel.ScenarioId, customScenario, language));
 
             if (activeGame == gameModel)
             {

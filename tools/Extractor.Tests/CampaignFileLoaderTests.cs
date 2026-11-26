@@ -4,9 +4,9 @@ public sealed class CampaignFileLoaderTests
 {
     private static byte[] BuildCampaign()
     {
-        return TestCampaignArchiveBuilder.Build("The Elven Crusade", "Emanuel Wall", new Db.Id("G000RR0005"), [
-            ("TUTORIAL.SG", TestScenarios.TutorialPath),
-            ("DORAGONREALM.SG", TestScenarios.DoragonRealmPath)
+        return TestCampaignArchiveBuilder.Build("The Greywater Chronicle", "Gallean Contributors", new Db.Id("G000RR0003"), [
+            ("CROSSING.SG", TestScenarios.GreywaterCrossingPath),
+            ("SIEGE.SG", TestScenarios.GreywaterSiegePath)
         ]);
     }
 
@@ -16,9 +16,9 @@ public sealed class CampaignFileLoaderTests
         CampaignFile campaign = CampaignFileLoader.Load(BuildCampaign(), TestScenarios.Encoding);
 
         Assert.That(campaign.Header, Is.EqualTo(new CampaignFileHeader(
-            "The Elven Crusade",
-            "Emanuel Wall",
-            new Db.Id("G000RR0005"),
+            "The Greywater Chronicle",
+            "Gallean Contributors",
+            new Db.Id("G000RR0003"),
             false)));
     }
 
@@ -27,9 +27,9 @@ public sealed class CampaignFileLoaderTests
     {
         byte[] data = TestCampaignArchiveBuilder.BuildArchive([
             ("HEADER.CPN", TestCampaignArchiveBuilder.BuildHeader(
-                "The Elven Crusade",
-                "Emanuel Wall",
-                new Db.Id("G000RR0005"),
+                "The Greywater Chronicle",
+                "Gallean Contributors",
+                new Db.Id("G000RR0003"),
                 hasSavedGame: true)),
             ("ORDER.CPN", TestCampaignArchiveBuilder.BuildOrder([]))
         ]);
@@ -37,9 +37,9 @@ public sealed class CampaignFileLoaderTests
         CampaignFile campaign = CampaignFileLoader.Load(data, TestScenarios.Encoding);
 
         Assert.That(campaign.Header, Is.EqualTo(new CampaignFileHeader(
-            "The Elven Crusade",
-            "Emanuel Wall",
-            new Db.Id("G000RR0005"),
+            "The Greywater Chronicle",
+            "Gallean Contributors",
+            new Db.Id("G000RR0003"),
             true)));
     }
 
@@ -49,8 +49,8 @@ public sealed class CampaignFileLoaderTests
         CampaignFile campaign = CampaignFileLoader.Load(BuildCampaign(), TestScenarios.Encoding);
 
         Assert.That(campaign.Scenarios.Select(scenario => scenario.FileName), Is.EqualTo([
-            "TUTORIAL.SG",
-            "DORAGONREALM.SG"
+            "CROSSING.SG",
+            "SIEGE.SG"
         ]));
     }
 
@@ -60,8 +60,8 @@ public sealed class CampaignFileLoaderTests
         CampaignFile campaign = CampaignFileLoader.Load(BuildCampaign(), TestScenarios.Encoding);
 
         Assert.That(campaign.Scenarios.Select(scenario => scenario.Scenario.ScenarioId), Is.EqualTo([
-            new Db.ScenarioId("S001SC0000"),
-            new Db.ScenarioId("S143SC0000")
+            new Db.ScenarioId("S417SC0000"),
+            new Db.ScenarioId("S418SC0000")
         ]));
     }
 
@@ -70,12 +70,12 @@ public sealed class CampaignFileLoaderTests
     {
         byte[] data = TestCampaignArchiveBuilder.BuildArchive([
             ("HEADER.CPN", TestCampaignArchiveBuilder.BuildHeader(
-                "The Elven Crusade",
-                "Emanuel Wall",
-                new Db.Id("G000RR0005"),
+                "The Greywater Chronicle",
+                "Gallean Contributors",
+                new Db.Id("G000RR0003"),
                 hasSavedGame: false)),
             ("ORDER.CPN", TestCampaignArchiveBuilder.BuildOrder([])),
-            ("DORAGONREALM.SG", File.ReadAllBytes(TestScenarios.DoragonRealmPath))
+            ("CROSSING.SG", File.ReadAllBytes(TestScenarios.GreywaterCrossingPath))
         ]);
 
         CampaignFile campaign = CampaignFileLoader.Load(data, TestScenarios.Encoding);
@@ -88,9 +88,9 @@ public sealed class CampaignFileLoaderTests
     {
         byte[] data = TestCampaignArchiveBuilder.BuildArchive([
             ("HEADER.CPN", TestCampaignArchiveBuilder.BuildHeader(
-                "The Elven Crusade",
-                "Emanuel Wall",
-                new Db.Id("G000RR0005"),
+                "The Greywater Chronicle",
+                "Gallean Contributors",
+                new Db.Id("G000RR0003"),
                 hasSavedGame: false)),
             ("ORDER.CPN", TestCampaignArchiveBuilder.BuildOrder(["MISSING.SG"]))
         ]);

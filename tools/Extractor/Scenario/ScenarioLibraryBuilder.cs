@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Gallean.Common;
 
 namespace Extractor;
 
@@ -8,9 +9,6 @@ internal sealed class ScenarioLibraryBuilder(
     string globalDirectory,
     ScenarioTextEncoding encoding)
 {
-    private const int FirstSlot = 200;
-    private const int LastSlot = 999;
-
     private const string ScenarioExtension = ".sg";
     private const string CampaignExtension = ".csg";
     private const string DefaultBriefingVideo = "DEFAULT";
@@ -123,9 +121,9 @@ internal sealed class ScenarioLibraryBuilder(
 
     private Db.ScenarioId AllocateScenarioId()
     {
-        for (int slot = FirstSlot; slot <= LastSlot; slot++)
+        foreach (int slot in ScenarioSlots.Default)
         {
-            Db.ScenarioId scenarioId = new($"S{slot:D3}SC0000");
+            Db.ScenarioId scenarioId = ScenarioSlots.GetScenarioId(slot);
 
             if (!Directory.Exists(Path.Combine(scenarioDirectory, scenarioId.Value)))
             {
@@ -140,9 +138,9 @@ internal sealed class ScenarioLibraryBuilder(
     {
         List<JsonElement> rows = ReadRows(Path.Combine(campaignDirectory, "CCamp.json"));
 
-        for (int slot = FirstSlot; slot <= LastSlot; slot++)
+        foreach (int slot in ScenarioSlots.CampaignDefault)
         {
-            Db.Id campaignId = new($"C000CC{slot:D4}");
+            Db.Id campaignId = ScenarioSlots.GetCampaignId(slot);
 
             if (!rows.Exists(row => HasId(row, "CAMP_ID", campaignId)))
             {

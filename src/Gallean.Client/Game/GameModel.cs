@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client;
@@ -44,6 +45,7 @@ internal sealed partial class GameModel : ObservableObject, IDisposable
     [NotifyPropertyChangedFor(nameof(ScenarioName))]
     public partial IGameTextProvider Texts { get; set; }
 
+    public CustomScenarioId? CustomScenarioId { get; init; }
     public string ScenarioId => Scenario.Definition.Id.Value;
     public string ScenarioName => Texts.GetScenarioText(Scenario.Definition.InfoTexts.Name);
     public BattleModel? ActiveBattle => activeBattle;

@@ -1,4 +1,5 @@
 using Gallean.Common;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client.Tests;
@@ -19,6 +20,37 @@ public sealed class GameLoaderTests
         }
 
         throw new KeyNotFoundException($"Scenario '{scenarioId}' was not found.");
+    }
+
+    private static IReadOnlyList<string> FormatScenarios(IReadOnlyList<GameScenario> scenarios)
+    {
+        List<string> rows = [];
+
+        foreach (GameScenario scenario in scenarios)
+        {
+            rows.Add($"{scenario.CustomScenarioId} | {scenario.Id} | {scenario.Name} | {scenario.IsSkirmish} | {scenario.CanImportLeader}");
+        }
+
+        return rows;
+    }
+
+    private static IReadOnlyList<string> FormatPlayers(WorldState state)
+    {
+        List<string> rows = [];
+
+        foreach (WorldPlayer player in state.Players.Values)
+        {
+            string control = "ai";
+
+            if (!player.IsAi)
+            {
+                control = "human";
+            }
+
+            rows.Add($"{player.Id} {player.Race} {control}");
+        }
+
+        return rows;
     }
 
     [Test]
@@ -50,85 +82,52 @@ public sealed class GameLoaderTests
     }
 
     [Test]
-    public void LoadTextsRussianTest()
+    public void LoadCustomScenarioTest()
     {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.Russian);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Scenario,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")));
 
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Империя"));
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0006")).Text, Is.EqualTo("Эльфы"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Крепость Хазан"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095LO0000:NAME_TXT:0")), Is.EqualTo("Дракон-страж"));
+        (GameSession session, IGameTextProvider texts) = new GameLoader(new RandomProvider(0)).LoadScenario("S900SC0000", customScenario, worldState: null, Language.English);
+        ScenarioDefinition definition = session.EngineContext.Scenario.Definition;
+
+        Assert.That(definition.Id, Is.EqualTo(new ScenarioId("S900SC0000")));
+        Assert.That(texts.GetScenarioText(definition.InfoTexts.Name), Is.EqualTo("Greywater Crossing"));
+        Assert.That(texts.GetScenarioText(new ScenarioTextId("S900FT0002:NAME_TXT:0")), Is.EqualTo("Brinewatch"));
+        Assert.That(session.World.State.Fortifications.Keys, Is.EqualTo([
+            new WorldFortificationId("S900FT0000"),
+            new WorldFortificationId("S900FT0001"),
+            new WorldFortificationId("S900FT0002"),
+            new WorldFortificationId("S900FT0003"),
+            new WorldFortificationId("S900FT0004"),
+            new WorldFortificationId("S900RU0000"),
+            new WorldFortificationId("S900RU0001")
+        ]));
     }
 
     [Test]
-    public void LoadTutorialTextsRussianTest()
+    public void LoadCustomCampaignTest()
     {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts(GameLoader.TutorialScenarioId, Language.Russian);
+        CustomScenarioFile customScenario = CustomScenarioFile.Create(
+            CustomScenarioType.Campaign,
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg")));
+        GameLoader gameLoader = new(new RandomProvider(0));
 
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S253FT0003:NAME_TXT:0")), Is.EqualTo("Неферис"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S253LO0000:NAME_TXT:0")), Is.EqualTo("Грабеж"));
-    }
+        GameCampaign campaign = gameLoader.LoadCustomCampaign(customScenario, Language.English);
+        (GameSession session, _) = gameLoader.LoadScenario("S900SC0000", customScenario, worldState: null, Language.English);
 
-    [Test]
-    public void LoadTextsCzechTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.Czech);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Říše lidí"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Chazanův Týn"));
-    }
-
-    [Test]
-    public void LoadTextsFrenchTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.French);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0001")).Text, Is.EqualTo("Clans des Nains"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Castel Kazan"));
-    }
-
-    [Test]
-    public void LoadTextsGermanTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.German);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Imperium"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Khazan Feste"));
-    }
-
-    [Test]
-    public void LoadTextsItalianTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.Italian);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Umani"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Rocca di Khazan"));
-    }
-
-    [Test]
-    public void LoadTextsPolishTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.Polish);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0001")).Text, Is.EqualTo("Górskie Klany"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Warownia Khazan"));
-    }
-
-    [Test]
-    public void LoadTextsSpanishTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts("S095SC0000", Language.Spanish);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Humanos"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S095FT0003:NAME_TXT:0")), Is.EqualTo("Torreón de Khazan"));
-    }
-
-    [Test]
-    public void LoadTextsEnglishTest()
-    {
-        IGameTextProvider texts = new GameLoader(new RandomProvider(0)).LoadTexts(GameLoader.TutorialScenarioId, Language.English);
-
-        Assert.That(texts.GetGlobalText(new GlobalTextId("x000tg0000")).Text, Is.EqualTo("Empire"));
-        Assert.That(texts.GetScenarioText(new ScenarioTextId("S253FT0003:NAME_TXT:0")), Is.EqualTo("Nepheris"));
+        Assert.That(
+            $"{campaign.CustomScenarioId} | {campaign.Id} | {campaign.Name} | {campaign.PlayRace.Race} | {campaign.IsSkirmish}",
+            Is.EqualTo("c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2 | C000CC0900 | The Greywater Chronicle | Undead | False"));
+        Assert.That(FormatScenarios(campaign.Scenarios), Is.EqualTo([
+            "c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2 | S900SC0000 | Greywater Crossing | False | True",
+            "c0d20b970c9606c338078e40bc9403902b08394516ce4f4c76284f93c9df3ad2 | S901SC0000 | Greywater Siege | False | True"
+        ]));
+        Assert.That(session.EngineContext.Scenario.Definition.NextScenarioId, Is.EqualTo(new ScenarioId("S901SC0000")));
+        Assert.That(FormatPlayers(session.World.State), Is.EqualTo([
+            "1 Neutral ai",
+            "2 Dwarf ai",
+            "3 Undead human"
+        ]));
     }
 }

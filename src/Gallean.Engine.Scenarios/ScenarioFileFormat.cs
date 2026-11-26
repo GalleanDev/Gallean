@@ -1,6 +1,6 @@
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
-internal sealed record ScenarioFileFormat(int? SaveVersion)
+public sealed record ScenarioFileFormat(int? SaveVersion)
 {
     public const string ScenarioSignature = "D2EESFISIG";
     public const string SaveSignature = "MidFile";

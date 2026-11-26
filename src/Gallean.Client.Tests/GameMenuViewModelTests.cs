@@ -12,7 +12,7 @@ public sealed class GameMenuViewModelTests
     private static GameModel LoadSeasonedHero(GameLoader gameLoader)
     {
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S202SC0000", configuration, Language.English);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S202SC0000", customScenario: null, configuration, Language.English);
         GameModel start = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         WorldState state = start.Snapshot.WorldState;
         WorldStack stack = state.Stacks[new WorldStackId("S202KC0000")];
@@ -25,6 +25,7 @@ public sealed class GameMenuViewModelTests
         };
         (GameSession seasonedSession, IGameTextProvider seasonedTexts) = gameLoader.LoadScenario(
             "S202SC0000",
+            customScenario: null,
             state with { Stacks = state.Stacks.SetItem(stack.Id, seasoned) },
             Language.English);
 
@@ -34,11 +35,12 @@ public sealed class GameMenuViewModelTests
     private static GameModel LoadWithoutLeaders(GameLoader gameLoader)
     {
         ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, Leader: null);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S202SC0000", configuration, Language.English);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario("S202SC0000", customScenario: null, configuration, Language.English);
         GameModel start = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         WorldState state = start.Snapshot.WorldState;
         (GameSession leaderlessSession, IGameTextProvider leaderlessTexts) = gameLoader.LoadScenario(
             "S202SC0000",
+            customScenario: null,
             state with { Stacks = state.Stacks.Remove(new WorldStackId("S202KC0000")) },
             Language.English);
 
@@ -175,7 +177,7 @@ public sealed class GameMenuViewModelTests
 
         GameConfiguration gameConfiguration = lordScreen.GameConfiguration;
         ScenarioConfiguration scenarioConfiguration = Assert.NotNull(gameConfiguration.Configuration);
-        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario(gameConfiguration.ScenarioId, scenarioConfiguration, Language.English);
+        (GameSession session, IGameTextProvider texts) = gameLoader.CreateScenario(gameConfiguration.ScenarioId, customScenario: null, scenarioConfiguration, Language.English);
         GameModel questModel = new(session, texts, NullLog.Instance, SynchronousTaskScheduler.Instance);
         WorldStack stack = questModel.Snapshot.WorldState.Stacks[new WorldStackId("S202KC0000")];
         (WorldUnit leader, _, _) = stack.GetLeader(questModel.Definitions);

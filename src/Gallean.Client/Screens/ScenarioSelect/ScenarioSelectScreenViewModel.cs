@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Gallean.Configuration;
 using Gallean.Engine;
 
 namespace Gallean.Client;
@@ -16,7 +17,8 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
         IAssetPreloader assetPreloader,
         IGameTextProvider texts,
         IGameDefinitionProvider definitions,
-        IReadOnlyList<GameCampaign> campaigns)
+        IReadOnlyList<GameCampaign> campaigns,
+        IReadOnlyList<GameScenario> customScenarios)
     {
         this.assetPreloader = assetPreloader;
         this.texts = texts;
@@ -25,7 +27,7 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
 
         Game = gameViewModel;
 
-        List<GameScenario> scenarios = [];
+        List<GameScenario> scenarios = [.. customScenarios];
 
         foreach (GameCampaign campaign in campaigns)
         {
@@ -35,17 +37,18 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
             }
         }
 
-        IOrderedEnumerable<GameScenario> orderedScenarios = scenarios
-            .OrderBy(scenario => scenario.Name, StringComparer.OrdinalIgnoreCase)
-            .ThenBy(scenario => scenario.Id, StringComparer.OrdinalIgnoreCase);
-
-        Scenarios = [.. orderedScenarios];
+        Scenarios = OrderScenarios(scenarios);
         SelectedScenario = Scenarios.Count > 0 ? Scenarios[0] : null;
         Background = MainMenuBackgroundViewModel.Create();
     }
 
     [ObservableProperty]
+    public partial IReadOnlyList<GameScenario> Scenarios { get; private set; }
+
+    [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(StartCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DeleteCommand))]
+    [NotifyPropertyChangedFor(nameof(IsCustomScenarioSelected))]
     [NotifyPropertyChangedFor(nameof(SelectedScenarioName))]
     [NotifyPropertyChangedFor(nameof(SelectedScenarioDescription))]
     [NotifyPropertyChangedFor(nameof(SelectedScenarioObjective))]
@@ -57,9 +60,9 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
     public partial GameScenario? SelectedScenario { get; set; }
 
     public GameViewModel Game { get; }
-    public IReadOnlyList<GameScenario> Scenarios { get; }
     public MainMenuBackgroundViewModel Background { get; }
 
+    public bool IsCustomScenarioSelected => SelectedScenario?.CustomScenarioId is not null;
     public string? SelectedScenarioName => SelectedScenario?.Name;
     public string? SelectedScenarioDescription => SelectedScenario?.Description;
     public string? SelectedScenarioObjective => FormatObjective(SelectedScenario);
@@ -71,6 +74,40 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
 
     public override ScreenMusic Music => ScreenMusic.Tracks(musicQueue);
     public override AssetSoundKey OpenSound => new AssetSoundKey.InterfaceOpen();
+
+    private static IReadOnlyList<GameScenario> OrderScenarios(IEnumerable<GameScenario> scenarios)
+    {
+        List<GameScenario> result = [.. scenarios];
+
+        result.Sort(CompareScenarios);
+
+        return result;
+    }
+
+    private static int CompareScenarios(GameScenario left, GameScenario right)
+    {
+        int rv;
+
+        rv = string.Compare(left.Name, right.Name, StringComparison.OrdinalIgnoreCase);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
+        rv = string.Compare(left.Id, right.Id, StringComparison.OrdinalIgnoreCase);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
+        rv = string.CompareOrdinal(left.CustomScenarioId?.Value, right.CustomScenarioId?.Value);
+        if (rv != 0)
+        {
+            return rv;
+        }
+
+        return 0;
+    }
 
     private static string? FormatRaces(GameScenario? scenario, IGameTextProvider texts)
     {
@@ -131,6 +168,54 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
     private bool CanStart()
     {
         return SelectedScenario is not null;
+    }
+
+    [RelayCommand]
+    private async Task ImportAsync(IReadOnlyList<ScenarioImportFile>? files)
+    {
+        if (files is not null)
+        {
+            foreach (ScenarioImportFile file in files)
+            {
+                GameScenario? scenario = await Game.TryImportCustomScenarioAsync(file);
+
+                if (scenario is not null)
+                {
+                    Scenarios = OrderScenarios([.. Scenarios.Where(existing => existing.CustomScenarioId != scenario.CustomScenarioId), scenario]);
+                    SelectedScenario = scenario;
+                }
+            }
+        }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanDelete))]
+    private void Delete()
+    {
+        if (SelectedScenario is not null && SelectedScenario.CustomScenarioId is not null)
+        {
+            CustomScenarioId id = SelectedScenario.CustomScenarioId.Value;
+
+            Game.OpenScreen(new ConfirmPromptViewModel(
+                TrSpans("Delete custom quest"),
+                TrSpans("Delete \"{0}\" permanently?", SelectedScenario.Name),
+                Tr("Delete"),
+                ConfirmPromptType.Danger,
+                () => DeleteAsync(id)));
+        }
+    }
+
+    private bool CanDelete()
+    {
+        return IsCustomScenarioSelected;
+    }
+
+    private async Task DeleteAsync(CustomScenarioId id)
+    {
+        if (await Game.TryDeleteCustomScenarioAsync(id))
+        {
+            Scenarios = [.. Scenarios.Where(scenario => scenario.CustomScenarioId != id)];
+            SelectedScenario = Scenarios.Count > 0 ? Scenarios[0] : null;
+        }
     }
 
     protected override bool TryClose()

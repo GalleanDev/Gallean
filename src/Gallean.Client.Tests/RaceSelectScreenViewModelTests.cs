@@ -22,6 +22,7 @@ public sealed class RaceSelectScreenViewModelTests
     public void SelectionTest()
     {
         GameScenario scenario = new(
+            CustomScenarioId: null,
             "S217SC0000",
             "Fardale's Web",
             null,
@@ -59,6 +60,7 @@ public sealed class RaceSelectScreenViewModelTests
     public void PlayerTypeTest()
     {
         GameScenario scenario = new(
+            CustomScenarioId: null,
             "S217SC0000",
             "Fardale's Web",
             null,
@@ -126,7 +128,7 @@ public sealed class RaceSelectScreenViewModelTests
         Assert.That(scenarioConfiguration.IsLastPlayer, Is.True);
         Assert.That(
             scenarioConfiguration.GameConfiguration,
-            Is.EqualTo(new GameConfiguration("S200SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU8009"), LeaderName: "")], WorldDifficulty.Average, Leader: null))));
+            Is.EqualTo(new GameConfiguration("S200SC0000", new ScenarioConfiguration([new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Warrior, new WorldObjectVariant(0), new UnitDefinitionId("G000UU8009"), LeaderName: "")], WorldDifficulty.Average, Leader: null), CustomScenarioId: null)));
         Assert.That(scenarioConfiguration.PortraitKey, Is.EqualTo(new AssetSpriteKey.LordFace(WorldRace.Elf, 0, IsLarge: true)));
     }
 
@@ -177,7 +179,7 @@ public sealed class RaceSelectScreenViewModelTests
                         new ScenarioPlayerConfiguration(WorldRace.Elf, LordCategory.Guildmaster, new WorldObjectVariant(0), new UnitDefinitionId("G000UU8009"), LeaderName: "")
                     ],
                     WorldDifficulty.Hard,
-                    Leader: null))));
+                    Leader: null), CustomScenarioId: null)));
 
         gameViewModel.EscapeCommand.Execute(null);
 

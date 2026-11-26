@@ -61,7 +61,20 @@
               Background="{StaticResource ScenarioSelectDividerBrush}"
               Margin="0,10,0,20" />
 
-      <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Text="{local:Text 'Quest'}" Classes="label" Margin="14,0,0,8" />
+      <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="16" Margin="14,0,16,8">
+        <local:OutlinedTextBlock Grid.Column="0" Text="{local:Text 'Quest'}" Classes="label" />
+        <Button Grid.Column="1"
+                Classes="link"
+                Content="{local:Text 'Delete'}"
+                Command="{Binding DeleteCommand}"
+                IsVisible="{Binding IsCustomScenarioSelected}"
+                VerticalAlignment="Bottom" />
+        <Button Grid.Column="2"
+                Classes="link"
+                Content="{local:Text 'Import'}"
+                Click="OnImportClick"
+                VerticalAlignment="Bottom" />
+      </Grid>
 
       <ListBox Grid.Row="3"
                Grid.Column="0"

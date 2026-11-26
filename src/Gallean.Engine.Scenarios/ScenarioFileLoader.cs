@@ -1,6 +1,6 @@
-namespace Extractor;
+namespace Gallean.Engine.Scenarios;
 
-internal static class ScenarioFileLoader
+public static class ScenarioFileLoader
 {
     private const int ScenarioIdLength = 11;
     private const int SignatureLength = 10;
