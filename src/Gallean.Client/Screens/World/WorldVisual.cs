@@ -15,6 +15,7 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 {
     private const double CameraSpeed = 2000.0;
     private const double ZoomStepFactor = 1.15;
+    private const double MapScalingBaseHeight = 540.0;
     private const double FastForwardRate = 2.0;
     private const double InterfaceScrollMargin = 4.0;
 
@@ -519,8 +520,20 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
 
         if (topLevel is not null)
         {
-            double viewportScaling = UiScaleDecorator.GetViewportScaling(topLevel.ClientSize.Height * topLevel.RenderScaling);
-            camera.UiScale = UiScaleDecorator.GetRenderScaling(this) / viewportScaling;
+            double mapScaling = GetMapScaling(topLevel.ClientSize.Height * topLevel.RenderScaling);
+            camera.UiScale = UiScaleDecorator.GetRenderScaling(this) / mapScaling;
+        }
+    }
+
+    private static double GetMapScaling(double deviceHeight)
+    {
+        if (double.IsFinite(deviceHeight))
+        {
+            return Math.Max(Math.Sqrt(deviceHeight / MapScalingBaseHeight), 1);
+        }
+        else
+        {
+            return 1.0;
         }
     }
 
