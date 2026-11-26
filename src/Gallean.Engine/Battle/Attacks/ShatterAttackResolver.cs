@@ -48,17 +48,11 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
 
     private static int GetShatteredArmor(IEngineContext context, BattleUnit target, UnitAttackStats attackStats)
     {
-        int shatteredArmor = 0;
-        foreach (BattleShatterArmorStatusEffect effect in target.StatusEffects.OfType<BattleShatterArmorStatusEffect>())
-        {
-            shatteredArmor += effect.Armor;
-        }
+        BattleShatterArmorStatusEffect? shatterEffect = target.StatusEffects.OfType<BattleShatterArmorStatusEffect>().SingleOrDefault();
+        int shatteredArmor = shatterEffect?.Armor ?? 0;
 
-        int fortificationArmor = 0;
-        foreach (BattleFortificationStatusEffect effect in target.StatusEffects.OfType<BattleFortificationStatusEffect>())
-        {
-            fortificationArmor = Math.Max(fortificationArmor, effect.Armor);
-        }
+        BattleFortificationStatusEffect? fortificationEffect = target.StatusEffects.OfType<BattleFortificationStatusEffect>().SingleOrDefault();
+        int fortificationArmor = fortificationEffect?.Armor ?? 0;
 
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
         UnitStats unitStats = UnitStatsCalculator.GetStats(targetDefinition, target.Level, target.Modifiers, context.Definitions, context.Globals);
