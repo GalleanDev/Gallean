@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Extractor.Tests" />
+    <InternalsVisibleTo Include="Gallean.Engine.Scenarios.Tests" />
   </ItemGroup>
 
 </Project>

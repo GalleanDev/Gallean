@@ -1,6 +1,6 @@
-namespace Extractor.Tests;
+namespace Gallean.Engine.Scenarios.Tests;
 
-internal static class TestScenarios
+public static class TestScenarios
 {
     private const string DirectoryName = "TestScenarios";
 

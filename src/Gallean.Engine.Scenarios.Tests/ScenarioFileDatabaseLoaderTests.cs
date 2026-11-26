@@ -1,7 +1,7 @@
 using Gallean.Engine;
 using Gallean.Entities.GameData;
 
-namespace Extractor.Tests;
+namespace Gallean.Engine.Scenarios.Tests;
 
 public sealed class ScenarioFileDatabaseLoaderTests
 {

@@ -3,15 +3,10 @@
   <Import Project="..\..\Tests.props" />
 
   <ItemGroup>
-    <Content Include="TestScenarios\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Using Include="Gallean.Engine.Contracts" />
     <Using Include="Gallean.Entities" />
     <Using Include="Gallean.Engine.Scenarios" />
+    <Using Include="Gallean.Engine.Scenarios.Tests" />
     <Using Include="Extractor" />
   </ItemGroup>
 
@@ -19,6 +14,7 @@
     <ProjectReference Include="..\Extractor\Extractor.csproj" />
     <ProjectReference Include="..\..\src\Gallean.Tests.Common\Gallean.Tests.Common.csproj" />
     <ProjectReference Include="..\..\src\Gallean.Engine\Gallean.Engine.csproj" />
+    <ProjectReference Include="..\..\src\Gallean.Engine.Scenarios.Tests\Gallean.Engine.Scenarios.Tests.csproj" />
     <ProjectReference Include="..\..\src\Gallean.Entities.GameData\Gallean.Entities.GameData.csproj" />
   </ItemGroup>
 

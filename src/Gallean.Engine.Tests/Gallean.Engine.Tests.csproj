@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <Content Include="TestData\**" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="..\..\tools\Extractor.Tests\TestScenarios\*.*" Link="TestScenarios\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\Gallean.Engine.Scenarios.Tests\TestScenarios\*.*" Link="TestScenarios\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
