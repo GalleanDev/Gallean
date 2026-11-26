@@ -54,13 +54,19 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
             alreadyShattered += effect.Armor;
         }
 
+        int fortificationArmor = 0;
+        foreach (BattleFortificationStatusEffect effect in target.StatusEffects.OfType<BattleFortificationStatusEffect>())
+        {
+            fortificationArmor = Math.Max(fortificationArmor, effect.Armor);
+        }
+
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
         UnitStats unitStats = UnitStatsCalculator.GetStats(targetDefinition, target.Level, target.Modifiers, context.Definitions, context.Globals);
 
         int shatteredArmor = attackStats.Damage;
         if (shatteredArmor > 0)
         {
-            int remainingArmor = Math.Max(0, unitStats.Armor - alreadyShattered);
+            int remainingArmor = Math.Max(0, unitStats.Armor - alreadyShattered - fortificationArmor);
             int remainingTotalCap = Math.Max(0, context.Globals.ShatterArmorTotalCap - alreadyShattered);
 
             shatteredArmor = Math.Min(shatteredArmor, context.Globals.ShatterArmorPerHitCap);

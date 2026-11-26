@@ -394,7 +394,7 @@ public sealed class BattleEngineShatterAttackTests
             new BattleUnitAttackEvent(shatterer.Id, new BattleAttackUnitTarget(golem.Id), [new UnitAttackDefinitionId("shatterer")]),
             new BattleUnitAttackedEvent(shatterer.Id, golem.Id, new UnitAttackDefinitionId("shatterer")),
             new BattleUnitAttackHitEvent(shatterer.Id, golem.Id, new UnitAttackDefinitionId("shatterer"), 0),
-            new BattleUnitEffectAppliedEvent(shatterer.Id, golem.Id, new BattleShatterArmorStatusEffect(30)),
+            new BattleUnitEffectAppliedEvent(shatterer.Id, golem.Id, new BattleShatterArmorStatusEffect(20)),
             new BattleUnitTurnEndingEvent(shatterer.Id),
             new BattleUnitTurnEndedEvent(shatterer.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal))
@@ -407,7 +407,7 @@ public sealed class BattleEngineShatterAttackTests
                     .Place(shatterer, GridPosition.FrontBottom, false)
                     .Build(),
                 DefenderGrid = new UnitGrid<BattleUnit>.Builder()
-                    .Place(golem with { StatusEffects = [new BattleFortificationStatusEffect(10), new BattleShatterArmorStatusEffect(30)] }, GridPosition.FrontBottom, false)
+                    .Place(golem with { StatusEffects = [new BattleFortificationStatusEffect(10), new BattleShatterArmorStatusEffect(20)] }, GridPosition.FrontBottom, false)
                     .Build(),
                 CurrentUnitTurn = new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal),
                 CurrentRound = BattleRound.Normal(1)
@@ -461,5 +461,36 @@ public sealed class BattleEngineShatterAttackTests
                 CurrentUnitTurn = new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal),
                 CurrentRound = BattleRound.Normal(1)
             }));
+    }
+
+    [Test]
+    public void FortificationArmorTest()
+    {
+        UnitDefinition shattererDefinition = ShattererDefinition("shatterer", initiative: 60, damage: 30);
+        UnitDefinition golemDefinition = TestHelpers.SimpleUnitDefinition("golem", maxHitpoints: 100, initiative: 40, damage: 2) with
+        {
+            Armor = 0
+        };
+
+        UnitModifierDefinition protection = TestHelpers.SimpleModifier("protection") with { Armor = new UnitStatModifier(50, 0) };
+
+        BattleUnit shatterer = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, shattererDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit golem = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, golemDefinition.Id, BattleSide.Defender, hitpoints: 100) with
+        {
+            Modifiers = [UnitModifier.FromFortification(protection.Id)],
+            StatusEffects = [new BattleFortificationStatusEffect(50)]
+        };
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(shattererDefinition)
+            .WithDefinition(golemDefinition)
+            .WithDefinition(protection)
+            .WithAttacker(shatterer, GridPosition.FrontBottom)
+            .WithDefender(golem, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommandError(
+            new BattleAttackCommand(shatterer.Id, new BattleAttackUnitTarget(golem.Id)),
+            BattleCommandError.TargetIncorrect);
     }
 }
