@@ -457,6 +457,13 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
 
             return scenario;
         }
+        catch (GameDefinitionNotFoundException ex)
+        {
+            log.Error($"Failed to import '{file.Name}'.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, Tr("This quest uses objects that are not in the base game ({0}).", ex.Id)), Tr("Close")));
+
+            return null;
+        }
         catch (Exception ex)
         {
             log.Error($"Failed to import '{file.Name}'.", ex);
@@ -482,6 +489,13 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
             await customScenarioStore.SaveAsync(customScenario);
 
             return campaign;
+        }
+        catch (GameDefinitionNotFoundException ex)
+        {
+            log.Error($"Failed to import '{file.Name}'.", ex);
+            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, Tr("This saga uses objects that are not in the base game ({0}).", ex.Id)), Tr("Close")));
+
+            return null;
         }
         catch (Exception ex)
         {

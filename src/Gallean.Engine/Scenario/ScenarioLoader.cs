@@ -114,7 +114,7 @@ public static class ScenarioLoader
         IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations =
             scenarioDb.ScenarioLocationsByScenario[scenarioId].ToDictionary(location => location.LocationId);
         WorldMap worldMap =
-            LoadMap(globalDb, scenarioDb, scenarioId, scenarioInfo);
+            LoadMap(scenarioDb, scenarioId, scenarioInfo, definitions);
         ImmutableSortedDictionary<WorldPlayerId, WorldPlayer> players =
             LoadPlayers(globalDb, scenarioDb, campaignDb, scenarioId, scenarioInfo, playerIds, globals, difficulty, configuration);
         WorldTurnInfo turnInfo =
@@ -132,7 +132,7 @@ public static class ScenarioLoader
         ImmutableSortedDictionary<WorldBagId, WorldBag> bags =
             LoadBags(scenarioDb, scenarioId, definitions, globals);
         ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark> landmarks =
-            LoadLandmarks(globalDb, scenarioDb, scenarioId);
+            LoadLandmarks(scenarioDb, scenarioId, definitions);
         ImmutableSortedDictionary<WorldMountainId, WorldMountain> mountains =
             LoadMountains(scenarioDb, scenarioId, worldMap);
         ImmutableSortedDictionary<WorldSiteId, WorldSite> sites =
@@ -1271,10 +1271,10 @@ public static class ScenarioLoader
     }
 
     private static WorldMap LoadMap(
-        GlobalDatabase globalDb,
         ScenarioDatabase scenarioDb,
         Db.ScenarioId scenarioId,
-        Db.ScenarioInfo scenarioInfo)
+        Db.ScenarioInfo scenarioInfo,
+        IGameDefinitionProvider definitions)
     {
         int mapSize = scenarioInfo.MapSize;
 
@@ -1297,7 +1297,7 @@ public static class ScenarioLoader
             mapSize,
             scenarioDb.ScenarioMapElementsByScenario[scenarioId],
             GetScenarioObjects(scenarioDb.ScenarioLandmarksByScenarioAndLandmarkId, scenarioId),
-            globalDb.Landmarks);
+            definitions);
 
         foreach (Db.ScenarioRoad road in scenarioDb.ScenarioRoadsByScenario[scenarioId])
         {
@@ -1357,15 +1357,15 @@ public static class ScenarioLoader
         int mapSize,
         IEnumerable<Db.ScenarioMapElement> mapElements,
         IReadOnlyDictionary<Db.Id, Db.ScenarioLandmark> scenarioLandmarks,
-        IReadOnlyDictionary<Db.Id, Db.Landmark> globalLandmarks)
+        IGameDefinitionProvider definitions)
     {
         foreach (Db.ScenarioMapElement mapElement in mapElements)
         {
             if (scenarioLandmarks.TryGetValue(mapElement.ElementId, out Db.ScenarioLandmark? scenarioLandmark))
             {
-                Db.Landmark landmark = globalLandmarks[scenarioLandmark.TypeId];
+                WorldLandmarkDefinition landmark = definitions.GetLandmark(new WorldLandmarkDefinitionId(scenarioLandmark.TypeId));
 
-                if (landmark.Mountain == true)
+                if (landmark.Mountain)
                 {
                     WorldPosition position = new(mapElement.PositionX, mapElement.PositionY);
                     if (position.X < 0 || position.X >= mapSize || position.Y < 0 || position.Y >= mapSize)
@@ -2120,9 +2120,9 @@ public static class ScenarioLoader
     }
 
     private static ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark> LoadLandmarks(
-        GlobalDatabase globalDb,
         ScenarioDatabase scenarioDb,
-        Db.ScenarioId scenarioId)
+        Db.ScenarioId scenarioId,
+        IGameDefinitionProvider definitions)
     {
         ImmutableSortedDictionary<WorldLandmarkId, WorldLandmark>.Builder result =
             ImmutableSortedDictionary.CreateBuilder<WorldLandmarkId, WorldLandmark>();
@@ -2132,14 +2132,15 @@ public static class ScenarioLoader
 
         foreach (Db.ScenarioLandmark landmark in landmarks.Values)
         {
-            Db.Landmark definition = globalDb.Landmarks[landmark.TypeId];
+            WorldLandmarkDefinitionId definitionId = new(landmark.TypeId);
+            WorldLandmarkDefinition definition = definitions.GetLandmark(definitionId);
 
             WorldLandmarkId landmarkId = new(landmark.LandmarkId);
             WorldPosition landmarkPosition = new(landmark.PositionX, landmark.PositionY);
             WorldLandmark worldLandmark = new(
                 landmarkId,
-                new WorldLandmarkDefinitionId(landmark.TypeId),
-                new WorldFootprint(landmarkPosition, definition.Cx, definition.Cy));
+                definitionId,
+                new WorldFootprint(landmarkPosition, definition.Width, definition.Height));
 
             result.Add(landmarkId, worldLandmark);
         }

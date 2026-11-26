@@ -80,4 +80,50 @@ public sealed class ScenarioFileDatabaseLoaderTests
             new WorldRod(new WorldRodId("S200RD0000"), new WorldPlayerId(2), new WorldPosition(10, 5))
         ]));
     }
+
+    [Test]
+    public void LoadUnknownLandmarkTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+        ScenarioFileTables tables = file.Tables with
+        {
+            ScenarioLandmarks = [.. file.Tables.ScenarioLandmarks.Select(landmark => landmark with { TypeId = new Db.Id("G000MG9999") })]
+        };
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+
+        GameDefinitionNotFoundException ex = Assert.Throws<GameDefinitionNotFoundException>(
+            () => ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables()));
+
+        Assert.That(ex.Id, Is.EqualTo("G000MG9999"));
+        Assert.That(ex.Message, Is.EqualTo("Landmark definition 'G000MG9999' was not found."));
+    }
+
+    [Test]
+    public void LoadUnknownUnitTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+        ScenarioFileTables tables = file.Tables with
+        {
+            ScenarioUnits = [.. file.Tables.ScenarioUnits.Select(unit => unit with { TypeId = new Db.Id("G000UU9999") })]
+        };
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+
+        GameDefinitionNotFoundException ex = Assert.Throws<GameDefinitionNotFoundException>(
+            () => ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables()));
+
+        Assert.That(ex.Id, Is.EqualTo("G000UU9999"));
+        Assert.That(ex.Message, Is.EqualTo("Unit definition 'G000UU9999' was not found."));
+    }
 }

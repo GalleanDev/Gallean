@@ -436,7 +436,7 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.Throws<KeyNotFoundException>(() => provider.GetUnit(new UnitDefinitionId("INVALID")));
+        Assert.Throws<GameDefinitionNotFoundException>(() => provider.GetUnit(new UnitDefinitionId("INVALID")));
     }
 
     [Test]
@@ -835,7 +835,7 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.Throws<KeyNotFoundException>(() => provider.GetUnitModifier(new UnitModifierDefinitionId("INVALID")));
+        Assert.Throws<GameDefinitionNotFoundException>(() => provider.GetUnitModifier(new UnitModifierDefinitionId("INVALID")));
     }
 
     [Test]
@@ -1053,7 +1053,7 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.Throws<KeyNotFoundException>(() => provider.GetItem(new ItemDefinitionId("INVALID")));
+        Assert.Throws<GameDefinitionNotFoundException>(() => provider.GetItem(new ItemDefinitionId("INVALID")));
     }
 
     [Test]
@@ -1211,7 +1211,7 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.Throws<KeyNotFoundException>(() => provider.GetPlayerBuilding(new WorldPlayerBuildingDefinitionId("INVALID")));
+        Assert.Throws<GameDefinitionNotFoundException>(() => provider.GetPlayerBuilding(new WorldPlayerBuildingDefinitionId("INVALID")));
     }
 
     [Test]
@@ -1250,7 +1250,7 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.Throws<KeyNotFoundException>(() => provider.GetCity(new WorldCityDefinitionId(WorldRace.Human, 99)));
+        Assert.Throws<GameDefinitionNotFoundException>(() => provider.GetCity(new WorldCityDefinitionId(WorldRace.Human, 99)));
     }
 
     [Test]
@@ -1318,7 +1318,7 @@ public sealed class GameDefinitionProviderTests
     {
         GameDefinitionProvider provider = CreateProvider();
 
-        Assert.Throws<KeyNotFoundException>(() => provider.GetRace((WorldRace)99));
+        Assert.Throws<GameDefinitionNotFoundException>(() => provider.GetRace((WorldRace)99));
     }
 
     [Test]

@@ -57,7 +57,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Unit definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Unit definition '{id}' was not found.");
     }
 
     public UnitDefinition? TryGetUnit(UnitDefinitionId id)
@@ -72,7 +72,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Attack definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Attack definition '{id}' was not found.");
     }
 
     public ImmutableArray<UnitUpgradeDefinition> GetUnitUpgrades(UnitDefinitionId id)
@@ -87,7 +87,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Dynamic upgrade definition for unit '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Dynamic upgrade definition for unit '{id}' was not found.");
     }
 
     public LordDefinition GetLord(LordDefinitionId id)
@@ -97,7 +97,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Lord definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Lord definition '{id}' was not found.");
     }
 
     public ImmutableArray<LeaderUpgradeDefinition> GetLeaderUpgrades(LordDefinitionId id)
@@ -112,7 +112,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Unit modifier definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Unit modifier definition '{id}' was not found.");
     }
 
     public ItemDefinition GetItem(ItemDefinitionId id)
@@ -122,7 +122,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Item definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Item definition '{id}' was not found.");
     }
 
     public WorldLandmarkDefinition GetLandmark(WorldLandmarkDefinitionId id)
@@ -132,7 +132,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Landmark definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Landmark definition '{id}' was not found.");
     }
 
     public WorldPlayerBuildingDefinition GetPlayerBuilding(WorldPlayerBuildingDefinitionId id)
@@ -142,7 +142,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Building definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Building definition '{id}' was not found.");
     }
 
     public WorldCityDefinition GetCity(WorldCityDefinitionId id)
@@ -152,7 +152,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"City definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"City definition '{id}' was not found.");
     }
 
     public WorldAiAttitudeDefinition GetAiAttitude(WorldAiAttitudeType type)
@@ -162,7 +162,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"AI attitude definition '{type}' was not found.");
+        throw new GameDefinitionNotFoundException(type.ToString(), $"AI attitude definition '{type}' was not found.");
     }
 
     private static IEnumerable<WorldAiAttitudeDefinition> LoadAiAttitudes(GlobalDatabase globalDb)
@@ -221,7 +221,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Race definition '{race}' was not found.");
+        throw new GameDefinitionNotFoundException(race.ToString(), $"Race definition '{race}' was not found.");
     }
 
     public WorldSpellDefinition GetSpell(WorldSpellDefinitionId id)
@@ -231,7 +231,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Spell definition '{id}' was not found.");
+        throw new GameDefinitionNotFoundException(id.ToString(), $"Spell definition '{id}' was not found.");
     }
 
     public WorldThiefActionDefinition GetThiefAction(WorldThiefActionType type)
@@ -241,7 +241,7 @@ public sealed class GameDefinitionProvider : IGameDefinitionProvider
             return definition;
         }
 
-        throw new KeyNotFoundException($"Thief action definition '{type}' was not found.");
+        throw new GameDefinitionNotFoundException(type.ToString(), $"Thief action definition '{type}' was not found.");
     }
 
     public IReadOnlyDictionary<WorldSpellDefinitionId, WorldResourceSet> GetSpellResearchCosts(WorldRace race)
