@@ -41,7 +41,7 @@ internal sealed class GameLoader(IRandomProvider random)
 
     public GameScenario LoadCustomScenario(CustomScenarioFile customScenario, Language language)
     {
-        ScenarioLibraryFile file = library.OpenScenarioFile(customScenario.Data, language);
+        ScenarioLibraryFile file = library.OpenScenarioFile(customScenario.Data);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, language);
         ScenarioMetadata scenario = campaign.Scenarios.Single();
 
@@ -50,7 +50,7 @@ internal sealed class GameLoader(IRandomProvider random)
 
     public GameCampaign LoadCustomCampaign(CustomScenarioFile customScenario, Language language)
     {
-        ScenarioLibraryFile file = library.OpenCampaignFile(customScenario.Data, language);
+        ScenarioLibraryFile file = library.OpenCampaignFile(customScenario.Data);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, language);
 
         List<GameScenario> scenarios = [];
@@ -120,7 +120,7 @@ internal sealed class GameLoader(IRandomProvider random)
         WorldState? worldState,
         Language language)
     {
-        ScenarioLibraryFile? file = OpenFile(customScenario, language);
+        ScenarioLibraryFile? file = OpenFile(customScenario);
 
         return library.LoadScenario(new ScenarioId(scenarioId), file, worldState, language);
     }
@@ -131,26 +131,26 @@ internal sealed class GameLoader(IRandomProvider random)
         ScenarioConfiguration configuration,
         Language language)
     {
-        ScenarioLibraryFile? file = OpenFile(customScenario, language);
+        ScenarioLibraryFile? file = OpenFile(customScenario);
 
         return library.CreateScenario(new ScenarioId(scenarioId), file, configuration, language);
     }
 
     public IGameTextProvider LoadTexts(string scenarioId, CustomScenarioFile? customScenario, Language language)
     {
-        ScenarioLibraryFile? file = OpenFile(customScenario, language);
+        ScenarioLibraryFile? file = OpenFile(customScenario);
 
         return library.LoadTexts(new ScenarioId(scenarioId), file, language);
     }
 
-    private ScenarioLibraryFile? OpenFile(CustomScenarioFile? customScenario, Language language)
+    private ScenarioLibraryFile? OpenFile(CustomScenarioFile? customScenario)
     {
         if (customScenario is not null)
         {
             return customScenario.Type switch
             {
-                CustomScenarioType.Scenario => library.OpenScenarioFile(customScenario.Data, language),
-                CustomScenarioType.Campaign => library.OpenCampaignFile(customScenario.Data, language)
+                CustomScenarioType.Scenario => library.OpenScenarioFile(customScenario.Data),
+                CustomScenarioType.Campaign => library.OpenCampaignFile(customScenario.Data)
             };
         }
         else

@@ -34,9 +34,9 @@ public sealed class ScenarioLibrary(IRandomProvider random, ScenarioLibraryConfi
         return (campaign, texts);
     }
 
-    public ScenarioLibraryFile OpenScenarioFile(byte[] data, Language language)
+    public ScenarioLibraryFile OpenScenarioFile(byte[] data)
     {
-        ScenarioTextEncoding encoding = ScenarioTextEncoding.FromCodePage(GetFileCodePage(language));
+        ScenarioTextEncoding encoding = ScenarioFileLoader.DetectEncoding(data);
         (ScenarioDatabase scenarioDatabase, CampaignDatabase fileCampaignDatabase) = CustomScenarioDatabaseLoader.LoadScenario(
             data,
             encoding,
@@ -46,9 +46,9 @@ public sealed class ScenarioLibrary(IRandomProvider random, ScenarioLibraryConfi
         return new ScenarioLibraryFile(info.Name, scenarioDatabase, fileCampaignDatabase);
     }
 
-    public ScenarioLibraryFile OpenCampaignFile(byte[] data, Language language)
+    public ScenarioLibraryFile OpenCampaignFile(byte[] data)
     {
-        ScenarioTextEncoding encoding = ScenarioTextEncoding.FromCodePage(GetFileCodePage(language));
+        ScenarioTextEncoding encoding = CampaignFileLoader.DetectEncoding(data);
         CampaignFileContent content = CampaignFileLoader.Read(data, encoding);
         (ScenarioDatabase scenarioDatabase, CampaignDatabase fileCampaignDatabase) = CustomScenarioDatabaseLoader.LoadCampaign(
             content,
@@ -110,21 +110,6 @@ public sealed class ScenarioLibrary(IRandomProvider random, ScenarioLibraryConfi
         (ScenarioDatabase scenarioDatabase, _) = LoadDatabases(scenarioId, file);
 
         return CreateTextProvider(scenarioDatabase, scenarioId, language);
-    }
-
-    private static int GetFileCodePage(Language language)
-    {
-        return language switch
-        {
-            Language.English => 1252,
-            Language.Czech => 1250,
-            Language.French => 1252,
-            Language.German => 1252,
-            Language.Italian => 1252,
-            Language.Polish => 1250,
-            Language.Russian => 1251,
-            Language.Spanish => 1252
-        };
     }
 
     private GameSession CreateSession(

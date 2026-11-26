@@ -13,6 +13,22 @@ public static class CampaignFileLoader
     private const string OrderFileName = "ORDER.CPN";
     private const string ScenarioFileExtension = ".SG";
 
+    public static ScenarioTextEncoding DetectEncoding(byte[] data)
+    {
+        CampaignFile campaign = Load(data, ScenarioTextEncodingDetector.DetectionEncoding);
+        CampaignFileHeader header = campaign.Header;
+        List<string> texts = [header.Name, header.Author];
+
+        foreach (CampaignFileScenario scenario in campaign.Scenarios)
+        {
+            ScenarioFile file = scenario.Scenario;
+
+            texts.AddRange(ScenarioTextEncodingDetector.GetTexts(file.Tables));
+        }
+
+        return ScenarioTextEncodingDetector.Detect(texts);
+    }
+
     public static CampaignFile Load(string path, ScenarioTextEncoding encoding)
     {
         return Load(File.ReadAllBytes(path), encoding);

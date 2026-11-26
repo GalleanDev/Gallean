@@ -69,8 +69,8 @@ public static class TestCampaignArchiveBuilder
     {
         byte[] result = new byte[HeaderLength];
         BitConverter.GetBytes(100).CopyTo(result, 0);
-        Encoding.ASCII.GetBytes(name).CopyTo(result, HeaderNameOffset);
-        Encoding.ASCII.GetBytes(author).CopyTo(result, HeaderAuthorOffset);
+        Encoding.Latin1.GetBytes(name).CopyTo(result, HeaderNameOffset);
+        Encoding.Latin1.GetBytes(author).CopyTo(result, HeaderAuthorOffset);
         BitConverter.GetBytes(IdSerializer.Serialize(playRaceId)).CopyTo(result, HeaderPlayRaceOffset);
         result[HeaderSavedGameOffset] = hasSavedGame ? (byte)1 : (byte)0;
 

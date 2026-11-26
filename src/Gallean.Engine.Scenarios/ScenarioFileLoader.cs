@@ -20,6 +20,15 @@ public static class ScenarioFileLoader
     private const int DesignSaveHeaderSize = 2999;
     private const int SaveHeaderSize = 2743;
 
+    public static ScenarioTextEncoding DetectEncoding(byte[] data)
+    {
+        using MemoryStream stream = new(data, writable: false);
+
+        ScenarioFile file = Load(stream, ScenarioTextEncodingDetector.DetectionEncoding);
+
+        return ScenarioTextEncodingDetector.Detect(ScenarioTextEncodingDetector.GetTexts(file.Tables));
+    }
+
     public static ScenarioFile Load(string path, ScenarioTextEncoding encoding)
     {
         using FileStream stream = File.OpenRead(path);

@@ -1926,6 +1926,16 @@ public sealed class ScenarioFileLoaderTests
     }
 
     [Test]
+    public void DetectEncodingTest()
+    {
+        byte[] data = File.ReadAllBytes(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioTextEncoding encoding = ScenarioFileLoader.DetectEncoding(data);
+
+        Assert.That(encoding.GetString([0xe6]), Is.EqualTo("æ"));
+    }
+
+    [Test]
     public void LoadUnknownSignatureTest()
     {
         using MemoryStream stream = new(new byte[64]);

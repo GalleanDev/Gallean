@@ -150,7 +150,7 @@ public sealed class ScenarioLibraryTests
     {
         byte[] data = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"));
 
-        ScenarioLibraryFile file = library.OpenScenarioFile(data, Language.English);
+        ScenarioLibraryFile file = library.OpenScenarioFile(data);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, Language.English);
         (GameSession session, _) = library.LoadScenario(new ScenarioId("S900SC0000"), file, worldState: null, Language.English);
 
@@ -172,7 +172,7 @@ public sealed class ScenarioLibraryTests
     {
         byte[] data = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg"));
 
-        ScenarioLibraryFile file = library.OpenCampaignFile(data, Language.English);
+        ScenarioLibraryFile file = library.OpenCampaignFile(data);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, Language.English);
         (GameSession session, _) = library.LoadScenario(new ScenarioId("S900SC0000"), file, worldState: null, Language.English);
 
@@ -196,7 +196,7 @@ public sealed class ScenarioLibraryTests
         byte[] data = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"));
 
         Assert.That(
-            () => library.OpenCampaignFile(data, Language.English),
+            () => library.OpenCampaignFile(data),
             Throws.TypeOf<InvalidDataException>().With.Message.EqualTo("Archive does not start with 'MQDB'."));
     }
 }

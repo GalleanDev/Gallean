@@ -101,6 +101,23 @@ public sealed class CampaignFileLoaderTests
     }
 
     [Test]
+    public void DetectEncodingTest()
+    {
+        byte[] data = TestCampaignArchiveBuilder.Build("\u00d5\u00f0\u00ee\u00ed\u00e8\u00ea\u00e8", "Gallean Contributors", new Db.Id("G000RR0003"), [
+            ("CROSSING.SG", TestScenarios.GreywaterCrossingPath)
+        ]);
+
+        ScenarioTextEncoding encoding = CampaignFileLoader.DetectEncoding(data);
+        CampaignFileContent content = CampaignFileLoader.Read(data, encoding);
+
+        Assert.That(content.Header, Is.EqualTo(new CampaignFileHeader(
+            "Хроники",
+            "Gallean Contributors",
+            new Db.Id("G000RR0003"),
+            false)));
+    }
+
+    [Test]
     public void LoadShortHeaderTest()
     {
         byte[] data = TestCampaignArchiveBuilder.BuildArchive([
