@@ -134,7 +134,7 @@ internal sealed class App(ILog log, GCMemoryInfo memoryInfo) : Application
     {
         if (processPath is not null)
         {
-            using Process process = Process.Start(processPath, desktop.Args ?? []);
+            Process.StartAndForget(processPath, desktop.Args ?? []);
         }
 
         desktop.Shutdown();
