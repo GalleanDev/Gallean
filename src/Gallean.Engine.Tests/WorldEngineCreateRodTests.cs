@@ -270,6 +270,58 @@ public sealed class WorldEngineCreateRodTests
     }
 
     [Test]
+    public void NearFortificationTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(8, 4);
+
+        UnitDefinition rodLeaderDefinition = RodLeaderDefinition();
+        WorldPlayer player1 = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            Resources = new WorldResourceSet(150, 0, 0, 0, 0, 0)
+        };
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+        WorldCity city = TestHelpers.SimpleCity(
+            new WorldFortificationId("city"),
+            cityDefinition,
+            player1.Id,
+            new WorldPosition(3, 3),
+            UnitGrid<WorldUnit>.Empty);
+
+        WorldStack stack = TestHelpers.SimpleStack(
+            new WorldStackId("rod-leader"),
+            player1.Id,
+            new WorldPosition(5, 2),
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(new WorldUnitId("rodLeader"), rodLeaderDefinition), GridPosition.FrontBottom, false)
+                .Build(),
+            movementPoints: 20);
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(rodLeaderDefinition)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(player1.LordId, player1.Race, LordCategory.Warrior))
+            .WithPlayer(player1)
+            .WithCity(city)
+            .WithStack(stack)
+            .Build();
+
+        engine.CheckCommandError(
+            new WorldCreateRodCommand(stack.Id, new WorldPosition(4, 1)),
+            WorldCommandError.RodInvalidLocation);
+
+        engine.CheckCommand(
+            new WorldCreateRodCommand(stack.Id, new WorldPosition(6, 1)),
+            [
+                new WorldRodCreatedEvent(new WorldRodId("Rod0001"), player1.Id, new WorldPosition(6, 1)),
+                new WorldStackMovementConsumedEvent(stack.Id, 0)
+            ]);
+    }
+
+    [Test]
     public void TargetTooFarTest()
     {
         WorldMap map = TestHelpers.SimpleMap(6, 3);

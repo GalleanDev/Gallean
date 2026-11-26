@@ -84,6 +84,14 @@ public sealed record WorldCreateRodCommand(
             return WorldCommandResult.Fail(WorldCommandError.TargetOccupied);
         }
 
+        foreach (WorldPosition position in ScenarioLocationCalculator.EnumerateTiles(TargetPosition, 1, state.Map))
+        {
+            if (plan.GetFortificationAt(position) is not null)
+            {
+                return WorldCommandResult.Fail(WorldCommandError.RodInvalidLocation);
+            }
+        }
+
         WorldPlayerId? landOwnerId = plan.GetLandOwner(TargetPosition);
 
         if (landOwnerId is not null && landOwnerId != currentPlayer)
