@@ -1,10 +1,8 @@
-using System.Buffers.Binary;
-
 namespace Gallean.Engine.Scenarios;
 
 internal sealed class MqdbArchive
 {
-    private readonly record struct Record(int Size, int Offset);
+    private readonly record struct Record(int Size, long Offset);
 
     private const string ArchiveSignature = "MQDB";
     private const string RecordSignature = "MQRC";
@@ -14,37 +12,43 @@ internal sealed class MqdbArchive
     private const int FileTableRecordId = 2;
     private const int FileNameLength = 256;
 
-    private readonly byte[] data;
+    private readonly ScenarioRecordReader reader;
     private readonly Dictionary<string, Record> filesByName;
 
-    private MqdbArchive(byte[] data, Dictionary<string, Record> filesByName)
+    private MqdbArchive(ScenarioRecordReader reader, Dictionary<string, Record> filesByName)
     {
-        this.data = data;
+        this.reader = reader;
         this.filesByName = filesByName;
     }
 
     public IReadOnlyCollection<string> FileNames => filesByName.Keys;
 
-    public static MqdbArchive Load(byte[] data, ScenarioTextEncoding encoding)
+    public static MqdbArchive Load(Stream stream, ScenarioTextEncoding encoding)
     {
-        if (encoding.GetString(data.AsSpan(0, ArchiveSignature.Length)) != ArchiveSignature)
+        ScenarioRecordReader reader = new(stream, encoding);
+
+        reader.Seek(0);
+
+        if (reader.ReadFixedString(ArchiveSignature.Length) != ArchiveSignature)
         {
             throw new InvalidDataException($"Archive does not start with '{ArchiveSignature}'.");
         }
 
-        if (BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(ArchiveVersionOffset)) != ArchiveVersion)
+        reader.Seek(ArchiveVersionOffset);
+
+        if (reader.ReadInt32() != ArchiveVersion)
         {
             throw new InvalidDataException($"Archive is not at version {ArchiveVersion}.");
         }
 
-        Dictionary<int, Record> recordsById = ReadRecords(data, encoding);
+        Dictionary<int, Record> recordsById = ReadRecords(reader);
 
         if (!recordsById.TryGetValue(FileTableRecordId, out Record fileTable))
         {
             throw new InvalidDataException($"Archive has no file table record '{FileTableRecordId}'.");
         }
 
-        return new MqdbArchive(data, ReadFileTable(data, fileTable, recordsById, encoding));
+        return new MqdbArchive(reader, ReadFileTable(reader, fileTable, recordsById));
     }
 
     public byte[] Read(string name)
@@ -54,52 +58,55 @@ internal sealed class MqdbArchive
             throw new InvalidDataException($"Archive has no file named '{name}'.");
         }
 
-        return [.. data.AsSpan(record.Offset, record.Size)];
+        reader.Seek(record.Offset);
+
+        return reader.ReadBytes(record.Size);
     }
 
-    private static Dictionary<int, Record> ReadRecords(byte[] data, ScenarioTextEncoding encoding)
+    private static Dictionary<int, Record> ReadRecords(ScenarioRecordReader reader)
     {
         Dictionary<int, Record> result = [];
-        int position = RecordTableOffset;
+        long position = RecordTableOffset;
 
-        while (position < data.Length - 1)
+        while (position < reader.Length - 1)
         {
-            if (encoding.GetString(data.AsSpan(position, RecordSignature.Length)) != RecordSignature)
+            reader.Seek(position);
+
+            if (reader.ReadFixedString(RecordSignature.Length) != RecordSignature)
             {
                 throw new InvalidDataException($"Expected '{RecordSignature}' at offset {position}.");
             }
 
-            position += RecordSignature.Length + sizeof(int);
+            reader.Skip(sizeof(int));
 
-            int id = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position));
-            int size = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position + 4));
-            int storedSize = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position + 8));
-            position += 5 * sizeof(int);
+            int id = reader.ReadInt32();
+            int size = reader.ReadInt32();
+            int storedSize = reader.ReadInt32();
 
-            result[id] = new Record(size, position);
-            position += storedSize;
+            reader.Skip(2 * sizeof(int));
+
+            result[id] = new Record(size, reader.Position);
+            position = reader.Position + storedSize;
         }
 
         return result;
     }
 
     private static Dictionary<string, Record> ReadFileTable(
-        byte[] data,
+        ScenarioRecordReader reader,
         Record fileTable,
-        Dictionary<int, Record> recordsById,
-        ScenarioTextEncoding encoding)
+        Dictionary<int, Record> recordsById)
     {
         Dictionary<string, Record> result = [with(StringComparer.OrdinalIgnoreCase)];
 
-        int position = fileTable.Offset;
-        int count = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position));
-        position += sizeof(int);
+        reader.Seek(fileTable.Offset);
+
+        int count = reader.ReadInt32();
 
         for (int i = 0; i < count; i++)
         {
-            string name = encoding.MakeNullTerminatedString(data.AsSpan(position, FileNameLength));
-            int id = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(position + FileNameLength));
-            position += FileNameLength + sizeof(int);
+            string name = reader.ReadFixedString(FileNameLength);
+            int id = reader.ReadInt32();
 
             if (recordsById.TryGetValue(id, out Record record))
             {

@@ -1928,9 +1928,9 @@ public sealed class ScenarioFileLoaderTests
     [Test]
     public void DetectEncodingTest()
     {
-        byte[] data = File.ReadAllBytes(TestScenarios.GreywaterCrossingPath);
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
 
-        ScenarioTextEncoding encoding = ScenarioFileLoader.DetectEncoding(data);
+        ScenarioTextEncoding encoding = ScenarioFileLoader.DetectEncoding(stream);
 
         Assert.That(encoding.GetString([0xe6]), Is.EqualTo("æ"));
     }

@@ -41,7 +41,9 @@ internal sealed class GameLoader(IRandomProvider random)
 
     public GameScenario LoadCustomScenario(CustomScenarioFile customScenario, Language language)
     {
-        ScenarioLibraryFile file = library.OpenScenarioFile(customScenario.Data);
+        using MemoryStream stream = new(customScenario.Data, writable: false);
+
+        ScenarioLibraryFile file = library.OpenScenarioFile(stream);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, language);
         ScenarioMetadata scenario = campaign.Scenarios.Single();
 
@@ -50,7 +52,9 @@ internal sealed class GameLoader(IRandomProvider random)
 
     public GameCampaign LoadCustomCampaign(CustomScenarioFile customScenario, Language language)
     {
-        ScenarioLibraryFile file = library.OpenCampaignFile(customScenario.Data);
+        using MemoryStream stream = new(customScenario.Data, writable: false);
+
+        ScenarioLibraryFile file = library.OpenCampaignFile(stream);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, language);
 
         List<GameScenario> scenarios = [];
@@ -147,10 +151,12 @@ internal sealed class GameLoader(IRandomProvider random)
     {
         if (customScenario is not null)
         {
+            using MemoryStream stream = new(customScenario.Data, writable: false);
+
             return customScenario.Type switch
             {
-                CustomScenarioType.Scenario => library.OpenScenarioFile(customScenario.Data),
-                CustomScenarioType.Campaign => library.OpenCampaignFile(customScenario.Data)
+                CustomScenarioType.Scenario => library.OpenScenarioFile(stream),
+                CustomScenarioType.Campaign => library.OpenCampaignFile(stream)
             };
         }
         else

@@ -11,8 +11,10 @@ public sealed class CustomScenarioDatabaseLoaderTests
             [new Db.Campaign(new Db.Id("C000CC0001"), Db.RaceType.Neutral, "X000TAE000", Skirmish: true, CanImport: true)],
             [new Db.CampaignScenario(new Db.Id("C000CC0001"), 7, new Db.ScenarioId("S200SC0000"), "DEFAULT", "DEFWIN", "DEFLOSE", "GENBRIEF")]);
 
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
         (ScenarioDatabase scenarioDatabase, CampaignDatabase customCampaignDatabase) = CustomScenarioDatabaseLoader.LoadScenario(
-            File.ReadAllBytes(TestScenarios.GreywaterCrossingPath),
+            stream,
             TestScenarios.Encoding,
             campaignDatabase);
 
@@ -79,12 +81,13 @@ public sealed class CustomScenarioDatabaseLoaderTests
         CampaignDatabase campaignDatabase = CampaignDatabaseLoader.Create(
             [new Db.Campaign(new Db.Id("C000CC0001"), Db.RaceType.Neutral, "X000TAE000", Skirmish: true, CanImport: true)],
             [new Db.CampaignScenario(new Db.Id("C000CC0001"), 7, new Db.ScenarioId("S200SC0000"), "DEFAULT", "DEFWIN", "DEFLOSE", "GENBRIEF")]);
-        CampaignFileContent campaign = CampaignFileLoader.Read(
-            TestCampaignArchiveBuilder.Build("The Greywater Chronicle", "Gallean Contributors", new Db.Id("G000RR0003"), [
-                ("CROSSING.SG", TestScenarios.GreywaterCrossingPath),
-                ("SIEGE.SG", TestScenarios.GreywaterSiegePath)
-            ]),
-            TestScenarios.Encoding);
+
+        using MemoryStream stream = new(TestCampaignArchiveBuilder.Build("The Greywater Chronicle", "Gallean Contributors", new Db.Id("G000RR0003"), [
+            ("CROSSING.SG", TestScenarios.GreywaterCrossingPath),
+            ("SIEGE.SG", TestScenarios.GreywaterSiegePath)
+        ]));
+
+        CampaignFileContent campaign = CampaignFileLoader.Read(stream, TestScenarios.Encoding);
 
         (ScenarioDatabase scenarioDatabase, CampaignDatabase customCampaignDatabase) = CustomScenarioDatabaseLoader.LoadCampaign(
             campaign,

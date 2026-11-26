@@ -148,9 +148,9 @@ public sealed class ScenarioLibraryTests
     [Test]
     public void OpenScenarioFileTest()
     {
-        byte[] data = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"));
+        using FileStream stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"));
 
-        ScenarioLibraryFile file = library.OpenScenarioFile(data);
+        ScenarioLibraryFile file = library.OpenScenarioFile(stream);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, Language.English);
         (GameSession session, _) = library.LoadScenario(new ScenarioId("S900SC0000"), file, worldState: null, Language.English);
 
@@ -170,9 +170,9 @@ public sealed class ScenarioLibraryTests
     [Test]
     public void OpenCampaignFileTest()
     {
-        byte[] data = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg"));
+        using FileStream stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg"));
 
-        ScenarioLibraryFile file = library.OpenCampaignFile(data);
+        ScenarioLibraryFile file = library.OpenCampaignFile(stream);
         (ScenarioCampaign campaign, IGameTextProvider texts) = library.LoadCampaign(file, Language.English);
         (GameSession session, _) = library.LoadScenario(new ScenarioId("S900SC0000"), file, worldState: null, Language.English);
 
@@ -193,10 +193,10 @@ public sealed class ScenarioLibraryTests
     [Test]
     public void OpenInvalidCampaignFileTest()
     {
-        byte[] data = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"));
+        using FileStream stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"));
 
         Assert.That(
-            () => library.OpenCampaignFile(data),
+            () => library.OpenCampaignFile(stream),
             Throws.TypeOf<InvalidDataException>().With.Message.EqualTo("Archive does not start with 'MQDB'."));
     }
 }

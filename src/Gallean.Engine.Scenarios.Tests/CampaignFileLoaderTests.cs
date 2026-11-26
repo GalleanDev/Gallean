@@ -13,7 +13,9 @@ public sealed class CampaignFileLoaderTests
     [Test]
     public void LoadHeaderTest()
     {
-        CampaignFile campaign = CampaignFileLoader.Load(BuildCampaign(), TestScenarios.Encoding);
+        using MemoryStream stream = new(BuildCampaign());
+
+        CampaignFile campaign = CampaignFileLoader.Load(stream, TestScenarios.Encoding);
 
         Assert.That(campaign.Header, Is.EqualTo(new CampaignFileHeader(
             "The Greywater Chronicle",
@@ -34,7 +36,9 @@ public sealed class CampaignFileLoaderTests
             ("ORDER.CPN", TestCampaignArchiveBuilder.BuildOrder([]))
         ]);
 
-        CampaignFile campaign = CampaignFileLoader.Load(data, TestScenarios.Encoding);
+        using MemoryStream stream = new(data);
+
+        CampaignFile campaign = CampaignFileLoader.Load(stream, TestScenarios.Encoding);
 
         Assert.That(campaign.Header, Is.EqualTo(new CampaignFileHeader(
             "The Greywater Chronicle",
@@ -46,7 +50,9 @@ public sealed class CampaignFileLoaderTests
     [Test]
     public void LoadScenarioOrderTest()
     {
-        CampaignFile campaign = CampaignFileLoader.Load(BuildCampaign(), TestScenarios.Encoding);
+        using MemoryStream stream = new(BuildCampaign());
+
+        CampaignFile campaign = CampaignFileLoader.Load(stream, TestScenarios.Encoding);
 
         Assert.That(campaign.Scenarios.Select(scenario => scenario.FileName), Is.EqualTo([
             "CROSSING.SG",
@@ -57,7 +63,9 @@ public sealed class CampaignFileLoaderTests
     [Test]
     public void LoadScenariosTest()
     {
-        CampaignFile campaign = CampaignFileLoader.Load(BuildCampaign(), TestScenarios.Encoding);
+        using MemoryStream stream = new(BuildCampaign());
+
+        CampaignFile campaign = CampaignFileLoader.Load(stream, TestScenarios.Encoding);
 
         Assert.That(campaign.Scenarios.Select(scenario => scenario.Scenario.ScenarioId), Is.EqualTo([
             new Db.ScenarioId("S417SC0000"),
@@ -78,7 +86,9 @@ public sealed class CampaignFileLoaderTests
             ("CROSSING.SG", File.ReadAllBytes(TestScenarios.GreywaterCrossingPath))
         ]);
 
-        CampaignFile campaign = CampaignFileLoader.Load(data, TestScenarios.Encoding);
+        using MemoryStream stream = new(data);
+
+        CampaignFile campaign = CampaignFileLoader.Load(stream, TestScenarios.Encoding);
 
         Assert.That(campaign.Scenarios, Is.Empty);
     }
@@ -95,8 +105,10 @@ public sealed class CampaignFileLoaderTests
             ("ORDER.CPN", TestCampaignArchiveBuilder.BuildOrder(["MISSING.SG"]))
         ]);
 
+        using MemoryStream stream = new(data);
+
         Assert.That(
-            () => CampaignFileLoader.Load(data, TestScenarios.Encoding),
+            () => CampaignFileLoader.Load(stream, TestScenarios.Encoding),
             Throws.TypeOf<InvalidDataException>());
     }
 
@@ -107,8 +119,10 @@ public sealed class CampaignFileLoaderTests
             ("CROSSING.SG", TestScenarios.GreywaterCrossingPath)
         ]);
 
-        ScenarioTextEncoding encoding = CampaignFileLoader.DetectEncoding(data);
-        CampaignFileContent content = CampaignFileLoader.Read(data, encoding);
+        using MemoryStream stream = new(data);
+
+        ScenarioTextEncoding encoding = CampaignFileLoader.DetectEncoding(stream);
+        CampaignFileContent content = CampaignFileLoader.Read(stream, encoding);
 
         Assert.That(content.Header, Is.EqualTo(new CampaignFileHeader(
             "Хроники",
@@ -125,16 +139,20 @@ public sealed class CampaignFileLoaderTests
             ("ORDER.CPN", TestCampaignArchiveBuilder.BuildOrder([]))
         ]);
 
+        using MemoryStream stream = new(data);
+
         Assert.That(
-            () => CampaignFileLoader.Load(data, TestScenarios.Encoding),
+            () => CampaignFileLoader.Load(stream, TestScenarios.Encoding),
             Throws.TypeOf<InvalidDataException>());
     }
 
     [Test]
     public void LoadUnknownArchiveTest()
     {
+        using MemoryStream stream = new(new byte[64]);
+
         Assert.That(
-            () => CampaignFileLoader.Load(new byte[64], TestScenarios.Encoding),
+            () => CampaignFileLoader.Load(stream, TestScenarios.Encoding),
             Throws.TypeOf<InvalidDataException>());
     }
 }

@@ -10,12 +10,10 @@ public static class CustomScenarioDatabaseLoader
     private static readonly Db.Id SkirmishCampaignId = new("C000CC0001");
 
     public static (ScenarioDatabase ScenarioDatabase, CampaignDatabase CampaignDatabase) LoadScenario(
-        byte[] data,
+        Stream stream,
         ScenarioTextEncoding encoding,
         CampaignDatabase campaignDatabase)
     {
-        using MemoryStream stream = new(data, writable: false);
-
         ScenarioFile file = ScenarioFileLoader.Load(stream, encoding, ScenarioSlots.GetScenarioId(ScenarioSlots.Custom.Start.Value));
         Db.ScenarioInfo scenarioInfo = file.Tables.ScenarioInfos.Single();
         Db.ScenarioInfo customScenarioInfo = scenarioInfo with { CampaignId = SkirmishCampaignId };

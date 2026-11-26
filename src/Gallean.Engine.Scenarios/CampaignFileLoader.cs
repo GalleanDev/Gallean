@@ -13,9 +13,9 @@ public static class CampaignFileLoader
     private const string OrderFileName = "ORDER.CPN";
     private const string ScenarioFileExtension = ".SG";
 
-    public static ScenarioTextEncoding DetectEncoding(byte[] data)
+    public static ScenarioTextEncoding DetectEncoding(Stream stream)
     {
-        CampaignFile campaign = Load(data, ScenarioTextEncodingDetector.DetectionEncoding);
+        CampaignFile campaign = Load(stream, ScenarioTextEncodingDetector.DetectionEncoding);
         CampaignFileHeader header = campaign.Header;
         List<string> texts = [header.Name, header.Author];
 
@@ -31,19 +31,21 @@ public static class CampaignFileLoader
 
     public static CampaignFile Load(string path, ScenarioTextEncoding encoding)
     {
-        return Load(File.ReadAllBytes(path), encoding);
+        using FileStream stream = File.OpenRead(path);
+
+        return Load(stream, encoding);
     }
 
-    public static CampaignFile Load(byte[] data, ScenarioTextEncoding encoding)
+    public static CampaignFile Load(Stream stream, ScenarioTextEncoding encoding)
     {
-        CampaignFileContent content = Read(MqdbArchive.Load(data, encoding), encoding);
+        CampaignFileContent content = Read(stream, encoding);
         List<CampaignFileScenario> scenarios = [];
 
         foreach (CampaignFileEntry entry in content.Scenarios)
         {
-            using MemoryStream stream = new(entry.Data, writable: false);
+            using MemoryStream entryStream = new(entry.Data, writable: false);
 
-            scenarios.Add(new CampaignFileScenario(entry.FileName, ScenarioFileLoader.Load(stream, encoding)));
+            scenarios.Add(new CampaignFileScenario(entry.FileName, ScenarioFileLoader.Load(entryStream, encoding)));
         }
 
         return new CampaignFile(content.Header, scenarios);
@@ -51,16 +53,14 @@ public static class CampaignFileLoader
 
     public static CampaignFileContent Read(string path, ScenarioTextEncoding encoding)
     {
-        return Read(File.ReadAllBytes(path), encoding);
+        using FileStream stream = File.OpenRead(path);
+
+        return Read(stream, encoding);
     }
 
-    public static CampaignFileContent Read(byte[] data, ScenarioTextEncoding encoding)
+    public static CampaignFileContent Read(Stream stream, ScenarioTextEncoding encoding)
     {
-        return Read(MqdbArchive.Load(data, encoding), encoding);
-    }
-
-    private static CampaignFileContent Read(MqdbArchive archive, ScenarioTextEncoding encoding)
-    {
+        MqdbArchive archive = MqdbArchive.Load(stream, encoding);
         CampaignFileHeader header = ReadHeader(archive, encoding);
         List<CampaignFileEntry> scenarios = [];
 

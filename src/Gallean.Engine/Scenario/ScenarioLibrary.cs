@@ -34,11 +34,11 @@ public sealed class ScenarioLibrary(IRandomProvider random, ScenarioLibraryConfi
         return (campaign, texts);
     }
 
-    public ScenarioLibraryFile OpenScenarioFile(byte[] data)
+    public ScenarioLibraryFile OpenScenarioFile(Stream stream)
     {
-        ScenarioTextEncoding encoding = ScenarioFileLoader.DetectEncoding(data);
+        ScenarioTextEncoding encoding = ScenarioFileLoader.DetectEncoding(stream);
         (ScenarioDatabase scenarioDatabase, CampaignDatabase fileCampaignDatabase) = CustomScenarioDatabaseLoader.LoadScenario(
-            data,
+            stream,
             encoding,
             campaignDatabase.Value);
         Db.ScenarioInfo info = scenarioDatabase.ScenarioInfos.Single();
@@ -46,10 +46,10 @@ public sealed class ScenarioLibrary(IRandomProvider random, ScenarioLibraryConfi
         return new ScenarioLibraryFile(info.Name, scenarioDatabase, fileCampaignDatabase);
     }
 
-    public ScenarioLibraryFile OpenCampaignFile(byte[] data)
+    public ScenarioLibraryFile OpenCampaignFile(Stream stream)
     {
-        ScenarioTextEncoding encoding = CampaignFileLoader.DetectEncoding(data);
-        CampaignFileContent content = CampaignFileLoader.Read(data, encoding);
+        ScenarioTextEncoding encoding = CampaignFileLoader.DetectEncoding(stream);
+        CampaignFileContent content = CampaignFileLoader.Read(stream, encoding);
         (ScenarioDatabase scenarioDatabase, CampaignDatabase fileCampaignDatabase) = CustomScenarioDatabaseLoader.LoadCampaign(
             content,
             encoding,
