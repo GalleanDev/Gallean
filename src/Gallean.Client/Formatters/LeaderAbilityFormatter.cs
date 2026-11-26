@@ -46,7 +46,7 @@ internal static class LeaderAbilityFormatter
             LeaderAbility.Zealot => string.Empty,
             LeaderAbility.Incorruptible => FormatGlobalText(texts, "X000TGA118"),
             LeaderAbility.WeaponMaster => FormatGlobalText(texts, "X000TGA112"),
-            LeaderAbility.WandScrollUse => Tr("Allows the leader to use Wands and Scrolls"),
+            LeaderAbility.WandScrollUse => Tr("Allows the leader to use Staffs and Scrolls"),
             LeaderAbility.WeaponArmorUse => FormatGlobalText(texts, "X000TGA101"),
             LeaderAbility.BannerUse => FormatGlobalText(texts, "X000TGA103"),
             LeaderAbility.JewelryUse => FormatGlobalText(texts, "X000TGA102"),
