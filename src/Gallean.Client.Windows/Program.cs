@@ -18,8 +18,9 @@ internal static class Program
                 ],
                 CompositionMode =
                 [
-                    Win32CompositionMode.LowLatencyDxgiSwapChain
+                    Win32CompositionMode.DirectComposition
                 ],
+                UseCompositionSwapChain = true,
                 OverlayPopups = true
             })
             .AfterSetup(_ =>
