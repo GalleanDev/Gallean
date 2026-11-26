@@ -99,7 +99,7 @@ internal static class LeaderEquipmentCalculator
             ItemCategory.Orb => IsBattleSlot(slot),
             ItemCategory.Talisman => IsBattleSlot(slot),
             ItemCategory.Scroll => false,
-            ItemCategory.Wand => IsBattleSlot(slot),
+            ItemCategory.Wand => false,
             ItemCategory.PotionTemporaryBoost => IsBattleSlot(slot),
             ItemCategory.PotionHeal => IsBattleSlot(slot),
             ItemCategory.PotionRevive => IsBattleSlot(slot),
