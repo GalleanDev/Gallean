@@ -24,7 +24,6 @@ internal sealed record WorldActionWheelViewModel(WorldPosition Position, IReadOn
         WorldState world,
         WorldStack stack,
         IGameDefinitionProvider definitions,
-        IGameTextProvider texts,
         IUnitStatsProvider stats)
     {
         WorldPlan plan = WorldPlan.For(world);
@@ -38,7 +37,6 @@ internal sealed record WorldActionWheelViewModel(WorldPosition Position, IReadOn
             items.Add(new WorldActionWheelItemViewModel(
                 Tr("Exchange"),
                 IconMoniker.Exchange,
-                ItemIconKey: null,
                 IsHighlighted: false,
                 new WorldStackAction.Exchange(stack.Id)));
         }
@@ -48,7 +46,6 @@ internal sealed record WorldActionWheelViewModel(WorldPosition Position, IReadOn
             items.Add(new WorldActionWheelItemViewModel(
                 Tr("Learn a new ability ({0})", stack.PendingLeaderUpgrades),
                 IconMoniker.LearnAbility,
-                ItemIconKey: null,
                 IsHighlighted: true,
                 new WorldStackAction.LearnAbility(stack.Id)));
         }
@@ -60,32 +57,13 @@ internal sealed record WorldActionWheelViewModel(WorldPosition Position, IReadOn
             items.Add(new WorldActionWheelItemViewModel(
                 Tr("Plant rod"),
                 IconMoniker.PlantRod,
-                ItemIconKey: null,
                 IsHighlighted: false,
                 new WorldStackAction.CreateRod(stack.Id)));
             items.Add(new WorldActionWheelItemViewModel(
                 Tr("Destroy rod"),
                 IconMoniker.DestroyRod,
-                ItemIconKey: null,
                 IsHighlighted: false,
                 new WorldStackAction.DestroyRod(stack.Id)));
-        }
-
-        foreach ((LeaderEquipmentSlot _, WorldItem item) in stack.Equipment.Items)
-        {
-            ItemDefinition definition = definitions.GetItem(item.DefinitionId);
-
-            if (definition.Effect is SpellItemEffect)
-            {
-                string name = ItemFormatter.FormatName(definitions, texts, item.DefinitionId, item.Charges);
-
-                items.Add(new WorldActionWheelItemViewModel(
-                    Tr("Use {0}", name),
-                    Icon: null,
-                    ItemIconResolver.Resolve(definitions, item.DefinitionId),
-                    IsHighlighted: false,
-                    new WorldStackAction.UseItem(stack.Id, item.Id)));
-            }
         }
 
         if (items.Count > 0)

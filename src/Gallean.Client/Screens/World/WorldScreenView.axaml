@@ -92,16 +92,7 @@
                       Classes.highlighted="{Binding IsHighlighted}"
                       Command="{Binding #Screen.((local:WorldScreenViewModel)DataContext).ActivateStackActionCommand}"
                       CommandParameter="{Binding Action}">
-                <Panel>
-                  <ContentControl Content="{Binding Icon}">
-                    <ContentControl.ContentTemplate>
-                      <DataTemplate x:DataType="local:IconMoniker">
-                        <local:IconVisual Moniker="{Binding}" />
-                      </DataTemplate>
-                    </ContentControl.ContentTemplate>
-                  </ContentControl>
-                  <local:SpriteVisual SpriteKey="{Binding ItemIconKey}" />
-                </Panel>
+                <local:IconVisual Moniker="{Binding Icon}" />
               </Button>
             </DataTemplate>
           </local:HoverItemsControl.ItemTemplate>

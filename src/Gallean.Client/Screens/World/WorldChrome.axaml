@@ -477,14 +477,6 @@
     <Setter Property="Width" Value="22" />
     <Setter Property="Height" Value="22" />
   </Style>
-  <Style Selector="Button.socket.world.wheel local|SpriteVisual">
-    <Setter Property="Width" Value="30" />
-    <Setter Property="Height" Value="30" />
-    <Setter Property="Stretch" Value="Uniform" />
-  </Style>
-  <Style Selector="Button.socket.world.wheel:disabled local|SpriteVisual">
-    <Setter Property="Opacity" Value="0.45" />
-  </Style>
 
   <Style Selector="Panel.world-minimap">
     <Setter Property="Width" Value="224" />

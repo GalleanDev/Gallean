@@ -1471,12 +1471,7 @@ internal sealed partial class WorldScreenViewModel :
 
         if (selected is not null)
         {
-            ActionWheel = WorldActionWheelViewModel.TryCreate(
-                WorldState,
-                selected,
-                GameModel.Definitions,
-                GameModel.Texts,
-                GameModel.Stats);
+            ActionWheel = WorldActionWheelViewModel.TryCreate(WorldState, selected, GameModel.Definitions, GameModel.Stats);
         }
         else
         {
@@ -1607,41 +1602,6 @@ internal sealed partial class WorldScreenViewModel :
         else
         {
             SelectAction(new WorldCursorAction.DestroyRod(action.StackId, result.Data.RemovePositions));
-        }
-    }
-
-    async Task IWorldStackActionVisitor<Task>.Visit(WorldStackAction.UseItem action)
-    {
-        if (!WorldState.Stacks.TryGetValue(action.StackId, out WorldStack? stack))
-        {
-            return;
-        }
-
-        LeaderEquipmentSlot? slot = stack.GetEquipmentSlot(action.ItemId);
-
-        if (slot is null)
-        {
-            return;
-        }
-
-        WorldItem item = stack.Equipment.Items[slot.Value];
-        ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
-
-        if (definition.Effect is SpellItemEffect effect)
-        {
-            WorldSpellDefinition spell = GameModel.Definitions.GetSpell(effect.SpellId);
-
-            if (spell.AreaRadius is null)
-            {
-                if (await TryDispatchWorldActionAsync(new WorldUseItemCommand(new WorldUnitGroup.Stack(action.StackId), action.ItemId, Target: null)))
-                {
-                    Game.PlaySound(ItemSoundResolver.ResolveWorld(definition.Category));
-                }
-            }
-            else
-            {
-                SelectAction(new WorldCursorAction.UseItem(action.StackId, action.ItemId));
-            }
         }
     }
 

@@ -6692,62 +6692,13 @@ public sealed class WorldScreenViewModelTests
                 TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
                 movementPoints: 20, leadership: 3) with
             {
-                LeaderAbilities = LeaderAbility.Rod | LeaderAbility.WandScrollUse
+                LeaderAbilities = LeaderAbility.Rod
             };
         UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 35, initiative: 50, damage: 10);
         IGameDefinitionProvider stackDefinitions = new TestGameDefinitionProviderBuilder()
             .AddUnit(leaderDefinition)
             .AddUnit(soldierDefinition)
             .Build();
-
-        WorldSpellDefinition healSpell = new(
-            new WorldSpellDefinitionId("heal"),
-            new GlobalTextId("heal-name"),
-            new GlobalTextId("heal-description"),
-            new GlobalTextId("heal-effect"),
-            WorldRace.Human,
-            Level: 1,
-            CastingCost: WorldResourceSet.Empty,
-            PurchaseCost: WorldResourceSet.Empty,
-            AreaRadius: null,
-            new WorldHealSpellEffect(5),
-            AiType: WorldAiSpellType.All);
-        WorldSpellDefinition areaSpell = new(
-            new WorldSpellDefinitionId("area-heal"),
-            new GlobalTextId("area-heal-name"),
-            new GlobalTextId("area-heal-description"),
-            new GlobalTextId("area-heal-effect"),
-            WorldRace.Human,
-            Level: 1,
-            CastingCost: WorldResourceSet.Empty,
-            PurchaseCost: WorldResourceSet.Empty,
-            AreaRadius: 1,
-            new WorldHealSpellEffect(5),
-            AiType: WorldAiSpellType.All);
-
-        ItemDefinition scroll = new(
-            new ItemDefinitionId("scroll"),
-            new GlobalTextId("scroll-name"),
-            new GlobalTextId("scroll-description"),
-            ItemCategory.Scroll,
-            WorldResourceSet.Empty,
-            EquipmentModifierId: null,
-            EquipmentAttackId: null,
-            Effect: new SpellItemEffect(healSpell.Id, WorldResourceSet.Empty),
-            AnimationUnitId: null);
-        ItemDefinition wand = new(
-            new ItemDefinitionId("wand"),
-            new GlobalTextId("wand-name"),
-            new GlobalTextId("wand-description"),
-            ItemCategory.Wand,
-            WorldResourceSet.Empty,
-            EquipmentModifierId: null,
-            EquipmentAttackId: null,
-            Effect: new SpellItemEffect(areaSpell.Id, WorldResourceSet.Empty),
-            AnimationUnitId: null);
-
-        WorldItem scrollItem = new(new WorldItemId("Scroll"), scroll.Id, Charges: null);
-        WorldItem wandItem = new(new WorldItemId("Wand"), wand.Id, Charges: 3);
 
         WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
             new WorldCityDefinitionId(WorldRace.Human, 1),
@@ -6775,7 +6726,6 @@ public sealed class WorldScreenViewModelTests
                     ]),
                 movementPoints: 20) with
             {
-                Equipment = LeaderEquipment.Empty.With(LeaderEquipmentSlot.Battle1, scrollItem).With(LeaderEquipmentSlot.Battle2, wandItem),
                 PendingLeaderUpgrades = 1
             };
 
@@ -6783,10 +6733,6 @@ public sealed class WorldScreenViewModelTests
             .WithMap(map)
             .WithDefinition(leaderDefinition)
             .WithDefinition(soldierDefinition)
-            .WithDefinition(healSpell)
-            .WithDefinition(areaSpell)
-            .WithDefinition(scroll)
-            .WithDefinition(wand)
             .WithDefinition(cityDefinition)
             .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
             .WithPlayer(player)
@@ -6807,37 +6753,9 @@ public sealed class WorldScreenViewModelTests
 
         Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
             new WorldPosition(5, 5),
-            [
-                new WorldActionWheelItemViewModel("Learn a new ability (1)", IconMoniker.LearnAbility, ItemIconKey: null, IsHighlighted: true, new WorldStackAction.LearnAbility(stack.Id)),
-                new WorldActionWheelItemViewModel("Use scroll-name", Icon: null, new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Scroll(WorldRace.Human)), IsHighlighted: false, new WorldStackAction.UseItem(stack.Id, scrollItem.Id)),
-                new WorldActionWheelItemViewModel("Use wand-name (3)", Icon: null, new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(wand.Id)), IsHighlighted: false, new WorldStackAction.UseItem(stack.Id, wandItem.Id))
-            ])));
+            [new WorldActionWheelItemViewModel("Learn a new ability (1)", IconMoniker.LearnAbility, IsHighlighted: true, new WorldStackAction.LearnAbility(stack.Id))])));
         Assert.That(world.IsActionWheelVisible, Is.True);
         Assert.That(world.InspectStackCommand.CanExecute(null), Is.True);
-
-        await world.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.UseItem(stack.Id, scrollItem.Id));
-
-        Assert.That(gameModel.Snapshot.WorldState.Stacks[stack.Id], Is.EqualTo(stack with
-        {
-            Equipment = LeaderEquipment.Empty.With(LeaderEquipmentSlot.Battle2, wandItem),
-            Units = TestHelpers.StackUnitGrid(
-                stackDefinitions,
-                [
-                    (leader, GridPosition.FrontBottom),
-                    (soldier with { Hitpoints = 35 }, GridPosition.FrontCenter)
-                ])
-        }));
-        Assert.That(world.Game.Alert.Current, Is.Null);
-        Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
-            new WorldPosition(5, 5),
-            [
-                new WorldActionWheelItemViewModel("Learn a new ability (1)", IconMoniker.LearnAbility, ItemIconKey: null, IsHighlighted: true, new WorldStackAction.LearnAbility(stack.Id)),
-                new WorldActionWheelItemViewModel("Use wand-name (3)", Icon: null, new AssetSpriteKey.ItemIcon(new AssetSpriteKey.ItemIconSource.Item(wand.Id)), IsHighlighted: false, new WorldStackAction.UseItem(stack.Id, wandItem.Id))
-            ])));
-
-        await world.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.UseItem(stack.Id, wandItem.Id));
-
-        Assert.That(world.ActionPromptText, Is.EqualTo("Select a target for the item on the map."));
 
         await world.ActivateStackActionCommand.ExecuteAsync(new WorldStackAction.CreateRod(stack.Id));
 
@@ -6940,8 +6858,8 @@ public sealed class WorldScreenViewModelTests
         Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
             new WorldPosition(1, 1),
             [
-                new WorldActionWheelItemViewModel("Plant rod", IconMoniker.PlantRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.CreateRod(outside.Id)),
-                new WorldActionWheelItemViewModel("Destroy rod", IconMoniker.DestroyRod, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.DestroyRod(outside.Id))
+                new WorldActionWheelItemViewModel("Plant rod", IconMoniker.PlantRod, IsHighlighted: false, new WorldStackAction.CreateRod(outside.Id)),
+                new WorldActionWheelItemViewModel("Destroy rod", IconMoniker.DestroyRod, IsHighlighted: false, new WorldStackAction.DestroyRod(outside.Id))
             ])));
 
         await world.HandleMapClickAsync(new WorldPosition(5, 5), null, 1);
@@ -7058,7 +6976,7 @@ public sealed class WorldScreenViewModelTests
         Assert.That(world.ActionWheel, Is.EqualTo(new WorldActionWheelViewModel(
             new WorldPosition(1, 0),
             [
-                new WorldActionWheelItemViewModel("Exchange", IconMoniker.Exchange, ItemIconKey: null, IsHighlighted: false, new WorldStackAction.Exchange(ready.Id))
+                new WorldActionWheelItemViewModel("Exchange", IconMoniker.Exchange, IsHighlighted: false, new WorldStackAction.Exchange(ready.Id))
             ])));
         Assert.That(world.IsActionWheelVisible, Is.False);
         Assert.That(world.StackItems, Is.EqualTo(items).Using<WorldStackItemViewModel>(ReferenceEquals));
