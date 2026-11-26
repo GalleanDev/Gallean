@@ -90,7 +90,7 @@
                                    VerticalAlignment="Center"
                                    Classes="caption"
                                    Foreground="{StaticResource HighlightTextBrush}"
-                                   IsVisible="{Binding IsPreferred}"
+                                   IsVisible="{Binding IsRecommended}"
                                    Text="{local:Text 'Recommended'}" />
                       </Grid>
                       <TextBlock Text="{Binding Description}"

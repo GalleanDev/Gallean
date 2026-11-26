@@ -148,11 +148,12 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
     private IReadOnlyList<LeaderUpgradeItemViewModel> BuildOptions()
     {
         WorldGetLeaderUpgradeInfoCommand.Result info = ResolveLeaderUpgradeInfo();
-        IEnumerable<WorldGetLeaderUpgradeInfoCommand.Upgrade> upgrades = info.Upgrades.OrderByDescending(upgrade => upgrade.IsPreferred);
+        LeaderUpgradeDefinition? recommendedUpgrade = GetRecommendedUpgrade(info);
+        IEnumerable<WorldGetLeaderUpgradeInfoCommand.Upgrade> upgrades = info.Upgrades.OrderByDescending(upgrade => upgrade.Definition == recommendedUpgrade);
 
         List<LeaderUpgradeItemViewModel> result = [];
 
-        foreach ((LeaderUpgradeDefinition definition, bool isPreferred, WorldCommandError? error) in upgrades)
+        foreach ((LeaderUpgradeDefinition definition, bool _, WorldCommandError? error) in upgrades)
         {
             string? unavailableReason;
 
@@ -171,11 +172,29 @@ internal sealed partial class LeaderUpgradeViewModel : AbstractGameScreenViewMod
                 UnitModifierIconResolver.Resolve(GameModel.Definitions.GetUnitModifier(definition.ModifierId)),
                 GameModel.Texts.GetGlobalText(definition.NameTextId).Text,
                 GameModel.Texts.GetGlobalText(definition.DescriptionTextId).Text,
-                isPreferred,
+                definition == recommendedUpgrade,
                 unavailableReason));
         }
 
         return result;
+    }
+
+    private LeaderUpgradeDefinition? GetRecommendedUpgrade(WorldGetLeaderUpgradeInfoCommand.Result info)
+    {
+        foreach (WorldGetLeaderUpgradeInfoCommand.Upgrade upgrade in info.Upgrades)
+        {
+            if (upgrade.IsPreferred)
+            {
+                UnitModifierDefinition modifier = GameModel.Definitions.GetUnitModifier(upgrade.Definition.ModifierId);
+
+                if (modifier.Leadership.Flat > 0)
+                {
+                    return upgrade.Definition;
+                }
+            }
+        }
+
+        return null;
     }
 
     private WorldGetLeaderUpgradeInfoCommand.Result ResolveLeaderUpgradeInfo()

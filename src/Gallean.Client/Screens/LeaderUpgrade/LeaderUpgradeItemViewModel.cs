@@ -11,14 +11,14 @@ internal sealed partial class LeaderUpgradeItemViewModel : ObservableObject
         IconMoniker icon,
         string name,
         string description,
-        bool isPreferred,
+        bool isRecommended,
         string? unavailableReason)
     {
         ModifierId = modifierId;
         Icon = icon;
         Name = name;
         Description = description;
-        IsPreferred = isPreferred;
+        IsRecommended = isRecommended;
         Status = new OfferStatusViewModel(unavailableReason);
         SelectCommand = new RelayCommand(() => owner.SelectUpgrade(this), () => Status.IsAvailable);
     }
@@ -27,7 +27,7 @@ internal sealed partial class LeaderUpgradeItemViewModel : ObservableObject
     public IconMoniker Icon { get; }
     public string Name { get; }
     public string Description { get; }
-    public bool IsPreferred { get; }
+    public bool IsRecommended { get; }
     public OfferStatusViewModel Status { get; }
 
     public IRelayCommand SelectCommand { get; }
