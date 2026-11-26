@@ -1005,7 +1005,8 @@ public sealed class ScenarioLoaderTests
                     ScenarioEventPopupAudience.Triggerer,
                     new ScenarioEventPortraitId("G000UU6108"),
                     IsPortraitLeft: false,
-                    IsPortraitTriggerer: false)
+                    IsPortraitTriggerer: false),
+                new ScenarioEventEnableEventEffect(new ScenarioEventId("S095EV0019"), false)
             ],
             Enabled: true,
             OccurOnce: true,
