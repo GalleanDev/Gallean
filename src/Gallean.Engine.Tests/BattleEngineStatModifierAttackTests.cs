@@ -448,6 +448,86 @@ public sealed class BattleEngineStatModifierAttackTests
     }
 
     [Test]
+    public void BoostAlternativeAttackTargetTest()
+    {
+        UnitDefinition boosterDefinition = IncreaseDamageDefinition("booster", initiative: 60, level: 1, isInfinite: true, reach: UnitAttackReach.Any);
+        UnitDefinition beastDefinition = TestHelpers.SimpleUnitDefinition("beast", maxHitpoints: 50, initiative: 50, damage: 8);
+        UnitDefinition wolfDefinition = TestHelpers.SimpleUnitDefinition("wolf", maxHitpoints: 100, initiative: 50, damage: 0) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("wolf"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.TransformSelf,
+                IsInfinite = true,
+                SmallTransformUnitId = beastDefinition.Id,
+                AlternativeAttackId = new UnitAttackDefinitionId("bite")
+            }
+        };
+        UnitAttackDefinition biteDefinition = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("bite"), initiative: 50, damage: 20, accuracy: 100, reach: UnitAttackReach.Adjacent);
+        UnitDefinition golemDefinition = TestHelpers.SimpleUnitDefinition("golem", maxHitpoints: 100, initiative: 40, damage: 2);
+
+        BattleUnit booster = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, boosterDefinition.Id, BattleSide.Attacker, hitpoints: 50);
+        BattleUnit wolf = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, wolfDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit golem = TestHelpers.SimpleBattleUnit(new BattleUnitId(2), null, golemDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(boosterDefinition)
+            .WithDefinition(beastDefinition)
+            .WithDefinition(wolfDefinition)
+            .WithDefinition(biteDefinition)
+            .WithDefinition(golemDefinition)
+            .WithAttacker(booster, GridPosition.BackBottom)
+            .WithAttacker(wolf, GridPosition.FrontBottom)
+            .WithDefender(golem, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(booster.Id, new BattleAttackUnitTarget(wolf.Id)), [
+            new BattleUnitAttackEvent(booster.Id, new BattleAttackUnitTarget(wolf.Id), [new UnitAttackDefinitionId("booster")]),
+            new BattleUnitAttackedEvent(booster.Id, wolf.Id, new UnitAttackDefinitionId("booster")),
+            new BattleUnitAttackHitEvent(booster.Id, wolf.Id, new UnitAttackDefinitionId("booster"), 0),
+            new BattleUnitEffectAppliedEvent(booster.Id, wolf.Id, new BattleIncreaseDamageStatusEffect(25, true)),
+            new BattleUnitTurnEndingEvent(booster.Id),
+            new BattleUnitTurnEndedEvent(booster.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(wolf.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        _ = engine.DispatchCommand(new BattleAttackCommand(wolf.Id, new BattleAttackUnitTarget(wolf.Id)));
+
+        engine.CheckCommand(new BattleAttackCommand(wolf.Id, new BattleAttackUnitTarget(golem.Id)), [
+            new BattleUnitAttackEvent(wolf.Id, new BattleAttackUnitTarget(golem.Id), [new UnitAttackDefinitionId("beast")]),
+            new BattleUnitAttackedEvent(wolf.Id, golem.Id, new UnitAttackDefinitionId("beast")),
+            new BattleUnitAttackHitEvent(wolf.Id, golem.Id, new UnitAttackDefinitionId("beast"), 10),
+            new BattleUnitTurnEndingEvent(wolf.Id),
+            new BattleUnitTurnEndedEvent(wolf.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        BattleUnit transformed = wolf with
+        {
+            DefinitionId = beastDefinition.Id,
+            Hitpoints = 50,
+            StatusEffects =
+            [
+                new BattleIncreaseDamageStatusEffect(25, true),
+                new BattleTransformStatusEffect(BattleTransformType.TransformSelf, wolfDefinition.Id, 1, [], null)
+            ]
+        };
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(booster, GridPosition.BackBottom, false)
+                    .Place(transformed, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(golem with { Hitpoints = 90 }, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(golem.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(1)
+            }));
+    }
+
+    [Test]
     public void ReduceDamageSupportTargetTest()
     {
         UnitDefinition witchDefinition = ReduceDamageDefinition("witch", initiative: 60, level: 1);
@@ -894,5 +974,58 @@ public sealed class BattleEngineStatModifierAttackTests
             new BattleUnitTurnEndedEvent(witch.Id),
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(scout.Id, BattleUnitTurnType.Normal))
         ]);
+    }
+
+    [Test]
+    public void LowerDamageAlternativeAttackTargetTest()
+    {
+        UnitDefinition witchDefinition = ReduceDamageDefinition("witch", initiative: 60, level: 1);
+        UnitDefinition beastDefinition = TestHelpers.SimpleUnitDefinition("beast", maxHitpoints: 50, initiative: 50, damage: 8);
+        UnitDefinition wolfDefinition = TestHelpers.SimpleUnitDefinition("wolf", maxHitpoints: 100, initiative: 50, damage: 0) with
+        {
+            Attack = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("wolf"), initiative: 50, damage: 0, accuracy: 100, reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.TransformSelf,
+                IsInfinite = true,
+                SmallTransformUnitId = beastDefinition.Id,
+                AlternativeAttackId = new UnitAttackDefinitionId("bite")
+            }
+        };
+        UnitAttackDefinition biteDefinition = TestHelpers.SimpleAttack(new UnitAttackDefinitionId("bite"), initiative: 50, damage: 20, accuracy: 100, reach: UnitAttackReach.Adjacent);
+
+        BattleUnit wolf = TestHelpers.SimpleBattleUnit(new BattleUnitId(0), null, wolfDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit witch = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, witchDefinition.Id, BattleSide.Defender, hitpoints: 50);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(witchDefinition)
+            .WithDefinition(beastDefinition)
+            .WithDefinition(wolfDefinition)
+            .WithDefinition(biteDefinition)
+            .WithAttacker(wolf, GridPosition.FrontBottom)
+            .WithDefender(witch, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(witch.Id, new BattleAttackUnitTarget(wolf.Id)), [
+            new BattleUnitAttackEvent(witch.Id, new BattleAttackUnitTarget(wolf.Id), [new UnitAttackDefinitionId("witch")]),
+            new BattleUnitAttackedEvent(witch.Id, wolf.Id, new UnitAttackDefinitionId("witch")),
+            new BattleUnitAttackHitEvent(witch.Id, wolf.Id, new UnitAttackDefinitionId("witch"), 0),
+            new BattleUnitEffectAppliedEvent(witch.Id, wolf.Id, new BattleReduceDamageStatusEffect(50, false)),
+            new BattleUnitTurnEndingEvent(witch.Id),
+            new BattleUnitTurnEndedEvent(witch.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(wolf.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(wolf with { StatusEffects = [new BattleReduceDamageStatusEffect(50, false)] }, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(witch, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(wolf.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(1)
+            }));
     }
 }

@@ -23,8 +23,20 @@ internal sealed class ReduceDamageAttackResolver : BattleAbstractAttackResolver,
         }
 
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
+        UnitAttackDefinitionId? alternativeAttackId = targetDefinition.Attack.AlternativeAttackId;
+        bool dealsDamage;
 
-        if (targetDefinition.HasAnyAttackType(UnitAttackType.Damage, UnitAttackType.DrainLife, UnitAttackType.DrainLifeOverflow))
+        if (alternativeAttackId is null)
+        {
+            dealsDamage = targetDefinition.HasAnyAttackType(UnitAttackType.Damage, UnitAttackType.DrainLife, UnitAttackType.DrainLifeOverflow);
+        }
+        else
+        {
+            UnitAttackDefinition alternativeAttack = context.Definitions.GetAttack(alternativeAttackId.Value);
+            dealsDamage = alternativeAttack.Type is UnitAttackType.Damage or UnitAttackType.DrainLife or UnitAttackType.DrainLifeOverflow;
+        }
+
+        if (dealsDamage)
         {
             return null;
         }

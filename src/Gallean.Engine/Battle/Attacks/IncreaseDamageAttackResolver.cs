@@ -48,8 +48,18 @@ internal sealed class IncreaseDamageAttackResolver : BattleAbstractAttackResolve
         }
 
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
+        UnitAttackDefinitionId? alternativeAttackId = targetDefinition.Attack.AlternativeAttackId;
 
-        return targetDefinition.HasAnyAttackType(UnitAttackType.Damage, UnitAttackType.DrainLife, UnitAttackType.DrainLifeOverflow);
+        if (alternativeAttackId is null)
+        {
+            return targetDefinition.HasAnyAttackType(UnitAttackType.Damage, UnitAttackType.DrainLife, UnitAttackType.DrainLifeOverflow);
+        }
+        else
+        {
+            UnitAttackDefinition alternativeAttack = context.Definitions.GetAttack(alternativeAttackId.Value);
+
+            return alternativeAttack.Type is UnitAttackType.Damage or UnitAttackType.DrainLife or UnitAttackType.DrainLifeOverflow;
+        }
     }
 
     private static bool IsDamageIncreased(BattleUnit target, int percent)
