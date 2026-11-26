@@ -114,6 +114,7 @@
     <Setter Property="ToolTip.VerticalOffset" Value="-8" />
     <Setter Property="ToolTip.ShowDelay" Value="0" />
     <Setter Property="ToolTip.ShowOnDisabled" Value="True" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
     <Setter Property="Template">
       <ControlTemplate>
         <Panel Background="Transparent">
