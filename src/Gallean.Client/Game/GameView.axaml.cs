@@ -14,6 +14,7 @@ namespace Gallean.Client;
 
 internal sealed partial class GameView : Window
 {
+    private const int MinAssetPixelScale = 3;
     private const double SceneHeight = 600.0;
 
     private readonly Size minSize;
@@ -322,9 +323,10 @@ internal sealed partial class GameView : Window
 
         if (assets is not null)
         {
-            int maxPixelScale = (int)Math.Ceiling(screen.Bounds.Height / SceneHeight);
+            int pixelScale = (int)Math.Ceiling(screen.Bounds.Height / SceneHeight);
+            pixelScale = Math.Max(pixelScale, MinAssetPixelScale);
 
-            assets.SetMaxPixelScale(maxPixelScale);
+            assets.SetMaxPixelScale(pixelScale);
         }
     }
 
