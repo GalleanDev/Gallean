@@ -90,7 +90,7 @@ internal static class WorldCommandErrorFormatter
             WorldCommandError.StackNotAtTrainer => Tr("The party is not at a training camp"),
             WorldCommandError.StackNotFound => Tr("This party is no longer available"),
             WorldCommandError.StackNotInCity => Tr("The party is not in one of your cities"),
-            WorldCommandError.TargetOccupied => Tr("The slot is occupied"),
+            WorldCommandError.TargetOccupied => Tr("This position is already occupied"),
             WorldCommandError.TargetOutOfBounds => Tr("Out of bounds"),
             WorldCommandError.TargetTooFar => Tr("Too far"),
             WorldCommandError.TargetUnpassable => Tr("Impassable terrain"),
