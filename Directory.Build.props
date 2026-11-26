@@ -8,6 +8,7 @@
     <Nullable>enable</Nullable>
     <IsAotCompatible>true</IsAotCompatible>
     <IsPublishable>false</IsPublishable>
+    <Features>$(Features);runtime-async=on</Features>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(_IsPublishing)' == 'true'">
