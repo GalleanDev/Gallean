@@ -42,27 +42,27 @@ internal sealed partial class BattleAiPlanner
             {
                 return context.Attack.Type switch
                 {
-                    UnitAttackType.Damage => [Weakness(context, target), Lethal(context, target), Unwarded(context, target), Undefended(target)],
-                    UnitAttackType.DrainLife => [Weakness(context, target), Lethal(context, target), Unwarded(context, target), Undefended(target)],
-                    UnitAttackType.DrainLifeOverflow => [Weakness(context, target), Lethal(context, target), Unwarded(context, target), Undefended(target)],
-                    UnitAttackType.Poison => [Weakness(context, target), Unwarded(context, target)],
-                    UnitAttackType.Frostbite => [Weakness(context, target), Unwarded(context, target)],
-                    UnitAttackType.Blister => [Weakness(context, target), Unwarded(context, target)],
-                    UnitAttackType.ReduceDamage => [Weakness(context, target), Unwarded(context, target)],
-                    UnitAttackType.ReduceInitiative => [Weakness(context, target), Unwarded(context, target)],
-                    UnitAttackType.ReduceLevel => [Weakness(context, target), Unwarded(context, target)],
-                    UnitAttackType.ReduceArmor => [Weakness(context, target), Unwarded(context, target)],
+                    UnitAttackType.Damage => [Weakness(context, target), Lethal(context, target), Unwarded(context, target), Undefended(target), Permanent(target)],
+                    UnitAttackType.DrainLife => [Weakness(context, target), Lethal(context, target), Unwarded(context, target), Undefended(target), Permanent(target)],
+                    UnitAttackType.DrainLifeOverflow => [Weakness(context, target), Lethal(context, target), Unwarded(context, target), Undefended(target), Permanent(target)],
+                    UnitAttackType.Poison => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
+                    UnitAttackType.Frostbite => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
+                    UnitAttackType.Blister => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
+                    UnitAttackType.ReduceDamage => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
+                    UnitAttackType.ReduceInitiative => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
+                    UnitAttackType.ReduceLevel => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
+                    UnitAttackType.ReduceArmor => [Weakness(context, target), Unwarded(context, target), Permanent(target)],
                     UnitAttackType.Doppelganger => [Power(context, target)],
-                    UnitAttackType.Paralyze => [Power(context, target), Unwarded(context, target), Controllable(target)],
-                    UnitAttackType.Petrify => [Power(context, target), Unwarded(context, target), Controllable(target)],
-                    UnitAttackType.Fear => [Power(context, target), Unwarded(context, target), Controllable(target)],
-                    UnitAttackType.TransformEnemy => [Power(context, target), Unwarded(context, target), Controllable(target), Transformable(target)],
-                    UnitAttackType.GiveAdditionalAttack => [Power(context, target)],
-                    UnitAttackType.Heal => [Wounded(context, target)],
-                    UnitAttackType.Cure => [Afflicted(target)],
+                    UnitAttackType.Paralyze => [Power(context, target), Unwarded(context, target), Controllable(target), Permanent(target)],
+                    UnitAttackType.Petrify => [Power(context, target), Unwarded(context, target), Controllable(target), Permanent(target)],
+                    UnitAttackType.Fear => [Power(context, target), Unwarded(context, target), Controllable(target), Permanent(target)],
+                    UnitAttackType.TransformEnemy => [Power(context, target), Unwarded(context, target), Controllable(target), Transformable(target), Permanent(target)],
+                    UnitAttackType.GiveAdditionalAttack => [Power(context, target), Permanent(target)],
+                    UnitAttackType.Heal => [Wounded(context, target), Permanent(target)],
+                    UnitAttackType.Cure => [Afflicted(target), Permanent(target)],
                     UnitAttackType.Revive => [Fallen(target)],
-                    UnitAttackType.GiveProtection => [Protectable(context, target)],
-                    UnitAttackType.IncreaseDamage => [Boostable(context, target)],
+                    UnitAttackType.GiveProtection => [Protectable(context, target), Permanent(target)],
+                    UnitAttackType.IncreaseDamage => [Boostable(context, target), Permanent(target)],
                     UnitAttackType.TransformSelf => [UtilityScore.Full],
                     UnitAttackType.Summon => [UtilityScore.None]
                 };
@@ -113,6 +113,13 @@ internal sealed partial class BattleAiPlanner
                 bool isUndefended = !target.HasStatusEffect<BattleDefendStatusEffect>();
 
                 return UtilityScore.Flag(isUndefended, MinTargetValue);
+            }
+
+            private static UtilityScore.Consideration Permanent(BattleUnit target)
+            {
+                bool isPermanent = target.SummonerId is null;
+
+                return UtilityScore.Flag(isPermanent, UtilityScore.MinScore);
             }
 
             private static UtilityScore.Consideration Controllable(BattleUnit target)

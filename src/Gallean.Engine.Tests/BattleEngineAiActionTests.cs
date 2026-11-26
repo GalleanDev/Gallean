@@ -1628,4 +1628,34 @@ public sealed class BattleEngineAiActionTests
             new BattleUnitTurnStartedEvent(new BattleUnitTurn(healer.Id, BattleUnitTurnType.Normal))
         ]);
     }
+
+    [Test]
+    public void SummonTargetTest()
+    {
+        UnitDefinition attackerDefinition = TestHelpers.SimpleUnitDefinition("attacker", maxHitpoints: 100, initiative: 50, damage: 5);
+        UnitDefinition summonerDefinition = TestHelpers.SimpleUnitDefinition("summoner", maxHitpoints: 50, initiative: 40, damage: 1);
+        UnitDefinition summonedDefinition = TestHelpers.SimpleUnitDefinition("summoned", maxHitpoints: 10, initiative: 30, damage: 1);
+
+        BattleUnit attacker = Unit(0, attackerDefinition.Id, BattleSide.Attacker, hitpoints: 100);
+        BattleUnit summoner = Unit(1, summonerDefinition.Id, BattleSide.Defender, hitpoints: 50);
+        BattleUnit summoned = Unit(2, summonedDefinition.Id, BattleSide.Defender, hitpoints: 10) with { SummonerId = summoner.Id };
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(attackerDefinition)
+            .WithDefinition(summonerDefinition)
+            .WithDefinition(summonedDefinition)
+            .WithAttacker(attacker, new GridPosition(0, 0))
+            .WithDefender(summoner, new GridPosition(0, 0))
+            .WithDefender(summoned, new GridPosition(0, 1))
+            .Build();
+
+        engine.CheckCommand(new BattleAiActionCommand(CanUseItems: true), [
+            new BattleUnitAttackEvent(attacker.Id, new BattleAttackUnitTarget(summoner.Id), [attackerDefinition.Attack.Id]),
+            new BattleUnitAttackedEvent(attacker.Id, summoner.Id, attackerDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(attacker.Id, summoner.Id, attackerDefinition.Attack.Id, 5),
+            new BattleUnitTurnEndingEvent(attacker.Id),
+            new BattleUnitTurnEndedEvent(attacker.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(summoner.Id, BattleUnitTurnType.Normal))
+        ]);
+    }
 }
