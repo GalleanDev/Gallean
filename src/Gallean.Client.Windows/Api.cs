@@ -8,7 +8,6 @@ internal static partial class Api
     public readonly record struct RECT(int Left, int Top, int Right, int Bottom);
 
     public const uint WM_SIZE = 0x0005;
-    public const uint WM_ERASEBKGND = 0x0014;
     public const nuint SIZE_RESTORED = 0;
 
     [LibraryImport("user32")]
@@ -29,14 +28,4 @@ internal static partial class Api
 
     [LibraryImport("user32", EntryPoint = "SendMessageW")]
     public static partial IntPtr SendMessage(IntPtr window, uint message, nuint wParam, nint lParam);
-
-    [LibraryImport("user32")]
-    public static partial int FillRect(IntPtr deviceContext, in RECT rect, IntPtr brush);
-
-    [LibraryImport("gdi32")]
-    public static partial IntPtr CreateSolidBrush(uint color);
-
-    [LibraryImport("gdi32")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool DeleteObject(IntPtr gdiObject);
 }

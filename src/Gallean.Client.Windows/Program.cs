@@ -27,7 +27,6 @@ internal static class Program
             {
                 PlatformCursorLock.Install();
                 PlatformDpiHandler.Install();
-                PlatformBackgroundErase.Install();
             })
             .StartWithClassicDesktopLifetime(args);
     }
