@@ -2011,21 +2011,21 @@ public static class ScenarioLoader
         }
 
         throw new InvalidDataException("Scenario has no initial leader.");
+    }
 
-        static bool IsCapitalStack(WorldStack stack, ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications)
+    private static bool IsCapitalStack(WorldStack stack, ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications)
+    {
+        foreach (WorldFortification fortification in fortifications.Values)
         {
-            foreach (WorldFortification fortification in fortifications.Values)
+            if (fortification is WorldCapital capital &&
+                capital.OwnerId == stack.OwnerId &&
+                capital.Entrance == stack.Position)
             {
-                if (fortification is WorldCapital capital &&
-                    capital.OwnerId == stack.OwnerId &&
-                    capital.Entrance == stack.Position)
-                {
-                    return true;
-                }
+                return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     private static List<ScenarioStackTemplateDefinition> LoadStackTemplates(
