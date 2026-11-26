@@ -1536,16 +1536,17 @@
   <Style Selector="ListBox.select-list ListBoxItem:selected TextBlock.row-title">
     <Setter Property="Foreground" Value="{StaticResource ScenarioSelectAccentBrush}" />
   </Style>
-  <Style Selector="ListBox.select-list ListBoxItem Border.row-badge">
-    <Setter Property="Padding" Value="7,1" />
-    <Setter Property="VerticalAlignment" Value="Center" />
-    <Setter Property="Background" Value="{StaticResource BadgeBackgroundBrush}" />
-    <Setter Property="BorderBrush" Value="{StaticResource BadgeBorderBrush}" />
+  <Style Selector="ListBox.select-list ListBoxItem Border.row-tag">
+    <Setter Property="Margin" Value="8,-3,0,-3" />
+    <Setter Property="TextBlock.BaselineOffset" Value="9" />
+    <Setter Property="Padding" Value="6,0" />
+    <Setter Property="Background" Value="{StaticResource PermanentModifierFaceGradientBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource PermanentModifierBorderGradientBrush}" />
     <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="CornerRadius" Value="{StaticResource RadiusLg}" />
+    <Setter Property="CornerRadius" Value="{StaticResource RadiusXl}" />
   </Style>
-  <Style Selector="ListBox.select-list ListBoxItem Border.row-badge > TextBlock">
-    <Setter Property="Foreground" Value="{StaticResource BadgeTextBrush}" />
+  <Style Selector="ListBox.select-list ListBoxItem Border.row-tag > TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     <Setter Property="FontFamily" Value="{StaticResource FontFamilySans}" />
     <Setter Property="FontSize" Value="{StaticResource FontSizeXs}" />
   </Style>
