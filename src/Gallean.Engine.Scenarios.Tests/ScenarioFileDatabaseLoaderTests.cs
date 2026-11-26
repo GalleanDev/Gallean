@@ -163,4 +163,112 @@ public sealed class ScenarioFileDatabaseLoaderTests
                 WorldStackDirection.East,
                 AiPriority: 3)));
     }
+
+    [Test]
+    public void LoadMissingDefendOrderLocationTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+        ScenarioFileTables tables = file.Tables with
+        {
+            ScenarioStackTemplates =
+            [
+                .. file.Tables.ScenarioStackTemplates.Select(template => template with { Order = Db.OrderType.DefendLocation, OrderTargetId = new Db.Id("S200LO0099") })
+            ]
+        };
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables());
+
+        UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+            .Place(new ScenarioStackTemplateUnit(new UnitDefinitionId("G000UU0099"), 100, 1, [], new ScenarioUnitName(new ScenarioTextId("S200TM0001:NAME_TXT:0"))), GridPosition.FrontCenter, false)
+            .Place(new ScenarioStackTemplateUnit(new UnitDefinitionId("G000UU0078"), 45, 1, [], null), GridPosition.BackBottom, false)
+            .Build();
+
+        Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S200TM0001")), Is.EqualTo(
+            new ScenarioStackTemplateDefinition(
+                new ScenarioStackTemplateId("S200TM0001"),
+                new WorldPlayerId(3),
+                new WorldSubraceId("S200SR0002"),
+                expectedUnits,
+                WorldStackOrder.Stand.Instance,
+                WorldStackDirection.East,
+                AiPriority: 3)));
+    }
+
+    [Test]
+    public void LoadMissingOrderCityTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+        ScenarioFileTables tables = file.Tables with
+        {
+            ScenarioStackTemplates =
+            [
+                .. file.Tables.ScenarioStackTemplates.Select(template => template with { Order = Db.OrderType.SecureCity, OrderTargetId = new Db.Id("S200FT0099") })
+            ]
+        };
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables());
+
+        UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+            .Place(new ScenarioStackTemplateUnit(new UnitDefinitionId("G000UU0099"), 100, 1, [], new ScenarioUnitName(new ScenarioTextId("S200TM0001:NAME_TXT:0"))), GridPosition.FrontCenter, false)
+            .Place(new ScenarioStackTemplateUnit(new UnitDefinitionId("G000UU0078"), 45, 1, [], null), GridPosition.BackBottom, false)
+            .Build();
+
+        Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S200TM0001")), Is.EqualTo(
+            new ScenarioStackTemplateDefinition(
+                new ScenarioStackTemplateId("S200TM0001"),
+                new WorldPlayerId(3),
+                new WorldSubraceId("S200SR0002"),
+                expectedUnits,
+                WorldStackOrder.Stand.Instance,
+                WorldStackDirection.East,
+                AiPriority: 3)));
+    }
+
+    [Test]
+    public void LoadMissingOrderStackTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+        ScenarioFileTables tables = file.Tables with
+        {
+            ScenarioStackTemplates =
+            [
+                .. file.Tables.ScenarioStackTemplates.Select(template => template with { Order = Db.OrderType.AttackStack, OrderTargetId = new Db.Id("S200KC0099") })
+            ]
+        };
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+        Scenario scenario = ScenarioLoader.Load(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables());
+
+        UnitGrid<ScenarioStackTemplateUnit> expectedUnits = new UnitGrid<ScenarioStackTemplateUnit>.Builder()
+            .Place(new ScenarioStackTemplateUnit(new UnitDefinitionId("G000UU0099"), 100, 1, [], new ScenarioUnitName(new ScenarioTextId("S200TM0001:NAME_TXT:0"))), GridPosition.FrontCenter, false)
+            .Place(new ScenarioStackTemplateUnit(new UnitDefinitionId("G000UU0078"), 45, 1, [], null), GridPosition.BackBottom, false)
+            .Build();
+
+        Assert.That(scenario.Provider.GetStackTemplate(new ScenarioStackTemplateId("S200TM0001")), Is.EqualTo(
+            new ScenarioStackTemplateDefinition(
+                new ScenarioStackTemplateId("S200TM0001"),
+                new WorldPlayerId(3),
+                new WorldSubraceId("S200SR0002"),
+                expectedUnits,
+                new WorldStackOrder.AttackStack(new WorldStackId("S200KC0099")),
+                WorldStackDirection.East,
+                AiPriority: 3)));
+    }
 }

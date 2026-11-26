@@ -146,11 +146,11 @@ public static class ScenarioLoader
         List<ScenarioVariableDefinition> variableDefinitions =
             LoadVariables(scenarioDb, scenarioId);
         List<ScenarioEventDefinition> eventDefinitions =
-            LoadEvents(scenarioDb, scenarioId, playerIds, subraces, locations, variableDefinitions, globals);
+            LoadEvents(scenarioDb, scenarioId, playerIds, subraces, locations, fortifications, variableDefinitions, globals);
         List<ScenarioLocationDefinition> locationDefinitions =
             LoadLocations(scenarioDb, scenarioId);
         List<ScenarioStackTemplateDefinition> stackTemplates =
-            LoadStackTemplates(scenarioDb, scenarioId, playerIds, definitions, globals, locations);
+            LoadStackTemplates(scenarioDb, scenarioId, playerIds, definitions, globals, locations, fortifications);
 
         if (configuration is not null)
         {
@@ -399,6 +399,7 @@ public static class ScenarioLoader
         IReadOnlyDictionary<Db.Id, WorldPlayerId> playerIds,
         IReadOnlyDictionary<WorldSubraceId, WorldSubrace> subraces,
         IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations,
+        IReadOnlyDictionary<WorldFortificationId, WorldFortification> fortifications,
         IReadOnlyList<ScenarioVariableDefinition> variables,
         GlobalVariables globals)
     {
@@ -446,6 +447,7 @@ public static class ScenarioLoader
                     stackReferences,
                     subraces,
                     locations,
+                    fortifications,
                     variableIds);
 
                 definitions.Add(new ScenarioEventDefinition(
@@ -583,6 +585,7 @@ public static class ScenarioLoader
         IReadOnlyDictionary<Db.Id, ScenarioStackReference> stackReferences,
         IReadOnlyDictionary<WorldSubraceId, WorldSubrace> subraces,
         IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations,
+        IReadOnlyDictionary<WorldFortificationId, WorldFortification> fortifications,
         IReadOnlySet<ScenarioVariableId> variableIds)
     {
         ImmutableArray<ScenarioEventEffect>.Builder result = ImmutableArray.CreateBuilder<ScenarioEventEffect>();
@@ -600,6 +603,7 @@ public static class ScenarioLoader
                 stackReferences,
                 subraces,
                 locations,
+                fortifications,
                 variableIds);
 
             if (mappedEffect is not null)
@@ -620,6 +624,7 @@ public static class ScenarioLoader
         IReadOnlyDictionary<Db.Id, ScenarioStackReference> stackReferences,
         IReadOnlyDictionary<WorldSubraceId, WorldSubrace> subraces,
         IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations,
+        IReadOnlyDictionary<WorldFortificationId, WorldFortification> fortifications,
         IReadOnlySet<ScenarioVariableId> variableIds)
     {
         return effect.Category switch
@@ -1008,7 +1013,7 @@ public static class ScenarioLoader
 
                 return new ScenarioEventChangeOrderEffect(
                     stack,
-                    MapWorldStackOrder(order, effect.OrderTarget, effect.Id, locations),
+                    MapWorldStackOrder(order, effect.OrderTarget, locations, fortifications),
                     RequireBool(effect.FirstOnly, effect));
             }
             else
@@ -1836,7 +1841,7 @@ public static class ScenarioLoader
             LeaderEquipment equipment = LoadEquipment(stack, items, talismanCharges, definitions, globals);
             WorldInventory inventory = LoadInventory(stack.StackId, inventories, items, talismanCharges, definitions, globals);
             WorldSubraceId subraceId = new(stack.SubraceId);
-            WorldCanonicalStackOrder order = MapWorldStackOrder(stack.Order, stack.OrderTargetId, stack.StackId, locations);
+            WorldCanonicalStackOrder order = MapWorldStackOrder(stack.Order, stack.OrderTargetId, locations, fortifications);
             ScenarioStackTemplateId? sourceTemplateId = ConvertOptionalId(stack.SourceTemplateId, static id => new ScenarioStackTemplateId(id));
 
             UnitGrid<WorldUnit> grid = LoadUnitGrid(unitGroups.GetValueOrDefault(stack.StackId), units, unitModifiers, unitNames, definitions);
@@ -1965,7 +1970,8 @@ public static class ScenarioLoader
         IReadOnlyDictionary<Db.Id, WorldPlayerId> playerIds,
         IGameDefinitionProvider definitions,
         GlobalVariables globals,
-        IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations)
+        IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations,
+        IReadOnlyDictionary<WorldFortificationId, WorldFortification> fortifications)
     {
         List<ScenarioStackTemplateDefinition> result = [];
 
@@ -1990,7 +1996,7 @@ public static class ScenarioLoader
                 playerIds[template.OwnerId],
                 new WorldSubraceId(template.SubraceId),
                 units,
-                MapWorldStackOrder(template.Order, template.OrderTargetId, template.Id, locations),
+                MapWorldStackOrder(template.Order, template.OrderTargetId, locations, fortifications),
                 direction,
                 template.AiPriority));
         }
@@ -2348,34 +2354,56 @@ public static class ScenarioLoader
     private static WorldCanonicalStackOrder MapWorldStackOrder(
         Db.OrderType order,
         Db.Id? orderTargetId,
-        Db.Id subjectId,
-        IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations)
+        IReadOnlyDictionary<Db.Id, Db.ScenarioLocation> locations,
+        IReadOnlyDictionary<WorldFortificationId, WorldFortification> fortifications)
     {
         return order switch
         {
             Db.OrderType.Normal => WorldStackOrder.Normal.Instance,
             Db.OrderType.Stand => WorldStackOrder.Stand.Instance,
             Db.OrderType.Guard => WorldStackOrder.Guard.Instance,
-            Db.OrderType.AttackStack => new WorldStackOrder.AttackStack(new WorldStackId(RequireTarget())),
-            Db.OrderType.DefendStack => new WorldStackOrder.DefendStack(new WorldStackId(RequireTarget())),
-            Db.OrderType.SecureCity => new WorldStackOrder.SecureCity(new WorldFortificationId(RequireTarget())),
+            Db.OrderType.AttackStack => MapStackTargetOrder(static targetId => new WorldStackOrder.AttackStack(targetId)),
+            Db.OrderType.DefendStack => MapStackTargetOrder(static targetId => new WorldStackOrder.DefendStack(targetId)),
+            Db.OrderType.SecureCity => MapFortificationTargetOrder(static targetId => new WorldStackOrder.SecureCity(targetId)),
             Db.OrderType.Roam => WorldStackOrder.Roam.Instance,
-            Db.OrderType.MoveToLocation => MapMoveToLocationOrder(),
-            Db.OrderType.DefendLocation => MapDefendLocationOrder(),
+            Db.OrderType.MoveToLocation => MapLocationTargetOrder(static (targetId, position, radius) => new WorldStackOrder.MoveToLocation(targetId, position, radius)),
+            Db.OrderType.DefendLocation => MapLocationTargetOrder(static (targetId, position, radius) => new WorldStackOrder.DefendLocation(targetId, position, radius)),
             Db.OrderType.Berserk => WorldStackOrder.Berserk.Instance,
-            Db.OrderType.Assist => new WorldStackOrder.Assist(new WorldStackId(RequireTarget())),
+            Db.OrderType.Assist => MapStackTargetOrder(static targetId => new WorldStackOrder.Assist(targetId)),
             Db.OrderType.Explore => WorldStackOrder.Explore.Instance,
             Db.OrderType.Steal => WorldStackOrder.Steal.Instance,
-            Db.OrderType.DefendCity => new WorldStackOrder.DefendCity(new WorldFortificationId(RequireTarget()))
+            Db.OrderType.DefendCity => MapFortificationTargetOrder(static targetId => new WorldStackOrder.DefendCity(targetId))
         };
 
-        WorldCanonicalStackOrder MapMoveToLocationOrder()
+        WorldCanonicalStackOrder MapStackTargetOrder(Func<WorldStackId, WorldCanonicalStackOrder> createFunc)
         {
-            Db.Id targetId = RequireTarget();
-
-            if (locations.TryGetValue(targetId, out Db.ScenarioLocation? location))
+            if (orderTargetId is not null)
             {
-                return new WorldStackOrder.MoveToLocation(
+                return createFunc(new WorldStackId(orderTargetId.Value));
+            }
+            else
+            {
+                return WorldStackOrder.Stand.Instance;
+            }
+        }
+
+        WorldCanonicalStackOrder MapFortificationTargetOrder(Func<WorldFortificationId, WorldCanonicalStackOrder> createFunc)
+        {
+            if (orderTargetId is not null && fortifications.ContainsKey(new WorldFortificationId(orderTargetId.Value)))
+            {
+                return createFunc(new WorldFortificationId(orderTargetId.Value));
+            }
+            else
+            {
+                return WorldStackOrder.Stand.Instance;
+            }
+        }
+
+        WorldCanonicalStackOrder MapLocationTargetOrder(Func<ScenarioLocationId, WorldPosition, int, WorldCanonicalStackOrder> createFunc)
+        {
+            if (orderTargetId is not null && locations.TryGetValue(orderTargetId.Value, out Db.ScenarioLocation? location))
+            {
+                return createFunc(
                     new ScenarioLocationId(location.LocationId),
                     new WorldPosition(location.PositionX, location.PositionY),
                     location.Radius);
@@ -2384,38 +2412,6 @@ public static class ScenarioLoader
             {
                 return WorldStackOrder.Stand.Instance;
             }
-        }
-
-        WorldStackOrder.DefendLocation MapDefendLocationOrder()
-        {
-            Db.ScenarioLocation location = RequireTargetLocation();
-
-            return new WorldStackOrder.DefendLocation(
-                new ScenarioLocationId(location.LocationId),
-                new WorldPosition(location.PositionX, location.PositionY),
-                location.Radius);
-        }
-
-        Db.ScenarioLocation RequireTargetLocation()
-        {
-            Db.Id targetId = RequireTarget();
-
-            if (!locations.TryGetValue(targetId, out Db.ScenarioLocation? location))
-            {
-                throw new InvalidDataException($"Order of '{subjectId}' has an unexpected target.");
-            }
-
-            return location;
-        }
-
-        Db.Id RequireTarget()
-        {
-            if (orderTargetId is null)
-            {
-                throw new InvalidDataException($"Order of '{subjectId}' has no target.");
-            }
-
-            return orderTargetId.Value;
         }
     }
 
