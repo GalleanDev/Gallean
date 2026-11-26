@@ -4,9 +4,9 @@ namespace Gallean.Engine.Tests;
 
 internal sealed class TestWorldAiRunner(GameSession session, IEngineContext context)
 {
-    public sealed record Trace(WorldAiActionPlan Plan, BattleTrace? Battle, WorldStackOrder? StackOrder, bool IsSummon);
+    public sealed record Trace(WorldAiActionPlan Plan, BattleTrace? Battle, WorldStackOrder? StackOrder);
 
-    public sealed record BattleTrace(WorldStackId AttackerStackId, BattleOutcome Outcome);
+    public sealed record BattleTrace(WorldStackId AttackerStackId, UnitDefinition AttackerLeaderDefinition, BattleOutcome Outcome);
 
     private readonly WorldAiController controller = new(context);
     private WorldAiMemory memory = WorldAiMemory.Empty;
@@ -20,7 +20,6 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
             WorldState state = session.World.State;
             WorldAiActionPlan plan = controller.DecideAction(state, memory);
             WorldStackOrder? stackOrder = GetStackOrder(state, plan);
-            bool isSummon = IsSummon(state, plan);
 
             memory = plan.Memory;
 
@@ -32,7 +31,7 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
                 break;
             }
 
-            traces.Add(new Trace(plan, ResolveBattle(), stackOrder, isSummon));
+            traces.Add(new Trace(plan, ResolveBattle(), stackOrder));
         }
 
         return traces;
@@ -56,20 +55,6 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
         else
         {
             return null;
-        }
-    }
-
-    private bool IsSummon(WorldState state, WorldAiActionPlan plan)
-    {
-        if (plan.Command is WorldAiMoveStackCommand command && state.Stacks.TryGetValue(command.StackId, out WorldStack? stack))
-        {
-            (_, _, UnitDefinition leaderDefinition) = stack.GetLeader(context.Definitions);
-
-            return leaderDefinition.Category is UnitCategory.Summon;
-        }
-        else
-        {
-            return false;
         }
     }
 
@@ -112,12 +97,14 @@ internal sealed class TestWorldAiRunner(GameSession session, IEngineContext cont
         }
 
         WorldStackId attackerStackId = Assert.NotNull(FindAttackerStackId(session.World.State, battle.State));
+        WorldStack attackerStack = session.World.State.Stacks[attackerStackId];
+        (_, _, UnitDefinition attackerLeaderDefinition) = attackerStack.GetLeader(context.Definitions);
 
         BattleCommandResult result = battle.DispatchCommand(new BattleAutoResolveCommand());
         Assert.That(result.Error, Is.Null);
 
         BattleOutcome outcome = Assert.NotNull(battle.State.Outcome);
 
-        return new BattleTrace(attackerStackId, outcome);
+        return new BattleTrace(attackerStackId, attackerLeaderDefinition, outcome);
     }
 }

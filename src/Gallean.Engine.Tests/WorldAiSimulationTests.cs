@@ -286,7 +286,7 @@ public sealed class WorldAiSimulationTests
                     continue;
                 }
 
-                if (trace.IsSummon)
+                if (trace.Battle.AttackerLeaderDefinition.Category is UnitCategory.Summon)
                 {
                     continue;
                 }
@@ -605,14 +605,30 @@ public sealed class WorldAiSimulationTests
     {
         WorldAiActionPlan plan = new(default, command, WorldAiMemory.Empty);
 
-        return new TestWorldAiRunner.Trace(plan, null, null, false);
+        return new TestWorldAiRunner.Trace(plan, null, null);
     }
 
     private static TestWorldAiRunner.Trace BuildBattleTrace(IWorldCommand<Empty> command, TestWorldAiRunner.BattleTrace battle)
     {
         WorldAiActionPlan plan = new(default, command, WorldAiMemory.Empty);
 
-        return new TestWorldAiRunner.Trace(plan, battle, null, false);
+        return new TestWorldAiRunner.Trace(plan, battle, null);
+    }
+
+    private static UnitDefinition LeaderDefinition()
+    {
+        return TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10) with
+        {
+            Category = UnitCategory.Leader
+        };
+    }
+
+    private static UnitDefinition SummonDefinition()
+    {
+        return TestHelpers.SimpleUnitDefinition("summon", maxHitpoints: 100, initiative: 50, damage: 10) with
+        {
+            Category = UnitCategory.Summon
+        };
     }
 
     private static WorldState BuildAnalyzerState(WorldPlayerId playerId, WorldResourceSet resources, WorldStack stack)
@@ -712,7 +728,7 @@ public sealed class WorldAiSimulationTests
         List<SimulationIssue> issues = [];
 
         issues.AddRange(analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId),
-            [BuildBattleTrace(new WorldAiMoveStackCommand(stackId, new WorldPosition(1, 0)), new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)))]));
+            [BuildBattleTrace(new WorldAiMoveStackCommand(stackId, new WorldPosition(1, 0)), new TestWorldAiRunner.BattleTrace(stackId, LeaderDefinition(), new BattleOutcome(BattleSide.Defender)))]));
 
         Assert.That(GetIssues(new SimulationResult(issues)), Is.EqualTo([
             new SimulationIssue(
@@ -742,7 +758,7 @@ public sealed class WorldAiSimulationTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> traces =
         [
-            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), new WorldStackOrder.AttackStack(new WorldStackId("Target")), false)
+            new(plan, new TestWorldAiRunner.BattleTrace(stackId, LeaderDefinition(), new BattleOutcome(BattleSide.Defender)), new WorldStackOrder.AttackStack(new WorldStackId("Target")))
         ];
 
         IEnumerable<SimulationIssue> issues = analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId), traces);
@@ -766,7 +782,7 @@ public sealed class WorldAiSimulationTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> traces =
         [
-            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), WorldStackOrder.Guard.Instance, false)
+            new(plan, new TestWorldAiRunner.BattleTrace(stackId, LeaderDefinition(), new BattleOutcome(BattleSide.Defender)), WorldStackOrder.Guard.Instance)
         ];
 
         IEnumerable<SimulationIssue> issues = analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId), traces);
@@ -790,7 +806,7 @@ public sealed class WorldAiSimulationTests
 
         IReadOnlyList<TestWorldAiRunner.Trace> traces =
         [
-            new(plan, new TestWorldAiRunner.BattleTrace(stackId, new BattleOutcome(BattleSide.Defender)), null, true)
+            new(plan, new TestWorldAiRunner.BattleTrace(stackId, SummonDefinition(), new BattleOutcome(BattleSide.Defender)), null)
         ];
 
         IEnumerable<SimulationIssue> issues = analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId), traces);
@@ -809,7 +825,7 @@ public sealed class WorldAiSimulationTests
         List<SimulationIssue> issues = [];
 
         issues.AddRange(analyzer.AnalyzeTurn("Synthetic", 1, state, new WorldTurnInfo(1, playerId),
-            [BuildBattleTrace(new WorldAiMoveStackCommand(stackId, new WorldPosition(1, 0)), new TestWorldAiRunner.BattleTrace(new WorldStackId("Ambusher"), new BattleOutcome(BattleSide.Defender)))]));
+            [BuildBattleTrace(new WorldAiMoveStackCommand(stackId, new WorldPosition(1, 0)), new TestWorldAiRunner.BattleTrace(new WorldStackId("Ambusher"), LeaderDefinition(), new BattleOutcome(BattleSide.Defender)))]));
 
         Assert.That(GetIssues(new SimulationResult(issues)), Is.Empty);
     }
