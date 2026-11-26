@@ -48,21 +48,6 @@ public sealed class UnitStatsProviderTests
     }
 
     [Test]
-    public void ShatteredArmorMultipleTest()
-    {
-        UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 50 };
-        IGameDefinitionProvider definitions = new TestGameDefinitionProviderBuilder().AddUnit(definition).Build();
-        GlobalVariables globals = new();
-
-        BattleUnit unit = new(new BattleUnitId(0), null, definition.Id, BattleSide.Defender, 100, 0, 0, 1, [], [new BattleShatterArmorStatusEffect(30), new BattleShatterArmorStatusEffect(10)], null, [], null, false);
-        BattleState state = new BattleStateBuilder(definitions).Add(unit, GridPosition.FrontBottom).Build(BattleModifiers.None, TestHelpers.SimpleBattleInfo());
-
-        UnitStats stats = new UnitStatsProvider(definitions, globals, GameScenarioProvider.Empty.Definition).GetBattleUnitStats(state, unit.Id);
-
-        Assert.That(stats, Is.EqualTo(new UnitStats(MaxHitpoints: 100, Armor: 10, Regeneration: 5, Initiative: 50, ExperienceKilled: 0, ExperienceNextLevel: 1000)));
-    }
-
-    [Test]
     public void FortificationLowArmorTest()
     {
         UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 10 };

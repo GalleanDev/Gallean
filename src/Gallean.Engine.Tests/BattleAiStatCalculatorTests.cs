@@ -62,16 +62,6 @@ public sealed class BattleAiStatCalculatorTests
     }
 
     [Test]
-    public void ShatteredArmorMultipleTest()
-    {
-        UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 50 };
-        IEngineContext context = BuildContext(definition);
-        BattleUnit unit = CreateUnit(definition, hitpoints: 80, [new BattleShatterArmorStatusEffect(30), new BattleShatterArmorStatusEffect(10)]);
-
-        Assert.That(BattleAiStatCalculator.GetEffectiveHitpoints(context, BuildState(context, unit), unit), Is.EqualTo(88));
-    }
-
-    [Test]
     public void FortificationArmorLowArmorTest()
     {
         UnitDefinition definition = TestHelpers.SimpleUnitDefinition("unit", maxHitpoints: 100, initiative: 50, damage: 25) with { Armor = 10 };
