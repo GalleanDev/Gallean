@@ -2369,14 +2369,21 @@ public static class ScenarioLoader
             Db.OrderType.DefendCity => new WorldStackOrder.DefendCity(new WorldFortificationId(RequireTarget()))
         };
 
-        WorldStackOrder.MoveToLocation MapMoveToLocationOrder()
+        WorldCanonicalStackOrder MapMoveToLocationOrder()
         {
-            Db.ScenarioLocation location = RequireTargetLocation();
+            Db.Id targetId = RequireTarget();
 
-            return new WorldStackOrder.MoveToLocation(
-                new ScenarioLocationId(location.LocationId),
-                new WorldPosition(location.PositionX, location.PositionY),
-                location.Radius);
+            if (locations.TryGetValue(targetId, out Db.ScenarioLocation? location))
+            {
+                return new WorldStackOrder.MoveToLocation(
+                    new ScenarioLocationId(location.LocationId),
+                    new WorldPosition(location.PositionX, location.PositionY),
+                    location.Radius);
+            }
+            else
+            {
+                return WorldStackOrder.Stand.Instance;
+            }
         }
 
         WorldStackOrder.DefendLocation MapDefendLocationOrder()
