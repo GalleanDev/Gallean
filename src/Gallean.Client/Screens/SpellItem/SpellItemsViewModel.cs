@@ -152,6 +152,7 @@ internal sealed partial class SpellItemsViewModel : AbstractGameScreenViewModel
                 SpellItemViewModel viewModel = new(
                     item.Id,
                     definition.Category,
+                    InventoryItemTypeResolver.Resolve(definition.Category),
                     itemGroup.Items.Length,
                     BuildStatus(stack, item, details),
                     details);

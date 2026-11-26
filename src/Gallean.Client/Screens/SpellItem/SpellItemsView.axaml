@@ -10,14 +10,6 @@
   </UserControl.KeyBindings>
 
   <UserControl.Styles>
-    <Style Selector="local|DesaturationOverlay.desaturate">
-      <Setter Property="IsHitTestVisible" Value="False" />
-      <Setter Property="Opacity" Value="0" />
-    </Style>
-    <Style Selector=".unavailable local|DesaturationOverlay.desaturate">
-      <Setter Property="Opacity" Value="0.9" />
-    </Style>
-
     <Style Selector="Button.spell-item-tile">
       <Setter Property="Width" Value="120" />
       <Setter Property="Padding" Value="4,8,4,6" />
@@ -48,62 +40,22 @@
       <Setter Property="Background" Value="{StaticResource SpellTileSelectedBrush}" />
     </Style>
 
-    <Style Selector="Panel.spell-item-thumbnail">
-      <Setter Property="Width" Value="76" />
-      <Setter Property="Height" Value="76" />
-      <Setter Property="HorizontalAlignment" Value="Center" />
-    </Style>
-    <Style Selector="Panel.spell-item-thumbnail > Border.spell-icon">
-      <Setter Property="Margin" Value="3" />
-      <Setter Property="CornerRadius" Value="{StaticResource RadiusSm}" />
-      <Setter Property="ClipToBounds" Value="True" />
-    </Style>
-    <Style Selector="Border.spell-icon local|SpriteVisual">
-      <Setter Property="Margin" Value="-5" />
-    </Style>
-    <Style Selector="Border.spell-item-locked-overlay">
-      <Setter Property="IsVisible" Value="False" />
-      <Setter Property="IsHitTestVisible" Value="False" />
-      <Setter Property="Background" Value="{StaticResource SpellLockedOverlayBrush}" />
-    </Style>
-    <Style Selector=".unavailable Border.spell-item-locked-overlay">
-      <Setter Property="IsVisible" Value="True" />
-    </Style>
-    <Style Selector="Border.spell-item-border">
-      <Setter Property="IsHitTestVisible" Value="False" />
-      <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
-      <Setter Property="BorderThickness" Value="2.5" />
-      <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
-    </Style>
-    <Style Selector="Button.spell-item-tile.unavailable Border.spell-item-border">
-      <Setter Property="BorderBrush" Value="{StaticResource SpellLockedInkBrush}" />
-      <Setter Property="BorderThickness" Value="1.5" />
-    </Style>
-    <Style Selector="Button.spell-item-tile.selected Border.spell-item-border">
-      <Setter Property="BorderBrush" Value="{StaticResource SpellSelectedBorderBrush}" />
-      <Setter Property="BorderThickness" Value="3" />
-    </Style>
     <Style Selector="Button.spell-item-tile.unavailable TextBlock.spell-item-name">
       <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
     </Style>
 
-    <Style Selector="Panel.spell-item-thumbnail > Panel.item-count">
-      <Setter Property="Margin" Value="0,0,-4,-4" />
+    <Style Selector="Panel.spell-item-socket">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector=".unavailable Panel.spell-item-socket">
+      <Setter Property="Opacity" Value="0.4" />
     </Style>
 
     <Style Selector="Border.group-divider">
       <Setter Property="Height" Value="1" />
       <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="Background" Value="{StaticResource DividerBrush}" />
-    </Style>
-
-    <Style Selector="Border.spell-item-popup-icon">
-      <Setter Property="Width" Value="64" />
-      <Setter Property="Height" Value="64" />
-      <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
-      <Setter Property="BorderThickness" Value="2" />
-      <Setter Property="CornerRadius" Value="{StaticResource RadiusMd}" />
-      <Setter Property="ClipToBounds" Value="True" />
     </Style>
 
     <Style Selector="ContentControl.spell-item-price WrapPanel">
@@ -130,15 +82,13 @@
                 CommandParameter="{Binding}"
                 DoubleTapped="OnItemDoubleTapped">
           <Grid RowDefinitions="Auto,*,Auto" RowSpacing="6">
-            <Panel Grid.Row="0" Classes="spell-item-thumbnail">
-              <Border Classes="spell-icon">
-                <Panel>
-                  <local:SpriteVisual SpriteKey="{Binding Details.IconKey}" Stretch="Uniform" />
-                  <local:DesaturationOverlay Classes="desaturate" />
-                  <Border Classes="spell-item-locked-overlay" />
-                </Panel>
-              </Border>
-              <Border Classes="spell-item-border" />
+            <Panel Grid.Row="0"
+                   Classes="inventory-slot spell-item-socket"
+                   Classes.equipment="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Equipment}}"
+                   Classes.valuable="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Valuable}}"
+                   Classes.special="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Special}}">
+              <local:PlateChrome Classes="socket" />
+              <local:SpriteVisual SpriteKey="{Binding Details.IconKey}" Stretch="Uniform" />
               <Panel Classes="item-count"
                      IsVisible="{Binding Count, Converter={x:Static local:GreaterThanConverter.Instance}, ConverterParameter=1}">
                 <local:PlateChrome Classes="socket counter" />
@@ -179,9 +129,14 @@
               <Line Classes="spell-item-divider" />
 
               <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
-                <Border Grid.Column="0" Classes="spell-icon spell-item-popup-icon">
+                <Panel Grid.Column="0"
+                       Classes="inventory-slot spell-item-socket"
+                       Classes.equipment="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Equipment}}"
+                       Classes.valuable="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Valuable}}"
+                       Classes.special="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:InventoryItemType.Special}}">
+                  <local:PlateChrome Classes="socket" />
                   <local:SpriteVisual SpriteKey="{Binding Details.IconKey}" Stretch="Uniform" />
-                </Border>
+                </Panel>
                 <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
                   <local:OutlinedTextBlock Text="{Binding Details.Name}" Classes="object-name row" TextWrapping="Wrap" />
                   <TextBlock Text="{Binding Details.CategoryText}" Classes="caption" Foreground="{StaticResource SecondaryTextBrush}" />

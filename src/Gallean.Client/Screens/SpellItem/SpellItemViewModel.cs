@@ -8,12 +8,14 @@ internal sealed partial class SpellItemViewModel : ObservableObject, IDetailsSou
     public SpellItemViewModel(
         WorldItemId itemId,
         ItemCategory category,
+        InventoryItemType type,
         int count,
         OfferStatusViewModel status,
         ItemDetailsViewModel details)
     {
         ItemId = itemId;
         Category = category;
+        Type = type;
         Count = count;
         Status = status;
         Details = details;
@@ -21,6 +23,7 @@ internal sealed partial class SpellItemViewModel : ObservableObject, IDetailsSou
 
     public WorldItemId ItemId { get; }
     public ItemCategory Category { get; }
+    public InventoryItemType Type { get; }
     public int Count { get; }
     public OfferStatusViewModel Status { get; }
     public ItemDetailsViewModel Details { get; }
