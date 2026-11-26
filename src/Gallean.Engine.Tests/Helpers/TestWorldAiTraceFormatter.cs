@@ -22,6 +22,7 @@ internal static class TestWorldAiTraceFormatter
             WorldAutoFitStackCommand c => $"AutoFit {c.StackId.Value}",
             WorldExitStackCommand c => $"Exit {c.StackId.Value}",
             WorldHealUnitCommand { Group: WorldUnitGroup.Stack stackGroup } c => $"Heal {stackGroup.StackId.Value} {c.UnitId.Value}",
+            WorldUseItemCommand { Group: WorldUnitGroup.Stack stackGroup, Target: WorldItemTarget.Unit target } c => $"Use {c.ItemId.Value} {stackGroup.StackId.Value} -> {target.UnitId.Value}",
             WorldPurchaseUnitCommand c => $"Purchase {c.UnitDefinitionId.Value} -> {c.FortificationId.Value} ({c.Position.Line}, {c.Position.Flank})",
             WorldPurchaseLeaderCommand c => $"Leader {c.LeaderId.Value} -> {c.FortificationId.Value}",
             WorldConstructBuildingCommand c => $"Build {c.BuildingId.Value}",

@@ -235,6 +235,7 @@ internal sealed partial class WorldAiPlanner
         {
             WorldCastSpellCommand? attackCast = null;
             WorldStack? attackSummon = null;
+            WorldUseItemCommand? attackPotion = null;
 
             if (battle.BattleTarget is WorldAiTarget.Stack target)
             {
@@ -242,6 +243,7 @@ internal sealed partial class WorldAiPlanner
 
                 attackCast = Context.Spellcasting.FindAttackCast(context.State, context.Stack, targetStack, battle.Power);
                 attackSummon = FindSummon(context, battle.BattleTarget);
+                attackPotion = FindPotion(context, targetStack, battle.Power);
             }
 
             if (attackCast is not null)
@@ -253,6 +255,10 @@ internal sealed partial class WorldAiPlanner
                 WorldAiMoveStackCommand moveCommand = new(attackSummon.Id, battle.BattlePosition);
 
                 return MakePlan(score, moveCommand, context.Memory);
+            }
+            else if (attackPotion is not null)
+            {
+                return MakePlan(score, attackPotion, context.Memory);
             }
             else
             {
@@ -275,6 +281,40 @@ internal sealed partial class WorldAiPlanner
                         if (battle.BattleTarget == target)
                         {
                             return stack;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private WorldUseItemCommand? FindPotion(ActionContext context, WorldStack target, WorldAiEstimator.PowerEstimate power)
+        {
+            WorldStack stack = context.Stack;
+            WorldPlayer owner = context.State.Players[stack.OwnerId];
+            WorldPlayer targetOwner = context.State.Players[target.OwnerId];
+
+            if (WorldHelpers.IsRacePlayable(owner.Race) &&
+                WorldHelpers.IsRacePlayable(targetOwner.Race) &&
+                !power.AtLeast(BattleSide.Attacker, Context.Engine.Globals.AiBoostPotionMaxPowerPercent))
+            {
+                (WorldUnit leader, GridPosition _, UnitDefinition _) = stack.GetLeader(Context.Engine.Definitions);
+                WorldUnitGroup.Stack stackGroup = new(stack.Id);
+                WorldItemTarget.Unit leaderTarget = new(stackGroup, leader.Id);
+
+                foreach (WorldItem item in stack.Inventory.Items)
+                {
+                    ItemDefinition itemDefinition = Context.Engine.Definitions.GetItem(item.DefinitionId);
+
+                    if (itemDefinition.Effect is TemporaryBoostItemEffect)
+                    {
+                        WorldUseItemCommand command = new(stackGroup, item.Id, leaderTarget);
+                        WorldCommandResult commandResult = command.Execute(context.State, Context.Engine);
+
+                        if (!commandResult.Failed)
+                        {
+                            return command;
                         }
                     }
                 }

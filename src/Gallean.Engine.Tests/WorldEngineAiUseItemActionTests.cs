@@ -33,6 +33,18 @@ public sealed class WorldEngineAiUseItemActionTests
         };
     }
 
+    private static WorldStack UnitStack(WorldUnitId leaderId, string id, WorldPlayerId ownerId, WorldPosition position, UnitDefinition leader, int hitpoints)
+    {
+        return TestHelpers.SimpleStack(
+            new WorldStackId(id),
+            ownerId,
+            position,
+            new UnitGrid<WorldUnit>.Builder()
+                .Place(TestHelpers.SimpleUnit(leaderId, leader) with { Hitpoints = hitpoints }, GridPosition.BackCenter, false)
+                .Build(),
+            movementPoints: 0);
+    }
+
     [Test]
     public void HealItemBeforeCityTest()
     {
@@ -235,72 +247,136 @@ public sealed class WorldEngineAiUseItemActionTests
     [Test]
     public void BoostBeforeAttackTest()
     {
-        WorldMap map = TestHelpers.SimpleMap(6, 6);
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
 
-        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
             TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
-            movementPoints: 6, leadership: 3);
-        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 30);
-        UnitDefinition enemyDefinition = TestHelpers.SimpleLeaderDefinition(
-            TestHelpers.SimpleUnitDefinition("enemy", maxHitpoints: 20, initiative: 10, damage: 5),
-            movementPoints: 6, leadership: 3);
+            movementPoints: 6, leadership: 6);
         UnitModifierDefinition modifier = TestHelpers.SimpleModifier("boost") with { Damage = new UnitStatModifier(0, 50) };
         ItemDefinition potion = BoostPotion(modifier.Id);
         WorldItem potionItem = new(new WorldItemId("Tonic"), potion.Id, Charges: null);
 
-        WorldPlayer aiPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
-        WorldPlayer humanPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
 
-        WorldStack stack = TestHelpers.SimpleStack(
-                new WorldStackId("Stack1"),
-                aiPlayer.Id,
-                new WorldPosition(2, 2),
-                new UnitGrid<WorldUnit>.Builder()
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition), GridPosition.FrontBottom, false)
-                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
-                    .Build(),
-                movementPoints: 6) with
-            {
-                Inventory = new WorldInventory([potionItem])
-            };
+        WorldStack attacker = UnitStack(new WorldUnitId("attackerLeader"), "Attacker", player.Id, new WorldPosition(2, 2), leader, hitpoints: 100) with
+        {
+            MovementPoints = 6,
+            Inventory = new WorldInventory([potionItem])
+        };
+        WorldStack target = UnitStack(new WorldUnitId("targetLeader"), "Target", enemy.Id, new WorldPosition(6, 6), leader, hitpoints: 100);
 
-        WorldStack enemyStack = TestHelpers.SimpleStack(
-            new WorldStackId("Enemy"),
-            humanPlayer.Id,
-            new WorldPosition(4, 2),
-            new UnitGrid<WorldUnit>.Builder().Place(TestHelpers.SimpleUnit(new WorldUnitId("enemy"), enemyDefinition), GridPosition.FrontBottom, false).Build(),
-            movementPoints: 0);
-
-        WorldEngine engine = new TestWorldEngineBuilder()
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
             .WithMap(map)
-            .WithDefinition(leaderDefinition)
-            .WithDefinition(soldierDefinition)
-            .WithDefinition(enemyDefinition)
+            .WithDefinition(leader)
             .WithDefinition(modifier)
             .WithDefinition(potion)
-            .WithDefinition(TestHelpers.SimpleLord(aiPlayer.LordId, aiPlayer.Race, LordCategory.Warrior))
-            .WithPlayer(aiPlayer)
-            .WithDefinition(TestHelpers.SimpleLord(humanPlayer.LordId, humanPlayer.Race, LordCategory.Warrior))
-            .WithPlayer(humanPlayer)
-            .WithStack(stack)
-            .WithStack(enemyStack)
-            .WithAiMemory(aiPlayer.Id, WorldAiMemory.Empty.WithStackMemory(
-                stack.Id,
-                new WorldAiStackMemory(WorldStackOrder.Normal.Instance, new WorldAiTarget.Stack(enemyStack.Id))))
-            .Build();
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(attacker)
+            .WithStack(target)
+            .BuildSession();
 
-        WorldAiMemory memory = new WorldAiMemory(new WorldAiTurnMemory(1, aiPlayer.Id, 1, 0, 0, []))
-            .WithStackMemory(stack.Id, new WorldAiStackMemory(WorldStackOrder.Normal.Instance, new WorldAiTarget.Stack(enemyStack.Id)));
-        WorldAiActionPlan plan = new(
-            new WorldAiActionScore(6, 1000),
-            new WorldUseItemCommand(new WorldUnitGroup.Stack(stack.Id), potionItem.Id, new WorldItemTarget.Unit(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"))),
-            memory);
+        TestWorldAiRunner runner = new(session, engine);
 
-        engine.CheckCommand(new WorldAiActionCommand(), [
-            new WorldAiActionStartedEvent(plan),
-            new WorldItemUsedEvent(new WorldUnitGroup.Stack(stack.Id), potionItem, RemainingCharges: null, Consumed: true),
-            new WorldUnitModifierAppliedEvent(new WorldUnitGroup.Stack(stack.Id), new WorldUnitId("leader"), UnitModifier.FromPotion(modifier.Id, 1)),
-            new WorldAiActionEndedEvent(aiPlayer.Id, memory)
-        ]);
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 500] Use Tonic Attacker -> attackerLeader",
+            "[P2 549] Move Attacker -> (6, 6) (Attacker wins)"
+        ]));
+    }
+
+    [Test]
+    public void BoostWeakTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        UnitModifierDefinition modifier = TestHelpers.SimpleModifier("boost") with { Damage = new UnitStatModifier(0, 50) };
+        ItemDefinition potion = BoostPotion(modifier.Id);
+        WorldItem potionItem = new(new WorldItemId("Tonic"), potion.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldStack attacker = UnitStack(new WorldUnitId("attackerLeader"), "Attacker", player.Id, new WorldPosition(2, 2), leader, hitpoints: 100) with
+        {
+            MovementPoints = 6,
+            Inventory = new WorldInventory([potionItem])
+        };
+        WorldStack target = UnitStack(new WorldUnitId("targetLeader"), "Target", enemy.Id, new WorldPosition(6, 6), leader, hitpoints: 30);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(modifier)
+            .WithDefinition(potion)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(attacker)
+            .WithStack(target)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 653] Move Attacker -> (6, 6) (Attacker wins)"
+        ]));
+    }
+
+    [Test]
+    public void BoostNeutralTargetTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        UnitModifierDefinition modifier = TestHelpers.SimpleModifier("boost") with { Damage = new UnitStatModifier(0, 50) };
+        ItemDefinition potion = BoostPotion(modifier.Id);
+        WorldItem potionItem = new(new WorldItemId("Tonic"), potion.Id, Charges: null);
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with { IsAi = true };
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Neutral, map);
+
+        WorldStack attacker = UnitStack(new WorldUnitId("attackerLeader"), "Attacker", player.Id, new WorldPosition(2, 2), leader, hitpoints: 100) with
+        {
+            MovementPoints = 6,
+            Inventory = new WorldInventory([potionItem])
+        };
+        WorldStack target = UnitStack(new WorldUnitId("targetLeader"), "Target", enemy.Id, new WorldPosition(6, 6), leader, hitpoints: 100);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(modifier)
+            .WithDefinition(potion)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithSubrace(TestHelpers.NeutralSubrace)
+            .WithStack(attacker)
+            .WithStack(target)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 16] Move Attacker -> (6, 6) (Attacker wins)"
+        ]));
     }
 }

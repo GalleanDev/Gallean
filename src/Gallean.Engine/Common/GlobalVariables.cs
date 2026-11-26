@@ -17,6 +17,7 @@ public sealed record GlobalVariables
     internal WorldAiAttackPowerPercent AiAttackPowerPercentVeryHard { get; init; } = new(HumanTarget: 80, OtherTarget: 80);
     internal int AiAutoExperienceGarrisonMultiplier { get; init; } = 2;
     internal int AiAutoExperienceNeutralMaxSuggestedLevel { get; init; } = 9;
+    internal int AiBoostPotionMaxPowerPercent { get; init; } = 150;
     internal int AiGlobalSpellMinMana { get; init; } = 1000;
     internal int AiGlobalSpellMinStacks { get; init; } = 2;
     internal int AiGlobalSpellMinSuggestedLevel { get; init; } = 10;
