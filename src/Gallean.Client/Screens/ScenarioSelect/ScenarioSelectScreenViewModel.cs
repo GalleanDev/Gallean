@@ -173,19 +173,48 @@ internal sealed partial class ScenarioSelectScreenViewModel : AbstractScreenView
     [RelayCommand]
     private async Task ImportAsync(IReadOnlyList<ScenarioImportFile>? files)
     {
-        if (files is not null)
+        if (files is not null && files.Count > 0)
         {
-            foreach (ScenarioImportFile file in files)
-            {
-                GameScenario? scenario = await Game.TryImportCustomScenarioAsync(file);
+            IReadOnlyList<GameScenario> scenarios = await Game.ImportCustomScenariosAsync(files);
 
-                if (scenario is not null)
+            if (scenarios.Count > 0)
+            {
+                HashSet<CustomScenarioId?> importedIds = [];
+                List<GameScenario> importedScenarios = [];
+
+                foreach (GameScenario scenario in scenarios)
                 {
-                    Scenarios = OrderScenarios([.. Scenarios.Where(existing => existing.CustomScenarioId != scenario.CustomScenarioId), scenario]);
-                    SelectedScenario = scenario;
+                    if (importedIds.Add(scenario.CustomScenarioId))
+                    {
+                        importedScenarios.Add(scenario);
+                    }
                 }
+
+                foreach (GameScenario scenario in Scenarios)
+                {
+                    if (!importedIds.Contains(scenario.CustomScenarioId))
+                    {
+                        importedScenarios.Add(scenario);
+                    }
+                }
+
+                Scenarios = OrderScenarios(importedScenarios);
+                SelectedScenario = FindFirstScenario(importedIds);
             }
         }
+    }
+
+    private GameScenario? FindFirstScenario(HashSet<CustomScenarioId?> ids)
+    {
+        foreach (GameScenario scenario in Scenarios)
+        {
+            if (ids.Contains(scenario.CustomScenarioId))
+            {
+                return scenario;
+            }
+        }
+
+        return null;
     }
 
     [RelayCommand(CanExecute = nameof(CanDelete))]

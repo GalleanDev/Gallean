@@ -278,6 +278,31 @@ public sealed class CampaignSelectScreenViewModelTests
     }
 
     [Test]
+    public async Task ImportManyInvalidTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowCampaignSelectCommand.ExecuteAsync(null);
+
+        CampaignSelectScreenViewModel viewModel = Assert.IsOfType<CampaignSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        await viewModel.ImportCommand.ExecuteAsync([
+            new("Greywater Crossing.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg"))),
+            new("Greywater Chronicle.csg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterChronicle.csg")))
+        ]);
+
+        ErrorScreenViewModel error = Assert.IsOfType<ErrorScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(error.Message, Is.EqualTo("Failed to import Greywater Crossing.sg.\nArchive does not start with 'MQDB'."));
+        Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { viewModel, error }));
+        Assert.That(viewModel.IsCustomCampaignSelected, Is.False);
+        Assert.That(sb.GetTree(), Is.Empty);
+    }
+
+    [Test]
     public async Task DeleteTest()
     {
         using Sandbox sb = Sandbox.Create();

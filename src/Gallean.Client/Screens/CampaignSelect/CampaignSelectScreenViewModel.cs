@@ -274,20 +274,49 @@ internal sealed partial class CampaignSelectScreenViewModel : AbstractScreenView
     [RelayCommand]
     private async Task ImportAsync(IReadOnlyList<ScenarioImportFile>? files)
     {
-        if (files is not null)
+        if (files is not null && files.Count > 0)
         {
-            foreach (ScenarioImportFile file in files)
-            {
-                GameCampaign? campaign = await Game.TryImportCustomCampaignAsync(file);
+            IReadOnlyList<GameCampaign> campaigns = await Game.ImportCustomCampaignsAsync(files);
 
-                if (campaign is not null)
+            if (campaigns.Count > 0)
+            {
+                HashSet<CustomScenarioId?> importedIds = [];
+                List<GameCampaign> importedCampaigns = [];
+
+                foreach (GameCampaign campaign in campaigns)
                 {
-                    customCampaigns = [.. customCampaigns.Where(existing => existing.CustomScenarioId != campaign.CustomScenarioId), campaign];
-                    Campaigns = BuildItems();
-                    SelectedCampaign = Campaigns.First(item => item.Campaign == campaign);
+                    if (importedIds.Add(campaign.CustomScenarioId))
+                    {
+                        importedCampaigns.Add(campaign);
+                    }
                 }
+
+                foreach (GameCampaign campaign in customCampaigns)
+                {
+                    if (!importedIds.Contains(campaign.CustomScenarioId))
+                    {
+                        importedCampaigns.Add(campaign);
+                    }
+                }
+
+                customCampaigns = importedCampaigns;
+                Campaigns = BuildItems();
+                SelectedCampaign = FindFirstItem(importedIds);
             }
         }
+    }
+
+    private CampaignSelectItemViewModel? FindFirstItem(HashSet<CustomScenarioId?> ids)
+    {
+        foreach (CampaignSelectItemViewModel item in Campaigns)
+        {
+            if (ids.Contains(item.Campaign.CustomScenarioId))
+            {
+                return item;
+            }
+        }
+
+        return null;
     }
 
     [RelayCommand(CanExecute = nameof(CanDelete))]

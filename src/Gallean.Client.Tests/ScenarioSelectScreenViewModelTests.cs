@@ -288,6 +288,37 @@ public sealed class ScenarioSelectScreenViewModelTests
     }
 
     [Test]
+    public async Task ImportManyInvalidTest()
+    {
+        using Sandbox sb = Sandbox.Create();
+
+        CustomScenarioStore customScenarioStore = new(sb.GetPath("scenarios"));
+        GameViewModel gameViewModel = new TestGameViewModelBuilder().WithCustomScenarioStore(customScenarioStore).Build();
+
+        await gameViewModel.ShowScenarioSelectCommand.ExecuteAsync(null);
+
+        ScenarioSelectScreenViewModel viewModel = Assert.IsOfType<ScenarioSelectScreenViewModel>(gameViewModel.RootScreen);
+
+        await viewModel.ImportCommand.ExecuteAsync([
+            new("Greywater Siege.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterSiege.sg"))),
+            new("Broken.sg", "NOTASCENARIOFILE"u8.ToArray()),
+            new("Greywater Crossing.sg", File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "TestScenarios", "GreywaterCrossing.sg")))
+        ]);
+
+        ErrorScreenViewModel error = Assert.IsOfType<ErrorScreenViewModel>(gameViewModel.TopScreen);
+
+        Assert.That(error.Message, Is.EqualTo("Failed to import Broken.sg.\nUnknown scenario file signature 'NOTASCENAR'."));
+        Assert.That(gameViewModel.Screens, Is.EqualTo(new AbstractScreenViewModel[] { viewModel, error }));
+        Assert.That(FormatCustomScenarios(viewModel.Scenarios), Is.EqualTo([
+            "Greywater Siege | S900SC0000 | Gallean Contributors | 55a0415124c32349cd2dbf6295214722b18fd129fd2dde43842130e2eb0ae01a"
+        ]));
+        Assert.That(sb.GetTree(), Is.EquivalentTo([
+            "scenarios/",
+            "scenarios/55a0415124c32349cd2dbf6295214722b18fd129fd2dde43842130e2eb0ae01a.sg"
+        ]));
+    }
+
+    [Test]
     public async Task DeleteTest()
     {
         using Sandbox sb = Sandbox.Create();

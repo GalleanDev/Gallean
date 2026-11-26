@@ -444,66 +444,96 @@ internal sealed partial class GameViewModel : ObservableObject, IDisposable
         }
     }
 
-    public async Task<GameScenario?> TryImportCustomScenarioAsync(ScenarioImportFile file)
+    public async Task<IReadOnlyList<GameScenario>> ImportCustomScenariosAsync(IReadOnlyList<ScenarioImportFile> files)
     {
-        try
+        LoadingScreenViewModel loadingScreen = new(Tr("Importing quests…"));
+        Language language = Settings.EffectiveInterfaceLanguage;
+        List<GameScenario> scenarios = [];
+        string? error = null;
+
+        OpenScreen(loadingScreen);
+
+        for (int index = 0; index < files.Count && error is null; index++)
         {
-            Language language = Settings.EffectiveInterfaceLanguage;
-            CustomScenarioFile customScenario = CustomScenarioFile.Create(CustomScenarioType.Scenario, file.Data);
-            GameScenario scenario = await RunAsync(() => gameLoader.LoadCustomScenario(customScenario, language));
+            ScenarioImportFile file = files[index];
 
-            await RunAsync(() => gameLoader.LoadScenario(scenario.Id, customScenario, worldState: null, language));
-            await customScenarioStore.SaveAsync(customScenario);
+            try
+            {
+                CustomScenarioFile customScenario = CustomScenarioFile.Create(CustomScenarioType.Scenario, file.Data);
+                GameScenario scenario = await RunAsync(() => gameLoader.LoadCustomScenario(customScenario, language));
 
-            return scenario;
+                await RunAsync(() => gameLoader.LoadScenario(scenario.Id, customScenario, worldState: null, language));
+                await customScenarioStore.SaveAsync(customScenario);
+                scenarios.Add(scenario);
+            }
+            catch (GameDefinitionNotFoundException ex)
+            {
+                log.Error($"Failed to import '{file.Name}'.", ex);
+                error = Tr("Failed to import {0}.\n{1}", file.Name, Tr("This quest uses objects that are not in the base game ({0}).", ex.Id));
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Failed to import '{file.Name}'.", ex);
+                error = Tr("Failed to import {0}.\n{1}", file.Name, ex.Message);
+            }
         }
-        catch (GameDefinitionNotFoundException ex)
+
+        CloseScreen(loadingScreen);
+
+        if (error is not null)
         {
-            log.Error($"Failed to import '{file.Name}'.", ex);
-            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, Tr("This quest uses objects that are not in the base game ({0}).", ex.Id)), Tr("Close")));
-
-            return null;
+            OpenScreen(new ErrorScreenViewModel(error, Tr("Close")));
         }
-        catch (Exception ex)
-        {
-            log.Error($"Failed to import '{file.Name}'.", ex);
-            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, ex.Message), Tr("Close")));
 
-            return null;
-        }
+        return scenarios;
     }
 
-    public async Task<GameCampaign?> TryImportCustomCampaignAsync(ScenarioImportFile file)
+    public async Task<IReadOnlyList<GameCampaign>> ImportCustomCampaignsAsync(IReadOnlyList<ScenarioImportFile> files)
     {
-        try
-        {
-            Language language = Settings.EffectiveInterfaceLanguage;
-            CustomScenarioFile customScenario = CustomScenarioFile.Create(CustomScenarioType.Campaign, file.Data);
-            GameCampaign campaign = await RunAsync(() => gameLoader.LoadCustomCampaign(customScenario, language));
+        LoadingScreenViewModel loadingScreen = new(Tr("Importing sagas…"));
+        Language language = Settings.EffectiveInterfaceLanguage;
+        List<GameCampaign> campaigns = [];
+        string? error = null;
 
-            foreach (GameScenario scenario in campaign.Scenarios)
+        OpenScreen(loadingScreen);
+
+        for (int index = 0; index < files.Count && error is null; index++)
+        {
+            ScenarioImportFile file = files[index];
+
+            try
             {
-                await RunAsync(() => gameLoader.LoadScenario(scenario.Id, customScenario, worldState: null, language));
+                CustomScenarioFile customScenario = CustomScenarioFile.Create(CustomScenarioType.Campaign, file.Data);
+                GameCampaign campaign = await RunAsync(() => gameLoader.LoadCustomCampaign(customScenario, language));
+
+                foreach (GameScenario scenario in campaign.Scenarios)
+                {
+                    await RunAsync(() => gameLoader.LoadScenario(scenario.Id, customScenario, worldState: null, language));
+                }
+
+                await customScenarioStore.SaveAsync(customScenario);
+                campaigns.Add(campaign);
             }
-
-            await customScenarioStore.SaveAsync(customScenario);
-
-            return campaign;
+            catch (GameDefinitionNotFoundException ex)
+            {
+                log.Error($"Failed to import '{file.Name}'.", ex);
+                error = Tr("Failed to import {0}.\n{1}", file.Name, Tr("This saga uses objects that are not in the base game ({0}).", ex.Id));
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Failed to import '{file.Name}'.", ex);
+                error = Tr("Failed to import {0}.\n{1}", file.Name, ex.Message);
+            }
         }
-        catch (GameDefinitionNotFoundException ex)
+
+        CloseScreen(loadingScreen);
+
+        if (error is not null)
         {
-            log.Error($"Failed to import '{file.Name}'.", ex);
-            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, Tr("This saga uses objects that are not in the base game ({0}).", ex.Id)), Tr("Close")));
-
-            return null;
+            OpenScreen(new ErrorScreenViewModel(error, Tr("Close")));
         }
-        catch (Exception ex)
-        {
-            log.Error($"Failed to import '{file.Name}'.", ex);
-            OpenScreen(new ErrorScreenViewModel(Tr("Failed to import {0}.\n{1}", file.Name, ex.Message), Tr("Close")));
 
-            return null;
-        }
+        return campaigns;
     }
 
     public async Task<bool> TryDeleteCustomScenarioAsync(CustomScenarioId id)
