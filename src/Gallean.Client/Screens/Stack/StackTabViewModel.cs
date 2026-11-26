@@ -36,7 +36,7 @@ internal abstract partial class StackTabViewModel
         DragDrop = new DragDropViewModel(gameModel, this);
         DropZones = [SpellDropZone, GroundDropZone, DismissDropZone];
 
-        RegisterSnapshotGatedCommands(DismissCommand, LockTypeCommand);
+        RegisterSnapshotGatedCommands(DismissCommand, LockTypeCommand, OpenSpellItemsCommand);
     }
 
     public ManagementScreenViewModel Screen { get; }
@@ -323,6 +323,8 @@ internal abstract partial class StackTabViewModel
 
         UpdateDropZones(stack, dragged);
         UpdateDismissDropZone(stack, dragged);
+
+        OpenSpellItemsCommand.NotifyCanExecuteChanged();
     }
 
     private WorldGetStackInfoCommand.Result ResolveStackInfo(WorldStack stack)
@@ -558,6 +560,8 @@ internal abstract partial class StackTabViewModel
         SpellDropZone.Hide();
         DismissDropZone.Hide();
 
+        OpenSpellItemsCommand.NotifyCanExecuteChanged();
+
         Leader = null;
         StackGridTitle = string.Empty;
         StackLeadership = string.Empty;
@@ -773,6 +777,35 @@ internal abstract partial class StackTabViewModel
     private async Task RenameLeaderConfirmedAsync(WorldStackId stackId, string name)
     {
         await TryDispatchWorldActionAsync(new WorldRenameLeaderCommand(stackId, name));
+    }
+
+    [RelayCommand(CanExecute = nameof(CanOpenSpellItems))]
+    private void OpenSpellItems()
+    {
+        if (currentStack is not null)
+        {
+            Game.OpenScreen(new SpellItemsViewModel(GameModel, Game, Screen, currentStack.Id));
+        }
+    }
+
+    private bool CanOpenSpellItems()
+    {
+        return currentStack is not null && HasSpellItems(currentStack);
+    }
+
+    private bool HasSpellItems(WorldStack stack)
+    {
+        foreach (WorldItem item in stack.Equipment.Items.Values.Concat(stack.Inventory.Items))
+        {
+            ItemDefinition definition = GameModel.Definitions.GetItem(item.DefinitionId);
+
+            if (definition.Effect is SpellItemEffect)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     [RelayCommand]

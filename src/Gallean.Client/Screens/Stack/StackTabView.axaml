@@ -7,6 +7,7 @@
   <UserControl.KeyBindings>
     <KeyBinding Gesture="T" Command="{Binding Screen.CloseCommand}" />
     <KeyBinding Gesture="P" Command="{Binding Screen.CloseCommand}" />
+    <KeyBinding Gesture="S" Command="{Binding OpenSpellItemsCommand}" />
   </UserControl.KeyBindings>
 
   <UserControl.Resources>
@@ -159,11 +160,13 @@
           <RowDefinition Height="*" />
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
+          <RowDefinition Height="100*" MaxHeight="16" />
+          <RowDefinition Height="Auto" />
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0"
-              Grid.RowSpan="4"
+              Grid.RowSpan="6"
               RowDefinitions="*,Auto"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -244,7 +247,7 @@
                           HorizontalAlignment="Center" />
         </Grid>
 
-        <Line Grid.Column="2" Grid.RowSpan="4" Classes="party-divider" />
+        <Line Grid.Column="2" Grid.RowSpan="6" Classes="party-divider" />
 
         <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center" Margin="0,0,0,12">
           <local:OutlinedTextBlock Text="{Binding StackGridTitle}" Classes="object-name row" />
@@ -263,12 +266,18 @@
         </Viewbox>
 
         <StackPanel Grid.Column="3"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Classes="focus-group"
                     Classes.inactive="{Binding TargetedAction, Converter={x:Static ObjectConverters.IsNotNull}}"
                     Spacing="12"
                     VerticalAlignment="Bottom"
                     Margin="0,16,0,0">
+          <Button Classes="pill action" local:PlateChrome.TextureSeed="2" Command="{Binding OpenSpellItemsCommand}">
+            <Grid ColumnDefinitions="Auto,*">
+              <local:IconVisual Grid.Column="0" Moniker="Magic" Foreground="{Binding $parent[Button].Foreground}" />
+              <local:HotkeyLabel Grid.Column="1" Text="{local:Text 'Scrolls and staffs'}" Hotkey="S" />
+            </Grid>
+          </Button>
           <Button Classes="pill action" local:PlateChrome.TextureSeed="3" Command="{Binding DismissCommand}">
             <Grid ColumnDefinitions="Auto,*">
               <local:IconVisual Grid.Column="0" Moniker="Delete" Foreground="{Binding $parent[Button].Foreground}" />
@@ -284,7 +293,7 @@
         </StackPanel>
 
         <ContentControl Grid.Column="4"
-                        Grid.RowSpan="4"
+                        Grid.RowSpan="6"
                         Classes="ornament-panel"
                         Background="Transparent"
                         HorizontalAlignment="Center"
