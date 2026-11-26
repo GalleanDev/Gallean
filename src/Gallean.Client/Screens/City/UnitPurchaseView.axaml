@@ -5,7 +5,7 @@
              x:DataType="local:UnitPurchaseViewModel">
 
   <Border Background="{StaticResource ModalBackdropBrush}" local:Backdrop.CloseCommand="{Binding CloseCommand}">
-    <local:ModalPanel Width="480" MaxHeight="640" Title="{local:Text 'Hire unit'}" InitialFocus="{Binding #CloseButton}">
+    <local:ModalPanel Width="480" MaxHeight="720" Title="{local:Text 'Hire unit'}" InitialFocus="{Binding #CloseButton}">
 
       <local:ModalPanel.Footer>
         <Button x:Name="CloseButton"
