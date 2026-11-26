@@ -51,7 +51,7 @@ internal sealed partial class Backdrop : AvaloniaObject
             for (int column = -1; column <= 1; column++)
             {
                 Point hitPoint = point + new Vector(column * HitMargin, row * HitMargin);
-                IInputElement? hitElement = control.InputHitTest(hitPoint);
+                IInputElement? hitElement = control.InputHitTest(hitPoint, enabledElementsOnly: false);
 
                 if (hitElement is not null && hitElement != control)
                 {
