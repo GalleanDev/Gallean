@@ -903,11 +903,9 @@ internal sealed partial class WorldScreenViewModel :
 
     private async Task DispatchSelectedActionAsync(WorldCursorAction action, WorldPosition position)
     {
-        ClearSelectedAction();
-
-        if (!await TryDispatchWorldActionAsync(action.CreateCommand(position)))
+        if (await TryDispatchWorldActionAsync(action.CreateCommand(position)))
         {
-            SelectAction(action);
+            ClearSelectedAction();
         }
     }
 
