@@ -48,10 +48,10 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
 
     private static int GetShatteredArmor(IEngineContext context, BattleUnit target, UnitAttackStats attackStats)
     {
-        int alreadyShattered = 0;
+        int shatteredArmor = 0;
         foreach (BattleShatterArmorStatusEffect effect in target.StatusEffects.OfType<BattleShatterArmorStatusEffect>())
         {
-            alreadyShattered += effect.Armor;
+            shatteredArmor += effect.Armor;
         }
 
         int fortificationArmor = 0;
@@ -63,17 +63,17 @@ internal sealed class ShatterAttackResolver : BattleAbstractAttackResolver, ISta
         UnitDefinition targetDefinition = context.Definitions.GetUnit(target.DefinitionId);
         UnitStats unitStats = UnitStatsCalculator.GetStats(targetDefinition, target.Level, target.Modifiers, context.Definitions, context.Globals);
 
-        int shatteredArmor = attackStats.Damage;
-        if (shatteredArmor > 0)
+        int result = attackStats.Damage;
+        if (result > 0)
         {
-            int remainingArmor = Math.Max(0, unitStats.Armor - alreadyShattered - fortificationArmor);
-            int remainingTotalCap = Math.Max(0, context.Globals.ShatterArmorTotalCap - alreadyShattered);
+            int remainingArmor = Math.Max(0, unitStats.Armor - shatteredArmor - fortificationArmor);
+            int remainingTotalCap = Math.Max(0, context.Globals.ShatterArmorTotalCap - shatteredArmor);
 
-            shatteredArmor = Math.Min(shatteredArmor, context.Globals.ShatterArmorPerHitCap);
-            shatteredArmor = Math.Min(shatteredArmor, remainingArmor);
-            shatteredArmor = Math.Min(shatteredArmor, remainingTotalCap);
+            result = Math.Min(result, context.Globals.ShatterArmorPerHitCap);
+            result = Math.Min(result, remainingArmor);
+            result = Math.Min(result, remainingTotalCap);
         }
 
-        return shatteredArmor;
+        return result;
     }
 }
