@@ -5,11 +5,8 @@ using Avalonia.Interactivity;
 
 namespace Gallean.Client;
 
-internal sealed class AnimatedNumberTextBlock : TextBlock
+internal sealed partial class AnimatedNumberTextBlock : TextBlock
 {
-    public static readonly StyledProperty<double> ValueProperty =
-        AvaloniaProperty.Register<AnimatedNumberTextBlock, double>(nameof(Value));
-
     public static readonly StyledProperty<IReadOnlyList<AnimationProperty>> AnimationProperty =
         AvaloniaProperty.Register<AnimatedNumberTextBlock, IReadOnlyList<AnimationProperty>>(nameof(Animation), []);
 
@@ -20,11 +17,8 @@ internal sealed class AnimatedNumberTextBlock : TextBlock
         UpdateText();
     }
 
-    public double Value
-    {
-        get => GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Value { get; set; }
 
     public IReadOnlyList<AnimationProperty> Animation
     {

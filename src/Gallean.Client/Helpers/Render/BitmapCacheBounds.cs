@@ -3,25 +3,15 @@ using Avalonia.Rendering.Composition;
 
 namespace Gallean.Client;
 
-internal sealed class BitmapCacheBounds : AvaloniaObject
+internal sealed partial class BitmapCacheBounds : AvaloniaObject
 {
-    public static readonly AttachedProperty<double?> OutsetProperty =
-        AvaloniaProperty.RegisterAttached<BitmapCacheBounds, Visual, double?>("Outset");
-
     static BitmapCacheBounds()
     {
         OutsetProperty.Changed.AddClassHandler<Visual>(OnOutsetChanged);
     }
 
-    public static void SetOutset(Visual element, double? value)
-    {
-        element.SetValue(OutsetProperty, value);
-    }
-
-    public static double? GetOutset(Visual element)
-    {
-        return element.GetValue(OutsetProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial double? GetOutset(Visual element);
 
     private static (double Offset, double Size) SnapToPixels(double start, double end, double scale)
     {

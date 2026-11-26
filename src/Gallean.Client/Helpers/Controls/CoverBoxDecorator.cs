@@ -5,11 +5,8 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class CoverBoxDecorator : Decorator
+internal sealed partial class CoverBoxDecorator : Decorator
 {
-    public static readonly StyledProperty<Thickness> CropMarginProperty =
-        AvaloniaProperty.Register<CoverBoxDecorator, Thickness>(nameof(CropMargin));
-
     static CoverBoxDecorator()
     {
         AffectsArrange<CoverBoxDecorator>(CropMarginProperty);
@@ -20,11 +17,8 @@ internal sealed class CoverBoxDecorator : Decorator
         ClipToBounds = true;
     }
 
-    public Thickness CropMargin
-    {
-        get => GetValue(CropMarginProperty);
-        set => SetValue(CropMarginProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Thickness CropMargin { get; set; }
 
     protected override Size MeasureOverride(Size availableSize)
     {

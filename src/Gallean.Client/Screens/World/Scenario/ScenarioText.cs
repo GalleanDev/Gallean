@@ -5,25 +5,15 @@ using Avalonia.Controls.Documents;
 
 namespace Gallean.Client;
 
-internal sealed class ScenarioText : AvaloniaObject
+internal sealed partial class ScenarioText : AvaloniaObject
 {
-    public static readonly AttachedProperty<ImmutableArray<ScenarioTextSpan>> SpansProperty =
-        AvaloniaProperty.RegisterAttached<ScenarioText, TextBlock, ImmutableArray<ScenarioTextSpan>>("Spans");
-
     static ScenarioText()
     {
         SpansProperty.Changed.AddClassHandler<TextBlock>(OnSpansChanged);
     }
 
-    public static void SetSpans(TextBlock element, ImmutableArray<ScenarioTextSpan> value)
-    {
-        element.SetValue(SpansProperty, value);
-    }
-
-    public static ImmutableArray<ScenarioTextSpan> GetSpans(TextBlock element)
-    {
-        return element.GetValue(SpansProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial ImmutableArray<ScenarioTextSpan> GetSpans(TextBlock element);
 
     private static void OnSpansChanged(TextBlock textBlock, AvaloniaPropertyChangedEventArgs e)
     {

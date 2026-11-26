@@ -8,7 +8,7 @@ using Avalonia.VisualTree;
 
 namespace Gallean.Client;
 
-internal sealed class AnimatedTextBlock : OutlinedTextBlock
+internal sealed partial class AnimatedTextBlock : OutlinedTextBlock
 {
     private const double FadeStart = 0.15;
     private const double FadeLength = 0.45;
@@ -31,24 +31,6 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
     private static readonly TimeSpan SmokeTail = TimeSpan.FromSeconds(2.4);
     private static readonly TimeSpan SmokeFade = TimeSpan.FromSeconds(1.2);
 
-    public static readonly StyledProperty<AnimatedTextReveal?> RevealProperty =
-        AvaloniaProperty.Register<AnimatedTextBlock, AnimatedTextReveal?>(nameof(Reveal));
-
-    public static readonly StyledProperty<TimeSpan> RevealDelayProperty =
-        AvaloniaProperty.Register<AnimatedTextBlock, TimeSpan>(nameof(RevealDelay));
-
-    public static readonly StyledProperty<bool> IsSkippableProperty =
-        AvaloniaProperty.Register<AnimatedTextBlock, bool>(nameof(IsSkippable), true);
-
-    public static readonly StyledProperty<Color> GlowColorProperty =
-        AvaloniaProperty.Register<AnimatedTextBlock, Color>(nameof(GlowColor));
-
-    public static readonly StyledProperty<Color> SmokeColorProperty =
-        AvaloniaProperty.Register<AnimatedTextBlock, Color>(nameof(SmokeColor));
-
-    public static readonly DirectProperty<AnimatedTextBlock, TimeSpan> RevealEndProperty =
-        AvaloniaProperty.RegisterDirect<AnimatedTextBlock, TimeSpan>(nameof(RevealEnd), block => block.RevealEnd);
-
     private IReadOnlyList<AnimatedTextSegment> segments = [];
     private TextLayout? segmentLayout;
     private TimeSpan revealSpan;
@@ -67,41 +49,23 @@ internal sealed class AnimatedTextBlock : OutlinedTextBlock
         ClipToBoundsProperty.OverrideDefaultValue<AnimatedTextBlock>(false);
     }
 
-    public AnimatedTextReveal? Reveal
-    {
-        get => GetValue(RevealProperty);
-        set => SetValue(RevealProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AnimatedTextReveal? Reveal { get; set; }
 
-    public TimeSpan RevealDelay
-    {
-        get => GetValue(RevealDelayProperty);
-        set => SetValue(RevealDelayProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial TimeSpan RevealDelay { get; set; }
 
-    public bool IsSkippable
-    {
-        get => GetValue(IsSkippableProperty);
-        set => SetValue(IsSkippableProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = true)]
+    public partial bool IsSkippable { get; set; }
 
-    public Color GlowColor
-    {
-        get => GetValue(GlowColorProperty);
-        set => SetValue(GlowColorProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Color GlowColor { get; set; }
 
-    public Color SmokeColor
-    {
-        get => GetValue(SmokeColorProperty);
-        set => SetValue(SmokeColorProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Color SmokeColor { get; set; }
 
-    public TimeSpan RevealEnd
-    {
-        get;
-        private set => SetAndRaise(RevealEndProperty, ref field, value);
-    }
+    [GeneratedDirectProperty]
+    public partial TimeSpan RevealEnd { get; private set; }
 
     protected override Type StyleKeyOverride => typeof(TextBlock);
 

@@ -6,52 +6,22 @@ using Avalonia.VisualTree;
 
 namespace Gallean.Client;
 
-internal sealed class ModalPanel : ContentControl
+internal sealed partial class ModalPanel : ContentControl
 {
-    public static readonly StyledProperty<TextSpans?> TitleProperty =
-        AvaloniaProperty.Register<ModalPanel, TextSpans?>(nameof(Title));
+    [GeneratedStyledProperty]
+    public partial TextSpans? Title { get; set; }
 
-    public static readonly StyledProperty<string?> SubtitleProperty =
-        AvaloniaProperty.Register<ModalPanel, string?>(nameof(Subtitle));
+    [GeneratedStyledProperty]
+    public partial string? Subtitle { get; set; }
 
-    public static readonly StyledProperty<IconMoniker?> SubtitleIconProperty =
-        AvaloniaProperty.Register<ModalPanel, IconMoniker?>(nameof(SubtitleIcon));
+    [GeneratedStyledProperty]
+    public partial IconMoniker? SubtitleIcon { get; set; }
 
-    public static readonly StyledProperty<object?> FooterProperty =
-        AvaloniaProperty.Register<ModalPanel, object?>(nameof(Footer));
+    [GeneratedStyledProperty]
+    public partial object? Footer { get; set; }
 
-    public static readonly StyledProperty<IInputElement?> InitialFocusProperty =
-        AvaloniaProperty.Register<ModalPanel, IInputElement?>(nameof(InitialFocus));
-
-    public TextSpans? Title
-    {
-        get => GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
-    }
-
-    public string? Subtitle
-    {
-        get => GetValue(SubtitleProperty);
-        set => SetValue(SubtitleProperty, value);
-    }
-
-    public IconMoniker? SubtitleIcon
-    {
-        get => GetValue(SubtitleIconProperty);
-        set => SetValue(SubtitleIconProperty, value);
-    }
-
-    public object? Footer
-    {
-        get => GetValue(FooterProperty);
-        set => SetValue(FooterProperty, value);
-    }
-
-    public IInputElement? InitialFocus
-    {
-        get => GetValue(InitialFocusProperty);
-        set => SetValue(InitialFocusProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IInputElement? InitialFocus { get; set; }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {

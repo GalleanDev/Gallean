@@ -7,7 +7,7 @@ using Avalonia.Media.Immutable;
 
 namespace Gallean.Client;
 
-internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<BuildingGraphVisual.LinkStyle>
+internal sealed partial class BuildingGraphVisual : Control, BuildingStatus.IVisitor<BuildingGraphVisual.LinkStyle>
 {
     internal readonly record struct LinkStyle(int Order, double Thickness, double Opacity, DashStyle? Dash);
 
@@ -21,36 +21,6 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
     private static readonly DashStyle LinkDash = new([4, 3], 0);
     private static readonly DashStyle RequirementDash = new([0, 2.5], 0);
     private static readonly LinkStyle SelectionLockedStyle = new(0, 1.2, 0.35, LinkDash);
-
-    public static readonly StyledProperty<BuildingGraphViewModel?> GraphProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, BuildingGraphViewModel?>(nameof(Graph));
-
-    public static readonly StyledProperty<BuildingNodeViewModel?> SelectedNodeProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, BuildingNodeViewModel?>(nameof(SelectedNode));
-
-    public static readonly StyledProperty<double> UnitSizeProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, double>(nameof(UnitSize));
-
-    public static readonly StyledProperty<IBrush?> RingBrushProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, IBrush?>(nameof(RingBrush));
-
-    public static readonly StyledProperty<IBrush?> ForegroundProperty =
-        TextElement.ForegroundProperty.AddOwner<BuildingGraphVisual>();
-
-    public static readonly StyledProperty<FontFamily> FontFamilyProperty =
-        TextElement.FontFamilyProperty.AddOwner<BuildingGraphVisual>();
-
-    public static readonly StyledProperty<double> FontSizeProperty =
-        TextElement.FontSizeProperty.AddOwner<BuildingGraphVisual>();
-
-    public static readonly StyledProperty<FontWeight> FontWeightProperty =
-        TextElement.FontWeightProperty.AddOwner<BuildingGraphVisual>();
-
-    public static readonly StyledProperty<IBrush?> OutlineProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, IBrush?>(nameof(Outline));
-
-    public static readonly StyledProperty<double> OutlineThicknessProperty =
-        AvaloniaProperty.Register<BuildingGraphVisual, double>(nameof(OutlineThickness));
 
     static BuildingGraphVisual()
     {
@@ -72,65 +42,35 @@ internal sealed class BuildingGraphVisual : Control, BuildingStatus.IVisitor<Bui
         IsHitTestVisible = false;
     }
 
-    public BuildingGraphViewModel? Graph
-    {
-        get => GetValue(GraphProperty);
-        set => SetValue(GraphProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial BuildingGraphViewModel? Graph { get; set; }
 
-    public BuildingNodeViewModel? SelectedNode
-    {
-        get => GetValue(SelectedNodeProperty);
-        set => SetValue(SelectedNodeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial BuildingNodeViewModel? SelectedNode { get; set; }
 
-    public double UnitSize
-    {
-        get => GetValue(UnitSizeProperty);
-        set => SetValue(UnitSizeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double UnitSize { get; set; }
 
-    public IBrush? RingBrush
-    {
-        get => GetValue(RingBrushProperty);
-        set => SetValue(RingBrushProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? RingBrush { get; set; }
 
-    public IBrush? Foreground
-    {
-        get => GetValue(ForegroundProperty);
-        set => SetValue(ForegroundProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial IBrush? Foreground { get; set; }
 
-    public FontFamily FontFamily
-    {
-        get => GetValue(FontFamilyProperty);
-        set => SetValue(FontFamilyProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial FontFamily FontFamily { get; set; }
 
-    public double FontSize
-    {
-        get => GetValue(FontSizeProperty);
-        set => SetValue(FontSizeProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial double FontSize { get; set; }
 
-    public FontWeight FontWeight
-    {
-        get => GetValue(FontWeightProperty);
-        set => SetValue(FontWeightProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial FontWeight FontWeight { get; set; }
 
-    public IBrush? Outline
-    {
-        get => GetValue(OutlineProperty);
-        set => SetValue(OutlineProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Outline { get; set; }
 
-    public double OutlineThickness
-    {
-        get => GetValue(OutlineThicknessProperty);
-        set => SetValue(OutlineThicknessProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double OutlineThickness { get; set; }
 
     public override void Render(DrawingContext context)
     {

@@ -28,7 +28,7 @@ internal sealed partial class BuildingTabView : UserControl
     {
         placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideY;
 
-        double factor = UiScaleDecorator.GetScalingFactor(placement.Target);
+        double factor = UiScaleDecorator.GetFactor(placement.Target);
 
         if (FitsOnRight(placement, DetailsGap * factor))
         {

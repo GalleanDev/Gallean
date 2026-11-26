@@ -5,16 +5,10 @@ using Avalonia.VisualTree;
 
 namespace Gallean.Client;
 
-internal sealed class HoverItemsControl : ItemsControl
+internal sealed partial class HoverItemsControl : ItemsControl
 {
-    public static readonly StyledProperty<object?> HoveredItemProperty =
-        AvaloniaProperty.Register<HoverItemsControl, object?>(nameof(HoveredItem));
-
-    public object? HoveredItem
-    {
-        get => GetValue(HoveredItemProperty);
-        private set => SetValue(HoveredItemProperty, value);
-    }
+    [GeneratedDirectProperty]
+    public partial object? HoveredItem { get; private set; }
 
     protected override void OnPointerMoved(PointerEventArgs e)
     {

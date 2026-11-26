@@ -18,9 +18,6 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
     private const double FastForwardRate = 2.0;
     private const double InterfaceScrollMargin = 4.0;
 
-    public static readonly StyledProperty<bool> IsHitboxOverlayVisibleProperty =
-        AvaloniaProperty.Register<WorldVisual, bool>(nameof(IsHitboxOverlayVisible));
-
     private static readonly ImmutableSolidColorBrush BackdropBrush = new(Client.Theme.World.BackdropColor);
 
     private readonly WorldAmbientSoundController ambientSoundController = new();
@@ -52,11 +49,8 @@ internal sealed partial class WorldVisual : AbstractAnimatedVisual
         ClipToBounds = true;
     }
 
-    public bool IsHitboxOverlayVisible
-    {
-        get => GetValue(IsHitboxOverlayVisibleProperty);
-        set => SetValue(IsHitboxOverlayVisibleProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsHitboxOverlayVisible { get; set; }
 
     private WorldScreenViewModel ViewModel => (WorldScreenViewModel)DataContext!;
     private IAssetProvider Assets => AssetScope.GetRequiredAssets(this);

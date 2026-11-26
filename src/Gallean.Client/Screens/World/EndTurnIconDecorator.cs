@@ -8,11 +8,8 @@ using AvaloniaAnimation = Avalonia.Animation.Animation;
 
 namespace Gallean.Client;
 
-internal sealed class EndTurnIconDecorator : Decorator
+internal sealed partial class EndTurnIconDecorator : Decorator
 {
-    public static readonly StyledProperty<bool> IsSpinningProperty =
-        AvaloniaProperty.Register<EndTurnIconDecorator, bool>(nameof(IsSpinning));
-
     private readonly RotateTransform rotation = new();
     private CancellationTokenSource? cts;
 
@@ -23,11 +20,8 @@ internal sealed class EndTurnIconDecorator : Decorator
         Child = new IconVisual { Moniker = IconMoniker.EndTurn };
     }
 
-    public bool IsSpinning
-    {
-        get => GetValue(IsSpinningProperty);
-        set => SetValue(IsSpinningProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsSpinning { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {

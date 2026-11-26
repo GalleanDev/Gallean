@@ -5,17 +5,8 @@ using Gallean.Common;
 
 namespace Gallean.Client;
 
-internal sealed class AnimationVisual : AbstractAnimatedVisual, ICustomHitTest
+internal sealed partial class AnimationVisual : AbstractAnimatedVisual, ICustomHitTest
 {
-    public static readonly StyledProperty<AssetAnimationKey?> AnimationKeyProperty =
-        AvaloniaProperty.Register<AnimationVisual, AssetAnimationKey?>(nameof(AnimationKey));
-
-    public static readonly StyledProperty<Stretch> StretchProperty =
-        AvaloniaProperty.Register<AnimationVisual, Stretch>(nameof(Stretch), Stretch.Uniform);
-
-    public static readonly StyledProperty<StretchDirection> StretchDirectionProperty =
-        AvaloniaProperty.Register<AnimationVisual, StretchDirection>(nameof(StretchDirection), StretchDirection.Both);
-
     private Animation? animation;
     private int frameIndex;
     private AssetCache<Animation>.Lease? lease;
@@ -31,23 +22,14 @@ internal sealed class AnimationVisual : AbstractAnimatedVisual, ICustomHitTest
         ClipToBounds = true;
     }
 
-    public AssetAnimationKey? AnimationKey
-    {
-        get => GetValue(AnimationKeyProperty);
-        set => SetValue(AnimationKeyProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetAnimationKey? AnimationKey { get; set; }
 
-    public Stretch Stretch
-    {
-        get => GetValue(StretchProperty);
-        set => SetValue(StretchProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = Stretch.Uniform)]
+    public partial Stretch Stretch { get; set; }
 
-    public StretchDirection StretchDirection
-    {
-        get => GetValue(StretchDirectionProperty);
-        set => SetValue(StretchDirectionProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = StretchDirection.Both)]
+    public partial StretchDirection StretchDirection { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -79,7 +61,7 @@ internal sealed class AnimationVisual : AbstractAnimatedVisual, ICustomHitTest
     {
         lease?.Dispose();
 
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (AnimationKey is not null && assets is not null)
         {

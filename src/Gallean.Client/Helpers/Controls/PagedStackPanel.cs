@@ -4,23 +4,8 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class PagedStackPanel : Panel
+internal sealed partial class PagedStackPanel : Panel
 {
-    public static readonly StyledProperty<int> FirstIndexProperty =
-        AvaloniaProperty.Register<PagedStackPanel, int>(nameof(FirstIndex), coerce: CoerceFirstIndex);
-
-    public static readonly StyledProperty<double> OverflowProperty =
-        AvaloniaProperty.Register<PagedStackPanel, double>(nameof(Overflow));
-
-    public static readonly StyledProperty<bool> FillsAvailableSpaceProperty =
-        AvaloniaProperty.Register<PagedStackPanel, bool>(nameof(FillsAvailableSpace));
-
-    public static readonly StyledProperty<int> MaxRowsProperty =
-        AvaloniaProperty.Register<PagedStackPanel, int>(nameof(MaxRows), int.MaxValue, validate: value => value >= 1);
-
-    public static readonly StyledProperty<ITemplate<Control>?> SlotTemplateProperty =
-        AvaloniaProperty.Register<PagedStackPanel, ITemplate<Control>?>(nameof(SlotTemplate));
-
     private readonly List<Control> slots = [];
     private Size slotSize;
     private int columns;
@@ -32,35 +17,20 @@ internal sealed class PagedStackPanel : Panel
         AffectsMeasure<PagedStackPanel>(FillsAvailableSpaceProperty, MaxRowsProperty, SlotTemplateProperty);
     }
 
-    public int FirstIndex
-    {
-        get => GetValue(FirstIndexProperty);
-        set => SetValue(FirstIndexProperty, value);
-    }
+    [GeneratedStyledProperty(CoerceMethodName = nameof(CoerceFirstIndex))]
+    public partial int FirstIndex { get; set; }
 
-    public double Overflow
-    {
-        get => GetValue(OverflowProperty);
-        set => SetValue(OverflowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Overflow { get; set; }
 
-    public bool FillsAvailableSpace
-    {
-        get => GetValue(FillsAvailableSpaceProperty);
-        set => SetValue(FillsAvailableSpaceProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool FillsAvailableSpace { get; set; }
 
-    public int MaxRows
-    {
-        get => GetValue(MaxRowsProperty);
-        set => SetValue(MaxRowsProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = int.MaxValue, ValidateMethodName = nameof(IsValidMaxRows))]
+    public partial int MaxRows { get; set; }
 
-    public ITemplate<Control>? SlotTemplate
-    {
-        get => GetValue(SlotTemplateProperty);
-        set => SetValue(SlotTemplateProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial ITemplate<Control>? SlotTemplate { get; set; }
 
     public int VisibleCount => columns * rows;
 
@@ -119,6 +89,11 @@ internal sealed class PagedStackPanel : Panel
         {
             SetSlotCount(0);
         }
+    }
+
+    private static bool IsValidMaxRows(int value)
+    {
+        return value >= 1;
     }
 
     private static int CoerceFirstIndex(AvaloniaObject sender, int value)

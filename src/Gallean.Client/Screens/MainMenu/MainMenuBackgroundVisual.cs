@@ -3,11 +3,8 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class MainMenuBackgroundVisual : AbstractAnimatedVisual
+internal sealed partial class MainMenuBackgroundVisual : AbstractAnimatedVisual
 {
-    public static readonly StyledProperty<AssetSpriteKey?> SpriteKeyProperty =
-        AvaloniaProperty.Register<MainMenuBackgroundVisual, AssetSpriteKey?>(nameof(SpriteKey));
-
     private static readonly MainMenuBackgroundLighting Lighting = MainMenuBackgroundLighting.Create();
     private static readonly AnimationClock LightClock = new();
     private static TimeSpan lightTime;
@@ -26,11 +23,8 @@ internal sealed class MainMenuBackgroundVisual : AbstractAnimatedVisual
         ClipToBounds = true;
     }
 
-    public AssetSpriteKey? SpriteKey
-    {
-        get => GetValue(SpriteKeyProperty);
-        set => SetValue(SpriteKeyProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetSpriteKey? SpriteKey { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -114,7 +108,7 @@ internal sealed class MainMenuBackgroundVisual : AbstractAnimatedVisual
     {
         lease?.Dispose();
 
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (SpriteKey is not null && assets is not null)
         {

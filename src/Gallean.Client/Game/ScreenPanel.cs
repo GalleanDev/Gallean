@@ -11,17 +11,12 @@ using AvaloniaAnimation = Avalonia.Animation.Animation;
 
 namespace Gallean.Client;
 
-internal sealed class ScreenPanel : Panel
+internal sealed partial class ScreenPanel : Panel
 {
-    public static readonly AttachedProperty<bool> IsTopmostProperty =
-        AvaloniaProperty.RegisterAttached<ScreenPanel, Control, bool>("IsTopmost", defaultValue: true, inherits: true);
-
     private readonly Dictionary<Control, AbstractScreenViewModel> screens = [];
 
-    public static bool GetIsTopmost(Control control)
-    {
-        return control.GetValue(IsTopmostProperty);
-    }
+    [GeneratedAttachedProperty(DefaultValue = true, Inherits = true)]
+    public static partial bool GetIsTopmost(Control control);
 
     protected override void ChildrenChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {

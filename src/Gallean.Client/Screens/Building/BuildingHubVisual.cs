@@ -4,7 +4,7 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class BuildingHubVisual : Control
+internal sealed partial class BuildingHubVisual : Control
 {
     private const double TextureOpacity = 0.55;
     private const double DropShadowBlur = 8.0;
@@ -13,24 +13,6 @@ internal sealed class BuildingHubVisual : Control
     private static readonly Vector DropShadowOffset = new(0.0, 3.0);
     private static readonly Vector BevelOffset = new(-1.0, -1.3);
     private static readonly Vector InnerShadowOffset = new(1.1, 1.5);
-
-    public static readonly StyledProperty<BuildingGraphViewModel?> GraphProperty =
-        AvaloniaProperty.Register<BuildingHubVisual, BuildingGraphViewModel?>(nameof(Graph));
-
-    public static readonly StyledProperty<double> UnitSizeProperty =
-        AvaloniaProperty.Register<BuildingHubVisual, double>(nameof(UnitSize));
-
-    public static readonly StyledProperty<IBrush?> FillProperty =
-        AvaloniaProperty.Register<BuildingHubVisual, IBrush?>(nameof(Fill));
-
-    public static readonly StyledProperty<IBrush?> TextureProperty =
-        AvaloniaProperty.Register<BuildingHubVisual, IBrush?>(nameof(Texture));
-
-    public static readonly StyledProperty<IBrush?> ShadowProperty =
-        AvaloniaProperty.Register<BuildingHubVisual, IBrush?>(nameof(Shadow));
-
-    public static readonly StyledProperty<IBrush?> BevelProperty =
-        AvaloniaProperty.Register<BuildingHubVisual, IBrush?>(nameof(Bevel));
 
     static BuildingHubVisual()
     {
@@ -42,41 +24,23 @@ internal sealed class BuildingHubVisual : Control
         IsHitTestVisible = false;
     }
 
-    public BuildingGraphViewModel? Graph
-    {
-        get => GetValue(GraphProperty);
-        set => SetValue(GraphProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial BuildingGraphViewModel? Graph { get; set; }
 
-    public double UnitSize
-    {
-        get => GetValue(UnitSizeProperty);
-        set => SetValue(UnitSizeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double UnitSize { get; set; }
 
-    public IBrush? Fill
-    {
-        get => GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Fill { get; set; }
 
-    public IBrush? Texture
-    {
-        get => GetValue(TextureProperty);
-        set => SetValue(TextureProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Texture { get; set; }
 
-    public IBrush? Shadow
-    {
-        get => GetValue(ShadowProperty);
-        set => SetValue(ShadowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Shadow { get; set; }
 
-    public IBrush? Bevel
-    {
-        get => GetValue(BevelProperty);
-        set => SetValue(BevelProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Bevel { get; set; }
 
     public override void Render(DrawingContext context)
     {

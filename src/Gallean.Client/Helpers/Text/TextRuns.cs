@@ -4,25 +4,15 @@ using Avalonia.Controls.Documents;
 
 namespace Gallean.Client;
 
-internal sealed class TextRuns : AvaloniaObject
+internal sealed partial class TextRuns : AvaloniaObject
 {
-    public static readonly AttachedProperty<TextSpans?> SpansProperty =
-        AvaloniaProperty.RegisterAttached<TextRuns, TextBlock, TextSpans?>("Spans");
-
     static TextRuns()
     {
         SpansProperty.Changed.AddClassHandler<TextBlock>(OnSpansChanged);
     }
 
-    public static void SetSpans(TextBlock element, TextSpans? value)
-    {
-        element.SetValue(SpansProperty, value);
-    }
-
-    public static TextSpans? GetSpans(TextBlock element)
-    {
-        return element.GetValue(SpansProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial TextSpans? GetSpans(TextBlock element);
 
     private static void OnSpansChanged(TextBlock textBlock, AvaloniaPropertyChangedEventArgs e)
     {

@@ -4,16 +4,10 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class CapitalBackdropVisual : Control
+internal sealed partial class CapitalBackdropVisual : Control
 {
     private const double BlurStrength = 30;
     private const double EdgeFadeWidth = 0.015;
-
-    public static readonly StyledProperty<AssetSpriteKey?> SpriteKeyProperty =
-        AvaloniaProperty.Register<CapitalBackdropVisual, AssetSpriteKey?>(nameof(SpriteKey));
-
-    public static readonly StyledProperty<Size> CanvasSizeProperty =
-        AvaloniaProperty.Register<CapitalBackdropVisual, Size>(nameof(CanvasSize));
 
     private AssetCache<Sprite>.Lease? lease;
     private Sprite? sprite;
@@ -28,17 +22,11 @@ internal sealed class CapitalBackdropVisual : Control
         ClipToBounds = true;
     }
 
-    public AssetSpriteKey? SpriteKey
-    {
-        get => GetValue(SpriteKeyProperty);
-        set => SetValue(SpriteKeyProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetSpriteKey? SpriteKey { get; set; }
 
-    public Size CanvasSize
-    {
-        get => GetValue(CanvasSizeProperty);
-        set => SetValue(CanvasSizeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Size CanvasSize { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -70,7 +58,7 @@ internal sealed class CapitalBackdropVisual : Control
     {
         lease?.Dispose();
 
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (SpriteKey is not null && assets is not null)
         {

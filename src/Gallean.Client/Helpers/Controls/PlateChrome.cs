@@ -5,7 +5,7 @@ using Avalonia.Rendering;
 
 namespace Gallean.Client;
 
-internal sealed class PlateChrome : Control, ICustomHitTest
+internal sealed partial class PlateChrome : Control, ICustomHitTest
 {
     public sealed record Lighting(Visual Space, IReadOnlyList<Lighting.Light> Lights, double Ambient)
     {
@@ -28,199 +28,71 @@ internal sealed class PlateChrome : Control, ICustomHitTest
     private const double GlowHaloBlur = 10;
     private const double GlowHaloReach = 32;
 
-    public static readonly StyledProperty<PlateChromeShapeType> ShapeProperty =
-        AvaloniaProperty.Register<PlateChrome, PlateChromeShapeType>(nameof(Shape), PlateChromeShapeType.Spiked);
-
-    public static readonly StyledProperty<IBrush?> StrokeProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Stroke));
-
-    public static readonly StyledProperty<double> StrokeThicknessProperty =
-        AvaloniaProperty.Register<PlateChrome, double>(nameof(StrokeThickness), 4);
-
-    public static readonly StyledProperty<CornerRadius> PanelRadiusProperty =
-        AvaloniaProperty.Register<PlateChrome, CornerRadius>(nameof(PanelRadius));
-
-    public static readonly StyledProperty<IBrush?> TrimProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Trim));
-
-    public static readonly StyledProperty<IBrush?> OuterShadowProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(OuterShadow));
-
-    public static readonly StyledProperty<IBrush?> GlowProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Glow));
-
-    public static readonly StyledProperty<IBrush?> GlowHaloProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(GlowHalo));
-
-    public static readonly StyledProperty<IBrush?> BevelProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Bevel));
-
-    public static readonly StyledProperty<IBrush?> OutlineProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Outline));
-
-    public static readonly StyledProperty<double> InnerShadowDepthProperty =
-        AvaloniaProperty.Register<PlateChrome, double>(nameof(InnerShadowDepth), 4);
-
-    public static readonly StyledProperty<IBrush?> InnerShadowProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(InnerShadow));
-
-    public static readonly StyledProperty<IBrush?> GlossProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Gloss));
-
-    public static readonly StyledProperty<IBrush?> FillProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Fill));
-
-    public static readonly StyledProperty<IBrush?> TextureProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(Texture));
-
-    public static readonly StyledProperty<double> TrailingSectionWidthProperty =
-        AvaloniaProperty.Register<PlateChrome, double>(nameof(TrailingSectionWidth));
-
-    public static readonly StyledProperty<IBrush?> TrailingSectionOverlayProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(TrailingSectionOverlay));
-
-    public static readonly StyledProperty<IBrush?> TrailingSectionDividerProperty =
-        AvaloniaProperty.Register<PlateChrome, IBrush?>(nameof(TrailingSectionDivider));
-
-    public static readonly AttachedProperty<int> TextureSeedProperty =
-        AvaloniaProperty.RegisterAttached<PlateChrome, Control, int>("TextureSeed", 1);
-
-    public static readonly AttachedProperty<Lighting?> LightingProperty =
-        AvaloniaProperty.RegisterAttached<PlateChrome, Control, Lighting?>("Lighting", inherits: true);
-
     static PlateChrome()
     {
         AffectsRender<PlateChrome>(ShapeProperty, StrokeProperty, StrokeThicknessProperty, PanelRadiusProperty, TrimProperty, OuterShadowProperty, GlowProperty, GlowHaloProperty, InnerShadowProperty, BevelProperty, OutlineProperty, InnerShadowDepthProperty, GlossProperty, FillProperty, TextureProperty, TrailingSectionWidthProperty, TrailingSectionOverlayProperty, TrailingSectionDividerProperty, TextureSeedProperty, LightingProperty);
         ClipToBoundsProperty.OverrideDefaultValue<PlateChrome>(false);
     }
 
-    public PlateChromeShapeType Shape
-    {
-        get => GetValue(ShapeProperty);
-        set => SetValue(ShapeProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = PlateChromeShapeType.Spiked)]
+    public partial PlateChromeShapeType Shape { get; set; }
 
-    public IBrush? Stroke
-    {
-        get => GetValue(StrokeProperty);
-        set => SetValue(StrokeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Stroke { get; set; }
 
-    public double StrokeThickness
-    {
-        get => GetValue(StrokeThicknessProperty);
-        set => SetValue(StrokeThicknessProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 4.0)]
+    public partial double StrokeThickness { get; set; }
 
-    public CornerRadius PanelRadius
-    {
-        get => GetValue(PanelRadiusProperty);
-        set => SetValue(PanelRadiusProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial CornerRadius PanelRadius { get; set; }
 
-    public IBrush? Trim
-    {
-        get => GetValue(TrimProperty);
-        set => SetValue(TrimProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Trim { get; set; }
 
-    public IBrush? OuterShadow
-    {
-        get => GetValue(OuterShadowProperty);
-        set => SetValue(OuterShadowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? OuterShadow { get; set; }
 
-    public IBrush? Glow
-    {
-        get => GetValue(GlowProperty);
-        set => SetValue(GlowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Glow { get; set; }
 
-    public IBrush? GlowHalo
-    {
-        get => GetValue(GlowHaloProperty);
-        set => SetValue(GlowHaloProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? GlowHalo { get; set; }
 
-    public IBrush? Bevel
-    {
-        get => GetValue(BevelProperty);
-        set => SetValue(BevelProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Bevel { get; set; }
 
-    public IBrush? Outline
-    {
-        get => GetValue(OutlineProperty);
-        set => SetValue(OutlineProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Outline { get; set; }
 
-    public double InnerShadowDepth
-    {
-        get => GetValue(InnerShadowDepthProperty);
-        set => SetValue(InnerShadowDepthProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 4.0)]
+    public partial double InnerShadowDepth { get; set; }
 
-    public IBrush? InnerShadow
-    {
-        get => GetValue(InnerShadowProperty);
-        set => SetValue(InnerShadowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? InnerShadow { get; set; }
 
-    public IBrush? Gloss
-    {
-        get => GetValue(GlossProperty);
-        set => SetValue(GlossProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Gloss { get; set; }
 
-    public IBrush? Fill
-    {
-        get => GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Fill { get; set; }
 
-    public IBrush? Texture
-    {
-        get => GetValue(TextureProperty);
-        set => SetValue(TextureProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Texture { get; set; }
 
-    public double TrailingSectionWidth
-    {
-        get => GetValue(TrailingSectionWidthProperty);
-        set => SetValue(TrailingSectionWidthProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double TrailingSectionWidth { get; set; }
 
-    public IBrush? TrailingSectionOverlay
-    {
-        get => GetValue(TrailingSectionOverlayProperty);
-        set => SetValue(TrailingSectionOverlayProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? TrailingSectionOverlay { get; set; }
 
-    public IBrush? TrailingSectionDivider
-    {
-        get => GetValue(TrailingSectionDividerProperty);
-        set => SetValue(TrailingSectionDividerProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? TrailingSectionDivider { get; set; }
 
-    public static int GetTextureSeed(Control control)
-    {
-        return control.GetValue(TextureSeedProperty);
-    }
+    [GeneratedAttachedProperty(DefaultValue = 1)]
+    public static partial int GetTextureSeed(Control control);
 
-    public static void SetTextureSeed(Control control, int value)
-    {
-        control.SetValue(TextureSeedProperty, value);
-    }
-
-    public static Lighting? GetLighting(Control control)
-    {
-        return control.GetValue(LightingProperty);
-    }
-
-    public static void SetLighting(Control control, Lighting? value)
-    {
-        control.SetValue(LightingProperty, value);
-    }
+    [GeneratedAttachedProperty(Inherits = true)]
+    public static partial Lighting? GetLighting(Control control);
 
     public bool HitTest(Point point)
     {

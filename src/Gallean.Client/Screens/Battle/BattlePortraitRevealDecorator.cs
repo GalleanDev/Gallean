@@ -4,14 +4,11 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class BattlePortraitRevealDecorator : Decorator
+internal sealed partial class BattlePortraitRevealDecorator : Decorator
 {
     private const double Rise = 16.0;
 
     private static readonly TimeSpan Duration = TimeSpan.FromSeconds(0.3);
-
-    public static readonly StyledProperty<BattleUnitId?> UnitIdProperty =
-        AvaloniaProperty.Register<BattlePortraitRevealDecorator, BattleUnitId?>(nameof(UnitId));
 
     private readonly TranslateTransform transform = new();
 
@@ -25,11 +22,8 @@ internal sealed class BattlePortraitRevealDecorator : Decorator
         RenderTransform = transform;
     }
 
-    public BattleUnitId? UnitId
-    {
-        get => GetValue(UnitIdProperty);
-        set => SetValue(UnitIdProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial BattleUnitId? UnitId { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {

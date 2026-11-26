@@ -4,21 +4,15 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class PopupLayoutTransformControl : LayoutTransformControl
+internal sealed partial class PopupLayoutTransformControl : LayoutTransformControl
 {
-    public static readonly StyledProperty<Transform?> TransformProperty =
-        AvaloniaProperty.Register<PopupLayoutTransformControl, Transform?>(nameof(Transform));
-
     public PopupLayoutTransformControl()
     {
         UpdateLayoutTransform();
     }
 
-    public Transform? Transform
-    {
-        get => GetValue(TransformProperty);
-        set => SetValue(TransformProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Transform? Transform { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -40,7 +34,7 @@ internal sealed class PopupLayoutTransformControl : LayoutTransformControl
         }
         else
         {
-            double factor = UiScaleDecorator.GetScalingFactor(this);
+            double factor = UiScaleDecorator.GetFactor(this);
 
             LayoutTransform = new ScaleTransform(factor, factor);
         }

@@ -6,11 +6,8 @@ using Avalonia.Media.TextFormatting;
 
 namespace Gallean.Client;
 
-internal sealed class TextLines : AvaloniaObject
+internal sealed partial class TextLines : AvaloniaObject
 {
-    public static readonly AttachedProperty<int> MinLinesProperty =
-        AvaloniaProperty.RegisterAttached<TextLines, TextBlock, int>("MinLines");
-
     static TextLines()
     {
         MinLinesProperty.Changed.AddClassHandler<TextBlock>(OnMinLinesChanged);
@@ -25,15 +22,8 @@ internal sealed class TextLines : AvaloniaObject
         TextBlock.PaddingProperty.Changed.AddClassHandler<TextBlock>(OnFontChanged);
     }
 
-    public static void SetMinLines(TextBlock element, int value)
-    {
-        element.SetValue(MinLinesProperty, value);
-    }
-
-    public static int GetMinLines(TextBlock element)
-    {
-        return element.GetValue(MinLinesProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial int GetMinLines(TextBlock element);
 
     private static void OnMinLinesChanged(TextBlock textBlock, AvaloniaPropertyChangedEventArgs e)
     {

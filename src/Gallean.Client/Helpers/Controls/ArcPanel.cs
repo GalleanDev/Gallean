@@ -3,17 +3,8 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-internal sealed class ArcPanel : Panel
+internal sealed partial class ArcPanel : Panel
 {
-    public static readonly StyledProperty<double> RadiusProperty =
-        AvaloniaProperty.Register<ArcPanel, double>(nameof(Radius), 200);
-
-    public static readonly StyledProperty<double> ItemAngleProperty =
-        AvaloniaProperty.Register<ArcPanel, double>(nameof(ItemAngle), 15);
-
-    public static readonly StyledProperty<double> SpreadProperty =
-        AvaloniaProperty.Register<ArcPanel, double>(nameof(Spread), 1);
-
     private Size slot;
 
     static ArcPanel()
@@ -22,23 +13,14 @@ internal sealed class ArcPanel : Panel
         AffectsArrange<ArcPanel>(SpreadProperty);
     }
 
-    public double Radius
-    {
-        get => GetValue(RadiusProperty);
-        set => SetValue(RadiusProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 200.0)]
+    public partial double Radius { get; set; }
 
-    public double ItemAngle
-    {
-        get => GetValue(ItemAngleProperty);
-        set => SetValue(ItemAngleProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 15.0)]
+    public partial double ItemAngle { get; set; }
 
-    public double Spread
-    {
-        get => GetValue(SpreadProperty);
-        set => SetValue(SpreadProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 1.0)]
+    public partial double Spread { get; set; }
 
     protected override Size MeasureOverride(Size availableSize)
     {

@@ -5,21 +5,15 @@ using Avalonia.Media.Immutable;
 
 namespace Gallean.Client;
 
-internal sealed class GlowVisual : Control
+internal sealed partial class GlowVisual : Control
 {
-    public static readonly StyledProperty<Color> ColorProperty =
-        AvaloniaProperty.Register<GlowVisual, Color>(nameof(Color));
-
     static GlowVisual()
     {
         AffectsRender<GlowVisual>(ColorProperty);
     }
 
-    public Color Color
-    {
-        get => GetValue(ColorProperty);
-        set => SetValue(ColorProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Color Color { get; set; }
 
     public override void Render(DrawingContext context)
     {

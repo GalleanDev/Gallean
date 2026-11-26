@@ -3,25 +3,15 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-internal sealed class Blankslate : AvaloniaObject
+internal sealed partial class Blankslate : AvaloniaObject
 {
-    public static readonly AttachedProperty<object?> ContentProperty =
-        AvaloniaProperty.RegisterAttached<Blankslate, ItemsControl, object?>("Content");
-
     static Blankslate()
     {
         ContentProperty.Changed.AddClassHandler<ItemsControl>(OnContentChanged);
     }
 
-    public static void SetContent(ItemsControl element, object? value)
-    {
-        element.SetValue(ContentProperty, value);
-    }
-
-    public static object? GetContent(ItemsControl element)
-    {
-        return element.GetValue(ContentProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial object? GetContent(ItemsControl element);
 
     private static void OnContentChanged(ItemsControl itemsControl, AvaloniaPropertyChangedEventArgs e)
     {

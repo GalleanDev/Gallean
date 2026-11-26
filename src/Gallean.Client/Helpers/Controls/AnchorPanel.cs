@@ -3,21 +3,15 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-internal sealed class AnchorPanel : Panel
+internal sealed partial class AnchorPanel : Panel
 {
-    public static readonly StyledProperty<RelativePoint> AnchorProperty =
-        AvaloniaProperty.Register<AnchorPanel, RelativePoint>(nameof(Anchor));
-
     static AnchorPanel()
     {
         AffectsArrange<AnchorPanel>(AnchorProperty);
     }
 
-    public RelativePoint Anchor
-    {
-        get => GetValue(AnchorProperty);
-        set => SetValue(AnchorProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial RelativePoint Anchor { get; set; }
 
     protected override Size MeasureOverride(Size availableSize)
     {

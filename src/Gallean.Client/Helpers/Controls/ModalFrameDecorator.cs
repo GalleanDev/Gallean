@@ -4,7 +4,7 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class ModalFrameDecorator : Decorator
+internal sealed partial class ModalFrameDecorator : Decorator
 {
     private const double OutlineThickness = 1;
     private const double BandThickness = 2;
@@ -16,15 +16,6 @@ internal sealed class ModalFrameDecorator : Decorator
 
     private static readonly double SpikeOutset = SpikeReach + GetSpikeReach() - CenterInset;
 
-    public static readonly StyledProperty<IBrush?> BackgroundProperty =
-        AvaloniaProperty.Register<ModalFrameDecorator, IBrush?>(nameof(Background));
-
-    public static readonly StyledProperty<IBrush?> BorderBrushProperty =
-        AvaloniaProperty.Register<ModalFrameDecorator, IBrush?>(nameof(BorderBrush));
-
-    public static readonly StyledProperty<IBrush?> OutlineBrushProperty =
-        AvaloniaProperty.Register<ModalFrameDecorator, IBrush?>(nameof(OutlineBrush));
-
     static ModalFrameDecorator()
     {
         AffectsRender<ModalFrameDecorator>(BackgroundProperty, BorderBrushProperty, OutlineBrushProperty);
@@ -35,23 +26,14 @@ internal sealed class ModalFrameDecorator : Decorator
         ClipToBoundsProperty.OverrideDefaultValue<ModalFrameDecorator>(false);
     }
 
-    public IBrush? Background
-    {
-        get => GetValue(BackgroundProperty);
-        set => SetValue(BackgroundProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Background { get; set; }
 
-    public IBrush? BorderBrush
-    {
-        get => GetValue(BorderBrushProperty);
-        set => SetValue(BorderBrushProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? BorderBrush { get; set; }
 
-    public IBrush? OutlineBrush
-    {
-        get => GetValue(OutlineBrushProperty);
-        set => SetValue(OutlineBrushProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? OutlineBrush { get; set; }
 
     private static Geometry FrameLine(Size size)
     {

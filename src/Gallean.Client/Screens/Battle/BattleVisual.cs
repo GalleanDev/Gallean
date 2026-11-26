@@ -7,14 +7,8 @@ using Gallean.Configuration;
 
 namespace Gallean.Client;
 
-internal sealed class BattleVisual : AbstractAnimatedVisual
+internal sealed partial class BattleVisual : AbstractAnimatedVisual
 {
-    public static readonly StyledProperty<bool> IsLightOverlayVisibleProperty =
-        AvaloniaProperty.Register<BattleVisual, bool>(nameof(IsLightOverlayVisible));
-
-    public static readonly StyledProperty<bool> IsHitboxOverlayVisibleProperty =
-        AvaloniaProperty.Register<BattleVisual, bool>(nameof(IsHitboxOverlayVisible));
-
     private readonly AnimationClock animationClock = new();
     private readonly BattleRenderContentProvider contentProvider = new();
     private readonly BattleRenderer renderer = new();
@@ -40,17 +34,11 @@ internal sealed class BattleVisual : AbstractAnimatedVisual
         Focusable = false;
     }
 
-    public bool IsLightOverlayVisible
-    {
-        get => GetValue(IsLightOverlayVisibleProperty);
-        set => SetValue(IsLightOverlayVisibleProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsLightOverlayVisible { get; set; }
 
-    public bool IsHitboxOverlayVisible
-    {
-        get => GetValue(IsHitboxOverlayVisibleProperty);
-        set => SetValue(IsHitboxOverlayVisibleProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsHitboxOverlayVisible { get; set; }
 
     private BattleScreenViewModel ViewModel => (BattleScreenViewModel)DataContext!;
     private IAssetProvider Assets => AssetScope.GetRequiredAssets(this);

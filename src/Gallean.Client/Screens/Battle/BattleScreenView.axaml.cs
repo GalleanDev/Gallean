@@ -174,12 +174,12 @@ internal sealed partial class BattleScreenView : UserControl
 
     private static void PlaceItemDetails(CustomPopupPlacement placement)
     {
-        double gap = ItemDetailsGap * UiScaleDecorator.GetScalingFactor(placement.Target);
+        double gap = ItemDetailsGap * UiScaleDecorator.GetFactor(placement.Target);
 
         placement.ConstraintAdjustment = PopupPositionerConstraintAdjustment.SlideX;
         placement.Anchor = PopupAnchor.Top;
         placement.Gravity = PopupGravity.Top;
-        placement.Offset = new Point(0, -ItemDetailsGap * UiScaleDecorator.GetScalingFactor(placement.Target));
+        placement.Offset = new Point(0, -ItemDetailsGap * UiScaleDecorator.GetFactor(placement.Target));
     }
 
     private static void PlaceUnitDetails(CustomPopupPlacement placement)
@@ -201,7 +201,7 @@ internal sealed partial class BattleScreenView : UserControl
                 Rect gridRect = new(grid.Bounds.Size);
                 Rect unitBounds = unitRect.TransformToAABB(unitTransform.Value);
                 Rect gridBounds = gridRect.TransformToAABB(gridTransform.Value);
-                double gap = UnitDetailsGap * UiScaleDecorator.GetScalingFactor(target);
+                double gap = UnitDetailsGap * UiScaleDecorator.GetFactor(target);
 
                 if (unitBounds.Center.X < topLevel.ClientSize.Width / 2.0)
                 {

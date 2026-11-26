@@ -5,20 +5,8 @@ using SkiaSharp;
 
 namespace Gallean.Client;
 
-internal sealed class SpriteVisual : Control
+internal sealed partial class SpriteVisual : Control
 {
-    public static readonly StyledProperty<AssetSpriteKey?> SpriteKeyProperty =
-        AvaloniaProperty.Register<SpriteVisual, AssetSpriteKey?>(nameof(SpriteKey));
-
-    public static readonly StyledProperty<Stretch> StretchProperty =
-        AvaloniaProperty.Register<SpriteVisual, Stretch>(nameof(Stretch), Stretch.Uniform);
-
-    public static readonly StyledProperty<StretchDirection> StretchDirectionProperty =
-        AvaloniaProperty.Register<SpriteVisual, StretchDirection>(nameof(StretchDirection), StretchDirection.Both);
-
-    public static readonly StyledProperty<Size?> CanvasSizeProperty =
-        AvaloniaProperty.Register<SpriteVisual, Size?>(nameof(CanvasSize));
-
     private AssetCache<Sprite>.Lease? lease;
     private Sprite? sprite;
 
@@ -33,29 +21,17 @@ internal sealed class SpriteVisual : Control
         ClipToBounds = true;
     }
 
-    public AssetSpriteKey? SpriteKey
-    {
-        get => GetValue(SpriteKeyProperty);
-        set => SetValue(SpriteKeyProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetSpriteKey? SpriteKey { get; set; }
 
-    public Stretch Stretch
-    {
-        get => GetValue(StretchProperty);
-        set => SetValue(StretchProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = Stretch.Uniform)]
+    public partial Stretch Stretch { get; set; }
 
-    public StretchDirection StretchDirection
-    {
-        get => GetValue(StretchDirectionProperty);
-        set => SetValue(StretchDirectionProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = StretchDirection.Both)]
+    public partial StretchDirection StretchDirection { get; set; }
 
-    public Size? CanvasSize
-    {
-        get => GetValue(CanvasSizeProperty);
-        set => SetValue(CanvasSizeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Size? CanvasSize { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -87,7 +63,7 @@ internal sealed class SpriteVisual : Control
     {
         lease?.Dispose();
 
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (SpriteKey is not null && assets is not null)
         {

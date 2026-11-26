@@ -3,36 +3,18 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-internal sealed class PriceButton : Button
+internal sealed partial class PriceButton : Button
 {
     private const int MaxPriceComponents = 2;
 
-    public static readonly StyledProperty<ResourceSetViewModel?> PriceProperty =
-        AvaloniaProperty.Register<PriceButton, ResourceSetViewModel?>(nameof(Price));
+    [GeneratedStyledProperty]
+    public partial ResourceSetViewModel? Price { get; set; }
 
-    public static readonly StyledProperty<OfferStatusViewModel?> StatusProperty =
-        AvaloniaProperty.Register<PriceButton, OfferStatusViewModel?>(nameof(Status));
+    [GeneratedStyledProperty]
+    public partial OfferStatusViewModel? Status { get; set; }
 
-    public static readonly DirectProperty<PriceButton, object?> PriceContentProperty =
-        AvaloniaProperty.RegisterDirect<PriceButton, object?>(nameof(PriceContent), button => button.PriceContent);
-
-    public ResourceSetViewModel? Price
-    {
-        get => GetValue(PriceProperty);
-        set => SetValue(PriceProperty, value);
-    }
-
-    public OfferStatusViewModel? Status
-    {
-        get => GetValue(StatusProperty);
-        set => SetValue(StatusProperty, value);
-    }
-
-    public object? PriceContent
-    {
-        get;
-        private set => SetAndRaise(PriceContentProperty, ref field, value);
-    }
+    [GeneratedDirectProperty]
+    public partial object? PriceContent { get; private set; }
 
     protected override Type StyleKeyOverride => typeof(Button);
 

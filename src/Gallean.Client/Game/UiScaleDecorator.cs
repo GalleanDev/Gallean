@@ -5,20 +5,8 @@ using Gallean.Configuration;
 
 namespace Gallean.Client;
 
-internal sealed class UiScaleDecorator : Decorator
+internal sealed partial class UiScaleDecorator : Decorator
 {
-    public static readonly AttachedProperty<double> FactorProperty =
-        AvaloniaProperty.RegisterAttached<UiScaleDecorator, Visual, double>("Factor", 1.0, inherits: true);
-
-    public static readonly AttachedProperty<double> RenderScalingProperty =
-        AvaloniaProperty.RegisterAttached<UiScaleDecorator, Visual, double>("RenderScaling", 1.0, inherits: true);
-
-    public static readonly StyledProperty<double> MinContentWidthProperty =
-        AvaloniaProperty.Register<UiScaleDecorator, double>(nameof(MinContentWidth));
-
-    public static readonly StyledProperty<double> MinContentHeightProperty =
-        AvaloniaProperty.Register<UiScaleDecorator, double>(nameof(MinContentHeight));
-
     private readonly ScaleTransform transform = new();
     private TopLevel? topLevel;
 
@@ -28,27 +16,17 @@ internal sealed class UiScaleDecorator : Decorator
         CacheModeProperty.Changed.AddClassHandler<Visual>(OnCacheScaleChanged);
     }
 
-    public double MinContentWidth
-    {
-        get => GetValue(MinContentWidthProperty);
-        set => SetValue(MinContentWidthProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double MinContentWidth { get; set; }
 
-    public double MinContentHeight
-    {
-        get => GetValue(MinContentHeightProperty);
-        set => SetValue(MinContentHeightProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double MinContentHeight { get; set; }
 
-    public static double GetRenderScaling(Visual element)
-    {
-        return element.GetValue(RenderScalingProperty);
-    }
+    [GeneratedAttachedProperty(DefaultValue = 1.0, Inherits = true)]
+    public static partial double GetRenderScaling(Visual element);
 
-    public static double GetScalingFactor(Visual element)
-    {
-        return element.GetValue(FactorProperty);
-    }
+    [GeneratedAttachedProperty(DefaultValue = 1.0, Inherits = true)]
+    public static partial double GetFactor(Visual element);
 
     public static double GetViewportScaling(double deviceHeight)
     {
@@ -81,8 +59,8 @@ internal sealed class UiScaleDecorator : Decorator
         }
         else if (e.Property == FactorProperty)
         {
-            transform.ScaleX = GetScalingFactor(this);
-            transform.ScaleY = GetScalingFactor(this);
+            transform.ScaleX = GetFactor(this);
+            transform.ScaleY = GetFactor(this);
         }
         else if (e.Property == SettingsScope.SettingsProperty ||
                  e.Property == MinContentWidthProperty ||
@@ -139,7 +117,7 @@ internal sealed class UiScaleDecorator : Decorator
 
     protected override Size ArrangeOverride(Size finalSize)
     {
-        Child?.Arrange(new Rect(finalSize / GetScalingFactor(this)));
+        Child?.Arrange(new Rect(finalSize / GetFactor(this)));
 
         return finalSize;
     }
@@ -148,7 +126,7 @@ internal sealed class UiScaleDecorator : Decorator
     {
         if (visual.CacheMode is BitmapCache cache)
         {
-            cache.RenderAtScale = GetScalingFactor(visual);
+            cache.RenderAtScale = GetFactor(visual);
         }
     }
 

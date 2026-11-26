@@ -3,19 +3,14 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-internal sealed class AudioScope : AvaloniaObject
+internal sealed partial class AudioScope : AvaloniaObject
 {
-    public static readonly AttachedProperty<IAudioPlayer?> AudioProperty =
-        AvaloniaProperty.RegisterAttached<AudioScope, Control, IAudioPlayer?>("Audio", inherits: true);
-
-    public static void SetAudio(Control element, IAudioPlayer? value)
-    {
-        element.SetValue(AudioProperty, value);
-    }
+    [GeneratedAttachedProperty(Inherits = true)]
+    public static partial IAudioPlayer? GetAudio(Control element);
 
     public static IAudioPlayer GetRequiredAudio(Control element)
     {
-        IAudioPlayer? audio = element.GetValue(AudioProperty);
+        IAudioPlayer? audio = GetAudio(element);
 
         if (audio is null)
         {

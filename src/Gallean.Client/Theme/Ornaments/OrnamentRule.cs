@@ -4,23 +4,8 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class OrnamentRule : Control
+internal sealed partial class OrnamentRule : Control
 {
-    public static readonly StyledProperty<IBrush?> StrokeProperty =
-        AvaloniaProperty.Register<OrnamentRule, IBrush?>(nameof(Stroke));
-
-    public static readonly StyledProperty<IBrush?> LineProperty =
-        AvaloniaProperty.Register<OrnamentRule, IBrush?>(nameof(Line));
-
-    public static readonly StyledProperty<IBrush?> PatternProperty =
-        AvaloniaProperty.Register<OrnamentRule, IBrush?>(nameof(Pattern));
-
-    public static readonly StyledProperty<OrnamentRuleType> TypeProperty =
-        AvaloniaProperty.Register<OrnamentRule, OrnamentRuleType>(nameof(Type));
-
-    public static readonly StyledProperty<double> SizeProperty =
-        AvaloniaProperty.Register<OrnamentRule, double>(nameof(Size), 4);
-
     static OrnamentRule()
     {
         AffectsRender<OrnamentRule>(StrokeProperty, LineProperty, PatternProperty, TypeProperty, SizeProperty);
@@ -28,35 +13,20 @@ internal sealed class OrnamentRule : Control
         ClipToBoundsProperty.OverrideDefaultValue<OrnamentRule>(false);
     }
 
-    public IBrush? Stroke
-    {
-        get => GetValue(StrokeProperty);
-        set => SetValue(StrokeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Stroke { get; set; }
 
-    public IBrush? Line
-    {
-        get => GetValue(LineProperty);
-        set => SetValue(LineProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Line { get; set; }
 
-    public IBrush? Pattern
-    {
-        get => GetValue(PatternProperty);
-        set => SetValue(PatternProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Pattern { get; set; }
 
-    public OrnamentRuleType Type
-    {
-        get => GetValue(TypeProperty);
-        set => SetValue(TypeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial OrnamentRuleType Type { get; set; }
 
-    public double Size
-    {
-        get => GetValue(SizeProperty);
-        set => SetValue(SizeProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 4.0)]
+    public partial double Size { get; set; }
 
     private double RuleOffset => Type switch
     {

@@ -3,14 +3,8 @@ using Avalonia.Controls.Primitives;
 
 namespace Gallean.Client;
 
-internal sealed class ModalIcon : TemplatedControl
+internal sealed partial class ModalIcon : TemplatedControl
 {
-    public static readonly StyledProperty<IconMoniker> IconProperty =
-        AvaloniaProperty.Register<ModalIcon, IconMoniker>(nameof(Icon));
-
-    public IconMoniker Icon
-    {
-        get => GetValue(IconProperty);
-        set => SetValue(IconProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IconMoniker Icon { get; set; }
 }

@@ -3,66 +3,28 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-internal sealed class BuildingGraphPanel : Panel
+internal sealed partial class BuildingGraphPanel : Panel
 {
-    public static readonly AttachedProperty<double> XProperty =
-        AvaloniaProperty.RegisterAttached<BuildingGraphPanel, Control, double>("X");
-
-    public static readonly AttachedProperty<double> YProperty =
-        AvaloniaProperty.RegisterAttached<BuildingGraphPanel, Control, double>("Y");
-
-    public static readonly StyledProperty<double> UnitSizeProperty =
-        AvaloniaProperty.Register<BuildingGraphPanel, double>(nameof(UnitSize));
-
-    public static readonly StyledProperty<double> ExtentXProperty =
-        AvaloniaProperty.Register<BuildingGraphPanel, double>(nameof(ExtentX));
-
-    public static readonly StyledProperty<double> ExtentYProperty =
-        AvaloniaProperty.Register<BuildingGraphPanel, double>(nameof(ExtentY));
-
     static BuildingGraphPanel()
     {
         AffectsParentArrange<BuildingGraphPanel>(XProperty, YProperty);
         AffectsMeasure<BuildingGraphPanel>(UnitSizeProperty, ExtentXProperty, ExtentYProperty);
     }
 
-    public double UnitSize
-    {
-        get => GetValue(UnitSizeProperty);
-        set => SetValue(UnitSizeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double UnitSize { get; set; }
 
-    public double ExtentX
-    {
-        get => GetValue(ExtentXProperty);
-        set => SetValue(ExtentXProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double ExtentX { get; set; }
 
-    public double ExtentY
-    {
-        get => GetValue(ExtentYProperty);
-        set => SetValue(ExtentYProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double ExtentY { get; set; }
 
-    public static double GetX(Control control)
-    {
-        return control.GetValue(XProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial double GetX(Control control);
 
-    public static void SetX(Control control, double value)
-    {
-        control.SetValue(XProperty, value);
-    }
-
-    public static double GetY(Control control)
-    {
-        return control.GetValue(YProperty);
-    }
-
-    public static void SetY(Control control, double value)
-    {
-        control.SetValue(YProperty, value);
-    }
+    [GeneratedAttachedProperty]
+    public static partial double GetY(Control control);
 
     protected override Size MeasureOverride(Size availableSize)
     {

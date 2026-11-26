@@ -16,15 +16,6 @@ internal sealed partial class GameView : Window
 {
     private const double SceneHeight = 600.0;
 
-    public static readonly StyledProperty<bool> IsWindowedProperty =
-        AvaloniaProperty.Register<GameView, bool>(nameof(IsWindowed), defaultValue: true, defaultBindingMode: BindingMode.TwoWay);
-
-    public static readonly StyledProperty<AbstractScreenViewModel?> TopScreenProperty =
-        AvaloniaProperty.Register<GameView, AbstractScreenViewModel?>(nameof(TopScreen));
-
-    public static readonly StyledProperty<Language> LanguageProperty =
-        AvaloniaProperty.Register<GameView, Language>(nameof(Language));
-
     private readonly Size minSize;
     private Task? exitSaveTask;
 
@@ -45,23 +36,14 @@ internal sealed partial class GameView : Window
 
     private GameViewModel? ViewModel => (GameViewModel?)DataContext;
 
-    public bool IsWindowed
-    {
-        get => GetValue(IsWindowedProperty);
-        set => SetValue(IsWindowedProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = true, DefaultBindingMode = BindingMode.TwoWay)]
+    public partial bool IsWindowed { get; set; }
 
-    public AbstractScreenViewModel? TopScreen
-    {
-        get => GetValue(TopScreenProperty);
-        set => SetValue(TopScreenProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AbstractScreenViewModel? TopScreen { get; set; }
 
-    public Language Language
-    {
-        get => GetValue(LanguageProperty);
-        set => SetValue(LanguageProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial Language Language { get; set; }
 
     protected override void OnOpened(EventArgs e)
     {
@@ -336,7 +318,7 @@ internal sealed partial class GameView : Window
 
     private void UpdateAssetPixelScale(Screen screen)
     {
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (assets is not null)
         {

@@ -6,22 +6,10 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class PointerTiltDecorator : Decorator
+internal sealed partial class PointerTiltDecorator : Decorator
 {
     private const double FollowRate = 5.0;
     private const double SettleDistance = 0.001;
-
-    public static readonly StyledProperty<double> AngleXProperty =
-        AvaloniaProperty.Register<PointerTiltDecorator, double>(nameof(AngleX));
-
-    public static readonly StyledProperty<double> AngleYProperty =
-        AvaloniaProperty.Register<PointerTiltDecorator, double>(nameof(AngleY));
-
-    public static readonly StyledProperty<double> DepthProperty =
-        AvaloniaProperty.Register<PointerTiltDecorator, double>(nameof(Depth));
-
-    public static readonly StyledProperty<double> TiltProperty =
-        AvaloniaProperty.Register<PointerTiltDecorator, double>(nameof(Tilt));
 
     private readonly Rotate3DTransform transform = new();
 
@@ -36,29 +24,17 @@ internal sealed class PointerTiltDecorator : Decorator
         RenderTransform = transform;
     }
 
-    public double AngleX
-    {
-        get => GetValue(AngleXProperty);
-        set => SetValue(AngleXProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double AngleX { get; set; }
 
-    public double AngleY
-    {
-        get => GetValue(AngleYProperty);
-        set => SetValue(AngleYProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double AngleY { get; set; }
 
-    public double Depth
-    {
-        get => GetValue(DepthProperty);
-        set => SetValue(DepthProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Depth { get; set; }
 
-    public double Tilt
-    {
-        get => GetValue(TiltProperty);
-        set => SetValue(TiltProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Tilt { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {

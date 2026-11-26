@@ -4,14 +4,8 @@ using Avalonia.Controls.Documents;
 
 namespace Gallean.Client;
 
-internal sealed class HotkeyLabel : Decorator
+internal sealed partial class HotkeyLabel : Decorator
 {
-    public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<HotkeyLabel, string>(nameof(Text), string.Empty);
-
-    public static readonly StyledProperty<string> HotkeyProperty =
-        AvaloniaProperty.Register<HotkeyLabel, string>(nameof(Hotkey), string.Empty);
-
     private readonly TextBlock label = new();
 
     public HotkeyLabel()
@@ -20,17 +14,11 @@ internal sealed class HotkeyLabel : Decorator
         UpdateInlines();
     }
 
-    public string Text
-    {
-        get => GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = "")]
+    public partial string Text { get; set; }
 
-    public string Hotkey
-    {
-        get => GetValue(HotkeyProperty);
-        set => SetValue(HotkeyProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = "")]
+    public partial string Hotkey { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {

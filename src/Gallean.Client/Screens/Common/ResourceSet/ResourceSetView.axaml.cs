@@ -8,22 +8,14 @@ internal sealed partial class ResourceSetView : UserControl
 {
     private const double IconScale = 1.3;
 
-    public static readonly DirectProperty<ResourceSetView, double> IconSizeProperty =
-        AvaloniaProperty.RegisterDirect<ResourceSetView, double>(nameof(IconSize), view => view.IconSize);
-
-    private double iconSize;
-
     public ResourceSetView()
     {
         AvaloniaXamlLoader.Load(this);
         UpdateIconSize();
     }
 
-    public double IconSize
-    {
-        get => iconSize;
-        private set => SetAndRaise(IconSizeProperty, ref iconSize, value);
-    }
+    [GeneratedDirectProperty]
+    public partial double IconSize { get; private set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {

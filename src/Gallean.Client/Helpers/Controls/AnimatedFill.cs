@@ -5,17 +5,8 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class AnimatedFill : Control
+internal sealed partial class AnimatedFill : Control
 {
-    public static readonly StyledProperty<double> CurrentProperty =
-        AvaloniaProperty.Register<AnimatedFill, double>(nameof(Current));
-
-    public static readonly StyledProperty<double> MaximumProperty =
-        AvaloniaProperty.Register<AnimatedFill, double>(nameof(Maximum));
-
-    public static readonly StyledProperty<IBrush?> FillProperty =
-        AvaloniaProperty.Register<AnimatedFill, IBrush?>(nameof(Fill));
-
     public static readonly StyledProperty<AnimationRange> AnimationProperty =
         AvaloniaProperty.Register<AnimatedFill, AnimationRange>(nameof(Animation), AnimationRange.None);
 
@@ -32,23 +23,14 @@ internal sealed class AnimatedFill : Control
         IsHitTestVisible = false;
     }
 
-    public double Current
-    {
-        get => GetValue(CurrentProperty);
-        set => SetValue(CurrentProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Current { get; set; }
 
-    public double Maximum
-    {
-        get => GetValue(MaximumProperty);
-        set => SetValue(MaximumProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Maximum { get; set; }
 
-    public IBrush? Fill
-    {
-        get => GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Fill { get; set; }
 
     public AnimationRange Animation
     {

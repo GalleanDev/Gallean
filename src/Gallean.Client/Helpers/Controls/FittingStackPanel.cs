@@ -4,14 +4,8 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class FittingStackPanel : Panel
+internal sealed partial class FittingStackPanel : Panel
 {
-    public static readonly StyledProperty<double> SpacingProperty =
-        AvaloniaProperty.Register<FittingStackPanel, double>(nameof(Spacing));
-
-    public static readonly StyledProperty<double> OverflowProperty =
-        AvaloniaProperty.Register<FittingStackPanel, double>(nameof(Overflow));
-
     private int fittingCount;
 
     static FittingStackPanel()
@@ -20,17 +14,11 @@ internal sealed class FittingStackPanel : Panel
         AffectsArrange<FittingStackPanel>(OverflowProperty);
     }
 
-    public double Spacing
-    {
-        get => GetValue(SpacingProperty);
-        set => SetValue(SpacingProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Spacing { get; set; }
 
-    public double Overflow
-    {
-        get => GetValue(OverflowProperty);
-        set => SetValue(OverflowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Overflow { get; set; }
 
     protected override Size MeasureOverride(Size availableSize)
     {

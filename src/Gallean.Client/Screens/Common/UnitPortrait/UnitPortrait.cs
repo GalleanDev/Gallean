@@ -16,7 +16,7 @@ namespace Gallean.Client;
     HighlightedPseudoClass,
     MarkedPseudoClass,
     SelectedPseudoClass)]
-internal sealed class UnitPortrait : ContentControl
+internal sealed partial class UnitPortrait : ContentControl
 {
     private const string DeadPseudoClass = ":dead";
     private const string FreePseudoClass = ":free";
@@ -27,70 +27,22 @@ internal sealed class UnitPortrait : ContentControl
     private const string MarkedPseudoClass = ":marked";
     private const string SelectedPseudoClass = ":selected";
 
-    public static readonly StyledProperty<AssetSpriteKey?> FaceKeyProperty =
-        AvaloniaProperty.Register<UnitPortrait, AssetSpriteKey?>(nameof(FaceKey));
-
-    public static readonly StyledProperty<double> HitpointsProperty =
-        AvaloniaProperty.Register<UnitPortrait, double>(nameof(Hitpoints));
-
-    public static readonly StyledProperty<double> MaxHitpointsProperty =
-        AvaloniaProperty.Register<UnitPortrait, double>(nameof(MaxHitpoints));
-
     public static readonly StyledProperty<AnimationRange> HitpointsAnimationProperty =
         AvaloniaProperty.Register<UnitPortrait, AnimationRange>(nameof(HitpointsAnimation), AnimationRange.None);
-
-    public static readonly StyledProperty<bool> IsHitpointsVisibleProperty =
-        AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsHitpointsVisible), true);
-
-    public static readonly StyledProperty<bool> IsSelectedProperty =
-        AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsSelected));
-
-    public static readonly StyledProperty<bool> IsHighlightedProperty =
-        AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsHighlighted));
-
-    public static readonly StyledProperty<bool> IsDeadProperty =
-        AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsDead));
-
-    public static readonly StyledProperty<bool> IsPendingUpgradeProperty =
-        AvaloniaProperty.Register<UnitPortrait, bool>(nameof(IsPendingUpgrade));
-
-    public static readonly StyledProperty<int> HighLevelRankProperty =
-        AvaloniaProperty.Register<UnitPortrait, int>(nameof(HighLevelRank));
-
-    public static readonly StyledProperty<IBrush?> MarkerProperty =
-        AvaloniaProperty.Register<UnitPortrait, IBrush?>(nameof(Marker));
-
-    public static readonly StyledProperty<IBrush?> OverlayProperty =
-        AvaloniaProperty.Register<UnitPortrait, IBrush?>(nameof(Overlay));
-
-    public static readonly StyledProperty<IEnumerable?> StatusesProperty =
-        AvaloniaProperty.Register<UnitPortrait, IEnumerable?>(nameof(Statuses));
-
-    public static readonly StyledProperty<IDataTemplate?> StatusTemplateProperty =
-        AvaloniaProperty.Register<UnitPortrait, IDataTemplate?>(nameof(StatusTemplate));
 
     public UnitPortrait()
     {
         UpdatePseudoClasses();
     }
 
-    public AssetSpriteKey? FaceKey
-    {
-        get => GetValue(FaceKeyProperty);
-        set => SetValue(FaceKeyProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetSpriteKey? FaceKey { get; set; }
 
-    public double Hitpoints
-    {
-        get => GetValue(HitpointsProperty);
-        set => SetValue(HitpointsProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Hitpoints { get; set; }
 
-    public double MaxHitpoints
-    {
-        get => GetValue(MaxHitpointsProperty);
-        set => SetValue(MaxHitpointsProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double MaxHitpoints { get; set; }
 
     public AnimationRange HitpointsAnimation
     {
@@ -98,65 +50,35 @@ internal sealed class UnitPortrait : ContentControl
         set => SetValue(HitpointsAnimationProperty, value);
     }
 
-    public bool IsHitpointsVisible
-    {
-        get => GetValue(IsHitpointsVisibleProperty);
-        set => SetValue(IsHitpointsVisibleProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = true)]
+    public partial bool IsHitpointsVisible { get; set; }
 
-    public bool IsSelected
-    {
-        get => GetValue(IsSelectedProperty);
-        set => SetValue(IsSelectedProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsSelected { get; set; }
 
-    public bool IsHighlighted
-    {
-        get => GetValue(IsHighlightedProperty);
-        set => SetValue(IsHighlightedProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsHighlighted { get; set; }
 
-    public bool IsDead
-    {
-        get => GetValue(IsDeadProperty);
-        set => SetValue(IsDeadProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsDead { get; set; }
 
-    public bool IsPendingUpgrade
-    {
-        get => GetValue(IsPendingUpgradeProperty);
-        set => SetValue(IsPendingUpgradeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool IsPendingUpgrade { get; set; }
 
-    public int HighLevelRank
-    {
-        get => GetValue(HighLevelRankProperty);
-        set => SetValue(HighLevelRankProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial int HighLevelRank { get; set; }
 
-    public IBrush? Marker
-    {
-        get => GetValue(MarkerProperty);
-        set => SetValue(MarkerProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Marker { get; set; }
 
-    public IBrush? Overlay
-    {
-        get => GetValue(OverlayProperty);
-        set => SetValue(OverlayProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Overlay { get; set; }
 
-    public IEnumerable? Statuses
-    {
-        get => GetValue(StatusesProperty);
-        set => SetValue(StatusesProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IEnumerable? Statuses { get; set; }
 
-    public IDataTemplate? StatusTemplate
-    {
-        get => GetValue(StatusTemplateProperty);
-        set => SetValue(StatusTemplateProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IDataTemplate? StatusTemplate { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {

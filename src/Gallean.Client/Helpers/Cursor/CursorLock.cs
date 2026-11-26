@@ -3,18 +3,8 @@ using Avalonia.Controls;
 
 namespace Gallean.Client;
 
-public sealed class CursorLock : AvaloniaObject
+public sealed partial class CursorLock : AvaloniaObject
 {
-    public static readonly AttachedProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.RegisterAttached<CursorLock, Window, bool>("IsEnabled");
-
-    public static void SetIsEnabled(Window window, bool value)
-    {
-        window.SetValue(IsEnabledProperty, value);
-    }
-
-    public static bool GetIsEnabled(Window window)
-    {
-        return window.GetValue(IsEnabledProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial bool GetIsEnabled(Window window);
 }

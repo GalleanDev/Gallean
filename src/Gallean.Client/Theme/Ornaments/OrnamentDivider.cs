@@ -4,30 +4,18 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class OrnamentDivider : Control
+internal sealed partial class OrnamentDivider : Control
 {
-    public static readonly StyledProperty<IBrush?> StrokeProperty =
-        AvaloniaProperty.Register<OrnamentDivider, IBrush?>(nameof(Stroke));
-
-    public static readonly StyledProperty<double> CurlRadiusProperty =
-        AvaloniaProperty.Register<OrnamentDivider, double>(nameof(CurlRadius), 5);
-
     static OrnamentDivider()
     {
         AffectsRender<OrnamentDivider>(StrokeProperty, CurlRadiusProperty);
     }
 
-    public IBrush? Stroke
-    {
-        get => GetValue(StrokeProperty);
-        set => SetValue(StrokeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Stroke { get; set; }
 
-    public double CurlRadius
-    {
-        get => GetValue(CurlRadiusProperty);
-        set => SetValue(CurlRadiusProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 5.0)]
+    public partial double CurlRadius { get; set; }
 
     protected override Size MeasureOverride(Size availableSize)
     {

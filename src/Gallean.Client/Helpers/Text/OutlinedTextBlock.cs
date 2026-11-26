@@ -5,14 +5,8 @@ using Avalonia.Media.TextFormatting;
 
 namespace Gallean.Client;
 
-internal class OutlinedTextBlock : TextBlock
+internal partial class OutlinedTextBlock : TextBlock
 {
-    public static readonly StyledProperty<IBrush?> OutlineProperty =
-        AvaloniaProperty.Register<OutlinedTextBlock, IBrush?>(nameof(Outline));
-
-    public static readonly StyledProperty<double> OutlineThicknessProperty =
-        AvaloniaProperty.Register<OutlinedTextBlock, double>(nameof(OutlineThickness));
-
     private TextLayout? arrangedLayout;
     private Size arrangedSize;
 
@@ -22,17 +16,11 @@ internal class OutlinedTextBlock : TextBlock
         AffectsRender<OutlinedTextBlock>(OutlineProperty, OutlineThicknessProperty);
     }
 
-    public IBrush? Outline
-    {
-        get => GetValue(OutlineProperty);
-        set => SetValue(OutlineProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Outline { get; set; }
 
-    public double OutlineThickness
-    {
-        get => GetValue(OutlineThicknessProperty);
-        set => SetValue(OutlineThicknessProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double OutlineThickness { get; set; }
 
     protected override Size ArrangeOverride(Size finalSize)
     {

@@ -5,11 +5,8 @@ using Avalonia.Interactivity;
 
 namespace Gallean.Client;
 
-internal sealed class CursorVisual : Control
+internal sealed partial class CursorVisual : Control
 {
-    public static readonly StyledProperty<AssetAnimationKey.CursorType> CursorTypeProperty =
-        AvaloniaProperty.Register<CursorVisual, AssetAnimationKey.CursorType>(nameof(CursorType));
-
     private readonly Dictionary<AssetAnimationKey.CursorType, CursorAnimation> cache = [];
     private readonly Cursor noneCursor = new(StandardCursorType.None);
     private CursorAnimation? animation;
@@ -19,11 +16,8 @@ internal sealed class CursorVisual : Control
     private TimeSpan? startTime;
     private TopLevel? topLevel;
 
-    public AssetAnimationKey.CursorType CursorType
-    {
-        get => GetValue(CursorTypeProperty);
-        set => SetValue(CursorTypeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetAnimationKey.CursorType CursorType { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -131,7 +125,7 @@ internal sealed class CursorVisual : Control
 
     private void Refresh()
     {
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (topLevel is null)
         {

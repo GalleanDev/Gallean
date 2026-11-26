@@ -5,48 +5,24 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class IconVisual : Control
+internal sealed partial class IconVisual : Control
 {
-    public static readonly StyledProperty<IconMoniker> MonikerProperty =
-        AvaloniaProperty.Register<IconVisual, IconMoniker>(nameof(Moniker));
-
-    public static readonly StyledProperty<IBrush?> ForegroundProperty =
-        TextElement.ForegroundProperty.AddOwner<IconVisual>();
-
-    public static readonly StyledProperty<IBrush?> OutlineProperty =
-        AvaloniaProperty.Register<IconVisual, IBrush?>(nameof(Outline));
-
-    public static readonly StyledProperty<double> OutlineThicknessProperty =
-        AvaloniaProperty.Register<IconVisual, double>(nameof(OutlineThickness));
-
     static IconVisual()
     {
         AffectsRender<IconVisual>(MonikerProperty, ForegroundProperty, OutlineProperty, OutlineThicknessProperty);
     }
 
-    public IconMoniker Moniker
-    {
-        get => GetValue(MonikerProperty);
-        set => SetValue(MonikerProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IconMoniker Moniker { get; set; }
 
-    public IBrush? Foreground
-    {
-        get => GetValue(ForegroundProperty);
-        set => SetValue(ForegroundProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial IBrush? Foreground { get; set; }
 
-    public IBrush? Outline
-    {
-        get => GetValue(OutlineProperty);
-        set => SetValue(OutlineProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Outline { get; set; }
 
-    public double OutlineThickness
-    {
-        get => GetValue(OutlineThicknessProperty);
-        set => SetValue(OutlineThicknessProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double OutlineThickness { get; set; }
 
     public override void Render(DrawingContext context)
     {

@@ -5,27 +5,17 @@ using Avalonia.Input;
 
 namespace Gallean.Client;
 
-internal sealed class Backdrop : AvaloniaObject
+internal sealed partial class Backdrop : AvaloniaObject
 {
     private const double HitMargin = 24;
-
-    public static readonly AttachedProperty<ICommand?> CloseCommandProperty =
-        AvaloniaProperty.RegisterAttached<Backdrop, Control, ICommand?>("CloseCommand");
 
     static Backdrop()
     {
         CloseCommandProperty.Changed.AddClassHandler<Control>(OnCloseCommandChanged);
     }
 
-    public static void SetCloseCommand(Control element, ICommand? value)
-    {
-        element.SetValue(CloseCommandProperty, value);
-    }
-
-    public static ICommand? GetCloseCommand(Control element)
-    {
-        return element.GetValue(CloseCommandProperty);
-    }
+    [GeneratedAttachedProperty]
+    public static partial ICommand? GetCloseCommand(Control element);
 
     private static void OnCloseCommandChanged(Control control, AvaloniaPropertyChangedEventArgs e)
     {

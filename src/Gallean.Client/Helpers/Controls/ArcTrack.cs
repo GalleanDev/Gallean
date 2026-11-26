@@ -4,34 +4,10 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class ArcTrack : Control
+internal sealed partial class ArcTrack : Control
 {
     private const double ShadowBlur = 6;
     private const double ShadowReach = 18;
-
-    public static readonly StyledProperty<double> RadiusProperty =
-        AvaloniaProperty.Register<ArcTrack, double>(nameof(Radius), 200);
-
-    public static readonly StyledProperty<double> ItemAngleProperty =
-        AvaloniaProperty.Register<ArcTrack, double>(nameof(ItemAngle), 15);
-
-    public static readonly StyledProperty<double> SpreadProperty =
-        AvaloniaProperty.Register<ArcTrack, double>(nameof(Spread), 1);
-
-    public static readonly StyledProperty<int> ItemCountProperty =
-        AvaloniaProperty.Register<ArcTrack, int>(nameof(ItemCount));
-
-    public static readonly StyledProperty<double> PaddingProperty =
-        AvaloniaProperty.Register<ArcTrack, double>(nameof(Padding));
-
-    public static readonly StyledProperty<IBrush?> FillProperty =
-        AvaloniaProperty.Register<ArcTrack, IBrush?>(nameof(Fill));
-
-    public static readonly StyledProperty<IBrush?> StrokeProperty =
-        AvaloniaProperty.Register<ArcTrack, IBrush?>(nameof(Stroke));
-
-    public static readonly StyledProperty<IBrush?> ShadowProperty =
-        AvaloniaProperty.Register<ArcTrack, IBrush?>(nameof(Shadow));
 
     static ArcTrack()
     {
@@ -39,53 +15,29 @@ internal sealed class ArcTrack : Control
         ClipToBoundsProperty.OverrideDefaultValue<ArcTrack>(false);
     }
 
-    public double Radius
-    {
-        get => GetValue(RadiusProperty);
-        set => SetValue(RadiusProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 200.0)]
+    public partial double Radius { get; set; }
 
-    public double ItemAngle
-    {
-        get => GetValue(ItemAngleProperty);
-        set => SetValue(ItemAngleProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 15.0)]
+    public partial double ItemAngle { get; set; }
 
-    public double Spread
-    {
-        get => GetValue(SpreadProperty);
-        set => SetValue(SpreadProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 1.0)]
+    public partial double Spread { get; set; }
 
-    public int ItemCount
-    {
-        get => GetValue(ItemCountProperty);
-        set => SetValue(ItemCountProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial int ItemCount { get; set; }
 
-    public double Padding
-    {
-        get => GetValue(PaddingProperty);
-        set => SetValue(PaddingProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Padding { get; set; }
 
-    public IBrush? Fill
-    {
-        get => GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Fill { get; set; }
 
-    public IBrush? Stroke
-    {
-        get => GetValue(StrokeProperty);
-        set => SetValue(StrokeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Stroke { get; set; }
 
-    public IBrush? Shadow
-    {
-        get => GetValue(ShadowProperty);
-        set => SetValue(ShadowProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Shadow { get; set; }
 
     private static Geometry Arc(Point center, double radius, double halfAngle)
     {

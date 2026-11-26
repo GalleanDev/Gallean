@@ -5,20 +5,8 @@ namespace Gallean.Client;
 
 internal sealed partial class VideoVisual : AbstractAnimatedVisual
 {
-    public static readonly StyledProperty<AssetAnimationKey?> AnimationKeyProperty =
-        AvaloniaProperty.Register<VideoVisual, AssetAnimationKey?>(nameof(AnimationKey));
-
     public static readonly StyledProperty<AnimationRate> RateProperty =
         AvaloniaProperty.Register<VideoVisual, AnimationRate>(nameof(Rate), AnimationRate.Sprites);
-
-    public static readonly StyledProperty<TimeSpan> StartTimeProperty =
-        AvaloniaProperty.Register<VideoVisual, TimeSpan>(nameof(StartTime));
-
-    public static readonly StyledProperty<Stretch> StretchProperty =
-        AvaloniaProperty.Register<VideoVisual, Stretch>(nameof(Stretch), Stretch.Uniform);
-
-    public static readonly StyledProperty<double> GrainProperty =
-        AvaloniaProperty.Register<VideoVisual, double>(nameof(Grain));
 
     private readonly FrameBuffer frameBuffer = new();
     private Playback? playback;
@@ -34,11 +22,8 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
         ClipToBounds = true;
     }
 
-    public AssetAnimationKey? AnimationKey
-    {
-        get => GetValue(AnimationKeyProperty);
-        set => SetValue(AnimationKeyProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial AssetAnimationKey? AnimationKey { get; set; }
 
     public AnimationRate Rate
     {
@@ -46,23 +31,14 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
         set => SetValue(RateProperty, value);
     }
 
-    public TimeSpan StartTime
-    {
-        get => GetValue(StartTimeProperty);
-        set => SetValue(StartTimeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial TimeSpan StartTime { get; set; }
 
-    public Stretch Stretch
-    {
-        get => GetValue(StretchProperty);
-        set => SetValue(StretchProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = Stretch.Uniform)]
+    public partial Stretch Stretch { get; set; }
 
-    public double Grain
-    {
-        get => GetValue(GrainProperty);
-        set => SetValue(GrainProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Grain { get; set; }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
@@ -101,7 +77,7 @@ internal sealed partial class VideoVisual : AbstractAnimatedVisual
 
     private Playback? CreatePlayback()
     {
-        IAssetProvider? assets = AssetScope.GetOptionalAssets(this);
+        IAssetProvider? assets = AssetScope.GetAssets(this);
 
         if (AnimationKey is null || assets is null)
         {

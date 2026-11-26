@@ -7,78 +7,15 @@ using Avalonia.Media;
 
 namespace Gallean.Client;
 
-internal sealed class BarVisual : Control
+internal sealed partial class BarVisual : Control
 {
     private const double SpikeRatio = 0.5;
     private const double EdgeThickness = 1.5;
     private const double BevelThickness = 1;
     private const double TextureOpacity = 0.45;
 
-    public static readonly StyledProperty<double> CurrentProperty =
-        AvaloniaProperty.Register<BarVisual, double>(nameof(Current));
-
-    public static readonly StyledProperty<double> MaximumProperty =
-        AvaloniaProperty.Register<BarVisual, double>(nameof(Maximum));
-
-    public static readonly StyledProperty<double> GainProperty =
-        AvaloniaProperty.Register<BarVisual, double>(nameof(Gain));
-
-    public static readonly StyledProperty<double> GainOpacityProperty =
-        AvaloniaProperty.Register<BarVisual, double>(nameof(GainOpacity), 1);
-
     public static readonly StyledProperty<AnimationRange> AnimationProperty =
         AvaloniaProperty.Register<BarVisual, AnimationRange>(nameof(Animation), AnimationRange.None);
-
-    public static readonly StyledProperty<string?> TextProperty =
-        AvaloniaProperty.Register<BarVisual, string?>(nameof(Text));
-
-    public static readonly StyledProperty<IBrush?> FillProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Fill));
-
-    public static readonly StyledProperty<IBrush?> GainFillProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(GainFill));
-
-    public static readonly StyledProperty<IBrush?> TrackProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Track));
-
-    public static readonly StyledProperty<IBrush?> FillOverlayProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(FillOverlay));
-
-    public static readonly StyledProperty<IBrush?> RelightProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Relight));
-
-    public static readonly StyledProperty<IBrush?> OverlayProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Overlay));
-
-    public static readonly StyledProperty<IBrush?> TextureProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Texture));
-
-    public static readonly StyledProperty<IBrush?> BevelProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Bevel));
-
-    public static readonly StyledProperty<IBrush?> EdgeProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Edge));
-
-    public static readonly StyledProperty<IBrush?> ForegroundProperty =
-        TextElement.ForegroundProperty.AddOwner<BarVisual>();
-
-    public static readonly StyledProperty<FontFamily> FontFamilyProperty =
-        TextElement.FontFamilyProperty.AddOwner<BarVisual>();
-
-    public static readonly StyledProperty<double> FontSizeProperty =
-        TextElement.FontSizeProperty.AddOwner<BarVisual>();
-
-    public static readonly StyledProperty<FontWeight> FontWeightProperty =
-        TextElement.FontWeightProperty.AddOwner<BarVisual>();
-
-    public static readonly StyledProperty<FontFeatureCollection?> FontFeaturesProperty =
-        TextElement.FontFeaturesProperty.AddOwner<BarVisual>();
-
-    public static readonly StyledProperty<IBrush?> OutlineProperty =
-        AvaloniaProperty.Register<BarVisual, IBrush?>(nameof(Outline));
-
-    public static readonly StyledProperty<double> OutlineThicknessProperty =
-        AvaloniaProperty.Register<BarVisual, double>(nameof(OutlineThickness));
 
     private readonly AnimationPropertyPlayer currentPlayer = new();
     private readonly AnimationPropertyPlayer maximumPlayer = new();
@@ -109,29 +46,17 @@ internal sealed class BarVisual : Control
             OutlineThicknessProperty);
     }
 
-    public double Current
-    {
-        get => GetValue(CurrentProperty);
-        set => SetValue(CurrentProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Current { get; set; }
 
-    public double Maximum
-    {
-        get => GetValue(MaximumProperty);
-        set => SetValue(MaximumProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Maximum { get; set; }
 
-    public double Gain
-    {
-        get => GetValue(GainProperty);
-        set => SetValue(GainProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double Gain { get; set; }
 
-    public double GainOpacity
-    {
-        get => GetValue(GainOpacityProperty);
-        set => SetValue(GainOpacityProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 1.0)]
+    public partial double GainOpacity { get; set; }
 
     public AnimationRange Animation
     {
@@ -139,107 +64,56 @@ internal sealed class BarVisual : Control
         set => SetValue(AnimationProperty, value);
     }
 
-    public string? Text
-    {
-        get => GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial string? Text { get; set; }
 
-    public IBrush? Fill
-    {
-        get => GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Fill { get; set; }
 
-    public IBrush? GainFill
-    {
-        get => GetValue(GainFillProperty);
-        set => SetValue(GainFillProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? GainFill { get; set; }
 
-    public IBrush? Track
-    {
-        get => GetValue(TrackProperty);
-        set => SetValue(TrackProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Track { get; set; }
 
-    public IBrush? FillOverlay
-    {
-        get => GetValue(FillOverlayProperty);
-        set => SetValue(FillOverlayProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? FillOverlay { get; set; }
 
-    public IBrush? Relight
-    {
-        get => GetValue(RelightProperty);
-        set => SetValue(RelightProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Relight { get; set; }
 
-    public IBrush? Overlay
-    {
-        get => GetValue(OverlayProperty);
-        set => SetValue(OverlayProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Overlay { get; set; }
 
-    public IBrush? Texture
-    {
-        get => GetValue(TextureProperty);
-        set => SetValue(TextureProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Texture { get; set; }
 
-    public IBrush? Bevel
-    {
-        get => GetValue(BevelProperty);
-        set => SetValue(BevelProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Bevel { get; set; }
 
-    public IBrush? Edge
-    {
-        get => GetValue(EdgeProperty);
-        set => SetValue(EdgeProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Edge { get; set; }
 
-    public IBrush? Foreground
-    {
-        get => GetValue(ForegroundProperty);
-        set => SetValue(ForegroundProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial IBrush? Foreground { get; set; }
 
-    public FontFamily FontFamily
-    {
-        get => GetValue(FontFamilyProperty);
-        set => SetValue(FontFamilyProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial FontFamily FontFamily { get; set; }
 
-    public double FontSize
-    {
-        get => GetValue(FontSizeProperty);
-        set => SetValue(FontSizeProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial double FontSize { get; set; }
 
-    public FontWeight FontWeight
-    {
-        get => GetValue(FontWeightProperty);
-        set => SetValue(FontWeightProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial FontWeight FontWeight { get; set; }
 
-    public FontFeatureCollection? FontFeatures
-    {
-        get => GetValue(FontFeaturesProperty);
-        set => SetValue(FontFeaturesProperty, value);
-    }
+    [GeneratedStyledProperty(AddOwnerFrom = typeof(TextElement))]
+    public partial FontFeatureCollection? FontFeatures { get; set; }
 
-    public IBrush? Outline
-    {
-        get => GetValue(OutlineProperty);
-        set => SetValue(OutlineProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? Outline { get; set; }
 
-    public double OutlineThickness
-    {
-        get => GetValue(OutlineThicknessProperty);
-        set => SetValue(OutlineThicknessProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial double OutlineThickness { get; set; }
 
     private static Geometry Chevron(Rect rect)
     {
