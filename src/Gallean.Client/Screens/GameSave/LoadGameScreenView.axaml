@@ -26,7 +26,7 @@
           <Button x:Name="LoadButton"
                   Grid.Column="2"
                   Content="{local:Text 'Load'}"
-                  Classes="pill primary"
+                  Classes="pill primary default"
                   local:PlateChrome.TextureSeed="2"
                   Command="{Binding Game.LoadGameCommand}"
                   CommandParameter="{Binding SaveList.SelectedSave.Entry}"

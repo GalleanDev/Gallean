@@ -90,7 +90,7 @@
                 local:PlateChrome.TextureSeed="1"
                 Content="{local:Text 'Back'}"
                 Command="{Binding CloseCommand}" />
-        <Button Grid.Column="1" Classes="pill primary" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Next'}" Command="{Binding NextCommand}" />
+        <Button Grid.Column="1" Classes="pill primary default" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Next'}" Command="{Binding NextCommand}" />
       </Grid>
     </Grid>
   </Grid>

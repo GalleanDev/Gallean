@@ -12,7 +12,7 @@
           <Button x:Name="AcceptButton"
                   Grid.Column="1"
                   Content="{local:Text 'Accept'}"
-                  Classes="pill success"
+                  Classes="pill success default"
                   local:PlateChrome.TextureSeed="1"
                   Command="{Binding AcceptCommand}"
                   MinWidth="150" />

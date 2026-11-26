@@ -13,7 +13,7 @@
                              Grid.Column="1"
                              Content="{Binding ConfirmLabel}"
                              Price="{Binding ConfirmPrice}"
-                             Classes="pill"
+                             Classes="pill default"
                              Classes.primary="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Primary}}"
                              Classes.danger="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Danger}}"
                              Classes.success="{Binding Type, Converter={x:Static local:EnumEqualsConverter.Instance}, ConverterParameter={x:Static local:ConfirmPromptType.Success}}"

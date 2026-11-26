@@ -12,7 +12,7 @@
           <Button x:Name="ExitButton"
                   Grid.Column="1"
                   Content="{local:Text 'Exit'}"
-                  Classes="pill primary"
+                  Classes="pill primary default"
                   local:PlateChrome.TextureSeed="1"
                   Command="{Binding ExitCommand}"
                   MinWidth="150" />

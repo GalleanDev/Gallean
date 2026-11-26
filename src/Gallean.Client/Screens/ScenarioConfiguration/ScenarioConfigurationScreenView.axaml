@@ -161,13 +161,13 @@
                 Content="{local:Text 'Back'}"
                 Command="{Binding CloseCommand}" />
         <Button Grid.Column="1"
-                Classes="pill primary"
+                Classes="pill primary default"
                 local:PlateChrome.TextureSeed="4"
                 Content="{local:Text 'Next'}"
                 Command="{Binding NextCommand}"
                 IsVisible="{Binding !IsLastPlayer}" />
         <Button Grid.Column="1"
-                Classes="pill success"
+                Classes="pill success default"
                 local:PlateChrome.TextureSeed="4"
                 Content="{local:Text 'Start game'}"
                 Command="{Binding Game.StartGameCommand}"

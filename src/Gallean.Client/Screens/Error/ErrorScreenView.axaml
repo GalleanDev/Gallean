@@ -12,7 +12,7 @@
           <Button x:Name="ActionButton"
                   Grid.Column="1"
                   Content="{Binding ActionLabel}"
-                  Classes="pill"
+                  Classes="pill default"
                   Command="{Binding ExecuteActionCommand}"
                   MinWidth="220" />
         </Grid>

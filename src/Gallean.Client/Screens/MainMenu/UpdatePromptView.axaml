@@ -12,7 +12,7 @@
           <Panel Grid.Column="1">
             <Button x:Name="InstallButton"
                     Content="{local:Text 'Update'}"
-                    Classes="pill success"
+                    Classes="pill success default"
                     local:PlateChrome.TextureSeed="1"
                     Command="{Binding InstallCommand}"
                     IsVisible="{Binding CanInstall}"

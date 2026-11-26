@@ -35,7 +35,7 @@
           <Button x:Name="ImportButton"
                   Grid.Column="3"
                   Content="{local:Text 'Import'}"
-                  Classes="pill success"
+                  Classes="pill success default"
                   local:PlateChrome.TextureSeed="2"
                   MinWidth="160"
                   VerticalAlignment="Center"

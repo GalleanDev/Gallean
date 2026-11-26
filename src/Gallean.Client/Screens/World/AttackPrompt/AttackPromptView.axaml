@@ -12,7 +12,7 @@
           <Button x:Name="AttackButton"
                   Grid.Column="1"
                   Content="{local:Text 'Attack'}"
-                  Classes="pill primary"
+                  Classes="pill primary default"
                   local:PlateChrome.TextureSeed="1"
                   Command="{Binding ConfirmCommand}"
                   MinWidth="150" />

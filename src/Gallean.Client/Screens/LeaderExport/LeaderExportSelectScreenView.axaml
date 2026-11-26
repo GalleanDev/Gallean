@@ -20,7 +20,7 @@
           <Button x:Name="ExportButton"
                   Grid.Column="2"
                   Content="{local:Text 'Export'}"
-                  Classes="pill success"
+                  Classes="pill success default"
                   local:PlateChrome.TextureSeed="2"
                   MinWidth="160"
                   VerticalAlignment="Center"

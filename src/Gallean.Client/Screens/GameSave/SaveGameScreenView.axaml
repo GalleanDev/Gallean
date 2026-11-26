@@ -12,7 +12,7 @@
           <Button x:Name="SaveButton"
                   Grid.Column="1"
                   Content="{Binding SaveLabel}"
-                  Classes="pill primary"
+                  Classes="pill primary default"
                   local:PlateChrome.TextureSeed="1"
                   Command="{Binding SaveCommand}"
                   MinWidth="150" />

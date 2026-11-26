@@ -162,7 +162,7 @@
                 local:PlateChrome.TextureSeed="1"
                 Content="{local:Text 'Back'}"
                 Command="{Binding Game.ShowMainMenuCommand}" />
-        <Button Grid.Column="1" Classes="pill primary" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Start game'}" Command="{Binding StartCommand}" />
+        <Button Grid.Column="1" Classes="pill primary default" local:PlateChrome.TextureSeed="2" Content="{local:Text 'Start game'}" Command="{Binding StartCommand}" />
       </Grid>
     </Grid>
   </Grid>
