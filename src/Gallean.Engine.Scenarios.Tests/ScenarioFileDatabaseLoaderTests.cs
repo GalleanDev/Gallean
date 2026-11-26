@@ -6,6 +6,24 @@ namespace Gallean.Engine.Scenarios.Tests;
 
 public sealed class ScenarioFileDatabaseLoaderTests
 {
+    private static IReadOnlyList<string> FormatRaceLeaders(WorldState state, IGameDefinitionProvider definitions)
+    {
+        List<string> rows = [];
+
+        foreach (WorldStack stack in state.Stacks.Values)
+        {
+            WorldPlayer owner = state.Players[stack.OwnerId];
+
+            if (owner.Race != WorldRace.Neutral)
+            {
+                (WorldUnit leader, GridPosition _, UnitDefinition _) = stack.GetLeader(definitions);
+                rows.Add($"{stack.Id} {owner.Race} {leader.DefinitionId} level {leader.Level} hp {leader.Hitpoints} xp {leader.Experience} upgrades {stack.PendingLeaderUpgrades}");
+            }
+        }
+
+        return rows;
+    }
+
     [Test]
     public void LoadExportTest()
     {
@@ -270,5 +288,69 @@ public sealed class ScenarioFileDatabaseLoaderTests
                 new WorldStackOrder.AttackStack(new WorldStackId("S200KC0099")),
                 WorldStackDirection.East,
                 AiPriority: 3)));
+    }
+
+    [Test]
+    public void LoadLeaderTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+
+        ScenarioLeader leader = new(
+            new WorldUnit(new WorldUnitId("Hero"), new UnitDefinitionId("G000UU0096"), Hitpoints: 150, Experience: 0, Level: 10, [], Name: null, IsTypeLocked: false),
+            LeaderEquipment.Empty,
+            WorldInventory.Empty,
+            PendingLeaderUpgrades: 0,
+            BattlesWon: 0);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Undead, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, leader);
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([file.Tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+        Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables(), configuration);
+
+        Assert.That(FormatRaceLeaders(scenario.State, definitions), Is.EqualTo([
+            "S200KC0000 Dwarf G000UU0044 level 3 hp 255 xp 0 upgrades 2",
+            "S200KC0001 Undead G000UU0096 level 10 hp 285 xp 0 upgrades 0",
+            "S200KC0005 Dwarf G000UU0047 level 2 hp 150 xp 40 upgrades 1",
+            "S200KC0006 Undead G000UU0097 level 1 hp 90 xp 0 upgrades 0"
+        ]));
+    }
+
+    [Test]
+    public void LoadMissingCapitalStackTest()
+    {
+        using FileStream stream = File.OpenRead(TestScenarios.GreywaterCrossingPath);
+
+        ScenarioFile file = ScenarioFileLoader.Load(stream, TestScenarios.Encoding, new Db.ScenarioId("S200SC0000"));
+        ScenarioFileTables tables = file.Tables with
+        {
+            ScenarioStacks =
+            [
+                .. file.Tables.ScenarioStacks.Where(stack => stack.StackId != new Db.Id("S200KC0000"))
+            ]
+        };
+
+        ScenarioLeader leader = new(
+            new WorldUnit(new WorldUnitId("Hero"), new UnitDefinitionId("G000UU0096"), Hitpoints: 150, Experience: 0, Level: 10, [], Name: null, IsTypeLocked: false),
+            LeaderEquipment.Empty,
+            WorldInventory.Empty,
+            PendingLeaderUpgrades: 0,
+            BattlesWon: 0);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Undead, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, leader);
+
+        GlobalDatabase globalDb = GlobalDatabaseLoader.Load(RiseOfTheElves.GlobalDatabasePath);
+        CampaignDatabase campaignDb = CampaignDatabaseLoader.Load(RiseOfTheElves.CampaignDatabasePath);
+        ScenarioDatabase scenarioDb = ScenarioFileDatabaseLoader.Load([tables]);
+        IGameDefinitionProvider definitions = new GameDefinitionProvider(globalDb);
+        Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, new ScenarioId("S200SC0000"), definitions, new GlobalVariables(), configuration);
+
+        Assert.That(FormatRaceLeaders(scenario.State, definitions), Is.EqualTo([
+            "S200KC0001 Undead G000UU0096 level 10 hp 285 xp 0 upgrades 0",
+            "S200KC0005 Dwarf G000UU0047 level 2 hp 150 xp 40 upgrades 1",
+            "S200KC0006 Undead G000UU0097 level 1 hp 90 xp 0 upgrades 0"
+        ]));
     }
 }

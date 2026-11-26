@@ -159,7 +159,17 @@ public static class ScenarioLoader
                 WorldPlayer owner = FindPlayer(players, configuration.HumanPlayers[0].Race);
                 WorldStack capitalStack = FindCapitalStack(stacks, fortifications, owner.Id);
 
+                int aiLeaderLevel = GetAiInitialLeaderLevel(configuration.Leader, difficulty, scenarioInfo, globals);
+
                 stacks = ImportLeader(stacks, capitalStack, configuration.Leader, definitions, globals);
+
+                foreach (WorldStack stack in stacks.Values)
+                {
+                    if (players[stack.OwnerId].IsAi && IsCapitalStack(stack, fortifications))
+                    {
+                        stacks = UpgradeLeader(stacks, stack, aiLeaderLevel, definitions, globals);
+                    }
+                }
             }
 
             foreach (ScenarioPlayerConfiguration player in configuration.HumanPlayers)
@@ -1916,6 +1926,51 @@ public static class ScenarioLoader
         return stacks.SetItem(stack.Id, stack);
     }
 
+    private static int GetAiInitialLeaderLevel(
+        ScenarioLeader importedLeader,
+        WorldDifficulty difficulty,
+        Db.ScenarioInfo scenarioInfo,
+        GlobalVariables globals)
+    {
+        int percent = difficulty switch
+        {
+            WorldDifficulty.Easy => globals.AiInitialLeaderLevelPercentEasy,
+            WorldDifficulty.Average => globals.AiInitialLeaderLevelPercentAverage,
+            WorldDifficulty.Hard => globals.AiInitialLeaderLevelPercentHard,
+            WorldDifficulty.VeryHard => globals.AiInitialLeaderLevelPercentVeryHard
+        };
+
+        return Math.Min(importedLeader.Unit.Level * percent / 100, scenarioInfo.MaxLeader);
+    }
+
+    private static ImmutableSortedDictionary<WorldStackId, WorldStack> UpgradeLeader(
+        ImmutableSortedDictionary<WorldStackId, WorldStack> stacks,
+        WorldStack stack,
+        int level,
+        IGameDefinitionProvider definitions,
+        GlobalVariables globals)
+    {
+        (WorldUnit leader, _, UnitDefinition leaderDefinition) = stack.GetLeader(definitions);
+
+        if (leader.Level < level)
+        {
+            UnitStats leaderStats = UnitStatsCalculator.GetStats(leaderDefinition, level, leader.Modifiers, definitions, globals);
+            int upgrades = Math.Min(level, globals.MaxLeaderAbilities) - Math.Min(leader.Level, globals.MaxLeaderAbilities);
+
+            stack = stack with
+            {
+                Units = stack.Units.Replace(leader, leader with { Hitpoints = leaderStats.MaxHitpoints, Experience = 0, Level = level }),
+                PendingLeaderUpgrades = stack.PendingLeaderUpgrades + upgrades
+            };
+
+            return stacks.SetItem(stack.Id, stack);
+        }
+        else
+        {
+            return stacks;
+        }
+    }
+
     private static ImmutableSortedDictionary<WorldStackId, WorldStack> SetLeaderName(
         ImmutableSortedDictionary<WorldStackId, WorldStack> stacks,
         WorldStack stack,
@@ -1947,21 +2002,30 @@ public static class ScenarioLoader
         ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications,
         WorldPlayerId playerId)
     {
-        foreach (WorldFortification fortification in fortifications.Values)
+        foreach (WorldStack stack in stacks.Values)
         {
-            if (fortification is WorldCapital capital && capital.OwnerId == playerId)
+            if (stack.OwnerId == playerId && IsCapitalStack(stack, fortifications))
             {
-                foreach (WorldStack stack in stacks.Values)
-                {
-                    if (stack.OwnerId == playerId && stack.Position == capital.Entrance)
-                    {
-                        return stack;
-                    }
-                }
+                return stack;
             }
         }
 
         throw new InvalidDataException("Scenario has no initial leader.");
+
+        static bool IsCapitalStack(WorldStack stack, ImmutableSortedDictionary<WorldFortificationId, WorldFortification> fortifications)
+        {
+            foreach (WorldFortification fortification in fortifications.Values)
+            {
+                if (fortification is WorldCapital capital &&
+                    capital.OwnerId == stack.OwnerId &&
+                    capital.Entrance == stack.Position)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
     private static List<ScenarioStackTemplateDefinition> LoadStackTemplates(

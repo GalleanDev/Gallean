@@ -21,6 +21,10 @@ public sealed record GlobalVariables
     internal int AiGlobalSpellMinMana { get; init; } = 1000;
     internal int AiGlobalSpellMinStacks { get; init; } = 2;
     internal int AiGlobalSpellMinSuggestedLevel { get; init; } = 10;
+    internal int AiInitialLeaderLevelPercentEasy { get; init; } = 0;
+    internal int AiInitialLeaderLevelPercentAverage { get; init; } = 50;
+    internal int AiInitialLeaderLevelPercentHard { get; init; } = 100;
+    internal int AiInitialLeaderLevelPercentVeryHard { get; init; } = 100;
     internal int AiObjectiveTurnEasy { get; init; } = 60;
     internal int AiObjectiveTurnAverage { get; init; } = 50;
     internal int AiObjectiveTurnHard { get; init; } = 40;

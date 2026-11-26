@@ -84,6 +84,24 @@ public sealed class ScenarioLoaderTests
         definitions = new GameDefinitionProvider(globalDb);
     }
 
+    private static IReadOnlyList<string> FormatRaceLeaders(WorldState state, IGameDefinitionProvider definitions)
+    {
+        List<string> rows = [];
+
+        foreach (WorldStack stack in state.Stacks.Values)
+        {
+            WorldPlayer owner = state.Players[stack.OwnerId];
+
+            if (owner.Race != WorldRace.Neutral)
+            {
+                (WorldUnit leader, GridPosition _, UnitDefinition _) = stack.GetLeader(definitions);
+                rows.Add($"{stack.Id} {owner.Race} {leader.DefinitionId} level {leader.Level} hp {leader.Hitpoints} xp {leader.Experience} upgrades {stack.PendingLeaderUpgrades}");
+            }
+        }
+
+        return rows;
+    }
+
     private static IReadOnlyList<string> FormatPlayers(ScenarioId scenarioId, WorldState state)
     {
         List<string> rows = [];
@@ -4278,5 +4296,25 @@ public sealed class ScenarioLoaderTests
                 WorldStackOrder.Normal.Instance,
                 Direction: null,
                 AiPriority: 3)));
+    }
+
+    [Test]
+    public void Load_S095SC0000_LeaderTest()
+    {
+        ScenarioId scenarioId = new("S095SC0000");
+        ScenarioLeader leader = new(
+            new WorldUnit(new WorldUnitId("Hero"), new UnitDefinitionId("G000UU0019"), Hitpoints: 150, Experience: 0, Level: 10, [], Name: null, IsTypeLocked: false),
+            LeaderEquipment.Empty,
+            WorldInventory.Empty,
+            PendingLeaderUpgrades: 0,
+            BattlesWon: 0);
+        ScenarioConfiguration configuration = new([new ScenarioPlayerConfiguration(WorldRace.Human, LordCategory.Warrior, new WorldObjectVariant(1), null, LeaderName: "")], WorldDifficulty.Hard, leader);
+        Scenario scenario = ScenarioLoader.Create(globalDb, scenarioDb, campaignDb, scenarioId, definitions, globals, configuration);
+
+        Assert.That(FormatRaceLeaders(scenario.State, definitions), Is.EqualTo([
+            "S095KC0000 Human G000UU0019 level 10 hp 285 xp 0 upgrades 0",
+            "S095KC0001 Heretic G000UU0070 level 7 hp 240 xp 0 upgrades 6",
+            "S095KC001e Heretic G000UU0072 level 3 hp 85 xp 0 upgrades 2"
+        ]));
     }
 }
