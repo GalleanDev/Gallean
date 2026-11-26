@@ -11,11 +11,12 @@ internal static class PlayerIncomeCalculator
 
     public static IncomeInfo GetIncomeInfo(WorldPlayer player, WorldState state, IEngineContext context)
     {
-        if (WorldHelpers.IsRacePlayable(player.Race))
+        WorldPlan plan = WorldPlan.For(state);
+
+        if (WorldHelpers.IsRacePlayable(player.Race) && !plan.IsPlayerDefeated(player.Id))
         {
             WorldResourceSet raceIncome = context.Definitions.GetRace(player.Race).Income;
             WorldResourceSet nodesIncome = WorldResourceSet.Empty;
-            WorldPlan plan = WorldPlan.For(state);
 
             foreach (WorldResourceNode node in state.ResourceNodes.Values)
             {

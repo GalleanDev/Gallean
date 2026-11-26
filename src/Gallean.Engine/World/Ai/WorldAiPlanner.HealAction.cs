@@ -86,6 +86,13 @@ internal sealed partial class WorldAiPlanner
 
         private WorldAiActionPlan? PlanAction(ActionContext context)
         {
+            WorldPlan plan = WorldPlan.For(context.State);
+
+            if (plan.IsPlayerDefeated(context.Stack.OwnerId))
+            {
+                return null;
+            }
+
             WorldStack stack = context.Stack;
             (int Score, WorldHealUnitCommand Command)? best = null;
 

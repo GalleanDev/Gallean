@@ -240,8 +240,13 @@ internal sealed partial class WorldAiPlanner
             if (battle.BattleTarget is WorldAiTarget.Stack target)
             {
                 WorldStack targetStack = context.State.Stacks[target.StackId];
+                WorldPlan plan = WorldPlan.For(context.State);
 
-                attackCast = Context.Spellcasting.FindAttackCast(context.State, context.Stack, targetStack, battle.Power);
+                if (!plan.IsPlayerDefeated(context.Stack.OwnerId))
+                {
+                    attackCast = Context.Spellcasting.FindAttackCast(context.State, context.Stack, targetStack, battle.Power);
+                }
+
                 attackSummon = FindSummon(context, battle.BattleTarget);
                 attackPotion = FindPotion(context, targetStack, battle.Power);
             }

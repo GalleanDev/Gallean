@@ -202,4 +202,82 @@ public sealed class WorldEngineAiHealActionTests
             new WorldAiActionEndedEvent(aiPlayer.Id, memory)
         ]);
     }
+
+    [Test]
+    public void DefeatedTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "^^^^^^^^^^^",
+            "^^^^^^^^^^^",
+            "^^^^^^^^^^^",
+            "^^^^^^^^^^^",
+            "^^^^..^^^^^",
+            "^^^^..^^^^^"
+        ]);
+
+        UnitDefinition leaderDefinition = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 3);
+        UnitDefinition soldierDefinition = TestHelpers.SimpleUnitDefinition("soldier", maxHitpoints: 100, initiative: 40, damage: 10);
+
+        WorldPlayerBuildingDefinition temple = Temple();
+
+        WorldCityDefinition cityDefinition = TestHelpers.SimpleCityDefinition(
+            new WorldCityDefinitionId(WorldRace.Undead, 1),
+            WorldResourceSet.Empty);
+
+        WorldPlayer aiPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0),
+            Buildings = new WorldPlayerBuildings([temple.Id], [temple.Id])
+        };
+        WorldPlayer humanPlayer = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Heretic, map);
+
+        WorldCapital capturedCapital = TestHelpers.SimpleCapital(
+                new WorldFortificationId("cap"),
+                aiPlayer.Id,
+                new WorldPosition(10, 5),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                CapturedById = humanPlayer.Id
+            };
+
+        WorldStack stack = TestHelpers.SimpleStack(
+                new WorldStackId("Stack1"),
+                aiPlayer.Id,
+                new WorldPosition(4, 4),
+                new UnitGrid<WorldUnit>.Builder()
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("leader"), leaderDefinition), GridPosition.BackBottom, false)
+                    .Place(TestHelpers.SimpleUnit(new WorldUnitId("soldier"), soldierDefinition) with { Hitpoints = 30 }, GridPosition.BackCenter, false)
+                    .Build(),
+                movementPoints: 6) with
+            {
+                Order = WorldStackOrder.Berserk.Instance
+            };
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(soldierDefinition)
+            .WithDefinition(temple)
+            .WithDefinition(cityDefinition)
+            .WithDefinition(TestHelpers.SimpleLord(aiPlayer.LordId, aiPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(aiPlayer)
+            .WithDefinition(TestHelpers.SimpleLord(humanPlayer.LordId, humanPlayer.Race, LordCategory.Warrior))
+            .WithPlayer(humanPlayer)
+            .WithCapital(capturedCapital)
+            .WithCity(TestHelpers.SimpleCity(new WorldFortificationId("city"), cityDefinition, aiPlayer.Id, new WorldPosition(4, 4), UnitGrid<WorldUnit>.Empty))
+            .WithStack(stack)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P3 1000] AutoFit Stack1"
+        ]));
+        Assert.That(session.World.State.Players[aiPlayer.Id], Is.EqualTo(aiPlayer));
+    }
 }

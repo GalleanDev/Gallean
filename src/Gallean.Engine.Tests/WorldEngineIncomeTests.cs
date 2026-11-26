@@ -492,4 +492,66 @@ public sealed class WorldEngineIncomeTests
             new WorldTurnResourcesGeneratedEvent(new WorldPlayerId(1), new WorldResourceSet(195, 32, 0, 0, 0, 0))
         ]);
     }
+
+    [Test]
+    public void DefeatedTest()
+    {
+        WorldMap map = TestHelpers.BuildMap([
+            "U.......",
+            "........",
+            "........",
+            "........",
+            "........",
+            "........"
+        ]);
+
+        WorldPlayer human = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Heretic, map);
+
+        WorldPlayer ai = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(100, 0, 0, 0, 0, 0)
+        };
+
+        WorldCapital capturedCapital = TestHelpers.SimpleCapital(
+                new WorldFortificationId("capital"),
+                ai.Id,
+                new WorldPosition(7, 5),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                CapturedById = human.Id
+            };
+
+        WorldResourceNode node = new(
+            Id: new WorldResourceNodeId("gold_mine"),
+            Position: new WorldPosition(0, 0),
+            ResourceType: WorldResourceType.Gold,
+            AiPriority: 3
+        );
+
+        WorldEngine engine = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(TestHelpers.SimpleLord(human.LordId, human.Race, LordCategory.Warrior))
+            .WithPlayer(human)
+            .WithDefinition(TestHelpers.SimpleLord(ai.LordId, ai.Race, LordCategory.Warrior))
+            .WithPlayer(ai)
+            .WithCapital(capturedCapital)
+            .WithResourceNode(node)
+            .Build();
+
+        engine.CheckCommand(new WorldStartGameCommand(), [
+            new WorldTurnStartingEvent(human.Id),
+            new WorldTurnStartedEvent(human.Id),
+            new WorldTurnResourcesGeneratedEvent(human.Id, new WorldResourceSet(100, 0, 0, 0, 25, 0))
+        ]);
+
+        engine.CheckCommand(new WorldEndTurnCommand(), [
+            new WorldTurnEndedEvent(human.Id),
+            new WorldTurnStartingEvent(ai.Id),
+            new WorldTurnStartedEvent(ai.Id),
+            new WorldTurnResourcesGeneratedEvent(ai.Id, WorldResourceSet.Empty)
+        ]);
+
+        Assert.That(engine.State.Players[ai.Id], Is.EqualTo(ai));
+    }
 }

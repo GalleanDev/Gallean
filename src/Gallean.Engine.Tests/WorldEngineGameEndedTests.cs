@@ -943,14 +943,14 @@ public sealed class WorldEngineGameEndedTests
             new WorldTurnEndedEvent(otherPlayer.Id),
             new WorldTurnStartingEvent(defender.Id),
             new WorldTurnStartedEvent(defender.Id),
-            new WorldTurnResourcesGeneratedEvent(defender.Id, new WorldResourceSet(100, 0, 0, 0, 25, 0))
+            new WorldTurnResourcesGeneratedEvent(defender.Id, WorldResourceSet.Empty)
         ]);
 
         Assert.That(engine.State, Is.EqualTo(engine.State with
         {
             Players = engine.State.Players
                 .SetItem(attacker.Id, attacker with { Resources = new WorldResourceSet(100, 25, 0, 0, 0, 0) })
-                .SetItem(defender.Id, defender with { Resources = new WorldResourceSet(100, 0, 0, 0, 25, 0) })
+                .SetItem(defender.Id, defender)
                 .SetItem(otherPlayer.Id, otherPlayer with { Resources = new WorldResourceSet(100, 0, 0, 25, 0, 0) }),
             Stacks = engine.State.Stacks.SetItem(stack.Id, stack with
             {

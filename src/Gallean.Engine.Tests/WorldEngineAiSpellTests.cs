@@ -1878,4 +1878,65 @@ public sealed class WorldEngineAiSpellTests
             }
         }));
     }
+
+    [Test]
+    public void DefeatedWeakenTest()
+    {
+        WorldMap map = TestHelpers.SimpleMap(16, 16);
+
+        UnitDefinition leader = TestHelpers.SimpleLeaderDefinition(
+            TestHelpers.SimpleUnitDefinition("leader", maxHitpoints: 100, initiative: 50, damage: 10),
+            movementPoints: 6, leadership: 6);
+        UnitModifierDefinition modifier = TestHelpers.SimpleModifier("modifier");
+        WorldSpellDefinition weaken = Spell("weaken", level: 1, new WorldWeakenSpellEffect(modifier.Id));
+
+        WorldPlayer player = TestHelpers.SimplePlayer(new WorldPlayerId(1), WorldRace.Undead, map) with
+        {
+            IsAi = true,
+            Resources = new WorldResourceSet(0, 100, 0, 0, 0, 0),
+            Spellbook = new WorldPlayerSpellbook([weaken.Id], [weaken.Id])
+        };
+        WorldPlayer enemy = TestHelpers.SimplePlayer(new WorldPlayerId(2), WorldRace.Human, map);
+
+        WorldCapital capturedCapital = TestHelpers.SimpleCapital(
+                new WorldFortificationId("capital"),
+                player.Id,
+                new WorldPosition(14, 6),
+                UnitGrid<WorldUnit>.Empty) with
+            {
+                CapturedById = enemy.Id
+            };
+
+        WorldStack attacker = UnitStack(new WorldUnitId("attackerLeader"), "Attacker", player.Id, new WorldPosition(2, 2), leader, hitpoints: 100) with
+        {
+            MovementPoints = 6,
+            Order = WorldStackOrder.Berserk.Instance
+        };
+        WorldStack target = UnitStack(new WorldUnitId("targetLeader"), "Target", enemy.Id, new WorldPosition(6, 6), leader, hitpoints: 100);
+        WorldStack far = UnitStack(new WorldUnitId("farLeader"), "Far", enemy.Id, new WorldPosition(15, 15), leader, hitpoints: 100);
+
+        (GameSession session, IEngineContext engine) = new TestWorldEngineBuilder()
+            .WithMap(map)
+            .WithDefinition(leader)
+            .WithDefinition(modifier)
+            .WithDefinition(weaken)
+            .WithDefinition(TestHelpers.SimpleLord(player.LordId, player.Race, LordCategory.Warrior))
+            .WithPlayer(player)
+            .WithDefinition(TestHelpers.SimpleLord(enemy.LordId, enemy.Race, LordCategory.Warrior))
+            .WithPlayer(enemy)
+            .WithCapital(capturedCapital)
+            .WithStack(attacker)
+            .WithStack(far)
+            .WithStack(target)
+            .BuildSession();
+
+        TestWorldAiRunner runner = new(session, engine);
+
+        IReadOnlyList<TestWorldAiRunner.Trace> report = runner.PlayTurn();
+
+        Assert.That(TestWorldAiTraceFormatter.Format(report), Is.EqualTo([
+            "[P2 500] Move Attacker -> (6, 6) (Attacker wins)"
+        ]));
+        Assert.That(session.World.State.Players[player.Id], Is.EqualTo(player));
+    }
 }
