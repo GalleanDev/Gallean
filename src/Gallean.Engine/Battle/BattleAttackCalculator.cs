@@ -178,6 +178,7 @@ internal static partial class BattleAttackCalculator
         ImmutableArray<BattleUnitId> nextTargetIds = step.NextTargetIds;
         UnitAttackDefinition attack = context.Definitions.GetAttack(step.AttackIds[0]);
         UnitAttackStats attackStats = context.UnitStats.GetBattleAttackStats(state, step.AttackerId, attack);
+        BattleUnit attacker = state.GetUnit(step.AttackerId);
         BattleAttackResult attackResult;
 
         if (state.TryGetUnit(targetId) is null)
@@ -196,7 +197,7 @@ internal static partial class BattleAttackCalculator
                 step.AccuracyReduction,
                 step.TargetIds.Length);
 
-            if (attackResult.Failed || attackResult.DidHit)
+            if (attackResult.Failed || attackResult.DidHit || attacker.EquipmentAttackIds.Contains(attack.Id))
             {
                 nextTargetIds = nextTargetIds.Add(targetId);
             }

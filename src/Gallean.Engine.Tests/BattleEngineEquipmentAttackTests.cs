@@ -365,4 +365,166 @@ public sealed class BattleEngineEquipmentAttackTests
                 CurrentRound = BattleRound.Normal(2)
             }));
     }
+
+    [Test]
+    public void BlockedArtifactTest()
+    {
+        UnitWard ward = new UnitAttackSourceWard(UnitAttackSource.Death, UnitWardCategory.Always);
+        UnitDefinition leaderDefinition = LeaderDefinition(damage: 10);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5) with
+        {
+            Wards = [ward]
+        };
+        UnitAttackDefinition bladeAttack = PoisonAttack(new UnitAttackDefinitionId("thanatos-blade"), damage: 20);
+        UnitAttackDefinition crystalAttack = TestHelpers.SimpleAttack(
+                new UnitAttackDefinitionId("soul-crystal"),
+                initiative: 30,
+                damage: 0,
+                accuracy: 100,
+                reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Paralyze,
+                Source = UnitAttackSource.Mind
+            };
+
+        BattleUnit leader = new(
+            new BattleUnitId(0),
+            null,
+            leaderDefinition.Id,
+            BattleSide.Attacker,
+            100,
+            0,
+            0,
+            1,
+            [],
+            [],
+            null,
+            [bladeAttack.Id, crystalAttack.Id],
+            Name: null,
+            IsTypeLocked: false);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(bladeAttack)
+            .WithDefinition(crystalAttack)
+            .WithAttacker(leader, GridPosition.FrontBottom)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(leader.Id, new BattleAttackUnitTarget(defender.Id)), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [leaderDefinition.Attack.Id, bladeAttack.Id, crystalAttack.Id]),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id, 10),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, bladeAttack.Id),
+            new BattleUnitAttackBlockedEvent(leader.Id, defender.Id, bladeAttack.Id, ward),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, crystalAttack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, crystalAttack.Id, 0),
+            new BattleUnitEffectAppliedEvent(leader.Id, defender.Id, new BattleParalyzeStatusEffect(1)),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitEffectDurationDecreasedEvent(defender.Id),
+            new BattleUnitEffectExpiredEvent(defender.Id, new BattleParalyzeStatusEffect(0)),
+            new BattleUnitTurnSkippedEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(defender.Id),
+            new BattleUnitTurnEndedEvent(defender.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Normal(2), [new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(defender with { Hitpoints = 90, Wards = [ward] }, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(2)
+            }));
+    }
+
+    [Test]
+    public void MissedArtifactTest()
+    {
+        UnitDefinition leaderDefinition = LeaderDefinition(damage: 10);
+        UnitDefinition defenderDefinition = TestHelpers.SimpleUnitDefinition("defender", maxHitpoints: 100, initiative: 40, damage: 5);
+        UnitAttackDefinition bladeAttack = PoisonAttack(new UnitAttackDefinitionId("thanatos-blade"), damage: 20) with { Accuracy = 0 };
+        UnitAttackDefinition crystalAttack = TestHelpers.SimpleAttack(
+                new UnitAttackDefinitionId("soul-crystal"),
+                initiative: 30,
+                damage: 0,
+                accuracy: 100,
+                reach: UnitAttackReach.Any) with
+            {
+                Type = UnitAttackType.Paralyze,
+                Source = UnitAttackSource.Mind
+            };
+
+        BattleUnit leader = new(
+            new BattleUnitId(0),
+            null,
+            leaderDefinition.Id,
+            BattleSide.Attacker,
+            100,
+            0,
+            0,
+            1,
+            [],
+            [],
+            null,
+            [bladeAttack.Id, crystalAttack.Id],
+            Name: null,
+            IsTypeLocked: false);
+        BattleUnit defender = TestHelpers.SimpleBattleUnit(new BattleUnitId(1), null, defenderDefinition.Id, BattleSide.Defender, hitpoints: 100);
+
+        BattleEngine engine = new TestBattleEngineBuilder()
+            .WithDefinition(leaderDefinition)
+            .WithDefinition(defenderDefinition)
+            .WithDefinition(bladeAttack)
+            .WithDefinition(crystalAttack)
+            .WithAttacker(leader, GridPosition.FrontBottom)
+            .WithDefender(defender, GridPosition.FrontBottom)
+            .Build();
+
+        engine.CheckCommand(new BattleAttackCommand(leader.Id, new BattleAttackUnitTarget(defender.Id)), [
+            new BattleUnitAttackEvent(leader.Id, new BattleAttackUnitTarget(defender.Id), [leaderDefinition.Attack.Id, bladeAttack.Id, crystalAttack.Id]),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, leaderDefinition.Attack.Id, 10),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, bladeAttack.Id),
+            new BattleUnitAttackMissedEvent(leader.Id, defender.Id, bladeAttack.Id),
+            new BattleUnitAttackedEvent(leader.Id, defender.Id, crystalAttack.Id),
+            new BattleUnitAttackHitEvent(leader.Id, defender.Id, crystalAttack.Id, 0),
+            new BattleUnitEffectAppliedEvent(leader.Id, defender.Id, new BattleParalyzeStatusEffect(1)),
+            new BattleUnitTurnEndingEvent(leader.Id),
+            new BattleUnitTurnEndedEvent(leader.Id),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)),
+            new BattleUnitEffectDurationDecreasedEvent(defender.Id),
+            new BattleUnitEffectExpiredEvent(defender.Id, new BattleParalyzeStatusEffect(0)),
+            new BattleUnitTurnSkippedEvent(defender.Id),
+            new BattleUnitTurnEndingEvent(defender.Id),
+            new BattleUnitTurnEndedEvent(defender.Id),
+            new BattleRoundEndedEvent(),
+            new BattleRoundStartedEvent(BattleRound.Normal(2), [new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal), new BattleUnitTurn(defender.Id, BattleUnitTurnType.Normal)]),
+            new BattleUnitTurnStartedEvent(new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal))
+        ]);
+
+        Assert.That(engine.State, Is.EqualTo(
+            engine.State with
+            {
+                AttackerGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(leader, GridPosition.FrontBottom, false)
+                    .Build(),
+                DefenderGrid = new UnitGrid<BattleUnit>.Builder()
+                    .Place(defender with { Hitpoints = 90 }, GridPosition.FrontBottom, false)
+                    .Build(),
+                CurrentUnitTurn = new BattleUnitTurn(leader.Id, BattleUnitTurnType.Normal),
+                CurrentRound = BattleRound.Normal(2)
+            }));
+    }
 }
